@@ -1,0 +1,66 @@
+# Fetch ↔ Memory — extracted from deployed MCP server source code
+#
+# Source: github.com/modelcontextprotocol/servers (official repo)
+#   Fetch: src/fetch/ (Python, httpx + readabilipy + markdownify)
+#   Memory: src/memory/ (TypeScript, JSONL knowledge graph)
+#
+# Knowledge acquisition pipeline: fetch retrieves web content, memory
+# stores entities and relations as a knowledge graph.  Feedback loop:
+# memory search identifies topics needing more information, triggering
+# new fetch operations.
+#
+# F(v) extracted from tool output schemas in source code.
+# S(v)\F(v) extracted from implementation:
+#   - encoding: fetch uses httpx charset detection (httpx default +
+#     charset_normalizer fallback); memory reads/writes JSONL as UTF-8
+#     (index.ts: fs.readFile(..., "utf-8"))
+#   - content_format: fetch converts HTML → markdown via readabilipy +
+#     markdownify (index.py:52-62); memory stores observations as opaque
+#     strings with no format awareness (index.ts: entity.observations)
+#   - entity_resolution_policy: memory uses case-sensitive exact match
+#     for create/delete (index.ts: existingEntity.name === e.name) but
+#     case-insensitive for search (index.ts: query.toLowerCase())
+
+name: "Fetch ↔ Memory (from MCP server source)"
+
+tools:
+  fetch:
+    internal_state:
+      - page_content
+      - url
+      - encoding                  # httpx charset detection, never in output
+      - content_format            # readabilipy+markdownify for HTML, raw otherwise
+      - truncation_boundary       # max_length default 5000, configurable
+    observable_schema:
+      - page_content
+      - url
+
+  memory:
+    internal_state:
+      - entities
+      - relations
+      - encoding                  # fs.readFile(..., "utf-8") — hardcoded UTF-8
+      - observation_format        # plain strings, no format validation
+      - entity_resolution_policy  # case-sensitive CRUD, case-insensitive search
+    observable_schema:
+      - entities
+      - relations
+
+edges:
+  - from: fetch
+    to: memory
+    dimensions:
+      - name: content_handoff
+        from_field: page_content
+      - name: encoding_match
+        from_field: encoding
+        to_field: encoding
+      - name: format_match
+        from_field: content_format
+        to_field: observation_format
+
+  - from: memory
+    to: fetch
+    dimensions:
+      - name: entity_handoff
+        from_field: entities

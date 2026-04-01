@@ -1,0 +1,77 @@
+# Official MCP Server Composition: fetch → git → filesystem
+# Common DevOps pipeline: fetch remote data, commit changes, manage files
+name: mcp-devops-pipeline
+
+tools:
+  fetch:
+    internal_state:
+      - url
+      - max_length
+      - start_index
+      - raw
+    observable_schema:
+      - url
+      - max_length
+
+  git_log:
+    internal_state:
+      - repo_path
+      - max_count
+      - start_timestamp
+      - end_timestamp
+    observable_schema:
+      - repo_path
+      - max_count
+      - start_timestamp
+      - end_timestamp
+
+  git_commit:
+    internal_state:
+      - repo_path
+      - message
+    observable_schema:
+      - repo_path
+      - message
+
+  get_file_info:
+    internal_state:
+      - path
+    observable_schema:
+      - path
+
+  write_file:
+    internal_state:
+      - path
+      - content
+    observable_schema:
+      - path
+      - content
+
+edges:
+  - from: fetch
+    to: write_file
+    dimensions:
+      - name: encoding
+        from_field: url
+        to_field: content
+
+  - from: git_log
+    to: git_commit
+    dimensions:
+      - name: date_format
+        from_field: start_timestamp
+        to_field: repo_path
+
+  - from: get_file_info
+    to: write_file
+    dimensions:
+      - name: encoding
+        from_field: path
+        to_field: path
+
+  - from: write_file
+    to: git_commit
+    dimensions:
+      - name: encoding
+        from_field: content
+        to_field: message

@@ -1,0 +1,54 @@
+name: bulla
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  coherence-check:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install bulla from source
+        run: pip install -e .
+
+      - name: Run bulla on bundled examples
+        run: |
+          bulla check --max-blind-spots 5 --format sarif compositions/ > bulla.sarif 2>/dev/null || true
+          bulla check --max-blind-spots 5 compositions/
+
+      - name: Upload SARIF
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: bulla.sarif
+        continue-on-error: true
+
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          pip install -e ".[ots]"
+          pip install pytest
+
+      - name: Run tests
+        run: python -m pytest tests/ -v

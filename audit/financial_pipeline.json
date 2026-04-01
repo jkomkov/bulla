@@ -1,0 +1,91 @@
+{
+  "tools": [
+    {
+      "name": "parse_invoice_markdown",
+      "description": "Parse a markdown-rendered invoice into structured fields. Amounts in dollars. Dates as ISO-8601 strings.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "markdown_text": {"type": "string", "description": "Markdown text of the invoice (from MarkItDown)"},
+          "source_currency": {"type": "string", "description": "Currency code of the invoice", "enum": ["USD", "EUR", "GBP", "JPY"]}
+        },
+        "required": ["markdown_text"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "invoice_id": {"type": "string"},
+          "vendor": {"type": "string"},
+          "invoice_date": {"type": "string", "format": "date", "description": "Invoice date in ISO-8601"},
+          "currency": {"type": "string"},
+          "subtotal": {"type": "number", "description": "Subtotal in dollars"},
+          "tax": {"type": "number", "description": "Tax amount in dollars"},
+          "discount": {"type": "number"},
+          "total_amount": {"type": "number", "description": "Total in dollars (Cluster X convention)"},
+          "amount_scale": {"type": "string", "enum": ["dollars", "cents"]}
+        }
+      }
+    },
+    {
+      "name": "compute_settlement",
+      "description": "Compute settlement date and converted amount. Amounts interpreted as cents. Uses T+1 settlement and 30/360 day-count convention.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "invoice_date": {"type": "string", "description": "Invoice date string"},
+          "total_amount": {"type": "number", "description": "Total amount (in upstream server's scale — NOT checked)"},
+          "currency": {"type": "string", "default": "USD"},
+          "fx_rate_base": {"type": "number", "default": 1.0}
+        },
+        "required": ["invoice_date", "total_amount"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "settlement_date_offset": {"type": "integer", "description": "Days until settlement (T+1)"},
+          "converted_amount": {"type": "number", "description": "FX-converted amount in cents"},
+          "amount_scale": {"type": "string", "enum": ["dollars", "cents"]}
+        }
+      }
+    },
+    {
+      "name": "compute_fees",
+      "description": "Compute fees and accrual for a settlement. Fee computed on net amount (Cluster Y). Uses 30/360 day-count.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "total_amount": {"type": "number", "description": "Total invoice amount (in upstream scale)"},
+          "discount_amount": {"type": "number", "default": 0.0},
+          "fee_rate": {"type": "number", "default": 0.015, "description": "Fee rate as decimal (e.g., 0.015 = 1.5%)"},
+          "accrual_days": {"type": "integer", "default": 30}
+        },
+        "required": ["total_amount"]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "fee_amount": {"type": "number"},
+          "net_amount": {"type": "number"},
+          "accrual_fraction": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+        }
+      }
+    },
+    {
+      "name": "prepare_ledger_entry",
+      "description": "Prepare a final ledger entry for persistence.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "invoice_id": {"type": "string"},
+          "vendor": {"type": "string"},
+          "total_amount": {"type": "number"},
+          "fee_amount": {"type": "number"},
+          "net_amount": {"type": "number"},
+          "settlement_date_offset": {"type": "integer"},
+          "converted_amount": {"type": "number"}
+        },
+        "required": ["invoice_id", "vendor", "total_amount", "fee_amount", "net_amount", "settlement_date_offset", "converted_amount"]
+      }
+    }
+  ]
+}

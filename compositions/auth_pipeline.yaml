@@ -1,0 +1,67 @@
+name: Auth-Data-Audit Pipeline
+
+tools:
+  auth_service:
+    internal_state:
+      - token
+      - user_id
+      - permissions
+      - expiry
+    observable_schema:
+      - token
+      - user_id
+      - permissions
+      - expiry
+
+  data_service:
+    internal_state:
+      - payload
+      - status_code
+      - user_id
+      - permissions
+    observable_schema:
+      - payload
+      - status_code
+      - user_id
+      - permissions
+
+  audit_logger:
+    internal_state:
+      - log_entry
+      - compliance_flag
+      - user_id
+    observable_schema:
+      - log_entry
+      - compliance_flag
+      - user_id
+
+edges:
+  - from: auth_service
+    to: data_service
+    dimensions:
+      - name: token_match
+        from_field: token
+      - name: user_match
+        from_field: user_id
+        to_field: user_id
+      - name: permissions_match
+        from_field: permissions
+        to_field: permissions
+
+  - from: data_service
+    to: audit_logger
+    dimensions:
+      - name: payload_match
+        from_field: payload
+      - name: user_audit_match
+        from_field: user_id
+        to_field: user_id
+
+  - from: audit_logger
+    to: auth_service
+    dimensions:
+      - name: compliance_match
+        from_field: compliance_flag
+      - name: user_refresh_match
+        from_field: user_id
+        to_field: user_id

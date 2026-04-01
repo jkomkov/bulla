@@ -1,0 +1,260 @@
+taxonomy_version: "0.2"
+dimensions:
+  date_format:
+    description: "How dates and timestamps are represented"
+    known_values:
+      - "ISO-8601"
+      - "US-MM/DD/YYYY"
+      - "EU-DD/MM/YYYY"
+      - "unix_epoch"
+      - "business_days"
+      - "calendar_days"
+    field_patterns:
+      - "*_date"
+      - "*_time"
+      - "*_timestamp"
+      - "created_at"
+      - "updated_at"
+      - "*_datetime"
+    description_keywords:
+      - "iso-8601"
+      - "iso 8601"
+      - "unix epoch"
+      - "unix timestamp"
+      - "utc time"
+      - "rfc 3339"
+      - "rfc3339"
+      - "yyyy-mm-dd"
+      - "date format"
+      - "datetime format"
+      - "timestamp format"
+      - "business days"
+      - "calendar days"
+      - "trading days"
+    domains:
+      - "universal"
+
+  amount_unit:
+    description: "The scale and currency of monetary amounts"
+    known_values:
+      - "dollars"
+      - "cents"
+      - "basis_points"
+      - "thousands"
+      - "millions"
+      - "satoshis"
+      - "wei"
+      - "gwei"
+      - "USD"
+      - "EUR"
+      - "GBP"
+      - "JPY"
+      - "CNY"
+      - "BTC"
+    field_patterns:
+      - "*_amount"
+      - "*_price"
+      - "*_cost"
+      - "*_fee"
+      - "*_total"
+      - "*_balance"
+    description_keywords:
+      - "in cents"
+      - "in dollars"
+      - "in pennies"
+      - "in satoshis"
+      - "basis points"
+      - "in wei"
+      - "in gwei"
+      - "smallest unit"
+      - "minor unit"
+      - "major unit"
+      - "currency unit"
+      - "monetary amount"
+      - "financial amount"
+    domains:
+      - "financial"
+
+  rate_scale:
+    description: "How rates, percentages, and probabilities are scaled"
+    known_values:
+      - "decimal_0_1"
+      - "percentage_0_100"
+      - "basis_points"
+      - "per_mille"
+    field_patterns:
+      - "*_rate"
+      - "*_percent"
+      - "*_ratio"
+      - "*_probability"
+    description_keywords:
+      - "as a percentage"
+      - "as a decimal"
+      - "between 0 and 1"
+      - "0 to 100"
+      - "per mille"
+      - "basis points"
+      - "probability"
+      - "fraction of"
+    domains:
+      - "financial"
+      - "ml"
+
+  score_range:
+    description: "The range and normalization of scores and ratings"
+    known_values:
+      - "0_to_1"
+      - "0_to_5"
+      - "0_to_10"
+      - "0_to_100"
+      - "1_to_5"
+    field_patterns:
+      - "*_score"
+      - "*_rating"
+      - "*_priority"
+      - "*_rank"
+    description_keywords:
+      - "on a scale"
+      - "1 to 5"
+      - "0 to 10"
+      - "0 to 100"
+      - "star rating"
+      - "priority level"
+      - "severity level"
+      - "normalized score"
+    domains:
+      - "universal"
+
+  id_offset:
+    description: "Whether identifiers and indices are zero-based or one-based"
+    known_values:
+      - "zero_based"
+      - "one_based"
+      - "uuid"
+      - "auto_increment"
+    field_patterns:
+      - "*_id"
+      - "*_index"
+      - "*_offset"
+      - "*_position"
+    description_keywords:
+      - "zero-based"
+      - "one-based"
+      - "0-indexed"
+      - "1-indexed"
+      - "zero indexed"
+      - "one indexed"
+      - "auto-increment"
+    domains:
+      - "universal"
+
+  precision:
+    description: "Numeric precision and rounding convention"
+    known_values:
+      - "0_decimal"
+      - "2_decimal"
+      - "4_decimal"
+      - "full_float64"
+      - "arbitrary"
+    field_patterns:
+      - "*_precision"
+      - "*_decimals"
+      - "*_rounding"
+    description_keywords:
+      - "decimal places"
+      - "significant digits"
+      - "rounding"
+      - "banker's rounding"
+      - "round half"
+      - "truncation"
+      - "floating point"
+      - "fixed point"
+    domains:
+      - "financial"
+      - "scientific"
+
+  encoding:
+    description: "Text encoding and character set convention"
+    known_values:
+      - "UTF-8"
+      - "ASCII"
+      - "Latin-1"
+      - "UTF-16"
+    field_patterns:
+      - "*_encoding"
+      - "*_charset"
+    description_keywords:
+      - "utf-8"
+      - "utf8"
+      - "ascii"
+      - "latin-1"
+      - "iso-8859"
+      - "character encoding"
+      - "text encoding"
+      - "unicode"
+    domains:
+      - "devops"
+      - "universal"
+
+  null_handling:
+    description: "How missing or null values are represented"
+    known_values:
+      - "explicit_none"
+      - "empty_string"
+      - "zero"
+      - "sentinel_value"
+      - "omit_field"
+    field_patterns: []
+    description_keywords:
+      - "null value"
+      - "missing value"
+      - "empty string"
+      - "sentinel value"
+      - "nan"
+      - "none value"
+      - "omit field"
+      - "optional field"
+    domains:
+      - "universal"
+
+  timezone:
+    description: "Timezone convention for datetime values"
+    known_values:
+      - "UTC"
+      - "local"
+      - "US_Eastern"
+      - "EU_Central"
+      - "server_local"
+    field_patterns:
+      - "*_tz"
+      - "*_timezone"
+    description_keywords:
+      - "utc"
+      - "timezone"
+      - "time zone"
+      - "local time"
+      - "eastern time"
+      - "pacific time"
+      - "gmt"
+      - "tz offset"
+      - "utc offset"
+    domains:
+      - "universal"
+
+  line_ending:
+    description: "Text line ending convention"
+    known_values:
+      - "LF"
+      - "CRLF"
+      - "CR"
+    field_patterns:
+      - "*_text"
+      - "*_content"
+    description_keywords:
+      - "line ending"
+      - "newline"
+      - "crlf"
+      - "line feed"
+      - "carriage return"
+    domains:
+      - "devops"

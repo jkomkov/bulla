@@ -1,0 +1,115 @@
+# Financial Invoice Processing Pipeline — BRIDGED
+# Bridge intervention: exposed amount_scale and invoice_date at settlement boundary
+name: financial-invoice-pipeline-bridged
+
+tools:
+  parse_invoice:
+    internal_state:
+      - markdown_text
+      - source_currency
+      - invoice_id
+      - vendor
+      - invoice_date
+      - currency
+      - subtotal
+      - tax
+      - discount
+      - total_amount
+      - amount_scale
+    observable_schema:
+      - invoice_id
+      - vendor
+      - invoice_date
+      - currency
+      - total_amount
+      - amount_scale
+
+  compute_settlement:
+    internal_state:
+      - invoice_date
+      - total_amount
+      - currency
+      - fx_rate_base
+      - settlement_date_offset
+      - converted_amount
+      - amount_scale
+    observable_schema:
+      - settlement_date_offset
+      - converted_amount
+      - total_amount
+      - invoice_date
+      - currency
+      - amount_scale
+
+  compute_fees:
+    internal_state:
+      - total_amount
+      - discount_amount
+      - fee_rate
+      - accrual_days
+      - fee_amount
+      - net_amount
+      - accrual_fraction
+    observable_schema:
+      - fee_amount
+      - net_amount
+      - total_amount
+
+  prepare_ledger:
+    internal_state:
+      - invoice_id
+      - vendor
+      - total_amount
+      - fee_amount
+      - net_amount
+      - settlement_date_offset
+      - converted_amount
+    observable_schema:
+      - invoice_id
+      - vendor
+      - total_amount
+      - fee_amount
+      - net_amount
+      - settlement_date_offset
+      - converted_amount
+
+edges:
+  - from: parse_invoice
+    to: compute_settlement
+    dimensions:
+      - name: amount_unit
+        from_field: total_amount
+        to_field: total_amount
+      - name: date_format
+        from_field: invoice_date
+        to_field: invoice_date
+      - name: currency_code
+        from_field: currency
+        to_field: currency
+
+  - from: compute_settlement
+    to: compute_fees
+    dimensions:
+      - name: amount_unit
+        from_field: total_amount
+        to_field: total_amount
+
+  - from: compute_settlement
+    to: prepare_ledger
+    dimensions:
+      - name: amount_unit
+        from_field: converted_amount
+        to_field: converted_amount
+      - name: settlement_offset
+        from_field: settlement_date_offset
+        to_field: settlement_date_offset
+
+  - from: compute_fees
+    to: prepare_ledger
+    dimensions:
+      - name: amount_unit
+        from_field: fee_amount
+        to_field: fee_amount
+      - name: net_amount_unit
+        from_field: net_amount
+        to_field: net_amount

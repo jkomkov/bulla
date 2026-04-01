@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bulla"
+version = "0.7.0"
+description = "Witness kernel for agent tool compositions — diagnose, attest, seal"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "Glyph" }]
+keywords = ["mcp", "agents", "witness", "bulla", "composition", "coherence"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = ["pyyaml>=6.0"]
+
+[project.optional-dependencies]
+ots = ["opentimestamps-client>=0.7"]
+
+[project.scripts]
+bulla = "bulla.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/jkomkov/bulla"
+Issues = "https://github.com/jkomkov/bulla/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bulla"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

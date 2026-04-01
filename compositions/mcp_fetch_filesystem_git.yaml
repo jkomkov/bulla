@@ -1,0 +1,90 @@
+# Fetch → Filesystem → Git — 3-tool composition from deployed MCP servers
+#
+# Source: github.com/modelcontextprotocol/servers (official repo, commit a83b145)
+#   Fetch: src/fetch/ (Python, httpx + readabilipy + markdownify)
+#   Filesystem: src/filesystem/ (TypeScript, Node.js)
+#   Git: src/git/ (Python, GitPython)
+#
+# Web-content-to-version-control pipeline: fetch retrieves documentation
+# or data from the web, filesystem writes it locally, git commits the
+# changes.  Feedback: git log reveals what was already committed,
+# informing the next fetch cycle.
+#
+# S(v)\F(v) extracted from source code — same dimensions as the two
+# 2-tool compositions, now composed across three tools.
+
+name: "Fetch → Filesystem → Git (from MCP server source)"
+
+tools:
+  fetch:
+    internal_state:
+      - page_content
+      - url
+      - encoding                  # httpx charset detection, never in output
+      - content_format            # readabilipy+markdownify for HTML, raw otherwise
+      - truncation_boundary       # max_length default 5000
+    observable_schema:
+      - page_content
+      - url
+
+  filesystem:
+    internal_state:
+      - content
+      - path
+      - file_info
+      - encoding                  # lib.ts:157 — always 'utf-8'
+      - line_ending_convention    # lib.ts:56 — raw from disk / LF for edit
+      - path_separator            # path-utils.ts:38 — OS-native
+    observable_schema:
+      - content
+      - path
+      - file_info
+
+  git:
+    internal_state:
+      - status
+      - diff
+      - log_entries
+      - commit_hash
+      - encoding                  # server.py:216 — locale-dependent / UTF-8 binary
+      - line_ending_convention    # server.py:154 — assumes LF
+      - diff_format               # server.py:19 — unified, context=3
+      - date_format               # server.py:151,160 — mixed formats
+      - path_separator            # Git convention — always '/'
+    observable_schema:
+      - status
+      - diff
+      - log_entries
+      - commit_hash
+
+edges:
+  - from: fetch
+    to: filesystem
+    dimensions:
+      - name: content_handoff
+        from_field: page_content
+        to_field: content
+      - name: encoding_fetch_fs
+        from_field: encoding
+        to_field: encoding
+
+  - from: filesystem
+    to: git
+    dimensions:
+      - name: content_handoff_fs_git
+        from_field: content
+      - name: encoding_fs_git
+        from_field: encoding
+        to_field: encoding
+      - name: line_ending_match
+        from_field: line_ending_convention
+        to_field: line_ending_convention
+      - name: path_format_match
+        from_field: path_separator
+        to_field: path_separator
+
+  - from: git
+    to: fetch
+    dimensions:
+      - name: log_handoff
+        from_field: log_entries

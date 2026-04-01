@@ -1,0 +1,78 @@
+# Filesystem ↔ Git — extracted from deployed MCP server source code
+#
+# Source: github.com/modelcontextprotocol/servers (official repo)
+#   Filesystem: src/filesystem/ (TypeScript, Node.js)
+#   Git: src/git/ (Python, GitPython)
+#
+# This is the canonical AI-assisted coding workflow: filesystem reads/writes
+# local files, git tracks changes and diffs.  Feedback loop: git status/diff
+# informs subsequent filesystem operations.
+#
+# F(v) extracted from tool output schemas in source code.
+# S(v)\F(v) extracted from implementation:
+#   - encoding: filesystem hardcodes UTF-8 (lib.ts:157); git uses
+#     locale-dependent subprocess output (server.py:216-219 hardcodes
+#     UTF-8 only for binary diffs)
+#   - line_ending_convention: filesystem returns raw from disk for reads,
+#     normalizes to LF for edit_file (lib.ts:56-57, 243); git assumes LF
+#     in split operations (server.py:154), no core.autocrlf handling
+#   - path_separator: filesystem uses OS-native via path.join
+#     (path-utils.ts:38-105); git always outputs / (POSIX convention)
+
+name: "Filesystem ↔ Git (from MCP server source)"
+
+tools:
+  filesystem:
+    internal_state:
+      - content
+      - path
+      - file_info
+      - encoding                  # lib.ts:157 — always 'utf-8', never in output
+      - line_ending_convention    # lib.ts:56-57 — raw from disk (read) / LF (edit)
+      - path_separator            # path-utils.ts:38-105 — OS-native (path.sep)
+    observable_schema:
+      - content
+      - path
+      - file_info
+
+  git:
+    internal_state:
+      - status
+      - diff
+      - log_entries
+      - commit_hash
+      - encoding                  # server.py:216-219 — locale-dependent / UTF-8 for binary
+      - line_ending_convention    # server.py:154 — assumes LF (split('\n'))
+      - diff_format               # server.py:19,114 — unified, context_lines=3
+      - date_format               # server.py:151,160,204 — mixed (str/repr/RFC2822)
+      - path_separator            # Git convention — always '/'
+    observable_schema:
+      - status
+      - diff
+      - log_entries
+      - commit_hash
+
+edges:
+  - from: filesystem
+    to: git
+    dimensions:
+      - name: content_handoff
+        from_field: content
+      - name: encoding_match
+        from_field: encoding
+        to_field: encoding
+      - name: line_ending_match
+        from_field: line_ending_convention
+        to_field: line_ending_convention
+      - name: path_format_match
+        from_field: path_separator
+        to_field: path_separator
+
+  - from: git
+    to: filesystem
+    dimensions:
+      - name: diff_handoff
+        from_field: diff
+      - name: path_format_return
+        from_field: path_separator
+        to_field: path_separator

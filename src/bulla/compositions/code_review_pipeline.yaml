@@ -1,0 +1,92 @@
+name: Code Review Pipeline
+
+tools:
+  diff_parser:
+    internal_state:
+      - files
+      - hunks
+      - language
+      - line_count
+      - diff_format
+    observable_schema:
+      - files
+      - hunks
+      - language
+      - line_count
+
+  static_analyzer:
+    internal_state:
+      - warnings
+      - errors
+      - complexity_score
+      - severity_threshold
+      - diff_format
+    observable_schema:
+      - warnings
+      - errors
+      - complexity_score
+
+  review_generator:
+    internal_state:
+      - comments
+      - approval_status
+      - fix_suggestions
+      - severity_threshold
+      - style_convention
+    observable_schema:
+      - comments
+      - approval_status
+      - fix_suggestions
+
+  ci_reporter:
+    internal_state:
+      - report
+      - pass_fail
+      - blocked_merges
+      - style_convention
+    observable_schema:
+      - report
+      - pass_fail
+      - blocked_merges
+
+edges:
+  - from: diff_parser
+    to: static_analyzer
+    dimensions:
+      - name: files_match
+        from_field: files
+      - name: language_match
+        from_field: language
+      - name: diff_format_match
+        from_field: diff_format
+        to_field: diff_format
+
+  - from: static_analyzer
+    to: review_generator
+    dimensions:
+      - name: warnings_match
+        from_field: warnings
+      - name: complexity_match
+        from_field: complexity_score
+      - name: severity_match
+        from_field: severity_threshold
+        to_field: severity_threshold
+
+  - from: review_generator
+    to: ci_reporter
+    dimensions:
+      - name: comments_match
+        from_field: comments
+      - name: approval_match
+        from_field: approval_status
+      - name: style_match
+        from_field: style_convention
+        to_field: style_convention
+
+  - from: ci_reporter
+    to: diff_parser
+    dimensions:
+      - name: feedback_match
+        from_field: report
+      - name: block_match
+        from_field: pass_fail

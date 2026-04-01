@@ -1,0 +1,65 @@
+{
+  "tools": [
+    {
+      "name": "invoice-parser",
+      "description": "Parse invoice documents and extract financial data",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "document_path": { "type": "string" },
+          "output_format": { "type": "string" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "total_amount": { "type": "number" },
+          "tax_amount": { "type": "number" },
+          "due_date": { "type": "string" },
+          "line_items": { "type": "array" }
+        }
+      }
+    },
+    {
+      "name": "payment-processor",
+      "description": "Process payments based on invoice data",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "amount": { "type": "number" },
+          "payment_date": { "type": "string" },
+          "currency": { "type": "string" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "transaction_id": { "type": "string" },
+          "status": { "type": "string" },
+          "processed_amount": { "type": "number" },
+          "fee": { "type": "number" }
+        }
+      }
+    },
+    {
+      "name": "audit-logger",
+      "description": "Log financial transactions for compliance",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "transaction_id": { "type": "string" },
+          "amount": { "type": "number" },
+          "timestamp": { "type": "string" },
+          "severity_level": { "type": "integer" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "log_id": { "type": "string" },
+          "compliance_score": { "type": "number" }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+name: Financial Analysis Pipeline
+
+tools:
+  data_provider:
+    internal_state:
+      - prices
+      - dividends
+      - period_unit
+      - data_start
+      - data_end
+      - day_convention
+    observable_schema:
+      - prices
+      - dividends
+      - period_unit
+      - data_start
+      - data_end
+
+  financial_analysis:
+    internal_state:
+      - risk_adjusted_return
+      - volatility
+      - max_drawdown
+      - annualized_return
+      - day_convention
+      - risk_metric
+    observable_schema:
+      - risk_adjusted_return
+      - volatility
+      - max_drawdown
+      - annualized_return
+
+  portfolio_verification:
+    internal_state:
+      - pass
+      - score
+      - recommendation
+      - risk_metric
+    observable_schema:
+      - pass
+      - score
+      - recommendation
+
+edges:
+  - from: data_provider
+    to: financial_analysis
+    dimensions:
+      - name: data_match
+        from_field: prices
+      - name: time_match
+        from_field: period_unit
+      - name: day_conv_match
+        from_field: day_convention
+        to_field: day_convention
+
+  - from: financial_analysis
+    to: portfolio_verification
+    dimensions:
+      - name: rar_match
+        from_field: risk_adjusted_return
+      - name: vol_match
+        from_field: volatility
+      - name: metric_type_match
+        from_field: risk_metric
+        to_field: risk_metric
+
+  - from: portfolio_verification
+    to: data_provider
+    dimensions:
+      - name: feedback_match
+        from_field: score
+      - name: granularity_match
+        from_field: recommendation

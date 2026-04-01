@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jkomkov/bulla/blob/main/composition-schema.json",
+  "title": "Seam Composition",
+  "description": "Schema for bulla YAML composition files. Defines tool specifications, their internal state vs observable schema, and the bilateral edges connecting them.",
+  "type": "object",
+  "required": ["tools", "edges"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Human-readable name for this composition. Defaults to the filename stem if omitted."
+    },
+    "tools": {
+      "type": "object",
+      "description": "Map of tool names to their specifications.",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/toolSpec"
+      }
+    },
+    "edges": {
+      "type": "array",
+      "description": "Bilateral interfaces between tools.",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/edge"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "toolSpec": {
+      "type": "object",
+      "description": "A tool's internal state (S) and observable schema (F). observable_schema must be a subset of internal_state.",
+      "required": ["internal_state", "observable_schema"],
+      "properties": {
+        "internal_state": {
+          "type": "array",
+          "description": "All semantic dimensions the tool operates on internally. This is S(v) — the full stalk.",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "observable_schema": {
+          "type": "array",
+          "description": "Semantic dimensions visible in the tool's API contract. This is F(v) — the observable sub-sheaf. Must be a subset of internal_state.",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "edge": {
+      "type": "object",
+      "description": "A bilateral interface between two tools, specifying which semantic dimensions are shared.",
+      "required": ["from", "to", "dimensions"],
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Source tool name. Must match a key in 'tools'."
+        },
+        "to": {
+          "type": "string",
+          "description": "Target tool name. Must match a key in 'tools'."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Semantic dimensions shared across this edge.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/semanticDimension"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "semanticDimension": {
+      "type": "object",
+      "description": "A named semantic dimension shared between two tools on an edge. from_field and to_field map to fields in the respective tools' internal_state.",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Identifier for this bilateral consistency constraint."
+        },
+        "from_field": {
+          "type": "string",
+          "description": "Field name in the source tool's internal_state that carries this dimension."
+        },
+        "to_field": {
+          "type": "string",
+          "description": "Field name in the target tool's internal_state that carries this dimension."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

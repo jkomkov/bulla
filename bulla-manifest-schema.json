@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bulla.dev/schemas/manifest-v0.1.json",
+  "title": "Bulla Manifest v0.1",
+  "description": "Per-tool semantic convention declaration for the Bulla protocol.",
+  "type": "object",
+  "anyOf": [
+    { "required": ["bulla_manifest", "tool", "conventions"] },
+    { "required": ["seam_manifest", "tool", "conventions"] }
+  ],
+  "properties": {
+    "bulla_manifest": {
+      "type": "string",
+      "const": "0.1",
+      "description": "Specification version (preferred key)."
+    },
+    "seam_manifest": {
+      "type": "string",
+      "const": "0.1",
+      "description": "Specification version (deprecated; use bulla_manifest)."
+    },
+    "tool": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Tool identifier, matching the MCP tool name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Semantic version of the tool."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the tool."
+        }
+      },
+      "additionalProperties": false
+    },
+    "conventions": {
+      "type": "object",
+      "description": "Map of dimension names to convention declarations.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["confidence"],
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The convention value (e.g. 'dollars', 'ISO-8601')."
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["declared", "inferred", "unknown"],
+            "description": "How the value was determined."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

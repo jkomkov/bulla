@@ -1,0 +1,94 @@
+name: Multi-Source Data ETL
+
+tools:
+  extractor:
+    internal_state:
+      - raw_records
+      - timestamp_col
+      - source_id
+      - timezone
+      - null_convention
+    observable_schema:
+      - raw_records
+      - timestamp_col
+      - source_id
+
+  transformer:
+    internal_state:
+      - clean_records
+      - derived_fields
+      - row_count
+      - timezone
+      - decimal_precision
+      - null_convention
+    observable_schema:
+      - clean_records
+      - derived_fields
+      - row_count
+
+  loader:
+    internal_state:
+      - loaded_count
+      - table_name
+      - schema_version
+      - decimal_precision
+    observable_schema:
+      - loaded_count
+      - table_name
+      - schema_version
+
+  validator:
+    internal_state:
+      - validation_report
+      - error_count
+      - pass_rate
+      - null_convention
+    observable_schema:
+      - validation_report
+      - error_count
+      - pass_rate
+
+edges:
+  - from: extractor
+    to: transformer
+    dimensions:
+      - name: records_match
+        from_field: raw_records
+      - name: timestamp_match
+        from_field: timestamp_col
+      - name: timezone_match
+        from_field: timezone
+        to_field: timezone
+      - name: null_conv_match
+        from_field: null_convention
+        to_field: null_convention
+
+  - from: transformer
+    to: loader
+    dimensions:
+      - name: data_match
+        from_field: clean_records
+      - name: count_match
+        from_field: row_count
+      - name: precision_match
+        from_field: decimal_precision
+        to_field: decimal_precision
+
+  - from: loader
+    to: validator
+    dimensions:
+      - name: table_match
+        from_field: table_name
+      - name: schema_match
+        from_field: schema_version
+
+  - from: validator
+    to: extractor
+    dimensions:
+      - name: feedback_match
+        from_field: validation_report
+      - name: quality_match
+        from_field: pass_rate
+      - name: null_handling_match
+        from_field: null_convention
+        to_field: null_convention

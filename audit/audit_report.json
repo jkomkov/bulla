@@ -1,0 +1,588 @@
+{
+  "audit_name": "bulla v0.5.0 \u2014 First Real MCP Audit",
+  "timestamp": "2026-03-31",
+  "bulla_version": "0.5.0",
+  "tool_groups": [
+    {
+      "name": "Official MCP (35 tools)",
+      "tools_count": 35,
+      "domain_hint": null,
+      "tools": [
+        {
+          "name": "read_file",
+          "fields": 3,
+          "dimensions": []
+        },
+        {
+          "name": "read_text_file",
+          "fields": 3,
+          "dimensions": [
+            {
+              "dimension": "encoding",
+              "confidence": "unknown",
+              "field": "_description",
+              "sources": [
+                "description"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "read_media_file",
+          "fields": 1,
+          "dimensions": []
+        },
+        {
+          "name": "read_multiple_files",
+          "fields": 1,
+          "dimensions": []
+        },
+        {
+          "name": "write_file",
+          "fields": 2,
+          "dimensions": []
+        },
+        {
+          "name": "edit_file",
+          "fields": 3,
+          "dimensions": []
+        },
+        {
+          "name": "create_directory",
+          "fields": 1,
+          "dimensions": []
+        },
+        {
+          "name": "list_directory",
+          "fields": 1,
+          "dimensions": []
+        },
+        {
+          "name": "list_directory_with_sizes",
+          "fields": 2,
+          "dimensions": []
+        },
+        {
+          "name": "directory_tree",
+          "fields": 2,
+          "dimensions": []
+        },
+        {
+          "name": "move_file",
+          "fields": 2,
+          "dimensions": []
+        },
+        {
+          "name": "search_files",
+          "fields": 3,
+          "dimensions": []
+        },
+        {
+          "name": "get_file_info",
+          "fields": 1,
+          "dimensions": []
+        },
+        {
+          "name": "git_status",
+          "fields": 1,
+          "dimensions": []
+        },
+        {
+          "name": "git_diff_unstaged",
+          "fields": 2,
+          "dimensions": []
+        },
+        {
+          "name": "git_diff_staged",
+          "fields": 2,
+          "dimensions": []
+        },
+        {
+          "name": "git_diff",
+          "fields": 3,
+          "dimensions": []
+        },
+        {
+          "name": "git_commit",
+          "fields": 2,
+          "dimensions": []
+        },
+        {
+          "name": "git_add",
+          "fields": 2,
+          "dimensions": []
+        },
+        {
+          "name": "git_reset",
+          "fields": 1,
+          "dimensions": []
+        },
+        {
+          "name": "git_log",
+          "fields": 4,
+          "dimensions": [
+            {
+              "dimension": "date_format",
+              "confidence": "inferred",
+              "field": "start_timestamp",
+              "sources": [
+                "name"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "git_create_branch",
+          "fields": 3,
+          "dimensions": []
+        },
+        {
+          "name": "git_checkout",
+          "fields": 2,
+          "dimensions": []
+        },
+        {
+          "name": "git_show",
+          "fields": 2,
+          "dimensions": []
+        },
+        {
+          "name": "git_branch",
+          "fields": 4,
+          "dimensions": []
+        },
+        {
+          "name": "fetch",
+          "fields": 4,
+          "dimensions": [
+            {
+              "dimension": "id_offset",
+              "confidence": "inferred",
+              "field": "start_index",
+              "sources": [
+                "name"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "create_entities",
+          "fields": 1,
+          "dimensions": []
+        },
+        {
+          "name": "create_relations",
+          "fields": 1,
+          "dimensions": []
+        },
+        {
+          "name": "add_observations",
+          "fields": 1,
+          "dimensions": []
+        },
+        {
+          "name": "delete_entities",
+          "fields": 1,
+          "dimensions": []
+        },
+        {
+          "name": "delete_observations",
+          "fields": 1,
+          "dimensions": []
+        },
+        {
+          "name": "delete_relations",
+          "fields": 2,
+          "dimensions": []
+        },
+        {
+          "name": "read_graph",
+          "fields": 0,
+          "dimensions": []
+        },
+        {
+          "name": "search_nodes",
+          "fields": 1,
+          "dimensions": []
+        },
+        {
+          "name": "open_nodes",
+          "fields": 1,
+          "dimensions": []
+        }
+      ],
+      "dims_found": [
+        "date_format",
+        "encoding",
+        "id_offset"
+      ],
+      "confidence_counts": {
+        "declared": 0,
+        "inferred": 2,
+        "unknown": 1
+      },
+      "total_fields": 66
+    },
+    {
+      "name": "Financial Pipeline (4 tools)",
+      "tools_count": 4,
+      "domain_hint": "financial",
+      "tools": [
+        {
+          "name": "parse_invoice_markdown",
+          "fields": 11,
+          "dimensions": [
+            {
+              "dimension": "id_offset",
+              "confidence": "inferred",
+              "field": "invoice_id",
+              "sources": [
+                "name"
+              ]
+            },
+            {
+              "dimension": "date_format",
+              "confidence": "declared",
+              "field": "invoice_date",
+              "sources": [
+                "name",
+                "description",
+                "schema_format"
+              ]
+            },
+            {
+              "dimension": "amount_unit",
+              "confidence": "declared",
+              "field": "subtotal",
+              "sources": [
+                "name",
+                "description",
+                "schema_enum"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "compute_settlement",
+          "fields": 7,
+          "dimensions": [
+            {
+              "dimension": "date_format",
+              "confidence": "inferred",
+              "field": "invoice_date",
+              "sources": [
+                "name"
+              ]
+            },
+            {
+              "dimension": "amount_unit",
+              "confidence": "declared",
+              "field": "total_amount",
+              "sources": [
+                "name",
+                "schema_enum"
+              ]
+            },
+            {
+              "dimension": "rate_scale",
+              "confidence": "inferred",
+              "field": "fx_rate_base",
+              "sources": [
+                "name"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "compute_fees",
+          "fields": 7,
+          "dimensions": [
+            {
+              "dimension": "amount_unit",
+              "confidence": "inferred",
+              "field": "total_amount",
+              "sources": [
+                "name"
+              ]
+            },
+            {
+              "dimension": "rate_scale",
+              "confidence": "declared",
+              "field": "fee_rate",
+              "sources": [
+                "name",
+                "schema_range"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "prepare_ledger_entry",
+          "fields": 7,
+          "dimensions": [
+            {
+              "dimension": "id_offset",
+              "confidence": "inferred",
+              "field": "invoice_id",
+              "sources": [
+                "name"
+              ]
+            },
+            {
+              "dimension": "amount_unit",
+              "confidence": "inferred",
+              "field": "total_amount",
+              "sources": [
+                "name"
+              ]
+            },
+            {
+              "dimension": "date_format",
+              "confidence": "inferred",
+              "field": "settlement_date_offset",
+              "sources": [
+                "name"
+              ]
+            }
+          ]
+        }
+      ],
+      "dims_found": [
+        "amount_unit",
+        "date_format",
+        "id_offset",
+        "rate_scale"
+      ],
+      "confidence_counts": {
+        "declared": 4,
+        "inferred": 7,
+        "unknown": 0
+      },
+      "total_fields": 32
+    },
+    {
+      "name": "Test Fixture (5 tools)",
+      "tools_count": 5,
+      "domain_hint": null,
+      "tools": [
+        {
+          "name": "stripe_create_charge",
+          "fields": 11,
+          "dimensions": [
+            {
+              "dimension": "amount_unit",
+              "confidence": "declared",
+              "field": "amount",
+              "sources": [
+                "name",
+                "description",
+                "schema_type_integer",
+                "schema_enum"
+              ]
+            },
+            {
+              "dimension": "id_offset",
+              "confidence": "inferred",
+              "field": "customer_id",
+              "sources": [
+                "name"
+              ]
+            },
+            {
+              "dimension": "date_format",
+              "confidence": "declared",
+              "field": "metadata.due_date",
+              "sources": [
+                "name",
+                "description",
+                "schema_format"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "github_create_issue",
+          "fields": 8,
+          "dimensions": [
+            {
+              "dimension": "score_range",
+              "confidence": "declared",
+              "field": "priority",
+              "sources": [
+                "name",
+                "description",
+                "schema_range"
+              ]
+            },
+            {
+              "dimension": "id_offset",
+              "confidence": "inferred",
+              "field": "issue_id",
+              "sources": [
+                "name"
+              ]
+            },
+            {
+              "dimension": "date_format",
+              "confidence": "declared",
+              "field": "created_at",
+              "sources": [
+                "name",
+                "schema_format"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "datadog_query_metrics",
+          "fields": 7,
+          "dimensions": [
+            {
+              "dimension": "date_format",
+              "confidence": "declared",
+              "field": "start_time",
+              "sources": [
+                "name",
+                "description"
+              ]
+            },
+            {
+              "dimension": "timezone",
+              "confidence": "inferred",
+              "field": "timezone",
+              "sources": [
+                "name"
+              ]
+            },
+            {
+              "dimension": "score_range",
+              "confidence": "declared",
+              "field": "health_score",
+              "sources": [
+                "name",
+                "description",
+                "schema_range"
+              ]
+            },
+            {
+              "dimension": "rate_scale",
+              "confidence": "declared",
+              "field": "confidence",
+              "sources": [
+                "name",
+                "description",
+                "schema_range"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "slack_post_message",
+          "fields": 6,
+          "dimensions": [
+            {
+              "dimension": "id_offset",
+              "confidence": "inferred",
+              "field": "channel_id",
+              "sources": [
+                "name"
+              ]
+            },
+            {
+              "dimension": "date_format",
+              "confidence": "inferred",
+              "field": "timestamp",
+              "sources": [
+                "name"
+              ]
+            },
+            {
+              "dimension": "encoding",
+              "confidence": "unknown",
+              "field": "_description",
+              "sources": [
+                "description"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ml_predict_score",
+          "fields": 5,
+          "dimensions": [
+            {
+              "dimension": "id_offset",
+              "confidence": "inferred",
+              "field": "model_id",
+              "sources": [
+                "name"
+              ]
+            },
+            {
+              "dimension": "precision",
+              "confidence": "inferred",
+              "field": "precision",
+              "sources": [
+                "name"
+              ]
+            },
+            {
+              "dimension": "score_range",
+              "confidence": "declared",
+              "field": "prediction_score",
+              "sources": [
+                "name",
+                "description"
+              ]
+            },
+            {
+              "dimension": "rate_scale",
+              "confidence": "declared",
+              "field": "confidence_pct",
+              "sources": [
+                "name",
+                "description",
+                "schema_range"
+              ]
+            }
+          ]
+        }
+      ],
+      "dims_found": [
+        "amount_unit",
+        "date_format",
+        "encoding",
+        "id_offset",
+        "precision",
+        "rate_scale",
+        "score_range",
+        "timezone"
+      ],
+      "confidence_counts": {
+        "declared": 9,
+        "inferred": 7,
+        "unknown": 1
+      },
+      "total_fields": 37
+    }
+  ],
+  "aggregate": {
+    "total_tools_scanned": 44,
+    "total_fields_analyzed": 135,
+    "dimensions_detected": [
+      "amount_unit",
+      "date_format",
+      "encoding",
+      "id_offset",
+      "precision",
+      "rate_scale",
+      "score_range",
+      "timezone"
+    ],
+    "confidence_distribution": {
+      "declared": 13,
+      "inferred": 16,
+      "unknown": 2
+    }
+  }
+}

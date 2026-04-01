@@ -1,0 +1,97 @@
+# Web Research Pipeline — based on commonly-deployed MCP server types
+#
+# Composition: Brave Search → Web Scraper → Summarizer → Fact Checker → (feedback to search)
+#
+# Modeled after real MCP servers:
+#   - @anthropic/brave-search (Brave Search API)
+#   - Web content extraction tools (Firecrawl, Jina Reader)
+#   - LLM summarization endpoints
+#   - Fact-checking / verification tools
+#
+# The feedback loop (fact_checker → brave_search) triggers re-search
+# when claims fail verification, creating a cycle (β₁ = 1).
+
+name: Web Research Pipeline
+
+tools:
+  brave_search:
+    internal_state:
+      - query
+      - results
+      - result_count
+      - search_language
+      - safe_search_level
+    observable_schema:
+      - query
+      - results
+      - result_count
+
+  web_scraper:
+    internal_state:
+      - urls
+      - extracted_content
+      - content_format
+      - search_language
+    observable_schema:
+      - urls
+      - extracted_content
+
+  summarizer:
+    internal_state:
+      - summary
+      - source_citations
+      - max_length
+      - search_language
+      - citation_style
+    observable_schema:
+      - summary
+      - source_citations
+      - max_length
+
+  fact_checker:
+    internal_state:
+      - claims
+      - verdicts
+      - confidence_scores
+      - citation_style
+      - source_freshness_days
+    observable_schema:
+      - claims
+      - verdicts
+      - confidence_scores
+
+edges:
+  - from: brave_search
+    to: web_scraper
+    dimensions:
+      - name: results_handoff
+        from_field: results
+      - name: language_match
+        from_field: search_language
+        to_field: search_language
+
+  - from: web_scraper
+    to: summarizer
+    dimensions:
+      - name: content_handoff
+        from_field: extracted_content
+      - name: language_continuity
+        from_field: search_language
+        to_field: search_language
+
+  - from: summarizer
+    to: fact_checker
+    dimensions:
+      - name: citations_handoff
+        from_field: source_citations
+      - name: citation_style_match
+        from_field: citation_style
+        to_field: citation_style
+
+  - from: fact_checker
+    to: brave_search
+    dimensions:
+      - name: verification_feedback
+        from_field: verdicts
+      - name: confidence_feedback
+        from_field: confidence_scores

@@ -1,0 +1,70 @@
+name: RAG Pipeline with Feedback
+
+tools:
+  retriever:
+    internal_state:
+      - chunks
+      - relevance_scores
+      - chunk_size
+      - relevance_threshold
+    observable_schema:
+      - chunks
+      - relevance_scores
+
+  generator:
+    internal_state:
+      - response
+      - citations
+      - confidence
+      - chunk_size
+      - citation_mode
+    observable_schema:
+      - response
+      - citations
+      - confidence
+
+  evaluator:
+    internal_state:
+      - quality_score
+      - feedback
+      - retry
+      - citation_mode
+      - relevance_threshold
+    observable_schema:
+      - quality_score
+      - feedback
+      - retry
+
+edges:
+  - from: retriever
+    to: generator
+    dimensions:
+      - name: chunks_match
+        from_field: chunks
+      - name: relevance_match
+        from_field: relevance_scores
+      - name: chunk_size_match
+        from_field: chunk_size
+        to_field: chunk_size
+
+  - from: generator
+    to: evaluator
+    dimensions:
+      - name: response_match
+        from_field: response
+      - name: citation_match
+        from_field: citations
+      - name: citation_mode_match
+        from_field: citation_mode
+        to_field: citation_mode
+
+  - from: evaluator
+    to: retriever
+    dimensions:
+      - name: feedback_match
+        from_field: quality_score
+      - name: retry_match
+        from_field: feedback
+      - name: threshold_match
+        from_field: relevance_threshold
+        to_field: relevance_threshold

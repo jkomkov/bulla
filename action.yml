@@ -1,0 +1,87 @@
+name: "bulla"
+description: "Run bulla coherence analysis on agent tool compositions"
+author: "Glyph"
+
+branding:
+  icon: "shield"
+  color: "blue"
+
+inputs:
+  path:
+    description: "Path to composition YAML file(s) or directory"
+    required: false
+    default: "compositions/"
+  max-blind-spots:
+    description: "Maximum blind spots before failing (default: 0)"
+    required: false
+    default: "0"
+  max-unbridged:
+    description: "Maximum unbridged edges before failing (default: 0)"
+    required: false
+    default: "0"
+  upload-sarif:
+    description: "Upload SARIF results to GitHub Code Scanning (default: true)"
+    required: false
+    default: "true"
+  version:
+    description: "bulla version to install (default: latest)"
+    required: false
+    default: ""
+  python-version:
+    description: "Python version to use (default: 3.11)"
+    required: false
+    default: "3.11"
+
+outputs:
+  passed:
+    description: "Whether all compositions passed the thresholds"
+    value: ${{ steps.check.outputs.passed }}
+  sarif-file:
+    description: "Path to the generated SARIF file"
+    value: ${{ steps.check.outputs.sarif_file }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install bulla
+      shell: bash
+      run: |
+        if [ -n "${{ inputs.version }}" ]; then
+          pip install "bulla==${{ inputs.version }}"
+        else
+          pip install bulla
+        fi
+
+    - name: Run bulla check
+      id: check
+      shell: bash
+      run: |
+        SARIF_FILE="bulla-results.sarif"
+        echo "sarif_file=${SARIF_FILE}" >> "$GITHUB_OUTPUT"
+
+        EXIT_CODE=0
+        bulla check \
+          --max-blind-spots "${{ inputs.max-blind-spots }}" \
+          --max-unbridged "${{ inputs.max-unbridged }}" \
+          --format sarif \
+          ${{ inputs.path }} > "${SARIF_FILE}" 2>/dev/null || EXIT_CODE=$?
+
+        if [ "$EXIT_CODE" -eq 0 ]; then
+          echo "passed=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "passed=false" >> "$GITHUB_OUTPUT"
+          echo "::error::bulla check failed. Run 'bulla diagnose ${{ inputs.path }}' for details."
+          exit 1
+        fi
+
+    - name: Upload SARIF to GitHub Code Scanning
+      if: always() && inputs.upload-sarif == 'true'
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: bulla-results.sarif
+      continue-on-error: true

@@ -1,0 +1,116 @@
+{
+  "tools": [
+    {
+      "name": "stripe_create_charge",
+      "description": "Create a Stripe charge. Amounts in cents, timestamps in ISO-8601.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "amount": {"type": "integer", "description": "Charge amount in cents"},
+          "currency": {"type": "string", "enum": ["USD", "EUR", "GBP", "JPY"]},
+          "customer_id": {"type": "string"},
+          "description": {"type": "string"},
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "invoice_id": {"type": "string"},
+              "due_date": {"type": "string", "format": "date"}
+            }
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "charge_id": {"type": "string"},
+          "amount": {"type": "integer"},
+          "created_at": {"type": "string", "format": "date-time"},
+          "fee": {"type": "integer", "description": "Stripe processing fee in cents"},
+          "status": {"type": "string", "enum": ["succeeded", "pending", "failed"]}
+        }
+      }
+    },
+    {
+      "name": "github_create_issue",
+      "description": "Create a GitHub issue with priority and severity levels.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {"type": "string"},
+          "body": {"type": "string"},
+          "priority": {"type": "integer", "minimum": 1, "maximum": 5, "description": "Priority level on a scale of 1 to 5"},
+          "labels": {"type": "array", "items": {"type": "string"}},
+          "assignee": {"type": "string"}
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "issue_id": {"type": "integer"},
+          "created_at": {"type": "string", "format": "date-time"},
+          "url": {"type": "string", "format": "uri"}
+        }
+      }
+    },
+    {
+      "name": "datadog_query_metrics",
+      "description": "Query Datadog metrics. Timestamps are unix epoch seconds. Returns normalized scores between 0 and 100.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {"type": "string"},
+          "start_time": {"type": "integer", "description": "Start time as unix timestamp"},
+          "end_time": {"type": "integer", "description": "End time as unix timestamp"},
+          "timezone": {"type": "string", "description": "Timezone for display, e.g. UTC or US/Eastern"}
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "series": {"type": "array"},
+          "health_score": {"type": "number", "minimum": 0, "maximum": 100},
+          "confidence": {"type": "number", "minimum": 0.0, "maximum": 1.0}
+        }
+      }
+    },
+    {
+      "name": "slack_post_message",
+      "description": "Post a message to a Slack channel. Text encoding is UTF-8.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "channel_id": {"type": "string"},
+          "text": {"type": "string"},
+          "thread_ts": {"type": "string", "description": "Thread timestamp for replies"}
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "message_id": {"type": "string"},
+          "timestamp": {"type": "string"},
+          "ok": {"type": "boolean"}
+        }
+      }
+    },
+    {
+      "name": "ml_predict_score",
+      "description": "Run ML prediction. Returns probability as a decimal between 0 and 1. Confidence expressed as a percentage (0 to 100).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "model_id": {"type": "string"},
+          "features": {"type": "object"},
+          "precision": {"type": "integer", "description": "Decimal places for output rounding"}
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "prediction_score": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+          "confidence_pct": {"type": "number", "minimum": 0, "maximum": 100, "description": "Model confidence percentage"}
+        }
+      }
+    }
+  ]
+}
