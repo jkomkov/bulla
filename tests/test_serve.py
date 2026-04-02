@@ -369,6 +369,26 @@ class TestAntiReflexivity:
                         f"diagnostic.py imports witness: {alias.name}"
                     )
 
+    def test_diagnostic_has_no_serve_imports(self):
+        """Law 1b: Measurement cannot depend on its own transport.
+
+        diagnostic.py must have zero imports from serve.py.
+        """
+        import bulla.diagnostic as diag_module
+        import inspect
+        source = inspect.getsource(diag_module)
+        tree = ast.parse(source)
+        for node in ast.walk(tree):
+            if isinstance(node, ast.ImportFrom):
+                assert node.module is None or "serve" not in node.module, (
+                    f"diagnostic.py imports from serve: {ast.dump(node)}"
+                )
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    assert "serve" not in alias.name, (
+                        f"diagnostic.py imports serve: {alias.name}"
+                    )
+
     def test_recursion_depth_limit(self):
         """Law 7: Recursive self-audit must be bounded."""
         resp = _handle_request({

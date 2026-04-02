@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.9.1
+
+### Changed
+- **`verify_receipt_integrity` is now forward-compatible**: Uses dict-exclusion (`to_dict()` minus `receipt_hash` and `anchor_ref`) instead of hardcoded field enumeration. Future field additions are automatically covered without code changes.
+- **`WitnessReceipt._hash_input()`**: Single source of truth for the receipt's hashable content. `receipt_hash`, `to_dict()`, and `verify_receipt_integrity` all derive from this one method, eliminating field enumeration duplication.
+- **`receipt_hash` is now cached**: Computed once on first access using lazy cache on the frozen dataclass. Eliminates redundant SHA-256 computation when `to_dict()` or receipt chaining access the hash multiple times.
+- **`verify_receipt_consistency` now verifies disposition**: Recomputes `_resolve_disposition` from the diagnostic, policy, and unknown_dimensions, and compares to the receipt's claimed disposition. A receipt can no longer claim `proceed` when measurements would produce `refuse_pending_disclosure`.
+- **`Diagnostic` is now frozen** with immutable `tuple` fields (`blind_spots`, `bridges`). Completes the immutability chain: `Composition`, `Diagnostic`, and `WitnessReceipt` are all frozen with tuple fields.
+- **`Bridge.add_to` is now `tuple[str, ...]`** (was `list[str]`). Consistent with all other frozen dataclass fields.
+- **Development Status**: Alpha → Beta. The kernel is feature-complete with 368 tests, verification functions, immutable constitutional objects, and a normative spec.
+
+### Added
+- Anti-reflexivity AST test: `diagnostic.py` has zero imports from `serve.py`. The measurement layer is now provably isolated from both witness and transport layers.
+
 ## 0.9.0
 
 ### Breaking Changes

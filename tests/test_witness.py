@@ -616,3 +616,16 @@ class TestVerifyReceiptIntegrity:
         from bulla.witness import verify_receipt_integrity
 
         assert not verify_receipt_integrity({})
+
+    def test_unknown_field_breaks_integrity(self):
+        """Adding an unknown key to the dict changes the hash,
+        proving the verifier isn't ignoring unknown fields."""
+        from bulla.diagnostic import diagnose as _diag
+        from bulla.witness import verify_receipt_integrity
+
+        diag = _diag(SAMPLE_COMPOSITION)
+        r = witness(diag, SAMPLE_COMPOSITION)
+        d = r.to_dict()
+        assert verify_receipt_integrity(d)
+        d["injected_field"] = "malicious"
+        assert not verify_receipt_integrity(d)

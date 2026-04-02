@@ -54,7 +54,7 @@ def diagnose(comp: Composition) -> Diagnostic:
             bridges.append(
                 Bridge(
                     field=bs.from_field,
-                    add_to=[edge_parts[0]],
+                    add_to=(edge_parts[0],),
                     eliminates=bs.dimension,
                 )
             )
@@ -62,7 +62,7 @@ def diagnose(comp: Composition) -> Diagnostic:
             bridges.append(
                 Bridge(
                     field=bs.to_field,
-                    add_to=[edge_parts[1]],
+                    add_to=(edge_parts[1],),
                     eliminates=bs.dimension,
                 )
             )
@@ -110,8 +110,8 @@ def diagnose(comp: Composition) -> Diagnostic:
         h1_obs=h1_obs,
         h1_full=h1_full,
         coherence_fee=h1_obs - h1_full,
-        blind_spots=blind_spots,
-        bridges=bridges,
+        blind_spots=tuple(blind_spots),
+        bridges=tuple(bridges),
         h1_after_bridge=h1_b,
         n_unbridged=n_unbridged,
     )

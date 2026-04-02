@@ -51,7 +51,7 @@ class TestDiagnose:
     def test_zero_fee(self):
         diag = diagnose(_auth_pipeline())
         assert diag.coherence_fee == 0
-        assert diag.blind_spots == []
+        assert diag.blind_spots == ()
         assert diag.n_unbridged == 0
 
     def test_nonzero_fee(self):

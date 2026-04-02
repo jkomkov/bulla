@@ -38,7 +38,7 @@ Disposition priority (first match wins):
 
 **Law 1**: The measurement layer (`diagnostic.py`) has zero imports from the witness layer (`witness.py`). Measurement does not know it is being witnessed.
 
-**Law 2**: The witness kernel never mutates a `Composition`. It proposes patches; it never applies them silently. `Composition` is `frozen=True` with immutable `tuple` fields.
+**Law 2**: The witness kernel never mutates a `Composition` or `Diagnostic`. It proposes patches; it never applies them silently. `Composition`, `Diagnostic`, and `WitnessReceipt` are all `frozen=True` with immutable `tuple` fields.
 
 ## Receipt Chains
 

@@ -109,11 +109,11 @@ class BlindSpot:
 @dataclass(frozen=True)
 class Bridge:
     field: str
-    add_to: list[str] = field(default_factory=list)
+    add_to: tuple[str, ...] = ()
     eliminates: str = ""
 
 
-@dataclass
+@dataclass(frozen=True)
 class Diagnostic:
     name: str
     n_tools: int
@@ -127,8 +127,8 @@ class Diagnostic:
     h1_obs: int
     h1_full: int
     coherence_fee: int
-    blind_spots: list[BlindSpot]
-    bridges: list[Bridge]
+    blind_spots: tuple[BlindSpot, ...]
+    bridges: tuple[Bridge, ...]
     h1_after_bridge: int
     n_unbridged: int = 0
 
@@ -345,61 +345,61 @@ class WitnessReceipt:
     active_packs: tuple[PackRef, ...] = ()
     witness_basis: WitnessBasis | None = None
 
+    def _hash_input(self) -> dict:
+        """Single source of truth for the receipt's hashable content.
+
+        Every field that should be covered by ``receipt_hash`` appears
+        here and nowhere else. ``to_dict()`` extends this with
+        ``receipt_hash`` and ``anchor_ref``; ``verify_receipt_integrity``
+        reconstructs this from a serialized dict by excluding those
+        same two keys.
+        """
+        return {
+            "receipt_version": self.receipt_version,
+            "kernel_version": self.kernel_version,
+            "composition_hash": self.composition_hash,
+            "diagnostic_hash": self.diagnostic_hash,
+            "policy_profile": self.policy_profile.to_dict(),
+            "fee": self.fee,
+            "blind_spots_count": self.blind_spots_count,
+            "bridges_required": self.bridges_required,
+            "unknown_dimensions": self.unknown_dimensions,
+            "disposition": self.disposition.value,
+            "timestamp": self.timestamp,
+            "patches": [p.to_bulla_patch() for p in self.patches],
+            "parent_receipt_hash": self.parent_receipt_hash,
+            "active_packs": [p.to_dict() for p in self.active_packs],
+            "witness_basis": (
+                self.witness_basis.to_dict()
+                if self.witness_basis is not None
+                else None
+            ),
+        }
+
     @property
     def receipt_hash(self) -> str:
         """Content-addressable hash of the receipt.
 
-        Includes timestamp (unique event identity) but excludes
-        anchor_ref (external publication proof). For deduplication
-        of measurement results, use diagnostic_hash instead.
+        Covers everything in ``_hash_input()`` — all fields except
+        ``receipt_hash`` itself and ``anchor_ref`` (external publication
+        proof added after the witness event). For deduplication of
+        measurement results, use ``diagnostic_hash`` instead.
+
+        Cached after first computation. Safe because the dataclass is
+        frozen — the hash input cannot change.
         """
-        obj: dict = {
-            "receipt_version": self.receipt_version,
-            "kernel_version": self.kernel_version,
-            "composition_hash": self.composition_hash,
-            "diagnostic_hash": self.diagnostic_hash,
-            "policy_profile": self.policy_profile.to_dict(),
-            "fee": self.fee,
-            "blind_spots_count": self.blind_spots_count,
-            "bridges_required": self.bridges_required,
-            "unknown_dimensions": self.unknown_dimensions,
-            "disposition": self.disposition.value,
-            "timestamp": self.timestamp,
-            "patches": [p.to_bulla_patch() for p in self.patches],
-            "parent_receipt_hash": self.parent_receipt_hash,
-            "active_packs": [p.to_dict() for p in self.active_packs],
-            "witness_basis": (
-                self.witness_basis.to_dict()
-                if self.witness_basis is not None
-                else None
-            ),
-        }
-        return hashlib.sha256(
-            json.dumps(obj, sort_keys=True).encode()
-        ).hexdigest()
+        try:
+            return object.__getattribute__(self, "_cached_receipt_hash")
+        except AttributeError:
+            h = hashlib.sha256(
+                json.dumps(self._hash_input(), sort_keys=True).encode()
+            ).hexdigest()
+            object.__setattr__(self, "_cached_receipt_hash", h)
+            return h
 
     def to_dict(self) -> dict:
         """Serialize to dict for JSON output / MCP response."""
-        return {
-            "receipt_version": self.receipt_version,
-            "kernel_version": self.kernel_version,
-            "receipt_hash": self.receipt_hash,
-            "composition_hash": self.composition_hash,
-            "diagnostic_hash": self.diagnostic_hash,
-            "policy_profile": self.policy_profile.to_dict(),
-            "fee": self.fee,
-            "blind_spots_count": self.blind_spots_count,
-            "bridges_required": self.bridges_required,
-            "unknown_dimensions": self.unknown_dimensions,
-            "disposition": self.disposition.value,
-            "timestamp": self.timestamp,
-            "patches": [p.to_bulla_patch() for p in self.patches],
-            "anchor_ref": self.anchor_ref,
-            "parent_receipt_hash": self.parent_receipt_hash,
-            "active_packs": [p.to_dict() for p in self.active_packs],
-            "witness_basis": (
-                self.witness_basis.to_dict()
-                if self.witness_basis is not None
-                else None
-            ),
-        }
+        d = self._hash_input()
+        d["receipt_hash"] = self.receipt_hash
+        d["anchor_ref"] = self.anchor_ref
+        return d

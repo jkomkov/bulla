@@ -178,16 +178,30 @@ def verify_receipt_consistency(
             violations.append(
                 "unknown_dimensions != witness_basis.unknown"
             )
+    expected = _resolve_disposition(
+        diag, receipt.policy_profile, receipt.unknown_dimensions,
+    )
+    if receipt.disposition != expected:
+        violations.append(
+            f"disposition {receipt.disposition.value} "
+            f"!= expected {expected.value}"
+        )
     return (len(violations) == 0, violations)
+
+
+_HASH_EXCLUDED_KEYS = frozenset({"receipt_hash", "anchor_ref"})
 
 
 def verify_receipt_integrity(receipt_dict: dict) -> bool:
     """Tamper detection: recompute receipt hash from a serialized dict.
 
     Self-contained — requires only the dict (e.g. from JSON or an MCP
-    response), not the kernel or any original objects. Reconstructs
-    the hash input from the dict's fields and compares to the claimed
-    ``receipt_hash``.
+    response), not the kernel or any original objects.
+
+    The contract: ``receipt_hash`` covers every field in ``to_dict()``
+    except ``receipt_hash`` itself and ``anchor_ref``. This function
+    reconstructs the hash input by excluding those two keys, so it
+    survives future field additions without code changes.
 
     Verification requires the **serialized dict** produced by
     ``WitnessReceipt.to_dict()``, which includes the timestamp.
@@ -196,23 +210,8 @@ def verify_receipt_integrity(receipt_dict: dict) -> bool:
     if claimed is None:
         return False
 
-    obj = {
-        "receipt_version": receipt_dict.get("receipt_version"),
-        "kernel_version": receipt_dict.get("kernel_version"),
-        "composition_hash": receipt_dict.get("composition_hash"),
-        "diagnostic_hash": receipt_dict.get("diagnostic_hash"),
-        "policy_profile": receipt_dict.get("policy_profile"),
-        "fee": receipt_dict.get("fee"),
-        "blind_spots_count": receipt_dict.get("blind_spots_count"),
-        "bridges_required": receipt_dict.get("bridges_required"),
-        "unknown_dimensions": receipt_dict.get("unknown_dimensions"),
-        "disposition": receipt_dict.get("disposition"),
-        "timestamp": receipt_dict.get("timestamp"),
-        "patches": receipt_dict.get("patches", []),
-        "parent_receipt_hash": receipt_dict.get("parent_receipt_hash"),
-        "active_packs": receipt_dict.get("active_packs", []),
-        "witness_basis": receipt_dict.get("witness_basis"),
-    }
+    obj = {k: v for k, v in receipt_dict.items()
+           if k not in _HASH_EXCLUDED_KEYS}
     computed = hashlib.sha256(
         json.dumps(obj, sort_keys=True).encode()
     ).hexdigest()
