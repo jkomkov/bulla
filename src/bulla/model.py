@@ -191,6 +191,48 @@ class WitnessError(Exception):
         super().__init__(f"[{code.name}] {message}")
 
 
+# ── Lexical constitution ──────────────────────────────────────────────
+
+
+@dataclass(frozen=True)
+class PackRef:
+    """Reference to a convention pack active during a witness event.
+
+    Stored in precedence order on the receipt. Order is semantics:
+    later packs override earlier ones on dimension collisions, so
+    [base, financial] and [financial, base] produce different active
+    vocabularies and different receipt hashes.
+    """
+
+    name: str
+    version: str
+    hash: str
+
+    def to_dict(self) -> dict:
+        return {"name": self.name, "version": self.version, "hash": self.hash}
+
+
+@dataclass(frozen=True)
+class WitnessBasis:
+    """Epistemic provenance of a witness event.
+
+    Counts how many convention dimensions were established by each
+    epistemic act. The kernel does not compute this — the caller
+    attests it, and the receipt records it.
+    """
+
+    declared: int
+    inferred: int
+    unknown: int
+
+    def to_dict(self) -> dict:
+        return {
+            "declared": self.declared,
+            "inferred": self.inferred,
+            "unknown": self.unknown,
+        }
+
+
 # ── Policy ───────────────────────────────────────────────────────────
 
 
@@ -299,6 +341,9 @@ class WitnessReceipt:
     timestamp: str  # ISO-8601 UTC
     patches: tuple[BridgePatch, ...] = ()
     anchor_ref: str | None = None  # future: OTS/blockchain anchor
+    parent_receipt_hash: str | None = None
+    active_packs: tuple[PackRef, ...] = ()
+    witness_basis: WitnessBasis | None = None
 
     @property
     def receipt_hash(self) -> str:
@@ -308,7 +353,7 @@ class WitnessReceipt:
         anchor_ref (external publication proof). For deduplication
         of measurement results, use diagnostic_hash instead.
         """
-        obj = {
+        obj: dict = {
             "receipt_version": self.receipt_version,
             "kernel_version": self.kernel_version,
             "composition_hash": self.composition_hash,
@@ -321,6 +366,13 @@ class WitnessReceipt:
             "disposition": self.disposition.value,
             "timestamp": self.timestamp,
             "patches": [p.to_bulla_patch() for p in self.patches],
+            "parent_receipt_hash": self.parent_receipt_hash,
+            "active_packs": [p.to_dict() for p in self.active_packs],
+            "witness_basis": (
+                self.witness_basis.to_dict()
+                if self.witness_basis is not None
+                else None
+            ),
         }
         return hashlib.sha256(
             json.dumps(obj, sort_keys=True).encode()
@@ -343,4 +395,11 @@ class WitnessReceipt:
             "timestamp": self.timestamp,
             "patches": [p.to_bulla_patch() for p in self.patches],
             "anchor_ref": self.anchor_ref,
+            "parent_receipt_hash": self.parent_receipt_hash,
+            "active_packs": [p.to_dict() for p in self.active_packs],
+            "witness_basis": (
+                self.witness_basis.to_dict()
+                if self.witness_basis is not None
+                else None
+            ),
         }

@@ -22,7 +22,9 @@ from bulla.model import (
     DEFAULT_POLICY_PROFILE,
     Diagnostic,
     Disposition,
+    PackRef,
     PolicyProfile,
+    WitnessBasis,
     WitnessReceipt,
 )
 
@@ -33,6 +35,7 @@ DEFAULT_POLICY = DEFAULT_POLICY_PROFILE
 def _resolve_disposition(
     diag: Diagnostic,
     policy: PolicyProfile = DEFAULT_POLICY_PROFILE,
+    unknown_dimensions: int = 0,
 ) -> Disposition:
     """Map measurement to judgment under a named policy.
 
@@ -43,9 +46,14 @@ def _resolve_disposition(
     has_blind_spots = diag.n_unbridged > 0
     has_fee = diag.coherence_fee > policy.max_fee
     over_blind_spots = len(diag.blind_spots) > policy.max_blind_spots
+    over_unknown = (
+        policy.max_unknown >= 0 and unknown_dimensions > policy.max_unknown
+    )
     needs_bridge = policy.require_bridge and has_blind_spots
 
     if has_blind_spots and has_fee:
+        return Disposition.REFUSE_PENDING_DISCLOSURE
+    if over_unknown:
         return Disposition.REFUSE_PENDING_DISCLOSURE
     if needs_bridge or over_blind_spots:
         return Disposition.PROCEED_WITH_BRIDGE
@@ -77,6 +85,9 @@ def witness(
     comp: Composition,
     unknown_dimensions: int = 0,
     policy_profile: PolicyProfile = DEFAULT_POLICY_PROFILE,
+    parent_receipt_hash: str | None = None,
+    active_packs: tuple[PackRef, ...] = (),
+    witness_basis: WitnessBasis | None = None,
 ) -> WitnessReceipt:
     """Produce a WitnessReceipt from a Diagnostic and Composition.
 
@@ -91,9 +102,21 @@ def witness(
     ``policy_profile`` is a PolicyProfile with explicit thresholds.
     Recorded in the receipt so consumers can verify the disposition
     follows from the measurement under the stated policy.
+
+    ``parent_receipt_hash`` links this receipt to a prior witness event
+    (e.g. the original receipt before bridge repair). Enables receipt
+    chains: original -> repair -> patched.
+
+    ``active_packs`` records the lexical constitution in force: which
+    convention packs were active, in precedence order. Order is
+    semantics — later packs override earlier ones.
+
+    ``witness_basis`` records the epistemic provenance of the
+    composition's conventions. The kernel does not compute this;
+    the caller attests it.
     """
     patches = _diagnostic_to_patches(diag)
-    disposition = _resolve_disposition(diag, policy_profile)
+    disposition = _resolve_disposition(diag, policy_profile, unknown_dimensions)
 
     return WitnessReceipt(
         receipt_version=RECEIPT_VERSION,
@@ -108,4 +131,7 @@ def witness(
         disposition=disposition,
         timestamp=datetime.now(timezone.utc).isoformat(),
         patches=patches,
+        parent_receipt_hash=parent_receipt_hash,
+        active_packs=active_packs,
+        witness_basis=witness_basis,
     )

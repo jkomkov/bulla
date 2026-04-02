@@ -431,6 +431,218 @@ class TestWitnessErrors:
 # ── K4: Hash semantics ──────────────────────────────────────────────
 
 
+# ── v0.8: Structured MCP output ──────────────────────────────────────
+
+
+class TestStructuredOutput:
+    def test_tools_have_output_schema(self):
+        for tool in TOOLS:
+            assert "outputSchema" in tool, f"{tool['name']} missing outputSchema"
+
+    def test_witness_returns_structured_content(self):
+        resp = _handle_request({
+            "jsonrpc": "2.0",
+            "id": 50,
+            "method": "tools/call",
+            "params": {
+                "name": "bulla.witness",
+                "arguments": {"composition": MINIMAL_COMPOSITION},
+            },
+        })
+        result = resp["result"]
+        assert "structuredContent" in result
+        assert "content" in result
+        structured = result["structuredContent"]
+        assert "receipt_hash" in structured
+        assert "disposition" in structured
+        text_fallback = json.loads(result["content"][0]["text"])
+        assert text_fallback["receipt_hash"] == structured["receipt_hash"]
+
+    def test_bridge_returns_structured_content(self):
+        resp = _handle_request({
+            "jsonrpc": "2.0",
+            "id": 51,
+            "method": "tools/call",
+            "params": {
+                "name": "bulla.bridge",
+                "arguments": {"composition": MINIMAL_COMPOSITION},
+            },
+        })
+        result = resp["result"]
+        assert "structuredContent" in result
+        structured = result["structuredContent"]
+        assert "patched_composition" in structured
+        assert "original_receipt" in structured
+        assert "receipt" in structured
+
+
+# ── v0.8: Operative policy at MCP boundary ───────────────────────────
+
+
+class TestOperativePolicy:
+    def test_policy_as_string_backward_compat(self):
+        result = _handle_witness({
+            "composition": CLEAN_COMPOSITION,
+            "policy": "strict.v1",
+        })
+        assert result["policy_profile"]["name"] == "strict.v1"
+        assert result["policy_profile"]["max_blind_spots"] == 0
+
+    def test_policy_as_object(self):
+        result = _handle_witness({
+            "composition": CLEAN_COMPOSITION,
+            "policy": {
+                "name": "lenient.v1",
+                "max_blind_spots": 5,
+                "max_fee": 10,
+                "max_unknown": 3,
+                "require_bridge": False,
+            },
+        })
+        pp = result["policy_profile"]
+        assert pp["name"] == "lenient.v1"
+        assert pp["max_blind_spots"] == 5
+        assert pp["max_fee"] == 10
+        assert pp["max_unknown"] == 3
+        assert pp["require_bridge"] is False
+
+    def test_policy_object_defaults(self):
+        result = _handle_witness({
+            "composition": CLEAN_COMPOSITION,
+            "policy": {"name": "partial.v1"},
+        })
+        pp = result["policy_profile"]
+        assert pp["name"] == "partial.v1"
+        assert pp["max_blind_spots"] == 0
+        assert pp["max_fee"] == 0
+        assert pp["max_unknown"] == -1
+        assert pp["require_bridge"] is True
+
+    def test_max_unknown_causes_refusal(self):
+        result = _handle_witness({
+            "composition": CLEAN_COMPOSITION,
+            "policy": {"name": "strict.v1", "max_unknown": 0},
+            "unknown_dimensions": 2,
+        })
+        assert result["disposition"] == "refuse_pending_disclosure"
+
+    def test_max_unknown_negative_one_allows_any(self):
+        result = _handle_witness({
+            "composition": CLEAN_COMPOSITION,
+            "policy": {"name": "default.v1", "max_unknown": -1},
+            "unknown_dimensions": 100,
+        })
+        assert result["disposition"] == "proceed"
+
+    def test_policy_object_in_bridge(self):
+        result = _handle_bridge({
+            "composition": MINIMAL_COMPOSITION,
+            "policy": {"name": "bridge.v1", "max_fee": 999},
+        })
+        assert result["original_receipt"]["policy_profile"]["name"] == "bridge.v1"
+        assert result["original_receipt"]["policy_profile"]["max_fee"] == 999
+
+    def test_policy_thresholds_in_receipt_hash(self):
+        r1 = _handle_witness({
+            "composition": CLEAN_COMPOSITION,
+            "policy": {"name": "a", "max_fee": 0},
+        })
+        r2 = _handle_witness({
+            "composition": CLEAN_COMPOSITION,
+            "policy": {"name": "a", "max_fee": 999},
+        })
+        assert r1["receipt_hash"] != r2["receipt_hash"]
+
+
+# ── v0.8: Receipt chaining ───────────────────────────────────────────
+
+
+class TestReceiptChaining:
+    def test_witness_has_null_parent_by_default(self):
+        result = _handle_witness({"composition": CLEAN_COMPOSITION})
+        assert result["parent_receipt_hash"] is None
+
+    def test_bridge_sets_parent_receipt_hash(self):
+        result = _handle_bridge({"composition": MINIMAL_COMPOSITION})
+        original = result["original_receipt"]
+        patched = result["receipt"]
+        if result["before"]["blind_spots"] > 0:
+            assert patched["parent_receipt_hash"] == original["receipt_hash"]
+        else:
+            assert patched["parent_receipt_hash"] is None
+
+    def test_bridge_clean_has_no_parent(self):
+        result = _handle_bridge({"composition": CLEAN_COMPOSITION})
+        assert result["receipt"]["parent_receipt_hash"] is None
+
+    def test_parent_hash_included_in_receipt_hash(self):
+        from bulla.model import Disposition, WitnessReceipt, DEFAULT_POLICY_PROFILE
+        base_kwargs = dict(
+            receipt_version="0.1.0",
+            kernel_version="0.5.0",
+            composition_hash="abc",
+            diagnostic_hash="def",
+            policy_profile=DEFAULT_POLICY_PROFILE,
+            fee=0,
+            blind_spots_count=0,
+            bridges_required=0,
+            unknown_dimensions=0,
+            disposition=Disposition.PROCEED,
+            timestamp="2026-03-30T00:00:00+00:00",
+        )
+        r_no_parent = WitnessReceipt(**base_kwargs, parent_receipt_hash=None)
+        r_with_parent = WitnessReceipt(**base_kwargs, parent_receipt_hash="abc123")
+        assert r_no_parent.receipt_hash != r_with_parent.receipt_hash
+
+
+# ── v0.8: WitnessBasis at MCP boundary ──────────────────────────────
+
+
+class TestWitnessBasisMCP:
+    def test_witness_basis_omitted_is_null(self):
+        result = _handle_witness({"composition": CLEAN_COMPOSITION})
+        assert result["witness_basis"] is None
+
+    def test_witness_basis_passed_through(self):
+        result = _handle_witness({
+            "composition": CLEAN_COMPOSITION,
+            "witness_basis": {"declared": 3, "inferred": 2, "unknown": 1},
+        })
+        assert result["witness_basis"] == {
+            "declared": 3, "inferred": 2, "unknown": 1
+        }
+
+    def test_witness_basis_in_receipt_hash(self):
+        r1 = _handle_witness({
+            "composition": CLEAN_COMPOSITION,
+            "witness_basis": {"declared": 3, "inferred": 2, "unknown": 1},
+        })
+        r2 = _handle_witness({
+            "composition": CLEAN_COMPOSITION,
+            "witness_basis": {"declared": 0, "inferred": 0, "unknown": 6},
+        })
+        assert r1["receipt_hash"] != r2["receipt_hash"]
+
+    def test_invalid_witness_basis_treated_as_none(self):
+        result = _handle_witness({
+            "composition": CLEAN_COMPOSITION,
+            "witness_basis": "not_an_object",
+        })
+        assert result["witness_basis"] is None
+
+
+# ── v0.8: Active packs in receipt ────────────────────────────────────
+
+
+class TestActivePacksInReceipt:
+    def test_default_receipt_has_empty_packs(self):
+        result = _handle_witness({"composition": CLEAN_COMPOSITION})
+        assert result["active_packs"] == []
+
+
+# ── K4: Hash semantics ──────────────────────────────────────────────
+
+
 class TestHashSemantics:
     def test_same_composition_different_times_different_receipt_hash(self):
         """Receipt hash includes timestamp — each witness event is unique.

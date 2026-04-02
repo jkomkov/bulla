@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.8.0
+
+### Added
+- **Structured MCP output**: `bulla.witness` and `bulla.bridge` now return `structuredContent` (typed dict) alongside the `content` text fallback. Both tools declare `outputSchema` so agents can consume receipts as typed objects without JSON parsing.
+- **Operative policy thresholds at MCP boundary**: policy input accepts a full object (`name`, `max_blind_spots`, `max_fee`, `max_unknown`, `require_bridge`) in addition to a bare string name. Custom thresholds now actually govern disposition — `max_unknown` is no longer dead code.
+- **Receipt chaining**: `WitnessReceipt` gains `parent_receipt_hash`. When `bulla.bridge` produces a patched receipt, it links back to the original. Enables auditable chains: original → repair → patched.
+- **Convention pack overlays**: `src/bulla/packs/` directory with layered, mergeable convention packs. Ships `base.yaml` (the 10 reference dimensions, moved from `taxonomy.yaml`) and `financial.yaml` (4 financial-specific dimensions: `day_count_convention`, `settlement_cycle`, `fee_basis`, `rounding_mode`). Later packs override earlier ones with `logger.warning` on dimension collisions.
+- **`--pack` CLI flag**: `bulla diagnose`, `bulla check`, `bulla infer`, and `bulla scan` accept `--pack FILE` (repeatable) to load additional convention packs.
+- **`PackRef` model**: ordered pack references (`name`, `version`, `hash`) stored on receipts. Order is semantics — `[base, financial]` and `[financial, base]` produce different receipt hashes.
+- **`WitnessBasis` model**: epistemic provenance dataclass (`declared`, `inferred`, `unknown`). Accepted as a parameter on `witness()` — the kernel records what the caller attests, never fabricates provenance.
+- **Provenance threading**: `BullaGuard.from_mcp_manifest()` and `BullaGuard.from_mcp_server()` now aggregate classifier confidence tags into a `WitnessBasis`, available via `guard.witness_basis`.
+- **Pack-aware classifier**: `classifier.py` loads from a configurable pack stack via `configure_packs()` / `load_pack_stack()`. Content hashes are SHA-256 of parsed canonical JSON, not raw YAML bytes.
+- 55 new tests (292 total)
+
+### Changed
+- `_resolve_disposition()` now enforces `max_unknown`: compositions exceeding the threshold receive `REFUSE_PENDING_DISCLOSURE`.
+- MCP `bulla.witness` input schema accepts `unknown_dimensions` (integer) and `witness_basis` (object) parameters.
+- MCP `bulla.bridge` handler sets `parent_receipt_hash` on the patched receipt.
+- `WitnessReceipt.receipt_hash` computation includes `parent_receipt_hash`, `active_packs`, and `witness_basis`.
+- `WitnessReceipt.to_dict()` includes `parent_receipt_hash`, `active_packs`, and `witness_basis`.
+
 ## 0.7.0
 
 ### Changed

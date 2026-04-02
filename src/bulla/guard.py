@@ -26,6 +26,7 @@ from bulla.model import (
     Edge,
     SemanticDimension,
     ToolSpec,
+    WitnessBasis,
 )
 from bulla.parser import load_composition
 
@@ -44,13 +45,28 @@ class BullaGuard:
     Immutable after construction.  ``diagnose()`` is cached.
     """
 
-    def __init__(self, composition: Composition) -> None:
+    def __init__(
+        self,
+        composition: Composition,
+        witness_basis: WitnessBasis | None = None,
+    ) -> None:
         self._composition = composition
         self._diagnostic: Diagnostic | None = None
+        self._witness_basis = witness_basis
 
     @property
     def composition(self) -> Composition:
         return self._composition
+
+    @property
+    def witness_basis(self) -> WitnessBasis | None:
+        """Epistemic provenance of the composition's conventions.
+
+        Non-None when the composition was built from an inference path
+        (from_mcp_manifest, from_mcp_server) where the classifier
+        produced confidence tags. None for hand-authored compositions.
+        """
+        return self._witness_basis
 
     # ── Construction paths ────────────────────────────────────────────
 
@@ -127,9 +143,10 @@ class BullaGuard:
                 f"Expected 'tools' array or plain array in {path}"
             )
 
-        return cls(_composition_from_mcp_tools(
+        comp, basis = _composition_from_mcp_tools(
             tools_list, name=f"inferred-from-{path.stem}"
-        ))
+        )
+        return cls(comp, witness_basis=basis)
 
     @classmethod
     def from_mcp_server(cls, command: str, *, name: str | None = None) -> BullaGuard:
@@ -137,7 +154,8 @@ class BullaGuard:
         from bulla.scan import scan_mcp_server
         tools_list = scan_mcp_server(command)
         comp_name = name or f"scan-{command.split()[0].split('/')[-1]}"
-        return cls(_composition_from_mcp_tools(tools_list, name=comp_name))
+        comp, basis = _composition_from_mcp_tools(tools_list, name=comp_name)
+        return cls(comp, witness_basis=basis)
 
     # ── Analysis ──────────────────────────────────────────────────────
 
@@ -265,8 +283,8 @@ def _composition_from_mcp_tools(
     tools_list: list[dict[str, Any]],
     *,
     name: str,
-) -> Composition:
-    """Convert a list of MCP tool dicts into a Composition."""
+) -> tuple[Composition, WitnessBasis]:
+    """Convert a list of MCP tool dicts into a Composition and WitnessBasis."""
     from bulla.infer.classifier import InferredDimension
 
     tool_specs: list[ToolSpec] = []
@@ -301,4 +319,19 @@ def _composition_from_mcp_tools(
         )
         edges.append(Edge(e["from"], e["to"], dims))
 
-    return Composition(name=name, tools=tool_specs, edges=edges)
+    n_declared = 0
+    n_inferred = 0
+    n_unknown = 0
+    for dims_list in tools_dims.values():
+        for dim in dims_list:
+            if dim.confidence == "declared":
+                n_declared += 1
+            elif dim.confidence == "inferred":
+                n_inferred += 1
+            else:
+                n_unknown += 1
+
+    basis = WitnessBasis(
+        declared=n_declared, inferred=n_inferred, unknown=n_unknown
+    )
+    return Composition(name=name, tools=tool_specs, edges=edges), basis

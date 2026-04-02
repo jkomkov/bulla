@@ -16,6 +16,27 @@ from bulla.formatters import format_json, format_sarif, format_text
 from bulla.parser import CompositionError, load_composition
 
 
+def _add_pack_args(parser: argparse.ArgumentParser) -> None:
+    """Add --pack argument to a subcommand parser."""
+    parser.add_argument(
+        "--pack",
+        type=Path,
+        action="append",
+        default=None,
+        dest="packs",
+        metavar="FILE",
+        help="Additional convention pack YAML (repeatable, later packs override)",
+    )
+
+
+def _configure_packs_from_args(args: argparse.Namespace) -> None:
+    """Configure the active pack stack from CLI args if packs were specified."""
+    packs = getattr(args, "packs", None)
+    if packs:
+        from bulla.infer.classifier import configure_packs
+        configure_packs(extra_paths=packs)
+
+
 def _resolve_paths(raw: list[Path]) -> list[Path]:
     paths: list[Path] = []
     for p in raw:
@@ -34,6 +55,7 @@ def _examples_dir() -> Path:
 
 
 def _cmd_diagnose(args: argparse.Namespace) -> None:
+    _configure_packs_from_args(args)
     if args.examples:
         paths = _resolve_paths([_examples_dir()])
     elif not args.files:
@@ -108,6 +130,7 @@ def _cmd_diagnose(args: argparse.Namespace) -> None:
 
 
 def _cmd_check(args: argparse.Namespace) -> None:
+    _configure_packs_from_args(args)
     if args.examples:
         paths = _resolve_paths([_examples_dir()])
     elif not args.files:
@@ -190,6 +213,7 @@ def _cmd_check(args: argparse.Namespace) -> None:
 
 
 def _cmd_infer(args: argparse.Namespace) -> None:
+    _configure_packs_from_args(args)
     from bulla.infer.mcp import infer_from_manifest
 
     if not args.manifest.exists():
@@ -478,6 +502,7 @@ def _cmd_serve() -> None:
 
 
 def _cmd_scan(args: argparse.Namespace) -> None:
+    _configure_packs_from_args(args)
     from bulla.guard import BullaGuard
     from bulla.scan import ScanError, scan_mcp_server, scan_mcp_servers
 
@@ -487,8 +512,8 @@ def _cmd_scan(args: argparse.Namespace) -> None:
         else:
             from bulla.guard import _composition_from_mcp_tools
             tools = scan_mcp_servers(args.commands)
-            comp = _composition_from_mcp_tools(tools, name="multi-server-scan")
-            guard = BullaGuard(comp)
+            comp, basis = _composition_from_mcp_tools(tools, name="multi-server-scan")
+            guard = BullaGuard(comp, witness_basis=basis)
     except ScanError as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
@@ -548,6 +573,7 @@ def main() -> None:
         action="store_true",
         help="Run on bundled example compositions",
     )
+    _add_pack_args(p_diag)
     p_diag.set_defaults(func=_cmd_diagnose)
 
     # ── check ─────────────────────────────────────────────────────────
@@ -584,6 +610,7 @@ def main() -> None:
         action="store_true",
         help="Run on bundled example compositions",
     )
+    _add_pack_args(p_check)
     p_check.set_defaults(func=_cmd_check)
 
     # ── infer ─────────────────────────────────────────────────────────
@@ -599,6 +626,7 @@ def main() -> None:
         "-o", "--output", type=Path, default=None,
         help="Write output to file instead of stdout",
     )
+    _add_pack_args(p_infer)
     p_infer.set_defaults(func=_cmd_infer)
 
     # ── scan ──────────────────────────────────────────────────────────
@@ -620,6 +648,7 @@ def main() -> None:
         "-o", "--output", type=Path, default=None,
         help="Save inferred composition YAML to file",
     )
+    _add_pack_args(p_scan)
     p_scan.set_defaults(func=_cmd_scan)
 
     # ── manifest ──────────────────────────────────────────────────────

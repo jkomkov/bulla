@@ -1,0 +1,92 @@
+pack_version: "0.1.0"
+pack_name: "financial"
+dimensions:
+  day_count_convention:
+    description: "Day count basis for interest accrual and coupon calculation"
+    known_values:
+      - "ACT/360"
+      - "ACT/365"
+      - "ACT/ACT"
+      - "30/360"
+      - "30E/360"
+    field_patterns:
+      - "*_day_count"
+      - "*_accrual_basis"
+      - "*_day_convention"
+      - "*_dcc"
+    description_keywords:
+      - "day count"
+      - "accrual basis"
+      - "act/360"
+      - "act/365"
+      - "30/360"
+      - "actual/actual"
+      - "coupon calculation"
+    domains:
+      - "financial"
+
+  settlement_cycle:
+    description: "Number of business days between trade and settlement"
+    known_values:
+      - "T+0"
+      - "T+1"
+      - "T+2"
+      - "T+3"
+    field_patterns:
+      - "*_settlement"
+      - "*_settle_date"
+      - "*_value_date"
+    description_keywords:
+      - "settlement cycle"
+      - "settlement date"
+      - "value date"
+      - "t+1"
+      - "t+2"
+      - "trade date plus"
+    domains:
+      - "financial"
+
+  fee_basis:
+    description: "How fees and commissions are expressed"
+    known_values:
+      - "flat"
+      - "percentage"
+      - "basis_points"
+      - "per_unit"
+      - "tiered"
+    field_patterns:
+      - "*_commission"
+      - "*_fee_type"
+      - "*_fee_basis"
+      - "*_spread"
+    description_keywords:
+      - "commission"
+      - "flat fee"
+      - "per unit"
+      - "tiered pricing"
+      - "spread"
+      - "bps fee"
+    domains:
+      - "financial"
+
+  rounding_mode:
+    description: "Rounding rule for financial calculations"
+    known_values:
+      - "half_up"
+      - "half_even"
+      - "half_down"
+      - "floor"
+      - "ceiling"
+      - "truncate"
+    field_patterns:
+      - "*_rounding"
+      - "*_round_mode"
+    description_keywords:
+      - "banker's rounding"
+      - "round half up"
+      - "round half even"
+      - "truncation"
+      - "floor"
+      - "ceiling"
+    domains:
+      - "financial"

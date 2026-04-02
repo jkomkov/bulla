@@ -31,6 +31,7 @@ from bulla.diagnostic import diagnose
 from bulla.model import (
     DEFAULT_POLICY_PROFILE,
     PolicyProfile,
+    WitnessBasis,
     WitnessError,
     WitnessErrorCode,
 )
@@ -42,7 +43,6 @@ SERVER_VERSION = __version__
 PROTOCOL_VERSION = "2024-11-05"
 MAX_DEPTH = 10
 
-# JSON-RPC error codes for MCP transport
 _RPC_CODES = {
     WitnessErrorCode.INVALID_COMPOSITION: -32001,
     WitnessErrorCode.INVALID_PARAMS: -32002,
@@ -67,6 +67,130 @@ def _error_response(
     }
 
 
+# ── Shared schema fragments ──────────────────────────────────────────
+
+_POLICY_INPUT_SCHEMA: dict[str, Any] = {
+    "oneOf": [
+        {
+            "type": "string",
+            "description": "Named policy profile (backward compat)",
+        },
+        {
+            "type": "object",
+            "description": "Full policy profile with thresholds",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": DEFAULT_POLICY_PROFILE.name,
+                },
+                "max_blind_spots": {"type": "integer", "default": 0},
+                "max_fee": {"type": "integer", "default": 0},
+                "max_unknown": {"type": "integer", "default": -1},
+                "require_bridge": {"type": "boolean", "default": True},
+            },
+        },
+    ],
+    "description": (
+        "Policy profile: either a name string (backward compat) or "
+        "an object with explicit thresholds"
+    ),
+    "default": DEFAULT_POLICY_PROFILE.name,
+}
+
+_RECEIPT_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        "receipt_version": {"type": "string"},
+        "kernel_version": {"type": "string"},
+        "receipt_hash": {"type": "string"},
+        "composition_hash": {"type": "string"},
+        "diagnostic_hash": {"type": "string"},
+        "policy_profile": {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "max_blind_spots": {"type": "integer"},
+                "max_fee": {"type": "integer"},
+                "max_unknown": {"type": "integer"},
+                "require_bridge": {"type": "boolean"},
+            },
+        },
+        "fee": {"type": "integer"},
+        "blind_spots_count": {"type": "integer"},
+        "bridges_required": {"type": "integer"},
+        "unknown_dimensions": {"type": "integer"},
+        "disposition": {
+            "type": "string",
+            "enum": [
+                "proceed",
+                "proceed_with_receipt",
+                "proceed_with_bridge",
+                "refuse_pending_disclosure",
+                "refuse_pending_human_review",
+            ],
+        },
+        "timestamp": {"type": "string"},
+        "patches": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "bulla_patch_version": {"type": "string"},
+                    "action": {"type": "string"},
+                    "target_tool": {"type": "string"},
+                    "field": {"type": "string"},
+                    "path": {"type": "string"},
+                    "dimension": {"type": "string"},
+                    "eliminates": {"type": "string"},
+                    "expected_fee_delta": {"type": "integer"},
+                },
+            },
+        },
+        "anchor_ref": {"type": ["string", "null"]},
+        "parent_receipt_hash": {"type": ["string", "null"]},
+        "active_packs": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string"},
+                    "version": {"type": "string"},
+                    "hash": {"type": "string"},
+                },
+            },
+        },
+        "witness_basis": {
+            "oneOf": [
+                {"type": "null"},
+                {
+                    "type": "object",
+                    "properties": {
+                        "declared": {"type": "integer"},
+                        "inferred": {"type": "integer"},
+                        "unknown": {"type": "integer"},
+                    },
+                },
+            ],
+        },
+    },
+    "required": [
+        "receipt_version",
+        "kernel_version",
+        "receipt_hash",
+        "composition_hash",
+        "diagnostic_hash",
+        "policy_profile",
+        "fee",
+        "blind_spots_count",
+        "bridges_required",
+        "unknown_dimensions",
+        "disposition",
+        "timestamp",
+        "patches",
+    ],
+}
+
+
 # ── Tool definitions ─────────────────────────────────────────────────
 
 
@@ -87,12 +211,28 @@ TOOLS = [
                     "type": "string",
                     "description": "Composition YAML as a string",
                 },
-                "policy": {
-                    "type": "string",
+                "policy": _POLICY_INPUT_SCHEMA,
+                "unknown_dimensions": {
+                    "type": "integer",
                     "description": (
-                        "Named policy profile (default: witness.default.v1)"
+                        "Number of convention dimensions that could not be "
+                        "classified under the active packs. Used by policy "
+                        "to enforce max_unknown thresholds."
                     ),
-                    "default": DEFAULT_POLICY_PROFILE.name,
+                    "default": 0,
+                },
+                "witness_basis": {
+                    "type": "object",
+                    "description": (
+                        "Epistemic provenance: how many conventions were "
+                        "declared, inferred, or unknown. Omit if not attested."
+                    ),
+                    "properties": {
+                        "declared": {"type": "integer"},
+                        "inferred": {"type": "integer"},
+                        "unknown": {"type": "integer"},
+                    },
+                    "required": ["declared", "inferred", "unknown"],
                 },
                 "depth": {
                     "type": "integer",
@@ -105,6 +245,7 @@ TOOLS = [
             },
             "required": ["composition"],
         },
+        "outputSchema": _RECEIPT_SCHEMA,
     },
     {
         "name": "bulla.bridge",
@@ -120,15 +261,37 @@ TOOLS = [
                     "type": "string",
                     "description": "Composition YAML as a string",
                 },
-                "policy": {
-                    "type": "string",
-                    "description": (
-                        "Named policy profile (default: witness.default.v1)"
-                    ),
-                    "default": DEFAULT_POLICY_PROFILE.name,
-                },
+                "policy": _POLICY_INPUT_SCHEMA,
             },
             "required": ["composition"],
+        },
+        "outputSchema": {
+            "type": "object",
+            "properties": {
+                "patched_composition": {"type": "string"},
+                "original_receipt": _RECEIPT_SCHEMA,
+                "receipt": _RECEIPT_SCHEMA,
+                "patches": {
+                    "type": "array",
+                    "items": {"type": "object"},
+                },
+                "before": {
+                    "type": "object",
+                    "properties": {"blind_spots": {"type": "integer"}},
+                },
+                "after": {
+                    "type": "object",
+                    "properties": {"blind_spots": {"type": "integer"}},
+                },
+            },
+            "required": [
+                "patched_composition",
+                "original_receipt",
+                "receipt",
+                "patches",
+                "before",
+                "after",
+            ],
         },
     },
 ]
@@ -153,13 +316,53 @@ RESOURCES = [
 ]
 
 
+# ── Policy parsing ───────────────────────────────────────────────────
+
+
+def _parse_policy(raw: Any) -> PolicyProfile:
+    """Parse policy input: accepts a string name or a full object."""
+    if raw is None:
+        return DEFAULT_POLICY_PROFILE
+    if isinstance(raw, str):
+        return PolicyProfile(name=raw)
+    if isinstance(raw, dict):
+        return PolicyProfile(
+            name=raw.get("name", DEFAULT_POLICY_PROFILE.name),
+            max_blind_spots=raw.get(
+                "max_blind_spots", DEFAULT_POLICY_PROFILE.max_blind_spots
+            ),
+            max_fee=raw.get("max_fee", DEFAULT_POLICY_PROFILE.max_fee),
+            max_unknown=raw.get(
+                "max_unknown", DEFAULT_POLICY_PROFILE.max_unknown
+            ),
+            require_bridge=raw.get(
+                "require_bridge", DEFAULT_POLICY_PROFILE.require_bridge
+            ),
+        )
+    return DEFAULT_POLICY_PROFILE
+
+
 # ── Tool handlers ────────────────────────────────────────────────────
+
+
+def _parse_witness_basis(raw: Any) -> WitnessBasis | None:
+    """Parse optional witness_basis from MCP input."""
+    if raw is None or not isinstance(raw, dict):
+        return None
+    try:
+        return WitnessBasis(
+            declared=int(raw["declared"]),
+            inferred=int(raw["inferred"]),
+            unknown=int(raw["unknown"]),
+        )
+    except (KeyError, TypeError, ValueError):
+        return None
 
 
 def _handle_witness(args: dict) -> dict:
     composition_yaml = args.get("composition", "")
-    policy_name = args.get("policy", DEFAULT_POLICY_PROFILE.name)
     depth = args.get("depth", 0)
+    unknown_dims = args.get("unknown_dimensions", 0)
 
     if depth > MAX_DEPTH:
         raise WitnessError(
@@ -167,19 +370,24 @@ def _handle_witness(args: dict) -> dict:
             f"Recursion depth {depth} exceeds max {MAX_DEPTH}",
         )
 
-    policy = PolicyProfile(name=policy_name)
+    policy = _parse_policy(args.get("policy"))
+    basis = _parse_witness_basis(args.get("witness_basis"))
     comp = load_composition(text=composition_yaml)
     diag = diagnose(comp)
-    receipt = witness(diag, comp, policy_profile=policy)
+    receipt = witness(
+        diag,
+        comp,
+        unknown_dimensions=unknown_dims,
+        policy_profile=policy,
+        witness_basis=basis,
+    )
     return receipt.to_dict()
 
 
 def _handle_bridge(args: dict) -> dict:
     composition_yaml = args.get("composition", "")
-    policy_name = args.get("policy", DEFAULT_POLICY_PROFILE.name)
-    policy = PolicyProfile(name=policy_name)
+    policy = _parse_policy(args.get("policy"))
 
-    # Diagnose and witness original
     comp = load_composition(text=composition_yaml)
     diag = diagnose(comp)
     original_receipt = witness(diag, comp, policy_profile=policy)
@@ -195,7 +403,6 @@ def _handle_bridge(args: dict) -> dict:
             "after": {"blind_spots": 0},
         }
 
-    # Apply bridges to raw YAML
     raw = yaml.safe_load(composition_yaml)
     tools_section = raw.get("tools", {})
     for br in diag.bridges:
@@ -211,10 +418,14 @@ def _handle_bridge(args: dict) -> dict:
 
     patched_yaml = yaml.dump(raw, default_flow_style=False, sort_keys=False)
 
-    # Re-diagnose and witness patched
     patched_comp = load_composition(text=patched_yaml)
     patched_diag = diagnose(patched_comp)
-    patched_receipt = witness(patched_diag, patched_comp, policy_profile=policy)
+    patched_receipt = witness(
+        patched_diag,
+        patched_comp,
+        policy_profile=policy,
+        parent_receipt_hash=original_receipt.receipt_hash,
+    )
 
     return {
         "patched_composition": patched_yaml,
@@ -241,7 +452,6 @@ def _handle_request(request: dict) -> dict | None:
     method = request.get("method", "")
     params = request.get("params", {})
 
-    # Notifications (no id) get no response
     is_notification = "id" not in request
 
     if method == "initialize":
@@ -262,7 +472,7 @@ def _handle_request(request: dict) -> dict | None:
         }
 
     if method == "notifications/initialized":
-        return None  # notification, no response
+        return None
 
     if method == "tools/list":
         return {
@@ -289,6 +499,7 @@ def _handle_request(request: dict) -> dict | None:
                 "jsonrpc": "2.0",
                 "id": msg_id,
                 "result": {
+                    "structuredContent": result,
                     "content": [
                         {
                             "type": "text",

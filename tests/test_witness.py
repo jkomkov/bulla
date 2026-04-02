@@ -13,7 +13,9 @@ from bulla.model import (
     DEFAULT_POLICY_PROFILE,
     Diagnostic,
     Disposition,
+    PackRef,
     PolicyProfile,
+    WitnessBasis,
     WitnessReceipt,
 )
 from bulla.model import Composition, Edge, SemanticDimension, ToolSpec
@@ -407,3 +409,133 @@ class TestCanonicalHash:
         c1 = load_composition(text=yaml_v1)
         c2 = load_composition(text=yaml_v2)
         assert c1.canonical_hash() == c2.canonical_hash()
+
+
+# ── v0.8: Disposition with max_unknown ───────────────────────────────
+
+
+class TestDispositionMaxUnknown:
+    def test_over_unknown_causes_refusal(self):
+        diag = _make_diagnostic(fee=0, n_unbridged=0)
+        policy = PolicyProfile(name="strict", max_unknown=0)
+        assert _resolve_disposition(diag, policy, unknown_dimensions=1) == (
+            Disposition.REFUSE_PENDING_DISCLOSURE
+        )
+
+    def test_at_unknown_limit_is_ok(self):
+        diag = _make_diagnostic(fee=0, n_unbridged=0)
+        policy = PolicyProfile(name="strict", max_unknown=2)
+        assert _resolve_disposition(diag, policy, unknown_dimensions=2) == (
+            Disposition.PROCEED
+        )
+
+    def test_unlimited_unknown_default(self):
+        diag = _make_diagnostic(fee=0, n_unbridged=0)
+        policy = PolicyProfile(name="default", max_unknown=-1)
+        assert _resolve_disposition(diag, policy, unknown_dimensions=999) == (
+            Disposition.PROCEED
+        )
+
+
+# ── v0.8: Parent receipt hash ────────────────────────────────────────
+
+
+class TestParentReceiptHash:
+    def test_default_is_none(self):
+        diag = _make_diagnostic(fee=0)
+        receipt = witness(diag, SAMPLE_COMPOSITION)
+        assert receipt.parent_receipt_hash is None
+
+    def test_passed_through(self):
+        diag = _make_diagnostic(fee=0)
+        receipt = witness(
+            diag, SAMPLE_COMPOSITION, parent_receipt_hash="parent_abc"
+        )
+        assert receipt.parent_receipt_hash == "parent_abc"
+        assert receipt.to_dict()["parent_receipt_hash"] == "parent_abc"
+
+    def test_affects_receipt_hash(self):
+        diag = _make_diagnostic(fee=0)
+        r1 = witness(diag, SAMPLE_COMPOSITION, parent_receipt_hash=None)
+        r2 = witness(diag, SAMPLE_COMPOSITION, parent_receipt_hash="abc123")
+        assert r1.receipt_hash != r2.receipt_hash
+
+
+# ── v0.8: WitnessBasis parameter ─────────────────────────────────────
+
+
+class TestWitnessBasisParam:
+    def test_default_is_none(self):
+        diag = _make_diagnostic(fee=0)
+        receipt = witness(diag, SAMPLE_COMPOSITION)
+        assert receipt.witness_basis is None
+        assert receipt.to_dict()["witness_basis"] is None
+
+    def test_passed_through(self):
+        diag = _make_diagnostic(fee=0)
+        basis = WitnessBasis(declared=5, inferred=3, unknown=2)
+        receipt = witness(diag, SAMPLE_COMPOSITION, witness_basis=basis)
+        assert receipt.witness_basis is basis
+        assert receipt.to_dict()["witness_basis"] == {
+            "declared": 5, "inferred": 3, "unknown": 2
+        }
+
+    def test_affects_receipt_hash(self):
+        diag = _make_diagnostic(fee=0)
+        r1 = witness(diag, SAMPLE_COMPOSITION, witness_basis=None)
+        basis = WitnessBasis(declared=1, inferred=0, unknown=0)
+        r2 = witness(diag, SAMPLE_COMPOSITION, witness_basis=basis)
+        assert r1.receipt_hash != r2.receipt_hash
+
+
+# ── v0.8: Active packs parameter ─────────────────────────────────────
+
+
+class TestActivePacksParam:
+    def test_default_is_empty(self):
+        diag = _make_diagnostic(fee=0)
+        receipt = witness(diag, SAMPLE_COMPOSITION)
+        assert receipt.active_packs == ()
+        assert receipt.to_dict()["active_packs"] == []
+
+    def test_passed_through(self):
+        diag = _make_diagnostic(fee=0)
+        packs = (
+            PackRef(name="base", version="0.1.0", hash="abc"),
+            PackRef(name="financial", version="0.1.0", hash="def"),
+        )
+        receipt = witness(diag, SAMPLE_COMPOSITION, active_packs=packs)
+        assert len(receipt.active_packs) == 2
+        d = receipt.to_dict()
+        assert len(d["active_packs"]) == 2
+        assert d["active_packs"][0]["name"] == "base"
+        assert d["active_packs"][1]["name"] == "financial"
+
+    def test_order_affects_receipt_hash(self):
+        diag = _make_diagnostic(fee=0)
+        packs_ab = (
+            PackRef(name="a", version="0.1.0", hash="aaa"),
+            PackRef(name="b", version="0.1.0", hash="bbb"),
+        )
+        packs_ba = (
+            PackRef(name="b", version="0.1.0", hash="bbb"),
+            PackRef(name="a", version="0.1.0", hash="aaa"),
+        )
+        r1 = witness(diag, SAMPLE_COMPOSITION, active_packs=packs_ab)
+        r2 = witness(diag, SAMPLE_COMPOSITION, active_packs=packs_ba)
+        assert r1.receipt_hash != r2.receipt_hash
+
+    def test_json_serializable(self):
+        diag = _make_diagnostic(fee=0)
+        basis = WitnessBasis(declared=1, inferred=1, unknown=0)
+        packs = (PackRef(name="base", version="0.1.0", hash="abc"),)
+        receipt = witness(
+            diag,
+            SAMPLE_COMPOSITION,
+            witness_basis=basis,
+            active_packs=packs,
+            parent_receipt_hash="parent123",
+        )
+        serialized = json.dumps(receipt.to_dict())
+        assert "parent123" in serialized
+        assert "base" in serialized

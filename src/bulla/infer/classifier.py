@@ -16,12 +16,20 @@ No LLM, no API key, deterministic.
 
 from __future__ import annotations
 
+import hashlib
 import importlib.resources
+import json
+import logging
 import re
 from dataclasses import dataclass, field as dc_field
+from pathlib import Path
 from typing import Any
 
 import yaml
+
+from bulla.model import PackRef
+
+logger = logging.getLogger(__name__)
 
 
 # ── Data types ─────────────────────────────────────────────────────────
@@ -49,28 +57,136 @@ class InferredDimension:
     sources: tuple[str, ...] = ()
 
 
-# ── Taxonomy loading ───────────────────────────────────────────────────
+# ── Pack loading ──────────────────────────────────────────────────────
 
 _taxonomy_cache: dict[str, Any] | None = None
+_active_pack_refs: tuple[PackRef, ...] = ()
+_extra_pack_paths: tuple[str, ...] = ()
+
+
+def _hash_pack(parsed: dict[str, Any]) -> str:
+    """Deterministic content hash of a parsed pack (not raw YAML)."""
+    return hashlib.sha256(
+        json.dumps(parsed, sort_keys=True).encode()
+    ).hexdigest()
+
+
+def _load_single_pack(path_or_resource: Path | str) -> dict[str, Any]:
+    """Load a single pack YAML from a file path or importlib resource."""
+    if isinstance(path_or_resource, Path):
+        return yaml.safe_load(path_or_resource.read_text(encoding="utf-8"))
+    return yaml.safe_load(path_or_resource)
+
+
+def _load_base_pack() -> tuple[dict[str, Any], PackRef]:
+    """Load the built-in base pack from package resources."""
+    pkg = importlib.resources.files("bulla")
+
+    packs_dir = pkg / "packs"
+    base_path = packs_dir / "base.yaml"
+    try:
+        text = base_path.read_text(encoding="utf-8")
+    except (FileNotFoundError, TypeError):
+        taxonomy_path = pkg / "taxonomy.yaml"
+        text = taxonomy_path.read_text(encoding="utf-8")
+
+    parsed = yaml.safe_load(text)
+    ref = PackRef(
+        name=parsed.get("pack_name", "base"),
+        version=parsed.get("pack_version", "0.1.0"),
+        hash=_hash_pack(parsed),
+    )
+    return parsed, ref
+
+
+def _merge_packs(
+    base: dict[str, Any],
+    overlay: dict[str, Any],
+    base_name: str,
+    overlay_name: str,
+) -> dict[str, Any]:
+    """Merge overlay dimensions into base. Later pack wins on collision."""
+    merged_dims = dict(base.get("dimensions", {}))
+    for dim_name, dim_def in overlay.get("dimensions", {}).items():
+        if dim_name in merged_dims:
+            logger.warning(
+                "Pack '%s' overrides dimension '%s' from pack '%s'",
+                overlay_name,
+                dim_name,
+                base_name,
+            )
+        merged_dims[dim_name] = dim_def
+    result = dict(base)
+    result["dimensions"] = merged_dims
+    return result
+
+
+def load_pack_stack(
+    extra_paths: list[Path] | None = None,
+) -> tuple[dict[str, Any], tuple[PackRef, ...]]:
+    """Load and merge the full pack stack, returning merged taxonomy and refs.
+
+    Precedence order: base (lowest) -> extra packs in order (highest last).
+    """
+    merged, base_ref = _load_base_pack()
+    refs: list[PackRef] = [base_ref]
+    prev_name = base_ref.name
+
+    for pack_path in extra_paths or []:
+        parsed = _load_single_pack(pack_path)
+        pack_name = parsed.get("pack_name", pack_path.stem)
+        ref = PackRef(
+            name=pack_name,
+            version=parsed.get("pack_version", "0.0.0"),
+            hash=_hash_pack(parsed),
+        )
+        merged = _merge_packs(merged, parsed, prev_name, pack_name)
+        refs.append(ref)
+        prev_name = pack_name
+
+    return merged, tuple(refs)
+
+
+def configure_packs(extra_paths: list[Path] | None = None) -> tuple[PackRef, ...]:
+    """Configure the active pack stack. Resets all caches."""
+    global _taxonomy_cache, _active_pack_refs, _extra_pack_paths
+    _reset_taxonomy_cache()
+    paths_key = tuple(str(p) for p in (extra_paths or []))
+    merged, refs = load_pack_stack(extra_paths)
+    _taxonomy_cache = merged
+    _active_pack_refs = refs
+    _extra_pack_paths = paths_key
+    return refs
+
+
+def get_active_pack_refs() -> tuple[PackRef, ...]:
+    """Return the currently active pack refs (after configure_packs or lazy load)."""
+    if not _active_pack_refs:
+        configure_packs()
+    return _active_pack_refs
 
 
 def _load_taxonomy() -> dict[str, Any]:
-    global _taxonomy_cache
+    """Load the merged taxonomy from the active pack stack."""
+    global _taxonomy_cache, _active_pack_refs
     if _taxonomy_cache is not None:
         return _taxonomy_cache
-    pkg = importlib.resources.files("bulla")
-    taxonomy_file = pkg / "taxonomy.yaml"
-    _taxonomy_cache = yaml.safe_load(taxonomy_file.read_text(encoding="utf-8"))
+    merged, refs = load_pack_stack()
+    _taxonomy_cache = merged
+    _active_pack_refs = refs
     return _taxonomy_cache
 
 
 def _reset_taxonomy_cache() -> None:
     """Reset all caches (for testing with custom taxonomies)."""
     global _taxonomy_cache, _compiled_patterns, _ENUM_KNOWN_VALUES, _DOMAIN_MAP
+    global _active_pack_refs, _extra_pack_paths
     _taxonomy_cache = None
     _compiled_patterns = None
     _ENUM_KNOWN_VALUES = None
     _DOMAIN_MAP = None
+    _active_pack_refs = ()
+    _extra_pack_paths = ()
 
 
 _DOMAIN_MAP: dict[str, list[str]] | None = None
