@@ -73,13 +73,13 @@ SAMPLE_BRIDGE = Bridge(
 
 SAMPLE_COMPOSITION = Composition(
     name="test-composition",
-    tools=[
+    tools=(
         ToolSpec("a", ("x", "y"), ("x",)),
         ToolSpec("b", ("x", "z"), ("x",)),
-    ],
-    edges=[
+    ),
+    edges=(
         Edge("a", "b", (SemanticDimension("d", "y", "z"),)),
-    ],
+    ),
 )
 
 
@@ -358,8 +358,8 @@ class TestCanonicalHash:
     def test_different_composition(self):
         other = Composition(
             name="other",
-            tools=[ToolSpec("z", ("a",), ("a",))],
-            edges=[],
+            tools=(ToolSpec("z", ("a",), ("a",)),),
+            edges=(),
         )
         assert SAMPLE_COMPOSITION.canonical_hash() != other.canonical_hash()
 
@@ -539,3 +539,80 @@ class TestActivePacksParam:
         serialized = json.dumps(receipt.to_dict())
         assert "parent123" in serialized
         assert "base" in serialized
+
+
+# ── Verification ────────────────────────────────────────────────────
+
+
+class TestVerifyReceiptConsistency:
+    def test_fresh_receipt_is_consistent(self):
+        from bulla.diagnostic import diagnose as _diag
+        from bulla.witness import verify_receipt_consistency
+
+        diag = _diag(SAMPLE_COMPOSITION)
+        r = witness(diag, SAMPLE_COMPOSITION)
+        ok, vs = verify_receipt_consistency(r, SAMPLE_COMPOSITION, diag)
+        assert ok
+        assert vs == []
+
+    def test_wrong_composition_detected(self):
+        from bulla.diagnostic import diagnose as _diag
+        from bulla.witness import verify_receipt_consistency
+
+        diag = _diag(SAMPLE_COMPOSITION)
+        r = witness(diag, SAMPLE_COMPOSITION)
+        other = Composition(
+            name="other",
+            tools=(ToolSpec("z", ("a",), ("a",)),),
+            edges=(),
+        )
+        ok, vs = verify_receipt_consistency(r, other, diag)
+        assert not ok
+        assert "composition_hash mismatch" in vs
+
+    def test_basis_unknown_consistency_enforced(self):
+        from bulla.diagnostic import diagnose as _diag
+        from bulla.witness import verify_receipt_consistency
+
+        diag = _diag(SAMPLE_COMPOSITION)
+        basis = WitnessBasis(declared=1, inferred=0, unknown=3)
+        r = witness(diag, SAMPLE_COMPOSITION, witness_basis=basis)
+        assert r.unknown_dimensions == 3
+        ok, vs = verify_receipt_consistency(r, SAMPLE_COMPOSITION, diag)
+        assert ok
+
+
+class TestVerifyReceiptIntegrity:
+    def test_valid_dict(self):
+        from bulla.diagnostic import diagnose as _diag
+        from bulla.witness import verify_receipt_integrity
+
+        diag = _diag(SAMPLE_COMPOSITION)
+        r = witness(diag, SAMPLE_COMPOSITION)
+        assert verify_receipt_integrity(r.to_dict())
+
+    def test_tampered_fee(self):
+        from bulla.diagnostic import diagnose as _diag
+        from bulla.witness import verify_receipt_integrity
+
+        diag = _diag(SAMPLE_COMPOSITION)
+        r = witness(diag, SAMPLE_COMPOSITION)
+        d = r.to_dict()
+        d["fee"] = 9999
+        assert not verify_receipt_integrity(d)
+
+    def test_tampered_disposition(self):
+        from bulla.diagnostic import diagnose as _diag
+        from bulla.witness import verify_receipt_integrity
+
+        diag = _diag(SAMPLE_COMPOSITION)
+        r = witness(diag, SAMPLE_COMPOSITION)
+        d = r.to_dict()
+        d["disposition"] = "proceed"
+        if r.disposition.value != "proceed":
+            assert not verify_receipt_integrity(d)
+
+    def test_missing_hash_returns_false(self):
+        from bulla.witness import verify_receipt_integrity
+
+        assert not verify_receipt_integrity({})

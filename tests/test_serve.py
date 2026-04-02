@@ -635,9 +635,11 @@ class TestWitnessBasisMCP:
 
 
 class TestActivePacksInReceipt:
-    def test_default_receipt_has_empty_packs(self):
+    def test_default_receipt_has_base_pack(self):
         result = _handle_witness({"composition": CLEAN_COMPOSITION})
-        assert result["active_packs"] == []
+        packs = result["active_packs"]
+        assert len(packs) >= 1
+        assert packs[0]["name"] == "base"
 
 
 # ── K4: Hash semantics ──────────────────────────────────────────────

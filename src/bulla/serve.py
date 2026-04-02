@@ -19,7 +19,6 @@ No SDK dependency — pure stdlib.
 
 from __future__ import annotations
 
-import importlib.resources
 import json
 import sys
 from typing import Any
@@ -35,6 +34,7 @@ from bulla.model import (
     WitnessError,
     WitnessErrorCode,
 )
+from bulla.infer.classifier import get_active_pack_refs
 from bulla.parser import CompositionError, load_composition
 from bulla.witness import witness
 
@@ -262,6 +262,28 @@ TOOLS = [
                     "description": "Composition YAML as a string",
                 },
                 "policy": _POLICY_INPUT_SCHEMA,
+                "unknown_dimensions": {
+                    "type": "integer",
+                    "description": (
+                        "Number of convention dimensions that could not be "
+                        "classified under the active packs. Used by policy "
+                        "to enforce max_unknown thresholds."
+                    ),
+                    "default": 0,
+                },
+                "witness_basis": {
+                    "type": "object",
+                    "description": (
+                        "Epistemic provenance: how many conventions were "
+                        "declared, inferred, or unknown. Omit if not attested."
+                    ),
+                    "properties": {
+                        "declared": {"type": "integer"},
+                        "inferred": {"type": "integer"},
+                        "unknown": {"type": "integer"},
+                    },
+                    "required": ["declared", "inferred", "unknown"],
+                },
             },
             "required": ["composition"],
         },
@@ -301,9 +323,10 @@ TOOLS = [
 
 
 def _load_taxonomy() -> str:
-    pkg = importlib.resources.files("bulla")
-    taxonomy_path = pkg / "taxonomy.yaml"
-    return taxonomy_path.read_text(encoding="utf-8")
+    from bulla.infer.classifier import load_pack_stack
+
+    merged, _ = load_pack_stack()
+    return yaml.dump(merged, default_flow_style=False, sort_keys=False)
 
 
 RESOURCES = [
@@ -380,6 +403,7 @@ def _handle_witness(args: dict) -> dict:
         unknown_dimensions=unknown_dims,
         policy_profile=policy,
         witness_basis=basis,
+        active_packs=get_active_pack_refs(),
     )
     return receipt.to_dict()
 
@@ -387,10 +411,19 @@ def _handle_witness(args: dict) -> dict:
 def _handle_bridge(args: dict) -> dict:
     composition_yaml = args.get("composition", "")
     policy = _parse_policy(args.get("policy"))
+    unknown_dims = args.get("unknown_dimensions", 0)
+    basis = _parse_witness_basis(args.get("witness_basis"))
+    packs = get_active_pack_refs()
 
     comp = load_composition(text=composition_yaml)
     diag = diagnose(comp)
-    original_receipt = witness(diag, comp, policy_profile=policy)
+    original_receipt = witness(
+        diag, comp,
+        unknown_dimensions=unknown_dims,
+        policy_profile=policy,
+        witness_basis=basis,
+        active_packs=packs,
+    )
     before_bs = len(diag.blind_spots)
 
     if before_bs == 0:
@@ -425,6 +458,8 @@ def _handle_bridge(args: dict) -> dict:
         patched_comp,
         policy_profile=policy,
         parent_receipt_hash=original_receipt.receipt_hash,
+        witness_basis=basis,
+        active_packs=packs,
     )
 
     return {

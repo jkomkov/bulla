@@ -6,44 +6,44 @@ from bulla.model import Composition, Edge, SemanticDimension, ToolSpec
 
 def _auth_pipeline():
     """Fee=0: all dimensions observable."""
-    tools = [
+    tools = (
         ToolSpec("auth", ("token", "user_id"), ("token", "user_id")),
         ToolSpec("data", ("payload", "user_id"), ("payload", "user_id")),
-    ]
-    edges = [
+    )
+    edges = (
         Edge("auth", "data", (SemanticDimension("uid", "user_id", "user_id"),)),
-    ]
+    )
     return Composition("auth", tools, edges)
 
 
 def _blind_pipeline():
     """Fee>0: day_convention hidden on both sides."""
-    tools = [
+    tools = (
         ToolSpec("provider", ("prices", "day_conv"), ("prices",)),
         ToolSpec("analysis", ("result", "day_conv"), ("result",)),
-    ]
-    edges = [
+    )
+    edges = (
         Edge(
             "provider",
             "analysis",
             (SemanticDimension("day_match", "day_conv", "day_conv"),),
         ),
-    ]
+    )
     return Composition("financial", tools, edges)
 
 
 def _cyclic_pipeline():
     """Cyclic: 3 tools in a triangle."""
-    tools = [
+    tools = (
         ToolSpec("A", ("x", "hidden_a"), ("x",)),
         ToolSpec("B", ("x", "hidden_a"), ("x",)),
         ToolSpec("C", ("x",), ("x",)),
-    ]
-    edges = [
+    )
+    edges = (
         Edge("A", "B", (SemanticDimension("d1", "hidden_a", "hidden_a"),)),
         Edge("B", "C", (SemanticDimension("d2", "x", "x"),)),
         Edge("C", "A", (SemanticDimension("d3", "x", "x"),)),
-    ]
+    )
     return Composition("cyclic", tools, edges)
 
 

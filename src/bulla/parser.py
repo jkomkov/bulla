@@ -126,7 +126,7 @@ def _parse_composition_data(
     _require_type(edges_data, list, "edges", source)
     edges = [_validate_edge(e, i, tool_names) for i, e in enumerate(edges_data)]
 
-    return Composition(name=name, tools=tools, edges=edges)
+    return Composition(name=name, tools=tuple(tools), edges=tuple(edges))
 
 
 def load_composition(path: Path | None = None, *, text: str | None = None) -> Composition:

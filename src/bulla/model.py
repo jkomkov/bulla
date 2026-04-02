@@ -45,8 +45,8 @@ class Edge:
 @dataclass(frozen=True)
 class Composition:
     name: str
-    tools: list[ToolSpec]
-    edges: list[Edge]
+    tools: tuple[ToolSpec, ...]
+    edges: tuple[Edge, ...]
 
     def canonical_hash(self) -> str:
         """Canonical identity hash of composition structure.

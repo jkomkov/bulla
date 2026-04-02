@@ -125,7 +125,7 @@ class BullaGuard:
         else:
             edge_list = _infer_edges(tool_specs)
 
-        return cls(Composition(name=name, tools=tool_specs, edges=edge_list))
+        return cls(Composition(name=name, tools=tuple(tool_specs), edges=tuple(edge_list)))
 
     @classmethod
     def from_mcp_manifest(cls, path: str | Path) -> BullaGuard:
@@ -334,4 +334,4 @@ def _composition_from_mcp_tools(
     basis = WitnessBasis(
         declared=n_declared, inferred=n_inferred, unknown=n_unknown
     )
-    return Composition(name=name, tools=tool_specs, edges=edges), basis
+    return Composition(name=name, tools=tuple(tool_specs), edges=tuple(edges)), basis

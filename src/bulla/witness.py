@@ -13,6 +13,7 @@ beyond the disposition thresholds.
 from __future__ import annotations
 
 import hashlib
+import json
 from datetime import datetime, timezone
 
 from bulla import __version__
@@ -113,10 +114,18 @@ def witness(
 
     ``witness_basis`` records the epistemic provenance of the
     composition's conventions. The kernel does not compute this;
-    the caller attests it.
+    the caller attests it. When provided, ``witness_basis.unknown``
+    overrides the ``unknown_dimensions`` parameter to ensure
+    consistency — the receipt cannot record a basis that disagrees
+    with the unknown count used for policy judgment.
     """
+    effective_unknown = (
+        witness_basis.unknown if witness_basis is not None
+        else unknown_dimensions
+    )
+
     patches = _diagnostic_to_patches(diag)
-    disposition = _resolve_disposition(diag, policy_profile, unknown_dimensions)
+    disposition = _resolve_disposition(diag, policy_profile, effective_unknown)
 
     return WitnessReceipt(
         receipt_version=RECEIPT_VERSION,
@@ -127,7 +136,7 @@ def witness(
         fee=diag.coherence_fee,
         blind_spots_count=len(diag.blind_spots),
         bridges_required=diag.n_unbridged,
-        unknown_dimensions=unknown_dimensions,
+        unknown_dimensions=effective_unknown,
         disposition=disposition,
         timestamp=datetime.now(timezone.utc).isoformat(),
         patches=patches,
@@ -135,3 +144,76 @@ def witness(
         active_packs=active_packs,
         witness_basis=witness_basis,
     )
+
+
+# ── Verification ─────────────────────────────────────────────────────
+
+
+def verify_receipt_consistency(
+    receipt: WitnessReceipt,
+    comp: Composition,
+    diag: Diagnostic,
+) -> tuple[bool, list[str]]:
+    """Check that a receipt is consistent with its composition and diagnostic.
+
+    Requires the kernel's objects. Returns ``(is_valid, violations)``.
+    Use when you have the original composition and diagnostic and want
+    to confirm the receipt binds them correctly.
+    """
+    violations: list[str] = []
+    if receipt.composition_hash != comp.canonical_hash():
+        violations.append("composition_hash mismatch")
+    if receipt.diagnostic_hash != diag.content_hash():
+        violations.append("diagnostic_hash mismatch")
+    if receipt.fee != diag.coherence_fee:
+        violations.append(
+            f"fee {receipt.fee} != diagnostic fee {diag.coherence_fee}"
+        )
+    if receipt.blind_spots_count != len(diag.blind_spots):
+        violations.append("blind_spots_count mismatch")
+    if receipt.bridges_required != diag.n_unbridged:
+        violations.append("bridges_required mismatch")
+    if receipt.witness_basis is not None:
+        if receipt.unknown_dimensions != receipt.witness_basis.unknown:
+            violations.append(
+                "unknown_dimensions != witness_basis.unknown"
+            )
+    return (len(violations) == 0, violations)
+
+
+def verify_receipt_integrity(receipt_dict: dict) -> bool:
+    """Tamper detection: recompute receipt hash from a serialized dict.
+
+    Self-contained — requires only the dict (e.g. from JSON or an MCP
+    response), not the kernel or any original objects. Reconstructs
+    the hash input from the dict's fields and compares to the claimed
+    ``receipt_hash``.
+
+    Verification requires the **serialized dict** produced by
+    ``WitnessReceipt.to_dict()``, which includes the timestamp.
+    """
+    claimed = receipt_dict.get("receipt_hash")
+    if claimed is None:
+        return False
+
+    obj = {
+        "receipt_version": receipt_dict.get("receipt_version"),
+        "kernel_version": receipt_dict.get("kernel_version"),
+        "composition_hash": receipt_dict.get("composition_hash"),
+        "diagnostic_hash": receipt_dict.get("diagnostic_hash"),
+        "policy_profile": receipt_dict.get("policy_profile"),
+        "fee": receipt_dict.get("fee"),
+        "blind_spots_count": receipt_dict.get("blind_spots_count"),
+        "bridges_required": receipt_dict.get("bridges_required"),
+        "unknown_dimensions": receipt_dict.get("unknown_dimensions"),
+        "disposition": receipt_dict.get("disposition"),
+        "timestamp": receipt_dict.get("timestamp"),
+        "patches": receipt_dict.get("patches", []),
+        "parent_receipt_hash": receipt_dict.get("parent_receipt_hash"),
+        "active_packs": receipt_dict.get("active_packs", []),
+        "witness_basis": receipt_dict.get("witness_basis"),
+    }
+    computed = hashlib.sha256(
+        json.dumps(obj, sort_keys=True).encode()
+    ).hexdigest()
+    return computed == claimed

@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.9.0
+
+### Breaking Changes
+- **`witness_basis.unknown` overrides `unknown_dimensions`**: When `witness_basis` is provided to `witness()`, `witness_basis.unknown` now determines both the receipt's `unknown_dimensions` field and the policy disposition. The explicit `unknown_dimensions` parameter becomes a fallback for non-attested cases only. This eliminates lying receipts where `witness_basis.unknown=5` could coexist with `unknown_dimensions=0` and a `proceed` disposition under `max_unknown=3`.
+- **`Composition.tools` and `Composition.edges` are now `tuple`**: Previously `list`. The `frozen=True` dataclass was misleading when fields were mutable. All construction sites now use `tuple()`. Code that indexes or iterates is unaffected; code that calls `.append()` on these fields must change.
+
+### Added
+- **`verify_receipt_consistency(receipt, comp, diag)`**: Checks that a receipt's claimed hashes and counts match the given composition and diagnostic objects. Returns `(is_valid, violations)`.
+- **`verify_receipt_integrity(receipt_dict)`**: Self-contained tamper detection from a serialized receipt dict. Recomputes the SHA-256 hash from the dict's fields and compares to the claimed `receipt_hash`. No kernel or original objects required.
+- **Public API exports**: `PackRef`, `WitnessBasis`, `verify_receipt_consistency`, and `verify_receipt_integrity` are now exported from `bulla`.
+- **MCP active_packs threading**: `bulla.witness` and `bulla.bridge` MCP handlers now pass configured pack refs to the witness kernel. Receipts emitted via MCP record the active lexical constitution.
+- **`bulla.bridge` schema parity**: `unknown_dimensions` and `witness_basis` parameters added to `bulla.bridge` input schema, matching `bulla.witness`.
+- **Mathematical invariant test suite**: `test_invariants.py` with 67 parametrized tests across all bundled compositions: coherence fee non-negativity, bridging monotonicity, basis/unknown consistency, verification round-trips, tamper detection, hash determinism, and pack order sensitivity.
+- 74 new tests (366 total)
+
+### Fixed
+- **`bulla://taxonomy` resource**: Now returns the merged pack stack (via `load_pack_stack()`) instead of the raw `taxonomy.yaml` file, consistent with the pack system.
+- **Bridge handler parity**: `_handle_bridge` now threads `unknown_dimensions`, `witness_basis`, and `active_packs` through both the original and patched witness calls.
+
 ## 0.8.0
 
 ### Added
