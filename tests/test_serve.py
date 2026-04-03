@@ -679,6 +679,20 @@ class TestMCPDisclosureAndDecomposition:
         assert result["disclosure_set"] == []
         assert result["fee"] == 0
 
+    def test_disclosure_set_empty_when_fee_zero(self):
+        """Lazy disclosure guard: fee=0 skips minimum_disclosure_set entirely."""
+        from pathlib import Path
+        comp_path = Path(__file__).parent.parent / "compositions" / "auth_pipeline.yaml"
+        comp = load_composition(path=comp_path)
+        from bulla.diagnostic import diagnose
+        diag = diagnose(comp)
+        assert diag.coherence_fee == 0
+        import yaml
+        comp_yaml = comp_path.read_text()
+        result = _handle_witness({"composition": comp_yaml})
+        assert result["fee"] == 0
+        assert result["disclosure_set"] == []
+
     def test_decomposition_absent_without_partition(self):
         result = _handle_witness({"composition": MINIMAL_COMPOSITION})
         assert "decomposition" not in result

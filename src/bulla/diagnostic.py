@@ -76,17 +76,18 @@ def diagnose(comp: Composition) -> Diagnostic:
                             to_field=dim.to_field,
                             from_hidden=f_hid,
                             to_hidden=t_hid,
+                            from_tool=edge.from_tool,
+                            to_tool=edge.to_tool,
                         )
                     )
 
     bridges: list[Bridge] = []
     for bs in blind_spots:
-        edge_parts = bs.edge.split(" \u2192 ")
         if bs.from_hidden:
             bridges.append(
                 Bridge(
                     field=bs.from_field,
-                    add_to=(edge_parts[0],),
+                    add_to=(bs.from_tool,),
                     eliminates=bs.dimension,
                 )
             )
@@ -94,7 +95,7 @@ def diagnose(comp: Composition) -> Diagnostic:
             bridges.append(
                 Bridge(
                     field=bs.to_field,
-                    add_to=(edge_parts[1],),
+                    add_to=(bs.to_tool,),
                     eliminates=bs.dimension,
                 )
             )
@@ -420,11 +421,9 @@ def conditional_diagnose(
 
     obligations: list[BoundaryObligation] = []
     for bs in extended_diag.blind_spots:
-        parts = bs.edge.split(" \u2192 ")
-        target = parts[1]
-        if target in placeholders and bs.to_hidden:
+        if bs.to_tool in placeholders and bs.to_hidden:
             obligations.append(BoundaryObligation(
-                placeholder_tool=target,
+                placeholder_tool=bs.to_tool,
                 dimension=bs.dimension,
                 field=bs.to_field,
             ))

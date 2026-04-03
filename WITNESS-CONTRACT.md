@@ -7,7 +7,7 @@ Normative reference for the witness kernel. Deviation between code and this spec
 | Object | Identity | Contents |
 |---|---|---|
 | `Composition` | `canonical_hash()` — SHA-256 of sorted structural JSON | Tools (name, internal state, observable schema) + edges + dimensions |
-| `Diagnostic` | `content_hash()` — SHA-256 of measurement content | Fee, blind spots, bridges, rank data. Excludes timestamps |
+| `Diagnostic` | `content_hash()` — SHA-256 of measurement content | Fee, blind spots, bridges, rank data. Excludes timestamps. `BlindSpot.from_tool`/`to_tool` are ergonomic fields excluded from hash |
 | `WitnessReceipt` | `receipt_hash` — SHA-256 of all fields except `anchor_ref` | Binds composition + diagnostic + policy + lexical constitution + provenance |
 
 Three hashes, three concerns: what was proposed, what was measured, what was witnessed.

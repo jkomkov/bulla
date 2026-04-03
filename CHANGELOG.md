@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.16.0
+
+### Added
+- **`BlindSpot.from_tool` / `BlindSpot.to_tool`**: Ergonomic fields storing source and target tool names directly on blind spot objects. Eliminates fragile `edge.split(" → ")` string parsing in `diagnose()` bridge generation and `conditional_diagnose()` obligation extraction. These fields are **excluded from `content_hash()`** — they are derivable from the already-hashed `edge` label and do not affect receipt verification against v0.15 receipts.
+- **Lazy disclosure test**: `test_serve.py` now verifies that MCP `bulla.witness` returns `disclosure_set=[]` for fee=0 compositions (using `auth_pipeline.yaml`), covering the lazy disclosure guard added in v0.15.
+- **LangGraph integration demo**: `examples/langgraph_demo.py` — a self-contained 4-tool trade pipeline that builds a LangGraph graph (schema-valid), extracts a Bulla `Composition` with manual annotation, and diagnoses hidden conventions invisible to the orchestrator. Frames `bulla gauge` (Sprint 17) as the automation target for the annotation step. LangGraph is not a project dependency.
+- 1 new test (543 total).
+
+### Changed
+- **Paper draft** (`papers/hierarchical-fee/`): Abstract tightened from ~196 to ~153 words (submodularity detail removed). Non-negativity proof expanded with explicit projection lemma. 8-tool case study added to empirical table with fee/disclosure/bridge/boundary metrics. Conditional resolution section expanded with baseline → worst-case → resolved fee-drop numbers. Author affiliation added. Self-citations (`bridge`, `sheaf`, `scpi`) labeled as "Technical Report, Res Agentica" with repository URLs. LangGraph demo referenced in Related Work. Companion version updated to v0.16.
+- **Self-citation provenance**: `bridge`, `sheaf`, `scpi` bibitems now carry "Technical Report, Res Agentica, 2026" labels with `\url{https://github.com/jkomkov/bulla}`.
+- **Sync script tracked**: `scripts/sync-to-standalone.sh` added to version control.
+
 ## 0.15.0
 
 ### Added

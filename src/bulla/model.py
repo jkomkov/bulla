@@ -104,6 +104,8 @@ class BlindSpot:
     to_field: str
     from_hidden: bool
     to_hidden: bool
+    from_tool: str = ""
+    to_tool: str = ""
 
 
 @dataclass(frozen=True)
