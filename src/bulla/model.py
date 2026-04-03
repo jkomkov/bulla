@@ -237,6 +237,20 @@ class WitnessBasis:
 
 
 @dataclass(frozen=True)
+class BoundaryObligation:
+    """Convention that an unspecified tool must declare observably.
+
+    Produced by conditional diagnosis on a partial composition.
+    Each obligation says: "the tool at this port must expose *field*
+    in its observable schema for the coherence fee to decrease."
+    """
+
+    placeholder_tool: str
+    dimension: str
+    field: str
+
+
+@dataclass(frozen=True)
 class PolicyProfile:
     """Named, versioned policy that maps measurement to disposition.
 

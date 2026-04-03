@@ -68,6 +68,52 @@ Invariant: `witness_basis is not None` implies `receipt.unknown_dimensions == wi
 
 **`verify_receipt_integrity(receipt_dict)`**: Self-contained tamper detection. Reconstructs the hash input from a serialized dict and compares to the claimed `receipt_hash`. No kernel required. The `to_dict()` round-trip is the verification path.
 
+## Hierarchical Fee Decomposition
+
+**Law**: For any partition of tools into disjoint groups, the coherence fee decomposes as:
+
+```
+fee(G) = sum(fee(G_i)) + boundary_fee
+```
+
+where `boundary_fee = rho_full - rho_obs >= 0` is the rank contribution of cross-partition edges modulo internal edges, computed independently for full and observable coboundary matrices.
+
+**Non-negativity**: The column-projection from full to observable fields preserves linear independence of cross-partition rows modulo internal rows. Hence `rho_full >= rho_obs` and `boundary_fee >= 0`.
+
+**Vanishing condition**: `boundary_fee = 0` when every cross-partition edge dimension has both endpoint fields in the respective tools' observable schemas.
+
+**Tower Law**: For a partition refined by sub-partitioning each group G_i via P_i: `bf(refined) = bf(coarse) + sum(bf(P_i))`. The boundary fee is additive across levels of hierarchy. Proof: apply the decomposition theorem at both levels; local fees cancel.
+
+**Monotonicity**: Since `bf(P_i) >= 0`, refining a partition can only increase the boundary fee. The boundary fee defines a monotone function on the refinement lattice: 0 at the trivial partition, `total_fee` at singletons. Operationally: every level of delegation adds non-negative hidden cost.
+
+**Interpretation**: `boundary_fee` counts convention dimensions hidden at partition boundaries — blind spots invisible at every level of a hierarchy that appear only in the flat expansion. This is the coherence cost of delegation without disclosure.
+
+**Non-valuation**: The boundary fee is monotone but NOT a valuation on the partition lattice. For the A->B->C chain with P={AB,C} and Q={A,BC}: `bf(P) + bf(Q) = 2` but `bf(P^Q) + bf(P v Q) = 1`. The same hidden convention at B causes boundary fee in both partitions; resolving it once (in the discrete partition) suffices.
+
+**Minimum Disclosure Set**: `minimum_disclosure_set(comp)` returns the smallest set of `(tool, field)` pairs whose disclosure eliminates the coherence fee. The cardinality always equals the fee — it is a basis for the quotient space of the full coboundary column space modulo the observable column space. Disclosures subsume bridges: `len(bridges) >= 2 * len(disclosures)` across all compositions.
+
+**Non-submodularity**: The boundary fee is NOT submodular on the partition lattice. An adversarial survey of 10,000 random compositions (635,095 partition pairs) found 4,061 violations of `bf(P^Q) + bf(P v Q) <= bf(P) + bf(Q)`, with maximum violation magnitude 3. The individual `rho_full` and `rho_obs` functions are submodular (matroid rank on row sets), but their difference `bf = rho_full - rho_obs` is not. The 9 original bundled compositions happen to satisfy submodularity, but this is a topological accident of their pipeline-like structure, not a general property.
+
+**Conditional Diagnosis**: For partial compositions with open ports, placeholder tools with empty observable schemas produce worst-case fee estimates. Boundary obligations — fields the placeholder must expose — are read off the blind spots on placeholder edges.
+
+**Online Resolution Protocol**: The full conditional loop is:
+1. `conditional_diagnose(partial_comp, open_ports)` → obligations
+2. Candidate tool arrives → `satisfies_obligations(candidate, obligations)` → pass/fail
+3. `resolve_conditional(cond, {placeholder: candidate})` → `Resolution` with `resolved_fee`, `fee_delta`, `met_obligations`, `remaining_obligations`
+4. If `resolved_fee > 0`: `minimum_disclosure_set(resolved_comp)` → prescribe remaining fixes
+
+`resolve_conditional` supports partial resolution: resolve some placeholders while leaving others. `fee_delta` is always non-negative (replacing a placeholder with a real tool can only improve the fee).
+
+**Structural vs Epistemic Unknown**: Open ports in partial compositions create **structural unknowns** (distinct from **epistemic unknowns** from classifier uncertainty). Structural unknowns count against `structural_unknowns` in the conditional diagnostic, not against `max_unknown` in policy evaluation.
+
+**Trace Gap (Closed)**: The Frobenius trace gap `trace(L_full) - trace(L_obs) = ||delta_full||_F^2 - ||delta_obs||_F^2` equals the total count of hidden-endpoint instances across blind spots: `sum(from_hidden + to_hidden for each blind spot)`. This is a weighted blind-spot count derivable from the existing diagnostic, not a genuine spectral refinement: it can be positive when the fee is zero (hidden columns in the span of observable columns). A continuous spectral refinement requires the eigenvalue spectrum of the sheaf Laplacian, deferred to future work.
+
+## MCP Surface: Prescriptive Witness
+
+`bulla.witness` always returns `disclosure_set` — a list of `[tool_name, field_name]` pairs representing the minimum disclosure set. This makes every witness call prescriptive: the agent knows not just the fee, but the exact fields to fix.
+
+When the optional `partition` parameter is provided (array of arrays of tool name strings), the output includes a `decomposition` field with `total_fee`, `local_fees`, `boundary_fee`, `rho_obs`, `rho_full`, `boundary_edges`. The decomposition field is absent when partition is not provided, preserving backward compatibility.
+
 ## `max_unknown` Definition
 
 A convention dimension is **unknown** when it is relevant to the composition but could not be assigned a `declared` or `inferred` value under the active packs. `max_unknown` bounds the number of such dimensions a policy will tolerate before refusing.

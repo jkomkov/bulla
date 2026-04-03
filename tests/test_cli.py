@@ -56,7 +56,7 @@ class TestDiagnoseCommand:
         r = _run("diagnose", "--examples")
         assert r.returncode == 0
         assert "Summary:" in r.stdout
-        assert "9 compositions" in r.stdout
+        assert "10 compositions" in r.stdout
 
     def test_no_files_error(self):
         r = _run("diagnose")

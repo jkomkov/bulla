@@ -26,7 +26,7 @@ from typing import Any
 import yaml
 
 from bulla import __version__
-from bulla.diagnostic import diagnose
+from bulla.diagnostic import decompose_fee, diagnose, minimum_disclosure_set
 from bulla.model import (
     DEFAULT_POLICY_PROFILE,
     PolicyProfile,
@@ -242,6 +242,20 @@ TOOLS = [
                     ),
                     "default": 0,
                 },
+                "partition": {
+                    "type": "array",
+                    "description": (
+                        "Optional tool-name partition for fee decomposition. "
+                        "Each element is an array of tool name strings. "
+                        "When provided, the output includes a 'decomposition' "
+                        "field with total_fee, local_fees, boundary_fee, "
+                        "rho_obs, rho_full."
+                    ),
+                    "items": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                    },
+                },
             },
             "required": ["composition"],
         },
@@ -405,7 +419,29 @@ def _handle_witness(args: dict) -> dict:
         witness_basis=basis,
         active_packs=get_active_pack_refs(),
     )
-    return receipt.to_dict()
+    result = receipt.to_dict()
+
+    if receipt.fee > 0:
+        result["disclosure_set"] = [
+            [tool, field] for tool, field in minimum_disclosure_set(comp)
+        ]
+    else:
+        result["disclosure_set"] = []
+
+    raw_partition = args.get("partition")
+    if raw_partition:
+        partition = [frozenset(group) for group in raw_partition]
+        dec = decompose_fee(comp, partition)
+        result["decomposition"] = {
+            "total_fee": dec.total_fee,
+            "local_fees": list(dec.local_fees),
+            "boundary_fee": dec.boundary_fee,
+            "rho_obs": dec.rho_obs,
+            "rho_full": dec.rho_full,
+            "boundary_edges": dec.boundary_edges,
+        }
+
+    return result
 
 
 def _handle_bridge(args: dict) -> dict:

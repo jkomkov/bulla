@@ -665,6 +665,64 @@ class TestActivePacksInReceipt:
 # ── K4: Hash semantics ──────────────────────────────────────────────
 
 
+class TestMCPDisclosureAndDecomposition:
+    """Tests for the v0.14 disclosure_set and partition decomposition."""
+
+    def test_disclosure_set_always_present(self):
+        result = _handle_witness({"composition": MINIMAL_COMPOSITION})
+        assert "disclosure_set" in result
+        assert isinstance(result["disclosure_set"], list)
+        assert len(result["disclosure_set"]) == result["fee"]
+
+    def test_disclosure_set_clean_composition(self):
+        result = _handle_witness({"composition": CLEAN_COMPOSITION})
+        assert result["disclosure_set"] == []
+        assert result["fee"] == 0
+
+    def test_decomposition_absent_without_partition(self):
+        result = _handle_witness({"composition": MINIMAL_COMPOSITION})
+        assert "decomposition" not in result
+
+    def test_decomposition_present_with_partition(self):
+        result = _handle_witness({
+            "composition": MINIMAL_COMPOSITION,
+            "partition": [["tool_a"], ["tool_b"]],
+        })
+        assert "decomposition" in result
+        dec = result["decomposition"]
+        assert "total_fee" in dec
+        assert "local_fees" in dec
+        assert "boundary_fee" in dec
+        assert "rho_obs" in dec
+        assert "rho_full" in dec
+        assert dec["total_fee"] == sum(dec["local_fees"]) + dec["boundary_fee"]
+
+    def test_disclosure_set_format(self):
+        result = _handle_witness({"composition": MINIMAL_COMPOSITION})
+        for entry in result["disclosure_set"]:
+            assert isinstance(entry, list)
+            assert len(entry) == 2
+            assert isinstance(entry[0], str)
+            assert isinstance(entry[1], str)
+
+    def test_decomposition_via_tools_call(self):
+        resp = _handle_request({
+            "jsonrpc": "2.0",
+            "id": 100,
+            "method": "tools/call",
+            "params": {
+                "name": "bulla.witness",
+                "arguments": {
+                    "composition": MINIMAL_COMPOSITION,
+                    "partition": [["tool_a"], ["tool_b"]],
+                },
+            },
+        })
+        structured = resp["result"]["structuredContent"]
+        assert "disclosure_set" in structured
+        assert "decomposition" in structured
+
+
 class TestHashSemantics:
     def test_same_composition_different_times_different_receipt_hash(self):
         """Receipt hash includes timestamp — each witness event is unique.

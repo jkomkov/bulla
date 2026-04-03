@@ -1,5 +1,110 @@
 # Changelog
 
+## 0.15.0
+
+### Added
+- **Trace gap investigation**: Computationally verified that the Frobenius trace gap (`||delta_full||_F^2 - ||delta_obs||_F^2`) equals the total count of hidden-endpoint instances across blind spots. Closed as a non-informative weighted blind-spot count: it can be positive when the fee is zero (hidden columns in the span of observable columns) and adds no information beyond the existing blind-spot structure. Counterexample verified. Documented as a remark in the proof note.
+- **Survey smoke test**: `tests/test_adversarial_survey.py` — imports core functions from the adversarial submodularity survey script and runs a minimal 10-composition smoke test to guard against silent regressions.
+- **Trace gap test suite**: `tests/test_trace_gap.py` — verifies trace_gap == endpoint count for all 10 bundled compositions, fee > 0 implies trace_gap > 0, fee=0/trace_gap>0 counterexample, and same-fee-different-trace-gap distinguishability.
+- 26 new tests (542 total): trace gap (22), survey smoke (4).
+
+### Changed
+- **Paper draft**: Proof note reorganized from theorem order to story order for submission. New sections: Introduction (opens with financial settlement failure narrative), Related Work (3 areas: contract-based design, sheaf cohomology, multi-agent orchestration), Conclusion (with explicit non-claim: "fee measures structural verifiability, not semantic correctness"). Case study expanded with "what could go wrong" failure scenario. Empirical table trimmed to 6 highlight rows. Bibliography expanded from 4 to 15 references. 831 lines (up from 660). Target venue: AAMAS 2027 or NeurIPS/ICML agent safety workshop.
+- **Case study YAML annotations**: `financial_settlement_pipeline.yaml` now includes comment blocks explaining the semantic meaning of each edge's convention propagation (e.g., why `jurisdiction` maps to `risk_model_version`).
+- **Lazy disclosure_set in MCP**: `_handle_witness` in `serve.py` now guards the `minimum_disclosure_set(comp)` call with `receipt.fee > 0`, skipping both coboundary matrix constructions when the fee is zero.
+
+## 0.14.0
+
+### Added
+- **Submodularity disproved**: Adversarial survey of 10,000 random compositions (635,095 partition pairs) found 4,061 violations of `bf(P^Q) + bf(P v Q) <= bf(P) + bf(Q)`, with maximum violation magnitude 3. Minimal counterexample: 4 tools, 5 edges, where two partitions have bf=0 but their meet has bf=1. Individual `rho_full` and `rho_obs` are submodular (matroid rank on row sets), but their difference `bf = rho_full - rho_obs` is not.
+- **8-tool case study**: `financial_settlement_pipeline.yaml` — realistic multi-agent financial settlement workflow with 8 tools, 8 edges, betti_1=1 (cycle via audit_log -> compliance_check). Fee=7, 8 blind spots, 15 bridges, 7-element minimum disclosure set (2.1x savings over bridges).
+- **MCP `disclosure_set`**: `bulla.witness` now always returns a `disclosure_set` field — the minimum disclosure set as `[[tool, field], ...]`. Makes every witness call prescriptive by default.
+- **MCP `partition` parameter**: `bulla.witness` accepts an optional `partition` parameter (array of arrays of tool name strings). When provided, the output includes a `decomposition` field with `total_fee`, `local_fees`, `boundary_fee`, `rho_obs`, `rho_full`, `boundary_edges`. Only present when partition is provided — existing consumers are unaffected.
+- **Case study section in proof note**: 8-tool composition analysis with fee, disclosure set table, front/back-office partition decomposition, and conditional resolution round-trip.
+- **Adversarial survey script**: `scripts/adversarial_submodularity_survey.py` — generates random compositions with random hidden/visible fields and checks submodularity across partition pairs.
+- 7 new tests (516 total): submodularity counterexample (1), MCP disclosure_set and decomposition (6).
+
+### Changed
+- **`ConditionalDiagnostic.extended_comp`**: Type annotation fixed from `Composition = None # type: ignore[assignment]` to `Composition | None = None`.
+- **Resolution monotonicity proof**: Strengthened from "internal states identical by construction" to "I_real ⊇ I_placeholder is a consequence of composition validity" (edge dimensions must reference existing internal_state fields).
+- **Submodularity remark in proof note**: Upgraded from "computationally verified" to "disproved by adversarial counterexample" with formal analysis of why bf is not submodular (difference of submodular functions).
+- **Bundled parametrized tests**: Partition sampling for compositions with > 50 binary partitions (8-tool composition has 254), keeping the test suite under 70 seconds.
+
+### Empirical Results
+- Submodularity disproved: 4,061/635,095 violations across 10,000 adversarial random compositions (0.64% violation rate). Bundled compositions (833 sampled pairs) still show zero violations — a topological accident of pipeline-like structure.
+- 8-tool case study: fee=7, |S|=7=fee, |bridges|=15 >= 2*7=14. Front/back-office partition: local=(2,3), bf=2.
+- Tower law verified: 2,778/2,778 sampled pairs across 10 bundled compositions.
+
+## 0.13.0
+
+### Added
+- **`resolve_conditional`**: Resolve one or more placeholders in a conditional diagnostic. Rebuilds the composition with real tools swapped in, runs `diagnose`, and partitions obligations into met and remaining. Supports partial resolution (resolve some placeholders, leave others). Returns a `Resolution` dataclass with `resolved_diag`, `resolved_fee`, `fee_delta`, `met_obligations`, and `remaining_obligations`.
+- **`Resolution` dataclass**: Result type for `resolve_conditional`. `fee_delta` is `worst_case_fee - resolved_fee` and is always non-negative (a real tool is at least as informative as a placeholder with empty observable schema).
+- **`ConditionalDiagnostic.extended_comp`**: Stores the extended composition with placeholders, enabling `resolve_conditional` to work without the caller needing to reconstruct the composition.
+- **Extremal boundary fee**: New proposition and tests for the all-hidden star topology. Partition `{Hub} | {S_1..S_n}` achieves `bf = total_fee = n` because all edges are cross-partition and both groups are internally edge-free. Grouping the hub with k spokes reduces `bf` by exactly k.
+- **Submodularity survey**: Exhaustive survey across 333 partition pairs from all 9 bundled compositions confirms submodularity (`bf(P^Q) + bf(P v Q) <= bf(P) + bf(Q)`) with zero violations. Added helper functions `_partition_meet` and `_partition_join` for lattice operations.
+- **Online resolution corollary**: Added to proof note — replacing a placeholder with a real tool can only decrease or maintain the coherence fee (resolution monotonicity).
+- **Proof note updates**: Extremal cases section with theorem and landscape remark, submodularity remark, online resolution section with corollary and proof. Abstract and empirical results updated for v0.13.
+- **`minimum_disclosure_set` documentation**: Non-uniqueness note in docstring and matroid rank submodularity comment on greedy loop.
+- 19 new tests (493 total): `resolve_conditional` (8 unit + bundled parametrized), extremal star (11: hub-vs-spokes, mixed partition, singleton partition), submodularity survey (1 bundled parametrized across 9 compositions).
+
+### Empirical Results
+- `resolve_conditional` verified on 7 unit compositions (fee drop, obligation matching, partial resolution, round-trip with `minimum_disclosure_set`, from-scratch equivalence).
+- Submodularity verified across 333 partition pairs (333/333).
+- Extremal star: `bf = total_fee` for `{Hub}|{spokes}` partition verified for 2-5 spokes.
+
+## 0.12.0
+
+### Added
+- **Minimum Disclosure Set** (`minimum_disclosure_set`): Given a composition, returns the smallest set of `(tool, field)` disclosures that reduces the coherence fee to zero. The cardinality always equals the fee — it is a basis for the quotient space `col(delta_full) / col(delta_obs)`. Greedy column selection finds one such basis. Removes at least 2x redundancy versus the existing bridges mechanism.
+- **Valuation counterexample**: Computationally proved that the boundary fee is NOT a valuation on the partition lattice. For the A->B->C chain: `bf(P) + bf(Q) = 2` but `bf(P^Q) + bf(P v Q) = 1`. The same hidden convention at B causes boundary fee in both partitions, but resolving it once suffices.
+- **Submodularity test**: Verified that the boundary fee satisfies submodularity (`bf(P^Q) + bf(P v Q) <= bf(P) + bf(Q)`) for the counterexample chain.
+- **Two-step tower law induction test**: Hand-built 4-tool chain (A->B->C->D) verifying `bf(singletons) = bf(coarse) + bf(sub_AB) + bf(sub_CD)`. Also verified on bundled compositions with >= 4 tools.
+- **Proof note update**: New "Minimum Disclosure Set" section with theorem (cardinality equals fee), proof, and bridges comparison remark. Non-valuation remark added to Tower Law section. Abstract and empirical results updated for v0.12.
+- **`satisfies_obligations` docstring**: Documents that the function checks fields only — the caller filters obligations by placeholder name.
+- 44 new tests (474 total): minimum disclosure set (5 unit + 27 bundled parametrized), valuation counterexample (1), submodularity (1), two-step tower law (1 unit + 9 bundled, 6 skipped for < 4 tools).
+
+### Empirical Results
+- `len(minimum_disclosure_set) == fee` verified across all 9 bundled compositions (9/9).
+- `len(bridges) >= 2 * len(disclosures)` verified across all 9 bundled compositions (9/9).
+- Applying disclosures reduces fee to 0 for all 9 bundled compositions.
+- Removing any single disclosure from a minimal set leaves fee > 0 (minimality verified).
+- Valuation property disproved; submodularity holds for tested cases.
+
+## 0.11.0
+
+### Added
+- **Tower Law** (Theorem): The boundary fee is additive across levels of hierarchy. For a partition refined by sub-partitioning each group: `bf(refined) = bf(coarse) + sum(bf(sub_i))`. Proof is a 3-sentence telescoping argument from the decomposition theorem.
+- **Monotonicity Corollary**: Refining a partition can only increase the boundary fee. The boundary fee defines a monotone function on the refinement lattice: 0 at the trivial partition, `total_fee` at singletons. Formalizes "every level of delegation adds non-negative hidden cost" as a theorem.
+- **`satisfies_obligations`**: Checks whether a `ToolSpec` meets a set of `BoundaryObligation`s. Closes the conditional receipt loop: `conditional_diagnose` -> obligations -> candidate tool arrives -> `satisfies_obligations` -> recompute with real tool.
+- **Proof note update**: Tower Law theorem, proof, Monotonicity corollary, and lattice remark added to `papers/hierarchical-fee/`. Empirical results updated with tower law verification data (264/264 pairs verified).
+- **WITNESS-CONTRACT.md**: Tower Law and Monotonicity added as sub-properties of the hierarchical decomposition law.
+- 25 new tests (430 total): tower law verification across all bundled compositions (9 tests), monotonicity under refinement (9 tests), obligation satisfaction checker (5 tests), edge cases for decompose_fee with 0 edges and shared-placeholder conditional diagnosis (2 tests).
+
+### Changed
+- **`_cross_rank_modulo_internal`**: Replaced fragile label string parsing (`split("→")`) with direct `Edge` iteration matching `_edge_basis` row ordering. Coupling comment documents the implicit contract between `diagnostic.py` and `coboundary.py`.
+- **`conditional_diagnose` placeholder merging**: Replaced O(n) `tuple` membership check with `set` intermediate for deduplication.
+- **LaTeX bibkeys**: Renamed `\bibitem{sheaf-paper}` to `\bibitem{sheaf}` for consistency.
+
+### Empirical Results
+- Tower law computationally verified across 264 coarse/refined partition pairs (264/264). Boundary fee survey unchanged: 64/70 (91%) of binary partitions have nonzero boundary fee.
+
+## 0.10.0
+
+### Added
+- **Hierarchical fee decomposition** (`decompose_fee`): Takes a `Composition` and a partition of tool names, returns `FeeDecomposition` with per-group local fees, boundary fee, and the independent block-rank characterization (`rho_obs`, `rho_full`). The boundary fee is computed via `rho_full - rho_obs` (rank of cross-partition rows modulo internal rows) and verified against the remainder. Non-negativity proved via column-projection argument.
+- **Conditional diagnosis** (`conditional_diagnose`): Diagnose partial compositions with open ports. Creates placeholder tools with empty observable schemas, runs existing `diagnose`, and returns `ConditionalDiagnostic` with worst-case fee, boundary obligations (fields placeholders must expose), and structural unknown count.
+- **`FeeDecomposition` model**: Frozen dataclass with `total_fee`, `local_fees`, `boundary_fee`, `partition`, `boundary_edges`, `rho_obs`, `rho_full`.
+- **`ConditionalDiagnostic` model**: Frozen dataclass with baseline/extended diagnostics, fee bounds, obligations, structural unknowns.
+- **`OpenPort` model**: Describes an unconnected port in a partial composition for conditional diagnosis.
+- **`BoundaryObligation` model**: Convention that an unspecified tool must declare observably.
+- **WITNESS-CONTRACT.md**: Hierarchical Fee Decomposition law, structural vs epistemic unknown distinction.
+- **Proof note**: `papers/hierarchical-fee/` — theorem (fee decomposition from block rank), counterexample, vanishing corollary, SCPI connection, empirical results.
+- 37 new tests (405 total): counterexample chain, multi-dimension variant, full-disclosure vanishing, decompose_fee API tests, invariant tests across all bundled compositions (70 partitions), parametrized full-disclosure vanishing (chain + cycle), adversarial hidden interfaces (both-sides, star topology, one-side, mixed), conditional diagnosis (6 tests), empirical boundary fee survey.
+
+### Empirical Results
+- Boundary fee is nonzero in 64/70 (91%) of binary partitions across 9 bundled compositions. The hierarchical blind spot is the dominant regime, not a corner case. All 6 vanishing cases come from `auth_pipeline` (total fee = 0).
+
 ## 0.9.1
 
 ### Changed
