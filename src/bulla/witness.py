@@ -87,6 +87,7 @@ def witness(
     unknown_dimensions: int = 0,
     policy_profile: PolicyProfile = DEFAULT_POLICY_PROFILE,
     parent_receipt_hash: str | None = None,
+    parent_receipt_hashes: tuple[str, ...] | None = None,
     active_packs: tuple[PackRef, ...] = (),
     witness_basis: WitnessBasis | None = None,
     inline_dimensions: dict | None = None,
@@ -97,33 +98,28 @@ def witness(
     same inputs (except timestamp). Everything an agent needs to decide
     whether to proceed is in the receipt.
 
-    Uses ``Composition.canonical_hash()`` for composition identity —
-    hashes structure, not presentation. Two YAML files with different
-    formatting but identical semantics produce the same composition hash.
+    ``parent_receipt_hash`` is a convenience parameter for single-parent
+    chains. ``parent_receipt_hashes`` is the DAG-capable parameter
+    accepting multiple parents as a precedence-ordered tuple (later
+    entries override earlier ones, consistent with the pack stack).
 
-    ``policy_profile`` is a PolicyProfile with explicit thresholds.
-    Recorded in the receipt so consumers can verify the disposition
-    follows from the measurement under the stated policy.
-
-    ``parent_receipt_hash`` links this receipt to a prior witness event
-    (e.g. the original receipt before bridge repair). Enables receipt
-    chains: original -> repair -> patched.
-
-    ``active_packs`` records the lexical constitution in force: which
-    convention packs were active, in precedence order. Order is
-    semantics — later packs override earlier ones.
-
-    ``witness_basis`` records the epistemic provenance of the
-    composition's conventions. The kernel does not compute this;
-    the caller attests it. When provided, ``witness_basis.unknown``
-    overrides the ``unknown_dimensions`` parameter to ensure
-    consistency — the receipt cannot record a basis that disagrees
-    with the unknown count used for policy judgment.
+    Provide at most one of these; if both are given, ``ValueError``
+    is raised. A single parent supplied via ``parent_receipt_hash``
+    is stored as a 1-tuple on the receipt.
 
     ``inline_dimensions`` embeds discovered pack content directly in
     the receipt. When None, the field is omitted from the receipt hash
     for backward compatibility with pre-v0.23.0 receipts.
     """
+    if parent_receipt_hash is not None and parent_receipt_hashes is not None:
+        raise ValueError(
+            "Provide parent_receipt_hash or parent_receipt_hashes, not both"
+        )
+
+    resolved_parents: tuple[str, ...] | None = parent_receipt_hashes
+    if parent_receipt_hash is not None:
+        resolved_parents = (parent_receipt_hash,)
+
     effective_unknown = (
         witness_basis.unknown if witness_basis is not None
         else unknown_dimensions
@@ -145,7 +141,7 @@ def witness(
         disposition=disposition,
         timestamp=datetime.now(timezone.utc).isoformat(),
         patches=patches,
-        parent_receipt_hash=parent_receipt_hash,
+        parent_receipt_hashes=resolved_parents,
         active_packs=active_packs,
         witness_basis=witness_basis,
         inline_dimensions=inline_dimensions,

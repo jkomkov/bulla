@@ -162,7 +162,8 @@ def run_demo(live: bool = False) -> None:
         print(f"    - {dim_name}{ref_str}")
     print()
 
-    pack_a_path = Path(tempfile.mktemp(suffix=".yaml", prefix="agent_a_"))
+    tmpdir = Path(tempfile.mkdtemp(prefix="bulla_chain_demo_"))
+    pack_a_path = tmpdir / "agent_a.yaml"
     pack_a_path.write_text(yaml.dump(disc_a.pack, default_flow_style=False, sort_keys=False))
     configure_packs(extra_paths=[pack_a_path])
 
@@ -197,7 +198,7 @@ def run_demo(live: bool = False) -> None:
     print(f"  Receipt hash: {receipt_a.receipt_hash[:16]}...")
     print()
 
-    receipt_a_path = Path(tempfile.mktemp(suffix=".json", prefix="receipt_a_"))
+    receipt_a_path = tmpdir / "receipt_a.json"
     receipt_a_path.write_text(json.dumps(receipt_a_dict, indent=2))
 
     # ── Agent B: github + puppeteer, chaining receipt A ───────────────
@@ -213,7 +214,7 @@ def run_demo(live: bool = False) -> None:
     inherited_dims = receipt_a_dict.get("inline_dimensions")
     inherited_pack_path = None
     if inherited_dims:
-        inherited_pack_path = Path(tempfile.mktemp(suffix=".yaml", prefix="inherited_"))
+        inherited_pack_path = tmpdir / "inherited.yaml"
         inherited_pack_path.write_text(yaml.dump(inherited_dims, default_flow_style=False, sort_keys=False))
         print(f"  Inherited {len(inherited_dims.get('dimensions', {}))} dimension(s) from Agent A")
 
@@ -236,7 +237,7 @@ def run_demo(live: bool = False) -> None:
 
     all_extra = list(existing_extra)
     if disc_b.valid and disc_b.n_dimensions > 0:
-        pack_b_path = Path(tempfile.mktemp(suffix=".yaml", prefix="agent_b_"))
+        pack_b_path = tmpdir / "agent_b.yaml"
         pack_b_path.write_text(yaml.dump(disc_b.pack, default_flow_style=False, sort_keys=False))
         all_extra.append(pack_b_path)
 
@@ -282,7 +283,7 @@ def run_demo(live: bool = False) -> None:
     if basis_b:
         print(f"  Basis: {basis_b.declared} declared, {basis_b.inferred} inferred, {basis_b.unknown} unknown{disc_str_b}")
     print(f"  Receipt hash: {receipt_b.receipt_hash[:16]}...")
-    print(f"  Parent hash:  {receipt_b.parent_receipt_hash[:16]}...")
+    print(f"  Parent hash:  {receipt_b.parent_receipt_hashes[0][:16]}...")
     print()
 
     # ── Summary ───────────────────────────────────────────────────────
@@ -304,7 +305,7 @@ def run_demo(live: bool = False) -> None:
           f" parent={receipt_a.receipt_hash[:12]}...)")
     print()
 
-    chain_valid = receipt_b.parent_receipt_hash == receipt_a.receipt_hash
+    chain_valid = receipt_b.parent_receipt_hashes == (receipt_a.receipt_hash,)
     print(f"  Chain integrity: {'VALID' if chain_valid else 'BROKEN'}")
 
     from bulla.witness import verify_receipt_integrity
@@ -314,13 +315,8 @@ def run_demo(live: bool = False) -> None:
     print(f"  Receipt B integrity: {'VALID' if b_valid else 'BROKEN'}")
     print()
 
-    # Cleanup
-    pack_a_path.unlink(missing_ok=True)
-    receipt_a_path.unlink(missing_ok=True)
-    if inherited_pack_path:
-        inherited_pack_path.unlink(missing_ok=True)
-    if disc_b.valid and disc_b.n_dimensions > 0:
-        pack_b_path.unlink(missing_ok=True)
+    import shutil
+    shutil.rmtree(tmpdir, ignore_errors=True)
     _reset_taxonomy_cache()
 
 

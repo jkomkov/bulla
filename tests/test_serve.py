@@ -580,20 +580,20 @@ class TestOperativePolicy:
 class TestReceiptChaining:
     def test_witness_has_null_parent_by_default(self):
         result = _handle_witness({"composition": CLEAN_COMPOSITION})
-        assert result["parent_receipt_hash"] is None
+        assert "parent_receipt_hashes" not in result or result.get("parent_receipt_hashes") is None
 
-    def test_bridge_sets_parent_receipt_hash(self):
+    def test_bridge_sets_parent_receipt_hashes(self):
         result = _handle_bridge({"composition": MINIMAL_COMPOSITION})
         original = result["original_receipt"]
         patched = result["receipt"]
         if result["before"]["blind_spots"] > 0:
-            assert patched["parent_receipt_hash"] == original["receipt_hash"]
+            assert patched["parent_receipt_hashes"] == [original["receipt_hash"]]
         else:
-            assert patched["parent_receipt_hash"] is None
+            assert patched.get("parent_receipt_hashes") is None
 
     def test_bridge_clean_has_no_parent(self):
         result = _handle_bridge({"composition": CLEAN_COMPOSITION})
-        assert result["receipt"]["parent_receipt_hash"] is None
+        assert result["receipt"].get("parent_receipt_hashes") is None
 
     def test_parent_hash_included_in_receipt_hash(self):
         from bulla.model import Disposition, WitnessReceipt, DEFAULT_POLICY_PROFILE
@@ -610,8 +610,8 @@ class TestReceiptChaining:
             disposition=Disposition.PROCEED,
             timestamp="2026-03-30T00:00:00+00:00",
         )
-        r_no_parent = WitnessReceipt(**base_kwargs, parent_receipt_hash=None)
-        r_with_parent = WitnessReceipt(**base_kwargs, parent_receipt_hash="abc123")
+        r_no_parent = WitnessReceipt(**base_kwargs, parent_receipt_hashes=None)
+        r_with_parent = WitnessReceipt(**base_kwargs, parent_receipt_hashes=("abc123",))
         assert r_no_parent.receipt_hash != r_with_parent.receipt_hash
 
 

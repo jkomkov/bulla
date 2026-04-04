@@ -123,8 +123,8 @@ section("3. Patched Witness Receipt (chained)")
 print(f"  Disposition: {patched_receipt.disposition.value}")
 print(f"  Fee: {patched_receipt.fee} (was {receipt.fee})")
 print(f"  Blind spots: {patched_receipt.blind_spots_count} (was {receipt.blind_spots_count})")
-print(f"  Parent hash: {patched_receipt.parent_receipt_hash[:16]}...")
-print(f"  Chain valid: {patched_receipt.parent_receipt_hash == receipt.receipt_hash}")
+print(f"  Parent hash: {patched_receipt.parent_receipt_hashes[0][:16]}...")
+print(f"  Chain valid: {patched_receipt.parent_receipt_hashes == (receipt.receipt_hash,)}")
 
 # ── 4. Verification ──────────────────────────────────────────────────
 

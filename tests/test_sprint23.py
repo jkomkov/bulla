@@ -176,7 +176,8 @@ class TestWitnessBasisDiscovered:
         d = basis.to_dict()
         assert "discovered" not in d
 
-    def test_guard_counts_discovered_dims(self):
+    def test_guard_counts_discovered_dims_with_micro_pack(self):
+        """With a micro-pack loaded, discovered count must be positive."""
         adapter = MockAdapter(MOCK_RESPONSE_WITH_REFINES)
         result = discover_dimensions(SAMPLE_TOOLS, adapter=adapter)
         tmpdir = Path(tempfile.mkdtemp())
@@ -187,12 +188,21 @@ class TestWitnessBasisDiscovered:
         guard = BullaGuard.from_tools_list(SAMPLE_TOOLS, name="test")
         basis = guard.witness_basis
         assert basis is not None
-        assert basis.discovered >= 0
-        total = basis.declared + basis.inferred + basis.unknown + basis.discovered
-        assert total >= 0
+        assert basis.discovered > 0, (
+            f"Expected discovered > 0 with micro-pack loaded, got {basis.discovered}"
+        )
 
         import shutil
         shutil.rmtree(tmpdir)
+
+    def test_guard_zero_discovered_with_base_pack_only(self):
+        """With only the base pack, discovered count must be zero."""
+        guard = BullaGuard.from_tools_list(SAMPLE_TOOLS, name="test-base-only")
+        basis = guard.witness_basis
+        assert basis is not None
+        assert basis.discovered == 0, (
+            f"Expected discovered == 0 with base pack only, got {basis.discovered}"
+        )
 
 
 # ── Phase 0+1+2: audit --discover --receipt --chain integration ───────
@@ -236,7 +246,8 @@ class TestAuditDiscoverReceiptChain:
         assert disc_a.valid
         assert disc_a.n_dimensions > 0
 
-        pack_a = Path(tempfile.mktemp(suffix=".yaml"))
+        tmpdir_packs = Path(tempfile.mkdtemp())
+        pack_a = tmpdir_packs / "pack_a.yaml"
         pack_a.write_text(yaml.dump(disc_a.pack, default_flow_style=False, sort_keys=False))
         configure_packs(extra_paths=[pack_a])
 
@@ -258,7 +269,7 @@ class TestAuditDiscoverReceiptChain:
         inherited_dims = receipt_a_dict.get("inline_dimensions")
         assert inherited_dims is not None
 
-        inherited_path = Path(tempfile.mktemp(suffix=".yaml"))
+        inherited_path = tmpdir_packs / "inherited.yaml"
         inherited_path.write_text(yaml.dump(inherited_dims, default_flow_style=False, sort_keys=False))
         configure_packs(extra_paths=[inherited_path])
 
@@ -274,13 +285,11 @@ class TestAuditDiscoverReceiptChain:
         receipt_b_dict = receipt_b.to_dict()
 
         assert verify_receipt_integrity(receipt_b_dict)
-        assert receipt_b.parent_receipt_hash == receipt_a.receipt_hash
+        assert receipt_b.parent_receipt_hashes == (receipt_a.receipt_hash,)
         assert "inline_dimensions" in receipt_b_dict
 
-        # Cleanup
-        pack_a.unlink(missing_ok=True)
-        inherited_path.unlink(missing_ok=True)
         import shutil
+        shutil.rmtree(tmpdir_packs)
         shutil.rmtree(manifests_dir)
 
 

@@ -1134,6 +1134,114 @@ def _cmd_discover(args: argparse.Namespace) -> None:
     print(f"  Raw LLM response saved to {raw_path}", file=sys.stderr)
 
 
+# ── merge ─────────────────────────────────────────────────────────────
+
+
+def _cmd_merge(args: argparse.Namespace) -> None:
+    """Merge vocabularies from multiple receipts (DAG support)."""
+    from bulla.merge import merge_receipt_vocabularies
+
+    receipt_paths: list[Path] = args.receipts
+    receipt_dicts: list[dict] = []
+    receipt_names: list[str] = []
+    for rp in receipt_paths:
+        if not rp.exists():
+            print(f"Error: receipt not found: {rp}", file=sys.stderr)
+            sys.exit(1)
+        receipt_dicts.append(json.loads(rp.read_text(encoding="utf-8")))
+        receipt_names.append(rp.name)
+
+    merged_vocab, overlaps = merge_receipt_vocabularies(receipt_dicts)
+
+    if merged_vocab is None:
+        print("  No inline_dimensions found in any receipt.", file=sys.stderr)
+        sys.exit(1)
+
+    merged_dims = merged_vocab.get("dimensions", {})
+    per_receipt_counts: list[int] = []
+    for rd in receipt_dicts:
+        inline = rd.get("inline_dimensions", {})
+        per_receipt_counts.append(len(inline.get("dimensions", {})) if inline else 0)
+
+    fmt = getattr(args, "format", "text")
+    receipt_path: Path | None = getattr(args, "receipt", None)
+
+    if fmt == "json":
+        obj: dict = {
+            "receipts": len(receipt_dicts),
+            "merged_dimensions": len(merged_dims),
+            "per_receipt_counts": per_receipt_counts,
+            "overlaps": [
+                {
+                    "dim_a": o.dim_a,
+                    "receipt_a": receipt_names[o.receipt_a_idx],
+                    "dim_b": o.dim_b,
+                    "receipt_b": receipt_names[o.receipt_b_idx],
+                    "shared_patterns": list(o.shared_patterns),
+                }
+                for o in overlaps
+            ],
+            "dimensions": list(merged_dims.keys()),
+        }
+        print(json.dumps(obj, indent=2))
+    else:
+        counts_str = ", ".join(
+            f"{c} from {n}" for c, n in zip(per_receipt_counts, receipt_names)
+        )
+        print(
+            f"  bulla merge: {len(receipt_dicts)} receipts, "
+            f"{len(merged_dims)} dimensions merged ({counts_str}, "
+            f"{len(overlaps)} overlapping)"
+        )
+        print()
+
+        if overlaps:
+            print("  Overlap:")
+            for o in overlaps:
+                pats = ", ".join(o.shared_patterns)
+                print(
+                    f"    {o.dim_a} ({receipt_names[o.receipt_a_idx]}) <-> "
+                    f"{o.dim_b} ({receipt_names[o.receipt_b_idx]}): "
+                    f"field_patterns intersect on {pats}"
+                )
+            print()
+
+        print(f"  Merged vocabulary: {len(merged_dims)} unique dimensions")
+
+    if receipt_path:
+        from bulla.model import Disposition, DEFAULT_POLICY_PROFILE
+        from bulla import __version__ as kver
+        from datetime import datetime, timezone
+        from bulla.model import WitnessReceipt
+
+        parent_hashes = tuple(
+            rd["receipt_hash"] for rd in receipt_dicts if "receipt_hash" in rd
+        )
+
+        merge_receipt = WitnessReceipt(
+            receipt_version="0.1.0",
+            kernel_version=kver,
+            composition_hash="merge",
+            diagnostic_hash="merge",
+            policy_profile=DEFAULT_POLICY_PROFILE,
+            fee=0,
+            blind_spots_count=0,
+            bridges_required=0,
+            unknown_dimensions=0,
+            disposition=Disposition.PROCEED,
+            timestamp=datetime.now(timezone.utc).isoformat(),
+            parent_receipt_hashes=parent_hashes if parent_hashes else None,
+            inline_dimensions=merged_vocab,
+        )
+        receipt_dict = merge_receipt.to_dict()
+        receipt_path.write_text(
+            json.dumps(receipt_dict, indent=2), encoding="utf-8"
+        )
+        if fmt != "json":
+            print(f"  Receipt written to {receipt_path}")
+        print(f"  Receipt written to {receipt_path}", file=sys.stderr)
+
+
 # ── pack ──────────────────────────────────────────────────────────────
 
 
@@ -1528,6 +1636,27 @@ def main() -> None:
         or sys.exit(1)
     ) if not getattr(args, "pack_command", None) else None)
 
+    # ── merge ─────────────────────────────────────────────────────────
+    p_merge = subparsers.add_parser(
+        "merge",
+        help="Merge vocabularies from multiple receipts (DAG convergence)",
+    )
+    p_merge.add_argument(
+        "receipts", nargs="+", type=Path,
+        help="Receipt JSON files to merge (argument order IS precedence order)",
+    )
+    p_merge.add_argument(
+        "--receipt", type=Path, metavar="FILE",
+        help="Write merged receipt JSON to file (DAG receipt with parent_receipt_hashes)",
+    )
+    p_merge.add_argument(
+        "--format",
+        choices=["text", "json"],
+        default="text",
+        help="Output format (default: text)",
+    )
+    p_merge.set_defaults(func=_cmd_merge)
+
     # ── serve ─────────────────────────────────────────────────────────
     p_serve = subparsers.add_parser(
         "serve",
@@ -1555,6 +1684,7 @@ def main() -> None:
         print("  bulla audit --discover         # audit with LLM convention discovery")
         print("  bulla audit --discover --receipt r.json  # audit + discovery + receipt")
         print("  bulla audit --chain r.json     # inherit prior vocabulary (CI mode)")
+        print("  bulla merge a.json b.json --receipt m.json  # merge receipt vocabularies (DAG)")
         print("  bulla gauge tools.json         # diagnose manifest with disclosure set")
         print("  bulla gauge --mcp-server 'python -m my_server'  # diagnose live server")
         print("  bulla discover --manifests DIR -o found.yaml  # LLM dimension discovery")

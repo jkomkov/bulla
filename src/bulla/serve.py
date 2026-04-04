@@ -147,7 +147,10 @@ _RECEIPT_SCHEMA: dict[str, Any] = {
             },
         },
         "anchor_ref": {"type": ["string", "null"]},
-        "parent_receipt_hash": {"type": ["string", "null"]},
+        "parent_receipt_hashes": {
+            "type": ["array", "null"],
+            "items": {"type": "string"},
+        },
         "active_packs": {
             "type": "array",
             "items": {

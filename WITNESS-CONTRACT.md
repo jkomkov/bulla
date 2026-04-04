@@ -14,11 +14,11 @@ Three hashes, three concerns: what was proposed, what was measured, what was wit
 
 ## Hash Coverage
 
-`receipt_hash` includes: `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `parent_receipt_hash`, `active_packs`, `witness_basis`, and conditionally `inline_dimensions` (only when not None).
+`receipt_hash` includes: `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `active_packs`, `witness_basis`, and conditionally `parent_receipt_hashes` and `inline_dimensions` (each only when not None).
 
 `receipt_hash` excludes: `anchor_ref` (external publication proof, added after witness event).
 
-Rationale: the hash must be computable at witness time. Anchor ref arrives later. `inline_dimensions` is conditionally included to preserve backward compatibility: pre-v0.23.0 receipts (which lack this field) produce the same hash when verified by v0.23.0 code.
+Rationale: the hash must be computable at witness time. Anchor ref arrives later. Conditional fields (`parent_receipt_hashes`, `inline_dimensions`) are included only when not None to preserve backward compatibility: pre-v0.24.0 receipts verify correctly with new code because their hash was computed without these keys, and the verifier only hashes keys that are present.
 
 ## Policy Semantics
 
@@ -40,11 +40,17 @@ Disposition priority (first match wins):
 
 **Law 2**: The witness kernel never mutates a `Composition` or `Diagnostic`. It proposes patches; it never applies them silently. `Composition`, `Diagnostic`, and `WitnessReceipt` are all `frozen=True` with immutable `tuple` fields.
 
-## Receipt Chains
+## Receipt DAG (v0.24.0)
 
-`parent_receipt_hash` links a receipt to a prior witness event. Canonical chain: original → bridge → patched. The patched receipt's `parent_receipt_hash` equals the original receipt's `receipt_hash`.
+`parent_receipt_hashes` (tuple of strings, or None) links a receipt to one or more prior witness events. A single parent is a 1-tuple; multiple parents form a DAG. This replaces the pre-v0.24.0 `parent_receipt_hash` (singular) field.
 
-Chains are advisory, not enforced by the kernel. Verification is the consumer's responsibility.
+**Precedence semantics**: Tuple order IS precedence order. Later entries have higher precedence, consistent with the pack stack convention. The merged receipt records its parents in precedence order: `bulla merge base.json override.json` produces `parent_receipt_hashes = (hash_base, hash_override)`, and override wins on dimension name collision.
+
+**Backward compatibility**: `verify_receipt_integrity()` is key-name-agnostic -- it recomputes the hash over whatever keys are present minus `_HASH_EXCLUDED_KEYS`. Pre-v0.24.0 receipts serialized with `parent_receipt_hash` (singular) verify correctly because the verifier sees that key and includes it. New receipts use `parent_receipt_hashes` (plural). No migration needed.
+
+**Convenience API**: `witness()` accepts both `parent_receipt_hash` (single string, for backward-compatible callers) and `parent_receipt_hashes` (tuple). Providing both raises `ValueError`. A single parent supplied via `parent_receipt_hash` is stored as a 1-tuple on the receipt.
+
+DAG structure is advisory, not enforced by the kernel. Recursive parent validation is the consumer's responsibility.
 
 ## Lexical Constitution
 
@@ -271,6 +277,31 @@ Integer count (v0.23.0, default 0). Distinguishes dimensions from LLM-discovered
 ### Most-Specific-Dimension-Wins (v0.23.0)
 
 When a field matches both a child dimension (from a micro-pack, via `refines`) and its parent dimension (from the base pack), the classifier returns only the child. `classify_field_by_name()` collects all pattern matches, then applies specificity deduplication via a cached `_refines_map` (child -> parent). The common case (single match) has zero overhead.
+
+## Vocabulary Merge (v0.24.0)
+
+### `bulla merge`
+
+`bulla merge` performs vocabulary union from multiple receipts. It does NOT audit -- that is `bulla audit --chain`. Separation of concerns: merge handles vocabulary, audit handles measurement.
+
+```
+bulla merge receipt_a.json receipt_c.json --receipt merged.json
+bulla audit --manifests DIR --chain merged.json --receipt audited.json
+```
+
+**Argument order IS precedence order**: `bulla merge base.json override.json` means override wins on dimension name collision.
+
+### `merge_receipt_vocabularies(receipts)`
+
+Core function in `bulla.merge`. Accepts a list of receipt dicts, returns `(merged_vocab_or_None, overlap_reports)`. Deep-copies all input data to prevent mutation.
+
+### Dimension Overlap Detection
+
+Overlap = non-empty intersection of `field_patterns` glob sets between dimensions from different source receipts. Same-name dimensions from different receipts are trivially overlapping. Overlap is purely informational -- it does not affect the merge (which is union with precedence). The alternative ("do they match the same actual fields on a tool set?") requires tool schemas and belongs in `bulla audit`.
+
+### No Convergence Fee
+
+The coherence fee is the universal measure. Vocabulary convergence is measured by comparing coherence fees under different pack configurations: `fee(merged) vs fee(A_alone) vs fee(B_alone)`. This is a delta of the existing fee, not a new concept.
 
 ## `max_unknown` Definition
 

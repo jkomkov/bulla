@@ -444,15 +444,36 @@ class TestParentReceiptHash:
     def test_default_is_none(self):
         diag = _make_diagnostic(fee=0)
         receipt = witness(diag, SAMPLE_COMPOSITION)
-        assert receipt.parent_receipt_hash is None
+        assert receipt.parent_receipt_hashes is None
 
-    def test_passed_through(self):
+    def test_single_parent_convenience(self):
         diag = _make_diagnostic(fee=0)
         receipt = witness(
             diag, SAMPLE_COMPOSITION, parent_receipt_hash="parent_abc"
         )
-        assert receipt.parent_receipt_hash == "parent_abc"
-        assert receipt.to_dict()["parent_receipt_hash"] == "parent_abc"
+        assert receipt.parent_receipt_hashes == ("parent_abc",)
+        d = receipt.to_dict()
+        assert d["parent_receipt_hashes"] == ["parent_abc"]
+
+    def test_dag_parents(self):
+        diag = _make_diagnostic(fee=0)
+        receipt = witness(
+            diag, SAMPLE_COMPOSITION,
+            parent_receipt_hashes=("hash_a", "hash_b"),
+        )
+        assert receipt.parent_receipt_hashes == ("hash_a", "hash_b")
+        d = receipt.to_dict()
+        assert d["parent_receipt_hashes"] == ["hash_a", "hash_b"]
+
+    def test_mutual_exclusion(self):
+        import pytest
+        diag = _make_diagnostic(fee=0)
+        with pytest.raises(ValueError, match="not both"):
+            witness(
+                diag, SAMPLE_COMPOSITION,
+                parent_receipt_hash="x",
+                parent_receipt_hashes=("y",),
+            )
 
     def test_affects_receipt_hash(self):
         diag = _make_diagnostic(fee=0)

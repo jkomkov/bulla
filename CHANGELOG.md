@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.24.0
+
+### Added
+- **Receipt DAG**: `WitnessReceipt.parent_receipt_hashes` (tuple of strings) replaces the singular `parent_receipt_hash`. A single parent is a 1-tuple; multiple parents form a DAG. Tuple order IS precedence order (later entries override earlier, consistent with the pack stack).
+- **`bulla merge` CLI command**: Vocabulary union from multiple receipts with overlap detection. Argument order IS precedence order. Does vocabulary merge only -- no audit, no fee calculation. Re-audit uses existing `bulla audit --chain`.
+- **`bulla.merge` module**: `merge_receipt_vocabularies(receipts)` returns merged vocabulary and overlap reports. Overlap = non-empty intersection of `field_patterns` glob sets between dimensions from different source receipts. Purely informational.
+- **`witness()` convenience API**: Accepts both `parent_receipt_hash` (single string, convenience) and `parent_receipt_hashes` (tuple, DAG). Providing both raises `ValueError`. Single parent is normalized to a 1-tuple on the receipt.
+- **Diamond demo** (`scripts/run_diamond_demo.py`): Multi-agent vocabulary convergence with adversarial overlap. Agent A and Agent C discover dimensions independently with overlapping field_patterns; Agent D merges and re-audits. Proves DAG structure, overlap detection, and receipt integrity.
+- Sprint 24 tests covering DAG receipts, mutual exclusion, backward compatibility, merge logic, overlap detection, and diamond demo smoke test.
+
+### Changed
+- `WitnessReceipt` field migration: `parent_receipt_hash` (singular) removed, replaced by `parent_receipt_hashes` (plural, `tuple[str, ...] | None`). Conditionally included in `_hash_input()` and `to_dict()` only when not None. Pre-v0.24.0 receipts with the old key verify correctly via `verify_receipt_integrity()` (key-name-agnostic).
+- `_hash_input()` no longer unconditionally includes `parent_receipt_hash`. The old key is removed from the hash input entirely; new receipts use `parent_receipt_hashes`.
+- MCP server schema updated: `parent_receipt_hash` replaced with `parent_receipt_hashes` (array of strings).
+
+### Fixed
+- `tempfile.mktemp()` replaced with `tempfile.mkdtemp()` in chain demo script (deprecated, race-condition-prone).
+- Tautological `assert basis.discovered >= 0` replaced with two meaningful tests: `> 0` with micro-pack, `== 0` with base pack only.
+
 ## 0.23.0
 
 ### Added

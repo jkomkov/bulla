@@ -364,7 +364,7 @@ class WitnessReceipt:
     timestamp: str  # ISO-8601 UTC
     patches: tuple[BridgePatch, ...] = ()
     anchor_ref: str | None = None  # future: OTS/blockchain anchor
-    parent_receipt_hash: str | None = None
+    parent_receipt_hashes: tuple[str, ...] | None = None
     active_packs: tuple[PackRef, ...] = ()
     witness_basis: WitnessBasis | None = None
     inline_dimensions: dict | None = None
@@ -378,9 +378,11 @@ class WitnessReceipt:
         reconstructs this from a serialized dict by excluding those
         same two keys.
 
-        ``inline_dimensions`` is included ONLY when not None to preserve
-        backward compatibility: pre-v0.23.0 receipts (which lack this
-        field) must produce the same hash when verified by new code.
+        ``parent_receipt_hashes`` and ``inline_dimensions`` are included
+        ONLY when not None to preserve backward compatibility: pre-v0.24.0
+        receipts (which lack ``parent_receipt_hashes``) and pre-v0.23.0
+        receipts (which lack ``inline_dimensions``) must produce the same
+        hash when verified by new code.
         """
         d: dict = {
             "receipt_version": self.receipt_version,
@@ -395,7 +397,6 @@ class WitnessReceipt:
             "disposition": self.disposition.value,
             "timestamp": self.timestamp,
             "patches": [p.to_bulla_patch() for p in self.patches],
-            "parent_receipt_hash": self.parent_receipt_hash,
             "active_packs": [p.to_dict() for p in self.active_packs],
             "witness_basis": (
                 self.witness_basis.to_dict()
@@ -403,6 +404,8 @@ class WitnessReceipt:
                 else None
             ),
         }
+        if self.parent_receipt_hashes is not None:
+            d["parent_receipt_hashes"] = list(self.parent_receipt_hashes)
         if self.inline_dimensions is not None:
             d["inline_dimensions"] = self.inline_dimensions
         return d
