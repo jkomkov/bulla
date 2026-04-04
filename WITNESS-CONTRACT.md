@@ -127,6 +127,8 @@ When the optional `partition` parameter is provided (array of arrays of tool nam
 
 The boundary fee quantifies conventions hidden at the seam between servers -- the exact gap that no individual server can detect on its own. This is the direct empirical instantiation of the hierarchical fee non-additivity theorem.
 
+**`--manifests DIR` flag** (v0.21.0): Loads pre-captured manifest JSON files from a directory instead of scanning live servers. Each `*.json` file in the directory is treated as one server's `tools/list` response, with the filename stem as the server name. This enables deterministic CI without live server dependencies. Cannot be combined with a config file argument.
+
 Auto-detection searches `.cursor/mcp.json` (project), `~/.cursor/mcp.json` (user), and Claude Desktop config (macOS). Only stdio-transport servers are scanned; HTTP/SSE entries are skipped with a warning. Failed servers are reported but do not block diagnosis of successful ones (`--skip-failed` default).
 
 ### Programmatic API: `BullaGuard.from_tools_list()`
@@ -147,7 +149,16 @@ The `__` prefix is applied only in audit mode; single-server paths (`bulla gauge
 
 `bulla audit --format sarif` produces SARIF v2.1.0 JSON with blind spots as `bulla/blind-spot` results and bridge recommendations as `bulla/bridge-recommendation` results, each tied to the MCP config file as the artifact location. This enables direct integration with GitHub Code Scanning.
 
-## Classifier Architecture (v0.20.0)
+### GitHub Action (v0.21.0)
+
+The `jkomkov/bulla` GitHub Action supports two modes via the `mode` input:
+
+- **`check`** (default): Analyzes composition YAML files. Backward compatible with v1.
+- **`audit`**: Scans MCP manifests (via `manifests-dir`) or live servers (via `mcp-config`). Outputs `coherence-fee` and `boundary-fee` as action outputs. SARIF upload to Code Scanning is supported in both modes.
+
+See `examples/github-action/` for workflow templates and documentation.
+
+## Classifier Architecture (v0.21.0)
 
 The multi-signal classifier uses four independent signal sources:
 
@@ -157,6 +168,16 @@ The multi-signal classifier uses four independent signal sources:
 4. **Per-field description keywords**: Phrases in individual field `description` attributes, matched against the same pack keywords. Source type `field_description` (weak signal alone, promotes to `declared` with corroboration).
 
 Confidence tiers: `declared` (2+ source types agree), `inferred` (1 strong signal: name, schema_format, schema_range, schema_pattern), `unknown` (weak signal only). Domain hints can promote `unknown` → `inferred`.
+
+### `_description` Pseudo-Field Suppression (v0.21.0)
+
+When signal source #2 (tool-level description keywords) matches but no real schema field is involved, the classifier creates an `InferredDimension` with `field_name="_description"`. This is a genuine signal (the tool *mentions* the convention), but it is not a concrete field that an agent interacts with.
+
+**Edge suppression rule**: In `_find_shared_dimensions()`, edges where either endpoint has `field_name == "_description"` are suppressed. This prevents inflated blind spot counts from tool-description-only matches.
+
+**Witness basis preservation**: `_description` signals are still counted in the `WitnessBasis` totals (`declared`, `inferred`, or `unknown` depending on confidence). The signal is recorded; only the edge creation is suppressed.
+
+**Observable schema invariant**: `_description` is never a real field in `internal_state` or `observable_schema`. The suppression affects only the edge graph, not the coboundary matrix structure. Fee computation is unaffected.
 
 ### Convention Dimensions (base pack v0.1.0)
 

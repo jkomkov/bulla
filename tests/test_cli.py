@@ -173,6 +173,45 @@ class TestGaugeCommand:
         assert len(comp.tools) > 0
 
 
+MANIFESTS_DIR = Path(__file__).parent.parent / "examples" / "real_world_audit" / "manifests"
+
+
+class TestAuditManifestsFlag:
+    def test_audit_manifests_text(self):
+        r = _run("audit", "--manifests", str(MANIFESTS_DIR))
+        assert r.returncode == 0
+        assert "Coherence fee:" in r.stdout
+        assert "Boundary fee:" in r.stdout
+
+    def test_audit_manifests_json(self):
+        r = _run("audit", "--manifests", str(MANIFESTS_DIR), "--format", "json")
+        assert r.returncode == 0
+        data = json.loads(r.stdout)
+        assert data["coherence_fee"] > 0
+        assert "cross_server_decomposition" in data
+        assert data["cross_server_decomposition"]["boundary_fee"] > 0
+
+    def test_audit_manifests_sarif(self):
+        r = _run("audit", "--manifests", str(MANIFESTS_DIR), "--format", "sarif")
+        assert r.returncode == 0
+        sarif = json.loads(r.stdout)
+        assert sarif["$schema"].startswith("https://")
+        assert len(sarif["runs"]) == 1
+
+    def test_audit_manifests_threshold_fail(self):
+        r = _run("audit", "--manifests", str(MANIFESTS_DIR), "--max-fee", "0")
+        assert r.returncode == 1
+
+    def test_audit_manifests_threshold_pass(self):
+        r = _run("audit", "--manifests", str(MANIFESTS_DIR), "--max-fee", "999")
+        assert r.returncode == 0
+
+    def test_audit_manifests_nonexistent_dir(self):
+        r = _run("audit", "--manifests", "/nonexistent")
+        assert r.returncode == 1
+        assert "not a directory" in r.stderr
+
+
 class TestVersionFlag:
     def test_version(self):
         r = _run("--version")

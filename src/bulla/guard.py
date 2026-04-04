@@ -312,7 +312,8 @@ def _composition_from_mcp_tools(
         field_infos = extract_field_infos(tool)
         fields = [fi.name for fi in field_infos]
         inferred = classify_tool_rich(tool, field_infos=field_infos)
-        inferred_field_names = {d.field_name for d in inferred}
+        real_inferred = [d for d in inferred if d.field_name != "_description"]
+        inferred_field_names = {d.field_name for d in real_inferred}
         observable = [f for f in fields if f not in inferred_field_names]
 
         tool_specs.append(ToolSpec(

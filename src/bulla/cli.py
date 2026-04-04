@@ -793,60 +793,102 @@ def _audit_json(
     return json.dumps(obj, indent=2)
 
 
+def _load_manifests_dir(manifests_dir: Path) -> tuple[list[dict], list[str]]:
+    """Load all *.json manifest files from a directory.
+
+    Returns (all_tools, server_names) with tools prefixed by server name.
+    """
+    server_names: list[str] = []
+    all_tools: list[dict] = []
+    for manifest_file in sorted(manifests_dir.glob("*.json")):
+        with open(manifest_file) as f:
+            data = json.load(f)
+        tools_data = data.get("tools", data) if isinstance(data, dict) else data
+        if not isinstance(tools_data, list):
+            continue
+        server = manifest_file.stem
+        server_names.append(server)
+        for t in tools_data:
+            t["name"] = f"{server}__{t.get('name', 'unknown')}"
+        all_tools.extend(tools_data)
+    return all_tools, server_names
+
+
 def _cmd_audit(args: argparse.Namespace) -> None:
     _configure_packs_from_args(args)
-    from bulla.config import ConfigError, find_mcp_config, parse_mcp_config
     from bulla.diagnostic import decompose_fee, prescriptive_disclosure
     from bulla.formatters import format_sarif
     from bulla.guard import BullaGuard
-    from bulla.scan import scan_mcp_servers_parallel
 
+    manifests_dir: Path | None = getattr(args, "manifests", None)
     config_path = getattr(args, "config", None)
-    if config_path is None:
-        config_path = find_mcp_config()
+
+    if manifests_dir and config_path:
+        print(
+            "Error: Cannot use both --manifests and a config file.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    if manifests_dir:
+        if not manifests_dir.is_dir():
+            print(f"Error: {manifests_dir} is not a directory.", file=sys.stderr)
+            sys.exit(1)
+        all_tools, server_names = _load_manifests_dir(manifests_dir)
+        if not all_tools:
+            print("Error: No tools found in manifest directory.", file=sys.stderr)
+            sys.exit(1)
+    else:
+        from bulla.config import ConfigError, find_mcp_config, parse_mcp_config
+        from bulla.scan import scan_mcp_servers_parallel
+
         if config_path is None:
-            print(
-                "Error: No MCP config found. Provide a config file path or "
-                "create ~/.cursor/mcp.json",
-                file=sys.stderr,
-            )
+            config_path = find_mcp_config()
+            if config_path is None:
+                print(
+                    "Error: No MCP config found. Provide a config file path or "
+                    "create ~/.cursor/mcp.json",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+            print(f"Auto-detected config: {config_path}", file=sys.stderr)
+
+        try:
+            entries = parse_mcp_config(config_path)
+        except ConfigError as e:
+            print(f"Error: {e}", file=sys.stderr)
             sys.exit(1)
-        print(f"Auto-detected config: {config_path}", file=sys.stderr)
 
-    try:
-        entries = parse_mcp_config(config_path)
-    except ConfigError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
-
-    if not entries:
-        print("Error: No stdio MCP servers found in config.", file=sys.stderr)
-        sys.exit(1)
-
-    servers_cfg = {
-        e.name: {"command": e.command, "env": e.env or None}
-        for e in entries
-    }
-    results = scan_mcp_servers_parallel(servers_cfg)
-
-    skip_failed = getattr(args, "skip_failed", True)
-    ok_results = [r for r in results if r.ok]
-    failed = [r for r in results if not r.ok]
-
-    if not ok_results:
-        if not skip_failed and failed:
-            print(f"Error: All {len(failed)} server(s) failed.", file=sys.stderr)
-            for r in failed:
-                print(f"  {r.name}: {r.error}", file=sys.stderr)
+        if not entries:
+            print("Error: No stdio MCP servers found in config.", file=sys.stderr)
             sys.exit(1)
-        print("Error: No servers scanned successfully.", file=sys.stderr)
-        sys.exit(1)
 
-    all_tools: list[dict] = []
-    for r in ok_results:
-        for tool in r.tools:
-            tool["name"] = f"{r.name}__{tool.get('name', 'unknown')}"
-        all_tools.extend(r.tools)
+        servers_cfg = {
+            e.name: {"command": e.command, "env": e.env or None}
+            for e in entries
+        }
+        results = scan_mcp_servers_parallel(servers_cfg)
+
+        skip_failed = getattr(args, "skip_failed", True)
+        ok_results = [r for r in results if r.ok]
+        failed = [r for r in results if not r.ok]
+
+        if not ok_results:
+            if not skip_failed and failed:
+                print(f"Error: All {len(failed)} server(s) failed.", file=sys.stderr)
+                for r in failed:
+                    print(f"  {r.name}: {r.error}", file=sys.stderr)
+                sys.exit(1)
+            print("Error: No servers scanned successfully.", file=sys.stderr)
+            sys.exit(1)
+
+        all_tools = []
+        server_names = []
+        for r in ok_results:
+            server_names.append(r.name)
+            for tool in r.tools:
+                tool["name"] = f"{r.name}__{tool.get('name', 'unknown')}"
+            all_tools.extend(r.tools)
 
     guard = BullaGuard.from_tools_list(all_tools, name="audit")
     comp = guard.composition
@@ -861,12 +903,12 @@ def _cmd_audit(args: argparse.Namespace) -> None:
     disclosure = prescriptive_disclosure(comp, diag.coherence_fee)
 
     decomposition = None
-    if len(ok_results) > 1:
+    if len(server_names) > 1:
         partition = []
-        for sr in ok_results:
+        for sname in server_names:
             tools_in_server = frozenset(
                 t_name for t_name, srv in tool_to_server.items()
-                if srv == sr.name
+                if srv == sname
             )
             if tools_in_server:
                 partition.append(tools_in_server)
@@ -880,13 +922,23 @@ def _cmd_audit(args: argparse.Namespace) -> None:
 
     fmt = getattr(args, "format", "text")
     verbose = getattr(args, "verbose", False)
+
+    if manifests_dir:
+        from types import SimpleNamespace
+        audit_results = []
+        for sname in server_names:
+            n_tools = sum(1 for t in comp.tools if t.name.startswith(f"{sname}__"))
+            audit_results.append(SimpleNamespace(name=sname, ok=True, tools=[None] * n_tools, error=None))
+    else:
+        audit_results = results
+
     if fmt == "json":
-        print(_audit_json(results, diag, disclosure, basis, decomposition))
+        print(_audit_json(audit_results, diag, disclosure, basis, decomposition))
     elif fmt == "sarif":
         sarif_path = Path(str(config_path)) if config_path else Path("audit.json")
         print(format_sarif([(diag, sarif_path)]))
     else:
-        print(_audit_text(results, diag, disclosure, basis, decomposition, verbose=verbose))
+        print(_audit_text(audit_results, diag, disclosure, basis, decomposition, verbose=verbose))
 
     output_comp = getattr(args, "output_composition", None)
     if output_comp:
@@ -1091,6 +1143,10 @@ def main() -> None:
     p_audit.add_argument(
         "config", nargs="?", type=Path, default=None,
         help="MCP config JSON file (default: auto-detect)",
+    )
+    p_audit.add_argument(
+        "--manifests", type=Path, metavar="DIR",
+        help="Directory of pre-captured MCP manifest JSON files (alternative to live scan)",
     )
     p_audit.add_argument(
         "--format",

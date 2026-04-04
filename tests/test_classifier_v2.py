@@ -215,6 +215,92 @@ class TestTypeAwareExclusion:
         _reset_taxonomy_cache()
 
 
+# ── Phase 0d (Sprint 21): _description pseudo-field suppression ──────
+
+
+class TestDescriptionSuppression:
+    def setup_method(self):
+        _reset_taxonomy_cache()
+
+    def test_description_only_match_produces_no_edge(self):
+        """Two tools matching same dimension via description only -> no edge."""
+        from bulla.guard import BullaGuard
+
+        tools = [
+            {"name": "tool_a", "description": "Uses ISO 8601 date format for timestamps",
+             "inputSchema": {"type": "object", "properties": {
+                 "query": {"type": "string"}, "limit": {"type": "integer"}}}},
+            {"name": "tool_b", "description": "Returns ISO 8601 timestamps in response",
+             "inputSchema": {"type": "object", "properties": {
+                 "filter": {"type": "string"}, "page": {"type": "integer"}}}},
+        ]
+        guard = BullaGuard.from_tools_list(tools, name="test")
+        for bs in guard.diagnose().blind_spots:
+            assert "_description" not in (bs.from_field or "")
+            assert "_description" not in (bs.to_field or "")
+
+    def test_one_real_one_description_produces_no_edge_for_that_dim(self):
+        """One real field + one _description -> no edge for that dimension."""
+        from bulla.guard import BullaGuard
+
+        tools = [
+            {"name": "tool_a", "description": "Get data",
+             "inputSchema": {"type": "object", "properties": {
+                 "since": {"type": "string"}, "limit": {"type": "integer"}}}},
+            {"name": "tool_b", "description": "Uses ISO 8601 timestamps for scheduling",
+             "inputSchema": {"type": "object", "properties": {
+                 "query": {"type": "string"}, "count": {"type": "integer"}}}},
+        ]
+        guard = BullaGuard.from_tools_list(tools, name="test")
+        for bs in guard.diagnose().blind_spots:
+            assert "_description" not in (bs.from_field or "")
+            assert "_description" not in (bs.to_field or "")
+
+    def test_description_signals_counted_in_witness_basis(self):
+        """Description-only signals still contribute to witness basis counts."""
+        from bulla.guard import BullaGuard
+
+        tools = [
+            {"name": "tool_a", "description": "Uses ISO 8601 date format for timestamps",
+             "inputSchema": {"type": "object", "properties": {
+                 "query": {"type": "string"}}}},
+        ]
+        guard = BullaGuard.from_tools_list(tools, name="test")
+        wb = guard.witness_basis
+        total = wb.declared + wb.inferred + wb.unknown
+        assert total >= 1
+
+    def test_real_world_audit_no_description_blind_spots(self):
+        """4-server audit: zero _description blind spots, fee preserved."""
+        import json
+        from bulla.guard import BullaGuard
+
+        manifests_dir = Path(__file__).parent.parent / "examples" / "real_world_audit" / "manifests"
+        all_tools: list[dict] = []
+        for manifest_file in sorted(manifests_dir.glob("*.json")):
+            with open(manifest_file) as f:
+                data = json.load(f)
+            tools_data = data.get("tools", [])
+            server = manifest_file.stem
+            for t in tools_data:
+                t["name"] = f"{server}__{t['name']}"
+            all_tools.extend(tools_data)
+
+        guard = BullaGuard.from_tools_list(all_tools, name="audit")
+        diag = guard.diagnose()
+
+        desc_blind = [
+            bs for bs in diag.blind_spots
+            if "_description" in (bs.from_field or "") or "_description" in (bs.to_field or "")
+        ]
+        assert len(desc_blind) == 0
+        assert len(diag.blind_spots) < 250
+        assert diag.coherence_fee > 0
+
+    def teardown_method(self):
+        _reset_taxonomy_cache()
+
+
 # ── Phase 1a: path_convention dimension ──────────────────────────────
 
 

@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.21.0
+
+### Added
+- **`--manifests DIR` flag for `bulla audit`**: Load pre-captured MCP manifest JSON files from a directory instead of scanning live servers. Enables deterministic CI without server runtime dependencies. Each `*.json` file is one server's `tools/list` response; filename stem becomes the server name.
+- **GitHub Action v2**: `action.yml` upgraded with `mode` input supporting both `check` (composition YAMLs, backward compatible) and `audit` (MCP manifests or live scan). Audit mode outputs `coherence-fee` and `boundary-fee` as action outputs. SARIF upload supported in both modes.
+- **`examples/github-action/`**: Workflow template (`coherence-audit.yml`) and README documenting setup, configuration, SARIF annotations, and manifest vs live scan trade-offs.
+- 10 new tests: `_description` suppression (4), `--manifests` CLI (6).
+
+### Changed
+- **`_description` pseudo-field suppression**: Tool-level description keyword matches that produce `_description` pseudo-fields no longer generate edges or blind spots. Signal is preserved in witness basis for auditability. Blind spots drop from 273 to 244 in the 4-server audit. Fee drops from 31 to 30 (more accurate without spurious edges). Boundary fee preserved at 1.
+- **Real-world audit findings updated**: FINDINGS.md updated with v0.19→v0.20→v0.21 progression table, dimension coverage table, and honest framing of 2/11 dimensions activated.
+- **Observable schema derivation**: Only real schema fields (not `_description` pseudo-fields) are excluded from `observable_schema`, producing slightly more accurate coboundary matrices.
+
+### Fixed
+- `_description` pseudo-fields no longer inflate blind spot counts (29 spurious blind spots removed from 4-server audit)
+- SARIF output no longer fails when using `--manifests` with a directory path
+
 ## 0.20.0
 
 ### Added

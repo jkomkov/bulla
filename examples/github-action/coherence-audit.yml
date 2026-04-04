@@ -1,0 +1,50 @@
+# Bulla Coherence Audit — GitHub Actions Workflow
+#
+# Scans pre-captured MCP server manifests for convention blind spots.
+# Produces SARIF annotations in the Code Scanning tab.
+#
+# Setup:
+#   1. Capture manifests: bulla manifest <server-command> -o manifests/<name>.json
+#   2. Commit the manifests/ directory to your repo
+#   3. Copy this workflow to .github/workflows/coherence-audit.yml
+#   4. Adjust max-fee threshold as needed
+
+name: Coherence Audit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    paths:
+      - "manifests/**"
+
+permissions:
+  security-events: write   # Required for SARIF upload
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run bulla audit
+        uses: jkomkov/bulla@v0.21.0
+        id: audit
+        with:
+          mode: audit
+          manifests-dir: manifests/
+          max-fee: "50"
+          upload-sarif: "true"
+
+      - name: Print summary
+        if: always()
+        run: |
+          echo "### Bulla Coherence Audit" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Passed | ${{ steps.audit.outputs.passed }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Coherence Fee | ${{ steps.audit.outputs.coherence-fee }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Boundary Fee | ${{ steps.audit.outputs.boundary-fee }} |" >> $GITHUB_STEP_SUMMARY

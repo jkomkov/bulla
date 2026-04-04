@@ -1,4 +1,4 @@
-# Real-World Cross-Server Audit Findings (v0.20.0)
+# Real-World Cross-Server Audit Findings (v0.21.0)
 
 ## The Concrete Agent Failure
 
@@ -34,33 +34,35 @@ in `manifests/`.
 
 ---
 
-## Before/After Comparison: v0.19.0 → v0.20.0
+## Version Progression: v0.19.0 → v0.20.0 → v0.21.0
 
-| Metric | v0.19.0 | v0.20.0 | Change |
-|--------|---------|---------|--------|
-| Coherence fee | 17 | 31 | +14 (path_convention adds real findings) |
-| Dimensions found | 1 (`id_offset`) | 2 (`id_offset`, `path_convention`) | +1 |
-| Blind spots | 153 | 273 | +120 (from path_convention) |
-| `per_page` false positive | Yes | **No** (excluded by negative pattern) | Fixed |
-| `commit_id` (string) flagged | Yes | **No** (type-aware exclusion) | Fixed |
-| Cross-server blind spots | 0 | **28** | +28 |
-| Boundary fee | 0 | **1** | +1 (the key result) |
+| Metric | v0.19.0 | v0.20.0 | v0.21.0 | Notes |
+|--------|---------|---------|---------|-------|
+| Coherence fee | 17 | 31 | **30** | Slight decrease from cleaner edge generation |
+| Dimensions found | 1 | 2 | **2** | `id_offset`, `path_convention` |
+| Blind spots | 153 | 273 | **244** | −29 `_description` pseudo-field noise removed |
+| `per_page` false positive | Yes | No | No | Fixed in v0.20.0 |
+| `commit_id` (string) flagged | Yes | No | No | Fixed in v0.20.0 |
+| Cross-server blind spots | 0 | 28 | **28** | All real field-to-field matches |
+| Boundary fee | 0 | 1 | **1** | The key result, preserved |
+| `_description` pseudo-fields | — | 29 | **0** | Suppressed from edge generation in v0.21.0 |
 
-### What changed in the classifier
+### Classifier changes (cumulative through v0.21.0)
 
-1. **Negative patterns**: `per_page`, `page_size`, `limit`, `count`, `batch_size`
-   excluded from `id_offset`. These are counts/limits, not indices.
-2. **Type-aware exclusion**: String-typed `*_id` fields (UUIDs, SHA hashes)
-   excluded from `id_offset`. `commit_id` (string) no longer flagged.
-3. **`path_convention` dimension added**: `path`, `filepath`, `directory`, etc.
-   now classified into a new dimension with known values `absolute_local`,
-   `relative_cwd`, `relative_repo`, `uri`.
-4. **Temporal patterns added**: `since`, `after`, `before`, `until` now
-   classified as `date_format` fields.
-5. **Pack-driven keywords**: Description keywords loaded dynamically from pack
-   YAML (single source of truth). Custom packs automatically enrich detection.
-6. **Per-field description scanning**: Field-level descriptions (not just
-   tool-level) scanned against pack keywords as a 4th signal source.
+1. **Negative patterns** (v0.20.0): `per_page`, `page_size`, `limit`, `count`,
+   `batch_size` excluded from `id_offset`.
+2. **Type-aware exclusion** (v0.20.0): String-typed `*_id` fields excluded from
+   `id_offset`.
+3. **`path_convention` dimension** (v0.20.0): `path`, `filepath`, `directory`
+   classified with known values `absolute_local`, `relative_cwd`,
+   `relative_repo`, `uri`.
+4. **Temporal patterns** (v0.20.0): `since`, `after`, `before`, `until`
+   classified as `date_format`.
+5. **Pack-driven keywords** (v0.20.0): Description keywords loaded from YAML.
+6. **Per-field description scanning** (v0.20.0): 4th signal source.
+7. **`_description` suppression** (v0.21.0): Tool-level description keyword
+   matches no longer generate edges or blind spots. Signal is preserved in the
+   witness basis for auditability, but does not inflate the output.
 
 ---
 
@@ -88,18 +90,19 @@ from multi-server composition analysis.
 
 ## Finding 2: Intra-Server Convention Risk (id_offset)
 
-**GitHub intra-server fee: 18** (153 blind spots)
+**GitHub intra-server fee: 18** (124 blind spots)
 
 The GitHub server has 153 blind spots across the `id_offset` dimension:
 - `page` fields (7 tools): zero-based vs one-based page indexing
 - `issue_number` / `pull_number` fields (8 tools): entity identifier convention
 - Overlap between tools sharing these fields creates the full edge set
 
-**Filesystem intra-server fee: 12** (120 blind spots in `path_convention`)
+**Filesystem intra-server fee: 11** (92 blind spots in `path_convention`)
 
-All 14 filesystem tools share `path` fields. Within the filesystem server,
-path convention is consistent (all absolute local), but this is not declared
-in the schema.
+All 14 filesystem tools share `path` fields. With `_description` pseudo-fields
+removed (v0.21.0), only real schema-field matches contribute. Within the
+filesystem server, path convention is consistent (all absolute local), but
+this is not declared in the schema.
 
 **Memory and Puppeteer: fee = 0** — these servers have no fields matching
 any convention dimension. They are semantically orthogonal.
@@ -120,7 +123,7 @@ blind spots would appear automatically.
 
 ## Interpretation
 
-The v0.20.0 classifier upgrade demonstrates three principles:
+The v0.21.0 audit demonstrates three principles:
 
 1. **Precision over recall**: Removing `per_page` and string `*_id` false
    positives makes remaining findings defensible. Every flagged field is a
@@ -136,11 +139,41 @@ The v0.20.0 classifier upgrade demonstrates three principles:
 
 ---
 
+## Dimension Coverage and Future Servers
+
+The base pack defines 11 convention dimensions. This audit activates 2 of them:
+
+| Dimension | Activated | Why |
+|-----------|-----------|-----|
+| `id_offset` | Yes | `page`, `issue_number`, `pull_number` fields |
+| `path_convention` | Yes | `path` fields in filesystem and GitHub |
+| `date_format` | Partial | `since` in one tool — no edges (need 2+ tools) |
+| `timezone` | No | No timezone fields in these servers |
+| `encoding` | No | No encoding fields |
+| `amount_unit` | No | No financial fields |
+| `null_handling` | No | No null-semantic fields |
+| `sort_order` | No | No sort fields |
+| `error_format` | No | No error format fields |
+| `case_convention` | No | No case-sensitive fields |
+| `bool_representation` | No | No boolean representation fields |
+
+This is expected: the 4 servers tested are developer tools, not financial or
+data-processing services. Adding servers that handle timestamps (e.g.,
+`@modelcontextprotocol/server-postgres`), currencies, or data formats would
+activate additional dimensions automatically — no classifier changes needed.
+
+---
+
 ## Reproducibility
 
 ```bash
 cd bulla
 pip install -e .
+
+# Using the CLI (v0.21.0+):
+bulla audit --manifests examples/real_world_audit/manifests/
+
+# Or using the script:
 python examples/real_world_audit/run_audit.py
 ```
 

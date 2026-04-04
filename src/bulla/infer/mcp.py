@@ -114,10 +114,14 @@ def _find_shared_dimensions(
             dims_2 = {d.dimension: d for d in tools_dims[t2]}
             for dim_name in dims_1:
                 if dim_name in dims_2:
+                    f1 = dims_1[dim_name].field_name
+                    f2 = dims_2[dim_name].field_name
+                    if f1 == "_description" or f2 == "_description":
+                        continue
                     shared.append({
                         "name": f"{dim_name}_match",
-                        "from_field": dims_1[dim_name].field_name,
-                        "to_field": dims_2[dim_name].field_name,
+                        "from_field": f1,
+                        "to_field": f2,
                     })
             if shared:
                 edges.append({

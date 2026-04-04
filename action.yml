@@ -7,16 +7,32 @@ branding:
   color: "blue"
 
 inputs:
+  mode:
+    description: "Analysis mode: 'check' (composition YAMLs) or 'audit' (MCP manifests)"
+    required: false
+    default: "check"
   path:
-    description: "Path to composition YAML file(s) or directory"
+    description: "Path to composition YAML file(s) or directory (check mode)"
     required: false
     default: "compositions/"
-  max-blind-spots:
-    description: "Maximum blind spots before failing (default: 0)"
+  manifests-dir:
+    description: "Directory of MCP manifest JSON files (audit mode)"
     required: false
-    default: "0"
+    default: ""
+  mcp-config:
+    description: "Path to MCP config file for live scan (audit mode)"
+    required: false
+    default: ""
+  max-fee:
+    description: "Maximum coherence fee before failing (audit mode, default: no limit)"
+    required: false
+    default: ""
+  max-blind-spots:
+    description: "Maximum blind spots before failing (default: 0 for check, no limit for audit)"
+    required: false
+    default: ""
   max-unbridged:
-    description: "Maximum unbridged edges before failing (default: 0)"
+    description: "Maximum unbridged edges before failing (check mode, default: 0)"
     required: false
     default: "0"
   upload-sarif:
@@ -34,11 +50,17 @@ inputs:
 
 outputs:
   passed:
-    description: "Whether all compositions passed the thresholds"
-    value: ${{ steps.check.outputs.passed }}
+    description: "Whether the analysis passed all thresholds"
+    value: ${{ steps.run.outputs.passed }}
   sarif-file:
     description: "Path to the generated SARIF file"
-    value: ${{ steps.check.outputs.sarif_file }}
+    value: ${{ steps.run.outputs.sarif_file }}
+  coherence-fee:
+    description: "Total coherence fee (audit mode)"
+    value: ${{ steps.run.outputs.coherence_fee }}
+  boundary-fee:
+    description: "Cross-server boundary fee (audit mode)"
+    value: ${{ steps.run.outputs.boundary_fee }}
 
 runs:
   using: "composite"
@@ -57,25 +79,67 @@ runs:
           pip install bulla
         fi
 
-    - name: Run bulla check
-      id: check
+    - name: Run bulla
+      id: run
       shell: bash
       run: |
         SARIF_FILE="bulla-results.sarif"
         echo "sarif_file=${SARIF_FILE}" >> "$GITHUB_OUTPUT"
 
+        MODE="${{ inputs.mode }}"
         EXIT_CODE=0
-        bulla check \
-          --max-blind-spots "${{ inputs.max-blind-spots }}" \
-          --max-unbridged "${{ inputs.max-unbridged }}" \
-          --format sarif \
-          ${{ inputs.path }} > "${SARIF_FILE}" 2>/dev/null || EXIT_CODE=$?
+
+        if [ "$MODE" = "audit" ]; then
+          # Build audit command
+          AUDIT_CMD="bulla audit"
+
+          if [ -n "${{ inputs.manifests-dir }}" ]; then
+            AUDIT_CMD="$AUDIT_CMD --manifests ${{ inputs.manifests-dir }}"
+          elif [ -n "${{ inputs.mcp-config }}" ]; then
+            AUDIT_CMD="$AUDIT_CMD ${{ inputs.mcp-config }}"
+          else
+            echo "::error::audit mode requires either manifests-dir or mcp-config input"
+            exit 1
+          fi
+
+          if [ -n "${{ inputs.max-fee }}" ]; then
+            AUDIT_CMD="$AUDIT_CMD --max-fee ${{ inputs.max-fee }}"
+          fi
+          if [ -n "${{ inputs.max-blind-spots }}" ]; then
+            AUDIT_CMD="$AUDIT_CMD --max-blind-spots ${{ inputs.max-blind-spots }}"
+          fi
+
+          # Run JSON output for structured data
+          JSON_OUT=$(eval "$AUDIT_CMD --format json" 2>/dev/null) || true
+          if [ -n "$JSON_OUT" ]; then
+            FEE=$(echo "$JSON_OUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('coherence_fee',0))")
+            BFEE=$(echo "$JSON_OUT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('cross_server_decomposition',{}).get('boundary_fee',0))")
+            echo "coherence_fee=${FEE}" >> "$GITHUB_OUTPUT"
+            echo "boundary_fee=${BFEE}" >> "$GITHUB_OUTPUT"
+          fi
+
+          # Run SARIF output
+          eval "$AUDIT_CMD --format sarif" > "${SARIF_FILE}" 2>/dev/null || EXIT_CODE=$?
+
+        else
+          # Check mode (backward compatible)
+          CHECK_CMD="bulla check"
+          if [ -n "${{ inputs.max-blind-spots }}" ]; then
+            CHECK_CMD="$CHECK_CMD --max-blind-spots ${{ inputs.max-blind-spots }}"
+          else
+            CHECK_CMD="$CHECK_CMD --max-blind-spots 0"
+          fi
+          CHECK_CMD="$CHECK_CMD --max-unbridged ${{ inputs.max-unbridged }}"
+          CHECK_CMD="$CHECK_CMD --format sarif ${{ inputs.path }}"
+
+          eval "$CHECK_CMD" > "${SARIF_FILE}" 2>/dev/null || EXIT_CODE=$?
+        fi
 
         if [ "$EXIT_CODE" -eq 0 ]; then
           echo "passed=true" >> "$GITHUB_OUTPUT"
         else
           echo "passed=false" >> "$GITHUB_OUTPUT"
-          echo "::error::bulla check failed. Run 'bulla diagnose ${{ inputs.path }}' for details."
+          echo "::error::bulla ${MODE} failed with exit code ${EXIT_CODE}. Run 'bulla ${MODE} --help' for details."
           exit 1
         fi
 
