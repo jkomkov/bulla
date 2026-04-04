@@ -629,7 +629,11 @@ class TestRealMCPValidation:
     """Run classifier against realistic multi-tool MCP definitions."""
 
     def test_stripe_tool_coverage(self):
-        """Stripe charge tool: should detect amount_unit, date_format, id_offset."""
+        """Stripe charge tool: should detect amount_unit, date_format.
+
+        String-typed *_id fields (customer_id, invoice_id) are correctly
+        excluded from id_offset by the type-aware filter.
+        """
         tools = json.loads(REAL_MCP_FIXTURE.read_text())["tools"]
         stripe = next(t for t in tools if t["name"] == "stripe_create_charge")
         results = classify_tool_rich(stripe)
@@ -639,7 +643,7 @@ class TestRealMCPValidation:
         assert dim_map["amount_unit"].confidence == "declared"  # name + description
         assert "date_format" in dim_map
         assert dim_map["date_format"].confidence == "declared"  # name + schema_format + description
-        assert "id_offset" in dim_map
+        assert "id_offset" not in dim_map  # string-typed IDs correctly excluded
 
     def test_github_tool_coverage(self):
         """GitHub issue tool: should detect score_range, date_format, id_offset."""

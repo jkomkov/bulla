@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.20.0
+
+### Added
+- **`path_convention` dimension**: New convention dimension in `base.yaml` with known values `absolute_local`, `relative_cwd`, `relative_repo`, `uri`. Detects `path`, `filepath`, `directory`, `dirname`, `folder` fields. Creates cross-server edges between filesystem and GitHub servers, producing the first **nonzero boundary fee** in real-world audit.
+- **Temporal field patterns**: `since`, `after`, `before`, `until` added to `date_format` core patterns and `base.yaml` field_patterns. GitHub's `list_issues.since` now correctly classified as `date_format`.
+- **Per-field description scanning**: 4th signal source in `classify_tool_rich`. Per-field descriptions (not just tool-level) scanned against pack keyword lists. Source type `field_description` — weak alone, promotes to `declared` when combined with name/schema signals.
+- **Pack-driven description keywords**: `_DESCRIPTION_KEYWORDS` replaced with dynamic loading from merged pack taxonomy via `_get_description_keywords()`. Custom packs automatically enrich description matching. Financial pack keywords become active when loaded.
+
+### Changed
+- **Negative patterns for `id_offset`**: `per_page`, `page_size`, `page_count`, `limit`, `count`, `total`, `max_results`, `num_results`, `batch_size` excluded from `id_offset` via `_NEGATIVE_PATTERNS`. These are counts/limits, not indices.
+- **Type-aware exclusion**: String-typed `*_id` fields (UUIDs, SHA hashes) excluded from `id_offset` when `schema_type="string"` is available. `commit_id` (string) no longer flagged.
+- **`id_offset` description narrowed**: "Whether numeric indices and page numbers are zero-based or one-based" (was "identifiers and indices").
+- **Real-world audit findings updated**: Fee 31 (was 17), 2 dimensions (was 1), boundary_fee=1 (was 0), 28 cross-server blind spots (was 0). FINDINGS.md rewritten with concrete agent failure scenario lede and before/after comparison table.
+- **Base pack now has 11 dimensions** (was 10).
+
+### Fixed
+- `per_page` false positive eliminated from GitHub audit findings
+- `commit_id` (string-typed) false positive eliminated
+- Description keyword matching now extensible via pack YAML instead of hardcoded
+
 ## 0.19.0
 
 ### Added

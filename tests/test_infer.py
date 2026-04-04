@@ -56,10 +56,11 @@ class TestClassifier:
     def test_classify_fields_batch(self):
         fields = ["total_amount", "status", "due_date", "path"]
         results = classify_fields(fields)
-        assert len(results) == 2
+        assert len(results) == 3
         dims = {r.dimension for r in results}
         assert "amount_unit" in dims
         assert "date_format" in dims
+        assert "path_convention" in dims
 
 
 class TestInferFromManifest:

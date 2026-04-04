@@ -94,10 +94,10 @@ class TestBasePackLoading:
         assert ref.version == "0.1.0"
         assert len(ref.hash) == 64
 
-    def test_base_pack_has_10_dimensions(self):
+    def test_base_pack_has_11_dimensions(self):
         parsed, _ = _load_base_pack()
         dims = parsed.get("dimensions", {})
-        assert len(dims) == 10
+        assert len(dims) == 11
 
     def test_base_pack_ref_is_frozen(self):
         _, ref = _load_base_pack()
@@ -132,7 +132,7 @@ class TestPackStack:
         merged, refs = load_pack_stack()
         assert len(refs) == 1
         assert refs[0].name == "base"
-        assert len(merged["dimensions"]) == 10
+        assert len(merged["dimensions"]) == 11
 
     def test_financial_overlay_adds_dimensions(self, financial_pack_path):
         merged, refs = load_pack_stack(extra_paths=[financial_pack_path])

@@ -147,6 +147,23 @@ The `__` prefix is applied only in audit mode; single-server paths (`bulla gauge
 
 `bulla audit --format sarif` produces SARIF v2.1.0 JSON with blind spots as `bulla/blind-spot` results and bridge recommendations as `bulla/bridge-recommendation` results, each tied to the MCP config file as the artifact location. This enables direct integration with GitHub Code Scanning.
 
+## Classifier Architecture (v0.20.0)
+
+The multi-signal classifier uses four independent signal sources:
+
+1. **Field name pattern matching**: Regex patterns from `_CORE_NAME_PATTERNS` plus taxonomy-compiled patterns from pack `field_patterns`. Includes negative pattern exclusions (`_NEGATIVE_PATTERNS`) and type-aware filtering (string-typed `*_id` excluded from `id_offset`).
+2. **Tool-level description keywords**: Phrases in the tool's top-level `description`, matched against pack `description_keywords` loaded dynamically from the merged taxonomy.
+3. **JSON Schema structural signals**: `format`, `type+range`, `enum`, `pattern` metadata from the field's schema definition.
+4. **Per-field description keywords**: Phrases in individual field `description` attributes, matched against the same pack keywords. Source type `field_description` (weak signal alone, promotes to `declared` with corroboration).
+
+Confidence tiers: `declared` (2+ source types agree), `inferred` (1 strong signal: name, schema_format, schema_range, schema_pattern), `unknown` (weak signal only). Domain hints can promote `unknown` → `inferred`.
+
+### Convention Dimensions (base pack v0.1.0)
+
+11 dimensions: `date_format`, `rate_scale`, `amount_unit`, `score_range`, `id_offset`, `precision`, `encoding`, `timezone`, `null_handling`, `line_ending`, `path_convention`.
+
+`path_convention` (added v0.20.0) detects path reference space mismatches (absolute local vs. repository-relative vs. URI). This dimension creates cross-server edges between filesystem and code hosting tools, producing nonzero boundary fees.
+
 ## `max_unknown` Definition
 
 A convention dimension is **unknown** when it is relevant to the composition but could not be assigned a `declared` or `inferred` value under the active packs. `max_unknown` bounds the number of such dimensions a policy will tolerate before refusing.

@@ -1,93 +1,148 @@
-# Real-World MCP Audit Findings
+# Real-World Cross-Server Audit Findings (v0.20.0)
 
-**Date**: 2026-04-04
-**Bulla version**: 0.18.0 (pre-0.19.0 release)
-**Methodology**: Genuine `tools/list` responses captured from live MCP servers via `bulla.scan.scan_mcp_server()`. No hand-constructed or simulated data.
+## The Concrete Agent Failure
 
-## Servers audited
+An agent asked to "copy this local file to the GitHub repo" calls
+`filesystem.read_file(path="/Users/me/repo/src/main.py")` to get the content,
+then calls `github.create_or_update_file(path="/Users/me/repo/src/main.py")`.
+The file is created at the wrong location because GitHub expects repo-relative
+`src/main.py`, not an absolute local path.
 
-| Server | Package | Tools | Provenance |
-|--------|---------|-------|------------|
-| filesystem | `@modelcontextprotocol/server-filesystem` | 14 | Live capture via `npx -y` |
-| github | `@modelcontextprotocol/server-github` | 26 | Live capture via `npx -y` |
-| memory | `@modelcontextprotocol/server-memory` | 9 | Live capture via `npx -y` |
-| puppeteer | `@modelcontextprotocol/server-puppeteer` | 7 | Live capture via `npx -y` |
+Bulla's cross-server audit detects this: `path_convention` is hidden on both
+sides of the filesystem↔github boundary. No individual server reveals the
+mismatch — only the composition does.
 
-Total: **56 tools** across 4 servers.
+**"These are arguably different semantic concepts that share a field name."**
+That's exactly what a convention blind spot IS: the schema doesn't distinguish
+them, and an agent composing across servers has no machine-readable signal that
+the same field name means different things.
 
-## Headline results
+---
 
-| Metric | Value |
-|--------|-------|
-| Total edges (inferred tool pairs) | 153 |
-| Coherence fee | **17** |
-| Blind spots | 153 |
-| Unbridged edges | 153 |
-| Minimum disclosure set | 17 fields |
+## Audit Configuration
 
-## Fee decomposition by server
+| Server | Package | Tools |
+|--------|---------|-------|
+| filesystem | `@modelcontextprotocol/server-filesystem` | 14 |
+| github | `@modelcontextprotocol/server-github` | 26 |
+| memory | `@modelcontextprotocol/server-memory` | 9 |
+| puppeteer | `@modelcontextprotocol/server-puppeteer` | 7 |
 
-| Server | Intra-server fee |
-|--------|-----------------|
-| filesystem | 0 |
-| github | **17** |
-| memory | 0 |
-| puppeteer | 0 |
-| **Boundary fee** | **0** |
-| **Boundary edges** | 0 |
+**Total**: 56 tools across 4 servers. All manifests captured from live servers
+on 2026-04-04. Raw `tools/list` JSON with `_bulla_provenance` metadata stored
+in `manifests/`.
+
+---
+
+## Before/After Comparison: v0.19.0 → v0.20.0
+
+| Metric | v0.19.0 | v0.20.0 | Change |
+|--------|---------|---------|--------|
+| Coherence fee | 17 | 31 | +14 (path_convention adds real findings) |
+| Dimensions found | 1 (`id_offset`) | 2 (`id_offset`, `path_convention`) | +1 |
+| Blind spots | 153 | 273 | +120 (from path_convention) |
+| `per_page` false positive | Yes | **No** (excluded by negative pattern) | Fixed |
+| `commit_id` (string) flagged | Yes | **No** (type-aware exclusion) | Fixed |
+| Cross-server blind spots | 0 | **28** | +28 |
+| Boundary fee | 0 | **1** | +1 (the key result) |
+
+### What changed in the classifier
+
+1. **Negative patterns**: `per_page`, `page_size`, `limit`, `count`, `batch_size`
+   excluded from `id_offset`. These are counts/limits, not indices.
+2. **Type-aware exclusion**: String-typed `*_id` fields (UUIDs, SHA hashes)
+   excluded from `id_offset`. `commit_id` (string) no longer flagged.
+3. **`path_convention` dimension added**: `path`, `filepath`, `directory`, etc.
+   now classified into a new dimension with known values `absolute_local`,
+   `relative_cwd`, `relative_repo`, `uri`.
+4. **Temporal patterns added**: `since`, `after`, `before`, `until` now
+   classified as `date_format` fields.
+5. **Pack-driven keywords**: Description keywords loaded dynamically from pack
+   YAML (single source of truth). Custom packs automatically enrich detection.
+6. **Per-field description scanning**: Field-level descriptions (not just
+   tool-level) scanned against pack keywords as a 4th signal source.
+
+---
+
+## Finding 1: Nonzero Boundary Fee (path_convention)
+
+**Boundary fee: 1**
+
+The filesystem server's `path` fields (11 tools: `read_file`, `write_file`,
+`edit_file`, etc.) use absolute local paths (`/Users/me/repo/src/main.py`).
+The GitHub server's `path` fields (2 tools: `create_or_update_file`,
+`get_file_contents`) use repository-relative paths (`src/main.py`).
+
+Neither server declares its path convention. When composed, 28 cross-server
+edges are created in the `path_convention` dimension. The boundary fee of 1
+means this blind spot exists **only** in the cross-server composition — it is
+invisible to any individual server audit.
+
+**Minimum disclosure**: Declaring `path_convention` on any one filesystem tool
+AND any one GitHub tool would resolve the cross-server ambiguity.
+
+This is the proof of concept for `bulla audit`: a finding that only emerges
+from multi-server composition analysis.
+
+---
+
+## Finding 2: Intra-Server Convention Risk (id_offset)
+
+**GitHub intra-server fee: 18** (153 blind spots)
+
+The GitHub server has 153 blind spots across the `id_offset` dimension:
+- `page` fields (7 tools): zero-based vs one-based page indexing
+- `issue_number` / `pull_number` fields (8 tools): entity identifier convention
+- Overlap between tools sharing these fields creates the full edge set
+
+**Filesystem intra-server fee: 12** (120 blind spots in `path_convention`)
+
+All 14 filesystem tools share `path` fields. Within the filesystem server,
+path convention is consistent (all absolute local), but this is not declared
+in the schema.
+
+**Memory and Puppeteer: fee = 0** — these servers have no fields matching
+any convention dimension. They are semantically orthogonal.
+
+---
+
+## Finding 3: Temporal Fields Detected
+
+GitHub's `list_issues.since` field is now classified as `date_format` (via the
+temporal pattern `since`). However, only one tool has this field, so no edges
+are created from it. This is honest: the classifier correctly identifies the
+convention-laden field, but a single instance doesn't create a blind spot.
+
+If a second server exposed a `since` or `after` field, cross-server temporal
+blind spots would appear automatically.
+
+---
 
 ## Interpretation
 
-### Finding 1: GitHub server has 17 internal blind spots
+The v0.20.0 classifier upgrade demonstrates three principles:
 
-The `@modelcontextprotocol/server-github` server exposes 26 tools, many of which share the `id_offset` convention dimension. Fields like `page`, `issue_number`, `pull_number`, and `per_page` are classified as index/offset fields, but their offset convention (zero-based vs one-based) is not declared in the tool schemas.
+1. **Precision over recall**: Removing `per_page` and string `*_id` false
+   positives makes remaining findings defensible. Every flagged field is a
+   genuine convention question.
 
-This creates 153 edges between GitHub tools where the `id_offset_match` dimension is hidden on both sides. The coherence fee of 17 corresponds to the rank deficiency: 17 independent convention assumptions are implicit in the server's API.
+2. **Multi-dimensional findings**: Two dimensions (`id_offset` +
+   `path_convention`) are strictly more informative than one. The decomposition
+   tells you *what kind* of convention risk exists, not just *how much*.
 
-**What this means in practice**: An agent composing these tools could pass a `page` value from `search_repositories` to `list_commits` without knowing whether pagination is zero-indexed or one-indexed. Similarly, `issue_number` from `get_issue` could be confused with `pull_number` in `merge_pull_request` — both are numeric identifiers with undeclared offset conventions.
+3. **Boundary fee as unique value**: The nonzero boundary fee proves that
+   `bulla audit` finds risks invisible to per-server analysis. This is the
+   tool's raison d'être.
 
-**Minimum disclosure set**: Bulla identifies exactly 17 fields that, if their `id_offset` convention were declared, would eliminate all blind spots:
-
-- `page` in: `search_repositories`, `list_commits`, `list_issues`, `search_code`, `search_issues`, `search_users`
-- `issue_number` in: `update_issue`, `add_issue_comment`, `get_issue`
-- `pull_number` in: `get_pull_request`, `create_pull_request_review`, `merge_pull_request`, `get_pull_request_files`, `get_pull_request_status`, `update_pull_request_branch`, `get_pull_request_comments`
-- `per_page` in: `list_pull_requests`
-
-### Finding 2: No cross-server (boundary) blind spots
-
-The boundary fee between all four servers is **zero**. This means:
-
-- **filesystem**, **github**, **memory**, and **puppeteer** are semantically orthogonal
-- Their convention-laden fields do not overlap across server boundaries
-- Composing these servers introduces no additional risk beyond what each server carries individually
-
-This is the expected result for general-purpose utility servers operating in distinct domains (local filesystem, remote Git hosting, knowledge graphs, browser automation). Cross-server blind spots are more likely in domain-specific compositions where multiple servers handle the same semantic concepts (dates, amounts, rates) with potentially different conventions.
-
-### Finding 3: Filesystem, memory, and puppeteer have fee 0
-
-These three servers have zero coherence fee individually. Their tool interfaces either:
-- Don't expose convention-laden fields (memory's `entities`, `relations`; puppeteer's `selector`, `script`)
-- Use fields that don't match known convention dimensions in the base pack taxonomy
-
-This does not mean these servers are risk-free in all compositions — it means the base pack's dimension vocabulary (date_format, amount_unit, timezone, encoding, etc.) does not flag any of their fields. Domain-specific packs could reveal additional conventions.
+---
 
 ## Reproducibility
 
-All findings are reproducible by running:
-
 ```bash
-cd bulla/examples/real_world_audit
-python run_audit.py
+cd bulla
+pip install -e .
+python examples/real_world_audit/run_audit.py
 ```
 
-The raw server manifests in `manifests/` contain `_bulla_provenance` metadata documenting the exact capture command, server package, and capture date.
-
-## Implications
-
-1. **The framework works**: Bulla detects genuine convention blind spots in real MCP server responses — not synthetic or hand-crafted examples.
-
-2. **Intra-server risk is real**: Even a single well-maintained reference server (GitHub) has 17 implicit convention assumptions. In a multi-agent workflow, these create real failure modes around pagination and entity ID handling.
-
-3. **Cross-server risk requires domain overlap**: General-purpose servers are orthogonal. The highest-risk compositions are domain-specific (e.g., multiple financial APIs, multiple database interfaces) where convention dimensions like `amount_unit`, `date_format`, and `timezone` span server boundaries.
-
-4. **Pack taxonomy is the lever**: The findings are only as comprehensive as the active pack vocabulary. The base pack captures `id_offset` (which flagged 17 fields in GitHub) but a financial pack would flag additional dimensions in payment or accounting servers.
+All manifests are genuine `tools/list` responses with provenance metadata.
+The audit is fully deterministic: same inputs → same fee, same blind spots.

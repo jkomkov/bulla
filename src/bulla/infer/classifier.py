@@ -180,11 +180,12 @@ def _load_taxonomy() -> dict[str, Any]:
 def _reset_taxonomy_cache() -> None:
     """Reset all caches (for testing with custom taxonomies)."""
     global _taxonomy_cache, _compiled_patterns, _ENUM_KNOWN_VALUES, _DOMAIN_MAP
-    global _active_pack_refs, _extra_pack_paths
+    global _active_pack_refs, _extra_pack_paths, _DESCRIPTION_KEYWORDS_CACHE
     _taxonomy_cache = None
     _compiled_patterns = None
     _ENUM_KNOWN_VALUES = None
     _DOMAIN_MAP = None
+    _DESCRIPTION_KEYWORDS_CACHE = None
     _active_pack_refs = ()
     _extra_pack_paths = ()
 
@@ -213,7 +214,7 @@ _CORE_NAME_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
     ("date_format", re.compile(
         r"(^|_)(time|date|timestamp|datetime|created_at|updated_at|"
         r"expires?_at|deadline|scheduled|start_time|end_time|"
-        r"birth_?date|due_date)($|_)", re.IGNORECASE
+        r"birth_?date|due_date|since|after|before|until)($|_)", re.IGNORECASE
     )),
     ("rate_scale", re.compile(
         r"(^|_)(rate|percent|percentage|ratio|probability|"
@@ -251,10 +252,23 @@ _CORE_NAME_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
     ("line_ending", re.compile(
         r"(^|_)(line_ending|newline|eol|crlf|lf_mode)($|_)", re.IGNORECASE
     )),
+    ("path_convention", re.compile(
+        r"(^)(path|filepath|file_path|dir_path|directory|"
+        r"dirname|folder)($|_)", re.IGNORECASE
+    )),
 ]
 
 # Backward-compat alias
 DIMENSION_PATTERNS = _CORE_NAME_PATTERNS
+
+# Negative patterns: field names that match a positive pattern but should
+# be excluded from the dimension.  Checked in classify_field_by_name.
+_NEGATIVE_PATTERNS: dict[str, re.Pattern[str]] = {
+    "id_offset": re.compile(
+        r"(^|_)(per_page|page_size|page_count|limit|count|"
+        r"total|max_results|num_results|batch_size)($|_)", re.IGNORECASE
+    ),
+}
 
 
 def _compile_taxonomy_patterns() -> list[tuple[str, re.Pattern[str]]]:
@@ -295,11 +309,29 @@ def _get_name_patterns() -> list[tuple[str, re.Pattern[str]]]:
     return _compiled_patterns
 
 
-def classify_field_by_name(name: str) -> InferredDimension | None:
-    """Classify a field by its name against dimension patterns."""
+def classify_field_by_name(
+    name: str,
+    *,
+    schema_type: str | None = None,
+) -> InferredDimension | None:
+    """Classify a field by its name against dimension patterns.
+
+    Args:
+        schema_type: When provided, enables type-aware exclusions (e.g.
+            string-typed ``*_id`` fields are excluded from ``id_offset``).
+    """
     leaf = name.rsplit(".", 1)[-1] if "." in name else name
     for dim_name, pattern in _get_name_patterns():
         if pattern.search(leaf):
+            neg = _NEGATIVE_PATTERNS.get(dim_name)
+            if neg and neg.search(leaf):
+                continue
+            if (
+                dim_name == "id_offset"
+                and schema_type == "string"
+                and re.search(r"(^|_)id($|_)", leaf, re.IGNORECASE)
+            ):
+                continue
             return InferredDimension(
                 field_name=name,
                 dimension=dim_name,
@@ -311,57 +343,25 @@ def classify_field_by_name(name: str) -> InferredDimension | None:
 
 # ── Signal 2: Description keyword matching ─────────────────────────────
 
-_DESCRIPTION_KEYWORDS: dict[str, list[str]] = {
-    "date_format": [
-        "iso-8601", "iso 8601", "unix epoch", "unix timestamp",
-        "utc time", "rfc 3339", "rfc3339", "yyyy-mm-dd",
-        "date format", "datetime format", "timestamp format",
-        "business days", "calendar days", "trading days",
-    ],
-    "amount_unit": [
-        "in cents", "in dollars", "in pennies", "in satoshis",
-        "basis points", "in wei", "in gwei", "smallest unit",
-        "minor unit", "major unit", "currency unit",
-        "monetary amount", "financial amount",
-    ],
-    "rate_scale": [
-        "as a percentage", "as a decimal", "between 0 and 1",
-        "0 to 100", "per mille", "basis points",
-        "probability", "fraction of",
-    ],
-    "score_range": [
-        "on a scale", "1 to 5", "0 to 10", "0 to 100",
-        "star rating", "priority level", "severity level",
-        "normalized score",
-    ],
-    "id_offset": [
-        "zero-based", "one-based", "0-indexed", "1-indexed",
-        "zero indexed", "one indexed", "auto-increment",
-    ],
-    "precision": [
-        "decimal places", "significant digits", "rounding",
-        "banker's rounding", "round half", "truncation",
-        "floating point", "fixed point",
-    ],
-    "encoding": [
-        "utf-8", "utf8", "ascii", "latin-1", "iso-8859",
-        "character encoding", "text encoding", "unicode",
-    ],
-    "timezone": [
-        "utc", "timezone", "time zone", "local time",
-        "eastern time", "pacific time", "gmt",
-        "tz offset", "utc offset",
-    ],
-    "null_handling": [
-        "null value", "missing value", "empty string",
-        "sentinel value", "n/a", "nan", "none value",
-        "omit field", "optional field",
-    ],
-    "line_ending": [
-        "line ending", "newline", "crlf", "line feed",
-        "carriage return",
-    ],
-}
+_DESCRIPTION_KEYWORDS_CACHE: dict[str, list[str]] | None = None
+
+
+def _get_description_keywords() -> dict[str, list[str]]:
+    """Load description_keywords from the merged pack taxonomy.
+
+    The pack YAML is the single source of truth for keyword lists.
+    Custom packs automatically enrich description matching.
+    """
+    global _DESCRIPTION_KEYWORDS_CACHE
+    if _DESCRIPTION_KEYWORDS_CACHE is not None:
+        return _DESCRIPTION_KEYWORDS_CACHE
+    taxonomy = _load_taxonomy()
+    _DESCRIPTION_KEYWORDS_CACHE = {
+        dim_name: dim_def.get("description_keywords", [])
+        for dim_name, dim_def in taxonomy.get("dimensions", {}).items()
+        if dim_def.get("description_keywords")
+    }
+    return _DESCRIPTION_KEYWORDS_CACHE
 
 
 def classify_description(text: str) -> list[InferredDimension]:
@@ -371,7 +371,7 @@ def classify_description(text: str) -> list[InferredDimension]:
     lower = text.lower()
     results: list[InferredDimension] = []
     seen: set[str] = set()
-    for dim_name, keywords in _DESCRIPTION_KEYWORDS.items():
+    for dim_name, keywords in _get_description_keywords().items():
         for kw in keywords:
             if kw in lower and dim_name not in seen:
                 seen.add(dim_name)
@@ -382,6 +382,37 @@ def classify_description(text: str) -> list[InferredDimension]:
                     sources=("description",),
                 ))
                 break
+    return results
+
+
+def _classify_field_descriptions(
+    field_infos: list[FieldInfo],
+) -> list[InferredDimension]:
+    """Scan per-field descriptions against pack keyword lists.
+
+    Returns one InferredDimension per (field, dimension) match.
+    Source type is "field_description" (weak signal unless corroborated).
+    """
+    results: list[InferredDimension] = []
+    keywords_map = _get_description_keywords()
+    for fi in field_infos:
+        if not fi.description:
+            continue
+        lower = fi.description.lower()
+        seen: set[str] = set()
+        for dim_name, keywords in keywords_map.items():
+            if dim_name in seen:
+                continue
+            for kw in keywords:
+                if kw in lower:
+                    seen.add(dim_name)
+                    results.append(InferredDimension(
+                        field_name=fi.name,
+                        dimension=dim_name,
+                        confidence="inferred",
+                        sources=("field_description",),
+                    ))
+                    break
     return results
 
 
@@ -524,6 +555,8 @@ def _merge_signals(
     name_hits: list[InferredDimension],
     description_hits: list[InferredDimension],
     schema_hits: list[InferredDimension],
+    *,
+    field_description_hits: list[InferredDimension] | None = None,
     domain_hint: str | None = None,
 ) -> list[InferredDimension]:
     """Merge signals from all sources, dedup by (field, dimension), compute confidence.
@@ -533,33 +566,25 @@ def _merge_signals(
     """
     dim_signals: dict[str, dict[str, list[str]]] = {}
 
+    def _accumulate(hit: InferredDimension, *, is_tool_desc: bool = False) -> None:
+        key = hit.dimension
+        dim_signals.setdefault(key, {"fields": [], "sources": []})
+        if not is_tool_desc and hit.field_name not in dim_signals[key]["fields"]:
+            dim_signals[key]["fields"].append(hit.field_name)
+        elif is_tool_desc and hit.field_name != "_description" and hit.field_name not in dim_signals[key]["fields"]:
+            dim_signals[key]["fields"].append(hit.field_name)
+        for s in hit.sources:
+            if s not in dim_signals[key]["sources"]:
+                dim_signals[key]["sources"].append(s)
+
     for hit in name_hits:
-        key = hit.dimension
-        dim_signals.setdefault(key, {"fields": [], "sources": []})
-        if hit.field_name not in dim_signals[key]["fields"]:
-            dim_signals[key]["fields"].append(hit.field_name)
-        for s in hit.sources:
-            if s not in dim_signals[key]["sources"]:
-                dim_signals[key]["sources"].append(s)
-
+        _accumulate(hit)
     for hit in description_hits:
-        key = hit.dimension
-        dim_signals.setdefault(key, {"fields": [], "sources": []})
-        # Inherit field names from co-occurring name/schema hits for this dimension
-        if hit.field_name != "_description" and hit.field_name not in dim_signals[key]["fields"]:
-            dim_signals[key]["fields"].append(hit.field_name)
-        for s in hit.sources:
-            if s not in dim_signals[key]["sources"]:
-                dim_signals[key]["sources"].append(s)
-
+        _accumulate(hit, is_tool_desc=True)
     for hit in schema_hits:
-        key = hit.dimension
-        dim_signals.setdefault(key, {"fields": [], "sources": []})
-        if hit.field_name not in dim_signals[key]["fields"]:
-            dim_signals[key]["fields"].append(hit.field_name)
-        for s in hit.sources:
-            if s not in dim_signals[key]["sources"]:
-                dim_signals[key]["sources"].append(s)
+        _accumulate(hit)
+    for hit in (field_description_hits or []):
+        _accumulate(hit)
 
     results: list[InferredDimension] = []
     for dim_name, info in dim_signals.items():
@@ -626,7 +651,7 @@ def classify_tool_rich(
     schema_hits: list[InferredDimension] = []
 
     for fi in field_infos:
-        nh = classify_field_by_name(fi.name)
+        nh = classify_field_by_name(fi.name, schema_type=fi.schema_type)
         if nh:
             name_hits.append(nh)
         sh = classify_schema_signal(fi)
@@ -635,7 +660,13 @@ def classify_tool_rich(
     desc = tool.get("description", "")
     description_hits = classify_description(desc)
 
-    return _merge_signals(name_hits, description_hits, schema_hits, domain_hint=domain_hint)
+    field_desc_hits = _classify_field_descriptions(field_infos)
+
+    return _merge_signals(
+        name_hits, description_hits, schema_hits,
+        field_description_hits=field_desc_hits,
+        domain_hint=domain_hint,
+    )
 
 
 # ── Backward-compatible API ────────────────────────────────────────────

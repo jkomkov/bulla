@@ -17,6 +17,10 @@ dimensions:
       - "created_at"
       - "updated_at"
       - "*_datetime"
+      - "since"
+      - "after"
+      - "before"
+      - "until"
     description_keywords:
       - "iso-8601"
       - "iso 8601"
@@ -127,7 +131,7 @@ dimensions:
       - "universal"
 
   id_offset:
-    description: "Whether identifiers and indices are zero-based or one-based"
+    description: "Whether numeric indices and page numbers are zero-based or one-based"
     known_values:
       - "zero_based"
       - "one_based"
@@ -259,3 +263,27 @@ dimensions:
       - "carriage return"
     domains:
       - "devops"
+
+  path_convention:
+    description: "Path reference space and format convention"
+    known_values:
+      - "absolute_local"
+      - "relative_cwd"
+      - "relative_repo"
+      - "uri"
+    field_patterns:
+      - "*_path"
+      - "*_dir"
+      - "*_directory"
+      - "*_folder"
+    description_keywords:
+      - "file path"
+      - "directory path"
+      - "absolute path"
+      - "relative path"
+      - "repository path"
+      - "local path"
+      - "allowed directories"
+    domains:
+      - "devops"
+      - "universal"
