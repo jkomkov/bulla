@@ -2,6 +2,9 @@
 
 Pure function from tool schemas to micro-pack YAML. The LLM call is the
 only external dependency, isolated behind the adapter interface.
+
+Guided discovery (v0.26.0) adds ``guided_discover``: obligation-directed
+probing via a batched prompt with per-obligation verdicts.
 """
 
 from __future__ import annotations
@@ -13,8 +16,14 @@ from typing import Any
 import yaml
 
 from bulla.discover.adapter import DiscoverAdapter, get_adapter
-from bulla.discover.prompt import build_prompt, parse_response
+from bulla.discover.prompt import (
+    build_guided_prompt,
+    build_prompt,
+    parse_guided_response,
+    parse_response,
+)
 from bulla.infer.classifier import load_pack_stack
+from bulla.model import BoundaryObligation, ObligationVerdict, ProbeResult
 from bulla.packs.validate import validate_pack
 
 logger = logging.getLogger(__name__)
@@ -117,6 +126,95 @@ def discover_dimensions(
 
     return DiscoveryResult(
         pack=parsed,
+        raw_response=raw_response,
+        prompt=prompt,
+    )
+
+
+# ── Guided discovery (v0.26.0) ──────────────────────────────────────
+
+
+class GuidedDiscoveryResult:
+    """Result of probing obligations via batched guided discovery."""
+
+    def __init__(
+        self,
+        probes: tuple[ProbeResult, ...],
+        raw_response: str,
+        prompt: str,
+    ) -> None:
+        self.probes = probes
+        self.raw_response = raw_response
+        self.prompt = prompt
+
+    @property
+    def n_confirmed(self) -> int:
+        return sum(1 for p in self.probes if p.verdict == ObligationVerdict.CONFIRMED)
+
+    @property
+    def n_denied(self) -> int:
+        return sum(1 for p in self.probes if p.verdict == ObligationVerdict.DENIED)
+
+    @property
+    def n_uncertain(self) -> int:
+        return sum(1 for p in self.probes if p.verdict == ObligationVerdict.UNCERTAIN)
+
+    @property
+    def confirmed(self) -> tuple[ProbeResult, ...]:
+        return tuple(p for p in self.probes if p.verdict == ObligationVerdict.CONFIRMED)
+
+
+def guided_discover(
+    obligations: tuple[BoundaryObligation, ...],
+    tool_schemas: list[dict[str, Any]],
+    adapter: DiscoverAdapter,
+    pack_context: dict[str, Any] | None = None,
+) -> GuidedDiscoveryResult:
+    """Direct LLM discovery at specific obligations via a single batched call.
+
+    For each obligation, matches the relevant tool schema by server group
+    prefix (from ``placeholder_tool``) or specific tool name (from
+    ``source_edge``), then constructs one batched prompt asking the LLM
+    to evaluate all obligations together.
+
+    Args:
+        obligations: Boundary obligations to probe.
+        tool_schemas: All available MCP tool dicts for tool matching.
+        adapter: LLM adapter (real or mock).
+        pack_context: Merged pack dict for known_values lookup.
+
+    Returns:
+        GuidedDiscoveryResult with per-obligation ProbeResults.
+    """
+    if not obligations:
+        return GuidedDiscoveryResult(probes=(), raw_response="", prompt="")
+
+    obl_dicts = [o.to_dict() for o in obligations]
+
+    prompt = build_guided_prompt(obl_dicts, tool_schemas, pack_context)
+
+    logger.info("Sending guided discovery prompt (%d obligations)", len(obligations))
+    raw_response = adapter.complete(prompt)
+    logger.info("Received guided discovery response (%d chars)", len(raw_response))
+
+    verdict_dicts = parse_guided_response(raw_response, len(obligations))
+
+    probes: list[ProbeResult] = []
+    for obl, vd in zip(obligations, verdict_dicts):
+        try:
+            verdict = ObligationVerdict(vd["verdict"].lower())
+        except ValueError:
+            verdict = ObligationVerdict.UNCERTAIN
+
+        probes.append(ProbeResult(
+            obligation=obl,
+            verdict=verdict,
+            evidence=vd.get("evidence", ""),
+            convention_value=vd.get("convention_value", ""),
+        ))
+
+    return GuidedDiscoveryResult(
+        probes=tuple(probes),
         raw_response=raw_response,
         prompt=prompt,
     )

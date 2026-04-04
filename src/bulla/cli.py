@@ -683,6 +683,7 @@ def _audit_text(
     verbose: bool = False,
     own_obligations: tuple | None = None,
     obligation_check: dict | None = None,
+    guided_repair: dict | None = None,
 ) -> str:
     ok_count = sum(1 for r in server_results if r.ok)
     fail_count = sum(1 for r in server_results if not r.ok)
@@ -772,6 +773,18 @@ def _audit_text(
                       + (f" ({unmet_dims})" if unmet_dims else ""))
         lines.append(f"    Irrelevant: {obligation_check['irrelevant']}")
 
+    if guided_repair:
+        lines.append("")
+        orig = guided_repair["original_fee"]
+        rep = guided_repair["repaired_fee"]
+        conf = guided_repair["confirmed"]
+        den = guided_repair["denied"]
+        unc = guided_repair["uncertain"]
+        lines.append(
+            f"  Guided repair: fee {orig} -> {rep} "
+            f"({conf} confirmed, {den} denied, {unc} uncertain)"
+        )
+
     lines.append("")
     return "\n".join(lines)
 
@@ -784,6 +797,7 @@ def _audit_json(
     decomposition: "FeeDecomposition | None",
     own_obligations: tuple | None = None,
     obligation_check: dict | None = None,
+    guided_repair: dict | None = None,
 ) -> str:
     from datetime import datetime, timezone as tz
 
@@ -824,6 +838,8 @@ def _audit_json(
         obj["boundary_obligations"] = [o.to_dict() for o in own_obligations]
     if obligation_check:
         obj["obligation_check"] = obligation_check
+    if guided_repair:
+        obj["guided_repair"] = guided_repair
     return json.dumps(obj, indent=2)
 
 
@@ -1079,6 +1095,82 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             }
             propagated_unmet = unmet
 
+    # --guided-discover: obligation-directed LLM repair
+    guided_repair_report: dict | None = None
+    do_guided = getattr(args, "guided_discover", False)
+    if do_guided and (own_obligations or propagated_unmet):
+        from bulla.discover.adapter import get_adapter as _get_guided_adapter
+        from bulla.discover.engine import guided_discover
+        from bulla.diagnostic import repair_composition
+
+        provider = getattr(args, "discover_provider", "auto")
+        try:
+            guided_adapter = _get_guided_adapter(provider)
+        except (ValueError, ImportError) as e:
+            print(f"Error: {e}", file=sys.stderr)
+            sys.exit(1)
+
+        target_obligations = tuple(
+            dict.fromkeys(  # deduplicate preserving order
+                [id(o) for o in (*propagated_unmet, *own_obligations)]
+            ).keys()
+        )
+        all_guided_obls: list = []
+        seen_g: set[tuple[str, str, str]] = set()
+        for obl in (*propagated_unmet, *own_obligations):
+            key = (obl.placeholder_tool, obl.dimension, obl.field)
+            if key not in seen_g:
+                seen_g.add(key)
+                all_guided_obls.append(obl)
+
+        if all_guided_obls:
+            from bulla.infer.classifier import load_pack_stack as _load_ps
+            merged_packs, _ = _load_ps(
+                extra_paths=(list(getattr(args, "packs", None) or [])
+                             + ([inherited_pack_path] if inherited_pack_path else [])
+                             + ([discovered_pack_path] if discovered_pack_path else []))
+                or None
+            )
+
+            guided_result = guided_discover(
+                tuple(all_guided_obls), all_tools, guided_adapter, merged_packs,
+            )
+
+            if guided_result.confirmed:
+                repaired_comp = repair_composition(comp, guided_result.confirmed)
+                from bulla.diagnostic import diagnose as _rediagnose
+                repaired_diag = _rediagnose(repaired_comp)
+
+                guided_repair_report = {
+                    "original_fee": diag.coherence_fee,
+                    "repaired_fee": repaired_diag.coherence_fee,
+                    "confirmed": guided_result.n_confirmed,
+                    "denied": guided_result.n_denied,
+                    "uncertain": guided_result.n_uncertain,
+                    "probes": [p.to_dict() for p in guided_result.probes],
+                }
+
+                comp = repaired_comp
+                diag = repaired_diag
+                disclosure = prescriptive_disclosure(comp, diag.coherence_fee)
+                if decomposition and len(server_names) > 1:
+                    decomposition = decompose_fee(comp, list(decomposition.partition))
+
+                own_obligations = ()
+                if decomposition and decomposition.boundary_fee > 0:
+                    own_obligations = boundary_obligations_from_decomposition(
+                        comp, list(decomposition.partition), diag,
+                    )
+            else:
+                guided_repair_report = {
+                    "original_fee": diag.coherence_fee,
+                    "repaired_fee": diag.coherence_fee,
+                    "confirmed": 0,
+                    "denied": guided_result.n_denied,
+                    "uncertain": guided_result.n_uncertain,
+                    "probes": [p.to_dict() for p in guided_result.probes],
+                }
+
     fmt = getattr(args, "format", "text")
     verbose = getattr(args, "verbose", False)
 
@@ -1096,6 +1188,7 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             audit_results, diag, disclosure, basis, decomposition,
             own_obligations=own_obligations or None,
             obligation_check=obligation_check,
+            guided_repair=guided_repair_report,
         ))
     elif fmt == "sarif":
         sarif_path = Path(str(config_path)) if config_path else Path("audit.json")
@@ -1106,6 +1199,7 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             verbose=verbose,
             own_obligations=own_obligations or None,
             obligation_check=obligation_check,
+            guided_repair=guided_repair_report,
         ))
         if discovery_n_dims > 0:
             print(f"  Discovery: {discovery_n_dims} dimension(s) added to vocabulary", file=sys.stderr)
@@ -1616,6 +1710,10 @@ def main() -> None:
         help="Save discovered micro-pack YAML to file (requires --discover)",
     )
     p_audit.add_argument(
+        "--guided-discover", action="store_true", default=False,
+        help="Run obligation-directed LLM discovery to repair blind spots",
+    )
+    p_audit.add_argument(
         "--receipt", type=Path, metavar="FILE",
         help="Write a WitnessReceipt JSON to file after auditing",
     )
@@ -1788,6 +1886,7 @@ def main() -> None:
         print("  bulla audit                    # audit all MCP servers in your config")
         print("  bulla audit --discover         # audit with LLM convention discovery")
         print("  bulla audit --discover --receipt r.json  # audit + discovery + receipt")
+        print("  bulla audit --guided-discover  # obligation-directed repair via LLM")
         print("  bulla audit --chain r.json     # inherit prior vocabulary (CI mode)")
         print("  bulla merge a.json b.json --receipt m.json  # merge receipt vocabularies (DAG)")
         print("  bulla gauge tools.json         # diagnose manifest with disclosure set")

@@ -13,6 +13,8 @@ from bulla.model import (
     Composition,
     Diagnostic,
     Edge,
+    ObligationVerdict,
+    ProbeResult,
     SemanticDimension,
     ToolSpec,
 )
@@ -464,6 +466,167 @@ def check_obligations(
             irrelevant.append(obl)
 
     return tuple(met), tuple(unmet), tuple(irrelevant)
+
+
+def repair_composition(
+    comp: Composition,
+    confirmed: tuple[ProbeResult, ...],
+) -> Composition:
+    """Produce a new Composition with confirmed fields made observable.
+
+    For each CONFIRMED probe, finds tools matching the obligation's
+    target (by server group prefix or source_edge tool name) and adds
+    the obligated field to ``observable_schema``.
+
+    Pure function: returns a new ``Composition``, does not mutate the
+    original.  Idempotent: applying the same repair twice produces the
+    same result.  Verifiable: ``diagnose(repaired).coherence_fee``
+    should be strictly less than ``diagnose(original).coherence_fee``
+    when at least one probe is confirmed (collective invariant).
+    """
+    updates: dict[str, set[str]] = {}
+    for probe in confirmed:
+        if probe.verdict != ObligationVerdict.CONFIRMED:
+            continue
+        obl = probe.obligation
+        group = obl.placeholder_tool
+
+        target_tools: list[str] = []
+        if obl.source_edge:
+            for part in obl.source_edge.replace(" -> ", "\t").split("\t"):
+                part = part.strip()
+                if part.startswith(f"{group}__") or part == group:
+                    target_tools.append(part)
+
+        if not target_tools:
+            for t in comp.tools:
+                if t.name.startswith(f"{group}__") or t.name == group:
+                    target_tools.append(t.name)
+
+        for tname in target_tools:
+            updates.setdefault(tname, set()).add(obl.field)
+
+    if not updates:
+        return comp
+
+    new_tools: list[ToolSpec] = []
+    for t in comp.tools:
+        if t.name in updates:
+            extra = updates[t.name]
+            new_obs = tuple(
+                sorted(set(t.observable_schema) | extra)
+            )
+            new_tools.append(ToolSpec(
+                name=t.name,
+                internal_state=t.internal_state,
+                observable_schema=new_obs,
+            ))
+        else:
+            new_tools.append(t)
+
+    return Composition(
+        name=comp.name,
+        tools=tuple(new_tools),
+        edges=comp.edges,
+    )
+
+
+@dataclass(frozen=True)
+class RepairResult:
+    """Result of one round of guided repair.
+
+    ``original_fee`` and ``repaired_fee`` bracket the fee change.
+    When ``confirmed_count >= 1``, the collective invariant guarantees
+    ``repaired_fee < original_fee``.  The reduction may be less than
+    ``confirmed_count`` when obligations share linear dependencies.
+    """
+
+    original_fee: int
+    repaired_fee: int
+    fee_delta: int
+    probes: tuple[ProbeResult, ...]
+    confirmed_count: int
+    repaired_comp: Composition
+    remaining_obligations: tuple[BoundaryObligation, ...]
+
+
+def repair_step(
+    comp: Composition,
+    partition: list[frozenset[str]],
+    tool_schemas: list[dict],
+    adapter: "DiscoverAdapter",
+    pack_context: dict | None = None,
+    parent_obligations: tuple[BoundaryObligation, ...] | None = None,
+) -> RepairResult:
+    """One round of diagnose -> obligations -> guided discover -> repair.
+
+    1. Diagnose ``comp`` and extract obligations from decomposition.
+    2. Merge with ``parent_obligations`` (if any).
+    3. Run ``guided_discover`` (single batched LLM call).
+    4. Apply confirmed repairs via ``repair_composition``.
+    5. Re-diagnose the repaired composition.
+
+    Sprint 26 calls this once.  Sprint 27's ``coordination_step()``
+    wraps this in a convergence loop.
+    """
+    from bulla.discover.engine import guided_discover
+
+    diag = diagnose(comp)
+    original_fee = diag.coherence_fee
+
+    own_obligations: tuple[BoundaryObligation, ...] = ()
+    decomposition = decompose_fee(comp, partition)
+    if decomposition.boundary_fee > 0:
+        own_obligations = boundary_obligations_from_decomposition(
+            comp, list(decomposition.partition), diag,
+        )
+
+    all_obligations: list[BoundaryObligation] = []
+    seen_keys: set[tuple[str, str, str]] = set()
+    for obl in (*(parent_obligations or ()), *own_obligations):
+        key = (obl.placeholder_tool, obl.dimension, obl.field)
+        if key not in seen_keys:
+            seen_keys.add(key)
+            all_obligations.append(obl)
+
+    if not all_obligations:
+        return RepairResult(
+            original_fee=original_fee,
+            repaired_fee=original_fee,
+            fee_delta=0,
+            probes=(),
+            confirmed_count=0,
+            repaired_comp=comp,
+            remaining_obligations=(),
+        )
+
+    result = guided_discover(
+        tuple(all_obligations), tool_schemas, adapter, pack_context,
+    )
+
+    confirmed = result.confirmed
+    if confirmed:
+        repaired_comp = repair_composition(comp, confirmed)
+        repaired_diag = diagnose(repaired_comp)
+        repaired_fee = repaired_diag.coherence_fee
+    else:
+        repaired_comp = comp
+        repaired_fee = original_fee
+
+    remaining = tuple(
+        p.obligation for p in result.probes
+        if p.verdict != ObligationVerdict.CONFIRMED
+    )
+
+    return RepairResult(
+        original_fee=original_fee,
+        repaired_fee=repaired_fee,
+        fee_delta=original_fee - repaired_fee,
+        probes=result.probes,
+        confirmed_count=len(confirmed),
+        repaired_comp=repaired_comp,
+        remaining_obligations=remaining,
+    )
 
 
 def satisfies_obligations(

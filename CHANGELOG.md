@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.26.0
+
+### Added
+- **Bridge-guided discovery**: `guided_discover(obligations, tool_schemas, adapter, pack_context)` probes obligations via a single batched LLM call with per-obligation verdicts (CONFIRMED / DENIED / UNCERTAIN). Uses numbered delimiters (`---BEGIN_VERDICT_N---` / `---END_VERDICT_N---`) for reliable multi-verdict parsing.
+- **`ObligationVerdict` enum**: Three-way verdict for guided discovery probes: `CONFIRMED`, `DENIED`, `UNCERTAIN`.
+- **`ProbeResult` dataclass**: Pairs a `BoundaryObligation` with its verdict, evidence string, and optional `convention_value` (populated when CONFIRMED).
+- **`GuidedDiscoveryResult`**: Container for batched probe results with `n_confirmed`, `n_denied`, `n_uncertain` summary stats and `confirmed` property for filtering.
+- **`repair_composition(comp, confirmed_probes)`**: Pure function that produces a new `Composition` with confirmed fields added to `observable_schema`. Immutable, idempotent, verifiable.
+- **`RepairResult` dataclass**: Result of one repair round: `original_fee`, `repaired_fee`, `fee_delta`, probes, `repaired_comp`, `remaining_obligations`.
+- **`repair_step(comp, partition, tool_schemas, adapter, ...)`**: Full one-round loop: diagnose -> obligations -> guided discover -> repair -> re-diagnose. Core coordination primitive for Sprint 27's `coordination_step()`.
+- **`build_guided_prompt(obligations, tool_schemas, pack_context)`**: Batched prompt template evaluating all obligations in one LLM call with numbered verdict delimiters and known_values context from the active pack.
+- **`parse_guided_response(raw, n_obligations)`**: Extracts all verdicts + evidence from a batched LLM response.
+- **CLI `--guided-discover` flag**: `bulla audit --guided-discover` runs obligation-directed LLM repair after diagnosis. Reports delta: `Guided repair: fee 3 -> 2 (1 confirmed, 1 denied, 0 uncertain)`. Works with `--chain` for chained obligation repair.
+- **Guided discovery demo** (`scripts/run_guided_discovery_demo.py`): Three-agent chain demonstrating guided repair with collective invariant assertion: fee strictly decreases after confirmed repairs. Uses `MockAdapter` for reproducibility.
+- Sprint 26 tests covering guided prompt construction/parsing, guided discovery engine, repair composition purity/idempotency, collective invariant (fee drops), repair_step integration, and demo smoke test.
+
+### Changed
+- **Collective repair invariant**: If at least one obligation is confirmed and repaired, `fee(repaired) < fee(original)`. The reduction is at least 1 but may be less than the number of confirmed probes (overlapping linear dependencies). Demo and WITNESS-CONTRACT assert this collective invariant, not per-probe.
+- `WITNESS-CONTRACT.md`: New "Bridge-Guided Discovery (v0.26.0)" section documenting guided discovery semantics, collective repair invariant, `ObligationVerdict` enum, `repair_step()` contract.
+
 ## 0.25.0
 
 ### Added

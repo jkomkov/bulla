@@ -354,6 +354,38 @@ Vocabulary merges by precedence (later receipt's definition wins on name collisi
 
 `WitnessReceipt.boundary_obligations` is an optional field (`tuple[BoundaryObligation, ...] | None`). Conditionally included in `_hash_input()` and `to_dict()` only when not None, following the established pattern for `parent_receipt_hashes` and `inline_dimensions`.
 
+## Bridge-Guided Discovery (v0.26.0)
+
+**Normative semantic:** Guided discovery is a hypothesis test on boundary obligations. For each obligation, the LLM evaluates whether the obligated field is observable in the target tool, returning a verdict: CONFIRMED, DENIED, or UNCERTAIN.
+
+### Collective Repair Invariant
+
+If at least one obligation is confirmed and repaired (field added to `observable_schema`), `fee(repaired) < fee(original)`. The reduction is at least 1 but may be less than the number of confirmed probes. This is because overlapping obligations may share an underlying linear dependency in the coboundary matrix (two blind spots on the same row). All confirmed repairs are applied together, then the composition is re-diagnosed once.
+
+**This invariant is a theorem, not an assumption.** Each confirmed repair adds a nonzero column to the observable coboundary matrix. At least one such column must be linearly independent of existing observable columns (since it was generating a blind spot). Therefore `rank_obs` increases by at least 1, and `fee = rank_full - rank_obs` decreases by at least 1.
+
+### `ObligationVerdict` Enum
+
+- **CONFIRMED**: The field IS observable in the target tool's output.
+- **DENIED**: The field is hidden, internal-only, or absent from the tool.
+- **UNCERTAIN**: The LLM cannot determine observability from the schema alone.
+
+### `ProbeResult`
+
+Pairs a `BoundaryObligation` with its `ObligationVerdict`, plus `evidence` (LLM reasoning) and `convention_value` (populated when CONFIRMED, e.g. `"zero_based"`).
+
+### `guided_discover(obligations, tool_schemas, adapter, pack_context)`
+
+Batched single-call probing: constructs one prompt with numbered verdict delimiters (`---BEGIN_VERDICT_N---` / `---END_VERDICT_N---`), sends one LLM call, parses N verdicts. Tool matching uses `placeholder_tool` as server group prefix and `source_edge` for specific tool targeting.
+
+### `repair_composition(comp, confirmed_probes)`
+
+Pure function: returns a new `Composition` with confirmed fields made observable. Immutable, idempotent. Does not mutate the original composition.
+
+### `repair_step(comp, partition, tool_schemas, adapter, ...)`
+
+One-round coordination loop: diagnose -> compute obligations -> guided discover -> repair -> re-diagnose. Returns `RepairResult` with before/after fees, all probes, and remaining obligations. Sprint 27's `coordination_step()` wraps this in a convergence loop.
+
 ## `max_unknown` Definition
 
 A convention dimension is **unknown** when it is relevant to the composition but could not be assigned a `declared` or `inferred` value under the active packs. `max_unknown` bounds the number of such dimensions a policy will tolerate before refusing.

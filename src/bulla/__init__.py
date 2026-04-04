@@ -1,6 +1,6 @@
 """bulla: Witness kernel for agent tool compositions — diagnose, attest, seal."""
 
-__version__ = "0.25.0"
+__version__ = "0.26.0"
 
 from bulla.model import (
     BlindSpot,
@@ -12,8 +12,10 @@ from bulla.model import (
     Diagnostic,
     Disposition,
     Edge,
+    ObligationVerdict,
     PackRef,
     PolicyProfile,
+    ProbeResult,
     SemanticDimension,
     ToolSpec,
     WitnessBasis,
@@ -25,6 +27,7 @@ from bulla.diagnostic import (
     ConditionalDiagnostic,
     FeeDecomposition,
     OpenPort,
+    RepairResult,
     Resolution,
     boundary_obligations_from_decomposition,
     check_obligations,
@@ -33,6 +36,8 @@ from bulla.diagnostic import (
     diagnose,
     minimum_disclosure_set,
     prescriptive_disclosure,
+    repair_composition,
+    repair_step,
     resolve_conditional,
     satisfies_obligations,
 )
@@ -71,7 +76,10 @@ __all__ = [
     "WitnessBasis",
     "WitnessError",
     "WitnessErrorCode",
+    "ObligationVerdict",
     "OpenPort",
+    "ProbeResult",
+    "RepairResult",
     "Resolution",
     "WitnessReceipt",
     "boundary_obligations_from_decomposition",
@@ -81,6 +89,8 @@ __all__ = [
     "diagnose",
     "minimum_disclosure_set",
     "prescriptive_disclosure",
+    "repair_composition",
+    "repair_step",
     "resolve_conditional",
     "satisfies_obligations",
     "load_composition",

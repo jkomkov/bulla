@@ -2,10 +2,15 @@
 
 Builds a prompt from tool schemas + existing pack dimensions, using rigid
 delimiters (---BEGIN_PACK--- / ---END_PACK---) for reliable parsing.
+
+Guided discovery (v0.26.0) adds batched obligation probing:
+``build_guided_prompt`` / ``parse_guided_response`` evaluate multiple
+obligations in a single LLM call using numbered verdict delimiters.
 """
 
 from __future__ import annotations
 
+import re
 import uuid
 from typing import Any
 
@@ -153,3 +158,192 @@ def parse_response(raw: str) -> str | None:
                 return rest[:end_idx].strip()
 
     return None
+
+
+# ── Guided discovery (v0.26.0) ──────────────────────────────────────
+
+
+_GUIDED_PREAMBLE = """\
+You are evaluating whether specific fields are observable in MCP tool \
+schemas. For each obligation below, determine whether the named field \
+is present and meaningful in the tool's output/behavior (CONFIRMED), \
+exists internally but is not exposed to callers (DENIED), or is not \
+relevant to this tool at all (DENIED).
+
+Reason from field names, types, descriptions, and the tool's purpose."""
+
+
+_GUIDED_VERDICT_FORMAT = """\
+For each obligation, respond inside numbered delimiters:
+---BEGIN_VERDICT_{n}---
+verdict: CONFIRMED or DENIED or UNCERTAIN
+evidence: one-sentence explanation
+convention_value: the value this tool uses (only if CONFIRMED, else empty)
+---END_VERDICT_{n}---"""
+
+
+def _format_obligation_block(
+    idx: int,
+    obligation_dict: dict[str, str],
+    tool_schema: dict[str, Any] | None,
+    known_values: list[str] | None,
+) -> str:
+    """Format one obligation + its target tool schema for the batched prompt."""
+    lines = [f"OBLIGATION {idx}:"]
+    lines.append(f"  Server group: {obligation_dict['placeholder_tool']}")
+    lines.append(f"  Dimension: {obligation_dict['dimension']}")
+    lines.append(f"  Field: {obligation_dict['field']}")
+    if obligation_dict.get("source_edge"):
+        lines.append(f"  Source edge: {obligation_dict['source_edge']}")
+    if known_values:
+        lines.append(f"  Known convention values: {known_values}")
+
+    if tool_schema:
+        name = tool_schema.get("name", "unknown")
+        desc = tool_schema.get("description", "")
+        lines.append(f"  Target tool: {name}")
+        if desc:
+            lines.append(f"    Description: {desc}")
+        props = tool_schema.get("inputSchema", {}).get("properties", {})
+        if props:
+            lines.append("    Fields:")
+            for fname, fdef in sorted(props.items()):
+                ftype = fdef.get("type", "any")
+                fdesc = fdef.get("description", "")
+                if fdesc:
+                    lines.append(f"      {fname} ({ftype}): {fdesc}")
+                else:
+                    lines.append(f"      {fname} ({ftype})")
+    else:
+        lines.append("  Target tool: (schema not available)")
+
+    return "\n".join(lines)
+
+
+def build_guided_prompt(
+    obligations: list[dict[str, str]],
+    tool_schemas: list[dict[str, Any]],
+    pack_context: dict[str, Any] | None = None,
+) -> str:
+    """Build a batched guided discovery prompt for multiple obligations.
+
+    Each obligation is evaluated against its target tool in a single
+    LLM call.  The prompt uses numbered verdict delimiters for reliable
+    multi-verdict parsing.
+
+    Args:
+        obligations: List of obligation dicts (placeholder_tool, dimension,
+            field, source_edge).
+        tool_schemas: All available MCP tool dicts for tool matching.
+        pack_context: Merged pack dict for known_values lookup.
+    """
+    tool_by_name: dict[str, dict[str, Any]] = {
+        t.get("name", ""): t for t in tool_schemas
+    }
+    dims = (pack_context or {}).get("dimensions", {})
+
+    blocks: list[str] = []
+    for idx, obl in enumerate(obligations, 1):
+        group = obl["placeholder_tool"]
+        dim_name = obl["dimension"]
+
+        known_values = None
+        if dim_name in dims:
+            known_values = dims[dim_name].get("known_values")
+
+        target_tool = _match_tool_for_obligation(obl, tool_by_name)
+        blocks.append(_format_obligation_block(idx, obl, target_tool, known_values))
+
+    n_obls = len(obligations)
+    verdict_instructions = "\n".join(
+        _GUIDED_VERDICT_FORMAT.replace("{n}", str(i))
+        for i in range(1, n_obls + 1)
+    )
+
+    sections = [
+        _GUIDED_PREAMBLE,
+        "",
+        "\n\n".join(blocks),
+        "",
+        verdict_instructions,
+        "",
+        "RULES:",
+        "- CONFIRMED means the field is present and meaningful in the tool's "
+        "observable output or API surface",
+        "- DENIED means the field is absent, internal-only, or not relevant",
+        "- UNCERTAIN means you cannot determine from the schema alone",
+        "- convention_value should be a short string like 'zero_based', "
+        "'one_based', 'absolute', 'relative', etc.",
+        "- Do NOT output any text outside the verdict delimiters",
+    ]
+    return "\n".join(sections)
+
+
+def _match_tool_for_obligation(
+    obligation: dict[str, str],
+    tool_by_name: dict[str, dict[str, Any]],
+) -> dict[str, Any] | None:
+    """Find the best tool schema matching an obligation's target.
+
+    Prefers exact tool name from source_edge, falls back to prefix
+    match on placeholder_tool (server group name).
+    """
+    source_edge = obligation.get("source_edge", "")
+    if source_edge:
+        for part in source_edge.replace(" -> ", "\t").split("\t"):
+            part = part.strip()
+            if part in tool_by_name:
+                group = obligation["placeholder_tool"]
+                if part.startswith(f"{group}__") or part == group:
+                    return tool_by_name[part]
+
+    group = obligation["placeholder_tool"]
+    for name, schema in tool_by_name.items():
+        if name.startswith(f"{group}__"):
+            return schema
+
+    return None
+
+
+def parse_guided_response(
+    raw: str,
+    n_obligations: int,
+) -> list[dict[str, str]]:
+    """Extract verdict blocks from a guided discovery LLM response.
+
+    Returns a list of dicts with keys: verdict, evidence, convention_value.
+    Length always equals ``n_obligations``; missing verdicts get UNCERTAIN.
+    """
+    results: list[dict[str, str]] = []
+    for idx in range(1, n_obligations + 1):
+        begin = f"---BEGIN_VERDICT_{idx}---"
+        end = f"---END_VERDICT_{idx}---"
+
+        verdict = "UNCERTAIN"
+        evidence = ""
+        convention_value = ""
+
+        if begin in raw and end in raw:
+            start = raw.index(begin) + len(begin)
+            stop = raw.index(end)
+            block = raw[start:stop].strip()
+            for line in block.splitlines():
+                line = line.strip()
+                if line.lower().startswith("verdict:"):
+                    v = line.split(":", 1)[1].strip().upper()
+                    if v in ("CONFIRMED", "DENIED", "UNCERTAIN"):
+                        verdict = v
+                elif line.lower().startswith("evidence:"):
+                    evidence = line.split(":", 1)[1].strip()
+                elif line.lower().startswith("convention_value:"):
+                    cv = line.split(":", 1)[1].strip()
+                    if cv and cv.lower() not in ("empty", "none", "n/a", ""):
+                        convention_value = cv
+
+        results.append({
+            "verdict": verdict,
+            "evidence": evidence,
+            "convention_value": convention_value,
+        })
+
+    return results

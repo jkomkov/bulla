@@ -275,6 +275,46 @@ class BoundaryObligation:
         return d
 
 
+class ObligationVerdict(Enum):
+    """Verdict from guided discovery probing a single obligation.
+
+    CONFIRMED: the field IS observable in the target tool's output.
+    DENIED:    the field is hidden or absent from the tool.
+    UNCERTAIN: the LLM cannot determine observability.
+    """
+
+    CONFIRMED = "confirmed"
+    DENIED = "denied"
+    UNCERTAIN = "uncertain"
+
+
+@dataclass(frozen=True)
+class ProbeResult:
+    """Result of probing one obligation via guided discovery.
+
+    Pairs a ``BoundaryObligation`` with the LLM's verdict on whether
+    the obligated field is observable in the target tool.  When the
+    verdict is CONFIRMED, ``convention_value`` may carry the discovered
+    convention value (e.g. ``"zero_based"``).
+    """
+
+    obligation: BoundaryObligation
+    verdict: ObligationVerdict
+    evidence: str = ""
+    convention_value: str = ""
+
+    def to_dict(self) -> dict:
+        d: dict = {
+            "obligation": self.obligation.to_dict(),
+            "verdict": self.verdict.value,
+        }
+        if self.evidence:
+            d["evidence"] = self.evidence
+        if self.convention_value:
+            d["convention_value"] = self.convention_value
+        return d
+
+
 @dataclass(frozen=True)
 class PolicyProfile:
     """Named, versioned policy that maps measurement to disposition.
