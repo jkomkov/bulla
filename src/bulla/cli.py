@@ -1221,8 +1221,8 @@ def _cmd_merge(args: argparse.Namespace) -> None:
         merge_receipt = WitnessReceipt(
             receipt_version="0.1.0",
             kernel_version=kver,
-            composition_hash="merge",
-            diagnostic_hash="merge",
+            composition_hash="no_composition",
+            diagnostic_hash="no_diagnostic",
             policy_profile=DEFAULT_POLICY_PROFILE,
             fee=0,
             blind_spots_count=0,
@@ -1237,8 +1237,6 @@ def _cmd_merge(args: argparse.Namespace) -> None:
         receipt_path.write_text(
             json.dumps(receipt_dict, indent=2), encoding="utf-8"
         )
-        if fmt != "json":
-            print(f"  Receipt written to {receipt_path}")
         print(f"  Receipt written to {receipt_path}", file=sys.stderr)
 
 

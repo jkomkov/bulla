@@ -118,12 +118,16 @@ TOOLS_PUPPETEER = [
 
 
 def _prefix_tools(tools: list[dict], server_name: str) -> list[dict]:
+    out = []
     for t in tools:
-        t["name"] = f"{server_name}__{t['name']}"
-    return tools
+        t2 = dict(t)
+        t2["name"] = f"{server_name}__{t2['name']}"
+        out.append(t2)
+    return out
 
 
 def run_demo(live: bool = False) -> None:
+    from bulla import __version__
     from bulla.discover.adapter import MockAdapter, get_adapter
     from bulla.discover.engine import discover_dimensions
     from bulla.diagnostic import decompose_fee, diagnose, prescriptive_disclosure
@@ -134,7 +138,7 @@ def run_demo(live: bool = False) -> None:
     _reset_taxonomy_cache()
 
     print("=" * 70)
-    print("  Bulla v0.23.0 — Two-Agent Chain Demo")
+    print(f"  Bulla v{__version__} — Two-Agent Chain Demo")
     print("=" * 70)
     print()
 

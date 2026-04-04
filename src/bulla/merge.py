@@ -6,7 +6,9 @@ override earlier ones).
 
 Overlap detection is purely informational -- it does not affect the
 merge result. Overlap = non-empty intersection of ``field_patterns``
-glob sets between dimensions from different source receipts.
+glob sets between dimensions from different source receipts. Detection
+is conservative (may undercount): it catches exact matches and
+superset/subset patterns but not all overlapping field sets.
 """
 
 from __future__ import annotations
@@ -101,8 +103,14 @@ def _detect_overlaps(
 def _intersect_glob_patterns(
     pats_a: list[str], pats_b: list[str],
 ) -> list[str]:
-    """Return patterns from A that also appear in B (exact match)
-    or that would match the same field names (cross-match)."""
+    """Return patterns that overlap between A and B.
+
+    Checks exact match (``*_page == *_page``) and superset/subset
+    (``fnmatch(pa, pb)`` tests whether one pattern matches the other
+    as a string). This is conservative: two patterns like ``*_page``
+    and ``page_*`` that match overlapping field sets won't be detected.
+    False negatives are acceptable for informational overlap reporting.
+    """
     shared: list[str] = []
     for pa in pats_a:
         for pb in pats_b:

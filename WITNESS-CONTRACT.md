@@ -299,6 +299,10 @@ Core function in `bulla.merge`. Accepts a list of receipt dicts, returns `(merge
 
 Overlap = non-empty intersection of `field_patterns` glob sets between dimensions from different source receipts. Same-name dimensions from different receipts are trivially overlapping. Overlap is purely informational -- it does not affect the merge (which is union with precedence). The alternative ("do they match the same actual fields on a tool set?") requires tool schemas and belongs in `bulla audit`.
 
+### Merge Receipts
+
+A merge receipt is a vocabulary-only DAG node with no composition or diagnostic backing. Its `composition_hash` is the sentinel string `"no_composition"` and its `diagnostic_hash` is `"no_diagnostic"`. These cannot be confused with real SHA-256 hashes. A merge receipt carries `inline_dimensions` (the merged vocabulary) and `parent_receipt_hashes` (the source receipts), but its `fee`, `blind_spots_count`, and `bridges_required` are all zero. To obtain a diagnostic receipt with the merged vocabulary, chain a `bulla audit --chain merged.json` after the merge.
+
 ### No Convergence Fee
 
 The coherence fee is the universal measure. Vocabulary convergence is measured by comparing coherence fees under different pack configurations: `fee(merged) vs fee(A_alone) vs fee(B_alone)`. This is a delta of the existing fee, not a new concept.
