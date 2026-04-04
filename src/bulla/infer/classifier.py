@@ -181,11 +181,13 @@ def _reset_taxonomy_cache() -> None:
     """Reset all caches (for testing with custom taxonomies)."""
     global _taxonomy_cache, _compiled_patterns, _ENUM_KNOWN_VALUES, _DOMAIN_MAP
     global _active_pack_refs, _extra_pack_paths, _DESCRIPTION_KEYWORDS_CACHE
+    global _refines_map
     _taxonomy_cache = None
     _compiled_patterns = None
     _ENUM_KNOWN_VALUES = None
     _DOMAIN_MAP = None
     _DESCRIPTION_KEYWORDS_CACHE = None
+    _refines_map = None
     _active_pack_refs = ()
     _extra_pack_paths = ()
 
@@ -300,6 +302,7 @@ def _compile_taxonomy_patterns() -> list[tuple[str, re.Pattern[str]]]:
 
 
 _compiled_patterns: list[tuple[str, re.Pattern[str]]] | None = None
+_refines_map: dict[str, str] | None = None
 
 
 def _get_name_patterns() -> list[tuple[str, re.Pattern[str]]]:
@@ -309,6 +312,38 @@ def _get_name_patterns() -> list[tuple[str, re.Pattern[str]]]:
     return _compiled_patterns
 
 
+def _get_refines_map() -> dict[str, str]:
+    """Build child -> parent mapping from ``refines`` fields in taxonomy."""
+    global _refines_map
+    if _refines_map is not None:
+        return _refines_map
+    taxonomy = _load_taxonomy()
+    _refines_map = {}
+    for dim_name, dim_def in taxonomy.get("dimensions", {}).items():
+        parent = dim_def.get("refines")
+        if parent and isinstance(parent, str):
+            _refines_map[dim_name] = parent
+    return _refines_map
+
+
+def _deduplicate_by_specificity(
+    matches: list[InferredDimension],
+) -> list[InferredDimension]:
+    """When a field matches both a child and its refines parent, keep only the child."""
+    if len(matches) <= 1:
+        return matches
+    refines = _get_refines_map()
+    matched_dims = {m.dimension for m in matches}
+    to_remove: set[str] = set()
+    for m in matches:
+        parent = refines.get(m.dimension)
+        if parent and parent in matched_dims:
+            to_remove.add(parent)
+    if not to_remove:
+        return matches
+    return [m for m in matches if m.dimension not in to_remove]
+
+
 def classify_field_by_name(
     name: str,
     *,
@@ -316,11 +351,16 @@ def classify_field_by_name(
 ) -> InferredDimension | None:
     """Classify a field by its name against dimension patterns.
 
+    Collects all matching dimensions, then applies most-specific-wins
+    deduplication via the ``refines`` hierarchy: if a child dimension
+    and its parent both match, only the child is returned.
+
     Args:
         schema_type: When provided, enables type-aware exclusions (e.g.
             string-typed ``*_id`` fields are excluded from ``id_offset``).
     """
     leaf = name.rsplit(".", 1)[-1] if "." in name else name
+    all_matches: list[InferredDimension] = []
     for dim_name, pattern in _get_name_patterns():
         if pattern.search(leaf):
             neg = _NEGATIVE_PATTERNS.get(dim_name)
@@ -332,13 +372,16 @@ def classify_field_by_name(
                 and re.search(r"(^|_)id($|_)", leaf, re.IGNORECASE)
             ):
                 continue
-            return InferredDimension(
+            all_matches.append(InferredDimension(
                 field_name=name,
                 dimension=dim_name,
                 confidence="inferred",
                 sources=("name",),
-            )
-    return None
+            ))
+    if not all_matches:
+        return None
+    deduped = _deduplicate_by_specificity(all_matches)
+    return deduped[0]
 
 
 # ── Signal 2: Description keyword matching ─────────────────────────────
@@ -684,11 +727,12 @@ def classify_field(name: str) -> InferredDimension | None:
 def classify_fields(fields: list[str]) -> list[InferredDimension]:
     """Classify a list of field names, returning only those that match.
 
-    Backward-compatible: name-only classification.
+    Backward-compatible: name-only classification. Applies
+    most-specific-wins deduplication across all results.
     """
     results = []
     for f in fields:
         inferred = classify_field_by_name(f)
         if inferred is not None:
             results.append(inferred)
-    return results
+    return _deduplicate_by_specificity(results)

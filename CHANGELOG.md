@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.23.0
+
+### Added
+- **`bulla audit --discover`**: Single-command coordination loop. Runs LLM convention discovery and audits with the enriched vocabulary in one step. Composable with `--receipt` and `--chain` flags. Additional flags: `--discover-provider` (openai, anthropic, openrouter, auto), `--output-discovered FILE`.
+- **`bulla audit --receipt FILE`**: Produces a `WitnessReceipt` JSON after auditing, threading `witness_basis`, `active_packs`, and `inline_dimensions`.
+- **`bulla audit --chain RECEIPT.json`**: Loads a prior receipt's embedded vocabulary and chains the new receipt to it via `parent_receipt_hash`. Enables deterministic CI: team lead runs `--discover` once, CI pipeline uses `--chain receipt.json` with no LLM call, no API key, no cost.
+- **`WitnessReceipt.inline_dimensions`**: Optional field embedding discovered pack content directly in the receipt. Agents receiving a chained receipt can reconstruct the vocabulary without the original YAML file. Conditionally included in `_hash_input()` and `to_dict()` only when not None, preserving backward compatibility with pre-v0.23.0 receipts.
+- **`WitnessBasis.discovered`**: New count distinguishing LLM-discovered dimensions from base-pack inferred dimensions. Defaults to 0 for backward compatibility. Included in `to_dict()` only when non-zero.
+- **Most-specific-dimension-wins deduplication**: When a field matches both a child dimension (from a micro-pack) and its `refines` parent (from the base pack), the classifier returns only the child. Unrelated dimensions matching the same field are both preserved.
+- **Two-agent chain demo** (`scripts/run_chain_demo.py`): Demonstrates vocabulary growth across two agents with overlapping server sets. Agent A discovers 4 dimensions, Agent B inherits them and discovers 2 more, producing chained receipts with tamper-evident hashes. Both mock and live LLM modes.
+- 14 new tests covering inline_dimensions backward compatibility, refines specificity deduplication, WitnessBasis.discovered, end-to-end chain loop, and chain demo smoke test.
+
+### Changed
+- `classify_field_by_name()` now collects all matching dimensions before returning, enabling specificity deduplication via the `refines` hierarchy.
+- `_audit_text()` and `_gauge_text()` now display the `discovered` count in the witness basis line when non-zero.
+- `witness()` accepts optional `inline_dimensions` parameter (default None) passed through to `WitnessReceipt`.
+
+### Fixed
+- Shallow copy mutation bug in vocabulary merging during receipt chaining (deep copy required for nested dimension dicts).
+
 ## 0.22.0
 
 ### Added

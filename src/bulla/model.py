@@ -221,18 +221,25 @@ class WitnessBasis:
     Counts how many convention dimensions were established by each
     epistemic act. The kernel does not compute this — the caller
     attests it, and the receipt records it.
+
+    ``discovered`` counts dimensions from LLM-discovered micro-packs
+    (a subset of inferred). Defaults to 0 for backward compatibility.
     """
 
     declared: int
     inferred: int
     unknown: int
+    discovered: int = 0
 
     def to_dict(self) -> dict:
-        return {
+        d: dict = {
             "declared": self.declared,
             "inferred": self.inferred,
             "unknown": self.unknown,
         }
+        if self.discovered > 0:
+            d["discovered"] = self.discovered
+        return d
 
 
 # ── Policy ───────────────────────────────────────────────────────────
@@ -360,6 +367,7 @@ class WitnessReceipt:
     parent_receipt_hash: str | None = None
     active_packs: tuple[PackRef, ...] = ()
     witness_basis: WitnessBasis | None = None
+    inline_dimensions: dict | None = None
 
     def _hash_input(self) -> dict:
         """Single source of truth for the receipt's hashable content.
@@ -369,8 +377,12 @@ class WitnessReceipt:
         ``receipt_hash`` and ``anchor_ref``; ``verify_receipt_integrity``
         reconstructs this from a serialized dict by excluding those
         same two keys.
+
+        ``inline_dimensions`` is included ONLY when not None to preserve
+        backward compatibility: pre-v0.23.0 receipts (which lack this
+        field) must produce the same hash when verified by new code.
         """
-        return {
+        d: dict = {
             "receipt_version": self.receipt_version,
             "kernel_version": self.kernel_version,
             "composition_hash": self.composition_hash,
@@ -391,6 +403,9 @@ class WitnessReceipt:
                 else None
             ),
         }
+        if self.inline_dimensions is not None:
+            d["inline_dimensions"] = self.inline_dimensions
+        return d
 
     @property
     def receipt_hash(self) -> str:

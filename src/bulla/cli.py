@@ -565,9 +565,10 @@ def _gauge_text(
 
     if basis is not None:
         lines.append("")
+        disc_str = f", {basis.discovered} discovered" if basis.discovered > 0 else ""
         lines.append(
             f"  Witness basis: {basis.declared} declared, "
-            f"{basis.inferred} inferred, {basis.unknown} unknown"
+            f"{basis.inferred} inferred, {basis.unknown} unknown{disc_str}"
         )
 
     lines.append("")
@@ -739,9 +740,10 @@ def _audit_text(
 
     if basis is not None:
         lines.append("")
+        disc_str = f", {basis.discovered} discovered" if basis.discovered > 0 else ""
         lines.append(
             f"  Witness basis: {basis.declared} declared, "
-            f"{basis.inferred} inferred, {basis.unknown} unknown"
+            f"{basis.inferred} inferred, {basis.unknown} unknown{disc_str}"
         )
 
     lines.append("")
@@ -819,9 +821,13 @@ def _cmd_audit(args: argparse.Namespace) -> None:
     from bulla.diagnostic import decompose_fee, prescriptive_disclosure
     from bulla.formatters import format_sarif
     from bulla.guard import BullaGuard
+    from bulla.infer.classifier import configure_packs, get_active_pack_refs
 
     manifests_dir: Path | None = getattr(args, "manifests", None)
     config_path = getattr(args, "config", None)
+    do_discover = getattr(args, "discover", False)
+    chain_path: Path | None = getattr(args, "chain", None)
+    receipt_path: Path | None = getattr(args, "receipt", None)
 
     if manifests_dir and config_path:
         print(
@@ -890,6 +896,86 @@ def _cmd_audit(args: argparse.Namespace) -> None:
                 tool["name"] = f"{r.name}__{tool.get('name', 'unknown')}"
             all_tools.extend(r.tools)
 
+    # --chain: load prior receipt vocabulary before discovery/audit
+    import tempfile
+    chain_receipt_data: dict | None = None
+    inherited_pack_path: Path | None = None
+    if chain_path:
+        if not chain_path.exists():
+            print(f"Error: receipt not found: {chain_path}", file=sys.stderr)
+            sys.exit(1)
+        chain_receipt_data = json.loads(chain_path.read_text(encoding="utf-8"))
+        inherited_dims = chain_receipt_data.get("inline_dimensions")
+        if inherited_dims and isinstance(inherited_dims, dict):
+            tmp = tempfile.NamedTemporaryFile(
+                suffix=".yaml", mode="w", delete=False, prefix="bulla_chain_"
+            )
+            yaml.dump(inherited_dims, tmp, default_flow_style=False, sort_keys=False)
+            tmp.close()
+            inherited_pack_path = Path(tmp.name)
+
+    # --discover: run LLM convention discovery
+    discovered_pack_path: Path | None = None
+    discovered_pack_data: dict | None = None
+    discovery_n_dims = 0
+    if do_discover:
+        from bulla.discover.adapter import get_adapter
+        from bulla.discover.engine import discover_dimensions
+
+        provider = getattr(args, "discover_provider", "auto")
+        try:
+            adapter = get_adapter(provider)
+        except (ValueError, ImportError) as e:
+            print(f"Error: {e}", file=sys.stderr)
+            sys.exit(1)
+
+        existing_extra = list(getattr(args, "packs", None) or [])
+        if inherited_pack_path:
+            existing_extra.append(inherited_pack_path)
+
+        try:
+            disc_result = discover_dimensions(
+                all_tools, adapter=adapter,
+                existing_packs=existing_extra or None,
+            )
+        except (ValueError, ImportError) as e:
+            print(f"Error during discovery: {e}", file=sys.stderr)
+            sys.exit(1)
+
+        if disc_result.valid and disc_result.n_dimensions > 0:
+            discovered_pack_data = disc_result.pack
+            discovery_n_dims = disc_result.n_dimensions
+
+            output_disc = getattr(args, "output_discovered", None)
+            if output_disc:
+                output_disc.write_text(
+                    yaml.dump(disc_result.pack, default_flow_style=False, sort_keys=False),
+                    encoding="utf-8",
+                )
+                print(f"  Discovered pack saved to {output_disc}", file=sys.stderr)
+
+            tmp = tempfile.NamedTemporaryFile(
+                suffix=".yaml", mode="w", delete=False, prefix="bulla_disc_"
+            )
+            yaml.dump(disc_result.pack, tmp, default_flow_style=False, sort_keys=False)
+            tmp.close()
+            discovered_pack_path = Path(tmp.name)
+        elif disc_result.valid and disc_result.n_dimensions == 0:
+            print("  Discovery: no new dimensions found.", file=sys.stderr)
+        else:
+            print("  Discovery produced invalid output:", file=sys.stderr)
+            for err in disc_result.errors:
+                print(f"    [error] {err}", file=sys.stderr)
+
+    # Reconfigure packs if discovery or chain added new packs
+    extra_packs = list(getattr(args, "packs", None) or [])
+    if inherited_pack_path:
+        extra_packs.append(inherited_pack_path)
+    if discovered_pack_path:
+        extra_packs.append(discovered_pack_path)
+    if extra_packs:
+        configure_packs(extra_paths=extra_packs)
+
     guard = BullaGuard.from_tools_list(all_tools, name="audit")
     comp = guard.composition
     basis = guard.witness_basis
@@ -939,11 +1025,46 @@ def _cmd_audit(args: argparse.Namespace) -> None:
         print(format_sarif([(diag, sarif_path)]))
     else:
         print(_audit_text(audit_results, diag, disclosure, basis, decomposition, verbose=verbose))
+        if discovery_n_dims > 0:
+            print(f"  Discovery: {discovery_n_dims} dimension(s) added to vocabulary", file=sys.stderr)
 
     output_comp = getattr(args, "output_composition", None)
     if output_comp:
         guard.to_yaml(output_comp)
         print(f"Wrote composition to {output_comp}", file=sys.stderr)
+
+    # --receipt: produce WitnessReceipt
+    if receipt_path:
+        from bulla.witness import witness
+
+        parent_hash = None
+        if chain_receipt_data:
+            parent_hash = chain_receipt_data.get("receipt_hash")
+
+        inline_dims = None
+        if discovered_pack_data:
+            inline_dims = discovered_pack_data
+        elif chain_receipt_data and chain_receipt_data.get("inline_dimensions"):
+            inline_dims = chain_receipt_data["inline_dimensions"]
+
+        receipt = witness(
+            diag, comp,
+            witness_basis=basis,
+            active_packs=get_active_pack_refs(),
+            parent_receipt_hash=parent_hash,
+            inline_dimensions=inline_dims,
+        )
+        receipt_dict = receipt.to_dict()
+        receipt_path.write_text(
+            json.dumps(receipt_dict, indent=2), encoding="utf-8"
+        )
+        print(f"  Receipt written to {receipt_path}", file=sys.stderr)
+
+    # Cleanup temp files
+    if inherited_pack_path:
+        inherited_pack_path.unlink(missing_ok=True)
+    if discovered_pack_path:
+        discovered_pack_path.unlink(missing_ok=True)
 
     _gauge_threshold_check(diag, args)
 
@@ -1266,6 +1387,29 @@ def main() -> None:
         "--no-skip-failed", action="store_false", dest="skip_failed",
         help="Fail if any server cannot be scanned",
     )
+    p_audit.add_argument(
+        "--discover", action="store_true", default=False,
+        help="Run LLM-powered convention discovery before auditing",
+    )
+    p_audit.add_argument(
+        "--discover-provider",
+        choices=["openai", "anthropic", "openrouter", "auto"],
+        default="auto",
+        metavar="PROVIDER",
+        help="LLM provider for --discover (default: auto-detect from env)",
+    )
+    p_audit.add_argument(
+        "--output-discovered", type=Path, metavar="FILE",
+        help="Save discovered micro-pack YAML to file (requires --discover)",
+    )
+    p_audit.add_argument(
+        "--receipt", type=Path, metavar="FILE",
+        help="Write a WitnessReceipt JSON to file after auditing",
+    )
+    p_audit.add_argument(
+        "--chain", type=Path, metavar="RECEIPT.json",
+        help="Load a prior receipt's vocabulary and chain the new receipt",
+    )
     _add_pack_args(p_audit)
     p_audit.set_defaults(func=_cmd_audit)
 
@@ -1408,6 +1552,9 @@ def main() -> None:
         print(f"bulla {__version__} — witness kernel for agent tool compositions\n")
         print("Quick start:")
         print("  bulla audit                    # audit all MCP servers in your config")
+        print("  bulla audit --discover         # audit with LLM convention discovery")
+        print("  bulla audit --discover --receipt r.json  # audit + discovery + receipt")
+        print("  bulla audit --chain r.json     # inherit prior vocabulary (CI mode)")
         print("  bulla gauge tools.json         # diagnose manifest with disclosure set")
         print("  bulla gauge --mcp-server 'python -m my_server'  # diagnose live server")
         print("  bulla discover --manifests DIR -o found.yaml  # LLM dimension discovery")

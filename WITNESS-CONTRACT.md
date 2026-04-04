@@ -14,11 +14,11 @@ Three hashes, three concerns: what was proposed, what was measured, what was wit
 
 ## Hash Coverage
 
-`receipt_hash` includes: `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `parent_receipt_hash`, `active_packs`, `witness_basis`.
+`receipt_hash` includes: `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `parent_receipt_hash`, `active_packs`, `witness_basis`, and conditionally `inline_dimensions` (only when not None).
 
 `receipt_hash` excludes: `anchor_ref` (external publication proof, added after witness event).
 
-Rationale: the hash must be computable at witness time. Anchor ref arrives later.
+Rationale: the hash must be computable at witness time. Anchor ref arrives later. `inline_dimensions` is conditionally included to preserve backward compatibility: pre-v0.23.0 receipts (which lack this field) produce the same hash when verified by v0.23.0 code.
 
 ## Policy Semantics
 
@@ -242,6 +242,35 @@ When signal source #2 (tool-level description keywords) matches but no real sche
 11 dimensions: `date_format`, `rate_scale`, `amount_unit`, `score_range`, `id_offset`, `precision`, `encoding`, `timezone`, `null_handling`, `line_ending`, `path_convention`.
 
 `path_convention` (added v0.20.0) detects path reference space mismatches (absolute local vs. repository-relative vs. URI). This dimension creates cross-server edges between filesystem and code hosting tools, producing nonzero boundary fees.
+
+## Coordination Loop (v0.23.0)
+
+### `bulla audit --discover --receipt --chain`
+
+The coordination loop collapses discovery, auditing, and receipt chaining into composable CLI flags:
+
+| Flags | Behavior |
+|---|---|
+| (neither) | Standard audit, no discovery, no chaining |
+| `--discover` only | Scan + discover + audit with enriched vocabulary. No receipt unless `--receipt` also given |
+| `--chain prior.json` only | Load prior receipt's vocabulary, audit with inherited dimensions. No LLM call, no cost |
+| `--discover --chain prior.json` | Full loop: inherit prior vocabulary + discover new + audit + chain receipt |
+
+The `--chain` without `--discover` case is the CI adoption pattern: a team lead runs `--discover` once, produces a receipt, and the CI pipeline uses `--chain receipt.json` on every PR. Deterministic, no API key needed.
+
+### `WitnessReceipt.inline_dimensions`
+
+Optional field (v0.23.0). When not None, embeds the discovered pack content directly in the receipt. Agents receiving a chained receipt can reconstruct the vocabulary without the original YAML file.
+
+**Backward compatibility**: `inline_dimensions` is included in `_hash_input()` and `to_dict()` **only when not None**. Pre-v0.23.0 receipts (which lack this field) produce identical hashes when verified by v0.23.0 code. This is enforced by test.
+
+### `WitnessBasis.discovered`
+
+Integer count (v0.23.0, default 0). Distinguishes dimensions from LLM-discovered micro-packs vs base-pack inferred dimensions. A dimension is counted as `discovered` when it belongs to a pack other than the base pack. Included in `to_dict()` only when non-zero for backward compatibility.
+
+### Most-Specific-Dimension-Wins (v0.23.0)
+
+When a field matches both a child dimension (from a micro-pack, via `refines`) and its parent dimension (from the base pack), the classifier returns only the child. `classify_field_by_name()` collects all pattern matches, then applies specificity deduplication via a cached `_refines_map` (child -> parent). The common case (single match) has zero overhead.
 
 ## `max_unknown` Definition
 

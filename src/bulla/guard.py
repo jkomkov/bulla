@@ -295,6 +295,13 @@ def _infer_edges(tools: list[ToolSpec]) -> list[Edge]:
     return edges
 
 
+def _get_base_pack_dimensions() -> set[str]:
+    """Return the set of dimension names from the base pack only."""
+    from bulla.infer.classifier import _load_base_pack
+    base_parsed, _ = _load_base_pack()
+    return set(base_parsed.get("dimensions", {}).keys())
+
+
 def _composition_from_mcp_tools(
     tools_list: list[dict[str, Any]],
     *,
@@ -336,19 +343,25 @@ def _composition_from_mcp_tools(
         )
         edges.append(Edge(e["from"], e["to"], dims))
 
+    base_dims = _get_base_pack_dimensions()
     n_declared = 0
     n_inferred = 0
     n_unknown = 0
+    n_discovered = 0
     for dims_list in tools_dims.values():
         for dim in dims_list:
             if dim.confidence == "declared":
                 n_declared += 1
             elif dim.confidence == "inferred":
-                n_inferred += 1
+                if dim.dimension not in base_dims:
+                    n_discovered += 1
+                else:
+                    n_inferred += 1
             else:
                 n_unknown += 1
 
     basis = WitnessBasis(
-        declared=n_declared, inferred=n_inferred, unknown=n_unknown
+        declared=n_declared, inferred=n_inferred, unknown=n_unknown,
+        discovered=n_discovered,
     )
     return Composition(name=name, tools=tuple(tool_specs), edges=tuple(edges)), basis

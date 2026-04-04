@@ -89,6 +89,7 @@ def witness(
     parent_receipt_hash: str | None = None,
     active_packs: tuple[PackRef, ...] = (),
     witness_basis: WitnessBasis | None = None,
+    inline_dimensions: dict | None = None,
 ) -> WitnessReceipt:
     """Produce a WitnessReceipt from a Diagnostic and Composition.
 
@@ -118,6 +119,10 @@ def witness(
     overrides the ``unknown_dimensions`` parameter to ensure
     consistency — the receipt cannot record a basis that disagrees
     with the unknown count used for policy judgment.
+
+    ``inline_dimensions`` embeds discovered pack content directly in
+    the receipt. When None, the field is omitted from the receipt hash
+    for backward compatibility with pre-v0.23.0 receipts.
     """
     effective_unknown = (
         witness_basis.unknown if witness_basis is not None
@@ -143,6 +148,7 @@ def witness(
         parent_receipt_hash=parent_receipt_hash,
         active_packs=active_packs,
         witness_basis=witness_basis,
+        inline_dimensions=inline_dimensions,
     )
 
 
