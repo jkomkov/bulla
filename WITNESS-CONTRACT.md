@@ -392,4 +392,58 @@ A convention dimension is **unknown** when it is relevant to the composition but
 
 ## Future Directions
 
-The obligation wire (v0.25.0) completes the coordination pipeline from attestation to requirement. Three capabilities extend this naturally: bridge-guided discovery, where obligations direct the LLM at specific boundary blind spots instead of general tool schemas; a `coordination_step()` SDK that collapses discover + audit + obligations + chain into a single call for agent framework integration; and multi-agent convergence simulation, where synthetic agent populations exercise the obligation lifecycle at scale to validate convergence properties before production deployment.
+### Mathematical Framework: Coordination Cohomology
+
+The Bulla protocol rests on a single mathematical structure that does not change across versions:
+
+**Presheaf model.** Each tool `T` defines a presheaf section `F(T) = internal_state(T)`. The observable sub-presheaf `O(T) = observable_schema(T)` is the publicly visible fragment. A composition is a diagram of tools connected by semantic edges; the coboundary operator `δ: C^0 → C^1` encodes dimensional compatibility along edges.
+
+**Obstruction cocycle.** The coherence fee `fee = rank(δ_full) - rank(δ_obs) = dim H^1(G; F/O)` measures the obstruction to extending observable sections to full sections. Each blind spot generates a cocycle in `H^1`. Fee = 0 iff every convention is either globally observable or globally irrelevant.
+
+**Resolution sequence.** The protocol's sprint arc traces a sequence of sub-presheaf inclusions:
+
+```
+O_0  ⊂  O_1  ⊂  O_2  ⊂  ...  ⊂  F
+```
+
+where each `O_{k+1}` is obtained by making one or more obligated fields observable. The coherence fee is monotonically non-increasing along this sequence: `fee(O_{k+1}) ≤ fee(O_k)`. When a confirmed repair adds a column that is linearly independent modulo existing observable columns, the fee strictly decreases.
+
+### Per-Sprint Thesis Statements
+
+Each sprint adds one mathematical capability to the resolution sequence:
+
+| Sprint | Version | Thesis |
+|--------|---------|--------|
+| **25** | v0.25.0 | **Obligation generation.** Boundary decomposition extracts generators of `H^1(G; F/O)` from cross-partition blind spots. Each obligation names a specific `(tool, dimension, field)` whose disclosure would eliminate one cocycle generator. |
+| **26** | v0.26.0 | **Guided resolution.** LLM-directed probing evaluates whether each generator can be resolved (field is observable). Confirmed resolutions extend `O → O'` with `fee(O') < fee(O)` (collective invariant). |
+| **27** | v0.27.0 | **Iterative convergence.** `coordination_step()` wraps `repair_step()` in a loop: `while fee > 0 and confirmed > 0: repair_step()`. Convergence is guaranteed because fee is a non-negative integer that strictly decreases on each round with at least one confirmation. |
+| **28** | v0.28.0 | **Convention value extraction.** Guided discovery extracts not just observability verdicts but convention *values* (e.g. "zero_based", "UTC", "absolute"). These values populate the micro-pack inline, enabling the presheaf section to carry semantic content — not just structural observability. |
+| **29** | v0.29.0 | **Contradiction detection.** When multi-parent DAG merges produce conflicting obligations on the same `(dimension, field)` — e.g. one parent requires "zero_based" while another requires "one_based" — the protocol detects this as a non-trivial element of `H^1` that cannot be resolved by disclosure alone. Fourth obligation status: `contradictory`. |
+| **30** | v0.30.0 | **Policy enforcement.** Obligations become enforceable: a policy profile can require that all obligations are met (or met within tolerance) before disposition is `PROCEED`. The policy layer closes the loop from measurement to judgment to requirement to enforcement. |
+| **31** | v0.31.0 | **Agent framework SDK.** `coordination_step()` collapses discover + audit + obligations + guided repair + chain into a single call. LangGraph, CrewAI, and AutoGen adapters. The protocol becomes invisible infrastructure — agents call one function, receive a receipt. |
+
+### Convergence Properties
+
+**Termination theorem (Sprint 27+).** The iterative repair loop `while fee > 0 and confirmed > 0` terminates in at most `fee_0` rounds, where `fee_0` is the initial coherence fee. Proof: fee is a non-negative integer. Each round with at least one confirmation strictly decreases it. Therefore the loop terminates.
+
+**Fixpoint characterization.** The loop's fixpoint has two cases:
+1. `fee = 0`: all conventions are observably coherent. The composition is fully resolved.
+2. `fee > 0, confirmed = 0`: remaining obligations cannot be resolved by the current tool set. These are genuine coordination gaps requiring human intervention, tool replacement, or composition restructuring.
+
+The protocol distinguishes these cases automatically. Case 1 produces `PROCEED`. Case 2 produces `REFUSE_PENDING_DISCLOSURE` with the remaining obligations enumerated.
+
+### Dependency Structure
+
+The capabilities compose linearly:
+
+```
+obligations (25) → guided discovery (26) → iterative repair (27)
+                                         → value extraction (28)
+                   → contradiction detection (29) [requires DAG from 24]
+                   → policy enforcement (30) [requires obligations from 25]
+                   → SDK (31) [integrates all of 25-30]
+```
+
+Sprints 27 and 28 are independent (can proceed in parallel). Sprint 29 depends on DAG support (Sprint 24) and obligations (Sprint 25). Sprint 30 depends on obligations. Sprint 31 integrates everything.
+
+When a new sprint ships, update this section: move its thesis from future to present tense, and add any new convergence properties discovered during implementation.
