@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.22.0
+
+### Added
+- **`bulla discover` CLI command**: LLM-powered convention dimension discovery. Reads tool schemas from manifest directory, sends structured prompt to LLM, outputs validated micro-pack YAML. Saves raw LLM response alongside for diagnostics. Usage: `bulla discover --manifests DIR -o FILE [--provider openai|anthropic|auto]`.
+- **Micro-pack format**: Convention packs now support two optional per-dimension fields:
+  - `refines`: Parent dimension name for degradation hierarchy (Dublin Core Dumb-Down Principle). Example: `entity_namespace` refines `id_offset`.
+  - `provenance`: Metadata dict for agent-invented dimensions (source, confidence, source_tools, boundary).
+- **`bulla pack validate FILE`**: New CLI subcommand to validate convention pack YAML files. Checks required fields, type constraints, and structural integrity.
+- **`validate_pack()` function**: Programmatic pack validation in `bulla.packs.validate`.
+- **LLM adapter interface**: `DiscoverAdapter` Protocol with `OpenAIAdapter`, `AnthropicAdapter`, and `MockAdapter` implementations. Real LLM dependencies are optional: `pip install bulla[discover]`.
+- **`[discover]` extras group**: Optional dependencies for LLM-powered discovery (`openai>=1.0`, `anthropic>=0.20`).
+- **Discovery evidence**: 3 new dimensions discovered from 4-server manifests (`entity_namespace`, `content_transport`, `graph_operation_scope`). Boundary fee 1→5, total fee 30→45, active dimensions 2→5.
+- 23 new tests: micro-pack validation (12), micro-pack loading (6), pack validate CLI (2), discover adapter/prompt/engine (18), full-loop integration (2).
+
+### Changed
+- **FINDINGS.md**: Updated with v0.22.0 discovery results, before/after comparison table, and four new discovered-dimension writeups.
+- **WITNESS-CONTRACT.md**: Documents micro-pack format, `refines` semantics, `provenance` fields, discovery engine architecture, LLM adapter interface, prompt architecture, and SCPI readiness.
+
 ## 0.21.0
 
 ### Added

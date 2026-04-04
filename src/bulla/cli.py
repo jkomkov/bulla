@@ -948,6 +948,94 @@ def _cmd_audit(args: argparse.Namespace) -> None:
     _gauge_threshold_check(diag, args)
 
 
+# ── discover ──────────────────────────────────────────────────────────
+
+
+def _cmd_discover(args: argparse.Namespace) -> None:
+    """Discover convention dimensions from tool schemas using an LLM."""
+    _configure_packs_from_args(args)
+    from bulla.discover.engine import discover_dimensions
+
+    manifests_dir: Path = args.manifests
+    if not manifests_dir.is_dir():
+        print(f"Error: {manifests_dir} is not a directory.", file=sys.stderr)
+        sys.exit(1)
+
+    all_tools, server_names = _load_manifests_dir(manifests_dir)
+    if not all_tools:
+        print("Error: No tools found in manifest directory.", file=sys.stderr)
+        sys.exit(1)
+
+    provider = getattr(args, "provider", "auto")
+    adapter = None
+    if provider != "auto":
+        from bulla.discover.adapter import get_adapter
+        adapter = get_adapter(provider)
+
+    try:
+        result = discover_dimensions(
+            all_tools,
+            adapter=adapter,
+            existing_packs=getattr(args, "packs", None),
+            session_id=None,
+        )
+    except (ValueError, ImportError) as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    output_path: Path = args.output
+    if result.valid and result.n_dimensions > 0:
+        output_path.write_text(
+            yaml.dump(result.pack, default_flow_style=False, sort_keys=False),
+            encoding="utf-8",
+        )
+        print(f"  Discovered {result.n_dimensions} dimension(s) across "
+              f"{len(server_names)} server(s)", file=sys.stderr)
+        print(f"  Wrote micro-pack to {output_path}", file=sys.stderr)
+
+        dims = result.pack.get("dimensions", {})
+        for dim_name, dim_def in dims.items():
+            desc = dim_def.get("description", "")[:60]
+            refines = dim_def.get("refines")
+            ref_str = f" (refines {refines})" if refines else ""
+            print(f"    - {dim_name}: {desc}{ref_str}", file=sys.stderr)
+    elif result.valid and result.n_dimensions == 0:
+        print("  No new dimensions discovered. Tool schemas may be too sparse "
+              "for the current prompt.", file=sys.stderr)
+    else:
+        print("  Discovery produced invalid output:", file=sys.stderr)
+        for err in result.errors:
+            print(f"    [error] {err}", file=sys.stderr)
+        sys.exit(1)
+
+    raw_path = output_path.with_suffix(".raw.txt")
+    raw_path.write_text(result.raw_response, encoding="utf-8")
+    print(f"  Raw LLM response saved to {raw_path}", file=sys.stderr)
+
+
+# ── pack ──────────────────────────────────────────────────────────────
+
+
+def _cmd_pack_validate(args: argparse.Namespace) -> None:
+    """Validate a convention pack YAML file."""
+    from bulla.packs.validate import validate_pack
+
+    path = args.file
+    if not path.exists():
+        print(f"Error: file not found: {path}", file=sys.stderr)
+        sys.exit(1)
+
+    parsed = yaml.safe_load(path.read_text(encoding="utf-8"))
+    errors = validate_pack(parsed)
+
+    if not errors:
+        print(f"  VALID  {path}")
+    else:
+        for err in errors:
+            print(f"  [error] {err}")
+        sys.exit(1)
+
+
 def _cmd_scan(args: argparse.Namespace) -> None:
     _configure_packs_from_args(args)
     from bulla.guard import BullaGuard
@@ -1254,6 +1342,48 @@ def main() -> None:
     )
     p_witness.set_defaults(func=_cmd_witness)
 
+    # ── discover ──────────────────────────────────────────────────────
+    p_discover = subparsers.add_parser(
+        "discover",
+        help="Discover convention dimensions from tool schemas using an LLM",
+    )
+    p_discover.add_argument(
+        "--manifests", type=Path, required=True, metavar="DIR",
+        help="Directory of pre-captured MCP manifest JSON files",
+    )
+    p_discover.add_argument(
+        "-o", "--output", type=Path, required=True, metavar="FILE",
+        help="Output micro-pack YAML file",
+    )
+    p_discover.add_argument(
+        "--provider",
+        choices=["openai", "anthropic", "auto"],
+        default="auto",
+        help="LLM provider (default: auto-detect from env)",
+    )
+    _add_pack_args(p_discover)
+    p_discover.set_defaults(func=_cmd_discover)
+
+    # ── pack ──────────────────────────────────────────────────────────
+    p_pack = subparsers.add_parser(
+        "pack",
+        help="Convention pack utilities (validate, inspect)",
+    )
+    pack_sub = p_pack.add_subparsers(dest="pack_command")
+    p_pack_val = pack_sub.add_parser(
+        "validate",
+        help="Validate a convention pack YAML file",
+    )
+    p_pack_val.add_argument(
+        "file", type=Path,
+        help="Pack YAML file to validate",
+    )
+    p_pack_val.set_defaults(func=_cmd_pack_validate)
+    p_pack.set_defaults(func=lambda args: (
+        print("Usage: bulla pack <validate> FILE", file=sys.stderr)
+        or sys.exit(1)
+    ) if not getattr(args, "pack_command", None) else None)
+
     # ── serve ─────────────────────────────────────────────────────────
     p_serve = subparsers.add_parser(
         "serve",
@@ -1280,6 +1410,7 @@ def main() -> None:
         print("  bulla audit                    # audit all MCP servers in your config")
         print("  bulla gauge tools.json         # diagnose manifest with disclosure set")
         print("  bulla gauge --mcp-server 'python -m my_server'  # diagnose live server")
+        print("  bulla discover --manifests DIR -o found.yaml  # LLM dimension discovery")
         print("  bulla diagnose --examples      # try bundled compositions")
         print("  bulla diagnose my-comp.yaml    # diagnose your own")
         print("  bulla check compositions/      # CI gate (exit 1 on blind spots)")
@@ -1287,6 +1418,7 @@ def main() -> None:
         print("  bulla witness comp.yaml        # emit witness receipt (JSON)")
         print("  bulla serve                    # run as MCP server (stdio)")
         print("  bulla manifest --from-json tools.json  # generate manifests")
+        print("  bulla pack validate pack.yaml  # validate a convention pack")
         print("  bulla init                     # interactive composition wizard")
         print()
         print("Run `bulla <command> --help` for details.")

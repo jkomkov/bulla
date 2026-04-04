@@ -158,6 +158,64 @@ The `jkomkov/bulla` GitHub Action supports two modes via the `mode` input:
 
 See `examples/github-action/` for workflow templates and documentation.
 
+## Discovery Engine (v0.22.0)
+
+`bulla discover` is a pure function from tool schemas to micro-pack YAML files. The LLM call is the only external dependency, isolated behind an adapter interface. The kernel never sees the LLM.
+
+### Micro-Pack Format
+
+A micro-pack is a standard pack YAML with two optional fields per dimension:
+
+- **`refines`** (string or null): Parent dimension name for degradation hierarchy (Dublin Core Dumb-Down Principle). Example: `entity_namespace` refines `id_offset`.
+- **`provenance`** (dict): Metadata for agent-invented dimensions: `source`, `confidence`, `source_tools`, `boundary`.
+
+Micro-packs are loaded by `load_pack_stack()` identically to any other pack. The kernel is dimension-agnostic — it sees pack YAML, same as always.
+
+### Validation
+
+`validate_pack(parsed: dict) -> list[str]` checks:
+- Required: `pack_name`, `dimensions` (at least one)
+- Per dimension: `description` required, at least one of `field_patterns` / `description_keywords`
+- Type checks for optional fields: `refines` (string/null), `provenance` (dict), `known_values` (list)
+
+CLI: `bulla pack validate FILE` exits 0 on valid, 1 on invalid with error details.
+
+### LLM Adapter Interface
+
+```python
+class DiscoverAdapter(Protocol):
+    def complete(self, prompt: str) -> str: ...
+```
+
+Implementations: `OpenAIAdapter`, `AnthropicAdapter`, `MockAdapter`. Real adapters are optional dependencies (`pip install bulla[discover]`). `get_adapter(provider="auto")` auto-detects from environment variables.
+
+### Prompt Architecture (v0.1)
+
+The prompt uses rigid `---BEGIN_PACK---` / `---END_PACK---` delimiters. Key design decisions:
+- Refinement allowed: "Do not duplicate, but you MAY propose refinements"
+- Sparse schema acknowledgment: "Reason from field names, types, and cross-tool patterns"
+- Existing dimensions listed to prevent duplication
+
+### Discovery Engine
+
+`discover_dimensions(tool_schemas, *, adapter, existing_packs) -> DiscoveryResult`
+
+Returns `DiscoveryResult` with `.pack` (parsed dict), `.raw_response` (full LLM output), `.prompt` (sent prompt), `.errors` (validation failures), `.valid` (bool), `.n_dimensions` (int).
+
+### CLI Surface: `bulla discover`
+
+```
+bulla discover --manifests DIR -o FILE [--provider openai|anthropic|auto] [--pack EXTRA.yaml]
+```
+
+Reads tool schemas from manifest directory, calls the discovery engine, writes micro-pack YAML and raw LLM response (`.raw.txt`).
+
+The full loop: `bulla discover --manifests DIR -o found.yaml && bulla audit --manifests DIR --pack found.yaml`
+
+### SCPI Readiness
+
+Sprint 22 establishes the deposit format (micro-packs). The SCPI coordination loop is not yet closed: receipts record discovered packs via `active_packs` (PackRef with hash), not inline definitions. Embedding micro-pack contents in receipts is deferred to a future sprint.
+
 ## Classifier Architecture (v0.21.0)
 
 The multi-signal classifier uses four independent signal sources:

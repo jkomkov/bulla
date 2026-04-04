@@ -1,4 +1,4 @@
-# Real-World Cross-Server Audit Findings (v0.21.0)
+# Real-World Cross-Server Audit Findings (v0.22.0)
 
 ## The Concrete Agent Failure
 
@@ -34,20 +34,23 @@ in `manifests/`.
 
 ---
 
-## Version Progression: v0.19.0 → v0.20.0 → v0.21.0
+## Version Progression: v0.19.0 → v0.20.0 → v0.21.0 → v0.22.0
 
-| Metric | v0.19.0 | v0.20.0 | v0.21.0 | Notes |
-|--------|---------|---------|---------|-------|
-| Coherence fee | 17 | 31 | **30** | Slight decrease from cleaner edge generation |
-| Dimensions found | 1 | 2 | **2** | `id_offset`, `path_convention` |
-| Blind spots | 153 | 273 | **244** | −29 `_description` pseudo-field noise removed |
-| `per_page` false positive | Yes | No | No | Fixed in v0.20.0 |
-| `commit_id` (string) flagged | Yes | No | No | Fixed in v0.20.0 |
-| Cross-server blind spots | 0 | 28 | **28** | All real field-to-field matches |
-| Boundary fee | 0 | 1 | **1** | The key result, preserved |
-| `_description` pseudo-fields | — | 29 | **0** | Suppressed from edge generation in v0.21.0 |
+| Metric | v0.19.0 | v0.20.0 | v0.21.0 | v0.22.0 (base) | v0.22.0 (base+discovered) |
+|--------|---------|---------|---------|-----------------|---------------------------|
+| Coherence fee | 17 | 31 | 30 | 30 | **45** |
+| Dimensions active | 1 | 2 | 2 | 2 | **5** |
+| Blind spots | 153 | 273 | 244 | 244 | **419** |
+| Boundary fee | 0 | 1 | 1 | 1 | **5** |
+| `_description` noise | — | 29 | 0 | 0 | 0 |
 
-### Classifier changes (cumulative through v0.21.0)
+The v0.22.0 column shows the same 4 servers with `bulla discover`-produced
+dimensions loaded. Three new dimensions (`entity_namespace`,
+`content_transport`, `graph_operation_scope`) produce 175 additional blind
+spots and raise the boundary fee from 1 to 5 — four new cross-server
+convention risks that the hand-crafted base pack missed entirely.
+
+### Classifier changes (cumulative through v0.22.0)
 
 1. **Negative patterns** (v0.20.0): `per_page`, `page_size`, `limit`, `count`,
    `batch_size` excluded from `id_offset`.
@@ -63,6 +66,10 @@ in `manifests/`.
 7. **`_description` suppression** (v0.21.0): Tool-level description keyword
    matches no longer generate edges or blind spots. Signal is preserved in the
    witness basis for auditability, but does not inflate the output.
+8. **Discovery engine** (v0.22.0): `bulla discover` generates micro-pack YAML
+   from tool schemas via LLM. Discovered `field_patterns` are compiled into
+   classifier name patterns automatically (no classifier code changes needed).
+   The kernel is unchanged — it sees pack YAML, same as always.
 
 ---
 
@@ -121,46 +128,94 @@ blind spots would appear automatically.
 
 ---
 
+## Finding 4: LLM-Discovered Dimensions (v0.22.0)
+
+`bulla discover --manifests examples/real_world_audit/manifests/` produces a
+micro-pack with three dimensions the hand-crafted base pack missed:
+
+### entity_namespace (refines id_offset)
+
+GitHub's `issue_number` and `pull_number` fields share a monotonic counter —
+issue #7 and PR #7 cannot coexist. This is a genuine convention risk: an agent
+composing `get_issue(issue_number=7)` → `get_pull_request(pull_number=7)` might
+assume these are independent sequences when they aren't.
+
+The `refines: id_offset` relationship means this dimension specializes the
+existing `id_offset` dimension. The base pack catches the "zero-based vs
+one-based" question; `entity_namespace` catches the "shared vs scoped sequence"
+question — a strictly finer distinction.
+
+### content_transport
+
+Filesystem tools return raw UTF-8 text in `content` fields. Puppeteer's
+`encoded` field returns base64-encoded screenshot data. An agent composing
+`read_file` → `puppeteer_screenshot` must handle the encoding difference.
+Neither schema declares the transport encoding.
+
+### graph_operation_scope
+
+Memory server's `create_entities`, `create_relations`, and `add_observations`
+accept arrays (batch operations). Other tools operate on single items. An
+agent composing across these boundaries must handle the batch/single conversion.
+
+### Impact
+
+| Metric | Base pack only | Base + discovered |
+|--------|---------------|-------------------|
+| Fee | 30 | 45 (+50%) |
+| Blind spots | 244 | 419 (+72%) |
+| Boundary fee | 1 | 5 (+400%) |
+| Active dimensions | 2 | 5 (+150%) |
+
+The boundary fee increase is the key result: 4 new cross-server convention
+risks that are invisible to per-server analysis AND invisible to the base pack.
+The discovery engine found them by reasoning across tool schemas.
+
+---
+
 ## Interpretation
 
-The v0.21.0 audit demonstrates three principles:
+The v0.22.0 audit demonstrates four principles:
 
 1. **Precision over recall**: Removing `per_page` and string `*_id` false
    positives makes remaining findings defensible. Every flagged field is a
    genuine convention question.
 
-2. **Multi-dimensional findings**: Two dimensions (`id_offset` +
-   `path_convention`) are strictly more informative than one. The decomposition
-   tells you *what kind* of convention risk exists, not just *how much*.
+2. **Multi-dimensional findings**: Five dimensions are strictly more informative
+   than two. The decomposition tells you *what kind* of convention risk exists.
 
 3. **Boundary fee as unique value**: The nonzero boundary fee proves that
    `bulla audit` finds risks invisible to per-server analysis. This is the
    tool's raison d'être.
 
+4. **Dynamic vocabulary**: The convention vocabulary is no longer fixed. An LLM
+   can discover dimensions the human pack author didn't anticipate, and the
+   kernel handles them without code changes. The vocabulary grows from usage,
+   not from committee.
+
 ---
 
-## Dimension Coverage and Future Servers
+## Dimension Coverage
 
-The base pack defines 11 convention dimensions. This audit activates 2 of them:
+The base pack defines 11 convention dimensions. With discovery, 5 are active:
 
-| Dimension | Activated | Why |
-|-----------|-----------|-----|
-| `id_offset` | Yes | `page`, `issue_number`, `pull_number` fields |
-| `path_convention` | Yes | `path` fields in filesystem and GitHub |
-| `date_format` | Partial | `since` in one tool — no edges (need 2+ tools) |
-| `timezone` | No | No timezone fields in these servers |
-| `encoding` | No | No encoding fields |
-| `amount_unit` | No | No financial fields |
-| `null_handling` | No | No null-semantic fields |
-| `sort_order` | No | No sort fields |
-| `error_format` | No | No error format fields |
-| `case_convention` | No | No case-sensitive fields |
-| `bool_representation` | No | No boolean representation fields |
+| Dimension | Source | Activated | Why |
+|-----------|--------|-----------|-----|
+| `id_offset` | base | Yes | `page`, `issue_number`, `pull_number` fields |
+| `path_convention` | base | Yes | `path` fields in filesystem and GitHub |
+| `entity_namespace` | discovered | Yes | `issue_number`, `pull_number` shared sequence |
+| `content_transport` | discovered | Yes | raw text vs base64 across servers |
+| `graph_operation_scope` | discovered | Yes | batch vs single operations |
+| `date_format` | base | Partial | `since` in one tool — no edges (need 2+ tools) |
+| `timezone` | base | No | No timezone fields in these servers |
+| `encoding` | base | No | No encoding fields |
+| `amount_unit` | base | No | No financial fields |
+| `null_handling` | base | No | No null-semantic fields |
 
-This is expected: the 4 servers tested are developer tools, not financial or
-data-processing services. Adding servers that handle timestamps (e.g.,
-`@modelcontextprotocol/server-postgres`), currencies, or data formats would
-activate additional dimensions automatically — no classifier changes needed.
+The discovered dimensions cover gaps the base pack's hand-crafted vocabulary
+missed. Adding servers that handle timestamps, currencies, or data formats
+would activate additional base dimensions automatically. Running `bulla discover`
+on new server compositions may find further dimensions specific to those tools.
 
 ---
 
@@ -170,12 +225,19 @@ activate additional dimensions automatically — no classifier changes needed.
 cd bulla
 pip install -e .
 
-# Using the CLI (v0.21.0+):
+# Baseline audit (base pack only):
 bulla audit --manifests examples/real_world_audit/manifests/
 
-# Or using the script:
-python examples/real_world_audit/run_audit.py
+# Discovery + audit with discovered pack:
+bulla discover --manifests examples/real_world_audit/manifests/ -o discovered.yaml
+bulla audit --manifests examples/real_world_audit/manifests/ --pack discovered.yaml
+
+# Or run the evidence comparison script:
+python scripts/run_discover_evidence.py        # mock adapter (no API key needed)
+python scripts/run_discover_evidence.py --live  # real LLM (requires API key)
 ```
 
 All manifests are genuine `tools/list` responses with provenance metadata.
-The audit is fully deterministic: same inputs → same fee, same blind spots.
+The baseline audit is fully deterministic: same inputs → same fee, same blind
+spots. Discovery results vary by LLM model and prompt but the kernel computation
+from any given micro-pack is deterministic.

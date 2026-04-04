@@ -1,0 +1,23 @@
+---BEGIN_PACK---
+pack_name: "discovered_4server_v1"
+pack_version: "0.1.0"
+dimensions:
+  entity_namespace:
+    description: "Whether numeric entity identifiers share a global sequence or are scoped per type — GitHub issues and pull requests share a monotonic counter, so issue #7 and PR #7 cannot coexist"
+    known_values: ["global_sequence", "per_type_sequence", "uuid", "scoped_auto_increment"]
+    field_patterns: ["*_number", "issue_number", "pull_number"]
+    description_keywords: ["issue number", "pull request number", "entity number", "PR number"]
+    refines: "id_offset"
+  content_transport:
+    description: "How file or page content is encoded for transport between tools — filesystem tools return raw UTF-8 text while puppeteer screenshot returns base64-encoded data"
+    known_values: ["raw_utf8", "base64", "binary_stream"]
+    field_patterns: ["*_content", "content", "encoded"]
+    description_keywords: ["base64", "encoded", "raw text", "file content", "screenshot"]
+    refines: null
+  graph_operation_scope:
+    description: "Whether a knowledge graph mutation operates on single entities or batches — memory server accepts arrays of entities/relations while other tools operate on single items"
+    known_values: ["single", "batch", "streaming"]
+    field_patterns: ["entities", "relations", "observations"]
+    description_keywords: ["batch", "multiple entities", "array of"]
+    refines: null
+---END_PACK---

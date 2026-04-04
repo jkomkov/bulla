@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bulla"
-version = "0.21.0"
+version = "0.22.0"
 description = "Witness kernel for agent tool compositions — diagnose, attest, seal"
 readme = "README.md"
 license = "MIT"
@@ -26,6 +26,7 @@ dependencies = ["pyyaml>=6.0"]
 
 [project.optional-dependencies]
 ots = ["opentimestamps-client>=0.7"]
+discover = ["openai>=1.0", "anthropic>=0.20"]
 
 [project.scripts]
 bulla = "bulla.cli:main"
