@@ -83,6 +83,41 @@ class AnthropicAdapter:
         return response.content[0].text
 
 
+class OpenRouterAdapter:
+    """Adapter using the OpenRouter API (OpenAI-compatible endpoint).
+
+    Requires ``OPENROUTER_API_KEY`` in the environment.
+    Supports any model available on OpenRouter.
+    """
+
+    def __init__(self, model: str = "anthropic/claude-sonnet-4-20250514") -> None:
+        try:
+            import openai  # noqa: F401
+        except ImportError:
+            raise ImportError(
+                "OpenRouter adapter requires the 'openai' package. "
+                "Install it with: pip install bulla[discover]"
+            )
+        self.model = model
+        self._api_key = os.environ.get("OPENROUTER_API_KEY", "")
+        if not self._api_key:
+            raise ValueError("OPENROUTER_API_KEY environment variable is required")
+
+    def complete(self, prompt: str) -> str:
+        import openai
+
+        client = openai.OpenAI(
+            api_key=self._api_key,
+            base_url="https://openrouter.ai/api/v1",
+        )
+        response = client.chat.completions.create(
+            model=self.model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.2,
+        )
+        return response.choices[0].message.content or ""
+
+
 class MockAdapter:
     """Testing adapter that returns a predetermined response."""
 
@@ -99,8 +134,8 @@ def get_adapter(provider: str = "auto") -> DiscoverAdapter:
     """Get an LLM adapter by provider name or auto-detect from environment.
 
     Args:
-        provider: One of "openai", "anthropic", "auto".
-            "auto" checks for API keys in order: ANTHROPIC_API_KEY, OPENAI_API_KEY.
+        provider: One of "openai", "anthropic", "openrouter", "auto".
+            "auto" checks for API keys in order: ANTHROPIC_API_KEY, OPENAI_API_KEY, OPENROUTER_API_KEY.
 
     Raises:
         ValueError: If no adapter can be configured.
@@ -109,13 +144,17 @@ def get_adapter(provider: str = "auto") -> DiscoverAdapter:
         return OpenAIAdapter()
     if provider == "anthropic":
         return AnthropicAdapter()
+    if provider == "openrouter":
+        return OpenRouterAdapter()
     if provider == "auto":
         if os.environ.get("ANTHROPIC_API_KEY"):
             return AnthropicAdapter()
         if os.environ.get("OPENAI_API_KEY"):
             return OpenAIAdapter()
+        if os.environ.get("OPENROUTER_API_KEY"):
+            return OpenRouterAdapter()
         raise ValueError(
-            "No LLM API key found. Set OPENAI_API_KEY or ANTHROPIC_API_KEY, "
-            "or install with: pip install bulla[discover]"
+            "No LLM API key found. Set OPENAI_API_KEY, ANTHROPIC_API_KEY, "
+            "or OPENROUTER_API_KEY."
         )
-    raise ValueError(f"Unknown provider: {provider!r}. Use 'openai', 'anthropic', or 'auto'.")
+    raise ValueError(f"Unknown provider: {provider!r}. Use 'openai', 'anthropic', 'openrouter', or 'auto'.")

@@ -1357,7 +1357,7 @@ def main() -> None:
     )
     p_discover.add_argument(
         "--provider",
-        choices=["openai", "anthropic", "auto"],
+        choices=["openai", "anthropic", "openrouter", "auto"],
         default="auto",
         help="LLM provider (default: auto-detect from env)",
     )

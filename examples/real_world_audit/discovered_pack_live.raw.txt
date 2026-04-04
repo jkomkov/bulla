@@ -1,0 +1,32 @@
+---BEGIN_PACK---
+pack_name: "discovered_177ba311"
+pack_version: "0.1.0"
+dimensions:
+  pagination_base:
+    description: "Whether pagination starts from 0 or 1 for page numbers"
+    known_values: ["zero_based", "one_based"]
+    field_patterns: ["page", "*_page", "page_*"]
+    description_keywords: ["page", "pagination"]
+    refines: "id_offset"
+  
+  path_context:
+    description: "Whether paths are interpreted relative to repository root, filesystem root, or current working directory"
+    known_values: ["repository_relative", "filesystem_absolute", "working_directory_relative"]
+    field_patterns: ["path", "*_path", "paths"]
+    description_keywords: ["path", "file", "directory"]
+    refines: "path_convention"
+  
+  array_item_structure:
+    description: "The expected structure and field names for items within array parameters"
+    known_values: ["object_with_typed_fields", "string_primitives", "mixed_types"]
+    field_patterns: ["*s", "items", "entries", "files", "relations", "entities"]
+    description_keywords: ["array", "list", "multiple"]
+    refines: null
+  
+  boolean_default_interpretation:
+    description: "How boolean fields behave when omitted - whether they default to true, false, or cause validation errors"
+    known_values: ["default_false", "default_true", "required_explicit"]
+    field_patterns: ["*", "auto*", "allow*", "enable*", "is*"]
+    description_keywords: ["boolean", "flag", "option"]
+    refines: "null_handling"
+---END_PACK---
