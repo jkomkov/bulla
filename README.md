@@ -47,6 +47,26 @@ bulla gauge tools.json --max-fee 0
 
 `bulla gauge` returns the coherence fee, minimum disclosure set (the exact fields to expose to eliminate all blind spots), and witness basis in a single command.
 
+## Audit your MCP setup
+
+`bulla audit` reads your MCP configuration (Cursor or Claude Desktop), scans all servers in parallel, and diagnoses cross-server coherence:
+
+```bash
+# Auto-detect your Cursor/Claude config and audit all servers
+bulla audit
+
+# Explicit config file
+bulla audit ~/.cursor/mcp.json
+
+# See cross-server blind spots in detail
+bulla audit -v
+
+# JSON output for CI integration
+bulla audit --format json --max-fee 5
+```
+
+The unique insight is the **cross-server risk decomposition**: `bulla audit` partitions blind spots into those _within_ a single server (intra-server fee) versus those that only appear _between_ independently-developed servers (boundary fee). The boundary fee represents conventions that no individual server can detect on its own.
+
 ## Other commands
 
 ```bash

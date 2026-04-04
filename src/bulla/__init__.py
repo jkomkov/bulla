@@ -1,6 +1,6 @@
 """bulla: Witness kernel for agent tool compositions — diagnose, attest, seal."""
 
-__version__ = "0.17.0"
+__version__ = "0.18.0"
 
 from bulla.model import (
     BlindSpot,
@@ -42,6 +42,8 @@ from bulla.witness import (
     witness,
 )
 from bulla.infer.classifier import FieldInfo, InferredDimension
+from bulla.config import ConfigError, McpServerEntry, find_mcp_config, parse_mcp_config
+from bulla.scan import ServerScanResult, scan_mcp_servers_parallel
 
 __all__ = [
     "__version__",
@@ -81,4 +83,10 @@ __all__ = [
     "verify_receipt_consistency",
     "verify_receipt_integrity",
     "witness",
+    "ConfigError",
+    "McpServerEntry",
+    "ServerScanResult",
+    "find_mcp_config",
+    "parse_mcp_config",
+    "scan_mcp_servers_parallel",
 ]

@@ -118,6 +118,17 @@ When the optional `partition` parameter is provided (array of arrays of tool nam
 
 `bulla gauge` is the live-server/manifest analog of `bulla check`. Where `check` operates on hand-authored YAML compositions and enforces CI gates, `gauge` operates on live MCP servers or manifest JSON files (the `tools/list` response) and produces prescriptive output: coherence fee, minimum disclosure set, and witness basis. It combines inference (`scan` + `infer`) and diagnosis (`diagnose`) into a single command for the 30-second adoption experience. CI gating flags (`--max-fee`, `--max-blind-spots`) mirror `check`'s exit-code semantics.
 
+## CLI Surface: `bulla audit`
+
+`bulla audit` reads an MCP configuration file (Cursor or Claude Desktop format), scans all configured servers in parallel, and diagnoses the combined cross-server composition. The unique output is the **cross-server risk decomposition**: using `decompose_fee()` with a partition-by-server, it separates the coherence fee into:
+
+- **Intra-server fee**: blind spots within individual servers (sum of per-server local fees)
+- **Boundary fee**: blind spots that only appear between independently-developed servers
+
+The boundary fee quantifies conventions hidden at the seam between servers -- the exact gap that no individual server can detect on its own. This is the direct empirical instantiation of the hierarchical fee non-additivity theorem.
+
+Auto-detection searches `.cursor/mcp.json` (project), `~/.cursor/mcp.json` (user), and Claude Desktop config (macOS). Only stdio-transport servers are scanned; HTTP/SSE entries are skipped with a warning. Failed servers are reported but do not block diagnosis of successful ones (`--skip-failed` default).
+
 ## `max_unknown` Definition
 
 A convention dimension is **unknown** when it is relevant to the composition but could not be assigned a `declared` or `inferred` value under the active packs. `max_unknown` bounds the number of such dimensions a policy will tolerate before refusing.

@@ -670,6 +670,227 @@ def _cmd_gauge(args: argparse.Namespace) -> None:
     _gauge_threshold_check(diag, args)
 
 
+# ── audit ─────────────────────────────────────────────────────────────
+
+
+def _audit_text(
+    server_results: list,
+    diag: "Diagnostic",
+    disclosure: list[tuple[str, str]],
+    basis: "WitnessBasis | None",
+    decomposition: "FeeDecomposition | None",
+    verbose: bool = False,
+) -> str:
+    ok_count = sum(1 for r in server_results if r.ok)
+    fail_count = sum(1 for r in server_results if not r.ok)
+
+    lines: list[str] = []
+    skip_label = f" ({fail_count} skipped)" if fail_count else ""
+    lines.append(f"  bulla audit: {ok_count} server(s) scanned{skip_label}")
+    lines.append("")
+
+    lines.append("  Servers:")
+    for r in server_results:
+        if r.ok:
+            lines.append(f"    {r.name:<20s} {len(r.tools):>3} tools   OK")
+        else:
+            short_err = r.error.split("\n")[0][:60] if r.error else "unknown"
+            lines.append(f"    {r.name:<20s}  --        FAILED: {short_err}")
+    lines.append("")
+
+    if ok_count == 0:
+        lines.append("  No servers scanned successfully.")
+        lines.append("")
+        return "\n".join(lines)
+
+    lines.append(f"  Combined composition: {diag.n_tools} tools, {diag.n_edges} edges")
+    lines.append("")
+    lines.append(f"  Coherence fee:  {diag.coherence_fee}")
+    lines.append(f"  Blind spots:    {len(diag.blind_spots)}")
+    lines.append(f"  Bridges:        {len(diag.bridges)}")
+
+    if decomposition and ok_count > 1:
+        intra = sum(decomposition.local_fees)
+        lines.append("")
+        lines.append("  Cross-server risk:")
+        lines.append(f"    Intra-server fee:  {intra}  (blind spots within individual servers)")
+        lines.append(f"    Boundary fee:      {decomposition.boundary_fee}  (blind spots between servers)")
+
+    if verbose and diag.blind_spots:
+        lines.append("")
+        lines.append(f"  Blind spot detail ({len(diag.blind_spots)}):")
+        for i, bs in enumerate(diag.blind_spots, 1):
+            locs: list[str] = []
+            if bs.from_hidden:
+                locs.append(f"{bs.from_field} hidden at {bs.from_tool}")
+            if bs.to_hidden:
+                locs.append(f"{bs.to_field} hidden at {bs.to_tool}")
+            lines.append(f"    [{i}] {bs.dimension} ({bs.edge})")
+            lines.append(f"        {'; '.join(locs)}")
+
+    if disclosure:
+        lines.append("")
+        lines.append(f"  Disclosure set ({len(disclosure)} field(s) to expose):")
+        for i, (tool, field) in enumerate(disclosure, 1):
+            lines.append(f"    {i}. {tool}.{field}")
+    elif diag.coherence_fee == 0:
+        lines.append("")
+        lines.append("  No disclosures needed.")
+
+    if basis is not None:
+        lines.append("")
+        lines.append(
+            f"  Witness basis: {basis.declared} declared, "
+            f"{basis.inferred} inferred, {basis.unknown} unknown"
+        )
+
+    lines.append("")
+    return "\n".join(lines)
+
+
+def _audit_json(
+    server_results: list,
+    diag: "Diagnostic",
+    disclosure: list[tuple[str, str]],
+    basis: "WitnessBasis | None",
+    decomposition: "FeeDecomposition | None",
+) -> str:
+    from datetime import datetime, timezone as tz
+
+    servers_out = []
+    for r in server_results:
+        entry: dict = {"name": r.name, "status": "ok" if r.ok else "failed"}
+        if r.ok:
+            entry["tools_count"] = len(r.tools)
+        if r.error:
+            entry["error"] = r.error
+        servers_out.append(entry)
+
+    obj: dict = {
+        "name": "audit",
+        "bulla_version": __version__,
+        "timestamp": datetime.now(tz.utc).isoformat(),
+        "servers": servers_out,
+        "topology": {
+            "tools": diag.n_tools,
+            "edges": diag.n_edges,
+            "betti_1": diag.betti_1,
+        },
+        "coherence_fee": diag.coherence_fee,
+        "blind_spots_count": len(diag.blind_spots),
+        "bridges_count": len(diag.bridges),
+        "n_unbridged": diag.n_unbridged,
+        "disclosure_set": [[t, f] for t, f in disclosure],
+        "witness_basis": basis.to_dict() if basis is not None else None,
+    }
+    if decomposition:
+        obj["cross_server_decomposition"] = {
+            "intra_server_fee": sum(decomposition.local_fees),
+            "boundary_fee": decomposition.boundary_fee,
+            "local_fees": list(decomposition.local_fees),
+            "partition": [sorted(g) for g in decomposition.partition],
+        }
+    return json.dumps(obj, indent=2)
+
+
+def _cmd_audit(args: argparse.Namespace) -> None:
+    _configure_packs_from_args(args)
+    from bulla.config import ConfigError, McpServerEntry, find_mcp_config, parse_mcp_config
+    from bulla.diagnostic import decompose_fee, prescriptive_disclosure
+    from bulla.guard import BullaGuard, _composition_from_mcp_tools
+    from bulla.scan import ServerScanResult, scan_mcp_servers_parallel
+
+    config_path = getattr(args, "config", None)
+    if config_path is None:
+        config_path = find_mcp_config()
+        if config_path is None:
+            print(
+                "Error: No MCP config found. Provide a config file path or "
+                "create ~/.cursor/mcp.json",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        print(f"Auto-detected config: {config_path}", file=sys.stderr)
+
+    try:
+        entries = parse_mcp_config(config_path)
+    except ConfigError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    if not entries:
+        print("Error: No stdio MCP servers found in config.", file=sys.stderr)
+        sys.exit(1)
+
+    servers_cfg = {
+        e.name: {"command": e.command, "env": e.env or None}
+        for e in entries
+    }
+    results = scan_mcp_servers_parallel(servers_cfg)
+
+    skip_failed = getattr(args, "skip_failed", True)
+    ok_results = [r for r in results if r.ok]
+    failed = [r for r in results if not r.ok]
+
+    if not ok_results:
+        if not skip_failed and failed:
+            print(f"Error: All {len(failed)} server(s) failed.", file=sys.stderr)
+            for r in failed:
+                print(f"  {r.name}: {r.error}", file=sys.stderr)
+            sys.exit(1)
+        print("Error: No servers scanned successfully.", file=sys.stderr)
+        sys.exit(1)
+
+    all_tools: list[dict] = []
+    tool_to_server: dict[str, str] = {}
+    for r in ok_results:
+        for tool in r.tools:
+            raw_name = tool.get("name", "unknown_tool")
+            safe_name = raw_name.replace("-", "_").replace(" ", "_")
+            tool_to_server[safe_name] = r.name
+        all_tools.extend(r.tools)
+
+    comp, basis = _composition_from_mcp_tools(all_tools, name="audit")
+    from bulla.diagnostic import diagnose
+    diag = diagnose(comp)
+
+    disclosure = prescriptive_disclosure(comp, diag.coherence_fee)
+
+    decomposition = None
+    if len(ok_results) > 1:
+        server_names_set = {r.name for r in ok_results}
+        partition = []
+        for sr in ok_results:
+            tools_in_server = frozenset(
+                t_name for t_name, s_name in tool_to_server.items()
+                if s_name == sr.name
+            )
+            if tools_in_server:
+                partition.append(tools_in_server)
+        all_tool_names = {t.name for t in comp.tools}
+        covered = frozenset().union(*partition) if partition else frozenset()
+        uncovered = all_tool_names - covered
+        if uncovered:
+            partition.append(frozenset(uncovered))
+        if len(partition) > 1:
+            decomposition = decompose_fee(comp, partition)
+
+    fmt = getattr(args, "format", "text")
+    verbose = getattr(args, "verbose", False)
+    if fmt == "json":
+        print(_audit_json(results, diag, disclosure, basis, decomposition))
+    else:
+        print(_audit_text(results, diag, disclosure, basis, decomposition, verbose=verbose))
+
+    output_comp = getattr(args, "output_composition", None)
+    if output_comp:
+        guard = BullaGuard(comp, witness_basis=basis)
+        guard.to_yaml(output_comp)
+        print(f"Wrote composition to {output_comp}", file=sys.stderr)
+
+    _gauge_threshold_check(diag, args)
+
+
 def _cmd_scan(args: argparse.Namespace) -> None:
     _configure_packs_from_args(args)
     from bulla.guard import BullaGuard
@@ -859,6 +1080,48 @@ def main() -> None:
     _add_pack_args(p_gauge)
     p_gauge.set_defaults(func=_cmd_gauge)
 
+    # ── audit ──────────────────────────────────────────────────────────
+    p_audit = subparsers.add_parser(
+        "audit",
+        help="Audit all MCP servers in a config file (cross-server diagnosis)",
+    )
+    p_audit.add_argument(
+        "config", nargs="?", type=Path, default=None,
+        help="MCP config JSON file (default: auto-detect)",
+    )
+    p_audit.add_argument(
+        "--format",
+        choices=["text", "json"],
+        default="text",
+        help="Output format (default: text)",
+    )
+    p_audit.add_argument(
+        "-o", "--output-composition", type=Path, metavar="FILE",
+        help="Save combined composition YAML to file",
+    )
+    p_audit.add_argument(
+        "--max-fee", type=int, default=None, metavar="N",
+        help="Exit 1 if coherence fee exceeds N (CI gating)",
+    )
+    p_audit.add_argument(
+        "--max-blind-spots", type=int, default=None, metavar="N",
+        help="Exit 1 if blind spots exceed N (CI gating)",
+    )
+    p_audit.add_argument(
+        "-v", "--verbose", action="store_true",
+        help="Show full blind spot details",
+    )
+    p_audit.add_argument(
+        "--skip-failed", action="store_true", default=True,
+        help="Continue when individual servers fail (default: true)",
+    )
+    p_audit.add_argument(
+        "--no-skip-failed", action="store_false", dest="skip_failed",
+        help="Fail if any server cannot be scanned",
+    )
+    _add_pack_args(p_audit)
+    p_audit.set_defaults(func=_cmd_audit)
+
     # ── manifest ──────────────────────────────────────────────────────
     p_manifest = subparsers.add_parser(
         "manifest",
@@ -955,6 +1218,7 @@ def main() -> None:
     if not args.command:
         print(f"bulla {__version__} — witness kernel for agent tool compositions\n")
         print("Quick start:")
+        print("  bulla audit                    # audit all MCP servers in your config")
         print("  bulla gauge tools.json         # diagnose manifest with disclosure set")
         print("  bulla gauge --mcp-server 'python -m my_server'  # diagnose live server")
         print("  bulla diagnose --examples      # try bundled compositions")

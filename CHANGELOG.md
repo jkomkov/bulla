@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.18.0
+
+### Added
+- **`bulla audit`**: New CLI subcommand that reads MCP configuration files (Cursor/Claude Desktop format), scans all configured servers in parallel, builds a cross-server composition graph, and diagnoses the combined system. Features:
+  - Auto-detection of MCP config in standard locations (`.cursor/mcp.json`, `~/.cursor/mcp.json`, Claude Desktop config)
+  - Parallel scanning via `ThreadPoolExecutor` with per-server error isolation
+  - Cross-server risk decomposition using `decompose_fee()` -- partitions blind spots into intra-server (within individual servers) vs boundary fee (between servers)
+  - Text and JSON output formats, CI gating with `--max-fee` / `--max-blind-spots`, `--verbose` for detailed blind spot listing
+  - `--skip-failed` / `--no-skip-failed` for controlling failure behavior
+- **`scan_mcp_servers_parallel()`**: New parallel scanner in `scan.py` using `ThreadPoolExecutor`. Returns `list[ServerScanResult]` with per-server success/failure instead of aborting on first error.
+- **`ServerScanResult`**: New dataclass in `scan.py` for structured scan results with `name`, `tools`, `error`, and `ok` property.
+- **`bulla.config` module**: New module with `McpServerEntry`, `parse_mcp_config()`, and `find_mcp_config()` for parsing Cursor/Claude Desktop MCP configuration files. Supports stdio servers, skips HTTP/SSE transport with warnings.
+- **`env` parameter on `scan_mcp_server()`**: Optional environment variable dict merged with `os.environ` before spawning, enabling API key passthrough from MCP configs.
+- 12 new tests (561 total): config parser (5), parallel scan (2), audit CLI text/JSON/threshold/failed-server (5).
+
+### Changed
+- CLI quick-start help now shows `bulla audit` as the first command.
+
 ## 0.17.0
 
 ### Added
