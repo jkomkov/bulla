@@ -12,6 +12,8 @@ import subprocess
 import sys
 from typing import Any
 
+from bulla import __version__
+
 
 class ScanError(Exception):
     """Raised when the scanner cannot communicate with the MCP server."""
@@ -97,7 +99,7 @@ def scan_mcp_server(command: str, *, timeout: float = 10.0) -> list[dict[str, An
         _send_request(proc, "initialize", {
             "protocolVersion": "2024-11-05",
             "capabilities": {},
-            "clientInfo": {"name": "bulla", "version": "0.7.0"},
+            "clientInfo": {"name": "bulla", "version": __version__},
         }, msg_id=1)
 
         _send_notification(proc, "notifications/initialized")

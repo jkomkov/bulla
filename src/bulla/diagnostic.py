@@ -292,6 +292,21 @@ class ConditionalDiagnostic:
     extended_comp: Composition | None = None
 
 
+def prescriptive_disclosure(
+    comp: Composition, fee: int
+) -> list[tuple[str, str]]:
+    """Return the minimum disclosure set if fee > 0, else empty list.
+
+    This is the canonical lazy guard: when ``fee`` is already known to be
+    zero, it skips the coboundary matrix construction entirely.  Both
+    the MCP surface (``serve.py``) and the CLI (``bulla gauge``) should
+    call this rather than duplicating the ``if fee > 0`` check.
+    """
+    if fee <= 0:
+        return []
+    return minimum_disclosure_set(comp)
+
+
 def minimum_disclosure_set(
     comp: Composition,
 ) -> list[tuple[str, str]]:

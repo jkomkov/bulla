@@ -26,7 +26,28 @@ Three layers, cleanly separated:
 
 The measurement layer has **zero imports** from the witness layer. Measurement does not know it is being witnessed.
 
-## Quick start
+## Quick start with `bulla gauge`
+
+The fastest way to diagnose an MCP server or tool manifest:
+
+```bash
+# Diagnose a live MCP server
+bulla gauge --mcp-server "python -m my_mcp_server"
+
+# Diagnose from a manifest JSON (tools/list response)
+bulla gauge tools.json
+
+# Save the inferred composition for hand-editing
+bulla gauge tools.json -o composition.yaml
+bulla diagnose composition.yaml     # re-diagnose after edits
+
+# CI gating: fail if coherence fee exceeds threshold
+bulla gauge tools.json --max-fee 0
+```
+
+`bulla gauge` returns the coherence fee, minimum disclosure set (the exact fields to expose to eliminate all blind spots), and witness basis in a single command.
+
+## Other commands
 
 ```bash
 bulla diagnose --examples          # run on bundled compositions

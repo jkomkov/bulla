@@ -129,6 +129,50 @@ class TestSarifStructure:
         assert "timestamp" in inv["properties"]
 
 
+class TestGaugeCommand:
+    MANIFEST = Path(__file__).parent / "fixtures" / "sample_mcp_manifest.json"
+
+    def test_gauge_text_output(self):
+        r = _run("gauge", str(self.MANIFEST))
+        assert r.returncode == 0
+        assert "Coherence fee:" in r.stdout
+        assert "Disclosure set" in r.stdout
+        assert "Witness basis:" in r.stdout
+
+    def test_gauge_json_output(self):
+        r = _run("gauge", "--format", "json", str(self.MANIFEST))
+        assert r.returncode == 0
+        data = json.loads(r.stdout)
+        assert "disclosure_set" in data
+        assert "witness_basis" in data
+        assert "coherence_fee" in data
+        assert isinstance(data["disclosure_set"], list)
+
+    def test_gauge_threshold_fail(self):
+        r = _run("gauge", "--max-fee", "0", str(self.MANIFEST))
+        assert r.returncode == 1
+        assert "FAIL" in r.stderr
+
+    def test_gauge_threshold_pass(self):
+        r = _run("gauge", "--max-fee", "999", str(self.MANIFEST))
+        assert r.returncode == 0
+
+    def test_gauge_blind_spots_threshold(self):
+        r = _run("gauge", "--max-blind-spots", "0", str(self.MANIFEST))
+        assert r.returncode == 1
+        assert "FAIL" in r.stderr
+
+    def test_gauge_output_composition_roundtrip(self, tmp_path):
+        out_file = tmp_path / "comp.yaml"
+        r = _run("gauge", "-o", str(out_file), str(self.MANIFEST))
+        assert r.returncode == 0
+        assert out_file.exists()
+        from bulla.parser import load_composition
+        comp = load_composition(out_file)
+        assert comp.name == "inferred-from-sample_mcp_manifest"
+        assert len(comp.tools) > 0
+
+
 class TestVersionFlag:
     def test_version(self):
         r = _run("--version")

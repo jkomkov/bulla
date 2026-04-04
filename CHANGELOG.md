@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.17.0
+
+### Added
+- **`bulla gauge`**: New CLI subcommand for prescriptive diagnosis of MCP servers and manifests. Accepts a manifest JSON file or `--mcp-server CMD` to diagnose a live server. Returns coherence fee, minimum disclosure set (exact fields to expose), and witness basis in a single command. Supports `--format text|json|sarif`, `--output-composition FILE` to save inferred YAML, CI gating flags `--max-fee N` / `--max-blind-spots N` (exit 1 on violation), and `--verbose` for full blind spot detail and bridge recommendations.
+- **`prescriptive_disclosure()`**: New helper in `diagnostic.py` that encapsulates the lazy disclosure guard (skip coboundary construction when fee=0). Used by both the MCP surface (`serve.py`) and the CLI (`bulla gauge`), eliminating the duplicated `if fee > 0` pattern.
+- 6 new tests (549 total): gauge text/JSON output, threshold pass/fail, blind spots threshold, composition round-trip.
+
+### Fixed
+- **`scan.py` clientInfo version**: Replaced hardcoded `"version": "0.7.0"` with `__version__` import. The MCP initialize handshake now reports the correct Bulla version.
+- **`formatters.py` residual string parsing**: Replaced 4 `bs.edge.split(" → ")` calls in `format_text` and `format_sarif` with `bs.from_tool` / `bs.to_tool`, eliminating the same fragile pattern fixed in `diagnostic.py` in v0.16.
+- **LangGraph demo dimension naming**: Renamed confusing dimension names `threshold_currency` → `amount_rounding` and `jurisdiction` → `regulatory_framework` to better represent the semantic conventions being measured.
+- **Dead code**: Removed unused `from bulla.model import Diagnostic, WitnessBasis` imports from gauge formatter functions.
+
+### Changed
+- **README**: Added "Quick start with `bulla gauge`" section as the primary entry point, showing manifest and live-server usage patterns.
+- **CLI help text**: Updated quick-start listing to feature `bulla gauge` first.
+
 ## 0.16.0
 
 ### Added

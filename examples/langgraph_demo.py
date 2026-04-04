@@ -133,7 +133,7 @@ EDGE_CONVENTIONS: list[dict[str, Any]] = [
         "from": "currency_convert",
         "to": "compliance_check",
         "dimensions": [
-            {"name": "threshold_currency", "from_field": "converted_amount",
+            {"name": "amount_rounding", "from_field": "converted_amount",
              "to_field": "threshold_currency"},
         ],
     },
@@ -141,7 +141,7 @@ EDGE_CONVENTIONS: list[dict[str, Any]] = [
         "from": "compliance_check",
         "to": "risk_assess",
         "dimensions": [
-            {"name": "jurisdiction", "from_field": "jurisdiction",
+            {"name": "regulatory_framework", "from_field": "jurisdiction",
              "to_field": "risk_model_version"},
         ],
     },

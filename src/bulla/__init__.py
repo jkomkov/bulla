@@ -1,6 +1,6 @@
 """bulla: Witness kernel for agent tool compositions — diagnose, attest, seal."""
 
-__version__ = "0.16.0"
+__version__ = "0.17.0"
 
 from bulla.model import (
     BlindSpot,
@@ -30,6 +30,7 @@ from bulla.diagnostic import (
     decompose_fee,
     diagnose,
     minimum_disclosure_set,
+    prescriptive_disclosure,
     resolve_conditional,
     satisfies_obligations,
 )
@@ -73,6 +74,7 @@ __all__ = [
     "decompose_fee",
     "diagnose",
     "minimum_disclosure_set",
+    "prescriptive_disclosure",
     "resolve_conditional",
     "satisfies_obligations",
     "load_composition",

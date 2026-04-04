@@ -26,7 +26,7 @@ from typing import Any
 import yaml
 
 from bulla import __version__
-from bulla.diagnostic import decompose_fee, diagnose, minimum_disclosure_set
+from bulla.diagnostic import decompose_fee, diagnose, prescriptive_disclosure
 from bulla.model import (
     DEFAULT_POLICY_PROFILE,
     PolicyProfile,
@@ -421,12 +421,10 @@ def _handle_witness(args: dict) -> dict:
     )
     result = receipt.to_dict()
 
-    if receipt.fee > 0:
-        result["disclosure_set"] = [
-            [tool, field] for tool, field in minimum_disclosure_set(comp)
-        ]
-    else:
-        result["disclosure_set"] = []
+    result["disclosure_set"] = [
+        [tool, field]
+        for tool, field in prescriptive_disclosure(comp, receipt.fee)
+    ]
 
     raw_partition = args.get("partition")
     if raw_partition:

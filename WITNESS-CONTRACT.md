@@ -114,6 +114,10 @@ where `boundary_fee = rho_full - rho_obs >= 0` is the rank contribution of cross
 
 When the optional `partition` parameter is provided (array of arrays of tool name strings), the output includes a `decomposition` field with `total_fee`, `local_fees`, `boundary_fee`, `rho_obs`, `rho_full`, `boundary_edges`. The decomposition field is absent when partition is not provided, preserving backward compatibility.
 
+## CLI Surface: `bulla gauge`
+
+`bulla gauge` is the live-server/manifest analog of `bulla check`. Where `check` operates on hand-authored YAML compositions and enforces CI gates, `gauge` operates on live MCP servers or manifest JSON files (the `tools/list` response) and produces prescriptive output: coherence fee, minimum disclosure set, and witness basis. It combines inference (`scan` + `infer`) and diagnosis (`diagnose`) into a single command for the 30-second adoption experience. CI gating flags (`--max-fee`, `--max-blind-spots`) mirror `check`'s exit-code semantics.
+
 ## `max_unknown` Definition
 
 A convention dimension is **unknown** when it is relevant to the composition but could not be assigned a `declared` or `inferred` value under the active packs. `max_unknown` bounds the number of such dimensions a policy will tolerate before refusing.

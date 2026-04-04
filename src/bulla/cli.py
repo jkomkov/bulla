@@ -501,6 +501,175 @@ def _cmd_serve() -> None:
     run_server()
 
 
+# ── gauge ─────────────────────────────────────────────────────────────
+
+
+def _gauge_text(
+    diag: "Diagnostic",
+    disclosure: list[tuple[str, str]],
+    basis: "WitnessBasis | None",
+    verbose: bool = False,
+) -> str:
+    lines: list[str] = []
+    lines.append("")
+    lines.append(f"  {diag.name}")
+    lines.append(f"  {'─' * len(diag.name)}")
+    lines.append(f"  {diag.n_tools} tools, {diag.n_edges} edges")
+    lines.append("")
+    lines.append(f"  Coherence fee:  {diag.coherence_fee}")
+    lines.append(f"  Blind spots:    {len(diag.blind_spots)}")
+    lines.append(f"  Bridges:        {len(diag.bridges)}")
+
+    if verbose and diag.blind_spots:
+        lines.append("")
+        lines.append(f"  Blind spot detail ({len(diag.blind_spots)}):")
+        for i, bs in enumerate(diag.blind_spots, 1):
+            locs: list[str] = []
+            if bs.from_hidden:
+                locs.append(f"{bs.from_field} hidden at {bs.from_tool}")
+            if bs.to_hidden:
+                locs.append(f"{bs.to_field} hidden at {bs.to_tool}")
+            lines.append(f"    [{i}] {bs.dimension} ({bs.edge})")
+            lines.append(f"        {'; '.join(locs)}")
+
+    if disclosure:
+        lines.append("")
+        lines.append(f"  Disclosure set ({len(disclosure)} field(s) to expose):")
+        for i, (tool, field) in enumerate(disclosure, 1):
+            lines.append(f"    {i}. {tool}.{field}")
+    elif diag.coherence_fee == 0:
+        lines.append("")
+        lines.append("  No disclosures needed.")
+
+    if verbose and diag.bridges:
+        from bulla.model import Bridge
+        seen_fields: set[str] = set()
+        unique_bridges: list[Bridge] = []
+        for br in diag.bridges:
+            if br.field not in seen_fields:
+                merged: list[str] = []
+                for b2 in diag.bridges:
+                    if b2.field == br.field:
+                        for t in b2.add_to:
+                            if t not in merged:
+                                merged.append(t)
+                unique_bridges.append(
+                    Bridge(field=br.field, add_to=merged, eliminates=br.eliminates)
+                )
+                seen_fields.add(br.field)
+        lines.append("")
+        lines.append("  Recommended bridges:")
+        for i, br in enumerate(unique_bridges, 1):
+            tools_str = " and ".join(f"F({t})" for t in br.add_to)
+            lines.append(f"    [{i}] Add '{br.field}' to {tools_str}")
+
+    if basis is not None:
+        lines.append("")
+        lines.append(
+            f"  Witness basis: {basis.declared} declared, "
+            f"{basis.inferred} inferred, {basis.unknown} unknown"
+        )
+
+    lines.append("")
+    return "\n".join(lines)
+
+
+def _gauge_json(
+    diag: "Diagnostic",
+    disclosure: list[tuple[str, str]],
+    basis: "WitnessBasis | None",
+) -> str:
+    from datetime import datetime, timezone as tz
+
+    obj: dict = {
+        "name": diag.name,
+        "bulla_version": __version__,
+        "timestamp": datetime.now(tz.utc).isoformat(),
+        "topology": {
+            "tools": diag.n_tools,
+            "edges": diag.n_edges,
+            "betti_1": diag.betti_1,
+        },
+        "coherence_fee": diag.coherence_fee,
+        "blind_spots_count": len(diag.blind_spots),
+        "bridges_count": len(diag.bridges),
+        "n_unbridged": diag.n_unbridged,
+        "disclosure_set": [[t, f] for t, f in disclosure],
+        "witness_basis": basis.to_dict() if basis is not None else None,
+        "blind_spots": [
+            {
+                "dimension": bs.dimension,
+                "edge": bs.edge,
+                "from_tool": bs.from_tool,
+                "to_tool": bs.to_tool,
+                "from_field": bs.from_field,
+                "to_field": bs.to_field,
+                "from_hidden": bs.from_hidden,
+                "to_hidden": bs.to_hidden,
+            }
+            for bs in diag.blind_spots
+        ],
+    }
+    return json.dumps(obj, indent=2)
+
+
+def _gauge_threshold_check(
+    diag: "Diagnostic", args: argparse.Namespace
+) -> None:
+    violations: list[str] = []
+    max_fee = getattr(args, "max_fee", None)
+    max_bs = getattr(args, "max_blind_spots", None)
+    if max_fee is not None and diag.coherence_fee > max_fee:
+        violations.append(
+            f"fee {diag.coherence_fee} exceeds --max-fee {max_fee}"
+        )
+    if max_bs is not None and len(diag.blind_spots) > max_bs:
+        violations.append(
+            f"{len(diag.blind_spots)} blind spot(s) exceeds "
+            f"--max-blind-spots {max_bs}"
+        )
+    if violations:
+        for v in violations:
+            print(f"FAIL: {v}", file=sys.stderr)
+        sys.exit(1)
+
+
+def _cmd_gauge(args: argparse.Namespace) -> None:
+    _configure_packs_from_args(args)
+    from bulla.guard import BullaGuard
+    from bulla.scan import ScanError
+
+    try:
+        if getattr(args, "mcp_server", None):
+            guard = BullaGuard.from_mcp_server(args.mcp_server)
+        else:
+            guard = BullaGuard.from_mcp_manifest(args.manifest)
+    except (ScanError, ValueError, FileNotFoundError) as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    diag = guard.diagnose()
+
+    from bulla.diagnostic import prescriptive_disclosure
+    disclosure = prescriptive_disclosure(guard.composition, diag.coherence_fee)
+
+    fmt = getattr(args, "format", "text")
+    verbose = getattr(args, "verbose", False)
+    if fmt == "json":
+        print(_gauge_json(diag, disclosure, guard.witness_basis))
+    elif fmt == "sarif":
+        print(guard.to_sarif())
+    else:
+        print(_gauge_text(diag, disclosure, guard.witness_basis, verbose=verbose))
+
+    output_comp = getattr(args, "output_composition", None)
+    if output_comp:
+        guard.to_yaml(output_comp)
+        print(f"Wrote composition to {output_comp}", file=sys.stderr)
+
+    _gauge_threshold_check(diag, args)
+
+
 def _cmd_scan(args: argparse.Namespace) -> None:
     _configure_packs_from_args(args)
     from bulla.guard import BullaGuard
@@ -651,6 +820,45 @@ def main() -> None:
     _add_pack_args(p_scan)
     p_scan.set_defaults(func=_cmd_scan)
 
+    # ── gauge ──────────────────────────────────────────────────────────
+    p_gauge = subparsers.add_parser(
+        "gauge",
+        help="Diagnose an MCP server or manifest with prescriptive disclosure",
+    )
+    gauge_input = p_gauge.add_mutually_exclusive_group(required=True)
+    gauge_input.add_argument(
+        "manifest", nargs="?", type=Path, default=None,
+        help="MCP manifest JSON file",
+    )
+    gauge_input.add_argument(
+        "--mcp-server", metavar="CMD",
+        help="Shell command to start MCP server",
+    )
+    p_gauge.add_argument(
+        "--format",
+        choices=["text", "json", "sarif"],
+        default="text",
+        help="Output format (default: text)",
+    )
+    p_gauge.add_argument(
+        "-o", "--output-composition", type=Path, metavar="FILE",
+        help="Save inferred composition YAML to file",
+    )
+    p_gauge.add_argument(
+        "--max-fee", type=int, default=None, metavar="N",
+        help="Exit 1 if coherence fee exceeds N (CI gating)",
+    )
+    p_gauge.add_argument(
+        "--max-blind-spots", type=int, default=None, metavar="N",
+        help="Exit 1 if blind spots exceed N (CI gating)",
+    )
+    p_gauge.add_argument(
+        "-v", "--verbose", action="store_true",
+        help="Show full blind spot details and bridge recommendations",
+    )
+    _add_pack_args(p_gauge)
+    p_gauge.set_defaults(func=_cmd_gauge)
+
     # ── manifest ──────────────────────────────────────────────────────
     p_manifest = subparsers.add_parser(
         "manifest",
@@ -747,7 +955,9 @@ def main() -> None:
     if not args.command:
         print(f"bulla {__version__} — witness kernel for agent tool compositions\n")
         print("Quick start:")
-        print("  bulla diagnose --examples     # try bundled compositions")
+        print("  bulla gauge tools.json         # diagnose manifest with disclosure set")
+        print("  bulla gauge --mcp-server 'python -m my_server'  # diagnose live server")
+        print("  bulla diagnose --examples      # try bundled compositions")
         print("  bulla diagnose my-comp.yaml    # diagnose your own")
         print("  bulla check compositions/      # CI gate (exit 1 on blind spots)")
         print("  bulla bridge comp.yaml -o bridged.yaml  # auto-bridge blind spots")

@@ -68,14 +68,11 @@ def format_text(d: Diagnostic) -> str:
             lines.append("")
         lines.append(f"  Blind spots ({len(d.blind_spots)}):")
         for i, bs in enumerate(d.blind_spots, 1):
-            edge_parts = bs.edge.split(" \u2192 ")
             locs: list[str] = []
             if bs.from_hidden:
-                src = edge_parts[0]
-                locs.append(f"{bs.from_field} \u2208 S\\F at {src}")
+                locs.append(f"{bs.from_field} \u2208 S\\F at {bs.from_tool}")
             if bs.to_hidden:
-                dst = edge_parts[1] if len(edge_parts) > 1 else edge_parts[0]
-                locs.append(f"{bs.to_field} \u2208 S\\F at {dst}")
+                locs.append(f"{bs.to_field} \u2208 S\\F at {bs.to_tool}")
             lines.append(f"    [{i}] {bs.dimension} ({bs.edge})")
             lines.append(f"        {'; '.join(locs)}")
         lines.append("")
@@ -199,14 +196,11 @@ def format_sarif(
     for diag, path in diagnostics:
         file_hash = _file_sha256(path) if path.exists() else "N/A"
         for bs in diag.blind_spots:
-            edge_parts = bs.edge.split(" \u2192 ")
             locs: list[str] = []
             if bs.from_hidden:
-                src = edge_parts[0]
-                locs.append(f"'{bs.from_field}' is hidden at {src}")
+                locs.append(f"'{bs.from_field}' is hidden at {bs.from_tool}")
             if bs.to_hidden:
-                dst = edge_parts[1] if len(edge_parts) > 1 else edge_parts[0]
-                locs.append(f"'{bs.to_field}' is hidden at {dst}")
+                locs.append(f"'{bs.to_field}' is hidden at {bs.to_tool}")
             results.append(
                 {
                     "ruleId": "bulla/blind-spot",
