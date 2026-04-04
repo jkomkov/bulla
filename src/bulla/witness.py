@@ -18,6 +18,7 @@ from datetime import datetime, timezone
 
 from bulla import __version__
 from bulla.model import (
+    BoundaryObligation,
     BridgePatch,
     Composition,
     DEFAULT_POLICY_PROFILE,
@@ -91,6 +92,7 @@ def witness(
     active_packs: tuple[PackRef, ...] = (),
     witness_basis: WitnessBasis | None = None,
     inline_dimensions: dict | None = None,
+    boundary_obligations: tuple[BoundaryObligation, ...] | None = None,
 ) -> WitnessReceipt:
     """Produce a WitnessReceipt from a Diagnostic and Composition.
 
@@ -145,6 +147,7 @@ def witness(
         active_packs=active_packs,
         witness_basis=witness_basis,
         inline_dimensions=inline_dimensions,
+        boundary_obligations=boundary_obligations,
     )
 
 

@@ -17,6 +17,8 @@ import copy
 import fnmatch
 from dataclasses import dataclass
 
+from bulla.model import BoundaryObligation
+
 
 @dataclass(frozen=True)
 class OverlapReport:
@@ -122,3 +124,32 @@ def _intersect_glob_patterns(
                 if canonical not in shared:
                     shared.append(canonical)
     return shared
+
+
+def merge_receipt_obligations(
+    receipts: list[dict],
+) -> tuple[BoundaryObligation, ...] | None:
+    """Accumulate obligations from all parent receipts.
+
+    Unlike vocabulary merge (precedence: later wins), obligation
+    merge is ADDITIVE: all parent obligations survive.  Duplicates
+    (same ``placeholder_tool``, ``dimension``, ``field``) are
+    deduplicated; the first ``source_edge`` encountered is kept.
+
+    Returns ``None`` if no receipts carry obligations.
+    """
+    seen: dict[tuple[str, str, str], BoundaryObligation] = {}
+    for r in receipts:
+        obl_dicts = r.get("boundary_obligations")
+        if not obl_dicts:
+            continue
+        for o in obl_dicts:
+            key = (o["placeholder_tool"], o["dimension"], o["field"])
+            if key not in seen:
+                seen[key] = BoundaryObligation(
+                    placeholder_tool=o["placeholder_tool"],
+                    dimension=o["dimension"],
+                    field=o["field"],
+                    source_edge=o.get("source_edge", ""),
+                )
+    return tuple(seen.values()) if seen else None

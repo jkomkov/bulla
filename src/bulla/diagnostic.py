@@ -362,6 +362,110 @@ def minimum_disclosure_set(
     return disclosures
 
 
+def boundary_obligations_from_decomposition(
+    comp: Composition,
+    partition: list[frozenset[str]],
+    diag: Diagnostic,
+) -> tuple[BoundaryObligation, ...]:
+    """Extract boundary obligations from cross-partition blind spots.
+
+    For each blind spot on a cross-partition edge where a field is
+    hidden, produce a ``BoundaryObligation``.  The ``placeholder_tool``
+    is the server group name (derived from tool name prefix), not the
+    specific tool name.
+
+    This does NOT use ``conditional_diagnose`` (which requires explicit
+    open ports).  It uses the existing decomposition + blind spot data
+    from a full-composition diagnostic.
+
+    Deduplicates on ``(placeholder_tool, dimension, field)``; the first
+    ``source_edge`` encountered is kept. ``source_edge`` is informational
+    provenance, not semantic identity.
+    """
+    tool_to_group: dict[str, str] = {}
+    for group_idx, group in enumerate(partition):
+        prefix = None
+        for t_name in sorted(group):
+            parts = t_name.split("__", 1)
+            if len(parts) == 2:
+                prefix = parts[0]
+                break
+        group_label = prefix if prefix else f"group_{group_idx}"
+        for t_name in group:
+            tool_to_group[t_name] = group_label
+
+    seen: dict[tuple[str, str, str], BoundaryObligation] = {}
+    for bs in diag.blind_spots:
+        if not bs.from_tool or not bs.to_tool:
+            continue
+        g_from = tool_to_group.get(bs.from_tool)
+        g_to = tool_to_group.get(bs.to_tool)
+        if g_from is None or g_to is None or g_from == g_to:
+            continue
+
+        edge_label = f"{bs.from_tool} -> {bs.to_tool}"
+        if bs.from_hidden:
+            key = (g_from, bs.dimension, bs.from_field)
+            if key not in seen:
+                seen[key] = BoundaryObligation(
+                    placeholder_tool=g_from,
+                    dimension=bs.dimension,
+                    field=bs.from_field,
+                    source_edge=edge_label,
+                )
+        if bs.to_hidden:
+            key = (g_to, bs.dimension, bs.to_field)
+            if key not in seen:
+                seen[key] = BoundaryObligation(
+                    placeholder_tool=g_to,
+                    dimension=bs.dimension,
+                    field=bs.to_field,
+                    source_edge=edge_label,
+                )
+
+    return tuple(seen.values())
+
+
+def check_obligations(
+    obligations: tuple[BoundaryObligation, ...],
+    comp: Composition,
+) -> tuple[
+    tuple[BoundaryObligation, ...],
+    tuple[BoundaryObligation, ...],
+    tuple[BoundaryObligation, ...],
+]:
+    """Check which obligations the current composition satisfies.
+
+    Returns ``(met, unmet, irrelevant)``:
+
+    - **met**: field is in some tool's ``observable_schema``
+    - **unmet**: field is in some tool's ``internal_state`` but NOT
+      in ``observable_schema``
+    - **irrelevant**: no tool in the composition has the field at all
+
+    v0.25.0: three-way classification.  Future: add ``contradictory``
+    when multi-parent merges produce conflicting obligations.
+    """
+    all_observable: set[str] = set()
+    all_internal: set[str] = set()
+    for t in comp.tools:
+        all_observable.update(t.observable_schema)
+        all_internal.update(t.internal_state)
+
+    met: list[BoundaryObligation] = []
+    unmet: list[BoundaryObligation] = []
+    irrelevant: list[BoundaryObligation] = []
+    for obl in obligations:
+        if obl.field in all_observable:
+            met.append(obl)
+        elif obl.field in all_internal:
+            unmet.append(obl)
+        else:
+            irrelevant.append(obl)
+
+    return tuple(met), tuple(unmet), tuple(irrelevant)
+
+
 def satisfies_obligations(
     tool: ToolSpec,
     obligations: tuple[BoundaryObligation, ...],

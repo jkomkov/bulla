@@ -681,6 +681,8 @@ def _audit_text(
     basis: "WitnessBasis | None",
     decomposition: "FeeDecomposition | None",
     verbose: bool = False,
+    own_obligations: tuple | None = None,
+    obligation_check: dict | None = None,
 ) -> str:
     ok_count = sum(1 for r in server_results if r.ok)
     fail_count = sum(1 for r in server_results if not r.ok)
@@ -746,6 +748,30 @@ def _audit_text(
             f"{basis.inferred} inferred, {basis.unknown} unknown{disc_str}"
         )
 
+    if own_obligations:
+        bf = decomposition.boundary_fee if decomposition else "?"
+        lines.append("")
+        lines.append(f"  Obligations ({len(own_obligations)} from boundary_fee={bf}):")
+        for obl in own_obligations:
+            lines.append(
+                f"    - {obl.dimension}: field \"{obl.field}\" hidden in "
+                f"{obl.placeholder_tool} group ({obl.source_edge})"
+            )
+
+    if obligation_check:
+        lines.append("")
+        lines.append(f"  Parent obligations: {obligation_check['parent_total']}")
+        met_dims = ", ".join(o["dimension"] for o in obligation_check["met_obligations"])
+        unmet_dims = ", ".join(
+            f"{o['dimension']} -- propagated"
+            for o in obligation_check["unmet_obligations"]
+        )
+        lines.append(f"    Met: {obligation_check['met']}"
+                      + (f" ({met_dims})" if met_dims else ""))
+        lines.append(f"    Unmet: {obligation_check['unmet']}"
+                      + (f" ({unmet_dims})" if unmet_dims else ""))
+        lines.append(f"    Irrelevant: {obligation_check['irrelevant']}")
+
     lines.append("")
     return "\n".join(lines)
 
@@ -756,6 +782,8 @@ def _audit_json(
     disclosure: list[tuple[str, str]],
     basis: "WitnessBasis | None",
     decomposition: "FeeDecomposition | None",
+    own_obligations: tuple | None = None,
+    obligation_check: dict | None = None,
 ) -> str:
     from datetime import datetime, timezone as tz
 
@@ -792,6 +820,10 @@ def _audit_json(
             "local_fees": list(decomposition.local_fees),
             "partition": [sorted(g) for g in decomposition.partition],
         }
+    if own_obligations:
+        obj["boundary_obligations"] = [o.to_dict() for o in own_obligations]
+    if obligation_check:
+        obj["obligation_check"] = obligation_check
     return json.dumps(obj, indent=2)
 
 
@@ -818,7 +850,12 @@ def _load_manifests_dir(manifests_dir: Path) -> tuple[list[dict], list[str]]:
 
 def _cmd_audit(args: argparse.Namespace) -> None:
     _configure_packs_from_args(args)
-    from bulla.diagnostic import decompose_fee, prescriptive_disclosure
+    from bulla.diagnostic import (
+        boundary_obligations_from_decomposition,
+        check_obligations,
+        decompose_fee,
+        prescriptive_disclosure,
+    )
     from bulla.formatters import format_sarif
     from bulla.guard import BullaGuard
     from bulla.infer.classifier import configure_packs, get_active_pack_refs
@@ -1006,6 +1043,42 @@ def _cmd_audit(args: argparse.Namespace) -> None:
         if len(partition) > 1:
             decomposition = decompose_fee(comp, partition)
 
+    # Compute boundary obligations from decomposition
+    own_obligations: tuple = ()
+    if decomposition and decomposition.boundary_fee > 0:
+        from bulla.model import BoundaryObligation
+        own_obligations = boundary_obligations_from_decomposition(
+            comp, list(decomposition.partition), diag,
+        )
+
+    # Check parent obligations (propagation rule: unmet parent + own new)
+    obligation_check: dict | None = None
+    propagated_unmet: tuple = ()
+    if chain_receipt_data:
+        parent_obl_dicts = chain_receipt_data.get("boundary_obligations")
+        if parent_obl_dicts:
+            from bulla.model import BoundaryObligation
+            parent_obligations = tuple(
+                BoundaryObligation(
+                    placeholder_tool=o["placeholder_tool"],
+                    dimension=o["dimension"],
+                    field=o["field"],
+                    source_edge=o.get("source_edge", ""),
+                )
+                for o in parent_obl_dicts
+            )
+            met, unmet, irrelevant = check_obligations(parent_obligations, comp)
+            obligation_check = {
+                "parent_total": len(parent_obligations),
+                "met": len(met),
+                "unmet": len(unmet),
+                "irrelevant": len(irrelevant),
+                "met_obligations": [o.to_dict() for o in met],
+                "unmet_obligations": [o.to_dict() for o in unmet],
+                "irrelevant_obligations": [o.to_dict() for o in irrelevant],
+            }
+            propagated_unmet = unmet
+
     fmt = getattr(args, "format", "text")
     verbose = getattr(args, "verbose", False)
 
@@ -1019,12 +1092,21 @@ def _cmd_audit(args: argparse.Namespace) -> None:
         audit_results = results
 
     if fmt == "json":
-        print(_audit_json(audit_results, diag, disclosure, basis, decomposition))
+        print(_audit_json(
+            audit_results, diag, disclosure, basis, decomposition,
+            own_obligations=own_obligations or None,
+            obligation_check=obligation_check,
+        ))
     elif fmt == "sarif":
         sarif_path = Path(str(config_path)) if config_path else Path("audit.json")
         print(format_sarif([(diag, sarif_path)]))
     else:
-        print(_audit_text(audit_results, diag, disclosure, basis, decomposition, verbose=verbose))
+        print(_audit_text(
+            audit_results, diag, disclosure, basis, decomposition,
+            verbose=verbose,
+            own_obligations=own_obligations or None,
+            obligation_check=obligation_check,
+        ))
         if discovery_n_dims > 0:
             print(f"  Discovery: {discovery_n_dims} dimension(s) added to vocabulary", file=sys.stderr)
 
@@ -1032,6 +1114,17 @@ def _cmd_audit(args: argparse.Namespace) -> None:
     if output_comp:
         guard.to_yaml(output_comp)
         print(f"Wrote composition to {output_comp}", file=sys.stderr)
+
+    # Combine: propagated unmet from parent + own new obligations (deduplicated)
+    combined_obligations: tuple["BoundaryObligation", ...] | None = None
+    if propagated_unmet or own_obligations:
+        from bulla.model import BoundaryObligation
+        seen_keys: dict[tuple[str, str, str], BoundaryObligation] = {}
+        for obl in (*propagated_unmet, *own_obligations):
+            key = (obl.placeholder_tool, obl.dimension, obl.field)
+            if key not in seen_keys:
+                seen_keys[key] = obl
+        combined_obligations = tuple(seen_keys.values()) if seen_keys else None
 
     # --receipt: produce WitnessReceipt
     if receipt_path:
@@ -1053,6 +1146,7 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             active_packs=get_active_pack_refs(),
             parent_receipt_hash=parent_hash,
             inline_dimensions=inline_dims,
+            boundary_obligations=combined_obligations,
         )
         receipt_dict = receipt.to_dict()
         receipt_path.write_text(
@@ -1139,7 +1233,7 @@ def _cmd_discover(args: argparse.Namespace) -> None:
 
 def _cmd_merge(args: argparse.Namespace) -> None:
     """Merge vocabularies from multiple receipts (DAG support)."""
-    from bulla.merge import merge_receipt_vocabularies
+    from bulla.merge import merge_receipt_obligations, merge_receipt_vocabularies
 
     receipt_paths: list[Path] = args.receipts
     receipt_dicts: list[dict] = []
@@ -1163,6 +1257,8 @@ def _cmd_merge(args: argparse.Namespace) -> None:
         inline = rd.get("inline_dimensions", {})
         per_receipt_counts.append(len(inline.get("dimensions", {})) if inline else 0)
 
+    merged_obls = merge_receipt_obligations(receipt_dicts)
+
     fmt = getattr(args, "format", "text")
     receipt_path: Path | None = getattr(args, "receipt", None)
 
@@ -1183,6 +1279,8 @@ def _cmd_merge(args: argparse.Namespace) -> None:
             ],
             "dimensions": list(merged_dims.keys()),
         }
+        if merged_obls:
+            obj["boundary_obligations"] = [o.to_dict() for o in merged_obls]
         print(json.dumps(obj, indent=2))
     else:
         counts_str = ", ".join(
@@ -1208,6 +1306,14 @@ def _cmd_merge(args: argparse.Namespace) -> None:
 
         print(f"  Merged vocabulary: {len(merged_dims)} unique dimensions")
 
+        if merged_obls:
+            print(f"  Accumulated obligations: {len(merged_obls)}")
+            for obl in merged_obls:
+                print(
+                    f"    - {obl.dimension}: field \"{obl.field}\" "
+                    f"in {obl.placeholder_tool} group"
+                )
+
     if receipt_path:
         from bulla.model import Disposition, DEFAULT_POLICY_PROFILE
         from bulla import __version__ as kver
@@ -1232,6 +1338,7 @@ def _cmd_merge(args: argparse.Namespace) -> None:
             timestamp=datetime.now(timezone.utc).isoformat(),
             parent_receipt_hashes=parent_hashes if parent_hashes else None,
             inline_dimensions=merged_vocab,
+            boundary_obligations=merged_obls,
         )
         receipt_dict = merge_receipt.to_dict()
         receipt_path.write_text(

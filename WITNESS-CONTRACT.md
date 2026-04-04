@@ -14,11 +14,11 @@ Three hashes, three concerns: what was proposed, what was measured, what was wit
 
 ## Hash Coverage
 
-`receipt_hash` includes: `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `active_packs`, `witness_basis`, and conditionally `parent_receipt_hashes` and `inline_dimensions` (each only when not None).
+`receipt_hash` includes: `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `active_packs`, `witness_basis`, and conditionally `parent_receipt_hashes`, `inline_dimensions`, and `boundary_obligations` (each only when not None).
 
 `receipt_hash` excludes: `anchor_ref` (external publication proof, added after witness event).
 
-Rationale: the hash must be computable at witness time. Anchor ref arrives later. Conditional fields (`parent_receipt_hashes`, `inline_dimensions`) are included only when not None to preserve backward compatibility: pre-v0.24.0 receipts verify correctly with new code because their hash was computed without these keys, and the verifier only hashes keys that are present.
+Rationale: the hash must be computable at witness time. Anchor ref arrives later. Conditional fields (`parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`) are included only when not None to preserve backward compatibility: pre-v0.25.0 receipts verify correctly with new code because their hash was computed without these keys, and the verifier only hashes keys that are present.
 
 ## Policy Semantics
 
@@ -307,6 +307,57 @@ A merge receipt is a vocabulary-only DAG node with no composition or diagnostic 
 
 The coherence fee is the universal measure. Vocabulary convergence is measured by comparing coherence fees under different pack configurations: `fee(merged) vs fee(A_alone) vs fee(B_alone)`. This is a delta of the existing fee, not a new concept.
 
+## Boundary Obligations (v0.25.0)
+
+**Normative semantic (one sentence):** A boundary obligation asserts that the coherence fee at a partition boundary cannot decrease unless a downstream composition exposes the specified dimension-field pair in its observable schema.
+
+This makes obligations falsifiable: satisfy the obligation, re-diagnose, fee must drop. If it does not, the obligation was wrong.
+
+### `BoundaryObligation` dataclass
+
+Fields: `placeholder_tool`, `dimension`, `field`, `source_edge` (default empty string).
+
+`placeholder_tool` has two production contexts:
+- From `conditional_diagnose`: the placeholder tool name inserted for open ports (e.g. `"__placeholder_0"`).
+- From `boundary_obligations_from_decomposition`: the server group name at the partition boundary (e.g. `"github"`).
+
+`source_edge` is informational provenance (e.g. `"storage__read_file -> api__list_items"`), not semantic identity. The obligation is the same obligation regardless of which edge surfaced it.
+
+### `boundary_obligations_from_decomposition(comp, partition, diag)`
+
+Extracts obligations from cross-partition blind spots in a full-composition diagnostic. For each blind spot on a cross-partition edge where a field is hidden, produces a `BoundaryObligation` with `placeholder_tool` = server group name (derived from `__` prefix convention).
+
+Deduplicates on `(placeholder_tool, dimension, field)`, keeping the first `source_edge` encountered.
+
+This does NOT use `conditional_diagnose` (which requires explicit open ports). It uses the existing decomposition + blind spot data from a full-composition diagnostic.
+
+### `check_obligations(obligations, comp)` — Three-Way Classification
+
+Returns `(met, unmet, irrelevant)`:
+- **met**: field is in some tool's `observable_schema`
+- **unmet**: field is in some tool's `internal_state` but NOT in `observable_schema`
+- **irrelevant**: no tool in the composition has the field at all
+
+v0.25.0: three-way classification. Future: add `contradictory` when multi-parent DAG merges produce conflicting obligations on the same field.
+
+### Propagation Rule
+
+A receipt's `boundary_obligations` = unmet obligations from parent receipt(s) + new obligations from own boundary decomposition. This is the accumulation principle applied across the chain: parent obligations that the current agent cannot satisfy are carried forward alongside any new obligations the current agent's own boundary produces.
+
+### Obligation Merge = Accumulation, NOT Precedence
+
+Vocabulary merges by precedence (later receipt's definition wins on name collision). Obligations merge by **accumulation**: all parent obligations are carried forward; a successor must satisfy each independently. Duplicates (same `placeholder_tool`, `dimension`, `field`) are deduplicated.
+
+`merge_receipt_obligations(receipts)` in `bulla.merge` implements this additive accumulation across all parent receipts.
+
+### Obligation on Receipt
+
+`WitnessReceipt.boundary_obligations` is an optional field (`tuple[BoundaryObligation, ...] | None`). Conditionally included in `_hash_input()` and `to_dict()` only when not None, following the established pattern for `parent_receipt_hashes` and `inline_dimensions`.
+
 ## `max_unknown` Definition
 
 A convention dimension is **unknown** when it is relevant to the composition but could not be assigned a `declared` or `inferred` value under the active packs. `max_unknown` bounds the number of such dimensions a policy will tolerate before refusing.
+
+## Future Directions
+
+The obligation wire (v0.25.0) completes the coordination pipeline from attestation to requirement. Three capabilities extend this naturally: bridge-guided discovery, where obligations direct the LLM at specific boundary blind spots instead of general tool schemas; a `coordination_step()` SDK that collapses discover + audit + obligations + chain into a single call for agent framework integration; and multi-agent convergence simulation, where synthetic agent populations exercise the obligation lifecycle at scale to validate convergence properties before production deployment.

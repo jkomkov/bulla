@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.25.0
+
+### Added
+- **Boundary obligations on receipts**: `WitnessReceipt.boundary_obligations` (`tuple[BoundaryObligation, ...] | None`) carries requirements for downstream compositions. Conditionally included in hash and serialization only when not None, preserving backward compatibility with pre-v0.25.0 receipts.
+- **`boundary_obligations_from_decomposition(comp, partition, diag)`**: Extracts boundary obligations from cross-partition blind spots. `placeholder_tool` is the server group name (from `__` prefix convention). Deduplicates on `(placeholder_tool, dimension, field)` with first `source_edge` kept.
+- **`check_obligations(obligations, comp)`**: Three-way obligation classification: `met` (field observable), `unmet` (field in internal_state only), `irrelevant` (field absent). Returns `(met, unmet, irrelevant)` tuples.
+- **`merge_receipt_obligations(receipts)`**: Additive obligation accumulation across parent receipts (NOT precedence). All parent obligations survive; duplicates deduplicated by `(placeholder_tool, dimension, field)`.
+- **`BoundaryObligation.source_edge`**: New field (default `""`) recording the tool pair that surfaced the obligation (e.g. `"storage__read_file -> api__list_items"`). Informational provenance, not semantic identity.
+- **`BoundaryObligation.to_dict()`**: Serialization method with conditional `source_edge` inclusion (omitted when empty).
+- **CLI obligation output**: `bulla audit` text and JSON output now includes obligation sections when `boundary_fee > 0`. When `--chain` is used with a parent receipt carrying obligations, the obligation check report (met/unmet/irrelevant) is displayed.
+- **CLI merge obligation output**: `bulla merge` text and JSON output now includes accumulated obligations from parent receipts.
+- **Obligation lifecycle demo** (`scripts/run_obligation_demo.py`): Three-agent chain demonstrating obligation convergence: A emits obligations from boundary blind spots, B resolves A's and adds own, C resolves all remaining. Verifies receipt integrity and chain linkage.
+- **`witness()` accepts `boundary_obligations`**: Optional parameter passed through to `WitnessReceipt`.
+- Sprint 25 tests covering obligation computation, checking, propagation, merge accumulation, receipt integration, backward compatibility, and demo smoke test.
+
+### Changed
+- `BoundaryObligation` docstring updated to document dual interpretation of `placeholder_tool` (from `conditional_diagnose` vs `boundary_obligations_from_decomposition`).
+- `_hash_input()` docstring expanded to include `boundary_obligations` in the backward-compatibility explanation.
+- `WITNESS-CONTRACT.md`: New "Boundary Obligations (v0.25.0)" section documenting obligation semantics, three-way classification, propagation rule, accumulation vs precedence distinction, and receipt field. New "Future Directions" paragraph.
+
 ## 0.24.0
 
 ### Added

@@ -249,14 +249,30 @@ class WitnessBasis:
 class BoundaryObligation:
     """Convention that an unspecified tool must declare observably.
 
-    Produced by conditional diagnosis on a partial composition.
     Each obligation says: "the tool at this port must expose *field*
     in its observable schema for the coherence fee to decrease."
+
+    ``placeholder_tool`` has two production contexts:
+    - From ``conditional_diagnose``: the placeholder tool name inserted
+      for open ports (e.g. ``"__placeholder_0"``).
+    - From ``boundary_obligations_from_decomposition``: the server group
+      name at the partition boundary (e.g. ``"github"``).
     """
 
     placeholder_tool: str
     dimension: str
     field: str
+    source_edge: str = ""
+
+    def to_dict(self) -> dict:
+        d: dict = {
+            "placeholder_tool": self.placeholder_tool,
+            "dimension": self.dimension,
+            "field": self.field,
+        }
+        if self.source_edge:
+            d["source_edge"] = self.source_edge
+        return d
 
 
 @dataclass(frozen=True)
@@ -368,6 +384,7 @@ class WitnessReceipt:
     active_packs: tuple[PackRef, ...] = ()
     witness_basis: WitnessBasis | None = None
     inline_dimensions: dict | None = None
+    boundary_obligations: tuple[BoundaryObligation, ...] | None = None
 
     def _hash_input(self) -> dict:
         """Single source of truth for the receipt's hashable content.
@@ -378,11 +395,13 @@ class WitnessReceipt:
         reconstructs this from a serialized dict by excluding those
         same two keys.
 
-        ``parent_receipt_hashes`` and ``inline_dimensions`` are included
-        ONLY when not None to preserve backward compatibility: pre-v0.24.0
-        receipts (which lack ``parent_receipt_hashes``) and pre-v0.23.0
-        receipts (which lack ``inline_dimensions``) must produce the same
-        hash when verified by new code.
+        ``parent_receipt_hashes``, ``inline_dimensions``, and
+        ``boundary_obligations`` are included ONLY when not None to
+        preserve backward compatibility: pre-v0.24.0 receipts (which
+        lack ``parent_receipt_hashes``), pre-v0.23.0 receipts (which
+        lack ``inline_dimensions``), and pre-v0.25.0 receipts (which
+        lack ``boundary_obligations``) must produce the same hash when
+        verified by new code.
         """
         d: dict = {
             "receipt_version": self.receipt_version,
@@ -408,6 +427,8 @@ class WitnessReceipt:
             d["parent_receipt_hashes"] = list(self.parent_receipt_hashes)
         if self.inline_dimensions is not None:
             d["inline_dimensions"] = self.inline_dimensions
+        if self.boundary_obligations is not None:
+            d["boundary_obligations"] = [o.to_dict() for o in self.boundary_obligations]
         return d
 
     @property
