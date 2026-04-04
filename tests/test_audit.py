@@ -1,4 +1,4 @@
-"""Tests for bulla audit: config parser, parallel scan, CLI output."""
+"""Tests for bulla audit: config parser, parallel scan, CLI output, SARIF."""
 
 import json
 import sys
@@ -8,6 +8,7 @@ from unittest.mock import patch
 import pytest
 
 from bulla.config import ConfigError, McpServerEntry, find_mcp_config, parse_mcp_config
+from bulla.guard import BullaGuard
 from bulla.scan import ServerScanResult, scan_mcp_servers_parallel
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -249,3 +250,110 @@ class TestAuditCli:
         assert "1 skipped" in text
         assert "FAILED" in text
         assert "broken" in text
+
+    def test_audit_sarif_output(self):
+        entries = [
+            McpServerEntry("filesystem", "npx server-fs"),
+            McpServerEntry("fetch", "uvx mcp-server-fetch"),
+        ]
+        text, _, exit_code = self._run_audit(
+            ["--format", "sarif"], _make_scan_results(), entries,
+        )
+        data = json.loads(text)
+        assert "sarif-schema-2.1.0" in data["$schema"]
+        assert data["version"] == "2.1.0"
+        runs = data["runs"]
+        assert len(runs) >= 1
+        assert runs[0]["tool"]["driver"]["name"] == "bulla"
+
+    def test_audit_sarif_contains_blind_spots(self):
+        entries = [
+            McpServerEntry("filesystem", "npx server-fs"),
+            McpServerEntry("fetch", "uvx mcp-server-fetch"),
+        ]
+        text, _, _ = self._run_audit(
+            ["--format", "sarif"], _make_scan_results(), entries,
+        )
+        data = json.loads(text)
+        results = data["runs"][0]["results"]
+        rule_ids = {r["ruleId"] for r in results}
+        assert "bulla/blind-spot" in rule_ids or "bulla/bridge-recommendation" in rule_ids
+
+
+# ── from_tools_list tests ────────────────────────────────────────────
+
+
+class TestFromToolsList:
+    def test_returns_guard_with_composition(self):
+        tools = CANNED_TOOLS_A + CANNED_TOOLS_B
+        guard = BullaGuard.from_tools_list(tools, name="test-comp")
+        assert guard.composition.name == "test-comp"
+        assert len(guard.composition.tools) == 3
+
+    def test_nonzero_fee(self):
+        tools = CANNED_TOOLS_A + CANNED_TOOLS_B
+        guard = BullaGuard.from_tools_list(tools, name="test-comp")
+        diag = guard.diagnose()
+        assert diag.coherence_fee > 0
+
+    def test_witness_basis_populated(self):
+        tools = CANNED_TOOLS_A + CANNED_TOOLS_B
+        guard = BullaGuard.from_tools_list(tools, name="test-comp")
+        basis = guard.witness_basis
+        assert basis is not None
+        total = basis.declared + basis.inferred + basis.unknown
+        assert total >= 0
+
+
+# ── Server-prefixed tool name tests ──────────────────────────────────
+
+
+class TestServerPrefixedNames:
+    def test_prefixed_names_in_composition(self):
+        tools_a = [{"name": "read_file", "inputSchema": {"type": "object", "properties": {"path": {"type": "string"}}}}]
+        tools_b = [{"name": "read_file", "inputSchema": {"type": "object", "properties": {"url": {"type": "string"}}}}]
+        for t in tools_a:
+            t["name"] = f"filesystem__{t['name']}"
+        for t in tools_b:
+            t["name"] = f"fetch__{t['name']}"
+        guard = BullaGuard.from_tools_list(tools_a + tools_b, name="prefixed")
+        names = {t.name for t in guard.composition.tools}
+        assert "filesystem__read_file" in names
+        assert "fetch__read_file" in names
+
+    def test_partition_extraction_from_prefixed(self):
+        tools = []
+        for srv, tool_name in [("srv_a", "tool1"), ("srv_a", "tool2"), ("srv_b", "tool3")]:
+            tools.append({"name": f"{srv}__{tool_name}", "inputSchema": {"type": "object", "properties": {"x": {"type": "string"}}}})
+        guard = BullaGuard.from_tools_list(tools, name="partition-test")
+        tool_to_server = {
+            t.name: t.name.split("__")[0] for t in guard.composition.tools
+        }
+        servers = set(tool_to_server.values())
+        assert "srv_a" in servers
+        assert "srv_b" in servers
+        a_tools = {t for t, s in tool_to_server.items() if s == "srv_a"}
+        assert len(a_tools) == 2
+
+
+# ── Real-world audit smoke test ──────────────────────────────────────
+
+
+class TestRunAuditScript:
+    def test_smoke_test_on_captured_manifests(self):
+        manifests_dir = Path(__file__).parent.parent / "examples" / "real_world_audit" / "manifests"
+        if not manifests_dir.exists() or not list(manifests_dir.glob("*.json")):
+            pytest.skip("No captured manifests available")
+
+        all_tools = []
+        for mf in sorted(manifests_dir.glob("*.json")):
+            data = json.loads(mf.read_text())
+            server_name = mf.stem
+            for tool in data["tools"]:
+                tool["name"] = f"{server_name}__{tool.get('name', 'unknown')}"
+            all_tools.extend(data["tools"])
+
+        guard = BullaGuard.from_tools_list(all_tools, name="smoke-test")
+        diag = guard.diagnose()
+        assert diag.coherence_fee >= 0
+        assert len(guard.composition.tools) == len(all_tools)

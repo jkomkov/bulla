@@ -157,6 +157,22 @@ class BullaGuard:
         comp, basis = _composition_from_mcp_tools(tools_list, name=comp_name)
         return cls(comp, witness_basis=basis)
 
+    @classmethod
+    def from_tools_list(
+        cls,
+        tools: list[dict[str, Any]],
+        *,
+        name: str = "composition",
+    ) -> "BullaGuard":
+        """Build from a raw MCP tools/list response (list of tool dicts).
+
+        This is the public entry point for programmatic use with
+        in-memory tool lists.  Used by ``bulla audit`` to compose tools
+        from multiple servers without requiring a file on disk.
+        """
+        comp, basis = _composition_from_mcp_tools(tools, name=name)
+        return cls(comp, witness_basis=basis)
+
     # ── Analysis ──────────────────────────────────────────────────────
 
     def diagnose(self) -> Diagnostic:

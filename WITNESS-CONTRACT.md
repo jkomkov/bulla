@@ -129,6 +129,24 @@ The boundary fee quantifies conventions hidden at the seam between servers -- th
 
 Auto-detection searches `.cursor/mcp.json` (project), `~/.cursor/mcp.json` (user), and Claude Desktop config (macOS). Only stdio-transport servers are scanned; HTTP/SSE entries are skipped with a warning. Failed servers are reported but do not block diagnosis of successful ones (`--skip-failed` default).
 
+### Programmatic API: `BullaGuard.from_tools_list()`
+
+`from_tools_list(tools, *, name="composition")` is the public entry point for building a guard from an in-memory list of MCP tool dicts (the `tools/list` response). This replaces direct use of the private `_composition_from_mcp_tools` helper. Used by `bulla audit` and recommended for any programmatic multi-server composition workflow.
+
+### Server-name prefixing convention
+
+In audit mode, tool names are prefixed with their originating server name using `__` as separator (e.g., `filesystem__read_file`, `github__search_repositories`). This convention:
+
+- Encodes the tool-to-server mapping directly into tool names, surviving any reordering or filtering
+- Makes audit output self-documenting (the server origin is visible in every tool reference)
+- Enables `decompose_fee` partition derivation from `comp.tools` by splitting on `__`
+
+The `__` prefix is applied only in audit mode; single-server paths (`bulla gauge`, `bulla scan`) do not prefix tool names.
+
+### SARIF output
+
+`bulla audit --format sarif` produces SARIF v2.1.0 JSON with blind spots as `bulla/blind-spot` results and bridge recommendations as `bulla/bridge-recommendation` results, each tied to the MCP config file as the artifact location. This enables direct integration with GitHub Code Scanning.
+
 ## `max_unknown` Definition
 
 A convention dimension is **unknown** when it is relevant to the composition but could not be assigned a `declared` or `inferred` value under the active packs. `max_unknown` bounds the number of such dimensions a policy will tolerate before refusing.

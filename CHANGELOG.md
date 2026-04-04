@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.19.0
+
+### Added
+- **`BullaGuard.from_tools_list()`**: New public classmethod for building a guard from an in-memory list of MCP tool dicts. This is the recommended entry point for programmatic multi-server audit, replacing direct use of the private `_composition_from_mcp_tools` helper.
+- **SARIF output for `bulla audit`**: `--format sarif` produces SARIF v2.1.0 output with blind spots and bridge recommendations tied to the MCP config file path. Enables GitHub Code Scanning integration for audit results.
+- **Server-name prefixed tool names**: In `bulla audit`, tools are now prefixed with their server name using `__` separator (e.g., `filesystem__read_file`). This makes tool-to-server mapping robust and self-documenting, eliminating the fragile index-based mapping from v0.18.0.
+- **Real-world audit evidence**: Captured genuine `tools/list` responses from 4 live MCP reference servers (filesystem, github, memory, puppeteer — 56 tools total) with provenance metadata. First real-world cross-server audit found 17 blind spots in the GitHub server's `id_offset` conventions. See `examples/real_world_audit/FINDINGS.md`.
+- **`examples/real_world_audit/`**: Reproducible audit demo with `run_audit.py` script and version-pinned server manifests in `manifests/`.
+- **8 new tests**: `from_tools_list` API, server-prefixed tool names, SARIF output validation, real-world manifest smoke test.
+
+### Fixed
+- `_cmd_audit` no longer imports private `_composition_from_mcp_tools`; uses `BullaGuard.from_tools_list()` instead.
+- Tool-to-server mapping in audit is now derived from prefixed tool names in the composition, not pre-predicted from raw tool dicts (eliminates invisible coupling).
+
 ## 0.18.0
 
 ### Added

@@ -795,10 +795,11 @@ def _audit_json(
 
 def _cmd_audit(args: argparse.Namespace) -> None:
     _configure_packs_from_args(args)
-    from bulla.config import ConfigError, McpServerEntry, find_mcp_config, parse_mcp_config
+    from bulla.config import ConfigError, find_mcp_config, parse_mcp_config
     from bulla.diagnostic import decompose_fee, prescriptive_disclosure
-    from bulla.guard import BullaGuard, _composition_from_mcp_tools
-    from bulla.scan import ServerScanResult, scan_mcp_servers_parallel
+    from bulla.formatters import format_sarif
+    from bulla.guard import BullaGuard
+    from bulla.scan import scan_mcp_servers_parallel
 
     config_path = getattr(args, "config", None)
     if config_path is None:
@@ -842,28 +843,30 @@ def _cmd_audit(args: argparse.Namespace) -> None:
         sys.exit(1)
 
     all_tools: list[dict] = []
-    tool_to_server: dict[str, str] = {}
     for r in ok_results:
         for tool in r.tools:
-            raw_name = tool.get("name", "unknown_tool")
-            safe_name = raw_name.replace("-", "_").replace(" ", "_")
-            tool_to_server[safe_name] = r.name
+            tool["name"] = f"{r.name}__{tool.get('name', 'unknown')}"
         all_tools.extend(r.tools)
 
-    comp, basis = _composition_from_mcp_tools(all_tools, name="audit")
+    guard = BullaGuard.from_tools_list(all_tools, name="audit")
+    comp = guard.composition
+    basis = guard.witness_basis
+
+    tool_to_server = {
+        t.name: t.name.split("__")[0] for t in comp.tools
+    }
+
     from bulla.diagnostic import diagnose
     diag = diagnose(comp)
-
     disclosure = prescriptive_disclosure(comp, diag.coherence_fee)
 
     decomposition = None
     if len(ok_results) > 1:
-        server_names_set = {r.name for r in ok_results}
         partition = []
         for sr in ok_results:
             tools_in_server = frozenset(
-                t_name for t_name, s_name in tool_to_server.items()
-                if s_name == sr.name
+                t_name for t_name, srv in tool_to_server.items()
+                if srv == sr.name
             )
             if tools_in_server:
                 partition.append(tools_in_server)
@@ -879,12 +882,14 @@ def _cmd_audit(args: argparse.Namespace) -> None:
     verbose = getattr(args, "verbose", False)
     if fmt == "json":
         print(_audit_json(results, diag, disclosure, basis, decomposition))
+    elif fmt == "sarif":
+        sarif_path = Path(str(config_path)) if config_path else Path("audit.json")
+        print(format_sarif([(diag, sarif_path)]))
     else:
         print(_audit_text(results, diag, disclosure, basis, decomposition, verbose=verbose))
 
     output_comp = getattr(args, "output_composition", None)
     if output_comp:
-        guard = BullaGuard(comp, witness_basis=basis)
         guard.to_yaml(output_comp)
         print(f"Wrote composition to {output_comp}", file=sys.stderr)
 
@@ -900,10 +905,8 @@ def _cmd_scan(args: argparse.Namespace) -> None:
         if len(args.commands) == 1:
             guard = BullaGuard.from_mcp_server(args.commands[0])
         else:
-            from bulla.guard import _composition_from_mcp_tools
             tools = scan_mcp_servers(args.commands)
-            comp, basis = _composition_from_mcp_tools(tools, name="multi-server-scan")
-            guard = BullaGuard(comp, witness_basis=basis)
+            guard = BullaGuard.from_tools_list(tools, name="multi-server-scan")
     except ScanError as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
@@ -1091,7 +1094,7 @@ def main() -> None:
     )
     p_audit.add_argument(
         "--format",
-        choices=["text", "json"],
+        choices=["text", "json", "sarif"],
         default="text",
         help="Output format (default: text)",
     )
