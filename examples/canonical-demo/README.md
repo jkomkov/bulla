@@ -14,7 +14,7 @@ Bulla catches this.
 $ python run_canonical_demo.py
 
   ════════════════════════════════════════════════════════════
-    The Seam Problem — Bulla v0.29.0
+    The Seam Problem — Bulla v0.30.0
   ════════════════════════════════════════════════════════════
 
     Servers: filesystem (14 tools), github (26 tools)
@@ -27,7 +27,10 @@ $ python run_canonical_demo.py
       filesystem: absolute_local
       github: relative_repo
 
-    Receipt: 45b2b3f0... (VALID)
+    Contradictions: 1
+      path_convention_match: absolute_local vs relative_repo (MISMATCH)
+
+    Receipt: a73a8395... (VALID)
     Discovered conventions: path_convention_match ['absolute_local', 'relative_repo']
 
   ════════════════════════════════════════════════════════════
@@ -37,7 +40,7 @@ $ python run_canonical_demo.py
 
 ```
 python -c "import json; from bulla import verify_receipt_integrity; \
-  print(verify_receipt_integrity(json.load(open('receipts/audit_receipt.json'))))"
+  print(verify_receipt_integrity(json.load(open('receipts/audit_receipt_v030.json'))))"
 ```
 
 ```

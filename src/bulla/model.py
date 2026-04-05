@@ -318,6 +318,48 @@ class ProbeResult:
         return d
 
 
+class ContradictionSeverity(Enum):
+    """Severity of a detected convention contradiction.
+
+    MISMATCH: two or more distinct values for the same dimension.
+    """
+
+    MISMATCH = "mismatch"
+
+
+@dataclass(frozen=True)
+class ContradictionReport:
+    """A detected convention contradiction on a single dimension.
+
+    ``values`` and ``sources`` are always sorted alphabetically so that
+    two reports with the same content are equal regardless of discovery
+    order.  Canonical ordering is enforced at construction time in
+    ``detect_contradictions()``.
+    """
+
+    dimension: str
+    values: tuple[str, ...]
+    sources: tuple[str, ...]
+    severity: ContradictionSeverity
+
+    def to_dict(self) -> dict:
+        return {
+            "dimension": self.dimension,
+            "values": list(self.values),
+            "sources": list(self.sources),
+            "severity": self.severity.value,
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> ContradictionReport:
+        return cls(
+            dimension=d["dimension"],
+            values=tuple(d["values"]),
+            sources=tuple(d["sources"]),
+            severity=ContradictionSeverity(d["severity"]),
+        )
+
+
 @dataclass(frozen=True)
 class PolicyProfile:
     """Named, versioned policy that maps measurement to disposition.
@@ -428,6 +470,7 @@ class WitnessReceipt:
     witness_basis: WitnessBasis | None = None
     inline_dimensions: dict | None = None
     boundary_obligations: tuple[BoundaryObligation, ...] | None = None
+    contradictions: tuple[ContradictionReport, ...] | None = None
 
     def _hash_input(self) -> dict:
         """Single source of truth for the receipt's hashable content.
@@ -438,13 +481,11 @@ class WitnessReceipt:
         reconstructs this from a serialized dict by excluding those
         same two keys.
 
-        ``parent_receipt_hashes``, ``inline_dimensions``, and
-        ``boundary_obligations`` are included ONLY when not None to
-        preserve backward compatibility: pre-v0.24.0 receipts (which
-        lack ``parent_receipt_hashes``), pre-v0.23.0 receipts (which
-        lack ``inline_dimensions``), and pre-v0.25.0 receipts (which
-        lack ``boundary_obligations``) must produce the same hash when
-        verified by new code.
+        ``parent_receipt_hashes``, ``inline_dimensions``,
+        ``boundary_obligations``, and ``contradictions`` are included
+        ONLY when not None to preserve backward compatibility: pre-v0.30.0
+        receipts (which lack ``contradictions``) must produce the same
+        hash when verified by new code.
         """
         d: dict = {
             "receipt_version": self.receipt_version,
@@ -472,6 +513,8 @@ class WitnessReceipt:
             d["inline_dimensions"] = self.inline_dimensions
         if self.boundary_obligations is not None:
             d["boundary_obligations"] = [o.to_dict() for o in self.boundary_obligations]
+        if self.contradictions is not None:
+            d["contradictions"] = [c.to_dict() for c in self.contradictions]
         return d
 
     @property

@@ -14,11 +14,11 @@ Three hashes, three concerns: what was proposed, what was measured, what was wit
 
 ## Hash Coverage
 
-`receipt_hash` includes: `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `active_packs`, `witness_basis`, and conditionally `parent_receipt_hashes`, `inline_dimensions`, and `boundary_obligations` (each only when not None).
+`receipt_hash` includes: `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `active_packs`, `witness_basis`, and conditionally `parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`, and `contradictions` (each only when not None).
 
 `receipt_hash` excludes: `anchor_ref` (external publication proof, added after witness event).
 
-Rationale: the hash must be computable at witness time. Anchor ref arrives later. Conditional fields (`parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`) are included only when not None to preserve backward compatibility: pre-v0.25.0 receipts verify correctly with new code because their hash was computed without these keys, and the verifier only hashes keys that are present.
+Rationale: the hash must be computable at witness time. Anchor ref arrives later. Conditional fields (`parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`, `contradictions`) are included only when not None to preserve backward compatibility: pre-v0.25.0 receipts (which lack `boundary_obligations`) and pre-v0.30.0 receipts (which lack `contradictions`) verify correctly with new code because their hash was computed without these keys, and the verifier only hashes keys that are present.
 
 ## Policy Semantics
 
@@ -427,6 +427,32 @@ The field is included in `to_dict()` only when non-empty. It is NOT yet propagat
 
 When `bulla audit --converge` or `--guided-discover` produces confirmed probes with convention values, the discovered pack is embedded as `inline_dimensions` on the receipt. Merge precedence: newly discovered dimensions win over existing inline dimensions from `--chain` (later-wins semantics, consistent with `merge_receipt_vocabularies`).
 
+## Contradiction Detection (v0.30.0)
+
+`detect_contradictions(discovered_pack)` is a pure function from pack dict to `tuple[ContradictionReport, ...]`. Any dimension with `len(known_values) > 1` produces a `ContradictionReport` with `severity=ContradictionSeverity.MISMATCH`.
+
+### `ContradictionSeverity`
+
+Enum following the `ObligationVerdict` pattern. Single member `MISMATCH` (2+ distinct values for the same dimension). `CONFLICT` (logically incompatible per pack definition) reserved for when packs define explicit compatibility rules.
+
+### `ContradictionReport`
+
+Frozen dataclass: `dimension` (str), `values` (tuple[str, ...]), `sources` (tuple[str, ...]), `severity` (ContradictionSeverity). `values` and `sources` are always sorted alphabetically — canonical ordering is enforced at construction time in `detect_contradictions()`, not at hash time. `to_dict()` / `from_dict()` support JSON round-trip.
+
+### Detection Surfaces
+
+- **Intra-run**: `detect_contradictions(pack)` — a single `coordination_step()` discovers conflicting values from different server groups on the same dimension.
+- **Intra-agent**: `detect_expected_value_contradictions(probes)` — a probe confirms a `convention_value` that differs from its obligation's `expected_value` (inherited from a parent chain receipt).
+- **Inter-agent**: `detect_contradictions_across(*convergence_results)` — merges `discovered_pack` from multiple convergence results (union of known_values and source_tools per dimension), then delegates to `detect_contradictions()`.
+
+### Receipt Integration
+
+`WitnessReceipt.contradictions: tuple[ContradictionReport, ...] | None`. Included in `_hash_input()` only when not None (conditional-include pattern). Pre-v0.30.0 receipts verify correctly because their hash was computed without the `contradictions` key.
+
+### `expected_value` Hydration
+
+When `--chain` is provided, `BoundaryObligation.expected_value` is hydrated from the chain receipt's `inline_dimensions`: for each obligation, if the dimension exists in the chain's inline_dimensions, the first `known_value` is used as the expected_value. This resolves the Sprint 28/29 TODO and gives `expected_value` its first machine consumer.
+
 ## `max_unknown` Definition
 
 A convention dimension is **unknown** when it is relevant to the composition but could not be assigned a `declared` or `inferred` value under the active packs. `max_unknown` bounds the number of such dimensions a policy will tolerate before refusing.
@@ -460,7 +486,7 @@ Each sprint adds one mathematical capability to the resolution sequence:
 | **27** | v0.27.0 | **Iterative convergence.** `coordination_step()` wraps `repair_step()` in a loop with three exit paths: `fee_zero`, `fixpoint`, `max_rounds`. Obligation triage carries forward only UNCERTAIN probes; DENIED and CONFIRMED are excluded. Convergence is guaranteed: fee is a non-negative integer that strictly decreases on each round with at least one confirmation. Module split: `repair.py` (coordination) separated from `diagnostic.py` (measurement), preserving anti-reflexivity. |
 | **28** | v0.28.0 | **Convention value extraction.** `extract_pack_from_probes()` transforms confirmed probe convention values into persistent micro-pack dimensions embedded in receipts. `ConvergenceResult.discovered_pack` aggregates all rounds. `BoundaryObligation.expected_value` seeds contradiction detection. The presheaf section now carries semantic content -- not just structural observability. |
 | **29** | v0.29.0 | **Canonical proof artifact.** Originally planned as contradiction detection; pivoted because the protocol was mature enough that the highest-leverage move was real-world proof, not another library feature. Two real MCP servers (filesystem + GitHub), one convention mismatch (absolute vs relative paths), full pipeline from measurement through guided discovery to receipted value extraction. Convention mismatch display flags multi-value dimensions. Pre-computed receipt is a checked-in cryptographic proof artifact. Contradiction detection deferred to Sprint 30. |
-| **30** | v0.30.0 | **Contradiction detection.** When multi-parent DAG merges produce conflicting obligations on the same `(dimension, field)` — e.g. one parent requires "zero_based" while another requires "one_based" — the protocol detects this as a non-trivial element of `H^1` that cannot be resolved by disclosure alone. Fourth obligation status: `contradictory`. |
+| **30** | v0.30.0 | **Contradiction detection.** `detect_contradictions(discovered_pack)` flags dimensions with 2+ distinct `known_values` as `ContradictionReport(severity=MISMATCH)`. `detect_expected_value_contradictions(probes)` detects intra-agent contradictions when a probe's `convention_value` differs from its obligation's `expected_value`. `detect_contradictions_across(*convergence_results)` merges packs from multiple runs. `WitnessReceipt.contradictions` embeds reports in the receipt hash (conditional-include, backward-compatible). `ContradictionSeverity` enum with single `MISMATCH` member follows the `ObligationVerdict` pattern. Values and sources sorted alphabetically at construction for canonical ordering. `--chain` now hydrates `expected_value` from inherited `inline_dimensions`. See `PROTOCOL-NOTE.md` for the theoretical framing. |
 | **31** | v0.31.0 | **Policy enforcement.** Obligations become enforceable: a policy profile can require that all obligations are met (or met within tolerance) before disposition is `PROCEED`. The policy layer closes the loop from measurement to judgment to requirement to enforcement. |
 | **32** | v0.32.0 | **Agent framework SDK.** `coordination_step()` collapses discover + audit + obligations + guided repair + chain into a single call. LangGraph, CrewAI, and AutoGen adapters. The protocol becomes invisible infrastructure — agents call one function, receive a receipt. |
 
@@ -482,11 +508,11 @@ The capabilities compose linearly:
 obligations (25) → guided discovery (26) → iterative repair (27)
                                          → value extraction (28)
                                          → canonical proof (29) [uses 25-28 on real data]
-                   → contradiction detection (30) [requires DAG from 24, expected_value from 28]
-                   → policy enforcement (31) [requires obligations from 25]
+                   → contradiction detection (30) [uses expected_value from 28, pack from 28, receipt from 24]
+                   → policy enforcement (31) [requires obligations from 25, contradictions from 30]
                    → SDK (32) [integrates all of 25-31]
 ```
 
-Sprints 27 and 28 are independent (can proceed in parallel). Sprint 29 is the canonical proof artifact: it exercises the full 25-28 pipeline on real MCP server manifests. Sprint 30 depends on DAG support (Sprint 24) and obligations (Sprint 25). Sprint 31 depends on obligations. Sprint 32 integrates everything.
+Sprints 27 and 28 are independent (can proceed in parallel). Sprint 29 is the canonical proof artifact: it exercises the full 25-28 pipeline on real MCP server manifests. Sprint 30 adds contradiction detection using expected_value from Sprint 28 and pack structure from Sprint 28. Sprint 31 depends on obligations (25) and contradictions (30). Sprint 32 integrates everything.
 
 When a new sprint ships, update this section: move its thesis from future to present tense, and add any new convergence properties discovered during implementation.

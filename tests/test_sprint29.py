@@ -257,6 +257,18 @@ class TestCanonicalDemo:
         assert "VALID" in result.stdout
         assert "path_convention_match" in result.stdout
 
+    def test_live_flag_parses(self):
+        """Smoke test: --help exits cleanly, proving --live is registered."""
+        demo_path = Path(__file__).parent.parent / "examples" / "canonical-demo" / "run_canonical_demo.py"
+        result = subprocess.run(
+            [sys.executable, str(demo_path), "--help"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        assert result.returncode == 0, f"--help failed:\n{result.stderr}"
+        assert "--live" in result.stdout
+
 
 # ── Pre-computed receipt integrity ───────────────────────────────────
 

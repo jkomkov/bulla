@@ -1,6 +1,6 @@
 {
   "receipt_version": "0.1.0",
-  "kernel_version": "0.29.0",
+  "kernel_version": "0.30.0",
   "composition_hash": "30144bfd52dda347ba043ad610c2d4e38bbbdc1a067bb1f672ab50d1d3fdde19",
   "diagnostic_hash": "f448e03b69149e2041a807c81c018e0c318f509fc6d422e0dccb978ed0dad218",
   "policy_profile": {
@@ -15,7 +15,7 @@
   "bridges_required": 234,
   "unknown_dimensions": 3,
   "disposition": "refuse_pending_disclosure",
-  "timestamp": "2026-04-05T04:53:56.209592+00:00",
+  "timestamp": "2026-04-05T05:13:10.967670+00:00",
   "patches": [
     {
       "bulla_patch_version": "0.1.0",
@@ -4300,6 +4300,20 @@
       "source_edge": "filesystem__read_multiple_files -> github__create_or_update_file"
     }
   ],
-  "receipt_hash": "5f73a230be5624e12fcd3db068c1da2f74fac94283d1aece49b7707b303e8dbf",
+  "contradictions": [
+    {
+      "dimension": "path_convention_match",
+      "values": [
+        "absolute_local",
+        "relative_repo"
+      ],
+      "sources": [
+        "filesystem",
+        "github"
+      ],
+      "severity": "mismatch"
+    }
+  ],
+  "receipt_hash": "304b14cea279823087838df99feff464e729ba9d7c339611c74af0fe9d1f39f4",
   "anchor_ref": null
 }

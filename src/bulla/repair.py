@@ -18,6 +18,8 @@ from bulla.diagnostic import (
 from bulla.model import (
     BoundaryObligation,
     Composition,
+    ContradictionReport,
+    ContradictionSeverity,
     ObligationVerdict,
     ProbeResult,
     ToolSpec,
@@ -290,14 +292,23 @@ class ConvergenceResult:
 
     @property
     def discovered_pack(self) -> dict:
-        """Derive a micro-pack from all confirmed probes across all rounds."""
-        all_probes = tuple(
-            p for r in self.rounds for p in r.probes
-        )
-        return extract_pack_from_probes(
-            all_probes,
-            self.final_comp.canonical_hash()[:8] if self.rounds else "",
-        )
+        """Derive a micro-pack from all confirmed probes across all rounds.
+
+        Cached after first computation. Safe because the dataclass is
+        frozen -- the inputs cannot change.
+        """
+        try:
+            return object.__getattribute__(self, "_cached_discovered_pack")
+        except AttributeError:
+            all_probes = tuple(
+                p for r in self.rounds for p in r.probes
+            )
+            pack = extract_pack_from_probes(
+                all_probes,
+                self.final_comp.canonical_hash()[:8] if self.rounds else "",
+            )
+            object.__setattr__(self, "_cached_discovered_pack", pack)
+            return pack
 
 
 def coordination_step(
@@ -380,3 +391,88 @@ def coordination_step(
         total_uncertain=total_uncertain,
         termination_reason=termination_reason,
     )
+
+
+# ── Contradiction detection (v0.30.0) ────────────────────────────────
+
+
+def detect_contradictions(
+    discovered_pack: dict,
+) -> tuple[ContradictionReport, ...]:
+    """Detect convention contradictions in a discovered pack.
+
+    Pure function. Any dimension with 2+ distinct ``known_values``
+    produces a ``ContradictionReport`` with severity ``MISMATCH``.
+    Values and sources are sorted alphabetically for canonical ordering.
+    """
+    dims = discovered_pack.get("dimensions", {})
+    reports: list[ContradictionReport] = []
+    for dim_name, dim_def in sorted(dims.items()):
+        vals = dim_def.get("known_values", [])
+        if len(vals) <= 1:
+            continue
+        sources = dim_def.get("provenance", {}).get("source_tools", [])
+        reports.append(ContradictionReport(
+            dimension=dim_name,
+            values=tuple(sorted(vals)),
+            sources=tuple(sorted(sources)),
+            severity=ContradictionSeverity.MISMATCH,
+        ))
+    return tuple(reports)
+
+
+def detect_expected_value_contradictions(
+    probes: tuple[ProbeResult, ...],
+) -> tuple[ContradictionReport, ...]:
+    """Detect contradictions between expected and actual convention values.
+
+    When a probe confirms a ``convention_value`` that differs from its
+    obligation's ``expected_value``, that is an intra-agent contradiction:
+    the parent chain expected one convention, the current tool uses another.
+    """
+    reports: list[ContradictionReport] = []
+    for probe in probes:
+        obl = probe.obligation
+        if not obl.expected_value:
+            continue
+        if probe.verdict != ObligationVerdict.CONFIRMED:
+            continue
+        if not probe.convention_value:
+            continue
+        if probe.convention_value == obl.expected_value:
+            continue
+        reports.append(ContradictionReport(
+            dimension=obl.dimension,
+            values=tuple(sorted([obl.expected_value, probe.convention_value])),
+            sources=tuple(sorted([obl.placeholder_tool])),
+            severity=ContradictionSeverity.MISMATCH,
+        ))
+    return tuple(reports)
+
+
+def detect_contradictions_across(
+    *convergence_results: ConvergenceResult,
+) -> tuple[ContradictionReport, ...]:
+    """Detect contradictions across multiple convergence results.
+
+    Merges ``discovered_pack`` from each result (union of known_values
+    and source_tools per dimension), then delegates to
+    ``detect_contradictions()``.
+    """
+    merged_dims: dict[str, dict] = {}
+    for cr in convergence_results:
+        pack = cr.discovered_pack
+        for dim_name, dim_def in pack.get("dimensions", {}).items():
+            if dim_name not in merged_dims:
+                merged_dims[dim_name] = {
+                    "known_values": [],
+                    "provenance": {"source_tools": []},
+                }
+            merged = merged_dims[dim_name]
+            for v in dim_def.get("known_values", []):
+                if v not in merged["known_values"]:
+                    merged["known_values"].append(v)
+            for s in dim_def.get("provenance", {}).get("source_tools", []):
+                if s not in merged["provenance"]["source_tools"]:
+                    merged["provenance"]["source_tools"].append(s)
+    return detect_contradictions({"dimensions": merged_dims})

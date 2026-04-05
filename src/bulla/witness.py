@@ -21,6 +21,7 @@ from bulla.model import (
     BoundaryObligation,
     BridgePatch,
     Composition,
+    ContradictionReport,
     DEFAULT_POLICY_PROFILE,
     Diagnostic,
     Disposition,
@@ -93,6 +94,7 @@ def witness(
     witness_basis: WitnessBasis | None = None,
     inline_dimensions: dict | None = None,
     boundary_obligations: tuple[BoundaryObligation, ...] | None = None,
+    contradictions: tuple[ContradictionReport, ...] | None = None,
 ) -> WitnessReceipt:
     """Produce a WitnessReceipt from a Diagnostic and Composition.
 
@@ -148,6 +150,7 @@ def witness(
         witness_basis=witness_basis,
         inline_dimensions=inline_dimensions,
         boundary_obligations=boundary_obligations,
+        contradictions=contradictions,
     )
 
 

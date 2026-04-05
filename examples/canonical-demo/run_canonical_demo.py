@@ -26,6 +26,7 @@ from bulla import (
     boundary_obligations_from_decomposition,
     coordination_step,
     decompose_fee,
+    detect_contradictions,
     diagnose,
     verify_receipt_integrity,
     witness,
@@ -152,17 +153,20 @@ def main() -> None:
     discovered_pack = conv_result.discovered_pack
     inline_dims = discovered_pack if discovered_pack.get("dimensions") else None
 
+    contradictions = detect_contradictions(discovered_pack) if inline_dims else ()
+
     receipt = witness(
         diagnose(conv_result.final_comp),
         conv_result.final_comp,
         witness_basis=guard.witness_basis,
         inline_dimensions=inline_dims,
         boundary_obligations=obligations,
+        contradictions=contradictions if contradictions else None,
     )
     receipt_dict = receipt.to_dict()
 
-    receipt_path = receipts_dir / "audit_receipt.json"
-    receipt_path.write_text(json.dumps(receipt_dict, indent=2), encoding="utf-8")
+    receipt_v030_path = receipts_dir / "audit_receipt_v030.json"
+    receipt_v030_path.write_text(json.dumps(receipt_dict, indent=2), encoding="utf-8")
     valid = verify_receipt_integrity(receipt_dict)
 
     bar = "\u2550" * 60
@@ -208,6 +212,13 @@ def main() -> None:
         for server_prefix, value in tv.items():
             print(f"      {server_prefix}: {value}")
     print()
+
+    if contradictions:
+        print(f"    Contradictions: {len(contradictions)}")
+        for c in contradictions:
+            vals_str = " vs ".join(c.values)
+            print(f"      {c.dimension}: {vals_str} ({c.severity.value.upper()})")
+        print()
 
     receipt_hash = receipt_dict.get("receipt_hash", "")[:8]
     valid_str = "VALID" if valid else "INVALID"

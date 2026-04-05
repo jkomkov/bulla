@@ -795,14 +795,13 @@ def _audit_text(
 
         disc_pack = guided_repair.get("discovered_pack")
         if disc_pack:
+            from bulla.repair import detect_contradictions
+
             disc_dims = disc_pack.get("dimensions", {})
             n_vals = sum(
                 len(d.get("known_values", [])) for d in disc_dims.values()
             )
-            n_mismatches = sum(
-                1 for d in disc_dims.values()
-                if len(d.get("known_values", [])) > 1
-            )
+            contradictions = detect_contradictions(disc_pack)
             lines.append(
                 f"  Discovered conventions: {len(disc_dims)} dimension(s) "
                 f"with {n_vals} value(s)"
@@ -817,9 +816,10 @@ def _audit_text(
                 if dim and tool and val and p.get("verdict") == "CONFIRMED":
                     probe_tool_values.setdefault(dim, {})[tool] = val
 
+            contradiction_dims = {c.dimension for c in contradictions}
             for dname, ddef in disc_dims.items():
                 vals = ddef.get("known_values", [])
-                if len(vals) > 1:
+                if dname in contradiction_dims:
                     lines.append(f"    {dname}: MISMATCH")
                     tv = probe_tool_values.get(dname, {})
                     max_prefix = max(
@@ -835,9 +835,9 @@ def _audit_text(
                     tool_str = f" (from {', '.join(tools)})" if tools else ""
                     lines.append(f"    {dname}: {', '.join(vals)}{tool_str}")
 
-            if n_mismatches:
+            if contradictions:
                 lines.append(
-                    f"  {n_mismatches} convention mismatch(es) across server boundaries"
+                    f"  {len(contradictions)} convention mismatch(es) across server boundaries"
                 )
 
     lines.append("")
@@ -894,15 +894,16 @@ def _audit_json(
     if obligation_check:
         obj["obligation_check"] = obligation_check
     if guided_repair:
+        from bulla.repair import detect_contradictions
+
         obj["guided_repair"] = guided_repair
         disc_pack = guided_repair.get("discovered_pack")
         if disc_pack:
-            disc_dims = disc_pack.get("dimensions", {})
-            n_mismatches = sum(
-                1 for d in disc_dims.values()
-                if len(d.get("known_values", [])) > 1
-            )
-            obj["guided_repair"]["mismatches"] = n_mismatches
+            contradictions = detect_contradictions(disc_pack)
+            obj["guided_repair"]["mismatches"] = len(contradictions)
+            obj["guided_repair"]["contradictions"] = [
+                c.to_dict() for c in contradictions
+            ]
     return json.dumps(obj, indent=2)
 
 
@@ -1137,16 +1138,21 @@ def _cmd_audit(args: argparse.Namespace) -> None:
         parent_obl_dicts = chain_receipt_data.get("boundary_obligations")
         if parent_obl_dicts:
             from bulla.model import BoundaryObligation
-            # TODO(Sprint 30): Hydrate expected_value from serialized obligation dict.
-            # Skipped deliberately: expected_value has no consumer until contradiction
-            # detection. Adding it here would propagate dead data on the wire.
-            # See BoundaryObligation.expected_value in model.py for field semantics.
+            chain_dims = (
+                chain_receipt_data.get("inline_dimensions", {})
+                .get("dimensions", {})
+            )
             parent_obligations = tuple(
                 BoundaryObligation(
                     placeholder_tool=o["placeholder_tool"],
                     dimension=o["dimension"],
                     field=o["field"],
                     source_edge=o.get("source_edge", ""),
+                    expected_value=o.get(
+                        "expected_value",
+                        (chain_dims.get(o["dimension"], {})
+                         .get("known_values", [""]))[0],
+                    ),
                 )
                 for o in parent_obl_dicts
             )
@@ -1370,6 +1376,13 @@ def _cmd_audit(args: argparse.Namespace) -> None:
         elif chain_inline and isinstance(chain_inline, dict):
             inline_dims = chain_inline
 
+        receipt_contradictions = None
+        if inline_dims:
+            from bulla.repair import detect_contradictions
+            _cr = detect_contradictions(inline_dims)
+            if _cr:
+                receipt_contradictions = _cr
+
         receipt = witness(
             diag, comp,
             witness_basis=basis,
@@ -1377,6 +1390,7 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             parent_receipt_hash=parent_hash,
             inline_dimensions=inline_dims,
             boundary_obligations=combined_obligations,
+            contradictions=receipt_contradictions,
         )
         receipt_dict = receipt.to_dict()
         receipt_path.write_text(

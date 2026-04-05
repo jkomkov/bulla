@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.30.0
+
+### Added
+- **Contradiction detection**: `detect_contradictions(discovered_pack)` is a pure function from pack dict to `tuple[ContradictionReport, ...]`. Any dimension with 2+ distinct `known_values` produces a MISMATCH report. Values and sources are sorted alphabetically at construction for canonical ordering.
+- **`ContradictionSeverity` enum**: Follows the `ObligationVerdict` pattern. Single member `MISMATCH`; `CONFLICT` reserved for future pack-level incompatibility rules.
+- **`ContradictionReport` frozen dataclass**: `dimension`, `values` (sorted tuple), `sources` (sorted tuple), `severity` (enum). `to_dict()`/`from_dict()` round-trip. Hashable and serializable.
+- **`detect_expected_value_contradictions(probes)`**: Intra-agent detection. Fires when a probe confirms a `convention_value` that differs from its obligation's `expected_value`. Closes the Sprint 28 `expected_value` loop.
+- **`detect_contradictions_across(*convergence_results)`**: Inter-agent convenience wrapper. Merges `discovered_pack` from multiple convergence results, then delegates to `detect_contradictions()`.
+- **`WitnessReceipt.contradictions` field**: `tuple[ContradictionReport, ...] | None`. Included in `_hash_input()` with conditional-include pattern (None = absent from hash, backward compatible with pre-v0.30.0 receipts).
+- **`witness()` `contradictions` parameter**: Pass-through to `WitnessReceipt` constructor.
+- **`expected_value` hydration in CLI**: `--chain` receipt's `inline_dimensions` are used to hydrate `BoundaryObligation.expected_value` during obligation loading. Resolves the Sprint 28/29 TODO.
+- **Protocol note**: `PROTOCOL-NOTE.md` with fee theorem, convergence guarantee, contradiction detection, worked example, and five open questions.
+- **Pre-computed v030 receipt**: `examples/canonical-demo/receipts/audit_receipt_v030.json` with embedded contradictions field. Original `audit_receipt.json` (v029 format) preserved as historical artifact.
+- Sprint 30 tests: 23 new tests covering contradiction detection (6), expected-value contradictions (4), cross-convergence (2), serialization (2), receipt integration (2), backward compat with v029/v030 receipts (6), updated demo smoke test (1).
+
+### Fixed
+- **`discovered_pack` caching**: `ConvergenceResult.discovered_pack` now caches on first access via `object.__setattr__` (same pattern as `WitnessReceipt.receipt_hash`). Safe because the dataclass is frozen.
+- **`--live` flag test coverage**: Added smoke test verifying `run_canonical_demo.py --help` exits cleanly and `--live` is registered.
+
+### Changed
+- **CLI mismatch display**: Replaced ad-hoc MISMATCH logic in `_audit_text()`/`_audit_json()` with structured `detect_contradictions()` calls. The CLI is now a consumer of the protocol, not an ad-hoc formatter. `_audit_json()` now includes `"contradictions": [...]` (list of dicts) alongside `"mismatches": N`.
+- **Canonical demo**: Output now includes `Contradictions: 1` section showing `path_convention_match: absolute_local vs relative_repo (MISMATCH)`.
+- **WITNESS-CONTRACT.md**: Sprint 30 thesis updated from future to present tense. `contradictions` added to hash coverage section. Contradiction detection semantics section added.
+
 ## 0.29.0
 
 ### Added
