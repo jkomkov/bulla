@@ -263,6 +263,7 @@ class BoundaryObligation:
     dimension: str
     field: str
     source_edge: str = ""
+    expected_value: str = ""
 
     def to_dict(self) -> dict:
         d: dict = {
@@ -272,6 +273,8 @@ class BoundaryObligation:
         }
         if self.source_edge:
             d["source_edge"] = self.source_edge
+        if self.expected_value:
+            d["expected_value"] = self.expected_value
         return d
 
 

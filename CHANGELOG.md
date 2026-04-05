@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.28.0
+
+### Added
+- **Convention value extraction**: `extract_pack_from_probes(probes, composition_hash)` transforms confirmed `ProbeResult` convention values into persistent micro-pack dimensions. Only CONFIRMED probes with non-empty `convention_value` produce entries. Multiple probes on the same dimension merge: `known_values` collects all distinct values (deduplicated), `source_tools` collects all tool names, `field_patterns` collects all fields (exact-match only). Output validated with `validate_pack()`.
+- **`ConvergenceResult.discovered_pack` property**: Derives a micro-pack from all confirmed probes across all convergence rounds. Lazy and derived (cannot be a stored field on `frozen=True` dataclass). Calls `extract_pack_from_probes` with the final composition's hash prefix.
+- **`BoundaryObligation.expected_value` field**: New optional field (default `""`) for convention values from upstream. When a parent receipt carries obligations with confirmed values, the downstream agent receives `expected_value` on each obligation. Included in `to_dict()` only when non-empty. Backward-compatible. Not yet propagated through `merge_receipt_obligations` (Sprint 29).
+- **CLI discovered pack integration**: `bulla audit --converge` and `--guided-discover` now extract convention values from probes and embed them as `inline_dimensions` on the receipt. Newly discovered dimensions win over existing inline dimensions from `--chain` (later-wins precedence). Text output reports: `Discovered conventions: N dimension(s) with M value(s)` with per-dimension detail.
+- **Value extraction demo** (`scripts/run_value_extraction_demo.py`): Two-agent demo. Agent A runs `coordination_step()` on a fee=2 composition, extracts specific convention values (pagination=zero_based, path_convention=absolute), witnesses with `inline_dimensions`. Agent B receives A's receipt via chain, inherits the enriched vocabulary.
+- Sprint 28 tests: `extract_pack_from_probes` (empty/single/multiple probes, same/different dimensions, denied/uncertain/empty excluded, same-value deduplication, validate_pack), `ConvergenceResult.discovered_pack` (valid pack, multi-round aggregation, empty convergence), `BoundaryObligation.expected_value` (default, to_dict, backward-compat, merge unchanged), receipt integration (inline_dimensions, round-trip, merge precedence), Sprint 27 Issue 1 fix, demo smoke test.
+
+### Fixed
+- **Sprint 27 Issue 1**: Removed redundant `diagnose()` call in `coordination_step()`. Now uses `rounds[-1].repaired_fee` instead of re-diagnosing (the repaired_fee was already computed in `repair_step`).
+- **Sprint 27 Issues 2+4**: Clarified `ConvergenceResult` docstring: `total_confirmed`/`total_denied`/`total_uncertain` count probe events across all rounds (not unique obligations). `converged` docs explain fixpoint-with-fee semantics.
+
+### Changed
+- `WITNESS-CONTRACT.md`: Sprint 28 thesis updated from future to present tense. New "Convention Value Extraction" section documenting `extract_pack_from_probes` semantics, pack format, receipt integration, and `expected_value` field.
+
 ## 0.27.0
 
 ### Added

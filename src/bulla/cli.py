@@ -793,6 +793,22 @@ def _audit_text(
                 f"({conf} confirmed, {den} denied, {unc} uncertain)"
             )
 
+        disc_pack = guided_repair.get("discovered_pack")
+        if disc_pack:
+            disc_dims = disc_pack.get("dimensions", {})
+            n_vals = sum(
+                len(d.get("known_values", [])) for d in disc_dims.values()
+            )
+            lines.append(
+                f"  Discovered conventions: {len(disc_dims)} dimension(s) "
+                f"with {n_vals} value(s)"
+            )
+            for dname, ddef in disc_dims.items():
+                vals = ddef.get("known_values", [])
+                tools = ddef.get("provenance", {}).get("source_tools", [])
+                tool_str = f" (from {', '.join(tools)})" if tools else ""
+                lines.append(f"    {dname}: {', '.join(vals)}{tool_str}")
+
     lines.append("")
     return "\n".join(lines)
 
@@ -1146,6 +1162,8 @@ def _cmd_audit(args: argparse.Namespace) -> None:
                     pack_context=merged_packs,
                     parent_obligations=tuple(all_guided_obls),
                 )
+                conv_pack = conv_result.discovered_pack
+                conv_pack_dims = conv_pack.get("dimensions", {})
                 guided_repair_report = {
                     "original_fee": diag.coherence_fee,
                     "repaired_fee": conv_result.final_fee,
@@ -1161,6 +1179,14 @@ def _cmd_audit(args: argparse.Namespace) -> None:
                         for p in r.probes
                     ],
                 }
+                if conv_pack_dims:
+                    guided_repair_report["discovered_pack"] = conv_pack
+                    if discovered_pack_data is None:
+                        discovered_pack_data = conv_pack
+                    else:
+                        merged_dims_d = dict(discovered_pack_data.get("dimensions", {}))
+                        merged_dims_d.update(conv_pack_dims)
+                        discovered_pack_data["dimensions"] = merged_dims_d
                 comp = conv_result.final_comp
                 diag = diagnose(comp)
                 disclosure = prescriptive_disclosure(comp, diag.coherence_fee)
@@ -1173,7 +1199,7 @@ def _cmd_audit(args: argparse.Namespace) -> None:
                     )
             else:
                 from bulla.discover.engine import guided_discover
-                from bulla.repair import repair_composition
+                from bulla.repair import extract_pack_from_probes, repair_composition
 
                 guided_result = guided_discover(
                     tuple(all_guided_obls), all_tools, guided_adapter, merged_packs,
@@ -1183,6 +1209,12 @@ def _cmd_audit(args: argparse.Namespace) -> None:
                     repaired_comp = repair_composition(comp, guided_result.confirmed)
                     repaired_diag = diagnose(repaired_comp)
 
+                    single_pack = extract_pack_from_probes(
+                        guided_result.probes,
+                        comp.canonical_hash()[:8],
+                    )
+                    single_pack_dims = single_pack.get("dimensions", {})
+
                     guided_repair_report = {
                         "original_fee": diag.coherence_fee,
                         "repaired_fee": repaired_diag.coherence_fee,
@@ -1191,6 +1223,14 @@ def _cmd_audit(args: argparse.Namespace) -> None:
                         "uncertain": guided_result.n_uncertain,
                         "probes": [p.to_dict() for p in guided_result.probes],
                     }
+                    if single_pack_dims:
+                        guided_repair_report["discovered_pack"] = single_pack
+                        if discovered_pack_data is None:
+                            discovered_pack_data = single_pack
+                        else:
+                            merged_dims_d = dict(discovered_pack_data.get("dimensions", {}))
+                            merged_dims_d.update(single_pack_dims)
+                            discovered_pack_data["dimensions"] = merged_dims_d
 
                     comp = repaired_comp
                     diag = repaired_diag
@@ -1271,10 +1311,21 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             parent_hash = chain_receipt_data.get("receipt_hash")
 
         inline_dims = None
-        if discovered_pack_data:
+        chain_inline = (
+            chain_receipt_data.get("inline_dimensions")
+            if chain_receipt_data else None
+        )
+        if chain_inline and isinstance(chain_inline, dict) and discovered_pack_data:
+            import copy as _copy
+            inline_dims = _copy.deepcopy(chain_inline)
+            inherited_dims = inline_dims.get("dimensions", {})
+            new_dims = discovered_pack_data.get("dimensions", {})
+            inherited_dims.update(new_dims)
+            inline_dims["dimensions"] = inherited_dims
+        elif discovered_pack_data:
             inline_dims = discovered_pack_data
-        elif chain_receipt_data and chain_receipt_data.get("inline_dimensions"):
-            inline_dims = chain_receipt_data["inline_dimensions"]
+        elif chain_inline and isinstance(chain_inline, dict):
+            inline_dims = chain_inline
 
         receipt = witness(
             diag, comp,

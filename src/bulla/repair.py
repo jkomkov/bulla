@@ -185,6 +185,80 @@ def repair_step(
     )
 
 
+# ── Convention value extraction (v0.28.0) ────────────────────────────
+
+
+def extract_pack_from_probes(
+    probes: tuple[ProbeResult, ...],
+    composition_hash: str = "",
+) -> dict:
+    """Generate a micro-pack dict from confirmed probes with convention values.
+
+    Each confirmed probe with a non-empty ``convention_value`` generates one
+    dimension entry.  Multiple probes on the same dimension merge:
+    ``known_values`` collects all **distinct** values (deduplicated),
+    ``source_tools`` collects all tool names, ``field_patterns`` collects
+    all fields.  Exact-match field patterns only -- the LLM confirmed a
+    specific field, not a pattern family.
+
+    Returns a dict conforming to the micro-pack schema (``validate_pack``).
+    Empty probes (no confirmed values) return an empty-dimensions pack.
+    """
+    dims: dict[str, dict] = {}
+
+    for probe in probes:
+        if probe.verdict != ObligationVerdict.CONFIRMED:
+            continue
+        if not probe.convention_value:
+            continue
+
+        obl = probe.obligation
+        dim_key = obl.dimension
+
+        if dim_key not in dims:
+            dims[dim_key] = {
+                "description": f"Convention for {dim_key} dimension",
+                "known_values": [],
+                "field_patterns": [],
+                "provenance": {
+                    "source": "guided_discovery",
+                    "confidence": "confirmed",
+                    "source_tools": [],
+                    "boundary": obl.source_edge or "",
+                },
+            }
+
+        entry = dims[dim_key]
+        if probe.convention_value not in entry["known_values"]:
+            entry["known_values"].append(probe.convention_value)
+        if obl.field not in entry["field_patterns"]:
+            entry["field_patterns"].append(obl.field)
+
+        prov_tools = entry["provenance"]["source_tools"]
+        if obl.placeholder_tool not in prov_tools:
+            prov_tools.append(obl.placeholder_tool)
+
+        if obl.source_edge and not entry["provenance"]["boundary"]:
+            entry["provenance"]["boundary"] = obl.source_edge
+
+    hash_prefix = composition_hash[:8] if composition_hash else "unknown"
+    pack: dict = {
+        "pack_name": f"discovered_{hash_prefix}",
+        "pack_version": "0.1.0",
+        "dimensions": dims,
+    }
+
+    if dims:
+        from bulla.packs.validate import validate_pack
+        errors = validate_pack(pack)
+        if errors:
+            raise ValueError(
+                f"extract_pack_from_probes produced invalid pack: {errors}"
+            )
+
+    return pack
+
+
 # ── Iterative convergence (v0.27.0) ─────────────────────────────────
 
 
@@ -192,10 +266,17 @@ def repair_step(
 class ConvergenceResult:
     """Result of iterative guided repair across multiple rounds.
 
-    ``converged`` is True when ``final_fee == 0`` or the loop reached
-    a fixpoint (no fee change in a round).  ``termination_reason``
-    distinguishes the three exit paths: ``"fee_zero"``, ``"fixpoint"``,
-    ``"max_rounds"``.
+    ``converged`` is True when the fee sequence has stabilized
+    (``fee_zero`` or ``fixpoint``).  A fixpoint with ``fee > 0``
+    means remaining obligations are unresolvable; check
+    ``termination_reason`` to distinguish from full resolution.
+
+    ``total_confirmed``, ``total_denied``, and ``total_uncertain``
+    count **probe events across all rounds**, not unique obligations.
+    An UNCERTAIN obligation re-probed in round 2 is counted twice.
+
+    ``termination_reason`` distinguishes the three exit paths:
+    ``"fee_zero"``, ``"fixpoint"``, ``"max_rounds"``.
     """
 
     rounds: tuple[RepairResult, ...]
@@ -206,6 +287,17 @@ class ConvergenceResult:
     total_denied: int
     total_uncertain: int
     termination_reason: str
+
+    @property
+    def discovered_pack(self) -> dict:
+        """Derive a micro-pack from all confirmed probes across all rounds."""
+        all_probes = tuple(
+            p for r in self.rounds for p in r.probes
+        )
+        return extract_pack_from_probes(
+            all_probes,
+            self.final_comp.canonical_hash()[:8] if self.rounds else "",
+        )
 
 
 def coordination_step(
@@ -275,7 +367,7 @@ def coordination_step(
         current_comp = result.repaired_comp
         current_obligations = remaining if remaining else None
 
-    final_fee = diagnose(current_comp).coherence_fee if rounds else diagnose(comp).coherence_fee
+    final_fee = rounds[-1].repaired_fee if rounds else diagnose(comp).coherence_fee
     converged = termination_reason in ("fee_zero", "fixpoint")
 
     return ConvergenceResult(
