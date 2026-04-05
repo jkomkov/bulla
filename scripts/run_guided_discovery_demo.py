@@ -22,8 +22,8 @@ from bulla.diagnostic import (
     check_obligations,
     decompose_fee,
     diagnose,
-    repair_composition,
 )
+from bulla.repair import repair_composition
 from bulla.discover.adapter import MockAdapter
 from bulla.discover.engine import guided_discover
 from bulla.model import (
@@ -207,7 +207,7 @@ def run_demo() -> None:
     print(f"  Guided discovery: {guided_result_b.n_confirmed} confirmed, "
           f"{guided_result_b.n_denied} denied, {guided_result_b.n_uncertain} uncertain")
     for p in guided_result_b.probes:
-        print(f"    {p.obligation.dimension}/{p.obligation.field}: {p.verdict.value}"
+        print(f"    {p.obligation.placeholder_tool}:{p.obligation.dimension}/{p.obligation.field}: {p.verdict.value}"
               + (f" (value: {p.convention_value})" if p.convention_value else ""))
 
     if guided_result_b.confirmed:
@@ -278,7 +278,7 @@ def run_demo() -> None:
         print(f"  Guided discovery: {guided_result_c.n_confirmed} confirmed, "
               f"{guided_result_c.n_denied} denied, {guided_result_c.n_uncertain} uncertain")
         for p in guided_result_c.probes:
-            print(f"    {p.obligation.dimension}/{p.obligation.field}: {p.verdict.value}")
+            print(f"    {p.obligation.placeholder_tool}:{p.obligation.dimension}/{p.obligation.field}: {p.verdict.value}")
 
         remaining_c = tuple(
             p.obligation for p in guided_result_c.probes

@@ -119,7 +119,12 @@ class OpenRouterAdapter:
 
 
 class MockAdapter:
-    """Testing adapter that returns a predetermined response."""
+    """Testing adapter that returns a predetermined response.
+
+    ``last_prompt`` stores the most recent prompt for test assertions.
+    This attribute is specific to MockAdapter and not part of the
+    ``DiscoverAdapter`` protocol.
+    """
 
     def __init__(self, response: str) -> None:
         self.response = response

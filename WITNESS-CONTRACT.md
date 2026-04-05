@@ -384,7 +384,21 @@ Pure function: returns a new `Composition` with confirmed fields made observable
 
 ### `repair_step(comp, partition, tool_schemas, adapter, ...)`
 
-One-round coordination loop: diagnose -> compute obligations -> guided discover -> repair -> re-diagnose. Returns `RepairResult` with before/after fees, all probes, and remaining obligations. Sprint 27's `coordination_step()` wraps this in a convergence loop.
+One-round coordination loop: diagnose -> compute obligations -> guided discover -> repair -> re-diagnose. Returns `RepairResult` with before/after fees, all probes, and remaining obligations. `coordination_step()` wraps this in a convergence loop.
+
+### Iterative Convergence Loop (v0.27.0)
+
+`coordination_step()` wraps `repair_step()` in a bounded loop with three termination conditions:
+
+1. **`fee_zero`**: The repaired composition has `coherence_fee == 0`. Full resolution achieved.
+2. **`fixpoint`**: A round produced `fee_delta == 0` — no progress was made (all remaining obligations are DENIED or UNCERTAIN with no new context).
+3. **`max_rounds`**: The round budget was exhausted (default 5).
+
+**Obligation triage between rounds**: Only UNCERTAIN obligations carry forward for re-probing. CONFIRMED obligations are excluded (already repaired). DENIED obligations are excluded (won't change). `repair_step` independently re-derives obligations from the repaired composition each round, so structurally persistent obligations are naturally re-encountered even if excluded from carry-forward.
+
+**`ConvergenceResult`**: Contains the full round history (`tuple[RepairResult, ...]`), convergence status, final composition, final fee, aggregate statistics (`total_confirmed`, `total_denied`, `total_uncertain`), and `termination_reason`.
+
+**Module structure (v0.27.0)**: `repair_composition`, `repair_step`, `RepairResult`, `coordination_step`, and `ConvergenceResult` live in `bulla.repair`. The measurement layer (`diagnostic.py`) has zero imports from `repair.py`, preserving the anti-reflexivity law. All symbols are re-exported from the `bulla` package.
 
 ## `max_unknown` Definition
 
@@ -416,7 +430,7 @@ Each sprint adds one mathematical capability to the resolution sequence:
 |--------|---------|--------|
 | **25** | v0.25.0 | **Obligation generation.** Boundary decomposition extracts generators of `H^1(G; F/O)` from cross-partition blind spots. Each obligation names a specific `(tool, dimension, field)` whose disclosure would eliminate one cocycle generator. |
 | **26** | v0.26.0 | **Guided resolution.** LLM-directed probing evaluates whether each generator can be resolved (field is observable). Confirmed resolutions extend `O → O'` with `fee(O') < fee(O)` (collective invariant). |
-| **27** | v0.27.0 | **Iterative convergence.** `coordination_step()` wraps `repair_step()` in a loop: `while fee > 0 and confirmed > 0: repair_step()`. Convergence is guaranteed because fee is a non-negative integer that strictly decreases on each round with at least one confirmation. |
+| **27** | v0.27.0 | **Iterative convergence.** `coordination_step()` wraps `repair_step()` in a loop with three exit paths: `fee_zero`, `fixpoint`, `max_rounds`. Obligation triage carries forward only UNCERTAIN probes; DENIED and CONFIRMED are excluded. Convergence is guaranteed: fee is a non-negative integer that strictly decreases on each round with at least one confirmation. Module split: `repair.py` (coordination) separated from `diagnostic.py` (measurement), preserving anti-reflexivity. |
 | **28** | v0.28.0 | **Convention value extraction.** Guided discovery extracts not just observability verdicts but convention *values* (e.g. "zero_based", "UTC", "absolute"). These values populate the micro-pack inline, enabling the presheaf section to carry semantic content — not just structural observability. |
 | **29** | v0.29.0 | **Contradiction detection.** When multi-parent DAG merges produce conflicting obligations on the same `(dimension, field)` — e.g. one parent requires "zero_based" while another requires "one_based" — the protocol detects this as a non-trivial element of `H^1` that cannot be resolved by disclosure alone. Fourth obligation status: `contradictory`. |
 | **30** | v0.30.0 | **Policy enforcement.** Obligations become enforceable: a policy profile can require that all obligations are met (or met within tolerance) before disposition is `PROCEED`. The policy layer closes the loop from measurement to judgment to requirement to enforcement. |

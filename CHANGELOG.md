@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.27.0
+
+### Added
+- **Iterative convergence loop**: `coordination_step(comp, partition, tool_schemas, adapter, *, max_rounds=5, ...)` wraps `repair_step()` in a bounded loop with three exit paths: `fee_zero` (full resolution), `fixpoint` (no progress), `max_rounds` (budget exhausted). Obligation triage between rounds carries forward only UNCERTAIN probes; DENIED and CONFIRMED are excluded. Convergence is a theorem: fee is a non-negative integer that strictly decreases on each round with at least one confirmation.
+- **`ConvergenceResult` dataclass**: Result of iterative repair: `rounds` (tuple of `RepairResult`), `converged`, `final_comp`, `final_fee`, `total_confirmed`/`total_denied`/`total_uncertain`, and `termination_reason` (`"fee_zero"`, `"fixpoint"`, `"max_rounds"`).
+- **`bulla.repair` module**: Repair/coordination layer extracted from `diagnostic.py`. Contains `repair_composition`, `repair_step`, `RepairResult`, `coordination_step`, `ConvergenceResult`. The measurement layer (`diagnostic.py`) has zero imports from `repair.py`, preserving the anti-reflexivity law.
+- **CLI `--converge` flag**: `bulla audit --converge` runs the iterative convergence loop. Reports: `Convergence: fee 3 -> 0 in 2 round(s) (3 confirmed, 0 denied, 0 uncertain) [fee_zero]`. `--max-rounds N` controls budget (default 5). `--guided-discover` remains for single-shot mode.
+- **Convergence demo** (`scripts/run_convergence_demo.py`): Two-agent demo with fee=2 topology. Agent B converges in 2 rounds (fee 2→1→0) using a dimension-aware staged adapter. Agent C demonstrates trivial fixpoint (fee=0).
+- Sprint 27 tests: `ConvergenceResult` fields, 1-round/2-round convergence, fixpoint (all denied), max_rounds cutoff, zero obligations, obligation carry-forward triage, monotonicity invariant, module split imports, Phase 0 cleanup fixes, demo smoke test.
+
+### Changed
+- **Module split**: `repair_composition`, `repair_step`, `RepairResult` moved from `diagnostic.py` to `repair.py`. All symbols re-exported from the `bulla` package for backward compatibility.
+- **`_match_tool_for_obligation`**: Uses sorted iteration for deterministic prefix matching. Source_edge match still preferred.
+- **Convention value filter**: `parse_guided_response` now accepts any non-empty `convention_value` (removed restrictive filter for "empty", "none", "n/a").
+- **Demo disambiguation**: Guided discovery demo prints `placeholder_tool:dimension/field` for obligation display, disambiguating duplicate `(dimension, field)` pairs.
+- **`MockAdapter` docstring**: Documents `last_prompt` as a test-only attribute.
+- `WITNESS-CONTRACT.md`: Sprint 27 thesis updated from future to present tense. New "Iterative Convergence Loop" section documenting termination conditions, obligation triage, module structure.
+
 ## 0.26.0
 
 ### Added

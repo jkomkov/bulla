@@ -10,9 +10,11 @@ from bulla.diagnostic import (
     boundary_obligations_from_decomposition,
     decompose_fee,
     diagnose,
+)
+from bulla.repair import (
+    RepairResult,
     repair_composition,
     repair_step,
-    RepairResult,
 )
 from bulla.discover.adapter import MockAdapter
 from bulla.discover.engine import guided_discover, GuidedDiscoveryResult

@@ -285,22 +285,20 @@ def _match_tool_for_obligation(
 ) -> dict[str, Any] | None:
     """Find the best tool schema matching an obligation's target.
 
-    Prefers exact tool name from source_edge, falls back to prefix
-    match on placeholder_tool (server group name).
+    Prefers exact tool name from source_edge (matching the obligation's
+    server group), falls back to first prefix match on placeholder_tool.
     """
+    group = obligation["placeholder_tool"]
     source_edge = obligation.get("source_edge", "")
     if source_edge:
         for part in source_edge.replace(" -> ", "\t").split("\t"):
             part = part.strip()
-            if part in tool_by_name:
-                group = obligation["placeholder_tool"]
-                if part.startswith(f"{group}__") or part == group:
-                    return tool_by_name[part]
+            if part in tool_by_name and (part.startswith(f"{group}__") or part == group):
+                return tool_by_name[part]
 
-    group = obligation["placeholder_tool"]
-    for name, schema in tool_by_name.items():
-        if name.startswith(f"{group}__"):
-            return schema
+    for name in sorted(tool_by_name):
+        if name.startswith(f"{group}__") or name == group:
+            return tool_by_name[name]
 
     return None
 
@@ -337,7 +335,7 @@ def parse_guided_response(
                     evidence = line.split(":", 1)[1].strip()
                 elif line.lower().startswith("convention_value:"):
                     cv = line.split(":", 1)[1].strip()
-                    if cv and cv.lower() not in ("empty", "none", "n/a", ""):
+                    if cv:
                         convention_value = cv
 
         results.append({
