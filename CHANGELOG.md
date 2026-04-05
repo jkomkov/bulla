@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.29.0
+
+### Added
+- **Canonical proof artifact**: `examples/canonical-demo/` runs the full Sprint 25-28 pipeline against real MCP server manifests (filesystem + GitHub). Two servers, one cross-server seam (`path_convention_match`), one convention mismatch (`absolute_local` vs `relative_repo`). Measurement, obligation extraction, guided discovery, value extraction, receipt with inline dimensions, and receipt integrity verification in a single demo script.
+- **Convention mismatch display**: When `discovered_pack` contains a dimension with 2+ `known_values`, `_audit_text()` flags it as `MISMATCH` with per-source-tool breakdown. `_audit_json()` adds `"mismatches": N` to the `guided_repair` section.
+- **`RealWorldMockAdapter`**: Deterministic adapter for the canonical demo that returns known convention values for real MCP servers. Parses obligation server group and dimension from the guided discovery prompt. `--live` flag on `run_canonical_demo.py` enables real LLM probing.
+- **Pre-computed proof artifact**: `examples/canonical-demo/receipts/audit_receipt.json` is a checked-in receipt with `inline_dimensions` containing the discovered path convention mismatch. `verify_receipt_integrity()` works on it directly.
+- Sprint 29 tests: convention mismatch formatting (MISMATCH in text, count in JSON, single-value no mismatch), real manifest audit (server tool counts, coherence_fee=30, boundary_fee=1, 3 obligations), canonical demo smoke test, pre-computed receipt integrity (exists, valid, has path_convention_match, has both values, has boundary obligations).
+
+### Fixed
+- **Package source resolution**: Tests now run against the workspace source (not standalone repo) after `pip install -e .` from the correct directory.
+
+### Changed
+- **Sprint 28 TODO**: Added `expected_value` hydration TODO comment in `cli.py` at `--chain` obligation loading, documenting deferred propagation to Sprint 30 (contradiction detection).
+- **WITNESS-CONTRACT.md**: Sprint 29 thesis updated from future to present tense. Pivoted from contradiction detection to canonical proof artifact. Contradiction detection deferred to Sprint 30. Dependency diagram updated.
+
 ## 0.28.0
 
 ### Added

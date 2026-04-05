@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bulla"
-version = "0.28.0"
+version = "0.29.0"
 description = "Witness kernel for agent tool compositions — diagnose, attest, seal"
 readme = "README.md"
 license = "MIT"

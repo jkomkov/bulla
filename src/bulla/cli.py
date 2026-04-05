@@ -799,15 +799,46 @@ def _audit_text(
             n_vals = sum(
                 len(d.get("known_values", [])) for d in disc_dims.values()
             )
+            n_mismatches = sum(
+                1 for d in disc_dims.values()
+                if len(d.get("known_values", [])) > 1
+            )
             lines.append(
                 f"  Discovered conventions: {len(disc_dims)} dimension(s) "
                 f"with {n_vals} value(s)"
             )
+
+            probe_tool_values: dict[str, dict[str, str]] = {}
+            for p in guided_repair.get("probes", []):
+                obl = p.get("obligation", {})
+                dim = obl.get("dimension", "")
+                tool = obl.get("placeholder_tool", "")
+                val = p.get("convention_value", "")
+                if dim and tool and val and p.get("verdict") == "CONFIRMED":
+                    probe_tool_values.setdefault(dim, {})[tool] = val
+
             for dname, ddef in disc_dims.items():
                 vals = ddef.get("known_values", [])
-                tools = ddef.get("provenance", {}).get("source_tools", [])
-                tool_str = f" (from {', '.join(tools)})" if tools else ""
-                lines.append(f"    {dname}: {', '.join(vals)}{tool_str}")
+                if len(vals) > 1:
+                    lines.append(f"    {dname}: MISMATCH")
+                    tv = probe_tool_values.get(dname, {})
+                    max_prefix = max(
+                        (len(t.split("__")[0]) for t in tv), default=0
+                    )
+                    for tool_name, value in tv.items():
+                        prefix = tool_name.split("__")[0]
+                        lines.append(
+                            f"      {prefix:<{max_prefix}s}: {value}"
+                        )
+                else:
+                    tools = ddef.get("provenance", {}).get("source_tools", [])
+                    tool_str = f" (from {', '.join(tools)})" if tools else ""
+                    lines.append(f"    {dname}: {', '.join(vals)}{tool_str}")
+
+            if n_mismatches:
+                lines.append(
+                    f"  {n_mismatches} convention mismatch(es) across server boundaries"
+                )
 
     lines.append("")
     return "\n".join(lines)
@@ -864,6 +895,14 @@ def _audit_json(
         obj["obligation_check"] = obligation_check
     if guided_repair:
         obj["guided_repair"] = guided_repair
+        disc_pack = guided_repair.get("discovered_pack")
+        if disc_pack:
+            disc_dims = disc_pack.get("dimensions", {})
+            n_mismatches = sum(
+                1 for d in disc_dims.values()
+                if len(d.get("known_values", [])) > 1
+            )
+            obj["guided_repair"]["mismatches"] = n_mismatches
     return json.dumps(obj, indent=2)
 
 
@@ -1098,6 +1137,10 @@ def _cmd_audit(args: argparse.Namespace) -> None:
         parent_obl_dicts = chain_receipt_data.get("boundary_obligations")
         if parent_obl_dicts:
             from bulla.model import BoundaryObligation
+            # TODO(Sprint 30): Hydrate expected_value from serialized obligation dict.
+            # Skipped deliberately: expected_value has no consumer until contradiction
+            # detection. Adding it here would propagate dead data on the wire.
+            # See BoundaryObligation.expected_value in model.py for field semantics.
             parent_obligations = tuple(
                 BoundaryObligation(
                     placeholder_tool=o["placeholder_tool"],

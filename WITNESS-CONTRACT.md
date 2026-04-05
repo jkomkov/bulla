@@ -410,7 +410,7 @@ Only CONFIRMED probes with non-empty `convention_value` produce dimension entrie
 
 - **Exact-match field_patterns**: `field_patterns: ["offset"]`, not glob patterns. The LLM confirmed a specific field, not a pattern family. `provenance.source: "guided_discovery"` signals narrow observation.
 - **Deduplication**: Multiple probes on the same dimension merge: `known_values` collects all distinct values, `source_tools` collects all tool names, `field_patterns` collects all fields. Same-value probes deduplicate (no `["zero_based", "zero_based"]`).
-- **Multi-value collection**: Two probes on the same dimension with different `convention_value`s both survive in `known_values`. This is the seed for Sprint 29's contradiction detection.
+- **Multi-value collection**: Two probes on the same dimension with different `convention_value`s both survive in `known_values`. This is the seed for Sprint 30's contradiction detection.
 - **Validation**: Output is validated with `validate_pack()` before return. Invalid output raises `ValueError`.
 
 ### `ConvergenceResult.discovered_pack`
@@ -421,7 +421,7 @@ A `@property` on `ConvergenceResult` that collects all probes across all rounds 
 
 New field (default `""`, backward-compatible). When a parent receipt carries obligations with confirmed values, the downstream agent receives `expected_value` on each obligation. Sprint 29 will use this to detect disagreements between expected and actual convention values.
 
-The field is included in `to_dict()` only when non-empty. It is NOT yet propagated through `merge_receipt_obligations` — the field has no machine consumer until Sprint 29.
+The field is included in `to_dict()` only when non-empty. It is NOT yet propagated through `merge_receipt_obligations` — the field has no machine consumer until Sprint 30 (contradiction detection).
 
 ### Receipt Integration
 
@@ -459,9 +459,10 @@ Each sprint adds one mathematical capability to the resolution sequence:
 | **26** | v0.26.0 | **Guided resolution.** LLM-directed probing evaluates whether each generator can be resolved (field is observable). Confirmed resolutions extend `O → O'` with `fee(O') < fee(O)` (collective invariant). |
 | **27** | v0.27.0 | **Iterative convergence.** `coordination_step()` wraps `repair_step()` in a loop with three exit paths: `fee_zero`, `fixpoint`, `max_rounds`. Obligation triage carries forward only UNCERTAIN probes; DENIED and CONFIRMED are excluded. Convergence is guaranteed: fee is a non-negative integer that strictly decreases on each round with at least one confirmation. Module split: `repair.py` (coordination) separated from `diagnostic.py` (measurement), preserving anti-reflexivity. |
 | **28** | v0.28.0 | **Convention value extraction.** `extract_pack_from_probes()` transforms confirmed probe convention values into persistent micro-pack dimensions embedded in receipts. `ConvergenceResult.discovered_pack` aggregates all rounds. `BoundaryObligation.expected_value` seeds contradiction detection. The presheaf section now carries semantic content -- not just structural observability. |
-| **29** | v0.29.0 | **Contradiction detection.** When multi-parent DAG merges produce conflicting obligations on the same `(dimension, field)` — e.g. one parent requires "zero_based" while another requires "one_based" — the protocol detects this as a non-trivial element of `H^1` that cannot be resolved by disclosure alone. Fourth obligation status: `contradictory`. |
-| **30** | v0.30.0 | **Policy enforcement.** Obligations become enforceable: a policy profile can require that all obligations are met (or met within tolerance) before disposition is `PROCEED`. The policy layer closes the loop from measurement to judgment to requirement to enforcement. |
-| **31** | v0.31.0 | **Agent framework SDK.** `coordination_step()` collapses discover + audit + obligations + guided repair + chain into a single call. LangGraph, CrewAI, and AutoGen adapters. The protocol becomes invisible infrastructure — agents call one function, receive a receipt. |
+| **29** | v0.29.0 | **Canonical proof artifact.** Originally planned as contradiction detection; pivoted because the protocol was mature enough that the highest-leverage move was real-world proof, not another library feature. Two real MCP servers (filesystem + GitHub), one convention mismatch (absolute vs relative paths), full pipeline from measurement through guided discovery to receipted value extraction. Convention mismatch display flags multi-value dimensions. Pre-computed receipt is a checked-in cryptographic proof artifact. Contradiction detection deferred to Sprint 30. |
+| **30** | v0.30.0 | **Contradiction detection.** When multi-parent DAG merges produce conflicting obligations on the same `(dimension, field)` — e.g. one parent requires "zero_based" while another requires "one_based" — the protocol detects this as a non-trivial element of `H^1` that cannot be resolved by disclosure alone. Fourth obligation status: `contradictory`. |
+| **31** | v0.31.0 | **Policy enforcement.** Obligations become enforceable: a policy profile can require that all obligations are met (or met within tolerance) before disposition is `PROCEED`. The policy layer closes the loop from measurement to judgment to requirement to enforcement. |
+| **32** | v0.32.0 | **Agent framework SDK.** `coordination_step()` collapses discover + audit + obligations + guided repair + chain into a single call. LangGraph, CrewAI, and AutoGen adapters. The protocol becomes invisible infrastructure — agents call one function, receive a receipt. |
 
 ### Convergence Properties
 
@@ -480,11 +481,12 @@ The capabilities compose linearly:
 ```
 obligations (25) → guided discovery (26) → iterative repair (27)
                                          → value extraction (28)
-                   → contradiction detection (29) [requires DAG from 24]
-                   → policy enforcement (30) [requires obligations from 25]
-                   → SDK (31) [integrates all of 25-30]
+                                         → canonical proof (29) [uses 25-28 on real data]
+                   → contradiction detection (30) [requires DAG from 24, expected_value from 28]
+                   → policy enforcement (31) [requires obligations from 25]
+                   → SDK (32) [integrates all of 25-31]
 ```
 
-Sprints 27 and 28 are independent (can proceed in parallel). Sprint 29 depends on DAG support (Sprint 24) and obligations (Sprint 25). Sprint 30 depends on obligations. Sprint 31 integrates everything.
+Sprints 27 and 28 are independent (can proceed in parallel). Sprint 29 is the canonical proof artifact: it exercises the full 25-28 pipeline on real MCP server manifests. Sprint 30 depends on DAG support (Sprint 24) and obligations (Sprint 25). Sprint 31 depends on obligations. Sprint 32 integrates everything.
 
 When a new sprint ships, update this section: move its thesis from future to present tense, and add any new convergence properties discovered during implementation.

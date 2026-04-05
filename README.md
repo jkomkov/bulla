@@ -8,6 +8,10 @@ When AI agents compose tools into pipelines, implicit semantic assumptions (date
 
 > **Naming**: *Bulla* is the protocol and tool. *SEAM* is the underlying theory ([paper](https://www.resagentica.com/papers/seam-paper.pdf)). *Glyph* is the company.
 
+## The Seam Problem (canonical demo)
+
+Two MCP servers. One uses absolute paths, the other uses relative paths. Schema validation passes. The agent silently puts the file in the wrong place. **[See the demo →](examples/canonical-demo/)**
+
 ## Install
 
 ```bash
