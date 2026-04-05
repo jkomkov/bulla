@@ -39,12 +39,21 @@ def _resolve_disposition(
     diag: Diagnostic,
     policy: PolicyProfile = DEFAULT_POLICY_PROFILE,
     unknown_dimensions: int = 0,
+    unmet_obligations: int = 0,
+    contradiction_count: int = 0,
 ) -> Disposition:
     """Map measurement to judgment under a named policy.
 
-    Uses the PolicyProfile thresholds to determine disposition.
-    The profile is recorded in the receipt so consumers know which
-    judgment logic was applied.
+    Priority chain (first match wins):
+
+    1. blind_spots > 0 AND fee > max_fee -> refuse
+    2. unknown > max_unknown (when >= 0) -> refuse
+    3. unmet_obligations > max_unmet_obligations (when >= 0) -> refuse
+    4. contradiction_count > max_contradictions (when >= 0) -> refuse
+    5. require_bridge AND blind_spots > 0 -> bridge
+    6. blind_spots > max_blind_spots -> bridge
+    7. fee > max_fee -> receipt
+    8. Otherwise -> proceed
     """
     has_blind_spots = diag.n_unbridged > 0
     has_fee = diag.coherence_fee > policy.max_fee
@@ -52,11 +61,23 @@ def _resolve_disposition(
     over_unknown = (
         policy.max_unknown >= 0 and unknown_dimensions > policy.max_unknown
     )
+    over_unmet = (
+        policy.max_unmet_obligations >= 0
+        and unmet_obligations > policy.max_unmet_obligations
+    )
+    over_contradictions = (
+        policy.max_contradictions >= 0
+        and contradiction_count > policy.max_contradictions
+    )
     needs_bridge = policy.require_bridge and has_blind_spots
 
     if has_blind_spots and has_fee:
         return Disposition.REFUSE_PENDING_DISCLOSURE
     if over_unknown:
+        return Disposition.REFUSE_PENDING_DISCLOSURE
+    if over_unmet:
+        return Disposition.REFUSE_PENDING_DISCLOSURE
+    if over_contradictions:
         return Disposition.REFUSE_PENDING_DISCLOSURE
     if needs_bridge or over_blind_spots:
         return Disposition.PROCEED_WITH_BRIDGE
@@ -95,6 +116,8 @@ def witness(
     inline_dimensions: dict | None = None,
     boundary_obligations: tuple[BoundaryObligation, ...] | None = None,
     contradictions: tuple[ContradictionReport, ...] | None = None,
+    unmet_obligations: int = 0,
+    contradiction_count: int = 0,
 ) -> WitnessReceipt:
     """Produce a WitnessReceipt from a Diagnostic and Composition.
 
@@ -129,8 +152,20 @@ def witness(
         else unknown_dimensions
     )
 
+    effective_contradiction_count = (
+        contradiction_count
+        if contradiction_count
+        else (len(contradictions) if contradictions else 0)
+    )
+
     patches = _diagnostic_to_patches(diag)
-    disposition = _resolve_disposition(diag, policy_profile, effective_unknown)
+    disposition = _resolve_disposition(
+        diag,
+        policy_profile,
+        effective_unknown,
+        unmet_obligations=unmet_obligations,
+        contradiction_count=effective_contradiction_count,
+    )
 
     return WitnessReceipt(
         receipt_version=RECEIPT_VERSION,

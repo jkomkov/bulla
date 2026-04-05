@@ -1,6 +1,6 @@
 # Bulla Protocol Note
 
-A concise technical summary of the Bulla witness protocol (Sprints 25-30).
+A concise technical summary of the Bulla witness protocol (Sprints 25-31).
 
 ## 1. The Fee Theorem
 
@@ -72,7 +72,7 @@ No runtime error occurs. Schema validation passes. The filesystem server's `read
 
 **(a) Hierarchical composition.** The boundary fee is monotone but not submodular on the partition lattice. For three or more levels of delegation (agent -> sub-agent -> tool), does the fee decomposition satisfy a tower law for non-disjoint partitions?
 
-**(b) Policy enforcement.** Obligations are currently advisory. Sprint 31 makes them enforceable: a policy profile can require that all obligations are met before disposition is PROCEED. The design question is threshold semantics: should a single unresolved obligation block the composition, or should there be a tolerance count?
+**(b) Policy enforcement.** ~~Resolved in v0.31.0.~~ `PolicyProfile` now includes `max_unmet_obligations` and `max_contradictions`. Both default to `-1` (disabled); `0` means strict (any occurrence triggers refusal); `N > 0` means tolerance. The threshold semantics follow the established `max_unknown` pattern: `-1` disables, `>= 0` enforces. `BullaGuard.enforce_policy()` is the one-call entry point.
 
 **(c) Spectral refinements.** The fee is a rank difference (integer). The sheaf Laplacian eigenvalue spectrum provides a continuous refinement: compositions with the same fee can differ in how "close" they are to coherence. This requires eigenvector computation, deferred to future work.
 

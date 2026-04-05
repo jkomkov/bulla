@@ -376,6 +376,8 @@ class PolicyProfile:
     max_fee: int = 0
     max_unknown: int = -1  # -1 = unlimited
     require_bridge: bool = True
+    max_unmet_obligations: int = -1  # -1 = disabled, 0 = strict
+    max_contradictions: int = -1  # -1 = disabled, 0 = strict
 
     def to_dict(self) -> dict:
         return {
@@ -384,6 +386,8 @@ class PolicyProfile:
             "max_fee": self.max_fee,
             "max_unknown": self.max_unknown,
             "require_bridge": self.require_bridge,
+            "max_unmet_obligations": self.max_unmet_obligations,
+            "max_contradictions": self.max_contradictions,
         }
 
 

@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.31.0
+
+### Added
+- **Policy enforcement**: `PolicyProfile` gains `max_unmet_obligations` (int, default -1) and `max_contradictions` (int, default -1). Both follow the `max_unknown` pattern: -1 disables, 0 means strict, N means tolerance.
+- **Disposition priority rules 3 and 4**: `_resolve_disposition()` now refuses when `unmet_obligations > max_unmet_obligations` (rule 3) or `contradiction_count > max_contradictions` (rule 4), slotted between the existing `max_unknown` refuse and `require_bridge` rules.
+- **`witness()` enforcement parameters**: `unmet_obligations: int = 0` and `contradiction_count: int = 0` are caller-attested integers passed through to `_resolve_disposition()`. When `contradictions` tuple is provided and `contradiction_count` is 0, the count auto-derives from `len(contradictions)`.
+- **`BullaGuard.enforce_policy()`**: Single entry point that diagnoses, resolves disposition under a given policy (with obligation/contradiction counts), and issues a receipt.
+- **CLI `--max-unmet` and `--max-contradictions`**: New threshold flags on `bulla audit` with exit-code semantics (exit 1 if exceeded). Mirrors the existing `--max-fee` / `--max-blind-spots` pattern.
+- **CLI `--max-fee` on `bulla check`**: Previously only available on `gauge` and `audit`.
+- Sprint 31 tests: 26 new tests covering policy serialization (3), disposition rules (8), witness with new params (4), enforce_policy (4), CLI exit codes (3), backward compatibility (4).
+
+### Fixed
+- **`detect_expected_value_contradictions` docstring**: Clarified that `sources` contains only `obligation.placeholder_tool`; the parent agent who set `expected_value` is unnamed because the obligation does not carry parent identity.
+
+### Changed
+- **WITNESS-CONTRACT.md**: Policy Semantics section updated with `max_unmet_obligations` and `max_contradictions` fields. Disposition priority chain expanded to 8 rules (was 6). Sprint 31 thesis updated from future to present tense.
+- **PROTOCOL-NOTE.md**: Open question (b) on policy enforcement threshold semantics marked as resolved.
+
 ## 0.30.0
 
 ### Added

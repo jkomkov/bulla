@@ -158,6 +158,7 @@ def _cmd_check(args: argparse.Namespace) -> None:
             sys.exit(1)
 
     failed = False
+    max_fee = getattr(args, "max_fee", None)
     for diag, path in diagnostics:
         bs_count = len(diag.blind_spots)
         ub_count = diag.n_unbridged
@@ -173,6 +174,13 @@ def _cmd_check(args: argparse.Namespace) -> None:
             print(
                 f"FAIL {path.name}: {ub_count} unbridged edge(s) "
                 f"(max allowed: {args.max_unbridged})",
+                file=sys.stderr,
+            )
+        if max_fee is not None and diag.coherence_fee > max_fee:
+            failed = True
+            print(
+                f"FAIL {path.name}: fee {diag.coherence_fee} "
+                f"(max allowed: {max_fee})",
                 file=sys.stderr,
             )
 
@@ -615,11 +623,17 @@ def _gauge_json(
 
 
 def _gauge_threshold_check(
-    diag: "Diagnostic", args: argparse.Namespace
+    diag: "Diagnostic",
+    args: argparse.Namespace,
+    *,
+    unmet_count: int = 0,
+    contradiction_count: int = 0,
 ) -> None:
     violations: list[str] = []
     max_fee = getattr(args, "max_fee", None)
     max_bs = getattr(args, "max_blind_spots", None)
+    max_unmet = getattr(args, "max_unmet", None)
+    max_contradictions = getattr(args, "max_contradictions", None)
     if max_fee is not None and diag.coherence_fee > max_fee:
         violations.append(
             f"fee {diag.coherence_fee} exceeds --max-fee {max_fee}"
@@ -628,6 +642,16 @@ def _gauge_threshold_check(
         violations.append(
             f"{len(diag.blind_spots)} blind spot(s) exceeds "
             f"--max-blind-spots {max_bs}"
+        )
+    if max_unmet is not None and unmet_count > max_unmet:
+        violations.append(
+            f"{unmet_count} unmet obligation(s) exceeds "
+            f"--max-unmet {max_unmet}"
+        )
+    if max_contradictions is not None and contradiction_count > max_contradictions:
+        violations.append(
+            f"{contradiction_count} contradiction(s) exceeds "
+            f"--max-contradictions {max_contradictions}"
         )
     if violations:
         for v in violations:
@@ -1351,6 +1375,15 @@ def _cmd_audit(args: argparse.Namespace) -> None:
                 seen_keys[key] = obl
         combined_obligations = tuple(seen_keys.values()) if seen_keys else None
 
+    # Compute counts for policy enforcement
+    _unmet_count = obligation_check["unmet"] if obligation_check else 0
+    _contradiction_count = 0
+    if guided_repair_report:
+        disc_pack = guided_repair_report.get("discovered_pack")
+        if disc_pack:
+            from bulla.repair import detect_contradictions as _dc
+            _contradiction_count = len(_dc(disc_pack))
+
     # --receipt: produce WitnessReceipt
     if receipt_path:
         from bulla.witness import witness
@@ -1382,6 +1415,7 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             _cr = detect_contradictions(inline_dims)
             if _cr:
                 receipt_contradictions = _cr
+                _contradiction_count = len(_cr)
 
         receipt = witness(
             diag, comp,
@@ -1391,6 +1425,8 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             inline_dimensions=inline_dims,
             boundary_obligations=combined_obligations,
             contradictions=receipt_contradictions,
+            unmet_obligations=_unmet_count,
+            contradiction_count=_contradiction_count,
         )
         receipt_dict = receipt.to_dict()
         receipt_path.write_text(
@@ -1404,7 +1440,11 @@ def _cmd_audit(args: argparse.Namespace) -> None:
     if discovered_pack_path:
         discovered_pack_path.unlink(missing_ok=True)
 
-    _gauge_threshold_check(diag, args)
+    _gauge_threshold_check(
+        diag, args,
+        unmet_count=_unmet_count,
+        contradiction_count=_contradiction_count,
+    )
 
 
 # ── discover ──────────────────────────────────────────────────────────
@@ -1711,6 +1751,13 @@ def main() -> None:
         help="Max unbridged edges per composition before failing (default: 0)",
     )
     p_check.add_argument(
+        "--max-fee",
+        type=int,
+        default=None,
+        metavar="N",
+        help="Exit 1 if coherence fee exceeds N",
+    )
+    p_check.add_argument(
         "--format",
         choices=["text", "json", "sarif"],
         default="text",
@@ -1831,6 +1878,14 @@ def main() -> None:
     p_audit.add_argument(
         "--max-blind-spots", type=int, default=None, metavar="N",
         help="Exit 1 if blind spots exceed N (CI gating)",
+    )
+    p_audit.add_argument(
+        "--max-unmet", type=int, default=None, metavar="N",
+        help="Exit 1 if unmet obligations exceed N (CI gating)",
+    )
+    p_audit.add_argument(
+        "--max-contradictions", type=int, default=None, metavar="N",
+        help="Exit 1 if contradictions exceed N (CI gating)",
     )
     p_audit.add_argument(
         "-v", "--verbose", action="store_true",

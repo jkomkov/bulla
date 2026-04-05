@@ -429,6 +429,12 @@ def detect_expected_value_contradictions(
     When a probe confirms a ``convention_value`` that differs from its
     obligation's ``expected_value``, that is an intra-agent contradiction:
     the parent chain expected one convention, the current tool uses another.
+
+    Note: ``sources`` contains only ``obligation.placeholder_tool`` (the
+    current tool). The parent agent who set ``expected_value`` is not
+    named because the obligation does not carry parent identity. If
+    provenance of the expected value matters, the caller should trace
+    it through the receipt DAG.
     """
     reports: list[ContradictionReport] = []
     for probe in probes:

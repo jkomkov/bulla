@@ -22,17 +22,19 @@ Rationale: the hash must be computable at witness time. Anchor ref arrives later
 
 ## Policy Semantics
 
-`PolicyProfile` fields: `name`, `max_blind_spots`, `max_fee`, `max_unknown`, `require_bridge`.
+`PolicyProfile` fields: `name`, `max_blind_spots`, `max_fee`, `max_unknown`, `require_bridge`, `max_unmet_obligations`, `max_contradictions`.
 
 Disposition priority (first match wins):
 1. `blind_spots > 0 AND fee > max_fee` → `refuse_pending_disclosure`
 2. `unknown_dimensions > max_unknown` (when `max_unknown >= 0`) → `refuse_pending_disclosure`
-3. `require_bridge AND blind_spots > 0` → `proceed_with_bridge`
-4. `blind_spots > max_blind_spots` → `proceed_with_bridge`
-5. `fee > max_fee` → `proceed_with_receipt`
-6. Otherwise → `proceed`
+3. `unmet_obligations > max_unmet_obligations` (when `max_unmet_obligations >= 0`) → `refuse_pending_disclosure`
+4. `contradiction_count > max_contradictions` (when `max_contradictions >= 0`) → `refuse_pending_disclosure`
+5. `require_bridge AND blind_spots > 0` → `proceed_with_bridge`
+6. `blind_spots > max_blind_spots` → `proceed_with_bridge`
+7. `fee > max_fee` → `proceed_with_receipt`
+8. Otherwise → `proceed`
 
-`max_unknown = -1` disables the unknown threshold (default).
+`max_unknown = -1` disables the unknown threshold (default). `max_unmet_obligations = -1` disables obligation enforcement (default). `max_contradictions = -1` disables contradiction enforcement (default). Setting any threshold to `0` means strict: any occurrence triggers refusal.
 
 ## Anti-Reflexivity Laws
 
@@ -487,7 +489,7 @@ Each sprint adds one mathematical capability to the resolution sequence:
 | **28** | v0.28.0 | **Convention value extraction.** `extract_pack_from_probes()` transforms confirmed probe convention values into persistent micro-pack dimensions embedded in receipts. `ConvergenceResult.discovered_pack` aggregates all rounds. `BoundaryObligation.expected_value` seeds contradiction detection. The presheaf section now carries semantic content -- not just structural observability. |
 | **29** | v0.29.0 | **Canonical proof artifact.** Originally planned as contradiction detection; pivoted because the protocol was mature enough that the highest-leverage move was real-world proof, not another library feature. Two real MCP servers (filesystem + GitHub), one convention mismatch (absolute vs relative paths), full pipeline from measurement through guided discovery to receipted value extraction. Convention mismatch display flags multi-value dimensions. Pre-computed receipt is a checked-in cryptographic proof artifact. Contradiction detection deferred to Sprint 30. |
 | **30** | v0.30.0 | **Contradiction detection.** `detect_contradictions(discovered_pack)` flags dimensions with 2+ distinct `known_values` as `ContradictionReport(severity=MISMATCH)`. `detect_expected_value_contradictions(probes)` detects intra-agent contradictions when a probe's `convention_value` differs from its obligation's `expected_value`. `detect_contradictions_across(*convergence_results)` merges packs from multiple runs. `WitnessReceipt.contradictions` embeds reports in the receipt hash (conditional-include, backward-compatible). `ContradictionSeverity` enum with single `MISMATCH` member follows the `ObligationVerdict` pattern. Values and sources sorted alphabetically at construction for canonical ordering. `--chain` now hydrates `expected_value` from inherited `inline_dimensions`. See `PROTOCOL-NOTE.md` for the theoretical framing. |
-| **31** | v0.31.0 | **Policy enforcement.** Obligations become enforceable: a policy profile can require that all obligations are met (or met within tolerance) before disposition is `PROCEED`. The policy layer closes the loop from measurement to judgment to requirement to enforcement. |
+| **31** | v0.31.0 | **Policy enforcement.** `PolicyProfile` gains `max_unmet_obligations` and `max_contradictions` (both default `-1` = disabled). `_resolve_disposition()` adds two refuse rules (priority 3 and 4) gated on these thresholds. `witness()` accepts `unmet_obligations` and `contradiction_count` as caller-attested integers. `BullaGuard.enforce_policy()` collapses diagnose → disposition → receipt into one call. CLI: `--max-unmet` and `--max-contradictions` on `bulla audit` with exit-code semantics; `--max-fee` on `bulla check`. |
 | **32** | v0.32.0 | **Agent framework SDK.** `coordination_step()` collapses discover + audit + obligations + guided repair + chain into a single call. LangGraph, CrewAI, and AutoGen adapters. The protocol becomes invisible infrastructure — agents call one function, receive a receipt. |
 
 ### Convergence Properties

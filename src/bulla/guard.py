@@ -22,10 +22,14 @@ from bulla.infer.mcp import (
 )
 from bulla.model import (
     Composition,
+    ContradictionReport,
+    DEFAULT_POLICY_PROFILE,
     Diagnostic,
     Edge,
+    PolicyProfile,
     SemanticDimension,
     ToolSpec,
+    WitnessReceipt,
     WitnessBasis,
 )
 from bulla.parser import load_composition
@@ -206,6 +210,33 @@ class BullaGuard:
                 diag,
             )
         return diag
+
+    def enforce_policy(
+        self,
+        policy: PolicyProfile = DEFAULT_POLICY_PROFILE,
+        *,
+        unmet_obligations: int = 0,
+        contradiction_count: int = 0,
+        contradictions: tuple[ContradictionReport, ...] | None = None,
+    ) -> WitnessReceipt:
+        """Diagnose, resolve disposition under *policy*, and issue a receipt.
+
+        Single entry point that combines diagnosis → disposition → witness.
+        Obligation and contradiction counts are caller-attested; the guard
+        does not compute them (it lacks guided-repair context).
+        """
+        from bulla.witness import witness
+
+        diag = self.diagnose()
+        return witness(
+            diag,
+            self._composition,
+            policy_profile=policy,
+            witness_basis=self._witness_basis,
+            unmet_obligations=unmet_obligations,
+            contradiction_count=contradiction_count,
+            contradictions=contradictions,
+        )
 
     # ── Export ─────────────────────────────────────────────────────────
 
