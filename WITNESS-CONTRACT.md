@@ -483,6 +483,20 @@ Frozen dataclass: `dimension` (str), `values` (tuple[str, ...]), `sources` (tupl
 
 `WitnessReceipt.contradictions: tuple[ContradictionReport, ...] | None`. Included in `_hash_input()` only when not None (conditional-include pattern). Pre-v0.30.0 receipts verify correctly because their hash was computed without the `contradictions` key.
 
+### Contradiction Inheritance Across the Receipt DAG
+
+**Normative rule: re-derivation, not union.** When agent B chains from agent A's receipt, B's contradictions are derived from B's `inline_dimensions` via `detect_contradictions()`. B does NOT union A's `contradictions` field with its own. The `contradictions` field on a receipt is a materialized view of the vocabulary, not an independent data source. The source of truth is `inline_dimensions`.
+
+This follows from the structure of `detect_contradictions()`: it is a pure, deterministic function from vocabulary to contradiction set. Given the same `inline_dimensions`, any agent produces the same contradictions. Inheriting a parent's contradiction list and merging it with a locally derived list would either (a) double-count identical contradictions, requiring deduplication, or (b) preserve stale contradictions from a vocabulary that the child has since extended (e.g., the child discovered a third value on a dimension, changing a 2-way mismatch into a 3-way mismatch).
+
+Three cases confirm the rule:
+
+1. **B's vocabulary = A's vocabulary** (pure chain, no new discovery): re-derivation produces identical contradictions. Union adds nothing.
+2. **B's vocabulary extends A's** (B discovered new dimensions or values): re-derivation captures everything A found plus new contradictions. Union would miss updated contradiction reports on dimensions where B added a third value.
+3. **B's vocabulary is disjoint from A's** (B has a different vocabulary): A's contradictions are irrelevant to B's composition. Inheriting them would pollute B's receipt with contradictions from dimensions B does not use.
+
+The SDK implements this rule: `compose_multi()` calls `detect_contradictions()` on the chain's `inline_dimensions` and does not read the chain's `contradictions` field.
+
 ### `expected_value` Hydration
 
 When `--chain` is provided, `BoundaryObligation.expected_value` is hydrated from the chain receipt's `inline_dimensions`: for each obligation, if the dimension exists in the chain's inline_dimensions, the first `known_value` is used as the expected_value. This resolves the Sprint 28/29 TODO and gives `expected_value` its first machine consumer.
