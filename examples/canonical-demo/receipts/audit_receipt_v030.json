@@ -17,7 +17,7 @@
   "bridges_required": 234,
   "unknown_dimensions": 3,
   "disposition": "refuse_pending_disclosure",
-  "timestamp": "2026-04-05T06:20:02.255768+00:00",
+  "timestamp": "2026-04-05T06:57:04.090911+00:00",
   "patches": [
     {
       "bulla_patch_version": "0.1.0",
@@ -4316,6 +4316,6 @@
       "severity": "mismatch"
     }
   ],
-  "receipt_hash": "16a4bd09d3bebd641a564eda393395c55b04a401a486cf1831ee9423271ac337",
+  "receipt_hash": "65e3ed8ddf8b027336b056390125f3f11229a3573ce0d2d0af9950f67fb20b46",
   "anchor_ref": null
 }

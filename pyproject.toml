@@ -4,17 +4,17 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bulla"
-version = "0.31.0"
+version = "0.32.0"
 description = "Witness kernel for agent tool compositions — diagnose, attest, seal"
 readme = "README.md"
-license = "MIT"
+license = {file = "LICENSE"}
 requires-python = ">=3.10"
 authors = [{ name = "Glyph" }]
 keywords = ["mcp", "agents", "witness", "bulla", "composition", "coherence"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
+    "License :: Other/Proprietary License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",

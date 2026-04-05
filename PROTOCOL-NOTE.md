@@ -1,6 +1,6 @@
 # Bulla Protocol Note
 
-A concise technical summary of the Bulla witness protocol (Sprints 25-31).
+A concise technical summary of the Bulla witness protocol (Sprints 25-32).
 
 ## 1. The Fee Theorem
 

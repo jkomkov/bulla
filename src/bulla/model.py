@@ -475,6 +475,7 @@ class WitnessReceipt:
     inline_dimensions: dict | None = None
     boundary_obligations: tuple[BoundaryObligation, ...] | None = None
     contradictions: tuple[ContradictionReport, ...] | None = None
+    unmet_obligations: int = 0
 
     def _hash_input(self) -> dict:
         """Single source of truth for the receipt's hashable content.
@@ -486,10 +487,11 @@ class WitnessReceipt:
         same two keys.
 
         ``parent_receipt_hashes``, ``inline_dimensions``,
-        ``boundary_obligations``, and ``contradictions`` are included
-        ONLY when not None to preserve backward compatibility: pre-v0.30.0
-        receipts (which lack ``contradictions``) must produce the same
-        hash when verified by new code.
+        ``boundary_obligations``, ``contradictions``, and
+        ``unmet_obligations`` are included ONLY when non-None/non-zero
+        to preserve backward compatibility: pre-v0.32.0 receipts
+        (which lack ``unmet_obligations``) must produce the same hash
+        when verified by new code.
         """
         d: dict = {
             "receipt_version": self.receipt_version,
@@ -519,6 +521,8 @@ class WitnessReceipt:
             d["boundary_obligations"] = [o.to_dict() for o in self.boundary_obligations]
         if self.contradictions is not None:
             d["contradictions"] = [c.to_dict() for c in self.contradictions]
+        if self.unmet_obligations > 0:
+            d["unmet_obligations"] = self.unmet_obligations
         return d
 
     @property

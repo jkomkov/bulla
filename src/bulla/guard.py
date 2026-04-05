@@ -21,11 +21,13 @@ from bulla.infer.mcp import (
     extract_field_infos,
 )
 from bulla.model import (
+    BoundaryObligation,
     Composition,
     ContradictionReport,
     DEFAULT_POLICY_PROFILE,
     Diagnostic,
     Edge,
+    PackRef,
     PolicyProfile,
     SemanticDimension,
     ToolSpec,
@@ -218,12 +220,18 @@ class BullaGuard:
         unmet_obligations: int = 0,
         contradiction_count: int = 0,
         contradictions: tuple[ContradictionReport, ...] | None = None,
+        inline_dimensions: dict | None = None,
+        boundary_obligations: tuple[BoundaryObligation, ...] | None = None,
+        parent_receipt_hash: str | None = None,
+        parent_receipt_hashes: tuple[str, ...] | None = None,
+        active_packs: tuple[PackRef, ...] = (),
     ) -> WitnessReceipt:
         """Diagnose, resolve disposition under *policy*, and issue a receipt.
 
-        Single entry point that combines diagnosis → disposition → witness.
-        Obligation and contradiction counts are caller-attested; the guard
-        does not compute them (it lacks guided-repair context).
+        Single entry point that combines diagnosis -> disposition -> witness.
+        All receipt fields are accepted as pass-through so callers can
+        produce fully populated receipts without dropping to the raw
+        ``witness()`` API.
         """
         from bulla.witness import witness
 
@@ -236,6 +244,11 @@ class BullaGuard:
             unmet_obligations=unmet_obligations,
             contradiction_count=contradiction_count,
             contradictions=contradictions,
+            inline_dimensions=inline_dimensions,
+            boundary_obligations=boundary_obligations,
+            parent_receipt_hash=parent_receipt_hash,
+            parent_receipt_hashes=parent_receipt_hashes,
+            active_packs=active_packs,
         )
 
     # ── Export ─────────────────────────────────────────────────────────

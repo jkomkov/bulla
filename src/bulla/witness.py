@@ -186,6 +186,7 @@ def witness(
         inline_dimensions=inline_dimensions,
         boundary_obligations=boundary_obligations,
         contradictions=contradictions,
+        unmet_obligations=unmet_obligations,
     )
 
 
@@ -223,6 +224,8 @@ def verify_receipt_consistency(
             )
     expected = _resolve_disposition(
         diag, receipt.policy_profile, receipt.unknown_dimensions,
+        unmet_obligations=receipt.unmet_obligations,
+        contradiction_count=len(receipt.contradictions) if receipt.contradictions else 0,
     )
     if receipt.disposition != expected:
         violations.append(

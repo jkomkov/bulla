@@ -14,11 +14,11 @@ Three hashes, three concerns: what was proposed, what was measured, what was wit
 
 ## Hash Coverage
 
-`receipt_hash` includes: `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `active_packs`, `witness_basis`, and conditionally `parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`, and `contradictions` (each only when not None).
+`receipt_hash` includes: `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `active_packs`, `witness_basis`, and conditionally `parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`, `contradictions` (each only when not None), and `unmet_obligations` (only when > 0).
 
 `receipt_hash` excludes: `anchor_ref` (external publication proof, added after witness event).
 
-Rationale: the hash must be computable at witness time. Anchor ref arrives later. Conditional fields (`parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`, `contradictions`) are included only when not None to preserve backward compatibility: pre-v0.25.0 receipts (which lack `boundary_obligations`) and pre-v0.30.0 receipts (which lack `contradictions`) verify correctly with new code because their hash was computed without these keys, and the verifier only hashes keys that are present.
+Rationale: the hash must be computable at witness time. Anchor ref arrives later. Conditional fields (`parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`, `contradictions`, `unmet_obligations`) are included only when non-None/non-zero to preserve backward compatibility: pre-v0.25.0 receipts (which lack `boundary_obligations`), pre-v0.30.0 receipts (which lack `contradictions`), and pre-v0.32.0 receipts (which lack `unmet_obligations`) verify correctly with new code because their hash was computed without these keys, and the verifier only hashes keys that are present.
 
 ## Policy Semantics
 
@@ -165,6 +165,38 @@ The `jkomkov/bulla` GitHub Action supports two modes via the `mode` input:
 - **`audit`**: Scans MCP manifests (via `manifests-dir`) or live servers (via `mcp-config`). Outputs `coherence-fee` and `boundary-fee` as action outputs. SARIF upload to Code Scanning is supported in both modes.
 
 See `examples/github-action/` for workflow templates and documentation.
+
+## SDK Surface (v0.32.0)
+
+`compose()` and `compose_multi()` are the programmatic entry points for agent framework integration. Each returns a `ComposeResult(receipt, diagnostic, decomposition)`.
+
+### `compose(tools, *, policy, chain, name) -> ComposeResult`
+
+Single-server composition. Accepts a list of MCP tool dicts (the `tools/list` response). Internally:
+
+1. Builds a `BullaGuard` from the tool list.
+2. Runs `diagnose()`.
+3. If `chain` is provided: extracts `inline_dimensions`, `parent_receipt_hashes`, and `boundary_obligations` from the chain receipt dict.
+4. Auto-computes `unmet_obligations`: if the chain provides `boundary_obligations`, calls `check_obligations()` and sets `unmet_obligations = len(unmet)`. The caller never passes obligation counts.
+5. Calls `witness()` with all extracted fields + policy.
+6. Returns `ComposeResult` with `decomposition=None`.
+
+No guided discovery, no LLM calls. Pure structural diagnosis + receipt.
+
+### `compose_multi(server_tools, *, policy, chain) -> ComposeResult`
+
+Multi-server composition with partition decomposition. Each key in `server_tools` is a server name; its value is the `tools/list` response. Tool names are prefixed with `server_name__` to avoid collisions (same convention as `bulla audit`).
+
+Additionally:
+- Computes `decompose_fee()` with partition-by-server.
+- Extracts `boundary_obligations_from_decomposition()`.
+- Auto-computes `unmet_obligations` from boundary obligations.
+- If `chain` provides `inline_dimensions`, calls `detect_contradictions()` and embeds any results in the receipt. Zero LLM cost.
+- Returns `ComposeResult` with `decomposition` populated.
+
+### `ComposeResult`
+
+Frozen dataclass: `receipt` (WitnessReceipt), `diagnostic` (Diagnostic), `decomposition` (FeeDecomposition | None). The calibration partner needs `diagnostic.coherence_fee` for time-series tracking and `decomposition.boundary_fee` for cross-server analysis.
 
 ## Discovery Engine (v0.22.0)
 
@@ -490,7 +522,7 @@ Each sprint adds one mathematical capability to the resolution sequence:
 | **29** | v0.29.0 | **Canonical proof artifact.** Originally planned as contradiction detection; pivoted because the protocol was mature enough that the highest-leverage move was real-world proof, not another library feature. Two real MCP servers (filesystem + GitHub), one convention mismatch (absolute vs relative paths), full pipeline from measurement through guided discovery to receipted value extraction. Convention mismatch display flags multi-value dimensions. Pre-computed receipt is a checked-in cryptographic proof artifact. Contradiction detection deferred to Sprint 30. |
 | **30** | v0.30.0 | **Contradiction detection.** `detect_contradictions(discovered_pack)` flags dimensions with 2+ distinct `known_values` as `ContradictionReport(severity=MISMATCH)`. `detect_expected_value_contradictions(probes)` detects intra-agent contradictions when a probe's `convention_value` differs from its obligation's `expected_value`. `detect_contradictions_across(*convergence_results)` merges packs from multiple runs. `WitnessReceipt.contradictions` embeds reports in the receipt hash (conditional-include, backward-compatible). `ContradictionSeverity` enum with single `MISMATCH` member follows the `ObligationVerdict` pattern. Values and sources sorted alphabetically at construction for canonical ordering. `--chain` now hydrates `expected_value` from inherited `inline_dimensions`. See `PROTOCOL-NOTE.md` for the theoretical framing. |
 | **31** | v0.31.0 | **Policy enforcement.** `PolicyProfile` gains `max_unmet_obligations` and `max_contradictions` (both default `-1` = disabled). `_resolve_disposition()` adds two refuse rules (priority 3 and 4) gated on these thresholds. `witness()` accepts `unmet_obligations` and `contradiction_count` as caller-attested integers. `BullaGuard.enforce_policy()` collapses diagnose → disposition → receipt into one call. CLI: `--max-unmet` and `--max-contradictions` on `bulla audit` with exit-code semantics; `--max-fee` on `bulla check`. |
-| **32** | v0.32.0 | **Agent framework SDK.** `coordination_step()` collapses discover + audit + obligations + guided repair + chain into a single call. LangGraph, CrewAI, and AutoGen adapters. The protocol becomes invisible infrastructure — agents call one function, receive a receipt. |
+| **32** | v0.32.0 | **Compose SDK.** `compose()` and `compose_multi()` collapse diagnosis, obligation checking, contradiction detection, and receipt issuance into single function calls. `compose()` auto-computes `unmet_obligations` from chain obligations. `compose_multi()` auto-detects contradictions from chain `inline_dimensions`. `ComposeResult` bundles receipt + diagnostic + optional decomposition. `WitnessReceipt.unmet_obligations` field (conditional hash). `verify_receipt_consistency` fixed to pass obligation/contradiction counts. `enforce_policy()` extended with all pass-through receipt fields. License changed from MIT to BSL 1.1. |
 
 ### Convergence Properties
 
@@ -515,6 +547,6 @@ obligations (25) → guided discovery (26) → iterative repair (27)
                    → SDK (32) [integrates all of 25-31]
 ```
 
-Sprints 27 and 28 are independent (can proceed in parallel). Sprint 29 is the canonical proof artifact: it exercises the full 25-28 pipeline on real MCP server manifests. Sprint 30 adds contradiction detection using expected_value from Sprint 28 and pack structure from Sprint 28. Sprint 31 depends on obligations (25) and contradictions (30). Sprint 32 integrates everything.
+Sprints 27 and 28 are independent (can proceed in parallel). Sprint 29 is the canonical proof artifact: it exercises the full 25-28 pipeline on real MCP server manifests. Sprint 30 adds contradiction detection using expected_value from Sprint 28 and pack structure from Sprint 28. Sprint 31 depends on obligations (25) and contradictions (30). Sprint 32 integrates everything: `compose()` and `compose_multi()` are thin entry points over the full 25-31 stack.
 
 When a new sprint ships, update this section: move its thesis from future to present tense, and add any new convergence properties discovered during implementation.

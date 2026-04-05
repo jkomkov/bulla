@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.32.0
+
+### Added
+- **Compose SDK**: `compose(tools, *, policy, chain, name)` and `compose_multi(server_tools, *, policy, chain)` are the one-function entry points for agent framework integration. Each returns a `ComposeResult(receipt, diagnostic, decomposition)`. No guided discovery, no LLM calls -- pure structural diagnosis + policy enforcement + receipt issuance.
+- **`compose()` auto-computes `unmet_obligations`**: When a `chain` receipt is provided with `boundary_obligations`, the SDK calls `check_obligations()` internally and sets `unmet_obligations = len(unmet)`. The caller never passes obligation counts.
+- **`compose_multi()` auto-detects contradictions**: When a `chain` receipt contains `inline_dimensions`, the SDK calls `detect_contradictions()` and embeds any results in the receipt. Zero LLM cost, zero extra complexity.
+- **`ComposeResult` frozen dataclass**: Bundles `WitnessReceipt`, `Diagnostic`, and optional `FeeDecomposition`. Calibration partners can access `diagnostic.coherence_fee` for time-series tracking and `decomposition.boundary_fee` for cross-server analysis without separate API calls.
+- **`WitnessReceipt.unmet_obligations`**: `int` field (default 0) recording the number of unmet boundary obligations at witness time. Conditional-include in `_hash_input()` (only when > 0), consistent with `contradictions`, `boundary_obligations`, `inline_dimensions`. Pre-v0.32.0 receipts verify correctly.
+- Sprint 32 tests: 29 new tests covering unmet_obligations receipt field (7), consistency fix (2), enforce_policy completeness (6), compose (5), compose_multi (5), backward compat (2), SDK imports (2).
+
+### Fixed
+- **`verify_receipt_consistency` disposition bug**: Now passes `unmet_obligations` and `contradiction_count` to `_resolve_disposition()`, so receipts with obligation/contradiction-driven refusals verify correctly.
+- **`enforce_policy()` completeness**: Accepts and passes through all receipt fields: `inline_dimensions`, `boundary_obligations`, `parent_receipt_hash`, `parent_receipt_hashes`, `active_packs`, `unmet_obligations`.
+
+### Changed
+- **License**: Changed from MIT to Business Source License 1.1. Use grant: non-competing use + commercial use under 1,000 compositions/month. Change date: 2030-04-01. Change license: Apache 2.0.
+- **WITNESS-CONTRACT.md**: Hash coverage section updated for `unmet_obligations`. New "SDK Surface" section documenting `compose()` and `compose_multi()`. Sprint 32 thesis updated from future to present tense.
+- **SDK surface**: 3 symbols (`compose`, `compose_multi`, `ComposeResult`) exported from `bulla` alongside 65+ kernel symbols.
+
 ## 0.31.0
 
 ### Added
