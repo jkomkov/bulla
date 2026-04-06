@@ -99,6 +99,25 @@ def _load_base_pack() -> tuple[dict[str, Any], PackRef]:
     return parsed, ref
 
 
+def _load_community_pack() -> tuple[dict[str, Any], PackRef] | None:
+    """Load the bundled community pack if present. Returns None when absent."""
+    pkg = importlib.resources.files("bulla")
+    community_path = pkg / "packs" / "community.yaml"
+    try:
+        text = community_path.read_text(encoding="utf-8")
+    except (FileNotFoundError, TypeError):
+        return None
+    parsed = yaml.safe_load(text)
+    if not parsed or "dimensions" not in parsed:
+        return None
+    ref = PackRef(
+        name=parsed.get("pack_name", "community"),
+        version=parsed.get("pack_version", "0.0.0"),
+        hash=_hash_pack(parsed),
+    )
+    return parsed, ref
+
+
 def _merge_packs(
     base: dict[str, Any],
     overlay: dict[str, Any],
@@ -126,11 +145,18 @@ def load_pack_stack(
 ) -> tuple[dict[str, Any], tuple[PackRef, ...]]:
     """Load and merge the full pack stack, returning merged taxonomy and refs.
 
-    Precedence order: base (lowest) -> extra packs in order (highest last).
+    Precedence order: base (lowest) -> community -> extra packs in order (highest last).
     """
     merged, base_ref = _load_base_pack()
     refs: list[PackRef] = [base_ref]
     prev_name = base_ref.name
+
+    community = _load_community_pack()
+    if community is not None:
+        parsed, ref = community
+        merged = _merge_packs(merged, parsed, prev_name, ref.name)
+        refs.append(ref)
+        prev_name = ref.name
 
     for pack_path in extra_paths or []:
         parsed = _load_single_pack(pack_path)

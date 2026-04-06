@@ -1,8 +1,8 @@
 {
   "receipt_version": "0.1.0",
-  "kernel_version": "0.32.0",
-  "composition_hash": "30144bfd52dda347ba043ad610c2d4e38bbbdc1a067bb1f672ab50d1d3fdde19",
-  "diagnostic_hash": "f448e03b69149e2041a807c81c018e0c318f509fc6d422e0dccb978ed0dad218",
+  "kernel_version": "0.33.0",
+  "composition_hash": "c8f4b175de1280d591bc4f0396345d2d900012c9ac55db7a6872b761b3f28793",
+  "diagnostic_hash": "2d50f380780fd3a46b15a9a9a853741f3c7a178ae94fdba9d3cec54b9ed291c5",
   "policy_profile": {
     "name": "witness.default.v1",
     "max_blind_spots": 0,
@@ -12,12 +12,12 @@
     "max_unmet_obligations": -1,
     "max_contradictions": -1
   },
-  "fee": 25,
-  "blind_spots_count": 234,
-  "bridges_required": 234,
-  "unknown_dimensions": 3,
+  "fee": 48,
+  "blind_spots_count": 448,
+  "bridges_required": 448,
+  "unknown_dimensions": 6,
   "disposition": "refuse_pending_disclosure",
-  "timestamp": "2026-04-06T04:36:30.021044+00:00",
+  "timestamp": "2026-04-06T06:57:40.326850+00:00",
   "patches": [
     {
       "bulla_patch_version": "0.1.0",
@@ -1192,6 +1192,406 @@
     {
       "bulla_patch_version": "0.1.0",
       "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_or_update_file",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
       "target_tool": "github__search_repositories",
       "field": "page",
       "path": "/observable_schema/page",
@@ -1532,6 +1932,2006 @@
     {
       "bulla_patch_version": "0.1.0",
       "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_file_contents",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__push_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__fork_repository",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
       "target_tool": "github__list_commits",
       "field": "page",
       "path": "/observable_schema/page",
@@ -1553,6 +3953,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -1567,6 +3987,26 @@
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -1653,6 +4093,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -1667,6 +4127,26 @@
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -1693,6 +4173,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -1707,6 +4207,26 @@
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -1733,6 +4253,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -1747,6 +4287,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -1773,6 +4333,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -1793,6 +4373,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -1807,6 +4407,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -1833,6 +4453,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_commits",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_commits",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -1853,6 +4493,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -1867,6 +4527,46 @@
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "state",
+      "path": "/observable_schema/state",
+      "dimension": "state_filter_match",
+      "eliminates": "state_filter_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "state",
+      "path": "/observable_schema/state",
+      "dimension": "state_filter_match",
+      "eliminates": "state_filter_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -1953,6 +4653,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -1967,6 +4687,26 @@
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -1993,6 +4733,46 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "direction",
+      "path": "/observable_schema/direction",
+      "dimension": "sort_direction_match",
+      "eliminates": "sort_direction_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "direction",
+      "path": "/observable_schema/direction",
+      "dimension": "sort_direction_match",
+      "eliminates": "sort_direction_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -2007,6 +4787,46 @@
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "state",
+      "path": "/observable_schema/state",
+      "dimension": "state_filter_match",
+      "eliminates": "state_filter_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "state",
+      "path": "/observable_schema/state",
+      "dimension": "state_filter_match",
+      "eliminates": "state_filter_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -2033,6 +4853,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -2047,6 +4887,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -2073,6 +4933,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -2093,6 +4973,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -2107,6 +5007,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -2133,6 +5053,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_issues",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_issues",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -2147,6 +5087,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -2233,6 +5193,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -2247,6 +5227,26 @@
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -2273,6 +5273,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -2287,6 +5307,46 @@
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "state",
+      "path": "/observable_schema/state",
+      "dimension": "state_filter_match",
+      "eliminates": "state_filter_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "state",
+      "path": "/observable_schema/state",
+      "dimension": "state_filter_match",
+      "eliminates": "state_filter_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -2313,6 +5373,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -2327,6 +5407,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -2353,6 +5453,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -2373,6 +5493,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -2387,6 +5527,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -2413,6 +5573,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__update_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_issue",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -2493,6 +5673,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -2507,6 +5707,26 @@
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -2533,6 +5753,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -2547,6 +5787,26 @@
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -2573,6 +5833,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -2587,6 +5867,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -2613,6 +5913,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -2633,6 +5953,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -2647,6 +5987,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -2673,6 +6033,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__add_issue_comment",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__add_issue_comment",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -3353,6 +6733,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -3367,6 +6767,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3393,6 +6813,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -3407,6 +6847,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3433,6 +6893,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -3447,6 +6927,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3473,6 +6973,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -3487,6 +7007,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3513,6 +7053,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__get_issue",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_issue",
       "field": "issue_number",
       "path": "/observable_schema/issue_number",
       "dimension": "id_offset_match",
@@ -3533,6 +7093,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -3547,6 +7127,26 @@
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3573,6 +7173,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -3587,6 +7207,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3613,6 +7253,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -3627,6 +7287,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3653,6 +7333,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -3667,6 +7367,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3693,6 +7413,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -3707,6 +7447,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3733,6 +7493,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -3747,6 +7527,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3773,6 +7573,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -3787,6 +7607,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3813,6 +7653,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__list_pull_requests",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__list_pull_requests",
       "field": "page",
       "path": "/observable_schema/page",
       "dimension": "id_offset_match",
@@ -3833,6 +7693,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -3847,6 +7727,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3873,6 +7773,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -3887,6 +7807,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3913,6 +7853,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -3927,6 +7887,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__create_pull_request_review",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3953,6 +7933,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -3967,6 +7967,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -3993,6 +8013,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -4007,6 +8047,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -4033,6 +8093,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__merge_pull_request",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__merge_pull_request",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -4047,6 +8127,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -4073,6 +8173,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -4087,6 +8207,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -4113,6 +8253,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__get_pull_request_files",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_files",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -4133,6 +8293,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -4147,6 +8327,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -4173,6 +8373,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__get_pull_request_status",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_status",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -4187,6 +8407,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -4213,6 +8453,26 @@
       "bulla_patch_version": "0.1.0",
       "action": "expose",
       "target_tool": "github__update_pull_request_branch",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__update_pull_request_branch",
       "field": "pull_number",
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
@@ -4227,6 +8487,26 @@
       "path": "/observable_schema/pull_number",
       "dimension": "id_offset_match",
       "eliminates": "id_offset_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_comments",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "github__get_pull_request_reviews",
+      "field": "owner",
+      "path": "/observable_schema/owner",
+      "dimension": "owner_convention_match",
+      "eliminates": "owner_convention_match",
       "expected_fee_delta": 0
     },
     {
@@ -4252,12 +8532,13 @@
   ],
   "active_packs": [],
   "witness_basis": {
-    "declared": 11,
+    "declared": 31,
     "inferred": 22,
-    "unknown": 3
+    "unknown": 6,
+    "discovered": 6
   },
   "inline_dimensions": {
-    "pack_name": "discovered_30144bfd",
+    "pack_name": "discovered_c8f4b175",
     "pack_version": "0.1.0",
     "dimensions": {
       "path_convention_match": {
@@ -4316,6 +8597,6 @@
       "severity": "mismatch"
     }
   ],
-  "receipt_hash": "9760b6bda807c9b3c2dffdb0d9c5b61211e7f86a2fd955bdbd206880bcca6afd",
+  "receipt_hash": "066b935ce76c19265fdc8b1ce3aa86681817c189029d0bc06461f8f8f142f928",
   "anchor_ref": null
 }

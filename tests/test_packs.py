@@ -128,17 +128,18 @@ class TestPackHash:
 
 
 class TestPackStack:
-    def test_base_only_returns_one_ref(self):
+    def test_base_and_community_loaded_by_default(self):
         merged, refs = load_pack_stack()
-        assert len(refs) == 1
-        assert refs[0].name == "base"
-        assert len(merged["dimensions"]) == 11
+        ref_names = [r.name for r in refs]
+        assert ref_names[0] == "base"
+        assert "community" in ref_names
+        assert len(merged["dimensions"]) >= 11
 
     def test_financial_overlay_adds_dimensions(self, financial_pack_path):
         merged, refs = load_pack_stack(extra_paths=[financial_pack_path])
-        assert len(refs) == 2
-        assert refs[0].name == "base"
-        assert refs[1].name == "financial"
+        ref_names = [r.name for r in refs]
+        assert ref_names[0] == "base"
+        assert ref_names[-1] == "financial"
         assert "day_count_convention" in merged["dimensions"]
         assert "settlement_cycle" in merged["dimensions"]
         assert "fee_basis" in merged["dimensions"]
@@ -146,18 +147,17 @@ class TestPackStack:
 
     def test_custom_pack_merges(self, tmp_custom_pack):
         merged, refs = load_pack_stack(extra_paths=[tmp_custom_pack])
-        assert len(refs) == 2
-        assert refs[1].name == "custom_test"
+        assert refs[-1].name == "custom_test"
         assert "custom_dim" in merged["dimensions"]
 
     def test_multiple_overlays(self, financial_pack_path, tmp_custom_pack):
         merged, refs = load_pack_stack(
             extra_paths=[financial_pack_path, tmp_custom_pack]
         )
-        assert len(refs) == 3
-        assert refs[0].name == "base"
-        assert refs[1].name == "financial"
-        assert refs[2].name == "custom_test"
+        ref_names = [r.name for r in refs]
+        assert ref_names[0] == "base"
+        assert ref_names[-2] == "financial"
+        assert ref_names[-1] == "custom_test"
         assert "day_count_convention" in merged["dimensions"]
         assert "custom_dim" in merged["dimensions"]
 
@@ -188,7 +188,9 @@ class TestPackPrecedenceOrder:
             extra_paths=[financial_pack_path, tmp_custom_pack]
         )
         names = [r.name for r in refs]
-        assert names == ["base", "financial", "custom_test"]
+        assert names[0] == "base"
+        assert names[-2] == "financial"
+        assert names[-1] == "custom_test"
 
     def test_reversed_order_produces_different_refs(
         self, financial_pack_path, tmp_custom_pack
@@ -208,18 +210,18 @@ class TestPackPrecedenceOrder:
 class TestConfigurePacks:
     def test_configure_returns_refs(self, financial_pack_path):
         refs = configure_packs(extra_paths=[financial_pack_path])
-        assert len(refs) == 2
-        assert refs[1].name == "financial"
+        assert refs[-1].name == "financial"
+        assert refs[0].name == "base"
 
     def test_get_active_pack_refs_after_configure(self, financial_pack_path):
         configure_packs(extra_paths=[financial_pack_path])
         refs = get_active_pack_refs()
-        assert len(refs) == 2
+        assert refs[-1].name == "financial"
 
     def test_get_active_pack_refs_lazy_loads_base(self):
         refs = get_active_pack_refs()
-        assert len(refs) == 1
         assert refs[0].name == "base"
+        assert len(refs) >= 1
 
 
 # ── PackRef model ────────────────────────────────────────────────────

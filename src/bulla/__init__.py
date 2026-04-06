@@ -1,6 +1,6 @@
 """bulla: Witness kernel for agent tool compositions — diagnose, attest, seal."""
 
-__version__ = "0.32.0"
+__version__ = "0.33.0"
 
 from bulla.model import (
     BlindSpot,

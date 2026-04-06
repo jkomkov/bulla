@@ -199,7 +199,7 @@ class TestRealManifestAudit:
     def test_coherence_fee(self):
         guard = BullaGuard.from_tools_list(self.all_tools, name="test-audit")
         diag = diagnose(guard.composition)
-        assert diag.coherence_fee == 30
+        assert diag.coherence_fee == 53
 
     def test_boundary_fee(self):
         guard = BullaGuard.from_tools_list(self.all_tools, name="test-audit")
@@ -250,7 +250,7 @@ class TestCanonicalDemo:
         )
         assert result.returncode == 0, f"Demo failed:\n{result.stderr}"
         assert "The Seam Problem" in result.stdout
-        assert "Coherence fee: 30" in result.stdout
+        assert "Coherence fee: 53" in result.stdout
         assert "boundary fee: 1" in result.stdout
         assert "absolute_local" in result.stdout
         assert "relative_repo" in result.stdout

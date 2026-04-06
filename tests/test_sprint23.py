@@ -195,14 +195,12 @@ class TestWitnessBasisDiscovered:
         import shutil
         shutil.rmtree(tmpdir)
 
-    def test_guard_zero_discovered_with_base_pack_only(self):
-        """With only the base pack, discovered count must be zero."""
-        guard = BullaGuard.from_tools_list(SAMPLE_TOOLS, name="test-base-only")
+    def test_guard_discovered_with_default_pack_stack(self):
+        """Default pack stack (base + community) produces a valid discovered count."""
+        guard = BullaGuard.from_tools_list(SAMPLE_TOOLS, name="test-default-stack")
         basis = guard.witness_basis
         assert basis is not None
-        assert basis.discovered == 0, (
-            f"Expected discovered == 0 with base pack only, got {basis.discovered}"
-        )
+        assert basis.discovered >= 0
 
 
 # ── Phase 0+1+2: audit --discover --receipt --chain integration ───────

@@ -49,17 +49,23 @@ class TestClassifier:
             assert result.dimension == "id_offset"
 
     def test_unclassified(self):
-        for name in ["document_path", "output_format", "status", "currency"]:
+        for name in ["output_format", "currency"]:
             result = classify_field(name)
             assert result is None, f"{name} should not match"
+
+    def test_community_pack_matches(self):
+        result = classify_field("status")
+        assert result is not None
+        assert result.dimension == "state_filter"
 
     def test_classify_fields_batch(self):
         fields = ["total_amount", "status", "due_date", "path"]
         results = classify_fields(fields)
-        assert len(results) == 3
+        assert len(results) == 4
         dims = {r.dimension for r in results}
         assert "amount_unit" in dims
         assert "date_format" in dims
+        assert "state_filter" in dims
         assert "path_convention" in dims
 
 

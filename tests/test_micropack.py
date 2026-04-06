@@ -137,8 +137,8 @@ class TestMicropackLoading:
             dims = merged["dimensions"]
             assert "coordinate_datum" in dims
             assert "date_format" in dims  # base still present
-            assert len(refs) == 2
-            assert refs[1].name == "discovered_test"
+            assert refs[-1].name == "discovered_test"
+            assert any(r.name == "base" for r in refs)
         finally:
             path.unlink()
 

@@ -1,0 +1,65 @@
+pack_name: community
+pack_version: "0.1.0"
+provenance:
+  seeded_from: calibration/tier2
+  method: LLM-assisted discovery, manually curated
+  discovery_date: "2026-03-31"
+
+dimensions:
+  sort_direction:
+    description: "Direction for ordering results — ascending or descending"
+    known_values:
+      - "asc"
+      - "desc"
+    field_patterns:
+      - "*_direction"
+    description_keywords:
+      - "sort direction"
+      - "ascending"
+      - "descending"
+      - "sort order"
+      - "order direction"
+    provenance:
+      discovered_by: [calibration-study]
+      server_affinity: [github, notion, exa]
+      independent_discoveries: 1
+
+  state_filter:
+    description: "Enumerated lifecycle state used to filter resources (issues, pages, tickets)"
+    known_values:
+      - "open"
+      - "closed"
+      - "all"
+      - "active"
+      - "inactive"
+    field_patterns:
+      - "*_state"
+      - "*_status"
+    description_keywords:
+      - "filter by state"
+      - "issue state"
+      - "status filter"
+      - "open or closed"
+      - "active or inactive"
+    provenance:
+      discovered_by: [calibration-study]
+      server_affinity: [github, notion, jira]
+      independent_discoveries: 1
+
+  owner_convention:
+    description: "Whether a resource owner identifier refers to a user or an organization"
+    known_values:
+      - "username"
+      - "organization"
+    field_patterns:
+      - "owner"
+      - "*_owner"
+    description_keywords:
+      - "repository owner"
+      - "org or user"
+      - "organization name"
+      - "owner name"
+    provenance:
+      discovered_by: [calibration-study]
+      server_affinity: [github]
+      independent_discoveries: 1

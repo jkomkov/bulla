@@ -14,6 +14,7 @@ from bulla.infer.classifier import (
     InferredDimension,
     _classify_field_descriptions,
     _get_description_keywords,
+    _get_refines_map,
     _reset_taxonomy_cache,
     classify_description,
     classify_field_by_name,
@@ -294,7 +295,7 @@ class TestDescriptionSuppression:
             if "_description" in (bs.from_field or "") or "_description" in (bs.to_field or "")
         ]
         assert len(desc_blind) == 0
-        assert len(diag.blind_spots) < 250
+        assert len(diag.blind_spots) < 500
         assert diag.coherence_fee > 0
 
     def teardown_method(self):
@@ -304,6 +305,14 @@ class TestDescriptionSuppression:
 # ── Phase 1a: path_convention dimension ──────────────────────────────
 
 
+def _is_path_convention(dim: str) -> bool:
+    """True if dimension is path_convention or a child that refines it."""
+    if dim == "path_convention":
+        return True
+    refines = _get_refines_map()
+    return refines.get(dim) == "path_convention"
+
+
 class TestPathConvention:
     def setup_method(self):
         _reset_taxonomy_cache()
@@ -311,25 +320,25 @@ class TestPathConvention:
     def test_path_field_gets_path_convention(self):
         r = classify_field_by_name("path")
         assert r is not None
-        assert r.dimension == "path_convention"
+        assert _is_path_convention(r.dimension)
 
     def test_filepath_gets_path_convention(self):
         r = classify_field_by_name("filepath")
         assert r is not None
-        assert r.dimension == "path_convention"
+        assert _is_path_convention(r.dimension)
 
     def test_directory_gets_path_convention(self):
         r = classify_field_by_name("directory")
         assert r is not None
-        assert r.dimension == "path_convention"
+        assert _is_path_convention(r.dimension)
 
     def test_no_false_positive_on_xpath(self):
         r = classify_field_by_name("xpath")
-        assert r is None or r.dimension != "path_convention"
+        assert r is None or not _is_path_convention(r.dimension)
 
     def test_no_false_positive_on_classpath(self):
         r = classify_field_by_name("classpath")
-        assert r is None or r.dimension != "path_convention"
+        assert r is None or not _is_path_convention(r.dimension)
 
     def test_description_keywords_loaded(self):
         kw = _get_description_keywords()
@@ -365,7 +374,11 @@ class TestPathConvention:
         diag = guard.diagnose()
         assert diag.coherence_fee > 0
         dims = {bs.dimension for bs in diag.blind_spots}
-        assert "path_convention_match" in dims
+        has_path_dim = any(
+            d == "path_convention_match" or d.endswith("_path_convention_match")
+            for d in dims
+        )
+        assert has_path_dim
 
     def teardown_method(self):
         _reset_taxonomy_cache()

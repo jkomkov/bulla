@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.33.0
+
+### Added
+- **Community convention pack**: `community.yaml` ships with 3 curated dimensions (`sort_direction`, `state_filter`, `owner_convention`) discovered during the Tier 2 calibration study and generalized for cross-server applicability. Every `bulla audit` now evaluates 14 dimensions by default (11 base + 3 community).
+- **Auto-bundled community pack**: `load_pack_stack()` automatically loads `community.yaml` between the base pack and user-supplied `--pack` overlays. Zero-config vocabulary enrichment — user packs still override everything.
+- **Provenance metadata in packs**: Each community dimension carries `provenance` (discovered_by, server_affinity, independent_discoveries) to support future reputation scoring without building registry infrastructure.
+- **CONTRIBUTING.md**: Dimension contribution guide with required fields, quality bar, pattern guidelines, and validation instructions. A PR to `community.yaml` is the submission format.
+
+### Changed
+- Default coherence fees increase on compositions involving `status`, `owner`, or `direction` fields, reflecting the newly recognized `state_filter`, `owner_convention`, and `sort_direction` dimensions.
+- Test assertions updated for the expanded default vocabulary.
+
 ## 0.32.0
 
 ### Added

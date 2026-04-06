@@ -19,7 +19,7 @@ $ python run_canonical_demo.py
 
     Servers: filesystem (14 tools), github (26 tools)
 
-    Coherence fee: 30
+    Coherence fee: 53
     Cross-server boundary fee: 1
     Obligation: path_convention_match at filesystem ↔ github
 
