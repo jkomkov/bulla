@@ -1,0 +1,53 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "twitter-mcp",
+    "capture_date": "2026-04-05T16:56:43.363544+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:6f067627c13a6dfc3c1db78b0e257e798367260d59c551246ece724a9d73da95",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "post_tweet",
+      "description": "Post a new tweet to Twitter",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The content of your tweet",
+            "maxLength": 280
+          }
+        },
+        "required": [
+          "text"
+        ]
+      }
+    },
+    {
+      "name": "search_tweets",
+      "description": "Search for tweets on Twitter",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query"
+          },
+          "count": {
+            "type": "number",
+            "description": "Number of tweets to return (10-100)",
+            "minimum": 10,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "query",
+          "count"
+        ]
+      }
+    }
+  ]
+}

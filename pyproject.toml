@@ -33,7 +33,9 @@ bulla = "bulla.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/jkomkov/bulla"
+Documentation = "https://github.com/jkomkov/bulla/blob/main/WITNESS-CONTRACT.md"
 Issues = "https://github.com/jkomkov/bulla/issues"
+Changelog = "https://github.com/jkomkov/bulla/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/bulla"]

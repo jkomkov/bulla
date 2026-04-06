@@ -1,0 +1,97 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "search1api-mcp",
+    "capture_date": "2026-04-05T16:56:43.337972+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:63c037e86cf92d92e796d227fd2898d093222ce6331444a378059ccd67e43319",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "search",
+      "description": "A fast way to search the world",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query"
+          },
+          "max_results": {
+            "type": "number",
+            "description": "Maximum number of results to return (default: 10)",
+            "default": 10
+          },
+          "search_service": {
+            "type": "string",
+            "description": "Search service to use (default: google)",
+            "default": "google"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "news",
+      "description": "Search for news articles",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "News search query"
+          },
+          "max_results": {
+            "type": "number",
+            "description": "Maximum number of results to return (default: 10)",
+            "default": 10
+          },
+          "search_service": {
+            "type": "string",
+            "description": "Search service to use (default: google)",
+            "default": "google"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "crawl",
+      "description": "Extract content from URL",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "URL to crawl"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    },
+    {
+      "name": "sitemap",
+      "description": "Get all related links from a URL",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "URL to get sitemap"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    }
+  ]
+}

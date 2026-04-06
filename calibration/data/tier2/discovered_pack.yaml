@@ -1,0 +1,236 @@
+pack_name: discovered_7ef9073b
+pack_version: 0.1.0
+dimensions:
+  github_path_convention:
+    description: The path convention used for files and directories in GitHub repositories.
+      This includes whether paths are relative to the repository root, and how to
+      handle special characters or encoding.
+    known_values:
+    - repository-relative
+    - absolute
+    field_patterns:
+    - path
+    description_keywords:
+    - github
+    - file
+    - directory
+    - path
+    refines: path_convention
+  filesystem_path_convention:
+    description: The path convention used for files and directories in the filesystem.
+      This includes whether paths are absolute or relative, and how to handle special
+      characters or encoding.
+    known_values:
+    - absolute
+    - relative
+    field_patterns:
+    - path
+    - source
+    - destination
+    - paths
+    description_keywords:
+    - filesystem
+    - file
+    - directory
+    - path
+    refines: path_convention
+  github_branch_convention:
+    description: The branch naming convention used in GitHub repositories. This includes
+      whether the default branch is 'main' or 'master', and any restrictions on branch
+      name characters.
+    known_values:
+    - main
+    - master
+    - custom
+    field_patterns:
+    - branch
+    - from_branch
+    - base
+    - head
+    description_keywords:
+    - github
+    - branch
+    - naming
+  github_owner_convention:
+    description: The convention for specifying the owner of a GitHub repository. This
+      includes whether the owner is a username or an organization name.
+    known_values:
+    - username
+    - organization
+    field_patterns:
+    - owner
+    description_keywords:
+    - github
+    - owner
+    - username
+    - organization
+  github_state_convention:
+    description: The convention for representing the state of a GitHub issue or pull
+      request. This includes the possible values for 'open', 'closed', and other states.
+    known_values:
+    - open
+    - closed
+    - all
+    field_patterns:
+    - state
+    description_keywords:
+    - github
+    - issue
+    - pull request
+    - state
+  github_sort_direction:
+    description: The convention for specifying the sort direction in GitHub API calls.
+      This includes the possible values for ascending and descending order.
+    known_values:
+    - asc
+    - desc
+    field_patterns:
+    - direction
+    description_keywords:
+    - github
+    - sort
+    - direction
+  github_sort_field:
+    description: The convention for specifying the field to sort by in GitHub API
+      calls. This includes the possible values for sorting by creation date, update
+      date, etc.
+    known_values:
+    - created
+    - updated
+    - comments
+    field_patterns:
+    - sort
+    description_keywords:
+    - github
+    - sort
+    - field
+  homeassistant_entity_id:
+    description: The format and structure of entity IDs in Home Assistant. This includes
+      the domain, object ID, and any specific naming conventions.
+    known_values:
+    - domain.object_id
+    field_patterns: []
+    description_keywords:
+    - homeassistant
+    - entity
+    - id
+  homeassistant_control_domain:
+    description: The domain of a Home Assistant entity being controlled. This determines
+      which control tool to use (e.g., control_light, control_climate).
+    known_values:
+    - light
+    - climate
+    - cover
+    - switch
+    - alarm_control_panel
+    field_patterns: []
+    description_keywords:
+    - homeassistant
+    - control
+    - domain
+  memory_relation_voice:
+    description: The voice (active or passive) used to represent relations in the
+      knowledge graph.
+    known_values:
+    - active
+    - passive
+    field_patterns: []
+    description_keywords:
+    - memory
+    - knowledge graph
+    - relation
+    - voice
+  memory_entity_name_convention:
+    description: The convention for naming entities in the knowledge graph. This includes
+      restrictions on characters, length, and uniqueness.
+    known_values:
+    - alphanumeric
+    - freeform
+    field_patterns:
+    - names
+    - entityNames
+    description_keywords:
+    - memory
+    - knowledge graph
+    - entity
+    - name
+  snowflake_query_type:
+    description: The type of SQL query being executed on Snowflake. This includes
+      whether it's a SELECT, INSERT, UPDATE, or DELETE query.
+    known_values:
+    - SELECT
+    - INSERT
+    - UPDATE
+    - DELETE
+    field_patterns: []
+    description_keywords:
+    - snowflake
+    - sql
+    - query
+    - type
+  tavily_search_mode:
+    description: The search mode used by Tavily's AI search engine. This includes
+      'basic' for faster, simpler searches and 'advanced' for more thorough analysis.
+    known_values:
+    - basic
+    - advanced
+    field_patterns: []
+    description_keywords:
+    - tavily
+    - search
+    - mode
+  puppeteer_launch_options:
+    description: The convention for specifying Puppeteer launch options. This includes
+      the format of the options object and the available options.
+    known_values:
+    - headless
+    - args
+    field_patterns:
+    - launchOptions
+    description_keywords:
+    - puppeteer
+    - launch
+    - options
+  puppeteer_screenshot_encoding:
+    description: The encoding of the screenshot captured by Puppeteer. This includes
+      whether it's a base64-encoded data URI or binary image content.
+    known_values:
+    - base64
+    - binary
+    field_patterns:
+    - encoded
+    description_keywords:
+    - puppeteer
+    - screenshot
+    - encoding
+  docker_container_id:
+    description: The format and structure of Docker container IDs. This includes whether
+      it's a short or long ID, and any specific naming conventions.
+    known_values:
+    - short
+    - long
+    field_patterns: []
+    description_keywords:
+    - docker
+    - container
+    - id
+  docker_image_name:
+    description: The format and structure of Docker image names. This includes the
+      repository, tag, and any specific naming conventions.
+    known_values:
+    - repository:tag
+    field_patterns: []
+    description_keywords:
+    - docker
+    - image
+    - name
+  kubernetes_namespace:
+    description: The convention for specifying the Kubernetes namespace. This includes
+      whether it's the default namespace or a custom namespace.
+    known_values:
+    - default
+    - custom
+    field_patterns: []
+    description_keywords:
+    - kubernetes
+    - namespace

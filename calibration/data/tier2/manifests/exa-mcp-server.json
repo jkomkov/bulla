@@ -1,0 +1,35 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "exa-mcp-server",
+    "capture_date": "2026-04-05T16:56:43.205434+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:b8369c7b573a0305cb44ed38fbf1bebae11f3fe41e1e24a932116cd7ca59d295",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "search",
+      "description": "Search the web using Exa AI",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query"
+          },
+          "numResults": {
+            "type": "number",
+            "description": "Number of results to return (default: 10)",
+            "minimum": 1,
+            "maximum": 50
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-server-rag-web-browser",
+    "capture_date": "2026-04-05T16:56:43.273644+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:d38b57305348e48bce63cd86a8476de2c3fed6df7494f9b55469aa38a7da06d1",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "search",
+      "description": "Search phrase or a URL at Google and return crawled web pages as text or Markdown",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Google Search keywords or a URL of a specific web page"
+          },
+          "maxResults": {
+            "type": "number",
+            "int": true,
+            "positive": true,
+            "default": 1,
+            "description": "The maximum number of top organic Google Search results whose web pages will be extracted (default: 1)"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

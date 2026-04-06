@@ -1,0 +1,295 @@
+{
+  "title": "State of Agent Coherence, Q2 2026",
+  "generated": "2026-04-06T00:27:37.222244+00:00",
+  "corpus": {
+    "n_compositions": 45,
+    "n_servers": 10,
+    "n_blind_spots": 2128,
+    "fee_distribution": {
+      "0": 15,
+      "1": 5,
+      "2": 1,
+      "3": 6,
+      "4": 1,
+      "11": 6,
+      "12": 1,
+      "15": 1,
+      "18": 5,
+      "19": 1,
+      "20": 1,
+      "22": 1,
+      "30": 1
+    }
+  },
+  "precision": {
+    "total_annotated": 2128,
+    "real_mismatch": 360,
+    "plausible": 905,
+    "false_positive": 863,
+    "precision": 0.294358135731807,
+    "live_validated": 0
+  },
+  "calibration_curve": [
+    {
+      "fee": 0,
+      "n_compositions": 15,
+      "n_with_real_mismatch": 0,
+      "p_failure": 0.0
+    },
+    {
+      "fee": 1,
+      "n_compositions": 5,
+      "n_with_real_mismatch": 0,
+      "p_failure": 0.0
+    },
+    {
+      "fee": 2,
+      "n_compositions": 1,
+      "n_with_real_mismatch": 1,
+      "p_failure": 1.0
+    },
+    {
+      "fee": 3,
+      "n_compositions": 6,
+      "n_with_real_mismatch": 2,
+      "p_failure": 0.3333333333333333
+    },
+    {
+      "fee": 4,
+      "n_compositions": 1,
+      "n_with_real_mismatch": 1,
+      "p_failure": 1.0
+    },
+    {
+      "fee": 11,
+      "n_compositions": 6,
+      "n_with_real_mismatch": 6,
+      "p_failure": 1.0
+    },
+    {
+      "fee": 12,
+      "n_compositions": 1,
+      "n_with_real_mismatch": 1,
+      "p_failure": 1.0
+    },
+    {
+      "fee": 15,
+      "n_compositions": 1,
+      "n_with_real_mismatch": 1,
+      "p_failure": 1.0
+    },
+    {
+      "fee": 18,
+      "n_compositions": 5,
+      "n_with_real_mismatch": 5,
+      "p_failure": 1.0
+    },
+    {
+      "fee": 19,
+      "n_compositions": 1,
+      "n_with_real_mismatch": 1,
+      "p_failure": 1.0
+    },
+    {
+      "fee": 20,
+      "n_compositions": 1,
+      "n_with_real_mismatch": 1,
+      "p_failure": 1.0
+    },
+    {
+      "fee": 22,
+      "n_compositions": 1,
+      "n_with_real_mismatch": 1,
+      "p_failure": 1.0
+    },
+    {
+      "fee": 30,
+      "n_compositions": 1,
+      "n_with_real_mismatch": 1,
+      "p_failure": 1.0
+    }
+  ],
+  "logistic_fit": {
+    "a": null,
+    "b": null
+  },
+  "boundary_fee": {
+    "spearman_rho": 0.3046113306982873,
+    "cross_category_mean": 0.0,
+    "intra_category_mean": 0.0
+  },
+  "dimensions": [
+    {
+      "dimension": "id_offset_match",
+      "occurrences": 1377,
+      "real_mismatch": 269,
+      "precision": 0.3005586592178771
+    },
+    {
+      "dimension": "path_convention_match",
+      "occurrences": 737,
+      "real_mismatch": 87,
+      "precision": 0.26851851851851855
+    },
+    {
+      "dimension": "date_format_match",
+      "occurrences": 14,
+      "real_mismatch": 4,
+      "precision": 1.0
+    }
+  ],
+  "server_scores": [
+    {
+      "server": "exa",
+      "composability": 0.5555555555555556,
+      "mean_fee": 3.6666666666666665,
+      "n_compositions": 9
+    },
+    {
+      "server": "mcp-server-fetch",
+      "composability": 0.5555555555555556,
+      "mean_fee": 3.6666666666666665,
+      "n_compositions": 9
+    },
+    {
+      "server": "memory",
+      "composability": 0.5555555555555556,
+      "mean_fee": 3.6666666666666665,
+      "n_compositions": 9
+    },
+    {
+      "server": "puppeteer",
+      "composability": 0.5555555555555556,
+      "mean_fee": 3.6666666666666665,
+      "n_compositions": 9
+    },
+    {
+      "server": "sequential-thinking",
+      "composability": 0.5555555555555556,
+      "mean_fee": 3.6666666666666665,
+      "n_compositions": 9
+    },
+    {
+      "server": "tavily",
+      "composability": 0.5555555555555556,
+      "mean_fee": 3.888888888888889,
+      "n_compositions": 9
+    },
+    {
+      "server": "filesystem",
+      "composability": 0.0,
+      "mean_fee": 13.666666666666666,
+      "n_compositions": 9
+    },
+    {
+      "server": "github",
+      "composability": 0.0,
+      "mean_fee": 20.11111111111111,
+      "n_compositions": 9
+    },
+    {
+      "server": "notion",
+      "composability": 0.0,
+      "mean_fee": 4.777777777777778,
+      "n_compositions": 9
+    },
+    {
+      "server": "playwright",
+      "composability": 0.0,
+      "mean_fee": 6.555555555555555,
+      "n_compositions": 9
+    }
+  ],
+  "top_dangerous": [
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_file",
+      "to_tool": "filesystem__read_multiple_files",
+      "from_field": "path",
+      "to_field": "paths",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_text_file",
+      "to_tool": "filesystem__read_multiple_files",
+      "from_field": "path",
+      "to_field": "paths",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_media_file",
+      "to_tool": "filesystem__read_multiple_files",
+      "from_field": "path",
+      "to_field": "paths",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_multiple_files",
+      "to_tool": "filesystem__write_file",
+      "from_field": "paths",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_multiple_files",
+      "to_tool": "filesystem__edit_file",
+      "from_field": "paths",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_multiple_files",
+      "to_tool": "filesystem__create_directory",
+      "from_field": "paths",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_multiple_files",
+      "to_tool": "filesystem__list_directory",
+      "from_field": "paths",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_multiple_files",
+      "to_tool": "filesystem__list_directory_with_sizes",
+      "from_field": "paths",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_multiple_files",
+      "to_tool": "filesystem__directory_tree",
+      "from_field": "paths",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_multiple_files",
+      "to_tool": "filesystem__search_files",
+      "from_field": "paths",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    }
+  ]
+}

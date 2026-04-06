@@ -437,3 +437,122 @@ class TestSDKImports:
         from bulla import ComposeResult, compose, compose_multi
         assert callable(compose)
         assert callable(compose_multi)
+
+
+# ── compose_multi() vs manual pipeline equivalence ───────────────────
+
+
+class TestComposeMultiEquivalence:
+    """Verify compose_multi() matches the manual BullaGuard + decompose_fee path.
+
+    This is the integration test against the calibration pipeline pattern
+    (calibration/compute.py) to ensure the SDK produces equivalent results.
+    """
+
+    def _server_tools(self) -> dict[str, list[dict]]:
+        return {
+            "weather": [
+                {
+                    "name": "get_forecast",
+                    "description": "Get weather forecast for a location",
+                    "inputSchema": {
+                        "type": "object",
+                        "properties": {
+                            "location": {"type": "string"},
+                            "units": {"type": "string", "enum": ["celsius", "fahrenheit"]},
+                            "days": {"type": "integer"},
+                        },
+                    },
+                },
+            ],
+            "maps": [
+                {
+                    "name": "geocode",
+                    "description": "Geocode an address to coordinates",
+                    "inputSchema": {
+                        "type": "object",
+                        "properties": {
+                            "address": {"type": "string"},
+                            "format": {"type": "string", "enum": ["decimal", "dms"]},
+                        },
+                    },
+                },
+            ],
+        }
+
+    def test_fee_matches_manual_path(self):
+        """compose_multi() fee == manual BullaGuard.from_tools_list() fee."""
+        from bulla.diagnostic import decompose_fee
+
+        st = self._server_tools()
+
+        # SDK path
+        sdk_result = compose_multi(st)
+
+        # Manual path (mirrors calibration/compute.py)
+        combined: list[dict] = []
+        for server_name, tools_list in st.items():
+            for tool in tools_list:
+                prefixed = dict(tool)
+                prefixed["name"] = f"{server_name}__{tool['name']}"
+                combined.append(prefixed)
+
+        guard = BullaGuard.from_tools_list(combined, name="manual")
+        manual_diag = guard.diagnose()
+
+        assert sdk_result.diagnostic.coherence_fee == manual_diag.coherence_fee
+        assert sdk_result.diagnostic.n_tools == manual_diag.n_tools
+        assert sdk_result.diagnostic.n_edges == manual_diag.n_edges
+
+    def test_decomposition_matches_manual_path(self):
+        """compose_multi() decomposition == manual decompose_fee()."""
+        from bulla.diagnostic import decompose_fee
+
+        st = self._server_tools()
+        sdk_result = compose_multi(st)
+
+        # Manual path
+        combined: list[dict] = []
+        server_groups: dict[str, list[str]] = {}
+        for server_name, tools_list in st.items():
+            group: list[str] = []
+            for tool in tools_list:
+                prefixed = dict(tool)
+                prefixed["name"] = f"{server_name}__{tool['name']}"
+                combined.append(prefixed)
+                group.append(prefixed["name"])
+            server_groups[server_name] = group
+
+        guard = BullaGuard.from_tools_list(combined, name="manual")
+        comp = guard.composition
+        partition = [frozenset(names) for names in server_groups.values()]
+        manual_decomp = decompose_fee(comp, partition)
+
+        assert sdk_result.decomposition is not None
+        assert sdk_result.decomposition.total_fee == manual_decomp.total_fee
+        assert sdk_result.decomposition.boundary_fee == manual_decomp.boundary_fee
+
+    def test_blind_spots_match(self):
+        """Blind spots from compose_multi() match the manual path exactly."""
+        st = self._server_tools()
+        sdk_result = compose_multi(st)
+
+        combined: list[dict] = []
+        for server_name, tools_list in st.items():
+            for tool in tools_list:
+                prefixed = dict(tool)
+                prefixed["name"] = f"{server_name}__{tool['name']}"
+                combined.append(prefixed)
+
+        guard = BullaGuard.from_tools_list(combined, name="manual")
+        manual_diag = guard.diagnose()
+
+        sdk_bs = {(bs.dimension, bs.from_tool, bs.to_tool) for bs in sdk_result.diagnostic.blind_spots}
+        manual_bs = {(bs.dimension, bs.from_tool, bs.to_tool) for bs in manual_diag.blind_spots}
+        assert sdk_bs == manual_bs
+
+    def test_receipt_integrity(self):
+        """compose_multi() receipt passes integrity verification."""
+        sdk_result = compose_multi(self._server_tools())
+        d = sdk_result.receipt.to_dict()
+        assert verify_receipt_integrity(d)

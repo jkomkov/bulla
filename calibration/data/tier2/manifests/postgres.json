@@ -1,0 +1,25 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "import:calibration/data/tier1/manifests/postgres.json",
+    "server_package": "@modelcontextprotocol/server-postgres",
+    "capture_date": "2026-04-05T16:56:40.330282+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:ff37cacf3a428367d03c282e191540ed4861b3cd0e347257fd4900ee0a4d115e",
+    "category": "official",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "query",
+      "description": "Run a read-only SQL query",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sql": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

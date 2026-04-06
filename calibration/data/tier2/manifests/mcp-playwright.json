@@ -1,0 +1,231 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-playwright",
+    "capture_date": "2026-04-05T16:56:43.248733+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:91657a0629eef9b5e722f18584d6a6e4479c70f86ae8703382364bbfb47e9d2d",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "playwright_navigate",
+      "description": "Navigate to a URL",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    },
+    {
+      "name": "playwright_screenshot",
+      "description": "Take a screenshot of the current page or a specific element",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "selector": {
+            "type": "string"
+          },
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          },
+          "storeBase64": {
+            "type": "boolean"
+          },
+          "savePng": {
+            "type": "boolean"
+          },
+          "downloadsDir": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    {
+      "name": "playwright_click",
+      "description": "Click an element on the page",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "selector"
+        ]
+      }
+    },
+    {
+      "name": "playwright_fill",
+      "description": "fill out an input field",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "selector",
+          "value"
+        ]
+      }
+    },
+    {
+      "name": "playwright_select",
+      "description": "Select an element on the page with Select tag",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "selector",
+          "value"
+        ]
+      }
+    },
+    {
+      "name": "playwright_hover",
+      "description": "Hover an element on the page",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "selector"
+        ]
+      }
+    },
+    {
+      "name": "playwright_evaluate",
+      "description": "Execute JavaScript in the browser console",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "script": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "script"
+        ]
+      }
+    },
+    {
+      "name": "playwright_get",
+      "description": "Perform an HTTP GET request",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    },
+    {
+      "name": "playwright_post",
+      "description": "Perform an HTTP POST request",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "value"
+        ]
+      }
+    },
+    {
+      "name": "playwright_put",
+      "description": "Perform an HTTP PUT request",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "value"
+        ]
+      }
+    },
+    {
+      "name": "playwright_patch",
+      "description": "Perform an HTTP PATCH request",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "value"
+        ]
+      }
+    },
+    {
+      "name": "playwright_delete",
+      "description": "Perform an HTTP DELETE request",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    }
+  ]
+}

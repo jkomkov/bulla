@@ -1,6 +1,6 @@
 {
   "receipt_version": "0.1.0",
-  "kernel_version": "0.31.0",
+  "kernel_version": "0.32.0",
   "composition_hash": "30144bfd52dda347ba043ad610c2d4e38bbbdc1a067bb1f672ab50d1d3fdde19",
   "diagnostic_hash": "f448e03b69149e2041a807c81c018e0c318f509fc6d422e0dccb978ed0dad218",
   "policy_profile": {
@@ -17,7 +17,7 @@
   "bridges_required": 234,
   "unknown_dimensions": 3,
   "disposition": "refuse_pending_disclosure",
-  "timestamp": "2026-04-05T06:57:04.090911+00:00",
+  "timestamp": "2026-04-06T04:36:30.021044+00:00",
   "patches": [
     {
       "bulla_patch_version": "0.1.0",
@@ -4316,6 +4316,6 @@
       "severity": "mismatch"
     }
   ],
-  "receipt_hash": "65e3ed8ddf8b027336b056390125f3f11229a3573ce0d2d0af9950f67fb20b46",
+  "receipt_hash": "9760b6bda807c9b3c2dffdb0d9c5b61211e7f86a2fd955bdbd206880bcca6afd",
   "anchor_ref": null
 }

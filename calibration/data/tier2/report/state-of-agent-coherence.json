@@ -1,0 +1,466 @@
+{
+  "title": "State of Agent Coherence, Q2 2026",
+  "generated": "2026-04-05T21:32:45.487147+00:00",
+  "corpus": {
+    "n_compositions": 1225,
+    "n_servers": 50,
+    "n_blind_spots": 10804,
+    "fee_distribution": {
+      "0": 1128,
+      "11": 48,
+      "18": 48,
+      "30": 1
+    }
+  },
+  "precision": {
+    "total_annotated": 10804,
+    "real_mismatch": 2098,
+    "plausible": 4229,
+    "false_positive": 4477,
+    "precision": 0.3190874524714829,
+    "live_validated": 0
+  },
+  "calibration_curve": [
+    {
+      "fee": 0,
+      "n_compositions": 1128,
+      "n_with_real_mismatch": 0,
+      "p_failure": 0.0
+    },
+    {
+      "fee": 11,
+      "n_compositions": 48,
+      "n_with_real_mismatch": 46,
+      "p_failure": 0.9583333333333334
+    },
+    {
+      "fee": 18,
+      "n_compositions": 48,
+      "n_with_real_mismatch": 48,
+      "p_failure": 1.0
+    },
+    {
+      "fee": 30,
+      "n_compositions": 1,
+      "n_with_real_mismatch": 1,
+      "p_failure": 1.0
+    }
+  ],
+  "logistic_fit": {
+    "a": null,
+    "b": null
+  },
+  "boundary_fee": {
+    "spearman_rho": 0.7453352564516835,
+    "cross_category_mean": 0.0,
+    "intra_category_mean": 0.06666666666666667
+  },
+  "dimensions": [
+    {
+      "dimension": "id_offset_match",
+      "occurrences": 7497,
+      "real_mismatch": 1605,
+      "precision": 0.3222244529211002
+    },
+    {
+      "dimension": "path_convention_match",
+      "occurrences": 3307,
+      "real_mismatch": 493,
+      "precision": 0.3092848180677541
+    }
+  ],
+  "server_scores": [
+    {
+      "server": "airtable-mcp",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "any-chat-completions-mcp",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "cognee-mcp-server",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "e2b-code-mcp-server",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "exa-mcp-server",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "fetch-mcp",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "flightradar24-mcp-server",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "gtasks-mcp",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "homeassistant-mcp",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "inoyu-mcp-unomi-server",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-bigquery-server",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-mongo-server",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-obsidian",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-pandoc",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-pinecone",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-playwright",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-aws",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-axiom",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-bigquery",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-browserbase",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-chatsum",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-cloudflare",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-docker",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-kubernetes",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-llamacloud",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-mysql",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-neon",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-rag-web-browser",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-rememberizer",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-server-tmdb",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-snowflake-server",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-tavily",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-vegalite-server",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mcp-xmind",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "memory",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "mysql_mcp_server",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "needle-mcp",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "needle-mcp_tools",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "ns-mcp-server",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "openrpc-mpc-server",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "postgres",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "puppeteer",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "qdrant",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "search1api-mcp",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "sequential-thinking",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "todoist-mcp-server",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "twitter-mcp",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "x-mcp",
+      "composability": 0.9591836734693877,
+      "mean_fee": 0.5918367346938775,
+      "n_compositions": 49
+    },
+    {
+      "server": "filesystem",
+      "composability": 0.0,
+      "mean_fee": 11.387755102040817,
+      "n_compositions": 49
+    },
+    {
+      "server": "github",
+      "composability": 0.0,
+      "mean_fee": 18.244897959183675,
+      "n_compositions": 49
+    }
+  ],
+  "top_dangerous": [
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_file",
+      "to_tool": "filesystem__read_media_file",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_file",
+      "to_tool": "filesystem__read_multiple_files",
+      "from_field": "path",
+      "to_field": "paths",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_file",
+      "to_tool": "filesystem__create_directory",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_text_file",
+      "to_tool": "filesystem__read_media_file",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_text_file",
+      "to_tool": "filesystem__read_multiple_files",
+      "from_field": "path",
+      "to_field": "paths",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_text_file",
+      "to_tool": "filesystem__create_directory",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_media_file",
+      "to_tool": "filesystem__read_multiple_files",
+      "from_field": "path",
+      "to_field": "paths",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_multiple_files",
+      "to_tool": "filesystem__write_file",
+      "from_field": "paths",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_multiple_files",
+      "to_tool": "filesystem__edit_file",
+      "from_field": "paths",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_multiple_files",
+      "to_tool": "filesystem__create_directory",
+      "from_field": "paths",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    }
+  ]
+}

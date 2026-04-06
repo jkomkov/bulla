@@ -1,0 +1,106 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-pinecone",
+    "capture_date": "2026-04-05T16:56:43.242955+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:1c4acbe7deeec8fedb950069bb8fef27da2d095ca6f27f962c2c4e5b775b06d2",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "semantic-search",
+      "description": "Search pineconeknowledge base",
+      "category": "search",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "top_k": {
+            "type": "integer",
+            "default": 10
+          },
+          "namespace": {
+            "type": "string",
+            "description": "Optional namespace to search in"
+          },
+          "category": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "date_range": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string",
+                "format": "date"
+              },
+              "end": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "read-document",
+      "description": "Read a document from the pinecone knowledge base",
+      "category": "read",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "document_id": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string",
+            "description": "Optional namespace to read from"
+          }
+        },
+        "required": [
+          "document_id"
+        ]
+      }
+    },
+    {
+      "name": "upsert-document",
+      "description": "Add or update content in the pinecone knowledge base",
+      "category": "mutation",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object"
+          },
+          "namespace": {
+            "type": "string",
+            "description": "Optional namespace to store the document in"
+          }
+        },
+        "required": [
+          "id",
+          "text"
+        ]
+      }
+    }
+  ]
+}

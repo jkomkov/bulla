@@ -1,0 +1,119 @@
+{
+  "exa": {
+    "capture_date": "2026-04-05T23:35:55.792399+00:00",
+    "captured_via": "live_scan:npx -y exa-mcp-server@latest",
+    "category": "",
+    "content_hash": "de0f65e05319ecddea872757fede6f08151ccf27e929219e06cb39e0d9a9f15a",
+    "n_tools": 3,
+    "package": "exa",
+    "popularity_rank": 0
+  },
+  "filesystem": {
+    "capture_date": "2026-04-05T23:34:17.617052+00:00",
+    "captured_via": "import:calibration/data/tier1/manifests/filesystem.json",
+    "category": "official",
+    "content_hash": "395d2862eef190a186d798023a6bd2f3b0f870e5464b6435a37fcbb2502e2618",
+    "n_tools": 14,
+    "package": "@modelcontextprotocol/server-filesystem",
+    "popularity_rank": 0
+  },
+  "github": {
+    "capture_date": "2026-04-05T23:34:17.627391+00:00",
+    "captured_via": "import:calibration/data/tier1/manifests/github.json",
+    "category": "official",
+    "content_hash": "b713dbb8370603a5941f1f0156b179fe1c6cc0b8cd1addafb84c42ddb7bf3977",
+    "n_tools": 26,
+    "package": "@modelcontextprotocol/server-github",
+    "popularity_rank": 0
+  },
+  "mcp-server-fetch": {
+    "capture_date": "2026-04-05T23:37:16.806077+00:00",
+    "captured_via": "live_scan:npx -y @tokenizin/mcp-npx-fetch",
+    "category": "",
+    "content_hash": "c91d095eb5f52c7b08a3f4fb4430e30d8a46f11239200702bb7ee53a75d6f304",
+    "n_tools": 4,
+    "package": "mcp-server-fetch",
+    "popularity_rank": 0
+  },
+  "memory": {
+    "capture_date": "2026-04-05T23:34:17.630283+00:00",
+    "captured_via": "import:calibration/data/tier1/manifests/memory.json",
+    "category": "official",
+    "content_hash": "ec0c686d41643c878cfe45de98121fb61f758e0a823ec573ef3e469f804fac45",
+    "n_tools": 9,
+    "package": "@modelcontextprotocol/server-memory",
+    "popularity_rank": 0
+  },
+  "notion": {
+    "capture_date": "2026-04-05T23:36:13.914030+00:00",
+    "captured_via": "live_scan:npx -y @notionhq/notion-mcp-server",
+    "category": "",
+    "content_hash": "00a6e9de7d9ca2bf0754a3ddf8622e83a302879db8933792f2ab021bd1575df5",
+    "n_tools": 22,
+    "package": "notion",
+    "popularity_rank": 0
+  },
+  "npm-search": {
+    "capture_date": "2026-04-05T23:37:02.003146+00:00",
+    "captured_via": "live_scan:npx -y npm-search-mcp-server",
+    "category": "",
+    "content_hash": "8ab6ef8282ef332b9e5c5ef8fffa740d6365128e51ff0dc8152c95f073ac7ba4",
+    "n_tools": 1,
+    "package": "npm-search",
+    "popularity_rank": 0
+  },
+  "playwright": {
+    "capture_date": "2026-04-05T23:35:28.720253+00:00",
+    "captured_via": "live_scan:npx -y @executeautomation/playwright-mcp-server",
+    "category": "",
+    "content_hash": "ee689e833ef6f7a028855ed42027374d96b2d5983bf4c8fcb15bb55154d548da",
+    "n_tools": 33,
+    "package": "playwright",
+    "popularity_rank": 0
+  },
+  "postgres": {
+    "capture_date": "2026-04-05T23:34:17.643637+00:00",
+    "captured_via": "import:calibration/data/tier1/manifests/postgres.json",
+    "category": "official",
+    "content_hash": "ff37cacf3a428367d03c282e191540ed4861b3cd0e347257fd4900ee0a4d115e",
+    "n_tools": 1,
+    "package": "@modelcontextprotocol/server-postgres",
+    "popularity_rank": 0
+  },
+  "puppeteer": {
+    "capture_date": "2026-04-05T23:34:17.646569+00:00",
+    "captured_via": "import:calibration/data/tier1/manifests/puppeteer.json",
+    "category": "official",
+    "content_hash": "00e12232bc1ff6f39bc2c6dbe3f7e2f0e92f4312a06605f356c74f50eeb56d66",
+    "n_tools": 7,
+    "package": "@modelcontextprotocol/server-puppeteer",
+    "popularity_rank": 0
+  },
+  "sequential-thinking": {
+    "capture_date": "2026-04-05T23:34:17.651218+00:00",
+    "captured_via": "import:calibration/data/tier1/manifests/sequential-thinking.json",
+    "category": "official",
+    "content_hash": "58cefd64c4146156073a8b96391958ff45e64c33e1e85e6c025d8d3ac107a180",
+    "n_tools": 1,
+    "package": "@modelcontextprotocol/server-sequential-thinking",
+    "popularity_rank": 0
+  },
+  "tavily": {
+    "capture_date": "2026-04-05T23:35:41.961132+00:00",
+    "captured_via": "live_scan:npx -y tavily-mcp@latest",
+    "category": "",
+    "content_hash": "5108e202df0cfe69947ad20dc7daa615830f68584fbb71dc616041898c9ce0aa",
+    "n_tools": 5,
+    "package": "tavily",
+    "popularity_rank": 0
+  },
+  "youtube-transcript": {
+    "capture_date": "2026-04-05T23:35:37.793402+00:00",
+    "captured_via": "live_scan:npx -y @kimtaeyoon83/mcp-server-youtube-transcript",
+    "category": "",
+    "content_hash": "54ed8ac8128f983b3c825dd3783b178f2556eadf0eea056ea82d03dd9c00436a",
+    "n_tools": 1,
+    "package": "youtube-transcript",
+    "popularity_rank": 0
+  }
+}

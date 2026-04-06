@@ -1,0 +1,65 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-server-tmdb",
+    "capture_date": "2026-04-05T16:56:43.274604+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:697ddade58425fa6329dbb284a18266f96c1e12e2f1fbbb21a0f1ee072f502da",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "search_movies",
+      "description": "Search for movies by title or keywords",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query for movie titles"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "get_recommendations",
+      "description": "Get movie recommendations based on a movie ID",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "movieId": {
+            "type": "string",
+            "description": "TMDB movie ID to get recommendations for"
+          }
+        },
+        "required": [
+          "movieId"
+        ]
+      }
+    },
+    {
+      "name": "get_trending",
+      "description": "Get trending movies for a time window",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "timeWindow": {
+            "type": "string",
+            "enum": [
+              "day",
+              "week"
+            ],
+            "description": "Time window for trending movies"
+          }
+        },
+        "required": [
+          "timeWindow"
+        ]
+      }
+    }
+  ]
+}

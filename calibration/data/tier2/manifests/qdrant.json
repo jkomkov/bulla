@@ -1,0 +1,44 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "qdrant",
+    "capture_date": "2026-04-05T16:56:43.330680+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:ba12a1189f060b653f36cff3332114cb5dbab433c1201450be8ba7bfe4a488b6",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "qdrant-store-memory",
+      "description": "Keep the memory for later use, when you are asked to remember something.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "information": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "information"
+        ]
+      }
+    },
+    {
+      "name": "qdrant-find-memories",
+      "description": "Look up memories in Qdrant. Use this tool when you need to: \n - Find memories by their content \n - Access memories for further analysis \n - Get some personal information about the user",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The query to search for in the memories"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    }
+  ]
+}

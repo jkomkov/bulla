@@ -1,0 +1,56 @@
+{
+  "filesystem": {
+    "capture_date": "2026-04-05T15:22:36.791603+00:00",
+    "captured_via": "local_scan:npx -y @modelcontextprotocol/server-filesystem /tmp",
+    "category": "official",
+    "content_hash": "395d2862eef190a186d798023a6bd2f3b0f870e5464b6435a37fcbb2502e2618",
+    "n_tools": 14,
+    "package": "@modelcontextprotocol/server-filesystem",
+    "popularity_rank": 0
+  },
+  "github": {
+    "capture_date": "2026-04-05T15:22:42.372737+00:00",
+    "captured_via": "local_scan:npx -y @modelcontextprotocol/server-github",
+    "category": "official",
+    "content_hash": "b713dbb8370603a5941f1f0156b179fe1c6cc0b8cd1addafb84c42ddb7bf3977",
+    "n_tools": 26,
+    "package": "@modelcontextprotocol/server-github",
+    "popularity_rank": 0
+  },
+  "memory": {
+    "capture_date": "2026-04-05T15:22:45.375218+00:00",
+    "captured_via": "local_scan:npx -y @modelcontextprotocol/server-memory",
+    "category": "official",
+    "content_hash": "ec0c686d41643c878cfe45de98121fb61f758e0a823ec573ef3e469f804fac45",
+    "n_tools": 9,
+    "package": "@modelcontextprotocol/server-memory",
+    "popularity_rank": 0
+  },
+  "postgres": {
+    "capture_date": "2026-04-05T15:24:12.959201+00:00",
+    "captured_via": "local_scan:npx -y @modelcontextprotocol/server-postgres postgresql://localhost/test",
+    "category": "official",
+    "content_hash": "ff37cacf3a428367d03c282e191540ed4861b3cd0e347257fd4900ee0a4d115e",
+    "n_tools": 1,
+    "package": "@modelcontextprotocol/server-postgres",
+    "popularity_rank": 0
+  },
+  "puppeteer": {
+    "capture_date": "2026-04-05T15:24:06.509514+00:00",
+    "captured_via": "local_scan:npx -y @modelcontextprotocol/server-puppeteer",
+    "category": "official",
+    "content_hash": "00e12232bc1ff6f39bc2c6dbe3f7e2f0e92f4312a06605f356c74f50eeb56d66",
+    "n_tools": 7,
+    "package": "@modelcontextprotocol/server-puppeteer",
+    "popularity_rank": 0
+  },
+  "sequential-thinking": {
+    "capture_date": "2026-04-05T15:24:24.159241+00:00",
+    "captured_via": "local_scan:npx -y @modelcontextprotocol/server-sequential-thinking",
+    "category": "official",
+    "content_hash": "58cefd64c4146156073a8b96391958ff45e64c33e1e85e6c025d8d3ac107a180",
+    "n_tools": 1,
+    "package": "@modelcontextprotocol/server-sequential-thinking",
+    "popularity_rank": 0
+  }
+}

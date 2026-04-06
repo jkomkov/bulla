@@ -1,0 +1,54 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "openrpc-mpc-server",
+    "capture_date": "2026-04-05T16:56:43.320879+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:c6e3b638132ae1cde03a4d8f13aa75833f02a87948ffe3ecf5d5bec8e7651244",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "rpc_call",
+      "description": "Call any JSON-RPC method on a server with parameters. A user would prompt: Call method <method> on <server url> with params <params>",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "server": {
+            "type": "string",
+            "description": "Server URL"
+          },
+          "method": {
+            "type": "string",
+            "description": "JSON-RPC method name to call"
+          },
+          "params": {
+            "type": "string",
+            "description": "Stringified Parameters to pass to the method"
+          }
+        },
+        "required": [
+          "server",
+          "method"
+        ]
+      }
+    },
+    {
+      "name": "rpc_discover",
+      "description": "This uses JSON-RPC to call `rpc.discover` which is part of the OpenRPC Specification for discovery for JSON-RPC servers. A user would prompt: What JSON-RPC methods does this server have? <server url>",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "server": {
+            "type": "string",
+            "description": "Server URL"
+          }
+        },
+        "required": [
+          "server"
+        ]
+      }
+    }
+  ]
+}

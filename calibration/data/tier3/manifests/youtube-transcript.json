@@ -1,0 +1,35 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "live_scan:npx -y @kimtaeyoon83/mcp-server-youtube-transcript",
+    "server_package": "youtube-transcript",
+    "capture_date": "2026-04-05T23:35:37.793402+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:54ed8ac8128f983b3c825dd3783b178f2556eadf0eea056ea82d03dd9c00436a",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "get_transcript",
+      "description": "Extract transcript from a YouTube video URL or ID",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "YouTube video URL or ID"
+          },
+          "lang": {
+            "type": "string",
+            "description": "Language code for transcript (e.g., 'ko', 'en')",
+            "default": "en"
+          }
+        },
+        "required": [
+          "url",
+          "lang"
+        ]
+      }
+    }
+  ]
+}

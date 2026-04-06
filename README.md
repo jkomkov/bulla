@@ -2,21 +2,65 @@
 
 Witness kernel for agent tool compositions — diagnose, attest, seal.
 
-When AI agents compose tools into pipelines, implicit semantic assumptions (date formats, unit scales, encoding schemes) can silently produce wrong results. Type-checking passes, but the pipeline is broken. Bulla computes the **coherence fee**: the exact number of independent semantic dimensions that bilateral verification cannot detect. For each blind spot, it recommends a **bridge** and issues a tamper-evident **WitnessReceipt**.
+When AI agents compose tools into pipelines, implicit semantic assumptions (date formats, unit scales, path conventions) can silently produce wrong results. Schema validation passes, but the pipeline is broken. Bulla computes the **coherence fee**: the exact number of independent semantic dimensions that bilateral verification cannot detect.
 
 **Zero heavy dependencies.** Only requires PyYAML. No numpy, no scipy, no LLM calls. Installs in under a second.
 
-> **Naming**: *Bulla* is the protocol and tool. *SEAM* is the underlying theory ([paper](https://www.resagentica.com/papers/seam-paper.pdf)). *Glyph* is the company.
+> **Naming**: *Bulla* is the protocol and tool. *SEAM* is the underlying theory ([paper](https://www.resagentica.com/papers/seam-paper.pdf)).
 
-## The Seam Problem (canonical demo)
-
-Two MCP servers. One uses absolute paths, the other uses relative paths. Schema validation passes. The agent silently puts the file in the wrong place. **[See the demo →](examples/canonical-demo/)**
-
-## Install
+## Try it now
 
 ```bash
 pip install bulla
+
+# Audit your Cursor / Claude Desktop MCP setup
+bulla audit
+
+# Explicit config path
+bulla audit ~/.cursor/mcp.json
+
+# CI gate: fail if any composition exceeds fee threshold
+bulla audit --max-fee 3 --format json
 ```
+
+`bulla audit` auto-detects your MCP configuration, scans all servers, and reports cross-server coherence risks — including the **boundary fee** (convention conflicts that no individual server can detect on its own).
+
+## The seam problem
+
+Two MCP servers. One uses absolute paths (`/tmp/src/main.py`), the other uses repository-relative paths (`src/main.py`). Schema validation passes. The agent silently puts the file in the wrong place. Bulla catches this before execution.
+
+**[See the canonical demo →](examples/canonical-demo/)**
+
+## Calibration results
+
+Tested across 10 real MCP servers (filesystem, github, notion, playwright, tavily, etc.) in 45 pairwise compositions:
+
+| Zone | Fee | P(mismatch) | Compositions |
+|------|-----|-------------|--------------|
+| **Safe** | 0 | 0% | 15/15 clean |
+| **Uncertain** | 1–3 | 0–33% | 12 compositions |
+| **Unsafe** | 4+ | ~100% | 18/18 confirmed |
+
+fee=0 guarantees no convention mismatch. fee≥4 guarantees real mismatches exist. The fee is computed from schemas alone — no execution required.
+
+See [calibration data](calibration/data/tier3/report/state-of-agent-coherence.md) for the full report.
+
+## Python SDK
+
+```python
+from bulla import compose_multi
+
+result = compose_multi({
+    "filesystem": fs_tools,
+    "github": gh_tools,
+})
+
+print(result.diagnostic.coherence_fee)   # 30
+print(result.receipt.disposition.value)  # "refuse"
+print(result.decomposition.boundary_fee) # 1
+```
+
+`compose_multi()` returns a `ComposeResult` with the diagnostic, a tamper-evident `WitnessReceipt`, and a fee decomposition partitioned by server. For single-server diagnosis, use `compose()`.
 
 ## Architecture
 
@@ -30,9 +74,23 @@ Three layers, cleanly separated:
 
 The measurement layer has **zero imports** from the witness layer. Measurement does not know it is being witnessed.
 
-## Quick start with `bulla gauge`
+## Commands
 
-The fastest way to diagnose an MCP server or tool manifest:
+| Command | Purpose |
+|---|---|
+| `bulla audit` | Scan MCP config, diagnose cross-server coherence |
+| `bulla gauge` | Diagnose a single MCP server or manifest |
+| `bulla diagnose` | Full diagnostic from a composition YAML |
+| `bulla check` | CI gate with configurable thresholds |
+| `bulla scan` | Scan live MCP servers (zero config) |
+| `bulla witness` | Diagnose and emit WitnessReceipt as JSON |
+| `bulla bridge` | Auto-bridge and emit patched YAML |
+| `bulla serve` | MCP stdio server |
+| `bulla discover` | LLM-powered convention dimension discovery |
+
+Output formats: `--format text` (default), `--format json`, `--format sarif`.
+
+## Quick start with `bulla gauge`
 
 ```bash
 # Diagnose a live MCP server
@@ -43,40 +101,9 @@ bulla gauge tools.json
 
 # Save the inferred composition for hand-editing
 bulla gauge tools.json -o composition.yaml
-bulla diagnose composition.yaml     # re-diagnose after edits
 
 # CI gating: fail if coherence fee exceeds threshold
 bulla gauge tools.json --max-fee 0
-```
-
-`bulla gauge` returns the coherence fee, minimum disclosure set (the exact fields to expose to eliminate all blind spots), and witness basis in a single command.
-
-## Audit your MCP setup
-
-`bulla audit` reads your MCP configuration (Cursor or Claude Desktop), scans all servers in parallel, and diagnoses cross-server coherence:
-
-```bash
-# Auto-detect your Cursor/Claude config and audit all servers
-bulla audit
-
-# Explicit config file
-bulla audit ~/.cursor/mcp.json
-
-# See cross-server blind spots in detail
-bulla audit -v
-
-# JSON output for CI integration
-bulla audit --format json --max-fee 5
-```
-
-The unique insight is the **cross-server risk decomposition**: `bulla audit` partitions blind spots into those _within_ a single server (intra-server fee) versus those that only appear _between_ independently-developed servers (boundary fee). The boundary fee represents conventions that no individual server can detect on its own.
-
-## Other commands
-
-```bash
-bulla diagnose --examples          # run on bundled compositions
-bulla scan "python my_server.py"   # scan a live MCP server
-bulla check compositions/          # CI gate (exit 1 on failure)
 ```
 
 ## Python API
@@ -137,13 +164,7 @@ bulla diagnose --pack financial.yaml pipeline.yaml
 bulla scan --pack custom.yaml "python server.py"
 ```
 
-Ships with `base` (10 dimensions) and `financial` (4 domain-specific dimensions).
-
-## Witness Contract
-
-Every receipt binds three hashes: **composition** (what was proposed), **diagnostic** (what was measured), **receipt** (what was witnessed). Receipts chain via `parent_receipt_hash` for auditable repair flows.
-
-See [WITNESS-CONTRACT.md](WITNESS-CONTRACT.md) for the normative specification.
+Ships with `base` (11 dimensions) and `financial` (4 domain-specific dimensions).
 
 ## CI Integration
 
@@ -156,22 +177,6 @@ See [WITNESS-CONTRACT.md](WITNESS-CONTRACT.md) for the normative specification.
     sarif_file: bulla.sarif
 ```
 
-## Commands
-
-| Command | Purpose |
-|---|---|
-| `bulla diagnose` | Full diagnostic with blind spots, bridges, fee |
-| `bulla check` | CI gate with configurable thresholds |
-| `bulla scan` | Scan live MCP servers (zero config) |
-| `bulla witness` | Diagnose and emit WitnessReceipt as JSON |
-| `bulla bridge` | Auto-bridge and emit patched YAML + patches |
-| `bulla manifest` | Generate/validate Bulla Manifest files |
-| `bulla serve` | MCP stdio server |
-| `bulla init` | Interactive composition wizard |
-| `bulla infer` | Infer proto-composition from MCP manifest |
-
-Output formats: `--format text` (default), `--format json`, `--format sarif`.
-
 ## How it works
 
 Bulla builds a coboundary operator from tool dimensions to edge dimensions for both the observable and full sheaves. The coherence fee is:
@@ -182,6 +187,14 @@ fee = rank(δ_full) − rank(δ_obs)
 
 Each unit of fee is an independent semantic dimension invisible to pairwise checks. Bridging increases rank(δ_obs) until it matches rank(δ_full). Rank computation uses exact arithmetic (`fractions.Fraction`) — no floating-point, no numpy.
 
+## Witness Contract
+
+Every receipt binds three hashes: **composition** (what was proposed), **diagnostic** (what was measured), **receipt** (what was witnessed). Receipts chain via `parent_receipt_hash` for auditable repair flows.
+
+See [WITNESS-CONTRACT.md](WITNESS-CONTRACT.md) for the normative specification.
+
 ## License
 
-MIT
+[Business Source License 1.1](LICENSE)
+
+Use grant: non-competing use, plus commercial use processing fewer than 1,000 compositions per month. Converts to Apache 2.0 on 2030-04-01.

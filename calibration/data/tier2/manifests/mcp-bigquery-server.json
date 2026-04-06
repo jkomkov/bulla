@@ -1,0 +1,30 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-bigquery-server",
+    "capture_date": "2026-04-05T16:56:43.222181+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:8fc44e6b61ff6be5861c37dead22f71ae0c6da253b2eb2b2198295210dc8b870",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "query",
+      "description": "Run a read-only BigQuery SQL query.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "sql": {
+            "type": "string"
+          },
+          "maximumBytesBilled": {
+            "type": "string",
+            "description": "Maximum bytes billed (default: 1GB)",
+            "optional": true
+          }
+        }
+      }
+    }
+  ]
+}

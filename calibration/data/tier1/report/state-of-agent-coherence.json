@@ -1,0 +1,202 @@
+{
+  "title": "State of Agent Coherence, Q2 2026",
+  "generated": "2026-04-05T16:01:09.181605+00:00",
+  "corpus": {
+    "n_compositions": 15,
+    "n_servers": 6,
+    "n_blind_spots": 1124,
+    "fee_distribution": {
+      "0": 6,
+      "11": 4,
+      "18": 4,
+      "30": 1
+    }
+  },
+  "precision": {
+    "total_annotated": 1124,
+    "real_mismatch": 240,
+    "plausible": 431,
+    "false_positive": 453,
+    "precision": 0.3463203463203463,
+    "live_validated": 0
+  },
+  "calibration_curve": [
+    {
+      "fee": 0,
+      "n_compositions": 6,
+      "n_with_real_mismatch": 0,
+      "p_failure": 0.0
+    },
+    {
+      "fee": 11,
+      "n_compositions": 4,
+      "n_with_real_mismatch": 4,
+      "p_failure": 1.0
+    },
+    {
+      "fee": 18,
+      "n_compositions": 4,
+      "n_with_real_mismatch": 4,
+      "p_failure": 1.0
+    },
+    {
+      "fee": 30,
+      "n_compositions": 1,
+      "n_with_real_mismatch": 1,
+      "p_failure": 1.0
+    }
+  ],
+  "logistic_fit": {
+    "a": null,
+    "b": null
+  },
+  "boundary_fee": {
+    "spearman_rho": -0.27142857142857135,
+    "cross_category_mean": 0.0,
+    "intra_category_mean": 0.06666666666666667
+  },
+  "dimensions": [
+    {
+      "dimension": "id_offset_match",
+      "occurrences": 765,
+      "real_mismatch": 180,
+      "precision": 0.3488372093023256
+    },
+    {
+      "dimension": "path_convention_match",
+      "occurrences": 359,
+      "real_mismatch": 60,
+      "precision": 0.3389830508474576
+    }
+  ],
+  "server_scores": [
+    {
+      "server": "memory",
+      "composability": 0.6,
+      "mean_fee": 5.8,
+      "n_compositions": 5
+    },
+    {
+      "server": "postgres",
+      "composability": 0.6,
+      "mean_fee": 5.8,
+      "n_compositions": 5
+    },
+    {
+      "server": "puppeteer",
+      "composability": 0.6,
+      "mean_fee": 5.8,
+      "n_compositions": 5
+    },
+    {
+      "server": "sequential-thinking",
+      "composability": 0.6,
+      "mean_fee": 5.8,
+      "n_compositions": 5
+    },
+    {
+      "server": "filesystem",
+      "composability": 0.0,
+      "mean_fee": 14.8,
+      "n_compositions": 5
+    },
+    {
+      "server": "github",
+      "composability": 0.0,
+      "mean_fee": 20.4,
+      "n_compositions": 5
+    }
+  ],
+  "top_dangerous": [
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_file",
+      "to_tool": "filesystem__read_multiple_files",
+      "from_field": "path",
+      "to_field": "paths",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_file",
+      "to_tool": "github__create_or_update_file",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_file",
+      "to_tool": "github__get_file_contents",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_text_file",
+      "to_tool": "filesystem__read_multiple_files",
+      "from_field": "path",
+      "to_field": "paths",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_text_file",
+      "to_tool": "filesystem__search_files",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_text_file",
+      "to_tool": "github__create_or_update_file",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_text_file",
+      "to_tool": "github__get_file_contents",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_media_file",
+      "to_tool": "filesystem__search_files",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_media_file",
+      "to_tool": "github__create_or_update_file",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_media_file",
+      "to_tool": "github__get_file_contents",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "llm"
+    }
+  ]
+}

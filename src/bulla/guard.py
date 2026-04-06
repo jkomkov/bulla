@@ -7,6 +7,7 @@ MCP servers.  Diagnose, check thresholds, and export results.
 from __future__ import annotations
 
 import json
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -346,25 +347,62 @@ def _get_base_pack_dimensions() -> set[str]:
     return set(base_parsed.get("dimensions", {}).keys())
 
 
+@dataclass
+class _ClassificationResult:
+    """Classification output for one tool, split by confidence.
+
+    ``confident`` dimensions participate in composition construction
+    (edge creation, observable/hidden partitioning, coboundary matrix).
+    ``all_dims`` includes weak-signal (unknown-confidence) dimensions
+    for WitnessBasis provenance reporting.
+
+    This separation ensures the math only sees strong signals while the
+    provenance record is honest about everything the classifier detected.
+    """
+
+    confident: list[Any] = field(default_factory=list)
+    all_dims: list[Any] = field(default_factory=list)
+
+    @staticmethod
+    def from_raw(raw: list[Any]) -> "_ClassificationResult":
+        confident = [
+            d for d in raw
+            if d.field_name != "_description"
+            and d.confidence in ("inferred", "declared")
+        ]
+        return _ClassificationResult(confident=confident, all_dims=raw)
+
+
 def _composition_from_mcp_tools(
     tools_list: list[dict[str, Any]],
     *,
     name: str,
 ) -> tuple[Composition, WitnessBasis]:
-    """Convert a list of MCP tool dicts into a Composition and WitnessBasis."""
+    """Convert a list of MCP tool dicts into a Composition and WitnessBasis.
+
+    Only dimensions with confidence "inferred" or "declared" participate
+    in composition construction (edge creation and observable/hidden
+    partitioning).  Dimensions with confidence "unknown" are recorded in
+    the WitnessBasis for auditability but do not affect the coboundary
+    matrix or the coherence fee.  This prevents weak classifier signals
+    (description-keyword-only matches, field-description-only matches)
+    from inflating the fee with phantom convention conflicts.
+    """
     from bulla.infer.classifier import InferredDimension
 
     tool_specs: list[ToolSpec] = []
-    tools_dims: dict[str, list[InferredDimension]] = {}
+    classifications: dict[str, _ClassificationResult] = {}
 
     for tool in tools_list:
         raw_name = tool.get("name", "unknown_tool")
         safe_name = raw_name.replace("-", "_").replace(" ", "_")
         field_infos = extract_field_infos(tool)
         fields = [fi.name for fi in field_infos]
-        inferred = classify_tool_rich(tool, field_infos=field_infos)
-        real_inferred = [d for d in inferred if d.field_name != "_description"]
-        inferred_field_names = {d.field_name for d in real_inferred}
+        raw_inferred = classify_tool_rich(tool, field_infos=field_infos)
+        cr = _ClassificationResult.from_raw(raw_inferred)
+        classifications[safe_name] = cr
+
+        inferred_field_names = {d.field_name for d in cr.confident}
         observable = [f for f in fields if f not in inferred_field_names]
 
         tool_specs.append(ToolSpec(
@@ -372,8 +410,9 @@ def _composition_from_mcp_tools(
             internal_state=tuple(fields) if fields else ("_placeholder",),
             observable_schema=tuple(observable) if observable else tuple(fields[:1]) if fields else ("_placeholder",),
         ))
-        tools_dims[safe_name] = inferred
 
+    # Edges built from confident dimensions only
+    tools_dims = {name: cr.confident for name, cr in classifications.items()}
     raw_edges = _find_shared_dimensions(tools_dims)
     edges: list[Edge] = []
     for e in raw_edges:
@@ -387,13 +426,15 @@ def _composition_from_mcp_tools(
         )
         edges.append(Edge(e["from"], e["to"], dims))
 
+    # WitnessBasis counts ALL classifications (including unknown)
+    # for honest epistemic provenance reporting
     base_dims = _get_base_pack_dimensions()
     n_declared = 0
     n_inferred = 0
     n_unknown = 0
     n_discovered = 0
-    for dims_list in tools_dims.values():
-        for dim in dims_list:
+    for cr in classifications.values():
+        for dim in cr.all_dims:
             if dim.confidence == "declared":
                 n_declared += 1
             elif dim.confidence == "inferred":

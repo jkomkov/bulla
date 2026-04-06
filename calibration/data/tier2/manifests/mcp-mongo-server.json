@@ -1,0 +1,62 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-mongo-server",
+    "capture_date": "2026-04-05T16:56:43.235294+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:695766e5e49351223c7024f701c3f6c0178604f62c0f7390ad0df5b0d143be47",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "query",
+      "description": "Execute a MongoDB query",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": "string",
+            "description": "Name of the collection to query"
+          },
+          "filter": {
+            "type": "object",
+            "description": "MongoDB query filter"
+          },
+          "projection": {
+            "type": "object",
+            "description": "Fields to include/exclude"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum number of documents to return"
+          }
+        },
+        "required": [
+          "collection"
+        ]
+      }
+    },
+    {
+      "name": "aggregate",
+      "description": "Execute a MongoDB aggregation pipeline",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": "string",
+            "description": "Name of the collection to aggregate"
+          },
+          "pipeline": {
+            "type": "array",
+            "description": "Aggregation pipeline stages"
+          }
+        },
+        "required": [
+          "collection",
+          "pipeline"
+        ]
+      }
+    }
+  ]
+}

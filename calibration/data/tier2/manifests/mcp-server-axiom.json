@@ -1,0 +1,34 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-server-axiom",
+    "capture_date": "2026-04-05T16:56:43.268959+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:b1549120113ae2eba06d768703fd653c27b88c11e9bb1458e1e9a590dd138bdb",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "queryApl",
+      "description": "Query Axiom datasets using Axiom Processing Language (APL). The query must be a valid APL query string.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The APL query to run"
+          }
+        }
+      }
+    },
+    {
+      "name": "listDatasets",
+      "description": "List all available Axiom datasets",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  ]
+}

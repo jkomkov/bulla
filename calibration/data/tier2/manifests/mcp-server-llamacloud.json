@@ -1,0 +1,29 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-server-llamacloud",
+    "capture_date": "2026-04-05T16:56:43.272591+00:00",
+    "bulla_version": "0.28.0",
+    "content_hash": "sha256:34187f0b15364e0009ee3b954c135f6b733c4674679a787519771a1b5ad35c0c",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "get_information",
+      "description": "Get information from your knowledge base to answer questions.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The query used to get information about your knowledge base."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    }
+  ]
+}

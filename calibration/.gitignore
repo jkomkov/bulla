@@ -1,0 +1,7 @@
+# SQLite databases are binary + regenerable from manifests
+*.db
+*.db-shm
+*.db-wal
+
+# QA directory is for local testing only
+data/qa/
