@@ -259,8 +259,7 @@ _CORE_NAME_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
         r"quality|severity|weight|importance)($|_)", re.IGNORECASE
     )),
     ("id_offset", re.compile(
-        r"(^|_)(id|index|offset|position|ordinal|sequence|"
-        r"serial|number|num|page)($|_)", re.IGNORECASE
+        r"(^|_)(offset|position|page|page_number)($|_)", re.IGNORECASE
     )),
     ("precision", re.compile(
         r"(^|_)(precision|decimals|decimal_places|dp|"

@@ -52,8 +52,8 @@ dimensions:
       - "username"
       - "organization"
     field_patterns:
-      - "owner"
-      - "*_owner"
+      - "repo_owner"
+      - "repository_owner"
     description_keywords:
       - "repository owner"
       - "org or user"

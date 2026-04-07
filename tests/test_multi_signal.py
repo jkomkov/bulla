@@ -646,7 +646,7 @@ class TestRealMCPValidation:
         assert "id_offset" not in dim_map  # string-typed IDs correctly excluded
 
     def test_github_tool_coverage(self):
-        """GitHub issue tool: should detect score_range, date_format, id_offset."""
+        """GitHub issue tool: should detect score_range, date_format."""
         tools = json.loads(REAL_MCP_FIXTURE.read_text())["tools"]
         gh = next(t for t in tools if t["name"] == "github_create_issue")
         results = classify_tool_rich(gh)
@@ -655,7 +655,6 @@ class TestRealMCPValidation:
         assert "score_range" in dim_map
         assert dim_map["score_range"].confidence == "declared"  # name + schema_range + description
         assert "date_format" in dim_map
-        assert "id_offset" in dim_map
 
     def test_datadog_tool_coverage(self):
         """Datadog tool: should detect date_format, timezone, rate_scale or score_range."""

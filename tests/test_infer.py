@@ -43,7 +43,7 @@ class TestClassifier:
             assert result is not None, f"{name} should match"
 
     def test_id_fields(self):
-        for name in ["transaction_id", "log_id", "page_index"]:
+        for name in ["scroll_offset", "cursor_position", "page_index"]:
             result = classify_field(name)
             assert result is not None, f"{name} should match"
             assert result.dimension == "id_offset"

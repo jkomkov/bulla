@@ -155,13 +155,13 @@ class TestNegativePatterns:
         assert r is not None
         assert r.dimension == "id_offset"
 
-    def test_index_still_matches_id_offset(self):
-        r = classify_field_by_name("index")
+    def test_offset_still_matches_id_offset(self):
+        r = classify_field_by_name("scroll_offset")
         assert r is not None
         assert r.dimension == "id_offset"
 
-    def test_issue_number_still_matches(self):
-        r = classify_field_by_name("issue_number")
+    def test_position_still_matches_id_offset(self):
+        r = classify_field_by_name("cursor_position")
         assert r is not None
         assert r.dimension == "id_offset"
 
@@ -179,22 +179,22 @@ class TestTypeAwareExclusion:
     def test_string_typed_commit_id_excluded(self):
         assert classify_field_by_name("commit_id", schema_type="string") is None
 
-    def test_integer_typed_id_still_matches(self):
-        r = classify_field_by_name("issue_id", schema_type="integer")
+    def test_integer_typed_offset_matches(self):
+        r = classify_field_by_name("scroll_offset", schema_type="integer")
         assert r is not None
         assert r.dimension == "id_offset"
 
-    def test_no_type_info_id_still_matches(self):
-        r = classify_field_by_name("user_id")
+    def test_page_matches_id_offset(self):
+        r = classify_field_by_name("page")
         assert r is not None
         assert r.dimension == "id_offset"
 
-    def test_string_number_not_excluded(self):
-        """Fields matching id_offset via 'number' token but typed string
-        are still matched since only *_id pattern is type-filtered."""
-        r = classify_field_by_name("issue_number", schema_type="string")
-        assert r is not None
-        assert r.dimension == "id_offset"
+    def test_generic_id_no_longer_matches(self):
+        """After pack tightening, generic *_id fields don't match id_offset.
+        Only offset/position/page patterns match — these are the fields where
+        zero-based vs one-based conventions cause real cross-server mismatches."""
+        assert classify_field_by_name("user_id") is None
+        assert classify_field_by_name("issue_id", schema_type="integer") is None
 
     def test_classify_tool_rich_passes_type_through(self):
         """Verify classify_tool_rich passes schema_type for exclusion."""

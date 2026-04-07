@@ -138,8 +138,8 @@ dimensions:
       - "uuid"
       - "auto_increment"
     field_patterns:
-      - "*_id"
-      - "*_index"
+      - "page"
+      - "page_number"
       - "*_offset"
       - "*_position"
     description_keywords:
@@ -253,8 +253,8 @@ dimensions:
       - "CRLF"
       - "CR"
     field_patterns:
-      - "*_text"
-      - "*_content"
+      - "*_newline"
+      - "*_line_ending"
     description_keywords:
       - "line ending"
       - "newline"
