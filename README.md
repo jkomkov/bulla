@@ -37,9 +37,9 @@ Tested across 10 real MCP servers (filesystem, github, notion, playwright, tavil
 
 | Zone | Fee | P(mismatch) | Compositions |
 |------|-----|-------------|--------------|
-| **Safe** | 0 | 0% | 15/15 clean |
+| **Safe** | 0 | 0% | 15 compositions, all clean |
 | **Uncertain** | 1–3 | 0–33% | 12 compositions |
-| **Unsafe** | 4+ | ~100% | 18/18 confirmed |
+| **Unsafe** | 4+ | ~100% | 18 compositions, all confirmed |
 
 fee=0 guarantees no convention mismatch. fee≥4 guarantees real mismatches exist. The fee is computed from schemas alone — no execution required.
 
@@ -141,7 +141,7 @@ bulla gauge tools.json --substitutes read_file path
 bulla gauge tools.json --costs costs.yaml
 ```
 
-JSON output adds a `witness_geometry` block only when the flag is set — default output remains byte-identical to 0.34.0. The mathematical backing is described in the [Witness Gram paper](../papers/hierarchical-fee/paper/witness-gram.pdf). The **research-program** Lean ledger documents **56** Aristotle-verified theorems across the witness-geometry chain (0 `sorry`); see [`papers/sheaf/lean/LEAN-CLAIM-LEDGER.md`](../papers/sheaf/lean/LEAN-CLAIM-LEDGER.md). The PyPI package does not vendor Lean — it implements the measurement and receipt layers in Python.
+JSON output adds a `witness_geometry` block only when the flag is set — default output remains byte-identical to 0.34.0. The mathematical backing is in the [Witness Gram paper](../papers/hierarchical-fee/paper/witness-gram.pdf), with the rank identity and Kron-reduction theorem machine-checked in Lean 4. The broader research-program ledger documents **56** Aristotle-verified theorems across the witness-geometry chain (0 `sorry`); see [`papers/sheaf/lean/LEAN-CLAIM-LEDGER.md`](../papers/sheaf/lean/LEAN-CLAIM-LEDGER.md). The PyPI package does not vendor Lean — it implements the measurement and receipt layers in Python.
 
 ## Quick start with `bulla gauge`
 
