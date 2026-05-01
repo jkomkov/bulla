@@ -1,0 +1,18 @@
+{
+  "name": "clean_memory_puppeteer",
+  "expectation": "clean",
+  "calls": [
+    {
+      "server": "memory",
+      "tool": "search_nodes",
+      "arguments": {},
+      "result": {}
+    },
+    {
+      "server": "puppeteer",
+      "tool": "puppeteer_navigate",
+      "arguments": {},
+      "result": {}
+    }
+  ]
+}

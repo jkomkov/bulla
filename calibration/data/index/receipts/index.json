@@ -1,0 +1,862 @@
+{
+  "generated_at": "2026-04-07T19:24:37.922665+00:00",
+  "scope": "curated",
+  "count": 45,
+  "receipts": [
+    {
+      "composition": "exa+mcp-server-fetch",
+      "servers": [
+        "exa",
+        "mcp-server-fetch"
+      ],
+      "composition_hash": "a9f442777c919ad32f4207b253693c66cb769ec45c9272a99d76dbcfd00bbad8",
+      "diagnostic_hash": "18a97467e59f3791468ee65eb1e7f56b2389310de3d8156fdea3b606da538aa7",
+      "receipt_hash": "0e3722c2315b251e41b54cd0574fd3a55cd7f9b22fadeefd23923a814c8be810",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "intra_category",
+      "categories": [
+        "community",
+        "community"
+      ]
+    },
+    {
+      "composition": "exa+memory",
+      "servers": [
+        "exa",
+        "memory"
+      ],
+      "composition_hash": "e3e31b65bd07aaef76748761188ee7fa92ed9d849c58e2986a49423604f6df15",
+      "diagnostic_hash": "c089d1d74fefd318597d4269744e911d6f6044d2b4cb2f79a4a07ac65f41371b",
+      "receipt_hash": "00047bd6dee2d415181dc166782858a08c7b073bac9539c388d657d94c589434",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "cross_category",
+      "categories": [
+        "community",
+        "official"
+      ]
+    },
+    {
+      "composition": "exa+playwright",
+      "servers": [
+        "exa",
+        "playwright"
+      ],
+      "composition_hash": "23d70b07975dd433c50b9d2bf687da755c6f72856b09fbaf045a031d29a70c8a",
+      "diagnostic_hash": "5fc41ce137dcd9b118ca8ce11e3becbea54a613c0accb2acba37f2b3c8ed0a02",
+      "receipt_hash": "723a6f3f4bd9ca9aae5ab0489493fad2b4ef0c26b1faf23dcc96feaca71ee97f",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "intra_category",
+      "categories": [
+        "community",
+        "community"
+      ]
+    },
+    {
+      "composition": "exa+puppeteer",
+      "servers": [
+        "exa",
+        "puppeteer"
+      ],
+      "composition_hash": "3f3bb14ed9466d916655b2c29a5f677f05d40853ed96d962bf5bb7d530427f97",
+      "diagnostic_hash": "dcd3466a8186ce72913ed28ac025fd3b8a039898ead796a4e1df76948a4b4c12",
+      "receipt_hash": "bc896d83d94bfb461b2b26bead51ca19e12e0a2a9db8c529345a93977ff7e2d9",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "cross_category",
+      "categories": [
+        "community",
+        "official"
+      ]
+    },
+    {
+      "composition": "exa+sequential-thinking",
+      "servers": [
+        "exa",
+        "sequential-thinking"
+      ],
+      "composition_hash": "95b74cbd3cc031fbcab18ea392aa19e7ec3f698e979a2e59c35850146e42ef0e",
+      "diagnostic_hash": "5aa04267b45c0da8f172f2e10722785b6cef7d9cc1c18bcab5137901eade2d7b",
+      "receipt_hash": "20646e1833c436d4da1d534ff0924442d661325145b13fbc2e105e0e5d50c483",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "cross_category",
+      "categories": [
+        "community",
+        "official"
+      ]
+    },
+    {
+      "composition": "exa+tavily",
+      "servers": [
+        "exa",
+        "tavily"
+      ],
+      "composition_hash": "7a7d65086a4ee8ad3e2c7460bdb65268eb4a054b6eb2ea5c21f87426134e0b92",
+      "diagnostic_hash": "81599f527495230cc8538ea79d90c9c27d44b65f54550fd3eae95f2e580203c7",
+      "receipt_hash": "2aacfc79d9bc03dba5f33cfc57239c8f72d17333e052c1d5974ae5868c7770af",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "intra_category",
+      "categories": [
+        "community",
+        "community"
+      ]
+    },
+    {
+      "composition": "mcp-server-fetch+memory",
+      "servers": [
+        "mcp-server-fetch",
+        "memory"
+      ],
+      "composition_hash": "52dbb58a890383c017cc417270e1aaedf321623fba40826795e8718cd6dfabf8",
+      "diagnostic_hash": "60447615d382d539960f0cec531e884d4874117fe25e47211ff074c0eb7322ac",
+      "receipt_hash": "596d39e9e3b9e75b8e6cc23ed79df05f583797cfb800c4cfeedd396a9e391400",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "cross_category",
+      "categories": [
+        "community",
+        "official"
+      ]
+    },
+    {
+      "composition": "mcp-server-fetch+playwright",
+      "servers": [
+        "mcp-server-fetch",
+        "playwright"
+      ],
+      "composition_hash": "886fdeeff619384a6f433e27453aa4319d1b24dad2920a4b50b8f4f12a90251f",
+      "diagnostic_hash": "c1bf780746307d3fd01c93bb4483f28bb2621019c5b610d5e936511346a2019a",
+      "receipt_hash": "0894e4a0d9287d0680418ea62db1ecfd1975319136500c66b093c73e9a4d5058",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "intra_category",
+      "categories": [
+        "community",
+        "community"
+      ]
+    },
+    {
+      "composition": "mcp-server-fetch+puppeteer",
+      "servers": [
+        "mcp-server-fetch",
+        "puppeteer"
+      ],
+      "composition_hash": "046cb440294a6a3ba264b317485e7bb5318806a33c88284d08782840fa334ebb",
+      "diagnostic_hash": "b18323a6cdae0165dab8298aa6b306bfc40cdf65af9a4c12f2e00a1400ef86c2",
+      "receipt_hash": "284426f76d53eb9b024fb43cd4129e4bddbd55e92bd7dce2fb4f16bddc1ffc81",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "cross_category",
+      "categories": [
+        "community",
+        "official"
+      ]
+    },
+    {
+      "composition": "mcp-server-fetch+sequential-thinking",
+      "servers": [
+        "mcp-server-fetch",
+        "sequential-thinking"
+      ],
+      "composition_hash": "9cb9e8de49dd8f983ebeac5bfa7abcc8f15c03a615df6c810ca48e7f2b118d28",
+      "diagnostic_hash": "67d883244ad93d162be8fcdf0c5cacf0510d843eefdb20fecb6e5adf874504e6",
+      "receipt_hash": "5c9517bcc119a7ac8f8ada329163a492ccc9696fe4059070bb1879c50e174e57",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "cross_category",
+      "categories": [
+        "community",
+        "official"
+      ]
+    },
+    {
+      "composition": "mcp-server-fetch+tavily",
+      "servers": [
+        "mcp-server-fetch",
+        "tavily"
+      ],
+      "composition_hash": "f8586d97a1fc62093c0b59497c463364ccfef67bf1efe5db4e902f70305d6487",
+      "diagnostic_hash": "d3b12c5d9954a3a99b16a6f86af965c22fb94be7e9bc1f0c20405cf241131e2c",
+      "receipt_hash": "ade7fd5b54ba2589929ec05f2be255bbf16363e0c9001fa0377a4afc81e1ebcd",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "intra_category",
+      "categories": [
+        "community",
+        "community"
+      ]
+    },
+    {
+      "composition": "memory+playwright",
+      "servers": [
+        "memory",
+        "playwright"
+      ],
+      "composition_hash": "9520c0d4833c645b40457513194643015bbb2ed6ec697d056b084231170f24b8",
+      "diagnostic_hash": "6d0ddb999c5fe8dbbe4d18ef194ba7de45383313cdc8b60d204d1293ddfafec8",
+      "receipt_hash": "77fd439bfdf2951771bf0a76232446c8692cacc0466748b8907abc4ba320cec2",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "cross_category",
+      "categories": [
+        "official",
+        "community"
+      ]
+    },
+    {
+      "composition": "memory+puppeteer",
+      "servers": [
+        "memory",
+        "puppeteer"
+      ],
+      "composition_hash": "3f27fc8d31731cb21a93ec1cde655532700d6f10efb5141f85c2ff646184c5bd",
+      "diagnostic_hash": "f6ef099f030a03bda83e2af2375bb96c4e7d0f9d55d05b616372bc1c69cb5aea",
+      "receipt_hash": "8fa04cc4a00288b6c1270a98a633117377efdc4127d179315551ec22b4a32c2d",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "intra_category",
+      "categories": [
+        "official",
+        "official"
+      ]
+    },
+    {
+      "composition": "memory+sequential-thinking",
+      "servers": [
+        "memory",
+        "sequential-thinking"
+      ],
+      "composition_hash": "6ecdcebf81f91a8f50dd290c77e199b71baa2ca045572f90426f118a2f8889dc",
+      "diagnostic_hash": "b2880c19917a35ff99e1724348ff2eafcb775c1ca9ed1df62712322ad5cd1560",
+      "receipt_hash": "5b4d53c39b21280364a1bc4f774f33cb427b8a7a1ba5d2cbfaf513e9eec933e6",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "intra_category",
+      "categories": [
+        "official",
+        "official"
+      ]
+    },
+    {
+      "composition": "memory+tavily",
+      "servers": [
+        "memory",
+        "tavily"
+      ],
+      "composition_hash": "e3198c89828f1edc2b6f08d0a8961b1377d8fa45d38c86bad4ec95bceb2d98b7",
+      "diagnostic_hash": "b16a2f8c5c6542becbea0bf8c20a2a322312db153528031db44d9fed976afbc7",
+      "receipt_hash": "8e1c4f9c6dd6fe4efa1357b34326455b7ca9989014a64ef4747c11e0491033d5",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "cross_category",
+      "categories": [
+        "official",
+        "community"
+      ]
+    },
+    {
+      "composition": "playwright+puppeteer",
+      "servers": [
+        "playwright",
+        "puppeteer"
+      ],
+      "composition_hash": "e9b00f838060d2a9da35054ff5125608eecda748eb5e3f922939dcedce29f672",
+      "diagnostic_hash": "a5cf1815bf9a8d3fe413cba9fba1398cc4c5a967bf2a31c0f0d295789316a0e9",
+      "receipt_hash": "d5314a60676a6f0a303c792b7beb792218a2fbb1506b7072d676c461f3c82237",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "cross_category",
+      "categories": [
+        "community",
+        "official"
+      ]
+    },
+    {
+      "composition": "playwright+sequential-thinking",
+      "servers": [
+        "playwright",
+        "sequential-thinking"
+      ],
+      "composition_hash": "116529f1b1f23cfaeaf29790dbbe313d645f54990065ce1d3a54faa7b32ac58a",
+      "diagnostic_hash": "c926e50290e03675a2ae371a37f22a94def5f144bd25cbade0f07b2f1150c032",
+      "receipt_hash": "d9d102884b8383ed2e1e2fc34ba5461216b7bc0b7a8e3490bfa49b53daf8edec",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "cross_category",
+      "categories": [
+        "community",
+        "official"
+      ]
+    },
+    {
+      "composition": "playwright+tavily",
+      "servers": [
+        "playwright",
+        "tavily"
+      ],
+      "composition_hash": "5b82fef0cf0b2a9ac41700e0deed490bbe9238e23063adbc281ed05a8a01059b",
+      "diagnostic_hash": "2a8930f7373c70f0733715cd9666eb3a0a3a332a10ef1b43cb47951f76116fe9",
+      "receipt_hash": "b7644dbbaea36cec03cb514f5981b24a569be13e858cc845d8c82c2f01375269",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "intra_category",
+      "categories": [
+        "community",
+        "community"
+      ]
+    },
+    {
+      "composition": "puppeteer+sequential-thinking",
+      "servers": [
+        "puppeteer",
+        "sequential-thinking"
+      ],
+      "composition_hash": "0d76e4a16bf097ec1c85ae1ab39bfde06cae4955370187cac883c6db639b1284",
+      "diagnostic_hash": "8cfd88be3819d7b4c49050dcedefa1729ee125b3e2b0edd7f612ccb4a37b945f",
+      "receipt_hash": "6997b4d4e490efeee8b97eae629e4b92378a1b3d331b8b42049906f30f23eeba",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "intra_category",
+      "categories": [
+        "official",
+        "official"
+      ]
+    },
+    {
+      "composition": "puppeteer+tavily",
+      "servers": [
+        "puppeteer",
+        "tavily"
+      ],
+      "composition_hash": "77fa3e95528e2aae6233e777085fe856f7cb177c01308c4d32de894d01203136",
+      "diagnostic_hash": "2bc55a4f4836e61da5791b9a88feacf4860c4c907d913cdc37990d5cc16a0fd4",
+      "receipt_hash": "82a7cbfb493fefd2f7c72fc2daa0f8702c302891e179e3a028a6446aab0df603",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "cross_category",
+      "categories": [
+        "official",
+        "community"
+      ]
+    },
+    {
+      "composition": "sequential-thinking+tavily",
+      "servers": [
+        "sequential-thinking",
+        "tavily"
+      ],
+      "composition_hash": "552f40f958e5acc079dbd3c2bf017d530708c44a0c473c3a1c9f3b1730c0bb23",
+      "diagnostic_hash": "847c398033101f022dfb7fcc64a2fd22402af2b6378dc95c3be5e59ae8228023",
+      "receipt_hash": "a43e8b17c7378e9663172c5eb35773962d1381e057557438a95a971522fcdfcd",
+      "fee": 0,
+      "boundary_fee": 0,
+      "blind_spots": 0,
+      "disposition": "proceed",
+      "pair_type": "cross_category",
+      "categories": [
+        "official",
+        "community"
+      ]
+    },
+    {
+      "composition": "exa+notion",
+      "servers": [
+        "exa",
+        "notion"
+      ],
+      "composition_hash": "327824eba269ba54c12942bdd6c9fc800cd022ab7e1d6e74ede5a85d4a36e9fb",
+      "diagnostic_hash": "71432b09641bd56c1bffc364d50a0f5d1b99091ec1a1e2ccf65340b5e432891b",
+      "receipt_hash": "3172fb835fbb34455f4e5e82c169ffe6c1c837fd4fafebf52e544025e0273a8a",
+      "fee": 1,
+      "boundary_fee": 0,
+      "blind_spots": 1,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "intra_category",
+      "categories": [
+        "community",
+        "community"
+      ]
+    },
+    {
+      "composition": "mcp-server-fetch+notion",
+      "servers": [
+        "mcp-server-fetch",
+        "notion"
+      ],
+      "composition_hash": "1a10cbbd39b40edfe65a09be76cf6bd935e6d7e350afdff294e14bc0e5751490",
+      "diagnostic_hash": "344c5b60f0671ce4e2c6e6ae2c7bb39d75c09171fa0382616004d0c2b8ecb2ba",
+      "receipt_hash": "d0d10f27d2b6f7e4c6cb38f1ae0c2df96366705a4de7f34f519fa4159a29dbbb",
+      "fee": 1,
+      "boundary_fee": 0,
+      "blind_spots": 1,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "intra_category",
+      "categories": [
+        "community",
+        "community"
+      ]
+    },
+    {
+      "composition": "memory+notion",
+      "servers": [
+        "memory",
+        "notion"
+      ],
+      "composition_hash": "bd21ae75717d77f2f529e5c9182de1a25e30c6c227fbd20f4edd2a468685c31a",
+      "diagnostic_hash": "e1790d355d5b249ebf8725722b93c936713341b6e8dd1dcab0ca3da4ff9e6527",
+      "receipt_hash": "95d9f15587ba33077a4dada31a89d5ef507caedffb1640c74ae4106c73ac470f",
+      "fee": 1,
+      "boundary_fee": 0,
+      "blind_spots": 1,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "cross_category",
+      "categories": [
+        "official",
+        "community"
+      ]
+    },
+    {
+      "composition": "notion+playwright",
+      "servers": [
+        "notion",
+        "playwright"
+      ],
+      "composition_hash": "f463d2cf84713dad97b2753f27d8b7933eecf798365057493a129f52fea09bf0",
+      "diagnostic_hash": "ed05b4f0330a69822a892d0dbf3319eaa6ffbb620f464d11a01298d58c8a22c5",
+      "receipt_hash": "ff5ab728d66c2a5b06bca9fb0d7622dc82e00e97a8a96f01bc5179ff7c6d0f78",
+      "fee": 1,
+      "boundary_fee": 0,
+      "blind_spots": 1,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "intra_category",
+      "categories": [
+        "community",
+        "community"
+      ]
+    },
+    {
+      "composition": "notion+puppeteer",
+      "servers": [
+        "notion",
+        "puppeteer"
+      ],
+      "composition_hash": "092403f0f3d050575cf96bb89f2121f52f55ac3b0b3ee6f382f92210cd56268c",
+      "diagnostic_hash": "ab953a8f7e6d40d431d0d59ceddadc223fa05219ea7d99773b4443ba7c6a35de",
+      "receipt_hash": "80c3884d395b23bf18609a7081da6fc3012e4e62821caa1100279a42b54ca5d4",
+      "fee": 1,
+      "boundary_fee": 0,
+      "blind_spots": 1,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "cross_category",
+      "categories": [
+        "community",
+        "official"
+      ]
+    },
+    {
+      "composition": "notion+sequential-thinking",
+      "servers": [
+        "notion",
+        "sequential-thinking"
+      ],
+      "composition_hash": "231ffbdf9134d7ed81b26dde558b68e5c092e3df3ed5e9336829e5c4fe6b6fcd",
+      "diagnostic_hash": "b23fad4ba618754860ff192bcac63786341fd33fd79859fc5b6ca2a5c6339d45",
+      "receipt_hash": "c44878e9c56c5d34cb92b9296fd0f86407665c1e069c343a0ec44f4c8b834a16",
+      "fee": 1,
+      "boundary_fee": 0,
+      "blind_spots": 1,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "cross_category",
+      "categories": [
+        "community",
+        "official"
+      ]
+    },
+    {
+      "composition": "notion+tavily",
+      "servers": [
+        "notion",
+        "tavily"
+      ],
+      "composition_hash": "3391149a7c6b501c061f8888582fc26c699b7e80b890ef2e7519766814c49fdb",
+      "diagnostic_hash": "91d70659ae6b22a1fb9610d2ad1bfdd995973801c69612dc842da41ab48e7448",
+      "receipt_hash": "900240e4eeb31a8d229f65a8154eb98b258bf6c8b46d79240ee34c271862224f",
+      "fee": 2,
+      "boundary_fee": 1,
+      "blind_spots": 3,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "intra_category",
+      "categories": [
+        "community",
+        "community"
+      ]
+    },
+    {
+      "composition": "exa+github",
+      "servers": [
+        "exa",
+        "github"
+      ],
+      "composition_hash": "d514b3c7b40efd33d027cc3edc16000a18faf42e798da7ba8d328436cb21ad18",
+      "diagnostic_hash": "91218f43763f0d1239eab11d6383c05d1df28050e3636d3b0db275d055776479",
+      "receipt_hash": "a3e6c015be36407a5c1208bed0202a06ba16b22794c31a9fdacefa0e94e99e5b",
+      "fee": 10,
+      "boundary_fee": 0,
+      "blind_spots": 26,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "cross_category",
+      "categories": [
+        "community",
+        "official"
+      ]
+    },
+    {
+      "composition": "github+mcp-server-fetch",
+      "servers": [
+        "github",
+        "mcp-server-fetch"
+      ],
+      "composition_hash": "dcdd56a9039c6de6c67b66f6eacb886a5d096ec8079e03f956996279e9b47233",
+      "diagnostic_hash": "4e9a80320347f3b7af7517d828958bde54d38b19c671589f248dfe2c06b7c47e",
+      "receipt_hash": "91f4327d0d8cba3826dd6d400ba6ed69655fd0d7f552f0c569e2185c4a57cf24",
+      "fee": 10,
+      "boundary_fee": 0,
+      "blind_spots": 26,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "cross_category",
+      "categories": [
+        "official",
+        "community"
+      ]
+    },
+    {
+      "composition": "github+memory",
+      "servers": [
+        "github",
+        "memory"
+      ],
+      "composition_hash": "ce1d9630b6cfc479152c38e66080d8f52ad26725e8bd871d847708014b8c81aa",
+      "diagnostic_hash": "38c6dd6db50dfd167ed8e3bd2bb138fcafb577ec53dc76e30bd10a8cb15aa593",
+      "receipt_hash": "6c8b7edeaed888e0e4256eb509b479071a5eba446479790eb98412f145afdb8b",
+      "fee": 10,
+      "boundary_fee": 0,
+      "blind_spots": 26,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "intra_category",
+      "categories": [
+        "official",
+        "official"
+      ]
+    },
+    {
+      "composition": "github+puppeteer",
+      "servers": [
+        "github",
+        "puppeteer"
+      ],
+      "composition_hash": "93ee24a9c105118c832dc2f221a951a0a80d0b0520e464f09e1422411bb3a421",
+      "diagnostic_hash": "d07dc3c4906b3ac16ad53fe99c0751ae855588a2d2e1714e14f037fdf7f0f74c",
+      "receipt_hash": "1b63395a7845b8c21815d0aeab4a75e0734f911ddd12e1d6cf18c3940619b17b",
+      "fee": 10,
+      "boundary_fee": 0,
+      "blind_spots": 26,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "intra_category",
+      "categories": [
+        "official",
+        "official"
+      ]
+    },
+    {
+      "composition": "github+sequential-thinking",
+      "servers": [
+        "github",
+        "sequential-thinking"
+      ],
+      "composition_hash": "bd68001f0c0a6daee392f7926c24b3a2dbf3366c5e13812a85c1528c9a917764",
+      "diagnostic_hash": "1aadcd879f26354bf0fac6eae9038f8d26c14d91b988181247fac7cb7cfcff6d",
+      "receipt_hash": "91774fdb6ddef3de88647eb748abf3158fde33847b8cf95cd02c6cdaab33ae4d",
+      "fee": 10,
+      "boundary_fee": 0,
+      "blind_spots": 26,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "intra_category",
+      "categories": [
+        "official",
+        "official"
+      ]
+    },
+    {
+      "composition": "exa+filesystem",
+      "servers": [
+        "exa",
+        "filesystem"
+      ],
+      "composition_hash": "18a8eda64b8fad53e130a0827655ca32a4a678364fea2098ff7cc0c95ea2a4c3",
+      "diagnostic_hash": "3bbcc96111e9546807f6f15bd339268beff53fecf339dfd2f2e57f9829afa8a5",
+      "receipt_hash": "1e0586e036828a886d70444c6da1c6f4f4d55a04c2ee60bd13d63bb807f59362",
+      "fee": 11,
+      "boundary_fee": 0,
+      "blind_spots": 66,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "cross_category",
+      "categories": [
+        "community",
+        "official"
+      ]
+    },
+    {
+      "composition": "filesystem+mcp-server-fetch",
+      "servers": [
+        "filesystem",
+        "mcp-server-fetch"
+      ],
+      "composition_hash": "b727f66e7951f970e7e440dc2986153c99a01cbb4ceff32f8479bbd1b7766dbc",
+      "diagnostic_hash": "11902b718d465164467200b3f45fab18cdd6c257400c70c8b852a430d58115de",
+      "receipt_hash": "5ad23d1ef61752083aa6e4ca7735e0c0f4ad940bc183a7db12f494e07f8d04a6",
+      "fee": 11,
+      "boundary_fee": 0,
+      "blind_spots": 66,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "cross_category",
+      "categories": [
+        "official",
+        "community"
+      ]
+    },
+    {
+      "composition": "filesystem+memory",
+      "servers": [
+        "filesystem",
+        "memory"
+      ],
+      "composition_hash": "21b55169eccdfdeb63009c5b3b91bb80dfcf6e5e0a15c10dbecdeceaacf07646",
+      "diagnostic_hash": "8d02d9334507aa525ec23054a07e22779e5f13b6094fd2327156b0c4de6a7249",
+      "receipt_hash": "e1bfcb982ac8c8b89d2ac8607fb568bfdcaff2242e531eb56e5167f2d7e8f310",
+      "fee": 11,
+      "boundary_fee": 0,
+      "blind_spots": 66,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "intra_category",
+      "categories": [
+        "official",
+        "official"
+      ]
+    },
+    {
+      "composition": "filesystem+puppeteer",
+      "servers": [
+        "filesystem",
+        "puppeteer"
+      ],
+      "composition_hash": "4664a5eac8e3d0b39787e007d85b9eb9fddc96a7d661831f0e7dcac4fadc3e31",
+      "diagnostic_hash": "0f201d62b7fe5bdeb3084de61b806bcf6296e1b22a16002798df0a1ffeea3525",
+      "receipt_hash": "efd8f79ccf35c704c2ccd314317fd8271aef92c618ea91837fbe5d132b247f8a",
+      "fee": 11,
+      "boundary_fee": 0,
+      "blind_spots": 66,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "intra_category",
+      "categories": [
+        "official",
+        "official"
+      ]
+    },
+    {
+      "composition": "filesystem+sequential-thinking",
+      "servers": [
+        "filesystem",
+        "sequential-thinking"
+      ],
+      "composition_hash": "aac00888f0be3e37afb147874bf1818bdc1b68766cdf7453335ea3b42905766c",
+      "diagnostic_hash": "6dacdd6fcae0c16193b3942b0919448f25eddfdf0971c5734c7302f71da97b03",
+      "receipt_hash": "29d5e5815ad7d3f2fc441a980055c984debf3b85c8b03b3c04e3e2da91ec46d4",
+      "fee": 11,
+      "boundary_fee": 0,
+      "blind_spots": 66,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "intra_category",
+      "categories": [
+        "official",
+        "official"
+      ]
+    },
+    {
+      "composition": "filesystem+tavily",
+      "servers": [
+        "filesystem",
+        "tavily"
+      ],
+      "composition_hash": "c38e6fa4f6d3de86ff18eaad2a00416fd316e79c9b1f098807eb746381d84720",
+      "diagnostic_hash": "8ac457d02702a7787484cd828b0759e2acab0da232b97dc8bb6286f7667deb4c",
+      "receipt_hash": "2b0b933a63b3f2b04bdd55ba7ce02f9bc578793054ab5ac25a1b18e52ca9cfb6",
+      "fee": 11,
+      "boundary_fee": 0,
+      "blind_spots": 66,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "cross_category",
+      "categories": [
+        "official",
+        "community"
+      ]
+    },
+    {
+      "composition": "github+playwright",
+      "servers": [
+        "github",
+        "playwright"
+      ],
+      "composition_hash": "92178d4d5a08cbb26ce16978b9b2893f9ba4201c38fd7cb073a468e0508247ee",
+      "diagnostic_hash": "77a9b750eac925ca88a568fdd2367bb33055dac715bbfc97030edda795556e02",
+      "receipt_hash": "8edd4403e07a1c21a835619c8570de6c0a4c0e347e2001c36f50fab9dfde6772",
+      "fee": 11,
+      "boundary_fee": 1,
+      "blind_spots": 28,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "cross_category",
+      "categories": [
+        "official",
+        "community"
+      ]
+    },
+    {
+      "composition": "github+tavily",
+      "servers": [
+        "github",
+        "tavily"
+      ],
+      "composition_hash": "2f657cf5a6cbc5ec13e321c1ce394244a14b1ec212e5324d0d0ad49b821196cb",
+      "diagnostic_hash": "a55633f4141a7d59f5089ff4776aa78fbae94a143318e89c286c023712e04d2e",
+      "receipt_hash": "4aca237b01e4503e74dba1d6fac8d4b34a834a65236c2d276c16a391ebfd641d",
+      "fee": 11,
+      "boundary_fee": 1,
+      "blind_spots": 27,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "cross_category",
+      "categories": [
+        "official",
+        "community"
+      ]
+    },
+    {
+      "composition": "filesystem+notion",
+      "servers": [
+        "filesystem",
+        "notion"
+      ],
+      "composition_hash": "26bd2c377b6f40544c255985b5e79315c493cbaf508e3a40a568de53feacf4a9",
+      "diagnostic_hash": "f4623132a7e44e123c1f8a0d696ae6534c6a60346cd29911c1a6612ed5632f66",
+      "receipt_hash": "a86ffebadcbaa177ca76c97d481d7dc2ad52029bd3c61820eb5ec55591967b8d",
+      "fee": 12,
+      "boundary_fee": 0,
+      "blind_spots": 67,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "cross_category",
+      "categories": [
+        "official",
+        "community"
+      ]
+    },
+    {
+      "composition": "filesystem+playwright",
+      "servers": [
+        "filesystem",
+        "playwright"
+      ],
+      "composition_hash": "72f52fb7f392e757048effc8c492203cf1174981d464f35ee035ee3609a71958",
+      "diagnostic_hash": "6f4e3bce10388ff153cc3dfc07a1ce3f95b55e150ce2645181247c528829a015",
+      "receipt_hash": "2676984d5192c442e4b15acacdea60cd8a16f016d305043a5d4f1f216abcbf9f",
+      "fee": 12,
+      "boundary_fee": 1,
+      "blind_spots": 78,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "cross_category",
+      "categories": [
+        "official",
+        "community"
+      ]
+    },
+    {
+      "composition": "github+notion",
+      "servers": [
+        "github",
+        "notion"
+      ],
+      "composition_hash": "ee8e0da7ebb3d63282d957d469d1ed21bdaf636c3197ca5e1b91c390b9d19ef2",
+      "diagnostic_hash": "e1790f7a5371b608f1ddef6426ef16c4083adcab2f423f33c1e4ae1385a741ec",
+      "receipt_hash": "4792c054034b36aac2f47e4adeafe7ae4815a25c4c6adc460986fd06435a7736",
+      "fee": 13,
+      "boundary_fee": 2,
+      "blind_spots": 31,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "cross_category",
+      "categories": [
+        "official",
+        "community"
+      ]
+    },
+    {
+      "composition": "filesystem+github",
+      "servers": [
+        "filesystem",
+        "github"
+      ],
+      "composition_hash": "754f99f32d05b14473e7d5c047b51d62c66026b28e9d4aeb45854fde353585dc",
+      "diagnostic_hash": "cbe6a3cd340e3498f374a9d9e5854ec1450271af0a93c1b1db33d65b381aa3dd",
+      "receipt_hash": "8744803d0e8da231de7591212bbd162843b3cabe99fefadbc2871405ec5eaeef",
+      "fee": 22,
+      "boundary_fee": 1,
+      "blind_spots": 116,
+      "disposition": "refuse_pending_disclosure",
+      "pair_type": "intra_category",
+      "categories": [
+        "official",
+        "official"
+      ]
+    }
+  ]
+}

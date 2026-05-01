@@ -69,11 +69,12 @@ def _cmd_diagnose(args: argparse.Namespace) -> None:
         print("No composition files found.", file=sys.stderr)
         sys.exit(1)
 
+    witness = getattr(args, "witness", False)
     diagnostics: list[tuple] = []
     for path in paths:
         try:
             comp = load_composition(path)
-            diag = diagnose(comp)
+            diag = diagnose(comp, include_witness_geometry=witness)
             diagnostics.append((diag, path))
         except CompositionError as e:
             print(f"Error: {e}", file=sys.stderr)
@@ -144,11 +145,12 @@ def _cmd_check(args: argparse.Namespace) -> None:
         print("No composition files found.", file=sys.stderr)
         sys.exit(1)
 
+    witness = getattr(args, "witness", False)
     diagnostics: list[tuple] = []
     for path in paths:
         try:
             comp = load_composition(path)
-            diag = diagnose(comp)
+            diag = diagnose(comp, include_witness_geometry=witness)
             diagnostics.append((diag, path))
         except CompositionError as e:
             print(f"Error: {e}", file=sys.stderr)
@@ -184,17 +186,53 @@ def _cmd_check(args: argparse.Namespace) -> None:
                 file=sys.stderr,
             )
 
+    # ── Baseline staleness + regression check ───────────────────────
+    baseline_path = getattr(args, "baseline", None)
+    baseline_diff = None
+    if baseline_path is not None:
+        from bulla.lifecycle import diff_receipts, receipt_from_dict
+        from bulla.witness import witness as _witness
+
+        if not baseline_path.exists():
+            print(f"Error: baseline receipt not found: {baseline_path}",
+                  file=sys.stderr)
+            sys.exit(1)
+
+        # Baseline mode requires exactly one composition
+        if len(diagnostics) != 1:
+            print(
+                f"Error: --baseline requires exactly one composition file, "
+                f"got {len(diagnostics)}",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+
+        with open(baseline_path) as f:
+            baseline_data = json.load(f)
+
+        diag_current, path_current = diagnostics[0]
+        comp_current = load_composition(path_current)
+        current_receipt = _witness(diag_current, comp_current)
+        baseline_receipt = receipt_from_dict(baseline_data)
+
+        baseline_diff = diff_receipts(baseline_receipt, current_receipt)
+        if baseline_diff.should_fail_gate:
+            failed = True
+
+    # ── Output (after all checks, including baseline) ─────────────
     fmt = getattr(args, "format", "text")
     if fmt == "sarif":
         print(format_sarif(diagnostics))
     elif fmt == "json":
         combined = [json.loads(format_json(d, p)) for d, p in diagnostics]
-        result = {
+        result: dict = {
             "passed": not failed,
             "max_blind_spots": args.max_blind_spots,
             "max_unbridged": args.max_unbridged,
             "compositions": combined,
         }
+        if baseline_diff is not None:
+            result["baseline"] = baseline_diff.to_dict()
         print(json.dumps(result, indent=2))
     else:
         for diag, path in diagnostics:
@@ -208,6 +246,16 @@ def _cmd_check(args: argparse.Namespace) -> None:
                 f"blind_spots={bs}  unbridged={ub}  "
                 f"fee={diag.coherence_fee}"
             )
+
+        if baseline_diff is not None:
+            print()
+            if baseline_diff.is_stale:
+                print(f"  STALE vs baseline: {baseline_diff.summary()}",
+                      file=sys.stderr)
+            if baseline_diff.is_regression:
+                print(f"  REGRESSION vs baseline: {baseline_diff.summary()}",
+                      file=sys.stderr)
+
         print()
         if failed:
             print("  Result: FAIL")
@@ -218,6 +266,58 @@ def _cmd_check(args: argparse.Namespace) -> None:
         print()
 
     sys.exit(1 if failed else 0)
+
+
+def _cmd_diff(args: argparse.Namespace) -> None:
+    """Compare two receipt JSON files and show what changed."""
+    from bulla.lifecycle import diff_receipts, receipt_from_dict
+
+    for label, path in [("baseline", args.baseline), ("current", args.current)]:
+        if not path.exists():
+            print(f"Error: {label} receipt not found: {path}", file=sys.stderr)
+            sys.exit(1)
+
+    with open(args.baseline) as f:
+        baseline_data = json.load(f)
+    with open(args.current) as f:
+        current_data = json.load(f)
+
+    baseline = receipt_from_dict(baseline_data)
+    current = receipt_from_dict(current_data)
+    diff = diff_receipts(baseline, current)
+
+    fmt = getattr(args, "format", "text")
+    if fmt == "json":
+        print(json.dumps(diff.to_dict(), indent=2))
+    else:
+        print(f"  Comparison: {args.baseline.name} → {args.current.name}")
+        print(f"  Summary:    {diff.summary()}")
+        print()
+        if diff.composition_changed:
+            print(f"  Composition: CHANGED (baseline stale)")
+        else:
+            print(f"  Composition: unchanged")
+        print(f"  Fee:         {baseline.fee} → {current.fee} (Δ{diff.fee_delta:+d})")
+        print(f"  Disposition: {baseline.disposition.value} → {current.disposition.value}")
+        print(f"  Blind spots: {baseline.blind_spots_count} → {current.blind_spots_count} (Δ{diff.blind_spots_delta:+d})")
+        if diff.contradiction_delta != 0:
+            print(f"  Contradictions: Δ{diff.contradiction_delta:+d}")
+        if diff.new_blind_spot_dimensions:
+            print(f"  New dimensions: {', '.join(diff.new_blind_spot_dimensions)}")
+        if diff.resolved_blind_spot_dimensions:
+            print(f"  Resolved:       {', '.join(diff.resolved_blind_spot_dimensions)}")
+        print()
+        if diff.is_stale and diff.is_regression:
+            print(f"  Verdict: STALE + REGRESSION")
+        elif diff.is_stale:
+            print(f"  Verdict: STALE (composition changed, metrics not worse)")
+        elif diff.is_regression:
+            print(f"  Verdict: REGRESSION")
+        else:
+            print(f"  Verdict: OK")
+        print()
+
+    sys.exit(1 if diff.should_fail_gate else 0)
 
 
 def _cmd_infer(args: argparse.Namespace) -> None:
@@ -504,6 +604,155 @@ def _cmd_witness(args: argparse.Namespace) -> None:
         print(json.dumps(receipts, indent=2))
 
 
+def _load_manifest_dir(manifests_dir: Path) -> dict[str, list[dict]]:
+    """Load {server_name: tools_list} from a manifest directory."""
+    if not manifests_dir.exists():
+        raise FileNotFoundError(f"manifest directory not found: {manifests_dir}")
+    if not manifests_dir.is_dir():
+        raise ValueError(f"manifest path is not a directory: {manifests_dir}")
+
+    server_tools: dict[str, list[dict]] = {}
+    for path in sorted(manifests_dir.glob("*.json")):
+        data = json.loads(path.read_text())
+        tools = data.get("tools", []) if isinstance(data, dict) else data
+        if not isinstance(tools, list):
+            raise ValueError(f"manifest {path} does not contain a tools list")
+        server_tools[path.stem] = tools
+    if not server_tools:
+        raise ValueError(f"no manifest JSON files found in {manifests_dir}")
+    return server_tools
+
+
+def _proxy_record_to_dict(record: "ProxyCallRecord") -> dict[str, object]:
+    d: dict[str, object] = {
+        "call_id": record.call_id,
+        "server": record.server,
+        "tool": record.tool,
+        "arguments": record.arguments,
+        "result": record.result,
+        "flows": [
+            {
+                "source_call_id": flow.source_call_id,
+                "source_server": flow.source_server,
+                "source_tool": flow.source_tool,
+                "source_field": flow.source_field,
+                "target_server": flow.target_server,
+                "target_tool": flow.target_tool,
+                "target_field": flow.target_field,
+                "category": flow.category,
+                "details": flow.details,
+                "mismatch_type": flow.mismatch_type,
+                "severity": flow.severity,
+            }
+            for flow in record.flows
+        ],
+        "local_diagnostic": record.local_diagnostic.to_dict(),
+        "receipt": record.receipt.to_dict(),
+    }
+    # Epistemic receipt: narrow product-facing view (local, not session-wide)
+    rg = record.local_diagnostic.repair_geometry
+    if rg is not None:
+        d["epistemic_receipt"] = rg.epistemic_view().to_dict()
+    return d
+
+
+def _cmd_proxy(args: argparse.Namespace) -> None:
+    """Replay a composition-aware proxy trace against captured manifests."""
+    from bulla.proxy import BullaProxySession
+
+    server_tools = _load_manifest_dir(args.manifests)
+    trace_data = json.loads(args.trace.read_text())
+    calls = trace_data["calls"] if isinstance(trace_data, dict) else trace_data
+    if not isinstance(calls, list):
+        print("Error: trace must be a JSON array or an object with a 'calls' array.", file=sys.stderr)
+        sys.exit(1)
+
+    trace_servers = {
+        item["server"]
+        for item in calls
+        if isinstance(item, dict) and "server" in item
+    }
+    server_tools = {
+        name: tools
+        for name, tools in server_tools.items()
+        if name in trace_servers
+    }
+
+    try:
+        session = BullaProxySession(server_tools)
+        records = session.replay_trace(calls)
+    except (KeyError, TypeError, ValueError) as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        sys.exit(1)
+
+    baseline = session.baseline
+    output = {
+        "trace_name": (
+            trace_data.get("name", args.trace.stem)
+            if isinstance(trace_data, dict)
+            else args.trace.stem
+        ),
+        "baseline": {
+            "coherence_fee": baseline.diagnostic.coherence_fee,
+            "blind_spots": len(baseline.diagnostic.blind_spots),
+            "boundary_fee": (
+                None
+                if baseline.decomposition is None
+                else baseline.decomposition.boundary_fee
+            ),
+            "disposition": baseline.receipt.disposition.value,
+        },
+        "calls": [_proxy_record_to_dict(record) for record in records],
+        "final_receipt": session.current_receipt.to_dict(),
+        "flow_conflicts": [conflict.to_dict() for conflict in session.flow_conflicts],
+    }
+
+    if args.format == "json":
+        text = json.dumps(output, indent=2)
+    else:
+        lines = [
+            f"Trace: {output['trace_name']}",
+            (
+                "Baseline: "
+                f"fee={output['baseline']['coherence_fee']} "
+                f"blind_spots={output['baseline']['blind_spots']} "
+                f"boundary_fee={output['baseline']['boundary_fee']} "
+                f"disposition={output['baseline']['disposition']}"
+            ),
+            "",
+        ]
+        for record in records:
+            local = record.local_diagnostic
+            lines.append(
+                f"[{record.call_id}] {record.server}.{record.tool} "
+                f"local_fee={local.coherence_fee} "
+                f"betti_1={local.betti_1} "
+                f"cluster_calls={list(local.cluster_call_ids)}"
+            )
+            if record.flows:
+                for flow in record.flows:
+                    lines.append(
+                        "  "
+                        f"{flow.source_server}.{flow.source_tool}.{flow.source_field} -> "
+                        f"{flow.target_server}.{flow.target_tool}.{flow.target_field} "
+                        f"[{flow.category}]"
+                    )
+            else:
+                lines.append("  (no traced flows)")
+            lines.append(
+                "  "
+                f"receipt={record.receipt.receipt_hash[:12]} "
+                f"disposition={record.receipt.disposition.value}"
+            )
+            lines.append("")
+        text = "\n".join(lines).rstrip() + "\n"
+
+    if args.output is not None:
+        args.output.write_text(text)
+    else:
+        print(text, end="" if text.endswith("\n") else "\n")
+
+
 def _cmd_serve() -> None:
     from bulla.serve import run_server
     run_server()
@@ -628,12 +877,14 @@ def _gauge_threshold_check(
     *,
     unmet_count: int = 0,
     contradiction_count: int = 0,
+    structural_contradiction_score: int = 0,
 ) -> None:
     violations: list[str] = []
     max_fee = getattr(args, "max_fee", None)
     max_bs = getattr(args, "max_blind_spots", None)
     max_unmet = getattr(args, "max_unmet", None)
     max_contradictions = getattr(args, "max_contradictions", None)
+    max_structural = getattr(args, "max_structural", None)
     if max_fee is not None and diag.coherence_fee > max_fee:
         violations.append(
             f"fee {diag.coherence_fee} exceeds --max-fee {max_fee}"
@@ -652,6 +903,11 @@ def _gauge_threshold_check(
         violations.append(
             f"{contradiction_count} contradiction(s) exceeds "
             f"--max-contradictions {max_contradictions}"
+        )
+    if max_structural is not None and structural_contradiction_score > max_structural:
+        violations.append(
+            f"structural contradiction score {structural_contradiction_score} exceeds "
+            f"--max-structural {max_structural}"
         )
     if violations:
         for v in violations:
@@ -673,19 +929,120 @@ def _cmd_gauge(args: argparse.Namespace) -> None:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
 
-    diag = guard.diagnose()
+    leverage_flag = getattr(args, "leverage", False)
+    substitutes_arg = getattr(args, "substitutes", None)
+    costs_path = getattr(args, "costs", None)
+    include_witness = bool(
+        leverage_flag or substitutes_arg or costs_path
+    )
+
+    from bulla.diagnostic import diagnose as _diagnose_fn
+    diag = _diagnose_fn(
+        guard.composition,
+        include_witness_geometry=include_witness,
+    )
 
     from bulla.diagnostic import prescriptive_disclosure
     disclosure = prescriptive_disclosure(guard.composition, diag.coherence_fee)
+
+    # ── --substitutes TOOL FIELD ──────────────────────────────────────
+    substitutes_output: str | None = None
+    if substitutes_arg is not None:
+        sub_tool, sub_field = substitutes_arg
+        target = (sub_tool, sub_field)
+        if target not in diag.hidden_basis:
+            print(
+                f"Error: field ({sub_tool!r}, {sub_field!r}) is not a "
+                f"hidden field in this composition. Hidden fields: "
+                f"{sorted(diag.hidden_basis)}",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        from bulla.witness_geometry import (
+            compute_all as _wg_compute_all,
+            disclosure_substitutes as _wg_substitutes,
+        )
+        wg = _wg_compute_all(
+            list(guard.composition.tools),
+            list(guard.composition.edges),
+        )
+        subs = _wg_substitutes(
+            wg["K"], wg["hidden_basis"], target, k=3
+        )
+        substitutes_output = _format_substitutes(target, subs)
+
+    # ── --costs costs.yaml ────────────────────────────────────────────
+    weighted_basis: list[tuple[str, str]] | None = None
+    weighted_total: "Fraction | None" = None
+    if costs_path is not None:
+        import yaml as _yaml
+        from fractions import Fraction as _Fraction
+        try:
+            raw = _yaml.safe_load(costs_path.read_text())
+        except FileNotFoundError:
+            print(f"Error: costs file not found: {costs_path}", file=sys.stderr)
+            sys.exit(1)
+        if not isinstance(raw, dict):
+            print(
+                f"Error: costs file must be a YAML mapping of "
+                f"'<tool>:<field>' -> cost. Got {type(raw).__name__}.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        costs: dict[tuple[str, str], _Fraction] = {}
+        for key, val in raw.items():
+            if not isinstance(key, str) or ":" not in key:
+                print(
+                    f"Error: cost key {key!r} must be of the form "
+                    f"'<tool>:<field>'.",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+            tool, _, field = key.partition(":")
+            try:
+                costs[(tool, field)] = _Fraction(str(val))
+            except (ValueError, TypeError) as exc:
+                print(
+                    f"Error: cost for {key!r} is not a rational: {val!r} "
+                    f"({exc}).",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+        from bulla.witness_geometry import (
+            compute_all as _wg_compute_all,
+            weighted_greedy_repair as _wg_greedy,
+        )
+        wg = _wg_compute_all(
+            list(guard.composition.tools),
+            list(guard.composition.edges),
+        )
+        weighted_basis = _wg_greedy(wg["K"], wg["hidden_basis"], costs)
+        weighted_total = sum(
+            (costs.get(p, _Fraction(1)) for p in weighted_basis),
+            start=_Fraction(0),
+        )
 
     fmt = getattr(args, "format", "text")
     verbose = getattr(args, "verbose", False)
     if fmt == "json":
         print(_gauge_json(diag, disclosure, guard.witness_basis))
+        if substitutes_output is not None:
+            print(substitutes_output)
+        if weighted_basis is not None:
+            print(_format_weighted_basis_json(weighted_basis, weighted_total))
     elif fmt == "sarif":
         print(guard.to_sarif())
     else:
         print(_gauge_text(diag, disclosure, guard.witness_basis, verbose=verbose))
+        if leverage_flag and diag.leverage_scores:
+            from bulla.formatters import _format_witness_section
+            witness_section = _format_witness_section(diag)
+            if witness_section:
+                print(witness_section)
+        if substitutes_output is not None:
+            print(substitutes_output)
+        if weighted_basis is not None:
+            print(_format_weighted_basis_text(weighted_basis, weighted_total))
 
     output_comp = getattr(args, "output_composition", None)
     if output_comp:
@@ -693,6 +1050,70 @@ def _cmd_gauge(args: argparse.Namespace) -> None:
         print(f"Wrote composition to {output_comp}", file=sys.stderr)
 
     _gauge_threshold_check(diag, args)
+
+
+def _format_substitutes(
+    target: tuple[str, str],
+    subs: list[tuple[tuple[str, str], "Fraction"]],
+) -> str:
+    """Render `--substitutes` output as a text block."""
+    tool, field = target
+    lines: list[str] = []
+    lines.append("")
+    lines.append(f"  Disclosure substitutes for {tool}.{field}:")
+    if not subs:
+        lines.append("    (no substitutes in the same hidden component)")
+    else:
+        for i, (field_pair, r_eff) in enumerate(subs, 1):
+            sub_tool, sub_field = field_pair
+            if hasattr(r_eff, "numerator") and r_eff.denominator == 1:
+                r_str = f"{r_eff.numerator}"
+            elif hasattr(r_eff, "numerator"):
+                r_str = f"{r_eff.numerator}/{r_eff.denominator}"
+            else:
+                r_str = str(r_eff)
+            lines.append(
+                f"    [{i}] {sub_tool}.{sub_field}    R_eff = {r_str}"
+            )
+    return "\n".join(lines)
+
+
+def _format_weighted_basis_text(
+    basis: list[tuple[str, str]],
+    total_cost: "Fraction | None",
+) -> str:
+    lines: list[str] = []
+    lines.append("")
+    lines.append(
+        f"  Minimum-cost disclosure basis ({len(basis)} field"
+        f"{'s' if len(basis) != 1 else ''}):"
+    )
+    for i, (tool, field) in enumerate(basis, 1):
+        lines.append(f"    [{i}] {tool}.{field}")
+    if total_cost is not None:
+        if hasattr(total_cost, "denominator") and total_cost.denominator == 1:
+            cost_str = f"{total_cost.numerator}"
+        elif hasattr(total_cost, "denominator"):
+            cost_str = (
+                f"{total_cost.numerator}/{total_cost.denominator}"
+            )
+        else:
+            cost_str = str(total_cost)
+        lines.append(f"  Total cost: {cost_str}")
+    return "\n".join(lines)
+
+
+def _format_weighted_basis_json(
+    basis: list[tuple[str, str]],
+    total_cost: "Fraction | None",
+) -> str:
+    payload = {
+        "weighted_greedy_basis": [list(pair) for pair in basis],
+        "total_cost": (
+            None if total_cost is None else str(total_cost)
+        ),
+    }
+    return json.dumps(payload, indent=2)
 
 
 # ── audit ─────────────────────────────────────────────────────────────
@@ -708,6 +1129,7 @@ def _audit_text(
     own_obligations: tuple | None = None,
     obligation_check: dict | None = None,
     guided_repair: dict | None = None,
+    repair_geometry: "RepairGeometry | None" = None,
 ) -> str:
     ok_count = sum(1 for r in server_results if r.ok)
     fail_count = sum(1 for r in server_results if not r.ok)
@@ -764,6 +1186,19 @@ def _audit_text(
     elif diag.coherence_fee == 0:
         lines.append("")
         lines.append("  No disclosures needed.")
+
+    if repair_geometry is not None:
+        er = repair_geometry.epistemic_view()
+        lines.append("")
+        lines.append(f"  Repair regime:  {er.regime}")
+        if er.regime == "exact":
+            lines.append(f"    Geometry dividend: {er.geometry_dividend}  (provably optimal)")
+        else:
+            lines.append(f"    Geometry dividend: {er.geometry_dividend}  (approximation)")
+            if er.downgrade:
+                lines.append(f"    Downgrade reason:  {er.downgrade}")
+            if er.forced_cost is not None:
+                lines.append(f"    Forced cost:       {er.forced_cost}")
 
     if basis is not None:
         lines.append("")
@@ -877,6 +1312,7 @@ def _audit_json(
     own_obligations: tuple | None = None,
     obligation_check: dict | None = None,
     guided_repair: dict | None = None,
+    repair_geometry: "RepairGeometry | None" = None,
 ) -> str:
     from datetime import datetime, timezone as tz
 
@@ -906,6 +1342,8 @@ def _audit_json(
         "disclosure_set": [[t, f] for t, f in disclosure],
         "witness_basis": basis.to_dict() if basis is not None else None,
     }
+    if repair_geometry is not None:
+        obj["epistemic_receipt"] = repair_geometry.epistemic_view().to_dict()
     if decomposition:
         obj["cross_server_decomposition"] = {
             "intra_server_fee": sum(decomposition.local_fees),
@@ -952,6 +1390,252 @@ def _load_manifests_dir(manifests_dir: Path) -> tuple[list[dict], list[str]]:
     return all_tools, server_names
 
 
+def _cmd_frameworks_list(args: argparse.Namespace) -> None:
+    """List all registered framework adapters and their parse-mode support."""
+    from bulla.frameworks import all_frameworks, ParseMode
+
+    print(f"{'FRAMEWORK':<22}  {'STATIC':<7}  {'RUNTIME':<8}  DISPLAY NAME")
+    print(f"{'-' * 22}  {'-' * 7}  {'-' * 8}  {'-' * 30}")
+    for fw in all_frameworks():
+        s = "yes" if fw.supports(ParseMode.STATIC) else "no"
+        r = "future" if not fw.supports(ParseMode.RUNTIME) else "yes"
+        print(f"{fw.name:<22}  {s:<7}  {r:<8}  {fw.display_name}")
+    print()
+    print("Use 'bulla import <framework> <source>' to convert to a Bulla manifest.")
+
+
+def _cmd_import(args: argparse.Namespace) -> None:
+    """Convert framework-native tool definitions to Bulla manifests."""
+    import json
+    import sys
+    from bulla.frameworks import FrameworkError, ParseMode, get, tools_to_raw_dicts
+
+    framework_name = args.framework
+    source: str = args.source
+    out_path: Path | None = getattr(args, "out", None)
+    do_audit: bool = getattr(args, "audit", False)
+    mode_str: str = getattr(args, "mode", "static")
+
+    try:
+        mode = ParseMode(mode_str)
+    except ValueError:
+        print(f"Error: unknown --mode {mode_str!r}. Use 'static' or 'runtime'.", file=sys.stderr)
+        sys.exit(1)
+
+    if mode is ParseMode.RUNTIME:
+        print(
+            "Error: --mode runtime is reserved for a future sprint. "
+            "Use --mode static (default).",
+            file=sys.stderr,
+        )
+        sys.exit(2)
+
+    try:
+        adapter = get(framework_name)
+    except FrameworkError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    if source == "-":
+        # stdin → write to a temp file because adapters take a Path
+        import tempfile
+        suffix = ".py" if framework_name in ("langgraph", "crewai") else ".json"
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=suffix, delete=False
+        ) as tmp:
+            tmp.write(sys.stdin.read())
+            source_path: Path | None = Path(tmp.name)
+    else:
+        source_path = Path(source)
+
+    try:
+        tools = adapter.parse(source_path, mode=mode)
+    except FrameworkError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+    except NotImplementedError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(2)
+
+    raw = tools_to_raw_dicts(tools)
+
+    if do_audit:
+        # Generate a manifest JSON via the existing pipeline and run audit.
+        from bulla.manifest import generate_manifest_from_tools
+
+        manifests = generate_manifest_from_tools(raw)
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_dir = Path(tmpdir)
+            for m in manifests:
+                tool_name = m.get("tool", {}).get("name", "tool")
+                (tmp_dir / f"{tool_name}.json").write_text(json.dumps(m, indent=2))
+            audit_args = argparse.Namespace(
+                manifests=tmp_dir,
+                config=None,
+                discover=False,
+                receipt=None,
+                chain=None,
+                format=getattr(args, "format", "text"),
+                verbose=False,
+                skip_failed=True,
+                discover_provider="auto",
+                output_discovered=None,
+                guided_discover=False,
+                converge=False,
+                max_rounds=5,
+                max_fee=None,
+                max_blind_spots=None,
+                max_unmet=None,
+                max_contradictions=None,
+                max_structural=None,
+                output_composition=None,
+                packs=[],
+                no_default_packs=False,
+                host=None,
+            )
+            _cmd_audit(audit_args)
+        return
+
+    # Default: write the raw tools list as a single manifest JSON file the
+    # rest of bulla can consume (matches the MCP tools/list shape).
+    payload = {"tools": raw}
+    text = json.dumps(payload, indent=2)
+    if out_path:
+        out_path.write_text(text)
+        print(f"Wrote {len(raw)} tool(s) to {out_path}", file=sys.stderr)
+    else:
+        print(text)
+
+
+def _cmd_hosts_list(args: argparse.Namespace) -> None:
+    """List all registered MCP hosts; mark which have configs detected.
+
+    With ``--verbose`` / ``-v``, show every candidate path scanned per host
+    and the reason it did or did not match. Useful for debugging
+    "why isn't my Cline-in-Insiders showing up?" cases.
+
+    With ``--format json``, emits the same data model as a structured
+    document for CI / wrapper-tool consumption. JSON output always
+    includes the full per-path probe data (i.e. behaves like ``-v``).
+    """
+    import json
+    from bulla.hosts import all_hosts, detect_all, diagnose_path
+
+    verbose = bool(getattr(args, "verbose", False))
+    output_format = getattr(args, "format", "text") or "text"
+    host_filter = getattr(args, "host", None)
+
+    detected = {(d.host.name, d.path) for d in detect_all()}
+
+    if output_format == "json":
+        _emit_hosts_list_json(host_filter, detected, all_hosts, diagnose_path)
+        return
+
+    detected_hosts = {h for h, _ in detected}
+
+    if not verbose:
+        print(f"{'HOST':<18}  {'STATUS':<10}  PATH")
+        print(f"{'-' * 18}  {'-' * 10}  {'-' * 40}")
+        for host in all_hosts():
+            if host_filter and host.name != host_filter:
+                continue
+            if host.name in detected_hosts:
+                paths = sorted(p for h, p in detected if h == host.name)
+                for path in paths:
+                    print(f"{host.name:<18}  {'detected':<10}  {path}")
+            else:
+                print(f"{host.name:<18}  {'-':<10}  (no config found on this system)")
+        print()
+        print(
+            f"{len(detected)} config(s) detected across "
+            f"{len(set(h.name for h in all_hosts()))} registered host(s)."
+        )
+        if not host_filter:
+            print("Run with -v / --verbose to see every candidate path that was scanned.")
+            print("Run with --format json for structured output.")
+        return
+
+    # Verbose mode: per-host scan trace (text)
+    for host in all_hosts():
+        if host_filter and host.name != host_filter:
+            continue
+        matches = sum(1 for h, _ in detected if h == host.name)
+        status = (
+            f"detected ({matches} config{'s' if matches > 1 else ''})"
+            if matches
+            else "not detected"
+        )
+        print(f"{host.display_name}  ({host.name})")
+        print(f"  status: {status}")
+        print(f"  paths checked:")
+        for path in host.candidate_paths():
+            probe = diagnose_path(host, path)
+            mark = "✓" if probe.matched else "·" if probe.exists else "-"
+            print(f"    {mark} {path}")
+            print(f"        {probe.reason}")
+        print()
+
+
+def _emit_hosts_list_json(
+    host_filter: str | None,
+    detected: set,
+    all_hosts_fn,
+    diagnose_path_fn,
+) -> None:
+    """Emit `bulla hosts list` data as a structured JSON document.
+
+    Schema:
+        {
+          "schema_version": "1",
+          "hosts": [
+            {
+              "name": "cline",
+              "display_name": "Cline",
+              "status": "detected" | "not_detected",
+              "matched_count": int,
+              "paths": [
+                {"path": str, "exists": bool, "matched": bool, "reason": str}
+              ]
+            }
+          ],
+          "total_detected": int,
+          "total_hosts": int
+        }
+    """
+    import json
+
+    out_hosts: list[dict] = []
+    for host in all_hosts_fn():
+        if host_filter and host.name != host_filter:
+            continue
+        matches = sum(1 for h, _ in detected if h == host.name)
+        path_probes: list[dict] = []
+        for path in host.candidate_paths():
+            probe = diagnose_path_fn(host, path)
+            path_probes.append({
+                "path": str(probe.path),
+                "exists": probe.exists,
+                "matched": probe.matched,
+                "reason": probe.reason,
+            })
+        out_hosts.append({
+            "name": host.name,
+            "display_name": host.display_name,
+            "status": "detected" if matches else "not_detected",
+            "matched_count": matches,
+            "paths": path_probes,
+        })
+
+    document = {
+        "schema_version": "1",
+        "hosts": out_hosts,
+        "total_detected": sum(h["matched_count"] for h in out_hosts),
+        "total_hosts": len(out_hosts),
+    }
+    print(json.dumps(document, indent=2))
+
+
 def _cmd_audit(args: argparse.Namespace) -> None:
     _configure_packs_from_args(args)
     from bulla.diagnostic import (
@@ -986,23 +1670,59 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             print("Error: No tools found in manifest directory.", file=sys.stderr)
             sys.exit(1)
     else:
-        from bulla.config import ConfigError, find_mcp_config, parse_mcp_config
+        from bulla.config import ConfigError, parse_mcp_config
+        from bulla.hosts import HostError, detect_all, get
         from bulla.scan import scan_mcp_servers_parallel
 
+        host_name = getattr(args, "host", None)
+        chosen_host = None
+
         if config_path is None:
-            config_path = find_mcp_config()
-            if config_path is None:
-                print(
-                    "Error: No MCP config found. Provide a config file path or "
-                    "create ~/.cursor/mcp.json",
-                    file=sys.stderr,
-                )
+            if host_name:
+                try:
+                    chosen_host = get(host_name)
+                except HostError as e:
+                    print(f"Error: {e}", file=sys.stderr)
+                    sys.exit(1)
+                for path in chosen_host.candidate_paths():
+                    if path.exists():
+                        config_path = path
+                        break
+                if config_path is None:
+                    print(
+                        f"Error: No config found for host '{host_name}'. "
+                        f"Pass an explicit config path.",
+                        file=sys.stderr,
+                    )
+                    sys.exit(1)
+            else:
+                matches = detect_all()
+                if not matches:
+                    print(
+                        "Error: No MCP config detected. Pass a config path "
+                        "or run 'bulla hosts list' to see supported hosts.",
+                        file=sys.stderr,
+                    )
+                    sys.exit(1)
+                chosen_host = matches[0].host
+                config_path = matches[0].path
+            print(
+                f"Auto-detected: {chosen_host.display_name} ({config_path})",
+                file=sys.stderr,
+            )
+        elif host_name:
+            try:
+                chosen_host = get(host_name)
+            except HostError as e:
+                print(f"Error: {e}", file=sys.stderr)
                 sys.exit(1)
-            print(f"Auto-detected config: {config_path}", file=sys.stderr)
 
         try:
-            entries = parse_mcp_config(config_path)
-        except ConfigError as e:
+            if chosen_host is not None:
+                entries = chosen_host.parse(config_path)
+            else:
+                entries = parse_mcp_config(config_path)
+        except (ConfigError, HostError) as e:
             print(f"Error: {e}", file=sys.stderr)
             sys.exit(1)
 
@@ -1326,6 +2046,12 @@ def _cmd_audit(args: argparse.Namespace) -> None:
                         "probes": [p.to_dict() for p in guided_result.probes],
                     }
 
+    # Compute repair geometry + epistemic receipt when fee > 0
+    repair_geo = None
+    if diag.coherence_fee > 0:
+        from bulla.proxy import compute_repair_geometry
+        repair_geo = compute_repair_geometry(guard)
+
     fmt = getattr(args, "format", "text")
     verbose = getattr(args, "verbose", False)
 
@@ -1344,6 +2070,7 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             own_obligations=own_obligations or None,
             obligation_check=obligation_check,
             guided_repair=guided_repair_report,
+            repair_geometry=repair_geo,
         ))
     elif fmt == "sarif":
         sarif_path = Path(str(config_path)) if config_path else Path("audit.json")
@@ -1355,6 +2082,7 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             own_obligations=own_obligations or None,
             obligation_check=obligation_check,
             guided_repair=guided_repair_report,
+            repair_geometry=repair_geo,
         ))
         if discovery_n_dims > 0:
             print(f"  Discovery: {discovery_n_dims} dimension(s) added to vocabulary", file=sys.stderr)
@@ -1383,6 +2111,11 @@ def _cmd_audit(args: argparse.Namespace) -> None:
         if disc_pack:
             from bulla.repair import detect_contradictions as _dc
             _contradiction_count = len(_dc(disc_pack))
+
+    _struct_diag = guard.structural_diagnostic
+    _structural_score = (
+        _struct_diag.contradiction_score if _struct_diag is not None else 0
+    )
 
     # --receipt: produce WitnessReceipt
     if receipt_path:
@@ -1417,6 +2150,11 @@ def _cmd_audit(args: argparse.Namespace) -> None:
                 receipt_contradictions = _cr
                 _contradiction_count = len(_cr)
 
+        _struct_contras = (
+            _struct_diag.contradictions
+            if _struct_diag is not None and _struct_diag.contradictions
+            else None
+        )
         receipt = witness(
             diag, comp,
             witness_basis=basis,
@@ -1427,6 +2165,8 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             contradictions=receipt_contradictions,
             unmet_obligations=_unmet_count,
             contradiction_count=_contradiction_count,
+            structural_contradictions=_struct_contras,
+            contradiction_score=_structural_score,
         )
         receipt_dict = receipt.to_dict()
         receipt_path.write_text(
@@ -1444,6 +2184,7 @@ def _cmd_audit(args: argparse.Namespace) -> None:
         diag, args,
         unmet_count=_unmet_count,
         contradiction_count=_contradiction_count,
+        structural_contradiction_score=_structural_score,
     )
 
 
@@ -1654,6 +2395,217 @@ def _cmd_pack_validate(args: argparse.Namespace) -> None:
         sys.exit(1)
 
 
+def _cmd_pack_verify(args: argparse.Namespace) -> None:
+    """Inspect a pack's values_registry pointers and check status.
+
+    By default this is a *static* inspection (Extension B core): it
+    walks the pack, lists the registry references, identifies which
+    ones would require a license credential, and reports without
+    fetching. Pass ``--fetch`` to actually fetch and hash-check (HTTP
+    fetch implementation is a stub for now; the static inspection is
+    fully functional).
+
+    Exit codes:
+      0 = all pointers OK or all gated on missing credentials (static OK)
+      1 = pack failed schema validation, or any pointer hash-mismatched,
+          or any registry was unavailable when --fetch was requested
+    """
+    from bulla.packs.validate import validate_pack
+    from bulla.packs.verify import (
+        CredentialProvider,
+        inspect_registries,
+        verify_pack_registries,
+    )
+
+    path = args.file
+    if not path.exists():
+        print(f"Error: file not found: {path}", file=sys.stderr)
+        sys.exit(1)
+
+    parsed = yaml.safe_load(path.read_text(encoding="utf-8"))
+    errors = validate_pack(parsed)
+    if errors:
+        for err in errors:
+            print(f"  [validation error] {err}", file=sys.stderr)
+        sys.exit(1)
+
+    refs = inspect_registries(parsed)
+    if not refs:
+        print(f"  NO REGISTRIES  {path} (no values_registry pointers found)")
+        return
+
+    print(f"  {len(refs)} registry pointer(s) in {parsed.get('pack_name', path.name)}:")
+    for ref in refs:
+        gate = (
+            "open"
+            if ref.registry_license == "open"
+            else f"requires license_id={ref.license_id!r}"
+        )
+        # Distinguish placeholder hashes from real sha256 — placeholder
+        # is "structurally ready, not yet ingested," not "verified."
+        if ref.expected_hash.startswith("placeholder:"):
+            hash_display = (
+                f"\033[33mPLACEHOLDER\033[0m "
+                f"({ref.expected_hash[len('placeholder:'):]})"
+            )
+        else:
+            hash_display = f"hash={ref.expected_hash[:16]}…"
+        print(
+            f"    - {ref.dimension}: {ref.uri}  "
+            f"version={ref.version}  {hash_display}  "
+            f"({gate})"
+        )
+
+    if not getattr(args, "fetch", False):
+        return
+
+    # Real fetch: not implemented yet; the production HTTP fetcher
+    # lands when Phase 2/3 packs actually exist to verify against.
+    # For now, --fetch is a stub that surfaces the design clearly.
+    print(
+        "  [info] --fetch requested but the HTTP registry fetcher is "
+        "not yet wired up. Static inspection above is the current "
+        "production behavior (Phase 1 of the Standards Ingestion sprint).",
+        file=sys.stderr,
+    )
+
+    # When the HTTP fetcher lands, the call shape is:
+    #   results = verify_pack_registries(
+    #       parsed, fetcher=HttpFetcher(),
+    #       credential_provider=CredentialProvider(load_credentials_from_env()),
+    #   )
+    # and exit nonzero on any "hash_mismatch" / "unavailable" / "license_required"
+
+
+def _cmd_pack_status(args: argparse.Namespace) -> None:
+    """Surface a pack's metadata: license, derives_from, registry refs.
+
+    Read-only inspection useful for humans and CI gates. No network.
+    """
+    from bulla.packs.validate import validate_pack
+    from bulla.packs.verify import inspect_registries
+
+    path = args.file
+    if not path.exists():
+        print(f"Error: file not found: {path}", file=sys.stderr)
+        sys.exit(1)
+
+    parsed = yaml.safe_load(path.read_text(encoding="utf-8"))
+    errors = validate_pack(parsed)
+    if errors:
+        for err in errors:
+            print(f"  [validation error] {err}", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"  pack:            {parsed.get('pack_name', '?')}")
+    print(f"  pack_version:    {parsed.get('pack_version', '?')}")
+    print(f"  dimensions:      {len(parsed.get('dimensions', {}))}")
+
+    derives = parsed.get("derives_from") or {}
+    if derives:
+        print(
+            f"  derives_from:    {derives.get('standard', '?')} "
+            f"version={derives.get('version', '?')}"
+        )
+        if derives.get("source_uri"):
+            print(f"  derives.source:  {derives['source_uri']}")
+
+    license_block = parsed.get("license") or {}
+    if license_block:
+        print(
+            f"  license.spdx:    {license_block.get('spdx_id', '(unset)')}"
+        )
+        print(
+            f"  license.regreg:  "
+            f"{license_block.get('registry_license', '(unset)')}"
+        )
+        if license_block.get("source_url"):
+            print(f"  license.source:  {license_block['source_url']}")
+        if license_block.get("attribution"):
+            print(f"  license.attrib:  {license_block['attribution']}")
+    else:
+        print("  license:         (no license block)")
+
+    refs = inspect_registries(parsed)
+    if refs:
+        print(f"  registries:      {len(refs)} pointer(s)")
+        for ref in refs:
+            print(
+                f"    - {ref.dimension}  "
+                f"version={ref.version}  license_id={ref.license_id or '(none)'}"
+            )
+    else:
+        print("  registries:      (none — inline known_values only)")
+
+    from bulla.mappings import list_mappings
+
+    map_summary = list_mappings(parsed)
+    if map_summary:
+        total = sum(n for _, _, n in map_summary)
+        print(
+            f"  mappings:        {len(map_summary)} table(s), "
+            f"{total} row(s) total"
+        )
+        for target_pack, target_dim, n in map_summary:
+            print(
+                f"    - {target_pack}.{target_dim}: {n} row(s)"
+            )
+
+
+def _cmd_pack_lint(args: argparse.Namespace) -> None:
+    """Lint a pack: surface non-fatal style issues and upgrade hints.
+
+    Validation must already pass. Lint findings are advisory; this
+    command never exits non-zero on a finding alone unless ``--strict``
+    is passed.
+    """
+    from bulla.packs.validate import validate_pack
+
+    path = args.file
+    if not path.exists():
+        print(f"Error: file not found: {path}", file=sys.stderr)
+        sys.exit(1)
+
+    parsed = yaml.safe_load(path.read_text(encoding="utf-8"))
+    errors = validate_pack(parsed)
+    if errors:
+        for err in errors:
+            print(f"  [validation error] {err}", file=sys.stderr)
+        sys.exit(1)
+
+    findings: list[str] = []
+
+    if "license" not in parsed:
+        findings.append(
+            "no license block — recommended for any pack that ships "
+            "via PyPI or a public registry; describe the underlying "
+            "registry's license posture even when it is 'open'"
+        )
+
+    dims = parsed.get("dimensions", {})
+    if isinstance(dims, dict):
+        for dim_name, dim_def in dims.items():
+            if not isinstance(dim_def, dict):
+                continue
+            kv = dim_def.get("known_values")
+            if isinstance(kv, list) and len(kv) > 5000:
+                findings.append(
+                    f"dimensions.{dim_name}: {len(kv)} inline values — "
+                    "consider migrating to values_registry to keep pack "
+                    "diffs reviewable and pack hashes stable across "
+                    "minor curation"
+                )
+
+    if not findings:
+        print(f"  CLEAN  {path}")
+        return
+
+    for f in findings:
+        print(f"  [hint] {f}")
+    if getattr(args, "strict", False):
+        sys.exit(1)
+
+
 def _cmd_scan(args: argparse.Namespace) -> None:
     _configure_packs_from_args(args)
     from bulla.guard import BullaGuard
@@ -1688,7 +2640,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         prog="bulla",
         description=(
-            "Witness kernel for agent tool compositions. "
+            "Witness kernel for agentic compositions. "
             "Diagnoses blind spots invisible to bilateral verification, "
             "attests to composition integrity, and recommends bridge annotations."
         ),
@@ -1723,6 +2675,15 @@ def main() -> None:
         "--examples",
         action="store_true",
         help="Run on bundled example compositions",
+    )
+    p_diag.add_argument(
+        "--witness",
+        action="store_true",
+        help=(
+            "Include witness-geometry diagnostics (leverage scores, "
+            "N_eff concentration, coloops/loops, greedy minimum-cost "
+            "disclosure basis). Computed only when fee > 0."
+        ),
     )
     _add_pack_args(p_diag)
     p_diag.set_defaults(func=_cmd_diagnose)
@@ -1768,8 +2729,51 @@ def main() -> None:
         action="store_true",
         help="Run on bundled example compositions",
     )
+    p_check.add_argument(
+        "--witness",
+        action="store_true",
+        help=(
+            "Include witness-geometry diagnostics in the text/JSON/SARIF "
+            "output (leverage, N_eff, coloops, greedy disclosure basis). "
+            "Does not affect check thresholds."
+        ),
+    )
+    p_check.add_argument(
+        "--baseline",
+        type=Path,
+        default=None,
+        metavar="RECEIPT.json",
+        help=(
+            "Compare against a baseline receipt (JSON). "
+            "Exit 1 if the baseline is stale (composition or policy "
+            "changed) OR if the current state has regressed (higher "
+            "fee, worse disposition, new blind spots). Requires "
+            "exactly one composition file."
+        ),
+    )
     _add_pack_args(p_check)
     p_check.set_defaults(func=_cmd_check)
+
+    # ── diff ──────────────────────────────────────────────────────────
+    p_diff = subparsers.add_parser(
+        "diff",
+        help="Compare two receipts and show what changed",
+    )
+    p_diff.add_argument(
+        "baseline", type=Path,
+        help="Baseline receipt (JSON) — the 'before' state",
+    )
+    p_diff.add_argument(
+        "current", type=Path,
+        help="Current receipt (JSON) — the 'after' state",
+    )
+    p_diff.add_argument(
+        "--format",
+        choices=["text", "json"],
+        default="text",
+        help="Output format (default: text)",
+    )
+    p_diff.set_defaults(func=_cmd_diff)
 
     # ── infer ─────────────────────────────────────────────────────────
     p_infer = subparsers.add_parser(
@@ -1845,6 +2849,38 @@ def main() -> None:
         "-v", "--verbose", action="store_true",
         help="Show full blind spot details and bridge recommendations",
     )
+    p_gauge.add_argument(
+        "--leverage",
+        action="store_true",
+        help=(
+            "Include witness-geometry diagnostics in the output "
+            "(per-field leverage, N_eff, coloops, greedy minimum-cost "
+            "disclosure basis)."
+        ),
+    )
+    p_gauge.add_argument(
+        "--substitutes",
+        nargs=2,
+        metavar=("TOOL", "FIELD"),
+        default=None,
+        help=(
+            "Show top-3 disclosure substitutes for the given hidden field, "
+            "ranked by effective resistance in the Kron-reduced witness "
+            "geometry. Takes two positional arguments: tool name and "
+            "field name (dot-safe)."
+        ),
+    )
+    p_gauge.add_argument(
+        "--costs",
+        type=Path,
+        default=None,
+        metavar="FILE",
+        help=(
+            "YAML file mapping '<tool>:<field>' -> rational cost string "
+            "('p/q' or integer). Runs the matroid-greedy minimum-cost "
+            "disclosure algorithm (optimal by Edmonds 1971)."
+        ),
+    )
     _add_pack_args(p_gauge)
     p_gauge.set_defaults(func=_cmd_gauge)
 
@@ -1885,7 +2921,11 @@ def main() -> None:
     )
     p_audit.add_argument(
         "--max-contradictions", type=int, default=None, metavar="N",
-        help="Exit 1 if contradictions exceed N (CI gating)",
+        help="Exit 1 if convention contradictions exceed N (CI gating)",
+    )
+    p_audit.add_argument(
+        "--max-structural", type=int, default=None, metavar="N",
+        help="Exit 1 if structural contradiction score exceeds N (CI gating)",
     )
     p_audit.add_argument(
         "-v", "--verbose", action="store_true",
@@ -1933,6 +2973,11 @@ def main() -> None:
     p_audit.add_argument(
         "--chain", type=Path, metavar="RECEIPT.json",
         help="Load a prior receipt's vocabulary and chain the new receipt",
+    )
+    p_audit.add_argument(
+        "--host", metavar="NAME",
+        help="Force a specific MCP host's config (e.g. 'cursor', 'claude-code', 'cline'). "
+             "Use 'bulla hosts list' to see registered hosts.",
     )
     _add_pack_args(p_audit)
     p_audit.set_defaults(func=_cmd_audit)
@@ -2035,7 +3080,7 @@ def main() -> None:
     # ── pack ──────────────────────────────────────────────────────────
     p_pack = subparsers.add_parser(
         "pack",
-        help="Convention pack utilities (validate, inspect)",
+        help="Convention pack utilities (validate, verify, status, lint)",
     )
     pack_sub = p_pack.add_subparsers(dest="pack_command")
     p_pack_val = pack_sub.add_parser(
@@ -2047,8 +3092,65 @@ def main() -> None:
         help="Pack YAML file to validate",
     )
     p_pack_val.set_defaults(func=_cmd_pack_validate)
+
+    p_pack_verify = pack_sub.add_parser(
+        "verify",
+        help=(
+            "Verify a pack's values_registry pointers (Extension B). "
+            "Static inspection by default; pass --fetch to attempt "
+            "network fetch and hash check."
+        ),
+    )
+    p_pack_verify.add_argument(
+        "file", type=Path,
+        help="Pack YAML file to verify",
+    )
+    p_pack_verify.add_argument(
+        "--fetch", action="store_true",
+        help=(
+            "Fetch each registry pointer's contents and verify hash "
+            "(stub in Phase 1; full implementation lands when Phase 2/3 "
+            "packs ship)"
+        ),
+    )
+    p_pack_verify.set_defaults(func=_cmd_pack_verify)
+
+    p_pack_status = pack_sub.add_parser(
+        "status",
+        help=(
+            "Show a pack's metadata: license, dimensions, registry "
+            "pointers (read-only, no network)"
+        ),
+    )
+    p_pack_status.add_argument(
+        "file", type=Path,
+        help="Pack YAML file to inspect",
+    )
+    p_pack_status.set_defaults(func=_cmd_pack_status)
+
+    p_pack_lint = pack_sub.add_parser(
+        "lint",
+        help=(
+            "Lint a pack for non-fatal style issues and upgrade hints "
+            "(advisory by default; pass --strict to exit nonzero on "
+            "any finding)"
+        ),
+    )
+    p_pack_lint.add_argument(
+        "file", type=Path,
+        help="Pack YAML file to lint",
+    )
+    p_pack_lint.add_argument(
+        "--strict", action="store_true",
+        help="Exit nonzero on any lint finding",
+    )
+    p_pack_lint.set_defaults(func=_cmd_pack_lint)
+
     p_pack.set_defaults(func=lambda args: (
-        print("Usage: bulla pack <validate> FILE", file=sys.stderr)
+        print(
+            "Usage: bulla pack <validate|verify|status|lint> FILE",
+            file=sys.stderr,
+        )
         or sys.exit(1)
     ) if not getattr(args, "pack_command", None) else None)
 
@@ -2073,6 +3175,38 @@ def main() -> None:
     )
     p_merge.set_defaults(func=_cmd_merge)
 
+    # ── proxy ─────────────────────────────────────────────────────────
+    p_proxy = subparsers.add_parser(
+        "proxy",
+        help="Replay a composition-aware proxy trace against captured manifests",
+    )
+    p_proxy.add_argument(
+        "--manifests",
+        type=Path,
+        required=True,
+        metavar="DIR",
+        help="Directory of captured MCP manifest JSON files",
+    )
+    p_proxy.add_argument(
+        "trace",
+        type=Path,
+        help="JSON trace file (array or object with 'calls')",
+    )
+    p_proxy.add_argument(
+        "--format",
+        choices=["text", "json"],
+        default="text",
+        help="Output format (default: text)",
+    )
+    p_proxy.add_argument(
+        "-o", "--output",
+        type=Path,
+        default=None,
+        metavar="FILE",
+        help="Write output to file instead of stdout",
+    )
+    p_proxy.set_defaults(func=_cmd_proxy)
+
     # ── serve ─────────────────────────────────────────────────────────
     p_serve = subparsers.add_parser(
         "serve",
@@ -2091,10 +3225,85 @@ def main() -> None:
     )
     p_init.set_defaults(func=_cmd_init)
 
+    # ── hosts ─────────────────────────────────────────────────────────
+    p_hosts = subparsers.add_parser(
+        "hosts",
+        help="Manage and inspect MCP host integrations",
+    )
+    hosts_sub = p_hosts.add_subparsers(dest="hosts_command")
+    p_hosts_list = hosts_sub.add_parser(
+        "list",
+        help="List registered MCP hosts and which configs are present on this system",
+    )
+    p_hosts_list.add_argument(
+        "-v", "--verbose", action="store_true",
+        help="Show every candidate path scanned per host with a per-path reason "
+             "(detected / not present / parse failure / no recognized servers key).",
+    )
+    p_hosts_list.add_argument(
+        "--host", metavar="NAME",
+        help="Restrict output to one host (e.g. cline, codex, claude-code).",
+    )
+    p_hosts_list.add_argument(
+        "--format",
+        choices=["text", "json"],
+        default="text",
+        help="Output format. Default 'text' is human-readable (see -v for full trace). "
+             "'json' emits a structured document with per-path probe data — "
+             "stable schema (schema_version: '1') intended for CI / wrapper tooling.",
+    )
+    p_hosts_list.set_defaults(func=_cmd_hosts_list)
+    p_hosts.set_defaults(func=lambda _: _cmd_hosts_list(_))
+
+    # ── frameworks ────────────────────────────────────────────────────
+    p_frameworks = subparsers.add_parser(
+        "frameworks",
+        help="Manage and inspect framework adapters (LangGraph, CrewAI, Anthropic Messages)",
+    )
+    frameworks_sub = p_frameworks.add_subparsers(dest="frameworks_command")
+    p_frameworks_list = frameworks_sub.add_parser(
+        "list",
+        help="List registered framework adapters and parse-mode support",
+    )
+    p_frameworks_list.set_defaults(func=_cmd_frameworks_list)
+    p_frameworks.set_defaults(func=lambda _: _cmd_frameworks_list(_))
+
+    # ── import ────────────────────────────────────────────────────────
+    p_import = subparsers.add_parser(
+        "import",
+        help="Convert framework-native tool definitions into a Bulla manifest",
+    )
+    p_import.add_argument(
+        "framework",
+        help="Framework name (e.g. anthropic-messages, langgraph, crewai). "
+             "Use 'bulla frameworks list' to see registered adapters.",
+    )
+    p_import.add_argument(
+        "source",
+        help="Source file path, directory, or '-' for stdin",
+    )
+    p_import.add_argument(
+        "--out", type=Path, metavar="FILE",
+        help="Write manifest JSON to FILE (default: stdout)",
+    )
+    p_import.add_argument(
+        "--audit", action="store_true",
+        help="Pipe through bulla audit immediately",
+    )
+    p_import.add_argument(
+        "--format", choices=["text", "json", "sarif"], default="text",
+        help="Audit output format (only relevant with --audit)",
+    )
+    p_import.add_argument(
+        "--mode", choices=["static", "runtime"], default="static",
+        help="Parse mode (default: static; runtime reserved for future sprint)",
+    )
+    p_import.set_defaults(func=_cmd_import)
+
     args = parser.parse_args()
 
     if not args.command:
-        print(f"bulla {__version__} — witness kernel for agent tool compositions\n")
+        print(f"bulla {__version__} — witness kernel for agentic compositions\n")
         print("Quick start:")
         print("  bulla audit                    # audit all MCP servers in your config")
         print("  bulla audit --discover         # audit with LLM convention discovery")
@@ -2110,6 +3319,7 @@ def main() -> None:
         print("  bulla diagnose my-comp.yaml    # diagnose your own")
         print("  bulla check compositions/      # CI gate (exit 1 on blind spots)")
         print("  bulla bridge comp.yaml -o bridged.yaml  # auto-bridge blind spots")
+        print("  bulla proxy --manifests DIR trace.json  # replay proxy trace")
         print("  bulla witness comp.yaml        # emit witness receipt (JSON)")
         print("  bulla serve                    # run as MCP server (stdio)")
         print("  bulla manifest --from-json tools.json  # generate manifests")

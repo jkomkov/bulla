@@ -1,0 +1,22 @@
+{
+  "tools": [
+    {
+      "name": "query_events",
+      "description": "Query analytics events and return results with file path and timestamp.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "filter": { "type": "string", "description": "Event filter expression" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Output file path" },
+          "timestamp": { "type": "string", "format": "date-time", "description": "Event timestamp" },
+          "count": { "type": "integer", "description": "Number of matching events" }
+        }
+      }
+    }
+  ]
+}

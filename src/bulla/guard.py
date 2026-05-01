@@ -21,6 +21,7 @@ from bulla.infer.mcp import (
     _find_shared_dimensions,
     extract_field_infos,
 )
+from bulla.infer.structural import scan_composition as _structural_scan
 from bulla.model import (
     BoundaryObligation,
     Composition,
@@ -31,6 +32,7 @@ from bulla.model import (
     PackRef,
     PolicyProfile,
     SemanticDimension,
+    StructuralDiagnostic,
     ToolSpec,
     WitnessReceipt,
     WitnessBasis,
@@ -56,10 +58,12 @@ class BullaGuard:
         self,
         composition: Composition,
         witness_basis: WitnessBasis | None = None,
+        structural_diagnostic: StructuralDiagnostic | None = None,
     ) -> None:
         self._composition = composition
         self._diagnostic: Diagnostic | None = None
         self._witness_basis = witness_basis
+        self._structural_diagnostic = structural_diagnostic
 
     @property
     def composition(self) -> Composition:
@@ -74,6 +78,16 @@ class BullaGuard:
         produced confidence tags. None for hand-authored compositions.
         """
         return self._witness_basis
+
+    @property
+    def structural_diagnostic(self) -> StructuralDiagnostic | None:
+        """Schema-level structural findings (parallel to cohomological diagnostic).
+
+        Non-None when the composition was built from an MCP inference
+        path where FieldInfo objects were available for cross-tool
+        schema comparison.  None for hand-authored compositions.
+        """
+        return self._structural_diagnostic
 
     # ── Construction paths ────────────────────────────────────────────
 
@@ -150,10 +164,10 @@ class BullaGuard:
                 f"Expected 'tools' array or plain array in {path}"
             )
 
-        comp, basis = _composition_from_mcp_tools(
+        comp, basis, struct_diag = _composition_from_mcp_tools(
             tools_list, name=f"inferred-from-{path.stem}"
         )
-        return cls(comp, witness_basis=basis)
+        return cls(comp, witness_basis=basis, structural_diagnostic=struct_diag)
 
     @classmethod
     def from_mcp_server(cls, command: str, *, name: str | None = None) -> BullaGuard:
@@ -161,8 +175,8 @@ class BullaGuard:
         from bulla.scan import scan_mcp_server
         tools_list = scan_mcp_server(command)
         comp_name = name or f"scan-{command.split()[0].split('/')[-1]}"
-        comp, basis = _composition_from_mcp_tools(tools_list, name=comp_name)
-        return cls(comp, witness_basis=basis)
+        comp, basis, struct_diag = _composition_from_mcp_tools(tools_list, name=comp_name)
+        return cls(comp, witness_basis=basis, structural_diagnostic=struct_diag)
 
     @classmethod
     def from_tools_list(
@@ -177,8 +191,8 @@ class BullaGuard:
         in-memory tool lists.  Used by ``bulla audit`` to compose tools
         from multiple servers without requiring a file on disk.
         """
-        comp, basis = _composition_from_mcp_tools(tools, name=name)
-        return cls(comp, witness_basis=basis)
+        comp, basis, struct_diag = _composition_from_mcp_tools(tools, name=name)
+        return cls(comp, witness_basis=basis, structural_diagnostic=struct_diag)
 
     # ── Analysis ──────────────────────────────────────────────────────
 
@@ -377,21 +391,24 @@ def _composition_from_mcp_tools(
     tools_list: list[dict[str, Any]],
     *,
     name: str,
-) -> tuple[Composition, WitnessBasis]:
-    """Convert a list of MCP tool dicts into a Composition and WitnessBasis.
+) -> tuple[Composition, WitnessBasis, StructuralDiagnostic]:
+    """Convert a list of MCP tool dicts into a Composition, WitnessBasis, and StructuralDiagnostic.
 
     Only dimensions with confidence "inferred" or "declared" participate
     in composition construction (edge creation and observable/hidden
     partitioning).  Dimensions with confidence "unknown" are recorded in
     the WitnessBasis for auditability but do not affect the coboundary
-    matrix or the coherence fee.  This prevents weak classifier signals
-    (description-keyword-only matches, field-description-only matches)
-    from inflating the fee with phantom convention conflicts.
+    matrix or the coherence fee.
+
+    The StructuralDiagnostic is a parallel analysis computed from raw
+    schema metadata.  It never enters the coboundary matrix; it detects
+    visible-but-incompatible fields that the coboundary cannot see.
     """
-    from bulla.infer.classifier import InferredDimension
+    from bulla.infer.classifier import FieldInfo as _FI, InferredDimension
 
     tool_specs: list[ToolSpec] = []
     classifications: dict[str, _ClassificationResult] = {}
+    tools_field_infos: dict[str, list[_FI]] = {}
 
     for tool in tools_list:
         raw_name = tool.get("name", "unknown_tool")
@@ -401,6 +418,7 @@ def _composition_from_mcp_tools(
         raw_inferred = classify_tool_rich(tool, field_infos=field_infos)
         cr = _ClassificationResult.from_raw(raw_inferred)
         classifications[safe_name] = cr
+        tools_field_infos[safe_name] = field_infos
 
         inferred_field_names = {d.field_name for d in cr.confident}
         observable = [f for f in fields if f not in inferred_field_names]
@@ -427,7 +445,6 @@ def _composition_from_mcp_tools(
         edges.append(Edge(e["from"], e["to"], dims))
 
     # WitnessBasis counts ALL classifications (including unknown)
-    # for honest epistemic provenance reporting
     base_dims = _get_base_pack_dimensions()
     n_declared = 0
     n_inferred = 0
@@ -449,4 +466,8 @@ def _composition_from_mcp_tools(
         declared=n_declared, inferred=n_inferred, unknown=n_unknown,
         discovered=n_discovered,
     )
-    return Composition(name=name, tools=tuple(tool_specs), edges=tuple(edges)), basis
+
+    struct_diag = _structural_scan(tools_field_infos)
+
+    comp = Composition(name=name, tools=tuple(tool_specs), edges=tuple(edges))
+    return comp, basis, struct_diag

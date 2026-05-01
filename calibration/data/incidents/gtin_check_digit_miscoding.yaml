@@ -1,0 +1,28 @@
+name: gtin_check_digit_miscoding
+description: 'GTIN check-digit miscoding (FDA-recall trigger, recurring). GTIN-13
+  vs GTIN-14 with leading-zero handling produces wrong product identity. gs1 detects:
+  gs1_id_key_type boundary fee.'
+tools:
+  manufacturer_label:
+    internal_state:
+    - product_id
+    - gtin
+    - gtin_format
+    observable_schema:
+    - product_id
+    - gtin
+  fda_udi_db:
+    internal_state:
+    - product_id
+    - gtin
+    - gtin_format
+    observable_schema:
+    - product_id
+    - gtin
+edges:
+- from: manufacturer_label
+  to: fda_udi_db
+  dimensions:
+  - name: gtin_format_match
+    from_field: gtin_format
+    to_field: gtin_format

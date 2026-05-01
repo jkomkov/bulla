@@ -86,31 +86,16 @@ def parse_mcp_config(path: Path) -> list[McpServerEntry]:
 def find_mcp_config() -> Path | None:
     """Auto-detect MCP config in standard locations.
 
-    Search order:
+    Walks every registered host in :mod:`bulla.hosts` (Cursor, Claude Code,
+    Cline, Claude Desktop, Zed, Windsurf) and returns the first config
+    file found on disk. Returns ``None`` if no host config is detected.
 
-    1. ``.cursor/mcp.json`` in the current working directory (project-level)
-    2. ``~/.cursor/mcp.json`` (user-level Cursor)
-    3. ``~/Library/Application Support/Claude/claude_desktop_config.json`` (macOS)
+    For programmatic access to all matches (including the host that owns
+    each match), use :func:`bulla.hosts.detect_all` directly.
     """
-    candidates = [
-        Path.cwd() / ".cursor" / "mcp.json",
-        Path.home() / ".cursor" / "mcp.json",
-    ]
-    if sys.platform == "darwin":
-        candidates.append(
-            Path.home()
-            / "Library"
-            / "Application Support"
-            / "Claude"
-            / "claude_desktop_config.json"
-        )
+    from bulla.hosts import detect_all
 
-    for p in candidates:
-        if p.exists():
-            try:
-                data = json.loads(p.read_text())
-                if isinstance(data, dict) and data.get("mcpServers"):
-                    return p
-            except (json.JSONDecodeError, OSError):
-                continue
-    return None
+    matches = detect_all()
+    if not matches:
+        return None
+    return matches[0].path

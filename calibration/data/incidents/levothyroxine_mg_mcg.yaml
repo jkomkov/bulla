@@ -1,0 +1,31 @@
+name: levothyroxine_mg_mcg
+description: 'Ongoing levothyroxine mg/mcg dosing errors (19% of pediatric tenfold
+  incidents). UCUM detects: amount_unit boundary fee on dose field.'
+tools:
+  ehr_order_entry:
+    internal_state:
+    - drug_id
+    - dose_amount
+    - dose_unit
+    - patient_id
+    observable_schema:
+    - drug_id
+    - dose_amount
+    - patient_id
+  pharmacy_dispense:
+    internal_state:
+    - drug_id
+    - dose_amount
+    - dose_unit
+    - patient_id
+    observable_schema:
+    - drug_id
+    - dose_amount
+    - patient_id
+edges:
+- from: ehr_order_entry
+  to: pharmacy_dispense
+  dimensions:
+  - name: dose_unit_match
+    from_field: dose_unit
+    to_field: dose_unit

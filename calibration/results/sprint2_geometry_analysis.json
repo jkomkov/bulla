@@ -1,0 +1,3486 @@
+{
+  "summary": {
+    "total_compositions": 703,
+    "nonzero_fee": 237,
+    "with_loops": 91,
+    "without_loops": 146,
+    "expected_wasted_disclosures_random": 47.54
+  },
+  "fee_group_analysis": [
+    {
+      "fee": 1,
+      "n_compositions": 89,
+      "has_loops": 37,
+      "no_loops": 52,
+      "loops_range": [
+        0,
+        2
+      ],
+      "n_effective_range": 0.0,
+      "p_effective_range": 0.5,
+      "mean_p_effective_random": 0.8539,
+      "compositions": [
+        {
+          "composition": "airtable-mcp+mcp-server-cloudflare",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "airtable-mcp+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "airtable-mcp+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "cognee-mcp-server+mcp-server-cloudflare",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "cognee-mcp-server+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "cognee-mcp-server+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "exa+mcp-server-cloudflare",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "exa+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "exa+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "fetch-mcp+mcp-server-cloudflare",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "fetch-mcp+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "fetch-mcp+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "flightradar24-mcp-server+mcp-server-cloudflare",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "flightradar24-mcp-server+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "flightradar24-mcp-server+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "gtasks-mcp+mcp-server-cloudflare",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "gtasks-mcp+notion",
+          "fee": 1,
+          "n_hidden": 4,
+          "loops_count": 2,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0625,
+          "p_effective_random": 0.5,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "gtasks-mcp+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "inoyu-mcp-unomi-server+mcp-server-cloudflare",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "inoyu-mcp-unomi-server+mcp-server-rememberizer",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "inoyu-mcp-unomi-server+notion",
+          "fee": 1,
+          "n_hidden": 4,
+          "loops_count": 2,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0625,
+          "p_effective_random": 0.5,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "inoyu-mcp-unomi-server+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-mongo-server+mcp-server-cloudflare",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-mongo-server+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-mongo-server+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-pinecone+tavily",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-playwright+mcp-server-cloudflare",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-playwright+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-playwright+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-aws+mcp-server-cloudflare",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-aws+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-aws+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-browserbase+mcp-server-cloudflare",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-browserbase+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-browserbase+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-chatsum+mcp-server-cloudflare",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-chatsum+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-chatsum+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+mcp-server-fetch",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+mcp-server-kubernetes",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+mcp-server-neon",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+mcp-server-rememberizer",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+mcp-server-tmdb",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+mcp-snowflake-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+mcp-vegalite-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+memory",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+needle-mcp",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+needle-mcp_tools",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+openrpc-mpc-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+playwright",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+puppeteer",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+search1api-mcp",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+sequential-thinking",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+twitter-mcp",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+x-mcp",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-fetch+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-fetch+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-kubernetes+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-kubernetes+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-neon+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-neon+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-rememberizer+notion",
+          "fee": 1,
+          "n_hidden": 4,
+          "loops_count": 2,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0625,
+          "p_effective_random": 0.5,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-rememberizer+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-tmdb+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-tmdb+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-snowflake-server+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-snowflake-server+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-vegalite-server+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-vegalite-server+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "memory+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "memory+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "needle-mcp+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "needle-mcp+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "needle-mcp_tools+notion",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "needle-mcp_tools+ns-mcp-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "notion+openrpc-mpc-server",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "notion+playwright",
+          "fee": 1,
+          "n_hidden": 4,
+          "loops_count": 2,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0625,
+          "p_effective_random": 0.5,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "notion+puppeteer",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "notion+search1api-mcp",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "notion+sequential-thinking",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "notion+twitter-mcp",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "notion+x-mcp",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "ns-mcp-server+openrpc-mpc-server",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "ns-mcp-server+playwright",
+          "fee": 1,
+          "n_hidden": 3,
+          "loops_count": 1,
+          "n_effective": 2.0,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.6667,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "ns-mcp-server+puppeteer",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "ns-mcp-server+search1api-mcp",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "ns-mcp-server+sequential-thinking",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "ns-mcp-server+twitter-mcp",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "ns-mcp-server+x-mcp",
+          "fee": 1,
+          "n_hidden": 2,
+          "loops_count": 0,
+          "n_effective": 2.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        }
+      ]
+    },
+    {
+      "fee": 2,
+      "n_compositions": 67,
+      "has_loops": 13,
+      "no_loops": 54,
+      "loops_range": [
+        0,
+        1
+      ],
+      "n_effective_range": 0.0,
+      "p_effective_range": 0.25,
+      "mean_p_effective_random": 0.9515,
+      "compositions": [
+        {
+          "composition": "airtable-mcp+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "airtable-mcp+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "cognee-mcp-server+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "cognee-mcp-server+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "exa+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "exa+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "fetch-mcp+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "fetch-mcp+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "flightradar24-mcp-server+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "flightradar24-mcp-server+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "gtasks-mcp+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 4,
+          "loops_count": 1,
+          "n_effective": 3.0,
+          "leverage_variance": 0.083333,
+          "p_effective_random": 0.75,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "gtasks-mcp+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 4,
+          "loops_count": 1,
+          "n_effective": 3.0,
+          "leverage_variance": 0.083333,
+          "p_effective_random": 0.75,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "inoyu-mcp-unomi-server+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 4,
+          "loops_count": 1,
+          "n_effective": 3.0,
+          "leverage_variance": 0.083333,
+          "p_effective_random": 0.75,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "inoyu-mcp-unomi-server+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 4,
+          "loops_count": 1,
+          "n_effective": 3.0,
+          "leverage_variance": 0.083333,
+          "p_effective_random": 0.75,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-mongo-server+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-mongo-server+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-pinecone+mcp-server-cloudflare",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-pinecone+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 4,
+          "loops_count": 1,
+          "n_effective": 3.0,
+          "leverage_variance": 0.083333,
+          "p_effective_random": 0.75,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-pinecone+notion",
+          "fee": 2,
+          "n_hidden": 4,
+          "loops_count": 1,
+          "n_effective": 3.0,
+          "leverage_variance": 0.083333,
+          "p_effective_random": 0.75,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-pinecone+ns-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-pinecone+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 4,
+          "loops_count": 1,
+          "n_effective": 3.0,
+          "leverage_variance": 0.083333,
+          "p_effective_random": 0.75,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-playwright+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-playwright+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-aws+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-aws+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-browserbase+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-browserbase+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-chatsum+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-chatsum+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+tavily",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-fetch+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-fetch+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-kubernetes+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-kubernetes+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-neon+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-neon+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-rememberizer+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 4,
+          "loops_count": 1,
+          "n_effective": 3.0,
+          "leverage_variance": 0.083333,
+          "p_effective_random": 0.75,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-rememberizer+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 4,
+          "loops_count": 1,
+          "n_effective": 3.0,
+          "leverage_variance": 0.083333,
+          "p_effective_random": 0.75,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-tmdb+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-tmdb+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-snowflake-server+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-snowflake-server+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-vegalite-server+mcp-xmind",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-vegalite-server+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-xmind+memory",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-xmind+needle-mcp",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-xmind+needle-mcp_tools",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-xmind+openrpc-mpc-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-xmind+puppeteer",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-xmind+search1api-mcp",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-xmind+sequential-thinking",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-xmind+tavily",
+          "fee": 2,
+          "n_hidden": 4,
+          "loops_count": 1,
+          "n_effective": 3.0,
+          "leverage_variance": 0.083333,
+          "p_effective_random": 0.75,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-xmind+twitter-mcp",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-xmind+x-mcp",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "memory+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "needle-mcp+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "needle-mcp_tools+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "notion+tavily",
+          "fee": 2,
+          "n_hidden": 4,
+          "loops_count": 1,
+          "n_effective": 3.0,
+          "leverage_variance": 0.083333,
+          "p_effective_random": 0.75,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "ns-mcp-server+tavily",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "openrpc-mpc-server+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "playwright+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 4,
+          "loops_count": 1,
+          "n_effective": 3.0,
+          "leverage_variance": 0.083333,
+          "p_effective_random": 0.75,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "puppeteer+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "search1api-mcp+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "sequential-thinking+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "tavily+todoist-mcp-server",
+          "fee": 2,
+          "n_hidden": 4,
+          "loops_count": 1,
+          "n_effective": 3.0,
+          "leverage_variance": 0.083333,
+          "p_effective_random": 0.75,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "todoist-mcp-server+twitter-mcp",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "todoist-mcp-server+x-mcp",
+          "fee": 2,
+          "n_hidden": 3,
+          "loops_count": 0,
+          "n_effective": 3.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        }
+      ]
+    },
+    {
+      "fee": 3,
+      "n_compositions": 10,
+      "has_loops": 4,
+      "no_loops": 6,
+      "loops_range": [
+        0,
+        1
+      ],
+      "n_effective_range": 0.9091,
+      "p_effective_range": 0.2,
+      "mean_p_effective_random": 0.9267,
+      "compositions": [
+        {
+          "composition": "mcp-server-cloudflare+mcp-xmind",
+          "fee": 3,
+          "n_hidden": 5,
+          "loops_count": 0,
+          "n_effective": 4.9091,
+          "leverage_variance": 0.006667,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+notion",
+          "fee": 3,
+          "n_hidden": 5,
+          "loops_count": 1,
+          "n_effective": 4.0,
+          "leverage_variance": 0.09,
+          "p_effective_random": 0.8,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+ns-mcp-server",
+          "fee": 3,
+          "n_hidden": 4,
+          "loops_count": 0,
+          "n_effective": 4.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-server-cloudflare+todoist-mcp-server",
+          "fee": 3,
+          "n_hidden": 5,
+          "loops_count": 0,
+          "n_effective": 4.9091,
+          "leverage_variance": 0.006667,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-xmind+notion",
+          "fee": 3,
+          "n_hidden": 6,
+          "loops_count": 1,
+          "n_effective": 4.9091,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.8333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-xmind+ns-mcp-server",
+          "fee": 3,
+          "n_hidden": 5,
+          "loops_count": 0,
+          "n_effective": 4.9091,
+          "leverage_variance": 0.006667,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "mcp-xmind+playwright",
+          "fee": 3,
+          "n_hidden": 4,
+          "loops_count": 0,
+          "n_effective": 4.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "notion+ns-mcp-server",
+          "fee": 3,
+          "n_hidden": 5,
+          "loops_count": 1,
+          "n_effective": 4.0,
+          "leverage_variance": 0.09,
+          "p_effective_random": 0.8,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "notion+todoist-mcp-server",
+          "fee": 3,
+          "n_hidden": 6,
+          "loops_count": 1,
+          "n_effective": 4.9091,
+          "leverage_variance": 0.055556,
+          "p_effective_random": 0.8333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "ns-mcp-server+todoist-mcp-server",
+          "fee": 3,
+          "n_hidden": 5,
+          "loops_count": 0,
+          "n_effective": 4.9091,
+          "leverage_variance": 0.006667,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        }
+      ]
+    },
+    {
+      "fee": 10,
+      "n_compositions": 25,
+      "has_loops": 25,
+      "no_loops": 0,
+      "loops_range": [
+        1,
+        1
+      ],
+      "n_effective_range": 0.0,
+      "p_effective_range": 0.0,
+      "mean_p_effective_random": 0.9333,
+      "compositions": [
+        {
+          "composition": "airtable-mcp+github",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "cognee-mcp-server+github",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "exa+github",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "fetch-mcp+github",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "flightradar24-mcp-server+github",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-mongo-server",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-playwright",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-server-aws",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-server-browserbase",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-server-chatsum",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-server-fetch",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-server-kubernetes",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-server-neon",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-server-tmdb",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-snowflake-server",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-vegalite-server",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+memory",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+needle-mcp",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+needle-mcp_tools",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+openrpc-mpc-server",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+puppeteer",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+search1api-mcp",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+sequential-thinking",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+twitter-mcp",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+x-mcp",
+          "fee": 10,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.3758,
+          "leverage_variance": 0.053968,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        }
+      ]
+    },
+    {
+      "fee": 11,
+      "n_compositions": 36,
+      "has_loops": 9,
+      "no_loops": 27,
+      "loops_range": [
+        0,
+        1
+      ],
+      "n_effective_range": 3.1701,
+      "p_effective_range": 0.0769,
+      "mean_p_effective_random": 0.9824,
+      "compositions": [
+        {
+          "composition": "airtable-mcp+filesystem",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "cognee-mcp-server+filesystem",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "exa+filesystem",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "fetch-mcp+filesystem",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+flightradar24-mcp-server",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+gtasks-mcp",
+          "fee": 11,
+          "n_hidden": 13,
+          "loops_count": 1,
+          "n_effective": 12.0,
+          "leverage_variance": 0.059665,
+          "p_effective_random": 0.9231,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+inoyu-mcp-unomi-server",
+          "fee": 11,
+          "n_hidden": 13,
+          "loops_count": 1,
+          "n_effective": 12.0,
+          "leverage_variance": 0.059665,
+          "p_effective_random": 0.9231,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+mcp-mongo-server",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+mcp-pinecone",
+          "fee": 11,
+          "n_hidden": 13,
+          "loops_count": 1,
+          "n_effective": 12.0,
+          "leverage_variance": 0.059665,
+          "p_effective_random": 0.9231,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+mcp-playwright",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+mcp-server-aws",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+mcp-server-browserbase",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+mcp-server-chatsum",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+mcp-server-fetch",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+mcp-server-kubernetes",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+mcp-server-neon",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+mcp-server-rememberizer",
+          "fee": 11,
+          "n_hidden": 13,
+          "loops_count": 1,
+          "n_effective": 12.0,
+          "leverage_variance": 0.059665,
+          "p_effective_random": 0.9231,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+mcp-server-tmdb",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+mcp-snowflake-server",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+mcp-vegalite-server",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+memory",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+needle-mcp",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+needle-mcp_tools",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+openrpc-mpc-server",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+puppeteer",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+search1api-mcp",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+sequential-thinking",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+tavily",
+          "fee": 11,
+          "n_hidden": 13,
+          "loops_count": 1,
+          "n_effective": 12.0,
+          "leverage_variance": 0.059665,
+          "p_effective_random": 0.9231,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+twitter-mcp",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+x-mcp",
+          "fee": 11,
+          "n_hidden": 12,
+          "loops_count": 0,
+          "n_effective": 12.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+gtasks-mcp",
+          "fee": 11,
+          "n_hidden": 16,
+          "loops_count": 1,
+          "n_effective": 14.417,
+          "leverage_variance": 0.051897,
+          "p_effective_random": 0.9375,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+inoyu-mcp-unomi-server",
+          "fee": 11,
+          "n_hidden": 16,
+          "loops_count": 1,
+          "n_effective": 14.3054,
+          "leverage_variance": 0.05599,
+          "p_effective_random": 0.9375,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-pinecone",
+          "fee": 11,
+          "n_hidden": 16,
+          "loops_count": 0,
+          "n_effective": 15.1701,
+          "leverage_variance": 0.025856,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-server-rememberizer",
+          "fee": 11,
+          "n_hidden": 16,
+          "loops_count": 1,
+          "n_effective": 14.3054,
+          "leverage_variance": 0.05599,
+          "p_effective_random": 0.9375,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+playwright",
+          "fee": 11,
+          "n_hidden": 16,
+          "loops_count": 1,
+          "n_effective": 14.5616,
+          "leverage_variance": 0.046689,
+          "p_effective_random": 0.9375,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+tavily",
+          "fee": 11,
+          "n_hidden": 16,
+          "loops_count": 0,
+          "n_effective": 15.1701,
+          "leverage_variance": 0.025856,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        }
+      ]
+    },
+    {
+      "fee": 12,
+      "n_compositions": 7,
+      "has_loops": 2,
+      "no_loops": 5,
+      "loops_range": [
+        0,
+        1
+      ],
+      "n_effective_range": 3.3459,
+      "p_effective_range": 0.0667,
+      "mean_p_effective_random": 0.9825,
+      "compositions": [
+        {
+          "composition": "filesystem+mcp-server-cloudflare",
+          "fee": 12,
+          "n_hidden": 14,
+          "loops_count": 0,
+          "n_effective": 13.6063,
+          "leverage_variance": 0.021259,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+notion",
+          "fee": 12,
+          "n_hidden": 15,
+          "loops_count": 1,
+          "n_effective": 13.6063,
+          "leverage_variance": 0.065556,
+          "p_effective_random": 0.9333,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+ns-mcp-server",
+          "fee": 12,
+          "n_hidden": 14,
+          "loops_count": 0,
+          "n_effective": 13.6063,
+          "leverage_variance": 0.021259,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "filesystem+playwright",
+          "fee": 12,
+          "n_hidden": 13,
+          "loops_count": 0,
+          "n_effective": 13.0,
+          "leverage_variance": 0.0,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-server-cloudflare",
+          "fee": 12,
+          "n_hidden": 17,
+          "loops_count": 0,
+          "n_effective": 16.3459,
+          "leverage_variance": 0.019937,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+ns-mcp-server",
+          "fee": 12,
+          "n_hidden": 17,
+          "loops_count": 0,
+          "n_effective": 16.3459,
+          "leverage_variance": 0.019937,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+todoist-mcp-server",
+          "fee": 12,
+          "n_hidden": 18,
+          "loops_count": 1,
+          "n_effective": 16.3459,
+          "leverage_variance": 0.044974,
+          "p_effective_random": 0.9444,
+          "geometry_guided_first_step": 1
+        }
+      ]
+    },
+    {
+      "fee": 13,
+      "n_compositions": 3,
+      "has_loops": 1,
+      "no_loops": 2,
+      "loops_range": [
+        0,
+        1
+      ],
+      "n_effective_range": 2.723,
+      "p_effective_range": 0.0556,
+      "mean_p_effective_random": 0.9815,
+      "compositions": [
+        {
+          "composition": "filesystem+todoist-mcp-server",
+          "fee": 13,
+          "n_hidden": 15,
+          "loops_count": 0,
+          "n_effective": 14.8029,
+          "leverage_variance": 0.01,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+mcp-xmind",
+          "fee": 13,
+          "n_hidden": 18,
+          "loops_count": 1,
+          "n_effective": 16.6074,
+          "leverage_variance": 0.043739,
+          "p_effective_random": 0.9444,
+          "geometry_guided_first_step": 1
+        },
+        {
+          "composition": "github+notion",
+          "fee": 13,
+          "n_hidden": 18,
+          "loops_count": 0,
+          "n_effective": 17.5259,
+          "leverage_variance": 0.014109,
+          "p_effective_random": 1.0,
+          "geometry_guided_first_step": 1
+        }
+      ]
+    }
+  ],
+  "best_contrasts": [
+    {
+      "fee": 1,
+      "worst": {
+        "composition": "gtasks-mcp+notion",
+        "n_hidden": 4,
+        "loops": 2,
+        "p_effective": 0.5
+      },
+      "best": {
+        "composition": "ns-mcp-server+x-mcp",
+        "n_hidden": 2,
+        "loops": 0,
+        "p_effective": 1.0
+      },
+      "p_effective_gap": 0.5
+    },
+    {
+      "fee": 2,
+      "worst": {
+        "composition": "gtasks-mcp+mcp-xmind",
+        "n_hidden": 4,
+        "loops": 1,
+        "p_effective": 0.75
+      },
+      "best": {
+        "composition": "todoist-mcp-server+x-mcp",
+        "n_hidden": 3,
+        "loops": 0,
+        "p_effective": 1.0
+      },
+      "p_effective_gap": 0.25
+    },
+    {
+      "fee": 3,
+      "worst": {
+        "composition": "mcp-server-cloudflare+notion",
+        "n_hidden": 5,
+        "loops": 1,
+        "p_effective": 0.8
+      },
+      "best": {
+        "composition": "ns-mcp-server+todoist-mcp-server",
+        "n_hidden": 5,
+        "loops": 0,
+        "p_effective": 1.0
+      },
+      "p_effective_gap": 0.2
+    },
+    {
+      "fee": 11,
+      "worst": {
+        "composition": "filesystem+gtasks-mcp",
+        "n_hidden": 13,
+        "loops": 1,
+        "p_effective": 0.9231
+      },
+      "best": {
+        "composition": "github+tavily",
+        "n_hidden": 16,
+        "loops": 0,
+        "p_effective": 1.0
+      },
+      "p_effective_gap": 0.0769
+    },
+    {
+      "fee": 12,
+      "worst": {
+        "composition": "filesystem+notion",
+        "n_hidden": 15,
+        "loops": 1,
+        "p_effective": 0.9333
+      },
+      "best": {
+        "composition": "github+ns-mcp-server",
+        "n_hidden": 17,
+        "loops": 0,
+        "p_effective": 1.0
+      },
+      "p_effective_gap": 0.0667
+    },
+    {
+      "fee": 13,
+      "worst": {
+        "composition": "github+mcp-xmind",
+        "n_hidden": 18,
+        "loops": 1,
+        "p_effective": 0.9444
+      },
+      "best": {
+        "composition": "github+notion",
+        "n_hidden": 18,
+        "loops": 0,
+        "p_effective": 1.0
+      },
+      "p_effective_gap": 0.0556
+    }
+  ],
+  "budget_curves_sample": [
+    {
+      "composition": "airtable-mcp+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "airtable-mcp+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "airtable-mcp+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "cognee-mcp-server+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "cognee-mcp-server+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "cognee-mcp-server+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "exa+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "exa+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "exa+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "fetch-mcp+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "fetch-mcp+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "fetch-mcp+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "flightradar24-mcp-server+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "flightradar24-mcp-server+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "flightradar24-mcp-server+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "gtasks-mcp+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "gtasks-mcp+notion",
+      "fee": 1,
+      "n_hidden": 4,
+      "loops": 2,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "composition": "gtasks-mcp+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+mcp-server-rememberizer",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+notion",
+      "fee": 1,
+      "n_hidden": 4,
+      "loops": 2,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-mongo-server+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-mongo-server+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-mongo-server+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-pinecone+tavily",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-playwright+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-playwright+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-playwright+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-aws+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-aws+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-aws+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-browserbase+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-browserbase+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-browserbase+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-chatsum+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-chatsum+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-chatsum+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-fetch",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-kubernetes",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-neon",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-rememberizer",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-tmdb",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-snowflake-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-vegalite-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-cloudflare+memory",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-cloudflare+needle-mcp",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-cloudflare+needle-mcp_tools",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-cloudflare+openrpc-mpc-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "loops": 0,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "composition": "mcp-server-cloudflare+playwright",
+      "fee": 1,
+      "n_hidden": 3,
+      "loops": 1,
+      "budget_range": [
+        1,
+        2
+      ],
+      "residual_guided": [
+        0,
+        0
+      ],
+      "residual_random": [
+        0.3333,
+        0
+      ]
+    }
+  ]
+}

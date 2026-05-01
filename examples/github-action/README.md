@@ -1,6 +1,6 @@
 # Bulla GitHub Action
 
-Bulla provides a GitHub Action for automated coherence analysis of agent tool compositions. It supports two modes:
+Bulla provides a GitHub Action for automated coherence analysis of agentic compositions. It supports two modes:
 
 - **Check mode** (default): Analyzes composition YAML files for blind spots
 - **Audit mode**: Scans MCP server manifests for cross-server convention risk

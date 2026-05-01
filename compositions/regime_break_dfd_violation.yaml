@@ -1,0 +1,46 @@
+# Regime-break construction: DFD violation
+#
+# Purpose: demonstrate that the Laplacian Collapse Theorem's
+# block-diagonal decomposition K = ⊕_d K_d requires DFD (no (tool, field)
+# pair appears in two distinct dimensions). Under DFD violation, K is
+# no longer block-diagonal; cross-dimension correlations appear.
+#
+# Structure: two tools, one edge, with TWO dimensions both referencing
+# the same (tool_a, x) field. This violates DFD: (tool_a, x) appears in
+# two distinct dimension names (`dim1` and `dim2`).
+#
+# Expected behavior:
+#   - rank(K) = fee (backbone still holds — this is regime-independent)
+#   - K is NOT block-diagonal (the (tool_a, x) column appears in rows
+#     for both dim1 and dim2)
+#   - Leverage departs from (|H|-1)/|H| formula
+#   - Coloops may appear (unusual in the 703 corpus)
+
+name: DFD Violation Regime Break
+
+tools:
+  tool_a:
+    internal_state:
+      - x
+      - y
+    observable_schema: []
+
+  tool_b:
+    internal_state:
+      - u
+      - v
+    observable_schema: []
+
+edges:
+  - from: tool_a
+    to: tool_b
+    dimensions:
+      - name: dim1
+        from_field: x         # (tool_a, x) in dim1
+        to_field: u
+      - name: dim2
+        from_field: x         # (tool_a, x) ALSO in dim2 — DFD violation
+        to_field: v
+      - name: dim3
+        from_field: y
+        to_field: u

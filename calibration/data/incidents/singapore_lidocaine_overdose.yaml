@@ -1,0 +1,27 @@
+name: singapore_lidocaine_overdose
+description: 'Singapore lidocaine IV dose-rate confusion (documented death). mg/kg/hr
+  vs mg/min unit mismatch. UCUM detects: rate_unit boundary fee.'
+tools:
+  icu_protocol:
+    internal_state:
+    - patient_id
+    - rate_value
+    - rate_unit
+    observable_schema:
+    - patient_id
+    - rate_value
+  infusion_pump:
+    internal_state:
+    - patient_id
+    - rate_value
+    - rate_unit
+    observable_schema:
+    - patient_id
+    - rate_value
+edges:
+- from: icu_protocol
+  to: infusion_pump
+  dimensions:
+  - name: rate_unit_match
+    from_field: rate_unit
+    to_field: rate_unit

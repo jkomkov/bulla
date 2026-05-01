@@ -1,0 +1,28 @@
+name: t1_settlement_transition
+description: '2024 US T+1 settlement transition ($3.1B margin impact). US moved T+2→T+1;
+  non-US counterparties stayed T+2; cross-border trades had cash-flow gaps. ISO-8601
+  detects: settlement_cycle boundary fee.'
+tools:
+  us_dtcc:
+    internal_state:
+    - trade_id
+    - settlement_date
+    - settlement_cycle
+    observable_schema:
+    - trade_id
+    - settlement_date
+  eu_clearer:
+    internal_state:
+    - trade_id
+    - settlement_date
+    - settlement_cycle
+    observable_schema:
+    - trade_id
+    - settlement_date
+edges:
+- from: us_dtcc
+  to: eu_clearer
+  dimensions:
+  - name: settlement_cycle_match
+    from_field: settlement_cycle
+    to_field: settlement_cycle

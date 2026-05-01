@@ -1,0 +1,28 @@
+name: gimli_glider
+description: '1983 Air Canada Gimli Glider (near-catastrophe). Ground crew used lbs/liter
+  for fuel density; new metric 767 expected kg/liter. Aircraft ran out at 41,000 feet.
+  UCUM detects: amount_unit boundary fee on density field.'
+tools:
+  ground_fueling:
+    internal_state:
+    - fuel_mass
+    - fuel_volume
+    - density_unit
+    observable_schema:
+    - fuel_mass
+    - fuel_volume
+  flight_planning:
+    internal_state:
+    - fuel_mass
+    - fuel_volume
+    - density_unit
+    observable_schema:
+    - fuel_mass
+    - fuel_volume
+edges:
+- from: ground_fueling
+  to: flight_planning
+  dimensions:
+  - name: density_unit_match
+    from_field: density_unit
+    to_field: density_unit

@@ -1,6 +1,6 @@
 # bulla
 
-Witness kernel for agent tool compositions — diagnose, attest, seal.
+Witness kernel for agentic compositions — diagnose, attest, seal.
 
 When AI agents compose tools into pipelines, implicit semantic assumptions (date formats, unit scales, path conventions) can silently produce wrong results. Schema validation passes, but the pipeline is broken. Bulla computes the **coherence fee**: the exact number of independent semantic dimensions that bilateral verification cannot detect.
 
@@ -56,7 +56,7 @@ result = compose_multi({
 })
 
 print(result.diagnostic.coherence_fee)   # 30
-print(result.receipt.disposition.value)  # "refuse"
+print(result.receipt.disposition.value)  # "refuse_pending_disclosure"
 print(result.decomposition.boundary_fee) # 1
 ```
 
@@ -86,9 +86,62 @@ The measurement layer has **zero imports** from the witness layer. Measurement d
 | `bulla witness` | Diagnose and emit WitnessReceipt as JSON |
 | `bulla bridge` | Auto-bridge and emit patched YAML |
 | `bulla serve` | MCP stdio server |
+| `bulla proxy` | Replay a session trace with flow-level structural diagnosis |
 | `bulla discover` | LLM-powered convention dimension discovery |
 
 Output formats: `--format text` (default), `--format json`, `--format sarif`.
+
+### Standards ingestion (new in 0.36.0)
+
+Bulla ships **19 seed packs** covering the canonical commercial standards plus 5 restricted-source vocabularies as metadata-only references:
+
+| Tier | Packs | Notes |
+|---|---|---|
+| **A — fully open, inline** | `iso-4217`, `iso-8601`, `iso-3166`, `iso-639`, `iana-media-types`, `naics-2022` | Currencies, dates, countries, languages, MIME, industry codes |
+| **B — large open, registry-backed** | `ucum`, `fix-4.4`, `fix-5.0`, `gs1`, `un-edifact`, `fhir-r4`, `fhir-r5`, `icd-10-cm` | Units, FIX/SWIFT/FHIR/ICD-10/EDIFACT/GS1; `values_registry` points to authoritative source |
+| **Restricted (metadata-only)** | `who-icd-10`, `swift-mt-mx`, `hl7-v2`, `umls-mappings`, `iso-20022` | Pack ships dimension metadata only — licensed values stay behind the registry pointer; consumer obtains license to fetch |
+
+```bash
+# List + inspect packs
+bulla pack status src/bulla/packs/seed/iso-4217.yaml
+bulla pack verify src/bulla/packs/seed/ucum.yaml          # static inspection (no network)
+bulla pack lint   src/bulla/packs/seed/icd-10-cm.yaml     # advisory style hints
+bulla pack validate path/to/your/pack.yaml                # schema check
+```
+
+**Architectural extensions (Extensions A–E)** behind the standards-ingestion sprint:
+
+- **`license`** at pack level — `registry_license: open | research-only | restricted` describes the upstream registry, not the pack's own metadata (which is always openly authored).
+- **`values_registry`** at dimension level — pointer to an external content-addressed registry. Hash format: real `sha256:<64-hex>` or sentinel `placeholder:awaiting-ingest` / `placeholder:awaiting-license`. Literal `sha256:0...0` is rejected by the validator.
+- **`derives_from`** on `PackRef` — per-pack standard-version provenance recorded on every receipt's `active_packs`.
+- **Alias-form `known_values`** — items widen from `string` to `{ canonical, aliases, source_codes }`. Strictly additive; legacy packs unchanged. A field whose enum lists `"840"` (ISO-4217 numeric) classifies under the same dimension as `"USD"`.
+- **Passive `mappings:`** in regular packs — receipt-side translation tables (e.g. ICD-9 ↔ ICD-10 GEMs, FHIR R4 ↔ R5 resource-type renames). Value-blind: the coboundary uses dimension *names*, so mappings don't change H¹.
+
+End-to-end demos at `calibration/data/demos/`:
+- `cross_pack_receipt_billing.yaml` — clinical_emr → billing_system → payer_gateway crossing ISO 4217 + FHIR R4 + ICD-10-CM seams in a single signed receipt.
+- `restricted_pack_metadata_only.yaml` — composition referencing a license-gated pack issues a valid receipt without consumer-side credentials; `bulla pack verify` returns `status='placeholder'` until a real ingest is performed.
+
+Authoritative-source registry hashes for 6 of 12 open packs (UCUM, NAICS 2022, ISO 639, IANA Media Types, FHIR R4, FHIR R5) are real SHA-256 from live fetches; the other 6 carry the `placeholder:awaiting-ingest` sentinel until their next ingest cycle. See `docs/STANDARDS-INGEST-SOURCES.md` and `docs/STANDARDS-PACK-MAINTENANCE.md` for the full ownership / drift-handling protocol.
+
+### Witness-geometry diagnostics (new in 0.35.0)
+
+Beyond the scalar coherence fee, Bulla can surface the full *witness geometry* of a composition: per-field leverage scores, concentration index (`N_eff`), coloops/loops, and the matroid-greedy minimum-cost disclosure basis. All quantities are exact rationals (`Fraction`), never floats.
+
+```bash
+# Show leverage, N_eff, coloops, and greedy basis on a composition
+bulla diagnose composition.yaml --witness
+
+# On a live MCP server or manifest (gauge is the prescriptive command)
+bulla gauge tools.json --leverage
+
+# Ask which hidden fields substitute for a target (effective resistance)
+bulla gauge tools.json --substitutes read_file path
+
+# Cost-weighted greedy: YAML maps "<tool>:<field>" → rational cost string
+bulla gauge tools.json --costs costs.yaml
+```
+
+JSON output adds a `witness_geometry` block only when the flag is set — default output remains byte-identical to 0.34.0. The mathematical backing is described in the [Witness Gram paper](../papers/hierarchical-fee/paper/witness-gram.pdf). The **research-program** Lean ledger documents **56** Aristotle-verified theorems across the witness-geometry chain (0 `sorry`); see [`papers/sheaf/lean/LEAN-CLAIM-LEDGER.md`](../papers/sheaf/lean/LEAN-CLAIM-LEDGER.md). The PyPI package does not vendor Lean — it implements the measurement and receipt layers in Python.
 
 ## Quick start with `bulla gauge`
 
@@ -189,7 +242,7 @@ Each unit of fee is an independent semantic dimension invisible to pairwise chec
 
 ## Witness Contract
 
-Every receipt binds three hashes: **composition** (what was proposed), **diagnostic** (what was measured), **receipt** (what was witnessed). Receipts chain via `parent_receipt_hash` for auditable repair flows.
+Every receipt binds three hashes: **composition** (what was proposed), **diagnostic** (what was measured), **receipt** (what was witnessed). Receipts chain via `parent_receipt_hashes` for auditable repair flows.
 
 See [WITNESS-CONTRACT.md](WITNESS-CONTRACT.md) for the normative specification.
 

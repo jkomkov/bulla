@@ -1,0 +1,59 @@
+{
+  "experiment": "familiarity_vocabulary_probe",
+  "model": "anthropic/claude-sonnet-4",
+  "n_compositions": 60,
+  "n_hidden_field_instances": 103,
+  "n_correctly_identified": 47,
+  "overall_identification_rate": 0.456,
+  "vocabulary_phenomenon": {
+    "path_family_fields": [
+      "path",
+      "paths",
+      "filePath"
+    ],
+    "path_family_total": 78,
+    "path_family_correct": 46,
+    "path_family_rate": 0.59,
+    "non_path_fields": [
+      "direction",
+      "state",
+      "after",
+      "sort.timestamp",
+      "page"
+    ],
+    "non_path_total": 25,
+    "non_path_correct": 1,
+    "non_path_rate": 0.04,
+    "chi_squared": 20.9,
+    "p_value": 2.42e-06,
+    "odds_ratio": 34.5,
+    "path_contribution_to_all_correct": 0.98
+  },
+  "morphological_gradient": {
+    "path_singular": {
+      "total": 41,
+      "correct": 35,
+      "rate": 0.854
+    },
+    "paths_plural": {
+      "total": 36,
+      "correct": 10,
+      "rate": 0.278
+    },
+    "filePath_camelCase": {
+      "total": 1,
+      "correct": 1,
+      "rate": 1.0
+    }
+  },
+  "interpretation": {
+    "mechanism": "morphological_retrieval",
+    "evidence": [
+      "path (85%) >> paths (28%): same concept, canonical form wins",
+      "direction/state/after (0%): equally hidden, not in training vocabulary",
+      "context_independence: path flagged regardless of composition partner"
+    ],
+    "effective_vocabulary_size": 2,
+    "claim": "Hiddenness identification is retrieval from memorized vocabulary, not compositional reasoning"
+  }
+}

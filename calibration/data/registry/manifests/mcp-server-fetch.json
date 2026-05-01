@@ -1,0 +1,93 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "index_scan:npx -y @tokenizin/mcp-npx-fetch",
+    "server_package": "@tokenizin/mcp-npx-fetch",
+    "capture_date": "2026-04-07T05:16:42.293640+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:c91d095eb5f52c7b08a3f4fb4430e30d8a46f11239200702bb7ee53a75d6f304",
+    "category": "community",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "fetch_html",
+      "description": "Fetch a website and return the content as HTML",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "URL of the website to fetch"
+          },
+          "headers": {
+            "type": "object",
+            "description": "Optional headers to include in the request"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    },
+    {
+      "name": "fetch_markdown",
+      "description": "Fetch a website and return the content as Markdown",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "URL of the website to fetch"
+          },
+          "headers": {
+            "type": "object",
+            "description": "Optional headers to include in the request"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    },
+    {
+      "name": "fetch_txt",
+      "description": "Fetch a website, return the content as plain text (no HTML)",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "URL of the website to fetch"
+          },
+          "headers": {
+            "type": "object",
+            "description": "Optional headers to include in the request"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    },
+    {
+      "name": "fetch_json",
+      "description": "Fetch a JSON file from a URL",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "URL of the JSON to fetch"
+          },
+          "headers": {
+            "type": "object",
+            "description": "Optional headers to include in the request"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    }
+  ]
+}

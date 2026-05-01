@@ -14,6 +14,7 @@ import json
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
+from fractions import Fraction
 
 
 @dataclass(frozen=True)
@@ -133,10 +134,19 @@ class Diagnostic:
     bridges: tuple[Bridge, ...]
     h1_after_bridge: int
     n_unbridged: int = 0
+    # Witness-geometry diagnostics (populated only when
+    # diagnose(..., include_witness_geometry=True) is called and
+    # coherence_fee > 0; otherwise empty tuples / None).
+    hidden_basis: tuple[tuple[str, str], ...] = ()
+    leverage_scores: tuple[Fraction, ...] = ()
+    n_effective: Fraction | None = None
+    coloops: tuple[tuple[str, str], ...] = ()
+    loops: tuple[tuple[str, str], ...] = ()
+    disclosure_set: tuple[tuple[str, str], ...] = ()
 
     def content_hash(self) -> str:
         """Deterministic hash of measurement content (excludes timestamps)."""
-        obj = {
+        obj: dict = {
             "name": self.name,
             "n_tools": self.n_tools,
             "n_edges": self.n_edges,
@@ -163,9 +173,159 @@ class Diagnostic:
             "h1_after_bridge": self.h1_after_bridge,
             "n_unbridged": self.n_unbridged,
         }
+        # Witness-geometry fields enter the hash ONLY when populated,
+        # so receipts produced before this field-family existed still
+        # hash identically.
+        if self.leverage_scores:
+            obj["witness_geometry"] = {
+                "hidden_basis": [list(p) for p in self.hidden_basis],
+                "leverage_scores": [str(x) for x in self.leverage_scores],
+                "n_effective": (
+                    None if self.n_effective is None else str(self.n_effective)
+                ),
+                "coloops": [list(p) for p in self.coloops],
+                "loops": [list(p) for p in self.loops],
+                "disclosure_set": [list(p) for p in self.disclosure_set],
+            }
         return hashlib.sha256(
             json.dumps(obj, sort_keys=True).encode()
         ).hexdigest()
+
+
+# ── Structural diagnostic ────────────────────────────────────────────
+#
+# Parallel to the cohomological diagnostic (Diagnostic above).
+# The coboundary measures the cost of opacity (hidden conventions).
+# The structural scan measures the cost of incompatibility (visible
+# fields with disagreeing schemas).  Together: total verification bill.
+
+
+@dataclass(frozen=True)
+class SchemaOverlap:
+    """A detected schema relationship between two fields on different tools.
+
+    Base type covering both agreements and contradictions.  Agreements
+    feed micro-pack generation; contradictions feed the diagnostic.
+    Same comparison pipeline, different consumer.
+    """
+
+    field_a: str
+    field_b: str
+    tool_a: str
+    tool_b: str
+    similarity: float
+    name_match: bool
+    category: str  # "contradiction" | "homonym" | "synonym" | "agreement"
+    details: str
+
+    def to_dict(self) -> dict:
+        return {
+            "field_a": self.field_a,
+            "field_b": self.field_b,
+            "tool_a": self.tool_a,
+            "tool_b": self.tool_b,
+            "similarity": self.similarity,
+            "name_match": self.name_match,
+            "category": self.category,
+            "details": self.details,
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> SchemaOverlap:
+        return cls(
+            field_a=d["field_a"],
+            field_b=d["field_b"],
+            tool_a=d["tool_a"],
+            tool_b=d["tool_b"],
+            similarity=d["similarity"],
+            name_match=d["name_match"],
+            category=d["category"],
+            details=d["details"],
+        )
+
+
+@dataclass(frozen=True)
+class SchemaContradiction:
+    """A visible-but-incompatible field pair across tools.
+
+    Structural contradictions are about observable fields that disagree
+    on constraints.  This is a different failure class from blind spots
+    (hidden fields): the caller CAN see both fields, but the schemas
+    are incompatible and the composition will fail at runtime.
+    """
+
+    field_a: str
+    field_b: str
+    tool_a: str
+    tool_b: str
+    mismatch_type: str  # "type" | "format" | "enum" | "range" | "pattern"
+    severity: float  # 0.0–1.0
+    details: str
+
+    def to_dict(self) -> dict:
+        return {
+            "field_a": self.field_a,
+            "field_b": self.field_b,
+            "tool_a": self.tool_a,
+            "tool_b": self.tool_b,
+            "mismatch_type": self.mismatch_type,
+            "severity": self.severity,
+            "details": self.details,
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> SchemaContradiction:
+        return cls(
+            field_a=d["field_a"],
+            field_b=d["field_b"],
+            tool_a=d["tool_a"],
+            tool_b=d["tool_b"],
+            mismatch_type=d["mismatch_type"],
+            severity=d["severity"],
+            details=d["details"],
+        )
+
+
+@dataclass(frozen=True)
+class StructuralDiagnostic:
+    """Parallel to Diagnostic: schema-level findings across tools.
+
+    The coboundary diagnostic measures h1_obs - h1_full (the coherence
+    fee from hidden conventions).  The structural diagnostic measures
+    visible constraint disagreements (the contradiction score from
+    incompatible schemas).
+
+    ``overlaps`` contains ALL findings: agreements, contradictions,
+    homonyms, synonyms.  ``contradictions`` is the diagnostic subset.
+    Agreements are the micro-pack input.
+    """
+
+    overlaps: tuple[SchemaOverlap, ...]
+    contradictions: tuple[SchemaContradiction, ...]
+    n_overlapping_fields: int
+    n_contradicted: int
+    contradiction_score: int  # sum of severities, rounded
+
+    def to_dict(self) -> dict:
+        return {
+            "overlaps": [o.to_dict() for o in self.overlaps],
+            "contradictions": [c.to_dict() for c in self.contradictions],
+            "n_overlapping_fields": self.n_overlapping_fields,
+            "n_contradicted": self.n_contradicted,
+            "contradiction_score": self.contradiction_score,
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> StructuralDiagnostic:
+        return cls(
+            overlaps=tuple(SchemaOverlap.from_dict(o) for o in d["overlaps"]),
+            contradictions=tuple(
+                SchemaContradiction.from_dict(c) for c in d["contradictions"]
+            ),
+            n_overlapping_fields=d["n_overlapping_fields"],
+            n_contradicted=d["n_contradicted"],
+            contradiction_score=d["contradiction_score"],
+        )
 
 
 # ── Errors ───────────────────────────────────────────────────────────
@@ -193,7 +353,117 @@ class WitnessError(Exception):
         super().__init__(f"[{code.name}] {message}")
 
 
+class RegistryAccessErrorCode(Enum):
+    """Machine-readable error vocabulary for values_registry access.
+
+    Raised by the registry-fetch path (``bulla packs verify`` and the
+    credential-aware loader) when a pack's ``values_registry`` pointer
+    cannot be materialized — typically because the consumer has not
+    obtained the license required by the upstream registry.
+
+    LICENSE_REQUIRED is the load-bearing case: a pack with
+    ``license.registry_license`` of ``research-only`` or ``restricted``
+    needs an explicit license credential before its values can be
+    fetched. The error names which license is missing so the caller
+    knows what to obtain.
+
+    PLACEHOLDER_HASH surfaces when a pack's values_registry pointer
+    uses the ``placeholder:<reason>`` sentinel format instead of a
+    real ``sha256:...`` hash. This indicates the pack is structurally
+    ready to verify but has not yet had a real ingest performed. The
+    distinction is load-bearing because a literal ``sha256:0...0``
+    placeholder would be silently treated as ``REGISTRY_HASH_MISMATCH``
+    (verification failure), masking the "not yet checkable" state
+    behind a "checked, mismatched" signal.
+    """
+
+    LICENSE_REQUIRED = "license_required"
+    REGISTRY_UNAVAILABLE = "registry_unavailable"
+    REGISTRY_HASH_MISMATCH = "registry_hash_mismatch"
+    INVALID_REGISTRY_POINTER = "invalid_registry_pointer"
+    PLACEHOLDER_HASH = "placeholder_hash"
+
+
+class RegistryAccessError(Exception):
+    """Typed error from the registry-fetch / values_registry path.
+
+    Distinct from ``WitnessError`` because registry-access failures live
+    at a different layer (fetch + license + integrity) and are typically
+    recoverable by the caller (obtain the license, retry, or fall back
+    to metadata-only verification).
+
+    ``license_id`` (when relevant) names the upstream license the
+    consumer must obtain — e.g. ``"NLM-UMLS"``, ``"WHO-ICD-10"``,
+    ``"SWIFT-MEMBER"``. Empty for license-independent errors
+    (registry unreachable, hash mismatch, etc.).
+    """
+
+    def __init__(
+        self,
+        code: RegistryAccessErrorCode,
+        message: str,
+        *,
+        license_id: str = "",
+        registry_uri: str = "",
+    ) -> None:
+        self.code = code
+        self.message = message
+        self.license_id = license_id
+        self.registry_uri = registry_uri
+        suffix = ""
+        if license_id:
+            suffix += f" license_id={license_id!r}"
+        if registry_uri:
+            suffix += f" registry_uri={registry_uri!r}"
+        super().__init__(f"[{code.name}] {message}{suffix}")
+
+
 # ── Lexical constitution ──────────────────────────────────────────────
+
+
+@dataclass(frozen=True)
+class StandardProvenance:
+    """Underlying-standard provenance for a convention pack.
+
+    When a pack's dimension metadata is derived from a published
+    standard (ISO 4217, FHIR R4, ICD-10-CM, etc.), this object
+    records which revision the pack mirrors, where the canonical
+    artifact lives, and a content hash of the source document. The
+    hash binds the pack to the exact standard revision so historical
+    receipts can be replayed or audited against the right version.
+
+    ``standard`` is the canonical short name (e.g. ``"ISO-4217"``,
+    ``"FHIR"``, ``"ICD-10-CM"``). ``version`` is the standard's own
+    version label (``"2024"``, ``"R4"``, ``"2024.10"``).
+    ``source_uri`` points to the authoritative published artifact;
+    ``source_hash`` is the SHA-256 of that artifact's bytes.
+
+    Lives inside ``PackRef`` rather than as a top-level receipt
+    field so multi-pack receipts carry per-standard provenance
+    naturally.
+    """
+
+    standard: str
+    version: str
+    source_uri: str = ""
+    source_hash: str = ""
+
+    def to_dict(self) -> dict:
+        d: dict = {"standard": self.standard, "version": self.version}
+        if self.source_uri:
+            d["source_uri"] = self.source_uri
+        if self.source_hash:
+            d["source_hash"] = self.source_hash
+        return d
+
+    @classmethod
+    def from_dict(cls, d: dict) -> StandardProvenance:
+        return cls(
+            standard=d.get("standard", ""),
+            version=d.get("version", ""),
+            source_uri=d.get("source_uri", ""),
+            source_hash=d.get("source_hash", ""),
+        )
 
 
 @dataclass(frozen=True)
@@ -204,14 +474,25 @@ class PackRef:
     later packs override earlier ones on dimension collisions, so
     [base, financial] and [financial, base] produce different active
     vocabularies and different receipt hashes.
+
+    ``derives_from`` (Extension C — Standards Ingest sprint) is the
+    optional pointer to the underlying standard the pack mirrors.
+    Lives on the ref rather than the receipt so multi-pack receipts
+    naturally carry per-standard provenance.  None for packs that are
+    not derived from an external standard (e.g. the base pack itself,
+    LLM-discovered micro-packs).
     """
 
     name: str
     version: str
     hash: str
+    derives_from: StandardProvenance | None = None
 
     def to_dict(self) -> dict:
-        return {"name": self.name, "version": self.version, "hash": self.hash}
+        d: dict = {"name": self.name, "version": self.version, "hash": self.hash}
+        if self.derives_from is not None:
+            d["derives_from"] = self.derives_from.to_dict()
+        return d
 
 
 @dataclass(frozen=True)
@@ -377,7 +658,8 @@ class PolicyProfile:
     max_unknown: int = -1  # -1 = unlimited
     require_bridge: bool = True
     max_unmet_obligations: int = -1  # -1 = disabled, 0 = strict
-    max_contradictions: int = -1  # -1 = disabled, 0 = strict
+    max_contradictions: int = -1  # -1 = disabled, 0 = strict (convention contradictions)
+    max_structural_contradictions: int = -1  # -1 = disabled, 0 = strict (schema contradictions)
 
     def to_dict(self) -> dict:
         return {
@@ -388,6 +670,7 @@ class PolicyProfile:
             "require_bridge": self.require_bridge,
             "max_unmet_obligations": self.max_unmet_obligations,
             "max_contradictions": self.max_contradictions,
+            "max_structural_contradictions": self.max_structural_contradictions,
         }
 
 
@@ -402,11 +685,18 @@ class Disposition(Enum):
 
     Layer C (judgment): maps kernel measurement to a decision an agent
     can act on without interpreting the mathematics.
+
+    Four quadrants on the 2D risk surface (fee x contradiction_score):
+      fee=0, contradictions=0  -> PROCEED
+      fee>0, contradictions=0  -> PROCEED_WITH_BRIDGE / REFUSE
+      fee=0, contradictions>0  -> PROCEED_WITH_CAUTION
+      fee>0, contradictions>0  -> REFUSE
     """
 
     PROCEED = "proceed"
     PROCEED_WITH_RECEIPT = "proceed_with_receipt"
     PROCEED_WITH_BRIDGE = "proceed_with_bridge"
+    PROCEED_WITH_CAUTION = "proceed_with_caution"
     REFUSE_PENDING_DISCLOSURE = "refuse_pending_disclosure"
     REFUSE_PENDING_HUMAN_REVIEW = "refuse_pending_human_review"
 
@@ -476,6 +766,17 @@ class WitnessReceipt:
     boundary_obligations: tuple[BoundaryObligation, ...] | None = None
     contradictions: tuple[ContradictionReport, ...] | None = None
     unmet_obligations: int = 0
+    structural_contradictions: tuple[SchemaContradiction, ...] | None = None
+    contradiction_score: int = 0
+    pack_attributions: tuple[str, ...] | None = None
+    """Hash-references (e.g. sha256:...) to NOTICES.md entries that the
+    standards bodies underlying ``active_packs`` require crediting.
+
+    Hash-references rather than inline text to prevent receipt bloat.
+    Resolved via the docs/STANDARDS-INGEST-NOTICES.md attribution master
+    file (Phase 6 deliverable). When all active packs carry only ``open``
+    registry licenses with no attribution requirement, this is None.
+    """
 
     def _hash_input(self) -> dict:
         """Single source of truth for the receipt's hashable content.
@@ -487,11 +788,12 @@ class WitnessReceipt:
         same two keys.
 
         ``parent_receipt_hashes``, ``inline_dimensions``,
-        ``boundary_obligations``, ``contradictions``, and
-        ``unmet_obligations`` are included ONLY when non-None/non-zero
-        to preserve backward compatibility: pre-v0.32.0 receipts
-        (which lack ``unmet_obligations``) must produce the same hash
-        when verified by new code.
+        ``boundary_obligations``, ``contradictions``,
+        ``unmet_obligations``, ``structural_contradictions``,
+        ``contradiction_score``, and ``pack_attributions`` are included
+        ONLY when non-None/non-zero to preserve backward compatibility:
+        pre-existing receipts must produce the same hash when verified
+        by new code.
         """
         d: dict = {
             "receipt_version": self.receipt_version,
@@ -523,6 +825,14 @@ class WitnessReceipt:
             d["contradictions"] = [c.to_dict() for c in self.contradictions]
         if self.unmet_obligations > 0:
             d["unmet_obligations"] = self.unmet_obligations
+        if self.structural_contradictions is not None:
+            d["structural_contradictions"] = [
+                c.to_dict() for c in self.structural_contradictions
+            ]
+        if self.contradiction_score > 0:
+            d["contradiction_score"] = self.contradiction_score
+        if self.pack_attributions is not None:
+            d["pack_attributions"] = list(self.pack_attributions)
         return d
 
     @property

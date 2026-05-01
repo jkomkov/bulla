@@ -1,0 +1,72 @@
+[
+  {
+    "pair": "airtable-mcp+github",
+    "target": "state",
+    "rename_to": "filepath",
+    "baseline_hit": false,
+    "rename_hit": false
+  },
+  {
+    "pair": "cognee-mcp-server+github",
+    "target": "state",
+    "rename_to": "filepath",
+    "baseline_hit": false,
+    "rename_hit": false
+  },
+  {
+    "pair": "exa+github",
+    "target": "state",
+    "rename_to": "filepath",
+    "baseline_hit": false,
+    "rename_hit": false
+  },
+  {
+    "pair": "fetch-mcp+github",
+    "target": "state",
+    "rename_to": "filepath",
+    "baseline_hit": false,
+    "rename_hit": false
+  },
+  {
+    "pair": "filesystem+github",
+    "target": "state",
+    "rename_to": "filepath",
+    "baseline_hit": false,
+    "rename_hit": false
+  },
+  {
+    "pair": "flightradar24-mcp-server+github",
+    "target": "state",
+    "rename_to": "filepath",
+    "baseline_hit": false,
+    "rename_hit": false
+  },
+  {
+    "pair": "github+gtasks-mcp",
+    "target": "state",
+    "rename_to": "filepath",
+    "baseline_hit": false,
+    "rename_hit": false
+  },
+  {
+    "pair": "github+inoyu-mcp-unomi-server",
+    "target": "state",
+    "rename_to": "filepath",
+    "baseline_hit": false,
+    "rename_hit": false
+  },
+  {
+    "pair": "github+mcp-mongo-server",
+    "target": "state",
+    "rename_to": "filepath",
+    "baseline_hit": false,
+    "rename_hit": false
+  },
+  {
+    "pair": "github+mcp-pinecone",
+    "target": "state",
+    "rename_to": "filepath",
+    "baseline_hit": false,
+    "rename_hit": false
+  }
+]

@@ -1,0 +1,3814 @@
+{
+  "summary": {
+    "n_compositions": 239,
+    "n_errors": 0,
+    "max_fee_analyzed": 14
+  },
+  "per_composition": [
+    {
+      "composition": "airtable-mcp+filesystem",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "airtable-mcp+github",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "airtable-mcp+mcp-server-cloudflare",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "airtable-mcp+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "airtable-mcp+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "airtable-mcp+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "airtable-mcp+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "cognee-mcp-server+filesystem",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "cognee-mcp-server+github",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "cognee-mcp-server+mcp-server-cloudflare",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "cognee-mcp-server+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "cognee-mcp-server+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "cognee-mcp-server+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "cognee-mcp-server+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "exa+filesystem",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "exa+github",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "exa+mcp-server-cloudflare",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "exa+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "exa+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "exa+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "exa+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "fetch-mcp+filesystem",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "fetch-mcp+github",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "fetch-mcp+mcp-server-cloudflare",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "fetch-mcp+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "fetch-mcp+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "fetch-mcp+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "fetch-mcp+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "filesystem+flightradar24-mcp-server",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+gtasks-mcp",
+      "fee": 11,
+      "component_sizes": [
+        12,
+        1
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.3704,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.0294
+    },
+    {
+      "composition": "filesystem+inoyu-mcp-unomi-server",
+      "fee": 11,
+      "component_sizes": [
+        12,
+        1
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.3704,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.0294
+    },
+    {
+      "composition": "filesystem+mcp-mongo-server",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+mcp-pinecone",
+      "fee": 11,
+      "component_sizes": [
+        12,
+        1
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.3704,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.0294
+    },
+    {
+      "composition": "filesystem+mcp-playwright",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+mcp-server-aws",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+mcp-server-browserbase",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+mcp-server-chatsum",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+mcp-server-cloudflare",
+      "fee": 12,
+      "component_sizes": [
+        12,
+        2
+      ],
+      "beta_formula": 24,
+      "beta_enumerated": 24,
+      "H_repair": 3.1781,
+      "n_distinct_optimal": 22,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.4074,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.625
+    },
+    {
+      "composition": "filesystem+mcp-server-fetch",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+mcp-server-kubernetes",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+mcp-server-neon",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+mcp-server-rememberizer",
+      "fee": 11,
+      "component_sizes": [
+        12,
+        1
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.3704,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.0294
+    },
+    {
+      "composition": "filesystem+mcp-server-tmdb",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+mcp-snowflake-server",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+mcp-vegalite-server",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+mcp-xmind",
+      "fee": 14,
+      "component_sizes": [
+        15
+      ],
+      "beta_formula": 15,
+      "beta_enumerated": 15,
+      "H_repair": 2.7081,
+      "n_distinct_optimal": 13,
+      "stability_ratio": 0.8667,
+      "tie_rate": 0.5,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.3704
+    },
+    {
+      "composition": "filesystem+memory",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+needle-mcp",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+needle-mcp_tools",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+notion",
+      "fee": 12,
+      "component_sizes": [
+        12,
+        2,
+        1
+      ],
+      "beta_formula": 24,
+      "beta_enumerated": 24,
+      "H_repair": 3.1781,
+      "n_distinct_optimal": 20,
+      "stability_ratio": 0.8333,
+      "tie_rate": 0.4259,
+      "median_margin": 1.0,
+      "mean_positive_margin": 2.1613
+    },
+    {
+      "composition": "filesystem+ns-mcp-server",
+      "fee": 12,
+      "component_sizes": [
+        12,
+        2
+      ],
+      "beta_formula": 24,
+      "beta_enumerated": 24,
+      "H_repair": 3.1781,
+      "n_distinct_optimal": 22,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.4074,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.625
+    },
+    {
+      "composition": "filesystem+openrpc-mpc-server",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+playwright",
+      "fee": 12,
+      "component_sizes": [
+        13
+      ],
+      "beta_formula": 13,
+      "beta_enumerated": 13,
+      "H_repair": 2.5649,
+      "n_distinct_optimal": 12,
+      "stability_ratio": 0.9231,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.0303
+    },
+    {
+      "composition": "filesystem+puppeteer",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+search1api-mcp",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+sequential-thinking",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+tavily",
+      "fee": 11,
+      "component_sizes": [
+        12,
+        1
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.3704,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.0294
+    },
+    {
+      "composition": "filesystem+todoist-mcp-server",
+      "fee": 13,
+      "component_sizes": [
+        12,
+        3
+      ],
+      "beta_formula": 36,
+      "beta_enumerated": 36,
+      "H_repair": 3.5835,
+      "n_distinct_optimal": 26,
+      "stability_ratio": 0.7222,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 2.2069
+    },
+    {
+      "composition": "filesystem+twitter-mcp",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "filesystem+x-mcp",
+      "fee": 11,
+      "component_sizes": [
+        12
+      ],
+      "beta_formula": 12,
+      "beta_enumerated": 12,
+      "H_repair": 2.4849,
+      "n_distinct_optimal": 11,
+      "stability_ratio": 0.9167,
+      "tie_rate": 0.463,
+      "median_margin": 1.0,
+      "mean_positive_margin": 3.4138
+    },
+    {
+      "composition": "flightradar24-mcp-server+github",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "flightradar24-mcp-server+mcp-server-cloudflare",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "flightradar24-mcp-server+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "flightradar24-mcp-server+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "flightradar24-mcp-server+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "flightradar24-mcp-server+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "github+gtasks-mcp",
+      "fee": 11,
+      "component_sizes": [
+        7,
+        4,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 112,
+      "beta_enumerated": 112,
+      "H_repair": 4.7185,
+      "n_distinct_optimal": 42,
+      "stability_ratio": 0.375,
+      "tie_rate": 0.5556,
+      "median_margin": 0.0,
+      "mean_positive_margin": 1.3333
+    },
+    {
+      "composition": "github+inoyu-mcp-unomi-server",
+      "fee": 11,
+      "component_sizes": [
+        8,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 96,
+      "beta_enumerated": 96,
+      "H_repair": 4.5643,
+      "n_distinct_optimal": 38,
+      "stability_ratio": 0.3958,
+      "tie_rate": 0.5741,
+      "median_margin": 0.0,
+      "mean_positive_margin": 1.3478
+    },
+    {
+      "composition": "github+mcp-mongo-server",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+mcp-pinecone",
+      "fee": 11,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        2
+      ],
+      "beta_formula": 168,
+      "beta_enumerated": 168,
+      "H_repair": 5.124,
+      "n_distinct_optimal": 44,
+      "stability_ratio": 0.2619,
+      "tie_rate": 0.6111,
+      "median_margin": 0.0,
+      "mean_positive_margin": 1.381
+    },
+    {
+      "composition": "github+mcp-playwright",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+mcp-server-aws",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+mcp-server-browserbase",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+mcp-server-chatsum",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+mcp-server-cloudflare",
+      "fee": 12,
+      "component_sizes": [
+        7,
+        3,
+        3,
+        2,
+        2
+      ],
+      "beta_formula": 252,
+      "beta_enumerated": 252,
+      "H_repair": 5.5294,
+      "n_distinct_optimal": 47,
+      "stability_ratio": 0.1865,
+      "tie_rate": 0.6296,
+      "median_margin": 0.0,
+      "mean_positive_margin": 1.3
+    },
+    {
+      "composition": "github+mcp-server-fetch",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+mcp-server-kubernetes",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+mcp-server-neon",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+mcp-server-rememberizer",
+      "fee": 11,
+      "component_sizes": [
+        8,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 96,
+      "beta_enumerated": 96,
+      "H_repair": 4.5643,
+      "n_distinct_optimal": 38,
+      "stability_ratio": 0.3958,
+      "tie_rate": 0.5741,
+      "median_margin": 0.0,
+      "mean_positive_margin": 1.3478
+    },
+    {
+      "composition": "github+mcp-server-tmdb",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+mcp-snowflake-server",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+mcp-vegalite-server",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+mcp-xmind",
+      "fee": 13,
+      "component_sizes": [
+        7,
+        5,
+        3,
+        2,
+        1
+      ],
+      "beta_formula": 210,
+      "beta_enumerated": 210,
+      "H_repair": 5.3471,
+      "n_distinct_optimal": 47,
+      "stability_ratio": 0.2238,
+      "tie_rate": 0.5185,
+      "median_margin": 0.0,
+      "mean_positive_margin": 1.5769
+    },
+    {
+      "composition": "github+memory",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+needle-mcp",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+needle-mcp_tools",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+notion",
+      "fee": 13,
+      "component_sizes": [
+        7,
+        3,
+        3,
+        3,
+        2
+      ],
+      "beta_formula": 378,
+      "beta_enumerated": 378,
+      "H_repair": 5.9349,
+      "n_distinct_optimal": 51,
+      "stability_ratio": 0.1349,
+      "tie_rate": 0.5741,
+      "median_margin": 0.0,
+      "mean_positive_margin": 1.1739
+    },
+    {
+      "composition": "github+ns-mcp-server",
+      "fee": 12,
+      "component_sizes": [
+        7,
+        3,
+        3,
+        2,
+        2
+      ],
+      "beta_formula": 252,
+      "beta_enumerated": 252,
+      "H_repair": 5.5294,
+      "n_distinct_optimal": 47,
+      "stability_ratio": 0.1865,
+      "tie_rate": 0.6296,
+      "median_margin": 0.0,
+      "mean_positive_margin": 1.3
+    },
+    {
+      "composition": "github+openrpc-mpc-server",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+playwright",
+      "fee": 11,
+      "component_sizes": [
+        7,
+        3,
+        3,
+        2,
+        1
+      ],
+      "beta_formula": 126,
+      "beta_enumerated": 126,
+      "H_repair": 4.8363,
+      "n_distinct_optimal": 39,
+      "stability_ratio": 0.3095,
+      "tie_rate": 0.5741,
+      "median_margin": 0.0,
+      "mean_positive_margin": 1.8261
+    },
+    {
+      "composition": "github+puppeteer",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+search1api-mcp",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+sequential-thinking",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+tavily",
+      "fee": 11,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        2
+      ],
+      "beta_formula": 168,
+      "beta_enumerated": 168,
+      "H_repair": 5.124,
+      "n_distinct_optimal": 44,
+      "stability_ratio": 0.2619,
+      "tie_rate": 0.6111,
+      "median_margin": 0.0,
+      "mean_positive_margin": 1.381
+    },
+    {
+      "composition": "github+todoist-mcp-server",
+      "fee": 12,
+      "component_sizes": [
+        7,
+        3,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 252,
+      "beta_enumerated": 252,
+      "H_repair": 5.5294,
+      "n_distinct_optimal": 48,
+      "stability_ratio": 0.1905,
+      "tie_rate": 0.4815,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.1786
+    },
+    {
+      "composition": "github+twitter-mcp",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "github+x-mcp",
+      "fee": 10,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "beta_formula": 84,
+      "beta_enumerated": 84,
+      "H_repair": 4.4308,
+      "n_distinct_optimal": 36,
+      "stability_ratio": 0.4286,
+      "tie_rate": 0.3889,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.303
+    },
+    {
+      "composition": "gtasks-mcp+mcp-server-cloudflare",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "gtasks-mcp+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1481,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.913
+    },
+    {
+      "composition": "gtasks-mcp+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4706
+    },
+    {
+      "composition": "gtasks-mcp+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "gtasks-mcp+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1481,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.913
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+mcp-server-cloudflare",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+mcp-server-rememberizer",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1481,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.913
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4706
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1481,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.913
+    },
+    {
+      "composition": "mcp-mongo-server+mcp-server-cloudflare",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-mongo-server+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-mongo-server+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "mcp-mongo-server+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-mongo-server+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-pinecone+mcp-server-cloudflare",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-pinecone+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1481,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.913
+    },
+    {
+      "composition": "mcp-pinecone+notion",
+      "fee": 2,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1296,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5532
+    },
+    {
+      "composition": "mcp-pinecone+ns-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-pinecone+tavily",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-pinecone+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1481,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.913
+    },
+    {
+      "composition": "mcp-playwright+mcp-server-cloudflare",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-playwright+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-playwright+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "mcp-playwright+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-playwright+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-aws+mcp-server-cloudflare",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-aws+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-aws+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "mcp-server-aws+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-aws+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-browserbase+mcp-server-cloudflare",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-browserbase+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-browserbase+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "mcp-server-browserbase+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-browserbase+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-chatsum+mcp-server-cloudflare",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-chatsum+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-chatsum+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "mcp-server-chatsum+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-chatsum+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-fetch",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-kubernetes",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-neon",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-rememberizer",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.037,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.3462
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-tmdb",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-snowflake-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-vegalite-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-xmind",
+      "fee": 3,
+      "component_sizes": [
+        3,
+        2
+      ],
+      "beta_formula": 6,
+      "beta_enumerated": 6,
+      "H_repair": 1.7918,
+      "n_distinct_optimal": 6,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1296,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.9787
+    },
+    {
+      "composition": "mcp-server-cloudflare+memory",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+needle-mcp",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+needle-mcp_tools",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+notion",
+      "fee": 3,
+      "component_sizes": [
+        4,
+        1
+      ],
+      "beta_formula": 4,
+      "beta_enumerated": 4,
+      "H_repair": 1.3863,
+      "n_distinct_optimal": 4,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1667,
+      "median_margin": 2.0,
+      "mean_positive_margin": 3.0667
+    },
+    {
+      "composition": "mcp-server-cloudflare+ns-mcp-server",
+      "fee": 3,
+      "component_sizes": [
+        4
+      ],
+      "beta_formula": 4,
+      "beta_enumerated": 4,
+      "H_repair": 1.3863,
+      "n_distinct_optimal": 4,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1296,
+      "median_margin": 1.0,
+      "mean_positive_margin": 2.2553
+    },
+    {
+      "composition": "mcp-server-cloudflare+openrpc-mpc-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+playwright",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.037,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.3462
+    },
+    {
+      "composition": "mcp-server-cloudflare+puppeteer",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+search1api-mcp",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+sequential-thinking",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+tavily",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-cloudflare+todoist-mcp-server",
+      "fee": 3,
+      "component_sizes": [
+        3,
+        2
+      ],
+      "beta_formula": 6,
+      "beta_enumerated": 6,
+      "H_repair": 1.7918,
+      "n_distinct_optimal": 6,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1296,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.9787
+    },
+    {
+      "composition": "mcp-server-cloudflare+twitter-mcp",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-cloudflare+x-mcp",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-fetch+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-fetch+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "mcp-server-fetch+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-fetch+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-kubernetes+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-kubernetes+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "mcp-server-kubernetes+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-kubernetes+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-neon+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-neon+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "mcp-server-neon+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-neon+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-rememberizer+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1481,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.913
+    },
+    {
+      "composition": "mcp-server-rememberizer+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4706
+    },
+    {
+      "composition": "mcp-server-rememberizer+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "mcp-server-rememberizer+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1481,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.913
+    },
+    {
+      "composition": "mcp-server-tmdb+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-server-tmdb+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "mcp-server-tmdb+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-server-tmdb+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-snowflake-server+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-snowflake-server+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "mcp-snowflake-server+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-snowflake-server+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-vegalite-server+mcp-xmind",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-vegalite-server+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "mcp-vegalite-server+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "mcp-vegalite-server+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-xmind+memory",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-xmind+needle-mcp",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-xmind+needle-mcp_tools",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-xmind+notion",
+      "fee": 3,
+      "component_sizes": [
+        3,
+        2,
+        1
+      ],
+      "beta_formula": 6,
+      "beta_enumerated": 6,
+      "H_repair": 1.7918,
+      "n_distinct_optimal": 6,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1667,
+      "median_margin": 1.0,
+      "mean_positive_margin": 2.2
+    },
+    {
+      "composition": "mcp-xmind+ns-mcp-server",
+      "fee": 3,
+      "component_sizes": [
+        3,
+        2
+      ],
+      "beta_formula": 6,
+      "beta_enumerated": 6,
+      "H_repair": 1.7918,
+      "n_distinct_optimal": 6,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1667,
+      "median_margin": 1.0,
+      "mean_positive_margin": 2.1778
+    },
+    {
+      "composition": "mcp-xmind+openrpc-mpc-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-xmind+playwright",
+      "fee": 3,
+      "component_sizes": [
+        4
+      ],
+      "beta_formula": 4,
+      "beta_enumerated": 4,
+      "H_repair": 1.3863,
+      "n_distinct_optimal": 4,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1296,
+      "median_margin": 1.0,
+      "mean_positive_margin": 2.2553
+    },
+    {
+      "composition": "mcp-xmind+puppeteer",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-xmind+search1api-mcp",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-xmind+sequential-thinking",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-xmind+tavily",
+      "fee": 2,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.7959
+    },
+    {
+      "composition": "mcp-xmind+todoist-mcp-server",
+      "fee": 4,
+      "component_sizes": [
+        3,
+        3
+      ],
+      "beta_formula": 9,
+      "beta_enumerated": 9,
+      "H_repair": 2.1972,
+      "n_distinct_optimal": 9,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.2222,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.9286
+    },
+    {
+      "composition": "mcp-xmind+twitter-mcp",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "mcp-xmind+x-mcp",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "memory+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "memory+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "memory+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "needle-mcp+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "needle-mcp+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "needle-mcp+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "needle-mcp_tools+notion",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "needle-mcp_tools+ns-mcp-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "needle-mcp_tools+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "notion+ns-mcp-server",
+      "fee": 3,
+      "component_sizes": [
+        4,
+        1
+      ],
+      "beta_formula": 4,
+      "beta_enumerated": 4,
+      "H_repair": 1.3863,
+      "n_distinct_optimal": 4,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0741,
+      "median_margin": 1.0,
+      "mean_positive_margin": 2.02
+    },
+    {
+      "composition": "notion+openrpc-mpc-server",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "notion+playwright",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0741,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.72
+    },
+    {
+      "composition": "notion+puppeteer",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "notion+search1api-mcp",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "notion+sequential-thinking",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "notion+tavily",
+      "fee": 2,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1481,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.913
+    },
+    {
+      "composition": "notion+todoist-mcp-server",
+      "fee": 3,
+      "component_sizes": [
+        3,
+        2,
+        1
+      ],
+      "beta_formula": 6,
+      "beta_enumerated": 6,
+      "H_repair": 1.7918,
+      "n_distinct_optimal": 6,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.2037,
+      "median_margin": 1.0,
+      "mean_positive_margin": 2.2558
+    },
+    {
+      "composition": "notion+twitter-mcp",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "notion+x-mcp",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0556,
+      "median_margin": 4.0,
+      "mean_positive_margin": 3.6471
+    },
+    {
+      "composition": "ns-mcp-server+openrpc-mpc-server",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "ns-mcp-server+playwright",
+      "fee": 1,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.037,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.3462
+    },
+    {
+      "composition": "ns-mcp-server+puppeteer",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "ns-mcp-server+search1api-mcp",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "ns-mcp-server+sequential-thinking",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "ns-mcp-server+tavily",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "ns-mcp-server+todoist-mcp-server",
+      "fee": 3,
+      "component_sizes": [
+        3,
+        2
+      ],
+      "beta_formula": 6,
+      "beta_enumerated": 6,
+      "H_repair": 1.7918,
+      "n_distinct_optimal": 6,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1296,
+      "median_margin": 1.0,
+      "mean_positive_margin": 1.9787
+    },
+    {
+      "composition": "ns-mcp-server+twitter-mcp",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "ns-mcp-server+x-mcp",
+      "fee": 1,
+      "component_sizes": [
+        2
+      ],
+      "beta_formula": 2,
+      "beta_enumerated": 2,
+      "H_repair": 0.6931,
+      "n_distinct_optimal": 2,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0185,
+      "median_margin": 3.0,
+      "mean_positive_margin": 3.4528
+    },
+    {
+      "composition": "openrpc-mpc-server+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "playwright+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1481,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.913
+    },
+    {
+      "composition": "puppeteer+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "search1api-mcp+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "sequential-thinking+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "tavily+todoist-mcp-server",
+      "fee": 2,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.1481,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.913
+    },
+    {
+      "composition": "todoist-mcp-server+twitter-mcp",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    },
+    {
+      "composition": "todoist-mcp-server+x-mcp",
+      "fee": 2,
+      "component_sizes": [
+        3
+      ],
+      "beta_formula": 3,
+      "beta_enumerated": 3,
+      "H_repair": 1.0986,
+      "n_distinct_optimal": 3,
+      "stability_ratio": 1.0,
+      "tie_rate": 0.0926,
+      "median_margin": 2.0,
+      "mean_positive_margin": 2.5306
+    }
+  ]
+}

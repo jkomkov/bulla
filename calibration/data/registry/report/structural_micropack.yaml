@@ -1,0 +1,146 @@
+pack_name: structural_inferred
+pack_version: 0.1.0
+dimensions:
+  query:
+    description: 'Auto-inferred: query convention (string)'
+    field_patterns:
+    - query
+    source: structural
+    n_servers: 16
+    n_tools: 21
+  name:
+    description: 'Auto-inferred: name convention (string)'
+    field_patterns:
+    - field.name
+    - name
+    - updates.name
+    source: structural
+    n_servers: 13
+    n_tools: 23
+  url:
+    description: 'Auto-inferred: url convention (string)'
+    field_patterns:
+    - cover.external.url
+    - url
+    source: structural
+    n_servers: 11
+    n_tools: 30
+  limit:
+    description: 'Auto-inferred: limit convention (number)'
+    field_patterns:
+    - limit
+    source: structural
+    n_servers: 8
+    n_tools: 9
+  value:
+    description: 'Auto-inferred: value convention (string)'
+    field_patterns:
+    - filter.value
+    - value
+    source: structural
+    n_servers: 6
+    n_tools: 17
+    known_values:
+    - data_source
+    - page
+  content:
+    description: 'Auto-inferred: content convention (string)'
+    field_patterns:
+    - content
+    source: structural
+    n_servers: 6
+    n_tools: 19
+  type:
+    description: 'Auto-inferred: type convention (string)'
+    field_patterns:
+    - cover.type
+    - field.type
+    - type
+    source: structural
+    n_servers: 5
+    n_tools: 5
+    known_values:
+    - DISRUPTION
+    - MAINTENANCE
+    - all
+    - auto
+    - debug
+    - error
+    - exception
+    - external
+    - fast
+    - info
+    - log
+    - warning
+  description:
+    description: 'Auto-inferred: description convention (string)'
+    field_patterns:
+    - description
+    - field.description
+    - updates.description
+    source: structural
+    n_servers: 4
+    n_tools: 8
+  script:
+    description: 'Auto-inferred: script convention (string)'
+    field_patterns:
+    - script
+    source: structural
+    n_servers: 4
+    n_tools: 4
+  table_name:
+    description: 'Auto-inferred: table_name convention (string)'
+    field_patterns:
+    - table_name
+    source: structural
+    n_servers: 3
+    n_tools: 20
+  text:
+    description: 'Auto-inferred: text convention (string)'
+    field_patterns:
+    - text
+    source: structural
+    n_servers: 3
+    n_tools: 3
+  headers:
+    description: 'Auto-inferred: headers convention (object)'
+    field_patterns:
+    - headers
+    source: structural
+    n_servers: 3
+    n_tools: 13
+  path:
+    description: 'Auto-inferred: path convention (string)'
+    field_patterns:
+    - path
+    source: structural
+    n_servers: 3
+    n_tools: 16
+  id:
+    description: 'Auto-inferred: id convention (string)'
+    field_patterns:
+    - id
+    source: structural
+    n_servers: 3
+    n_tools: 5
+  selector:
+    description: 'Auto-inferred: selector convention (string)'
+    field_patterns:
+    - selector
+    source: structural
+    n_servers: 3
+    n_tools: 21
+  width:
+    description: 'Auto-inferred: width convention (number)'
+    field_patterns:
+    - width
+    source: structural
+    n_servers: 3
+    n_tools: 5
+  height:
+    description: 'Auto-inferred: height convention (number)'
+    field_patterns:
+    - height
+    source: structural
+    n_servers: 3
+    n_tools: 5

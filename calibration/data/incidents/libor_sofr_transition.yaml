@@ -1,0 +1,44 @@
+name: libor_sofr_transition
+description: '2020 LIBOR→SOFR big-bang ($154T notional affected). LCH and CME switched
+  discount curves on different days; cross-venue netting failed. FIX detects: rate_basis
+  boundary fee.'
+tools:
+  lch_clearing:
+    internal_state:
+    - swap_id
+    - discount_rate
+    - rate_basis
+    - valuation_date
+    observable_schema:
+    - swap_id
+    - discount_rate
+    - valuation_date
+  cme_clearing:
+    internal_state:
+    - swap_id
+    - discount_rate
+    - rate_basis
+    - valuation_date
+    observable_schema:
+    - swap_id
+    - discount_rate
+    - valuation_date
+  cross_venue_netting:
+    internal_state:
+    - net_amount
+    - rate_basis
+    observable_schema:
+    - net_amount
+edges:
+- from: lch_clearing
+  to: cross_venue_netting
+  dimensions:
+  - name: rate_basis_match
+    from_field: rate_basis
+    to_field: rate_basis
+- from: cme_clearing
+  to: cross_venue_netting
+  dimensions:
+  - name: rate_basis_match_b
+    from_field: rate_basis
+    to_field: rate_basis

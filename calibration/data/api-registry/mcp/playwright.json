@@ -1,0 +1,1043 @@
+{
+  "source_kind": "mcp",
+  "source_id": "playwright",
+  "schema_hash": "d203d94a62cfb54ba330c963e2e4862913c1ced03b866f97564f3f511ece9b13",
+  "captured_at": "2026-04-26T19:32:52.894642+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "a7c0737771859f2ee620d02cf4f60e3c2e0b5cc084146df1b5fb99d55511c7f7",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "0a649c78eac4c0e5ceaaba5647d5a64882eaa2fed9a263e93cf9832365f14094",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.0",
+      "hash": "c6cc93a8395021f67b77edb248a53ebfa6bd7618555db99151dbb2e391c103f8",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://github.com/connamara/quickfixengine/raw/main/spec/FIX44.xml"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.0",
+      "hash": "8dbae15ec0545f05d04270a553de710fa8ee8b2dbabd177366596e0b477c3d4a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://github.com/connamara/quickfixengine/raw/main/spec/FIX50.xml"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.0",
+      "hash": "b4e26a401bdba7c6d4a5106901f3e0f97779a6cb06cf2db3b55433f35f19ac88",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.gs1.org/standards/barcodes-epcrfid-id-keys/general-specifications"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "19d66479952cf92981c0282976a0c28993f0050f19665c31da0b0fb4af11447b",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "e9bd2147d7790eca0a71e6e74386781444f30a9e7babc3fd90e0a4ed57686903",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.0",
+      "hash": "f47f0a8306d1ce8d2912217b2c19b2d9377b56b9b10ebfb8803791d24d058084",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2024",
+        "source_uri": "https://www.cms.gov/files/zip/2024-icd-10-cm-code-files.zip"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "7db538fb7c2a168d64aee40b446e2e3622823aed2711cd7bde180f7fcae84f86",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "5ef8e2f31445e76abe14f399aa054accdbac55c55cece18f1c4dcdbf775cae18",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "73474a16f37220bd5856cddf48d3692eb06a794ae113f6abb1e05b5485426c8e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7e9a1fbc360a252f3fceebe50ddf8c178da6103e47f71cee724eba5aac47ecbc",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "fa26826eea49a71d9512aeb2c747e4eaaefae276b45bbd8fc5a2d42e8cd271c3",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "3e5bb7e321d082cedd6b9f5f4a97cad04db7a3711a7905a7027b8aa285bab9c1",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.0",
+      "hash": "4b99b5c630db2df578696d954d9b7834fbb23295adcce9a1bd3f3d017184bbd0",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.htm"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "a36c6d4b5a88f2f98286c78f3e7868b9c53c172472e641a1821ea408cf252347",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "tool_name": "start_codegen_session",
+      "description": "Start a new code generation session to record Playwright actions",
+      "fields": [
+        {
+          "field_name": "options",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object",
+          "description": "Code generation options"
+        },
+        {
+          "field_name": "options.outputPath",
+          "dimensions": [
+            "path_convention"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Directory path where generated tests will be saved (use absolute path)"
+        },
+        {
+          "field_name": "options.testNamePrefix",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Prefix to use for generated test names (default: 'GeneratedTest')"
+        },
+        {
+          "field_name": "options.includeComments",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to include descriptive comments in generated tests"
+        }
+      ]
+    },
+    {
+      "tool_name": "end_codegen_session",
+      "description": "End a code generation session and generate the test file",
+      "fields": [
+        {
+          "field_name": "sessionId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ID of the session to end"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_codegen_session",
+      "description": "Get information about a code generation session",
+      "fields": [
+        {
+          "field_name": "sessionId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ID of the session to retrieve"
+        }
+      ]
+    },
+    {
+      "tool_name": "clear_codegen_session",
+      "description": "Clear a code generation session without generating a test",
+      "fields": [
+        {
+          "field_name": "sessionId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ID of the session to clear"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_navigate",
+      "description": "Navigate to a URL",
+      "fields": [
+        {
+          "field_name": "url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "URL to navigate to the website specified"
+        },
+        {
+          "field_name": "browserType",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Browser type to use (chromium, firefox, webkit). Defaults to chromium"
+        },
+        {
+          "field_name": "width",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "Viewport width in pixels (default: 1280)"
+        },
+        {
+          "field_name": "height",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "Viewport height in pixels (default: 720)"
+        },
+        {
+          "field_name": "timeout",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "Navigation timeout in milliseconds"
+        },
+        {
+          "field_name": "waitUntil",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Navigation wait condition"
+        },
+        {
+          "field_name": "headless",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Run browser in headless mode (default: false)"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_screenshot",
+      "description": "Take a screenshot of the current page or a specific element",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Name for the screenshot"
+        },
+        {
+          "field_name": "selector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector for element to screenshot"
+        },
+        {
+          "field_name": "width",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "Width in pixels (default: 800)"
+        },
+        {
+          "field_name": "height",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "Height in pixels (default: 600)"
+        },
+        {
+          "field_name": "storeBase64",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Store screenshot in base64 format (default: true)"
+        },
+        {
+          "field_name": "fullPage",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Store screenshot of the entire page (default: false)"
+        },
+        {
+          "field_name": "savePng",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Save screenshot as PNG file (default: false)"
+        },
+        {
+          "field_name": "downloadsDir",
+          "dimensions": [
+            "path_convention"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Custom downloads directory path (default: user's Downloads folder)"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_click",
+      "description": "Click an element on the page",
+      "fields": [
+        {
+          "field_name": "selector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector for the element to click"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_iframe_click",
+      "description": "Click an element in an iframe on the page",
+      "fields": [
+        {
+          "field_name": "iframeSelector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector for the iframe containing the element to click"
+        },
+        {
+          "field_name": "selector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector for the element to click"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_iframe_fill",
+      "description": "Fill an element in an iframe on the page",
+      "fields": [
+        {
+          "field_name": "iframeSelector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector for the iframe containing the element to fill"
+        },
+        {
+          "field_name": "selector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector for the element to fill"
+        },
+        {
+          "field_name": "value",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Value to fill"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_fill",
+      "description": "fill out an input field",
+      "fields": [
+        {
+          "field_name": "selector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector for input field"
+        },
+        {
+          "field_name": "value",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Value to fill"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_select",
+      "description": "Select an element on the page with Select tag",
+      "fields": [
+        {
+          "field_name": "selector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector for element to select"
+        },
+        {
+          "field_name": "value",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Value to select"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_hover",
+      "description": "Hover an element on the page",
+      "fields": [
+        {
+          "field_name": "selector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector for element to hover"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_upload_file",
+      "description": "Upload a file to an input[type='file'] element on the page",
+      "fields": [
+        {
+          "field_name": "selector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector for the file input element"
+        },
+        {
+          "field_name": "filePath",
+          "dimensions": [
+            "path_convention"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Absolute path to the file to upload"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_evaluate",
+      "description": "Execute JavaScript in the browser console",
+      "fields": [
+        {
+          "field_name": "script",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "JavaScript code to execute"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_console_logs",
+      "description": "Retrieve console logs from the browser with filtering options",
+      "fields": [
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Type of logs to retrieve (all, error, warning, log, info, debug, exception)"
+        },
+        {
+          "field_name": "search",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Text to search for in logs (handles text with square brackets)"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "Maximum number of logs to return"
+        },
+        {
+          "field_name": "clear",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to clear logs after retrieval (default: false)"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_resize",
+      "description": "Resize the browser viewport using manual dimensions or device presets. Supports 143+ device presets including iPhone, iPad, Android devices, and desktop browsers with proper user-agent and touch emulation.",
+      "fields": [
+        {
+          "field_name": "device",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Device preset name (e.g., 'iPhone 13', 'iPad Pro 11', 'Pixel 7', 'Galaxy S24', 'Desktop Chrome'). Automatically configures viewport, user-agent, and device capabilities. Use playwright.devices to see all available devices."
+        },
+        {
+          "field_name": "width",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "Viewport width in pixels (for manual resize without device preset)"
+        },
+        {
+          "field_name": "height",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "Viewport height in pixels (for manual resize without device preset)"
+        },
+        {
+          "field_name": "orientation",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Device orientation: 'portrait' or 'landscape' (only applies when using device preset)"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_close",
+      "description": "Close the browser and release all resources",
+      "fields": []
+    },
+    {
+      "tool_name": "playwright_get",
+      "description": "Perform an HTTP GET request",
+      "fields": [
+        {
+          "field_name": "url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "URL to perform GET operation"
+        },
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Bearer token for authorization"
+        },
+        {
+          "field_name": "headers",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object",
+          "description": "Additional headers to include in the request"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_post",
+      "description": "Perform an HTTP POST request",
+      "fields": [
+        {
+          "field_name": "url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "URL to perform POST operation"
+        },
+        {
+          "field_name": "value",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Data to post in the body"
+        },
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Bearer token for authorization"
+        },
+        {
+          "field_name": "headers",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object",
+          "description": "Additional headers to include in the request"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_put",
+      "description": "Perform an HTTP PUT request",
+      "fields": [
+        {
+          "field_name": "url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "URL to perform PUT operation"
+        },
+        {
+          "field_name": "value",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Data to PUT in the body"
+        },
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Bearer token for authorization"
+        },
+        {
+          "field_name": "headers",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object",
+          "description": "Additional headers to include in the request"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_patch",
+      "description": "Perform an HTTP PATCH request",
+      "fields": [
+        {
+          "field_name": "url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "URL to perform PATCH operation"
+        },
+        {
+          "field_name": "value",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Data to PATCH in the body"
+        },
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Bearer token for authorization"
+        },
+        {
+          "field_name": "headers",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object",
+          "description": "Additional headers to include in the request"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_delete",
+      "description": "Perform an HTTP DELETE request",
+      "fields": [
+        {
+          "field_name": "url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "URL to perform DELETE operation"
+        },
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Bearer token for authorization"
+        },
+        {
+          "field_name": "headers",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object",
+          "description": "Additional headers to include in the request"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_expect_response",
+      "description": "Ask Playwright to start waiting for a HTTP response. This tool initiates the wait operation but does not wait for its completion.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Unique & arbitrary identifier to be used for retrieving this response later with `Playwright_assert_response`."
+        },
+        {
+          "field_name": "url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "URL pattern to match in the response."
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_assert_response",
+      "description": "Wait for and validate a previously initiated HTTP response wait operation.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Identifier of the HTTP response initially expected using `Playwright_expect_response`."
+        },
+        {
+          "field_name": "value",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Data to expect in the body of the HTTP response. If provided, the assertion will fail if this value is not found in the response body."
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_custom_user_agent",
+      "description": "Set a custom User Agent for the browser",
+      "fields": [
+        {
+          "field_name": "userAgent",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Custom User Agent for the Playwright browser instance"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_get_visible_text",
+      "description": "Get the visible text content of the current page",
+      "fields": []
+    },
+    {
+      "tool_name": "playwright_get_visible_html",
+      "description": "Get the HTML content of the current page. By default, all <script> tags are removed from the output unless removeScripts is explicitly set to false.",
+      "fields": [
+        {
+          "field_name": "selector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector to limit the HTML to a specific container"
+        },
+        {
+          "field_name": "removeScripts",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Remove all script tags from the HTML (default: true)"
+        },
+        {
+          "field_name": "removeComments",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Remove all HTML comments (default: false)"
+        },
+        {
+          "field_name": "removeStyles",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Remove all style tags from the HTML (default: false)"
+        },
+        {
+          "field_name": "removeMeta",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Remove all meta tags from the HTML (default: false)"
+        },
+        {
+          "field_name": "cleanHtml",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Perform comprehensive HTML cleaning (default: false)"
+        },
+        {
+          "field_name": "minify",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Minify the HTML output (default: false)"
+        },
+        {
+          "field_name": "maxLength",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "Maximum number of characters to return (default: 20000)"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_go_back",
+      "description": "Navigate back in browser history",
+      "fields": []
+    },
+    {
+      "tool_name": "playwright_go_forward",
+      "description": "Navigate forward in browser history",
+      "fields": []
+    },
+    {
+      "tool_name": "playwright_drag",
+      "description": "Drag an element to a target location",
+      "fields": [
+        {
+          "field_name": "sourceSelector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector for the element to drag"
+        },
+        {
+          "field_name": "targetSelector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector for the target location"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_press_key",
+      "description": "Press a keyboard key",
+      "fields": [
+        {
+          "field_name": "key",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Key to press (e.g. 'Enter', 'ArrowDown', 'a')"
+        },
+        {
+          "field_name": "selector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Optional CSS selector to focus before pressing key"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_save_as_pdf",
+      "description": "Save the current page as a PDF file",
+      "fields": [
+        {
+          "field_name": "outputPath",
+          "dimensions": [
+            "path_convention"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Directory path where PDF will be saved"
+        },
+        {
+          "field_name": "filename",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Name of the PDF file (default: page.pdf)"
+        },
+        {
+          "field_name": "format",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Page format (e.g. 'A4', 'Letter')"
+        },
+        {
+          "field_name": "printBackground",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to print background graphics"
+        },
+        {
+          "field_name": "margin",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object",
+          "description": "Page margins"
+        },
+        {
+          "field_name": "margin.top",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "margin.right",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "margin.bottom",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "margin.left",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "playwright_click_and_switch_tab",
+      "description": "Click a link and switch to the newly opened tab",
+      "fields": [
+        {
+          "field_name": "selector",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "CSS selector for the link to click"
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "n_tools": 33,
+    "n_fields": 89,
+    "n_declared": 0,
+    "n_inferred": 4,
+    "n_unknown": 85,
+    "n_dim_signals": 4,
+    "dim_hits": {
+      "path_convention": 4
+    }
+  },
+  "capture_hash": "64753ea5c720fcec5d638d4880a7db5a5bb65425ff8ce105dc7e23f78c8368b9"
+}

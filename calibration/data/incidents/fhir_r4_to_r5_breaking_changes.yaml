@@ -1,0 +1,28 @@
+name: fhir_r4_to_r5_breaking_changes
+description: 'FHIR R4 → R5 breaking changes. ImagingManifest (R4) renamed to ImagingSelection
+  (R5) with field-level differences. fhir-r4 / fhir-r5 detects: resource_type boundary
+  fee.'
+tools:
+  r4_pacs:
+    internal_state:
+    - study_id
+    - fhir_version
+    - resource_type
+    observable_schema:
+    - study_id
+    - resource_type
+  r5_emr:
+    internal_state:
+    - study_id
+    - fhir_version
+    - resource_type
+    observable_schema:
+    - study_id
+    - resource_type
+edges:
+- from: r4_pacs
+  to: r5_emr
+  dimensions:
+  - name: fhir_version_match
+    from_field: fhir_version
+    to_field: fhir_version

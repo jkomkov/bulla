@@ -1,0 +1,286 @@
+{
+  "source_kind": "mcp",
+  "source_id": "mcp-server-browserbase",
+  "schema_hash": "3b6d0c77028220823f40844065a2f8faf84e7fa9874901e618f40389caa43278",
+  "captured_at": "2026-04-26T19:32:52.853789+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "a7c0737771859f2ee620d02cf4f60e3c2e0b5cc084146df1b5fb99d55511c7f7",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "0a649c78eac4c0e5ceaaba5647d5a64882eaa2fed9a263e93cf9832365f14094",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.0",
+      "hash": "c6cc93a8395021f67b77edb248a53ebfa6bd7618555db99151dbb2e391c103f8",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://github.com/connamara/quickfixengine/raw/main/spec/FIX44.xml"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.0",
+      "hash": "8dbae15ec0545f05d04270a553de710fa8ee8b2dbabd177366596e0b477c3d4a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://github.com/connamara/quickfixengine/raw/main/spec/FIX50.xml"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.0",
+      "hash": "b4e26a401bdba7c6d4a5106901f3e0f97779a6cb06cf2db3b55433f35f19ac88",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.gs1.org/standards/barcodes-epcrfid-id-keys/general-specifications"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "19d66479952cf92981c0282976a0c28993f0050f19665c31da0b0fb4af11447b",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "e9bd2147d7790eca0a71e6e74386781444f30a9e7babc3fd90e0a4ed57686903",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.0",
+      "hash": "f47f0a8306d1ce8d2912217b2c19b2d9377b56b9b10ebfb8803791d24d058084",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2024",
+        "source_uri": "https://www.cms.gov/files/zip/2024-icd-10-cm-code-files.zip"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "7db538fb7c2a168d64aee40b446e2e3622823aed2711cd7bde180f7fcae84f86",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "5ef8e2f31445e76abe14f399aa054accdbac55c55cece18f1c4dcdbf775cae18",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "73474a16f37220bd5856cddf48d3692eb06a794ae113f6abb1e05b5485426c8e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7e9a1fbc360a252f3fceebe50ddf8c178da6103e47f71cee724eba5aac47ecbc",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "fa26826eea49a71d9512aeb2c747e4eaaefae276b45bbd8fc5a2d42e8cd271c3",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "3e5bb7e321d082cedd6b9f5f4a97cad04db7a3711a7905a7027b8aa285bab9c1",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.0",
+      "hash": "4b99b5c630db2df578696d954d9b7834fbb23295adcce9a1bd3f3d017184bbd0",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.htm"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "a36c6d4b5a88f2f98286c78f3e7868b9c53c172472e641a1821ea408cf252347",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "tool_name": "stagehand_navigate",
+      "description": "Navigate to a URL in the browser.",
+      "fields": [
+        {
+          "field_name": "url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The URL to navigate to."
+        }
+      ]
+    },
+    {
+      "tool_name": "stagehand_act",
+      "description": "Performs an action on the web page.",
+      "fields": [
+        {
+          "field_name": "action",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The action to perform."
+        },
+        {
+          "field_name": "variables",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object",
+          "description": "Variables used in the action template."
+        }
+      ]
+    },
+    {
+      "tool_name": "stagehand_extract",
+      "description": "Extracts structured data from the web page based on an instruction and a JSON schema.",
+      "fields": [
+        {
+          "field_name": "instruction",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Clear instruction for what data to extract from the page"
+        },
+        {
+          "field_name": "schema",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object",
+          "description": "A JSON Schema object defining the structure of data to extract"
+        }
+      ]
+    },
+    {
+      "tool_name": "stagehand_observe",
+      "description": "Observes actions that can be performed on the web page.",
+      "fields": [
+        {
+          "field_name": "instruction",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Instruction for observation."
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "n_tools": 4,
+    "n_fields": 6,
+    "n_declared": 0,
+    "n_inferred": 0,
+    "n_unknown": 6,
+    "n_dim_signals": 0,
+    "dim_hits": {}
+  },
+  "capture_hash": "eda69a937dd71adc43c42f2ac6a46d82ac21b30be158f60036f58f730041db74"
+}

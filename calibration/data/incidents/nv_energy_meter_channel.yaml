@@ -1,0 +1,28 @@
+name: nv_energy_meter_channel
+description: 'NV Energy meter channel mismatch ($685K FERC penalty). Channel 1 vs
+  Channel 3 readings reported on FERC-regulated points. Generic detects: meter_channel
+  boundary fee (id_offset family).'
+tools:
+  scada_collector:
+    internal_state:
+    - meter_id
+    - reading_kwh
+    - channel_index
+    observable_schema:
+    - meter_id
+    - reading_kwh
+  ferc_filer:
+    internal_state:
+    - meter_id
+    - reading_kwh
+    - channel_index
+    observable_schema:
+    - meter_id
+    - reading_kwh
+edges:
+- from: scada_collector
+  to: ferc_filer
+  dimensions:
+  - name: channel_index_match
+    from_field: channel_index
+    to_field: channel_index

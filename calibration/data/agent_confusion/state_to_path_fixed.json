@@ -1,0 +1,86 @@
+[
+  {
+    "pair": "airtable-mcp+github",
+    "baseline_state": false,
+    "baseline_path": false,
+    "swap_renamed_state_as_path": false,
+    "swap_original_path_as_resource": false
+  },
+  {
+    "pair": "cognee-mcp-server+github",
+    "baseline_state": false,
+    "baseline_path": false,
+    "swap_renamed_state_as_path": false,
+    "swap_original_path_as_resource": true
+  },
+  {
+    "pair": "exa+github",
+    "baseline_state": false,
+    "baseline_path": false,
+    "swap_renamed_state_as_path": true,
+    "swap_original_path_as_resource": true
+  },
+  {
+    "pair": "fetch-mcp+github",
+    "baseline_state": false,
+    "baseline_path": false,
+    "swap_renamed_state_as_path": false,
+    "swap_original_path_as_resource": true
+  },
+  {
+    "pair": "flightradar24-mcp-server+github",
+    "baseline_state": false,
+    "baseline_path": false,
+    "swap_renamed_state_as_path": false,
+    "swap_original_path_as_resource": false
+  },
+  {
+    "pair": "github+gtasks-mcp",
+    "baseline_state": false,
+    "baseline_path": false,
+    "swap_renamed_state_as_path": false,
+    "swap_original_path_as_resource": false
+  },
+  {
+    "pair": "github+inoyu-mcp-unomi-server",
+    "baseline_state": false,
+    "baseline_path": false,
+    "swap_renamed_state_as_path": false,
+    "swap_original_path_as_resource": false
+  },
+  {
+    "pair": "github+mcp-mongo-server",
+    "baseline_state": false,
+    "baseline_path": false,
+    "swap_renamed_state_as_path": false,
+    "swap_original_path_as_resource": false
+  },
+  {
+    "pair": "github+mcp-pinecone",
+    "baseline_state": false,
+    "baseline_path": false,
+    "swap_renamed_state_as_path": false,
+    "swap_original_path_as_resource": false
+  },
+  {
+    "pair": "github+mcp-playwright",
+    "baseline_state": false,
+    "baseline_path": false,
+    "swap_renamed_state_as_path": false,
+    "swap_original_path_as_resource": false
+  },
+  {
+    "pair": "github+mcp-server-aws",
+    "baseline_state": false,
+    "baseline_path": false,
+    "swap_renamed_state_as_path": false,
+    "swap_original_path_as_resource": false
+  },
+  {
+    "pair": "github+mcp-server-browserbase",
+    "baseline_state": false,
+    "baseline_path": false,
+    "swap_renamed_state_as_path": false,
+    "swap_original_path_as_resource": false
+  }
+]

@@ -1,0 +1,74 @@
+{
+  "name": "Financial Analysis Pipeline",
+  "bulla_version": "0.34.0",
+  "timestamp": "2026-04-14T20:57:12.551552+00:00",
+  "topology": {
+    "tools": 3,
+    "edges": 3,
+    "betti_1": 1
+  },
+  "observable_sheaf": {
+    "dim_c0": 12,
+    "dim_c1": 8,
+    "rank": 6,
+    "h1": 2
+  },
+  "full_sheaf": {
+    "dim_c0": 16,
+    "dim_c1": 8,
+    "rank": 8,
+    "h1": 0
+  },
+  "coherence_fee": 2,
+  "blind_spots": [
+    {
+      "dimension": "day_conv_match",
+      "edge": "data_provider \u2192 financial_analysis",
+      "from_field": "day_convention",
+      "to_field": "day_convention",
+      "from_hidden": true,
+      "to_hidden": true
+    },
+    {
+      "dimension": "metric_type_match",
+      "edge": "financial_analysis \u2192 portfolio_verification",
+      "from_field": "risk_metric",
+      "to_field": "risk_metric",
+      "from_hidden": true,
+      "to_hidden": true
+    }
+  ],
+  "n_unbridged": 2,
+  "bridges": [
+    {
+      "field": "day_convention",
+      "add_to": [
+        "data_provider"
+      ],
+      "eliminates": "day_conv_match"
+    },
+    {
+      "field": "day_convention",
+      "add_to": [
+        "financial_analysis"
+      ],
+      "eliminates": "day_conv_match"
+    },
+    {
+      "field": "risk_metric",
+      "add_to": [
+        "financial_analysis"
+      ],
+      "eliminates": "metric_type_match"
+    },
+    {
+      "field": "risk_metric",
+      "add_to": [
+        "portfolio_verification"
+      ],
+      "eliminates": "metric_type_match"
+    }
+  ],
+  "h1_after_bridge": 0,
+  "composition_sha256": "03e38c87a9016c1e01cf26a2ff906027e2e37013893c177b6b22466789cd07f0"
+}

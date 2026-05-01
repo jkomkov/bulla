@@ -1,0 +1,193 @@
+{
+  "cyclic_cases": [
+    {
+      "pair_name": "filesystem+mcp-xmind",
+      "cycle_tools": [
+        "filesystem__read_file",
+        "filesystem__read_text_file",
+        "filesystem__read_media_file"
+      ],
+      "trace_length": 3,
+      "local_diagnostic": {
+        "call_id": 3,
+        "cluster_call_ids": [
+          1,
+          2,
+          3
+        ],
+        "tool_names": [
+          "filesystem__read_file",
+          "filesystem__read_text_file",
+          "filesystem__read_media_file"
+        ],
+        "n_tools": 3,
+        "n_edges": 3,
+        "betti_1": 1,
+        "coherence_fee": 2,
+        "blind_spots": 3,
+        "contradictions": 0
+      },
+      "validated": true
+    },
+    {
+      "pair_name": "filesystem+github",
+      "cycle_tools": [
+        "filesystem__read_file",
+        "filesystem__read_text_file",
+        "filesystem__read_media_file"
+      ],
+      "trace_length": 3,
+      "local_diagnostic": {
+        "call_id": 3,
+        "cluster_call_ids": [
+          1,
+          2,
+          3
+        ],
+        "tool_names": [
+          "filesystem__read_file",
+          "filesystem__read_text_file",
+          "filesystem__read_media_file"
+        ],
+        "n_tools": 3,
+        "n_edges": 3,
+        "betti_1": 1,
+        "coherence_fee": 2,
+        "blind_spots": 3,
+        "contradictions": 0
+      },
+      "validated": true
+    },
+    {
+      "pair_name": "cognee-mcp-server+filesystem",
+      "cycle_tools": [
+        "filesystem__read_file",
+        "filesystem__read_text_file",
+        "filesystem__read_media_file"
+      ],
+      "trace_length": 3,
+      "local_diagnostic": {
+        "call_id": 3,
+        "cluster_call_ids": [
+          1,
+          2,
+          3
+        ],
+        "tool_names": [
+          "filesystem__read_file",
+          "filesystem__read_text_file",
+          "filesystem__read_media_file"
+        ],
+        "n_tools": 3,
+        "n_edges": 3,
+        "betti_1": 1,
+        "coherence_fee": 2,
+        "blind_spots": 3,
+        "contradictions": 0
+      },
+      "validated": true
+    },
+    {
+      "pair_name": "filesystem+mcp-server-chatsum",
+      "cycle_tools": [
+        "filesystem__read_file",
+        "filesystem__read_text_file",
+        "filesystem__read_media_file"
+      ],
+      "trace_length": 3,
+      "local_diagnostic": {
+        "call_id": 3,
+        "cluster_call_ids": [
+          1,
+          2,
+          3
+        ],
+        "tool_names": [
+          "filesystem__read_file",
+          "filesystem__read_text_file",
+          "filesystem__read_media_file"
+        ],
+        "n_tools": 3,
+        "n_edges": 3,
+        "betti_1": 1,
+        "coherence_fee": 2,
+        "blind_spots": 3,
+        "contradictions": 0
+      },
+      "validated": true
+    },
+    {
+      "pair_name": "filesystem+sequential-thinking",
+      "cycle_tools": [
+        "filesystem__read_file",
+        "filesystem__read_text_file",
+        "filesystem__read_media_file"
+      ],
+      "trace_length": 3,
+      "local_diagnostic": {
+        "call_id": 3,
+        "cluster_call_ids": [
+          1,
+          2,
+          3
+        ],
+        "tool_names": [
+          "filesystem__read_file",
+          "filesystem__read_text_file",
+          "filesystem__read_media_file"
+        ],
+        "n_tools": 3,
+        "n_edges": 3,
+        "betti_1": 1,
+        "coherence_fee": 2,
+        "blind_spots": 3,
+        "contradictions": 0
+      },
+      "validated": true
+    }
+  ],
+  "control_cases": [
+    {
+      "pair_name": "airtable-mcp+cognee-mcp-server",
+      "trace_length": 2,
+      "local_diagnostic": {
+        "call_id": 2,
+        "cluster_call_ids": [
+          2
+        ],
+        "tool_names": [
+          "cognee-mcp-server__Cognify_and_search"
+        ],
+        "n_tools": 1,
+        "n_edges": 0,
+        "betti_1": 0,
+        "coherence_fee": 0,
+        "blind_spots": 0,
+        "contradictions": 0
+      },
+      "validated": true
+    },
+    {
+      "pair_name": "airtable-mcp+exa",
+      "trace_length": 2,
+      "local_diagnostic": {
+        "call_id": 2,
+        "cluster_call_ids": [
+          2
+        ],
+        "tool_names": [
+          "exa__web_search_exa"
+        ],
+        "n_tools": 1,
+        "n_edges": 0,
+        "betti_1": 0,
+        "coherence_fee": 0,
+        "blind_spots": 0,
+        "contradictions": 0
+      },
+      "validated": true
+    }
+  ],
+  "validated_cyclic": 5,
+  "validated_controls": 2
+}

@@ -1,0 +1,317 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-server-neon",
+    "capture_date": "2026-04-07T05:16:06.622794+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:630e71bf9685a1cf5d0ab9b19627bd0c4563c2157209e20ec1dbcfd744893533",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "__node_version",
+      "description": "Get the Node.js version used by the MCP server",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "list_projects",
+      "description": "List all Neon projects in your account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "cursor": {
+            "type": "string",
+            "description": "Specify the cursor value from the previous response to retrieve the next batch of projects."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Specify a value from 1 to 400 to limit number of projects in the response."
+          },
+          "search": {
+            "type": "string",
+            "description": "Search by project name or id. You can specify partial name or id values to filter results."
+          },
+          "orgId": {
+            "type": "string",
+            "description": "Search for projects by org_id."
+          }
+        }
+      }
+    },
+    {
+      "name": "create_project",
+      "description": "Create a new Neon project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "An optional name of the project to create."
+          }
+        }
+      }
+    },
+    {
+      "name": "delete_project",
+      "description": "Delete a Neon project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project to delete"
+          }
+        },
+        "required": [
+          "projectId"
+        ]
+      }
+    },
+    {
+      "name": "describe_project",
+      "description": "Describes a Neon project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project to describe"
+          }
+        },
+        "required": [
+          "projectId"
+        ]
+      }
+    },
+    {
+      "name": "run_sql",
+      "description": "Execute a single SQL statement against a Neon database",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sql": {
+            "type": "string",
+            "description": "The SQL query to execute"
+          },
+          "databaseName": {
+            "type": "string",
+            "description": "The name of the database to execute the query against"
+          },
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project to execute the query against"
+          },
+          "branchId": {
+            "type": "string",
+            "description": "An optional ID of the branch to execute the query against"
+          }
+        },
+        "required": [
+          "sql",
+          "databaseName",
+          "projectId"
+        ]
+      }
+    },
+    {
+      "name": "run_sql_transaction",
+      "description": "Execute a SQL transaction against a Neon database, should be used for multiple SQL statements",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sqlStatements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The SQL statements to execute"
+          },
+          "databaseName": {
+            "type": "string",
+            "description": "The name of the database to execute the query against"
+          },
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project to execute the query against"
+          },
+          "branchId": {
+            "type": "string",
+            "description": "An optional ID of the branch to execute the query against"
+          }
+        },
+        "required": [
+          "sqlStatements",
+          "databaseName",
+          "projectId"
+        ]
+      }
+    },
+    {
+      "name": "describe_table_schema",
+      "description": "Describe the schema of a table in a Neon database",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "tableName": {
+            "type": "string",
+            "description": "The name of the table"
+          },
+          "databaseName": {
+            "type": "string",
+            "description": "The name of the database to get the table schema from"
+          },
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project to execute the query against"
+          },
+          "branchId": {
+            "type": "string",
+            "description": "An optional ID of the branch to execute the query against"
+          }
+        },
+        "required": [
+          "tableName",
+          "databaseName",
+          "projectId"
+        ]
+      }
+    },
+    {
+      "name": "get_database_tables",
+      "description": "Get all tables in a Neon database",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project"
+          },
+          "branchId": {
+            "type": "string",
+            "description": "An optional ID of the branch"
+          },
+          "databaseName": {
+            "type": "string",
+            "description": "The name of the database"
+          }
+        },
+        "required": [
+          "projectId",
+          "databaseName"
+        ]
+      }
+    },
+    {
+      "name": "create_branch",
+      "description": "Create a branch in a Neon project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project to create the branch in"
+          },
+          "branchName": {
+            "type": "string",
+            "description": "An optional name for the branch"
+          }
+        },
+        "required": [
+          "projectId"
+        ]
+      }
+    },
+    {
+      "name": "prepare_database_migration",
+      "description": "Prepare a database migration, creating a temporary branch and applying the migration SQL there. Returns migration details.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "migrationSql": {
+            "type": "string",
+            "description": "The SQL to execute to create the migration"
+          },
+          "databaseName": {
+            "type": "string",
+            "description": "The name of the database to execute the query against"
+          },
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project to execute the query against"
+          }
+        },
+        "required": [
+          "migrationSql",
+          "databaseName",
+          "projectId"
+        ]
+      }
+    },
+    {
+      "name": "complete_database_migration",
+      "description": "Complete a database migration when the user confirms the migration is ready to be applied to the main branch. This tool also deletes the temporary branch.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "migrationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "migrationId"
+        ]
+      }
+    },
+    {
+      "name": "describe_branch",
+      "description": "Get a tree view of all objects in a branch, including databases, schemas, tables, views, and functions",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project"
+          },
+          "branchId": {
+            "type": "string",
+            "description": "An ID of the branch to describe"
+          },
+          "databaseName": {
+            "type": "string",
+            "description": "The name of the database"
+          }
+        },
+        "required": [
+          "projectId",
+          "databaseName",
+          "branchId"
+        ]
+      }
+    },
+    {
+      "name": "delete_branch",
+      "description": "Delete a branch from a Neon project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "description": "The ID of the project containing the branch"
+          },
+          "branchId": {
+            "type": "string",
+            "description": "The ID of the branch to delete"
+          }
+        },
+        "required": [
+          "projectId",
+          "branchId"
+        ]
+      }
+    }
+  ]
+}

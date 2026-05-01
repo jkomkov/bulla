@@ -1,0 +1,1829 @@
+{
+  "theorem_2_synthetic": {
+    "description": "Verification of Theorem 2 (fee-multiplicity separation)",
+    "results": {
+      "2": {
+        "G0_fee": 2,
+        "G0_beta": 1,
+        "G1_fee": 2,
+        "G1_beta": 3,
+        "verified": true
+      },
+      "3": {
+        "G0_fee": 3,
+        "G0_beta": 1,
+        "G1_fee": 3,
+        "G1_beta": 3,
+        "verified": true
+      },
+      "5": {
+        "G0_fee": 5,
+        "G0_beta": 1,
+        "G1_fee": 5,
+        "G1_beta": 3,
+        "verified": true
+      },
+      "10": {
+        "G0_fee": 10,
+        "G0_beta": 1,
+        "G1_fee": 10,
+        "G1_beta": 3,
+        "verified": true
+      }
+    }
+  },
+  "corpus_fee_groups": {
+    "11": {
+      "n": 36,
+      "hidden_range": [
+        12,
+        16
+      ],
+      "loops_range": [
+        0,
+        1
+      ]
+    },
+    "10": {
+      "n": 25,
+      "hidden_range": [
+        15,
+        15
+      ],
+      "loops_range": [
+        1,
+        1
+      ]
+    },
+    "1": {
+      "n": 89,
+      "hidden_range": [
+        2,
+        4
+      ],
+      "loops_range": [
+        0,
+        2
+      ]
+    },
+    "2": {
+      "n": 67,
+      "hidden_range": [
+        3,
+        4
+      ],
+      "loops_range": [
+        0,
+        1
+      ]
+    },
+    "22": {
+      "n": 1,
+      "hidden_range": [
+        27,
+        27
+      ],
+      "loops_range": [
+        1,
+        1
+      ]
+    },
+    "12": {
+      "n": 7,
+      "hidden_range": [
+        13,
+        18
+      ],
+      "loops_range": [
+        0,
+        1
+      ]
+    },
+    "14": {
+      "n": 1,
+      "hidden_range": [
+        15,
+        15
+      ],
+      "loops_range": [
+        0,
+        0
+      ]
+    },
+    "13": {
+      "n": 3,
+      "hidden_range": [
+        15,
+        18
+      ],
+      "loops_range": [
+        0,
+        1
+      ]
+    },
+    "3": {
+      "n": 10,
+      "hidden_range": [
+        4,
+        6
+      ],
+      "loops_range": [
+        0,
+        1
+      ]
+    },
+    "4": {
+      "n": 1,
+      "hidden_range": [
+        6,
+        6
+      ],
+      "loops_range": [
+        0,
+        0
+      ]
+    }
+  },
+  "per_composition": [
+    {
+      "composition": "airtable-mcp+filesystem",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "airtable-mcp+github",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "airtable-mcp+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "airtable-mcp+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "airtable-mcp+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "airtable-mcp+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "airtable-mcp+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "cognee-mcp-server+filesystem",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "cognee-mcp-server+github",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "cognee-mcp-server+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "cognee-mcp-server+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "cognee-mcp-server+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "cognee-mcp-server+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "cognee-mcp-server+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "exa+filesystem",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "exa+github",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "exa+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "exa+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "exa+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "exa+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "exa+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "fetch-mcp+filesystem",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "fetch-mcp+github",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "fetch-mcp+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "fetch-mcp+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "fetch-mcp+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "fetch-mcp+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "fetch-mcp+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "filesystem+flightradar24-mcp-server",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+github",
+      "fee": 22,
+      "n_hidden": 27,
+      "n_loops": 1,
+      "n_independent": 26
+    },
+    {
+      "composition": "filesystem+gtasks-mcp",
+      "fee": 11,
+      "n_hidden": 13,
+      "n_loops": 1,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+inoyu-mcp-unomi-server",
+      "fee": 11,
+      "n_hidden": 13,
+      "n_loops": 1,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-mongo-server",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-pinecone",
+      "fee": 11,
+      "n_hidden": 13,
+      "n_loops": 1,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-playwright",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-server-aws",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-server-browserbase",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-server-chatsum",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-server-cloudflare",
+      "fee": 12,
+      "n_hidden": 14,
+      "n_loops": 0,
+      "n_independent": 14
+    },
+    {
+      "composition": "filesystem+mcp-server-fetch",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-server-kubernetes",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-server-neon",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-server-rememberizer",
+      "fee": 11,
+      "n_hidden": 13,
+      "n_loops": 1,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-server-tmdb",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-snowflake-server",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-vegalite-server",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+mcp-xmind",
+      "fee": 14,
+      "n_hidden": 15,
+      "n_loops": 0,
+      "n_independent": 15
+    },
+    {
+      "composition": "filesystem+memory",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+needle-mcp",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+needle-mcp_tools",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+notion",
+      "fee": 12,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "filesystem+ns-mcp-server",
+      "fee": 12,
+      "n_hidden": 14,
+      "n_loops": 0,
+      "n_independent": 14
+    },
+    {
+      "composition": "filesystem+openrpc-mpc-server",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+playwright",
+      "fee": 12,
+      "n_hidden": 13,
+      "n_loops": 0,
+      "n_independent": 13
+    },
+    {
+      "composition": "filesystem+puppeteer",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+search1api-mcp",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+sequential-thinking",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+tavily",
+      "fee": 11,
+      "n_hidden": 13,
+      "n_loops": 1,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+todoist-mcp-server",
+      "fee": 13,
+      "n_hidden": 15,
+      "n_loops": 0,
+      "n_independent": 15
+    },
+    {
+      "composition": "filesystem+twitter-mcp",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "filesystem+x-mcp",
+      "fee": 11,
+      "n_hidden": 12,
+      "n_loops": 0,
+      "n_independent": 12
+    },
+    {
+      "composition": "flightradar24-mcp-server+github",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "flightradar24-mcp-server+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "flightradar24-mcp-server+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "flightradar24-mcp-server+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "flightradar24-mcp-server+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "flightradar24-mcp-server+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "github+gtasks-mcp",
+      "fee": 11,
+      "n_hidden": 16,
+      "n_loops": 1,
+      "n_independent": 15
+    },
+    {
+      "composition": "github+inoyu-mcp-unomi-server",
+      "fee": 11,
+      "n_hidden": 16,
+      "n_loops": 1,
+      "n_independent": 15
+    },
+    {
+      "composition": "github+mcp-mongo-server",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+mcp-pinecone",
+      "fee": 11,
+      "n_hidden": 16,
+      "n_loops": 0,
+      "n_independent": 16
+    },
+    {
+      "composition": "github+mcp-playwright",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+mcp-server-aws",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+mcp-server-browserbase",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+mcp-server-chatsum",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+mcp-server-cloudflare",
+      "fee": 12,
+      "n_hidden": 17,
+      "n_loops": 0,
+      "n_independent": 17
+    },
+    {
+      "composition": "github+mcp-server-fetch",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+mcp-server-kubernetes",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+mcp-server-neon",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+mcp-server-rememberizer",
+      "fee": 11,
+      "n_hidden": 16,
+      "n_loops": 1,
+      "n_independent": 15
+    },
+    {
+      "composition": "github+mcp-server-tmdb",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+mcp-snowflake-server",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+mcp-vegalite-server",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+mcp-xmind",
+      "fee": 13,
+      "n_hidden": 18,
+      "n_loops": 1,
+      "n_independent": 17
+    },
+    {
+      "composition": "github+memory",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+needle-mcp",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+needle-mcp_tools",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+notion",
+      "fee": 13,
+      "n_hidden": 18,
+      "n_loops": 0,
+      "n_independent": 18
+    },
+    {
+      "composition": "github+ns-mcp-server",
+      "fee": 12,
+      "n_hidden": 17,
+      "n_loops": 0,
+      "n_independent": 17
+    },
+    {
+      "composition": "github+openrpc-mpc-server",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+playwright",
+      "fee": 11,
+      "n_hidden": 16,
+      "n_loops": 1,
+      "n_independent": 15
+    },
+    {
+      "composition": "github+puppeteer",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+search1api-mcp",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+sequential-thinking",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+tavily",
+      "fee": 11,
+      "n_hidden": 16,
+      "n_loops": 0,
+      "n_independent": 16
+    },
+    {
+      "composition": "github+todoist-mcp-server",
+      "fee": 12,
+      "n_hidden": 18,
+      "n_loops": 1,
+      "n_independent": 17
+    },
+    {
+      "composition": "github+twitter-mcp",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "github+x-mcp",
+      "fee": 10,
+      "n_hidden": 15,
+      "n_loops": 1,
+      "n_independent": 14
+    },
+    {
+      "composition": "gtasks-mcp+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "gtasks-mcp+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 4,
+      "n_loops": 1,
+      "n_independent": 3
+    },
+    {
+      "composition": "gtasks-mcp+notion",
+      "fee": 1,
+      "n_hidden": 4,
+      "n_loops": 2,
+      "n_independent": 2
+    },
+    {
+      "composition": "gtasks-mcp+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "gtasks-mcp+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 4,
+      "n_loops": 1,
+      "n_independent": 3
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+mcp-server-rememberizer",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 4,
+      "n_loops": 1,
+      "n_independent": 3
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+notion",
+      "fee": 1,
+      "n_hidden": 4,
+      "n_loops": 2,
+      "n_independent": 2
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 4,
+      "n_loops": 1,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-mongo-server+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-mongo-server+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-mongo-server+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-mongo-server+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-mongo-server+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-pinecone+mcp-server-cloudflare",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-pinecone+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 4,
+      "n_loops": 1,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-pinecone+notion",
+      "fee": 2,
+      "n_hidden": 4,
+      "n_loops": 1,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-pinecone+ns-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-pinecone+tavily",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-pinecone+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 4,
+      "n_loops": 1,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-playwright+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-playwright+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-playwright+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-playwright+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-playwright+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-aws+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-aws+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-aws+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-aws+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-aws+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-browserbase+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-browserbase+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-browserbase+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-browserbase+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-browserbase+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-chatsum+mcp-server-cloudflare",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-chatsum+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-chatsum+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-chatsum+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-chatsum+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-fetch",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-kubernetes",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-neon",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-rememberizer",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-tmdb",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-snowflake-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-vegalite-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-xmind",
+      "fee": 3,
+      "n_hidden": 5,
+      "n_loops": 0,
+      "n_independent": 5
+    },
+    {
+      "composition": "mcp-server-cloudflare+memory",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+needle-mcp",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+needle-mcp_tools",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+notion",
+      "fee": 3,
+      "n_hidden": 5,
+      "n_loops": 1,
+      "n_independent": 4
+    },
+    {
+      "composition": "mcp-server-cloudflare+ns-mcp-server",
+      "fee": 3,
+      "n_hidden": 4,
+      "n_loops": 0,
+      "n_independent": 4
+    },
+    {
+      "composition": "mcp-server-cloudflare+openrpc-mpc-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+playwright",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+puppeteer",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+search1api-mcp",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+sequential-thinking",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+tavily",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-cloudflare+todoist-mcp-server",
+      "fee": 3,
+      "n_hidden": 5,
+      "n_loops": 0,
+      "n_independent": 5
+    },
+    {
+      "composition": "mcp-server-cloudflare+twitter-mcp",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-cloudflare+x-mcp",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-fetch+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-fetch+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-fetch+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-fetch+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-kubernetes+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-kubernetes+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-kubernetes+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-kubernetes+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-neon+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-neon+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-neon+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-neon+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-rememberizer+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 4,
+      "n_loops": 1,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-rememberizer+notion",
+      "fee": 1,
+      "n_hidden": 4,
+      "n_loops": 2,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-rememberizer+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-rememberizer+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 4,
+      "n_loops": 1,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-tmdb+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-server-tmdb+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-tmdb+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-server-tmdb+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-snowflake-server+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-snowflake-server+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-snowflake-server+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-snowflake-server+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-vegalite-server+mcp-xmind",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-vegalite-server+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-vegalite-server+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "mcp-vegalite-server+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-xmind+memory",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-xmind+needle-mcp",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-xmind+needle-mcp_tools",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-xmind+notion",
+      "fee": 3,
+      "n_hidden": 6,
+      "n_loops": 1,
+      "n_independent": 5
+    },
+    {
+      "composition": "mcp-xmind+ns-mcp-server",
+      "fee": 3,
+      "n_hidden": 5,
+      "n_loops": 0,
+      "n_independent": 5
+    },
+    {
+      "composition": "mcp-xmind+openrpc-mpc-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-xmind+playwright",
+      "fee": 3,
+      "n_hidden": 4,
+      "n_loops": 0,
+      "n_independent": 4
+    },
+    {
+      "composition": "mcp-xmind+puppeteer",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-xmind+search1api-mcp",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-xmind+sequential-thinking",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-xmind+tavily",
+      "fee": 2,
+      "n_hidden": 4,
+      "n_loops": 1,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-xmind+todoist-mcp-server",
+      "fee": 4,
+      "n_hidden": 6,
+      "n_loops": 0,
+      "n_independent": 6
+    },
+    {
+      "composition": "mcp-xmind+twitter-mcp",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "mcp-xmind+x-mcp",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "memory+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "memory+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "memory+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "needle-mcp+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "needle-mcp+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "needle-mcp+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "needle-mcp_tools+notion",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "needle-mcp_tools+ns-mcp-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "needle-mcp_tools+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "notion+ns-mcp-server",
+      "fee": 3,
+      "n_hidden": 5,
+      "n_loops": 1,
+      "n_independent": 4
+    },
+    {
+      "composition": "notion+openrpc-mpc-server",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "notion+playwright",
+      "fee": 1,
+      "n_hidden": 4,
+      "n_loops": 2,
+      "n_independent": 2
+    },
+    {
+      "composition": "notion+puppeteer",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "notion+search1api-mcp",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "notion+sequential-thinking",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "notion+tavily",
+      "fee": 2,
+      "n_hidden": 4,
+      "n_loops": 1,
+      "n_independent": 3
+    },
+    {
+      "composition": "notion+todoist-mcp-server",
+      "fee": 3,
+      "n_hidden": 6,
+      "n_loops": 1,
+      "n_independent": 5
+    },
+    {
+      "composition": "notion+twitter-mcp",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "notion+x-mcp",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "ns-mcp-server+openrpc-mpc-server",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "ns-mcp-server+playwright",
+      "fee": 1,
+      "n_hidden": 3,
+      "n_loops": 1,
+      "n_independent": 2
+    },
+    {
+      "composition": "ns-mcp-server+puppeteer",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "ns-mcp-server+search1api-mcp",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "ns-mcp-server+sequential-thinking",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "ns-mcp-server+tavily",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "ns-mcp-server+todoist-mcp-server",
+      "fee": 3,
+      "n_hidden": 5,
+      "n_loops": 0,
+      "n_independent": 5
+    },
+    {
+      "composition": "ns-mcp-server+twitter-mcp",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "ns-mcp-server+x-mcp",
+      "fee": 1,
+      "n_hidden": 2,
+      "n_loops": 0,
+      "n_independent": 2
+    },
+    {
+      "composition": "openrpc-mpc-server+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "playwright+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 4,
+      "n_loops": 1,
+      "n_independent": 3
+    },
+    {
+      "composition": "puppeteer+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "search1api-mcp+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "sequential-thinking+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "tavily+todoist-mcp-server",
+      "fee": 2,
+      "n_hidden": 4,
+      "n_loops": 1,
+      "n_independent": 3
+    },
+    {
+      "composition": "todoist-mcp-server+twitter-mcp",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    },
+    {
+      "composition": "todoist-mcp-server+x-mcp",
+      "fee": 2,
+      "n_hidden": 3,
+      "n_loops": 0,
+      "n_independent": 3
+    }
+  ]
+}

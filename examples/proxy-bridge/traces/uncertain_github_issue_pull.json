@@ -1,0 +1,28 @@
+{
+  "name": "uncertain_github_issue_pull",
+  "expectation": "uncertain",
+  "calls": [
+    {
+      "server": "github",
+      "tool": "get_issue",
+      "arguments": {
+        "issue_number": 7
+      },
+      "result": {}
+    },
+    {
+      "server": "github",
+      "tool": "get_pull_request",
+      "arguments": {
+        "pull_number": 7
+      },
+      "argument_sources": {
+        "pull_number": {
+          "call_id": 1,
+          "field": "issue_number"
+        }
+      },
+      "result": {}
+    }
+  ]
+}

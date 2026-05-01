@@ -1,0 +1,32 @@
+pack_name: who-icd-10
+pack_version: 0.1.0
+license:
+  spdx_id: CC-BY-NC-SA-3.0
+  source_url: https://icd.who.int/browse10/
+  registry_license: research-only
+  attribution: sha256:who-icd-10-notices
+derives_from:
+  standard: WHO-ICD-10
+  version: '2019'
+  source_uri: https://icd.who.int/browse10/2019/en
+dimensions:
+  who_icd_10_code:
+    description: WHO international ICD-10 diagnosis code (distinct from ICD-10-CM,
+      the US clinical modification). Translations are licensed; the values_registry
+      pointer requires a WHO ICD-10 research credential to fetch.
+    field_patterns:
+    - who_icd
+    - who_icd_10
+    - international_icd_10
+    - '*_who_icd'
+    description_keywords:
+    - who icd-10
+    - international classification of diseases
+    - icd-10 international
+    domains:
+    - healthcare
+    values_registry:
+      uri: https://icd.who.int/browse10/2019/en
+      hash: placeholder:awaiting-license
+      version: '2019'
+      license_id: WHO-ICD-10

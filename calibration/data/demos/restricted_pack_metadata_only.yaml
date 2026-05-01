@@ -1,0 +1,68 @@
+name: restricted_pack_metadata_only
+
+description: |
+  End-to-end demo proving the architectural separation between
+  metadata-receipt-issuance and licensed-value-fetch. The composition
+  references the umls-mappings restricted-source pack (NLM-UMLS
+  license-gated). Today, with no NLM credential configured:
+
+    1. The composition LOADS without error (pack metadata is
+       independently authored by Bulla, ships in our repo).
+    2. The classifier RUNS — fields named like CUIs classify under
+       `umls_concept_id` because the pack ships the classifier
+       metadata.
+    3. A receipt ISSUES with `active_packs: [umls-mappings]` and
+       `derives_from.standard: UMLS-Metathesaurus`. The receipt
+       captures the binding without ever touching the licensed
+       registry.
+    4. `bulla pack verify` on the same pack returns
+       `status='placeholder'` (or, in strict mode, raises
+       `RegistryAccessError(PLACEHOLDER_HASH, ...)`) because the
+       pack carries `placeholder:awaiting-license` until a consumer
+       performs a licensed ingest and substitutes a real
+       `sha256:...` hash.
+
+  The two layers — metadata-receipt and licensed-fetch — are
+  independent. Step #2 of the post-feedback sprint sequence
+  introduced the placeholder sentinel format precisely to make this
+  separation machine-readable.
+
+tools:
+  ehr_clinical:
+    internal_state:
+      - patient_id
+      - encounter_id
+      - umls_cui                 # cross-vocabulary concept id
+      - source_terminology       # e.g. 'SNOMED-CT'
+      - icd_10_cm_code
+    observable_schema:
+      - patient_id
+      - encounter_id
+      - umls_cui
+      - icd_10_cm_code
+
+  terminology_resolver:
+    internal_state:
+      - umls_cui
+      - canonical_term
+      - source_terminology       # may be different
+      - icd_10_cm_code
+      - snomed_concept_id
+    observable_schema:
+      - umls_cui
+      - canonical_term
+      - icd_10_cm_code
+
+edges:
+  - from: ehr_clinical
+    to: terminology_resolver
+    dimensions:
+      - name: umls_concept_id
+        from_field: umls_cui
+        to_field: umls_cui
+      - name: icd_10_cm_code
+        from_field: icd_10_cm_code
+        to_field: icd_10_cm_code
+      - name: terminology_match
+        from_field: source_terminology
+        to_field: source_terminology

@@ -1,0 +1,53 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-server-bigquery",
+    "capture_date": "2026-04-07T05:16:06.619785+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:bb3b8a3059f7de682ceda70b82e0b57ac908c5f036299edddcb96a41c8908e88",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "execute-query",
+      "description": "Execute a SELECT query on the BigQuery database",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "SELECT SQL query to execute using BigQuery dialect"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "list-tables",
+      "description": "List all tables in the BigQuery database",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "describe-table",
+      "description": "Get the schema information for a specific table",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "table_name": {
+            "type": "string",
+            "description": "Name of the table to describe (e.g. my_dataset.my_table)"
+          }
+        },
+        "required": [
+          "table_name"
+        ]
+      }
+    }
+  ]
+}

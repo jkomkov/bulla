@@ -1,0 +1,59 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-vegalite-server",
+    "capture_date": "2026-04-07T05:16:06.624959+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:a7b8fd1f577ceb8cd764a7e1c542667aa6fced0f3cadaa87192075081965bb1c",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "save_data",
+      "description": "A tool which allows you to save data to a named table for later use in visualizations.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the table to save the data to"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "Row of the table as a dictionary/object"
+            },
+            "description": "The data to save"
+          }
+        },
+        "required": [
+          "name",
+          "data"
+        ]
+      }
+    },
+    {
+      "name": "visualize_data",
+      "description": "A tool which allows you to produce a data visualization using the Vega-Lite grammar.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data_name": {
+            "type": "string",
+            "description": "The name of the data table to visualize"
+          },
+          "vegalite_specification": {
+            "type": "string",
+            "description": "The vegalite v5 specification for the visualization. Do not include the data field, as this will be added automatically."
+          }
+        },
+        "required": [
+          "data_name",
+          "vegalite_specification"
+        ]
+      }
+    }
+  ]
+}

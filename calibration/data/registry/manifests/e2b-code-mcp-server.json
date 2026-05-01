@@ -1,0 +1,28 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "e2b-code-mcp-server",
+    "capture_date": "2026-04-07T05:16:06.614389+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:f91ab75c11f05b3e32ef13b7fd03648989ddd337c583a577828cf2769f7e56a5",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "run_code",
+      "description": "Run python code in a secure sandbox by E2B. Using the Jupyter Notebook syntax.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      }
+    }
+  ]
+}

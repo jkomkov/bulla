@@ -1,0 +1,467 @@
+{
+  "title": "State of Agent Coherence, Q2 2026",
+  "generated": "2026-04-07T19:25:52.346511+00:00",
+  "corpus": {
+    "n_compositions": 703,
+    "n_servers": 38,
+    "n_blind_spots": 4125,
+    "fee_distribution": {
+      "0": 463,
+      "1": 89,
+      "2": 67,
+      "3": 10,
+      "4": 1,
+      "10": 25,
+      "11": 36,
+      "12": 7,
+      "13": 3,
+      "14": 1,
+      "22": 1
+    }
+  },
+  "precision": {
+    "total_annotated": 4125,
+    "real_mismatch": 161,
+    "plausible": 5,
+    "false_positive": 3959,
+    "precision": 0.03907766990291262,
+    "live_validated": 0
+  },
+  "calibration_curve": [
+    {
+      "fee": 0,
+      "n_compositions": 463,
+      "n_with_real_mismatch": 0,
+      "p_failure": 0.0
+    },
+    {
+      "fee": 1,
+      "n_compositions": 89,
+      "n_with_real_mismatch": 2,
+      "p_failure": 0.02247191011235955
+    },
+    {
+      "fee": 2,
+      "n_compositions": 67,
+      "n_with_real_mismatch": 6,
+      "p_failure": 0.08955223880597014
+    },
+    {
+      "fee": 3,
+      "n_compositions": 10,
+      "n_with_real_mismatch": 4,
+      "p_failure": 0.4
+    },
+    {
+      "fee": 4,
+      "n_compositions": 1,
+      "n_with_real_mismatch": 0,
+      "p_failure": 0.0
+    },
+    {
+      "fee": 10,
+      "n_compositions": 25,
+      "n_with_real_mismatch": 0,
+      "p_failure": 0.0
+    },
+    {
+      "fee": 11,
+      "n_compositions": 36,
+      "n_with_real_mismatch": 5,
+      "p_failure": 0.1388888888888889
+    },
+    {
+      "fee": 12,
+      "n_compositions": 7,
+      "n_with_real_mismatch": 3,
+      "p_failure": 0.42857142857142855
+    },
+    {
+      "fee": 13,
+      "n_compositions": 3,
+      "n_with_real_mismatch": 2,
+      "p_failure": 0.6666666666666666
+    },
+    {
+      "fee": 14,
+      "n_compositions": 1,
+      "n_with_real_mismatch": 1,
+      "p_failure": 1.0
+    },
+    {
+      "fee": 22,
+      "n_compositions": 1,
+      "n_with_real_mismatch": 1,
+      "p_failure": 1.0
+    }
+  ],
+  "logistic_fit": {
+    "a": 0.18932306422728865,
+    "b": -3.33484222686615
+  },
+  "boundary_fee": {
+    "spearman_rho": 0.9960112739718003,
+    "cross_category_mean": 0.2,
+    "intra_category_mean": 0.1
+  },
+  "dimensions": [
+    {
+      "dimension": "path_convention_match",
+      "occurrences": 2925,
+      "real_mismatch": 113,
+      "precision": 0.03863247863247863
+    },
+    {
+      "dimension": "id_offset_match",
+      "occurrences": 792,
+      "real_mismatch": 15,
+      "precision": 0.01893939393939394
+    },
+    {
+      "dimension": "date_format_match",
+      "occurrences": 144,
+      "real_mismatch": 33,
+      "precision": 0.22916666666666666
+    },
+    {
+      "dimension": "state_filter_match",
+      "occurrences": 114,
+      "real_mismatch": 0,
+      "precision": 0.0
+    },
+    {
+      "dimension": "score_range_match",
+      "occurrences": 111,
+      "real_mismatch": 0,
+      "precision": 0.0
+    },
+    {
+      "dimension": "sort_direction_match",
+      "occurrences": 39,
+      "real_mismatch": 0,
+      "precision": 0.0
+    }
+  ],
+  "server_scores": [
+    {
+      "server": "airtable-mcp",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "cognee-mcp-server",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "exa",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "fetch-mcp",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "flightradar24-mcp-server",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "gtasks-mcp",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7837837837837838,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-mongo-server",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-playwright",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-server-aws",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-server-browserbase",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-server-chatsum",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-server-fetch",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-server-kubernetes",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-server-neon",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-server-tmdb",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-snowflake-server",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-vegalite-server",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "memory",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "needle-mcp",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "needle-mcp_tools",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "openrpc-mpc-server",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "playwright",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.8378378378378378,
+      "n_compositions": 37
+    },
+    {
+      "server": "puppeteer",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "search1api-mcp",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "sequential-thinking",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "twitter-mcp",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "x-mcp",
+      "composability": 0.8108108108108109,
+      "mean_fee": 0.7567567567567568,
+      "n_compositions": 37
+    },
+    {
+      "server": "inoyu-mcp-unomi-server",
+      "composability": 0.7837837837837838,
+      "mean_fee": 0.8108108108108109,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-pinecone",
+      "composability": 0.7837837837837838,
+      "mean_fee": 0.8918918918918919,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-server-rememberizer",
+      "composability": 0.7837837837837838,
+      "mean_fee": 0.8108108108108109,
+      "n_compositions": 37
+    },
+    {
+      "server": "tavily",
+      "composability": 0.7837837837837838,
+      "mean_fee": 0.8918918918918919,
+      "n_compositions": 37
+    },
+    {
+      "server": "filesystem",
+      "composability": 0.0,
+      "mean_fee": 11.54054054054054,
+      "n_compositions": 37
+    },
+    {
+      "server": "github",
+      "composability": 0.0,
+      "mean_fee": 10.81081081081081,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-server-cloudflare",
+      "composability": 0.0,
+      "mean_fee": 1.864864864864865,
+      "n_compositions": 37
+    },
+    {
+      "server": "mcp-xmind",
+      "composability": 0.0,
+      "mean_fee": 2.7837837837837838,
+      "n_compositions": 37
+    },
+    {
+      "server": "notion",
+      "composability": 0.0,
+      "mean_fee": 1.8918918918918919,
+      "n_compositions": 37
+    },
+    {
+      "server": "ns-mcp-server",
+      "composability": 0.0,
+      "mean_fee": 1.864864864864865,
+      "n_compositions": 37
+    },
+    {
+      "server": "todoist-mcp-server",
+      "composability": 0.0,
+      "mean_fee": 2.7027027027027026,
+      "n_compositions": 37
+    }
+  ],
+  "top_dangerous": [
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_file",
+      "to_tool": "github__create_or_update_file",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "auto:cross_server_path_convention_match"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_file",
+      "to_tool": "github__get_file_contents",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "auto:cross_server_path_convention_match"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_text_file",
+      "to_tool": "github__create_or_update_file",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "auto:cross_server_path_convention_match"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_text_file",
+      "to_tool": "github__get_file_contents",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "auto:cross_server_path_convention_match"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_media_file",
+      "to_tool": "github__create_or_update_file",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "auto:cross_server_path_convention_match"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_media_file",
+      "to_tool": "github__get_file_contents",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "auto:cross_server_path_convention_match"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_multiple_files",
+      "to_tool": "github__create_or_update_file",
+      "from_field": "paths",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "auto:cross_server_path_convention_match"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__read_multiple_files",
+      "to_tool": "github__get_file_contents",
+      "from_field": "paths",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "auto:cross_server_path_convention_match"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__write_file",
+      "to_tool": "github__create_or_update_file",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "auto:cross_server_path_convention_match"
+    },
+    {
+      "dimension": "path_convention_match",
+      "from_tool": "filesystem__write_file",
+      "to_tool": "github__get_file_contents",
+      "from_field": "path",
+      "to_field": "path",
+      "annotation": "REAL_MISMATCH",
+      "source": "auto:cross_server_path_convention_match"
+    }
+  ]
+}

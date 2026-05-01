@@ -1,0 +1,137 @@
+pack_name: fix-4.4
+pack_version: 0.1.0
+license:
+  spdx_id: Apache-2.0
+  source_url: https://www.fixtrading.org/standards/fix-4-4/
+  registry_license: open
+derives_from:
+  standard: FIX-4.4
+  version: '4.4'
+  source_uri: https://github.com/connamara/quickfixengine/raw/main/spec/FIX44.xml
+dimensions:
+  fix_msg_type:
+    description: FIX 4.4 MsgType (Tag 35). Single-character or two-character codes
+      identifying message kind. The inline seed covers the ~20 most-common values;
+      the QuickFIX dictionary at the values_registry pointer is the authoritative
+      source.
+    field_patterns:
+    - msg_type
+    - msgType
+    - MsgType
+    - tag_35
+    - fix_msg_type
+    - '*_msg_type'
+    description_keywords:
+    - fix msgtype
+    - fix message type
+    - fix tag 35
+    - msgtype field
+    domains:
+    - financial
+    known_values:
+    - canonical: D
+      aliases:
+      - NewOrderSingle
+      - new-order-single
+    - canonical: F
+      aliases:
+      - OrderCancelRequest
+      - order-cancel
+    - canonical: G
+      aliases:
+      - OrderCancelReplaceRequest
+      - cancel-replace
+    - canonical: '8'
+      aliases:
+      - ExecutionReport
+      - execution-report
+    - canonical: '9'
+      aliases:
+      - OrderCancelReject
+      - cancel-reject
+    - canonical: '1'
+      aliases:
+      - TestRequest
+    - canonical: '0'
+      aliases:
+      - Heartbeat
+    - canonical: A
+      aliases:
+      - Logon
+    - canonical: '5'
+      aliases:
+      - Logout
+    - canonical: '2'
+      aliases:
+      - ResendRequest
+    - canonical: '3'
+      aliases:
+      - Reject
+    - canonical: '4'
+      aliases:
+      - SequenceReset
+    - canonical: V
+      aliases:
+      - MarketDataRequest
+    - canonical: W
+      aliases:
+      - MarketDataSnapshotFullRefresh
+    - canonical: X
+      aliases:
+      - MarketDataIncrementalRefresh
+    - canonical: h
+      aliases:
+      - TradingSessionStatus
+    - canonical: AE
+      aliases:
+      - TradeCaptureReport
+    - canonical: j
+      aliases:
+      - BusinessMessageReject
+    values_registry:
+      uri: https://github.com/connamara/quickfixengine/raw/main/spec/FIX44.xml
+      hash: placeholder:awaiting-ingest
+      version: '4.4'
+  fix_side:
+    description: FIX Side (Tag 54) — buy/sell/etc. Closed enum, stable across FIX
+      versions.
+    field_patterns:
+    - side
+    - '*_side'
+    - tag_54
+    - order_side
+    description_keywords:
+    - fix side
+    - fix tag 54
+    domains:
+    - financial
+    known_values:
+    - canonical: '1'
+      aliases:
+      - Buy
+      - buy
+    - canonical: '2'
+      aliases:
+      - Sell
+      - sell
+    - canonical: '3'
+      aliases:
+      - BuyMinus
+    - canonical: '4'
+      aliases:
+      - SellPlus
+    - canonical: '5'
+      aliases:
+      - SellShort
+    - canonical: '6'
+      aliases:
+      - SellShortExempt
+    - canonical: '7'
+      aliases:
+      - Undisclosed
+    - canonical: '8'
+      aliases:
+      - Cross
+    - canonical: '9'
+      aliases:
+      - CrossShort

@@ -1,0 +1,33 @@
+pack_name: iso-20022
+pack_version: 0.1.0
+license:
+  spdx_id: Proprietary-ISO
+  source_url: https://www.iso20022.org/
+  registry_license: research-only
+  attribution: sha256:iso-20022-notices
+derives_from:
+  standard: ISO-20022
+  version: '2024'
+  source_uri: https://www.iso20022.org/iso-20022-message-definitions
+dimensions:
+  iso_20022_message_type:
+    description: ISO 20022 message-definition identifier (e.g. pacs.008.001.10, pain.001.001.11).
+      Paid spec; values_registry requires ISO-20022 license.
+    field_patterns:
+    - iso20022_msg
+    - iso_20022_message
+    - message_definition
+    - '*_iso20022_msg'
+    description_keywords:
+    - iso 20022 message
+    - iso-20022 message
+    - pacs.008
+    - pain.001
+    - camt.053
+    domains:
+    - financial
+    values_registry:
+      uri: https://www.iso20022.org/iso-20022-message-definitions
+      hash: placeholder:awaiting-license
+      version: '2024'
+      license_id: ISO-20022

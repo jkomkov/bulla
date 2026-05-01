@@ -1,0 +1,30 @@
+name: drupal_stripe_jpy
+description: 'Drupal Commerce + Stripe JPY 100× overcharge (recurring). Integration
+  multiplies amount by 100 assuming 2-decimal currency. JPY is zero-decimal. ISO-4217
+  detects: currency_code mismatch on amount field.'
+tools:
+  drupal_commerce:
+    internal_state:
+    - amount
+    - currency
+    - minor_unit_factor
+    - order_id
+    observable_schema:
+    - amount
+    - currency
+    - order_id
+  stripe_charge:
+    internal_state:
+    - amount_minor
+    - currency
+    - charge_id
+    observable_schema:
+    - amount_minor
+    - currency
+    - charge_id
+edges:
+- from: drupal_commerce
+  to: stripe_charge
+  dimensions:
+  - name: minor_unit_convention_match
+    from_field: minor_unit_factor

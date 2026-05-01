@@ -1,0 +1,2511 @@
+{
+  "version": "0.3.0",
+  "manifests_count": 57,
+  "headline": {
+    "coboundary_correctness_incidents_total": 30,
+    "coboundary_correctness_detected_baseline": 30,
+    "coboundary_correctness_detected_enriched": 30,
+    "coboundary_correctness_rate_baseline_pct": 100.0,
+    "coboundary_correctness_rate_enriched_pct": 100.0,
+    "coboundary_correctness_target_pct": 80.0,
+    "coboundary_correctness_target_met": true,
+    "classifier_discovery_calibration_corpus_size": 57,
+    "classifier_discovery_signals_baseline": 109,
+    "classifier_discovery_signals_enriched": 141,
+    "classifier_discovery_signal_density_increase_pct": 29.36,
+    "classifier_discovery_target_pct": 25.0,
+    "classifier_discovery_target_met": true,
+    "incident_field_name_classifier_field_count": 198,
+    "incident_field_name_classifier_unknown_baseline": 144,
+    "incident_field_name_classifier_unknown_enriched": 117,
+    "incident_field_name_classifier_reduction_pct": 18.75,
+    "incident_field_name_classifier_target_pct": 15.0,
+    "incident_field_name_classifier_target_met": true,
+    "calibration_unknown_baseline": 766,
+    "calibration_unknown_enriched": 758,
+    "calibration_unknown_reduction_pct": 1.04,
+    "deprecated_50_percent_target_pct": 50.0,
+    "deprecated_50_percent_target_met_on_incidents": false,
+    "deprecated_50_percent_target_explanation": "Original plan target. Wrong-shaped because: (a) on the calibration corpus, ~90% of fields are domain-irrelevant identifiers; (b) on the incident corpus, ~70% of fields are structural identifiers no standards pack should classify. Replaced by the two claim-A / claim-B metrics above.",
+    "phase5_calibration_target_pct": 50.0,
+    "phase5_incident_detection_target_pct": 80.0,
+    "phase5_incident_unknown_reduction_target_pct": 50.0,
+    "phase5_incident_target_met": true,
+    "phase5_incident_unknown_reduction_target_met": false,
+    "incidents_total": 30,
+    "incidents_detected_baseline": 30,
+    "incidents_detected_enriched": 30,
+    "incidents_detection_rate_baseline_pct": 100.0,
+    "incidents_detection_rate_enriched_pct": 100.0,
+    "incident_field_count": 198,
+    "incident_unknown_baseline": 144,
+    "incident_unknown_enriched": 117,
+    "incident_unknown_reduction_pct": 18.75,
+    "calibration_signal_density_increase_pct": 29.36
+  },
+  "baseline": {
+    "active_packs": [
+      "base",
+      "community"
+    ],
+    "aggregate": {
+      "n_fields": 846,
+      "n_declared": 0,
+      "n_inferred": 80,
+      "n_unknown": 766,
+      "n_dim_signals": 109,
+      "dim_hits": {
+        "path_convention": 37,
+        "encoding": 1,
+        "owner_convention": 15,
+        "id_offset": 9,
+        "sort_direction": 10,
+        "date_format": 20,
+        "state_filter": 7,
+        "timezone": 4,
+        "null_handling": 1,
+        "score_range": 5
+      }
+    },
+    "per_manifest": [
+      {
+        "manifest": "airtable-mcp",
+        "n_fields": 40,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 40,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "any-chat-completions-mcp",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "cognee-mcp-server",
+        "n_fields": 4,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 4,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "e2b-code-mcp-server",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "exa-mcp-server",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "exa",
+        "n_fields": 12,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 12,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "fetch-mcp",
+        "n_fields": 8,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 8,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "filesystem",
+        "n_fields": 38,
+        "n_declared": 0,
+        "n_inferred": 12,
+        "n_unknown": 26,
+        "n_dim_signals": 26,
+        "dim_hits": {
+          "path_convention": 25,
+          "encoding": 1
+        }
+      },
+      {
+        "manifest": "flightradar24-mcp-server",
+        "n_fields": 5,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 5,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "github",
+        "n_fields": 130,
+        "n_declared": 0,
+        "n_inferred": 33,
+        "n_unknown": 97,
+        "n_dim_signals": 38,
+        "dim_hits": {
+          "owner_convention": 15,
+          "path_convention": 2,
+          "id_offset": 7,
+          "sort_direction": 7,
+          "date_format": 1,
+          "state_filter": 6
+        }
+      },
+      {
+        "manifest": "gtasks-mcp",
+        "n_fields": 16,
+        "n_declared": 0,
+        "n_inferred": 1,
+        "n_unknown": 15,
+        "n_dim_signals": 1,
+        "dim_hits": {
+          "state_filter": 1
+        }
+      },
+      {
+        "manifest": "homeassistant-mcp",
+        "n_fields": 0,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 0,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "inoyu-mcp-unomi-server",
+        "n_fields": 10,
+        "n_declared": 0,
+        "n_inferred": 1,
+        "n_unknown": 9,
+        "n_dim_signals": 1,
+        "dim_hits": {
+          "id_offset": 1
+        }
+      },
+      {
+        "manifest": "mcp-bigquery-server",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-mongo-server",
+        "n_fields": 6,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 6,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-obsidian",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-pandoc",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-pinecone",
+        "n_fields": 14,
+        "n_declared": 0,
+        "n_inferred": 3,
+        "n_unknown": 11,
+        "n_dim_signals": 3,
+        "dim_hits": {
+          "date_format": 3
+        }
+      },
+      {
+        "manifest": "mcp-playwright",
+        "n_fields": 23,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 23,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-aws",
+        "n_fields": 45,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 45,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-axiom",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-bigquery",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-browserbase",
+        "n_fields": 6,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 6,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-chatsum",
+        "n_fields": 3,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 3,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-cloudflare",
+        "n_fields": 43,
+        "n_declared": 0,
+        "n_inferred": 3,
+        "n_unknown": 40,
+        "n_dim_signals": 3,
+        "dim_hits": {
+          "date_format": 3
+        }
+      },
+      {
+        "manifest": "mcp-server-docker",
+        "n_fields": 0,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 0,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-fetch",
+        "n_fields": 8,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 8,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-kubernetes",
+        "n_fields": 10,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 10,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-llamacloud",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-mysql",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-neon",
+        "n_fields": 33,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 33,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-rag-web-browser",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-rememberizer",
+        "n_fields": 13,
+        "n_declared": 0,
+        "n_inferred": 5,
+        "n_unknown": 8,
+        "n_dim_signals": 9,
+        "dim_hits": {
+          "date_format": 4,
+          "timezone": 4,
+          "id_offset": 1
+        }
+      },
+      {
+        "manifest": "mcp-server-tmdb",
+        "n_fields": 3,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 3,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-snowflake-server",
+        "n_fields": 5,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 5,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-tavily",
+        "n_fields": 0,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 0,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-vegalite-server",
+        "n_fields": 4,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 4,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-xmind",
+        "n_fields": 11,
+        "n_declared": 0,
+        "n_inferred": 5,
+        "n_unknown": 6,
+        "n_dim_signals": 5,
+        "dim_hits": {
+          "path_convention": 5
+        }
+      },
+      {
+        "manifest": "memory",
+        "n_fields": 21,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 21,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mysql_mcp_server",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "needle-mcp",
+        "n_fields": 9,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 9,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "needle-mcp_tools",
+        "n_fields": 9,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 9,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "notion",
+        "n_fields": 93,
+        "n_declared": 0,
+        "n_inferred": 4,
+        "n_unknown": 89,
+        "n_dim_signals": 5,
+        "dim_hits": {
+          "sort_direction": 3,
+          "date_format": 2
+        }
+      },
+      {
+        "manifest": "npm-search",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "ns-mcp-server",
+        "n_fields": 10,
+        "n_declared": 0,
+        "n_inferred": 3,
+        "n_unknown": 7,
+        "n_dim_signals": 3,
+        "dim_hits": {
+          "null_handling": 1,
+          "date_format": 2
+        }
+      },
+      {
+        "manifest": "openrpc-mpc-server",
+        "n_fields": 4,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 4,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "playwright",
+        "n_fields": 89,
+        "n_declared": 0,
+        "n_inferred": 4,
+        "n_unknown": 85,
+        "n_dim_signals": 5,
+        "dim_hits": {
+          "path_convention": 5
+        }
+      },
+      {
+        "manifest": "postgres",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "puppeteer",
+        "n_fields": 15,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 15,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "qdrant",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "search1api-mcp",
+        "n_fields": 8,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 8,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "sequential-thinking",
+        "n_fields": 11,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 11,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "tavily",
+        "n_fields": 41,
+        "n_declared": 0,
+        "n_inferred": 3,
+        "n_unknown": 38,
+        "n_dim_signals": 5,
+        "dim_hits": {
+          "date_format": 5
+        }
+      },
+      {
+        "manifest": "todoist-mcp-server",
+        "n_fields": 15,
+        "n_declared": 0,
+        "n_inferred": 3,
+        "n_unknown": 12,
+        "n_dim_signals": 5,
+        "dim_hits": {
+          "score_range": 5
+        }
+      },
+      {
+        "manifest": "twitter-mcp",
+        "n_fields": 3,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 3,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "x-mcp",
+        "n_fields": 4,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 4,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "youtube-transcript",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      }
+    ]
+  },
+  "enriched": {
+    "active_packs": [
+      "base",
+      "community",
+      "fhir-r4",
+      "fhir-r5",
+      "fix-4.4",
+      "fix-5.0",
+      "gs1",
+      "hl7-v2",
+      "iana-media-types",
+      "icd-10-cm",
+      "iso-20022",
+      "iso-3166",
+      "iso-4217",
+      "iso-639",
+      "iso-8601",
+      "naics-2022",
+      "swift-mt-mx",
+      "ucum",
+      "umls-mappings",
+      "un-edifact",
+      "who-icd-10"
+    ],
+    "aggregate": {
+      "n_fields": 846,
+      "n_declared": 0,
+      "n_inferred": 88,
+      "n_unknown": 758,
+      "n_dim_signals": 141,
+      "dim_hits": {
+        "unit_of_measure": 3,
+        "path_convention": 37,
+        "encoding": 1,
+        "media_type": 3,
+        "owner_convention": 15,
+        "id_offset": 9,
+        "sort_direction": 10,
+        "date_format": 12,
+        "state_filter": 7,
+        "currency_code": 2,
+        "temporal_format": 17,
+        "timezone": 4,
+        "industry_code": 2,
+        "null_handling": 1,
+        "language_code": 4,
+        "country_code": 3,
+        "score_range": 5,
+        "fix_msg_type": 3,
+        "fix_side": 3
+      }
+    },
+    "per_manifest": [
+      {
+        "manifest": "airtable-mcp",
+        "n_fields": 40,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 40,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "any-chat-completions-mcp",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "cognee-mcp-server",
+        "n_fields": 4,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 4,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "e2b-code-mcp-server",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "exa-mcp-server",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "exa",
+        "n_fields": 12,
+        "n_declared": 0,
+        "n_inferred": 1,
+        "n_unknown": 11,
+        "n_dim_signals": 1,
+        "dim_hits": {
+          "unit_of_measure": 1
+        }
+      },
+      {
+        "manifest": "fetch-mcp",
+        "n_fields": 8,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 8,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "filesystem",
+        "n_fields": 38,
+        "n_declared": 0,
+        "n_inferred": 12,
+        "n_unknown": 26,
+        "n_dim_signals": 27,
+        "dim_hits": {
+          "path_convention": 25,
+          "encoding": 1,
+          "media_type": 1
+        }
+      },
+      {
+        "manifest": "flightradar24-mcp-server",
+        "n_fields": 5,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 5,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "github",
+        "n_fields": 130,
+        "n_declared": 0,
+        "n_inferred": 33,
+        "n_unknown": 97,
+        "n_dim_signals": 40,
+        "dim_hits": {
+          "owner_convention": 15,
+          "path_convention": 2,
+          "id_offset": 7,
+          "sort_direction": 7,
+          "date_format": 1,
+          "state_filter": 6,
+          "currency_code": 2
+        }
+      },
+      {
+        "manifest": "gtasks-mcp",
+        "n_fields": 16,
+        "n_declared": 0,
+        "n_inferred": 1,
+        "n_unknown": 15,
+        "n_dim_signals": 1,
+        "dim_hits": {
+          "state_filter": 1
+        }
+      },
+      {
+        "manifest": "homeassistant-mcp",
+        "n_fields": 0,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 0,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "inoyu-mcp-unomi-server",
+        "n_fields": 10,
+        "n_declared": 0,
+        "n_inferred": 1,
+        "n_unknown": 9,
+        "n_dim_signals": 1,
+        "dim_hits": {
+          "id_offset": 1
+        }
+      },
+      {
+        "manifest": "mcp-bigquery-server",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-mongo-server",
+        "n_fields": 6,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 6,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-obsidian",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-pandoc",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-pinecone",
+        "n_fields": 14,
+        "n_declared": 0,
+        "n_inferred": 3,
+        "n_unknown": 11,
+        "n_dim_signals": 3,
+        "dim_hits": {
+          "temporal_format": 1,
+          "date_format": 2
+        }
+      },
+      {
+        "manifest": "mcp-playwright",
+        "n_fields": 23,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 23,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-aws",
+        "n_fields": 45,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 45,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-axiom",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-bigquery",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-browserbase",
+        "n_fields": 6,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 6,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-chatsum",
+        "n_fields": 3,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 3,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-cloudflare",
+        "n_fields": 43,
+        "n_declared": 0,
+        "n_inferred": 4,
+        "n_unknown": 39,
+        "n_dim_signals": 5,
+        "dim_hits": {
+          "media_type": 2,
+          "temporal_format": 1,
+          "date_format": 2
+        }
+      },
+      {
+        "manifest": "mcp-server-docker",
+        "n_fields": 0,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 0,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-fetch",
+        "n_fields": 8,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 8,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-kubernetes",
+        "n_fields": 10,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 10,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-llamacloud",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-mysql",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-neon",
+        "n_fields": 33,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 33,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-rag-web-browser",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-server-rememberizer",
+        "n_fields": 13,
+        "n_declared": 0,
+        "n_inferred": 5,
+        "n_unknown": 8,
+        "n_dim_signals": 13,
+        "dim_hits": {
+          "date_format": 4,
+          "timezone": 4,
+          "temporal_format": 4,
+          "id_offset": 1
+        }
+      },
+      {
+        "manifest": "mcp-server-tmdb",
+        "n_fields": 3,
+        "n_declared": 0,
+        "n_inferred": 1,
+        "n_unknown": 2,
+        "n_dim_signals": 1,
+        "dim_hits": {
+          "unit_of_measure": 1
+        }
+      },
+      {
+        "manifest": "mcp-snowflake-server",
+        "n_fields": 5,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 5,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-tavily",
+        "n_fields": 0,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 0,
+        "n_dim_signals": 1,
+        "dim_hits": {
+          "industry_code": 1
+        }
+      },
+      {
+        "manifest": "mcp-vegalite-server",
+        "n_fields": 4,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 4,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mcp-xmind",
+        "n_fields": 11,
+        "n_declared": 0,
+        "n_inferred": 5,
+        "n_unknown": 6,
+        "n_dim_signals": 5,
+        "dim_hits": {
+          "path_convention": 5
+        }
+      },
+      {
+        "manifest": "memory",
+        "n_fields": 21,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 21,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "mysql_mcp_server",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "needle-mcp",
+        "n_fields": 9,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 9,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "needle-mcp_tools",
+        "n_fields": 9,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 9,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "notion",
+        "n_fields": 93,
+        "n_declared": 0,
+        "n_inferred": 4,
+        "n_unknown": 89,
+        "n_dim_signals": 7,
+        "dim_hits": {
+          "sort_direction": 3,
+          "temporal_format": 3,
+          "date_format": 1
+        }
+      },
+      {
+        "manifest": "npm-search",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "ns-mcp-server",
+        "n_fields": 10,
+        "n_declared": 0,
+        "n_inferred": 5,
+        "n_unknown": 5,
+        "n_dim_signals": 7,
+        "dim_hits": {
+          "null_handling": 1,
+          "temporal_format": 3,
+          "language_code": 2,
+          "country_code": 1
+        }
+      },
+      {
+        "manifest": "openrpc-mpc-server",
+        "n_fields": 4,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 4,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "playwright",
+        "n_fields": 89,
+        "n_declared": 0,
+        "n_inferred": 4,
+        "n_unknown": 85,
+        "n_dim_signals": 5,
+        "dim_hits": {
+          "path_convention": 5
+        }
+      },
+      {
+        "manifest": "postgres",
+        "n_fields": 1,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 1,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "puppeteer",
+        "n_fields": 15,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 15,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "qdrant",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 2,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "search1api-mcp",
+        "n_fields": 8,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 8,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "sequential-thinking",
+        "n_fields": 11,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 11,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "tavily",
+        "n_fields": 41,
+        "n_declared": 0,
+        "n_inferred": 5,
+        "n_unknown": 36,
+        "n_dim_signals": 11,
+        "dim_hits": {
+          "industry_code": 1,
+          "temporal_format": 5,
+          "unit_of_measure": 1,
+          "date_format": 2,
+          "country_code": 2
+        }
+      },
+      {
+        "manifest": "todoist-mcp-server",
+        "n_fields": 15,
+        "n_declared": 0,
+        "n_inferred": 3,
+        "n_unknown": 12,
+        "n_dim_signals": 11,
+        "dim_hits": {
+          "score_range": 5,
+          "fix_msg_type": 3,
+          "fix_side": 3
+        }
+      },
+      {
+        "manifest": "twitter-mcp",
+        "n_fields": 3,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 3,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "x-mcp",
+        "n_fields": 4,
+        "n_declared": 0,
+        "n_inferred": 0,
+        "n_unknown": 4,
+        "n_dim_signals": 0,
+        "dim_hits": {}
+      },
+      {
+        "manifest": "youtube-transcript",
+        "n_fields": 2,
+        "n_declared": 0,
+        "n_inferred": 1,
+        "n_unknown": 1,
+        "n_dim_signals": 2,
+        "dim_hits": {
+          "language_code": 2
+        }
+      }
+    ]
+  },
+  "per_manifest_deltas": [
+    {
+      "manifest": "airtable-mcp",
+      "n_fields": 40,
+      "unknown_baseline": 40,
+      "unknown_enriched": 40,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "any-chat-completions-mcp",
+      "n_fields": 1,
+      "unknown_baseline": 1,
+      "unknown_enriched": 1,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "cognee-mcp-server",
+      "n_fields": 4,
+      "unknown_baseline": 4,
+      "unknown_enriched": 4,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "e2b-code-mcp-server",
+      "n_fields": 1,
+      "unknown_baseline": 1,
+      "unknown_enriched": 1,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "exa-mcp-server",
+      "n_fields": 2,
+      "unknown_baseline": 2,
+      "unknown_enriched": 2,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "exa",
+      "n_fields": 12,
+      "unknown_baseline": 12,
+      "unknown_enriched": 11,
+      "unknown_delta": 1,
+      "signals_baseline": 0,
+      "signals_enriched": 1,
+      "signals_delta": 1
+    },
+    {
+      "manifest": "fetch-mcp",
+      "n_fields": 8,
+      "unknown_baseline": 8,
+      "unknown_enriched": 8,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "filesystem",
+      "n_fields": 38,
+      "unknown_baseline": 26,
+      "unknown_enriched": 26,
+      "unknown_delta": 0,
+      "signals_baseline": 26,
+      "signals_enriched": 27,
+      "signals_delta": 1
+    },
+    {
+      "manifest": "flightradar24-mcp-server",
+      "n_fields": 5,
+      "unknown_baseline": 5,
+      "unknown_enriched": 5,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "github",
+      "n_fields": 130,
+      "unknown_baseline": 97,
+      "unknown_enriched": 97,
+      "unknown_delta": 0,
+      "signals_baseline": 38,
+      "signals_enriched": 40,
+      "signals_delta": 2
+    },
+    {
+      "manifest": "gtasks-mcp",
+      "n_fields": 16,
+      "unknown_baseline": 15,
+      "unknown_enriched": 15,
+      "unknown_delta": 0,
+      "signals_baseline": 1,
+      "signals_enriched": 1,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "homeassistant-mcp",
+      "n_fields": 0,
+      "unknown_baseline": 0,
+      "unknown_enriched": 0,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "inoyu-mcp-unomi-server",
+      "n_fields": 10,
+      "unknown_baseline": 9,
+      "unknown_enriched": 9,
+      "unknown_delta": 0,
+      "signals_baseline": 1,
+      "signals_enriched": 1,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-bigquery-server",
+      "n_fields": 2,
+      "unknown_baseline": 2,
+      "unknown_enriched": 2,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-mongo-server",
+      "n_fields": 6,
+      "unknown_baseline": 6,
+      "unknown_enriched": 6,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-obsidian",
+      "n_fields": 2,
+      "unknown_baseline": 2,
+      "unknown_enriched": 2,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-pandoc",
+      "n_fields": 2,
+      "unknown_baseline": 2,
+      "unknown_enriched": 2,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-pinecone",
+      "n_fields": 14,
+      "unknown_baseline": 11,
+      "unknown_enriched": 11,
+      "unknown_delta": 0,
+      "signals_baseline": 3,
+      "signals_enriched": 3,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-playwright",
+      "n_fields": 23,
+      "unknown_baseline": 23,
+      "unknown_enriched": 23,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-server-aws",
+      "n_fields": 45,
+      "unknown_baseline": 45,
+      "unknown_enriched": 45,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-server-axiom",
+      "n_fields": 1,
+      "unknown_baseline": 1,
+      "unknown_enriched": 1,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-server-bigquery",
+      "n_fields": 2,
+      "unknown_baseline": 2,
+      "unknown_enriched": 2,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-server-browserbase",
+      "n_fields": 6,
+      "unknown_baseline": 6,
+      "unknown_enriched": 6,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-server-chatsum",
+      "n_fields": 3,
+      "unknown_baseline": 3,
+      "unknown_enriched": 3,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-server-cloudflare",
+      "n_fields": 43,
+      "unknown_baseline": 40,
+      "unknown_enriched": 39,
+      "unknown_delta": 1,
+      "signals_baseline": 3,
+      "signals_enriched": 5,
+      "signals_delta": 2
+    },
+    {
+      "manifest": "mcp-server-docker",
+      "n_fields": 0,
+      "unknown_baseline": 0,
+      "unknown_enriched": 0,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-server-fetch",
+      "n_fields": 8,
+      "unknown_baseline": 8,
+      "unknown_enriched": 8,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-server-kubernetes",
+      "n_fields": 10,
+      "unknown_baseline": 10,
+      "unknown_enriched": 10,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-server-llamacloud",
+      "n_fields": 1,
+      "unknown_baseline": 1,
+      "unknown_enriched": 1,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-server-mysql",
+      "n_fields": 1,
+      "unknown_baseline": 1,
+      "unknown_enriched": 1,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-server-neon",
+      "n_fields": 33,
+      "unknown_baseline": 33,
+      "unknown_enriched": 33,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-server-rag-web-browser",
+      "n_fields": 2,
+      "unknown_baseline": 2,
+      "unknown_enriched": 2,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-server-rememberizer",
+      "n_fields": 13,
+      "unknown_baseline": 8,
+      "unknown_enriched": 8,
+      "unknown_delta": 0,
+      "signals_baseline": 9,
+      "signals_enriched": 13,
+      "signals_delta": 4
+    },
+    {
+      "manifest": "mcp-server-tmdb",
+      "n_fields": 3,
+      "unknown_baseline": 3,
+      "unknown_enriched": 2,
+      "unknown_delta": 1,
+      "signals_baseline": 0,
+      "signals_enriched": 1,
+      "signals_delta": 1
+    },
+    {
+      "manifest": "mcp-snowflake-server",
+      "n_fields": 5,
+      "unknown_baseline": 5,
+      "unknown_enriched": 5,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-tavily",
+      "n_fields": 0,
+      "unknown_baseline": 0,
+      "unknown_enriched": 0,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 1,
+      "signals_delta": 1
+    },
+    {
+      "manifest": "mcp-vegalite-server",
+      "n_fields": 4,
+      "unknown_baseline": 4,
+      "unknown_enriched": 4,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mcp-xmind",
+      "n_fields": 11,
+      "unknown_baseline": 6,
+      "unknown_enriched": 6,
+      "unknown_delta": 0,
+      "signals_baseline": 5,
+      "signals_enriched": 5,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "memory",
+      "n_fields": 21,
+      "unknown_baseline": 21,
+      "unknown_enriched": 21,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "mysql_mcp_server",
+      "n_fields": 1,
+      "unknown_baseline": 1,
+      "unknown_enriched": 1,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "needle-mcp",
+      "n_fields": 9,
+      "unknown_baseline": 9,
+      "unknown_enriched": 9,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "needle-mcp_tools",
+      "n_fields": 9,
+      "unknown_baseline": 9,
+      "unknown_enriched": 9,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "notion",
+      "n_fields": 93,
+      "unknown_baseline": 89,
+      "unknown_enriched": 89,
+      "unknown_delta": 0,
+      "signals_baseline": 5,
+      "signals_enriched": 7,
+      "signals_delta": 2
+    },
+    {
+      "manifest": "npm-search",
+      "n_fields": 1,
+      "unknown_baseline": 1,
+      "unknown_enriched": 1,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "ns-mcp-server",
+      "n_fields": 10,
+      "unknown_baseline": 7,
+      "unknown_enriched": 5,
+      "unknown_delta": 2,
+      "signals_baseline": 3,
+      "signals_enriched": 7,
+      "signals_delta": 4
+    },
+    {
+      "manifest": "openrpc-mpc-server",
+      "n_fields": 4,
+      "unknown_baseline": 4,
+      "unknown_enriched": 4,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "playwright",
+      "n_fields": 89,
+      "unknown_baseline": 85,
+      "unknown_enriched": 85,
+      "unknown_delta": 0,
+      "signals_baseline": 5,
+      "signals_enriched": 5,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "postgres",
+      "n_fields": 1,
+      "unknown_baseline": 1,
+      "unknown_enriched": 1,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "puppeteer",
+      "n_fields": 15,
+      "unknown_baseline": 15,
+      "unknown_enriched": 15,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "qdrant",
+      "n_fields": 2,
+      "unknown_baseline": 2,
+      "unknown_enriched": 2,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "search1api-mcp",
+      "n_fields": 8,
+      "unknown_baseline": 8,
+      "unknown_enriched": 8,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "sequential-thinking",
+      "n_fields": 11,
+      "unknown_baseline": 11,
+      "unknown_enriched": 11,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "tavily",
+      "n_fields": 41,
+      "unknown_baseline": 38,
+      "unknown_enriched": 36,
+      "unknown_delta": 2,
+      "signals_baseline": 5,
+      "signals_enriched": 11,
+      "signals_delta": 6
+    },
+    {
+      "manifest": "todoist-mcp-server",
+      "n_fields": 15,
+      "unknown_baseline": 12,
+      "unknown_enriched": 12,
+      "unknown_delta": 0,
+      "signals_baseline": 5,
+      "signals_enriched": 11,
+      "signals_delta": 6
+    },
+    {
+      "manifest": "twitter-mcp",
+      "n_fields": 3,
+      "unknown_baseline": 3,
+      "unknown_enriched": 3,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "x-mcp",
+      "n_fields": 4,
+      "unknown_baseline": 4,
+      "unknown_enriched": 4,
+      "unknown_delta": 0,
+      "signals_baseline": 0,
+      "signals_enriched": 0,
+      "signals_delta": 0
+    },
+    {
+      "manifest": "youtube-transcript",
+      "n_fields": 2,
+      "unknown_baseline": 2,
+      "unknown_enriched": 1,
+      "unknown_delta": 1,
+      "signals_baseline": 0,
+      "signals_enriched": 2,
+      "signals_delta": 2
+    }
+  ],
+  "incidents_baseline": {
+    "total": 30,
+    "detected": 30,
+    "rate_pct": 100.0,
+    "misses": [],
+    "per_incident": [
+      {
+        "incident": "ariane_5_flight_501",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "boeing_737_max_faa_oda",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "country_code_alpha2_alpha3_drift",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "digoxin_tenfold_transfer",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "drupal_stripe_jpy",
+        "fee": 1,
+        "blind_spots": 0
+      },
+      {
+        "incident": "edifact_d96a_d21b_drift",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "fhir_r4_to_r5_breaking_changes",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "gcv_ncv_gas_billing",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "gimli_glider",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "gtin_check_digit_miscoding",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "herstatt_risk",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "icd_9_to_icd_10_transition",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "language_tag_bcp47_drift",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "leap_second_2012_outages",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "levothyroxine_mg_mcg",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "libor_sofr_transition",
+        "fee": 2,
+        "blind_spots": 2
+      },
+      {
+        "incident": "lng_price_formula_disputes",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "mars_climate_orbiter",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "mt_to_iso20022_migration",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "naics_sic_classification_dispute",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "nv_energy_meter_channel",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "overlingen_tcas_atc",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "patriot_missile_dhahran",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "phe_covid_xls_truncation",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "shopify_quickbooks_tax",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "singapore_lidocaine_overdose",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "snomed_icd10_double_coding",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "stripe_webhook_duplicates",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "t1_settlement_transition",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "vancouver_stock_exchange",
+        "fee": 2,
+        "blind_spots": 2
+      }
+    ]
+  },
+  "incidents_enriched": {
+    "total": 30,
+    "detected": 30,
+    "rate_pct": 100.0,
+    "misses": [],
+    "per_incident": [
+      {
+        "incident": "ariane_5_flight_501",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "boeing_737_max_faa_oda",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "country_code_alpha2_alpha3_drift",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "digoxin_tenfold_transfer",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "drupal_stripe_jpy",
+        "fee": 1,
+        "blind_spots": 0
+      },
+      {
+        "incident": "edifact_d96a_d21b_drift",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "fhir_r4_to_r5_breaking_changes",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "gcv_ncv_gas_billing",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "gimli_glider",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "gtin_check_digit_miscoding",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "herstatt_risk",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "icd_9_to_icd_10_transition",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "language_tag_bcp47_drift",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "leap_second_2012_outages",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "levothyroxine_mg_mcg",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "libor_sofr_transition",
+        "fee": 2,
+        "blind_spots": 2
+      },
+      {
+        "incident": "lng_price_formula_disputes",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "mars_climate_orbiter",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "mt_to_iso20022_migration",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "naics_sic_classification_dispute",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "nv_energy_meter_channel",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "overlingen_tcas_atc",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "patriot_missile_dhahran",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "phe_covid_xls_truncation",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "shopify_quickbooks_tax",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "singapore_lidocaine_overdose",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "snomed_icd10_double_coding",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "stripe_webhook_duplicates",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "t1_settlement_transition",
+        "fee": 1,
+        "blind_spots": 1
+      },
+      {
+        "incident": "vancouver_stock_exchange",
+        "fee": 2,
+        "blind_spots": 2
+      }
+    ]
+  },
+  "incidents_unknown_baseline": {
+    "n_fields": 198,
+    "n_classified": 54,
+    "n_unknown": 144,
+    "per_incident": [
+      {
+        "incident": "ariane_5_flight_501",
+        "n_fields": 4,
+        "n_classified": 2,
+        "n_unknown": 2
+      },
+      {
+        "incident": "boeing_737_max_faa_oda",
+        "n_fields": 8,
+        "n_classified": 4,
+        "n_unknown": 4
+      },
+      {
+        "incident": "country_code_alpha2_alpha3_drift",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "digoxin_tenfold_transfer",
+        "n_fields": 10,
+        "n_classified": 2,
+        "n_unknown": 8
+      },
+      {
+        "incident": "drupal_stripe_jpy",
+        "n_fields": 7,
+        "n_classified": 3,
+        "n_unknown": 4
+      },
+      {
+        "incident": "edifact_d96a_d21b_drift",
+        "n_fields": 6,
+        "n_classified": 2,
+        "n_unknown": 4
+      },
+      {
+        "incident": "fhir_r4_to_r5_breaking_changes",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "gcv_ncv_gas_billing",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "gimli_glider",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "gtin_check_digit_miscoding",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "herstatt_risk",
+        "n_fields": 6,
+        "n_classified": 4,
+        "n_unknown": 2
+      },
+      {
+        "incident": "icd_9_to_icd_10_transition",
+        "n_fields": 8,
+        "n_classified": 2,
+        "n_unknown": 6
+      },
+      {
+        "incident": "language_tag_bcp47_drift",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "leap_second_2012_outages",
+        "n_fields": 4,
+        "n_classified": 2,
+        "n_unknown": 2
+      },
+      {
+        "incident": "levothyroxine_mg_mcg",
+        "n_fields": 8,
+        "n_classified": 2,
+        "n_unknown": 6
+      },
+      {
+        "incident": "libor_sofr_transition",
+        "n_fields": 10,
+        "n_classified": 8,
+        "n_unknown": 2
+      },
+      {
+        "incident": "lng_price_formula_disputes",
+        "n_fields": 6,
+        "n_classified": 2,
+        "n_unknown": 4
+      },
+      {
+        "incident": "mars_climate_orbiter",
+        "n_fields": 7,
+        "n_classified": 0,
+        "n_unknown": 7
+      },
+      {
+        "incident": "mt_to_iso20022_migration",
+        "n_fields": 8,
+        "n_classified": 2,
+        "n_unknown": 6
+      },
+      {
+        "incident": "naics_sic_classification_dispute",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "nv_energy_meter_channel",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "overlingen_tcas_atc",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "patriot_missile_dhahran",
+        "n_fields": 6,
+        "n_classified": 2,
+        "n_unknown": 4
+      },
+      {
+        "incident": "phe_covid_xls_truncation",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "shopify_quickbooks_tax",
+        "n_fields": 7,
+        "n_classified": 5,
+        "n_unknown": 2
+      },
+      {
+        "incident": "singapore_lidocaine_overdose",
+        "n_fields": 6,
+        "n_classified": 4,
+        "n_unknown": 2
+      },
+      {
+        "incident": "snomed_icd10_double_coding",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "stripe_webhook_duplicates",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "t1_settlement_transition",
+        "n_fields": 6,
+        "n_classified": 2,
+        "n_unknown": 4
+      },
+      {
+        "incident": "vancouver_stock_exchange",
+        "n_fields": 9,
+        "n_classified": 6,
+        "n_unknown": 3
+      }
+    ]
+  },
+  "incidents_unknown_enriched": {
+    "n_fields": 198,
+    "n_classified": 81,
+    "n_unknown": 117,
+    "per_incident": [
+      {
+        "incident": "ariane_5_flight_501",
+        "n_fields": 4,
+        "n_classified": 2,
+        "n_unknown": 2
+      },
+      {
+        "incident": "boeing_737_max_faa_oda",
+        "n_fields": 8,
+        "n_classified": 4,
+        "n_unknown": 4
+      },
+      {
+        "incident": "country_code_alpha2_alpha3_drift",
+        "n_fields": 6,
+        "n_classified": 2,
+        "n_unknown": 4
+      },
+      {
+        "incident": "digoxin_tenfold_transfer",
+        "n_fields": 10,
+        "n_classified": 4,
+        "n_unknown": 6
+      },
+      {
+        "incident": "drupal_stripe_jpy",
+        "n_fields": 7,
+        "n_classified": 6,
+        "n_unknown": 1
+      },
+      {
+        "incident": "edifact_d96a_d21b_drift",
+        "n_fields": 6,
+        "n_classified": 4,
+        "n_unknown": 2
+      },
+      {
+        "incident": "fhir_r4_to_r5_breaking_changes",
+        "n_fields": 6,
+        "n_classified": 2,
+        "n_unknown": 4
+      },
+      {
+        "incident": "gcv_ncv_gas_billing",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "gimli_glider",
+        "n_fields": 6,
+        "n_classified": 2,
+        "n_unknown": 4
+      },
+      {
+        "incident": "gtin_check_digit_miscoding",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "herstatt_risk",
+        "n_fields": 6,
+        "n_classified": 4,
+        "n_unknown": 2
+      },
+      {
+        "incident": "icd_9_to_icd_10_transition",
+        "n_fields": 8,
+        "n_classified": 4,
+        "n_unknown": 4
+      },
+      {
+        "incident": "language_tag_bcp47_drift",
+        "n_fields": 6,
+        "n_classified": 4,
+        "n_unknown": 2
+      },
+      {
+        "incident": "leap_second_2012_outages",
+        "n_fields": 4,
+        "n_classified": 2,
+        "n_unknown": 2
+      },
+      {
+        "incident": "levothyroxine_mg_mcg",
+        "n_fields": 8,
+        "n_classified": 4,
+        "n_unknown": 4
+      },
+      {
+        "incident": "libor_sofr_transition",
+        "n_fields": 10,
+        "n_classified": 8,
+        "n_unknown": 2
+      },
+      {
+        "incident": "lng_price_formula_disputes",
+        "n_fields": 6,
+        "n_classified": 2,
+        "n_unknown": 4
+      },
+      {
+        "incident": "mars_climate_orbiter",
+        "n_fields": 7,
+        "n_classified": 2,
+        "n_unknown": 5
+      },
+      {
+        "incident": "mt_to_iso20022_migration",
+        "n_fields": 8,
+        "n_classified": 2,
+        "n_unknown": 6
+      },
+      {
+        "incident": "naics_sic_classification_dispute",
+        "n_fields": 6,
+        "n_classified": 2,
+        "n_unknown": 4
+      },
+      {
+        "incident": "nv_energy_meter_channel",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "overlingen_tcas_atc",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "patriot_missile_dhahran",
+        "n_fields": 6,
+        "n_classified": 2,
+        "n_unknown": 4
+      },
+      {
+        "incident": "phe_covid_xls_truncation",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "shopify_quickbooks_tax",
+        "n_fields": 7,
+        "n_classified": 5,
+        "n_unknown": 2
+      },
+      {
+        "incident": "singapore_lidocaine_overdose",
+        "n_fields": 6,
+        "n_classified": 4,
+        "n_unknown": 2
+      },
+      {
+        "incident": "snomed_icd10_double_coding",
+        "n_fields": 6,
+        "n_classified": 2,
+        "n_unknown": 4
+      },
+      {
+        "incident": "stripe_webhook_duplicates",
+        "n_fields": 6,
+        "n_classified": 0,
+        "n_unknown": 6
+      },
+      {
+        "incident": "t1_settlement_transition",
+        "n_fields": 6,
+        "n_classified": 2,
+        "n_unknown": 4
+      },
+      {
+        "incident": "vancouver_stock_exchange",
+        "n_fields": 9,
+        "n_classified": 6,
+        "n_unknown": 3
+      }
+    ]
+  }
+}

@@ -1,0 +1,735 @@
+{
+  "baseline": [
+    {
+      "pair_name": "airtable-mcp+filesystem",
+      "target_field": "path",
+      "identified": false,
+      "all_fields": [
+        "description",
+        "name",
+        "type"
+      ]
+    },
+    {
+      "pair_name": "cognee-mcp-server+filesystem",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "graph_model_file",
+        "graph_model_name",
+        "path",
+        "search_query",
+        "text"
+      ]
+    },
+    {
+      "pair_name": "exa+filesystem",
+      "target_field": "path",
+      "identified": false,
+      "all_fields": []
+    },
+    {
+      "pair_name": "fetch-mcp+filesystem",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "destination",
+        "excludePatterns",
+        "head",
+        "headers",
+        "path",
+        "paths",
+        "pattern",
+        "source",
+        "tail",
+        "url"
+      ]
+    },
+    {
+      "pair_name": "filesystem+flightradar24-mcp-server",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "bounds",
+        "excludePatterns",
+        "path",
+        "pattern"
+      ]
+    },
+    {
+      "pair_name": "filesystem+github",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "path"
+      ]
+    },
+    {
+      "pair_name": "filesystem+gtasks-mcp",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "cursor",
+        "due",
+        "excludePatterns",
+        "id",
+        "path",
+        "pattern",
+        "query",
+        "taskListId",
+        "uri"
+      ]
+    },
+    {
+      "pair_name": "filesystem+inoyu-mcp-unomi-server",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "excludePatterns",
+        "path",
+        "pattern",
+        "profileId",
+        "query",
+        "scope"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-mongo-server",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "collection",
+        "excludePatterns",
+        "filter",
+        "path",
+        "pattern",
+        "pipeline",
+        "projection"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-pinecone",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "category",
+        "document_id",
+        "excludePatterns",
+        "id",
+        "namespace",
+        "path",
+        "pattern",
+        "tags"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-playwright",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "downloadsDir",
+        "excludePatterns",
+        "path",
+        "pattern",
+        "script",
+        "selector",
+        "url",
+        "value"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-aws",
+      "target_field": "path",
+      "identified": false,
+      "all_fields": [
+        "content"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-browserbase",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "action",
+        "excludePatterns",
+        "instruction",
+        "path",
+        "pattern",
+        "schema",
+        "url"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-chatsum",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "excludePatterns",
+        "path",
+        "pattern",
+        "room_names",
+        "talker_names"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-cloudflare",
+      "target_field": "path",
+      "identified": false,
+      "all_fields": [
+        "content",
+        "key",
+        "limit",
+        "name",
+        "prefix"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-fetch",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "excludePatterns",
+        "headers",
+        "path",
+        "pattern",
+        "url"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-kubernetes",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "command",
+        "excludePatterns",
+        "name",
+        "namespace",
+        "path",
+        "pattern"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-neon",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "cursor",
+        "path",
+        "pattern",
+        "search"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-rememberizer",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "excludePatterns",
+        "from",
+        "path",
+        "pattern",
+        "to"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-tmdb",
+      "target_field": "path",
+      "identified": true,
+      "all_fields": [
+        "excludePatterns",
+        "movieId",
+        "path",
+        "pattern"
+      ]
+    }
+  ],
+  "location": [
+    {
+      "pair_name": "airtable-mcp+filesystem",
+      "target_field": "location",
+      "identified": false,
+      "all_fields": [
+        "description",
+        "name",
+        "type"
+      ]
+    },
+    {
+      "pair_name": "cognee-mcp-server+filesystem",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "destination",
+        "location",
+        "pattern",
+        "source"
+      ]
+    },
+    {
+      "pair_name": "exa+filesystem",
+      "target_field": "location",
+      "identified": false,
+      "all_fields": []
+    },
+    {
+      "pair_name": "fetch-mcp+filesystem",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "destination",
+        "excludePatterns",
+        "head",
+        "headers",
+        "location",
+        "newText",
+        "oldText",
+        "paths",
+        "pattern",
+        "source",
+        "tail",
+        "url"
+      ]
+    },
+    {
+      "pair_name": "filesystem+flightradar24-mcp-server",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "bounds",
+        "location",
+        "pattern"
+      ]
+    },
+    {
+      "pair_name": "filesystem+github",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "location"
+      ]
+    },
+    {
+      "pair_name": "filesystem+gtasks-mcp",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "cursor",
+        "due",
+        "location",
+        "pattern",
+        "uri"
+      ]
+    },
+    {
+      "pair_name": "filesystem+inoyu-mcp-unomi-server",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "location",
+        "pattern",
+        "query",
+        "scope"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-mongo-server",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "location"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-pinecone",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "category",
+        "destination",
+        "document_id",
+        "excludePatterns",
+        "id",
+        "location",
+        "metadata",
+        "namespace",
+        "paths",
+        "pattern",
+        "query",
+        "source",
+        "tags"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-playwright",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "destination",
+        "downloadsDir",
+        "excludePatterns",
+        "location",
+        "name",
+        "paths",
+        "pattern",
+        "selector",
+        "source"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-aws",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "destination",
+        "excludePatterns",
+        "file_content",
+        "location",
+        "object_key",
+        "paths",
+        "pattern",
+        "source"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-browserbase",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "action",
+        "destination",
+        "excludePatterns",
+        "head",
+        "instruction",
+        "location",
+        "paths",
+        "pattern",
+        "schema",
+        "source",
+        "tail",
+        "url",
+        "variables"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-chatsum",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "destination",
+        "location",
+        "source"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-cloudflare",
+      "target_field": "location",
+      "identified": false,
+      "all_fields": [
+        "content",
+        "key",
+        "limit",
+        "name",
+        "prefix"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-fetch",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "destination",
+        "excludePatterns",
+        "headers",
+        "location",
+        "paths",
+        "pattern",
+        "source",
+        "url"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-kubernetes",
+      "target_field": "location",
+      "identified": false,
+      "all_fields": []
+    },
+    {
+      "pair_name": "filesystem+mcp-server-neon",
+      "target_field": "location",
+      "identified": false,
+      "all_fields": []
+    },
+    {
+      "pair_name": "filesystem+mcp-server-rememberizer",
+      "target_field": "location",
+      "identified": false,
+      "all_fields": []
+    },
+    {
+      "pair_name": "filesystem+mcp-server-tmdb",
+      "target_field": "location",
+      "identified": true,
+      "all_fields": [
+        "destination",
+        "excludePatterns",
+        "location",
+        "movieId",
+        "paths",
+        "pattern",
+        "query",
+        "source"
+      ]
+    }
+  ],
+  "target": [
+    {
+      "pair_name": "airtable-mcp+filesystem",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "data",
+        "description",
+        "name",
+        "target",
+        "type"
+      ]
+    },
+    {
+      "pair_name": "cognee-mcp-server+filesystem",
+      "target_field": "target",
+      "identified": false,
+      "all_fields": []
+    },
+    {
+      "pair_name": "exa+filesystem",
+      "target_field": "target",
+      "identified": false,
+      "all_fields": []
+    },
+    {
+      "pair_name": "fetch-mcp+filesystem",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "destination",
+        "excludePatterns",
+        "head",
+        "headers",
+        "newText",
+        "oldText",
+        "paths",
+        "pattern",
+        "source",
+        "tail",
+        "target",
+        "url"
+      ]
+    },
+    {
+      "pair_name": "filesystem+flightradar24-mcp-server",
+      "target_field": "target",
+      "identified": false,
+      "all_fields": []
+    },
+    {
+      "pair_name": "filesystem+github",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "target"
+      ]
+    },
+    {
+      "pair_name": "filesystem+gtasks-mcp",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "cursor",
+        "destination",
+        "due",
+        "excludePatterns",
+        "head",
+        "id",
+        "paths",
+        "pattern",
+        "query",
+        "source",
+        "tail",
+        "target",
+        "taskListId",
+        "uri"
+      ]
+    },
+    {
+      "pair_name": "filesystem+inoyu-mcp-unomi-server",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "destination",
+        "excludePatterns",
+        "head",
+        "paths",
+        "pattern",
+        "profileId",
+        "query",
+        "scope",
+        "source",
+        "tail",
+        "target"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-mongo-server",
+      "target_field": "target",
+      "identified": false,
+      "all_fields": []
+    },
+    {
+      "pair_name": "filesystem+mcp-pinecone",
+      "target_field": "target",
+      "identified": false,
+      "all_fields": [
+        "category",
+        "content",
+        "excludePatterns",
+        "namespace",
+        "pattern"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-playwright",
+      "target_field": "target",
+      "identified": false,
+      "all_fields": []
+    },
+    {
+      "pair_name": "filesystem+mcp-server-aws",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "excludePatterns",
+        "file_content",
+        "filter_expression",
+        "key",
+        "key_condition",
+        "object_key",
+        "pattern",
+        "target"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-browserbase",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "action",
+        "excludePatterns",
+        "instruction",
+        "paths",
+        "pattern",
+        "target",
+        "variables"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-chatsum",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "room_names",
+        "talker_names",
+        "target"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-cloudflare",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "key",
+        "limit",
+        "name",
+        "prefix",
+        "target"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-fetch",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "destination",
+        "excludePatterns",
+        "paths",
+        "pattern",
+        "source",
+        "target"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-kubernetes",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "command",
+        "destination",
+        "excludePatterns",
+        "name",
+        "namespace",
+        "paths",
+        "pattern",
+        "source",
+        "target"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-neon",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "target"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-rememberizer",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "content",
+        "destination",
+        "excludePatterns",
+        "paths",
+        "pattern",
+        "source",
+        "target"
+      ]
+    },
+    {
+      "pair_name": "filesystem+mcp-server-tmdb",
+      "target_field": "target",
+      "identified": true,
+      "all_fields": [
+        "movieId",
+        "query",
+        "target"
+      ]
+    }
+  ]
+}

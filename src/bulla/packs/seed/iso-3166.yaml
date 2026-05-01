@@ -1,0 +1,2034 @@
+pack_name: iso-3166
+pack_version: 0.1.0
+license:
+  spdx_id: CC0-1.0
+  source_url: https://www.iso.org/iso-3166-country-codes.html
+  registry_license: open
+derives_from:
+  standard: ISO-3166-1
+  version: pycountry-snapshot-2026-04-26
+  source_uri: https://www.iso.org/iso-3166-country-codes.html
+dimensions:
+  country_code:
+    description: ISO 3166-1 country code. Canonical form is alpha-2 (US, GB, FR, ...);
+      alpha-3 and numeric forms are recorded as aliases so a field whose enum uses
+      any single form classifies under this dimension.
+    field_patterns:
+    - country
+    - country_code
+    - country_id
+    - '*_country'
+    - '*_country_code'
+    - country_of_origin
+    - origin_country
+    - destination_country
+    - ship_country
+    - billing_country
+    - shipping_country
+    - iso_country
+    - iso_country_code
+    - nationality
+    - domicile
+    description_keywords:
+    - country code
+    - iso 3166
+    - iso-3166
+    - alpha-2 country
+    - alpha-3 country
+    - numeric country
+    - country of origin
+    domains:
+    - universal
+    known_values:
+    - canonical: AD
+      aliases:
+      - AND
+      - '020'
+      source_codes:
+        ISO-3166-1-alpha-2: AD
+        ISO-3166-1-alpha-3: AND
+        ISO-3166-1-numeric: '020'
+    - canonical: AE
+      aliases:
+      - ARE
+      - '784'
+      source_codes:
+        ISO-3166-1-alpha-2: AE
+        ISO-3166-1-alpha-3: ARE
+        ISO-3166-1-numeric: '784'
+    - canonical: AF
+      aliases:
+      - AFG
+      - '004'
+      source_codes:
+        ISO-3166-1-alpha-2: AF
+        ISO-3166-1-alpha-3: AFG
+        ISO-3166-1-numeric: '004'
+    - canonical: AG
+      aliases:
+      - ATG
+      - 028
+      source_codes:
+        ISO-3166-1-alpha-2: AG
+        ISO-3166-1-alpha-3: ATG
+        ISO-3166-1-numeric: 028
+    - canonical: AI
+      aliases:
+      - AIA
+      - '660'
+      source_codes:
+        ISO-3166-1-alpha-2: AI
+        ISO-3166-1-alpha-3: AIA
+        ISO-3166-1-numeric: '660'
+    - canonical: AL
+      aliases:
+      - ALB
+      - 008
+      source_codes:
+        ISO-3166-1-alpha-2: AL
+        ISO-3166-1-alpha-3: ALB
+        ISO-3166-1-numeric: 008
+    - canonical: AM
+      aliases:
+      - ARM
+      - '051'
+      source_codes:
+        ISO-3166-1-alpha-2: AM
+        ISO-3166-1-alpha-3: ARM
+        ISO-3166-1-numeric: '051'
+    - canonical: AO
+      aliases:
+      - AGO
+      - '024'
+      source_codes:
+        ISO-3166-1-alpha-2: AO
+        ISO-3166-1-alpha-3: AGO
+        ISO-3166-1-numeric: '024'
+    - canonical: AQ
+      aliases:
+      - ATA
+      - '010'
+      source_codes:
+        ISO-3166-1-alpha-2: AQ
+        ISO-3166-1-alpha-3: ATA
+        ISO-3166-1-numeric: '010'
+    - canonical: AR
+      aliases:
+      - ARG
+      - '032'
+      source_codes:
+        ISO-3166-1-alpha-2: AR
+        ISO-3166-1-alpha-3: ARG
+        ISO-3166-1-numeric: '032'
+    - canonical: AS
+      aliases:
+      - ASM
+      - '016'
+      source_codes:
+        ISO-3166-1-alpha-2: AS
+        ISO-3166-1-alpha-3: ASM
+        ISO-3166-1-numeric: '016'
+    - canonical: AT
+      aliases:
+      - AUT
+      - '040'
+      source_codes:
+        ISO-3166-1-alpha-2: AT
+        ISO-3166-1-alpha-3: AUT
+        ISO-3166-1-numeric: '040'
+    - canonical: AU
+      aliases:
+      - AUS
+      - '036'
+      source_codes:
+        ISO-3166-1-alpha-2: AU
+        ISO-3166-1-alpha-3: AUS
+        ISO-3166-1-numeric: '036'
+    - canonical: AW
+      aliases:
+      - ABW
+      - '533'
+      source_codes:
+        ISO-3166-1-alpha-2: AW
+        ISO-3166-1-alpha-3: ABW
+        ISO-3166-1-numeric: '533'
+    - canonical: AX
+      aliases:
+      - ALA
+      - '248'
+      source_codes:
+        ISO-3166-1-alpha-2: AX
+        ISO-3166-1-alpha-3: ALA
+        ISO-3166-1-numeric: '248'
+    - canonical: AZ
+      aliases:
+      - AZE
+      - '031'
+      source_codes:
+        ISO-3166-1-alpha-2: AZ
+        ISO-3166-1-alpha-3: AZE
+        ISO-3166-1-numeric: '031'
+    - canonical: BA
+      aliases:
+      - BIH
+      - '070'
+      source_codes:
+        ISO-3166-1-alpha-2: BA
+        ISO-3166-1-alpha-3: BIH
+        ISO-3166-1-numeric: '070'
+    - canonical: BB
+      aliases:
+      - BRB
+      - '052'
+      source_codes:
+        ISO-3166-1-alpha-2: BB
+        ISO-3166-1-alpha-3: BRB
+        ISO-3166-1-numeric: '052'
+    - canonical: BD
+      aliases:
+      - BGD
+      - '050'
+      source_codes:
+        ISO-3166-1-alpha-2: BD
+        ISO-3166-1-alpha-3: BGD
+        ISO-3166-1-numeric: '050'
+    - canonical: BE
+      aliases:
+      - BEL
+      - '056'
+      source_codes:
+        ISO-3166-1-alpha-2: BE
+        ISO-3166-1-alpha-3: BEL
+        ISO-3166-1-numeric: '056'
+    - canonical: BF
+      aliases:
+      - BFA
+      - '854'
+      source_codes:
+        ISO-3166-1-alpha-2: BF
+        ISO-3166-1-alpha-3: BFA
+        ISO-3166-1-numeric: '854'
+    - canonical: BG
+      aliases:
+      - BGR
+      - '100'
+      source_codes:
+        ISO-3166-1-alpha-2: BG
+        ISO-3166-1-alpha-3: BGR
+        ISO-3166-1-numeric: '100'
+    - canonical: BH
+      aliases:
+      - BHR
+      - 048
+      source_codes:
+        ISO-3166-1-alpha-2: BH
+        ISO-3166-1-alpha-3: BHR
+        ISO-3166-1-numeric: 048
+    - canonical: BI
+      aliases:
+      - BDI
+      - '108'
+      source_codes:
+        ISO-3166-1-alpha-2: BI
+        ISO-3166-1-alpha-3: BDI
+        ISO-3166-1-numeric: '108'
+    - canonical: BJ
+      aliases:
+      - BEN
+      - '204'
+      source_codes:
+        ISO-3166-1-alpha-2: BJ
+        ISO-3166-1-alpha-3: BEN
+        ISO-3166-1-numeric: '204'
+    - canonical: BL
+      aliases:
+      - BLM
+      - '652'
+      source_codes:
+        ISO-3166-1-alpha-2: BL
+        ISO-3166-1-alpha-3: BLM
+        ISO-3166-1-numeric: '652'
+    - canonical: BM
+      aliases:
+      - BMU
+      - '060'
+      source_codes:
+        ISO-3166-1-alpha-2: BM
+        ISO-3166-1-alpha-3: BMU
+        ISO-3166-1-numeric: '060'
+    - canonical: BN
+      aliases:
+      - BRN
+      - 096
+      source_codes:
+        ISO-3166-1-alpha-2: BN
+        ISO-3166-1-alpha-3: BRN
+        ISO-3166-1-numeric: 096
+    - canonical: BO
+      aliases:
+      - BOL
+      - 068
+      source_codes:
+        ISO-3166-1-alpha-2: BO
+        ISO-3166-1-alpha-3: BOL
+        ISO-3166-1-numeric: 068
+    - canonical: BQ
+      aliases:
+      - BES
+      - '535'
+      source_codes:
+        ISO-3166-1-alpha-2: BQ
+        ISO-3166-1-alpha-3: BES
+        ISO-3166-1-numeric: '535'
+    - canonical: BR
+      aliases:
+      - BRA
+      - '076'
+      source_codes:
+        ISO-3166-1-alpha-2: BR
+        ISO-3166-1-alpha-3: BRA
+        ISO-3166-1-numeric: '076'
+    - canonical: BS
+      aliases:
+      - BHS
+      - '044'
+      source_codes:
+        ISO-3166-1-alpha-2: BS
+        ISO-3166-1-alpha-3: BHS
+        ISO-3166-1-numeric: '044'
+    - canonical: BT
+      aliases:
+      - BTN
+      - '064'
+      source_codes:
+        ISO-3166-1-alpha-2: BT
+        ISO-3166-1-alpha-3: BTN
+        ISO-3166-1-numeric: '064'
+    - canonical: BV
+      aliases:
+      - BVT
+      - '074'
+      source_codes:
+        ISO-3166-1-alpha-2: BV
+        ISO-3166-1-alpha-3: BVT
+        ISO-3166-1-numeric: '074'
+    - canonical: BW
+      aliases:
+      - BWA
+      - '072'
+      source_codes:
+        ISO-3166-1-alpha-2: BW
+        ISO-3166-1-alpha-3: BWA
+        ISO-3166-1-numeric: '072'
+    - canonical: BY
+      aliases:
+      - BLR
+      - '112'
+      source_codes:
+        ISO-3166-1-alpha-2: BY
+        ISO-3166-1-alpha-3: BLR
+        ISO-3166-1-numeric: '112'
+    - canonical: BZ
+      aliases:
+      - BLZ
+      - 084
+      source_codes:
+        ISO-3166-1-alpha-2: BZ
+        ISO-3166-1-alpha-3: BLZ
+        ISO-3166-1-numeric: 084
+    - canonical: CA
+      aliases:
+      - CAN
+      - '124'
+      source_codes:
+        ISO-3166-1-alpha-2: CA
+        ISO-3166-1-alpha-3: CAN
+        ISO-3166-1-numeric: '124'
+    - canonical: CC
+      aliases:
+      - CCK
+      - '166'
+      source_codes:
+        ISO-3166-1-alpha-2: CC
+        ISO-3166-1-alpha-3: CCK
+        ISO-3166-1-numeric: '166'
+    - canonical: CD
+      aliases:
+      - COD
+      - '180'
+      source_codes:
+        ISO-3166-1-alpha-2: CD
+        ISO-3166-1-alpha-3: COD
+        ISO-3166-1-numeric: '180'
+    - canonical: CF
+      aliases:
+      - CAF
+      - '140'
+      source_codes:
+        ISO-3166-1-alpha-2: CF
+        ISO-3166-1-alpha-3: CAF
+        ISO-3166-1-numeric: '140'
+    - canonical: CG
+      aliases:
+      - COG
+      - '178'
+      source_codes:
+        ISO-3166-1-alpha-2: CG
+        ISO-3166-1-alpha-3: COG
+        ISO-3166-1-numeric: '178'
+    - canonical: CH
+      aliases:
+      - CHE
+      - '756'
+      source_codes:
+        ISO-3166-1-alpha-2: CH
+        ISO-3166-1-alpha-3: CHE
+        ISO-3166-1-numeric: '756'
+    - canonical: CI
+      aliases:
+      - CIV
+      - '384'
+      source_codes:
+        ISO-3166-1-alpha-2: CI
+        ISO-3166-1-alpha-3: CIV
+        ISO-3166-1-numeric: '384'
+    - canonical: CK
+      aliases:
+      - COK
+      - '184'
+      source_codes:
+        ISO-3166-1-alpha-2: CK
+        ISO-3166-1-alpha-3: COK
+        ISO-3166-1-numeric: '184'
+    - canonical: CL
+      aliases:
+      - CHL
+      - '152'
+      source_codes:
+        ISO-3166-1-alpha-2: CL
+        ISO-3166-1-alpha-3: CHL
+        ISO-3166-1-numeric: '152'
+    - canonical: CM
+      aliases:
+      - CMR
+      - '120'
+      source_codes:
+        ISO-3166-1-alpha-2: CM
+        ISO-3166-1-alpha-3: CMR
+        ISO-3166-1-numeric: '120'
+    - canonical: CN
+      aliases:
+      - CHN
+      - '156'
+      source_codes:
+        ISO-3166-1-alpha-2: CN
+        ISO-3166-1-alpha-3: CHN
+        ISO-3166-1-numeric: '156'
+    - canonical: CO
+      aliases:
+      - COL
+      - '170'
+      source_codes:
+        ISO-3166-1-alpha-2: CO
+        ISO-3166-1-alpha-3: COL
+        ISO-3166-1-numeric: '170'
+    - canonical: CR
+      aliases:
+      - CRI
+      - '188'
+      source_codes:
+        ISO-3166-1-alpha-2: CR
+        ISO-3166-1-alpha-3: CRI
+        ISO-3166-1-numeric: '188'
+    - canonical: CU
+      aliases:
+      - CUB
+      - '192'
+      source_codes:
+        ISO-3166-1-alpha-2: CU
+        ISO-3166-1-alpha-3: CUB
+        ISO-3166-1-numeric: '192'
+    - canonical: CV
+      aliases:
+      - CPV
+      - '132'
+      source_codes:
+        ISO-3166-1-alpha-2: CV
+        ISO-3166-1-alpha-3: CPV
+        ISO-3166-1-numeric: '132'
+    - canonical: CW
+      aliases:
+      - CUW
+      - '531'
+      source_codes:
+        ISO-3166-1-alpha-2: CW
+        ISO-3166-1-alpha-3: CUW
+        ISO-3166-1-numeric: '531'
+    - canonical: CX
+      aliases:
+      - CXR
+      - '162'
+      source_codes:
+        ISO-3166-1-alpha-2: CX
+        ISO-3166-1-alpha-3: CXR
+        ISO-3166-1-numeric: '162'
+    - canonical: CY
+      aliases:
+      - CYP
+      - '196'
+      source_codes:
+        ISO-3166-1-alpha-2: CY
+        ISO-3166-1-alpha-3: CYP
+        ISO-3166-1-numeric: '196'
+    - canonical: CZ
+      aliases:
+      - CZE
+      - '203'
+      source_codes:
+        ISO-3166-1-alpha-2: CZ
+        ISO-3166-1-alpha-3: CZE
+        ISO-3166-1-numeric: '203'
+    - canonical: DE
+      aliases:
+      - DEU
+      - '276'
+      source_codes:
+        ISO-3166-1-alpha-2: DE
+        ISO-3166-1-alpha-3: DEU
+        ISO-3166-1-numeric: '276'
+    - canonical: DJ
+      aliases:
+      - DJI
+      - '262'
+      source_codes:
+        ISO-3166-1-alpha-2: DJ
+        ISO-3166-1-alpha-3: DJI
+        ISO-3166-1-numeric: '262'
+    - canonical: DK
+      aliases:
+      - DNK
+      - '208'
+      source_codes:
+        ISO-3166-1-alpha-2: DK
+        ISO-3166-1-alpha-3: DNK
+        ISO-3166-1-numeric: '208'
+    - canonical: DM
+      aliases:
+      - DMA
+      - '212'
+      source_codes:
+        ISO-3166-1-alpha-2: DM
+        ISO-3166-1-alpha-3: DMA
+        ISO-3166-1-numeric: '212'
+    - canonical: DO
+      aliases:
+      - DOM
+      - '214'
+      source_codes:
+        ISO-3166-1-alpha-2: DO
+        ISO-3166-1-alpha-3: DOM
+        ISO-3166-1-numeric: '214'
+    - canonical: DZ
+      aliases:
+      - DZA
+      - '012'
+      source_codes:
+        ISO-3166-1-alpha-2: DZ
+        ISO-3166-1-alpha-3: DZA
+        ISO-3166-1-numeric: '012'
+    - canonical: EC
+      aliases:
+      - ECU
+      - '218'
+      source_codes:
+        ISO-3166-1-alpha-2: EC
+        ISO-3166-1-alpha-3: ECU
+        ISO-3166-1-numeric: '218'
+    - canonical: EE
+      aliases:
+      - EST
+      - '233'
+      source_codes:
+        ISO-3166-1-alpha-2: EE
+        ISO-3166-1-alpha-3: EST
+        ISO-3166-1-numeric: '233'
+    - canonical: EG
+      aliases:
+      - EGY
+      - '818'
+      source_codes:
+        ISO-3166-1-alpha-2: EG
+        ISO-3166-1-alpha-3: EGY
+        ISO-3166-1-numeric: '818'
+    - canonical: EH
+      aliases:
+      - ESH
+      - '732'
+      source_codes:
+        ISO-3166-1-alpha-2: EH
+        ISO-3166-1-alpha-3: ESH
+        ISO-3166-1-numeric: '732'
+    - canonical: ER
+      aliases:
+      - ERI
+      - '232'
+      source_codes:
+        ISO-3166-1-alpha-2: ER
+        ISO-3166-1-alpha-3: ERI
+        ISO-3166-1-numeric: '232'
+    - canonical: ES
+      aliases:
+      - ESP
+      - '724'
+      source_codes:
+        ISO-3166-1-alpha-2: ES
+        ISO-3166-1-alpha-3: ESP
+        ISO-3166-1-numeric: '724'
+    - canonical: ET
+      aliases:
+      - ETH
+      - '231'
+      source_codes:
+        ISO-3166-1-alpha-2: ET
+        ISO-3166-1-alpha-3: ETH
+        ISO-3166-1-numeric: '231'
+    - canonical: FI
+      aliases:
+      - FIN
+      - '246'
+      source_codes:
+        ISO-3166-1-alpha-2: FI
+        ISO-3166-1-alpha-3: FIN
+        ISO-3166-1-numeric: '246'
+    - canonical: FJ
+      aliases:
+      - FJI
+      - '242'
+      source_codes:
+        ISO-3166-1-alpha-2: FJ
+        ISO-3166-1-alpha-3: FJI
+        ISO-3166-1-numeric: '242'
+    - canonical: FK
+      aliases:
+      - FLK
+      - '238'
+      source_codes:
+        ISO-3166-1-alpha-2: FK
+        ISO-3166-1-alpha-3: FLK
+        ISO-3166-1-numeric: '238'
+    - canonical: FM
+      aliases:
+      - FSM
+      - '583'
+      source_codes:
+        ISO-3166-1-alpha-2: FM
+        ISO-3166-1-alpha-3: FSM
+        ISO-3166-1-numeric: '583'
+    - canonical: FO
+      aliases:
+      - FRO
+      - '234'
+      source_codes:
+        ISO-3166-1-alpha-2: FO
+        ISO-3166-1-alpha-3: FRO
+        ISO-3166-1-numeric: '234'
+    - canonical: FR
+      aliases:
+      - FRA
+      - '250'
+      source_codes:
+        ISO-3166-1-alpha-2: FR
+        ISO-3166-1-alpha-3: FRA
+        ISO-3166-1-numeric: '250'
+    - canonical: GA
+      aliases:
+      - GAB
+      - '266'
+      source_codes:
+        ISO-3166-1-alpha-2: GA
+        ISO-3166-1-alpha-3: GAB
+        ISO-3166-1-numeric: '266'
+    - canonical: GB
+      aliases:
+      - GBR
+      - '826'
+      source_codes:
+        ISO-3166-1-alpha-2: GB
+        ISO-3166-1-alpha-3: GBR
+        ISO-3166-1-numeric: '826'
+    - canonical: GD
+      aliases:
+      - GRD
+      - '308'
+      source_codes:
+        ISO-3166-1-alpha-2: GD
+        ISO-3166-1-alpha-3: GRD
+        ISO-3166-1-numeric: '308'
+    - canonical: GE
+      aliases:
+      - GEO
+      - '268'
+      source_codes:
+        ISO-3166-1-alpha-2: GE
+        ISO-3166-1-alpha-3: GEO
+        ISO-3166-1-numeric: '268'
+    - canonical: GF
+      aliases:
+      - GUF
+      - '254'
+      source_codes:
+        ISO-3166-1-alpha-2: GF
+        ISO-3166-1-alpha-3: GUF
+        ISO-3166-1-numeric: '254'
+    - canonical: GG
+      aliases:
+      - GGY
+      - '831'
+      source_codes:
+        ISO-3166-1-alpha-2: GG
+        ISO-3166-1-alpha-3: GGY
+        ISO-3166-1-numeric: '831'
+    - canonical: GH
+      aliases:
+      - GHA
+      - '288'
+      source_codes:
+        ISO-3166-1-alpha-2: GH
+        ISO-3166-1-alpha-3: GHA
+        ISO-3166-1-numeric: '288'
+    - canonical: GI
+      aliases:
+      - GIB
+      - '292'
+      source_codes:
+        ISO-3166-1-alpha-2: GI
+        ISO-3166-1-alpha-3: GIB
+        ISO-3166-1-numeric: '292'
+    - canonical: GL
+      aliases:
+      - GRL
+      - '304'
+      source_codes:
+        ISO-3166-1-alpha-2: GL
+        ISO-3166-1-alpha-3: GRL
+        ISO-3166-1-numeric: '304'
+    - canonical: GM
+      aliases:
+      - GMB
+      - '270'
+      source_codes:
+        ISO-3166-1-alpha-2: GM
+        ISO-3166-1-alpha-3: GMB
+        ISO-3166-1-numeric: '270'
+    - canonical: GN
+      aliases:
+      - GIN
+      - '324'
+      source_codes:
+        ISO-3166-1-alpha-2: GN
+        ISO-3166-1-alpha-3: GIN
+        ISO-3166-1-numeric: '324'
+    - canonical: GP
+      aliases:
+      - GLP
+      - '312'
+      source_codes:
+        ISO-3166-1-alpha-2: GP
+        ISO-3166-1-alpha-3: GLP
+        ISO-3166-1-numeric: '312'
+    - canonical: GQ
+      aliases:
+      - GNQ
+      - '226'
+      source_codes:
+        ISO-3166-1-alpha-2: GQ
+        ISO-3166-1-alpha-3: GNQ
+        ISO-3166-1-numeric: '226'
+    - canonical: GR
+      aliases:
+      - GRC
+      - '300'
+      source_codes:
+        ISO-3166-1-alpha-2: GR
+        ISO-3166-1-alpha-3: GRC
+        ISO-3166-1-numeric: '300'
+    - canonical: GS
+      aliases:
+      - SGS
+      - '239'
+      source_codes:
+        ISO-3166-1-alpha-2: GS
+        ISO-3166-1-alpha-3: SGS
+        ISO-3166-1-numeric: '239'
+    - canonical: GT
+      aliases:
+      - GTM
+      - '320'
+      source_codes:
+        ISO-3166-1-alpha-2: GT
+        ISO-3166-1-alpha-3: GTM
+        ISO-3166-1-numeric: '320'
+    - canonical: GU
+      aliases:
+      - GUM
+      - '316'
+      source_codes:
+        ISO-3166-1-alpha-2: GU
+        ISO-3166-1-alpha-3: GUM
+        ISO-3166-1-numeric: '316'
+    - canonical: GW
+      aliases:
+      - GNB
+      - '624'
+      source_codes:
+        ISO-3166-1-alpha-2: GW
+        ISO-3166-1-alpha-3: GNB
+        ISO-3166-1-numeric: '624'
+    - canonical: GY
+      aliases:
+      - GUY
+      - '328'
+      source_codes:
+        ISO-3166-1-alpha-2: GY
+        ISO-3166-1-alpha-3: GUY
+        ISO-3166-1-numeric: '328'
+    - canonical: HK
+      aliases:
+      - HKG
+      - '344'
+      source_codes:
+        ISO-3166-1-alpha-2: HK
+        ISO-3166-1-alpha-3: HKG
+        ISO-3166-1-numeric: '344'
+    - canonical: HM
+      aliases:
+      - HMD
+      - '334'
+      source_codes:
+        ISO-3166-1-alpha-2: HM
+        ISO-3166-1-alpha-3: HMD
+        ISO-3166-1-numeric: '334'
+    - canonical: HN
+      aliases:
+      - HND
+      - '340'
+      source_codes:
+        ISO-3166-1-alpha-2: HN
+        ISO-3166-1-alpha-3: HND
+        ISO-3166-1-numeric: '340'
+    - canonical: HR
+      aliases:
+      - HRV
+      - '191'
+      source_codes:
+        ISO-3166-1-alpha-2: HR
+        ISO-3166-1-alpha-3: HRV
+        ISO-3166-1-numeric: '191'
+    - canonical: HT
+      aliases:
+      - HTI
+      - '332'
+      source_codes:
+        ISO-3166-1-alpha-2: HT
+        ISO-3166-1-alpha-3: HTI
+        ISO-3166-1-numeric: '332'
+    - canonical: HU
+      aliases:
+      - HUN
+      - '348'
+      source_codes:
+        ISO-3166-1-alpha-2: HU
+        ISO-3166-1-alpha-3: HUN
+        ISO-3166-1-numeric: '348'
+    - canonical: ID
+      aliases:
+      - IDN
+      - '360'
+      source_codes:
+        ISO-3166-1-alpha-2: ID
+        ISO-3166-1-alpha-3: IDN
+        ISO-3166-1-numeric: '360'
+    - canonical: IE
+      aliases:
+      - IRL
+      - '372'
+      source_codes:
+        ISO-3166-1-alpha-2: IE
+        ISO-3166-1-alpha-3: IRL
+        ISO-3166-1-numeric: '372'
+    - canonical: IL
+      aliases:
+      - ISR
+      - '376'
+      source_codes:
+        ISO-3166-1-alpha-2: IL
+        ISO-3166-1-alpha-3: ISR
+        ISO-3166-1-numeric: '376'
+    - canonical: IM
+      aliases:
+      - IMN
+      - '833'
+      source_codes:
+        ISO-3166-1-alpha-2: IM
+        ISO-3166-1-alpha-3: IMN
+        ISO-3166-1-numeric: '833'
+    - canonical: IN
+      aliases:
+      - IND
+      - '356'
+      source_codes:
+        ISO-3166-1-alpha-2: IN
+        ISO-3166-1-alpha-3: IND
+        ISO-3166-1-numeric: '356'
+    - canonical: IO
+      aliases:
+      - IOT
+      - 086
+      source_codes:
+        ISO-3166-1-alpha-2: IO
+        ISO-3166-1-alpha-3: IOT
+        ISO-3166-1-numeric: 086
+    - canonical: IQ
+      aliases:
+      - IRQ
+      - '368'
+      source_codes:
+        ISO-3166-1-alpha-2: IQ
+        ISO-3166-1-alpha-3: IRQ
+        ISO-3166-1-numeric: '368'
+    - canonical: IR
+      aliases:
+      - IRN
+      - '364'
+      source_codes:
+        ISO-3166-1-alpha-2: IR
+        ISO-3166-1-alpha-3: IRN
+        ISO-3166-1-numeric: '364'
+    - canonical: IS
+      aliases:
+      - ISL
+      - '352'
+      source_codes:
+        ISO-3166-1-alpha-2: IS
+        ISO-3166-1-alpha-3: ISL
+        ISO-3166-1-numeric: '352'
+    - canonical: IT
+      aliases:
+      - ITA
+      - '380'
+      source_codes:
+        ISO-3166-1-alpha-2: IT
+        ISO-3166-1-alpha-3: ITA
+        ISO-3166-1-numeric: '380'
+    - canonical: JE
+      aliases:
+      - JEY
+      - '832'
+      source_codes:
+        ISO-3166-1-alpha-2: JE
+        ISO-3166-1-alpha-3: JEY
+        ISO-3166-1-numeric: '832'
+    - canonical: JM
+      aliases:
+      - JAM
+      - '388'
+      source_codes:
+        ISO-3166-1-alpha-2: JM
+        ISO-3166-1-alpha-3: JAM
+        ISO-3166-1-numeric: '388'
+    - canonical: JO
+      aliases:
+      - JOR
+      - '400'
+      source_codes:
+        ISO-3166-1-alpha-2: JO
+        ISO-3166-1-alpha-3: JOR
+        ISO-3166-1-numeric: '400'
+    - canonical: JP
+      aliases:
+      - JPN
+      - '392'
+      source_codes:
+        ISO-3166-1-alpha-2: JP
+        ISO-3166-1-alpha-3: JPN
+        ISO-3166-1-numeric: '392'
+    - canonical: KE
+      aliases:
+      - KEN
+      - '404'
+      source_codes:
+        ISO-3166-1-alpha-2: KE
+        ISO-3166-1-alpha-3: KEN
+        ISO-3166-1-numeric: '404'
+    - canonical: KG
+      aliases:
+      - KGZ
+      - '417'
+      source_codes:
+        ISO-3166-1-alpha-2: KG
+        ISO-3166-1-alpha-3: KGZ
+        ISO-3166-1-numeric: '417'
+    - canonical: KH
+      aliases:
+      - KHM
+      - '116'
+      source_codes:
+        ISO-3166-1-alpha-2: KH
+        ISO-3166-1-alpha-3: KHM
+        ISO-3166-1-numeric: '116'
+    - canonical: KI
+      aliases:
+      - KIR
+      - '296'
+      source_codes:
+        ISO-3166-1-alpha-2: KI
+        ISO-3166-1-alpha-3: KIR
+        ISO-3166-1-numeric: '296'
+    - canonical: KM
+      aliases:
+      - COM
+      - '174'
+      source_codes:
+        ISO-3166-1-alpha-2: KM
+        ISO-3166-1-alpha-3: COM
+        ISO-3166-1-numeric: '174'
+    - canonical: KN
+      aliases:
+      - KNA
+      - '659'
+      source_codes:
+        ISO-3166-1-alpha-2: KN
+        ISO-3166-1-alpha-3: KNA
+        ISO-3166-1-numeric: '659'
+    - canonical: KP
+      aliases:
+      - PRK
+      - '408'
+      source_codes:
+        ISO-3166-1-alpha-2: KP
+        ISO-3166-1-alpha-3: PRK
+        ISO-3166-1-numeric: '408'
+    - canonical: KR
+      aliases:
+      - KOR
+      - '410'
+      source_codes:
+        ISO-3166-1-alpha-2: KR
+        ISO-3166-1-alpha-3: KOR
+        ISO-3166-1-numeric: '410'
+    - canonical: KW
+      aliases:
+      - KWT
+      - '414'
+      source_codes:
+        ISO-3166-1-alpha-2: KW
+        ISO-3166-1-alpha-3: KWT
+        ISO-3166-1-numeric: '414'
+    - canonical: KY
+      aliases:
+      - CYM
+      - '136'
+      source_codes:
+        ISO-3166-1-alpha-2: KY
+        ISO-3166-1-alpha-3: CYM
+        ISO-3166-1-numeric: '136'
+    - canonical: KZ
+      aliases:
+      - KAZ
+      - '398'
+      source_codes:
+        ISO-3166-1-alpha-2: KZ
+        ISO-3166-1-alpha-3: KAZ
+        ISO-3166-1-numeric: '398'
+    - canonical: LA
+      aliases:
+      - LAO
+      - '418'
+      source_codes:
+        ISO-3166-1-alpha-2: LA
+        ISO-3166-1-alpha-3: LAO
+        ISO-3166-1-numeric: '418'
+    - canonical: LB
+      aliases:
+      - LBN
+      - '422'
+      source_codes:
+        ISO-3166-1-alpha-2: LB
+        ISO-3166-1-alpha-3: LBN
+        ISO-3166-1-numeric: '422'
+    - canonical: LC
+      aliases:
+      - LCA
+      - '662'
+      source_codes:
+        ISO-3166-1-alpha-2: LC
+        ISO-3166-1-alpha-3: LCA
+        ISO-3166-1-numeric: '662'
+    - canonical: LI
+      aliases:
+      - LIE
+      - '438'
+      source_codes:
+        ISO-3166-1-alpha-2: LI
+        ISO-3166-1-alpha-3: LIE
+        ISO-3166-1-numeric: '438'
+    - canonical: LK
+      aliases:
+      - LKA
+      - '144'
+      source_codes:
+        ISO-3166-1-alpha-2: LK
+        ISO-3166-1-alpha-3: LKA
+        ISO-3166-1-numeric: '144'
+    - canonical: LR
+      aliases:
+      - LBR
+      - '430'
+      source_codes:
+        ISO-3166-1-alpha-2: LR
+        ISO-3166-1-alpha-3: LBR
+        ISO-3166-1-numeric: '430'
+    - canonical: LS
+      aliases:
+      - LSO
+      - '426'
+      source_codes:
+        ISO-3166-1-alpha-2: LS
+        ISO-3166-1-alpha-3: LSO
+        ISO-3166-1-numeric: '426'
+    - canonical: LT
+      aliases:
+      - LTU
+      - '440'
+      source_codes:
+        ISO-3166-1-alpha-2: LT
+        ISO-3166-1-alpha-3: LTU
+        ISO-3166-1-numeric: '440'
+    - canonical: LU
+      aliases:
+      - LUX
+      - '442'
+      source_codes:
+        ISO-3166-1-alpha-2: LU
+        ISO-3166-1-alpha-3: LUX
+        ISO-3166-1-numeric: '442'
+    - canonical: LV
+      aliases:
+      - LVA
+      - '428'
+      source_codes:
+        ISO-3166-1-alpha-2: LV
+        ISO-3166-1-alpha-3: LVA
+        ISO-3166-1-numeric: '428'
+    - canonical: LY
+      aliases:
+      - LBY
+      - '434'
+      source_codes:
+        ISO-3166-1-alpha-2: LY
+        ISO-3166-1-alpha-3: LBY
+        ISO-3166-1-numeric: '434'
+    - canonical: MA
+      aliases:
+      - MAR
+      - '504'
+      source_codes:
+        ISO-3166-1-alpha-2: MA
+        ISO-3166-1-alpha-3: MAR
+        ISO-3166-1-numeric: '504'
+    - canonical: MC
+      aliases:
+      - MCO
+      - '492'
+      source_codes:
+        ISO-3166-1-alpha-2: MC
+        ISO-3166-1-alpha-3: MCO
+        ISO-3166-1-numeric: '492'
+    - canonical: MD
+      aliases:
+      - MDA
+      - '498'
+      source_codes:
+        ISO-3166-1-alpha-2: MD
+        ISO-3166-1-alpha-3: MDA
+        ISO-3166-1-numeric: '498'
+    - canonical: ME
+      aliases:
+      - MNE
+      - '499'
+      source_codes:
+        ISO-3166-1-alpha-2: ME
+        ISO-3166-1-alpha-3: MNE
+        ISO-3166-1-numeric: '499'
+    - canonical: MF
+      aliases:
+      - MAF
+      - '663'
+      source_codes:
+        ISO-3166-1-alpha-2: MF
+        ISO-3166-1-alpha-3: MAF
+        ISO-3166-1-numeric: '663'
+    - canonical: MG
+      aliases:
+      - MDG
+      - '450'
+      source_codes:
+        ISO-3166-1-alpha-2: MG
+        ISO-3166-1-alpha-3: MDG
+        ISO-3166-1-numeric: '450'
+    - canonical: MH
+      aliases:
+      - MHL
+      - '584'
+      source_codes:
+        ISO-3166-1-alpha-2: MH
+        ISO-3166-1-alpha-3: MHL
+        ISO-3166-1-numeric: '584'
+    - canonical: MK
+      aliases:
+      - MKD
+      - '807'
+      source_codes:
+        ISO-3166-1-alpha-2: MK
+        ISO-3166-1-alpha-3: MKD
+        ISO-3166-1-numeric: '807'
+    - canonical: ML
+      aliases:
+      - MLI
+      - '466'
+      source_codes:
+        ISO-3166-1-alpha-2: ML
+        ISO-3166-1-alpha-3: MLI
+        ISO-3166-1-numeric: '466'
+    - canonical: MM
+      aliases:
+      - MMR
+      - '104'
+      source_codes:
+        ISO-3166-1-alpha-2: MM
+        ISO-3166-1-alpha-3: MMR
+        ISO-3166-1-numeric: '104'
+    - canonical: MN
+      aliases:
+      - MNG
+      - '496'
+      source_codes:
+        ISO-3166-1-alpha-2: MN
+        ISO-3166-1-alpha-3: MNG
+        ISO-3166-1-numeric: '496'
+    - canonical: MO
+      aliases:
+      - MAC
+      - '446'
+      source_codes:
+        ISO-3166-1-alpha-2: MO
+        ISO-3166-1-alpha-3: MAC
+        ISO-3166-1-numeric: '446'
+    - canonical: MP
+      aliases:
+      - MNP
+      - '580'
+      source_codes:
+        ISO-3166-1-alpha-2: MP
+        ISO-3166-1-alpha-3: MNP
+        ISO-3166-1-numeric: '580'
+    - canonical: MQ
+      aliases:
+      - MTQ
+      - '474'
+      source_codes:
+        ISO-3166-1-alpha-2: MQ
+        ISO-3166-1-alpha-3: MTQ
+        ISO-3166-1-numeric: '474'
+    - canonical: MR
+      aliases:
+      - MRT
+      - '478'
+      source_codes:
+        ISO-3166-1-alpha-2: MR
+        ISO-3166-1-alpha-3: MRT
+        ISO-3166-1-numeric: '478'
+    - canonical: MS
+      aliases:
+      - MSR
+      - '500'
+      source_codes:
+        ISO-3166-1-alpha-2: MS
+        ISO-3166-1-alpha-3: MSR
+        ISO-3166-1-numeric: '500'
+    - canonical: MT
+      aliases:
+      - MLT
+      - '470'
+      source_codes:
+        ISO-3166-1-alpha-2: MT
+        ISO-3166-1-alpha-3: MLT
+        ISO-3166-1-numeric: '470'
+    - canonical: MU
+      aliases:
+      - MUS
+      - '480'
+      source_codes:
+        ISO-3166-1-alpha-2: MU
+        ISO-3166-1-alpha-3: MUS
+        ISO-3166-1-numeric: '480'
+    - canonical: MV
+      aliases:
+      - MDV
+      - '462'
+      source_codes:
+        ISO-3166-1-alpha-2: MV
+        ISO-3166-1-alpha-3: MDV
+        ISO-3166-1-numeric: '462'
+    - canonical: MW
+      aliases:
+      - MWI
+      - '454'
+      source_codes:
+        ISO-3166-1-alpha-2: MW
+        ISO-3166-1-alpha-3: MWI
+        ISO-3166-1-numeric: '454'
+    - canonical: MX
+      aliases:
+      - MEX
+      - '484'
+      source_codes:
+        ISO-3166-1-alpha-2: MX
+        ISO-3166-1-alpha-3: MEX
+        ISO-3166-1-numeric: '484'
+    - canonical: MY
+      aliases:
+      - MYS
+      - '458'
+      source_codes:
+        ISO-3166-1-alpha-2: MY
+        ISO-3166-1-alpha-3: MYS
+        ISO-3166-1-numeric: '458'
+    - canonical: MZ
+      aliases:
+      - MOZ
+      - '508'
+      source_codes:
+        ISO-3166-1-alpha-2: MZ
+        ISO-3166-1-alpha-3: MOZ
+        ISO-3166-1-numeric: '508'
+    - canonical: NA
+      aliases:
+      - NAM
+      - '516'
+      source_codes:
+        ISO-3166-1-alpha-2: NA
+        ISO-3166-1-alpha-3: NAM
+        ISO-3166-1-numeric: '516'
+    - canonical: NC
+      aliases:
+      - NCL
+      - '540'
+      source_codes:
+        ISO-3166-1-alpha-2: NC
+        ISO-3166-1-alpha-3: NCL
+        ISO-3166-1-numeric: '540'
+    - canonical: NE
+      aliases:
+      - NER
+      - '562'
+      source_codes:
+        ISO-3166-1-alpha-2: NE
+        ISO-3166-1-alpha-3: NER
+        ISO-3166-1-numeric: '562'
+    - canonical: NF
+      aliases:
+      - NFK
+      - '574'
+      source_codes:
+        ISO-3166-1-alpha-2: NF
+        ISO-3166-1-alpha-3: NFK
+        ISO-3166-1-numeric: '574'
+    - canonical: NG
+      aliases:
+      - NGA
+      - '566'
+      source_codes:
+        ISO-3166-1-alpha-2: NG
+        ISO-3166-1-alpha-3: NGA
+        ISO-3166-1-numeric: '566'
+    - canonical: NI
+      aliases:
+      - NIC
+      - '558'
+      source_codes:
+        ISO-3166-1-alpha-2: NI
+        ISO-3166-1-alpha-3: NIC
+        ISO-3166-1-numeric: '558'
+    - canonical: NL
+      aliases:
+      - NLD
+      - '528'
+      source_codes:
+        ISO-3166-1-alpha-2: NL
+        ISO-3166-1-alpha-3: NLD
+        ISO-3166-1-numeric: '528'
+    - canonical: 'NO'
+      aliases:
+      - NOR
+      - '578'
+      source_codes:
+        ISO-3166-1-alpha-2: 'NO'
+        ISO-3166-1-alpha-3: NOR
+        ISO-3166-1-numeric: '578'
+    - canonical: NP
+      aliases:
+      - NPL
+      - '524'
+      source_codes:
+        ISO-3166-1-alpha-2: NP
+        ISO-3166-1-alpha-3: NPL
+        ISO-3166-1-numeric: '524'
+    - canonical: NR
+      aliases:
+      - NRU
+      - '520'
+      source_codes:
+        ISO-3166-1-alpha-2: NR
+        ISO-3166-1-alpha-3: NRU
+        ISO-3166-1-numeric: '520'
+    - canonical: NU
+      aliases:
+      - NIU
+      - '570'
+      source_codes:
+        ISO-3166-1-alpha-2: NU
+        ISO-3166-1-alpha-3: NIU
+        ISO-3166-1-numeric: '570'
+    - canonical: NZ
+      aliases:
+      - NZL
+      - '554'
+      source_codes:
+        ISO-3166-1-alpha-2: NZ
+        ISO-3166-1-alpha-3: NZL
+        ISO-3166-1-numeric: '554'
+    - canonical: OM
+      aliases:
+      - OMN
+      - '512'
+      source_codes:
+        ISO-3166-1-alpha-2: OM
+        ISO-3166-1-alpha-3: OMN
+        ISO-3166-1-numeric: '512'
+    - canonical: PA
+      aliases:
+      - PAN
+      - '591'
+      source_codes:
+        ISO-3166-1-alpha-2: PA
+        ISO-3166-1-alpha-3: PAN
+        ISO-3166-1-numeric: '591'
+    - canonical: PE
+      aliases:
+      - PER
+      - '604'
+      source_codes:
+        ISO-3166-1-alpha-2: PE
+        ISO-3166-1-alpha-3: PER
+        ISO-3166-1-numeric: '604'
+    - canonical: PF
+      aliases:
+      - PYF
+      - '258'
+      source_codes:
+        ISO-3166-1-alpha-2: PF
+        ISO-3166-1-alpha-3: PYF
+        ISO-3166-1-numeric: '258'
+    - canonical: PG
+      aliases:
+      - PNG
+      - '598'
+      source_codes:
+        ISO-3166-1-alpha-2: PG
+        ISO-3166-1-alpha-3: PNG
+        ISO-3166-1-numeric: '598'
+    - canonical: PH
+      aliases:
+      - PHL
+      - '608'
+      source_codes:
+        ISO-3166-1-alpha-2: PH
+        ISO-3166-1-alpha-3: PHL
+        ISO-3166-1-numeric: '608'
+    - canonical: PK
+      aliases:
+      - PAK
+      - '586'
+      source_codes:
+        ISO-3166-1-alpha-2: PK
+        ISO-3166-1-alpha-3: PAK
+        ISO-3166-1-numeric: '586'
+    - canonical: PL
+      aliases:
+      - POL
+      - '616'
+      source_codes:
+        ISO-3166-1-alpha-2: PL
+        ISO-3166-1-alpha-3: POL
+        ISO-3166-1-numeric: '616'
+    - canonical: PM
+      aliases:
+      - SPM
+      - '666'
+      source_codes:
+        ISO-3166-1-alpha-2: PM
+        ISO-3166-1-alpha-3: SPM
+        ISO-3166-1-numeric: '666'
+    - canonical: PN
+      aliases:
+      - PCN
+      - '612'
+      source_codes:
+        ISO-3166-1-alpha-2: PN
+        ISO-3166-1-alpha-3: PCN
+        ISO-3166-1-numeric: '612'
+    - canonical: PR
+      aliases:
+      - PRI
+      - '630'
+      source_codes:
+        ISO-3166-1-alpha-2: PR
+        ISO-3166-1-alpha-3: PRI
+        ISO-3166-1-numeric: '630'
+    - canonical: PS
+      aliases:
+      - PSE
+      - '275'
+      source_codes:
+        ISO-3166-1-alpha-2: PS
+        ISO-3166-1-alpha-3: PSE
+        ISO-3166-1-numeric: '275'
+    - canonical: PT
+      aliases:
+      - PRT
+      - '620'
+      source_codes:
+        ISO-3166-1-alpha-2: PT
+        ISO-3166-1-alpha-3: PRT
+        ISO-3166-1-numeric: '620'
+    - canonical: PW
+      aliases:
+      - PLW
+      - '585'
+      source_codes:
+        ISO-3166-1-alpha-2: PW
+        ISO-3166-1-alpha-3: PLW
+        ISO-3166-1-numeric: '585'
+    - canonical: PY
+      aliases:
+      - PRY
+      - '600'
+      source_codes:
+        ISO-3166-1-alpha-2: PY
+        ISO-3166-1-alpha-3: PRY
+        ISO-3166-1-numeric: '600'
+    - canonical: QA
+      aliases:
+      - QAT
+      - '634'
+      source_codes:
+        ISO-3166-1-alpha-2: QA
+        ISO-3166-1-alpha-3: QAT
+        ISO-3166-1-numeric: '634'
+    - canonical: RE
+      aliases:
+      - REU
+      - '638'
+      source_codes:
+        ISO-3166-1-alpha-2: RE
+        ISO-3166-1-alpha-3: REU
+        ISO-3166-1-numeric: '638'
+    - canonical: RO
+      aliases:
+      - ROU
+      - '642'
+      source_codes:
+        ISO-3166-1-alpha-2: RO
+        ISO-3166-1-alpha-3: ROU
+        ISO-3166-1-numeric: '642'
+    - canonical: RS
+      aliases:
+      - SRB
+      - '688'
+      source_codes:
+        ISO-3166-1-alpha-2: RS
+        ISO-3166-1-alpha-3: SRB
+        ISO-3166-1-numeric: '688'
+    - canonical: RU
+      aliases:
+      - RUS
+      - '643'
+      source_codes:
+        ISO-3166-1-alpha-2: RU
+        ISO-3166-1-alpha-3: RUS
+        ISO-3166-1-numeric: '643'
+    - canonical: RW
+      aliases:
+      - RWA
+      - '646'
+      source_codes:
+        ISO-3166-1-alpha-2: RW
+        ISO-3166-1-alpha-3: RWA
+        ISO-3166-1-numeric: '646'
+    - canonical: SA
+      aliases:
+      - SAU
+      - '682'
+      source_codes:
+        ISO-3166-1-alpha-2: SA
+        ISO-3166-1-alpha-3: SAU
+        ISO-3166-1-numeric: '682'
+    - canonical: SB
+      aliases:
+      - SLB
+      - 090
+      source_codes:
+        ISO-3166-1-alpha-2: SB
+        ISO-3166-1-alpha-3: SLB
+        ISO-3166-1-numeric: 090
+    - canonical: SC
+      aliases:
+      - SYC
+      - '690'
+      source_codes:
+        ISO-3166-1-alpha-2: SC
+        ISO-3166-1-alpha-3: SYC
+        ISO-3166-1-numeric: '690'
+    - canonical: SD
+      aliases:
+      - SDN
+      - '729'
+      source_codes:
+        ISO-3166-1-alpha-2: SD
+        ISO-3166-1-alpha-3: SDN
+        ISO-3166-1-numeric: '729'
+    - canonical: SE
+      aliases:
+      - SWE
+      - '752'
+      source_codes:
+        ISO-3166-1-alpha-2: SE
+        ISO-3166-1-alpha-3: SWE
+        ISO-3166-1-numeric: '752'
+    - canonical: SG
+      aliases:
+      - SGP
+      - '702'
+      source_codes:
+        ISO-3166-1-alpha-2: SG
+        ISO-3166-1-alpha-3: SGP
+        ISO-3166-1-numeric: '702'
+    - canonical: SH
+      aliases:
+      - SHN
+      - '654'
+      source_codes:
+        ISO-3166-1-alpha-2: SH
+        ISO-3166-1-alpha-3: SHN
+        ISO-3166-1-numeric: '654'
+    - canonical: SI
+      aliases:
+      - SVN
+      - '705'
+      source_codes:
+        ISO-3166-1-alpha-2: SI
+        ISO-3166-1-alpha-3: SVN
+        ISO-3166-1-numeric: '705'
+    - canonical: SJ
+      aliases:
+      - SJM
+      - '744'
+      source_codes:
+        ISO-3166-1-alpha-2: SJ
+        ISO-3166-1-alpha-3: SJM
+        ISO-3166-1-numeric: '744'
+    - canonical: SK
+      aliases:
+      - SVK
+      - '703'
+      source_codes:
+        ISO-3166-1-alpha-2: SK
+        ISO-3166-1-alpha-3: SVK
+        ISO-3166-1-numeric: '703'
+    - canonical: SL
+      aliases:
+      - SLE
+      - '694'
+      source_codes:
+        ISO-3166-1-alpha-2: SL
+        ISO-3166-1-alpha-3: SLE
+        ISO-3166-1-numeric: '694'
+    - canonical: SM
+      aliases:
+      - SMR
+      - '674'
+      source_codes:
+        ISO-3166-1-alpha-2: SM
+        ISO-3166-1-alpha-3: SMR
+        ISO-3166-1-numeric: '674'
+    - canonical: SN
+      aliases:
+      - SEN
+      - '686'
+      source_codes:
+        ISO-3166-1-alpha-2: SN
+        ISO-3166-1-alpha-3: SEN
+        ISO-3166-1-numeric: '686'
+    - canonical: SO
+      aliases:
+      - SOM
+      - '706'
+      source_codes:
+        ISO-3166-1-alpha-2: SO
+        ISO-3166-1-alpha-3: SOM
+        ISO-3166-1-numeric: '706'
+    - canonical: SR
+      aliases:
+      - SUR
+      - '740'
+      source_codes:
+        ISO-3166-1-alpha-2: SR
+        ISO-3166-1-alpha-3: SUR
+        ISO-3166-1-numeric: '740'
+    - canonical: SS
+      aliases:
+      - SSD
+      - '728'
+      source_codes:
+        ISO-3166-1-alpha-2: SS
+        ISO-3166-1-alpha-3: SSD
+        ISO-3166-1-numeric: '728'
+    - canonical: ST
+      aliases:
+      - STP
+      - '678'
+      source_codes:
+        ISO-3166-1-alpha-2: ST
+        ISO-3166-1-alpha-3: STP
+        ISO-3166-1-numeric: '678'
+    - canonical: SV
+      aliases:
+      - SLV
+      - '222'
+      source_codes:
+        ISO-3166-1-alpha-2: SV
+        ISO-3166-1-alpha-3: SLV
+        ISO-3166-1-numeric: '222'
+    - canonical: SX
+      aliases:
+      - SXM
+      - '534'
+      source_codes:
+        ISO-3166-1-alpha-2: SX
+        ISO-3166-1-alpha-3: SXM
+        ISO-3166-1-numeric: '534'
+    - canonical: SY
+      aliases:
+      - SYR
+      - '760'
+      source_codes:
+        ISO-3166-1-alpha-2: SY
+        ISO-3166-1-alpha-3: SYR
+        ISO-3166-1-numeric: '760'
+    - canonical: SZ
+      aliases:
+      - SWZ
+      - '748'
+      source_codes:
+        ISO-3166-1-alpha-2: SZ
+        ISO-3166-1-alpha-3: SWZ
+        ISO-3166-1-numeric: '748'
+    - canonical: TC
+      aliases:
+      - TCA
+      - '796'
+      source_codes:
+        ISO-3166-1-alpha-2: TC
+        ISO-3166-1-alpha-3: TCA
+        ISO-3166-1-numeric: '796'
+    - canonical: TD
+      aliases:
+      - TCD
+      - '148'
+      source_codes:
+        ISO-3166-1-alpha-2: TD
+        ISO-3166-1-alpha-3: TCD
+        ISO-3166-1-numeric: '148'
+    - canonical: TF
+      aliases:
+      - ATF
+      - '260'
+      source_codes:
+        ISO-3166-1-alpha-2: TF
+        ISO-3166-1-alpha-3: ATF
+        ISO-3166-1-numeric: '260'
+    - canonical: TG
+      aliases:
+      - TGO
+      - '768'
+      source_codes:
+        ISO-3166-1-alpha-2: TG
+        ISO-3166-1-alpha-3: TGO
+        ISO-3166-1-numeric: '768'
+    - canonical: TH
+      aliases:
+      - THA
+      - '764'
+      source_codes:
+        ISO-3166-1-alpha-2: TH
+        ISO-3166-1-alpha-3: THA
+        ISO-3166-1-numeric: '764'
+    - canonical: TJ
+      aliases:
+      - TJK
+      - '762'
+      source_codes:
+        ISO-3166-1-alpha-2: TJ
+        ISO-3166-1-alpha-3: TJK
+        ISO-3166-1-numeric: '762'
+    - canonical: TK
+      aliases:
+      - TKL
+      - '772'
+      source_codes:
+        ISO-3166-1-alpha-2: TK
+        ISO-3166-1-alpha-3: TKL
+        ISO-3166-1-numeric: '772'
+    - canonical: TL
+      aliases:
+      - TLS
+      - '626'
+      source_codes:
+        ISO-3166-1-alpha-2: TL
+        ISO-3166-1-alpha-3: TLS
+        ISO-3166-1-numeric: '626'
+    - canonical: TM
+      aliases:
+      - TKM
+      - '795'
+      source_codes:
+        ISO-3166-1-alpha-2: TM
+        ISO-3166-1-alpha-3: TKM
+        ISO-3166-1-numeric: '795'
+    - canonical: TN
+      aliases:
+      - TUN
+      - '788'
+      source_codes:
+        ISO-3166-1-alpha-2: TN
+        ISO-3166-1-alpha-3: TUN
+        ISO-3166-1-numeric: '788'
+    - canonical: TO
+      aliases:
+      - TON
+      - '776'
+      source_codes:
+        ISO-3166-1-alpha-2: TO
+        ISO-3166-1-alpha-3: TON
+        ISO-3166-1-numeric: '776'
+    - canonical: TR
+      aliases:
+      - TUR
+      - '792'
+      source_codes:
+        ISO-3166-1-alpha-2: TR
+        ISO-3166-1-alpha-3: TUR
+        ISO-3166-1-numeric: '792'
+    - canonical: TT
+      aliases:
+      - TTO
+      - '780'
+      source_codes:
+        ISO-3166-1-alpha-2: TT
+        ISO-3166-1-alpha-3: TTO
+        ISO-3166-1-numeric: '780'
+    - canonical: TV
+      aliases:
+      - TUV
+      - '798'
+      source_codes:
+        ISO-3166-1-alpha-2: TV
+        ISO-3166-1-alpha-3: TUV
+        ISO-3166-1-numeric: '798'
+    - canonical: TW
+      aliases:
+      - TWN
+      - '158'
+      source_codes:
+        ISO-3166-1-alpha-2: TW
+        ISO-3166-1-alpha-3: TWN
+        ISO-3166-1-numeric: '158'
+    - canonical: TZ
+      aliases:
+      - TZA
+      - '834'
+      source_codes:
+        ISO-3166-1-alpha-2: TZ
+        ISO-3166-1-alpha-3: TZA
+        ISO-3166-1-numeric: '834'
+    - canonical: UA
+      aliases:
+      - UKR
+      - '804'
+      source_codes:
+        ISO-3166-1-alpha-2: UA
+        ISO-3166-1-alpha-3: UKR
+        ISO-3166-1-numeric: '804'
+    - canonical: UG
+      aliases:
+      - UGA
+      - '800'
+      source_codes:
+        ISO-3166-1-alpha-2: UG
+        ISO-3166-1-alpha-3: UGA
+        ISO-3166-1-numeric: '800'
+    - canonical: UM
+      aliases:
+      - UMI
+      - '581'
+      source_codes:
+        ISO-3166-1-alpha-2: UM
+        ISO-3166-1-alpha-3: UMI
+        ISO-3166-1-numeric: '581'
+    - canonical: US
+      aliases:
+      - USA
+      - '840'
+      source_codes:
+        ISO-3166-1-alpha-2: US
+        ISO-3166-1-alpha-3: USA
+        ISO-3166-1-numeric: '840'
+    - canonical: UY
+      aliases:
+      - URY
+      - '858'
+      source_codes:
+        ISO-3166-1-alpha-2: UY
+        ISO-3166-1-alpha-3: URY
+        ISO-3166-1-numeric: '858'
+    - canonical: UZ
+      aliases:
+      - UZB
+      - '860'
+      source_codes:
+        ISO-3166-1-alpha-2: UZ
+        ISO-3166-1-alpha-3: UZB
+        ISO-3166-1-numeric: '860'
+    - canonical: VA
+      aliases:
+      - VAT
+      - '336'
+      source_codes:
+        ISO-3166-1-alpha-2: VA
+        ISO-3166-1-alpha-3: VAT
+        ISO-3166-1-numeric: '336'
+    - canonical: VC
+      aliases:
+      - VCT
+      - '670'
+      source_codes:
+        ISO-3166-1-alpha-2: VC
+        ISO-3166-1-alpha-3: VCT
+        ISO-3166-1-numeric: '670'
+    - canonical: VE
+      aliases:
+      - VEN
+      - '862'
+      source_codes:
+        ISO-3166-1-alpha-2: VE
+        ISO-3166-1-alpha-3: VEN
+        ISO-3166-1-numeric: '862'
+    - canonical: VG
+      aliases:
+      - VGB
+      - 092
+      source_codes:
+        ISO-3166-1-alpha-2: VG
+        ISO-3166-1-alpha-3: VGB
+        ISO-3166-1-numeric: 092
+    - canonical: VI
+      aliases:
+      - VIR
+      - '850'
+      source_codes:
+        ISO-3166-1-alpha-2: VI
+        ISO-3166-1-alpha-3: VIR
+        ISO-3166-1-numeric: '850'
+    - canonical: VN
+      aliases:
+      - VNM
+      - '704'
+      source_codes:
+        ISO-3166-1-alpha-2: VN
+        ISO-3166-1-alpha-3: VNM
+        ISO-3166-1-numeric: '704'
+    - canonical: VU
+      aliases:
+      - VUT
+      - '548'
+      source_codes:
+        ISO-3166-1-alpha-2: VU
+        ISO-3166-1-alpha-3: VUT
+        ISO-3166-1-numeric: '548'
+    - canonical: WF
+      aliases:
+      - WLF
+      - '876'
+      source_codes:
+        ISO-3166-1-alpha-2: WF
+        ISO-3166-1-alpha-3: WLF
+        ISO-3166-1-numeric: '876'
+    - canonical: WS
+      aliases:
+      - WSM
+      - '882'
+      source_codes:
+        ISO-3166-1-alpha-2: WS
+        ISO-3166-1-alpha-3: WSM
+        ISO-3166-1-numeric: '882'
+    - canonical: YE
+      aliases:
+      - YEM
+      - '887'
+      source_codes:
+        ISO-3166-1-alpha-2: YE
+        ISO-3166-1-alpha-3: YEM
+        ISO-3166-1-numeric: '887'
+    - canonical: YT
+      aliases:
+      - MYT
+      - '175'
+      source_codes:
+        ISO-3166-1-alpha-2: YT
+        ISO-3166-1-alpha-3: MYT
+        ISO-3166-1-numeric: '175'
+    - canonical: ZA
+      aliases:
+      - ZAF
+      - '710'
+      source_codes:
+        ISO-3166-1-alpha-2: ZA
+        ISO-3166-1-alpha-3: ZAF
+        ISO-3166-1-numeric: '710'
+    - canonical: ZM
+      aliases:
+      - ZMB
+      - '894'
+      source_codes:
+        ISO-3166-1-alpha-2: ZM
+        ISO-3166-1-alpha-3: ZMB
+        ISO-3166-1-numeric: '894'
+    - canonical: ZW
+      aliases:
+      - ZWE
+      - '716'
+      source_codes:
+        ISO-3166-1-alpha-2: ZW
+        ISO-3166-1-alpha-3: ZWE
+        ISO-3166-1-numeric: '716'

@@ -1,0 +1,27 @@
+name: herstatt_risk
+description: '1974 Herstatt Risk ($620M at risk). Cross-timezone FX settlement: counterparty
+  failed before second leg. iso-8601 detects: timezone boundary fee.'
+tools:
+  us_correspondent:
+    internal_state:
+    - trade_id
+    - settlement_time
+    - timezone
+    observable_schema:
+    - trade_id
+    - settlement_time
+  german_bank:
+    internal_state:
+    - trade_id
+    - settlement_time
+    - timezone
+    observable_schema:
+    - trade_id
+    - settlement_time
+edges:
+- from: us_correspondent
+  to: german_bank
+  dimensions:
+  - name: timezone_match
+    from_field: timezone
+    to_field: timezone

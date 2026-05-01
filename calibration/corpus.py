@@ -162,6 +162,10 @@ class ManifestStore:
     def list_servers(self) -> list[str]:
         return sorted(self._index.keys())
 
+    def get_metadata(self, name: str) -> dict[str, Any]:
+        """Return the index metadata dict for a server (or empty dict if unknown)."""
+        return dict(self._index.get(name, {}))
+
     def stats(self) -> dict[str, int]:
         total_tools = sum(e["n_tools"] for e in self._index.values())
         return {
@@ -260,6 +264,33 @@ def _infer_install_command(entry: dict[str, Any]) -> str:
     return ""
 
 
+# ── Schema normalization ─────────────────────────────────────────────
+
+
+def _normalize_tool_schemas(tools: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Normalize tool schema format for consistency.
+
+    Handles:
+    - input_schema (underscore) → inputSchema (camelCase)
+    - JSON string schemas → parsed dicts
+    """
+    normalized = []
+    for t in tools:
+        t = dict(t)  # shallow copy
+        # Normalize key name
+        if "input_schema" in t and "inputSchema" not in t:
+            schema = t.pop("input_schema")
+            # Handle string-encoded schemas
+            if isinstance(schema, str):
+                try:
+                    schema = json.loads(schema)
+                except (json.JSONDecodeError, ValueError):
+                    schema = {}
+            t["inputSchema"] = schema
+        normalized.append(t)
+    return normalized
+
+
 # ── Source 2: Schema repository ──────────────────────────────────────
 
 
@@ -297,6 +328,9 @@ def import_from_schemas_repo(
 
             if not tools:
                 continue
+
+            # Normalize input_schema → inputSchema (schemas repo uses underscore)
+            tools = _normalize_tool_schemas(tools)
 
             name = _sanitize_name(json_file.stem)
             store.add(
@@ -422,6 +456,8 @@ def import_from_directory(
 
         if not tools:
             continue
+
+        tools = _normalize_tool_schemas(tools)
 
         name = _sanitize_name(json_file.stem)
         store.add(

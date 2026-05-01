@@ -1,0 +1,28 @@
+name: edifact_d96a_d21b_drift
+description: 'EDIFACT D.96A → D.21B+ version drift (recurring). New segments and altered
+  semantics break legacy partners. un-edifact detects: edifact_message_type boundary
+  fee.'
+tools:
+  modern_sender:
+    internal_state:
+    - envelope_id
+    - directory_version
+    - message_type
+    observable_schema:
+    - envelope_id
+    - message_type
+  legacy_receiver:
+    internal_state:
+    - envelope_id
+    - directory_version
+    - message_type
+    observable_schema:
+    - envelope_id
+    - message_type
+edges:
+- from: modern_sender
+  to: legacy_receiver
+  dimensions:
+  - name: directory_version_match
+    from_field: directory_version
+    to_field: directory_version

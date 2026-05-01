@@ -1,0 +1,30 @@
+name: shopify_quickbooks_tax
+description: 'Shopify→QuickBooks gross/net mismatch (recurring). Shopify reports gross;
+  QuickBooks expects net. iso-4217 + amount_unit detects: net_or_gross convention
+  boundary fee.'
+tools:
+  shopify_orders:
+    internal_state:
+    - order_id
+    - amount
+    - amount_basis
+    - tax_amount
+    observable_schema:
+    - order_id
+    - amount
+    - tax_amount
+  quickbooks_pl:
+    internal_state:
+    - transaction_id
+    - amount
+    - amount_basis
+    observable_schema:
+    - transaction_id
+    - amount
+edges:
+- from: shopify_orders
+  to: quickbooks_pl
+  dimensions:
+  - name: amount_basis_match
+    from_field: amount_basis
+    to_field: amount_basis

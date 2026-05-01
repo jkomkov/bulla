@@ -1,0 +1,27 @@
+name: gcv_ncv_gas_billing
+description: 'Gross/Net Calorific Value gas billing mismatch (10.8% systematic error).
+  UK uses GCV; EU uses NCV. UCUM + energy detects: calorific_basis boundary fee.'
+tools:
+  uk_supplier_meter:
+    internal_state:
+    - delivery_id
+    - energy_mj
+    - calorific_basis
+    observable_schema:
+    - delivery_id
+    - energy_mj
+  eu_buyer_invoice:
+    internal_state:
+    - delivery_id
+    - energy_mj
+    - calorific_basis
+    observable_schema:
+    - delivery_id
+    - energy_mj
+edges:
+- from: uk_supplier_meter
+  to: eu_buyer_invoice
+  dimensions:
+  - name: calorific_basis_match
+    from_field: calorific_basis
+    to_field: calorific_basis

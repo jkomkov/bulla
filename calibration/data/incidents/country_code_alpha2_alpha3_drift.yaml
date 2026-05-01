@@ -1,0 +1,28 @@
+name: country_code_alpha2_alpha3_drift
+description: 'ISO 3166 alpha-2 / alpha-3 / numeric drift (recurring). Order/shipping/customs
+  systems mix forms; receiver expecting one form drops records using another. iso-3166
+  detects: country_code boundary fee.'
+tools:
+  checkout_form:
+    internal_state:
+    - order_id
+    - country_code
+    - code_form
+    observable_schema:
+    - order_id
+    - country_code
+  shipping_label_printer:
+    internal_state:
+    - order_id
+    - country_code
+    - code_form
+    observable_schema:
+    - order_id
+    - country_code
+edges:
+- from: checkout_form
+  to: shipping_label_printer
+  dimensions:
+  - name: code_form_match
+    from_field: code_form
+    to_field: code_form

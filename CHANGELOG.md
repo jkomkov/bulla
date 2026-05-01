@@ -1,5 +1,107 @@
 # Changelog
 
+## 0.36.0
+
+### Added — Standards Ingestion sprint output
+
+- **Five architectural extensions to the pack format** (Extensions A–E):
+  - **A. License metadata** (`license: { spdx_id, source_url, registry_license, attribution }`) at the pack level. `registry_license` is one of `open` / `research-only` / `restricted` and describes the upstream registry's license posture, not the pack's own (the pack is always our own openly-published metadata). New `RegistryAccessError` with code `LICENSE_REQUIRED` raised when a consumer hits a registry needing a credential they haven't configured. New optional `WitnessReceipt.pack_attributions` carries hash-references to NOTICES.md entries that standards bodies require crediting.
+  - **B. `values_registry`** (`{ uri, hash, version, license_id }`) on a dimension — pointer to an external content-addressed registry that owns the canonical set of values. The pack hash includes the pointer object but **not** the registry contents (avoids 3–5 MB JSON-blob hashing on every load). Inline `known_values` + `values_registry` may coexist for `open` packs (inline acts as documentation, stripped from the canonical hash); for `restricted` / `research-only` packs the validator REJECTS the coexistence — licensed values must remain behind the registry pointer, not be redistributed in the pack file. New `bulla pack verify`, `bulla pack status`, `bulla pack lint` CLI commands.
+  - **C. `derives_from`** standard-version provenance on `PackRef` (`StandardProvenance` dataclass: `{ standard, version, source_uri, source_hash }`). Multi-pack receipts naturally carry per-standard provenance because every active pack records its own `derives_from`. Receipt hash binds the underlying-standard revision transitively.
+  - **D. Alias-form `known_values`**: items widen from `string` to `string | { canonical, aliases: [string], source_codes: { standard: code } }`. Strictly additive — legacy string-only packs keep working. Classifier collapses canonical + aliases + source-code values into one normalized set per dimension, so a field whose enum lists `"840"` (ISO-4217 numeric) classifies under the same dimension as a field listing `"USD"`.
+  - **E. Passive `mappings:` block** in regular packs (`{ target_pack: { target_dimension: [{from, to, equivalence: exact|lossy_forward|lossy_bidirectional|contextual}] } }`) plus `bulla.mappings.translate` consumer helper. The coboundary uses dimension *names*, not values — so mappings are receipt-side translation tables, NOT measurement primitives. No new artifact type; embedded as data in regular packs.
+
+- **Placeholder-sentinel hash format** for `values_registry.hash`: `placeholder:awaiting-ingest` (open registries we haven't fetched yet) and `placeholder:awaiting-license` (license-gated registries). New `RegistryAccessErrorCode.PLACEHOLDER_HASH`. Validator REJECTS literal `sha256:0...0` (a valid-shaped hash that the verifier would silently treat as "checked, mismatched" — worse than the explicit "not yet checkable" state). The verifier short-circuits placeholder pointers before any fetch and returns `status='placeholder'` distinct from `hash_mismatch`. Strict mode (`raise_on_placeholder=True`) raises `RegistryAccessError(PLACEHOLDER_HASH, ...)`. Caught and fixed a pre-existing verifier bug in the process: `actual_hash` was bare hex while `expected_hash` carried the `sha256:` prefix, which would always mis-compare; now normalized to the prefixed canonical form.
+
+- **19 seed packs** at `src/bulla/packs/seed/`:
+  - **14 open standards**: ISO 4217 (currencies, 178 entries with alpha/numeric aliases), ISO 8601 / RFC 3339 (date/time formats), ISO 3166-1 (250+ countries with alpha-2/alpha-3/numeric aliases), ISO 639-1/3 (49 most-localized languages, full ~7700-entry SIL registry behind `values_registry`), IANA Media Types (MIME types), NAICS 2022 (industry classification), UCUM (units of measure), FIX 4.4 + 5.0 SP2 (financial messaging), GS1 General Specifications (GTIN/GLN/SSCC + Application Identifiers), UN/EDIFACT D.21B (supply-chain messaging), HL7 FHIR R4 + R5 (healthcare resource types), ICD-10-CM (US diagnosis codes + ICD-9 GEMs in the passive `mappings:` block).
+  - **5 restricted-source metadata-only packs**: WHO ICD-10 translations, SWIFT MT/MX, HL7 v2, UMLS Metathesaurus mappings, ISO 20022. Each carries `license.registry_license: research-only` or `restricted`, dimension metadata only, `values_registry` placeholder pointers — zero licensed content shipped in any pack file.
+  - **6 of 12 open registries carry real SHA-256 hashes** from authoritative-source fetches (UCUM, NAICS 2022, ISO 639, IANA Media Types, FHIR R4, FHIR R5). The remaining 6 carry the `placeholder:awaiting-ingest` sentinel. All 5 restricted packs carry `placeholder:awaiting-license`.
+
+- **30 reconstructed historical mismatch incidents** at `calibration/data/incidents/` (Mars Climate Orbiter, Drupal+Stripe JPY, Vancouver Stock Exchange, Patriot missile Dhahran, Ariane 5 Flight 501, Gimli Glider, LIBOR-SOFR transition, US T+1 settlement, Herstatt Risk, levothyroxine mg/mcg, ICD-9→ICD-10 transition, FHIR R4→R5 breaking changes, SNOMED↔ICD-10 double-coding, Boeing 737 MAX FAA ODA, PHE COVID XLS truncation, Shopify-QuickBooks tax, Stripe webhook duplicates, NV Energy meter channel, GCV/NCV gas billing, LNG price-formula disputes, GTIN check-digit miscoding, EDIFACT D.96A→D.21B drift, MT→ISO 20022 migration, NAICS/SIC classification dispute, country-code drift, language-tag drift, Überlingen TCAS/ATC, leap-second 2012 outages, digoxin tenfold transfer, Singapore lidocaine overdose). Each is a Bulla composition YAML with pre-labeled dimension edges encoded by the generator script.
+
+- **`bulla.api_registry` schema-capture pipeline** (Phase 7): MCP / OpenAPI / GraphQL normalization → classification under the active pack stack → content-addressed capture record. Aggregations: per-source coverage map, classifier-training corpus (every `(field, dimension, confidence)` triple as a labeled row in JSONL), forward-compatible storage format for the deferred Part B equivalence detector. Pipeline + 65 indexed records (57 reprocessed real MCP manifests + 8 synthetic pipeline-validation fixtures: Stripe charges, Shopify Admin, GitHub v3, FHIR Patient, Slack Web, Twilio Messages, FIX Trading Orders, GS1 Traceability).
+
+- **2 end-to-end demo compositions** at `calibration/data/demos/` proving the architecture works across the full stack:
+  - `cross_pack_receipt_billing.yaml` — clinical_emr → billing_system → payer_gateway crossing ISO 4217 + FHIR R4 + ICD-10-CM seams, producing a single signed receipt with all three packs in `active_packs`, all three `derives_from` provenances, and `pack_attributions` resolving via NOTICES.md.
+  - `restricted_pack_metadata_only.yaml` — composition referencing the umls-mappings restricted pack issues a valid receipt today without any consumer-side license; `bulla pack verify` on the same pack fails with `RegistryAccessError(PLACEHOLDER_HASH)`. The architectural separation between metadata-receipt-issuance and licensed-value-fetch is end-to-end provable.
+
+### Corpus + verification
+
+- **Seed-pack scale**: 14 open + 5 restricted = 19 seed packs, all validate clean. ISO 639 dropped from 656 KB inline-everything to 8.7 KB seed + `values_registry` (75× smaller) — the architectural-consistency fix the Extension B rationale was designed to enforce.
+- **Real-hash fetches** (6 of 12 open): UCUM (`ucum-essence.xml`, 545 KB, sha256:b78e1fc5…), NAICS 2022 (`2-6_digit_2022_Codes.xlsx`, 82 KB, sha256:be12ba41…), ISO 639-3 SIL (178 KB, sha256:9697ac84…), IANA Media Types XHTML (946 KB, sha256:e6d05584…), FHIR R4 valueset-resource-types (2 KB, sha256:82ae2b62…), FHIR R5 valueset-resource-types (63 KB, sha256:6ed6a7d2…).
+- **Phase 5 empirical metrics** (revised post-feedback to distinguish two distinct claims):
+  - **Claim B (load-bearing — classifier discovery on unlabeled MCP schemas)**: 29.4% signal-density increase on the 57-manifest calibration corpus, target ≥25%, **PASS**. This is the framework's value-prop metric — the classifier identifying standards-dimensions in raw `inputSchema` properties.
+  - **Claim A (baseline sanity — coboundary correctness on labeled graphs)**: 30/30 incident-corpus detection (100%), target ≥80%, **PASS**. Note: incident YAMLs encode pre-labeled dimension edges by construction; this validates the measurement layer (δ₀) on a known-good case but does NOT exercise the discovery layer.
+  - **Auxiliary** (incident-corpus field-name classifier): 18.8% reduction on a 198-field cross-domain corpus, target ≥15%, **PASS**. The original wrong-shaped 50% claim was retired after honest accounting — ~70% of incident fields are structural identifiers (patient_id, claim_id, trade_id) that no standards pack should classify.
+- **Zero-licensed-content audit**: `git grep` confirms zero licensed values in any pack file across the 5 restricted packs. The validator's metadata-only invariant is the single line of defense; CI re-checks.
+- **Test count**: **1381** tests collected under `pytest tests/`; **1363 passing**, **18 skipped** (verified 2026-04-30). Note: `tests/test_hosts.py` fixtures create a `.cursor` directory under the temp workspace; environments that deny creation of that path (some sandboxed runners) may see **PermissionError** on those cases — rerun outside the sandbox or on macOS without that restriction.
+- Sprint-level test additions include: placeholder-sentinel, demo compositions, values_registry, aliases, mappings, license, derives_from, tier A/B seeds, ISO 4217, Phase 4 restricted, incidents, Phase 5/7, api_registry, etc.
+
+### Lean
+
+No new Lean work ships **inside** the Bulla wheel this cycle — Standards Ingestion is Python data + pack machinery on the stable measurement layer. The **research-program** Lean ledger (witness geometry / fee rank / Laplacian–Schur chain) is documented separately and lists **56** theorems across 10 files, 0 `sorry`, per [`papers/sheaf/lean/LEAN-CLAIM-LEDGER.md`](../papers/sheaf/lean/LEAN-CLAIM-LEDGER.md). For the colimit-comparison thread see [`docs/COLIMIT-OBSTRUCTION-RESUMPTION-2026-04-26.md`](../docs/COLIMIT-OBSTRUCTION-RESUMPTION-2026-04-26.md) (research memo; not a PyPI dependency).
+
+### Changed
+
+- **Pack-hash canonicalization** (Extension B): `_hash_pack` strips inline `known_values` from any dimension that also has a `values_registry` pointer before hashing. Authors can curate inline documentation without producing pack-hash drift; the registry pointer is the binding object. Dimensions WITHOUT `values_registry` keep their inline values in the hash exactly as before — preserving 0.35.0 behavior for all base/community/financial packs.
+- **Phase 4 / restricted-pack verifier precedence**: when a `values_registry` pointer carries the `placeholder:` sentinel, the verifier short-circuits before the credential gate. A restricted pack with `placeholder:awaiting-license` returns `status='placeholder'`, NOT `status='license_required'`. This is the architecturally correct precedence — the placeholder is "structurally not yet checkable" which is deeper than the credential question. The credential gate still fires when a real `sha256:...` hash meets a missing credential.
+- **CLI `bulla pack verify` rendering**: distinguishes placeholder hashes (yellow `PLACEHOLDER (awaiting-ingest)` / `PLACEHOLDER (awaiting-license)`) from real `sha256:...` hashes in the per-pointer summary line.
+
+### Documentation
+
+- New `docs/STANDARDS-INGEST-SOURCES.md` — RP-2 deliverable; canonical source URIs + license + update cadence for all 12 open + 5 restricted standards.
+- New `docs/STANDARDS-PACK-MAINTENANCE.md` — Phase 6 deliverable; per-pack maintenance ownership, FTE-allocation per pack family, drift-handling protocol, hash-state vocabulary (real `sha256:...` vs `placeholder:...` sentinels), restricted-corpus governance, contribution checklist, quarterly maintenance rotation.
+- New `docs/STANDARDS-INGEST-NOTICES.md` — attribution master file resolving `pack_attributions` hash-references to the standards-body credit strings.
+- New `docs/API-REGISTRY-PIPELINE.md` — Phase 7 deliverable; pipeline architecture, source-kind normalization (MCP/OpenAPI/GraphQL), capture-record format, coverage map, classifier-training corpus, forward-compatibility contract for the deferred Part B equivalence detector.
+- README updated with "Standards Ingestion (new in 0.36.0)" section listing the 19 seed packs + new pack subcommands.
+
+## 0.35.0
+
+### Added
+- **Witness-geometry diagnostics** surfaced through the CLI. The math layer (`bulla.witness_geometry`, shipped earlier as an internal research module) is now wired into `bulla diagnose`, `bulla check`, and `bulla gauge` behind explicit flags. All quantities are exact rationals — leverage scores, N_eff, and effective resistances serialize as `"p/q"` strings in JSON, never floats.
+- **`bulla diagnose --witness` / `bulla check --witness`**: emit a top-level `witness_geometry` JSON block (per-field leverage, N_eff concentration, coloops, loops, greedy minimum-cost disclosure basis) and a "Witness Geometry" text section. Only computed when `coherence_fee > 0`. Default output (flag absent) is byte-identical to 0.34.0, guarded by a golden-fixture regression test.
+- **`bulla gauge --leverage`**: include the witness-geometry block in gauge output (per-field ℓ scores alongside the existing disclosure list).
+- **`bulla gauge --substitutes TOOL FIELD`**: top-3 disclosure substitutes for a target hidden field, ranked by effective resistance in the Kron-reduced witness geometry. Takes two positional args (dot- and colon-safe in tool/field names). Emits exit code 1 + stderr message if the target is not a hidden field in the composition.
+- **`bulla gauge --costs FILE`**: matroid-greedy minimum-cost disclosure (Edmonds 1971). YAML file maps `"<tool>:<field>"` → rational cost string; returns the cost-optimal basis with total cost.
+- **`Diagnostic` model extended** with six optional witness-geometry fields (`hidden_basis`, `leverage_scores`, `n_effective`, `coloops`, `loops`, `disclosure_set`). Defaults are empty tuples / `None` so existing construction sites continue to work unchanged. `content_hash()` includes these fields only when populated, so receipts produced before 0.35.0 still hash identically.
+- **15 new CLI tests** (`TestWitnessGeometry`) covering positive + regression paths for every new flag, plus exact-rational leverage conservation, the empty-witness-hash backward-compat guarantee, and the default-JSON-unchanged regression against a pinned 0.34.0 golden fixture (`tests/golden/diagnose_0.34_financial_pipeline.json`).
+
+### Corpus + verification
+- 703-composition real-schema corpus passes 703/703 structural identities (`rank K = fee`, `Σ ℓ = fee`, `0 ≤ ℓ ≤ 1`) and 240/240 Kron-reduction leverage predictions in exact rational arithmetic. Artifacts: `calibration/results/witness_geometry_703.summary.json`, `calibration/results/laplacian_collapse_verification.json`.
+
+### Lean
+- 2 new theorems (`witness_gram_rank_eq_fee`, `leverage_conservation`) Aristotle-verified (UUID `3c1a38f9-a823-4b80-ae5d-7e4dfaacad85`). Program total: **14 Lean-verified theorems, 0 `sorry`**.
+
+### Changed
+- **Anti-reflexivity test** (`tests/test_serve.py::TestAntiReflexivity::test_diagnostic_has_no_witness_imports`) now uses exact module-name matching rather than substring. The ban is specifically on `bulla.witness` (receipt/disposition layer, Law 1: measurement cannot depend on judgment); `bulla.witness_geometry` is pure linear algebra and is explicitly excluded.
+
+### Documentation
+- New README section "Witness-geometry diagnostics (new in 0.35.0)" with CLI examples.
+
+## 0.34.0
+
+### Added
+- **Structural schema comparison**: `bulla.infer.structural` module performs pack-free, deterministic cross-tool field comparison using schema metadata (type, format, enum, range, pattern). Produces a `StructuralDiagnostic` parallel to the cohomological `Diagnostic`. The coboundary measures the cost of opacity (hidden conventions); the structural scan measures the cost of incompatibility (visible fields with disagreeing schemas). Together: total verification bill.
+- **`SchemaOverlap` model**: Frozen dataclass for detected schema relationships between cross-tool fields. Covers agreements (micro-pack input), contradictions (diagnostic output), homonyms, and synonyms. `to_dict()`/`from_dict()` round-trip.
+- **`SchemaContradiction` model**: Frozen dataclass for visible-but-incompatible field pairs. Records `mismatch_type` (type/format/enum/range/pattern), `severity` (0.0–1.0), and human-readable details.
+- **`StructuralDiagnostic` model**: Container for all structural findings: `overlaps`, `contradictions`, `n_overlapping_fields`, `n_contradicted`, `contradiction_score` (sum of severities, rounded).
+- **`scan_composition()` and `schema_similarity()`**: Public API functions exported from `bulla`. `scan_composition(tools_fields)` is the entry point; `schema_similarity(a, b)` is the weighted 5-component similarity metric.
+- **`PROCEED_WITH_CAUTION` disposition**: New member of `Disposition` enum for compositions with schema contradictions but no opacity (fee=0, contradictions>0).
+- **2D disposition reasoning**: `_resolve_disposition()` now reasons over a fee x contradiction_score surface. Four quadrants: fee=0/contradictions=0 → PROCEED, fee>0/contradictions=0 → BRIDGE/REFUSE, fee=0/contradictions>0 → CAUTION, fee>0/contradictions>0 → REFUSE. Priority chain expanded to 10 rules (was 8).
+- **`PolicyProfile.max_structural_contradictions`**: New threshold (int, default -1). Follows the `max_unknown` pattern: -1 disables, 0 means strict.
+- **`WitnessReceipt.structural_contradictions` and `WitnessReceipt.contradiction_score`**: Receipt fields for structural findings. Conditionally included in `_hash_input()` for backward compatibility.
+- **CLI `--max-structural` flag**: `bulla audit --max-structural N` exits 1 if the structural contradiction score exceeds N. Mirrors `--max-fee`/`--max-contradictions`.
+- Sprint 34 tests: `test_structural.py` (structural scan, similarity metric, classification, contradiction detection), expanded `test_witness.py` (2D disposition, caution path, structural receipt fields).
+
+### Changed
+- **Pack tightening**: Narrowed `id_offset` field patterns from `*_id/*_index` to `page/page_number/*_offset/*_position`. Narrowed `line_ending` field patterns from `*_text/*_content` to `*_newline/*_line_ending`. Narrowed `owner_convention` field patterns from `owner/*_owner` to `repo_owner/repository_owner`. Within-server blind spots drop from 16,801 to 4,125 (76% reduction); precision improves from 1% to 4%.
+- **`id_offset` classifier regex**: Narrowed from `id|index|offset|position|ordinal|sequence|serial|number|num|page` to `offset|position|page|page_number`.
+- **`--max-contradictions` help text**: Clarified as "convention contradictions" to distinguish from structural contradictions.
+
+### Fixed
+- **Dead code in `_resolve_disposition()`**: Removed redundant triple-check (blind_spots AND fee AND structural) that was a strict subset of (blind_spots AND fee) and never differentiated.
+
 ## 0.33.0
 
 ### Added
@@ -337,7 +439,7 @@
 
 ### Added
 - **Submodularity disproved**: Adversarial survey of 10,000 random compositions (635,095 partition pairs) found 4,061 violations of `bf(P^Q) + bf(P v Q) <= bf(P) + bf(Q)`, with maximum violation magnitude 3. Minimal counterexample: 4 tools, 5 edges, where two partitions have bf=0 but their meet has bf=1. Individual `rho_full` and `rho_obs` are submodular (matroid rank on row sets), but their difference `bf = rho_full - rho_obs` is not.
-- **8-tool case study**: `financial_settlement_pipeline.yaml` — realistic multi-agent financial settlement workflow with 8 tools, 8 edges, betti_1=1 (cycle via audit_log -> compliance_check). Fee=7, 8 blind spots, 15 bridges, 7-element minimum disclosure set (2.1x savings over bridges).
+- **8-tool case study**: `financial_settlement_pipeline.yaml` — realistic hierarchical financial settlement workflow with 8 tools, 8 edges, betti_1=1 (cycle via audit_log -> compliance_check). Fee=7, 8 blind spots, 15 bridges, 7-element minimum disclosure set (2.1x savings over bridges).
 - **MCP `disclosure_set`**: `bulla.witness` now always returns a `disclosure_set` field — the minimum disclosure set as `[[tool, field], ...]`. Makes every witness call prescriptive by default.
 - **MCP `partition` parameter**: `bulla.witness` accepts an optional `partition` parameter (array of arrays of tool name strings). When provided, the output includes a `decomposition` field with `total_fee`, `local_fees`, `boundary_fee`, `rho_obs`, `rho_full`, `boundary_edges`. Only present when partition is provided — existing consumers are unaffected.
 - **Case study section in proof note**: 8-tool composition analysis with fee, disclosure set table, front/back-office partition decomposition, and conditional resolution round-trip.

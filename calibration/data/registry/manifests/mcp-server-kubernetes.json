@@ -1,0 +1,130 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-server-kubernetes",
+    "capture_date": "2026-04-07T05:16:06.621783+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:842dcdf78684595d12916bbbcf3e73923f7953a98340545f479dacf5058f1505",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "list_pods",
+      "description": "List pods in a namespace",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "namespace": {
+            "type": "string",
+            "default": "default"
+          }
+        },
+        "required": [
+          "namespace"
+        ]
+      }
+    },
+    {
+      "name": "list_deployments",
+      "description": "List deployments in a namespace",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "namespace": {
+            "type": "string",
+            "default": "default"
+          }
+        },
+        "required": [
+          "namespace"
+        ]
+      }
+    },
+    {
+      "name": "list_services",
+      "description": "List services in a namespace",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "namespace": {
+            "type": "string",
+            "default": "default"
+          }
+        },
+        "required": [
+          "namespace"
+        ]
+      }
+    },
+    {
+      "name": "list_namespaces",
+      "description": "List all namespaces",
+      "inputSchema": {}
+    },
+    {
+      "name": "create_pod",
+      "description": "Create a new Kubernetes pod",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string"
+          },
+          "template": {
+            "type": "string",
+            "enum": [
+              "ubuntu",
+              "nginx",
+              "busybox",
+              "alpine"
+            ]
+          },
+          "command": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "optional": true
+          }
+        },
+        "required": [
+          "name",
+          "namespace",
+          "template"
+        ]
+      }
+    },
+    {
+      "name": "delete_pod",
+      "description": "Delete a Kubernetes pod",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string"
+          },
+          "ignoreNotFound": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "name",
+          "namespace"
+        ]
+      }
+    },
+    {
+      "name": "cleanup",
+      "description": "Cleanup all managed resources",
+      "inputSchema": {}
+    }
+  ]
+}

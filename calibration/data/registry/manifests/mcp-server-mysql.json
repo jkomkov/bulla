@@ -1,0 +1,29 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-server-mysql",
+    "capture_date": "2026-04-07T05:16:06.622433+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:835e9b4a0380568544099dd35cd307b8025eb865a3cccd65be0c8ecdefad209c",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "mysql_query",
+      "description": "Run a read-only MySQL query",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "sql": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "sql"
+        ]
+      }
+    }
+  ]
+}

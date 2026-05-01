@@ -1,0 +1,426 @@
+pack_name: iso-639
+pack_version: 0.2.0
+license:
+  spdx_id: CC0-1.0
+  source_url: https://iso639-3.sil.org/code_tables/639/data
+  registry_license: open
+  attribution: sha256:iso-639-notices
+derives_from:
+  standard: ISO-639-3
+  version: sil-snapshot-2026-04-26
+  source_uri: https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab
+dimensions:
+  language_code:
+    description: ISO 639 language code. Canonical form is the ISO 639-1 alpha-2 code
+      where one exists (en, fr, ja, ...); the ISO 639-3 alpha-3 code (eng, fra, jpn,
+      ...) is recorded as an alias and as a source_code so either form classifies
+      under this dimension. The inline seed covers the global top-~35 most-spoken
+      languages plus common-software locales for documentation; the authoritative
+      ~7700-entry SIL registry lives behind the values_registry pointer (per Extension
+      B, the inline list is stripped from the pack hash so seed curation doesn't produce
+      drift).
+    field_patterns:
+    - language
+    - language_code
+    - lang
+    - lang_code
+    - locale
+    - locale_code
+    - '*_language'
+    - '*_lang'
+    - '*_locale'
+    - preferred_language
+    description_keywords:
+    - language code
+    - iso 639
+    - iso-639
+    - bcp-47
+    - bcp 47
+    - alpha-2 language
+    - alpha-3 language
+    - ietf language tag
+    domains:
+    - universal
+    known_values:
+    - canonical: en
+      aliases:
+      - eng
+      source_codes:
+        ISO-639-1: en
+        ISO-639-3: eng
+    - canonical: zh
+      aliases:
+      - zho
+      source_codes:
+        ISO-639-1: zh
+        ISO-639-3: zho
+    - canonical: hi
+      aliases:
+      - hin
+      source_codes:
+        ISO-639-1: hi
+        ISO-639-3: hin
+    - canonical: es
+      aliases:
+      - spa
+      source_codes:
+        ISO-639-1: es
+        ISO-639-3: spa
+    - canonical: ar
+      aliases:
+      - ara
+      source_codes:
+        ISO-639-1: ar
+        ISO-639-3: ara
+    - canonical: bn
+      aliases:
+      - ben
+      source_codes:
+        ISO-639-1: bn
+        ISO-639-3: ben
+    - canonical: fr
+      aliases:
+      - fra
+      source_codes:
+        ISO-639-1: fr
+        ISO-639-3: fra
+    - canonical: pt
+      aliases:
+      - por
+      source_codes:
+        ISO-639-1: pt
+        ISO-639-3: por
+    - canonical: ru
+      aliases:
+      - rus
+      source_codes:
+        ISO-639-1: ru
+        ISO-639-3: rus
+    - canonical: ur
+      aliases:
+      - urd
+      source_codes:
+        ISO-639-1: ur
+        ISO-639-3: urd
+    - canonical: id
+      aliases:
+      - ind
+      source_codes:
+        ISO-639-1: id
+        ISO-639-3: ind
+    - canonical: de
+      aliases:
+      - deu
+      source_codes:
+        ISO-639-1: de
+        ISO-639-3: deu
+    - canonical: ja
+      aliases:
+      - jpn
+      source_codes:
+        ISO-639-1: ja
+        ISO-639-3: jpn
+    - canonical: sw
+      aliases:
+      - swa
+      source_codes:
+        ISO-639-1: sw
+        ISO-639-3: swa
+    - canonical: mr
+      aliases:
+      - mar
+      source_codes:
+        ISO-639-1: mr
+        ISO-639-3: mar
+    - canonical: te
+      aliases:
+      - tel
+      source_codes:
+        ISO-639-1: te
+        ISO-639-3: tel
+    - canonical: tr
+      aliases:
+      - tur
+      source_codes:
+        ISO-639-1: tr
+        ISO-639-3: tur
+    - canonical: ta
+      aliases:
+      - tam
+      source_codes:
+        ISO-639-1: ta
+        ISO-639-3: tam
+    - canonical: ko
+      aliases:
+      - kor
+      source_codes:
+        ISO-639-1: ko
+        ISO-639-3: kor
+    - canonical: vi
+      aliases:
+      - vie
+      source_codes:
+        ISO-639-1: vi
+        ISO-639-3: vie
+    - canonical: fa
+      aliases:
+      - fas
+      source_codes:
+        ISO-639-1: fa
+        ISO-639-3: fas
+    - canonical: pl
+      aliases:
+      - pol
+      source_codes:
+        ISO-639-1: pl
+        ISO-639-3: pol
+    - canonical: uk
+      aliases:
+      - ukr
+      source_codes:
+        ISO-639-1: uk
+        ISO-639-3: ukr
+    - canonical: it
+      aliases:
+      - ita
+      source_codes:
+        ISO-639-1: it
+        ISO-639-3: ita
+    - canonical: my
+      aliases:
+      - mya
+      source_codes:
+        ISO-639-1: my
+        ISO-639-3: mya
+    - canonical: th
+      aliases:
+      - tha
+      source_codes:
+        ISO-639-1: th
+        ISO-639-3: tha
+    - canonical: ms
+      aliases:
+      - msa
+      source_codes:
+        ISO-639-1: ms
+        ISO-639-3: msa
+    - canonical: nl
+      aliases:
+      - nld
+      source_codes:
+        ISO-639-1: nl
+        ISO-639-3: nld
+    - canonical: sv
+      aliases:
+      - swe
+      source_codes:
+        ISO-639-1: sv
+        ISO-639-3: swe
+    - canonical: el
+      aliases:
+      - ell
+      source_codes:
+        ISO-639-1: el
+        ISO-639-3: ell
+    - canonical: he
+      aliases:
+      - heb
+      source_codes:
+        ISO-639-1: he
+        ISO-639-3: heb
+    - canonical: da
+      aliases:
+      - dan
+      source_codes:
+        ISO-639-1: da
+        ISO-639-3: dan
+    - canonical: 'no'
+      aliases:
+      - nor
+      source_codes:
+        ISO-639-1: 'no'
+        ISO-639-3: nor
+    - canonical: fi
+      aliases:
+      - fin
+      source_codes:
+        ISO-639-1: fi
+        ISO-639-3: fin
+    - canonical: cs
+      aliases:
+      - ces
+      source_codes:
+        ISO-639-1: cs
+        ISO-639-3: ces
+    - canonical: sk
+      aliases:
+      - slk
+      source_codes:
+        ISO-639-1: sk
+        ISO-639-3: slk
+    - canonical: hu
+      aliases:
+      - hun
+      source_codes:
+        ISO-639-1: hu
+        ISO-639-3: hun
+    - canonical: ro
+      aliases:
+      - ron
+      source_codes:
+        ISO-639-1: ro
+        ISO-639-3: ron
+    - canonical: bg
+      aliases:
+      - bul
+      source_codes:
+        ISO-639-1: bg
+        ISO-639-3: bul
+    - canonical: hr
+      aliases:
+      - hrv
+      source_codes:
+        ISO-639-1: hr
+        ISO-639-3: hrv
+    - canonical: sr
+      aliases:
+      - srp
+      source_codes:
+        ISO-639-1: sr
+        ISO-639-3: srp
+    - canonical: sl
+      aliases:
+      - slv
+      source_codes:
+        ISO-639-1: sl
+        ISO-639-3: slv
+    - canonical: lt
+      aliases:
+      - lit
+      source_codes:
+        ISO-639-1: lt
+        ISO-639-3: lit
+    - canonical: lv
+      aliases:
+      - lav
+      source_codes:
+        ISO-639-1: lv
+        ISO-639-3: lav
+    - canonical: et
+      aliases:
+      - est
+      source_codes:
+        ISO-639-1: et
+        ISO-639-3: est
+    - canonical: is
+      aliases:
+      - isl
+      source_codes:
+        ISO-639-1: is
+        ISO-639-3: isl
+    - canonical: ca
+      aliases:
+      - cat
+      source_codes:
+        ISO-639-1: ca
+        ISO-639-3: cat
+    - canonical: ga
+      aliases:
+      - gle
+      source_codes:
+        ISO-639-1: ga
+        ISO-639-3: gle
+    - canonical: tl
+      aliases:
+      - tgl
+      source_codes:
+        ISO-639-1: tl
+        ISO-639-3: tgl
+    - canonical: ne
+      aliases:
+      - nep
+      source_codes:
+        ISO-639-1: ne
+        ISO-639-3: nep
+    - canonical: si
+      aliases:
+      - sin
+      source_codes:
+        ISO-639-1: si
+        ISO-639-3: sin
+    - canonical: km
+      aliases:
+      - khm
+      source_codes:
+        ISO-639-1: km
+        ISO-639-3: khm
+    - canonical: lo
+      aliases:
+      - lao
+      source_codes:
+        ISO-639-1: lo
+        ISO-639-3: lao
+    - canonical: ka
+      aliases:
+      - kat
+      source_codes:
+        ISO-639-1: ka
+        ISO-639-3: kat
+    - canonical: hy
+      aliases:
+      - hye
+      source_codes:
+        ISO-639-1: hy
+        ISO-639-3: hye
+    - canonical: az
+      aliases:
+      - aze
+      source_codes:
+        ISO-639-1: az
+        ISO-639-3: aze
+    - canonical: kk
+      aliases:
+      - kaz
+      source_codes:
+        ISO-639-1: kk
+        ISO-639-3: kaz
+    - canonical: uz
+      aliases:
+      - uzb
+      source_codes:
+        ISO-639-1: uz
+        ISO-639-3: uzb
+    - canonical: am
+      aliases:
+      - amh
+      source_codes:
+        ISO-639-1: am
+        ISO-639-3: amh
+    - canonical: yo
+      aliases:
+      - yor
+      source_codes:
+        ISO-639-1: yo
+        ISO-639-3: yor
+    - canonical: ig
+      aliases:
+      - ibo
+      source_codes:
+        ISO-639-1: ig
+        ISO-639-3: ibo
+    - canonical: ha
+      aliases:
+      - hau
+      source_codes:
+        ISO-639-1: ha
+        ISO-639-3: hau
+    - canonical: zu
+      aliases:
+      - zul
+      source_codes:
+        ISO-639-1: zu
+        ISO-639-3: zul
+    values_registry:
+      uri: https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab
+      hash: sha256:9697ac84b95b9b4d8624693fb51a496cc95677ff0abb28a7b860aa2f2c80ff13
+      version: sil-snapshot

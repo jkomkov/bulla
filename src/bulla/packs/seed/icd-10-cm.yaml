@@ -1,0 +1,146 @@
+pack_name: icd-10-cm
+pack_version: 0.1.0
+license:
+  spdx_id: Public-Domain
+  source_url: https://www.cms.gov/medicare/coding-billing/icd-10-codes
+  registry_license: open
+  attribution: sha256:cms-icd-10-cm-notices
+derives_from:
+  standard: ICD-10-CM
+  version: '2024'
+  source_uri: https://www.cms.gov/files/zip/2024-icd-10-cm-code-files.zip
+dimensions:
+  icd_10_cm_code:
+    description: ICD-10-CM diagnosis code. The full registry has ~70k codes; the inline
+      seed lists the 21 chapter prefixes for documentation. The CMS-published annual
+      release at the values_registry pointer is the authoritative source. Annual cutover
+      is October 1; pack maintainers bump derives_from.version + values_registry.version
+      each cycle.
+    field_patterns:
+    - icd_10
+    - icd10
+    - icd_10_cm
+    - icd10cm
+    - diagnosis_code
+    - dx_code
+    - primary_diagnosis
+    - secondary_diagnosis
+    - '*_icd'
+    - '*_icd10'
+    - '*_diagnosis'
+    description_keywords:
+    - icd-10
+    - icd10
+    - icd-10-cm
+    - icd10cm
+    - diagnosis code
+    - clinical modification
+    domains:
+    - healthcare
+    known_values:
+    - canonical: A00-B99
+      aliases:
+      - chapter-1
+      - infectious
+    - canonical: C00-D49
+      aliases:
+      - chapter-2
+      - neoplasms
+    - canonical: D50-D89
+      aliases:
+      - chapter-3
+      - blood
+    - canonical: E00-E89
+      aliases:
+      - chapter-4
+      - endocrine
+    - canonical: F01-F99
+      aliases:
+      - chapter-5
+      - mental
+    - canonical: G00-G99
+      aliases:
+      - chapter-6
+      - nervous-system
+    - canonical: H00-H59
+      aliases:
+      - chapter-7
+      - eye
+    - canonical: H60-H95
+      aliases:
+      - chapter-8
+      - ear
+    - canonical: I00-I99
+      aliases:
+      - chapter-9
+      - circulatory
+    - canonical: J00-J99
+      aliases:
+      - chapter-10
+      - respiratory
+    - canonical: K00-K95
+      aliases:
+      - chapter-11
+      - digestive
+    - canonical: L00-L99
+      aliases:
+      - chapter-12
+      - skin
+    - canonical: M00-M99
+      aliases:
+      - chapter-13
+      - musculoskeletal
+    - canonical: N00-N99
+      aliases:
+      - chapter-14
+      - genitourinary
+    - canonical: O00-O9A
+      aliases:
+      - chapter-15
+      - pregnancy
+    - canonical: P00-P96
+      aliases:
+      - chapter-16
+      - perinatal
+    - canonical: Q00-Q99
+      aliases:
+      - chapter-17
+      - congenital
+    - canonical: R00-R99
+      aliases:
+      - chapter-18
+      - symptoms-signs
+    - canonical: S00-T88
+      aliases:
+      - chapter-19
+      - injury-poisoning
+    - canonical: V00-Y99
+      aliases:
+      - chapter-20
+      - external-causes
+    - canonical: Z00-Z99
+      aliases:
+      - chapter-21
+      - factors-influencing-health
+    values_registry:
+      uri: https://www.cms.gov/files/zip/2024-icd-10-cm-code-files.zip
+      hash: placeholder:awaiting-ingest
+      version: '2024'
+mappings:
+  icd-9-cm:
+    icd_9_cm_code:
+    - from: '001.0'
+      to: A00.0
+      equivalence: exact
+    - from: '008.45'
+      to: A04.7
+      equivalence: exact
+    - from: '250.00'
+      to: E11.9
+      equivalence: exact
+    - from: '401.9'
+      to: I10
+      equivalence: exact
+    - from: '493.90'
+      to: J45.909
+      equivalence: exact

@@ -121,7 +121,100 @@ def format_text(d: Diagnostic) -> str:
             lines.append("  No blind spots detected.")
             lines.append("  All bilateral dimensions are observable.")
 
+    witness_section = _format_witness_section(d)
+    if witness_section:
+        lines.append(witness_section)
+        lines.append("")
+
     lines.append("")
+    return "\n".join(lines)
+
+
+def _format_witness_section(d: Diagnostic) -> str:
+    """Render the witness-geometry block when present.
+
+    Returns an empty string when `d.leverage_scores` is empty (i.e., the
+    caller did not opt in to witness geometry, or the composition has
+    fee == 0). Uses exact rational strings for leverage and N_eff so
+    the rendered numbers match the JSON schema without drift.
+    """
+    if not d.leverage_scores:
+        return ""
+
+    lines: list[str] = []
+    lines.append(
+        "  \u250c\u2500 Witness Geometry "
+        + "\u2500" * 28
+    )
+
+    # N_eff: show as exact fraction plus float approximation.
+    n_eff_frac = d.n_effective
+    if n_eff_frac is None:
+        n_eff_str = "—"
+    elif n_eff_frac.denominator == 1:
+        n_eff_str = f"{n_eff_frac.numerator}"
+    else:
+        approx = float(n_eff_frac.numerator) / float(n_eff_frac.denominator)
+        n_eff_str = f"{n_eff_frac.numerator}/{n_eff_frac.denominator} ≈ {approx:.2f}"
+    lines.append(
+        f"  \u2502  Concentration N_eff:  {n_eff_str}  "
+        f"(fee = {d.coherence_fee})"
+    )
+
+    coloop_count = len(d.coloops)
+    if coloop_count == 0:
+        lines.append("  \u2502  Coloops (must disclose):  none")
+    else:
+        lines.append(
+            f"  \u2502  Coloops (must disclose):  {coloop_count} "
+            f"field{'s' if coloop_count != 1 else ''}"
+        )
+        for tool, field in d.coloops:
+            lines.append(f"  \u2502    • {tool}.{field}")
+
+    loop_count = len(d.loops)
+    if loop_count == 0:
+        lines.append("  \u2502  Loops (already redundant):  none")
+    else:
+        lines.append(
+            f"  \u2502  Loops (already redundant):  {loop_count} "
+            f"field{'s' if loop_count != 1 else ''}"
+        )
+
+    if d.disclosure_set:
+        lines.append(
+            f"  \u2502  Greedy minimum-cost basis "
+            f"({len(d.disclosure_set)} field"
+            f"{'s' if len(d.disclosure_set) != 1 else ''}):"
+        )
+        # Show top-8 by leverage with (… n more) tail if large.
+        basis_set = set(d.disclosure_set)
+        # Index leverage by (tool, field) via hidden_basis order.
+        lev_by_field = {
+            field_pair: d.leverage_scores[i]
+            for i, field_pair in enumerate(d.hidden_basis)
+        }
+        display_limit = 8
+        for i, field_pair in enumerate(d.disclosure_set[:display_limit], 1):
+            tool, field = field_pair
+            ell = lev_by_field.get(field_pair)
+            if ell is None:
+                ell_str = "?"
+            elif ell.denominator == 1:
+                ell_str = f"{ell.numerator}"
+            else:
+                ell_str = f"{ell.numerator}/{ell.denominator}"
+            lines.append(
+                f"  \u2502    [{i}] {tool}.{field}    ℓ = {ell_str}"
+            )
+        remaining = len(d.disclosure_set) - display_limit
+        if remaining > 0:
+            lines.append(f"  \u2502    (… {remaining} more)")
+
+    lines.append(
+        "  \u2514"
+        + "\u2500" * 50
+    )
     return "\n".join(lines)
 
 
@@ -179,6 +272,35 @@ def format_json(d: Diagnostic, source_path: Path | None = None) -> str:
         ],
         "h1_after_bridge": d.h1_after_bridge,
     }
+    # Witness-geometry block: emitted only when populated, so default
+    # output remains byte-identical to pre-0.35.0 for existing consumers.
+    if d.leverage_scores:
+        obj["witness_geometry"] = {
+            "schema_note": (
+                "All leverage scores and n_effective are exact rational "
+                "strings of the form 'p/q' (or an integer string for "
+                "whole values), never floats. Consumers must parse with a "
+                "Fraction / rational library — not json.loads → float."
+            ),
+            "n_effective": (
+                None
+                if d.n_effective is None
+                else str(d.n_effective)
+            ),
+            "leverage": [
+                {
+                    "tool": tool,
+                    "field": field,
+                    "score": str(score),
+                }
+                for (tool, field), score in zip(
+                    d.hidden_basis, d.leverage_scores
+                )
+            ],
+            "coloops": [list(pair) for pair in d.coloops],
+            "loops": [list(pair) for pair in d.loops],
+            "disclosure_set": [list(pair) for pair in d.disclosure_set],
+        }
     if source_path:
         obj["composition_sha256"] = _file_sha256(source_path)
     return json.dumps(obj, indent=2)

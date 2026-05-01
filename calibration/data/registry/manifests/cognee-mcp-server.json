@@ -1,0 +1,38 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "cognee-mcp-server",
+    "capture_date": "2026-04-07T05:16:06.614102+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:d7f1b0cb9eb86ef24469feb58666e209b932f830ad31cfc1011927221aa1c3aa",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "Cognify_and_search",
+      "description": "Build knowledge graph from the input text and search in it.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "search_query": {
+            "type": "string"
+          },
+          "graph_model_file": {
+            "type": "string"
+          },
+          "graph_model_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "search_query"
+        ]
+      }
+    }
+  ]
+}

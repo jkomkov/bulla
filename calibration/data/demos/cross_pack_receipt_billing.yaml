@@ -1,0 +1,103 @@
+name: cross_pack_receipt_billing
+
+description: |
+  End-to-end demo composition crossing ISO-4217 + FHIR R4 + ICD-10-CM
+  seams. Models a hospital billing pipeline where:
+    1. clinical_emr (FHIR R4 Condition resources, ICD-10-CM coded)
+       hands off to
+    2. billing_system (FHIR Claim resources, USD-denominated)
+       which submits to
+    3. payer_gateway (USD-denominated remittance per claim)
+  The seams cross three distinct seed-pack vocabularies. A single
+  signed receipt issued from this composition carries:
+    - active_packs: [iso-4217, fhir-r4, icd-10-cm]
+    - derives_from per pack (per-standard provenance, Extension C)
+    - pack_attributions per standards body (Extension A)
+  This is the load-bearing proof that the architecture works across
+  the full stack — three packs, three vocabularies, one receipt.
+
+tools:
+  clinical_emr:
+    internal_state:
+      - patient_id
+      - encounter_id
+      - resourceType            # FHIR R4
+      - diagnosis_code          # ICD-10-CM
+      - icd_version             # 'ICD-10-CM' or 'ICD-9-CM'
+      - charge_amount           # USD minor units
+      - currency                # ISO-4217
+      - charge_date
+    observable_schema:
+      - patient_id
+      - encounter_id
+      - resourceType
+      - diagnosis_code
+      - charge_amount
+      - currency
+      - charge_date
+
+  billing_system:
+    internal_state:
+      - patient_id
+      - claim_id
+      - resourceType            # FHIR R4 Claim
+      - diagnosis_code
+      - icd_version             # may differ from clinical_emr
+      - charge_amount
+      - currency
+      - settlement_date
+    observable_schema:
+      - patient_id
+      - claim_id
+      - resourceType
+      - diagnosis_code
+      - charge_amount
+      - currency
+      - settlement_date
+
+  payer_gateway:
+    internal_state:
+      - claim_id
+      - resourceType            # FHIR R4 ExplanationOfBenefit
+      - approved_amount
+      - currency
+      - paid_at
+    observable_schema:
+      - claim_id
+      - resourceType
+      - approved_amount
+      - currency
+      - paid_at
+
+edges:
+  - from: clinical_emr
+    to: billing_system
+    dimensions:
+      - name: fhir_resource_type
+        from_field: resourceType
+        to_field: resourceType
+      - name: icd_10_cm_code
+        from_field: diagnosis_code
+        to_field: diagnosis_code
+      - name: icd_version_match
+        from_field: icd_version
+        to_field: icd_version
+      - name: currency_code
+        from_field: currency
+        to_field: currency
+      - name: amount_unit
+        from_field: charge_amount
+        to_field: charge_amount
+
+  - from: billing_system
+    to: payer_gateway
+    dimensions:
+      - name: fhir_resource_type
+        from_field: resourceType
+        to_field: resourceType
+      - name: currency_code
+        from_field: currency
+        to_field: currency
+      - name: amount_unit
+        from_field: charge_amount
+        to_field: approved_amount

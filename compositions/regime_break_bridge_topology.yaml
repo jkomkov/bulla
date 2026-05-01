@@ -1,0 +1,57 @@
+# Regime-break construction: bridge topology (cut-edge carrier graph)
+#
+# Purpose: demonstrate that effective resistance distinguishes structurally
+# different fields even when leverage is uniform.
+#
+# Structure: three tools A, B, C arranged in a path: A --path--> B --path--> C.
+# All three tools carry the `path_convention_match` dimension via their
+# `path` field. Full CHP (all path fields hidden).
+#
+# Carrier graph: P_3 (path on 3 vertices, 2 edges).
+# The edge (B-middle) connecting A's subgraph to C's subgraph is a bridge.
+#
+# Expected behavior (strict theorem):
+#   - fee = 2 (rank of L(P_3), since null space is span(1))
+#   - Leverage uniform: (3-1)/3 = 2/3 on all three fields
+#   - Effective resistance distinguishes:
+#     - R_eff(A, B) = 1 (adjacent)
+#     - R_eff(B, C) = 1 (adjacent)
+#     - R_eff(A, C) = 2 (across the bridge = 2 edges in series)
+#   - B (the "middle") has lower average R_eff than A, C
+#   - Governance interpretation: B is the best single substitute for
+#     either A or C, but A and C are far apart (R=2) — disclosing A
+#     does not directly help with C, even though both are in the same
+#     dimension
+
+name: Bridge Topology Regime Example
+
+tools:
+  tool_a:
+    internal_state:
+      - path
+    observable_schema: []
+
+  tool_b:
+    internal_state:
+      - path
+    observable_schema: []
+
+  tool_c:
+    internal_state:
+      - path
+    observable_schema: []
+
+edges:
+  - from: tool_a
+    to: tool_b
+    dimensions:
+      - name: path_convention_match
+        from_field: path
+        to_field: path
+
+  - from: tool_b
+    to: tool_c
+    dimensions:
+      - name: path_convention_match
+        from_field: path
+        to_field: path

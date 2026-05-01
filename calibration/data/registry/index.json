@@ -1,0 +1,515 @@
+{
+  "airtable-mcp": {
+    "capture_date": "2026-04-07T05:16:06.579412+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "01aa2d06c13cac369d808e902238e7f1179a37ef9ae2e4822484ffe77436b521",
+    "n_tools": 11,
+    "package": "airtable-mcp",
+    "popularity_rank": 0
+  },
+  "any-chat-completions-mcp": {
+    "capture_date": "2026-04-07T05:16:06.613637+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "1bb805a04f7dfdfaf454b2f3dcbf5cce0778067f30d84128fc598ef135e5b482",
+    "n_tools": 1,
+    "package": "any-chat-completions-mcp",
+    "popularity_rank": 0
+  },
+  "cognee-mcp-server": {
+    "capture_date": "2026-04-07T05:16:06.614102+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "d7f1b0cb9eb86ef24469feb58666e209b932f830ad31cfc1011927221aa1c3aa",
+    "n_tools": 1,
+    "package": "cognee-mcp-server",
+    "popularity_rank": 0
+  },
+  "e2b-code-mcp-server": {
+    "capture_date": "2026-04-07T05:16:06.614389+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "f91ab75c11f05b3e32ef13b7fd03648989ddd337c583a577828cf2769f7e56a5",
+    "n_tools": 1,
+    "package": "e2b-code-mcp-server",
+    "popularity_rank": 0
+  },
+  "exa": {
+    "capture_date": "2026-04-07T05:16:36.684289+00:00",
+    "captured_via": "index_scan:npx -y exa-mcp-server@latest",
+    "category": "community",
+    "content_hash": "de0f65e05319ecddea872757fede6f08151ccf27e929219e06cb39e0d9a9f15a",
+    "n_tools": 3,
+    "package": "exa-mcp-server",
+    "popularity_rank": 0
+  },
+  "exa-mcp-server": {
+    "capture_date": "2026-04-07T05:16:06.614646+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "3272c9c3bd1806e46facf49f78f440bd6ec88374355f84b135c8044066749257",
+    "n_tools": 1,
+    "package": "exa-mcp-server",
+    "popularity_rank": 0
+  },
+  "fetch-mcp": {
+    "capture_date": "2026-04-07T05:16:06.614914+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "c91d095eb5f52c7b08a3f4fb4430e30d8a46f11239200702bb7ee53a75d6f304",
+    "n_tools": 4,
+    "package": "fetch-mcp",
+    "popularity_rank": 0
+  },
+  "filesystem": {
+    "capture_date": "2026-04-07T05:16:08.935801+00:00",
+    "captured_via": "index_scan:npx -y @modelcontextprotocol/server-filesystem /tmp",
+    "category": "official",
+    "content_hash": "395d2862eef190a186d798023a6bd2f3b0f870e5464b6435a37fcbb2502e2618",
+    "n_tools": 14,
+    "package": "@modelcontextprotocol/server-filesystem",
+    "popularity_rank": 0
+  },
+  "flightradar24-mcp-server": {
+    "capture_date": "2026-04-07T05:16:06.615172+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "2947510f7f12c65d37b1aa0c23ec2d55941e30dd7957308df62470bbb84f60c3",
+    "n_tools": 2,
+    "package": "flightradar24-mcp-server",
+    "popularity_rank": 0
+  },
+  "github": {
+    "capture_date": "2026-04-07T05:16:10.552148+00:00",
+    "captured_via": "index_scan:npx -y @modelcontextprotocol/server-github",
+    "category": "official",
+    "content_hash": "b713dbb8370603a5941f1f0156b179fe1c6cc0b8cd1addafb84c42ddb7bf3977",
+    "n_tools": 26,
+    "package": "@modelcontextprotocol/server-github",
+    "popularity_rank": 0
+  },
+  "gtasks-mcp": {
+    "capture_date": "2026-04-07T05:16:06.615472+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "c573b85d8e0e4d4dc342b2c1db161edeb2b56afae432d4df0644176089b964f9",
+    "n_tools": 6,
+    "package": "gtasks-mcp",
+    "popularity_rank": 0
+  },
+  "homeassistant-mcp": {
+    "capture_date": "2026-04-07T05:16:06.615865+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "eedbd6da9c0312a25f25fb6b9c87284446029a559b197e184e12ea94437c5311",
+    "n_tools": 13,
+    "package": "homeassistant-mcp",
+    "popularity_rank": 0
+  },
+  "inoyu-mcp-unomi-server": {
+    "capture_date": "2026-04-07T05:16:06.616156+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "efccb6ca92edaaed9ac1aaf1edd177a47bf47d9cd6711eb244720df331f546f0",
+    "n_tools": 5,
+    "package": "inoyu-mcp-unomi-server",
+    "popularity_rank": 0
+  },
+  "mcp-bigquery-server": {
+    "capture_date": "2026-04-07T05:16:06.616552+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "021f9a925d4d5024f82d9a7df3853938ed82b3ff1a7395ccf9f9fef9e0395c39",
+    "n_tools": 1,
+    "package": "mcp-bigquery-server",
+    "popularity_rank": 0
+  },
+  "mcp-mongo-server": {
+    "capture_date": "2026-04-07T05:16:06.616850+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "9d4626aa0c65063aa7ac9378e47709dc236498bd3297df9fac216c306859e000",
+    "n_tools": 2,
+    "package": "mcp-mongo-server",
+    "popularity_rank": 0
+  },
+  "mcp-obsidian": {
+    "capture_date": "2026-04-07T05:16:06.617122+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "efafe4b7f1e6962d2f5699fc9eff681c1e6d98ccc2feebf9f375aa36b7293232",
+    "n_tools": 2,
+    "package": "mcp-obsidian",
+    "popularity_rank": 0
+  },
+  "mcp-pandoc": {
+    "capture_date": "2026-04-07T05:16:06.617772+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "f9338b98f5207216918fc211d41be8581fda064bf929d365bcc907478529e9d3",
+    "n_tools": 1,
+    "package": "mcp-pandoc",
+    "popularity_rank": 0
+  },
+  "mcp-pinecone": {
+    "capture_date": "2026-04-07T05:16:06.618118+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "1e314f1498d014002d9db4163991a62ef68b8d87eca15bccec54450cfe7a888d",
+    "n_tools": 3,
+    "package": "mcp-pinecone",
+    "popularity_rank": 0
+  },
+  "mcp-playwright": {
+    "capture_date": "2026-04-07T05:16:06.618488+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "d435599376e8d5607bfcccd91085494b5d3affc67fdd026fda2db583ceb6ef4f",
+    "n_tools": 12,
+    "package": "mcp-playwright",
+    "popularity_rank": 0
+  },
+  "mcp-server-aws": {
+    "capture_date": "2026-04-07T05:16:06.618944+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "b21d4b169646ec0cd3a0a49564a524dc01de026a0f19e46a4bfffd9a36aab170",
+    "n_tools": 23,
+    "package": "mcp-server-aws",
+    "popularity_rank": 0
+  },
+  "mcp-server-axiom": {
+    "capture_date": "2026-04-07T05:16:06.619393+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "48dd9ecb615627e6faafbfd60cde2f8ffd465205b0b67759558d0a4aa66804a1",
+    "n_tools": 2,
+    "package": "mcp-server-axiom",
+    "popularity_rank": 0
+  },
+  "mcp-server-bigquery": {
+    "capture_date": "2026-04-07T05:16:06.619785+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "bb3b8a3059f7de682ceda70b82e0b57ac908c5f036299edddcb96a41c8908e88",
+    "n_tools": 3,
+    "package": "mcp-server-bigquery",
+    "popularity_rank": 0
+  },
+  "mcp-server-browserbase": {
+    "capture_date": "2026-04-07T05:16:06.620135+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "f7b8f23133ad0d1592097623d89ed22c38e5c4deae070ab18e4f6a88c1e27549",
+    "n_tools": 4,
+    "package": "mcp-server-browserbase",
+    "popularity_rank": 0
+  },
+  "mcp-server-chatsum": {
+    "capture_date": "2026-04-07T05:16:06.620445+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "c9fa125315a8a9a992b9576c636880bc82b2e7aa57d0d7c2c5c9e7b32ebbc528",
+    "n_tools": 1,
+    "package": "mcp-server-chatsum",
+    "popularity_rank": 0
+  },
+  "mcp-server-cloudflare": {
+    "capture_date": "2026-04-07T05:16:06.620849+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "99bb801696848d953437fd769bb36aa92b71a29e2764121ed91f3af8a9bf0830",
+    "n_tools": 21,
+    "package": "mcp-server-cloudflare",
+    "popularity_rank": 0
+  },
+  "mcp-server-docker": {
+    "capture_date": "2026-04-07T05:16:06.621406+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "9ca026634b567aa2d6be7e14e8a666a65b42bf773c46ad0133b23e713fece8a8",
+    "n_tools": 19,
+    "package": "mcp-server-docker",
+    "popularity_rank": 0
+  },
+  "mcp-server-fetch": {
+    "capture_date": "2026-04-07T05:16:42.293640+00:00",
+    "captured_via": "index_scan:npx -y @tokenizin/mcp-npx-fetch",
+    "category": "community",
+    "content_hash": "c91d095eb5f52c7b08a3f4fb4430e30d8a46f11239200702bb7ee53a75d6f304",
+    "n_tools": 4,
+    "package": "@tokenizin/mcp-npx-fetch",
+    "popularity_rank": 0
+  },
+  "mcp-server-kubernetes": {
+    "capture_date": "2026-04-07T05:16:06.621783+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "842dcdf78684595d12916bbbcf3e73923f7953a98340545f479dacf5058f1505",
+    "n_tools": 7,
+    "package": "mcp-server-kubernetes",
+    "popularity_rank": 0
+  },
+  "mcp-server-llamacloud": {
+    "capture_date": "2026-04-07T05:16:06.622094+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "d6f4d8ca782758572c0668ebec38966cf345ae0fab96d3cd3022dcf0d5a50826",
+    "n_tools": 1,
+    "package": "mcp-server-llamacloud",
+    "popularity_rank": 0
+  },
+  "mcp-server-mysql": {
+    "capture_date": "2026-04-07T05:16:06.622433+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "835e9b4a0380568544099dd35cd307b8025eb865a3cccd65be0c8ecdefad209c",
+    "n_tools": 1,
+    "package": "mcp-server-mysql",
+    "popularity_rank": 0
+  },
+  "mcp-server-neon": {
+    "capture_date": "2026-04-07T05:16:06.622794+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "630e71bf9685a1cf5d0ab9b19627bd0c4563c2157209e20ec1dbcfd744893533",
+    "n_tools": 14,
+    "package": "mcp-server-neon",
+    "popularity_rank": 0
+  },
+  "mcp-server-rag-web-browser": {
+    "capture_date": "2026-04-07T05:16:06.623250+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "432ba8238ff14115409a82275e66b6e2719576d2ee29acb8b18d884831102e99",
+    "n_tools": 1,
+    "package": "mcp-server-rag-web-browser",
+    "popularity_rank": 0
+  },
+  "mcp-server-rememberizer": {
+    "capture_date": "2026-04-07T05:16:06.623575+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "cf2474df08b7d8d920a1f16ec71bff0500a8f75619bc0d26aa1f20c1c26a0dec",
+    "n_tools": 6,
+    "package": "mcp-server-rememberizer",
+    "popularity_rank": 0
+  },
+  "mcp-server-tmdb": {
+    "capture_date": "2026-04-07T05:16:06.623921+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "d5f4e73d6af114d886308ae7379b111cc568043f17f9bd225a17d5153c03c887",
+    "n_tools": 3,
+    "package": "mcp-server-tmdb",
+    "popularity_rank": 0
+  },
+  "mcp-snowflake-server": {
+    "capture_date": "2026-04-07T05:16:06.624209+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "0a268853a06b422862a8cec775cd9528ad5565b243d92b46c0e2ca6b3c0c448c",
+    "n_tools": 6,
+    "package": "mcp-snowflake-server",
+    "popularity_rank": 0
+  },
+  "mcp-tavily": {
+    "capture_date": "2026-04-07T05:16:06.624595+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "f98679105b812392efd536bf75c20ea67d54b14db883802292dcdaf539ab253b",
+    "n_tools": 3,
+    "package": "mcp-tavily",
+    "popularity_rank": 0
+  },
+  "mcp-vegalite-server": {
+    "capture_date": "2026-04-07T05:16:06.624959+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "a7b8fd1f577ceb8cd764a7e1c542667aa6fced0f3cadaa87192075081965bb1c",
+    "n_tools": 2,
+    "package": "mcp-vegalite-server",
+    "popularity_rank": 0
+  },
+  "mcp-xmind": {
+    "capture_date": "2026-04-07T05:16:06.625263+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "85bf3671a9f054c27555b5516684ee7ebba6dfc05cb3455deb2f88c818a43181",
+    "n_tools": 7,
+    "package": "mcp-xmind",
+    "popularity_rank": 0
+  },
+  "memory": {
+    "capture_date": "2026-04-07T05:16:12.449795+00:00",
+    "captured_via": "index_scan:npx -y @modelcontextprotocol/server-memory",
+    "category": "official",
+    "content_hash": "ec0c686d41643c878cfe45de98121fb61f758e0a823ec573ef3e469f804fac45",
+    "n_tools": 9,
+    "package": "@modelcontextprotocol/server-memory",
+    "popularity_rank": 0
+  },
+  "mysql_mcp_server": {
+    "capture_date": "2026-04-07T05:16:06.625562+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "854982651035f209d62e17d897dd0b36778d63e471b4a94bdebbd86b3cfe50f1",
+    "n_tools": 1,
+    "package": "mysql_mcp_server",
+    "popularity_rank": 0
+  },
+  "needle-mcp": {
+    "capture_date": "2026-04-07T05:16:06.625869+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "dbe1d349ee24b87f21216fbbb85895f9b29130e59b7d26b91115a94d79f16cf6",
+    "n_tools": 7,
+    "package": "needle-mcp",
+    "popularity_rank": 0
+  },
+  "needle-mcp_tools": {
+    "capture_date": "2026-04-07T05:16:06.626187+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "dbe1d349ee24b87f21216fbbb85895f9b29130e59b7d26b91115a94d79f16cf6",
+    "n_tools": 7,
+    "package": "needle-mcp_tools",
+    "popularity_rank": 0
+  },
+  "notion": {
+    "capture_date": "2026-04-07T05:16:38.485893+00:00",
+    "captured_via": "index_scan:npx -y @notionhq/notion-mcp-server",
+    "category": "community",
+    "content_hash": "00a6e9de7d9ca2bf0754a3ddf8622e83a302879db8933792f2ab021bd1575df5",
+    "n_tools": 22,
+    "package": "@notionhq/notion-mcp-server",
+    "popularity_rank": 0
+  },
+  "npm-search": {
+    "capture_date": "2026-04-07T05:16:40.185313+00:00",
+    "captured_via": "index_scan:npx -y npm-search-mcp-server",
+    "category": "community",
+    "content_hash": "8ab6ef8282ef332b9e5c5ef8fffa740d6365128e51ff0dc8152c95f073ac7ba4",
+    "n_tools": 1,
+    "package": "npm-search-mcp-server",
+    "popularity_rank": 0
+  },
+  "ns-mcp-server": {
+    "capture_date": "2026-04-07T05:16:06.626489+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "6f5494f70fce2e06461e739c0263dc107b6575e1586bbb2c660f42f549d13701",
+    "n_tools": 3,
+    "package": "ns-mcp-server",
+    "popularity_rank": 0
+  },
+  "openrpc-mpc-server": {
+    "capture_date": "2026-04-07T05:16:06.626787+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "579d9484d6c71cf372e43177abe4f8b27f0e82ef545e2ddaa5c22459de2ae83f",
+    "n_tools": 2,
+    "package": "openrpc-mpc-server",
+    "popularity_rank": 0
+  },
+  "playwright": {
+    "capture_date": "2026-04-07T05:16:31.141985+00:00",
+    "captured_via": "index_scan:npx -y @executeautomation/playwright-mcp-server",
+    "category": "community",
+    "content_hash": "ee689e833ef6f7a028855ed42027374d96b2d5983bf4c8fcb15bb55154d548da",
+    "n_tools": 33,
+    "package": "@executeautomation/playwright-mcp-server",
+    "popularity_rank": 0
+  },
+  "postgres": {
+    "capture_date": "2026-04-07T05:16:15.805502+00:00",
+    "captured_via": "index_scan:npx -y @modelcontextprotocol/server-postgres postgresql://localhost/test",
+    "category": "official",
+    "content_hash": "ff37cacf3a428367d03c282e191540ed4861b3cd0e347257fd4900ee0a4d115e",
+    "n_tools": 1,
+    "package": "@modelcontextprotocol/server-postgres",
+    "popularity_rank": 0
+  },
+  "puppeteer": {
+    "capture_date": "2026-04-07T05:16:14.178501+00:00",
+    "captured_via": "index_scan:npx -y @modelcontextprotocol/server-puppeteer",
+    "category": "official",
+    "content_hash": "00e12232bc1ff6f39bc2c6dbe3f7e2f0e92f4312a06605f356c74f50eeb56d66",
+    "n_tools": 7,
+    "package": "@modelcontextprotocol/server-puppeteer",
+    "popularity_rank": 0
+  },
+  "qdrant": {
+    "capture_date": "2026-04-07T05:16:06.627069+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "0dd43ac449db5edc762b4f59f861e2d40f2b68eca8e048f3cacfbb46c312a6f6",
+    "n_tools": 2,
+    "package": "qdrant",
+    "popularity_rank": 0
+  },
+  "search1api-mcp": {
+    "capture_date": "2026-04-07T05:16:06.627348+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "f83b7128bcf3772218bdd2893bc569db63de53f8e0f9fd36d60dda140dc72004",
+    "n_tools": 4,
+    "package": "search1api-mcp",
+    "popularity_rank": 0
+  },
+  "sequential-thinking": {
+    "capture_date": "2026-04-07T05:16:19.166239+00:00",
+    "captured_via": "index_scan:npx -y @modelcontextprotocol/server-sequential-thinking",
+    "category": "official",
+    "content_hash": "58cefd64c4146156073a8b96391958ff45e64c33e1e85e6c025d8d3ac107a180",
+    "n_tools": 1,
+    "package": "@modelcontextprotocol/server-sequential-thinking",
+    "popularity_rank": 0
+  },
+  "tavily": {
+    "capture_date": "2026-04-07T05:16:34.843881+00:00",
+    "captured_via": "index_scan:npx -y tavily-mcp@latest",
+    "category": "community",
+    "content_hash": "5108e202df0cfe69947ad20dc7daa615830f68584fbb71dc616041898c9ce0aa",
+    "n_tools": 5,
+    "package": "tavily-mcp",
+    "popularity_rank": 0
+  },
+  "todoist-mcp-server": {
+    "capture_date": "2026-04-07T05:16:06.627757+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "fdd79b1d1fd2e6f01a4fd35927e037b9fba6af0d56fd7494cd7aabfcd27d53df",
+    "n_tools": 5,
+    "package": "todoist-mcp-server",
+    "popularity_rank": 0
+  },
+  "twitter-mcp": {
+    "capture_date": "2026-04-07T05:16:06.628369+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "b6d1b7c70b4445fc5bc0696c42a98a89143d4435fc151b215241ae7b84953573",
+    "n_tools": 2,
+    "package": "twitter-mcp",
+    "popularity_rank": 0
+  },
+  "x-mcp": {
+    "capture_date": "2026-04-07T05:16:06.628744+00:00",
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "category": "",
+    "content_hash": "fb9868f288f6484faade94b1fca6e2401cf6a492e63d893bf75ca4f6af5fd8cc",
+    "n_tools": 5,
+    "package": "x-mcp",
+    "popularity_rank": 0
+  },
+  "youtube-transcript": {
+    "capture_date": "2026-04-07T05:16:32.945544+00:00",
+    "captured_via": "index_scan:npx -y @kimtaeyoon83/mcp-server-youtube-transcript",
+    "category": "community",
+    "content_hash": "54ed8ac8128f983b3c825dd3783b178f2556eadf0eea056ea82d03dd9c00436a",
+    "n_tools": 1,
+    "package": "@kimtaeyoon83/mcp-server-youtube-transcript",
+    "popularity_rank": 0
+  }
+}

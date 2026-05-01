@@ -1,0 +1,23 @@
+name: ariane_5_flight_501
+description: '1996 Ariane 5 Flight 501 ($370M+). 64-bit horizontal velocity → 16-bit
+  signed integer overflow. UCUM + precision detects: precision boundary fee.'
+tools:
+  inertial_reference:
+    internal_state:
+    - horizontal_velocity
+    - value_precision_bits
+    observable_schema:
+    - horizontal_velocity
+  flight_control:
+    internal_state:
+    - horizontal_velocity
+    - value_precision_bits
+    observable_schema:
+    - horizontal_velocity
+edges:
+- from: inertial_reference
+  to: flight_control
+  dimensions:
+  - name: precision_match
+    from_field: value_precision_bits
+    to_field: value_precision_bits

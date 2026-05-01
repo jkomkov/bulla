@@ -1,0 +1,28 @@
+{
+  "name": "uncertain_github_paging",
+  "expectation": "uncertain",
+  "calls": [
+    {
+      "server": "github",
+      "tool": "search_repositories",
+      "arguments": {
+        "page": 1
+      },
+      "result": {}
+    },
+    {
+      "server": "github",
+      "tool": "list_commits",
+      "arguments": {
+        "page": 1
+      },
+      "argument_sources": {
+        "page": {
+          "call_id": 1,
+          "field": "page"
+        }
+      },
+      "result": {}
+    }
+  ]
+}

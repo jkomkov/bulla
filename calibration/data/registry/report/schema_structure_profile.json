@@ -1,0 +1,114 @@
+{
+  "corpus": "registry_real_schema_pairwise",
+  "real_schema_servers": 38,
+  "pairwise_compositions": 703,
+  "all_pairs": {
+    "tool_count": {
+      "min": 2,
+      "median": 12,
+      "max": 59,
+      "mean": 15.737
+    },
+    "edge_count": {
+      "min": 0,
+      "median": 0,
+      "max": 136,
+      "mean": 5.814
+    },
+    "betti_1": {
+      "min": 0,
+      "median": 0,
+      "max": 116,
+      "mean": 2.633
+    },
+    "fee": {
+      "min": 0,
+      "median": 0,
+      "max": 22,
+      "mean": 1.511
+    },
+    "contradictions": {
+      "min": 0,
+      "median": 0,
+      "max": 26,
+      "mean": 1.364
+    },
+    "max_dims_per_edge": {
+      "min": 0,
+      "median": 0,
+      "max": 3,
+      "mean": 0.447
+    }
+  },
+  "structure_gates": {
+    "with_edges": 240,
+    "edge_free_pairs": 463,
+    "acyclic_with_edges": 188,
+    "cyclic_with_edges": 52,
+    "positive_fee_pairs": 240,
+    "pairs_with_structural_contradictions": 112
+  },
+  "nonzero_edge_pairs": {
+    "edge_count": {
+      "min": 1,
+      "median": 3.0,
+      "max": 136,
+      "mean": 17.029
+    },
+    "betti_1": {
+      "min": 0,
+      "median": 0.0,
+      "max": 116,
+      "mean": 7.713
+    },
+    "fee": {
+      "min": 1,
+      "median": 2.0,
+      "max": 22,
+      "mean": 4.425
+    },
+    "contradictions": {
+      "min": 0,
+      "median": 0.0,
+      "max": 26,
+      "mean": 3.85
+    }
+  },
+  "overlap_categories": {
+    "agreement": 58802,
+    "homonym": 790,
+    "contradiction": 959,
+    "synonym": 259
+  },
+  "mismatch_types": {
+    "enum": 326,
+    "range": 37,
+    "format": 596
+  },
+  "top_dimensions": [
+    [
+      "path_convention_match",
+      2962
+    ],
+    [
+      "id_offset_match",
+      792
+    ],
+    [
+      "date_format_match",
+      144
+    ],
+    [
+      "state_filter_match",
+      114
+    ],
+    [
+      "score_range_match",
+      111
+    ],
+    [
+      "sort_direction_match",
+      39
+    ]
+  ]
+}

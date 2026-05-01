@@ -38,8 +38,21 @@ class FeeDecomposition:
     rho_full: int = 0
 
 
-def diagnose(comp: Composition) -> Diagnostic:
-    """Analyse a composition and return its full diagnostic."""
+def diagnose(
+    comp: Composition,
+    *,
+    include_witness_geometry: bool = False,
+) -> Diagnostic:
+    """Analyse a composition and return its full diagnostic.
+
+    Args:
+        comp: composition to diagnose.
+        include_witness_geometry: if True and ``coherence_fee > 0``, also
+            compute the witness Gram and populate the witness-geometry
+            fields on the returned ``Diagnostic`` (leverage scores,
+            N_eff, coloops, loops, greedy disclosure set). Defaults to
+            False so existing callers see no behavior change.
+    """
     tool_map = {t.name: t for t in comp.tools}
 
     delta_obs, v_obs, e_obs = build_coboundary(
@@ -130,6 +143,30 @@ def diagnose(comp: Composition) -> Diagnostic:
         )
     )
 
+    fee = h1_obs - h1_full
+
+    # Witness-geometry is off by default; computed only when the caller
+    # explicitly opts in AND the fee is positive (zero-fee compositions
+    # have an empty witness matroid with no content to surface).
+    wg_hidden_basis: tuple[tuple[str, str], ...] = ()
+    wg_leverage: tuple = ()
+    wg_n_eff: Fraction | None = None
+    wg_coloops: tuple[tuple[str, str], ...] = ()
+    wg_loops: tuple[tuple[str, str], ...] = ()
+    wg_disclosure: tuple[tuple[str, str], ...] = ()
+    if include_witness_geometry and fee > 0:
+        # Lazy import keeps import-time cost zero for the default path.
+        from bulla.witness_geometry import compute_all as _wg_compute_all
+
+        # compute_all expects raw lists; Composition stores tuples.
+        wg = _wg_compute_all(list(comp.tools), list(comp.edges))
+        wg_hidden_basis = tuple(tuple(pair) for pair in wg["hidden_basis"])
+        wg_leverage = tuple(wg["leverage"])
+        wg_n_eff = wg["n_effective"]
+        wg_coloops = tuple(tuple(pair) for pair in wg["coloops"])
+        wg_loops = tuple(tuple(pair) for pair in wg["loops"])
+        wg_disclosure = tuple(tuple(pair) for pair in wg["basis_greedy"])
+
     return Diagnostic(
         name=comp.name,
         n_tools=len(comp.tools),
@@ -142,11 +179,17 @@ def diagnose(comp: Composition) -> Diagnostic:
         rank_full=rank_full,
         h1_obs=h1_obs,
         h1_full=h1_full,
-        coherence_fee=h1_obs - h1_full,
+        coherence_fee=fee,
         blind_spots=tuple(blind_spots),
         bridges=tuple(bridges),
         h1_after_bridge=h1_b,
         n_unbridged=n_unbridged,
+        hidden_basis=wg_hidden_basis,
+        leverage_scores=wg_leverage,
+        n_effective=wg_n_eff,
+        coloops=wg_coloops,
+        loops=wg_loops,
+        disclosure_set=wg_disclosure,
     )
 
 

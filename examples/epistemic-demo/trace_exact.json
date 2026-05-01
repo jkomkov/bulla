@@ -1,0 +1,29 @@
+{
+  "name": "exact_regime_demo",
+  "description": "Two-server pipeline: analytics produces a path and timestamp, storage consumes both. The path and date_format conventions are hidden — Bulla detects them and provides an exact repair recommendation.",
+  "calls": [
+    {
+      "server": "analytics",
+      "tool": "query_events",
+      "arguments": { "filter": "type=error AND date>2026-04-01" },
+      "result": {
+        "path": "/data/events/april-errors.csv",
+        "timestamp": "2026-04-24T12:00:00Z",
+        "count": 42
+      }
+    },
+    {
+      "server": "storage",
+      "tool": "write_report",
+      "arguments": {
+        "path": "/data/events/april-errors.csv",
+        "content": "42 error events found",
+        "timestamp": "2026-04-24T12:00:00Z"
+      },
+      "argument_sources": {
+        "path": { "call_id": 1, "field": "path" },
+        "timestamp": { "call_id": 1, "field": "timestamp" }
+      }
+    }
+  ]
+}

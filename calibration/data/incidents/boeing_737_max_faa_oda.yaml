@@ -1,0 +1,31 @@
+name: boeing_737_max_faa_oda
+description: '2018-2019 Boeing 737 MAX MCAS (346 deaths). FAA ODA self-cert covered
+  94% of certifications; the seam between design data and certification authority
+  concealed the single-sensor MCAS dependence. Generic safety-cert pack would detect:
+  authorization_authority boundary fee.'
+tools:
+  boeing_design:
+    internal_state:
+    - system_id
+    - redundancy_level
+    - certification_authority
+    - design_review_status
+    observable_schema:
+    - system_id
+    - design_review_status
+  faa_oversight:
+    internal_state:
+    - system_id
+    - redundancy_level
+    - certification_authority
+    - approval_status
+    observable_schema:
+    - system_id
+    - approval_status
+edges:
+- from: boeing_design
+  to: faa_oversight
+  dimensions:
+  - name: certification_authority_match
+    from_field: certification_authority
+    to_field: certification_authority

@@ -1,0 +1,55 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "flightradar24-mcp-server",
+    "capture_date": "2026-04-07T05:16:06.615172+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:2947510f7f12c65d37b1aa0c23ec2d55941e30dd7957308df62470bbb84f60c3",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "get_flight_positions",
+      "description": "Get real-time flight positions with various filtering options",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "airports": {
+            "type": "string",
+            "description": "Comma-separated list of airport ICAO codes"
+          },
+          "bounds": {
+            "type": "string",
+            "description": "Geographical bounds (lat1,lon1,lat2,lon2)"
+          },
+          "categories": {
+            "type": "string",
+            "description": "Aircraft categories (P,C,J)"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum number of results"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_flight_eta",
+      "description": "Get estimated arrival time for a specific flight",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "flightNumber": {
+            "type": "string",
+            "description": "Flight number (e.g., UA123)",
+            "pattern": "^[A-Z0-9]{2,8}$"
+          }
+        },
+        "required": [
+          "flightNumber"
+        ]
+      }
+    }
+  ]
+}

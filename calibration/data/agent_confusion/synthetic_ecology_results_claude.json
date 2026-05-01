@@ -1,0 +1,1106 @@
+{
+  "structured": [
+    {
+      "pair": "file_reader+data_loader",
+      "fee": 1,
+      "ground_truth": [
+        "path"
+      ],
+      "identified": [
+        "path"
+      ],
+      "true_positives": [
+        "path"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "file_reader+data_loader",
+      "fee": 1,
+      "ground_truth": [
+        "path"
+      ],
+      "identified": [
+        "path"
+      ],
+      "true_positives": [
+        "path"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "file_reader+data_loader",
+      "fee": 1,
+      "ground_truth": [
+        "path"
+      ],
+      "identified": [
+        "content",
+        "data",
+        "path"
+      ],
+      "true_positives": [
+        "path"
+      ],
+      "false_positives": [
+        "content",
+        "data"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 2
+    },
+    {
+      "pair": "file_reader+event_logger",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "file_reader+event_logger",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "message"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "message"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 1
+    },
+    {
+      "pair": "file_reader+event_logger",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    },
+    {
+      "pair": "file_reader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "file_reader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "file_reader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    },
+    {
+      "pair": "data_loader+event_logger",
+      "fee": 1,
+      "ground_truth": [
+        "timestamp"
+      ],
+      "identified": [
+        "data",
+        "message",
+        "timestamp"
+      ],
+      "true_positives": [
+        "timestamp"
+      ],
+      "false_positives": [
+        "data",
+        "message"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 0
+    },
+    {
+      "pair": "data_loader+event_logger",
+      "fee": 1,
+      "ground_truth": [
+        "timestamp"
+      ],
+      "identified": [
+        "timestamp"
+      ],
+      "true_positives": [
+        "timestamp"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "data_loader+event_logger",
+      "fee": 1,
+      "ground_truth": [
+        "timestamp"
+      ],
+      "identified": [
+        "timestamp"
+      ],
+      "true_positives": [
+        "timestamp"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    },
+    {
+      "pair": "data_loader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "data_loader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "data_loader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    },
+    {
+      "pair": "event_logger+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "event_logger+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "event_logger+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    },
+    {
+      "pair": "text_encoder+page_browser",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "text_encoder+page_browser",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "text_encoder+page_browser",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    },
+    {
+      "pair": "file_reader+text_encoder",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "file_reader+text_encoder",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "file_reader+text_encoder",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    }
+  ],
+  "bare": [
+    {
+      "pair": "file_reader+data_loader",
+      "fee": 1,
+      "ground_truth": [
+        "path"
+      ],
+      "identified": [
+        "path"
+      ],
+      "true_positives": [
+        "path"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "file_reader+data_loader",
+      "fee": 1,
+      "ground_truth": [
+        "path"
+      ],
+      "identified": [
+        "path",
+        "timestamp"
+      ],
+      "true_positives": [
+        "path"
+      ],
+      "false_positives": [
+        "timestamp"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 1
+    },
+    {
+      "pair": "file_reader+data_loader",
+      "fee": 1,
+      "ground_truth": [
+        "path"
+      ],
+      "identified": [
+        "path",
+        "timestamp"
+      ],
+      "true_positives": [
+        "path"
+      ],
+      "false_positives": [
+        "timestamp"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 2
+    },
+    {
+      "pair": "file_reader+event_logger",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "file_reader+event_logger",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "content",
+        "level",
+        "message",
+        "path",
+        "query",
+        "timestamp"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "content",
+        "level",
+        "message",
+        "path",
+        "query",
+        "timestamp"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 1
+    },
+    {
+      "pair": "file_reader+event_logger",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    },
+    {
+      "pair": "file_reader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "file_reader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "file_reader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    },
+    {
+      "pair": "data_loader+event_logger",
+      "fee": 1,
+      "ground_truth": [
+        "timestamp"
+      ],
+      "identified": [
+        "timestamp"
+      ],
+      "true_positives": [
+        "timestamp"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "data_loader+event_logger",
+      "fee": 1,
+      "ground_truth": [
+        "timestamp"
+      ],
+      "identified": [
+        "timestamp"
+      ],
+      "true_positives": [
+        "timestamp"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "data_loader+event_logger",
+      "fee": 1,
+      "ground_truth": [
+        "timestamp"
+      ],
+      "identified": [
+        "timestamp"
+      ],
+      "true_positives": [
+        "timestamp"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    },
+    {
+      "pair": "data_loader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "data_loader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "data_loader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    },
+    {
+      "pair": "event_logger+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "currency",
+        "level",
+        "symbol",
+        "timestamp"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "currency",
+        "level",
+        "symbol",
+        "timestamp"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 0
+    },
+    {
+      "pair": "event_logger+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "currency",
+        "level",
+        "symbol",
+        "timestamp"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "currency",
+        "level",
+        "symbol",
+        "timestamp"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 1
+    },
+    {
+      "pair": "event_logger+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "currency",
+        "level",
+        "symbol",
+        "timestamp"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "currency",
+        "level",
+        "symbol",
+        "timestamp"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 2
+    },
+    {
+      "pair": "text_encoder+page_browser",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "encoding",
+        "items",
+        "offset",
+        "result",
+        "text",
+        "url"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "encoding",
+        "items",
+        "offset",
+        "result",
+        "text",
+        "url"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 0
+    },
+    {
+      "pair": "text_encoder+page_browser",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "encoding",
+        "items",
+        "offset",
+        "result"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "encoding",
+        "items",
+        "offset",
+        "result"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 1
+    },
+    {
+      "pair": "text_encoder+page_browser",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "encoding",
+        "items",
+        "offset",
+        "result"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "encoding",
+        "items",
+        "offset",
+        "result"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 2
+    },
+    {
+      "pair": "file_reader+text_encoder",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "content",
+        "encoding",
+        "path",
+        "query",
+        "result",
+        "text"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "content",
+        "encoding",
+        "path",
+        "query",
+        "result",
+        "text"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 0
+    },
+    {
+      "pair": "file_reader+text_encoder",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "content",
+        "encoding",
+        "path",
+        "query",
+        "result",
+        "text"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "content",
+        "encoding",
+        "path",
+        "query",
+        "result",
+        "text"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 1
+    },
+    {
+      "pair": "file_reader+text_encoder",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "content",
+        "encoding",
+        "path",
+        "query",
+        "result",
+        "text"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "content",
+        "encoding",
+        "path",
+        "query",
+        "result",
+        "text"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 2
+    }
+  ],
+  "flat": [
+    {
+      "pair": "file_reader+data_loader",
+      "fee": 1,
+      "ground_truth": [
+        "path"
+      ],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [
+        "path"
+      ],
+      "correct": false,
+      "repeat": 0
+    },
+    {
+      "pair": "file_reader+data_loader",
+      "fee": 1,
+      "ground_truth": [
+        "path"
+      ],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [
+        "path"
+      ],
+      "correct": false,
+      "repeat": 1
+    },
+    {
+      "pair": "file_reader+data_loader",
+      "fee": 1,
+      "ground_truth": [
+        "path"
+      ],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [
+        "path"
+      ],
+      "correct": false,
+      "repeat": 2
+    },
+    {
+      "pair": "file_reader+event_logger",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "timestamp"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "timestamp"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 0
+    },
+    {
+      "pair": "file_reader+event_logger",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "file_reader+event_logger",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "level",
+        "timestamp"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "level",
+        "timestamp"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 2
+    },
+    {
+      "pair": "file_reader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "file_reader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "file_reader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    },
+    {
+      "pair": "data_loader+event_logger",
+      "fee": 1,
+      "ground_truth": [
+        "timestamp"
+      ],
+      "identified": [
+        "timestamp"
+      ],
+      "true_positives": [
+        "timestamp"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "data_loader+event_logger",
+      "fee": 1,
+      "ground_truth": [
+        "timestamp"
+      ],
+      "identified": [
+        "timestamp"
+      ],
+      "true_positives": [
+        "timestamp"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "data_loader+event_logger",
+      "fee": 1,
+      "ground_truth": [
+        "timestamp"
+      ],
+      "identified": [
+        "timestamp"
+      ],
+      "true_positives": [
+        "timestamp"
+      ],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    },
+    {
+      "pair": "data_loader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "currency",
+        "timestamp"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "currency",
+        "timestamp"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 0
+    },
+    {
+      "pair": "data_loader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "currency",
+        "data",
+        "timestamp"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "currency",
+        "data",
+        "timestamp"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 1
+    },
+    {
+      "pair": "data_loader+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "currency",
+        "timestamp"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "currency",
+        "timestamp"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 2
+    },
+    {
+      "pair": "event_logger+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 0
+    },
+    {
+      "pair": "event_logger+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "event_logger+price_fetcher",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 2
+    },
+    {
+      "pair": "text_encoder+page_browser",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "encoding",
+        "items",
+        "offset",
+        "result"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "encoding",
+        "items",
+        "offset",
+        "result"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 0
+    },
+    {
+      "pair": "text_encoder+page_browser",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "encoding",
+        "items",
+        "offset",
+        "result"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "encoding",
+        "items",
+        "offset",
+        "result"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 1
+    },
+    {
+      "pair": "text_encoder+page_browser",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "encoding",
+        "offset"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "encoding",
+        "offset"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 2
+    },
+    {
+      "pair": "file_reader+text_encoder",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "encoding"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "encoding"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 0
+    },
+    {
+      "pair": "file_reader+text_encoder",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [],
+      "true_positives": [],
+      "false_positives": [],
+      "false_negatives": [],
+      "correct": true,
+      "repeat": 1
+    },
+    {
+      "pair": "file_reader+text_encoder",
+      "fee": 0,
+      "ground_truth": [],
+      "identified": [
+        "encoding"
+      ],
+      "true_positives": [],
+      "false_positives": [
+        "encoding"
+      ],
+      "false_negatives": [],
+      "correct": false,
+      "repeat": 2
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "total": 703,
+  "trivial": 463,
+  "B_zero": 678,
+  "B_positive": 25,
+  "direct_sum_and_B_zero": 678,
+  "not_direct_sum_and_B_pos": 0,
+  "MISMATCH": 25,
+  "errors": 0,
+  "characterization_holds": false
+}

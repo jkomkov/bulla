@@ -1,0 +1,28 @@
+name: phe_covid_xls_truncation
+description: 'October 2020 PHE COVID-19 case truncation (15,841 cases lost over 8
+  days). .XLS row limit 65,536 hit; later rows silently dropped. iana-media-types
+  detects: media_type boundary fee (xls vs xlsx vs csv).'
+tools:
+  lab_export:
+    internal_state:
+    - case_records
+    - export_format
+    - row_count
+    observable_schema:
+    - case_records
+    - row_count
+  phe_ingestion:
+    internal_state:
+    - case_records
+    - export_format
+    - row_count
+    observable_schema:
+    - case_records
+    - row_count
+edges:
+- from: lab_export
+  to: phe_ingestion
+  dimensions:
+  - name: export_format_match
+    from_field: export_format
+    to_field: export_format

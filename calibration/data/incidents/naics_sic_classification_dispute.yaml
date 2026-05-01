@@ -1,0 +1,28 @@
+name: naics_sic_classification_dispute
+description: 'NAICS vs SIC industry classification dispute (recurring Tax Court).
+  Self-reported SIC vs IRS-recomputed NAICS drives tax-credit eligibility differences.
+  naics-2022 detects: industry_code boundary fee.'
+tools:
+  company_filing:
+    internal_state:
+    - ein
+    - industry_code
+    - code_system
+    observable_schema:
+    - ein
+    - industry_code
+  irs_audit:
+    internal_state:
+    - ein
+    - industry_code
+    - code_system
+    observable_schema:
+    - ein
+    - industry_code
+edges:
+- from: company_filing
+  to: irs_audit
+  dimensions:
+  - name: code_system_match
+    from_field: code_system
+    to_field: code_system

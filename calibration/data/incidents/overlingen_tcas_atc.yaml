@@ -1,0 +1,27 @@
+name: overlingen_tcas_atc
+description: '2002 Überlingen mid-air collision (71 killed). TCAS and ATC issued contradictory
+  instructions to two aircraft. Generic detects: authority_source boundary fee.'
+tools:
+  aircraft_a:
+    internal_state:
+    - vertical_command
+    - command_authority
+    - altitude
+    observable_schema:
+    - vertical_command
+    - altitude
+  aircraft_b:
+    internal_state:
+    - vertical_command
+    - command_authority
+    - altitude
+    observable_schema:
+    - vertical_command
+    - altitude
+edges:
+- from: aircraft_a
+  to: aircraft_b
+  dimensions:
+  - name: command_authority_match
+    from_field: command_authority
+    to_field: command_authority

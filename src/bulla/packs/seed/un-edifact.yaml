@@ -1,0 +1,96 @@
+pack_name: un-edifact
+pack_version: 0.1.0
+license:
+  spdx_id: Public-Domain
+  source_url: https://service.unece.org/trade/untdid/welcome.html
+  registry_license: open
+derives_from:
+  standard: UN-EDIFACT
+  version: D.21B
+  source_uri: https://service.unece.org/trade/untdid/d21b/d21b.htm
+dimensions:
+  edifact_message_type:
+    description: UN/EDIFACT message type — the 6-character code at the head of every
+      EDIFACT envelope. The inline seed covers the ~20 most-common types across commercial,
+      transport, financial, and customs domains; the values_registry pointer is the
+      authoritative UN/CEFACT directory.
+    field_patterns:
+    - msg_type
+    - message_type
+    - edi_type
+    - edifact_type
+    - '*_message_type'
+    - '*_msg_type'
+    description_keywords:
+    - edifact message type
+    - edi message
+    - un/edifact
+    - untdid
+    domains:
+    - universal
+    known_values:
+    - canonical: INVOIC
+      aliases:
+      - invoice
+    - canonical: ORDERS
+      aliases:
+      - purchase-order
+    - canonical: ORDRSP
+      aliases:
+      - order-response
+    - canonical: DESADV
+      aliases:
+      - dispatch-advice
+      - asn
+    - canonical: RECADV
+      aliases:
+      - receiving-advice
+    - canonical: REMADV
+      aliases:
+      - remittance-advice
+    - canonical: PRICAT
+      aliases:
+      - price-catalogue
+    - canonical: PROINQ
+      aliases:
+      - product-inquiry
+    - canonical: QUOTES
+      aliases:
+      - quote
+    - canonical: PAYORD
+      aliases:
+      - payment-order
+    - canonical: PAYMUL
+      aliases:
+      - multiple-payment-order
+    - canonical: BANSTA
+      aliases:
+      - banking-status
+    - canonical: FINSTA
+      aliases:
+      - financial-statement
+    - canonical: IFTMIN
+      aliases:
+      - transport-instruction
+    - canonical: IFTSTA
+      aliases:
+      - transport-status
+    - canonical: CUSDEC
+      aliases:
+      - customs-declaration
+    - canonical: CUSRES
+      aliases:
+      - customs-response
+    - canonical: DELFOR
+      aliases:
+      - delivery-forecast
+    - canonical: DELJIT
+      aliases:
+      - delivery-just-in-time
+    - canonical: INVRPT
+      aliases:
+      - inventory-report
+    values_registry:
+      uri: https://service.unece.org/trade/untdid/d21b/d21b.zip
+      hash: placeholder:awaiting-ingest
+      version: D.21B

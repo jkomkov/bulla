@@ -1,0 +1,28 @@
+name: stripe_webhook_duplicates
+description: 'Stripe webhook duplicate processing (recurring). At-least-once delivery;
+  downstream must dedupe by event_id. Without dedupe → 2-3× charges. Generic detects:
+  delivery_semantics boundary fee.'
+tools:
+  stripe_webhook:
+    internal_state:
+    - event_id
+    - delivery_semantics
+    - payload
+    observable_schema:
+    - event_id
+    - payload
+  downstream_consumer:
+    internal_state:
+    - event_id
+    - delivery_semantics
+    - processed_payload
+    observable_schema:
+    - event_id
+    - processed_payload
+edges:
+- from: stripe_webhook
+  to: downstream_consumer
+  dimensions:
+  - name: delivery_semantics_match
+    from_field: delivery_semantics
+    to_field: delivery_semantics

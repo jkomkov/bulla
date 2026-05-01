@@ -1,0 +1,56 @@
+pack_name: swift-mt-mx
+pack_version: 0.1.0
+license:
+  spdx_id: Proprietary-SWIFT
+  source_url: https://developer.swift.com/
+  registry_license: restricted
+  attribution: sha256:swift-notices
+derives_from:
+  standard: SWIFT-MT-MX
+  version: snapshot-2026-04-26
+  source_uri: https://developer.swift.com/
+dimensions:
+  swift_mt_message_type:
+    description: SWIFT MT message type (MT 103, MT 202, MT 940, etc.). Membership-restricted;
+      values_registry requires a SWIFT credential.
+    field_patterns:
+    - mt_type
+    - mt_message_type
+    - swift_mt
+    - '*_mt_type'
+    - '*_swift_mt'
+    description_keywords:
+    - swift mt
+    - swift mt message
+    - mt 103
+    - mt 202
+    domains:
+    - financial
+    values_registry:
+      uri: https://developer.swift.com/messages-mt
+      hash: placeholder:awaiting-license
+      version: snapshot
+      license_id: SWIFT-MEMBER
+  swift_mx_message_type:
+    description: SWIFT MX (ISO 20022-flavored) message type (pacs.008, pain.001, camt.053,
+      etc.). Same license gating as MT.
+    field_patterns:
+    - mx_type
+    - mx_message_type
+    - swift_mx
+    - '*_mx_type'
+    - '*_swift_mx'
+    - iso20022_message
+    description_keywords:
+    - swift mx
+    - iso 20022 message
+    - pacs.008
+    - pain.001
+    - camt.053
+    domains:
+    - financial
+    values_registry:
+      uri: https://developer.swift.com/messages-mx
+      hash: placeholder:awaiting-license
+      version: snapshot
+      license_id: SWIFT-MEMBER

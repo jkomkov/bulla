@@ -27,7 +27,29 @@ from typing import Any
 
 import yaml
 
-from bulla.model import PackRef
+from bulla.model import PackRef, StandardProvenance
+
+
+def _extract_provenance(parsed: dict[str, Any]) -> StandardProvenance | None:
+    """Read an optional ``derives_from`` block from a parsed pack.
+
+    Returns None when absent or malformed (the validator surfaces the
+    malformed case as an error elsewhere; here we only need to decide
+    whether to attach provenance to the resulting ``PackRef``).
+    """
+    block = parsed.get("derives_from")
+    if not isinstance(block, dict):
+        return None
+    standard = block.get("standard")
+    version = block.get("version")
+    if not isinstance(standard, str) or not isinstance(version, str):
+        return None
+    return StandardProvenance(
+        standard=standard,
+        version=version,
+        source_uri=block.get("source_uri", "") if isinstance(block.get("source_uri"), str) else "",
+        source_hash=block.get("source_hash", "") if isinstance(block.get("source_hash"), str) else "",
+    )
 
 logger = logging.getLogger(__name__)
 
@@ -64,10 +86,62 @@ _active_pack_refs: tuple[PackRef, ...] = ()
 _extra_pack_paths: tuple[str, ...] = ()
 
 
+def _canonicalize_pack_for_hash(parsed: dict[str, Any]) -> dict[str, Any]:
+    """Strip non-content fields from a pack dict before hashing.
+
+    Extension B canonicalization rule: when a dimension has both
+    ``values_registry`` (authoritative, content-addressed pointer) AND
+    inline ``known_values`` (documentation/examples), the inline list
+    is excluded from the pack hash so authors can curate examples
+    without producing pack-hash drift. The registry pointer's hash
+    field is what binds the pack to a specific value-set revision;
+    the inline list has no semantic role in that case.
+
+    Dimensions without ``values_registry`` keep their inline values in
+    the hash exactly as before — this is the existing behavior for
+    every base/community/financial pack and is preserved.
+
+    The canonicalization is non-destructive: it returns a new dict
+    rather than mutating ``parsed``.
+    """
+    if not isinstance(parsed, dict):
+        return parsed
+    dims = parsed.get("dimensions")
+    if not isinstance(dims, dict):
+        return parsed
+
+    canonical_dims: dict[str, Any] = {}
+    any_change = False
+    for dim_name, dim_def in dims.items():
+        if (
+            isinstance(dim_def, dict)
+            and "values_registry" in dim_def
+            and "known_values" in dim_def
+        ):
+            stripped = {k: v for k, v in dim_def.items() if k != "known_values"}
+            canonical_dims[dim_name] = stripped
+            any_change = True
+        else:
+            canonical_dims[dim_name] = dim_def
+
+    if not any_change:
+        return parsed
+    canonical = dict(parsed)
+    canonical["dimensions"] = canonical_dims
+    return canonical
+
+
 def _hash_pack(parsed: dict[str, Any]) -> str:
-    """Deterministic content hash of a parsed pack (not raw YAML)."""
+    """Deterministic content hash of a parsed pack (not raw YAML).
+
+    Inline ``known_values`` on a dimension with ``values_registry`` are
+    excluded from the hash — see ``_canonicalize_pack_for_hash``. Every
+    other field, including the registry pointer object itself,
+    participates fully.
+    """
+    canonical = _canonicalize_pack_for_hash(parsed)
     return hashlib.sha256(
-        json.dumps(parsed, sort_keys=True).encode()
+        json.dumps(canonical, sort_keys=True).encode()
     ).hexdigest()
 
 
@@ -95,6 +169,7 @@ def _load_base_pack() -> tuple[dict[str, Any], PackRef]:
         name=parsed.get("pack_name", "base"),
         version=parsed.get("pack_version", "0.1.0"),
         hash=_hash_pack(parsed),
+        derives_from=_extract_provenance(parsed),
     )
     return parsed, ref
 
@@ -114,6 +189,7 @@ def _load_community_pack() -> tuple[dict[str, Any], PackRef] | None:
         name=parsed.get("pack_name", "community"),
         version=parsed.get("pack_version", "0.0.0"),
         hash=_hash_pack(parsed),
+        derives_from=_extract_provenance(parsed),
     )
     return parsed, ref
 
@@ -165,6 +241,7 @@ def load_pack_stack(
             name=pack_name,
             version=parsed.get("pack_version", "0.0.0"),
             hash=_hash_pack(parsed),
+            derives_from=_extract_provenance(parsed),
         )
         merged = _merge_packs(merged, parsed, prev_name, pack_name)
         refs.append(ref)
@@ -503,8 +580,49 @@ _FORMAT_TO_DIMENSION: dict[str, str] = {
 _ENUM_KNOWN_VALUES: dict[str, set[str]] | None = None
 
 
+def _iter_normalized_values(values: list[Any]) -> set[str]:
+    """Walk a ``known_values`` list and return the normalized set of all
+    values + aliases + source-code values.
+
+    Accepts both the legacy string form and the alias-dict form
+    introduced by Extension D. A single dimension may mix the two; an
+    alias dict may carry any subset of {``canonical``, ``aliases``,
+    ``source_codes``}. All strings reachable from a known_value entry
+    are normalized via ``_normalize_enum_value`` and folded into the
+    same dimension's set, so a field whose enum lists ``"840"`` (the
+    ISO-4217 numeric code) classifies under ``currency`` just like a
+    field whose enum lists ``"USD"``.
+    """
+    out: set[str] = set()
+    for v in values:
+        if isinstance(v, str):
+            out.add(_normalize_enum_value(v))
+            continue
+        if not isinstance(v, dict):
+            continue
+        canonical = v.get("canonical")
+        if isinstance(canonical, str):
+            out.add(_normalize_enum_value(canonical))
+        aliases = v.get("aliases", [])
+        if isinstance(aliases, list):
+            for a in aliases:
+                if isinstance(a, str):
+                    out.add(_normalize_enum_value(a))
+        source_codes = v.get("source_codes", {})
+        if isinstance(source_codes, dict):
+            for code in source_codes.values():
+                if isinstance(code, str):
+                    out.add(_normalize_enum_value(code))
+    return out
+
+
 def _get_enum_known_values() -> dict[str, set[str]]:
-    """Build a mapping from known_values to dimension names."""
+    """Build a mapping from known_values to dimension names.
+
+    Walks ``_iter_normalized_values`` so both legacy string entries
+    and Extension D's alias-dict entries are recognized; aliases and
+    source-codes contribute to the same set as their canonical value.
+    """
     global _ENUM_KNOWN_VALUES
     if _ENUM_KNOWN_VALUES is not None:
         return _ENUM_KNOWN_VALUES
@@ -513,10 +631,7 @@ def _get_enum_known_values() -> dict[str, set[str]]:
     result: dict[str, set[str]] = {}
     for dim_name, dim_def in dims.items():
         values = dim_def.get("known_values", [])
-        normalized = set()
-        for v in values:
-            normalized.add(_normalize_enum_value(v))
-        result[dim_name] = normalized
+        result[dim_name] = _iter_normalized_values(values)
     _ENUM_KNOWN_VALUES = result
     return result
 

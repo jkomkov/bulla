@@ -14,27 +14,31 @@ Three hashes, three concerns: what was proposed, what was measured, what was wit
 
 ## Hash Coverage
 
-`receipt_hash` includes: `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `active_packs`, `witness_basis`, and conditionally `parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`, `contradictions` (each only when not None), and `unmet_obligations` (only when > 0).
+`receipt_hash` includes: `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `active_packs`, `witness_basis`, and conditionally `parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`, `contradictions`, `structural_contradictions` (each only when not None), `unmet_obligations` (only when > 0), and `contradiction_score` (only when > 0).
 
 `receipt_hash` excludes: `anchor_ref` (external publication proof, added after witness event).
 
-Rationale: the hash must be computable at witness time. Anchor ref arrives later. Conditional fields (`parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`, `contradictions`, `unmet_obligations`) are included only when non-None/non-zero to preserve backward compatibility: pre-v0.25.0 receipts (which lack `boundary_obligations`), pre-v0.30.0 receipts (which lack `contradictions`), and pre-v0.32.0 receipts (which lack `unmet_obligations`) verify correctly with new code because their hash was computed without these keys, and the verifier only hashes keys that are present.
+Rationale: the hash must be computable at witness time. Anchor ref arrives later. Conditional fields (`parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`, `contradictions`, `structural_contradictions`, `unmet_obligations`, `contradiction_score`) are included only when non-None/non-zero to preserve backward compatibility: pre-v0.25.0 receipts (which lack `boundary_obligations`), pre-v0.30.0 receipts (which lack `contradictions`), pre-v0.32.0 receipts (which lack `unmet_obligations`), and pre-v0.34.0 receipts (which lack `structural_contradictions` and `contradiction_score`) verify correctly with new code because their hash was computed without these keys, and the verifier only hashes keys that are present.
 
 ## Policy Semantics
 
-`PolicyProfile` fields: `name`, `max_blind_spots`, `max_fee`, `max_unknown`, `require_bridge`, `max_unmet_obligations`, `max_contradictions`.
+`PolicyProfile` fields: `name`, `max_blind_spots`, `max_fee`, `max_unknown`, `require_bridge`, `max_unmet_obligations`, `max_contradictions`, `max_structural_contradictions`.
 
 Disposition priority (first match wins):
 1. `blind_spots > 0 AND fee > max_fee` → `refuse_pending_disclosure`
 2. `unknown_dimensions > max_unknown` (when `max_unknown >= 0`) → `refuse_pending_disclosure`
 3. `unmet_obligations > max_unmet_obligations` (when `max_unmet_obligations >= 0`) → `refuse_pending_disclosure`
 4. `contradiction_count > max_contradictions` (when `max_contradictions >= 0`) → `refuse_pending_disclosure`
-5. `require_bridge AND blind_spots > 0` → `proceed_with_bridge`
-6. `blind_spots > max_blind_spots` → `proceed_with_bridge`
-7. `fee > max_fee` → `proceed_with_receipt`
-8. Otherwise → `proceed`
+5. `structural_contradiction_score > max_structural_contradictions` (when `max_structural_contradictions >= 0`) → `refuse_pending_disclosure`
+6. `require_bridge AND blind_spots > 0` → `proceed_with_bridge`
+7. `blind_spots > max_blind_spots` → `proceed_with_bridge`
+8. `structural_contradiction_score > 0` → `proceed_with_caution`
+9. `fee > max_fee` → `proceed_with_receipt`
+10. Otherwise → `proceed`
 
-`max_unknown = -1` disables the unknown threshold (default). `max_unmet_obligations = -1` disables obligation enforcement (default). `max_contradictions = -1` disables contradiction enforcement (default). Setting any threshold to `0` means strict: any occurrence triggers refusal.
+Note on caution vs. threshold: rule 8 fires on ANY nonzero `structural_contradiction_score`, independent of `max_structural_contradictions`. The threshold (rule 5) controls the refuse boundary; the caution boundary (rule 8) fires unconditionally on visible schema incompatibility.
+
+`max_unknown = -1` disables the unknown threshold (default). `max_unmet_obligations = -1` disables obligation enforcement (default). `max_contradictions = -1` disables contradiction enforcement (default). `max_structural_contradictions = -1` disables structural contradiction enforcement (default). Setting any threshold to `0` means strict: any occurrence triggers refusal.
 
 ## Anti-Reflexivity Laws
 
@@ -100,7 +104,7 @@ where `boundary_fee = rho_full - rho_obs >= 0` is the rank contribution of cross
 
 **Minimum Disclosure Set**: `minimum_disclosure_set(comp)` returns the smallest set of `(tool, field)` pairs whose disclosure eliminates the coherence fee. The cardinality always equals the fee — it is a basis for the quotient space of the full coboundary column space modulo the observable column space. Disclosures subsume bridges: `len(bridges) >= 2 * len(disclosures)` across all compositions.
 
-**Non-submodularity**: The boundary fee is NOT submodular on the partition lattice. An adversarial survey of 10,000 random compositions (635,095 partition pairs) found 4,061 violations of `bf(P^Q) + bf(P v Q) <= bf(P) + bf(Q)`, with maximum violation magnitude 3. The individual `rho_full` and `rho_obs` functions are submodular (matroid rank on row sets), but their difference `bf = rho_full - rho_obs` is not. The 9 original bundled compositions happen to satisfy submodularity, but this is a topological accident of their pipeline-like structure, not a general property.
+**Non-submodularity** (corrected scope, Sprint 0.2 audit, 2026-04-10): The boundary fee `bf` produces 4,061 strict-inequality violations of `bf(P^Q) + bf(P v Q) <= bf(P) + bf(Q)` out of 635,095 partition pairs across 10,000 random compositions, with maximum violation magnitude 3, under the producing script `bulla/scripts/adversarial_submodularity_survey.py` at seed=42. This number is correctly computed (exact `Fraction` arithmetic, bit-exact reproduction verified 2026-04-10), but the Sprint 0.2 code-inspection audit (`papers/hierarchical-fee/submodularity_audit.md`) found that **the script tests `bf` on a specific sub-domain of the partition lattice that is adversarially misaligned with realistic compositions**: (1) the partition sampler `lines 111-152` enumerates only binary partitions for `(P, Q)`, while the lattice meets and joins it computes can have any arity, producing an asymmetric `(binary, binary, non-binary, non-binary)` test rather than a uniform-arity submodularity test; (2) the composition generator `lines 43-79` introduces a freshly named convention dimension on every edge (`d{DIM_COUNTER}` at line 73), so no two edges in the entire 10K corpus share a dimension name — the opposite extreme from real MCP compositions like `filesystem+github` where `path_convention_match` appears on 13 edges. The individual `rho_full` and `rho_obs` functions remain submodular (matroid rank on row sets), and their difference `bf = rho_full - rho_obs` is non-submodular *on this sub-domain with this generator*. Whether `bf` is submodular on (a) the full partition lattice rather than the binary-pair sub-domain, or (b) compositions with shared dimension names across edges, is **untested** by this script and is the subject of pre-registered conjectures SA-1 and SA-2 in `papers/hierarchical-fee/submodularity_audit.md` §4, scheduled for Sprint B.3. The 9 original bundled compositions happen to satisfy submodularity; whether this is a topological accident or a general property of realistic compositions is also a Sprint B.3 question. **The honest version of this claim is "bf is non-submodular on the binary-pair sub-domain with the fresh-dimension-per-edge generator," not "bf is non-submodular on the partition lattice."**
 
 **Conditional Diagnosis**: For partial compositions with open ports, placeholder tools with empty observable schemas produce worst-case fee estimates. Boundary obligations — fields the placeholder must expose — are read off the blind spots on placeholder edges.
 
@@ -496,6 +500,26 @@ Three cases confirm the rule:
 3. **B's vocabulary is disjoint from A's** (B has a different vocabulary): A's contradictions are irrelevant to B's composition. Inheriting them would pollute B's receipt with contradictions from dimensions B does not use.
 
 The SDK implements this rule: `compose_multi()` calls `detect_contradictions()` on the chain's `inline_dimensions` and does not read the chain's `contradictions` field.
+
+## Structural Contradictions (v0.34.0)
+
+Structural contradictions are a different failure class from convention contradictions above. Convention contradictions detect conflicting *values* for the same dimension (e.g., "zero_based" vs "one_based" for `id_offset`). Structural contradictions detect *schema incompatibilities* between fields that are visibly connected — same-named fields with different types, enum values, formats, or ranges.
+
+### `SchemaContradiction`
+
+Frozen dataclass: `field_a`, `field_b`, `tool_a`, `tool_b`, `mismatch_type` (one of `"type"`, `"format"`, `"enum"`, `"range"`, `"pattern"`), `severity` (float 0.0–1.0), `details` (str). `to_dict()` / `from_dict()` support JSON round-trip.
+
+### `StructuralDiagnostic`
+
+Contains `overlaps` (all findings: agreements + contradictions + homonyms + synonyms), `contradictions` (the diagnostic subset), `n_overlapping_fields`, `n_contradicted`, `contradiction_score` (sum of severities, rounded).
+
+### Receipt Fields
+
+`WitnessReceipt.structural_contradictions: tuple[SchemaContradiction, ...] | None`. `WitnessReceipt.contradiction_score: int` (default 0). Both are conditionally included in `_hash_input()` (structural_contradictions only when not None; contradiction_score only when > 0).
+
+### Disposition Effect
+
+Any nonzero `contradiction_score` triggers `PROCEED_WITH_CAUTION` (rule 8 in disposition priority). The `max_structural_contradictions` policy threshold (rule 5) controls the escalation to `refuse_pending_disclosure`. This is independent of convention contradiction enforcement (`max_contradictions`).
 
 ### `expected_value` Hydration
 

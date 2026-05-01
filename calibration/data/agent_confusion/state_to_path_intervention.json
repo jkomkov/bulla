@@ -1,0 +1,215 @@
+[
+  {
+    "pair": "airtable-mcp+github",
+    "baseline_hit": false,
+    "rename_hit": false,
+    "baseline_all": [
+      "base_id",
+      "field_id",
+      "fields",
+      "milestone",
+      "options",
+      "q",
+      "query",
+      "record_id",
+      "sha",
+      "since",
+      "table_id",
+      "type",
+      "value"
+    ],
+    "rename_all": [
+      "base_id",
+      "field_id",
+      "fields",
+      "options",
+      "q",
+      "query",
+      "record_id",
+      "table_id",
+      "type"
+    ]
+  },
+  {
+    "pair": "cognee-mcp-server+github",
+    "baseline_hit": false,
+    "rename_hit": false,
+    "baseline_all": [
+      "commit_id",
+      "content",
+      "expected_head_sha",
+      "graph_model_file",
+      "graph_model_name",
+      "q",
+      "query",
+      "search_query",
+      "sha",
+      "since",
+      "text"
+    ],
+    "rename_all": [
+      "content",
+      "expected_head_sha",
+      "graph_model_file",
+      "graph_model_name",
+      "q",
+      "query",
+      "search_query",
+      "sha",
+      "since",
+      "text"
+    ]
+  },
+  {
+    "pair": "exa+github",
+    "baseline_hit": false,
+    "rename_hit": false,
+    "baseline_all": [
+      "query"
+    ],
+    "rename_all": []
+  },
+  {
+    "pair": "fetch-mcp+github",
+    "baseline_hit": false,
+    "rename_hit": false,
+    "baseline_all": [
+      "content",
+      "headers",
+      "since"
+    ],
+    "rename_all": [
+      "headers",
+      "q",
+      "sha",
+      "since"
+    ]
+  },
+  {
+    "pair": "flightradar24-mcp-server+github",
+    "baseline_hit": false,
+    "rename_hit": true,
+    "baseline_all": [],
+    "rename_all": [
+      "bounds",
+      "categories",
+      "path",
+      "sha",
+      "since"
+    ]
+  },
+  {
+    "pair": "github+gtasks-mcp",
+    "baseline_hit": false,
+    "rename_hit": true,
+    "baseline_all": [
+      "cursor",
+      "due",
+      "query"
+    ],
+    "rename_all": [
+      "base",
+      "commit_id",
+      "cursor",
+      "direction",
+      "due",
+      "expected_head_sha",
+      "head",
+      "line",
+      "order",
+      "page",
+      "path",
+      "perPage",
+      "per_page",
+      "position",
+      "q",
+      "query",
+      "sha",
+      "since",
+      "sort"
+    ]
+  },
+  {
+    "pair": "github+inoyu-mcp-unomi-server",
+    "baseline_hit": false,
+    "rename_hit": false,
+    "baseline_all": [
+      "description",
+      "name",
+      "query"
+    ],
+    "rename_all": [
+      "query"
+    ]
+  },
+  {
+    "pair": "github+mcp-mongo-server",
+    "baseline_hit": false,
+    "rename_hit": false,
+    "baseline_all": [],
+    "rename_all": []
+  },
+  {
+    "pair": "github+mcp-pinecone",
+    "baseline_hit": false,
+    "rename_hit": false,
+    "baseline_all": [
+      "metadata",
+      "namespace",
+      "query"
+    ],
+    "rename_all": [
+      "metadata",
+      "namespace",
+      "query"
+    ]
+  },
+  {
+    "pair": "github+mcp-playwright",
+    "baseline_hit": false,
+    "rename_hit": false,
+    "baseline_all": [],
+    "rename_all": []
+  },
+  {
+    "pair": "github+mcp-server-aws",
+    "baseline_hit": false,
+    "rename_hit": false,
+    "baseline_all": [
+      "attribute_definitions",
+      "expression_attributes",
+      "expression_values",
+      "item",
+      "key",
+      "key_schema"
+    ],
+    "rename_all": [
+      "attribute_definitions",
+      "expression_attributes",
+      "expression_values",
+      "file_content",
+      "item",
+      "key",
+      "key_schema",
+      "parameters",
+      "request_items",
+      "statements"
+    ]
+  },
+  {
+    "pair": "github+mcp-server-browserbase",
+    "baseline_hit": false,
+    "rename_hit": false,
+    "baseline_all": [
+      "action",
+      "instruction",
+      "variables"
+    ],
+    "rename_all": [
+      "action",
+      "instruction",
+      "schema",
+      "url"
+    ]
+  }
+]

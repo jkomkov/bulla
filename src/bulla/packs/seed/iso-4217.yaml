@@ -1,0 +1,1641 @@
+pack_name: iso-4217
+pack_version: 0.1.0
+license:
+  spdx_id: CC0-1.0
+  source_url: https://www.six-group.com/en/products-services/financial-information/data-standards.html
+  registry_license: open
+  attribution: sha256:iso-4217-notices
+derives_from:
+  standard: ISO-4217
+  version: pycountry-snapshot-2026-04-26
+  source_uri: https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml
+dimensions:
+  currency_code:
+    description: ISO 4217 currency code. The canonical form is the alpha-3 code (USD,
+      EUR, JPY, ...); the numeric code (840, 978, 392, ...) is recorded as an alias
+      so a field whose enum uses numeric-only codes still classifies under this dimension.
+      Standards-tagged source_codes preserve the original ISO-4217-alpha and ISO-4217-numeric
+      forms for consumers that need them.
+    field_patterns:
+    - '*_currency'
+    - '*_currency_code'
+    - currency
+    - currency_code
+    - ccy
+    - ccy_code
+    - ccyCode
+    description_keywords:
+    - currency code
+    - iso 4217
+    - iso-4217
+    - alpha-3 currency
+    - numeric currency
+    domains:
+    - financial
+    - universal
+    known_values:
+    - canonical: AED
+      aliases:
+      - '784'
+      source_codes:
+        ISO-4217-alpha: AED
+        ISO-4217-numeric: '784'
+    - canonical: AFN
+      aliases:
+      - '971'
+      source_codes:
+        ISO-4217-alpha: AFN
+        ISO-4217-numeric: '971'
+    - canonical: ALL
+      aliases:
+      - 008
+      source_codes:
+        ISO-4217-alpha: ALL
+        ISO-4217-numeric: 008
+    - canonical: AMD
+      aliases:
+      - '051'
+      source_codes:
+        ISO-4217-alpha: AMD
+        ISO-4217-numeric: '051'
+    - canonical: AOA
+      aliases:
+      - '973'
+      source_codes:
+        ISO-4217-alpha: AOA
+        ISO-4217-numeric: '973'
+    - canonical: ARS
+      aliases:
+      - '032'
+      source_codes:
+        ISO-4217-alpha: ARS
+        ISO-4217-numeric: '032'
+    - canonical: AUD
+      aliases:
+      - '036'
+      source_codes:
+        ISO-4217-alpha: AUD
+        ISO-4217-numeric: '036'
+    - canonical: AWG
+      aliases:
+      - '533'
+      source_codes:
+        ISO-4217-alpha: AWG
+        ISO-4217-numeric: '533'
+    - canonical: AZN
+      aliases:
+      - '944'
+      source_codes:
+        ISO-4217-alpha: AZN
+        ISO-4217-numeric: '944'
+    - canonical: BAM
+      aliases:
+      - '977'
+      source_codes:
+        ISO-4217-alpha: BAM
+        ISO-4217-numeric: '977'
+    - canonical: BBD
+      aliases:
+      - '052'
+      source_codes:
+        ISO-4217-alpha: BBD
+        ISO-4217-numeric: '052'
+    - canonical: BDT
+      aliases:
+      - '050'
+      source_codes:
+        ISO-4217-alpha: BDT
+        ISO-4217-numeric: '050'
+    - canonical: BHD
+      aliases:
+      - 048
+      source_codes:
+        ISO-4217-alpha: BHD
+        ISO-4217-numeric: 048
+    - canonical: BIF
+      aliases:
+      - '108'
+      source_codes:
+        ISO-4217-alpha: BIF
+        ISO-4217-numeric: '108'
+    - canonical: BMD
+      aliases:
+      - '060'
+      source_codes:
+        ISO-4217-alpha: BMD
+        ISO-4217-numeric: '060'
+    - canonical: BND
+      aliases:
+      - 096
+      source_codes:
+        ISO-4217-alpha: BND
+        ISO-4217-numeric: 096
+    - canonical: BOB
+      aliases:
+      - 068
+      source_codes:
+        ISO-4217-alpha: BOB
+        ISO-4217-numeric: 068
+    - canonical: BOV
+      aliases:
+      - '984'
+      source_codes:
+        ISO-4217-alpha: BOV
+        ISO-4217-numeric: '984'
+    - canonical: BRL
+      aliases:
+      - '986'
+      source_codes:
+        ISO-4217-alpha: BRL
+        ISO-4217-numeric: '986'
+    - canonical: BSD
+      aliases:
+      - '044'
+      source_codes:
+        ISO-4217-alpha: BSD
+        ISO-4217-numeric: '044'
+    - canonical: BTN
+      aliases:
+      - '064'
+      source_codes:
+        ISO-4217-alpha: BTN
+        ISO-4217-numeric: '064'
+    - canonical: BWP
+      aliases:
+      - '072'
+      source_codes:
+        ISO-4217-alpha: BWP
+        ISO-4217-numeric: '072'
+    - canonical: BYN
+      aliases:
+      - '933'
+      source_codes:
+        ISO-4217-alpha: BYN
+        ISO-4217-numeric: '933'
+    - canonical: BZD
+      aliases:
+      - 084
+      source_codes:
+        ISO-4217-alpha: BZD
+        ISO-4217-numeric: 084
+    - canonical: CAD
+      aliases:
+      - '124'
+      source_codes:
+        ISO-4217-alpha: CAD
+        ISO-4217-numeric: '124'
+    - canonical: CDF
+      aliases:
+      - '976'
+      source_codes:
+        ISO-4217-alpha: CDF
+        ISO-4217-numeric: '976'
+    - canonical: CHE
+      aliases:
+      - '947'
+      source_codes:
+        ISO-4217-alpha: CHE
+        ISO-4217-numeric: '947'
+    - canonical: CHF
+      aliases:
+      - '756'
+      source_codes:
+        ISO-4217-alpha: CHF
+        ISO-4217-numeric: '756'
+    - canonical: CHW
+      aliases:
+      - '948'
+      source_codes:
+        ISO-4217-alpha: CHW
+        ISO-4217-numeric: '948'
+    - canonical: CLF
+      aliases:
+      - '990'
+      source_codes:
+        ISO-4217-alpha: CLF
+        ISO-4217-numeric: '990'
+    - canonical: CLP
+      aliases:
+      - '152'
+      source_codes:
+        ISO-4217-alpha: CLP
+        ISO-4217-numeric: '152'
+    - canonical: CNY
+      aliases:
+      - '156'
+      source_codes:
+        ISO-4217-alpha: CNY
+        ISO-4217-numeric: '156'
+    - canonical: COP
+      aliases:
+      - '170'
+      source_codes:
+        ISO-4217-alpha: COP
+        ISO-4217-numeric: '170'
+    - canonical: COU
+      aliases:
+      - '970'
+      source_codes:
+        ISO-4217-alpha: COU
+        ISO-4217-numeric: '970'
+    - canonical: CRC
+      aliases:
+      - '188'
+      source_codes:
+        ISO-4217-alpha: CRC
+        ISO-4217-numeric: '188'
+    - canonical: CUP
+      aliases:
+      - '192'
+      source_codes:
+        ISO-4217-alpha: CUP
+        ISO-4217-numeric: '192'
+    - canonical: CVE
+      aliases:
+      - '132'
+      source_codes:
+        ISO-4217-alpha: CVE
+        ISO-4217-numeric: '132'
+    - canonical: CZK
+      aliases:
+      - '203'
+      source_codes:
+        ISO-4217-alpha: CZK
+        ISO-4217-numeric: '203'
+    - canonical: DJF
+      aliases:
+      - '262'
+      source_codes:
+        ISO-4217-alpha: DJF
+        ISO-4217-numeric: '262'
+    - canonical: DKK
+      aliases:
+      - '208'
+      source_codes:
+        ISO-4217-alpha: DKK
+        ISO-4217-numeric: '208'
+    - canonical: DOP
+      aliases:
+      - '214'
+      source_codes:
+        ISO-4217-alpha: DOP
+        ISO-4217-numeric: '214'
+    - canonical: DZD
+      aliases:
+      - '012'
+      source_codes:
+        ISO-4217-alpha: DZD
+        ISO-4217-numeric: '012'
+    - canonical: EGP
+      aliases:
+      - '818'
+      source_codes:
+        ISO-4217-alpha: EGP
+        ISO-4217-numeric: '818'
+    - canonical: ERN
+      aliases:
+      - '232'
+      source_codes:
+        ISO-4217-alpha: ERN
+        ISO-4217-numeric: '232'
+    - canonical: ETB
+      aliases:
+      - '230'
+      source_codes:
+        ISO-4217-alpha: ETB
+        ISO-4217-numeric: '230'
+    - canonical: EUR
+      aliases:
+      - '978'
+      source_codes:
+        ISO-4217-alpha: EUR
+        ISO-4217-numeric: '978'
+    - canonical: FJD
+      aliases:
+      - '242'
+      source_codes:
+        ISO-4217-alpha: FJD
+        ISO-4217-numeric: '242'
+    - canonical: FKP
+      aliases:
+      - '238'
+      source_codes:
+        ISO-4217-alpha: FKP
+        ISO-4217-numeric: '238'
+    - canonical: GBP
+      aliases:
+      - '826'
+      source_codes:
+        ISO-4217-alpha: GBP
+        ISO-4217-numeric: '826'
+    - canonical: GEL
+      aliases:
+      - '981'
+      source_codes:
+        ISO-4217-alpha: GEL
+        ISO-4217-numeric: '981'
+    - canonical: GHS
+      aliases:
+      - '936'
+      source_codes:
+        ISO-4217-alpha: GHS
+        ISO-4217-numeric: '936'
+    - canonical: GIP
+      aliases:
+      - '292'
+      source_codes:
+        ISO-4217-alpha: GIP
+        ISO-4217-numeric: '292'
+    - canonical: GMD
+      aliases:
+      - '270'
+      source_codes:
+        ISO-4217-alpha: GMD
+        ISO-4217-numeric: '270'
+    - canonical: GNF
+      aliases:
+      - '324'
+      source_codes:
+        ISO-4217-alpha: GNF
+        ISO-4217-numeric: '324'
+    - canonical: GTQ
+      aliases:
+      - '320'
+      source_codes:
+        ISO-4217-alpha: GTQ
+        ISO-4217-numeric: '320'
+    - canonical: GYD
+      aliases:
+      - '328'
+      source_codes:
+        ISO-4217-alpha: GYD
+        ISO-4217-numeric: '328'
+    - canonical: HKD
+      aliases:
+      - '344'
+      source_codes:
+        ISO-4217-alpha: HKD
+        ISO-4217-numeric: '344'
+    - canonical: HNL
+      aliases:
+      - '340'
+      source_codes:
+        ISO-4217-alpha: HNL
+        ISO-4217-numeric: '340'
+    - canonical: HTG
+      aliases:
+      - '332'
+      source_codes:
+        ISO-4217-alpha: HTG
+        ISO-4217-numeric: '332'
+    - canonical: HUF
+      aliases:
+      - '348'
+      source_codes:
+        ISO-4217-alpha: HUF
+        ISO-4217-numeric: '348'
+    - canonical: IDR
+      aliases:
+      - '360'
+      source_codes:
+        ISO-4217-alpha: IDR
+        ISO-4217-numeric: '360'
+    - canonical: ILS
+      aliases:
+      - '376'
+      source_codes:
+        ISO-4217-alpha: ILS
+        ISO-4217-numeric: '376'
+    - canonical: INR
+      aliases:
+      - '356'
+      source_codes:
+        ISO-4217-alpha: INR
+        ISO-4217-numeric: '356'
+    - canonical: IQD
+      aliases:
+      - '368'
+      source_codes:
+        ISO-4217-alpha: IQD
+        ISO-4217-numeric: '368'
+    - canonical: IRR
+      aliases:
+      - '364'
+      source_codes:
+        ISO-4217-alpha: IRR
+        ISO-4217-numeric: '364'
+    - canonical: ISK
+      aliases:
+      - '352'
+      source_codes:
+        ISO-4217-alpha: ISK
+        ISO-4217-numeric: '352'
+    - canonical: JMD
+      aliases:
+      - '388'
+      source_codes:
+        ISO-4217-alpha: JMD
+        ISO-4217-numeric: '388'
+    - canonical: JOD
+      aliases:
+      - '400'
+      source_codes:
+        ISO-4217-alpha: JOD
+        ISO-4217-numeric: '400'
+    - canonical: JPY
+      aliases:
+      - '392'
+      source_codes:
+        ISO-4217-alpha: JPY
+        ISO-4217-numeric: '392'
+    - canonical: KES
+      aliases:
+      - '404'
+      source_codes:
+        ISO-4217-alpha: KES
+        ISO-4217-numeric: '404'
+    - canonical: KGS
+      aliases:
+      - '417'
+      source_codes:
+        ISO-4217-alpha: KGS
+        ISO-4217-numeric: '417'
+    - canonical: KHR
+      aliases:
+      - '116'
+      source_codes:
+        ISO-4217-alpha: KHR
+        ISO-4217-numeric: '116'
+    - canonical: KMF
+      aliases:
+      - '174'
+      source_codes:
+        ISO-4217-alpha: KMF
+        ISO-4217-numeric: '174'
+    - canonical: KPW
+      aliases:
+      - '408'
+      source_codes:
+        ISO-4217-alpha: KPW
+        ISO-4217-numeric: '408'
+    - canonical: KRW
+      aliases:
+      - '410'
+      source_codes:
+        ISO-4217-alpha: KRW
+        ISO-4217-numeric: '410'
+    - canonical: KWD
+      aliases:
+      - '414'
+      source_codes:
+        ISO-4217-alpha: KWD
+        ISO-4217-numeric: '414'
+    - canonical: KYD
+      aliases:
+      - '136'
+      source_codes:
+        ISO-4217-alpha: KYD
+        ISO-4217-numeric: '136'
+    - canonical: KZT
+      aliases:
+      - '398'
+      source_codes:
+        ISO-4217-alpha: KZT
+        ISO-4217-numeric: '398'
+    - canonical: LAK
+      aliases:
+      - '418'
+      source_codes:
+        ISO-4217-alpha: LAK
+        ISO-4217-numeric: '418'
+    - canonical: LBP
+      aliases:
+      - '422'
+      source_codes:
+        ISO-4217-alpha: LBP
+        ISO-4217-numeric: '422'
+    - canonical: LKR
+      aliases:
+      - '144'
+      source_codes:
+        ISO-4217-alpha: LKR
+        ISO-4217-numeric: '144'
+    - canonical: LRD
+      aliases:
+      - '430'
+      source_codes:
+        ISO-4217-alpha: LRD
+        ISO-4217-numeric: '430'
+    - canonical: LSL
+      aliases:
+      - '426'
+      source_codes:
+        ISO-4217-alpha: LSL
+        ISO-4217-numeric: '426'
+    - canonical: LYD
+      aliases:
+      - '434'
+      source_codes:
+        ISO-4217-alpha: LYD
+        ISO-4217-numeric: '434'
+    - canonical: MAD
+      aliases:
+      - '504'
+      source_codes:
+        ISO-4217-alpha: MAD
+        ISO-4217-numeric: '504'
+    - canonical: MDL
+      aliases:
+      - '498'
+      source_codes:
+        ISO-4217-alpha: MDL
+        ISO-4217-numeric: '498'
+    - canonical: MGA
+      aliases:
+      - '969'
+      source_codes:
+        ISO-4217-alpha: MGA
+        ISO-4217-numeric: '969'
+    - canonical: MKD
+      aliases:
+      - '807'
+      source_codes:
+        ISO-4217-alpha: MKD
+        ISO-4217-numeric: '807'
+    - canonical: MMK
+      aliases:
+      - '104'
+      source_codes:
+        ISO-4217-alpha: MMK
+        ISO-4217-numeric: '104'
+    - canonical: MNT
+      aliases:
+      - '496'
+      source_codes:
+        ISO-4217-alpha: MNT
+        ISO-4217-numeric: '496'
+    - canonical: MOP
+      aliases:
+      - '446'
+      source_codes:
+        ISO-4217-alpha: MOP
+        ISO-4217-numeric: '446'
+    - canonical: MRU
+      aliases:
+      - '929'
+      source_codes:
+        ISO-4217-alpha: MRU
+        ISO-4217-numeric: '929'
+    - canonical: MUR
+      aliases:
+      - '480'
+      source_codes:
+        ISO-4217-alpha: MUR
+        ISO-4217-numeric: '480'
+    - canonical: MVR
+      aliases:
+      - '462'
+      source_codes:
+        ISO-4217-alpha: MVR
+        ISO-4217-numeric: '462'
+    - canonical: MWK
+      aliases:
+      - '454'
+      source_codes:
+        ISO-4217-alpha: MWK
+        ISO-4217-numeric: '454'
+    - canonical: MXN
+      aliases:
+      - '484'
+      source_codes:
+        ISO-4217-alpha: MXN
+        ISO-4217-numeric: '484'
+    - canonical: MXV
+      aliases:
+      - '979'
+      source_codes:
+        ISO-4217-alpha: MXV
+        ISO-4217-numeric: '979'
+    - canonical: MYR
+      aliases:
+      - '458'
+      source_codes:
+        ISO-4217-alpha: MYR
+        ISO-4217-numeric: '458'
+    - canonical: MZN
+      aliases:
+      - '943'
+      source_codes:
+        ISO-4217-alpha: MZN
+        ISO-4217-numeric: '943'
+    - canonical: NAD
+      aliases:
+      - '516'
+      source_codes:
+        ISO-4217-alpha: NAD
+        ISO-4217-numeric: '516'
+    - canonical: NGN
+      aliases:
+      - '566'
+      source_codes:
+        ISO-4217-alpha: NGN
+        ISO-4217-numeric: '566'
+    - canonical: NIO
+      aliases:
+      - '558'
+      source_codes:
+        ISO-4217-alpha: NIO
+        ISO-4217-numeric: '558'
+    - canonical: NOK
+      aliases:
+      - '578'
+      source_codes:
+        ISO-4217-alpha: NOK
+        ISO-4217-numeric: '578'
+    - canonical: NPR
+      aliases:
+      - '524'
+      source_codes:
+        ISO-4217-alpha: NPR
+        ISO-4217-numeric: '524'
+    - canonical: NZD
+      aliases:
+      - '554'
+      source_codes:
+        ISO-4217-alpha: NZD
+        ISO-4217-numeric: '554'
+    - canonical: OMR
+      aliases:
+      - '512'
+      source_codes:
+        ISO-4217-alpha: OMR
+        ISO-4217-numeric: '512'
+    - canonical: PAB
+      aliases:
+      - '590'
+      source_codes:
+        ISO-4217-alpha: PAB
+        ISO-4217-numeric: '590'
+    - canonical: PEN
+      aliases:
+      - '604'
+      source_codes:
+        ISO-4217-alpha: PEN
+        ISO-4217-numeric: '604'
+    - canonical: PGK
+      aliases:
+      - '598'
+      source_codes:
+        ISO-4217-alpha: PGK
+        ISO-4217-numeric: '598'
+    - canonical: PHP
+      aliases:
+      - '608'
+      source_codes:
+        ISO-4217-alpha: PHP
+        ISO-4217-numeric: '608'
+    - canonical: PKR
+      aliases:
+      - '586'
+      source_codes:
+        ISO-4217-alpha: PKR
+        ISO-4217-numeric: '586'
+    - canonical: PLN
+      aliases:
+      - '985'
+      source_codes:
+        ISO-4217-alpha: PLN
+        ISO-4217-numeric: '985'
+    - canonical: PYG
+      aliases:
+      - '600'
+      source_codes:
+        ISO-4217-alpha: PYG
+        ISO-4217-numeric: '600'
+    - canonical: QAR
+      aliases:
+      - '634'
+      source_codes:
+        ISO-4217-alpha: QAR
+        ISO-4217-numeric: '634'
+    - canonical: RON
+      aliases:
+      - '946'
+      source_codes:
+        ISO-4217-alpha: RON
+        ISO-4217-numeric: '946'
+    - canonical: RSD
+      aliases:
+      - '941'
+      source_codes:
+        ISO-4217-alpha: RSD
+        ISO-4217-numeric: '941'
+    - canonical: RUB
+      aliases:
+      - '643'
+      source_codes:
+        ISO-4217-alpha: RUB
+        ISO-4217-numeric: '643'
+    - canonical: RWF
+      aliases:
+      - '646'
+      source_codes:
+        ISO-4217-alpha: RWF
+        ISO-4217-numeric: '646'
+    - canonical: SAR
+      aliases:
+      - '682'
+      source_codes:
+        ISO-4217-alpha: SAR
+        ISO-4217-numeric: '682'
+    - canonical: SBD
+      aliases:
+      - 090
+      source_codes:
+        ISO-4217-alpha: SBD
+        ISO-4217-numeric: 090
+    - canonical: SCR
+      aliases:
+      - '690'
+      source_codes:
+        ISO-4217-alpha: SCR
+        ISO-4217-numeric: '690'
+    - canonical: SDG
+      aliases:
+      - '938'
+      source_codes:
+        ISO-4217-alpha: SDG
+        ISO-4217-numeric: '938'
+    - canonical: SEK
+      aliases:
+      - '752'
+      source_codes:
+        ISO-4217-alpha: SEK
+        ISO-4217-numeric: '752'
+    - canonical: SGD
+      aliases:
+      - '702'
+      source_codes:
+        ISO-4217-alpha: SGD
+        ISO-4217-numeric: '702'
+    - canonical: SHP
+      aliases:
+      - '654'
+      source_codes:
+        ISO-4217-alpha: SHP
+        ISO-4217-numeric: '654'
+    - canonical: SLE
+      aliases:
+      - '925'
+      source_codes:
+        ISO-4217-alpha: SLE
+        ISO-4217-numeric: '925'
+    - canonical: SOS
+      aliases:
+      - '706'
+      source_codes:
+        ISO-4217-alpha: SOS
+        ISO-4217-numeric: '706'
+    - canonical: SRD
+      aliases:
+      - '968'
+      source_codes:
+        ISO-4217-alpha: SRD
+        ISO-4217-numeric: '968'
+    - canonical: SSP
+      aliases:
+      - '728'
+      source_codes:
+        ISO-4217-alpha: SSP
+        ISO-4217-numeric: '728'
+    - canonical: STN
+      aliases:
+      - '930'
+      source_codes:
+        ISO-4217-alpha: STN
+        ISO-4217-numeric: '930'
+    - canonical: SVC
+      aliases:
+      - '222'
+      source_codes:
+        ISO-4217-alpha: SVC
+        ISO-4217-numeric: '222'
+    - canonical: SYP
+      aliases:
+      - '760'
+      source_codes:
+        ISO-4217-alpha: SYP
+        ISO-4217-numeric: '760'
+    - canonical: SZL
+      aliases:
+      - '748'
+      source_codes:
+        ISO-4217-alpha: SZL
+        ISO-4217-numeric: '748'
+    - canonical: THB
+      aliases:
+      - '764'
+      source_codes:
+        ISO-4217-alpha: THB
+        ISO-4217-numeric: '764'
+    - canonical: TJS
+      aliases:
+      - '972'
+      source_codes:
+        ISO-4217-alpha: TJS
+        ISO-4217-numeric: '972'
+    - canonical: TMT
+      aliases:
+      - '934'
+      source_codes:
+        ISO-4217-alpha: TMT
+        ISO-4217-numeric: '934'
+    - canonical: TND
+      aliases:
+      - '788'
+      source_codes:
+        ISO-4217-alpha: TND
+        ISO-4217-numeric: '788'
+    - canonical: TOP
+      aliases:
+      - '776'
+      source_codes:
+        ISO-4217-alpha: TOP
+        ISO-4217-numeric: '776'
+    - canonical: TRY
+      aliases:
+      - '949'
+      source_codes:
+        ISO-4217-alpha: TRY
+        ISO-4217-numeric: '949'
+    - canonical: TTD
+      aliases:
+      - '780'
+      source_codes:
+        ISO-4217-alpha: TTD
+        ISO-4217-numeric: '780'
+    - canonical: TWD
+      aliases:
+      - '901'
+      source_codes:
+        ISO-4217-alpha: TWD
+        ISO-4217-numeric: '901'
+    - canonical: TZS
+      aliases:
+      - '834'
+      source_codes:
+        ISO-4217-alpha: TZS
+        ISO-4217-numeric: '834'
+    - canonical: UAH
+      aliases:
+      - '980'
+      source_codes:
+        ISO-4217-alpha: UAH
+        ISO-4217-numeric: '980'
+    - canonical: UGX
+      aliases:
+      - '800'
+      source_codes:
+        ISO-4217-alpha: UGX
+        ISO-4217-numeric: '800'
+    - canonical: USD
+      aliases:
+      - '840'
+      source_codes:
+        ISO-4217-alpha: USD
+        ISO-4217-numeric: '840'
+    - canonical: USN
+      aliases:
+      - '997'
+      source_codes:
+        ISO-4217-alpha: USN
+        ISO-4217-numeric: '997'
+    - canonical: UYI
+      aliases:
+      - '940'
+      source_codes:
+        ISO-4217-alpha: UYI
+        ISO-4217-numeric: '940'
+    - canonical: UYU
+      aliases:
+      - '858'
+      source_codes:
+        ISO-4217-alpha: UYU
+        ISO-4217-numeric: '858'
+    - canonical: UYW
+      aliases:
+      - '927'
+      source_codes:
+        ISO-4217-alpha: UYW
+        ISO-4217-numeric: '927'
+    - canonical: UZS
+      aliases:
+      - '860'
+      source_codes:
+        ISO-4217-alpha: UZS
+        ISO-4217-numeric: '860'
+    - canonical: VED
+      aliases:
+      - '926'
+      source_codes:
+        ISO-4217-alpha: VED
+        ISO-4217-numeric: '926'
+    - canonical: VES
+      aliases:
+      - '928'
+      source_codes:
+        ISO-4217-alpha: VES
+        ISO-4217-numeric: '928'
+    - canonical: VND
+      aliases:
+      - '704'
+      source_codes:
+        ISO-4217-alpha: VND
+        ISO-4217-numeric: '704'
+    - canonical: VUV
+      aliases:
+      - '548'
+      source_codes:
+        ISO-4217-alpha: VUV
+        ISO-4217-numeric: '548'
+    - canonical: WST
+      aliases:
+      - '882'
+      source_codes:
+        ISO-4217-alpha: WST
+        ISO-4217-numeric: '882'
+    - canonical: XAD
+      aliases:
+      - '396'
+      source_codes:
+        ISO-4217-alpha: XAD
+        ISO-4217-numeric: '396'
+    - canonical: XAF
+      aliases:
+      - '950'
+      source_codes:
+        ISO-4217-alpha: XAF
+        ISO-4217-numeric: '950'
+    - canonical: XAG
+      aliases:
+      - '961'
+      source_codes:
+        ISO-4217-alpha: XAG
+        ISO-4217-numeric: '961'
+    - canonical: XAU
+      aliases:
+      - '959'
+      source_codes:
+        ISO-4217-alpha: XAU
+        ISO-4217-numeric: '959'
+    - canonical: XBA
+      aliases:
+      - '955'
+      source_codes:
+        ISO-4217-alpha: XBA
+        ISO-4217-numeric: '955'
+    - canonical: XBB
+      aliases:
+      - '956'
+      source_codes:
+        ISO-4217-alpha: XBB
+        ISO-4217-numeric: '956'
+    - canonical: XBC
+      aliases:
+      - '957'
+      source_codes:
+        ISO-4217-alpha: XBC
+        ISO-4217-numeric: '957'
+    - canonical: XBD
+      aliases:
+      - '958'
+      source_codes:
+        ISO-4217-alpha: XBD
+        ISO-4217-numeric: '958'
+    - canonical: XCD
+      aliases:
+      - '951'
+      source_codes:
+        ISO-4217-alpha: XCD
+        ISO-4217-numeric: '951'
+    - canonical: XCG
+      aliases:
+      - '532'
+      source_codes:
+        ISO-4217-alpha: XCG
+        ISO-4217-numeric: '532'
+    - canonical: XDR
+      aliases:
+      - '960'
+      source_codes:
+        ISO-4217-alpha: XDR
+        ISO-4217-numeric: '960'
+    - canonical: XOF
+      aliases:
+      - '952'
+      source_codes:
+        ISO-4217-alpha: XOF
+        ISO-4217-numeric: '952'
+    - canonical: XPD
+      aliases:
+      - '964'
+      source_codes:
+        ISO-4217-alpha: XPD
+        ISO-4217-numeric: '964'
+    - canonical: XPF
+      aliases:
+      - '953'
+      source_codes:
+        ISO-4217-alpha: XPF
+        ISO-4217-numeric: '953'
+    - canonical: XPT
+      aliases:
+      - '962'
+      source_codes:
+        ISO-4217-alpha: XPT
+        ISO-4217-numeric: '962'
+    - canonical: XSU
+      aliases:
+      - '994'
+      source_codes:
+        ISO-4217-alpha: XSU
+        ISO-4217-numeric: '994'
+    - canonical: XTS
+      aliases:
+      - '963'
+      source_codes:
+        ISO-4217-alpha: XTS
+        ISO-4217-numeric: '963'
+    - canonical: XUA
+      aliases:
+      - '965'
+      source_codes:
+        ISO-4217-alpha: XUA
+        ISO-4217-numeric: '965'
+    - canonical: XXX
+      aliases:
+      - '999'
+      source_codes:
+        ISO-4217-alpha: XXX
+        ISO-4217-numeric: '999'
+    - canonical: YER
+      aliases:
+      - '886'
+      source_codes:
+        ISO-4217-alpha: YER
+        ISO-4217-numeric: '886'
+    - canonical: ZAR
+      aliases:
+      - '710'
+      source_codes:
+        ISO-4217-alpha: ZAR
+        ISO-4217-numeric: '710'
+    - canonical: ZMW
+      aliases:
+      - '967'
+      source_codes:
+        ISO-4217-alpha: ZMW
+        ISO-4217-numeric: '967'
+    - canonical: ZWG
+      aliases:
+      - '924'
+      source_codes:
+        ISO-4217-alpha: ZWG
+        ISO-4217-numeric: '924'
+mappings:
+  iso-4217-numeric-only:
+    currency_numeric:
+    - from: AED
+      to: '784'
+      equivalence: exact
+    - from: AFN
+      to: '971'
+      equivalence: exact
+    - from: ALL
+      to: 008
+      equivalence: exact
+    - from: AMD
+      to: '051'
+      equivalence: exact
+    - from: AOA
+      to: '973'
+      equivalence: exact
+    - from: ARS
+      to: '032'
+      equivalence: exact
+    - from: AUD
+      to: '036'
+      equivalence: exact
+    - from: AWG
+      to: '533'
+      equivalence: exact
+    - from: AZN
+      to: '944'
+      equivalence: exact
+    - from: BAM
+      to: '977'
+      equivalence: exact
+    - from: BBD
+      to: '052'
+      equivalence: exact
+    - from: BDT
+      to: '050'
+      equivalence: exact
+    - from: BHD
+      to: 048
+      equivalence: exact
+    - from: BIF
+      to: '108'
+      equivalence: exact
+    - from: BMD
+      to: '060'
+      equivalence: exact
+    - from: BND
+      to: 096
+      equivalence: exact
+    - from: BOB
+      to: 068
+      equivalence: exact
+    - from: BOV
+      to: '984'
+      equivalence: exact
+    - from: BRL
+      to: '986'
+      equivalence: exact
+    - from: BSD
+      to: '044'
+      equivalence: exact
+    - from: BTN
+      to: '064'
+      equivalence: exact
+    - from: BWP
+      to: '072'
+      equivalence: exact
+    - from: BYN
+      to: '933'
+      equivalence: exact
+    - from: BZD
+      to: 084
+      equivalence: exact
+    - from: CAD
+      to: '124'
+      equivalence: exact
+    - from: CDF
+      to: '976'
+      equivalence: exact
+    - from: CHE
+      to: '947'
+      equivalence: exact
+    - from: CHF
+      to: '756'
+      equivalence: exact
+    - from: CHW
+      to: '948'
+      equivalence: exact
+    - from: CLF
+      to: '990'
+      equivalence: exact
+    - from: CLP
+      to: '152'
+      equivalence: exact
+    - from: CNY
+      to: '156'
+      equivalence: exact
+    - from: COP
+      to: '170'
+      equivalence: exact
+    - from: COU
+      to: '970'
+      equivalence: exact
+    - from: CRC
+      to: '188'
+      equivalence: exact
+    - from: CUP
+      to: '192'
+      equivalence: exact
+    - from: CVE
+      to: '132'
+      equivalence: exact
+    - from: CZK
+      to: '203'
+      equivalence: exact
+    - from: DJF
+      to: '262'
+      equivalence: exact
+    - from: DKK
+      to: '208'
+      equivalence: exact
+    - from: DOP
+      to: '214'
+      equivalence: exact
+    - from: DZD
+      to: '012'
+      equivalence: exact
+    - from: EGP
+      to: '818'
+      equivalence: exact
+    - from: ERN
+      to: '232'
+      equivalence: exact
+    - from: ETB
+      to: '230'
+      equivalence: exact
+    - from: EUR
+      to: '978'
+      equivalence: exact
+    - from: FJD
+      to: '242'
+      equivalence: exact
+    - from: FKP
+      to: '238'
+      equivalence: exact
+    - from: GBP
+      to: '826'
+      equivalence: exact
+    - from: GEL
+      to: '981'
+      equivalence: exact
+    - from: GHS
+      to: '936'
+      equivalence: exact
+    - from: GIP
+      to: '292'
+      equivalence: exact
+    - from: GMD
+      to: '270'
+      equivalence: exact
+    - from: GNF
+      to: '324'
+      equivalence: exact
+    - from: GTQ
+      to: '320'
+      equivalence: exact
+    - from: GYD
+      to: '328'
+      equivalence: exact
+    - from: HKD
+      to: '344'
+      equivalence: exact
+    - from: HNL
+      to: '340'
+      equivalence: exact
+    - from: HTG
+      to: '332'
+      equivalence: exact
+    - from: HUF
+      to: '348'
+      equivalence: exact
+    - from: IDR
+      to: '360'
+      equivalence: exact
+    - from: ILS
+      to: '376'
+      equivalence: exact
+    - from: INR
+      to: '356'
+      equivalence: exact
+    - from: IQD
+      to: '368'
+      equivalence: exact
+    - from: IRR
+      to: '364'
+      equivalence: exact
+    - from: ISK
+      to: '352'
+      equivalence: exact
+    - from: JMD
+      to: '388'
+      equivalence: exact
+    - from: JOD
+      to: '400'
+      equivalence: exact
+    - from: JPY
+      to: '392'
+      equivalence: exact
+    - from: KES
+      to: '404'
+      equivalence: exact
+    - from: KGS
+      to: '417'
+      equivalence: exact
+    - from: KHR
+      to: '116'
+      equivalence: exact
+    - from: KMF
+      to: '174'
+      equivalence: exact
+    - from: KPW
+      to: '408'
+      equivalence: exact
+    - from: KRW
+      to: '410'
+      equivalence: exact
+    - from: KWD
+      to: '414'
+      equivalence: exact
+    - from: KYD
+      to: '136'
+      equivalence: exact
+    - from: KZT
+      to: '398'
+      equivalence: exact
+    - from: LAK
+      to: '418'
+      equivalence: exact
+    - from: LBP
+      to: '422'
+      equivalence: exact
+    - from: LKR
+      to: '144'
+      equivalence: exact
+    - from: LRD
+      to: '430'
+      equivalence: exact
+    - from: LSL
+      to: '426'
+      equivalence: exact
+    - from: LYD
+      to: '434'
+      equivalence: exact
+    - from: MAD
+      to: '504'
+      equivalence: exact
+    - from: MDL
+      to: '498'
+      equivalence: exact
+    - from: MGA
+      to: '969'
+      equivalence: exact
+    - from: MKD
+      to: '807'
+      equivalence: exact
+    - from: MMK
+      to: '104'
+      equivalence: exact
+    - from: MNT
+      to: '496'
+      equivalence: exact
+    - from: MOP
+      to: '446'
+      equivalence: exact
+    - from: MRU
+      to: '929'
+      equivalence: exact
+    - from: MUR
+      to: '480'
+      equivalence: exact
+    - from: MVR
+      to: '462'
+      equivalence: exact
+    - from: MWK
+      to: '454'
+      equivalence: exact
+    - from: MXN
+      to: '484'
+      equivalence: exact
+    - from: MXV
+      to: '979'
+      equivalence: exact
+    - from: MYR
+      to: '458'
+      equivalence: exact
+    - from: MZN
+      to: '943'
+      equivalence: exact
+    - from: NAD
+      to: '516'
+      equivalence: exact
+    - from: NGN
+      to: '566'
+      equivalence: exact
+    - from: NIO
+      to: '558'
+      equivalence: exact
+    - from: NOK
+      to: '578'
+      equivalence: exact
+    - from: NPR
+      to: '524'
+      equivalence: exact
+    - from: NZD
+      to: '554'
+      equivalence: exact
+    - from: OMR
+      to: '512'
+      equivalence: exact
+    - from: PAB
+      to: '590'
+      equivalence: exact
+    - from: PEN
+      to: '604'
+      equivalence: exact
+    - from: PGK
+      to: '598'
+      equivalence: exact
+    - from: PHP
+      to: '608'
+      equivalence: exact
+    - from: PKR
+      to: '586'
+      equivalence: exact
+    - from: PLN
+      to: '985'
+      equivalence: exact
+    - from: PYG
+      to: '600'
+      equivalence: exact
+    - from: QAR
+      to: '634'
+      equivalence: exact
+    - from: RON
+      to: '946'
+      equivalence: exact
+    - from: RSD
+      to: '941'
+      equivalence: exact
+    - from: RUB
+      to: '643'
+      equivalence: exact
+    - from: RWF
+      to: '646'
+      equivalence: exact
+    - from: SAR
+      to: '682'
+      equivalence: exact
+    - from: SBD
+      to: 090
+      equivalence: exact
+    - from: SCR
+      to: '690'
+      equivalence: exact
+    - from: SDG
+      to: '938'
+      equivalence: exact
+    - from: SEK
+      to: '752'
+      equivalence: exact
+    - from: SGD
+      to: '702'
+      equivalence: exact
+    - from: SHP
+      to: '654'
+      equivalence: exact
+    - from: SLE
+      to: '925'
+      equivalence: exact
+    - from: SOS
+      to: '706'
+      equivalence: exact
+    - from: SRD
+      to: '968'
+      equivalence: exact
+    - from: SSP
+      to: '728'
+      equivalence: exact
+    - from: STN
+      to: '930'
+      equivalence: exact
+    - from: SVC
+      to: '222'
+      equivalence: exact
+    - from: SYP
+      to: '760'
+      equivalence: exact
+    - from: SZL
+      to: '748'
+      equivalence: exact
+    - from: THB
+      to: '764'
+      equivalence: exact
+    - from: TJS
+      to: '972'
+      equivalence: exact
+    - from: TMT
+      to: '934'
+      equivalence: exact
+    - from: TND
+      to: '788'
+      equivalence: exact
+    - from: TOP
+      to: '776'
+      equivalence: exact
+    - from: TRY
+      to: '949'
+      equivalence: exact
+    - from: TTD
+      to: '780'
+      equivalence: exact
+    - from: TWD
+      to: '901'
+      equivalence: exact
+    - from: TZS
+      to: '834'
+      equivalence: exact
+    - from: UAH
+      to: '980'
+      equivalence: exact
+    - from: UGX
+      to: '800'
+      equivalence: exact
+    - from: USD
+      to: '840'
+      equivalence: exact
+    - from: USN
+      to: '997'
+      equivalence: exact
+    - from: UYI
+      to: '940'
+      equivalence: exact
+    - from: UYU
+      to: '858'
+      equivalence: exact
+    - from: UYW
+      to: '927'
+      equivalence: exact
+    - from: UZS
+      to: '860'
+      equivalence: exact
+    - from: VED
+      to: '926'
+      equivalence: exact
+    - from: VES
+      to: '928'
+      equivalence: exact
+    - from: VND
+      to: '704'
+      equivalence: exact
+    - from: VUV
+      to: '548'
+      equivalence: exact
+    - from: WST
+      to: '882'
+      equivalence: exact
+    - from: XAD
+      to: '396'
+      equivalence: exact
+    - from: XAF
+      to: '950'
+      equivalence: exact
+    - from: XAG
+      to: '961'
+      equivalence: exact
+    - from: XAU
+      to: '959'
+      equivalence: exact
+    - from: XBA
+      to: '955'
+      equivalence: exact
+    - from: XBB
+      to: '956'
+      equivalence: exact
+    - from: XBC
+      to: '957'
+      equivalence: exact
+    - from: XBD
+      to: '958'
+      equivalence: exact
+    - from: XCD
+      to: '951'
+      equivalence: exact
+    - from: XCG
+      to: '532'
+      equivalence: exact
+    - from: XDR
+      to: '960'
+      equivalence: exact
+    - from: XOF
+      to: '952'
+      equivalence: exact
+    - from: XPD
+      to: '964'
+      equivalence: exact
+    - from: XPF
+      to: '953'
+      equivalence: exact
+    - from: XPT
+      to: '962'
+      equivalence: exact
+    - from: XSU
+      to: '994'
+      equivalence: exact
+    - from: XTS
+      to: '963'
+      equivalence: exact
+    - from: XUA
+      to: '965'
+      equivalence: exact
+    - from: XXX
+      to: '999'
+      equivalence: exact
+    - from: YER
+      to: '886'
+      equivalence: exact
+    - from: ZAR
+      to: '710'
+      equivalence: exact
+    - from: ZMW
+      to: '967'
+      equivalence: exact
+    - from: ZWG
+      to: '924'
+      equivalence: exact

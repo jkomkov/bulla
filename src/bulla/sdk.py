@@ -25,6 +25,8 @@ from bulla.model import (
     DEFAULT_POLICY_PROFILE,
     Diagnostic,
     PolicyProfile,
+    SchemaContradiction,
+    StructuralDiagnostic,
     WitnessReceipt,
 )
 from bulla.repair import detect_contradictions
@@ -33,11 +35,17 @@ from bulla.witness import witness
 
 @dataclass(frozen=True)
 class ComposeResult:
-    """Result of a composition: receipt + diagnostic + optional decomposition."""
+    """Result of a composition: receipt + diagnostic + optional decomposition.
+
+    ``structural_diagnostic`` carries the parallel schema-comparison
+    findings (visible-but-incompatible fields).  Non-None when the
+    composition was built from MCP tool schemas.
+    """
 
     receipt: WitnessReceipt
     diagnostic: Diagnostic
     decomposition: FeeDecomposition | None = None
+    structural_diagnostic: StructuralDiagnostic | None = None
 
 
 def _obligations_from_chain(chain: dict) -> tuple[BoundaryObligation, ...]:
@@ -79,12 +87,19 @@ def compose(
     guard = BullaGuard.from_tools_list(tools, name=name)
     diag = guard.diagnose()
     comp = guard.composition
+    struct_diag = guard.structural_diagnostic
 
     inline_dimensions: dict | None = None
     parent_receipt_hashes: tuple[str, ...] | None = None
     boundary_obligations: tuple[BoundaryObligation, ...] | None = None
     contradictions: tuple[ContradictionReport, ...] | None = None
     unmet_obligations = 0
+
+    structural_contradictions: tuple[SchemaContradiction, ...] | None = None
+    contradiction_score = 0
+    if struct_diag is not None and struct_diag.contradictions:
+        structural_contradictions = struct_diag.contradictions
+        contradiction_score = struct_diag.contradiction_score
 
     if chain is not None:
         inline_dimensions = chain.get("inline_dimensions")
@@ -110,9 +125,14 @@ def compose(
         boundary_obligations=boundary_obligations,
         contradictions=contradictions,
         unmet_obligations=unmet_obligations,
+        structural_contradictions=structural_contradictions,
+        contradiction_score=contradiction_score,
     )
 
-    return ComposeResult(receipt=receipt, diagnostic=diag)
+    return ComposeResult(
+        receipt=receipt, diagnostic=diag,
+        structural_diagnostic=struct_diag,
+    )
 
 
 def compose_multi(
@@ -144,13 +164,16 @@ def compose_multi(
             prefixed_name = f"{server_name}__{original_name}"
             prefixed["name"] = prefixed_name
             combined_tools.append(prefixed)
-            group_names.append(prefixed_name)
+            group_names.append(
+                prefixed_name.replace("-", "_").replace(" ", "_")
+            )
         server_groups[server_name] = group_names
 
     comp_name = "multi_" + "_".join(sorted(server_tools.keys()))
     guard = BullaGuard.from_tools_list(combined_tools, name=comp_name)
     diag = guard.diagnose()
     comp = guard.composition
+    struct_diag = guard.structural_diagnostic
 
     partition = [frozenset(names) for names in server_groups.values()]
     decomposition = decompose_fee(comp, partition)
@@ -164,6 +187,12 @@ def compose_multi(
     inline_dimensions: dict | None = None
     parent_receipt_hashes: tuple[str, ...] | None = None
     contradictions: tuple[ContradictionReport, ...] | None = None
+
+    structural_contradictions: tuple[SchemaContradiction, ...] | None = None
+    contradiction_score = 0
+    if struct_diag is not None and struct_diag.contradictions:
+        structural_contradictions = struct_diag.contradictions
+        contradiction_score = struct_diag.contradiction_score
 
     if chain is not None:
         inline_dimensions = chain.get("inline_dimensions")
@@ -187,8 +216,11 @@ def compose_multi(
         boundary_obligations=boundary_obs if boundary_obs else None,
         contradictions=contradictions,
         unmet_obligations=unmet_obligations,
+        structural_contradictions=structural_contradictions,
+        contradiction_score=contradiction_score,
     )
 
     return ComposeResult(
         receipt=receipt, diagnostic=diag, decomposition=decomposition,
+        structural_diagnostic=struct_diag,
     )

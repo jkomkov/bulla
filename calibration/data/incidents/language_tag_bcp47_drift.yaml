@@ -1,0 +1,27 @@
+name: language_tag_bcp47_drift
+description: 'Language tag drift (recurring). Localization service expects BCP-47;
+  CMS sends ISO-639-3 alpha-3 only. iso-639 detects: language_code boundary fee.'
+tools:
+  cms_publisher:
+    internal_state:
+    - content_id
+    - language
+    - language_form
+    observable_schema:
+    - content_id
+    - language
+  translation_service:
+    internal_state:
+    - content_id
+    - language
+    - language_form
+    observable_schema:
+    - content_id
+    - language
+edges:
+- from: cms_publisher
+  to: translation_service
+  dimensions:
+  - name: language_form_match
+    from_field: language_form
+    to_field: language_form

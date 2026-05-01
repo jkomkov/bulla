@@ -27,6 +27,7 @@ from bulla.model import (
     Disposition,
     PackRef,
     PolicyProfile,
+    SchemaContradiction,
     WitnessBasis,
     WitnessReceipt,
 )
@@ -41,22 +42,40 @@ def _resolve_disposition(
     unknown_dimensions: int = 0,
     unmet_obligations: int = 0,
     contradiction_count: int = 0,
+    structural_contradiction_score: int = 0,
 ) -> Disposition:
     """Map measurement to judgment under a named policy.
 
+    Reasons over a 2D risk surface (fee x contradiction_score):
+
+      fee=0, contradictions=0  -> PROCEED
+      fee>0, contradictions=0  -> PROCEED_WITH_BRIDGE / REFUSE
+      fee=0, contradictions>0  -> PROCEED_WITH_CAUTION
+      fee>0, contradictions>0  -> REFUSE (both axes hot)
+
     Priority chain (first match wins):
 
-    1. blind_spots > 0 AND fee > max_fee -> refuse
-    2. unknown > max_unknown (when >= 0) -> refuse
-    3. unmet_obligations > max_unmet_obligations (when >= 0) -> refuse
-    4. contradiction_count > max_contradictions (when >= 0) -> refuse
-    5. require_bridge AND blind_spots > 0 -> bridge
-    6. blind_spots > max_blind_spots -> bridge
-    7. fee > max_fee -> receipt
-    8. Otherwise -> proceed
+     1. blind_spots > 0 AND fee > max_fee -> refuse
+     2. unknown > max_unknown (when >= 0) -> refuse
+     3. unmet_obligations > max_unmet_obligations (when >= 0) -> refuse
+     4. contradiction_count > max_contradictions (when >= 0) -> refuse
+     5. structural > max_structural_contradictions (when >= 0) -> refuse
+     6. require_bridge AND blind_spots > 0 -> bridge
+     7. blind_spots > max_blind_spots -> bridge
+     8. structural > 0 -> caution (incompatibility without opacity)
+     9. fee > max_fee -> receipt
+    10. Otherwise -> proceed
+
+    Note on caution vs. threshold: PROCEED_WITH_CAUTION fires on ANY
+    nonzero structural_contradiction_score, independent of the
+    max_structural_contradictions threshold. The threshold controls the
+    refuse boundary ("how many before I block"), not the caution boundary.
+    Any visible schema incompatibility is a real signal the agent should
+    know about, even if the policy tolerates it.
     """
     has_blind_spots = diag.n_unbridged > 0
     has_fee = diag.coherence_fee > policy.max_fee
+    has_structural = structural_contradiction_score > 0
     over_blind_spots = len(diag.blind_spots) > policy.max_blind_spots
     over_unknown = (
         policy.max_unknown >= 0 and unknown_dimensions > policy.max_unknown
@@ -69,6 +88,10 @@ def _resolve_disposition(
         policy.max_contradictions >= 0
         and contradiction_count > policy.max_contradictions
     )
+    over_structural = (
+        policy.max_structural_contradictions >= 0
+        and structural_contradiction_score > policy.max_structural_contradictions
+    )
     needs_bridge = policy.require_bridge and has_blind_spots
 
     if has_blind_spots and has_fee:
@@ -79,8 +102,12 @@ def _resolve_disposition(
         return Disposition.REFUSE_PENDING_DISCLOSURE
     if over_contradictions:
         return Disposition.REFUSE_PENDING_DISCLOSURE
+    if over_structural:
+        return Disposition.REFUSE_PENDING_DISCLOSURE
     if needs_bridge or over_blind_spots:
         return Disposition.PROCEED_WITH_BRIDGE
+    if has_structural:
+        return Disposition.PROCEED_WITH_CAUTION
     if has_fee:
         return Disposition.PROCEED_WITH_RECEIPT
     return Disposition.PROCEED
@@ -118,6 +145,8 @@ def witness(
     contradictions: tuple[ContradictionReport, ...] | None = None,
     unmet_obligations: int = 0,
     contradiction_count: int = 0,
+    structural_contradictions: tuple[SchemaContradiction, ...] | None = None,
+    contradiction_score: int = 0,
 ) -> WitnessReceipt:
     """Produce a WitnessReceipt from a Diagnostic and Composition.
 
@@ -152,7 +181,7 @@ def witness(
         else unknown_dimensions
     )
 
-    effective_contradiction_count = (
+    convention_contradiction_count = (
         contradiction_count
         if contradiction_count
         else (len(contradictions) if contradictions else 0)
@@ -164,7 +193,8 @@ def witness(
         policy_profile,
         effective_unknown,
         unmet_obligations=unmet_obligations,
-        contradiction_count=effective_contradiction_count,
+        contradiction_count=convention_contradiction_count,
+        structural_contradiction_score=contradiction_score,
     )
 
     return WitnessReceipt(
@@ -187,6 +217,8 @@ def witness(
         boundary_obligations=boundary_obligations,
         contradictions=contradictions,
         unmet_obligations=unmet_obligations,
+        structural_contradictions=structural_contradictions,
+        contradiction_score=contradiction_score,
     )
 
 
@@ -222,10 +254,12 @@ def verify_receipt_consistency(
             violations.append(
                 "unknown_dimensions != witness_basis.unknown"
             )
+    convention_contradictions = len(receipt.contradictions) if receipt.contradictions else 0
     expected = _resolve_disposition(
         diag, receipt.policy_profile, receipt.unknown_dimensions,
         unmet_obligations=receipt.unmet_obligations,
-        contradiction_count=len(receipt.contradictions) if receipt.contradictions else 0,
+        contradiction_count=convention_contradictions,
+        structural_contradiction_score=receipt.contradiction_score,
     )
     if receipt.disposition != expected:
         violations.append(

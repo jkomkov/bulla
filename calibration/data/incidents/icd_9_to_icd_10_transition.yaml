@@ -1,0 +1,32 @@
+name: icd_9_to_icd_10_transition
+description: '2015 US ICD-9 → ICD-10-CM cutover. Service date vs. submission date
+  confusion drove ~10% claim rejection in first quarter. icd-10-cm detects: code_system
+  boundary fee.'
+tools:
+  biller:
+    internal_state:
+    - claim_id
+    - diagnosis_code
+    - code_system
+    - service_date
+    observable_schema:
+    - claim_id
+    - diagnosis_code
+    - service_date
+  payer:
+    internal_state:
+    - claim_id
+    - diagnosis_code
+    - code_system
+    - service_date
+    observable_schema:
+    - claim_id
+    - diagnosis_code
+    - service_date
+edges:
+- from: biller
+  to: payer
+  dimensions:
+  - name: code_system_match
+    from_field: code_system
+    to_field: code_system

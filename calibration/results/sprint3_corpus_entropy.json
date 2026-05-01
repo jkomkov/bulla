@@ -1,0 +1,3622 @@
+{
+  "summary": {
+    "n_compositions": 240,
+    "n_errors": 0,
+    "mean_F": 0.08823888557209297,
+    "median_F": 0.0
+  },
+  "fee_groups": {
+    "11": {
+      "n": 36,
+      "beta_range": [
+        12,
+        168
+      ],
+      "H_range": [
+        2.4849066497880004,
+        5.123963979403259
+      ],
+      "F_range": [
+        0.0,
+        0.5134640145013282
+      ]
+    },
+    "10": {
+      "n": 25,
+      "beta_range": [
+        84,
+        84
+      ],
+      "H_range": [
+        4.430816798843313,
+        4.430816798843313
+      ],
+      "F_range": [
+        0.4484145158544168,
+        0.4484145158544168
+      ]
+    },
+    "1": {
+      "n": 89,
+      "beta_range": [
+        2,
+        2
+      ],
+      "H_range": [
+        0.6931471805599453,
+        0.6931471805599453
+      ],
+      "F_range": [
+        0.0,
+        0.0
+      ]
+    },
+    "2": {
+      "n": 67,
+      "beta_range": [
+        3,
+        3
+      ],
+      "H_range": [
+        1.0986122886681098,
+        1.0986122886681098
+      ],
+      "F_range": [
+        0.0,
+        0.0
+      ]
+    },
+    "22": {
+      "n": 1,
+      "beta_range": [
+        588,
+        588
+      ],
+      "H_range": [
+        6.376726947898627,
+        6.376726947898627
+      ],
+      "F_range": [
+        0.26756655887324854,
+        0.26756655887324854
+      ]
+    },
+    "12": {
+      "n": 7,
+      "beta_range": [
+        13,
+        252
+      ],
+      "H_range": [
+        2.5649493574615367,
+        5.529429087511423
+      ],
+      "F_range": [
+        0.0,
+        0.5153092525524632
+      ]
+    },
+    "14": {
+      "n": 1,
+      "beta_range": [
+        15,
+        15
+      ],
+      "H_range": [
+        2.70805020110221,
+        2.70805020110221
+      ],
+      "F_range": [
+        0.0,
+        0.0
+      ]
+    },
+    "13": {
+      "n": 3,
+      "beta_range": [
+        36,
+        378
+      ],
+      "H_range": [
+        3.58351893845611,
+        5.934894195619588
+      ],
+      "F_range": [
+        0.14822394075174006,
+        0.5172491118549487
+      ]
+    },
+    "3": {
+      "n": 10,
+      "beta_range": [
+        4,
+        6
+      ],
+      "H_range": [
+        1.3862943611198906,
+        1.791759469228055
+      ],
+      "F_range": [
+        0.0,
+        0.5849625007211563
+      ]
+    },
+    "4": {
+      "n": 1,
+      "beta_range": [
+        9,
+        9
+      ],
+      "H_range": [
+        2.1972245773362196,
+        2.1972245773362196
+      ],
+      "F_range": [
+        0.5053400298111957,
+        0.5053400298111957
+      ]
+    }
+  },
+  "motif_atlas": {
+    "(12,)": {
+      "count": 30,
+      "beta": 12,
+      "fee": 11,
+      "class": "single-block"
+    },
+    "(7, 3, 2, 2)": {
+      "count": 25,
+      "beta": 84,
+      "fee": 10,
+      "class": "component-heavy"
+    },
+    "(2,)": {
+      "count": 89,
+      "beta": 2,
+      "fee": 1,
+      "class": "binary-flex"
+    },
+    "(3,)": {
+      "count": 67,
+      "beta": 3,
+      "fee": 2,
+      "class": "rigid"
+    },
+    "(14, 7, 3, 2)": {
+      "count": 1,
+      "beta": 588,
+      "fee": 22,
+      "class": "component-heavy"
+    },
+    "(12, 2)": {
+      "count": 3,
+      "beta": 24,
+      "fee": 12,
+      "class": "component-heavy"
+    },
+    "(15,)": {
+      "count": 1,
+      "beta": 15,
+      "fee": 14,
+      "class": "single-block"
+    },
+    "(13,)": {
+      "count": 1,
+      "beta": 13,
+      "fee": 12,
+      "class": "single-block"
+    },
+    "(12, 3)": {
+      "count": 1,
+      "beta": 36,
+      "fee": 13,
+      "class": "component-heavy"
+    },
+    "(7, 4, 2, 2)": {
+      "count": 1,
+      "beta": 112,
+      "fee": 11,
+      "class": "component-heavy"
+    },
+    "(8, 3, 2, 2)": {
+      "count": 2,
+      "beta": 96,
+      "fee": 11,
+      "class": "component-heavy"
+    },
+    "(7, 3, 2, 2, 2)": {
+      "count": 2,
+      "beta": 168,
+      "fee": 11,
+      "class": "component-heavy"
+    },
+    "(7, 3, 3, 2, 2)": {
+      "count": 3,
+      "beta": 252,
+      "fee": 12,
+      "class": "component-heavy"
+    },
+    "(7, 5, 3, 2)": {
+      "count": 1,
+      "beta": 210,
+      "fee": 13,
+      "class": "component-heavy"
+    },
+    "(7, 3, 3, 3, 2)": {
+      "count": 1,
+      "beta": 378,
+      "fee": 13,
+      "class": "component-heavy"
+    },
+    "(7, 3, 3, 2)": {
+      "count": 1,
+      "beta": 126,
+      "fee": 11,
+      "class": "component-heavy"
+    },
+    "(3, 2)": {
+      "count": 6,
+      "beta": 6,
+      "fee": 3,
+      "class": "mixed"
+    },
+    "(4,)": {
+      "count": 4,
+      "beta": 4,
+      "fee": 3,
+      "class": "single-block"
+    },
+    "(3, 3)": {
+      "count": 1,
+      "beta": 9,
+      "fee": 4,
+      "class": "mixed"
+    }
+  },
+  "per_composition": [
+    {
+      "composition": "airtable-mcp+filesystem",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "airtable-mcp+github",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "airtable-mcp+mcp-server-cloudflare",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "airtable-mcp+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "airtable-mcp+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "airtable-mcp+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "airtable-mcp+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "cognee-mcp-server+filesystem",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "cognee-mcp-server+github",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "cognee-mcp-server+mcp-server-cloudflare",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "cognee-mcp-server+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "cognee-mcp-server+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "cognee-mcp-server+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "cognee-mcp-server+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "exa+filesystem",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "exa+github",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "exa+mcp-server-cloudflare",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "exa+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "exa+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "exa+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "exa+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "fetch-mcp+filesystem",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "fetch-mcp+github",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "fetch-mcp+mcp-server-cloudflare",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "fetch-mcp+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "fetch-mcp+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "fetch-mcp+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "fetch-mcp+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+flightradar24-mcp-server",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+github",
+      "fee": 22,
+      "beta": 588,
+      "H_repair": 6.376727,
+      "F": 0.267567,
+      "component_sizes": [
+        14,
+        7,
+        3,
+        2,
+        1
+      ],
+      "n_hidden": 27,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "filesystem+gtasks-mcp",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12,
+        1
+      ],
+      "n_hidden": 13,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "filesystem+inoyu-mcp-unomi-server",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12,
+        1
+      ],
+      "n_hidden": 13,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "filesystem+mcp-mongo-server",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+mcp-pinecone",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12,
+        1
+      ],
+      "n_hidden": 13,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "filesystem+mcp-playwright",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+mcp-server-aws",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+mcp-server-browserbase",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+mcp-server-chatsum",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+mcp-server-cloudflare",
+      "fee": 12,
+      "beta": 24,
+      "H_repair": 3.178054,
+      "F": 0.106575,
+      "component_sizes": [
+        12,
+        2
+      ],
+      "n_hidden": 14,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+mcp-server-fetch",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+mcp-server-kubernetes",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+mcp-server-neon",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+mcp-server-rememberizer",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12,
+        1
+      ],
+      "n_hidden": 13,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "filesystem+mcp-server-tmdb",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+mcp-snowflake-server",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+mcp-vegalite-server",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+mcp-xmind",
+      "fee": 14,
+      "beta": 15,
+      "H_repair": 2.70805,
+      "F": 0.0,
+      "component_sizes": [
+        15
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+memory",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+needle-mcp",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+needle-mcp_tools",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+notion",
+      "fee": 12,
+      "beta": 24,
+      "H_repair": 3.178054,
+      "F": 0.106575,
+      "component_sizes": [
+        12,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "filesystem+ns-mcp-server",
+      "fee": 12,
+      "beta": 24,
+      "H_repair": 3.178054,
+      "F": 0.106575,
+      "component_sizes": [
+        12,
+        2
+      ],
+      "n_hidden": 14,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+openrpc-mpc-server",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+playwright",
+      "fee": 12,
+      "beta": 13,
+      "H_repair": 2.564949,
+      "F": 0.0,
+      "component_sizes": [
+        13
+      ],
+      "n_hidden": 13,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+puppeteer",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+search1api-mcp",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+sequential-thinking",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+tavily",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12,
+        1
+      ],
+      "n_hidden": 13,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "filesystem+todoist-mcp-server",
+      "fee": 13,
+      "beta": 36,
+      "H_repair": 3.583519,
+      "F": 0.148224,
+      "component_sizes": [
+        12,
+        3
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+twitter-mcp",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "filesystem+x-mcp",
+      "fee": 11,
+      "beta": 12,
+      "H_repair": 2.484907,
+      "F": 0.0,
+      "component_sizes": [
+        12
+      ],
+      "n_hidden": 12,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "flightradar24-mcp-server+github",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "flightradar24-mcp-server+mcp-server-cloudflare",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "flightradar24-mcp-server+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "flightradar24-mcp-server+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "flightradar24-mcp-server+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "flightradar24-mcp-server+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "github+gtasks-mcp",
+      "fee": 11,
+      "beta": 112,
+      "H_repair": 4.718499,
+      "F": 0.434575,
+      "component_sizes": [
+        7,
+        4,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 16,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+inoyu-mcp-unomi-server",
+      "fee": 11,
+      "beta": 96,
+      "H_repair": 4.564348,
+      "F": 0.404583,
+      "component_sizes": [
+        8,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 16,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+mcp-mongo-server",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+mcp-pinecone",
+      "fee": 11,
+      "beta": 168,
+      "H_repair": 5.123964,
+      "F": 0.513464,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        2
+      ],
+      "n_hidden": 16,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "github+mcp-playwright",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+mcp-server-aws",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+mcp-server-browserbase",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+mcp-server-chatsum",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+mcp-server-cloudflare",
+      "fee": 12,
+      "beta": 252,
+      "H_repair": 5.529429,
+      "F": 0.515309,
+      "component_sizes": [
+        7,
+        3,
+        3,
+        2,
+        2
+      ],
+      "n_hidden": 17,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "github+mcp-server-fetch",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+mcp-server-kubernetes",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+mcp-server-neon",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+mcp-server-rememberizer",
+      "fee": 11,
+      "beta": 96,
+      "H_repair": 4.564348,
+      "F": 0.404583,
+      "component_sizes": [
+        8,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 16,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+mcp-server-tmdb",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+mcp-snowflake-server",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+mcp-vegalite-server",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+mcp-xmind",
+      "fee": 13,
+      "beta": 210,
+      "H_repair": 5.347108,
+      "F": 0.425002,
+      "component_sizes": [
+        7,
+        5,
+        3,
+        2,
+        1
+      ],
+      "n_hidden": 18,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+memory",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+needle-mcp",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+needle-mcp_tools",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+notion",
+      "fee": 13,
+      "beta": 378,
+      "H_repair": 5.934894,
+      "F": 0.517249,
+      "component_sizes": [
+        7,
+        3,
+        3,
+        3,
+        2
+      ],
+      "n_hidden": 18,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "github+ns-mcp-server",
+      "fee": 12,
+      "beta": 252,
+      "H_repair": 5.529429,
+      "F": 0.515309,
+      "component_sizes": [
+        7,
+        3,
+        3,
+        2,
+        2
+      ],
+      "n_hidden": 17,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "github+openrpc-mpc-server",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+playwright",
+      "fee": 11,
+      "beta": 126,
+      "H_repair": 4.836282,
+      "F": 0.457492,
+      "component_sizes": [
+        7,
+        3,
+        3,
+        2,
+        1
+      ],
+      "n_hidden": 16,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+puppeteer",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+search1api-mcp",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+sequential-thinking",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+tavily",
+      "fee": 11,
+      "beta": 168,
+      "H_repair": 5.123964,
+      "F": 0.513464,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        2
+      ],
+      "n_hidden": 16,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "github+todoist-mcp-server",
+      "fee": 12,
+      "beta": 252,
+      "H_repair": 5.529429,
+      "F": 0.515309,
+      "component_sizes": [
+        7,
+        3,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 18,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+twitter-mcp",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "github+x-mcp",
+      "fee": 10,
+      "beta": 84,
+      "H_repair": 4.430817,
+      "F": 0.448415,
+      "component_sizes": [
+        7,
+        3,
+        2,
+        2,
+        1
+      ],
+      "n_hidden": 15,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "gtasks-mcp+mcp-server-cloudflare",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "gtasks-mcp+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "gtasks-mcp+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 2
+    },
+    {
+      "composition": "gtasks-mcp+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "gtasks-mcp+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+mcp-server-cloudflare",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+mcp-server-rememberizer",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 2
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "inoyu-mcp-unomi-server+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-mongo-server+mcp-server-cloudflare",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-mongo-server+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-mongo-server+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-mongo-server+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-mongo-server+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-pinecone+mcp-server-cloudflare",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-pinecone+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-pinecone+notion",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-pinecone+ns-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-pinecone+tavily",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-pinecone+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-playwright+mcp-server-cloudflare",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-playwright+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-playwright+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-playwright+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-playwright+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-aws+mcp-server-cloudflare",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-aws+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-aws+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-server-aws+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-aws+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-browserbase+mcp-server-cloudflare",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-browserbase+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-browserbase+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-server-browserbase+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-browserbase+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-chatsum+mcp-server-cloudflare",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-chatsum+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-chatsum+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-server-chatsum+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-chatsum+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-fetch",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-kubernetes",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-neon",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-rememberizer",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-server-tmdb",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-snowflake-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-vegalite-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+mcp-xmind",
+      "fee": 3,
+      "beta": 6,
+      "H_repair": 1.791759,
+      "F": 0.584963,
+      "component_sizes": [
+        3,
+        2
+      ],
+      "n_hidden": 5,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+memory",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+needle-mcp",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+needle-mcp_tools",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+notion",
+      "fee": 3,
+      "beta": 4,
+      "H_repair": 1.386294,
+      "F": 0.0,
+      "component_sizes": [
+        4,
+        1
+      ],
+      "n_hidden": 5,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-server-cloudflare+ns-mcp-server",
+      "fee": 3,
+      "beta": 4,
+      "H_repair": 1.386294,
+      "F": 0.0,
+      "component_sizes": [
+        4
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+openrpc-mpc-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+playwright",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-server-cloudflare+puppeteer",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+search1api-mcp",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+sequential-thinking",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+tavily",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+todoist-mcp-server",
+      "fee": 3,
+      "beta": 6,
+      "H_repair": 1.791759,
+      "F": 0.584963,
+      "component_sizes": [
+        3,
+        2
+      ],
+      "n_hidden": 5,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+twitter-mcp",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-cloudflare+x-mcp",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-fetch+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-fetch+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-server-fetch+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-fetch+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-kubernetes+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-kubernetes+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-server-kubernetes+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-kubernetes+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-neon+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-neon+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-server-neon+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-neon+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-rememberizer+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-server-rememberizer+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 2
+    },
+    {
+      "composition": "mcp-server-rememberizer+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-server-rememberizer+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-server-tmdb+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-tmdb+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-server-tmdb+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-server-tmdb+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-snowflake-server+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-snowflake-server+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-snowflake-server+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-snowflake-server+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-vegalite-server+mcp-xmind",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-vegalite-server+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-vegalite-server+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-vegalite-server+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-xmind+memory",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-xmind+needle-mcp",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-xmind+needle-mcp_tools",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-xmind+notion",
+      "fee": 3,
+      "beta": 6,
+      "H_repair": 1.791759,
+      "F": 0.584963,
+      "component_sizes": [
+        3,
+        2,
+        1
+      ],
+      "n_hidden": 6,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-xmind+ns-mcp-server",
+      "fee": 3,
+      "beta": 6,
+      "H_repair": 1.791759,
+      "F": 0.584963,
+      "component_sizes": [
+        3,
+        2
+      ],
+      "n_hidden": 5,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-xmind+openrpc-mpc-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-xmind+playwright",
+      "fee": 3,
+      "beta": 4,
+      "H_repair": 1.386294,
+      "F": 0.0,
+      "component_sizes": [
+        4
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-xmind+puppeteer",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-xmind+search1api-mcp",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-xmind+sequential-thinking",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-xmind+tavily",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "mcp-xmind+todoist-mcp-server",
+      "fee": 4,
+      "beta": 9,
+      "H_repair": 2.197225,
+      "F": 0.50534,
+      "component_sizes": [
+        3,
+        3
+      ],
+      "n_hidden": 6,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-xmind+twitter-mcp",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "mcp-xmind+x-mcp",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "memory+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "memory+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "memory+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "needle-mcp+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "needle-mcp+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "needle-mcp+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "needle-mcp_tools+notion",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "needle-mcp_tools+ns-mcp-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "needle-mcp_tools+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "notion+ns-mcp-server",
+      "fee": 3,
+      "beta": 4,
+      "H_repair": 1.386294,
+      "F": 0.0,
+      "component_sizes": [
+        4,
+        1
+      ],
+      "n_hidden": 5,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "notion+openrpc-mpc-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "notion+playwright",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 2
+    },
+    {
+      "composition": "notion+puppeteer",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "notion+search1api-mcp",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "notion+sequential-thinking",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "notion+tavily",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "notion+todoist-mcp-server",
+      "fee": 3,
+      "beta": 6,
+      "H_repair": 1.791759,
+      "F": 0.584963,
+      "component_sizes": [
+        3,
+        2,
+        1
+      ],
+      "n_hidden": 6,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "notion+twitter-mcp",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "notion+x-mcp",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "ns-mcp-server+openrpc-mpc-server",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "ns-mcp-server+playwright",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2,
+        1
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "ns-mcp-server+puppeteer",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "ns-mcp-server+search1api-mcp",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "ns-mcp-server+sequential-thinking",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "ns-mcp-server+tavily",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "ns-mcp-server+todoist-mcp-server",
+      "fee": 3,
+      "beta": 6,
+      "H_repair": 1.791759,
+      "F": 0.584963,
+      "component_sizes": [
+        3,
+        2
+      ],
+      "n_hidden": 5,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "ns-mcp-server+twitter-mcp",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "ns-mcp-server+x-mcp",
+      "fee": 1,
+      "beta": 2,
+      "H_repair": 0.693147,
+      "F": 0.0,
+      "component_sizes": [
+        2
+      ],
+      "n_hidden": 2,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "openrpc-mpc-server+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "playwright+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "puppeteer+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "search1api-mcp+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "sequential-thinking+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "tavily+todoist-mcp-server",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3,
+        1
+      ],
+      "n_hidden": 4,
+      "n_coloops": 0,
+      "n_loops": 1
+    },
+    {
+      "composition": "todoist-mcp-server+twitter-mcp",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    },
+    {
+      "composition": "todoist-mcp-server+x-mcp",
+      "fee": 2,
+      "beta": 3,
+      "H_repair": 1.098612,
+      "F": 0.0,
+      "component_sizes": [
+        3
+      ],
+      "n_hidden": 3,
+      "n_coloops": 0,
+      "n_loops": 0
+    }
+  ]
+}

@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bulla"
-version = "0.33.0"
-description = "Witness kernel for agent tool compositions — diagnose, attest, seal"
+version = "0.36.0"
+description = "Witness kernel for agentic compositions — diagnose, attest, seal"
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.10"
@@ -22,11 +22,21 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Topic :: Software Development :: Quality Assurance",
 ]
-dependencies = ["pyyaml>=6.0"]
+dependencies = [
+    "pyyaml>=6.0",
+    # tomllib is stdlib on 3.11+; tomli is the canonical backport for 3.10.
+    "tomli>=2.0; python_version < '3.11'",
+]
 
 [project.optional-dependencies]
 ots = ["opentimestamps-client>=0.7"]
 discover = ["openai>=1.0", "anthropic>=0.20"]
+# Framework adapters — optional. Static AST parsing has no runtime dep on
+# the framework itself; these extras enable schema-validation helpers and
+# reserve the dependency surface for future ParseMode.RUNTIME support.
+langgraph = ["langchain-core>=0.3"]
+crewai = ["crewai>=0.80"]
+all = ["bulla[ots,discover,langgraph,crewai]"]
 
 [project.scripts]
 bulla = "bulla.cli:main"

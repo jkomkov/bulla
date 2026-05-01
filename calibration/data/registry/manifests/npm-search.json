@@ -1,0 +1,29 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "index_scan:npx -y npm-search-mcp-server",
+    "server_package": "npm-search-mcp-server",
+    "capture_date": "2026-04-07T05:16:40.185313+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:8ab6ef8282ef332b9e5c5ef8fffa740d6365128e51ff0dc8152c95f073ac7ba4",
+    "category": "community",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "search_npm_packages",
+      "description": "Search for npm packages",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    }
+  ]
+}

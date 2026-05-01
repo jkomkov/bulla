@@ -352,21 +352,31 @@ class TestAntiReflexivity:
     def test_diagnostic_has_no_witness_imports(self):
         """Law 1: Measurement cannot depend on its own judgment.
 
-        diagnostic.py must have zero imports from witness.py.
+        diagnostic.py must have zero imports from the witness-receipt
+        module (``bulla.witness``), which carries disposition/judgment
+        logic.  ``bulla.witness_geometry`` is a pure-math module
+        (linear algebra on the coboundary) and is explicitly excluded
+        from this ban — it does not participate in disposition.
         """
         import bulla.diagnostic as diag_module
         import inspect
         source = inspect.getsource(diag_module)
         tree = ast.parse(source)
+        # Exact module names banned.  Substring matching would
+        # false-positive on ``witness_geometry`` (pure math, no
+        # disposition) — we want to ban only the receipt-layer module.
+        banned_modules = {"bulla.witness", "witness"}
         for node in ast.walk(tree):
             if isinstance(node, ast.ImportFrom):
-                assert node.module is None or "witness" not in node.module, (
-                    f"diagnostic.py imports from witness: {ast.dump(node)}"
+                assert node.module not in banned_modules, (
+                    f"diagnostic.py imports from witness-receipt module: "
+                    f"{ast.dump(node)}"
                 )
             if isinstance(node, ast.Import):
                 for alias in node.names:
-                    assert "witness" not in alias.name, (
-                        f"diagnostic.py imports witness: {alias.name}"
+                    assert alias.name not in banned_modules, (
+                        f"diagnostic.py imports witness-receipt module: "
+                        f"{alias.name}"
                     )
 
     def test_diagnostic_has_no_serve_imports(self):

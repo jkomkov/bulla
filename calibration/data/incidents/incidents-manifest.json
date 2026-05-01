@@ -1,0 +1,216 @@
+{
+  "version": "0.1.0",
+  "incident_count": 30,
+  "incidents": [
+    {
+      "name": "mars_climate_orbiter",
+      "domain": "aerospace",
+      "primary_pack": "ucum",
+      "loss": "$327.6M",
+      "yaml_path": "data/incidents/mars_climate_orbiter.yaml"
+    },
+    {
+      "name": "ariane_5_flight_501",
+      "domain": "aerospace",
+      "primary_pack": "ucum",
+      "loss": "$370M+",
+      "yaml_path": "data/incidents/ariane_5_flight_501.yaml"
+    },
+    {
+      "name": "patriot_missile_dhahran",
+      "domain": "aerospace",
+      "primary_pack": "ucum",
+      "loss": "28 killed",
+      "yaml_path": "data/incidents/patriot_missile_dhahran.yaml"
+    },
+    {
+      "name": "gimli_glider",
+      "domain": "aerospace",
+      "primary_pack": "ucum",
+      "loss": "near-catastrophe",
+      "yaml_path": "data/incidents/gimli_glider.yaml"
+    },
+    {
+      "name": "overlingen_tcas_atc",
+      "domain": "aerospace",
+      "primary_pack": "generic",
+      "loss": "71 killed",
+      "yaml_path": "data/incidents/overlingen_tcas_atc.yaml"
+    },
+    {
+      "name": "boeing_737_max_faa_oda",
+      "domain": "aerospace",
+      "primary_pack": "generic",
+      "loss": "346 killed",
+      "yaml_path": "data/incidents/boeing_737_max_faa_oda.yaml"
+    },
+    {
+      "name": "drupal_stripe_jpy",
+      "domain": "payments",
+      "primary_pack": "iso-4217",
+      "loss": "100x overcharge",
+      "yaml_path": "data/incidents/drupal_stripe_jpy.yaml"
+    },
+    {
+      "name": "stripe_webhook_duplicates",
+      "domain": "payments",
+      "primary_pack": "generic",
+      "loss": "2-3x charges",
+      "yaml_path": "data/incidents/stripe_webhook_duplicates.yaml"
+    },
+    {
+      "name": "shopify_quickbooks_tax",
+      "domain": "payments",
+      "primary_pack": "iso-4217",
+      "loss": "tax misreport",
+      "yaml_path": "data/incidents/shopify_quickbooks_tax.yaml"
+    },
+    {
+      "name": "vancouver_stock_exchange",
+      "domain": "finance",
+      "primary_pack": "ucum",
+      "loss": "50% index corruption",
+      "yaml_path": "data/incidents/vancouver_stock_exchange.yaml"
+    },
+    {
+      "name": "libor_sofr_transition",
+      "domain": "finance",
+      "primary_pack": "fix-4.4",
+      "loss": "$154T notional",
+      "yaml_path": "data/incidents/libor_sofr_transition.yaml"
+    },
+    {
+      "name": "t1_settlement_transition",
+      "domain": "finance",
+      "primary_pack": "iso-8601",
+      "loss": "$3.1B margin",
+      "yaml_path": "data/incidents/t1_settlement_transition.yaml"
+    },
+    {
+      "name": "herstatt_risk",
+      "domain": "finance",
+      "primary_pack": "iso-8601",
+      "loss": "$620M",
+      "yaml_path": "data/incidents/herstatt_risk.yaml"
+    },
+    {
+      "name": "mt_to_iso20022_migration",
+      "domain": "finance",
+      "primary_pack": "swift-mt-mx",
+      "loss": "ongoing",
+      "yaml_path": "data/incidents/mt_to_iso20022_migration.yaml"
+    },
+    {
+      "name": "levothyroxine_mg_mcg",
+      "domain": "healthcare",
+      "primary_pack": "ucum",
+      "loss": "ongoing",
+      "yaml_path": "data/incidents/levothyroxine_mg_mcg.yaml"
+    },
+    {
+      "name": "digoxin_tenfold_transfer",
+      "domain": "healthcare",
+      "primary_pack": "ucum",
+      "loss": "deaths",
+      "yaml_path": "data/incidents/digoxin_tenfold_transfer.yaml"
+    },
+    {
+      "name": "singapore_lidocaine_overdose",
+      "domain": "healthcare",
+      "primary_pack": "ucum",
+      "loss": "death",
+      "yaml_path": "data/incidents/singapore_lidocaine_overdose.yaml"
+    },
+    {
+      "name": "icd_9_to_icd_10_transition",
+      "domain": "healthcare",
+      "primary_pack": "icd-10-cm",
+      "loss": "10% claim rejection",
+      "yaml_path": "data/incidents/icd_9_to_icd_10_transition.yaml"
+    },
+    {
+      "name": "fhir_r4_to_r5_breaking_changes",
+      "domain": "healthcare",
+      "primary_pack": "fhir-r4",
+      "loss": "ongoing",
+      "yaml_path": "data/incidents/fhir_r4_to_r5_breaking_changes.yaml"
+    },
+    {
+      "name": "snomed_icd10_double_coding",
+      "domain": "healthcare",
+      "primary_pack": "umls-mappings",
+      "loss": "claims",
+      "yaml_path": "data/incidents/snomed_icd10_double_coding.yaml"
+    },
+    {
+      "name": "phe_covid_xls_truncation",
+      "domain": "software",
+      "primary_pack": "iana-media-types",
+      "loss": "15,841 cases",
+      "yaml_path": "data/incidents/phe_covid_xls_truncation.yaml"
+    },
+    {
+      "name": "leap_second_2012_outages",
+      "domain": "software",
+      "primary_pack": "iso-8601",
+      "loss": "multi-site",
+      "yaml_path": "data/incidents/leap_second_2012_outages.yaml"
+    },
+    {
+      "name": "nv_energy_meter_channel",
+      "domain": "energy",
+      "primary_pack": "generic",
+      "loss": "$685K FERC",
+      "yaml_path": "data/incidents/nv_energy_meter_channel.yaml"
+    },
+    {
+      "name": "gcv_ncv_gas_billing",
+      "domain": "energy",
+      "primary_pack": "ucum",
+      "loss": "10.8%",
+      "yaml_path": "data/incidents/gcv_ncv_gas_billing.yaml"
+    },
+    {
+      "name": "lng_price_formula_disputes",
+      "domain": "energy",
+      "primary_pack": "iso-4217",
+      "loss": "$4B+ arbitration",
+      "yaml_path": "data/incidents/lng_price_formula_disputes.yaml"
+    },
+    {
+      "name": "gtin_check_digit_miscoding",
+      "domain": "supply",
+      "primary_pack": "gs1",
+      "loss": "FDA recall",
+      "yaml_path": "data/incidents/gtin_check_digit_miscoding.yaml"
+    },
+    {
+      "name": "edifact_d96a_d21b_drift",
+      "domain": "supply",
+      "primary_pack": "un-edifact",
+      "loss": "ongoing",
+      "yaml_path": "data/incidents/edifact_d96a_d21b_drift.yaml"
+    },
+    {
+      "name": "country_code_alpha2_alpha3_drift",
+      "domain": "trade",
+      "primary_pack": "iso-3166",
+      "loss": "ongoing",
+      "yaml_path": "data/incidents/country_code_alpha2_alpha3_drift.yaml"
+    },
+    {
+      "name": "language_tag_bcp47_drift",
+      "domain": "localization",
+      "primary_pack": "iso-639",
+      "loss": "ongoing",
+      "yaml_path": "data/incidents/language_tag_bcp47_drift.yaml"
+    },
+    {
+      "name": "naics_sic_classification_dispute",
+      "domain": "tax",
+      "primary_pack": "naics-2022",
+      "loss": "tax court",
+      "yaml_path": "data/incidents/naics_sic_classification_dispute.yaml"
+    }
+  ]
+}

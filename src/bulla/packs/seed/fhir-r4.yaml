@@ -1,0 +1,76 @@
+pack_name: fhir-r4
+pack_version: 0.1.0
+license:
+  spdx_id: CC0-1.0
+  source_url: https://hl7.org/fhir/R4/
+  registry_license: open
+  attribution: sha256:hl7-fhir-notices
+derives_from:
+  standard: HL7-FHIR
+  version: R4
+  source_uri: https://hl7.org/fhir/R4/downloads.html
+dimensions:
+  fhir_resource_type:
+    description: FHIR R4 resourceType discriminator. Inline seed of ~40 most-recurrent
+      resources; the authoritative ~150 entries live at the values_registry pointer.
+      R4→R5 introduces breaking changes on a subset of resources, so R4 and R5 packs
+      are separate.
+    field_patterns:
+    - resourceType
+    - resource_type
+    - resource
+    - fhir_type
+    - '*_resource_type'
+    description_keywords:
+    - fhir resource
+    - fhir resource type
+    - fhir resourcetype
+    - fhir R4
+    domains:
+    - healthcare
+    known_values:
+    - Patient
+    - Practitioner
+    - PractitionerRole
+    - Organization
+    - Location
+    - Encounter
+    - Observation
+    - Condition
+    - DiagnosticReport
+    - Procedure
+    - MedicationRequest
+    - Medication
+    - MedicationStatement
+    - MedicationAdministration
+    - AllergyIntolerance
+    - Immunization
+    - FamilyMemberHistory
+    - CarePlan
+    - Goal
+    - Task
+    - Coverage
+    - Claim
+    - ExplanationOfBenefit
+    - Composition
+    - Bundle
+    - DocumentReference
+    - Specimen
+    - ImagingStudy
+    - ServiceRequest
+    - Appointment
+    - AppointmentResponse
+    - Schedule
+    - Slot
+    - Consent
+    - Provenance
+    - AuditEvent
+    - RelatedPerson
+    - Group
+    - List
+    - Subscription
+    - Communication
+    values_registry:
+      uri: https://hl7.org/fhir/R4/valueset-resource-types.json
+      hash: sha256:82ae2b62e9f10a32a2e60b7498b80f0b258eaa22cef1724de20fc0218a8e575c
+      version: R4

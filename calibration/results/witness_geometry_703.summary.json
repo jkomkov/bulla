@@ -1,0 +1,17 @@
+{
+  "coloop_histogram": {
+    "0": 703
+  },
+  "errors": 0,
+  "fail_bounds": 0,
+  "fail_conservation": 0,
+  "fail_rank": 0,
+  "fee_zero": 163,
+  "loop_count_total": 272,
+  "nontrivial": 240,
+  "pass_bounds": 703,
+  "pass_conservation": 703,
+  "pass_rank": 703,
+  "total": 703,
+  "trivial_no_hidden": 300
+}

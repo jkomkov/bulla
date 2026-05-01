@@ -217,3 +217,256 @@ class TestVersionFlag:
         r = _run("--version")
         assert r.returncode == 0
         assert __version__ in r.stdout
+
+
+FIXTURES_DIR = Path(__file__).parent / "fixtures"
+GOLDEN_DIR = Path(__file__).parent / "golden"
+WITNESS_COSTS = FIXTURES_DIR / "witness_costs.yaml"
+GOLDEN_0_34 = GOLDEN_DIR / "diagnose_0.34_financial_pipeline.json"
+MANIFESTS_DIR = (
+    Path(__file__).parent.parent
+    / "calibration"
+    / "data"
+    / "registry"
+    / "manifests"
+)
+FILESYSTEM_MANIFEST = MANIFESTS_DIR / "filesystem.json"
+
+
+class TestWitnessGeometry:
+    """Coverage target: every new CLI flag has >=1 positive test and
+    >=1 regression test (default behavior unchanged when flag absent)."""
+
+    # ── --witness on diagnose ───────────────────────────────────────
+
+    def test_diagnose_witness_text_positive(self):
+        r = _run("diagnose", str(FINANCIAL), "--witness")
+        assert r.returncode == 0
+        assert "Witness Geometry" in r.stdout
+        assert "Concentration N_eff" in r.stdout
+
+    def test_diagnose_witness_json_positive(self):
+        r = _run("diagnose", str(FINANCIAL), "--witness", "--format", "json")
+        assert r.returncode == 0
+        data = json.loads(r.stdout)
+        assert "witness_geometry" in data
+        wg = data["witness_geometry"]
+        assert isinstance(wg["leverage"], list)
+        assert len(wg["leverage"]) == 4
+        for entry in wg["leverage"]:
+            assert set(entry.keys()) == {"tool", "field", "score"}
+            # Score must be a string rational, never a float
+            assert isinstance(entry["score"], str)
+
+    def test_diagnose_default_json_regression(self):
+        """Default JSON output (no --witness) is byte-identical to the
+        pinned 0.34.0 golden fixture, modulo bulla_version + timestamp.
+        """
+        r = _run("diagnose", str(FINANCIAL), "--format", "json")
+        assert r.returncode == 0
+        current = json.loads(r.stdout)
+        golden = json.loads(GOLDEN_0_34.read_text())
+        for key in ("bulla_version", "timestamp"):
+            current.pop(key, None)
+            golden.pop(key, None)
+        assert current == golden, (
+            "Default JSON output drifted from 0.34.0 golden fixture. "
+            "The --witness flag must be additive-only."
+        )
+
+    def test_diagnose_witness_fee_zero_no_block(self):
+        """When fee == 0, --witness must not emit a witness_geometry block."""
+        r = _run("diagnose", str(AUTH), "--witness", "--format", "json")
+        assert r.returncode == 0
+        data = json.loads(r.stdout)
+        assert data["coherence_fee"] == 0
+        assert "witness_geometry" not in data
+
+    # ── leverage conservation (exact Fraction) ──────────────────────
+
+    def test_leverage_conservation_exact_rational(self):
+        """Sum of leverage == coherence_fee in exact Fraction arithmetic."""
+        from fractions import Fraction
+
+        r = _run("diagnose", str(FINANCIAL), "--witness", "--format", "json")
+        assert r.returncode == 0
+        data = json.loads(r.stdout)
+        total = sum(
+            (
+                Fraction(entry["score"])
+                for entry in data["witness_geometry"]["leverage"]
+            ),
+            start=Fraction(0),
+        )
+        assert total == data["coherence_fee"]
+
+    # ── --witness on check ──────────────────────────────────────────
+
+    def test_check_witness_passthrough(self):
+        """`bulla check --witness` forwards the flag through to diagnose
+        so JSON output carries the witness_geometry block, independent
+        of the check's pass/fail verdict."""
+        r = _run(
+            "check",
+            str(FINANCIAL),
+            "--max-blind-spots",
+            "100",
+            "--max-unbridged",
+            "100",
+            "--witness",
+            "--format",
+            "json",
+        )
+        assert r.returncode == 0
+        data = json.loads(r.stdout)
+        # The check command aggregates compositions; grab the first.
+        comp = data["compositions"][0]
+        assert "witness_geometry" in comp
+        assert isinstance(comp["witness_geometry"]["leverage"], list)
+
+    def test_check_without_witness_no_block(self):
+        """Regression: without --witness, check's JSON output must not
+        carry the witness_geometry block."""
+        r = _run(
+            "check",
+            str(FINANCIAL),
+            "--max-blind-spots",
+            "100",
+            "--max-unbridged",
+            "100",
+            "--format",
+            "json",
+        )
+        assert r.returncode == 0
+        data = json.loads(r.stdout)
+        comp = data["compositions"][0]
+        assert "witness_geometry" not in comp
+
+    # ── --leverage on gauge ─────────────────────────────────────────
+
+    def test_gauge_leverage_text_positive(self):
+        if not FILESYSTEM_MANIFEST.exists():
+            pytest.skip("filesystem manifest not available in this tree")
+        r = _run("gauge", str(FILESYSTEM_MANIFEST), "--leverage")
+        assert r.returncode == 0
+        assert "Witness Geometry" in r.stdout
+        assert "Greedy minimum-cost basis" in r.stdout
+
+    def test_gauge_default_no_witness_section(self):
+        """`bulla gauge` without --leverage/--substitutes/--costs must
+        not include the witness block in text output (regression guard)."""
+        if not FILESYSTEM_MANIFEST.exists():
+            pytest.skip("filesystem manifest not available in this tree")
+        r = _run("gauge", str(FILESYSTEM_MANIFEST))
+        assert r.returncode == 0
+        assert "Witness Geometry" not in r.stdout
+
+    # ── --substitutes on gauge ──────────────────────────────────────
+
+    def test_gauge_substitutes_positive(self):
+        if not FILESYSTEM_MANIFEST.exists():
+            pytest.skip("filesystem manifest not available in this tree")
+        r = _run(
+            "gauge",
+            str(FILESYSTEM_MANIFEST),
+            "--substitutes",
+            "read_file",
+            "path",
+        )
+        assert r.returncode == 0
+        assert "Disclosure substitutes for read_file.path" in r.stdout
+        assert "R_eff" in r.stdout
+
+    def test_gauge_substitutes_unknown_target_exits_nonzero(self):
+        """Unknown (tool, field) targets produce exit code 1 + stderr."""
+        if not FILESYSTEM_MANIFEST.exists():
+            pytest.skip("filesystem manifest not available in this tree")
+        r = _run(
+            "gauge",
+            str(FILESYSTEM_MANIFEST),
+            "--substitutes",
+            "bogus_tool",
+            "nonexistent_field",
+        )
+        assert r.returncode == 1
+        assert "not a hidden field" in r.stderr
+
+    def test_gauge_substitutes_missing_arg_argparse_error(self):
+        """--substitutes expects exactly two positional args."""
+        if not FILESYSTEM_MANIFEST.exists():
+            pytest.skip("filesystem manifest not available in this tree")
+        r = _run(
+            "gauge",
+            str(FILESYSTEM_MANIFEST),
+            "--substitutes",
+            "read_file",  # missing FIELD
+        )
+        assert r.returncode != 0
+
+    # ── --costs on gauge ────────────────────────────────────────────
+
+    def test_gauge_costs_positive(self):
+        if not FILESYSTEM_MANIFEST.exists():
+            pytest.skip("filesystem manifest not available in this tree")
+        r = _run(
+            "gauge",
+            str(FILESYSTEM_MANIFEST),
+            "--costs",
+            str(WITNESS_COSTS),
+        )
+        assert r.returncode == 0
+        assert "Minimum-cost disclosure basis" in r.stdout
+        assert "Total cost:" in r.stdout
+
+    def test_gauge_costs_missing_file(self):
+        target = (
+            str(FILESYSTEM_MANIFEST)
+            if FILESYSTEM_MANIFEST.exists()
+            else str(FINANCIAL)
+        )
+        r = _run(
+            "gauge",
+            target,
+            "--costs",
+            "/tmp/__bulla_nonexistent_costs__.yaml",
+        )
+        assert r.returncode == 1
+
+    # ── Diagnostic.content_hash backward compat ─────────────────────
+
+    def test_diagnostic_content_hash_empty_witness_stable(self):
+        """Empty witness-geometry fields must not perturb the content
+        hash, so existing receipts hash identically after D5.1."""
+        from bulla.model import Diagnostic
+        from fractions import Fraction
+
+        d_no_witness = Diagnostic(
+            name="test", n_tools=3, n_edges=3, betti_1=1,
+            dim_c0_obs=12, dim_c0_full=16, dim_c1=8,
+            rank_obs=6, rank_full=8, h1_obs=2, h1_full=0,
+            coherence_fee=2, blind_spots=(), bridges=(), h1_after_bridge=0,
+        )
+        d_empty_witness = Diagnostic(
+            name="test", n_tools=3, n_edges=3, betti_1=1,
+            dim_c0_obs=12, dim_c0_full=16, dim_c1=8,
+            rank_obs=6, rank_full=8, h1_obs=2, h1_full=0,
+            coherence_fee=2, blind_spots=(), bridges=(), h1_after_bridge=0,
+            hidden_basis=(),
+            leverage_scores=(),
+            n_effective=None,
+            coloops=(),
+            loops=(),
+            disclosure_set=(),
+        )
+        assert d_no_witness.content_hash() == d_empty_witness.content_hash()
+
+        d_populated = Diagnostic(
+            name="test", n_tools=3, n_edges=3, betti_1=1,
+            dim_c0_obs=12, dim_c0_full=16, dim_c1=8,
+            rank_obs=6, rank_full=8, h1_obs=2, h1_full=0,
+            coherence_fee=2, blind_spots=(), bridges=(), h1_after_bridge=0,
+            hidden_basis=(("a", "x"),),
+            leverage_scores=(Fraction(1, 2),),
+            n_effective=Fraction(1),
+        )
+        assert d_populated.content_hash() != d_no_witness.content_hash()

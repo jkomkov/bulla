@@ -1,0 +1,123 @@
+{
+  "compositions": [
+    {
+      "composition": "mcp-xmind+notion",
+      "fee": 3,
+      "beta": 6,
+      "repair_entropy": 1.7918,
+      "component_sizes": [
+        3,
+        2
+      ],
+      "reachable_basis_count": 6,
+      "stability_ratio": 1.0,
+      "robustness_margin": 1.0,
+      "repair_mode": "flexible",
+      "min_repair_cost": 13.0,
+      "max_repair_cost": 17.0,
+      "recommended_basis": [
+        "search_xmind_files::directory",
+        "API_post_search::sort.timestamp",
+        "extract_node::path"
+      ],
+      "recommended_cost": 13.0
+    },
+    {
+      "composition": "mcp-xmind+playwright",
+      "fee": 3,
+      "beta": 4,
+      "repair_entropy": 1.3863,
+      "component_sizes": [
+        4
+      ],
+      "reachable_basis_count": 4,
+      "stability_ratio": 1.0,
+      "robustness_margin": 1.0,
+      "repair_mode": "rigid",
+      "min_repair_cost": 17.0,
+      "max_repair_cost": 21.0,
+      "recommended_basis": [
+        "search_xmind_files::directory",
+        "extract_node::path",
+        "extract_node_by_id::path"
+      ],
+      "recommended_cost": 17.0
+    }
+  ],
+  "phase_diagram": [
+    {
+      "quadrant": "Q1",
+      "label": "rigid+uniform",
+      "composition": "notion+ns-mcp-server",
+      "fee": 3,
+      "beta": 4,
+      "motif": [
+        4
+      ],
+      "mode": "rigid",
+      "n_bases": 4,
+      "sigma_star": 9.0,
+      "avoidable": 3.0,
+      "margin": 0.0,
+      "min_cost": 9.0,
+      "max_cost": 9.0,
+      "decision_relevant": false
+    },
+    {
+      "quadrant": "Q2",
+      "label": "flex+uniform",
+      "composition": "notion+todoist-mcp-server",
+      "fee": 3,
+      "beta": 6,
+      "motif": [
+        3,
+        2
+      ],
+      "mode": "flexible",
+      "n_bases": 6,
+      "sigma_star": 9.0,
+      "avoidable": 6.0,
+      "margin": 0.0,
+      "min_cost": 9.0,
+      "max_cost": 9.0,
+      "decision_relevant": false
+    },
+    {
+      "quadrant": "Q3",
+      "label": "rigid+hetero",
+      "composition": "mcp-xmind+playwright",
+      "fee": 3,
+      "beta": 4,
+      "motif": [
+        4
+      ],
+      "mode": "rigid",
+      "n_bases": 4,
+      "sigma_star": 17.0,
+      "avoidable": 7.0,
+      "margin": 0.0,
+      "min_cost": 17.0,
+      "max_cost": 21.0,
+      "decision_relevant": false
+    },
+    {
+      "quadrant": "Q4",
+      "label": "flex+hetero",
+      "composition": "mcp-xmind+notion",
+      "fee": 3,
+      "beta": 6,
+      "motif": [
+        3,
+        2
+      ],
+      "mode": "flexible",
+      "n_bases": 6,
+      "sigma_star": 13.0,
+      "avoidable": 10.0,
+      "margin": 0.0,
+      "min_cost": 13.0,
+      "max_cost": 17.0,
+      "decision_relevant": true
+    }
+  ]
+}

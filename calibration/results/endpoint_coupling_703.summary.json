@@ -1,0 +1,14 @@
+{
+  "tested": 703,
+  "nonzero_fee": 240,
+  "multi_blocks": 3873,
+  "k_rank_histogram": {
+    "1": 170,
+    "2": 3703
+  },
+  "blocks_delta_rank2_k_lt2": 0,
+  "compositions_with_delta_rank2_k_lt2": 0,
+  "max_delta_block_rank": 2,
+  "max_k_block_rank": 2,
+  "examples": []
+}

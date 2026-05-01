@@ -1,0 +1,42 @@
+pack_name: umls-mappings
+pack_version: 0.1.0
+license:
+  spdx_id: NLM-UMLS
+  source_url: https://uts.nlm.nih.gov/uts/umls
+  registry_license: restricted
+  attribution: sha256:nlm-umls-notices
+derives_from:
+  standard: UMLS-Metathesaurus
+  version: 2024AB
+  source_uri: https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html
+dimensions:
+  umls_concept_id:
+    description: UMLS Concept Unique Identifier (CUI) — the spine of cross-vocabulary
+      terminology mapping. License-gated; values_registry requires NLM-UMLS user-of-record
+      credential.
+    field_patterns:
+    - cui
+    - umls_cui
+    - concept_id
+    - umls_concept_id
+    - '*_cui'
+    description_keywords:
+    - umls cui
+    - umls concept
+    - concept unique identifier
+    domains:
+    - healthcare
+    values_registry:
+      uri: https://uts.nlm.nih.gov/uts/umls/concepts
+      hash: placeholder:awaiting-license
+      version: 2024AB
+      license_id: NLM-UMLS
+mappings:
+  snomed-ct:
+    snomed_concept_id: []
+  icd-10-cm:
+    icd_10_cm_code: []
+  loinc:
+    loinc_code: []
+  rxnorm:
+    rxnorm_cui: []

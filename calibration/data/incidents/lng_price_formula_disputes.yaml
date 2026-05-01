@@ -1,0 +1,28 @@
+name: lng_price_formula_disputes
+description: 'LNG price-formula arbitration disputes ($4B+ aggregate). Henry Hub vs
+  JKM vs oil-indexed bases mixed in long-term supply contracts. Generic + iso-4217
+  detects: pricing_basis boundary fee.'
+tools:
+  supplier_invoice:
+    internal_state:
+    - cargo_id
+    - price_per_mmbtu
+    - pricing_basis
+    observable_schema:
+    - cargo_id
+    - price_per_mmbtu
+  buyer_payment:
+    internal_state:
+    - cargo_id
+    - price_per_mmbtu
+    - pricing_basis
+    observable_schema:
+    - cargo_id
+    - price_per_mmbtu
+edges:
+- from: supplier_invoice
+  to: buyer_payment
+  dimensions:
+  - name: pricing_basis_match
+    from_field: pricing_basis
+    to_field: pricing_basis

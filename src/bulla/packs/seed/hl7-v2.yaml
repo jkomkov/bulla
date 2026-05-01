@@ -1,0 +1,55 @@
+pack_name: hl7-v2
+pack_version: 0.1.0
+license:
+  spdx_id: Proprietary-HL7
+  source_url: https://www.hl7.org/implement/standards/product_brief.cfm?product_id=185
+  registry_license: research-only
+  attribution: sha256:hl7-v2-notices
+derives_from:
+  standard: HL7-v2
+  version: 2.5.1
+  source_uri: https://www.hl7.org/implement/standards/
+dimensions:
+  hl7_v2_segment:
+    description: 'HL7 v2.x segment identifier (3-character code: MSH, PID, OBR, OBX,
+      ORC, NTE, etc.). Membership-tier licensed; values_registry requires HL7 credential
+      to fetch the full segment dictionary.'
+    field_patterns:
+    - segment
+    - segment_id
+    - hl7_segment
+    - '*_segment'
+    - '*_hl7_segment'
+    description_keywords:
+    - hl7 v2 segment
+    - hl7 segment
+    - msh segment
+    - pid segment
+    - obx segment
+    domains:
+    - healthcare
+    values_registry:
+      uri: https://www.hl7.org/implement/standards/v2-segments
+      hash: placeholder:awaiting-license
+      version: 2.5.1
+      license_id: HL7-MEMBER
+  hl7_v2_message_type:
+    description: HL7 v2.x message type (ADT, ORM, ORU, RDE, etc.) with optional event
+      triggers (ADT^A01).
+    field_patterns:
+    - message_type
+    - msg_type
+    - hl7_message_type
+    - '*_hl7_msg'
+    description_keywords:
+    - hl7 v2 message
+    - hl7 message type
+    - adt message
+    - oru message
+    domains:
+    - healthcare
+    values_registry:
+      uri: https://www.hl7.org/implement/standards/v2-messages
+      hash: placeholder:awaiting-license
+      version: 2.5.1
+      license_id: HL7-MEMBER

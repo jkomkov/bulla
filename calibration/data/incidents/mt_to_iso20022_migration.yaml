@@ -1,0 +1,30 @@
+name: mt_to_iso20022_migration
+description: 'SWIFT MT → ISO 20022 (MX) migration (ongoing 2023-2025). Field-level
+  translation losses on amount, party id, reference. swift-mt-mx + iso-20022 detects:
+  message_format boundary fee.'
+tools:
+  originating_bank:
+    internal_state:
+    - txn_id
+    - amount
+    - message_format
+    - swift_field_70
+    observable_schema:
+    - txn_id
+    - amount
+  intermediary_bank:
+    internal_state:
+    - txn_id
+    - amount
+    - message_format
+    - remittance_info_xml
+    observable_schema:
+    - txn_id
+    - amount
+edges:
+- from: originating_bank
+  to: intermediary_bank
+  dimensions:
+  - name: message_format_match
+    from_field: message_format
+    to_field: message_format

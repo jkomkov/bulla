@@ -1,0 +1,181 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "mcp-server-docker",
+    "capture_date": "2026-04-07T05:16:06.621406+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:9ca026634b567aa2d6be7e14e8a666a65b42bf773c46ad0133b23e713fece8a8",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "list_containers",
+      "description": "List all Docker containers",
+      "inputSchema": {
+        "all": false,
+        "filters": null
+      }
+    },
+    {
+      "name": "create_container",
+      "description": "Create a new Docker container",
+      "inputSchema": {
+        "detach": true,
+        "image": "...",
+        "name": null,
+        "entrypoint": null,
+        "command": null,
+        "network": null,
+        "environment": null,
+        "ports": null,
+        "volumes": null,
+        "labels": null,
+        "auto_remove": false
+      }
+    },
+    {
+      "name": "run_container",
+      "description": "Run an image in a new Docker container",
+      "inputSchema": {
+        "detach": true,
+        "image": "...",
+        "name": null,
+        "entrypoint": null,
+        "command": null,
+        "network": null,
+        "environment": null,
+        "ports": null,
+        "volumes": null,
+        "labels": null,
+        "auto_remove": false
+      }
+    },
+    {
+      "name": "recreate_container",
+      "description": "Stop and remove a container, then run a new container. Fails if the container does not exist.",
+      "inputSchema": {
+        "container_id": null,
+        "resolved_container_id": null
+      }
+    },
+    {
+      "name": "start_container",
+      "description": "Start a Docker container",
+      "inputSchema": {
+        "container_id": null
+      }
+    },
+    {
+      "name": "fetch_container_logs",
+      "description": "Fetch logs for a Docker container",
+      "inputSchema": {
+        "container_id": "...",
+        "tail": 100
+      }
+    },
+    {
+      "name": "stop_container",
+      "description": "Stop a Docker container",
+      "inputSchema": {
+        "container_id": null
+      }
+    },
+    {
+      "name": "remove_container",
+      "description": "Remove a Docker container",
+      "inputSchema": {
+        "container_id": "...",
+        "force": false
+      }
+    },
+    {
+      "name": "list_images",
+      "description": "List Docker images",
+      "inputSchema": {
+        "name": null,
+        "all": false,
+        "filters": null
+      }
+    },
+    {
+      "name": "pull_image",
+      "description": "Pull a Docker image",
+      "inputSchema": {
+        "repository": "...",
+        "tag": "latest"
+      }
+    },
+    {
+      "name": "push_image",
+      "description": "Push a Docker image",
+      "inputSchema": {
+        "repository": "...",
+        "tag": null
+      }
+    },
+    {
+      "name": "build_image",
+      "description": "Build a Docker image from a Dockerfile",
+      "inputSchema": {
+        "path": "...",
+        "tag": "...",
+        "dockerfile": null
+      }
+    },
+    {
+      "name": "remove_image",
+      "description": "Remove a Docker image",
+      "inputSchema": {
+        "image": "...",
+        "force": false
+      }
+    },
+    {
+      "name": "list_networks",
+      "description": "List Docker networks",
+      "inputSchema": {
+        "filters": null
+      }
+    },
+    {
+      "name": "create_network",
+      "description": "Create a Docker network",
+      "inputSchema": {
+        "name": "...",
+        "driver": "bridge",
+        "internal": false,
+        "labels": null
+      }
+    },
+    {
+      "name": "remove_network",
+      "description": "Remove a Docker network",
+      "inputSchema": {
+        "network_id": "..."
+      }
+    },
+    {
+      "name": "list_volumes",
+      "description": "List Docker volumes",
+      "inputSchema": {}
+    },
+    {
+      "name": "create_volume",
+      "description": "Create a Docker volume",
+      "inputSchema": {
+        "name": "...",
+        "driver": "local",
+        "labels": null
+      }
+    },
+    {
+      "name": "remove_volume",
+      "description": "Remove a Docker volume",
+      "inputSchema": {
+        "volume_name": "...",
+        "force": false
+      }
+    }
+  ]
+}

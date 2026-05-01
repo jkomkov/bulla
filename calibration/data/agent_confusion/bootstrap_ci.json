@@ -1,0 +1,108 @@
+{
+  "claude": {
+    "structured": {
+      "exact_match": {
+        "point": 0.875,
+        "ci_low": 0.75,
+        "ci_high": 1.0
+      },
+      "precision": {
+        "point": 0.9028,
+        "ci_low": 0.7917,
+        "ci_high": 1.0
+      },
+      "recall": {
+        "point": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0
+      }
+    },
+    "bare": {
+      "exact_match": {
+        "point": 0.5,
+        "ci_low": 0.2917,
+        "ci_high": 0.7083
+      },
+      "precision": {
+        "point": 0.5417,
+        "ci_low": 0.3542,
+        "ci_high": 0.7292
+      },
+      "recall": {
+        "point": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0
+      }
+    },
+    "flat": {
+      "exact_match": {
+        "point": 0.4583,
+        "ci_low": 0.25,
+        "ci_high": 0.6667
+      },
+      "precision": {
+        "point": 0.4583,
+        "ci_low": 0.25,
+        "ci_high": 0.6667
+      },
+      "recall": {
+        "point": 0.875,
+        "ci_low": 0.75,
+        "ci_high": 1.0
+      }
+    }
+  },
+  "gpt4o": {
+    "structured": {
+      "exact_match": {
+        "point": 0.4167,
+        "ci_low": 0.2083,
+        "ci_high": 0.625
+      },
+      "precision": {
+        "point": 0.4167,
+        "ci_low": 0.2083,
+        "ci_high": 0.625
+      },
+      "recall": {
+        "point": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0
+      }
+    },
+    "bare": {
+      "exact_match": {
+        "point": 0.25,
+        "ci_low": 0.0833,
+        "ci_high": 0.4167
+      },
+      "precision": {
+        "point": 0.25,
+        "ci_low": 0.0833,
+        "ci_high": 0.4167
+      },
+      "recall": {
+        "point": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0
+      }
+    },
+    "flat": {
+      "exact_match": {
+        "point": 0.3333,
+        "ci_low": 0.1667,
+        "ci_high": 0.5417
+      },
+      "precision": {
+        "point": 0.3333,
+        "ci_low": 0.1667,
+        "ci_high": 0.5417
+      },
+      "recall": {
+        "point": 1.0,
+        "ci_low": 1.0,
+        "ci_high": 1.0
+      }
+    }
+  }
+}

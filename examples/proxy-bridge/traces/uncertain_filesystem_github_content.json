@@ -1,0 +1,30 @@
+{
+  "name": "uncertain_filesystem_github_content",
+  "expectation": "uncertain",
+  "calls": [
+    {
+      "server": "filesystem",
+      "tool": "read_text_file",
+      "arguments": {
+        "path": "/Users/me/repo/src/main.py"
+      },
+      "result": {
+        "content": "print('hello')"
+      }
+    },
+    {
+      "server": "github",
+      "tool": "create_or_update_file",
+      "arguments": {
+        "content": "print('hello')"
+      },
+      "argument_sources": {
+        "content": {
+          "call_id": 1,
+          "field": "content"
+        }
+      },
+      "result": {}
+    }
+  ]
+}

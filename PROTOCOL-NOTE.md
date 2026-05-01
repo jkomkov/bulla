@@ -1,6 +1,6 @@
 # Bulla Protocol Note
 
-A concise technical summary of the Bulla witness protocol (Sprints 25-32).
+A concise technical summary of the Bulla witness protocol (Sprints 25-35).
 
 ## 1. The Fee Theorem
 
@@ -51,7 +51,24 @@ Two detection surfaces:
 
 Contradictions are first-class protocol objects: frozen dataclasses, hashable, serializable, receipt-embedded. They survive the full `to_dict() -> JSON -> verify_receipt_integrity()` round-trip.
 
-## 4. Worked Example
+### Structural Contradictions (v0.34.0)
+
+Convention contradictions detect conflicting *values* for the same dimension. Structural contradictions detect *schema incompatibilities* between visible fields: same-named fields with different types, enum domains, formats, or ranges. These are a different failure class — the caller CAN see both fields, but the schemas are incompatible and the composition will fail at runtime.
+
+`SchemaContradiction` records each finding: `field_a`, `field_b`, `tool_a`, `tool_b`, `mismatch_type`, `severity`, `details`. The `contradiction_score` (sum of severities, rounded) is sealed into the receipt when > 0. Any nonzero score triggers `PROCEED_WITH_CAUTION`; the `max_structural_contradictions` policy threshold controls escalation to `refuse_pending_disclosure`.
+
+## 4. Session Proxy and Epistemic Receipt (v0.35.0)
+
+`BullaProxySession` tracks tool calls and field flows at runtime, computing per-call `LocalDiagnosticSummary` including `RepairGeometry` (when fee > 0). The `EpistemicReceipt` is a narrow product-facing view derived from `RepairGeometry` that answers: what does Bulla promise here, and with what confidence?
+
+Three regimes:
+- **exact**: geometry dividend is the true unavoidable cost (`uniform_product` essential matroid, no coloops)
+- **surrogate**: formula is a useful approximation but not a provable bound (coloops and/or non-uniform essential matroid)
+- **unresolved**: reserved for future use
+
+The epistemic receipt is local to a call cluster and NOT part of the sealed `WitnessReceipt` hash.
+
+## 5. Worked Example
 
 Two MCP servers: filesystem (14 tools, absolute local paths) and GitHub (26 tools, repo-relative paths). Composed into a single agent.
 
@@ -68,7 +85,7 @@ Receipt integrity:       VALID
 
 No runtime error occurs. Schema validation passes. The filesystem server's `read_file` accepts `/Users/me/repo/src/main.py`; the GitHub server's `create_or_update_file` accepts `src/main.py`. An agent that copies a file between them gets the path wrong silently. Bulla detects the incompatible convention at the boundary without executing either tool.
 
-## 5. Open Questions
+## 6. Open Questions
 
 **(a) Hierarchical composition.** The boundary fee is monotone but not submodular on the partition lattice. For three or more levels of delegation (agent -> sub-agent -> tool), does the fee decomposition satisfy a tower law for non-disjoint partitions?
 

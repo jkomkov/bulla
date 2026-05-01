@@ -1,0 +1,30 @@
+{
+  "name": "broken_filesystem_github_path",
+  "expectation": "broken",
+  "calls": [
+    {
+      "server": "filesystem",
+      "tool": "read_text_file",
+      "arguments": {
+        "path": "/Users/me/repo/src/main.py"
+      },
+      "result": {
+        "content": "print('hello')"
+      }
+    },
+    {
+      "server": "github",
+      "tool": "create_or_update_file",
+      "arguments": {
+        "path": "/Users/me/repo/src/main.py"
+      },
+      "argument_sources": {
+        "path": {
+          "call_id": 1,
+          "field": "path"
+        }
+      },
+      "result": {}
+    }
+  ]
+}

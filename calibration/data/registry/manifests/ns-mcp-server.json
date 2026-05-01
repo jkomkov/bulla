@@ -1,0 +1,97 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "ns-mcp-server",
+    "capture_date": "2026-04-07T05:16:06.626489+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:6f5494f70fce2e06461e739c0263dc107b6575e1586bbb2c660f42f549d13701",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "get_disruptions",
+      "description": "Get current train disruptions from NS API",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean",
+            "description": "Filter to only return active disruptions"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of disruptions to return (e.g., MAINTENANCE, DISRUPTION)",
+            "enum": [
+              "MAINTENANCE",
+              "DISRUPTION"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "get_travel_advice",
+      "description": "Get travel advice between two train stations",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fromStation": {
+            "type": "string",
+            "description": "Name or code of departure station"
+          },
+          "toStation": {
+            "type": "string",
+            "description": "Name or code of destination station"
+          },
+          "dateTime": {
+            "type": "string",
+            "description": "Optional departure/arrival time in ISO format (e.g. 2024-03-20T14:00:00+01:00)"
+          },
+          "searchForArrival": {
+            "type": "boolean",
+            "description": "If true, dateTime is treated as desired arrival time instead of departure time"
+          }
+        },
+        "required": [
+          "fromStation",
+          "toStation"
+        ]
+      }
+    },
+    {
+      "name": "get_departures",
+      "description": "Get list of departing trains from a station",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "station": {
+            "type": "string",
+            "description": "Station name or code to get departures for"
+          },
+          "dateTime": {
+            "type": "string",
+            "description": "Optional departure time in ISO format (e.g. 2024-03-20T14:00:00+01:00)"
+          },
+          "maxJourneys": {
+            "type": "number",
+            "description": "Maximum number of departures to return (default: 40)",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "lang": {
+            "type": "string",
+            "description": "Language for messages (default: nl)",
+            "enum": [
+              "nl",
+              "en"
+            ]
+          }
+        },
+        "required": [
+          "station"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+# Costs for weighted-greedy test: make financial_analysis fields cheap
+# so greedy picks them over the more expensive day_convention / risk_metric
+# on data_provider and portfolio_verification.
+"data_provider:day_convention": "10"
+"financial_analysis:day_convention": "1"
+"financial_analysis:risk_metric": "1"
+"portfolio_verification:risk_metric": "10"

@@ -1,0 +1,78 @@
+{
+  "version": "0.1.0",
+  "fetched_at": "2026-04-26T19:45:23.814325+00:00",
+  "entries": [
+    {
+      "pack": "iana-media-types",
+      "dimension": "media_type",
+      "version": "snapshot",
+      "uri": "https://www.iana.org/assignments/media-types/media-types.xhtml",
+      "hash": "sha256:e6d05584bc4d2518a07f39de88b3a23a06c1a63ccc61c1ab6f935d986dab7883",
+      "bytes_fetched": 945761,
+      "status": "ok"
+    },
+    {
+      "pack": "ucum",
+      "dimension": "unit_of_measure",
+      "version": "snapshot",
+      "uri": "https://ucum.org/ucum-essence.xml",
+      "hash": "sha256:b78e1fc5d9c025f8c0062152e02e51a77fdbc489cb22a893e7c187fd0f44e027",
+      "bytes_fetched": 545431,
+      "status": "ok"
+    },
+    {
+      "pack": "naics-2022",
+      "dimension": "industry_code",
+      "version": "2022",
+      "uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx",
+      "hash": "sha256:be12ba41002803359f49181c9bf33a03fbd08578f4f4a4c0bbad7aadaaea0316",
+      "bytes_fetched": 82460,
+      "status": "ok"
+    },
+    {
+      "pack": "iso-639",
+      "dimension": "language_code",
+      "version": "sil-snapshot",
+      "uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab",
+      "hash": "sha256:9697ac84b95b9b4d8624693fb51a496cc95677ff0abb28a7b860aa2f2c80ff13",
+      "bytes_fetched": 178336,
+      "status": "ok"
+    },
+    {
+      "pack": "fix-4.4",
+      "dimension": "fix_msg_type",
+      "version": "4.4",
+      "uri": "https://raw.githubusercontent.com/quickfix-j/quickfixj/master/quickfixj-core/src/main/resources/FIX44.xml",
+      "hash": null,
+      "bytes_fetched": 0,
+      "status": "fetch_failed"
+    },
+    {
+      "pack": "fix-5.0",
+      "dimension": "fix_msg_type",
+      "version": "5.0",
+      "uri": "https://raw.githubusercontent.com/quickfix-j/quickfixj/master/quickfixj-core/src/main/resources/FIX50.xml",
+      "hash": null,
+      "bytes_fetched": 0,
+      "status": "fetch_failed"
+    },
+    {
+      "pack": "fhir-r4",
+      "dimension": "fhir_resource_type",
+      "version": "R4",
+      "uri": "https://hl7.org/fhir/R4/valueset-resource-types.json",
+      "hash": "sha256:82ae2b62e9f10a32a2e60b7498b80f0b258eaa22cef1724de20fc0218a8e575c",
+      "bytes_fetched": 2293,
+      "status": "ok"
+    },
+    {
+      "pack": "fhir-r5",
+      "dimension": "fhir_resource_type",
+      "version": "R5",
+      "uri": "https://hl7.org/fhir/R5/valueset-resource-types.json",
+      "hash": "sha256:6ed6a7d2179d67c9c8b8423dc2695607d85336cc34036a0c00a1b198c9a1e85e",
+      "bytes_fetched": 63326,
+      "status": "ok"
+    }
+  ]
+}

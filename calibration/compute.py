@@ -10,7 +10,7 @@ import itertools
 import json
 import logging
 import sqlite3
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -190,6 +190,9 @@ class ComputeResult:
     rank_full: int
     diagnostic_hash: str
     blind_spots: list[dict[str, Any]]
+    # Kernel objects — always populated by diagnose_pair for receipt generation
+    kernel_composition: Any = field(default=None, repr=False)
+    kernel_diagnostic: Any = field(default=None, repr=False)
 
 
 def _classify_pair_type(cat_a: str, cat_b: str) -> str:
@@ -230,9 +233,13 @@ def diagnose_pair(
     diag = guard.diagnose()
 
     # Fee decomposition: partition by server
+    # BullaGuard normalizes hyphens to underscores in tool names, so we must
+    # match the normalized prefix, not the original server name.
+    prefix_a = server_a.replace("-", "_") + "__"
+    prefix_b = server_b.replace("-", "_") + "__"
     partition = (
-        frozenset(t.name for t in comp.tools if t.name.startswith(f"{server_a}__")),
-        frozenset(t.name for t in comp.tools if t.name.startswith(f"{server_b}__")),
+        frozenset(t.name for t in comp.tools if t.name.startswith(prefix_a)),
+        frozenset(t.name for t in comp.tools if t.name.startswith(prefix_b)),
     )
     partition = tuple(p for p in partition if p)  # remove empty
 
@@ -273,6 +280,8 @@ def diagnose_pair(
         rank_full=diag.rank_full,
         diagnostic_hash=diag.content_hash(),
         blind_spots=blind_spots_data,
+        kernel_composition=comp,
+        kernel_diagnostic=diag,
     )
 
 

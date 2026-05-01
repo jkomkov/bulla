@@ -1,0 +1,138 @@
+{
+  "exact": {
+    "demo": "A",
+    "title": "Exact Regime",
+    "composition": "analytics \u2192 storage",
+    "local_diagnostic": {
+      "call_id": 2,
+      "cluster_call_ids": [
+        1,
+        2
+      ],
+      "tool_names": [
+        "analytics__query_events",
+        "storage__write_report"
+      ],
+      "n_tools": 2,
+      "n_edges": 1,
+      "betti_1": 0,
+      "coherence_fee": 2,
+      "blind_spots": 2,
+      "contradictions": 0,
+      "repair_geometry": {
+        "fee": 2,
+        "beta": 4,
+        "repair_entropy": 1.3863,
+        "component_sizes": [
+          2,
+          2
+        ],
+        "reachable_basis_count": 4,
+        "stability_ratio": 1.0,
+        "robustness_margin": 2.0,
+        "repair_mode": "flexible",
+        "recommended_basis": [
+          [
+            "analytics__query_events",
+            "timestamp"
+          ],
+          [
+            "analytics__query_events",
+            "path"
+          ]
+        ],
+        "greedy_basis": [
+          [
+            "analytics__query_events",
+            "path"
+          ],
+          [
+            "analytics__query_events",
+            "timestamp"
+          ]
+        ],
+        "field_costs": {
+          "analytics__query_events::path": 7.0,
+          "analytics__query_events::timestamp": 3.0,
+          "storage__write_report::path": 7.0,
+          "storage__write_report::timestamp": 3.0,
+          "storage__write_report::status": 5.0
+        },
+        "forced_cost": 0,
+        "geometry_dividend": 10.0,
+        "sigma_star": 10.0,
+        "residual_regime": "uniform_product"
+      }
+    },
+    "epistemic_receipt": {
+      "fee": 2,
+      "geometry_dividend": 10.0,
+      "sigma_star": 10.0,
+      "regime": "exact",
+      "recommended_repair": [
+        [
+          "analytics__query_events",
+          "timestamp"
+        ],
+        [
+          "analytics__query_events",
+          "path"
+        ]
+      ]
+    },
+    "disposition": "refuse_pending_disclosure"
+  },
+  "surrogate": {
+    "demo": "B",
+    "title": "Surrogate Regime (coloop burden)",
+    "composition": "auth \u2192 api \u2192 database (synthetic)",
+    "note": "Coloops are rare (0/373 in calibration corpus) but real.",
+    "epistemic_receipt": {
+      "fee": 3,
+      "geometry_dividend": 6.0,
+      "sigma_star": 16.0,
+      "regime": "surrogate",
+      "forced_cost": 10.0,
+      "downgrade": "coloop_burden",
+      "recommended_repair": [
+        [
+          "auth__get_credentials",
+          "token"
+        ],
+        [
+          "api__fetch_data",
+          "path"
+        ]
+      ]
+    }
+  },
+  "comparison": {
+    "demo": "C",
+    "title": "Comparison",
+    "without_bulla": {
+      "schema_validation": "PASS",
+      "visible_problems": 0,
+      "actual_hidden_risks": 2
+    },
+    "with_bulla": {
+      "coherence_fee": 2,
+      "epistemic_receipt": {
+        "fee": 2,
+        "geometry_dividend": 10.0,
+        "sigma_star": 10.0,
+        "regime": "exact",
+        "recommended_repair": [
+          [
+            "analytics__query_events",
+            "timestamp"
+          ],
+          [
+            "analytics__query_events",
+            "path"
+          ]
+        ]
+      },
+      "disposition": "refuse_pending_disclosure"
+    }
+  }
+}

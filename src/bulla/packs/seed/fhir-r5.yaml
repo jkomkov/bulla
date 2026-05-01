@@ -1,0 +1,83 @@
+pack_name: fhir-r5
+pack_version: 0.1.0
+license:
+  spdx_id: CC0-1.0
+  source_url: https://hl7.org/fhir/R5/
+  registry_license: open
+  attribution: sha256:hl7-fhir-notices
+derives_from:
+  standard: HL7-FHIR
+  version: R5
+  source_uri: https://hl7.org/fhir/R5/downloads.html
+dimensions:
+  fhir_resource_type:
+    description: FHIR R5 resourceType discriminator. Inline seed of ~40 most-recurrent
+      resources; the authoritative ~150 entries live at the values_registry pointer.
+      R4→R5 introduces breaking changes on a subset of resources, so R4 and R5 packs
+      are separate.
+    field_patterns:
+    - resourceType
+    - resource_type
+    - resource
+    - fhir_type
+    - '*_resource_type'
+    description_keywords:
+    - fhir resource
+    - fhir resource type
+    - fhir resourcetype
+    - fhir R5
+    domains:
+    - healthcare
+    known_values:
+    - Patient
+    - Practitioner
+    - PractitionerRole
+    - Organization
+    - Location
+    - Encounter
+    - Observation
+    - Condition
+    - DiagnosticReport
+    - Procedure
+    - MedicationRequest
+    - Medication
+    - MedicationStatement
+    - MedicationAdministration
+    - AllergyIntolerance
+    - Immunization
+    - FamilyMemberHistory
+    - CarePlan
+    - Goal
+    - Task
+    - Coverage
+    - Claim
+    - ExplanationOfBenefit
+    - Composition
+    - Bundle
+    - DocumentReference
+    - Specimen
+    - ImagingStudy
+    - ServiceRequest
+    - Appointment
+    - AppointmentResponse
+    - Schedule
+    - Slot
+    - Consent
+    - Provenance
+    - AuditEvent
+    - RelatedPerson
+    - Group
+    - List
+    - Subscription
+    - Communication
+    values_registry:
+      uri: https://hl7.org/fhir/R5/valueset-resource-types.json
+      hash: sha256:6ed6a7d2179d67c9c8b8423dc2695607d85336cc34036a0c00a1b198c9a1e85e
+      version: R5
+mappings:
+  fhir-r4:
+    fhir_resource_type:
+    - from: ImagingSelection
+      to: ImagingManifest
+      equivalence: lossy_bidirectional
+      note: R5 ImagingSelection replaces R4 ImagingManifest with field-level differences

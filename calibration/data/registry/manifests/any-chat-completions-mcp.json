@@ -1,0 +1,29 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "schemas_repo:https://github.com/oslook/mcp-servers-schemas/archive/refs/heads/main.tar.gz",
+    "server_package": "any-chat-completions-mcp",
+    "capture_date": "2026-04-07T05:16:06.613637+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:1bb805a04f7dfdfaf454b2f3dcbf5cce0778067f30d84128fc598ef135e5b482",
+    "category": "",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "chat-with-openai",
+      "description": "Text chat with OpenAI's language model.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The content of the chat to send to OpenAI."
+          }
+        },
+        "required": [
+          "content"
+        ]
+      }
+    }
+  ]
+}

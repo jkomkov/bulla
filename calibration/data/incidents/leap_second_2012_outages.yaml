@@ -1,0 +1,23 @@
+name: leap_second_2012_outages
+description: '2012 leap-second multi-site outages. Kernel hrtimer bug on 23:59:60
+  timestamp. iso-8601 detects: temporal_format boundary fee (60-second minute).'
+tools:
+  ntp_source:
+    internal_state:
+    - timestamp
+    - minute_seconds
+    observable_schema:
+    - timestamp
+  kernel_hrtimer:
+    internal_state:
+    - timestamp
+    - minute_seconds
+    observable_schema:
+    - timestamp
+edges:
+- from: ntp_source
+  to: kernel_hrtimer
+  dimensions:
+  - name: minute_seconds_match
+    from_field: minute_seconds
+    to_field: minute_seconds

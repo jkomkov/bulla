@@ -1,0 +1,68 @@
+pack_name: iana-media-types
+pack_version: 0.1.0
+license:
+  spdx_id: Public-Domain
+  source_url: https://www.iana.org/assignments/media-types/media-types.xhtml
+  registry_license: open
+derives_from:
+  standard: IANA-Media-Types
+  version: snapshot-2026-04-26
+  source_uri: https://www.iana.org/assignments/media-types/media-types.csv
+dimensions:
+  media_type:
+    description: IANA media type (MIME type). The full registry has ~2000 entries
+      with continuous additions; the authoritative list lives at the values_registry
+      pointer. The 25 inline values are documentation of the most commonly observed
+      types and are stripped from the pack hash via the canonicalization rule (Extension
+      B), so curating examples doesn't produce pack-hash drift.
+    field_patterns:
+    - content_type
+    - contentType
+    - content-type
+    - media_type
+    - mime_type
+    - mimeType
+    - '*_content_type'
+    - '*_mime'
+    - '*_mime_type'
+    - accept
+    - accept_type
+    description_keywords:
+    - media type
+    - mime type
+    - content type
+    - iana media
+    - rfc 6838
+    - rfc6838
+    domains:
+    - universal
+    known_values:
+    - application/json
+    - application/xml
+    - application/x-www-form-urlencoded
+    - application/octet-stream
+    - application/pdf
+    - application/zip
+    - application/gzip
+    - application/javascript
+    - application/yaml
+    - application/xhtml+xml
+    - text/plain
+    - text/html
+    - text/css
+    - text/csv
+    - text/markdown
+    - image/png
+    - image/jpeg
+    - image/gif
+    - image/svg+xml
+    - image/webp
+    - audio/mpeg
+    - video/mp4
+    - multipart/form-data
+    - multipart/mixed
+    - message/rfc822
+    values_registry:
+      uri: https://www.iana.org/assignments/media-types/media-types.xhtml
+      hash: sha256:e6d05584bc4d2518a07f39de88b3a23a06c1a63ccc61c1ab6f935d986dab7883
+      version: snapshot

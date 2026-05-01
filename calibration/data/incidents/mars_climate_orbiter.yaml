@@ -1,0 +1,31 @@
+name: mars_climate_orbiter
+description: '1999 Mars Climate Orbiter ($327.6M). Lockheed Martin thruster software
+  output impulse in pound-force·second; NASA JPL navigation expected newton·second.
+  Factor 4.45 error accumulated over 9.5 months. UCUM detects: amount_unit boundary
+  fee on impulse field.'
+tools:
+  lockheed_thruster:
+    internal_state:
+    - impulse
+    - thrust_duration
+    - burn_id
+    - force_unit
+    observable_schema:
+    - impulse
+    - thrust_duration
+    - burn_id
+  jpl_nav:
+    internal_state:
+    - impulse
+    - trajectory
+    - force_unit
+    observable_schema:
+    - impulse
+    - trajectory
+edges:
+- from: lockheed_thruster
+  to: jpl_nav
+  dimensions:
+  - name: force_unit_match
+    from_field: force_unit
+    to_field: force_unit

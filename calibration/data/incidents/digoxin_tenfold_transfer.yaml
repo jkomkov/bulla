@@ -1,0 +1,36 @@
+name: digoxin_tenfold_transfer
+description: 'Digoxin tenfold-error pediatric mortality (documented). Decimal point
+  lost during interfacility transfer doc rewriting. UCUM + precision detects: precision
+  boundary fee on dose field.'
+tools:
+  transferring_hospital:
+    internal_state:
+    - patient_id
+    - drug
+    - dose_value
+    - dose_unit
+    - decimal_precision
+    observable_schema:
+    - patient_id
+    - drug
+    - dose_value
+    - dose_unit
+  receiving_hospital:
+    internal_state:
+    - patient_id
+    - drug
+    - dose_value
+    - dose_unit
+    - decimal_precision
+    observable_schema:
+    - patient_id
+    - drug
+    - dose_value
+    - dose_unit
+edges:
+- from: transferring_hospital
+  to: receiving_hospital
+  dimensions:
+  - name: decimal_precision_match
+    from_field: decimal_precision
+    to_field: decimal_precision

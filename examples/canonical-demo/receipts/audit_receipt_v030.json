@@ -1,6 +1,6 @@
 {
   "receipt_version": "0.1.0",
-  "kernel_version": "0.33.0",
+  "kernel_version": "0.36.0",
   "composition_hash": "0e6eb8884c8bc5bdffa61752daae9563f3fe2d267129e79c56760693996bf341",
   "diagnostic_hash": "d375f27065c20cda943644ce52d04507ee52e64fe5b407a8297f85f873fe958e",
   "policy_profile": {
@@ -10,14 +10,15 @@
     "max_unknown": -1,
     "require_bridge": true,
     "max_unmet_obligations": -1,
-    "max_contradictions": -1
+    "max_contradictions": -1,
+    "max_structural_contradictions": -1
   },
   "fee": 17,
   "blind_spots_count": 106,
   "bridges_required": 106,
   "unknown_dimensions": 21,
   "disposition": "refuse_pending_disclosure",
-  "timestamp": "2026-04-07T19:34:22.921358+00:00",
+  "timestamp": "2026-05-01T20:10:04.613385+00:00",
   "patches": [
     {
       "bulla_patch_version": "0.1.0",
@@ -1756,6 +1757,6 @@
       "severity": "mismatch"
     }
   ],
-  "receipt_hash": "7689e450e5fc88cc5a83e913ed230f92ded8760b276e1609d14016b56d7db0b1",
+  "receipt_hash": "53bc319f5215a4e821a581fc073124358c5c82d21942b484e0e98322ef4981a0",
   "anchor_ref": null
 }

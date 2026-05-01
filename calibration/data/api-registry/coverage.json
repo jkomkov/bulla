@@ -1,0 +1,839 @@
+{
+  "by_source": [
+    {
+      "source_kind": "graphql",
+      "source_id": "shopify-admin",
+      "n_tools": 3,
+      "n_fields": 4,
+      "n_unknown": 1,
+      "dim_hits": {
+        "currency_code": 1,
+        "country_code": 1,
+        "language_code": 1
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "airtable-mcp",
+      "n_tools": 11,
+      "n_fields": 40,
+      "n_unknown": 40,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "any-chat-completions-mcp",
+      "n_tools": 1,
+      "n_fields": 1,
+      "n_unknown": 1,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "cognee-mcp-server",
+      "n_tools": 1,
+      "n_fields": 4,
+      "n_unknown": 4,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "e2b-code-mcp-server",
+      "n_tools": 1,
+      "n_fields": 1,
+      "n_unknown": 1,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "exa",
+      "n_tools": 3,
+      "n_fields": 12,
+      "n_unknown": 11,
+      "dim_hits": {
+        "unit_of_measure": 1
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "exa-mcp-server",
+      "n_tools": 1,
+      "n_fields": 2,
+      "n_unknown": 2,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "fetch-mcp",
+      "n_tools": 4,
+      "n_fields": 8,
+      "n_unknown": 8,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "filesystem",
+      "n_tools": 14,
+      "n_fields": 38,
+      "n_unknown": 26,
+      "dim_hits": {
+        "path_convention": 25,
+        "encoding": 1,
+        "media_type": 1
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "flightradar24-mcp-server",
+      "n_tools": 2,
+      "n_fields": 5,
+      "n_unknown": 5,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "github",
+      "n_tools": 26,
+      "n_fields": 130,
+      "n_unknown": 97,
+      "dim_hits": {
+        "owner_convention": 15,
+        "path_convention": 2,
+        "id_offset": 7,
+        "sort_direction": 5,
+        "date_format": 1,
+        "currency_code": 2,
+        "state_filter": 3
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "gtasks-mcp",
+      "n_tools": 6,
+      "n_fields": 16,
+      "n_unknown": 15,
+      "dim_hits": {
+        "state_filter": 1
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "homeassistant-mcp",
+      "n_tools": 13,
+      "n_fields": 0,
+      "n_unknown": 0,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "inoyu-mcp-unomi-server",
+      "n_tools": 5,
+      "n_fields": 10,
+      "n_unknown": 9,
+      "dim_hits": {
+        "id_offset": 1
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-bigquery-server",
+      "n_tools": 1,
+      "n_fields": 2,
+      "n_unknown": 2,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-mongo-server",
+      "n_tools": 2,
+      "n_fields": 6,
+      "n_unknown": 6,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-obsidian",
+      "n_tools": 2,
+      "n_fields": 2,
+      "n_unknown": 2,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-pandoc",
+      "n_tools": 1,
+      "n_fields": 2,
+      "n_unknown": 2,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-pinecone",
+      "n_tools": 3,
+      "n_fields": 14,
+      "n_unknown": 11,
+      "dim_hits": {
+        "temporal_format": 1,
+        "date_format": 2
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-playwright",
+      "n_tools": 12,
+      "n_fields": 23,
+      "n_unknown": 23,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-aws",
+      "n_tools": 23,
+      "n_fields": 45,
+      "n_unknown": 45,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-axiom",
+      "n_tools": 2,
+      "n_fields": 1,
+      "n_unknown": 1,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-bigquery",
+      "n_tools": 3,
+      "n_fields": 2,
+      "n_unknown": 2,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-browserbase",
+      "n_tools": 4,
+      "n_fields": 6,
+      "n_unknown": 6,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-chatsum",
+      "n_tools": 1,
+      "n_fields": 3,
+      "n_unknown": 3,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-cloudflare",
+      "n_tools": 21,
+      "n_fields": 43,
+      "n_unknown": 39,
+      "dim_hits": {
+        "media_type": 1,
+        "temporal_format": 1,
+        "date_format": 2
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-docker",
+      "n_tools": 19,
+      "n_fields": 0,
+      "n_unknown": 0,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-fetch",
+      "n_tools": 4,
+      "n_fields": 8,
+      "n_unknown": 8,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-kubernetes",
+      "n_tools": 7,
+      "n_fields": 10,
+      "n_unknown": 10,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-llamacloud",
+      "n_tools": 1,
+      "n_fields": 1,
+      "n_unknown": 1,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-mysql",
+      "n_tools": 1,
+      "n_fields": 1,
+      "n_unknown": 1,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-neon",
+      "n_tools": 14,
+      "n_fields": 33,
+      "n_unknown": 33,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-rag-web-browser",
+      "n_tools": 1,
+      "n_fields": 2,
+      "n_unknown": 2,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-rememberizer",
+      "n_tools": 6,
+      "n_fields": 13,
+      "n_unknown": 8,
+      "dim_hits": {
+        "date_format": 4,
+        "temporal_format": 4,
+        "timezone": 4,
+        "id_offset": 1
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-server-tmdb",
+      "n_tools": 3,
+      "n_fields": 3,
+      "n_unknown": 2,
+      "dim_hits": {
+        "unit_of_measure": 1
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-snowflake-server",
+      "n_tools": 6,
+      "n_fields": 5,
+      "n_unknown": 5,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-tavily",
+      "n_tools": 3,
+      "n_fields": 0,
+      "n_unknown": 0,
+      "dim_hits": {
+        "industry_code": 1
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-vegalite-server",
+      "n_tools": 2,
+      "n_fields": 4,
+      "n_unknown": 4,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mcp-xmind",
+      "n_tools": 7,
+      "n_fields": 11,
+      "n_unknown": 6,
+      "dim_hits": {
+        "path_convention": 5
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "memory",
+      "n_tools": 9,
+      "n_fields": 21,
+      "n_unknown": 21,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "mysql_mcp_server",
+      "n_tools": 1,
+      "n_fields": 1,
+      "n_unknown": 1,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "needle-mcp",
+      "n_tools": 7,
+      "n_fields": 9,
+      "n_unknown": 9,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "needle-mcp_tools",
+      "n_tools": 7,
+      "n_fields": 9,
+      "n_unknown": 9,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "notion",
+      "n_tools": 22,
+      "n_fields": 93,
+      "n_unknown": 89,
+      "dim_hits": {
+        "sort_direction": 2,
+        "temporal_format": 2,
+        "date_format": 1
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "npm-search",
+      "n_tools": 1,
+      "n_fields": 1,
+      "n_unknown": 1,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "ns-mcp-server",
+      "n_tools": 3,
+      "n_fields": 10,
+      "n_unknown": 5,
+      "dim_hits": {
+        "null_handling": 1,
+        "temporal_format": 3,
+        "country_code": 1,
+        "language_code": 1
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "openrpc-mpc-server",
+      "n_tools": 2,
+      "n_fields": 4,
+      "n_unknown": 4,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "playwright",
+      "n_tools": 33,
+      "n_fields": 89,
+      "n_unknown": 85,
+      "dim_hits": {
+        "path_convention": 4
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "postgres",
+      "n_tools": 1,
+      "n_fields": 1,
+      "n_unknown": 1,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "puppeteer",
+      "n_tools": 7,
+      "n_fields": 15,
+      "n_unknown": 15,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "qdrant",
+      "n_tools": 2,
+      "n_fields": 2,
+      "n_unknown": 2,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "search1api-mcp",
+      "n_tools": 4,
+      "n_fields": 8,
+      "n_unknown": 8,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "sequential-thinking",
+      "n_tools": 1,
+      "n_fields": 11,
+      "n_unknown": 11,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "tavily",
+      "n_tools": 5,
+      "n_fields": 41,
+      "n_unknown": 36,
+      "dim_hits": {
+        "industry_code": 1,
+        "temporal_format": 3,
+        "unit_of_measure": 1,
+        "date_format": 2,
+        "country_code": 1
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "todoist-mcp-server",
+      "n_tools": 5,
+      "n_fields": 15,
+      "n_unknown": 12,
+      "dim_hits": {
+        "fix_msg_type": 3,
+        "fix_side": 3,
+        "score_range": 3
+      }
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "twitter-mcp",
+      "n_tools": 2,
+      "n_fields": 3,
+      "n_unknown": 3,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "x-mcp",
+      "n_tools": 5,
+      "n_fields": 4,
+      "n_unknown": 4,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "mcp",
+      "source_id": "youtube-transcript",
+      "n_tools": 1,
+      "n_fields": 2,
+      "n_unknown": 1,
+      "dim_hits": {
+        "language_code": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "fhir-patient",
+      "n_tools": 3,
+      "n_fields": 6,
+      "n_unknown": 2,
+      "dim_hits": {
+        "unit_of_measure": 1,
+        "fhir_resource_type": 1,
+        "icd_10_cm_code": 2,
+        "date_format": 1,
+        "language_code": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "fix-trading-orders",
+      "n_tools": 1,
+      "n_fields": 4,
+      "n_unknown": 0,
+      "dim_hits": {
+        "fix_msg_type": 2,
+        "unit_of_measure": 1,
+        "fix_side": 1,
+        "amount_unit": 1,
+        "currency_code": 1,
+        "date_format": 1,
+        "temporal_format": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "github-v3",
+      "n_tools": 2,
+      "n_fields": 5,
+      "n_unknown": 3,
+      "dim_hits": {
+        "language_code": 1,
+        "date_format": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "gs1-traceability",
+      "n_tools": 1,
+      "n_fields": 4,
+      "n_unknown": 1,
+      "dim_hits": {
+        "gs1_application_identifier": 2,
+        "gs1_id_key_type": 1,
+        "country_code": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "slack-web",
+      "n_tools": 2,
+      "n_fields": 3,
+      "n_unknown": 2,
+      "dim_hits": {
+        "media_type": 2
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "stripe-charges",
+      "n_tools": 2,
+      "n_fields": 6,
+      "n_unknown": 2,
+      "dim_hits": {
+        "amount_unit": 3,
+        "currency_code": 1,
+        "date_format": 1,
+        "country_code": 1,
+        "language_code": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "twilio-messages",
+      "n_tools": 1,
+      "n_fields": 5,
+      "n_unknown": 4,
+      "dim_hits": {
+        "currency_code": 1
+      }
+    }
+  ],
+  "by_dimension": [
+    {
+      "dimension": "path_convention",
+      "total_hits": 36,
+      "sources": [
+        "filesystem",
+        "github",
+        "mcp-xmind",
+        "playwright"
+      ]
+    },
+    {
+      "dimension": "date_format",
+      "total_hits": 16,
+      "sources": [
+        "fhir-patient",
+        "fix-trading-orders",
+        "github",
+        "github-v3",
+        "mcp-pinecone",
+        "mcp-server-cloudflare",
+        "mcp-server-rememberizer",
+        "notion",
+        "stripe-charges",
+        "tavily"
+      ]
+    },
+    {
+      "dimension": "owner_convention",
+      "total_hits": 15,
+      "sources": [
+        "github"
+      ]
+    },
+    {
+      "dimension": "temporal_format",
+      "total_hits": 15,
+      "sources": [
+        "fix-trading-orders",
+        "mcp-pinecone",
+        "mcp-server-cloudflare",
+        "mcp-server-rememberizer",
+        "notion",
+        "ns-mcp-server",
+        "tavily"
+      ]
+    },
+    {
+      "dimension": "id_offset",
+      "total_hits": 9,
+      "sources": [
+        "github",
+        "inoyu-mcp-unomi-server",
+        "mcp-server-rememberizer"
+      ]
+    },
+    {
+      "dimension": "sort_direction",
+      "total_hits": 7,
+      "sources": [
+        "github",
+        "notion"
+      ]
+    },
+    {
+      "dimension": "currency_code",
+      "total_hits": 6,
+      "sources": [
+        "fix-trading-orders",
+        "github",
+        "shopify-admin",
+        "stripe-charges",
+        "twilio-messages"
+      ]
+    },
+    {
+      "dimension": "language_code",
+      "total_hits": 6,
+      "sources": [
+        "fhir-patient",
+        "github-v3",
+        "ns-mcp-server",
+        "shopify-admin",
+        "stripe-charges",
+        "youtube-transcript"
+      ]
+    },
+    {
+      "dimension": "unit_of_measure",
+      "total_hits": 5,
+      "sources": [
+        "exa",
+        "fhir-patient",
+        "fix-trading-orders",
+        "mcp-server-tmdb",
+        "tavily"
+      ]
+    },
+    {
+      "dimension": "country_code",
+      "total_hits": 5,
+      "sources": [
+        "gs1-traceability",
+        "ns-mcp-server",
+        "shopify-admin",
+        "stripe-charges",
+        "tavily"
+      ]
+    },
+    {
+      "dimension": "fix_msg_type",
+      "total_hits": 5,
+      "sources": [
+        "fix-trading-orders",
+        "todoist-mcp-server"
+      ]
+    },
+    {
+      "dimension": "media_type",
+      "total_hits": 4,
+      "sources": [
+        "filesystem",
+        "mcp-server-cloudflare",
+        "slack-web"
+      ]
+    },
+    {
+      "dimension": "state_filter",
+      "total_hits": 4,
+      "sources": [
+        "github",
+        "gtasks-mcp"
+      ]
+    },
+    {
+      "dimension": "timezone",
+      "total_hits": 4,
+      "sources": [
+        "mcp-server-rememberizer"
+      ]
+    },
+    {
+      "dimension": "fix_side",
+      "total_hits": 4,
+      "sources": [
+        "fix-trading-orders",
+        "todoist-mcp-server"
+      ]
+    },
+    {
+      "dimension": "amount_unit",
+      "total_hits": 4,
+      "sources": [
+        "fix-trading-orders",
+        "stripe-charges"
+      ]
+    },
+    {
+      "dimension": "score_range",
+      "total_hits": 3,
+      "sources": [
+        "todoist-mcp-server"
+      ]
+    },
+    {
+      "dimension": "industry_code",
+      "total_hits": 2,
+      "sources": [
+        "mcp-tavily",
+        "tavily"
+      ]
+    },
+    {
+      "dimension": "icd_10_cm_code",
+      "total_hits": 2,
+      "sources": [
+        "fhir-patient"
+      ]
+    },
+    {
+      "dimension": "gs1_application_identifier",
+      "total_hits": 2,
+      "sources": [
+        "gs1-traceability"
+      ]
+    },
+    {
+      "dimension": "encoding",
+      "total_hits": 1,
+      "sources": [
+        "filesystem"
+      ]
+    },
+    {
+      "dimension": "null_handling",
+      "total_hits": 1,
+      "sources": [
+        "ns-mcp-server"
+      ]
+    },
+    {
+      "dimension": "fhir_resource_type",
+      "total_hits": 1,
+      "sources": [
+        "fhir-patient"
+      ]
+    },
+    {
+      "dimension": "gs1_id_key_type",
+      "total_hits": 1,
+      "sources": [
+        "gs1-traceability"
+      ]
+    }
+  ],
+  "totals": {
+    "n_sources": 65,
+    "n_tools": 370,
+    "n_fields": 883,
+    "n_unknown": 773
+  }
+}

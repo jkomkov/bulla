@@ -1,0 +1,22 @@
+{
+  "tools": [
+    {
+      "name": "write_report",
+      "description": "Write a report to the specified file path with timestamp metadata.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Destination file path" },
+          "content": { "type": "string", "description": "Report body" },
+          "timestamp": { "type": "string", "format": "date-time", "description": "Report timestamp" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string", "description": "Write status" }
+        }
+      }
+    }
+  ]
+}

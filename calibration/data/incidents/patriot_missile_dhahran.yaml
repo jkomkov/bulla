@@ -1,0 +1,28 @@
+name: patriot_missile_dhahran
+description: '1991 Patriot missile Dhahran (28 killed). Timing software 24-bit fixed-point
+  precision drift over 100 hours produced 0.34s tracking error. UCUM detects: precision
+  boundary fee on time field.'
+tools:
+  radar_tracker:
+    internal_state:
+    - tick_count
+    - tick_precision_bits
+    - elapsed_seconds
+    observable_schema:
+    - tick_count
+    - elapsed_seconds
+  intercept_calc:
+    internal_state:
+    - elapsed_seconds
+    - tick_precision_bits
+    - intercept_window
+    observable_schema:
+    - elapsed_seconds
+    - intercept_window
+edges:
+- from: radar_tracker
+  to: intercept_calc
+  dimensions:
+  - name: precision_match
+    from_field: tick_precision_bits
+    to_field: tick_precision_bits

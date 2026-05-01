@@ -1,0 +1,123 @@
+{
+  "manifest_dir": "/Users/jkomkov/Documents/GitHub/res-agentica/bulla/examples/real_world_audit/manifests",
+  "sessions": [
+    {
+      "name": "clean_memory_puppeteer",
+      "expectation": "clean",
+      "final_local_diagnostic": {
+        "call_id": 2,
+        "cluster_call_ids": [
+          2
+        ],
+        "tool_names": [
+          "puppeteer__puppeteer_navigate"
+        ],
+        "n_tools": 1,
+        "n_edges": 0,
+        "betti_1": 0,
+        "coherence_fee": 0,
+        "blind_spots": 0,
+        "contradictions": 0
+      },
+      "flow_conflict_count": 0,
+      "has_signal": false,
+      "disposition": "proceed"
+    },
+    {
+      "name": "broken_filesystem_github_path",
+      "expectation": "broken",
+      "final_local_diagnostic": {
+        "call_id": 2,
+        "cluster_call_ids": [
+          1,
+          2
+        ],
+        "tool_names": [
+          "filesystem__read_text_file",
+          "github__create_or_update_file"
+        ],
+        "n_tools": 2,
+        "n_edges": 1,
+        "betti_1": 0,
+        "coherence_fee": 1,
+        "blind_spots": 1,
+        "contradictions": 0
+      },
+      "flow_conflict_count": 0,
+      "has_signal": true,
+      "disposition": "refuse_pending_disclosure"
+    },
+    {
+      "name": "uncertain_github_paging",
+      "expectation": "uncertain",
+      "final_local_diagnostic": {
+        "call_id": 2,
+        "cluster_call_ids": [
+          1,
+          2
+        ],
+        "tool_names": [
+          "github__search_repositories",
+          "github__list_commits"
+        ],
+        "n_tools": 2,
+        "n_edges": 1,
+        "betti_1": 0,
+        "coherence_fee": 1,
+        "blind_spots": 1,
+        "contradictions": 0
+      },
+      "flow_conflict_count": 0,
+      "has_signal": true,
+      "disposition": "refuse_pending_disclosure"
+    },
+    {
+      "name": "uncertain_github_issue_pull",
+      "expectation": "uncertain",
+      "final_local_diagnostic": {
+        "call_id": 2,
+        "cluster_call_ids": [
+          1,
+          2
+        ],
+        "tool_names": [
+          "github__get_issue",
+          "github__get_pull_request"
+        ],
+        "n_tools": 2,
+        "n_edges": 0,
+        "betti_1": 0,
+        "coherence_fee": 0,
+        "blind_spots": 0,
+        "contradictions": 0
+      },
+      "flow_conflict_count": 0,
+      "has_signal": false,
+      "disposition": "refuse_pending_disclosure"
+    },
+    {
+      "name": "uncertain_filesystem_github_content",
+      "expectation": "uncertain",
+      "final_local_diagnostic": {
+        "call_id": 2,
+        "cluster_call_ids": [
+          1,
+          2
+        ],
+        "tool_names": [
+          "filesystem__read_text_file",
+          "github__create_or_update_file"
+        ],
+        "n_tools": 2,
+        "n_edges": 1,
+        "betti_1": 0,
+        "coherence_fee": 1,
+        "blind_spots": 1,
+        "contradictions": 0
+      },
+      "flow_conflict_count": 0,
+      "has_signal": true,
+      "disposition": "refuse_pending_disclosure"
+    }
+  ]
+}

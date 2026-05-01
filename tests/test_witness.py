@@ -650,3 +650,201 @@ class TestVerifyReceiptIntegrity:
         assert verify_receipt_integrity(d)
         d["injected_field"] = "malicious"
         assert not verify_receipt_integrity(d)
+
+
+# ── 2D disposition (four-quadrant model) ─────────────────────────────
+
+
+class Test2DDisposition:
+    """The disposition should reason over fee and contradiction_score
+    as independent axes, not flatten them via addition."""
+
+    # Quadrant 1: fee=0, contradictions=0 -> PROCEED
+    def test_quadrant_clean(self):
+        diag = _make_diagnostic(fee=0, n_unbridged=0)
+        assert _resolve_disposition(
+            diag, structural_contradiction_score=0,
+        ) == Disposition.PROCEED
+
+    # Quadrant 2: fee>0, contradictions=0 -> opacity only (existing behavior)
+    def test_quadrant_opacity_only_receipt(self):
+        diag = _make_diagnostic(fee=2, n_unbridged=0)
+        assert _resolve_disposition(
+            diag, structural_contradiction_score=0,
+        ) == Disposition.PROCEED_WITH_RECEIPT
+
+    def test_quadrant_opacity_only_refuse(self):
+        diag = _make_diagnostic(
+            fee=2,
+            blind_spots=[SAMPLE_BLIND_SPOT],
+            bridges=[SAMPLE_BRIDGE],
+            n_unbridged=1,
+        )
+        assert _resolve_disposition(
+            diag, structural_contradiction_score=0,
+        ) == Disposition.REFUSE_PENDING_DISCLOSURE
+
+    # Quadrant 3: fee=0, contradictions>0 -> PROCEED_WITH_CAUTION
+    def test_quadrant_incompatibility_only(self):
+        diag = _make_diagnostic(fee=0, n_unbridged=0)
+        assert _resolve_disposition(
+            diag, structural_contradiction_score=5,
+        ) == Disposition.PROCEED_WITH_CAUTION
+
+    def test_quadrant_incompatibility_only_score_1(self):
+        diag = _make_diagnostic(fee=0, n_unbridged=0)
+        assert _resolve_disposition(
+            diag, structural_contradiction_score=1,
+        ) == Disposition.PROCEED_WITH_CAUTION
+
+    # Quadrant 4: fee>0 + blind_spots, contradictions>0 -> REFUSE
+    def test_quadrant_both_axes_hot(self):
+        diag = _make_diagnostic(
+            fee=2,
+            blind_spots=[SAMPLE_BLIND_SPOT],
+            bridges=[SAMPLE_BRIDGE],
+            n_unbridged=1,
+        )
+        assert _resolve_disposition(
+            diag, structural_contradiction_score=3,
+        ) == Disposition.REFUSE_PENDING_DISCLOSURE
+
+    # Policy: max_structural_contradictions threshold
+    def test_structural_threshold_refuse(self):
+        diag = _make_diagnostic(fee=0, n_unbridged=0)
+        policy = PolicyProfile(
+            name="strict", max_structural_contradictions=0, require_bridge=False,
+        )
+        assert _resolve_disposition(
+            diag, policy, structural_contradiction_score=1,
+        ) == Disposition.REFUSE_PENDING_DISCLOSURE
+
+    def test_structural_threshold_at_limit_ok(self):
+        diag = _make_diagnostic(fee=0, n_unbridged=0)
+        policy = PolicyProfile(
+            name="tolerant", max_structural_contradictions=5, require_bridge=False,
+        )
+        assert _resolve_disposition(
+            diag, policy, structural_contradiction_score=5,
+        ) == Disposition.PROCEED_WITH_CAUTION
+
+    def test_structural_threshold_over_limit_refuse(self):
+        diag = _make_diagnostic(fee=0, n_unbridged=0)
+        policy = PolicyProfile(
+            name="strict", max_structural_contradictions=2, require_bridge=False,
+        )
+        assert _resolve_disposition(
+            diag, policy, structural_contradiction_score=3,
+        ) == Disposition.REFUSE_PENDING_DISCLOSURE
+
+    # Backward compat: default policy (-1) disables structural threshold
+    def test_default_policy_structural_caution_not_refuse(self):
+        diag = _make_diagnostic(fee=0, n_unbridged=0)
+        assert _resolve_disposition(
+            diag, structural_contradiction_score=999,
+        ) == Disposition.PROCEED_WITH_CAUTION
+
+    # Convention contradictions are still independent
+    def test_convention_contradictions_independent(self):
+        diag = _make_diagnostic(fee=0, n_unbridged=0)
+        policy = PolicyProfile(
+            name="strict", max_contradictions=0, require_bridge=False,
+        )
+        assert _resolve_disposition(
+            diag, policy,
+            contradiction_count=1,
+            structural_contradiction_score=0,
+        ) == Disposition.REFUSE_PENDING_DISCLOSURE
+
+    def test_axes_not_summed(self):
+        """Convention=1 and structural=1 should NOT sum to 2 for threshold checks."""
+        diag = _make_diagnostic(fee=0, n_unbridged=0)
+        policy = PolicyProfile(
+            name="test",
+            max_contradictions=1,
+            max_structural_contradictions=1,
+            require_bridge=False,
+        )
+        result = _resolve_disposition(
+            diag, policy,
+            contradiction_count=1,
+            structural_contradiction_score=1,
+        )
+        assert result == Disposition.PROCEED_WITH_CAUTION
+
+    # Enum values
+    def test_proceed_with_caution_value(self):
+        assert Disposition.PROCEED_WITH_CAUTION.value == "proceed_with_caution"
+
+
+class Test2DDispositionReceipts:
+    """Receipts with PROCEED_WITH_CAUTION verify correctly."""
+
+    def test_receipt_with_caution_integrity(self):
+        from bulla.witness import verify_receipt_integrity
+
+        diag = _make_diagnostic(fee=0, n_unbridged=0)
+        receipt = witness(
+            diag, SAMPLE_COMPOSITION,
+            contradiction_score=3,
+        )
+        assert receipt.disposition == Disposition.PROCEED_WITH_CAUTION
+        assert receipt.contradiction_score == 3
+        d = receipt.to_dict()
+        assert verify_receipt_integrity(d)
+
+    def test_receipt_consistency_caution(self):
+        from bulla.diagnostic import diagnose as _diag
+        from bulla.witness import verify_receipt_consistency
+
+        diag = _diag(SAMPLE_COMPOSITION)
+        receipt = witness(
+            diag, SAMPLE_COMPOSITION,
+            contradiction_score=5,
+        )
+        ok, violations = verify_receipt_consistency(
+            receipt, SAMPLE_COMPOSITION, diag,
+        )
+        assert ok, f"Violations: {violations}"
+
+    def test_receipt_consistency_both_axes(self):
+        from bulla.witness import verify_receipt_consistency
+        from bulla.model import ContradictionReport, ContradictionSeverity
+
+        diag = _make_diagnostic(
+            fee=2,
+            blind_spots=[SAMPLE_BLIND_SPOT],
+            bridges=[SAMPLE_BRIDGE],
+            n_unbridged=1,
+        )
+        contradictions = (
+            ContradictionReport(
+                dimension="encoding",
+                values=("utf-8", "ascii"),
+                sources=("a", "b"),
+                severity=ContradictionSeverity.MISMATCH,
+            ),
+        )
+        receipt = witness(
+            diag, SAMPLE_COMPOSITION,
+            contradictions=contradictions,
+            contradiction_score=3,
+        )
+        assert receipt.disposition == Disposition.REFUSE_PENDING_DISCLOSURE
+        ok, violations = verify_receipt_consistency(
+            receipt, SAMPLE_COMPOSITION, diag,
+        )
+        assert ok, f"Violations: {violations}"
+
+    def test_policy_profile_serializes_structural_threshold(self):
+        p = PolicyProfile(
+            name="strict", max_structural_contradictions=2,
+        )
+        d = p.to_dict()
+        assert d["max_structural_contradictions"] == 2
+        p2 = PolicyProfile(**d)
+        assert p2.max_structural_contradictions == 2
+
+    def test_default_policy_backward_compat(self):
+        d = DEFAULT_POLICY_PROFILE.to_dict()
+        assert d["max_structural_contradictions"] == -1

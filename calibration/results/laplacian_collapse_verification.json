@@ -1,0 +1,27 @@
+{
+  "mismatches": [],
+  "n_d_histogram": {
+    "2": 170,
+    "3": 84,
+    "4": 4,
+    "5": 34,
+    "6": 1,
+    "7": 36,
+    "8": 2,
+    "12": 34,
+    "13": 1,
+    "14": 1,
+    "17": 1
+  },
+  "stats": {
+    "all_predictions_match": 240,
+    "dfd_violations": 0,
+    "disconnected_dim": 0,
+    "errors": 0,
+    "fee_zero_nontrivial": 163,
+    "nontrivial": 240,
+    "some_prediction_mismatch": 0,
+    "total": 703,
+    "trivial": 300
+  }
+}

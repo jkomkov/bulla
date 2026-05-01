@@ -1,0 +1,39 @@
+name: vancouver_stock_exchange
+description: 'Vancouver Stock Exchange 1982-83. Index truncated to 3dp instead of
+  rounded; recalculated ~3000×/day. Self-loop with β₁=1; even minimal per-step bias
+  compounds. UCUM/ iso-8601 detects: precision boundary fee on accumulator.'
+tools:
+  trade_aggregator:
+    internal_state:
+    - raw_index_value
+    - rounding_mode
+    - decimal_places
+    observable_schema:
+    - raw_index_value
+  index_publisher:
+    internal_state:
+    - published_index
+    - rounding_mode
+    - decimal_places
+    observable_schema:
+    - published_index
+  trade_aggregator_t1:
+    internal_state:
+    - raw_index_value
+    - rounding_mode
+    - decimal_places
+    observable_schema:
+    - raw_index_value
+edges:
+- from: trade_aggregator
+  to: index_publisher
+  dimensions:
+  - name: rounding_match
+    from_field: rounding_mode
+    to_field: rounding_mode
+- from: index_publisher
+  to: trade_aggregator_t1
+  dimensions:
+  - name: feedback_rounding_match
+    from_field: rounding_mode
+    to_field: rounding_mode

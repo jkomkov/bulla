@@ -1,0 +1,28 @@
+name: snomed_icd10_double_coding
+description: 'SNOMED ↔ ICD-10 double-coding mismatch (recurring). EHRs code clinical
+  findings in SNOMED; billing in ICD-10; gap reconciliation depends on UMLS. umls-mappings
+  + icd-10-cm detects: code_system boundary fee.'
+tools:
+  ehr_clinical:
+    internal_state:
+    - encounter_id
+    - diagnosis_code
+    - code_system
+    observable_schema:
+    - encounter_id
+    - diagnosis_code
+  billing_system:
+    internal_state:
+    - encounter_id
+    - diagnosis_code
+    - code_system
+    observable_schema:
+    - encounter_id
+    - diagnosis_code
+edges:
+- from: ehr_clinical
+  to: billing_system
+  dimensions:
+  - name: code_system_match
+    from_field: code_system
+    to_field: code_system

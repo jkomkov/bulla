@@ -1,0 +1,148 @@
+{
+  "_bulla_provenance": {
+    "captured_via": "index_scan:npx -y exa-mcp-server@latest",
+    "server_package": "exa-mcp-server",
+    "capture_date": "2026-04-07T04:55:22.210309+00:00",
+    "bulla_version": "0.33.0",
+    "content_hash": "sha256:de0f65e05319ecddea872757fede6f08151ccf27e929219e06cb39e0d9a9f15a",
+    "category": "community",
+    "popularity_rank": 0
+  },
+  "tools": [
+    {
+      "name": "web_search_exa",
+      "description": "Search the web for any topic and get clean, ready-to-use content.\n\nBest for: Finding current information, news, facts, or answering questions about any topic.\nReturns: Clean text content from top search results, ready for LLM use.\n\nQuery tips: describe the ideal page, not keywords. \"blog post comparing React and Vue performance\" not \"React vs Vue\".\nIf highlights are insufficient, follow up with crawling_exa on the best URLs.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Natural language search query. Should be a semantically rich description of the ideal page, not just keywords."
+          },
+          "numResults": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Number of search results to return (must be a number, default: 8)"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "fast"
+            ],
+            "description": "Search type - 'auto': balanced search (default), 'fast': quick results"
+          },
+          "freshness": {
+            "type": "string",
+            "enum": [
+              "24h",
+              "week",
+              "month",
+              "year",
+              "any"
+            ],
+            "description": "How recent results should be. Only set when recency matters."
+          },
+          "includeDomains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of domains to include in the search. If specified, results will only come from these domains."
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "crawling_exa",
+      "description": "Read a webpage's full content as clean markdown. Use after web_search_exa when highlights are insufficient or to read any URL.\n\nBest for: Extracting full content from known URLs. Batch multiple URLs in one call.\nReturns: Clean text content and metadata from the page(s).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "URLs to read. Batch multiple URLs in one call."
+          },
+          "maxCharacters": {
+            "type": "number",
+            "description": "Maximum characters to extract per page (must be a number, default: 3000)"
+          },
+          "maxAgeHours": {
+            "type": "number",
+            "description": "Maximum age of cached content in hours. 0 = always fetch fresh content, omit = use cached content with fresh fetch fallback."
+          },
+          "subpages": {
+            "type": "number",
+            "description": "Number of subpages to also crawl from each URL."
+          },
+          "subpageTarget": {
+            "type": "string",
+            "description": "Keywords to prioritize when selecting subpages"
+          }
+        },
+        "required": [
+          "urls"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_code_context_exa",
+      "description": "Find code examples, documentation, and programming solutions. \n\nBest for: Any programming question - API usage, library examples, code snippets, debugging help.\nReturns: Relevant code and documentation.\n\nQuery tips: describe what you're looking for specifically. \"Python requests library POST with JSON body\" not \"python http\".\nIf highlights are insufficient, follow up with crawling_exa on the best URLs.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query to find relevant context for APIs, Libraries, and SDKs. For example, 'React useState hook examples', 'Python pandas dataframe filtering', 'Express.js middleware', 'Next js partial prerendering configuration'"
+          },
+          "numResults": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 20,
+            "description": "Number of search results to return (must be a number, default: 8)"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    }
+  ]
+}

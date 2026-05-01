@@ -3,5 +3,13 @@
 *.db-shm
 *.db-wal
 
+# Individual receipt JSON files are regenerable from manifests
+# (keep receipts/index.json — the compatibility database seed)
+data/*/receipts/*.json
+!data/*/receipts/index.json
+
+# Run logs are local
+runs.jsonl
+
 # QA directory is for local testing only
 data/qa/
