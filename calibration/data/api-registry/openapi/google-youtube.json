@@ -1,0 +1,2845 @@
+{
+  "source_kind": "openapi",
+  "source_id": "google-youtube",
+  "schema_hash": "ff66fca12564b5d5103899027c061f976c052aa4d3539195bfafdee8c161aaab",
+  "captured_at": "2026-05-02T20:36:14.878298+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "614aa67ae498e841a1f42084343b9d41f739e5678f1f271c1e2a03e8864bee04",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "65a946aee1b4b6585df08554171fd5a5c749793180ace1b8de8efd74fd663517",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.1",
+      "hash": "d1caf350ea5d6f1a4023c6d15670e3ec25dfa832a015348ffeb5a4d3f70dec3a",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+        "source_hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.1",
+      "hash": "4313a1301e360fb9f40823328a75592039aedd2821d63b80be9cf45ed765c32a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+        "source_hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.1",
+      "hash": "2ed09413af1da88d807787fe901c2b430a8a9304ba27f235e28b31d0ef67e4a8",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-05-02",
+        "source_uri": "https://ref.gs1.org/ai/",
+        "source_hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "0aab1b08537ae2835ab1a05adb8a0800eaf7a7ce98ad6937f6cc3f7ee721a997",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "d95ea9d09a69dd1ba4a5679e890a2509185167a10357ae8f8591d8fcde73ff0a",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.1",
+      "hash": "fe87dbb4b7125cab4135f2af6775b75d798390e91ab0849c3496900f43662b52",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2026",
+        "source_uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+        "source_hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "cf7e4bbfb6c7bd012e8508a5b07d9719bbe35b8970a60bddc3128d05e7e2598f",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "0205810517db330b61965d089f78f1b427ea7fc0caec471025929ac965ffd583",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "2a3143742f52266ba08484a16e889d63761d409f1055d95021dab7a03da25a2e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7092871334e53492b46e4835ab2ef1f5d0ac9e184ed257c68ee212692f926c53",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "b16d83cbe515dc7e52d778f5fcb7d016e4a1f292cd8340307b85066141f5be65",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "b2396f760586f9656bd4b806127d5e3404f80d770288f1445beb04b27bae105d",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.1",
+      "hash": "8daa8d898578ac4feaebc986a3f0a8ce367d866054aec9b0654d01bb8f8f71cd",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+        "source_hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "6e653a3d4f730cc93b673893ac69b5215a0f3fbeb25059b3014aa83f5d339d69",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "tool_name": "youtube.abuseReports.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.activities.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more activity resource properties that the API response will include. If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in an activity resource, the snippet property contains other properties that identify the type of activity, a display title for the activity, and so forth. If you set *part=snippet*, the API response will also contain all of those nested properties."
+        },
+        {
+          "field_name": "channelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "home",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "mine",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        },
+        {
+          "field_name": "publishedAfter",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "publishedBefore",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "regionCode",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.captions.delete",
+      "description": "Deletes a resource.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "onBehalfOf",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ID of the Google+ Page for the channel that the request is be on behalf of"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.captions.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more caption resource parts that the API response will include. The part names that you can include in the parameter value are id and snippet."
+        },
+        {
+          "field_name": "videoId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Returns the captions for the specified video."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Returns the captions with the given IDs for Stubby or Apiary."
+        },
+        {
+          "field_name": "onBehalfOf",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ID of the Google+ Page for the channel that the request is on behalf of."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.captions.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the caption resource parts that the API response will include. Set the parameter value to snippet."
+        },
+        {
+          "field_name": "onBehalfOf",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ID of the Google+ Page for the channel that the request is be on behalf of"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "sync",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Extra parameter to allow automatically syncing the uploaded caption/transcript with the audio."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.captions.update",
+      "description": "Updates an existing resource.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more caption resource parts that the API response will include. The part names that you can include in the parameter value are id and snippet."
+        },
+        {
+          "field_name": "onBehalfOf",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ID of the Google+ Page for the channel that the request is on behalf of."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "sync",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Extra parameter to allow automatically syncing the uploaded caption/transcript with the audio."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.captions.download",
+      "description": "Downloads a caption track.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the caption track to download, required for One Platform."
+        },
+        {
+          "field_name": "onBehalfOf",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ID of the Google+ Page for the channel that the request is be on behalf of"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "tfmt",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Convert the captions into this format. Supported options are sbv, srt, and vtt."
+        },
+        {
+          "field_name": "tlang",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "tlang is the language code; machine translate the captions into this language."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.channelBanners.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "channelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Unused, channel_id is currently derived from the security context of the requestor."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.channelSections.delete",
+      "description": "Deletes a resource.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.channelSections.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more channelSection resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, and contentDetails. If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channelSection resource, the snippet property contains other properties, such as a display title for the channelSection. If you set *part=snippet*, the API response will also contain all of those nested properties."
+        },
+        {
+          "field_name": "channelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return the ChannelSections owned by the specified channel ID."
+        },
+        {
+          "field_name": "hl",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return content in specified language"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Return the ChannelSections with the given IDs for Stubby or Apiary."
+        },
+        {
+          "field_name": "mine",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Return the ChannelSections owned by the authenticated user."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.channelSections.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. The part names that you can include in the parameter value are snippet and contentDetails."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.channelSections.update",
+      "description": "Updates an existing resource.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. The part names that you can include in the parameter value are snippet and contentDetails."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.channels.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more channel resource properties that the API response will include. If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channel resource, the contentDetails property contains other properties, such as the uploads properties. As such, if you set *part=contentDetails*, the API response will also contain all of those nested properties."
+        },
+        {
+          "field_name": "categoryId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return the channels within the specified guide category ID."
+        },
+        {
+          "field_name": "forHandle",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return the channel associated with a YouTube handle."
+        },
+        {
+          "field_name": "forUsername",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return the channel associated with a YouTube username."
+        },
+        {
+          "field_name": "hl",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Stands for \"host language\". Specifies the localization language of the metadata to be filled into snippet.localized. The field is filled with the default metadata if there is no localization in the specified language. The parameter value must be a language code included in the list returned by the i18nLanguages.list method (e.g. en_US, es_MX)."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Return the channels with the specified IDs."
+        },
+        {
+          "field_name": "managedByMe",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Return the channels managed by the authenticated user."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "mine",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Return the ids of channels owned by the authenticated user."
+        },
+        {
+          "field_name": "mySubscribers",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Return the channels subscribed to the authenticated user"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.channels.update",
+      "description": "Updates an existing resource.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. The API currently only allows the parameter value to be set to either brandingSettings or invideoPromotion. (You cannot update both of those parts with a single request.) Note that this method overrides the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *onBehalfOfContentOwner* parameter indicates that the authenticated user is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with needs to be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.commentThreads.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more commentThread resource properties that the API response will include."
+        },
+        {
+          "field_name": "allThreadsRelatedToChannelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Returns the comment threads of all videos of the channel and the channel comments as well."
+        },
+        {
+          "field_name": "channelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Returns the comment threads for all the channel comments (ie does not include comments left on videos)."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Returns the comment threads with the given IDs for Stubby or Apiary."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "moderationStatus",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Limits the returned comment threads to those with the specified moderation status. Not compatible with the 'id' filter. Valid values: published, heldForReview, likelySpam."
+        },
+        {
+          "field_name": "order",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        },
+        {
+          "field_name": "searchTerms",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Limits the returned comment threads to those matching the specified key words. Not compatible with the 'id' filter."
+        },
+        {
+          "field_name": "textFormat",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The requested text format for the returned comments."
+        },
+        {
+          "field_name": "videoId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Returns the comment threads of the specified video."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.commentThreads.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter identifies the properties that the API response will include. Set the parameter value to snippet. The snippet part has a quota cost of 2 units."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.youtube.v3.updateCommentThreads",
+      "description": "Updates an existing resource.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of commentThread resource properties that the API response will include. You must at least include the snippet part in the parameter value since that part contains all of the properties that the API request can update."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.comments.delete",
+      "description": "Deletes a resource.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.comments.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more comment resource properties that the API response will include."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Returns the comments with the given IDs for One Platform."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        },
+        {
+          "field_name": "parentId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Returns replies to the specified comment. Note, currently YouTube features only one level of replies (ie replies to top level comments). However replies to replies may be supported in the future."
+        },
+        {
+          "field_name": "textFormat",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The requested text format for the returned comments."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.comments.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter identifies the properties that the API response will include. Set the parameter value to snippet. The snippet part has a quota cost of 2 units."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.comments.update",
+      "description": "Updates an existing resource.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter identifies the properties that the API response will include. You must at least include the snippet part in the parameter value since that part contains all of the properties that the API request can update."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.comments.markAsSpam",
+      "description": "Expresses the caller's opinion that one or more comments should be flagged as spam.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Flags the comments with the given IDs as spam in the caller's opinion."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.comments.setModerationStatus",
+      "description": "Sets the moderation status of one or more comments.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Modifies the moderation status of the comments with the given IDs"
+        },
+        {
+          "field_name": "moderationStatus",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Specifies the requested moderation status. Note, comments can be in statuses, which are not available through this call. For example, this call does not allow to mark a comment as 'likely spam'. Valid values: 'heldForReview', 'published' or 'rejected'."
+        },
+        {
+          "field_name": "banAuthor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "If set to true the author of the comment gets added to the ban list. This means all future comments of the author will autmomatically be rejected. Only valid in combination with STATUS_REJECTED."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.i18nLanguages.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the i18nLanguage resource properties that the API response will include. Set the parameter value to snippet."
+        },
+        {
+          "field_name": "hl",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.i18nRegions.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the i18nRegion resource properties that the API response will include. Set the parameter value to snippet."
+        },
+        {
+          "field_name": "hl",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveBroadcasts.delete",
+      "description": "Delete a given broadcast.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Broadcast to delete."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveBroadcasts.list",
+      "description": "Retrieve the list of broadcasts associated with the given channel.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, status and statistics."
+        },
+        {
+          "field_name": "broadcastStatus",
+          "dimensions": [
+            "currency_code",
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Return broadcasts with a certain status, e.g. active broadcasts."
+        },
+        {
+          "field_name": "broadcastType",
+          "dimensions": [
+            "currency_code",
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Return only broadcasts with the selected type."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Return broadcasts with the given ids from Stubby or Apiary."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "mine",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveBroadcasts.insert",
+      "description": "Inserts a new stream for the authenticated user.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. The part properties that you can include in the parameter value are id, snippet, contentDetails, and status."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveBroadcasts.update",
+      "description": "Updates an existing broadcast for the authenticated user.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. The part properties that you can include in the parameter value are id, snippet, contentDetails, and status. Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a broadcast's privacy status is defined in the status part. As such, if your request is updating a private or unlisted broadcast, and the request's part parameter value includes the status part, the broadcast's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the broadcast will revert to the default privacy setting."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveBroadcasts.bind",
+      "description": "Bind a broadcast to a stream.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Broadcast to bind to the stream"
+        },
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        },
+        {
+          "field_name": "streamId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Stream to bind, if not set unbind the current one."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveBroadcasts.insertCuepoint",
+      "description": "Insert cuepoints in a broadcast",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Broadcast to insert ads to, or equivalently `external_video_id` for internal use."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        },
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveBroadcasts.transition",
+      "description": "Transition a broadcast to a given status.",
+      "fields": [
+        {
+          "field_name": "broadcastStatus",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The status to which the broadcast is going to transition."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Broadcast to transition."
+        },
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveChatBans.delete",
+      "description": "Deletes a chat ban.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveChatBans.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response returns. Set the parameter value to snippet."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveChatMessages.delete",
+      "description": "Deletes a chat message.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveChatMessages.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "liveChatId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id of the live chat for which comments should be returned."
+        },
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the liveChatComment resource parts that the API response will include. Supported values are id and snippet."
+        },
+        {
+          "field_name": "hl",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Specifies the localization language in which the system messages should be returned."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identify other pages that could be retrieved."
+        },
+        {
+          "field_name": "profileImageSize",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Specifies the size of the profile image that should be returned for each user."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveChatMessages.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes. It identifies the properties that the write operation will set as well as the properties that the API response will include. Set the parameter value to snippet."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveChatModerators.delete",
+      "description": "Deletes a chat moderator.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveChatModerators.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "liveChatId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id of the live chat for which moderators should be returned."
+        },
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the liveChatModerator resource parts that the API response will include. Supported values are id and snippet."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveChatModerators.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response returns. Set the parameter value to snippet."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveStreams.delete",
+      "description": "Deletes an existing stream for the authenticated user.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveStreams.list",
+      "description": "Retrieve the list of streams associated with the given channel. --",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more liveStream resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, cdn, and status."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Return LiveStreams with the given ids from Stubby or Apiary."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "mine",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveStreams.insert",
+      "description": "Inserts a new stream for the authenticated user.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. The part properties that you can include in the parameter value are id, snippet, cdn, content_details, and status."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.liveStreams.update",
+      "description": "Updates an existing stream for the authenticated user.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. The part properties that you can include in the parameter value are id, snippet, cdn, and status. Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. If the request body does not specify a value for a mutable property, the existing value for that property will be removed."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.members.list",
+      "description": "Retrieves a list of members that match the request criteria for a channel.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the member resource parts that the API response will include. Set the parameter value to snippet."
+        },
+        {
+          "field_name": "filterByMemberChannelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Comma separated list of channel IDs. Only data about members that are part of this list will be included in the response."
+        },
+        {
+          "field_name": "hasAccessToLevel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter members in the results set to the ones that have access to a level."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "mode",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Parameter that specifies which channel members to return."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.membershipsLevels.list",
+      "description": "Retrieves a list of all pricing levels offered by a creator to the fans.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the membershipsLevel resource parts that the API response will include. Supported values are id and snippet."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.playlistImages.delete",
+      "description": "Deletes a resource.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Id to identify this image. This is returned from by the List method."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.playlistImages.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        },
+        {
+          "field_name": "parent",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return PlaylistImages for this playlist id."
+        },
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more playlistImage resource properties that the API response will include. If the parameter identifies a property that contains child properties, the child properties will be included in the response."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.playlistImages.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        },
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the properties that the API response will include."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.playlistImages.update",
+      "description": "Updates an existing resource.",
+      "fields": [
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the properties that the API response will include."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.playlistItems.delete",
+      "description": "Deletes a resource.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.playlistItems.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more playlistItem resource properties that the API response will include. If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a playlistItem resource, the snippet property contains numerous fields, including the title, description, position, and resourceId properties. As such, if you set *part=snippet*, the API response will contain all of those properties."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        },
+        {
+          "field_name": "playlistId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return the playlist items within the given playlist."
+        },
+        {
+          "field_name": "videoId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return the playlist items associated with the given video ID."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.playlistItems.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.playlistItems.update",
+      "description": "Updates an existing resource.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a playlist item can specify a start time and end time, which identify the times portion of the video that should play when users watch the video in the playlist. If your request is updating a playlist item that sets these values, and the request's part parameter value includes the contentDetails part, the playlist item's start and end times will be updated to whatever value the request body specifies. If the request body does not specify values, the existing start and end times will be removed and replaced with the default settings."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.playlists.delete",
+      "description": "Deletes a resource.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.playlists.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more playlist resource properties that the API response will include. If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a playlist resource, the snippet property contains properties like author, title, description, tags, and timeCreated. As such, if you set *part=snippet*, the API response will contain all of those properties."
+        },
+        {
+          "field_name": "channelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return the playlists owned by the specified channel ID."
+        },
+        {
+          "field_name": "hl",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return content in specified language"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Return the playlists with the given IDs for Stubby or Apiary."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "mine",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Return the playlists owned by the authenticated user."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.playlists.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.playlists.update",
+      "description": "Updates an existing resource.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. Note that this method will override the existing values for mutable properties that are contained in any parts that the request body specifies. For example, a playlist's description is contained in the snippet part, which must be included in the request body. If the request does not specify a value for the snippet.description property, the playlist's existing description will be deleted."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.search.list",
+      "description": "Retrieves a list of search resources",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more search resource properties that the API response will include. Set the parameter value to snippet."
+        },
+        {
+          "field_name": "channelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on resources belonging to this channelId."
+        },
+        {
+          "field_name": "channelType",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Add a filter on the channel search."
+        },
+        {
+          "field_name": "eventType",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on the livestream status of the videos."
+        },
+        {
+          "field_name": "forContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Search owned by a content owner."
+        },
+        {
+          "field_name": "forDeveloper",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Restrict the search to only retrieve videos uploaded using the project id of the authenticated user."
+        },
+        {
+          "field_name": "forMine",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Search for the private videos of the authenticated user."
+        },
+        {
+          "field_name": "location",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on location of the video"
+        },
+        {
+          "field_name": "locationRadius",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on distance from the location (specified above)."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "order",
+          "dimensions": [
+            "sort_direction"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Sort order of the results."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        },
+        {
+          "field_name": "publishedAfter",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on resources published after this date."
+        },
+        {
+          "field_name": "publishedBefore",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on resources published before this date."
+        },
+        {
+          "field_name": "q",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Textual search terms to match."
+        },
+        {
+          "field_name": "regionCode",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Display the content as seen by viewers in this country."
+        },
+        {
+          "field_name": "relevanceLanguage",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return results relevant to this language."
+        },
+        {
+          "field_name": "safeSearch",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Indicates whether the search results should include restricted content as well as standard content."
+        },
+        {
+          "field_name": "topicId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Restrict results to a particular topic."
+        },
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Restrict results to a particular set of resource types from One Platform."
+        },
+        {
+          "field_name": "videoCaption",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on the presence of captions on the videos."
+        },
+        {
+          "field_name": "videoCategoryId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on videos in a specific category."
+        },
+        {
+          "field_name": "videoDefinition",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on the definition of the videos."
+        },
+        {
+          "field_name": "videoDimension",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on 3d videos."
+        },
+        {
+          "field_name": "videoDuration",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on the duration of the videos."
+        },
+        {
+          "field_name": "videoEmbeddable",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on embeddable videos."
+        },
+        {
+          "field_name": "videoLicense",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on the license of the videos."
+        },
+        {
+          "field_name": "videoPaidProductPlacement",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "videoSyndicated",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on syndicated videos."
+        },
+        {
+          "field_name": "videoType",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filter on videos of a specific type."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.subscriptions.delete",
+      "description": "Deletes a resource.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.subscriptions.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more subscription resource properties that the API response will include. If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a subscription resource, the snippet property contains other properties, such as a display title for the subscription. If you set *part=snippet*, the API response will also contain all of those nested properties."
+        },
+        {
+          "field_name": "channelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return the subscriptions of the given channel owner."
+        },
+        {
+          "field_name": "forChannelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return the subscriptions to the subset of these channels that the authenticated user is subscribed to."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Return the subscriptions with the given IDs for Stubby or Apiary."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "mine",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Flag for returning the subscriptions of the authenticated user."
+        },
+        {
+          "field_name": "myRecentSubscribers",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "mySubscribers",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Return the subscribers of the given channel owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        },
+        {
+          "field_name": "order",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The order of the returned subscriptions"
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.subscriptions.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.superChatEvents.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the superChatEvent resource parts that the API response will include. This parameter is currently not supported."
+        },
+        {
+          "field_name": "hl",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return rendered funding amounts in specified language."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.tests.insert",
+      "description": "POST method.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "externalChannelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.thirdPartyLinks.delete",
+      "description": "Deletes a resource.",
+      "fields": [
+        {
+          "field_name": "linkingToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Delete the partner links with the given linking token."
+        },
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Type of the link to be deleted."
+        },
+        {
+          "field_name": "externalChannelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Channel ID to which changes should be applied, for delegation."
+        },
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Do not use. Required for compatibility."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.thirdPartyLinks.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the thirdPartyLink resource parts that the API response will include. Supported values are linkingToken, status, and snippet."
+        },
+        {
+          "field_name": "externalChannelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Channel ID to which changes should be applied, for delegation."
+        },
+        {
+          "field_name": "linkingToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Get a third party link with the given linking token."
+        },
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Get a third party link of the given type."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.thirdPartyLinks.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the thirdPartyLink resource parts that the API request and response will include. Supported values are linkingToken, status, and snippet."
+        },
+        {
+          "field_name": "externalChannelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Channel ID to which changes should be applied, for delegation."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.thirdPartyLinks.update",
+      "description": "Updates an existing resource.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the thirdPartyLink resource parts that the API request and response will include. Supported values are linkingToken, status, and snippet."
+        },
+        {
+          "field_name": "externalChannelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Channel ID to which changes should be applied, for delegation."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.thumbnails.set",
+      "description": "As this is not an insert in a strict sense (it supports uploading/setting of a thumbnail for multiple videos, which doesn't result in creation of a single resource), I use a custom verb here.",
+      "fields": [
+        {
+          "field_name": "videoId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Returns the Thumbnail with the given video IDs for Stubby or Apiary."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.videoAbuseReportReasons.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the videoCategory resource parts that the API response will include. Supported values are id and snippet."
+        },
+        {
+          "field_name": "hl",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.videoCategories.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies the videoCategory resource properties that the API response will include. Set the parameter value to snippet."
+        },
+        {
+          "field_name": "hl",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Returns the video categories with the given IDs for Stubby or Apiary."
+        },
+        {
+          "field_name": "regionCode",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.videos.delete",
+      "description": "Deletes a resource.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.videos.list",
+      "description": "Retrieves a list of resources, possibly filtered.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter specifies a comma-separated list of one or more video resource properties that the API response will include. If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a video resource, the snippet property contains the channelId, title, description, tags, and categoryId properties. As such, if you set *part=snippet*, the API response will contain all of those properties."
+        },
+        {
+          "field_name": "chart",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return the videos that are in the specified chart."
+        },
+        {
+          "field_name": "hl",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Stands for \"host language\". Specifies the localization language of the metadata to be filled into snippet.localized. The field is filled with the default metadata if there is no localization in the specified language. The parameter value must be a language code included in the list returned by the i18nLanguages.list method (e.g. en_US, es_MX)."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Return videos with the given ids."
+        },
+        {
+          "field_name": "locale",
+          "dimensions": [
+            "encoding"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "maxHeight",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The *maxResults* parameter specifies the maximum number of items that should be returned in the result set. *Note:* This parameter is supported for use in conjunction with the myRating and chart parameters, but it is not supported for use in conjunction with the id parameter."
+        },
+        {
+          "field_name": "maxWidth",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Return the player with maximum height specified in"
+        },
+        {
+          "field_name": "myRating",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Return videos liked/disliked by the authenticated user. Does not support RateType.RATED_TYPE_NONE."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved. *Note:* This parameter is supported for use in conjunction with the myRating and chart parameters, but it is not supported for use in conjunction with the id parameter."
+        },
+        {
+          "field_name": "regionCode",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Use a chart that is specific to the specified region"
+        },
+        {
+          "field_name": "videoCategoryId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Use chart that is specific to the specified video category"
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.videos.insert",
+      "description": "Inserts a new resource into this collection.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. Note that not all parts contain properties that can be set when inserting or updating a video. For example, the statistics object encapsulates statistics that YouTube calculates for a video and does not contain values that you can set or modify. If the parameter value specifies a part that does not contain mutable values, that part will still be included in the API response."
+        },
+        {
+          "field_name": "autoLevels",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Should auto-levels be applied to the upload."
+        },
+        {
+          "field_name": "notifySubscribers",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Notify the channel subscribers about the new video. As default, the notification is enabled."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        },
+        {
+          "field_name": "onBehalfOfContentOwnerChannel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "This parameter can only be used in a properly authorized request. *Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwnerChannel* parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel."
+        },
+        {
+          "field_name": "stabilize",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Should stabilize be applied to the upload."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.videos.update",
+      "description": "Updates an existing resource.",
+      "fields": [
+        {
+          "field_name": "part",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a video's privacy setting is contained in the status part. As such, if your request is updating a private video, and the request's part parameter value includes the status part, the video's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the video will revert to the default privacy setting. In addition, not all parts contain properties that can be set when inserting or updating a video. For example, the statistics object encapsulates statistics that YouTube calculates for a video and does not contain values that you can set or modify. If the parameter value specifies a part that does not contain mutable values, that part will still be included in the API response."
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.videos.getRating",
+      "description": "Retrieves the ratings that the authorized user gave to a list of specified videos.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.videos.rate",
+      "description": "Adds a like or dislike rating to a video or removes a rating from a video.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "rating",
+          "dimensions": [
+            "score_range"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.videos.reportAbuse",
+      "description": "Report abuse for a video.",
+      "fields": [
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.watermarks.set",
+      "description": "Allows upload of watermark image and setting it for a channel.",
+      "fields": [
+        {
+          "field_name": "channelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "youtube.watermarks.unset",
+      "description": "Allows removal of channel watermark.",
+      "fields": [
+        {
+          "field_name": "channelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "onBehalfOfContentOwner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "n_tools": 80,
+    "n_fields": 307,
+    "n_declared": 0,
+    "n_inferred": 9,
+    "n_unknown": 298,
+    "n_dim_signals": 11,
+    "dim_hits": {
+      "language_code": 3,
+      "temporal_format": 1,
+      "currency_code": 2,
+      "state_filter": 2,
+      "sort_direction": 1,
+      "encoding": 1,
+      "score_range": 1
+    }
+  },
+  "capture_hash": "3e8d5ec83e87d9650fea263bcaada460119842dc3a16cb2806244011d443e05c"
+}

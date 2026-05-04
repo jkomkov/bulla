@@ -9,14 +9,22 @@ catalogue behind the values_registry pointer.
 EDIFACT is heavily used in European/Asian supply chains and is a
 documented source of cross-standard mismatch losses (the canonical
 EDI translation errors industry surveys identify each year).
+
+The values_registry pointer targets the UNECE-published full
+directory ZIP (machine-readable). The HTML index page is the
+human-readable landing.
 """
 
 from __future__ import annotations
 
-import datetime as _dt
 import sys
 
 import yaml
+
+# Resolve real registry hashes when an ingest has been performed,
+# else fall back to the placeholder sentinel.
+sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent))
+from _hash_lookup import lookup as _hash_for  # noqa: E402
 
 
 # Most-common UN/EDIFACT message types.
@@ -44,11 +52,13 @@ COMMON_MESSAGE_TYPES = [
 ]
 
 
+_REGISTRY_URI = "https://service.unece.org/trade/untdid/d21b/d21b.zip"
+
+
 def build_pack() -> dict:
-    today = _dt.date.today().isoformat()
     pack = {
         "pack_name": "un-edifact",
-        "pack_version": "0.1.0",
+        "pack_version": "0.1.1",
         "license": {
             "spdx_id": "Public-Domain",
             "source_url": "https://service.unece.org/trade/untdid/welcome.html",
@@ -57,7 +67,10 @@ def build_pack() -> dict:
         "derives_from": {
             "standard": "UN-EDIFACT",
             "version": "D.21B",
-            "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.htm",
+            "source_uri": _REGISTRY_URI,
+            "source_hash": _hash_for(
+                "un-edifact", "edifact_message_type", "D.21B"
+            ),
         },
         "dimensions": {
             "edifact_message_type": {
@@ -86,11 +99,10 @@ def build_pack() -> dict:
                 "domains": ["universal"],
                 "known_values": COMMON_MESSAGE_TYPES,
                 "values_registry": {
-                    "uri": (
-                        "https://service.unece.org/trade/untdid/d21b/"
-                        "d21b.zip"
+                    "uri": _REGISTRY_URI,
+                    "hash": _hash_for(
+                        "un-edifact", "edifact_message_type", "D.21B"
                     ),
-                    "hash": "placeholder:awaiting-ingest",
                     "version": "D.21B",
                 },
             },

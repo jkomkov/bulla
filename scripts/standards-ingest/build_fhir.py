@@ -48,9 +48,12 @@ COMMON_RESOURCE_TYPES = [
 def build_pack(version: str) -> dict:
     today = _dt.date.today().isoformat()
     pack_name = f"fhir-{version.lower()}"
+    registry_uri = (
+        f"https://hl7.org/fhir/{version}/valueset-resource-types.json"
+    )
     pack = {
         "pack_name": pack_name,
-        "pack_version": "0.1.0",
+        "pack_version": "0.1.1",
         "license": {
             "spdx_id": "CC0-1.0",
             "source_url": f"https://hl7.org/fhir/{version}/",
@@ -60,7 +63,12 @@ def build_pack(version: str) -> dict:
         "derives_from": {
             "standard": "HL7-FHIR",
             "version": version,
-            "source_uri": f"https://hl7.org/fhir/{version}/downloads.html",
+            # source_uri matches values_registry.uri so source_hash
+            # binds to the same artifact (Phase 3 provenance invariant).
+            # The downloads.html landing page is the human-facing pointer
+            # via license.source_url above.
+            "source_uri": registry_uri,
+            "source_hash": _hash_for(pack_name, "fhir_resource_type", version),
         },
         "dimensions": {
             "fhir_resource_type": {
@@ -88,15 +96,8 @@ def build_pack(version: str) -> dict:
                 "domains": ["healthcare"],
                 "known_values": COMMON_RESOURCE_TYPES,
                 "values_registry": {
-                    "uri": (
-                        f"https://hl7.org/fhir/{version}/"
-                        "valueset-resource-types.json"
-                    ),
-                    "hash": _hash_for(
-                        f"fhir-{version.lower()}",
-                        "fhir_resource_type",
-                        version,
-                    ),
+                    "uri": registry_uri,
+                    "hash": _hash_for(pack_name, "fhir_resource_type", version),
                     "version": version,
                 },
             },

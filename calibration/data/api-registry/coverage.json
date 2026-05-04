@@ -67,8 +67,10 @@
       "source_id": "fetch-mcp",
       "n_tools": 4,
       "n_fields": 8,
-      "n_unknown": 8,
-      "dim_hits": {}
+      "n_unknown": 4,
+      "dim_hits": {
+        "path_convention": 4
+      }
     },
     {
       "source_kind": "mcp",
@@ -111,8 +113,9 @@
       "source_id": "gtasks-mcp",
       "n_tools": 6,
       "n_fields": 16,
-      "n_unknown": 15,
+      "n_unknown": 14,
       "dim_hits": {
+        "path_convention": 1,
         "state_filter": 1
       }
     },
@@ -182,8 +185,10 @@
       "source_id": "mcp-playwright",
       "n_tools": 12,
       "n_fields": 23,
-      "n_unknown": 23,
-      "dim_hits": {}
+      "n_unknown": 17,
+      "dim_hits": {
+        "path_convention": 6
+      }
     },
     {
       "source_kind": "mcp",
@@ -214,8 +219,10 @@
       "source_id": "mcp-server-browserbase",
       "n_tools": 4,
       "n_fields": 6,
-      "n_unknown": 6,
-      "dim_hits": {}
+      "n_unknown": 5,
+      "dim_hits": {
+        "path_convention": 1
+      }
     },
     {
       "source_kind": "mcp",
@@ -250,8 +257,10 @@
       "source_id": "mcp-server-fetch",
       "n_tools": 4,
       "n_fields": 8,
-      "n_unknown": 8,
-      "dim_hits": {}
+      "n_unknown": 4,
+      "dim_hits": {
+        "path_convention": 4
+      }
     },
     {
       "source_kind": "mcp",
@@ -373,27 +382,32 @@
       "source_id": "needle-mcp",
       "n_tools": 7,
       "n_fields": 9,
-      "n_unknown": 9,
-      "dim_hits": {}
+      "n_unknown": 8,
+      "dim_hits": {
+        "path_convention": 1
+      }
     },
     {
       "source_kind": "mcp",
       "source_id": "needle-mcp_tools",
       "n_tools": 7,
       "n_fields": 9,
-      "n_unknown": 9,
-      "dim_hits": {}
+      "n_unknown": 8,
+      "dim_hits": {
+        "path_convention": 1
+      }
     },
     {
       "source_kind": "mcp",
       "source_id": "notion",
       "n_tools": 22,
       "n_fields": 93,
-      "n_unknown": 89,
+      "n_unknown": 88,
       "dim_hits": {
         "sort_direction": 2,
         "temporal_format": 2,
-        "date_format": 1
+        "date_format": 1,
+        "path_convention": 1
       }
     },
     {
@@ -430,9 +444,9 @@
       "source_id": "playwright",
       "n_tools": 33,
       "n_fields": 89,
-      "n_unknown": 85,
+      "n_unknown": 78,
       "dim_hits": {
-        "path_convention": 4
+        "path_convention": 11
       }
     },
     {
@@ -448,8 +462,10 @@
       "source_id": "puppeteer",
       "n_tools": 7,
       "n_fields": 15,
-      "n_unknown": 15,
-      "dim_hits": {}
+      "n_unknown": 14,
+      "dim_hits": {
+        "path_convention": 1
+      }
     },
     {
       "source_kind": "mcp",
@@ -464,8 +480,10 @@
       "source_id": "search1api-mcp",
       "n_tools": 4,
       "n_fields": 8,
-      "n_unknown": 8,
-      "dim_hits": {}
+      "n_unknown": 6,
+      "dim_hits": {
+        "path_convention": 2
+      }
     },
     {
       "source_kind": "mcp",
@@ -480,13 +498,14 @@
       "source_id": "tavily",
       "n_tools": 5,
       "n_fields": 41,
-      "n_unknown": 36,
+      "n_unknown": 34,
       "dim_hits": {
         "industry_code": 1,
         "temporal_format": 3,
         "unit_of_measure": 1,
         "date_format": 2,
-        "country_code": 1
+        "country_code": 1,
+        "path_convention": 2
       }
     },
     {
@@ -522,9 +541,123 @@
       "source_id": "youtube-transcript",
       "n_tools": 1,
       "n_fields": 2,
-      "n_unknown": 1,
+      "n_unknown": 0,
       "dim_hits": {
+        "path_convention": 1,
         "language_code": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "asana-api",
+      "n_tools": 245,
+      "n_fields": 357,
+      "n_unknown": 337,
+      "dim_hits": {
+        "encoding": 1,
+        "industry_code": 1,
+        "line_ending": 1,
+        "sort_direction": 1,
+        "fhir_resource_type": 4,
+        "score_range": 1,
+        "temporal_format": 14,
+        "date_format": 14,
+        "state_filter": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "atlassian-jira",
+      "n_tools": 499,
+      "n_fields": 996,
+      "n_unknown": 978,
+      "dim_hits": {
+        "date_format": 9,
+        "sort_direction": 1,
+        "temporal_format": 11,
+        "id_offset": 1,
+        "null_handling": 5,
+        "country_code": 4,
+        "language_code": 1,
+        "owner_convention": 1,
+        "state_filter": 3,
+        "path_convention": 1,
+        "industry_code": 43,
+        "score_range": 1,
+        "timezone": 3,
+        "media_type": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "box-api",
+      "n_tools": 294,
+      "n_fields": 977,
+      "n_unknown": 822,
+      "dim_hits": {
+        "state_filter": 25,
+        "date_format": 25,
+        "temporal_format": 26,
+        "path_convention": 38,
+        "id_offset": 17,
+        "encoding": 4,
+        "country_code": 3,
+        "language_code": 5,
+        "sort_direction": 7,
+        "media_type": 2,
+        "industry_code": 1,
+        "fhir_resource_type": 2,
+        "currency_code": 2,
+        "amount_unit": 2,
+        "timezone": 3,
+        "score_range": 8,
+        "unit_of_measure": 1,
+        "hl7_v2_segment": 12
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "circleci-v1",
+      "n_tools": 22,
+      "n_fields": 10,
+      "n_unknown": 9,
+      "dim_hits": {
+        "media_type": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "digitalocean-api",
+      "n_tools": 290,
+      "n_fields": 171,
+      "n_unknown": 151,
+      "dim_hits": {
+        "id_offset": 3,
+        "media_type": 2,
+        "date_format": 4,
+        "temporal_format": 6,
+        "country_code": 1,
+        "currency_code": 1,
+        "path_convention": 1,
+        "null_handling": 6,
+        "unit_of_measure": 1,
+        "industry_code": 3,
+        "rate_scale": 2,
+        "sort_direction": 1,
+        "fhir_resource_type": 2
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "discord-api",
+      "n_tools": 231,
+      "n_fields": 201,
+      "n_unknown": 171,
+      "dim_hits": {
+        "date_format": 23,
+        "score_range": 4,
+        "id_offset": 2,
+        "state_filter": 1
       }
     },
     {
@@ -540,6 +673,22 @@
         "date_format": 1,
         "language_code": 1
       }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "fhir-r4-resource-types",
+      "n_tools": 0,
+      "n_fields": 0,
+      "n_unknown": 0,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "fhir-r5-resource-types",
+      "n_tools": 0,
+      "n_fields": 0,
+      "n_unknown": 0,
+      "dim_hits": {}
     },
     {
       "source_kind": "openapi",
@@ -559,6 +708,36 @@
     },
     {
       "source_kind": "openapi",
+      "source_id": "github-rest",
+      "n_tools": 1145,
+      "n_fields": 1448,
+      "n_unknown": 1236,
+      "dim_hits": {
+        "score_range": 5,
+        "rate_scale": 2,
+        "path_convention": 21,
+        "media_type": 82,
+        "industry_code": 532,
+        "currency_code": 42,
+        "state_filter": 85,
+        "id_offset": 6,
+        "sort_direction": 21,
+        "date_format": 29,
+        "temporal_format": 40,
+        "encoding": 7,
+        "fhir_resource_type": 11,
+        "owner_convention": 13,
+        "amount_unit": 6,
+        "null_handling": 17,
+        "gs1_application_identifier": 1,
+        "unit_of_measure": 1,
+        "language_code": 3,
+        "timezone": 12,
+        "fix_side": 2
+      }
+    },
+    {
+      "source_kind": "openapi",
       "source_id": "github-v3",
       "n_tools": 2,
       "n_fields": 5,
@@ -566,6 +745,71 @@
       "dim_hits": {
         "language_code": 1,
         "date_format": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "google-calendar",
+      "n_tools": 37,
+      "n_fields": 145,
+      "n_unknown": 123,
+      "dim_hits": {
+        "date_format": 8,
+        "temporal_format": 8,
+        "timezone": 10,
+        "rate_scale": 4,
+        "currency_code": 6,
+        "state_filter": 6
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "google-drive",
+      "n_tools": 50,
+      "n_fields": 204,
+      "n_unknown": 196,
+      "dim_hits": {
+        "media_type": 5,
+        "encoding": 1,
+        "language_code": 4,
+        "sort_direction": 1,
+        "date_format": 1,
+        "temporal_format": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "google-gmail",
+      "n_tools": 79,
+      "n_fields": 158,
+      "n_unknown": 158,
+      "dim_hits": {}
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "google-sheets",
+      "n_tools": 17,
+      "n_fields": 40,
+      "n_unknown": 36,
+      "dim_hits": {
+        "gs1_application_identifier": 4,
+        "temporal_format": 4
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "google-youtube",
+      "n_tools": 80,
+      "n_fields": 307,
+      "n_unknown": 298,
+      "dim_hits": {
+        "language_code": 3,
+        "temporal_format": 1,
+        "currency_code": 2,
+        "state_filter": 2,
+        "sort_direction": 1,
+        "encoding": 1,
+        "score_range": 1
       }
     },
     {
@@ -582,12 +826,270 @@
     },
     {
       "source_kind": "openapi",
+      "source_id": "intercom-2-13",
+      "n_tools": 133,
+      "n_fields": 260,
+      "n_unknown": 251,
+      "dim_hits": {
+        "date_format": 7,
+        "temporal_format": 6,
+        "sort_direction": 4,
+        "state_filter": 1,
+        "path_convention": 1,
+        "hl7_v2_segment": 1,
+        "id_offset": 2,
+        "amount_unit": 1,
+        "timezone": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "linode-api",
+      "n_tools": 350,
+      "n_fields": 142,
+      "n_unknown": 134,
+      "dim_hits": {
+        "null_handling": 10,
+        "timezone": 3,
+        "score_range": 2,
+        "state_filter": 1,
+        "industry_code": 3,
+        "media_type": 1,
+        "country_code": 1,
+        "date_format": 1,
+        "path_convention": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "mailchimp-3",
+      "n_tools": 272,
+      "n_fields": 1556,
+      "n_unknown": 1263,
+      "dim_hits": {
+        "id_offset": 56,
+        "date_format": 68,
+        "temporal_format": 72,
+        "state_filter": 25,
+        "industry_code": 15,
+        "amount_unit": 24,
+        "sort_direction": 14,
+        "unit_of_measure": 2,
+        "path_convention": 24,
+        "fhir_resource_type": 1,
+        "media_type": 2,
+        "hl7_v2_segment": 14,
+        "currency_code": 11,
+        "timezone": 6,
+        "country_code": 30,
+        "encoding": 12,
+        "language_code": 5
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "notion-api",
+      "n_tools": 13,
+      "n_fields": 30,
+      "n_unknown": 29,
+      "dim_hits": {
+        "state_filter": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "openai-platform",
+      "n_tools": 28,
+      "n_fields": 11,
+      "n_unknown": 11,
+      "dim_hits": {
+        "industry_code": 4
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "plaid-api",
+      "n_tools": 330,
+      "n_fields": 2,
+      "n_unknown": 2,
+      "dim_hits": {
+        "null_handling": 22,
+        "owner_convention": 1,
+        "temporal_format": 5,
+        "timezone": 7,
+        "industry_code": 3,
+        "sort_direction": 3
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "plaid-apis-guru",
+      "n_tools": 200,
+      "n_fields": 0,
+      "n_unknown": 0,
+      "dim_hits": {
+        "null_handling": 9,
+        "industry_code": 2,
+        "temporal_format": 4,
+        "sort_direction": 3,
+        "date_format": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "sendgrid-api",
+      "n_tools": 334,
+      "n_fields": 380,
+      "n_unknown": 295,
+      "dim_hits": {
+        "rate_scale": 2,
+        "id_offset": 28,
+        "temporal_format": 33,
+        "date_format": 30,
+        "unit_of_measure": 4,
+        "sort_direction": 5,
+        "timezone": 4,
+        "hl7_v2_segment": 3,
+        "country_code": 2,
+        "language_code": 1,
+        "industry_code": 3,
+        "media_type": 2,
+        "encoding": 1,
+        "null_handling": 4,
+        "state_filter": 3,
+        "path_convention": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "slack-apis-guru",
+      "n_tools": 174,
+      "n_fields": 667,
+      "n_unknown": 621,
+      "dim_hits": {
+        "sort_direction": 2,
+        "path_convention": 1,
+        "temporal_format": 27,
+        "date_format": 7,
+        "timezone": 1,
+        "encoding": 3,
+        "id_offset": 7,
+        "industry_code": 2,
+        "null_handling": 2
+      }
+    },
+    {
+      "source_kind": "openapi",
       "source_id": "slack-web",
       "n_tools": 2,
       "n_fields": 3,
       "n_unknown": 2,
       "dim_hits": {
         "media_type": 2
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "slack-web-official",
+      "n_tools": 174,
+      "n_fields": 671,
+      "n_unknown": 625,
+      "dim_hits": {
+        "sort_direction": 2,
+        "path_convention": 1,
+        "temporal_format": 27,
+        "date_format": 7,
+        "timezone": 1,
+        "encoding": 3,
+        "id_offset": 7,
+        "industry_code": 2,
+        "null_handling": 2
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "spotify-apis-guru",
+      "n_tools": 88,
+      "n_fields": 133,
+      "n_unknown": 78,
+      "dim_hits": {
+        "industry_code": 10,
+        "country_code": 8,
+        "encoding": 3,
+        "language_code": 3,
+        "date_format": 5,
+        "temporal_format": 7,
+        "timezone": 1,
+        "id_offset": 7,
+        "path_convention": 1,
+        "state_filter": 2,
+        "rate_scale": 25,
+        "score_range": 4
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "spotify-web",
+      "n_tools": 97,
+      "n_fields": 148,
+      "n_unknown": 93,
+      "dim_hits": {
+        "industry_code": 10,
+        "score_range": 5,
+        "id_offset": 8,
+        "date_format": 5,
+        "temporal_format": 9,
+        "country_code": 3,
+        "encoding": 3,
+        "language_code": 3,
+        "rate_scale": 25,
+        "state_filter": 2,
+        "path_convention": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "square-connect",
+      "n_tools": 200,
+      "n_fields": 266,
+      "n_unknown": 222,
+      "dim_hits": {
+        "industry_code": 18,
+        "date_format": 23,
+        "temporal_format": 26,
+        "state_filter": 6,
+        "amount_unit": 6,
+        "sort_direction": 8,
+        "hl7_v2_segment": 1,
+        "null_handling": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "stripe-apis-guru",
+      "n_tools": 452,
+      "n_fields": 4878,
+      "n_unknown": 3768,
+      "dim_hits": {
+        "date_format": 238,
+        "country_code": 80,
+        "state_filter": 93,
+        "path_convention": 9,
+        "amount_unit": 463,
+        "temporal_format": 87,
+        "currency_code": 68,
+        "rate_scale": 31,
+        "id_offset": 9,
+        "encoding": 5,
+        "language_code": 9,
+        "industry_code": 7,
+        "fhir_resource_type": 1,
+        "precision": 11,
+        "timezone": 5,
+        "null_handling": 72,
+        "sort_direction": 9,
+        "unit_of_measure": 11,
+        "score_range": 1
       }
     },
     {
@@ -606,6 +1108,77 @@
     },
     {
       "source_kind": "openapi",
+      "source_id": "stripe-openapi",
+      "n_tools": 587,
+      "n_fields": 7854,
+      "n_unknown": 6279,
+      "dim_hits": {
+        "amount_unit": 705,
+        "date_format": 297,
+        "currency_code": 88,
+        "country_code": 97,
+        "state_filter": 119,
+        "path_convention": 15,
+        "temporal_format": 133,
+        "rate_scale": 37,
+        "score_range": 6,
+        "gs1_application_identifier": 1,
+        "unit_of_measure": 20,
+        "timezone": 12,
+        "id_offset": 11,
+        "encoding": 9,
+        "language_code": 10,
+        "industry_code": 25,
+        "fhir_resource_type": 1,
+        "precision": 14,
+        "null_handling": 95,
+        "sort_direction": 10
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "twilio-2010",
+      "n_tools": 197,
+      "n_fields": 1671,
+      "n_unknown": 1510,
+      "dim_hits": {
+        "date_format": 60,
+        "temporal_format": 53,
+        "state_filter": 13,
+        "id_offset": 61,
+        "country_code": 15,
+        "path_convention": 4,
+        "timezone": 39,
+        "encoding": 1,
+        "null_handling": 3,
+        "industry_code": 4,
+        "currency_code": 1,
+        "language_code": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "twilio-apis-guru",
+      "n_tools": 195,
+      "n_fields": 1635,
+      "n_unknown": 1467,
+      "dim_hits": {
+        "state_filter": 12,
+        "id_offset": 61,
+        "date_format": 60,
+        "temporal_format": 53,
+        "country_code": 15,
+        "industry_code": 10,
+        "timezone": 35,
+        "path_convention": 4,
+        "currency_code": 1,
+        "precision": 1,
+        "encoding": 1,
+        "null_handling": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
       "source_id": "twilio-messages",
       "n_tools": 1,
       "n_fields": 5,
@@ -613,178 +1186,596 @@
       "dim_hits": {
         "currency_code": 1
       }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "weather-gov",
+      "n_tools": 65,
+      "n_fields": 53,
+      "n_unknown": 43,
+      "dim_hits": {
+        "date_format": 8,
+        "temporal_format": 2,
+        "state_filter": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "wikimedia-api",
+      "n_tools": 35,
+      "n_fields": 155,
+      "n_unknown": 119,
+      "dim_hits": {
+        "language_code": 30,
+        "temporal_format": 6,
+        "country_code": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "zoom-apis-guru",
+      "n_tools": 373,
+      "n_fields": 1161,
+      "n_unknown": 926,
+      "dim_hits": {
+        "id_offset": 85,
+        "country_code": 21,
+        "state_filter": 20,
+        "date_format": 65,
+        "temporal_format": 43,
+        "fix_msg_type": 22,
+        "fix_side": 22,
+        "industry_code": 12,
+        "timezone": 12,
+        "path_convention": 2,
+        "score_range": 2,
+        "currency_code": 3,
+        "fhir_resource_type": 2,
+        "language_code": 3,
+        "amount_unit": 1,
+        "null_handling": 2,
+        "gs1_application_identifier": 1
+      }
+    },
+    {
+      "source_kind": "openapi",
+      "source_id": "zoom-v2",
+      "n_tools": 155,
+      "n_fields": 81,
+      "n_unknown": 80,
+      "dim_hits": {
+        "state_filter": 2
+      }
     }
   ],
   "by_dimension": [
     {
-      "dimension": "path_convention",
-      "total_hits": 36,
+      "dimension": "amount_unit",
+      "total_hits": 1212,
       "sources": [
-        "filesystem",
-        "github",
-        "mcp-xmind",
-        "playwright"
+        "box-api",
+        "fix-trading-orders",
+        "github-rest",
+        "intercom-2-13",
+        "mailchimp-3",
+        "square-connect",
+        "stripe-apis-guru",
+        "stripe-charges",
+        "stripe-openapi",
+        "zoom-apis-guru"
       ]
     },
     {
       "dimension": "date_format",
-      "total_hits": 16,
+      "total_hits": 1011,
       "sources": [
+        "asana-api",
+        "atlassian-jira",
+        "box-api",
+        "digitalocean-api",
+        "discord-api",
         "fhir-patient",
         "fix-trading-orders",
         "github",
+        "github-rest",
         "github-v3",
+        "google-calendar",
+        "google-drive",
+        "intercom-2-13",
+        "linode-api",
+        "mailchimp-3",
         "mcp-pinecone",
         "mcp-server-cloudflare",
         "mcp-server-rememberizer",
         "notion",
+        "plaid-apis-guru",
+        "sendgrid-api",
+        "slack-apis-guru",
+        "slack-web-official",
+        "spotify-apis-guru",
+        "spotify-web",
+        "square-connect",
+        "stripe-apis-guru",
         "stripe-charges",
-        "tavily"
-      ]
-    },
-    {
-      "dimension": "owner_convention",
-      "total_hits": 15,
-      "sources": [
-        "github"
+        "stripe-openapi",
+        "tavily",
+        "twilio-2010",
+        "twilio-apis-guru",
+        "weather-gov",
+        "zoom-apis-guru"
       ]
     },
     {
       "dimension": "temporal_format",
-      "total_hits": 15,
+      "total_hits": 719,
       "sources": [
+        "asana-api",
+        "atlassian-jira",
+        "box-api",
+        "digitalocean-api",
         "fix-trading-orders",
+        "github-rest",
+        "google-calendar",
+        "google-drive",
+        "google-sheets",
+        "google-youtube",
+        "intercom-2-13",
+        "mailchimp-3",
         "mcp-pinecone",
         "mcp-server-cloudflare",
         "mcp-server-rememberizer",
         "notion",
         "ns-mcp-server",
-        "tavily"
-      ]
-    },
-    {
-      "dimension": "id_offset",
-      "total_hits": 9,
-      "sources": [
-        "github",
-        "inoyu-mcp-unomi-server",
-        "mcp-server-rememberizer"
-      ]
-    },
-    {
-      "dimension": "sort_direction",
-      "total_hits": 7,
-      "sources": [
-        "github",
-        "notion"
-      ]
-    },
-    {
-      "dimension": "currency_code",
-      "total_hits": 6,
-      "sources": [
-        "fix-trading-orders",
-        "github",
-        "shopify-admin",
-        "stripe-charges",
-        "twilio-messages"
-      ]
-    },
-    {
-      "dimension": "language_code",
-      "total_hits": 6,
-      "sources": [
-        "fhir-patient",
-        "github-v3",
-        "ns-mcp-server",
-        "shopify-admin",
-        "stripe-charges",
-        "youtube-transcript"
-      ]
-    },
-    {
-      "dimension": "unit_of_measure",
-      "total_hits": 5,
-      "sources": [
-        "exa",
-        "fhir-patient",
-        "fix-trading-orders",
-        "mcp-server-tmdb",
-        "tavily"
-      ]
-    },
-    {
-      "dimension": "country_code",
-      "total_hits": 5,
-      "sources": [
-        "gs1-traceability",
-        "ns-mcp-server",
-        "shopify-admin",
-        "stripe-charges",
-        "tavily"
-      ]
-    },
-    {
-      "dimension": "fix_msg_type",
-      "total_hits": 5,
-      "sources": [
-        "fix-trading-orders",
-        "todoist-mcp-server"
-      ]
-    },
-    {
-      "dimension": "media_type",
-      "total_hits": 4,
-      "sources": [
-        "filesystem",
-        "mcp-server-cloudflare",
-        "slack-web"
-      ]
-    },
-    {
-      "dimension": "state_filter",
-      "total_hits": 4,
-      "sources": [
-        "github",
-        "gtasks-mcp"
-      ]
-    },
-    {
-      "dimension": "timezone",
-      "total_hits": 4,
-      "sources": [
-        "mcp-server-rememberizer"
-      ]
-    },
-    {
-      "dimension": "fix_side",
-      "total_hits": 4,
-      "sources": [
-        "fix-trading-orders",
-        "todoist-mcp-server"
-      ]
-    },
-    {
-      "dimension": "amount_unit",
-      "total_hits": 4,
-      "sources": [
-        "fix-trading-orders",
-        "stripe-charges"
-      ]
-    },
-    {
-      "dimension": "score_range",
-      "total_hits": 3,
-      "sources": [
-        "todoist-mcp-server"
+        "plaid-api",
+        "plaid-apis-guru",
+        "sendgrid-api",
+        "slack-apis-guru",
+        "slack-web-official",
+        "spotify-apis-guru",
+        "spotify-web",
+        "square-connect",
+        "stripe-apis-guru",
+        "stripe-openapi",
+        "tavily",
+        "twilio-2010",
+        "twilio-apis-guru",
+        "weather-gov",
+        "wikimedia-api",
+        "zoom-apis-guru"
       ]
     },
     {
       "dimension": "industry_code",
-      "total_hits": 2,
+      "total_hits": 712,
       "sources": [
+        "asana-api",
+        "atlassian-jira",
+        "box-api",
+        "digitalocean-api",
+        "github-rest",
+        "linode-api",
+        "mailchimp-3",
         "mcp-tavily",
+        "openai-platform",
+        "plaid-api",
+        "plaid-apis-guru",
+        "sendgrid-api",
+        "slack-apis-guru",
+        "slack-web-official",
+        "spotify-apis-guru",
+        "spotify-web",
+        "square-connect",
+        "stripe-apis-guru",
+        "stripe-openapi",
+        "tavily",
+        "twilio-2010",
+        "twilio-apis-guru",
+        "zoom-apis-guru"
+      ]
+    },
+    {
+      "dimension": "state_filter",
+      "total_hits": 428,
+      "sources": [
+        "asana-api",
+        "atlassian-jira",
+        "box-api",
+        "discord-api",
+        "github",
+        "github-rest",
+        "google-calendar",
+        "google-youtube",
+        "gtasks-mcp",
+        "intercom-2-13",
+        "linode-api",
+        "mailchimp-3",
+        "notion-api",
+        "sendgrid-api",
+        "spotify-apis-guru",
+        "spotify-web",
+        "square-connect",
+        "stripe-apis-guru",
+        "stripe-openapi",
+        "twilio-2010",
+        "twilio-apis-guru",
+        "weather-gov",
+        "zoom-apis-guru",
+        "zoom-v2"
+      ]
+    },
+    {
+      "dimension": "id_offset",
+      "total_hits": 380,
+      "sources": [
+        "atlassian-jira",
+        "box-api",
+        "digitalocean-api",
+        "discord-api",
+        "github",
+        "github-rest",
+        "inoyu-mcp-unomi-server",
+        "intercom-2-13",
+        "mailchimp-3",
+        "mcp-server-rememberizer",
+        "sendgrid-api",
+        "slack-apis-guru",
+        "slack-web-official",
+        "spotify-apis-guru",
+        "spotify-web",
+        "stripe-apis-guru",
+        "stripe-openapi",
+        "twilio-2010",
+        "twilio-apis-guru",
+        "zoom-apis-guru"
+      ]
+    },
+    {
+      "dimension": "country_code",
+      "total_hits": 286,
+      "sources": [
+        "atlassian-jira",
+        "box-api",
+        "digitalocean-api",
+        "gs1-traceability",
+        "linode-api",
+        "mailchimp-3",
+        "ns-mcp-server",
+        "sendgrid-api",
+        "shopify-admin",
+        "spotify-apis-guru",
+        "spotify-web",
+        "stripe-apis-guru",
+        "stripe-charges",
+        "stripe-openapi",
+        "tavily",
+        "twilio-2010",
+        "twilio-apis-guru",
+        "wikimedia-api",
+        "zoom-apis-guru"
+      ]
+    },
+    {
+      "dimension": "null_handling",
+      "total_hits": 252,
+      "sources": [
+        "atlassian-jira",
+        "digitalocean-api",
+        "github-rest",
+        "linode-api",
+        "ns-mcp-server",
+        "plaid-api",
+        "plaid-apis-guru",
+        "sendgrid-api",
+        "slack-apis-guru",
+        "slack-web-official",
+        "square-connect",
+        "stripe-apis-guru",
+        "stripe-openapi",
+        "twilio-2010",
+        "twilio-apis-guru",
+        "zoom-apis-guru"
+      ]
+    },
+    {
+      "dimension": "currency_code",
+      "total_hits": 231,
+      "sources": [
+        "box-api",
+        "digitalocean-api",
+        "fix-trading-orders",
+        "github",
+        "github-rest",
+        "google-calendar",
+        "google-youtube",
+        "mailchimp-3",
+        "shopify-admin",
+        "stripe-apis-guru",
+        "stripe-charges",
+        "stripe-openapi",
+        "twilio-2010",
+        "twilio-apis-guru",
+        "twilio-messages",
+        "zoom-apis-guru"
+      ]
+    },
+    {
+      "dimension": "path_convention",
+      "total_hits": 194,
+      "sources": [
+        "atlassian-jira",
+        "box-api",
+        "digitalocean-api",
+        "fetch-mcp",
+        "filesystem",
+        "github",
+        "github-rest",
+        "gtasks-mcp",
+        "intercom-2-13",
+        "linode-api",
+        "mailchimp-3",
+        "mcp-playwright",
+        "mcp-server-browserbase",
+        "mcp-server-fetch",
+        "mcp-xmind",
+        "needle-mcp",
+        "needle-mcp_tools",
+        "notion",
+        "playwright",
+        "puppeteer",
+        "search1api-mcp",
+        "sendgrid-api",
+        "slack-apis-guru",
+        "slack-web-official",
+        "spotify-apis-guru",
+        "spotify-web",
+        "stripe-apis-guru",
+        "stripe-openapi",
+        "tavily",
+        "twilio-2010",
+        "twilio-apis-guru",
+        "youtube-transcript",
+        "zoom-apis-guru"
+      ]
+    },
+    {
+      "dimension": "timezone",
+      "total_hits": 159,
+      "sources": [
+        "atlassian-jira",
+        "box-api",
+        "github-rest",
+        "google-calendar",
+        "intercom-2-13",
+        "linode-api",
+        "mailchimp-3",
+        "mcp-server-rememberizer",
+        "plaid-api",
+        "sendgrid-api",
+        "slack-apis-guru",
+        "slack-web-official",
+        "spotify-apis-guru",
+        "stripe-apis-guru",
+        "stripe-openapi",
+        "twilio-2010",
+        "twilio-apis-guru",
+        "zoom-apis-guru"
+      ]
+    },
+    {
+      "dimension": "rate_scale",
+      "total_hits": 128,
+      "sources": [
+        "digitalocean-api",
+        "github-rest",
+        "google-calendar",
+        "sendgrid-api",
+        "spotify-apis-guru",
+        "spotify-web",
+        "stripe-apis-guru",
+        "stripe-openapi"
+      ]
+    },
+    {
+      "dimension": "media_type",
+      "total_hits": 102,
+      "sources": [
+        "atlassian-jira",
+        "box-api",
+        "circleci-v1",
+        "digitalocean-api",
+        "filesystem",
+        "github-rest",
+        "google-drive",
+        "linode-api",
+        "mailchimp-3",
+        "mcp-server-cloudflare",
+        "sendgrid-api",
+        "slack-web"
+      ]
+    },
+    {
+      "dimension": "sort_direction",
+      "total_hits": 100,
+      "sources": [
+        "asana-api",
+        "atlassian-jira",
+        "box-api",
+        "digitalocean-api",
+        "github",
+        "github-rest",
+        "google-drive",
+        "google-youtube",
+        "intercom-2-13",
+        "mailchimp-3",
+        "notion",
+        "plaid-api",
+        "plaid-apis-guru",
+        "sendgrid-api",
+        "slack-apis-guru",
+        "slack-web-official",
+        "square-connect",
+        "stripe-apis-guru",
+        "stripe-openapi"
+      ]
+    },
+    {
+      "dimension": "language_code",
+      "total_hits": 87,
+      "sources": [
+        "atlassian-jira",
+        "box-api",
+        "fhir-patient",
+        "github-rest",
+        "github-v3",
+        "google-drive",
+        "google-youtube",
+        "mailchimp-3",
+        "ns-mcp-server",
+        "sendgrid-api",
+        "shopify-admin",
+        "spotify-apis-guru",
+        "spotify-web",
+        "stripe-apis-guru",
+        "stripe-charges",
+        "stripe-openapi",
+        "twilio-2010",
+        "wikimedia-api",
+        "youtube-transcript",
+        "zoom-apis-guru"
+      ]
+    },
+    {
+      "dimension": "encoding",
+      "total_hits": 56,
+      "sources": [
+        "asana-api",
+        "box-api",
+        "filesystem",
+        "github-rest",
+        "google-drive",
+        "google-youtube",
+        "mailchimp-3",
+        "sendgrid-api",
+        "slack-apis-guru",
+        "slack-web-official",
+        "spotify-apis-guru",
+        "spotify-web",
+        "stripe-apis-guru",
+        "stripe-openapi",
+        "twilio-2010",
+        "twilio-apis-guru"
+      ]
+    },
+    {
+      "dimension": "unit_of_measure",
+      "total_hits": 45,
+      "sources": [
+        "box-api",
+        "digitalocean-api",
+        "exa",
+        "fhir-patient",
+        "fix-trading-orders",
+        "github-rest",
+        "mailchimp-3",
+        "mcp-server-tmdb",
+        "sendgrid-api",
+        "stripe-apis-guru",
+        "stripe-openapi",
         "tavily"
+      ]
+    },
+    {
+      "dimension": "score_range",
+      "total_hits": 43,
+      "sources": [
+        "asana-api",
+        "atlassian-jira",
+        "box-api",
+        "discord-api",
+        "github-rest",
+        "google-youtube",
+        "linode-api",
+        "spotify-apis-guru",
+        "spotify-web",
+        "stripe-apis-guru",
+        "stripe-openapi",
+        "todoist-mcp-server",
+        "zoom-apis-guru"
+      ]
+    },
+    {
+      "dimension": "hl7_v2_segment",
+      "total_hits": 31,
+      "sources": [
+        "box-api",
+        "intercom-2-13",
+        "mailchimp-3",
+        "sendgrid-api",
+        "square-connect"
+      ]
+    },
+    {
+      "dimension": "owner_convention",
+      "total_hits": 30,
+      "sources": [
+        "atlassian-jira",
+        "github",
+        "github-rest",
+        "plaid-api"
+      ]
+    },
+    {
+      "dimension": "fix_side",
+      "total_hits": 28,
+      "sources": [
+        "fix-trading-orders",
+        "github-rest",
+        "todoist-mcp-server",
+        "zoom-apis-guru"
+      ]
+    },
+    {
+      "dimension": "fix_msg_type",
+      "total_hits": 27,
+      "sources": [
+        "fix-trading-orders",
+        "todoist-mcp-server",
+        "zoom-apis-guru"
+      ]
+    },
+    {
+      "dimension": "precision",
+      "total_hits": 26,
+      "sources": [
+        "stripe-apis-guru",
+        "stripe-openapi",
+        "twilio-apis-guru"
+      ]
+    },
+    {
+      "dimension": "fhir_resource_type",
+      "total_hits": 25,
+      "sources": [
+        "asana-api",
+        "box-api",
+        "digitalocean-api",
+        "fhir-patient",
+        "github-rest",
+        "mailchimp-3",
+        "stripe-apis-guru",
+        "stripe-openapi",
+        "zoom-apis-guru"
+      ]
+    },
+    {
+      "dimension": "gs1_application_identifier",
+      "total_hits": 9,
+      "sources": [
+        "github-rest",
+        "google-sheets",
+        "gs1-traceability",
+        "stripe-openapi",
+        "zoom-apis-guru"
       ]
     },
     {
@@ -795,45 +1786,30 @@
       ]
     },
     {
-      "dimension": "gs1_application_identifier",
-      "total_hits": 2,
-      "sources": [
-        "gs1-traceability"
-      ]
-    },
-    {
-      "dimension": "encoding",
-      "total_hits": 1,
-      "sources": [
-        "filesystem"
-      ]
-    },
-    {
-      "dimension": "null_handling",
-      "total_hits": 1,
-      "sources": [
-        "ns-mcp-server"
-      ]
-    },
-    {
-      "dimension": "fhir_resource_type",
-      "total_hits": 1,
-      "sources": [
-        "fhir-patient"
-      ]
-    },
-    {
       "dimension": "gs1_id_key_type",
       "total_hits": 1,
       "sources": [
         "gs1-traceability"
       ]
+    },
+    {
+      "dimension": "line_ending",
+      "total_hits": 1,
+      "sources": [
+        "asana-api"
+      ]
     }
   ],
   "totals": {
-    "n_sources": 65,
-    "n_tools": 370,
-    "n_fields": 883,
-    "n_unknown": 773
+    "n_sources": 100,
+    "n_tools": 7811,
+    "n_fields": 27651,
+    "n_unknown": 23072,
+    "n_real_mcp": 57,
+    "n_synthetic_fixtures": 8,
+    "n_real_external": 35,
+    "n_external_skipped": 0,
+    "n_real": 92,
+    "n_synthetic": 8
   }
 }

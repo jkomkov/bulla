@@ -1,5 +1,5 @@
 pack_name: fhir-r5
-pack_version: 0.1.0
+pack_version: 0.1.1
 license:
   spdx_id: CC0-1.0
   source_url: https://hl7.org/fhir/R5/
@@ -8,7 +8,8 @@ license:
 derives_from:
   standard: HL7-FHIR
   version: R5
-  source_uri: https://hl7.org/fhir/R5/downloads.html
+  source_uri: https://hl7.org/fhir/R5/valueset-resource-types.json
+  source_hash: sha256:6ed6a7d2179d67c9c8b8423dc2695607d85336cc34036a0c00a1b198c9a1e85e
 dimensions:
   fhir_resource_type:
     description: FHIR R5 resourceType discriminator. Inline seed of ~40 most-recurrent

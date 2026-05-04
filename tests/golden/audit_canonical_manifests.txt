@@ -1,0 +1,33 @@
+bulla audit
+───────────
+manifests · 2 servers · 40 tools · 3.0s
+
+  ✓ filesystem          14 tools
+  ✓ github              26 tools
+
+┌──────────────────────┐
+│  BOUNDARY FEE      1 │
+│  within fee       21 │
+└──────────────────────┘
+
+── cross-server ────────────────────────────
+
+⚠ path_convention (24 tool-pairs)    filesystem → github
+  2 distinct field pairs — typed compatibly — validation passes locally
+  filesystem: absolute/local paths    github: repo-relative paths
+  fix: bridge path_convention on read_file.path
+
+── within-server (92 blind spots) ──────────────
+
+  filesystem  66    github  26
+  bulla audit -v for details
+
+── repair ──────────────────────────────────
+
+Expose 3 field(s) to eliminate boundary risk:
+  filesystem: path
+  filesystem: paths
+  github: path
+bulla audit --max-fee 0     CI gate
+bulla audit --format json   machine output
+

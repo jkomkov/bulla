@@ -1,6 +1,12 @@
-"""bulla: Witness kernel for agentic compositions — diagnose, attest, seal."""
+"""bulla: Witness kernel for agentic compositions.
 
-__version__ = "0.36.0"
+Computes the coherence fee — the exact number of independent semantic
+dimensions that bilateral schema validation cannot detect — when AI
+agents compose tools across MCP servers, LangGraph graphs, or CrewAI
+crews. Exact rationals throughout, no numpy, no LLM calls.
+"""
+
+__version__ = "0.37.0"
 
 from bulla.model import (
     BlindSpot,
@@ -56,6 +62,15 @@ from bulla.repair import (
 )
 from bulla.witness_geometry import WitnessProfile, compute_profile
 from bulla.incremental import IncrementalDiagnostic, FeeDelta
+from bulla.update import (
+    ChainHomotopy,
+    Cocycle,
+    CoherencePreservationCertificate,
+    RepairCertificate,
+    diff_classify,
+    is_implementation_available,
+    repair,
+)
 from bulla.parser import load_composition
 from bulla.guard import BullaGuard, BullaCheckError
 from bulla.witness import (
@@ -84,6 +99,15 @@ from bulla.proxy import (
     LocalDiagnosticSummary,
     ProxyCallRecord,
 )
+from bulla.bridges import (
+    TranslationEvidence,
+    TranslationResult,
+    TranslationUnavailable,
+    register as register_translator,
+    translate,
+)
+from bulla.session import AddToolResult, Session
+from bulla.live import AddServerResult, LiveSession
 
 __all__ = [
     "__version__",
@@ -164,9 +188,29 @@ __all__ = [
     "receipt_from_dict",
     "validate_receipt",
     "FeeDelta",
+    # Update protocol (§9.5 Coherence-Preserving Update; gated on Phase B)
+    "ChainHomotopy",
+    "Cocycle",
+    "CoherencePreservationCertificate",
+    "RepairCertificate",
+    "diff_classify",
+    "is_implementation_available",
+    "repair",
     "EpistemicReceipt",
     "FlowRecord",
     "FlowReference",
     "LocalDiagnosticSummary",
     "ProxyCallRecord",
+    # Runtime value translation (Phase A of the Indispensability Push)
+    "TranslationEvidence",
+    "TranslationResult",
+    "TranslationUnavailable",
+    "register_translator",
+    "translate",
+    # Session API (Phase B of the Indispensability Push)
+    "AddToolResult",
+    "Session",
+    # LiveSession (online proxy — Session + BullaProxySession unified)
+    "AddServerResult",
+    "LiveSession",
 ]

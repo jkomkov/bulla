@@ -9,20 +9,20 @@
 
 | Standard | Phase | Format | Authoritative source | Update cadence |
 |---|---|---|---|---|
-| **ISO 4217** (currency codes) | 2A | XML/CSV | https://www.six-group.com/en/products-services/financial-information/data-standards.html | Irregular; SIX is the official maintenance agency |
-| **ISO 8601 / RFC 3339** (date/time) | 2B | Prose / RFC | https://www.rfc-editor.org/rfc/rfc3339 | RFC frozen; ISO 8601-1:2019 is the current ISO base |
-| **ISO 3166-1/2** (country / subdivision) | 2C | CSV / JSON | https://www.iso.org/iso-3166-country-codes.html (canonical); https://datahub.io/core/country-list (mirror) | Annual or as needed |
-| **ISO 639** (languages) | 2D | TSV (SIL) | https://iso639-3.sil.org/code_tables/639/data | Annual |
-| **IANA Media Types (MIME)** | 2E | CSV | https://www.iana.org/assignments/media-types/media-types.xhtml | Continuous (additions land monthly) |
-| **NAICS 2022** (US industry codes) | 2F | CSV / Excel | https://www.census.gov/naics/?68967 | 5-year revision cycle |
-| **UCUM** (units of measure) | 3A | XML (`ucum-essence.xml`) | https://ucum.org/ucum-essence.xml | Stable; minor errata |
-| **FIX 4.4** (financial messaging) | 3B | XML reference dictionary | https://www.fixtrading.org/standards/fix-4-4/ | Frozen |
-| **FIX 5.0 SP2** | 3B | XML reference dictionary | https://www.fixtrading.org/standards/fix-5-0-sp-2/ | Engineering drafts published; spec frozen |
-| **GS1 General Specifications** (GTIN/GLN/SSCC, AIs) | 3C | PDF + JSON | https://www.gs1.org/standards/barcodes-epcrfid-id-keys/general-specifications | Annual |
-| **UN/EDIFACT D.21B** | 3D | TXT (UN/CEFACT) | https://service.unece.org/trade/untdid/d21b/d21b.htm | Biannual |
-| **HL7 FHIR R4** | 3E | JSON / XML (Definitions package) | https://hl7.org/fhir/R4/downloads.html | Frozen at R4; R4B is patches |
-| **HL7 FHIR R5** | 3E | JSON / XML | https://hl7.org/fhir/R5/downloads.html | Active; minor releases |
-| **ICD-10-CM** (US clinical modification) | 3F | XML / CSV | https://www.cms.gov/medicare/coding-billing/icd-10-codes | Annual cutover October 1 |
+| **ISO 4217** (currency codes) | 2A | XML/CSV | https://www.six-group.com/en/products-services/financial-information/data-standards.html | Irregular; SIX is the official maintenance agency. Inline-only — no values_registry. |
+| **ISO 8601 / RFC 3339** (date/time) | 2B | Prose / RFC | https://www.rfc-editor.org/rfc/rfc3339 | RFC frozen; ISO 8601-1:2019 is the current ISO base. Inline-only — no values_registry. |
+| **ISO 3166-1/2** (country / subdivision) | 2C | CSV / JSON | https://www.iso.org/iso-3166-country-codes.html (canonical); https://datahub.io/core/country-list (mirror) | Annual or as needed. Inline-only — no values_registry. |
+| **ISO 639** (languages) | 2D | TSV (SIL) | https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab | Annual. Real hash. |
+| **IANA Media Types (MIME)** | 2E | XHTML index | https://www.iana.org/assignments/media-types/media-types.xhtml | Continuous (additions land monthly). Real hash. |
+| **NAICS 2022** (US industry codes) | 2F | XLSX | https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx | 5-year revision cycle. Real hash. |
+| **UCUM** (units of measure) | 3A | XML (`ucum-essence.xml`) | https://ucum.org/ucum-essence.xml | Stable; minor errata. Real hash. |
+| **FIX 4.4** (financial messaging) | 3B | XML reference dictionary | https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml | Frozen. Real hash (sprint Phase 1; the prior `quickfix-j` mirror retired). |
+| **FIX 5.0 SP2** | 3B | XML reference dictionary | https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml | Engineering drafts published; spec frozen. Real hash. |
+| **GS1 Application Identifiers** | 3C | JSON (ref.gs1.org) | https://ref.gs1.org/ai/ | Annual. Real hash (sprint Phase 1; switched from gs1.org PDF which gates non-browser UAs). |
+| **UN/EDIFACT D.21B** | 3D | ZIP (UN/CEFACT directory) | https://service.unece.org/trade/untdid/d21b/d21b.zip | Biannual. Real hash. |
+| **HL7 FHIR R4** | 3E | JSON valueset | https://hl7.org/fhir/R4/valueset-resource-types.json | Frozen at R4; R4B is patches. Real hash. |
+| **HL7 FHIR R5** | 3E | JSON valueset | https://hl7.org/fhir/R5/valueset-resource-types.json | Active; minor releases. Real hash. |
+| **ICD-10-CM** (US clinical modification) | 3F | ZIP (`<year>-code-descriptions-tabular-order.zip`) | https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip | Annual cutover October 1. Real hash (sprint Phase 1; switched from retired `<year>-icd-10-cm-code-files.zip` URL pattern). |
 
 ## Restricted (Phase 4 — gated on RP-1 license acquisition)
 
@@ -61,6 +61,6 @@
 
 ## Pending work
 
-- [ ] Capture `source_hash` SHA-256 for each artifact at ingest time (recorded in pack `derives_from.source_hash` per Extension C).
+- [x] Capture `source_hash` SHA-256 for each artifact at ingest time (recorded in pack `derives_from.source_hash` per Extension C). **Sprint Phase 3** propagated real `source_hash` values onto all 11 fetchable open packs and added a CI invariant that `source_hash` agrees with `values_registry.hash` whenever the URIs match.
 - [ ] Identify mirror/archive URLs for each authoritative source so a pack remains verifiable if the upstream URL drifts.
 - [ ] Confirm exact license terms for each restricted corpus (RP-1 deliverable; gates Phase 4).

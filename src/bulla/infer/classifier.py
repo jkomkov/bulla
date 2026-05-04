@@ -356,9 +356,12 @@ _CORE_NAME_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
     ("line_ending", re.compile(
         r"(^|_)(line_ending|newline|eol|crlf|lf_mode)($|_)", re.IGNORECASE
     )),
+    # Include URL/URI locators with path-like fields. This intentionally
+    # surfaces cross-server seams such as browser navigation URLs versus
+    # filesystem/repository path references.
     ("path_convention", re.compile(
         r"(^)(path|filepath|file_path|dir_path|directory|"
-        r"dirname|folder)($|_)", re.IGNORECASE
+        r"dirname|folder|url|uri)($|_)", re.IGNORECASE
     )),
 ]
 

@@ -1,0 +1,180 @@
+{
+  "entries": {
+    "https://api.weather.gov/openapi.json": {
+      "bytes": 118858,
+      "fetched_at": "2026-05-02T20:28:14.357466+00:00",
+      "sha256": "baef8cb81d21c4717e492e041437c4036a40d875de7113ff58225ff5cc569c77"
+    },
+    "https://hl7.org/fhir/R4/valueset-resource-types.json": {
+      "bytes": 2293,
+      "fetched_at": "2026-05-02T20:28:58.310627+00:00",
+      "sha256": "82ae2b62e9f10a32a2e60b7498b80f0b258eaa22cef1724de20fc0218a8e575c"
+    },
+    "https://hl7.org/fhir/R5/valueset-resource-types.json": {
+      "bytes": 63326,
+      "fetched_at": "2026-05-02T20:28:58.782291+00:00",
+      "sha256": "6ed6a7d2179d67c9c8b8423dc2695607d85336cc34036a0c00a1b198c9a1e85e"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/atlassian.com/jira/1001.0.0-SNAPSHOT/openapi.yaml": {
+      "bytes": 2124906,
+      "fetched_at": "2026-05-02T20:33:55.645636+00:00",
+      "sha256": "af66914f0d43b7c45c46a69e7619d3a7e008eff4668fc4caa43145170f9b97a3"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/circleci.com/v1/openapi.yaml": {
+      "bytes": 26705,
+      "fetched_at": "2026-05-02T20:33:58.108454+00:00",
+      "sha256": "5d4a1a3cc0473a44b0c8098a4e649bb4a1343a6ba3ac025f87a89f7a1c6dc599"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/digitalocean.com/2.0/openapi.yaml": {
+      "bytes": 1574377,
+      "fetched_at": "2026-05-02T20:33:51.940886+00:00",
+      "sha256": "5bd3a4800c4396372cb80d99cc82b49463e4a3f136b63d1794c19f13da37cf63"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/calendar/v3/openapi.yaml": {
+      "bytes": 147362,
+      "fetched_at": "2026-05-02T20:34:10.968115+00:00",
+      "sha256": "beb4c5414ff527249fe660e8d7e49e1a026ff62d0accd6f9b42fcf89ea61f3b7"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/drive/v3/openapi.yaml": {
+      "bytes": 208440,
+      "fetched_at": "2026-05-02T20:34:11.772772+00:00",
+      "sha256": "5c8ef89b07b57e2a0d941c9512c2fe53ea90f3fcf85a122f679d5649f46f314c"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/gmail/v1/openapi.yaml": {
+      "bytes": 202928,
+      "fetched_at": "2026-05-02T20:34:11.309193+00:00",
+      "sha256": "041154c430d2d9654032888d0d9b2a7357b5b6272b1c8194419719fe5f9348ce"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/sheets/v4/openapi.yaml": {
+      "bytes": 285289,
+      "fetched_at": "2026-05-02T20:34:12.307656+00:00",
+      "sha256": "5598e24f4f4512bae57e7a06675a47d140012e9399c7d8b673f9c3b390aa68c3"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/youtube/v3/openapi.yaml": {
+      "bytes": 454179,
+      "fetched_at": "2026-05-02T20:34:12.862404+00:00",
+      "sha256": "64368a8846394137924f0492053bb05b54049826df83920a8e2eeae2ec30fb12"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/linode.com/4.151.1/openapi.yaml": {
+      "bytes": 971317,
+      "fetched_at": "2026-05-02T20:33:53.922781+00:00",
+      "sha256": "f53d21652132a4c958ef4ed68d9c6cd6b9d572b9edef9254e73a1e8753168be9"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/mailchimp.com/3.0.55/openapi.yaml": {
+      "bytes": 10264851,
+      "fetched_at": "2026-05-02T20:33:59.606898+00:00",
+      "sha256": "73f5015350af370aa2b5a2d538d491654c275dbb43881b15e8911641729fa181"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/notion.com/1.0.0/openapi.yaml": {
+      "bytes": 371024,
+      "fetched_at": "2026-05-02T20:28:14.821451+00:00",
+      "sha256": "9bc037c3d9d66ae4c85e1996319cf67a38867dbbd23bed4f5d8a633cca32c226"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/openai.com/1.2.0/openapi.yaml": {
+      "bytes": 125162,
+      "fetched_at": "2026-05-02T20:28:14.526653+00:00",
+      "sha256": "a0b0676b9737dd2b9f3ac1838c67eb11838540b824513420b3968015e4ed933a"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/plaid.com/2020-09-14_1.345.1/openapi.yaml": {
+      "bytes": 1534450,
+      "fetched_at": "2026-05-02T20:28:42.583088+00:00",
+      "sha256": "79291d99cc1de9909805841b30b2795b8c9327563d76b94d37a2df3733176bda"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/sendgrid.com/1.0.0/openapi.yaml": {
+      "bytes": 1183476,
+      "fetched_at": "2026-05-02T20:28:42.265717+00:00",
+      "sha256": "a3794ef6ff4338a61cb4285a195214b38e7ebe754858ff8830fa63c521f4a2ed"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/slack.com/1.7.0/openapi.yaml": {
+      "bytes": 728350,
+      "fetched_at": "2026-05-02T20:28:57.135968+00:00",
+      "sha256": "01c97099c4eb149567d42eb870cb2e0b89e68dabf8bc8ad46f02f448351a5387"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/spotify.com/1.0.0/openapi.yaml": {
+      "bytes": 289324,
+      "fetched_at": "2026-05-02T20:28:46.124195+00:00",
+      "sha256": "4edb1dbfc6a5fec53e52d738561c56817b9a66f5c171dc236222a0bb43142b83"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/squareup.com/2.0/openapi.yaml": {
+      "bytes": 1362648,
+      "fetched_at": "2026-05-02T20:28:15.433959+00:00",
+      "sha256": "3e820f5ce38aae3ea91999433f5b4798512e0170128bc4bea85dfccab492db01"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/stripe.com/2022-11-15/openapi.yaml": {
+      "bytes": 3726556,
+      "fetched_at": "2026-05-02T20:28:46.929130+00:00",
+      "sha256": "fba83fd7ff9ce87eafa0fbbc15c382b176dac204ca21b72df1a8c361441d9ecf"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/twilio.com/api/1.55.0/openapi.yaml": {
+      "bytes": 1100928,
+      "fetched_at": "2026-05-02T20:28:44.536121+00:00",
+      "sha256": "f39f225169c44125c4d141601541ea311e7d4baa166b3d59731af69f13f209bf"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/wikimedia.org/1.0.0/swagger.yaml": {
+      "bytes": 112708,
+      "fetched_at": "2026-05-02T20:33:58.384495+00:00",
+      "sha256": "98e86faea93fb1f8f2d200a223f909fa0dbac757e9eb28f481bd182ec39c3f51"
+    },
+    "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/zoom.us/2.0.0/openapi.yaml": {
+      "bytes": 5037451,
+      "fetched_at": "2026-05-02T20:28:52.049565+00:00",
+      "sha256": "dfb27518884bb1b5940763ded19c8f848e2e519ce5f29a37420ec4e5312390d2"
+    },
+    "https://raw.githubusercontent.com/asana/openapi/master/defs/asana_oas.yaml": {
+      "bytes": 3019780,
+      "fetched_at": "2026-05-02T20:28:11.774899+00:00",
+      "sha256": "b04e9dcf7c0050e6c909ceefe5e91af92a1f8ea67c5df62cdb38de4c9566aede"
+    },
+    "https://raw.githubusercontent.com/box/box-openapi/main/openapi.json": {
+      "bytes": 1744675,
+      "fetched_at": "2026-05-02T20:28:06.452282+00:00",
+      "sha256": "2e8f59f0a95e14a9e6eb1b2f3f0afa16ff81062fede08508010006a822ccde20"
+    },
+    "https://raw.githubusercontent.com/discord/discord-api-spec/main/specs/openapi.json": {
+      "bytes": 1094297,
+      "fetched_at": "2026-05-02T20:27:39.274444+00:00",
+      "sha256": "18614886429f0a78a13415eb92402ecc57a4fc4930347eaf4cc37994a7dd5564"
+    },
+    "https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json": {
+      "bytes": 12265037,
+      "fetched_at": "2026-05-02T20:27:36.005271+00:00",
+      "sha256": "a2ecf514722e7ffa689d4bf1ff4ed733be6259af5e8ab1edad064f2d35bdbcd4"
+    },
+    "https://raw.githubusercontent.com/intercom/Intercom-OpenAPI/main/descriptions/2.13/api.intercom.io.yaml": {
+      "bytes": 768050,
+      "fetched_at": "2026-05-02T20:28:06.849184+00:00",
+      "sha256": "c3699221ca75c5414b5c33c0594639841ba2ec00fed81c011d757d560d56be18"
+    },
+    "https://raw.githubusercontent.com/plaid/plaid-openapi/master/2020-09-14.yml": {
+      "bytes": 2948640,
+      "fetched_at": "2026-05-02T20:28:08.426888+00:00",
+      "sha256": "5951ace727481f57621aa39263863fd8e8811906aca68cb6a4a044db2d4ae803"
+    },
+    "https://raw.githubusercontent.com/slackapi/slack-api-specs/master/web-api/slack_web_openapi_v2.json": {
+      "bytes": 1237332,
+      "fetched_at": "2026-05-02T20:27:38.344799+00:00",
+      "sha256": "742a5c977180a829df8767cf57bc417d99b3713583aee83741efb9c08ca731e7"
+    },
+    "https://raw.githubusercontent.com/sonallux/spotify-web-api/main/fixed-spotify-open-api.yml": {
+      "bytes": 285540,
+      "fetched_at": "2026-05-02T20:27:39.498655+00:00",
+      "sha256": "bce10524a84dabf3f7e0f7c70d6bbce48e96beea3d71fea9bf46940e23fcd1bd"
+    },
+    "https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.json": {
+      "bytes": 7753660,
+      "fetched_at": "2026-05-02T20:27:37.376134+00:00",
+      "sha256": "6f7c5c122b98ccca6218b3980cbbf48773ffd40dc2fc9a09c4783143b9261915"
+    },
+    "https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_api_v2010.json": {
+      "bytes": 1869177,
+      "fetched_at": "2026-05-02T20:27:38.765391+00:00",
+      "sha256": "99cae87a6bb1725f71363364cbd30282a13140374b2d5f9bdd5bdfa5d4c8a6d7"
+    },
+    "https://raw.githubusercontent.com/zoom/api/master/openapi.v2.json": {
+      "bytes": 481487,
+      "fetched_at": "2026-05-02T20:28:07.950786+00:00",
+      "sha256": "1b04394282bb3759744334835c5aa92fcafb57df71f27713f92e7f0532bd18b0"
+    }
+  },
+  "version": "0.1.0"
+}

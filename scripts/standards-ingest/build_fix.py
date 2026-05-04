@@ -10,14 +10,23 @@ Two packs (4.4 and 5.0) ship as separate seed files because production
 trading systems often run multiple FIX versions concurrently and a
 composition crossing version boundaries needs both vocabularies
 loaded simultaneously.
+
+Canonical FIX dictionary URLs come from the QuickFIX C++ reference
+implementation (Apache-2.0). The Java fork (`quickfix-j`) used to
+mirror the dictionaries but no longer carries them at the historical
+path, hence the move to the C++ repo's ``spec/`` directory.
 """
 
 from __future__ import annotations
 
-import datetime as _dt
 import sys
 
 import yaml
+
+# Resolve real registry hashes when an ingest has been performed,
+# else fall back to the placeholder sentinel.
+sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent))
+from _hash_lookup import lookup as _hash_for  # noqa: E402
 
 
 # Most-common FIX MsgType values (Tag 35). Aliases include the
@@ -44,12 +53,27 @@ COMMON_MSGTYPES = [
 ]
 
 
+# QuickFIX C++ repo path → FIX dictionary file. The 5.0 published
+# dictionary is the SP2 form (FIX 5.0 SP1/SP2 differ only in errata).
+_FIX_SPEC_FILE: dict[str, str] = {
+    "4.4": "FIX44.xml",
+    "5.0": "FIX50SP2.xml",
+}
+
+
+def _canonical_uri(version: str) -> str:
+    return (
+        "https://raw.githubusercontent.com/quickfix/quickfix/"
+        f"master/spec/{_FIX_SPEC_FILE[version]}"
+    )
+
+
 def build_pack(version: str) -> dict:
-    today = _dt.date.today().isoformat()
     pack_name = f"fix-{version}"
+    canonical_uri = _canonical_uri(version)
     pack = {
         "pack_name": pack_name,
-        "pack_version": "0.1.0",
+        "pack_version": "0.1.1",
         "license": {
             "spdx_id": "Apache-2.0",  # QuickFIX dictionary license
             "source_url": (
@@ -61,10 +85,8 @@ def build_pack(version: str) -> dict:
         "derives_from": {
             "standard": f"FIX-{version}",
             "version": version,
-            "source_uri": (
-                "https://github.com/connamara/quickfixengine/raw/"
-                f"main/spec/FIX{version.replace('.', '')}.xml"
-            ),
+            "source_uri": canonical_uri,
+            "source_hash": _hash_for(pack_name, "fix_msg_type", version),
         },
         "dimensions": {
             "fix_msg_type": {
@@ -92,11 +114,8 @@ def build_pack(version: str) -> dict:
                 "domains": ["financial"],
                 "known_values": COMMON_MSGTYPES,
                 "values_registry": {
-                    "uri": (
-                        "https://github.com/connamara/quickfixengine/raw/"
-                        f"main/spec/FIX{version.replace('.', '')}.xml"
-                    ),
-                    "hash": "placeholder:awaiting-ingest",
+                    "uri": canonical_uri,
+                    "hash": _hash_for(pack_name, "fix_msg_type", version),
                     "version": version,
                 },
             },

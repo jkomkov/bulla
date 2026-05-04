@@ -7,3 +7,8 @@ build/
 *.egg
 .venv/
 .pytest_cache/
+
+# Phase 7 external-fetcher content-addressed cache: raw blobs are
+# regenerable from the URL via _external_fetcher.py + manifest.json,
+# so only the manifest commits — keep the repo lean.
+calibration/data/api-registry/_cache/*.bin

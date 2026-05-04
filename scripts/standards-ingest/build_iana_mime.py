@@ -60,25 +60,29 @@ INLINE_SEED = [
 ]
 
 
+_REGISTRY_URI = (
+    "https://www.iana.org/assignments/media-types/media-types.xhtml"
+)
+
+
 def build_pack() -> dict:
     today = _dt.date.today().isoformat()
     pack = {
         "pack_name": "iana-media-types",
-        "pack_version": "0.1.0",
+        "pack_version": "0.1.1",
         "license": {
             "spdx_id": "Public-Domain",
-            "source_url": (
-                "https://www.iana.org/assignments/media-types/"
-                "media-types.xhtml"
-            ),
+            "source_url": _REGISTRY_URI,
             "registry_license": "open",
         },
         "derives_from": {
             "standard": "IANA-Media-Types",
             "version": f"snapshot-{today}",
-            "source_uri": (
-                "https://www.iana.org/assignments/media-types/"
-                "media-types.csv"
+            # source_uri matches values_registry.uri so source_hash
+            # binds to the same artifact (Phase 3 provenance invariant).
+            "source_uri": _REGISTRY_URI,
+            "source_hash": _hash_for(
+                "iana-media-types", "media_type", "snapshot"
             ),
         },
         "dimensions": {
@@ -117,10 +121,7 @@ def build_pack() -> dict:
                 "domains": ["universal"],
                 "known_values": INLINE_SEED,
                 "values_registry": {
-                    "uri": (
-                        "https://www.iana.org/assignments/media-types/"
-                        "media-types.xhtml"
-                    ),
+                    "uri": _REGISTRY_URI,
                     "hash": _hash_for("iana-media-types", "media_type", "snapshot"),
                     "version": "snapshot",
                 },

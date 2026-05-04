@@ -3,8 +3,14 @@ from __future__ import annotations
 
 import subprocess
 import sys
+from pathlib import Path
 
 import pytest
+
+# Sprint 12: anchor demo-script paths to the test file so the demo test
+# runs cleanly regardless of pytest's cwd (worktree root vs `bulla/`).
+_BULLA_REPO_ROOT = Path(__file__).resolve().parent.parent
+_GUIDED_DISCOVERY_DEMO = _BULLA_REPO_ROOT / "scripts" / "run_guided_discovery_demo.py"
 
 from bulla.diagnostic import (
     boundary_obligations_from_decomposition,
@@ -362,8 +368,18 @@ class TestGuidedDiscoveryResult:
 
 class TestGuidedDiscoveryDemo:
     def test_demo_runs_successfully(self):
+        # Sprint 12: anchor the demo-script path to the test file's location
+        # (`_GUIDED_DISCOVERY_DEMO`) so this test passes regardless of
+        # pytest's cwd. Previously the test invoked
+        # `scripts/run_guided_discovery_demo.py` relative to cwd, which
+        # broke when pytest was run from the worktree root instead of `bulla/`.
+        assert _GUIDED_DISCOVERY_DEMO.exists(), (
+            f"Demo script missing at {_GUIDED_DISCOVERY_DEMO} — "
+            "either the file was moved/deleted or `_BULLA_REPO_ROOT` "
+            "needs to be re-anchored."
+        )
         result = subprocess.run(
-            [sys.executable, "scripts/run_guided_discovery_demo.py"],
+            [sys.executable, str(_GUIDED_DISCOVERY_DEMO)],
             capture_output=True, text=True, timeout=30,
         )
         assert result.returncode == 0, f"Demo failed:\n{result.stderr}\n{result.stdout}"

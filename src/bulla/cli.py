@@ -11,9 +11,41 @@ from pathlib import Path
 import yaml
 
 from bulla import __version__
+from bulla.audit_report import (
+    audit_report_to_json_dict,
+    build_audit_report,
+    format_audit_report_text,
+    format_verbose_blind_spots,
+)
+from bulla.certificate import certify, to_dict, to_json
 from bulla.diagnostic import diagnose
 from bulla.formatters import format_json, format_sarif, format_text
+from bulla.model import Composition
 from bulla.parser import CompositionError, load_composition
+from bulla.regime import format_regime_warning, validate_regime
+
+
+# Sprint 11 Phase 2: centralized composition loader that surfaces regime
+# warnings consistently across all CLI commands. Use this helper anywhere
+# a composition is loaded from a user-supplied path; it ensures the
+# regime warning fires once per file regardless of which command is invoked.
+def _load_with_regime_warning(path) -> "Composition":
+    """Load a composition from `path` and emit a regime warning to stderr
+    if the composition fails the schema-shape predicate.
+
+    Wraps `bulla.parser.load_composition`. Any malformed YAML still
+    raises `CompositionError` from the parser (Layer 1 defense); this
+    helper adds the Layer-3 regime warning for compositions that pass
+    the parser but trip the projective-observables check.
+    """
+    comp = load_composition(path)
+    # Sprint 12 fix: pass the actual file path so the warning suggests
+    # `bulla regime <path>` (not the YAML composition name, which would
+    # not work as a CLI argument).
+    warning = format_regime_warning(comp, source_path=str(path))
+    if warning is not None:
+        print(f"\n[{path.name}] {warning}\n", file=sys.stderr)
+    return comp
 
 
 def _add_pack_args(parser: argparse.ArgumentParser) -> None:
@@ -54,6 +86,374 @@ def _examples_dir() -> Path:
     return Path(str(pkg / "compositions"))
 
 
+def _cmd_regime(args: argparse.Namespace) -> None:
+    """Sprint 11 Phase 6: print the regime classification of compositions.
+
+    Per-composition output (text format):
+      - rank_obs / rank_internal / fee_formula
+      - is_well_formed_for_fee  (Sprint 8)
+      - has_projective_observables  (Sprint 9)
+      - has_dfd_conservative / has_chp_conservative / is_exact_regime_conservative (Sprint 11)
+      - is_all_hidden / is_all_observable / dominance flags
+
+    JSON format emits a list of `{path, regime}` dicts where each `regime`
+    matches the `regime` block of `bulla diagnose --format json`.
+    """
+    from bulla.regime import classify
+    _configure_packs_from_args(args)
+    if not args.files:
+        print("Error: provide composition files or directories", file=sys.stderr)
+        sys.exit(1)
+    paths = _resolve_paths(args.files)
+    if not paths:
+        print("No composition files found.", file=sys.stderr)
+        sys.exit(1)
+    fmt = getattr(args, "format", "text")
+
+    records: list[dict] = []
+    for path in paths:
+        try:
+            comp = _load_with_regime_warning(path)
+        except CompositionError as e:
+            print(f"Error: {e}", file=sys.stderr)
+            sys.exit(1)
+        report = classify(comp)
+        record = {
+            "path": str(path),
+            "name": comp.name,
+            "rank_obs": report.rank_obs,
+            "rank_internal": report.rank_internal,
+            "fee_formula": report.fee_formula,
+            "is_well_formed_for_fee": report.is_well_formed_for_fee,
+            "has_projective_observables": report.has_projective_observables,
+            "has_dfd_conservative": report.has_dfd_conservative,
+            "has_chp_conservative": report.has_chp_conservative,
+            "is_exact_regime_conservative": report.is_exact_regime_conservative,
+            "is_all_hidden": report.is_all_hidden,
+            "is_all_observable": report.is_all_observable,
+            "has_internal_dominance": report.has_internal_dominance,
+            "has_balanced_ranks": report.has_balanced_ranks,
+            "has_obs_dominance": report.has_obs_dominance,
+        }
+        records.append(record)
+
+    if fmt == "json":
+        print(json.dumps(records if len(records) > 1 else records[0], indent=2))
+        return
+
+    # Text format
+    for record in records:
+        print(f"\n{record['name']}  ({record['path']})")
+        print(f"  rank_obs:                       {record['rank_obs']}")
+        print(f"  rank_internal:                  {record['rank_internal']}")
+        print(f"  fee_formula:                    {record['fee_formula']}")
+        print(f"  is_well_formed_for_fee:         {record['is_well_formed_for_fee']}")
+        print(f"  has_projective_observables:     {record['has_projective_observables']}")
+        print(f"  has_dfd_conservative:           {record['has_dfd_conservative']}")
+        print(f"  has_chp_conservative:           {record['has_chp_conservative']}")
+        print(f"  is_exact_regime_conservative:   {record['is_exact_regime_conservative']}")
+        print(f"  is_all_hidden:                  {record['is_all_hidden']}")
+        if record['has_obs_dominance']:
+            print(f"  ⚠ has_obs_dominance (fee < 0):  {record['has_obs_dominance']}  "
+                  f"— see bulla/docs/REGIME.md")
+
+
+# Sprint 13 — `bulla certify` is the per-composition certificate
+# orchestrator: bundles regime + diagnostic + cross-server + witness
+# geometry + interpretation labels into one JSON artifact per composition.
+# See bulla.certificate.CompositionCertificate and bulla/docs/REGIME.md
+# for the full schema.
+
+# The 10-composition seed set lives at module scope so it can be
+# loaded by name in --seed-set mode without re-parsing each invocation.
+_SEED_SET_REGISTRY_PAIRS = (
+    ("filesystem", "github"),
+    ("github", "notion"),
+)
+_SEED_SET_CURATED_YAMLS = (
+    "bulla/compositions/mcp_filesystem_git.yaml",
+    "bulla/compositions/financial_pipeline.yaml",
+    "bulla/compositions/mcp_fetch_filesystem_git.yaml",
+    "bulla/compositions/auth_pipeline.yaml",
+    "bulla/compositions/regime_break_dfd_violation.yaml",
+    "bulla/compositions/regime_break_bridge_topology.yaml",
+)
+
+
+def _seed_set_load_registry_manifests(manifests_dir: Path) -> dict[str, list[dict]]:
+    """Inlined version of the Sprint 4 helper. Avoids importing
+    `sprint4_canonical_pair` (which has a heavy script body with
+    side-effects at import time)."""
+    manifests: dict[str, list[dict]] = {}
+    if not manifests_dir.is_dir():
+        return manifests
+    for f in sorted(manifests_dir.glob("*.json")):
+        if f.name == "coherence.db" or f.stem.startswith("."):
+            continue
+        try:
+            data = json.loads(f.read_text())
+            tools = data.get("tools", [])
+            if tools:
+                manifests[f.stem] = tools
+        except (json.JSONDecodeError, KeyError):
+            continue
+    return manifests
+
+
+def _seed_set_build_pair(
+    server_a: str, tools_a: list[dict],
+    server_b: str, tools_b: list[dict],
+) -> Composition:
+    """Inlined Sprint 4 pair-composition builder. Same prefix convention
+    as `BullaGuard.from_tools_list` so the composition has multi-server
+    `xxx__tool` names."""
+    from bulla.guard import BullaGuard
+    prefixed: list[dict] = []
+    for t in tools_a:
+        p = dict(t)
+        p["name"] = f"{server_a}__{t['name']}"
+        prefixed.append(p)
+    for t in tools_b:
+        p = dict(t)
+        p["name"] = f"{server_b}__{t['name']}"
+        prefixed.append(p)
+    return BullaGuard.from_tools_list(
+        prefixed, name=f"{server_a}+{server_b}"
+    ).composition
+
+
+def _seed_set_compositions(repo_root: Path) -> list[tuple[Composition, str]]:
+    """Return (Composition, source_path) tuples for the Sprint 13 seed
+    set: 10 compositions covering the regime lattice. Reuses existing
+    Sprint 6 cycle family + (inlined Sprint 4) registry pair construction +
+    curated YAMLs + Sprint 10 negative-control fixture."""
+    out: list[tuple[Composition, str]] = []
+
+    # Registry pairs (inlined Sprint 4 helpers; no module-import side effects)
+    manifests_dir = (
+        repo_root / "bulla" / "calibration" / "data" / "registry" / "manifests"
+    )
+    manifests = _seed_set_load_registry_manifests(manifests_dir)
+    for a, b in _SEED_SET_REGISTRY_PAIRS:
+        if a in manifests and b in manifests:
+            try:
+                comp = _seed_set_build_pair(a, manifests[a], b, manifests[b])
+                out.append((comp, f"<registry pair: {a}+{b}>"))
+            except Exception as e:
+                print(f"warning: skipping pair {a}+{b}: {e}", file=sys.stderr)
+
+    # Curated YAMLs
+    for rel in _SEED_SET_CURATED_YAMLS:
+        p = repo_root / rel
+        if p.exists():
+            try:
+                comp = load_composition(p)
+                out.append((comp, str(p)))
+            except Exception as e:
+                print(f"warning: skipping {rel}: {e}", file=sys.stderr)
+
+    # Cycle family A_{3,4} (synthetic, all-hidden exact-conservative)
+    from bulla.model import Edge, SemanticDimension, ToolSpec
+    n = 3 * 4
+    tools = tuple(
+        ToolSpec(name=f"t{i}", internal_state=("f",), observable_schema=())
+        for i in range(n)
+    )
+    edges = []
+    for c in range(3):
+        for i in range(4):
+            u = c * 4 + i
+            v = c * 4 + (i + 1) % 4
+            edges.append(Edge(
+                from_tool=f"t{u}", to_tool=f"t{v}",
+                dimensions=(SemanticDimension(name="f_match", from_field="f", to_field="f"),),
+            ))
+    out.append((
+        Composition(name="A_3_4", tools=tools, edges=tuple(edges)),
+        "<cycle family k=3 m=4>",
+    ))
+
+    # Negative control: malformed_non_projective via Python construction
+    # (parser blocks the YAML version, so we build the same shape via the
+    # model API to demonstrate violations propagation)
+    t1 = ToolSpec(
+        name="t1", internal_state=("hidden_a",), observable_schema=("secret",)
+    )
+    t2 = ToolSpec(
+        name="t2", internal_state=("hidden_b",), observable_schema=("secret",)
+    )
+    edge = Edge(
+        from_tool="t1", to_tool="t2",
+        dimensions=(SemanticDimension(
+            name="secret_match", from_field="secret", to_field="secret"
+        ),),
+    )
+    out.append((
+        Composition(name="malformed_non_projective_negative_control",
+                    tools=(t1, t2), edges=(edge,)),
+        "<negative control: parser-blocked YAML reproduced via Python API>",
+    ))
+
+    return out
+
+
+def _format_certify_text(cert) -> str:
+    """Human-readable v1.0 certificate summary.
+
+    Sprint 14: reads from the `claims` block as the source of truth, with
+    `display.fee_interpretation` and `display.repair_semantics` reproduced
+    verbatim for back-compat. Regime fields shown for evidence."""
+    r = cert.regime
+    subject = cert.subject
+    diagnostic = cert.diagnostic
+    claims = cert.claims
+    lines: list[str] = []
+    lines.append("")
+    lines.append(f"Composition: {subject['name']}")
+    if subject.get("source_path"):
+        lines.append(f"  source:                  {subject['source_path']}")
+    lines.append(f"  composition_sha256:      {subject['composition_sha256'][:16]}…")
+    lines.append(f"  certificate_content_hash: {cert.certificate_content_hash[:23]}…")
+    lines.append(f"  schema_version:          {cert.certificate_schema_version}")
+    lines.append("")
+    lines.append("  REGIME (evidence):")
+    lines.append(f"    is_well_formed_for_fee:        {r.is_well_formed_for_fee}")
+    lines.append(f"    has_projective_observables:    {r.has_projective_observables}")
+    lines.append(f"    has_dfd_conservative:          {r.has_dfd_conservative}")
+    lines.append(f"    has_chp_conservative:          {r.has_chp_conservative}")
+    lines.append(f"    is_exact_regime_conservative:  {r.is_exact_regime_conservative}")
+    lines.append(f"    is_all_hidden:                 {r.is_all_hidden}")
+    lines.append("")
+    lines.append("  DIAGNOSTIC:")
+    lines.append(f"    coherence_fee:           {diagnostic['coherence_fee']}")
+    lines.append(f"    blind_spots:             {diagnostic['blind_spots_count']}")
+    lines.append(f"    bridges_recommended:     {diagnostic['bridges_count']}")
+    lines.append(f"    n_unbridged:             {diagnostic['n_unbridged']}")
+    if diagnostic.get("cross_server_decomposition") is not None:
+        d = diagnostic["cross_server_decomposition"]
+        lines.append("")
+        lines.append("  CROSS-SERVER:")
+        lines.append(f"    n_servers:               {d['n_servers']}")
+        lines.append(f"    servers:                 {d['servers']}")
+        lines.append(f"    total_fee:               {d['total_fee']}")
+        lines.append(f"    local_fees:              {d['local_fees']}")
+        lines.append(f"    boundary_fee:            {d['boundary_fee']}")
+    lines.append("")
+    lines.append("  CLAIMS (machine-verifiable):")
+    for claim_name in (
+        "schema_shape_valid", "fee_is_nonnegative", "fee_is_interpretable",
+        "exact_disclosure_equivalence", "repair_basis_status",
+        "subject_bound",
+    ):
+        c = claims[claim_name]
+        status_glyph = {
+            "certified": "✓",
+            "candidate": "?",
+            "not_certified": "✗",
+            "not_applicable": "—",
+        }.get(c.status, " ")
+        line = f"    {status_glyph} {claim_name:34s} status={c.status:14s} value={c.value}"
+        lines.append(line)
+        if c.licensed_by:
+            lines.append(f"      licensed_by: {list(c.licensed_by)}")
+        if c.not_licensed:
+            lines.append(f"      not_licensed: {list(c.not_licensed)}")
+    lines.append("")
+    lines.append("  DISPLAY (v0 free-text labels; UI back-compat — do NOT parse):")
+    lines.append(f"    fee_interpretation:      {cert.display['fee_interpretation']!r}")
+    lines.append(f"    repair_semantics:        {cert.display['repair_semantics']}")
+    if cert.violations:
+        lines.append("")
+        lines.append("  ⚠ SCHEMA-SHAPE VIOLATIONS:")
+        for v in cert.violations:
+            lines.append(f"    - tool `{v.tool_name}`: fields {list(v.fields)} "
+                         f"(kind: {v.kind})")
+    return "\n".join(lines) + "\n"
+
+
+def _cmd_certify(args: argparse.Namespace) -> None:
+    """Sprint 13: emit per-composition certificate(s). Bundles regime +
+    diagnostic + cross-server + witness geometry + interpretation labels
+    into one structured artifact per composition."""
+    _configure_packs_from_args(args)
+    fmt = getattr(args, "format", "text")
+
+    # Repo root for seed-set construction. Cwd is presumed to be the
+    # repo root or a worktree where `bulla/` lives.
+    repo_root = Path.cwd()
+    while not (repo_root / "bulla").is_dir():
+        if repo_root.parent == repo_root:
+            repo_root = Path.cwd()  # fallback to cwd
+            break
+        repo_root = repo_root.parent
+
+    # Resolve compositions to certify.
+    pairs: list[tuple[Composition, str]] = []
+    if getattr(args, "seed_set", False):
+        pairs = _seed_set_compositions(repo_root)
+        if not pairs:
+            print("Error: seed set is empty (no fixtures found)", file=sys.stderr)
+            sys.exit(1)
+    else:
+        if not args.files:
+            print(
+                "Error: provide composition files or directories, or use --seed-set",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        paths = _resolve_paths(args.files)
+        if not paths:
+            print("No composition files found.", file=sys.stderr)
+            sys.exit(1)
+        for path in paths:
+            try:
+                comp = _load_with_regime_warning(path)
+                pairs.append((comp, str(path)))
+            except CompositionError as e:
+                print(f"Error: {e}", file=sys.stderr)
+                sys.exit(1)
+            except Exception as e:
+                print(f"Error processing {path}: {e}", file=sys.stderr)
+                sys.exit(1)
+
+    # Build certificates
+    certs = [
+        certify(comp, source_path=src) for comp, src in pairs
+    ]
+
+    # Optional output file
+    output = getattr(args, "output", None)
+
+    if fmt == "json":
+        if len(certs) == 1:
+            payload = to_dict(certs[0])
+        else:
+            payload = [to_dict(c) for c in certs]
+        text = json.dumps(payload, indent=2)
+        if output:
+            Path(output).write_text(text + "\n")
+            print(f"  Wrote {len(certs)} certificate(s) to {output}",
+                  file=sys.stderr)
+        else:
+            print(text)
+        return
+
+    # Text format
+    sep = "─" * 60
+    out_lines: list[str] = []
+    for i, cert in enumerate(certs):
+        if i > 0:
+            out_lines.append(sep)
+        out_lines.append(_format_certify_text(cert))
+    text = "\n".join(out_lines)
+    if output:
+        Path(output).write_text(text)
+        print(f"  Wrote {len(certs)} certificate(s) to {output}",
+              file=sys.stderr)
+    else:
+        print(text, end="")
+
+
 def _cmd_diagnose(args: argparse.Namespace) -> None:
     _configure_packs_from_args(args)
     if args.examples:
@@ -70,12 +470,16 @@ def _cmd_diagnose(args: argparse.Namespace) -> None:
         sys.exit(1)
 
     witness = getattr(args, "witness", False)
-    diagnostics: list[tuple] = []
+    # Sprint 11 Phase 5: track (diag, path, comp) so format_json can
+    # emit the regime block under --format json without re-parsing.
+    diagnostics: list[tuple] = []  # list[tuple[Diagnostic, Path, Composition]]
     for path in paths:
         try:
-            comp = load_composition(path)
+            # Sprint 11 Phase 2: centralized helper emits regime warnings
+            # to stderr; commands no longer have to repeat the boilerplate.
+            comp = _load_with_regime_warning(path)
             diag = diagnose(comp, include_witness_geometry=witness)
-            diagnostics.append((diag, path))
+            diagnostics.append((diag, path, comp))
         except CompositionError as e:
             print(f"Error: {e}", file=sys.stderr)
             sys.exit(1)
@@ -87,17 +491,23 @@ def _cmd_diagnose(args: argparse.Namespace) -> None:
     brief = getattr(args, "brief", False)
 
     if fmt == "sarif":
-        print(format_sarif(diagnostics))
+        # SARIF formatter takes (diag, path) tuples.
+        print(format_sarif([(d, p) for d, p, _ in diagnostics]))
     elif fmt == "json":
+        # Sprint 12: regime block is opt-in via --regime to preserve
+        # byte-identity with the 0.34.0 golden JSON fixture.
+        include_regime = getattr(args, "regime", False)
         if len(diagnostics) == 1:
-            print(format_json(diagnostics[0][0], diagnostics[0][1]))
+            d0, p0, c0 = diagnostics[0]
+            print(format_json(d0, p0, comp=c0 if include_regime else None))
         else:
             combined = [
-                json.loads(format_json(d, p)) for d, p in diagnostics
+                json.loads(format_json(d, p, comp=c if include_regime else None))
+                for d, p, c in diagnostics
             ]
             print(json.dumps(combined, indent=2))
     elif brief:
-        for diag, path in diagnostics:
+        for diag, path, _comp in diagnostics:
             bs = len(diag.blind_spots)
             status = "PASS" if diag.coherence_fee == 0 else "FAIL"
             print(
@@ -107,15 +517,15 @@ def _cmd_diagnose(args: argparse.Namespace) -> None:
         print()
     else:
         sep = "\u2500" * 60
-        for i, (d, _p) in enumerate(diagnostics):
+        for i, (d, _p, _c) in enumerate(diagnostics):
             if i > 0:
                 print(sep)
             print(format_text(d))
 
         if len(diagnostics) > 1:
             print("\u2501" * 60)
-            fees = [d.coherence_fee for d, _ in diagnostics]
-            total_bs = sum(len(d.blind_spots) for d, _ in diagnostics)
+            fees = [d.coherence_fee for d, _, _ in diagnostics]
+            total_bs = sum(len(d.blind_spots) for d, _, _ in diagnostics)
             print(f"  Summary: {len(diagnostics)} compositions")
             print(
                 f"  Fully bridged (fee = 0): "
@@ -149,7 +559,8 @@ def _cmd_check(args: argparse.Namespace) -> None:
     diagnostics: list[tuple] = []
     for path in paths:
         try:
-            comp = load_composition(path)
+            # Sprint 11 Phase 2: centralized helper.
+            comp = _load_with_regime_warning(path)
             diag = diagnose(comp, include_witness_geometry=witness)
             diagnostics.append((diag, path))
         except CompositionError as e:
@@ -512,6 +923,44 @@ def _cmd_manifest(args: argparse.Namespace) -> None:
         )
 
 
+def _cmd_translate(args: argparse.Namespace) -> None:
+    """Runtime value translation (bulla.bridges) — different operation
+    from the diagnostic ``bulla bridge`` YAML rewriter.
+
+    Resolves a value across conventions on a single dimension. Returns
+    JSON: ``{"value": "...", "evidence": {...}, "receipt_hash": "..."}``.
+    Exits 1 with a structured error JSON when no translator covers the
+    request.
+    """
+    from bulla.bridges import translate, TranslationUnavailable
+
+    try:
+        result = translate(
+            args.dimension,
+            value=args.value,
+            to_convention=args.to,
+            from_convention=args.from_,
+        )
+    except TranslationUnavailable as exc:
+        err = {
+            "error": "translation_unavailable",
+            "dimension": exc.dimension,
+            "from_convention": exc.from_convention,
+            "to_convention": exc.to_convention,
+            "suggestion": exc.suggestion,
+            "license_required": exc.license_required,
+        }
+        print(json.dumps(err, indent=2))
+        sys.exit(1)
+
+    out = {
+        "value": result.value,
+        "evidence": result.evidence.to_dict(),
+        "receipt_hash": result.receipt.receipt_hash,
+    }
+    print(json.dumps(out, indent=2))
+
+
 def _cmd_bridge(args: argparse.Namespace) -> None:
     """Generate bridged composition YAML or JSON patches from a diagnosed composition."""
     paths = _resolve_paths(args.files)
@@ -521,7 +970,8 @@ def _cmd_bridge(args: argparse.Namespace) -> None:
 
     for path in paths:
         try:
-            comp = load_composition(path)
+            # Sprint 11 Phase 2: centralized helper.
+            comp = _load_with_regime_warning(path)
             diag = diagnose(comp)
         except CompositionError as e:
             print(f"Error: {e}", file=sys.stderr)
@@ -586,7 +1036,10 @@ def _cmd_witness(args: argparse.Namespace) -> None:
     receipts = []
     for path in paths:
         try:
-            comp = load_composition(path)
+            # Sprint 11 Phase 2: centralized helper (regime warning fires
+            # on hand-authored compositions that bypass BullaGuard but
+            # somehow pass the parser).
+            comp = _load_with_regime_warning(path)
             diag = diagnose(comp)
         except CompositionError as e:
             print(f"Error: {e}", file=sys.stderr)
@@ -1119,64 +1572,85 @@ def _format_weighted_basis_json(
 # ── audit ─────────────────────────────────────────────────────────────
 
 
-def _audit_text(
-    server_results: list,
+def _audit_guided_repair_append(guided_repair: dict | None) -> str:
+    """Append guided repair / convergence narrative (keeps sprint-29 checks)."""
+    if not guided_repair:
+        return ""
+    lines: list[str] = []
+    lines.append("")
+    orig = guided_repair["original_fee"]
+    rep = guided_repair["repaired_fee"]
+    conf = guided_repair["confirmed"]
+    den = guided_repair["denied"]
+    unc = guided_repair["uncertain"]
+    n_rounds = guided_repair.get("rounds")
+    reason = guided_repair.get("termination_reason")
+    if n_rounds is not None:
+        lines.append(
+            f"  Convergence: fee {orig} -> {rep} in {n_rounds} round(s) "
+            f"({conf} confirmed, {den} denied, {unc} uncertain) [{reason}]"
+        )
+    else:
+        lines.append(
+            f"  Guided repair: fee {orig} -> {rep} "
+            f"({conf} confirmed, {den} denied, {unc} uncertain)"
+        )
+
+    disc_pack = guided_repair.get("discovered_pack")
+    if disc_pack:
+        from bulla.repair import detect_contradictions
+
+        disc_dims = disc_pack.get("dimensions", {})
+        n_vals = sum(len(d.get("known_values", [])) for d in disc_dims.values())
+        contradictions = detect_contradictions(disc_pack)
+        lines.append(
+            f"  Discovered conventions: {len(disc_dims)} dimension(s) "
+            f"with {n_vals} value(s)"
+        )
+
+        probe_tool_values: dict[str, dict[str, str]] = {}
+        for p in guided_repair.get("probes", []):
+            obl = p.get("obligation", {})
+            dim = obl.get("dimension", "")
+            tool = obl.get("placeholder_tool", "")
+            val = p.get("convention_value", "")
+            if dim and tool and val and p.get("verdict") == "CONFIRMED":
+                probe_tool_values.setdefault(dim, {})[tool] = val
+
+        contradiction_dims = {c.dimension for c in contradictions}
+        for dname, ddef in disc_dims.items():
+            vals = ddef.get("known_values", [])
+            if dname in contradiction_dims:
+                lines.append(f"    {dname}: MISMATCH")
+                tv = probe_tool_values.get(dname, {})
+                max_prefix = max((len(t.split("__")[0]) for t in tv), default=0)
+                for tool_name, value in tv.items():
+                    prefix = tool_name.split("__")[0]
+                    lines.append(f"      {prefix:<{max_prefix}s}: {value}")
+            else:
+                tools = ddef.get("provenance", {}).get("source_tools", [])
+                tool_str = f" (from {', '.join(tools)})" if tools else ""
+                lines.append(f"    {dname}: {', '.join(vals)}{tool_str}")
+
+        if contradictions:
+            lines.append(
+                f"  {len(contradictions)} convention mismatch(es) across server boundaries"
+            )
+
+    return "\n".join(lines) + ("\n" if lines else "")
+
+
+def _audit_verbose_metadata_append(
     diag: "Diagnostic",
     disclosure: list[tuple[str, str]],
     basis: "WitnessBasis | None",
     decomposition: "FeeDecomposition | None",
-    verbose: bool = False,
-    own_obligations: tuple | None = None,
-    obligation_check: dict | None = None,
-    guided_repair: dict | None = None,
-    repair_geometry: "RepairGeometry | None" = None,
+    own_obligations: tuple | None,
+    obligation_check: dict | None,
+    repair_geometry: "RepairGeometry | None",
 ) -> str:
-    ok_count = sum(1 for r in server_results if r.ok)
-    fail_count = sum(1 for r in server_results if not r.ok)
-
+    """Extra audit sections reserved for ``-v`` (receipt stays compact)."""
     lines: list[str] = []
-    skip_label = f" ({fail_count} skipped)" if fail_count else ""
-    lines.append(f"  bulla audit: {ok_count} server(s) scanned{skip_label}")
-    lines.append("")
-
-    lines.append("  Servers:")
-    for r in server_results:
-        if r.ok:
-            lines.append(f"    {r.name:<20s} {len(r.tools):>3} tools   OK")
-        else:
-            short_err = r.error.split("\n")[0][:60] if r.error else "unknown"
-            lines.append(f"    {r.name:<20s}  --        FAILED: {short_err}")
-    lines.append("")
-
-    if ok_count == 0:
-        lines.append("  No servers scanned successfully.")
-        lines.append("")
-        return "\n".join(lines)
-
-    lines.append(f"  Combined composition: {diag.n_tools} tools, {diag.n_edges} edges")
-    lines.append("")
-    lines.append(f"  Coherence fee:  {diag.coherence_fee}")
-    lines.append(f"  Blind spots:    {len(diag.blind_spots)}")
-    lines.append(f"  Bridges:        {len(diag.bridges)}")
-
-    if decomposition and ok_count > 1:
-        intra = sum(decomposition.local_fees)
-        lines.append("")
-        lines.append("  Cross-server risk:")
-        lines.append(f"    Intra-server fee:  {intra}  (blind spots within individual servers)")
-        lines.append(f"    Boundary fee:      {decomposition.boundary_fee}  (blind spots between servers)")
-
-    if verbose and diag.blind_spots:
-        lines.append("")
-        lines.append(f"  Blind spot detail ({len(diag.blind_spots)}):")
-        for i, bs in enumerate(diag.blind_spots, 1):
-            locs: list[str] = []
-            if bs.from_hidden:
-                locs.append(f"{bs.from_field} hidden at {bs.from_tool}")
-            if bs.to_hidden:
-                locs.append(f"{bs.to_field} hidden at {bs.to_tool}")
-            lines.append(f"    [{i}] {bs.dimension} ({bs.edge})")
-            lines.append(f"        {'; '.join(locs)}")
 
     if disclosure:
         lines.append("")
@@ -1187,14 +1661,25 @@ def _audit_text(
         lines.append("")
         lines.append("  No disclosures needed.")
 
+    lines.append("")
+    lines.append(
+        f"  Composition detail: {diag.n_tools} tools, {diag.n_edges} edges — "
+        f"total coherence fee {diag.coherence_fee}, "
+        f"{len(diag.blind_spots)} blind spot(s), {len(diag.bridges)} bridge(s)"
+    )
+
     if repair_geometry is not None:
         er = repair_geometry.epistemic_view()
         lines.append("")
         lines.append(f"  Repair regime:  {er.regime}")
         if er.regime == "exact":
-            lines.append(f"    Geometry dividend: {er.geometry_dividend}  (provably optimal)")
+            lines.append(
+                f"    Geometry dividend: {er.geometry_dividend}  (provably optimal)"
+            )
         else:
-            lines.append(f"    Geometry dividend: {er.geometry_dividend}  (approximation)")
+            lines.append(
+                f"    Geometry dividend: {er.geometry_dividend}  (approximation)"
+            )
             if er.downgrade:
                 lines.append(f"    Downgrade reason:  {er.downgrade}")
             if er.forced_cost is not None:
@@ -1211,7 +1696,9 @@ def _audit_text(
     if own_obligations:
         bf = decomposition.boundary_fee if decomposition else "?"
         lines.append("")
-        lines.append(f"  Obligations ({len(own_obligations)} from boundary_fee={bf}):")
+        lines.append(
+            f"  Obligations ({len(own_obligations)} from boundary_fee={bf}):"
+        )
         for obl in own_obligations:
             lines.append(
                 f"    - {obl.dimension}: field \"{obl.field}\" hidden in "
@@ -1226,81 +1713,68 @@ def _audit_text(
             f"{o['dimension']} -- propagated"
             for o in obligation_check["unmet_obligations"]
         )
-        lines.append(f"    Met: {obligation_check['met']}"
-                      + (f" ({met_dims})" if met_dims else ""))
-        lines.append(f"    Unmet: {obligation_check['unmet']}"
-                      + (f" ({unmet_dims})" if unmet_dims else ""))
+        lines.append(
+            f"    Met: {obligation_check['met']}"
+            + (f" ({met_dims})" if met_dims else "")
+        )
+        lines.append(
+            f"    Unmet: {obligation_check['unmet']}"
+            + (f" ({unmet_dims})" if unmet_dims else "")
+        )
         lines.append(f"    Irrelevant: {obligation_check['irrelevant']}")
 
-    if guided_repair:
-        lines.append("")
-        orig = guided_repair["original_fee"]
-        rep = guided_repair["repaired_fee"]
-        conf = guided_repair["confirmed"]
-        den = guided_repair["denied"]
-        unc = guided_repair["uncertain"]
-        n_rounds = guided_repair.get("rounds")
-        reason = guided_repair.get("termination_reason")
-        if n_rounds is not None:
-            lines.append(
-                f"  Convergence: fee {orig} -> {rep} in {n_rounds} round(s) "
-                f"({conf} confirmed, {den} denied, {unc} uncertain) [{reason}]"
-            )
-        else:
-            lines.append(
-                f"  Guided repair: fee {orig} -> {rep} "
-                f"({conf} confirmed, {den} denied, {unc} uncertain)"
-            )
+    if not lines:
+        return ""
+    return "\n".join(lines).rstrip() + "\n"
 
-        disc_pack = guided_repair.get("discovered_pack")
-        if disc_pack:
-            from bulla.repair import detect_contradictions
 
-            disc_dims = disc_pack.get("dimensions", {})
-            n_vals = sum(
-                len(d.get("known_values", [])) for d in disc_dims.values()
-            )
-            contradictions = detect_contradictions(disc_pack)
-            lines.append(
-                f"  Discovered conventions: {len(disc_dims)} dimension(s) "
-                f"with {n_vals} value(s)"
-            )
+def _audit_text(
+    server_results: list,
+    diag: "Diagnostic",
+    disclosure: list[tuple[str, str]],
+    basis: "WitnessBasis | None",
+    decomposition: "FeeDecomposition | None",
+    verbose: bool = False,
+    own_obligations: tuple | None = None,
+    obligation_check: dict | None = None,
+    guided_repair: dict | None = None,
+    repair_geometry: "RepairGeometry | None" = None,
+    *,
+    raw_tools: list | None = None,
+    context_line: str | None = None,
+) -> str:
+    ok_count = sum(1 for r in server_results if r.ok)
+    if ok_count == 0:
+        lines = ["bulla audit", "───────────", "", "  No servers scanned successfully.", ""]
+        return "\n".join(lines)
 
-            probe_tool_values: dict[str, dict[str, str]] = {}
-            for p in guided_repair.get("probes", []):
-                obl = p.get("obligation", {})
-                dim = obl.get("dimension", "")
-                tool = obl.get("placeholder_tool", "")
-                val = p.get("convention_value", "")
-                if dim and tool and val and p.get("verdict") == "CONFIRMED":
-                    probe_tool_values.setdefault(dim, {})[tool] = val
-
-            contradiction_dims = {c.dimension for c in contradictions}
-            for dname, ddef in disc_dims.items():
-                vals = ddef.get("known_values", [])
-                if dname in contradiction_dims:
-                    lines.append(f"    {dname}: MISMATCH")
-                    tv = probe_tool_values.get(dname, {})
-                    max_prefix = max(
-                        (len(t.split("__")[0]) for t in tv), default=0
-                    )
-                    for tool_name, value in tv.items():
-                        prefix = tool_name.split("__")[0]
-                        lines.append(
-                            f"      {prefix:<{max_prefix}s}: {value}"
-                        )
-                else:
-                    tools = ddef.get("provenance", {}).get("source_tools", [])
-                    tool_str = f" (from {', '.join(tools)})" if tools else ""
-                    lines.append(f"    {dname}: {', '.join(vals)}{tool_str}")
-
-            if contradictions:
-                lines.append(
-                    f"  {len(contradictions)} convention mismatch(es) across server boundaries"
-                )
-
-    lines.append("")
-    return "\n".join(lines)
+    report = build_audit_report(
+        server_results,
+        diag,
+        decomposition,
+        raw_tools=raw_tools,
+        guided_repair=guided_repair,
+        context_line=context_line,
+        disclosure=disclosure,
+    )
+    text = format_audit_report_text(
+        report,
+        verbose=verbose,
+        blind_spots=diag.blind_spots if verbose else None,
+    )
+    if verbose:
+        text += format_verbose_blind_spots(diag.blind_spots)
+        text += _audit_verbose_metadata_append(
+            diag,
+            disclosure,
+            basis,
+            decomposition,
+            own_obligations,
+            obligation_check,
+            repair_geometry,
+        )
+    text += _audit_guided_repair_append(guided_repair)
+    return text
 
 
 def _audit_json(
@@ -1313,6 +1787,9 @@ def _audit_json(
     obligation_check: dict | None = None,
     guided_repair: dict | None = None,
     repair_geometry: "RepairGeometry | None" = None,
+    *,
+    raw_tools: list | None = None,
+    context_line: str | None = None,
 ) -> str:
     from datetime import datetime, timezone as tz
 
@@ -1366,6 +1843,17 @@ def _audit_json(
             obj["guided_repair"]["contradictions"] = [
                 c.to_dict() for c in contradictions
             ]
+    obj["audit_report"] = audit_report_to_json_dict(
+        build_audit_report(
+            server_results,
+            diag,
+            decomposition,
+            raw_tools=raw_tools,
+            guided_repair=guided_repair,
+            context_line=context_line,
+            disclosure=disclosure,
+        )
+    )
     return json.dumps(obj, indent=2)
 
 
@@ -1650,6 +2138,7 @@ def _cmd_audit(args: argparse.Namespace) -> None:
 
     manifests_dir: Path | None = getattr(args, "manifests", None)
     config_path = getattr(args, "config", None)
+    scan_elapsed_s: float | None = None
     do_discover = getattr(args, "discover", False)
     chain_path: Path | None = getattr(args, "chain", None)
     receipt_path: Path | None = getattr(args, "receipt", None)
@@ -1699,8 +2188,14 @@ def _cmd_audit(args: argparse.Namespace) -> None:
                 matches = detect_all()
                 if not matches:
                     print(
-                        "Error: No MCP config detected. Pass a config path "
-                        "or run 'bulla hosts list' to see supported hosts.",
+                        "No MCP configuration found.\n\n"
+                        "Try with two real servers:\n"
+                        "  bulla scan \\\n"
+                        '    "npx -y @modelcontextprotocol/server-filesystem /tmp" \\\n'
+                        '    "npx -y @modelcontextprotocol/server-git --repository /tmp"\n\n'
+                        "Or point to a config:\n"
+                        "  bulla audit ~/.cursor/mcp.json\n\n"
+                        "Or run 'bulla hosts list' to see supported hosts.",
                         file=sys.stderr,
                     )
                     sys.exit(1)
@@ -1734,7 +2229,11 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             e.name: {"command": e.command, "env": e.env or None}
             for e in entries
         }
+        import time
+
+        _t_scan = time.perf_counter()
         results = scan_mcp_servers_parallel(servers_cfg)
+        scan_elapsed_s = time.perf_counter() - _t_scan
 
         skip_failed = getattr(args, "skip_failed", True)
         ok_results = [r for r in results if r.ok]
@@ -1837,6 +2336,9 @@ def _cmd_audit(args: argparse.Namespace) -> None:
     if extra_packs:
         configure_packs(extra_paths=extra_packs)
 
+    import time as _time
+
+    _t_diag = _time.perf_counter()
     guard = BullaGuard.from_tools_list(all_tools, name="audit")
     comp = guard.composition
     basis = guard.witness_basis
@@ -1848,6 +2350,7 @@ def _cmd_audit(args: argparse.Namespace) -> None:
     from bulla.diagnostic import diagnose
     diag = diagnose(comp)
     disclosure = prescriptive_disclosure(comp, diag.coherence_fee)
+    diag_elapsed_s = _time.perf_counter() - _t_diag
 
     decomposition = None
     if len(server_names) > 1:
@@ -2061,8 +2564,26 @@ def _cmd_audit(args: argparse.Namespace) -> None:
         for sname in server_names:
             n_tools = sum(1 for t in comp.tools if t.name.startswith(f"{sname}__"))
             audit_results.append(SimpleNamespace(name=sname, ok=True, tools=[None] * n_tools, error=None))
+        elapsed = (scan_elapsed_s or 0) + diag_elapsed_s
+        context_line = f"manifests · {len(server_names)} servers · {diag.n_tools} tools · {elapsed:.1f}s"
     else:
         audit_results = results
+        ctx_parts: list[str] = []
+        if chosen_host is not None:
+            ctx_parts.append(chosen_host.display_name)
+        elif config_path is not None:
+            ctx_parts.append(Path(config_path).name)
+        else:
+            ctx_parts.append("audit")
+        ctx_parts.append(f"{len(audit_results)} servers")
+        ctx_parts.append(f"{diag.n_tools} tools")
+        total_s = (scan_elapsed_s or 0) + diag_elapsed_s
+        ctx_parts.append(f"{total_s:.1f}s")
+        context_line = " · ".join(ctx_parts)
+
+    _fail_servers = sum(1 for r in audit_results if not r.ok)
+    if _fail_servers:
+        context_line = f"{context_line} · {_fail_servers} skipped"
 
     if fmt == "json":
         print(_audit_json(
@@ -2071,6 +2592,8 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             obligation_check=obligation_check,
             guided_repair=guided_repair_report,
             repair_geometry=repair_geo,
+            raw_tools=all_tools,
+            context_line=context_line,
         ))
     elif fmt == "sarif":
         sarif_path = Path(str(config_path)) if config_path else Path("audit.json")
@@ -2083,6 +2606,8 @@ def _cmd_audit(args: argparse.Namespace) -> None:
             obligation_check=obligation_check,
             guided_repair=guided_repair_report,
             repair_geometry=repair_geo,
+            raw_tools=all_tools,
+            context_line=context_line,
         ))
         if discovery_n_dims > 0:
             print(f"  Discovery: {discovery_n_dims} dimension(s) added to vocabulary", file=sys.stderr)
@@ -2606,34 +3131,336 @@ def _cmd_pack_lint(args: argparse.Namespace) -> None:
         sys.exit(1)
 
 
+_PAIRWISE_SCAN_CUTOFF = 8
+"""When more than this many servers are scanned, skip the pairwise
+comparison block. n*(n-1)/2 compose_multi calls dominates wall-clock
+time at 8+ servers; the moat case stays visible from the global
+diagnostic alone."""
+
+
+def _no_config_found_message() -> str:
+    """Helpful error when bulla scan can't auto-detect any host.
+
+    Distinguishes "no host config found anywhere" from "host config
+    found but empty". The latter case is actionable: the user has
+    Claude Code or Cursor installed but no MCP servers configured.
+    """
+    from bulla.hosts import all_hosts
+
+    seen_paths: list[tuple[str, str]] = []
+    empty_hosts: list[str] = []
+    for host in all_hosts():
+        for p in host.candidate_paths():
+            if p.exists():
+                seen_paths.append((host.display_name, str(p)))
+                # Try parsing — if it succeeds with zero servers,
+                # mark the host as "configured but empty."
+                try:
+                    entries = host.parse(p)
+                    if not entries:
+                        empty_hosts.append(host.display_name)
+                except Exception:
+                    pass
+                break
+
+    lines: list[str] = ["No MCP servers found via auto-detect."]
+    lines.append("")
+    if empty_hosts:
+        lines.append(
+            "Detected host configs without MCP servers configured:"
+        )
+        for name in empty_hosts:
+            lines.append(f"  - {name}")
+        lines.append("")
+        lines.append(
+            "Add a server to your host's MCP config (e.g. via "
+            "`claude mcp add` for Claude Code, or by editing "
+            "~/.cursor/mcp.json for Cursor) and re-run bulla scan."
+        )
+        lines.append("")
+    elif seen_paths:
+        lines.append("Files found but unrecognized as MCP configs:")
+        for name, path in seen_paths:
+            lines.append(f"  - {name}: {path}")
+        lines.append("")
+    else:
+        lines.append("bulla scan checked the standard locations:")
+        lines.append("  - Claude Code:    ~/.claude.json, <cwd>/.mcp.json")
+        lines.append("  - Cursor:         ~/.cursor/mcp.json")
+        lines.append(
+            "  - Claude Desktop: "
+            "~/Library/Application Support/Claude/claude_desktop_config.json"
+        )
+        lines.append("  - Cline, Windsurf, Zed, Codex "
+                     "(see `bulla hosts list`)")
+        lines.append("")
+    lines.append("Or pass an explicit target:")
+    lines.append("  bulla scan --config /path/to/mcp.json")
+    lines.append(
+        "  bulla scan \"npx -y @modelcontextprotocol/server-filesystem /tmp\""
+    )
+    return "\n".join(lines) + "\n"
+
+
 def _cmd_scan(args: argparse.Namespace) -> None:
     _configure_packs_from_args(args)
+
+    server_tools, config_source = _resolve_scan_targets(args)
+    if server_tools is None:
+        return  # _resolve_scan_targets already exited or printed the error
+
+    # Build a BullaGuard for legacy formats (text / sarif / -o yaml)
+    # AND keep server_tools as the source of truth for narrative +
+    # pairwise. Both paths share the same diagnosis underneath
+    # (compose_multi internally builds a Composition that matches what
+    # BullaGuard.from_tools_list would produce on the same flat list).
+    flat_tools, naming = _flatten_for_guard(server_tools)
     from bulla.guard import BullaGuard
-    from bulla.scan import ScanError, scan_mcp_server, scan_mcp_servers
-
-    try:
-        if len(args.commands) == 1:
-            guard = BullaGuard.from_mcp_server(args.commands[0])
-        else:
-            tools = scan_mcp_servers(args.commands)
-            guard = BullaGuard.from_tools_list(tools, name="multi-server-scan")
-    except ScanError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
-
+    guard = BullaGuard.from_tools_list(
+        flat_tools, name=naming
+    )
     diag = guard.diagnose()
-    fmt = getattr(args, "format", "text")
+
+    fmt = getattr(args, "format", "narrative")
+    if getattr(args, "json", False):
+        fmt = "json"
 
     if fmt == "json":
         print(guard.to_json())
     elif fmt == "sarif":
         print(guard.to_sarif())
-    else:
+    elif fmt == "text":
+        # The legacy mathematician-grade output; preserved for power
+        # users who want β₁, H¹, and δ₀ rank in the receipt.
         print(guard.to_text())
+    else:
+        # narrative — the awareness-gap-fix default.
+        _render_scan_narrative(args, diag, server_tools, config_source)
 
     if args.output:
         guard.to_yaml(args.output)
         print(f"Wrote composition to {args.output}", file=sys.stderr)
+
+
+def _resolve_scan_targets(
+    args: argparse.Namespace,
+) -> tuple[dict[str, list[dict]] | None, str | None]:
+    """Resolve the scan inputs to ``(server_tools, config_source)``.
+
+    ``server_tools`` is a dict of ``{server_name: [tool_dict, ...]}``
+    suitable for both ``BullaGuard.from_tools_list`` (after flattening)
+    and ``compute_pairwise_fees``. ``config_source`` is a human-readable
+    label for the narrative header (e.g. ``"~/.cursor/mcp.json"``).
+
+    Returns ``(None, None)`` and exits the process on terminal failure
+    (no config found, host parser raised, etc.).
+    """
+    from bulla.scan import ScanError, scan_mcp_server
+
+    commands = list(args.commands or [])
+    config_path = getattr(args, "config", None)
+
+    # Branch A: explicit positional commands.
+    if commands:
+        return _scan_explicit_commands(commands)
+
+    # Branch B: --config <path>.
+    if config_path:
+        from bulla.config import parse_mcp_config
+        try:
+            entries = parse_mcp_config(config_path)
+        except Exception as e:
+            print(f"Error reading {config_path}: {e}", file=sys.stderr)
+            sys.exit(1)
+        if not entries:
+            print(
+                f"No MCP servers configured in {config_path}.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        return _scan_named_entries(entries, str(config_path))
+
+    # Branch C: auto-detect via registered hosts.
+    from bulla.hosts import detect_all
+    matches = detect_all()
+    if not matches:
+        print(_no_config_found_message(), file=sys.stderr)
+        sys.exit(1)
+    chosen = matches[0]
+    try:
+        entries = chosen.host.parse(chosen.path)
+    except Exception as e:
+        print(
+            f"Error parsing {chosen.host.display_name} config "
+            f"at {chosen.path}: {e}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    if not entries:
+        print(
+            f"No MCP servers configured in {chosen.path}.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    print(
+        f"Auto-detected: {chosen.host.display_name} ({chosen.path})",
+        file=sys.stderr,
+    )
+    return _scan_named_entries(entries, str(chosen.path))
+
+
+def _scan_explicit_commands(
+    commands: list[str],
+) -> tuple[dict[str, list[dict]], str | None]:
+    """Scan each explicit shell command, naming each server by the
+    last path segment of its command (e.g.
+    ``server-filesystem`` from ``npx -y @mcp/server-filesystem``)."""
+    from bulla.scan import ScanError, scan_mcp_server
+
+    server_tools: dict[str, list[dict]] = {}
+    used_names: set[str] = set()
+    for cmd in commands:
+        try:
+            tools = scan_mcp_server(cmd)
+        except ScanError as e:
+            print(f"Error scanning {cmd!r}: {e}", file=sys.stderr)
+            sys.exit(1)
+        name = _server_name_from_command(cmd, used_names)
+        used_names.add(name)
+        server_tools[name] = tools
+    config_source = commands[0] if len(commands) == 1 else None
+    return server_tools, config_source
+
+
+def _scan_named_entries(
+    entries: list, config_source: str,
+) -> tuple[dict[str, list[dict]], str]:
+    """Scan a list of ``McpServerEntry`` objects (already named)."""
+    from bulla.scan import ScanError, scan_mcp_server
+
+    server_tools: dict[str, list[dict]] = {}
+    for entry in entries:
+        try:
+            tools = scan_mcp_server(entry.command, env=entry.env)
+        except ScanError as e:
+            print(
+                f"Error scanning server {entry.name!r}: {e}",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        server_tools[entry.name] = tools
+    return server_tools, config_source
+
+
+def _server_name_from_command(cmd: str, used: set[str]) -> str:
+    """Derive a stable, unique server name from a shell command.
+
+    Heuristic: scan the command's tokens left-to-right, picking the
+    last one that looks like a package identifier
+    (contains ``-`` or starts with ``@``, doesn't look like a flag
+    or filesystem path argument). For
+    ``npx -y @modelcontextprotocol/server-filesystem /tmp`` this
+    yields ``server-filesystem``; the trailing ``/tmp`` is correctly
+    skipped as a path argument.
+
+    Falls back to the last non-flag token, then to ``"server"``.
+    Append ``-2``, ``-3`` suffixes when the name collides.
+    """
+    parts = cmd.split()
+    candidate: str | None = None
+    for tok in parts:
+        if tok.startswith("-"):
+            continue  # flags
+        if tok.startswith("/"):
+            continue  # filesystem paths
+        # Strip leading @scope/ for matching purposes; keep the
+        # remainder as a candidate.
+        stripped = tok.split("/")[-1].removesuffix(".py")
+        if not stripped:
+            continue
+        # Looks like a package name when it has a hyphen, or the
+        # original token had an @scope/ prefix, or it's a known
+        # MCP-server-shaped identifier.
+        if "-" in stripped or "@" in tok:
+            candidate = stripped
+    if candidate is None:
+        # Fall back to the last non-flag, non-path token.
+        for tok in reversed(parts):
+            if not tok.startswith("-") and not tok.startswith("/"):
+                candidate = tok.split("/")[-1].removesuffix(".py")
+                if candidate:
+                    break
+    if not candidate:
+        candidate = "server"
+    name = candidate
+    suffix = 2
+    while name in used:
+        name = f"{candidate}-{suffix}"
+        suffix += 1
+    return name
+
+
+def _flatten_for_guard(
+    server_tools: dict[str, list[dict]],
+) -> tuple[list[dict], str]:
+    """Flatten ``{server: [tool, ...]}`` to a single list with
+    ``server__tool`` namespacing, matching what
+    ``compose_multi`` produces internally."""
+    flat: list[dict] = []
+    for server, tools in server_tools.items():
+        for tool in tools:
+            tool_copy = dict(tool)
+            tool_copy["name"] = f"{server}__{tool['name']}"
+            flat.append(tool_copy)
+    if len(server_tools) == 1:
+        only = next(iter(server_tools.keys()))
+        return flat, f"scan-{only}"
+    return flat, "multi-server-scan"
+
+
+def _render_scan_narrative(
+    args: argparse.Namespace,
+    diag,
+    server_tools: dict[str, list[dict]],
+    config_source: str | None,
+) -> None:
+    """Render the narrative output. Pairwise comparison fires only on
+    the moat case (every pair fee=0, global fee>0); the dict of
+    server tools we already have is the input — no re-flattening, no
+    empty-schema fakes."""
+    from bulla.scan_format import (
+        compute_pairwise_fees,
+        format_scan_narrative,
+    )
+
+    server_names = sorted(server_tools.keys())
+    pairwise: dict[tuple[str, str], int] | None = None
+    if (
+        len(server_names) >= 2
+        and len(server_names) <= _PAIRWISE_SCAN_CUTOFF
+        and not getattr(args, "no_pairwise", False)
+    ):
+        try:
+            pairwise = compute_pairwise_fees(server_tools)
+        except Exception as e:
+            # Surface to stderr — silently dropping the pairwise block
+            # would hide the moat case on the exact runs where it
+            # most matters. The user can pass --no-pairwise to suppress
+            # the warning explicitly.
+            print(
+                f"warning: pairwise comparison skipped ({type(e).__name__}: {e}); "
+                "pass --no-pairwise to silence.",
+                file=sys.stderr,
+            )
+            pairwise = None
+
+    narrative = format_scan_narrative(
+        diag,
+        server_names,
+        config_source=config_source,
+        pairwise_fees=pairwise,
+    )
+    print(narrative, end="")
 
 
 def main() -> None:
@@ -2685,8 +3512,72 @@ def main() -> None:
             "disclosure basis). Computed only when fee > 0."
         ),
     )
+    p_diag.add_argument(
+        "--regime",
+        action="store_true",
+        help=(
+            "Include the regime block in JSON output (Sprint 11 regime "
+            "lattice classification). Default off — preserves byte-"
+            "identity with the 0.34.0 golden JSON fixture. Use "
+            "`bulla regime <path>` for a standalone regime classification."
+        ),
+    )
     _add_pack_args(p_diag)
     p_diag.set_defaults(func=_cmd_diagnose)
+
+    # ── regime ────────────────────────────────────────────────────────
+    p_regime = subparsers.add_parser(
+        "regime",
+        help="Print the regime classification of one or more compositions",
+    )
+    p_regime.add_argument(
+        "files", nargs="+", type=Path,
+        help="YAML composition file(s) or directories",
+    )
+    p_regime.add_argument(
+        "--format",
+        choices=["text", "json"],
+        default="text",
+        help="Output format (default: text)",
+    )
+    _add_pack_args(p_regime)
+    p_regime.set_defaults(func=_cmd_regime)
+
+    # ── certify ───────────────────────────────────────────────────────
+    # Sprint 13: per-composition certificate orchestrator.
+    p_certify = subparsers.add_parser(
+        "certify",
+        help=(
+            "Emit per-composition certificate(s): regime + fee + "
+            "interpretation + repair semantics in one bundled JSON artifact"
+        ),
+    )
+    p_certify.add_argument(
+        "files", nargs="*", type=Path,
+        help="YAML composition file(s) or directories",
+    )
+    p_certify.add_argument(
+        "--format",
+        choices=["text", "json"],
+        default="text",
+        help="Output format (default: text)",
+    )
+    p_certify.add_argument(
+        "--seed-set",
+        action="store_true",
+        help=(
+            "Emit certificates for the canonical Sprint 13 seed set "
+            "(10 compositions covering the regime lattice)"
+        ),
+    )
+    p_certify.add_argument(
+        "--output",
+        type=str,
+        default=None,
+        help="Write certificate(s) to FILE instead of stdout",
+    )
+    _add_pack_args(p_certify)
+    p_certify.set_defaults(func=_cmd_certify)
 
     # ── check ─────────────────────────────────────────────────────────
     p_check = subparsers.add_parser(
@@ -2794,17 +3685,50 @@ def main() -> None:
     # ── scan ──────────────────────────────────────────────────────────
     p_scan = subparsers.add_parser(
         "scan",
-        help="Scan live MCP server(s) via stdio and diagnose",
+        help=(
+            "Scan MCP server(s) and diagnose. With no args, "
+            "auto-detects the host config; pass commands or --config "
+            "for explicit targets."
+        ),
     )
     p_scan.add_argument(
-        "commands", nargs="+",
-        help="Shell command(s) to start MCP server(s)",
+        "commands", nargs="*",
+        help=(
+            "Shell command(s) to start MCP server(s). Omit for "
+            "auto-detect of the host's MCP config."
+        ),
+    )
+    p_scan.add_argument(
+        "--config", type=Path, default=None,
+        help=(
+            "Path to an MCP config file (Cursor / Claude Desktop / "
+            "Claude Code shape). Skips auto-detect."
+        ),
     )
     p_scan.add_argument(
         "--format",
-        choices=["text", "json", "sarif"],
-        default="text",
-        help="Output format (default: text)",
+        choices=["narrative", "text", "json", "sarif"],
+        default="narrative",
+        help=(
+            "Output format. 'narrative' (default) is plain prose with "
+            "dimension explanations and the pairwise-vs-global "
+            "comparison. 'text' is the legacy mathematician-grade "
+            "view. 'json' / 'sarif' for programmatic consumers."
+        ),
+    )
+    p_scan.add_argument(
+        "--json",
+        action="store_true",
+        help="Shortcut for --format json (machine-readable receipt).",
+    )
+    p_scan.add_argument(
+        "--no-pairwise",
+        action="store_true",
+        help=(
+            "Skip the pairwise-vs-global comparison block in narrative "
+            "output. Useful for very large compositions or when the "
+            "n*(n-1)/2 compose_multi calls would slow the scan."
+        ),
     )
     p_scan.add_argument(
         "-o", "--output", type=Path, default=None,
@@ -3043,6 +3967,33 @@ def main() -> None:
         help="Write output to file instead of stdout",
     )
     p_bridge.set_defaults(func=_cmd_bridge)
+
+    # ── translate (runtime value translation, separate from `bridge`) ──
+    p_translate = subparsers.add_parser(
+        "translate",
+        help="Runtime value translation across conventions on a dimension",
+    )
+    p_translate.add_argument(
+        "--dimension", required=True,
+        help="Dimension name (e.g. currency_code, country_code)",
+    )
+    p_translate.add_argument(
+        "--value", required=True,
+        help="Value to translate (e.g. USD)",
+    )
+    p_translate.add_argument(
+        "--to", required=True, dest="to",
+        help="Target convention id (e.g. stripe-lower, iso-3166-alpha3)",
+    )
+    p_translate.add_argument(
+        "--from", default=None, dest="from_",
+        help=(
+            "Optional source convention id; if omitted, the runtime "
+            "tries every registered translator with matching dimension "
+            "and to-convention."
+        ),
+    )
+    p_translate.set_defaults(func=_cmd_translate)
 
     # ── witness ────────────────────────────────────────────────────────
     p_witness = subparsers.add_parser(

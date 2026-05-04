@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from bulla import __version__
-from bulla.model import Bridge, Diagnostic
+from bulla.model import Bridge, Composition, Diagnostic
 
 
 # ── Text ──────────────────────────────────────────────────────────────
@@ -227,7 +227,18 @@ def _file_sha256(path: Path) -> str:
     return h.hexdigest()
 
 
-def format_json(d: Diagnostic, source_path: Path | None = None) -> str:
+def format_json(
+    d: Diagnostic,
+    source_path: Path | None = None,
+    comp: Composition | None = None,
+) -> str:
+    """Format a diagnostic as JSON.
+
+    Sprint 11 Phase 5: when `comp` is supplied, the output also carries a
+    `regime` block summarising the composition's regime classification
+    (`bulla.regime.classify`). Backwards-compatible: callers that don't
+    pass `comp` get exactly the previous JSON shape.
+    """
     obj: dict = {
         "name": d.name,
         "bulla_version": __version__,
@@ -300,6 +311,32 @@ def format_json(d: Diagnostic, source_path: Path | None = None) -> str:
             "coloops": [list(pair) for pair in d.coloops],
             "loops": [list(pair) for pair in d.loops],
             "disclosure_set": [list(pair) for pair in d.disclosure_set],
+        }
+    # Sprint 11 Phase 5: regime block (only emitted when comp is supplied,
+    # so default output stays byte-identical for callers that don't pass it).
+    if comp is not None:
+        from bulla.regime import classify
+        report = classify(comp)
+        obj["regime"] = {
+            "schema_note": (
+                "Regime classification per bulla.regime (Sprint 8/9/11). "
+                "Use `is_well_formed_for_fee` as the gate before "
+                "interpreting `coherence_fee` as a fee. See "
+                "bulla/docs/REGIME.md for the regime lattice."
+            ),
+            "rank_obs": report.rank_obs,
+            "rank_internal": report.rank_internal,
+            "fee_formula": report.fee_formula,
+            "is_all_hidden": report.is_all_hidden,
+            "is_all_observable": report.is_all_observable,
+            "has_internal_dominance": report.has_internal_dominance,
+            "has_balanced_ranks": report.has_balanced_ranks,
+            "has_obs_dominance": report.has_obs_dominance,
+            "is_well_formed_for_fee": report.is_well_formed_for_fee,
+            "has_projective_observables": report.has_projective_observables,
+            "has_dfd_conservative": report.has_dfd_conservative,
+            "has_chp_conservative": report.has_chp_conservative,
+            "is_exact_regime_conservative": report.is_exact_regime_conservative,
         }
     if source_path:
         obj["composition_sha256"] = _file_sha256(source_path)

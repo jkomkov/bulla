@@ -1,0 +1,1447 @@
+{
+  "source_kind": "openapi",
+  "source_id": "wikimedia-api",
+  "schema_hash": "8944127f77b6f66276ae9eb269bddd3581d7b6164e94ce93275aaccea5ffcc31",
+  "captured_at": "2026-05-02T20:36:01.779558+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "614aa67ae498e841a1f42084343b9d41f739e5678f1f271c1e2a03e8864bee04",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "65a946aee1b4b6585df08554171fd5a5c749793180ace1b8de8efd74fd663517",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.1",
+      "hash": "d1caf350ea5d6f1a4023c6d15670e3ec25dfa832a015348ffeb5a4d3f70dec3a",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+        "source_hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.1",
+      "hash": "4313a1301e360fb9f40823328a75592039aedd2821d63b80be9cf45ed765c32a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+        "source_hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.1",
+      "hash": "2ed09413af1da88d807787fe901c2b430a8a9304ba27f235e28b31d0ef67e4a8",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-05-02",
+        "source_uri": "https://ref.gs1.org/ai/",
+        "source_hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "0aab1b08537ae2835ab1a05adb8a0800eaf7a7ce98ad6937f6cc3f7ee721a997",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "d95ea9d09a69dd1ba4a5679e890a2509185167a10357ae8f8591d8fcde73ff0a",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.1",
+      "hash": "fe87dbb4b7125cab4135f2af6775b75d798390e91ab0849c3496900f43662b52",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2026",
+        "source_uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+        "source_hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "cf7e4bbfb6c7bd012e8508a5b07d9719bbe35b8970a60bddc3128d05e7e2598f",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "0205810517db330b61965d089f78f1b427ea7fc0caec471025929ac965ffd583",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "2a3143742f52266ba08484a16e889d63761d409f1055d95021dab7a03da25a2e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7092871334e53492b46e4835ab2ef1f5d0ac9e184ed257c68ee212692f926c53",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "b16d83cbe515dc7e52d778f5fcb7d016e4a1f292cd8340307b85066141f5be65",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "b2396f760586f9656bd4b806127d5e3404f80d770288f1445beb04b27bae105d",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.1",
+      "hash": "8daa8d898578ac4feaebc986a3f0a8ce367d866054aec9b0654d01bb8f8f71cd",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+        "source_hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "6e653a3d4f730cc93b673893ac69b5215a0f3fbeb25059b3014aa83f5d339d69",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "tool_name": "get_/feed/availability",
+      "description": "Gets availability of featured feed content for the apps by wiki domain.\n\nGets availability of featured feed content for the apps by wiki domain.\n\nStability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)",
+      "fields": []
+    },
+    {
+      "tool_name": "post_/media/math/check/{type}",
+      "description": "Check and normalize a TeX formula.\n\nChecks the supplied TeX formula for correctness and returns the\nnormalised formula representation as well as information about\nidentifiers. Available types are tex and inline-tex. The response\ncontains the `x-resource-location` header which can be used to retrieve\nthe render of the checked formula in one of the supported rendering\nformats. Just append the value of the header to `/media/math/{format}/`\nand perform a GET request against that URL.\n\nStability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable).",
+      "fields": [
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The input type of the given formula; can be tex or inline-tex"
+        },
+        {
+          "field_name": "q",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The formula to check"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/media/math/formula/{hash}",
+      "description": "Get a previously-stored formula\n\nReturns the previously-stored formula via `/media/math/check/{type}` for\nthe given hash.\n\nStability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable).",
+      "fields": [
+        {
+          "field_name": "hash",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The hash string of the previous POST data"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/media/math/render/{format}/{hash}",
+      "description": "Get rendered formula in the given format.\n\nGiven a request hash, renders a TeX formula into its mathematic\nrepresentation in the given format. When a request is issued to the\n`/media/math/check/{format}` POST endpoint, the response contains the\n`x-resource-location` header denoting the hash ID of the POST data. Once\nobtained, this endpoint has to be used to obtain the actual render.\n\nStability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable).",
+      "fields": [
+        {
+          "field_name": "format",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The output format; can be svg or mml"
+        },
+        {
+          "field_name": "hash",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The hash string of the previous POST data"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/bytes-difference/absolute/aggregate/{project}/{editor-type}/{page-type}/{granularity}/{start}/{end}",
+      "description": "Get the sum of absolute value of text bytes difference between current edit and\nprevious one.\n\n\nGiven a Mediawiki project and a date range, returns a timeseries of absolute bytes\ndifference sums. You can filter by editors-type (all-editor-types, anonymous, group-bot,\nname-bot, user) and page-type (all-page-types, content, non-content). You can choose\nbetween daily and monthly granularity as well.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "page-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n"
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Time unit for the response data. As of today, supported values are daily and monthly\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the first day to include, in YYYYMMDD format"
+        },
+        {
+          "field_name": "end",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the last day to include, in YYYYMMDD format"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/bytes-difference/absolute/per-page/{project}/{page-title}/{editor-type}/{granularity}/{start}/{end}",
+      "description": "Get the sum of absolute text bytes difference per page.\n\nGiven a Mediawiki project, a page-title prefixed with canonical namespace (for\ninstance 'User:Jimbo_Wales') and a date range, returns a timeseries of bytes\ndifference absolute sums. You can filter by editors-type (all-editor-types, anonymous,\ngroup-bot, name-bot, user). You can choose between daily and monthly granularity as well.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org.\n"
+        },
+        {
+          "field_name": "page-title",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The page-title to request absolute bytes-difference for. Should be prefixed with the\npage canonical namespace.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Time unit for the response data. As of today, supported values are daily and monthly\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the first day to include, in YYYYMMDD format"
+        },
+        {
+          "field_name": "end",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the last day to include, in YYYYMMDD format"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/bytes-difference/net/aggregate/{project}/{editor-type}/{page-type}/{granularity}/{start}/{end}",
+      "description": "Get the sum of net text bytes difference between current edit and previous one.\n\nGiven a Mediawiki project and a date range, returns a timeseries of bytes difference net\nsums. You can filter by editors-type (all-editor-types, anonymous, group-bot, name-bot,\nuser) and page-type (all-page-types, content or non-content). You can choose between\ndaily and monthly granularity as well.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org. If you're interested in the aggregation of all projects, use\nall-projects.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "page-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n"
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Time unit for the response data. As of today, supported values are daily and monthly\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the first day to include, in YYYYMMDD format"
+        },
+        {
+          "field_name": "end",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the last day to include, in YYYYMMDD format"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/bytes-difference/net/per-page/{project}/{page-title}/{editor-type}/{granularity}/{start}/{end}",
+      "description": "Get the sum of net text bytes difference per page.\n\nGiven a Mediawiki project, a page-title prefixed with canonical namespace (for\ninstance 'User:Jimbo_Wales') and a date range, returns a timeseries of bytes\ndifference net sums. You can filter by editors-type (all-editor-types, anonymous,\ngroup-bot, name-bot, user). You can choose between daily and monthly granularity as well.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org.\n"
+        },
+        {
+          "field_name": "page-title",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The page-title to request net bytes-difference for. Should be prefixed with the\npage canonical namespace.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Time unit for the response data. As of today, supported values are daily and monthly\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the first day to include, in YYYYMMDD format"
+        },
+        {
+          "field_name": "end",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the last day to include, in YYYYMMDD format"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/edited-pages/aggregate/{project}/{editor-type}/{page-type}/{activity-level}/{granularity}/{start}/{end}",
+      "description": "Get edited-pages counts for a project.\n\nGiven a Mediawiki project and a date range, returns a timeseries of its edited-pages counts.\nYou can filter by editor-type (all-editor-types, anonymous, group-bot, name-bot, user),\npage-type (all-page-types, content or non-content) or activity-level (1..4-edits,\n5..24-edits, 25..99-edits, 100..-edits). You can choose between daily and monthly\ngranularity as well.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff.  For projects like commons without language codes, use commons.wikimedia.\nFor projects like www.mediawiki.org, you can use that full string, or just use\nmediawiki or mediawiki.org.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "page-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by page-type, use one of content (edited-pages in content\nnamespaces) or non-content (edited-pages in non-content namespaces). If you are\ninterested in edited-pages regardless of their page-type, use all-page-types.\n"
+        },
+        {
+          "field_name": "activity-level",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by activity-level, use one of 1..4-edits, 5..24-edits,\n25..99-edits or 100..-edits. If you are interested in edited-pages regardless\nof their activity level, use all-activity-levels.\n"
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The time unit for the response data. As of today, supported values are\ndaily and monthly.\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the first day to include, in YYYYMMDD format"
+        },
+        {
+          "field_name": "end",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the last day to include, in YYYYMMDD format"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/edited-pages/new/{project}/{editor-type}/{page-type}/{granularity}/{start}/{end}",
+      "description": "Get new pages counts for a project.\n\nGiven a Mediawiki project and a date range, returns a timeseries of its new pages counts.\nYou can filter by editor type (all-editor-types, anonymous, group-bot, name-bot, user)\nor page-type (all-page-types, content or non-content). You can choose between daily and\nmonthly granularity as well.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff.  For projects like commons without language codes, use commons.wikimedia.\nFor projects like www.mediawiki.org, you can use that full string, or just use\nmediawiki or mediawiki.org. If you're interested in the aggregation of all\nprojects, use all-projects.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging\nto the bot group but having bot-like names) or user (registered account not in bot\ngroup nor having bot-like name). If you are interested in edits regardless of\ntheir editor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "page-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by page-type, use one of content (new pages in content\nnamespaces) or non-content (new pages in non-content namespaces). If you are\ninterested in new-articles regardless of their page-type, use all-page-types.\n"
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The time unit for the response data. As of today, supported values are\ndaily and monthly.\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the first day to include, in YYYYMMDD format"
+        },
+        {
+          "field_name": "end",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the last day to include, in YYYYMMDD format"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/edited-pages/top-by-absolute-bytes-difference/{project}/{editor-type}/{page-type}/{year}/{month}/{day}",
+      "description": "Get top 100 edited-pages by absolute bytes-difference.\n\nGiven a Mediawiki project and a date (day or month), returns a timeseries of the top 100\nedited-pages by absolute bytes-difference. You can filter by editor-type (all-editor-types,\nanonymous, group-bot, name-bot, user) or page-type (all-page-types, content or non-content).\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "page-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n"
+        },
+        {
+          "field_name": "year",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The year of the date for which to retrieve top edited-pages, in YYYY format."
+        },
+        {
+          "field_name": "month",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The month of the date for which to retrieve top edited-pages, in MM format. If you want to get the top edited-pages of a whole month, the day parameter should be all-days."
+        },
+        {
+          "field_name": "day",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The day of the date for which to retrieve top edited-pages, in DD format, or all-days for a monthly value."
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/edited-pages/top-by-edits/{project}/{editor-type}/{page-type}/{year}/{month}/{day}",
+      "description": "Get top 100 edited-pages by edits count.\n\nGiven a Mediawiki project and a date (day or month), returns a timeseries of the top\n100 edited-pages by edits count. You can filter by editor-type (all-editor-types,\nanonymous, group-bot, name-bot, user) or page-type (all-page-types, content or\nnon-content).\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "page-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n"
+        },
+        {
+          "field_name": "year",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The year of the date for which to retrieve top edited-pages, in YYYY format."
+        },
+        {
+          "field_name": "month",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The month of the date for which to retrieve top edited-pages, in MM format. If you want to get the top edited-pages of a whole month, the day parameter should be all-days."
+        },
+        {
+          "field_name": "day",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The day of the date for which to retrieve top edited-pages, in DD format, or all-days for a monthly value."
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/edited-pages/top-by-net-bytes-difference/{project}/{editor-type}/{page-type}/{year}/{month}/{day}",
+      "description": "Get top 100 edited-pages by net bytes-difference.\n\nGiven a Mediawiki project and a date (day or month), returns a timeseries of the top 100\nedited-pages by net bytes-difference. You can filter by editor-type (all-editor-types,\nanonymous, group-bot, name-bot, user) or page-type (all-page-types, content or non-content).\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "page-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n"
+        },
+        {
+          "field_name": "year",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The year of the date for which to retrieve top edited-pages, in YYYY format."
+        },
+        {
+          "field_name": "month",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The month of the date for which to retrieve top edited-pages, in MM format. If you want to get the top edited-pages of a whole month, the day parameter should be all-days."
+        },
+        {
+          "field_name": "day",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The day of the date for which to retrieve top edited-pages, in DD format, or all-days for a monthly value."
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/editors/aggregate/{project}/{editor-type}/{page-type}/{activity-level}/{granularity}/{start}/{end}",
+      "description": "Get editors counts for a project.\n\nGiven a Mediawiki project and a date range, returns a timeseries of its editors counts.\nYou can filter by editory-type (all-editor-types, anonymous, group-bot, name-bot, user),\npage-type (all-page-types, content or non-content) or activity-level (1..4-edits,\n5..24-edits, 25..99-edits or 100..-edits). You can choose between daily and monthly\ngranularity as well.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff.  For projects like commons without language codes, use commons.wikimedia.\nFor projects like www.mediawiki.org, you can use that full string, or just use\nmediawiki or mediawiki.org.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging\nto the bot group but having bot-like names) or user (registered account not in bot\ngroup nor having bot-like name). If you are interested in edits regardless\nof their editor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "page-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by page-type, use one of content (edits made in content\nnamespaces) or non-content (edits made in non-content namespaces). If you are\ninterested in editors regardless of their page-type, use all-page-types.\n"
+        },
+        {
+          "field_name": "activity-level",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by activity-level, use one of 1..4-edits, 5..24-edits,\n25..99-edits or 100..-edits. If you are interested in editors regardless\nof their activity-level, use all-activity-levels.\n"
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The time unit for the response data. As of today, supported values are\ndaily and monthly.\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the first day to include, in YYYYMMDD format"
+        },
+        {
+          "field_name": "end",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the last day to include, in YYYYMMDD format"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/editors/top-by-absolute-bytes-difference/{project}/{editor-type}/{page-type}/{year}/{month}/{day}",
+      "description": "Get top 100 editors by absolute bytes-difference.\n\nGiven a Mediawiki project and a date (day or month), returns a timeseries of the top 100\neditors by absolute bytes-difference. You can filter by editor-type (all-editor-types,\nanonymous, group-bot, name-bot, user) or page-type (all-page-types, content or non-content).\nThe user_text returned is either the mediawiki user_text if the user is registered, or\nnull if user is anonymous.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "page-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n"
+        },
+        {
+          "field_name": "year",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The year of the date for which to retrieve top editors, in YYYY format."
+        },
+        {
+          "field_name": "month",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The month of the date for which to retrieve top editors, in MM format. If you want to get the top editors of a whole month, the day parameter should be all-days."
+        },
+        {
+          "field_name": "day",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The day of the date for which to retrieve top editors, in DD format, or all-days for a monthly value."
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/editors/top-by-edits/{project}/{editor-type}/{page-type}/{year}/{month}/{day}",
+      "description": "Get top 100 editors by edits count.\n\nGiven a Mediawiki project and a date (day or month), returns a timeseries of the top\n100 editors by edits count. You can filter by editor-type (all-editor-types,\nanonymous, group-bot, name-bot, user) or page-type (all-page-types, content or\nnon-content). The user_text returned is either the mediawiki user_text if the user is\nregistered, or null if user is anonymous.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "page-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n"
+        },
+        {
+          "field_name": "year",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The year of the date for which to retrieve top editors, in YYYY format."
+        },
+        {
+          "field_name": "month",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The month of the date for which to retrieve top editors, in MM format. If you want to get the top editors of a whole month, the day parameter should be all-days."
+        },
+        {
+          "field_name": "day",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The day of the date for which to retrieve top editors, in DD format, or all-days for a monthly value."
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/editors/top-by-net-bytes-difference/{project}/{editor-type}/{page-type}/{year}/{month}/{day}",
+      "description": "Get top 100 editors by net bytes-difference.\n\nGiven a Mediawiki project and a date (day or month), returns a timeseries of the top 100\neditors by net bytes-difference. You can filter by editor-type (all-editor-types, anonymous,\ngroup-bot, name-bot, user) or page-type (all-page-types, content or non-content). The\nuser_text returned is either the mediawiki user_text if the user is registered, or\n\"Anonymous Editor\" if user is anonymous.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "page-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n"
+        },
+        {
+          "field_name": "year",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The year of the date for which to retrieve top editors, in YYYY format."
+        },
+        {
+          "field_name": "month",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The month of the date for which to retrieve top editors, in MM format. If you want to get the top editors of a whole month, the day parameter should be all-days."
+        },
+        {
+          "field_name": "day",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The day of the date for which to retrieve top editors, in DD format, or all-days for a monthly value."
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/edits/aggregate/{project}/{editor-type}/{page-type}/{granularity}/{start}/{end}",
+      "description": "Get edits counts for a project.\n\nGiven a Mediawiki project and a date range, returns a timeseries of edits counts.\nYou can filter by editors-type (all-editor-types, anonymous, bot, registered) and\npage-type (all-page-types, content or non-content). You can choose between daily and\nmonthly granularity as well.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff.  For projects like commons without language codes, use commons.wikimedia.\nFor projects like www.mediawiki.org, you can use that full string, or just use\nmediawiki or mediawiki.org. If you're interested in the aggregation of\nall projects, use all-projects.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging\nto the bot group but having bot-like names) or user (registered account not in bot\ngroup nor having bot-like name). If you are interested in edits regardless\nof their editor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "page-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by page-type, use one of content (edits on pages in content\nnamespaces) or non-content (edits on pages in non-content namespaces). If you are\ninterested in edits regardless of their page-type, use all-page-types.\n"
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The time unit for the response data. As of today, supported values are\ndaily and monthly.\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the first day to include, in YYYYMMDD format"
+        },
+        {
+          "field_name": "end",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the last day to include, in YYYYMMDD format"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/edits/per-page/{project}/{page-title}/{editor-type}/{granularity}/{start}/{end}",
+      "description": "Get edit counts for a page in a project.\n\nGiven a Mediawiki project, a page-title prefixed with its canonical namespace (for\ninstance 'User:Jimbo_Wales') and a date range, returns a timeseries of edit counts.\nYou can filter by editors-type (all-editor-types, anonymous, group-bot, name-bot, user).\nYou can choose between daily and monthly granularity as well.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia. For\nprojects like www.mediawiki.org, you can use that full string, or just use mediawiki\nor mediawiki.org.\n"
+        },
+        {
+          "field_name": "page-title",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The page-title to request edits for. It should be prefixed with canonical namespace.\nSpaces will be converted to underscores.\n"
+        },
+        {
+          "field_name": "editor-type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by editor-type, use one of anonymous, group-bot (registered\naccounts belonging to the bot group), name-bot (registered accounts not belonging to\nthe bot group but having bot-like names) or user (registered account not in bot group\nnor having bot-like name). If you are interested in edits regardless of their\neditor-type, use all-editor-types.\n"
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Time unit for the response data. As of today, supported values are daily and monthly\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the first day to include, in YYYYMMDD format"
+        },
+        {
+          "field_name": "end",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the last day to include, in YYYYMMDD format"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/legacy/pagecounts/aggregate/{project}/{access-site}/{granularity}/{start}/{end}",
+      "description": "Given a project and a date range, returns a timeseries of pagecounts.\nYou can filter by access site (mobile or desktop) and you can choose between monthly,\ndaily and hourly granularity as well.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 100 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff. For projects like commons without language codes, use commons.wikimedia.\n"
+        },
+        {
+          "field_name": "access-site",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by access site, use one of desktop-site or mobile-site. If you are interested in pagecounts regardless of access site use all-sites."
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The time unit for the response data. As of today, the supported granularities for\nthis endpoint are hourly, daily and monthly.\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "The timestamp of the first hour/day/month to include, in YYYYMMDDHH format."
+        },
+        {
+          "field_name": "end",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "The timestamp of the last hour/day/month to include, in YYYYMMDDHH format.\nIn hourly and daily granularities this value is inclusive, in the monthly granularity\nthis value is exclusive.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/pageviews/aggregate/{project}/{access}/{agent}/{granularity}/{start}/{end}",
+      "description": "Get pageview counts for a project.\n\nGiven a date range, returns a timeseries of pageview counts. You can filter by project,\naccess method and/or agent type. You can choose between daily and hourly granularity\nas well.\n\n- Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)\n- Rate limit: 100 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by project, use the domain of any Wikimedia project,\nfor example 'en.wikipedia.org', 'www.mediawiki.org' or 'commons.wikimedia.org'.\nIf you are interested in all pageviews regardless of project, use all-projects.\n"
+        },
+        {
+          "field_name": "access",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by access method, use one of desktop, mobile-app or mobile-web.\nIf you are interested in pageviews regardless of access method, use all-access.\n"
+        },
+        {
+          "field_name": "agent",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by agent type, use one of user or spider. If you are interested\nin pageviews regardless of agent type, use all-agents.\n"
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The time unit for the response data. As of today, the supported granularities for this\nendpoint are hourly, daily, and monthly.\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "The timestamp of the first hour/day/month to include, in YYYYMMDDHH format"
+        },
+        {
+          "field_name": "end",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "The timestamp of the last hour/day/month to include, in YYYYMMDDHH format"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/pageviews/per-article/{project}/{access}/{agent}/{article}/{granularity}/{start}/{end}",
+      "description": "Get pageview counts for a page.\n\nGiven a Mediawiki article and a date range, returns a daily timeseries of its pageview\ncounts. You can also filter by access method and/or agent type.\n\n- Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)\n- Rate limit: 100 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by project, use the domain of any Wikimedia project,\nfor example 'en.wikipedia.org', 'www.mediawiki.org' or 'commons.wikimedia.org'.\n"
+        },
+        {
+          "field_name": "access",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by access method, use one of desktop, mobile-app\nor mobile-web. If you are interested in pageviews regardless of access method,\nuse all-access.\n"
+        },
+        {
+          "field_name": "agent",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by agent type, use one of user, bot or spider. If you are\ninterested in pageviews regardless of agent type, use all-agents.\n"
+        },
+        {
+          "field_name": "article",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "'The title of any article in the specified project. Any spaces should be replaced\nwith underscores. It also should be URI-encoded, so that non-URI-safe characters like\n%, / or ? are accepted. Example: Are_You_the_One%3F'.\n"
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The time unit for the response data. As of today, the only supported granularity for\nthis endpoint is daily and monthly.\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the first day to include, in YYYYMMDD or YYYYMMDDHH format"
+        },
+        {
+          "field_name": "end",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the last day to include, in YYYYMMDD or YYYYMMDDHH format"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/pageviews/top-by-country/{project}/{access}/{year}/{month}",
+      "description": "Get pageviews by country and access method.\n\nLists the pageviews to this project, split by country of origin for a given month.\nBecause of privacy reasons, pageviews are given in a bucketed format, and countries\nwith less than 100 views do not get reported.\nStability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 100 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by project, use the domain of any Wikimedia project,\nfor example 'en.wikipedia.org', 'www.mediawiki.org' or 'commons.wikimedia.org'.\n"
+        },
+        {
+          "field_name": "access",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by access method, use one of desktop, mobile-app or mobile-web.\nIf you are interested in pageviews regardless of access method, use all-access.\n"
+        },
+        {
+          "field_name": "year",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The year of the date for which to retrieve top countries, in YYYY format."
+        },
+        {
+          "field_name": "month",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The month of the date for which to retrieve top countries, in MM format.\n"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "country_code"
+          ],
+          "confidence": "inferred",
+          "description": "Get pageviews by country and access method.\n\nLists the pageviews to this project, split by country of origin for a given month.\nBecause of privacy reasons, pageviews are given in a bucketed format, and countries\nwith less than 100 views do not get reported.\nStability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 100 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/)."
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/pageviews/top/{project}/{access}/{year}/{month}/{day}",
+      "description": "Get the most viewed articles for a project.\n\nLists the 1000 most viewed articles for a given project and timespan (month or day).\nYou can filter by access method.\n\n- Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)\n- Rate limit: 100 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by project, use the domain of any Wikimedia project,\nfor example 'en.wikipedia.org', 'www.mediawiki.org' or 'commons.wikimedia.org'.\n"
+        },
+        {
+          "field_name": "access",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by access method, use one of desktop, mobile-app or mobile-web.\nIf you are interested in pageviews regardless of access method, use all-access.\n"
+        },
+        {
+          "field_name": "year",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The year of the date for which to retrieve top articles, in YYYY format."
+        },
+        {
+          "field_name": "month",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The month of the date for which to retrieve top articles, in MM format. If you want\nto get the top articles of a whole month, the day parameter should be all-days.\n"
+        },
+        {
+          "field_name": "day",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The day of the date for which to retrieve top articles, in DD format."
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/registered-users/new/{project}/{granularity}/{start}/{end}",
+      "description": "Get newly registered users counts for a project.\n\nGiven a Mediawiki project and a date range, returns a timeseries of its newly registered\nusers counts. You can choose between daily and monthly granularity. The newly registered\nusers value is computed with self-created users only, not auto-login created ones.\n\n- Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)\n- Rate limit: 25 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The name of any Wikimedia project formatted like {language code}.{project name},\nfor example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped\noff.  For projects like commons without language codes, use commons.wikimedia.\nFor projects like www.mediawiki.org, you can use that full string, or just use\nmediawiki or mediawiki.org. If you're interested in the aggregation of\nall projects, use all.\n"
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The time unit for the response data. As of today, supported values are\ndaily and monthly.\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the first day to include, in YYYYMMDD format"
+        },
+        {
+          "field_name": "end",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The date of the last day to include, in YYYYMMDD format"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/metrics/unique-devices/{project}/{access-site}/{granularity}/{start}/{end}",
+      "description": "Get unique devices count per project\n\nGiven a project and a date range, returns a timeseries of unique devices counts.\nYou need to specify a project, and can filter by accessed site (mobile or desktop).\nYou can choose between daily and hourly granularity as well.\n\n- Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)\n- Rate limit: 100 req/s\n- License: Data accessible via this endpoint is available under the\n  [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).",
+      "fields": [
+        {
+          "field_name": "project",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by project, use the domain of any Wikimedia project,\nfor example 'en.wikipedia.org', 'www.mediawiki.org' or 'commons.wikimedia.org'.\n"
+        },
+        {
+          "field_name": "access-site",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If you want to filter by accessed site, use one of desktop-site or mobile-site.\nIf you are interested in unique devices regardless of accessed site, use or all-sites.\n"
+        },
+        {
+          "field_name": "granularity",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The time unit for the response data. As of today, the supported granularities\nfor this endpoint are daily and monthly.\n"
+        },
+        {
+          "field_name": "start",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "The timestamp of the first day/month to include, in YYYYMMDD format"
+        },
+        {
+          "field_name": "end",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "The timestamp of the last day/month to include, in YYYYMMDD format"
+        }
+      ]
+    },
+    {
+      "tool_name": "post_/transform/html/from/{from_lang}/to/{to_lang}",
+      "description": "Machine-translate content\n\nFetches the machine translation for the posted content from the source\nto the destination language.\n\nStability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)",
+      "fields": [
+        {
+          "field_name": "from_lang",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The source language code"
+        },
+        {
+          "field_name": "to_lang",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The target language code"
+        },
+        {
+          "field_name": "html",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The HTML content to translate"
+        }
+      ]
+    },
+    {
+      "tool_name": "post_/transform/html/from/{from_lang}/to/{to_lang}/{provider}",
+      "description": "Machine-translate content\n\nFetches the machine translation for the posted content from the source\nto the destination language.\n\nStability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)",
+      "fields": [
+        {
+          "field_name": "from_lang",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The source language code"
+        },
+        {
+          "field_name": "to_lang",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The target language code"
+        },
+        {
+          "field_name": "provider",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The machine translation provider id"
+        },
+        {
+          "field_name": "html",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The HTML content to translate"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/transform/list/languagepairs/",
+      "description": "Lists the language pairs supported by the back-end\n\nFetches the list of language pairs the back-end service can translate\n\nStability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)",
+      "fields": []
+    },
+    {
+      "tool_name": "get_/transform/list/pair/{from}/{to}/",
+      "description": "Lists the tools available for a language pair\n\nFetches the list of tools that are available for the given pair of languages.\n\nStability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)",
+      "fields": [
+        {
+          "field_name": "from",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The source language code"
+        },
+        {
+          "field_name": "to",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The target language code"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/transform/list/tool/{tool}",
+      "description": "Lists the tools and language pairs available for the given tool category\n\nFetches the list of tools and all of the language pairs it can translate\n\nStability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)",
+      "fields": [
+        {
+          "field_name": "tool",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The tool category to list tools and language pairs for"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/transform/list/tool/{tool}/{from}",
+      "description": "Lists the tools and language pairs available for the given tool category\n\nFetches the list of tools and all of the language pairs it can translate\n\nStability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)",
+      "fields": [
+        {
+          "field_name": "tool",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The tool category to list tools and language pairs for"
+        },
+        {
+          "field_name": "from",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The source language code"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/transform/list/tool/{tool}/{from}/{to}",
+      "description": "Lists the tools and language pairs available for the given tool category\n\nFetches the list of tools and all of the language pairs it can translate\n\nStability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)",
+      "fields": [
+        {
+          "field_name": "tool",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The tool category to list tools and language pairs for"
+        },
+        {
+          "field_name": "from",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The source language code"
+        },
+        {
+          "field_name": "to",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The target language code"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/transform/word/from/{from_lang}/to/{to_lang}/{word}",
+      "description": "Fetch the dictionary meaning of a word\n\nFetches the dictionary meaning of a word from a language and displays\nit in the target language.\n\nStability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)",
+      "fields": [
+        {
+          "field_name": "from_lang",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The source language code"
+        },
+        {
+          "field_name": "to_lang",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The target language code"
+        },
+        {
+          "field_name": "word",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The word to lookup"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_/transform/word/from/{from_lang}/to/{to_lang}/{word}/{provider}",
+      "description": "Fetch the dictionary meaning of a word\n\nFetches the dictionary meaning of a word from a language and displays\nit in the target language.\n\nStability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)",
+      "fields": [
+        {
+          "field_name": "from_lang",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The source language code"
+        },
+        {
+          "field_name": "to_lang",
+          "dimensions": [
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "description": "The target language code"
+        },
+        {
+          "field_name": "word",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The word to lookup"
+        },
+        {
+          "field_name": "provider",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The dictionary provider id"
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "n_tools": 35,
+    "n_fields": 155,
+    "n_declared": 0,
+    "n_inferred": 36,
+    "n_unknown": 119,
+    "n_dim_signals": 37,
+    "dim_hits": {
+      "language_code": 30,
+      "temporal_format": 6,
+      "country_code": 1
+    }
+  },
+  "capture_hash": "a96510b3513de2c4fe79e8b3cb5295760c341f4d25b91be590bca60763976877"
+}

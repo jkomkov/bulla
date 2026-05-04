@@ -1,13 +1,14 @@
 pack_name: iana-media-types
-pack_version: 0.1.0
+pack_version: 0.1.1
 license:
   spdx_id: Public-Domain
   source_url: https://www.iana.org/assignments/media-types/media-types.xhtml
   registry_license: open
 derives_from:
   standard: IANA-Media-Types
-  version: snapshot-2026-04-26
-  source_uri: https://www.iana.org/assignments/media-types/media-types.csv
+  version: snapshot-2026-05-02
+  source_uri: https://www.iana.org/assignments/media-types/media-types.xhtml
+  source_hash: sha256:e6d05584bc4d2518a07f39de88b3a23a06c1a63ccc61c1ab6f935d986dab7883
 dimensions:
   media_type:
     description: IANA media type (MIME type). The full registry has ~2000 entries

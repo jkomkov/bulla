@@ -1,0 +1,1668 @@
+{
+  "n_servers": 13,
+  "server_names": [
+    "exa",
+    "filesystem",
+    "github",
+    "mcp-server-fetch",
+    "memory",
+    "notion",
+    "npm-search",
+    "playwright",
+    "postgres",
+    "puppeteer",
+    "sequential-thinking",
+    "tavily",
+    "youtube-transcript"
+  ],
+  "server_dimensions": {
+    "exa": [],
+    "filesystem": [
+      "path_convention"
+    ],
+    "github": [
+      "date_format",
+      "id_offset",
+      "path_convention",
+      "sort_direction",
+      "state_filter"
+    ],
+    "mcp-server-fetch": [],
+    "memory": [],
+    "notion": [
+      "date_format",
+      "sort_direction"
+    ],
+    "npm-search": [],
+    "playwright": [
+      "path_convention"
+    ],
+    "postgres": [],
+    "puppeteer": [],
+    "sequential-thinking": [],
+    "tavily": [
+      "date_format"
+    ],
+    "youtube-transcript": []
+  },
+  "n_pairs_total": 78,
+  "n_pairs_succeeded": 78,
+  "fee_distribution": {
+    "0": 45,
+    "1": 9,
+    "2": 1,
+    "10": 17,
+    "11": 4,
+    "13": 1,
+    "21": 1
+  },
+  "n_pairs_with_positive_fee": 33,
+  "n_zero_zero_bypassable": 0,
+  "n_lower_fee_bypassable": 6,
+  "n_per_dim_bypassable": 33,
+  "bypass_results": [
+    {
+      "pair": [
+        "exa",
+        "filesystem"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "path_convention_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "path_convention_match": [
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "exa",
+        "github"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 4,
+      "blind_dimensions": [
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "sort_direction_match": [
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "state_filter_match": [
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "path_convention_match": [
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "id_offset_match": [
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "exa",
+        "notion"
+      ],
+      "direct_fee": 1,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "date_format_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "date_format_match": [
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "filesystem",
+        "github"
+      ],
+      "direct_fee": 21,
+      "n_blind_spots": 4,
+      "blind_dimensions": [
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [
+        [
+          "exa",
+          20
+        ],
+        [
+          "mcp-server-fetch",
+          20
+        ],
+        [
+          "memory",
+          20
+        ],
+        [
+          "npm-search",
+          20
+        ],
+        [
+          "postgres",
+          20
+        ],
+        [
+          "puppeteer",
+          20
+        ],
+        [
+          "sequential-thinking",
+          20
+        ],
+        [
+          "youtube-transcript",
+          20
+        ]
+      ],
+      "per_dim_bypass": {
+        "sort_direction_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "state_filter_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "id_offset_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "filesystem",
+        "mcp-server-fetch"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "path_convention_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "path_convention_match": [
+          "exa",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "filesystem",
+        "memory"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "path_convention_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "filesystem",
+        "notion"
+      ],
+      "direct_fee": 11,
+      "n_blind_spots": 2,
+      "blind_dimensions": [
+        "date_format_match",
+        "path_convention_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "date_format_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ],
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "filesystem",
+        "npm-search"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "path_convention_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "filesystem",
+        "playwright"
+      ],
+      "direct_fee": 11,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "path_convention_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [
+        [
+          "exa",
+          10
+        ],
+        [
+          "mcp-server-fetch",
+          10
+        ],
+        [
+          "memory",
+          10
+        ],
+        [
+          "npm-search",
+          10
+        ],
+        [
+          "postgres",
+          10
+        ],
+        [
+          "puppeteer",
+          10
+        ],
+        [
+          "sequential-thinking",
+          10
+        ],
+        [
+          "tavily",
+          10
+        ],
+        [
+          "youtube-transcript",
+          10
+        ]
+      ],
+      "per_dim_bypass": {
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "filesystem",
+        "postgres"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "path_convention_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "filesystem",
+        "puppeteer"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "path_convention_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "filesystem",
+        "sequential-thinking"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "path_convention_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "filesystem",
+        "tavily"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "path_convention_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "filesystem",
+        "youtube-transcript"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "path_convention_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "github",
+        "mcp-server-fetch"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 4,
+      "blind_dimensions": [
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "sort_direction_match": [
+          "exa",
+          "filesystem",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "state_filter_match": [
+          "exa",
+          "filesystem",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "path_convention_match": [
+          "exa",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "id_offset_match": [
+          "exa",
+          "filesystem",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "github",
+        "memory"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 4,
+      "blind_dimensions": [
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "sort_direction_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "state_filter_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "id_offset_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "github",
+        "notion"
+      ],
+      "direct_fee": 13,
+      "n_blind_spots": 5,
+      "blind_dimensions": [
+        "date_format_match",
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [
+        [
+          "exa",
+          11
+        ],
+        [
+          "mcp-server-fetch",
+          11
+        ],
+        [
+          "memory",
+          11
+        ],
+        [
+          "npm-search",
+          11
+        ],
+        [
+          "postgres",
+          11
+        ],
+        [
+          "puppeteer",
+          11
+        ],
+        [
+          "sequential-thinking",
+          11
+        ],
+        [
+          "youtube-transcript",
+          11
+        ],
+        [
+          "playwright",
+          12
+        ]
+      ],
+      "per_dim_bypass": {
+        "state_filter_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "date_format_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ],
+        "id_offset_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "sort_direction_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "github",
+        "npm-search"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 4,
+      "blind_dimensions": [
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "sort_direction_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "state_filter_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "id_offset_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "github",
+        "playwright"
+      ],
+      "direct_fee": 11,
+      "n_blind_spots": 4,
+      "blind_dimensions": [
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [
+        [
+          "exa",
+          10
+        ],
+        [
+          "mcp-server-fetch",
+          10
+        ],
+        [
+          "memory",
+          10
+        ],
+        [
+          "npm-search",
+          10
+        ],
+        [
+          "postgres",
+          10
+        ],
+        [
+          "puppeteer",
+          10
+        ],
+        [
+          "sequential-thinking",
+          10
+        ],
+        [
+          "youtube-transcript",
+          10
+        ]
+      ],
+      "per_dim_bypass": {
+        "sort_direction_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "state_filter_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "id_offset_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "github",
+        "postgres"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 4,
+      "blind_dimensions": [
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "sort_direction_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "state_filter_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "id_offset_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "github",
+        "puppeteer"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 4,
+      "blind_dimensions": [
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "sort_direction_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "state_filter_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "id_offset_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "sequential-thinking",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "github",
+        "sequential-thinking"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 4,
+      "blind_dimensions": [
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "sort_direction_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "state_filter_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "tavily",
+          "youtube-transcript"
+        ],
+        "id_offset_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "tavily",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "github",
+        "tavily"
+      ],
+      "direct_fee": 11,
+      "n_blind_spots": 5,
+      "blind_dimensions": [
+        "date_format_match",
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [
+        [
+          "exa",
+          10
+        ],
+        [
+          "mcp-server-fetch",
+          10
+        ],
+        [
+          "memory",
+          10
+        ],
+        [
+          "npm-search",
+          10
+        ],
+        [
+          "postgres",
+          10
+        ],
+        [
+          "puppeteer",
+          10
+        ],
+        [
+          "sequential-thinking",
+          10
+        ],
+        [
+          "youtube-transcript",
+          10
+        ]
+      ],
+      "per_dim_bypass": {
+        "state_filter_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ],
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ],
+        "date_format_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ],
+        "id_offset_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ],
+        "sort_direction_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "github",
+        "youtube-transcript"
+      ],
+      "direct_fee": 10,
+      "n_blind_spots": 4,
+      "blind_dimensions": [
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "sort_direction_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily"
+        ],
+        "state_filter_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily"
+        ],
+        "path_convention_match": [
+          "exa",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily"
+        ],
+        "id_offset_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "notion",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "tavily"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "mcp-server-fetch",
+        "notion"
+      ],
+      "direct_fee": 1,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "date_format_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "date_format_match": [
+          "exa",
+          "filesystem",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "memory",
+        "notion"
+      ],
+      "direct_fee": 1,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "date_format_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "date_format_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "notion",
+        "npm-search"
+      ],
+      "direct_fee": 1,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "date_format_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "date_format_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "notion",
+        "playwright"
+      ],
+      "direct_fee": 1,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "date_format_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "date_format_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "notion",
+        "postgres"
+      ],
+      "direct_fee": 1,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "date_format_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "date_format_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "notion",
+        "puppeteer"
+      ],
+      "direct_fee": 1,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "date_format_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "date_format_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "sequential-thinking",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "notion",
+        "sequential-thinking"
+      ],
+      "direct_fee": 1,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "date_format_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "date_format_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "notion",
+        "tavily"
+      ],
+      "direct_fee": 2,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "date_format_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [
+        [
+          "exa",
+          1
+        ],
+        [
+          "mcp-server-fetch",
+          1
+        ],
+        [
+          "memory",
+          1
+        ],
+        [
+          "npm-search",
+          1
+        ],
+        [
+          "playwright",
+          1
+        ],
+        [
+          "postgres",
+          1
+        ],
+        [
+          "puppeteer",
+          1
+        ],
+        [
+          "sequential-thinking",
+          1
+        ],
+        [
+          "youtube-transcript",
+          1
+        ]
+      ],
+      "per_dim_bypass": {
+        "date_format_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking",
+          "youtube-transcript"
+        ]
+      }
+    },
+    {
+      "pair": [
+        "notion",
+        "youtube-transcript"
+      ],
+      "direct_fee": 1,
+      "n_blind_spots": 1,
+      "blind_dimensions": [
+        "date_format_match"
+      ],
+      "zero_zero_bypass_via": [],
+      "lower_fee_bypass_via": [],
+      "per_dim_bypass": {
+        "date_format_match": [
+          "exa",
+          "filesystem",
+          "mcp-server-fetch",
+          "memory",
+          "npm-search",
+          "playwright",
+          "postgres",
+          "puppeteer",
+          "sequential-thinking"
+        ]
+      }
+    }
+  ]
+}

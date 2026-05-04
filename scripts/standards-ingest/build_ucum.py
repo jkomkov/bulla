@@ -89,7 +89,7 @@ def build_pack() -> dict:
     today = _dt.date.today().isoformat()
     pack = {
         "pack_name": "ucum",
-        "pack_version": "0.1.0",
+        "pack_version": "0.1.1",
         "license": {
             "spdx_id": "Public-Domain",
             "source_url": "https://ucum.org/",
@@ -99,6 +99,7 @@ def build_pack() -> dict:
             "standard": "UCUM",
             "version": f"snapshot-{today}",
             "source_uri": "https://ucum.org/ucum-essence.xml",
+            "source_hash": _hash_for("ucum", "unit_of_measure", "snapshot"),
         },
         "dimensions": {
             "unit_of_measure": {

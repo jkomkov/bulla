@@ -305,6 +305,16 @@ def _looks_like_mcp_config(host: MCPHost, path: Path) -> bool:
     nested = data.get("mcp")
     if isinstance(nested, dict) and ("servers" in nested or "mcpServers" in nested):
         return True
+    # Claude Code's ~/.claude.json buries MCP servers under
+    # ``projects.<path>.mcpServers``. Detect any project section
+    # that carries servers.
+    projects = data.get("projects")
+    if isinstance(projects, dict):
+        for proj_cfg in projects.values():
+            if isinstance(proj_cfg, dict):
+                proj_servers = proj_cfg.get("mcpServers")
+                if isinstance(proj_servers, dict) and proj_servers:
+                    return True
     return False
 
 

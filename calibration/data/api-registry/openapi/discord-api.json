@@ -1,0 +1,2784 @@
+{
+  "source_kind": "openapi",
+  "source_id": "discord-api",
+  "schema_hash": "652688c5376c3aa9c109b4ce90fd020170d52f01e30db4078a077d4f87689122",
+  "captured_at": "2026-05-02T20:35:31.924875+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "614aa67ae498e841a1f42084343b9d41f739e5678f1f271c1e2a03e8864bee04",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "65a946aee1b4b6585df08554171fd5a5c749793180ace1b8de8efd74fd663517",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.1",
+      "hash": "d1caf350ea5d6f1a4023c6d15670e3ec25dfa832a015348ffeb5a4d3f70dec3a",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+        "source_hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.1",
+      "hash": "4313a1301e360fb9f40823328a75592039aedd2821d63b80be9cf45ed765c32a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+        "source_hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.1",
+      "hash": "2ed09413af1da88d807787fe901c2b430a8a9304ba27f235e28b31d0ef67e4a8",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-05-02",
+        "source_uri": "https://ref.gs1.org/ai/",
+        "source_hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "0aab1b08537ae2835ab1a05adb8a0800eaf7a7ce98ad6937f6cc3f7ee721a997",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "d95ea9d09a69dd1ba4a5679e890a2509185167a10357ae8f8591d8fcde73ff0a",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.1",
+      "hash": "fe87dbb4b7125cab4135f2af6775b75d798390e91ab0849c3496900f43662b52",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2026",
+        "source_uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+        "source_hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "cf7e4bbfb6c7bd012e8508a5b07d9719bbe35b8970a60bddc3128d05e7e2598f",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "0205810517db330b61965d089f78f1b427ea7fc0caec471025929ac965ffd583",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "2a3143742f52266ba08484a16e889d63761d409f1055d95021dab7a03da25a2e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7092871334e53492b46e4835ab2ef1f5d0ac9e184ed257c68ee212692f926c53",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "b16d83cbe515dc7e52d778f5fcb7d016e4a1f292cd8340307b85066141f5be65",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "b2396f760586f9656bd4b806127d5e3404f80d770288f1445beb04b27bae105d",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.1",
+      "hash": "8daa8d898578ac4feaebc986a3f0a8ce367d866054aec9b0654d01bb8f8f71cd",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+        "source_hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "6e653a3d4f730cc93b673893ac69b5215a0f3fbeb25059b3014aa83f5d339d69",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "tool_name": "get_my_application",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_my_application",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_application",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_application",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "applications_get_activity_instance",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "upload_application_attachment",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "list_application_commands",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "with_localizations",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "bulk_set_application_commands",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_application_command",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_application_command",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_application_command",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_application_command",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_application_emojis",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_application_emoji",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "image",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_application_emoji",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_application_emoji",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_application_emoji",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_entitlements",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "user_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "sku_ids",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "guild_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "before",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "after",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "exclude_ended",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "exclude_deleted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "only_active",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "create_entitlement",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_entitlement",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_entitlement",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "consume_entitlement",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_guild_application_commands",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "with_localizations",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "bulk_set_guild_application_commands",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_guild_application_command",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_guild_application_command_permissions",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guild_application_command",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_guild_application_command",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_guild_application_command",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guild_application_command_permissions",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "set_guild_application_command_permissions",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "permissions",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "array",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "get_application_role_connections_metadata",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_application_role_connections_metadata",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_channel",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_channel",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_channel",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "follow_channel",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "webhook_channel_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "list_channel_invites",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_channel_invite",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_messages",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "around",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "before",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "after",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        }
+      ]
+    },
+    {
+      "tool_name": "create_message",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "bulk_delete_messages",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "messages",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        }
+      ]
+    },
+    {
+      "tool_name": "list_pins",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "before",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        }
+      ]
+    },
+    {
+      "tool_name": "create_pin",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_pin",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_message",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_message",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_message",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "crosspost_message",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_all_message_reactions",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_message_reactions_by_emoji",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "after",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "delete_all_message_reactions_by_emoji",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "add_my_message_reaction",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_my_message_reaction",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_user_message_reaction",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_thread_from_message",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "set_channel_permission_overwrite",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "allow",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "integer",
+            "null"
+          ]
+        },
+        {
+          "field_name": "deny",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "integer",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "delete_channel_permission_overwrite",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "deprecated_list_pins",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "deprecated_create_pin",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "deprecated_delete_pin",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_answer_voters",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "after",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        }
+      ]
+    },
+    {
+      "tool_name": "poll_expire",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "add_group_dm_user",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "access_token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "field_name": "nick",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "delete_group_dm_user",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "send_soundboard_sound",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_thread_members",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "with_member",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "after",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        }
+      ]
+    },
+    {
+      "tool_name": "join_thread",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "leave_thread",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_thread_member",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "with_member",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "add_thread_member",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_thread_member",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_thread",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_private_archived_threads",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "before",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        }
+      ]
+    },
+    {
+      "tool_name": "list_public_archived_threads",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "before",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        }
+      ]
+    },
+    {
+      "tool_name": "thread_search",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "slop",
+          "dimensions": [
+            "score_range"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "min_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "max_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "tag",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "tag_setting",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "archived",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "sort_by",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "sort_order",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "offset",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer"
+        }
+      ]
+    },
+    {
+      "tool_name": "trigger_typing_indicator",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_my_private_archived_threads",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "before",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        }
+      ]
+    },
+    {
+      "tool_name": "update_voice_channel_status",
+      "description": "Set a voice channel's status.",
+      "fields": [
+        {
+          "field_name": "status",
+          "dimensions": [
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "schema_type": [
+            "string",
+            "null"
+          ],
+          "description": "The new voice channel status"
+        }
+      ]
+    },
+    {
+      "tool_name": "list_channel_webhooks",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_webhook",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "avatar",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "get_gateway",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_bot_gateway",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guild_template",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guild",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "with_counts",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "update_guild",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_guild_audit_log_entries",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "user_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "target_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "action_type",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "before",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "after",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        }
+      ]
+    },
+    {
+      "tool_name": "list_auto_moderation_rules",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_auto_moderation_rule",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_auto_moderation_rule",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_auto_moderation_rule",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_auto_moderation_rule",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_guild_bans",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "before",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "after",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_guild_ban",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "ban_user_from_guild",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "unban_user_from_guild",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "bulk_ban_users_from_guild",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_guild_channels",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_guild_channel",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "bulk_update_guild_channels",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_guild_emojis",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_guild_emoji",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "image",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "roles",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "array",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "get_guild_emoji",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_guild_emoji",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_guild_emoji",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "roles",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "array",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "list_guild_integrations",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_guild_integration",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_guild_invites",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_guild_members",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "after",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer"
+        }
+      ]
+    },
+    {
+      "tool_name": "update_my_guild_member",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "nick",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "field_name": "avatar",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "field_name": "bio",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "field_name": "banner",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "search_guild_members",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "query",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_guild_member",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "add_guild_member",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_guild_member",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_guild_member",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "nick",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "field_name": "roles",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "array",
+            "null"
+          ]
+        },
+        {
+          "field_name": "mute",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "boolean",
+            "null"
+          ]
+        },
+        {
+          "field_name": "deaf",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "boolean",
+            "null"
+          ]
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "communication_disabled_until",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "field_name": "flags",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "integer",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "add_guild_member_role",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_guild_member_role",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "guild_search",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "sort_by",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "sort_order",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "content",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "slop",
+          "dimensions": [
+            "score_range"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "author_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "author_type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "mentions",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "mentions_role_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "replied_to_user_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "replied_to_message_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "mention_everyone",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "min_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "max_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "offset",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "has",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "link_hostname",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "embed_provider",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "embed_type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "attachment_extension",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "attachment_filename",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "pinned",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "include_nsfw",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_guild_new_member_welcome",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guilds_onboarding",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "put_guilds_onboarding",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guild_preview",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "preview_prune_guild",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "days",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "include_roles",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "prune_guild",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_guild_voice_regions",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_guild_roles",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_guild_role",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "bulk_update_guild_roles",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "guild_role_member_counts",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guild_role",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_guild_role",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_guild_role",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_guild_scheduled_events",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "with_user_count",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "create_guild_scheduled_event",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guild_scheduled_event",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "with_user_count",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "delete_guild_scheduled_event",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_guild_scheduled_event",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_guild_scheduled_event_users",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "with_member",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "before",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "after",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        }
+      ]
+    },
+    {
+      "tool_name": "list_guild_soundboard_sounds",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_guild_soundboard_sound",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guild_soundboard_sound",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_guild_soundboard_sound",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_guild_soundboard_sound",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_guild_stickers",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_guild_sticker",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "tags",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "description",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_guild_sticker",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_guild_sticker",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_guild_sticker",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "tags",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "description",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "list_guild_templates",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_guild_template",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "description",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "sync_guild_template",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_guild_template",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_guild_template",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "description",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "get_active_guild_threads",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guild_vanity_url",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_self_voice_state",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_self_voice_state",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_voice_state",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_voice_state",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guild_webhooks",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guild_welcome_screen",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_guild_welcome_screen",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guild_widget_settings",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_guild_widget_settings",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "enabled",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "boolean",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "get_guild_widget",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_guild_widget_png",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "style",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "create_interaction_response",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "with_response",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "invite_resolve",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "with_counts",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "guild_scheduled_event_id",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        }
+      ]
+    },
+    {
+      "tool_name": "invite_revoke",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_invite_target_users",
+      "description": "Get the target users for an invite.",
+      "fields": []
+    },
+    {
+      "tool_name": "update_invite_target_users",
+      "description": "Update the target users for an existing invite.",
+      "fields": [
+        {
+          "field_name": "target_users_file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_invite_target_users_job_status",
+      "description": "Get the target users job status for an invite.",
+      "fields": []
+    },
+    {
+      "tool_name": "create_or_join_lobby",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "idle_timeout_seconds",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "integer",
+            "null"
+          ]
+        },
+        {
+          "field_name": "lobby_metadata",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "object",
+            "null"
+          ]
+        },
+        {
+          "field_name": "member_metadata",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "object",
+            "null"
+          ]
+        },
+        {
+          "field_name": "secret",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "flags",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "create_lobby",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "idle_timeout_seconds",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "integer",
+            "null"
+          ]
+        },
+        {
+          "field_name": "members",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "array",
+            "null"
+          ]
+        },
+        {
+          "field_name": "metadata",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "object",
+            "null"
+          ]
+        },
+        {
+          "field_name": "flags",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "override_event_webhooks_url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "get_lobby",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "edit_lobby",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "idle_timeout_seconds",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "integer",
+            "null"
+          ]
+        },
+        {
+          "field_name": "metadata",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "object",
+            "null"
+          ]
+        },
+        {
+          "field_name": "members",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "array",
+            "null"
+          ]
+        },
+        {
+          "field_name": "flags",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "override_event_webhooks_url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "edit_lobby_channel_link",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "leave_lobby",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_linked_lobby_guild_invite_for_self",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "bulk_update_lobby_members",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "add_lobby_member",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "metadata",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "object",
+            "null"
+          ]
+        },
+        {
+          "field_name": "flags",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "delete_lobby_member",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_linked_lobby_guild_invite_for_user",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_lobby_messages",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        }
+      ]
+    },
+    {
+      "tool_name": "create_lobby_message",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_lobby_message_external_moderation_metadata",
+      "description": "Update the external moderation metadata for a lobby message.",
+      "fields": []
+    },
+    {
+      "tool_name": "get_my_oauth2_authorization",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_my_oauth2_application",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_public_keys",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_openid_connect_userinfo",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_user_message_external_moderation_metadata",
+      "description": "Update the external moderation metadata for a user message (DM).",
+      "fields": []
+    },
+    {
+      "tool_name": "partner_sdk_unmerge_provisional_account",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "client_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "client_secret",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "field_name": "external_auth_token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "external_auth_type",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "bot_partner_sdk_unmerge_provisional_account",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "external_user_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "partner_sdk_token",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "client_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "client_secret",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "field_name": "external_auth_token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "external_auth_type",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "bot_partner_sdk_token",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "external_user_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "preferred_global_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "get_soundboard_default_sounds",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_stage_instance",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "topic",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "privacy_level",
+          "dimensions": [
+            "score_range"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "guild_scheduled_event_id",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "send_start_notification",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "boolean",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "get_stage_instance",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_stage_instance",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_stage_instance",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "topic",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "privacy_level",
+          "dimensions": [
+            "score_range"
+          ],
+          "confidence": "inferred"
+        }
+      ]
+    },
+    {
+      "tool_name": "list_sticker_packs",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_sticker_pack",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_sticker",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_my_user",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_my_user",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_current_user_application_entitlements",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "sku_ids",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "exclude_consumed",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_application_user_role_connection",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_application_user_role_connection",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_application_user_role_connection",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "create_dm",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_my_connections",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_my_guilds",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "before",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "after",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer"
+        },
+        {
+          "field_name": "with_counts",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "leave_guild",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_my_guild_member",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_user",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "list_voice_regions",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "get_webhook",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "delete_webhook",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_webhook",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "avatar",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_webhook_by_token",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "execute_webhook",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "wait",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "thread_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "with_components",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "delete_webhook_by_token",
+      "description": "",
+      "fields": []
+    },
+    {
+      "tool_name": "update_webhook_by_token",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "avatar",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": [
+            "string",
+            "null"
+          ]
+        }
+      ]
+    },
+    {
+      "tool_name": "execute_github_compatible_webhook",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "wait",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "thread_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_original_webhook_message",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "thread_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "delete_original_webhook_message",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "thread_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "update_original_webhook_message",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "thread_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "with_components",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "get_webhook_message",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "thread_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "delete_webhook_message",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "thread_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "update_webhook_message",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "thread_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "with_components",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "execute_slack_compatible_webhook",
+      "description": "",
+      "fields": [
+        {
+          "field_name": "wait",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "thread_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "n_tools": 231,
+    "n_fields": 201,
+    "n_declared": 0,
+    "n_inferred": 30,
+    "n_unknown": 171,
+    "n_dim_signals": 30,
+    "dim_hits": {
+      "date_format": 23,
+      "score_range": 4,
+      "id_offset": 2,
+      "state_filter": 1
+    }
+  },
+  "capture_hash": "a7ba2c0baf3ce5add05cb083353265f163f35b1378f167e36c016a8e968c99c8"
+}

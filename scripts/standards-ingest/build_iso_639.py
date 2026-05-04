@@ -95,7 +95,7 @@ def build_pack() -> dict:
 
     pack = {
         "pack_name": "iso-639",
-        "pack_version": "0.2.0",
+        "pack_version": "0.2.1",
         "license": {
             "spdx_id": "CC0-1.0",
             "source_url": "https://iso639-3.sil.org/code_tables/639/data",
@@ -106,6 +106,9 @@ def build_pack() -> dict:
             "standard": "ISO-639-3",
             "version": f"sil-snapshot-{today}",
             "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab",
+            "source_hash": _hash_for(
+                "iso-639", "language_code", "sil-snapshot"
+            ),
         },
         "dimensions": {
             "language_code": {

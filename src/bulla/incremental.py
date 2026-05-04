@@ -60,6 +60,23 @@ class FeeDelta:
     leverage_was: Fraction
 
 
+@dataclass(frozen=True)
+class ExtendDelta:
+    """Result of an ``extend()`` call.
+
+    Captures: which tools/edges were added, fee before and after,
+    the (signed) delta, and which hidden fields newly appeared. The
+    Session API surfaces a thin shim over this dataclass.
+    """
+
+    new_tool_names: tuple[str, ...]
+    new_edges: tuple[Edge, ...]
+    fee_before: int
+    fee_after: int
+    delta_fee: int
+    new_hidden_fields: tuple[tuple[str, str], ...]
+
+
 class IncrementalDiagnostic:
     """Maintains the witness Gram matrix K(G) under incremental disclosures.
 
@@ -80,6 +97,14 @@ class IncrementalDiagnostic:
         self._hidden_basis: list[tuple[str, str]] = list(hidden_basis)
         self._fee = fee_from_gram(K)
         self._disclosures: list[tuple[str, str]] = []
+        # The Session API needs the underlying composition so it can
+        # extend it incrementally (and so leverage / profile queries
+        # that consult the composition still work after extend()
+        # mutates state). Store the live tool/edge tuples here; the
+        # composition can be reconstructed via ``current_composition()``.
+        self._tools: list[ToolSpec] = list(comp.tools)
+        self._edges: list[Edge] = list(comp.edges)
+        self._comp_name: str = comp.name
 
     @property
     def fee(self) -> int:
@@ -202,6 +227,100 @@ class IncrementalDiagnostic:
             fee_change=-1,
             new_fee=new_fee,
             leverage_was=pivot,
+        )
+
+    # ── Tool/edge extension (Session API substrate) ────────────────
+
+    def current_composition(self) -> Composition:
+        """Return the live composition state as a frozen Composition."""
+        return Composition(
+            name=self._comp_name,
+            tools=tuple(self._tools),
+            edges=tuple(self._edges),
+        )
+
+    def extend(
+        self,
+        new_tools: list[ToolSpec] | None = None,
+        new_edges: list[Edge] | None = None,
+    ) -> "ExtendDelta":
+        """Append new tools and/or edges and refresh K accordingly.
+
+        Mathematical semantics: this method produces the same K and
+        hidden_basis that ``witness_gram`` would compute on the
+        composition with the supplied additions appended. Bitwise
+        equality is the load-bearing invariant — see
+        ``tests/test_session.py::test_session_bitwise_equals_full_rebuild``.
+
+        Implementation is full-rebuild for now: K is recomputed from
+        scratch on each extend. The API is forward-compatible with a
+        future Schur-block update that maintains K incrementally; the
+        property test pins the externally-observable behavior so that
+        future swap is safe.
+
+        Constraints:
+
+          - Tool names are unique. Adding a tool whose name already
+            exists raises ``ValueError``.
+          - Edge endpoints must reference tools known after the
+            extension (either already present or in ``new_tools``).
+            ``ValueError`` otherwise.
+          - Disclosed-then-extend is supported but unusual: prior
+            disclosures persist in ``self._disclosures`` for audit but
+            are NOT re-applied to the new K. Most callers extend before
+            disclosing.
+        """
+        new_tools = list(new_tools or [])
+        new_edges = list(new_edges or [])
+
+        # Uniqueness check on tool names (after extension).
+        existing_names = {t.name for t in self._tools}
+        for t in new_tools:
+            if t.name in existing_names:
+                raise ValueError(
+                    f"tool name {t.name!r} already in session; "
+                    "duplicate names break the v_basis index"
+                )
+            existing_names.add(t.name)
+
+        # Edge endpoints must reference known tools.
+        all_names = existing_names  # already includes new tools
+        for e in new_edges:
+            if e.from_tool not in all_names:
+                raise ValueError(
+                    f"edge from_tool {e.from_tool!r} not in session "
+                    f"(after extension)"
+                )
+            if e.to_tool not in all_names:
+                raise ValueError(
+                    f"edge to_tool {e.to_tool!r} not in session "
+                    f"(after extension)"
+                )
+
+        prev_fee = self._fee
+        prev_hidden_basis = list(self._hidden_basis)
+
+        # Append.
+        self._tools.extend(new_tools)
+        self._edges.extend(new_edges)
+
+        # Recompute K and hidden_basis on the extended composition.
+        K_new, hidden_basis_new = witness_gram(
+            list(self._tools), list(self._edges)
+        )
+        self._K = K_new
+        self._hidden_basis = list(hidden_basis_new)
+        self._fee = fee_from_gram(K_new)
+
+        return ExtendDelta(
+            new_tool_names=tuple(t.name for t in new_tools),
+            new_edges=tuple(new_edges),
+            fee_before=prev_fee,
+            fee_after=self._fee,
+            delta_fee=self._fee - prev_fee,
+            new_hidden_fields=tuple(
+                f for f in hidden_basis_new if f not in prev_hidden_basis
+            ),
         )
 
     def profile(self) -> WitnessProfile:

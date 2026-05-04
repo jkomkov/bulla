@@ -19,14 +19,68 @@ from fractions import Fraction
 
 @dataclass(frozen=True)
 class ToolSpec:
+    """Specification of a single tool exposed to a composition.
+
+    Field names (Sprint 10 naming clarification):
+      * `name`: canonical tool identifier.
+      * `internal_state`: **legacy field name**; semantically this is the
+        **full field universe** of the tool — every named field the tool
+        can carry. Sprint 9's schema-shape invariant requires that
+        `observable_schema ⊆ internal_state` per tool. Helper property
+        `field_universe` is a Sprint-10 alias that reads more clearly
+        in new code.
+      * `observable_schema`: subset of fields visible at the seam
+        boundary. By Sprint 9 theorem, must be a subset of
+        `internal_state` for `coherence_fee` to be a fee.
+
+    Helper properties (Sprint 10):
+      * `field_universe`: alias for `internal_state`, semantically named.
+      * `hidden_schema`: complement `field_universe \\ observable_schema` —
+        the truly latent fields, what older prose called "internal" /
+        "hidden." Always a subset of `field_universe` by construction.
+      * `projected_away`: legacy alias of `hidden_schema`, kept for
+        backward compatibility with prior callers.
+
+    Migration note: `internal_state` is preserved as the storage field
+    (rename would break `dataclass` equality, hashing, and downstream
+    serialisers). New code should prefer `field_universe` /
+    `hidden_schema` for clarity; legacy code reading `internal_state`
+    continues to work.
+    """
     name: str
     internal_state: tuple[str, ...]
     observable_schema: tuple[str, ...]
 
     @property
-    def projected_away(self) -> tuple[str, ...]:
+    def field_universe(self) -> tuple[str, ...]:
+        """Sprint-10 alias for `internal_state`, semantically named.
+
+        The field universe of a tool is every named field it can carry.
+        For Sprint-9 well-formed compositions, `observable_schema` is a
+        subset of `field_universe`; the difference is `hidden_schema`.
+        """
+        return self.internal_state
+
+    @property
+    def hidden_schema(self) -> tuple[str, ...]:
+        """Fields in the field universe that are NOT in `observable_schema`.
+
+        For real-MCP tools (which always satisfy the Sprint-9 schema-shape
+        invariant `observable_schema ⊆ internal_state`), this is the set
+        of truly latent fields the tool carries but does not expose at
+        the seam boundary. For ill-formed tools it may be smaller than
+        expected (or empty), in which case `bulla.regime.validate_regime`
+        will surface the issue.
+
+        Equivalent to `projected_away` (kept as legacy alias).
+        """
         return tuple(d for d in self.internal_state
                      if d not in self.observable_schema)
+
+    @property
+    def projected_away(self) -> tuple[str, ...]:
+        """Legacy alias of `hidden_schema`. Preserved for backward compatibility."""
+        return self.hidden_schema
 
 
 @dataclass(frozen=True)

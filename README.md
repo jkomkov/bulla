@@ -1,6 +1,6 @@
 # bulla
 
-Witness kernel for agentic compositions — diagnose, attest, seal.
+Witness kernel for agentic compositions.
 
 When AI agents compose tools into pipelines, implicit semantic assumptions (date formats, unit scales, path conventions) can silently produce wrong results. Schema validation passes, but the pipeline is broken. Bulla computes the **coherence fee**: the exact number of independent semantic dimensions that bilateral verification cannot detect.
 
@@ -13,7 +13,7 @@ When AI agents compose tools into pipelines, implicit semantic assumptions (date
 ```bash
 pip install bulla
 
-# Audit your Cursor / Claude Desktop MCP setup
+# Primary demo: audit your live MCP setup (Cursor, Claude Desktop, …)
 bulla audit
 
 # Explicit config path
@@ -21,15 +21,19 @@ bulla audit ~/.cursor/mcp.json
 
 # CI gate: fail if any composition exceeds fee threshold
 bulla audit --max-fee 3 --format json
+
+# Deterministic audit from saved MCP manifests (great for docs/screenshots)
+# From a checkout of the bulla repo:
+bulla audit --manifests examples/canonical-demo/manifests/
 ```
 
-`bulla audit` auto-detects your MCP configuration, scans all servers, and reports cross-server coherence risks — including the **boundary fee** (convention conflicts that no individual server can detect on its own).
+`bulla audit` auto-detects your MCP configuration when possible, scans servers, and prints a short **receipt**: **boundary fee** first (cross-server seams), then within-server blind spots, then copy-paste next steps (`--max-fee`, `--format json`). If no config is found, stderr suggests a **`bulla scan …`** command you can run with zero setup.
 
 ## The seam problem
 
 Two MCP servers. One uses absolute paths (`/tmp/src/main.py`), the other uses repository-relative paths (`src/main.py`). Schema validation passes. The agent silently puts the file in the wrong place. Bulla catches this before execution.
 
-**[See the canonical demo →](examples/canonical-demo/)**
+**[See the canonical demo →](https://github.com/jkomkov/bulla/tree/main/examples/canonical-demo)** — frozen MCP manifests, real fee, walks through the bridge runtime.
 
 ## Calibration results
 
@@ -43,7 +47,7 @@ Tested across 10 real MCP servers (filesystem, github, notion, playwright, tavil
 
 fee=0 guarantees no convention mismatch. fee≥4 guarantees real mismatches exist. The fee is computed from schemas alone — no execution required.
 
-See [calibration data](calibration/data/tier3/report/state-of-agent-coherence.md) for the full report.
+See [calibration data](https://github.com/jkomkov/bulla/blob/main/calibration/data/tier3/report/state-of-agent-coherence.md) for the full report.
 
 ## Python SDK
 
@@ -85,11 +89,91 @@ The measurement layer has **zero imports** from the witness layer. Measurement d
 | `bulla scan` | Scan live MCP servers (zero config) |
 | `bulla witness` | Diagnose and emit WitnessReceipt as JSON |
 | `bulla bridge` | Auto-bridge and emit patched YAML |
+| `bulla translate` | Apply a typed runtime translator (`--dimension X --value V --to T`) |
 | `bulla serve` | MCP stdio server |
 | `bulla proxy` | Replay a session trace with flow-level structural diagnosis |
 | `bulla discover` | LLM-powered convention dimension discovery |
+| `bulla import langgraph` | Parse a LangGraph workflow into a Bulla manifest |
+| `bulla import crewai` | Parse a CrewAI crew/agent/task tree into a Bulla manifest |
 
 Output formats: `--format text` (default), `--format json`, `--format sarif`.
+
+### Runtime translation, Session API, framework adapters (new in 0.37.0)
+
+Three additions in 0.37.0. `bulla.translate` exposes typed runtime translators that produce a `WitnessReceipt` for every transformation. `bulla.Session` builds compositions tool-by-tool with rank-1 incremental updates. `bulla.LiveSession` extends Session with call tracing for MCP proxies. Native `bulla.langgraph` and `bulla.crewai` adapters round it out.
+
+#### `bulla.translate`
+
+Typed runtime value translation across conventions.
+
+```python
+from bulla import translate
+
+result = translate("currency_code", value="USD", to_convention="numeric")
+print(result.value)                         # "840"
+print(result.evidence.kind)                 # "translator" | "mapping" | "pack"
+print(result.receipt.disposition.value)     # "proceed"
+```
+
+Five canonical translators ship registered: `currency_code`, `country_code`, `language_code`, `temporal_format`, `fhir_resource_type`. Restricted-pack values raise `TranslationUnavailable` rather than leaking through. Register your own via `@bulla.bridges.register`. CLI: `bulla translate --dimension currency_code --value USD --to numeric`.
+
+#### `bulla.Session`
+
+Long-lived composition built tool by tool.
+
+```python
+from bulla import Session
+
+s = Session()
+s.add_tool("filesystem.read_file", fields=["path"], conventions={"path_convention": "absolute"})
+s.add_tool("github.create_file",  fields=["path"], conventions={"path_convention": "repo_relative"})
+s.add_edge("filesystem.read_file", "github.create_file")
+print(s.fee)                # 1
+receipt = s.diagnose()      # full WitnessReceipt
+```
+
+Every `add_tool`, `translate(...)`, and `checkpoint()` extends a chained receipt history. Incremental updates use rank-1 Schur complements; a 10,000-seed property test pins bitwise equality with full-rebuild `witness_gram`.
+
+#### `bulla.LiveSession`
+
+Online MCP composition proxy.
+
+```python
+from bulla import LiveSession
+
+live = LiveSession(name="checkout")
+live.add_server("filesystem", fs_tools)
+live.add_server("github", gh_tools)
+print(live.fee)             # equals compose_multi({fs, gh}).coherence_fee
+live.record_call("github.create_file", inputs={...})
+receipt = live.diagnose()
+```
+
+`add_server` returns `AddServerResult` with the per-server delta. `LiveSession.from_server_tools(...)` constructs from a single `dict[str, list[dict]]`.
+
+#### Native LangGraph and CrewAI adapters
+
+```bash
+pip install bulla[langgraph]    # or bulla[crewai], bulla[all]
+```
+
+```python
+from bulla.langgraph import bind, BullaCallbackHandler
+from bulla.crewai     import bind as crew_bind, BullaCrewCallback
+
+# LangGraph: snapshot a compiled or uncompiled StateGraph
+session = bind(graph)
+print(session.fee)
+
+# CrewAI: walks crew.agents, crew.tasks, task.context, task.tools
+session = crew_bind(crew)
+```
+
+Both `bind()` calls return a `bulla.Session` with a deterministic `composition_hash`. Order-independence is property-tested over 50 seeded random graph constructions. `BullaCallbackHandler` and `BullaCrewCallback` record live tool invocations into the session's receipt chain. Static AST adapters (`bulla.frameworks.{langgraph,crewai}`) are unchanged for source-file scanning. See [`docs/FRAMEWORKS.md`](https://github.com/jkomkov/bulla/blob/main/docs/FRAMEWORKS.md).
+
+#### Awareness-gap demo
+
+A reproducible bundle at `examples/awareness-gap-demo/` walks the full failure → diagnose → translate → fix loop on canned filesystem + github manifests, no network or LLM required. `bulla scan` defaults to a prose narrative covering 39 dimension explanations, with a pairwise-vs-global block that fires only when every pair has fee=0 and the global has fee>0.
 
 ### Standards ingestion (new in 0.36.0)
 
@@ -121,7 +205,7 @@ End-to-end demos at `calibration/data/demos/`:
 - `cross_pack_receipt_billing.yaml` — clinical_emr → billing_system → payer_gateway crossing ISO 4217 + FHIR R4 + ICD-10-CM seams in a single signed receipt.
 - `restricted_pack_metadata_only.yaml` — composition referencing a license-gated pack issues a valid receipt without consumer-side credentials; `bulla pack verify` returns `status='placeholder'` until a real ingest is performed.
 
-Authoritative-source registry hashes for 6 of 12 open packs (UCUM, NAICS 2022, ISO 639, IANA Media Types, FHIR R4, FHIR R5) are real SHA-256 from live fetches; the other 6 carry the `placeholder:awaiting-ingest` sentinel until their next ingest cycle. See `docs/STANDARDS-INGEST-SOURCES.md` and `docs/STANDARDS-PACK-MAINTENANCE.md` for the full ownership / drift-handling protocol.
+Authoritative-source registry hashes are real SHA-256 from live fetches for **all 11 fetchable open packs** (UCUM, NAICS 2022, ISO 639, IANA Media Types, FHIR R4, FHIR R5, FIX 4.4, FIX 5.0, GS1, UN-EDIFACT, ICD-10-CM); the 5 restricted packs use `placeholder:awaiting-license` until a license-holder substitutes their own ingest; the 3 fully-inline packs (ISO 3166/4217/8601) carry no registry pointer. Real hashes also propagate onto `derives_from.source_hash` so receipts bind to the underlying-standard revision transitively. See `docs/STANDARDS-INGEST-SOURCES.md` and `docs/STANDARDS-PACK-MAINTENANCE.md` for the full ownership / drift-handling protocol.
 
 ### Witness-geometry diagnostics (new in 0.35.0)
 
@@ -141,7 +225,7 @@ bulla gauge tools.json --substitutes read_file path
 bulla gauge tools.json --costs costs.yaml
 ```
 
-JSON output adds a `witness_geometry` block only when the flag is set — default output remains byte-identical to 0.34.0. The mathematical backing is in the [Witness Gram paper](../papers/hierarchical-fee/paper/witness-gram.pdf), with the rank identity and Kron-reduction theorem machine-checked in Lean 4. The broader research-program ledger documents **56** Aristotle-verified theorems across the witness-geometry chain (0 `sorry`); see [`papers/sheaf/lean/LEAN-CLAIM-LEDGER.md`](../papers/sheaf/lean/LEAN-CLAIM-LEDGER.md). The PyPI package does not vendor Lean — it implements the measurement and receipt layers in Python.
+JSON output adds a `witness_geometry` block only when the flag is set; default output remains byte-identical to 0.34.0. The mathematical backing is the Witness Gram rank identity and the Kron-reduction theorem, machine-checked in Lean 4. The broader research-program ledger documents 56 Aristotle-verified theorems across the witness-geometry chain (0 `sorry`). The PyPI package does not vendor Lean; it implements the measurement and receipt layers in Python.
 
 ## Quick start with `bulla gauge`
 
@@ -244,10 +328,10 @@ Each unit of fee is an independent semantic dimension invisible to pairwise chec
 
 Every receipt binds three hashes: **composition** (what was proposed), **diagnostic** (what was measured), **receipt** (what was witnessed). Receipts chain via `parent_receipt_hashes` for auditable repair flows.
 
-See [WITNESS-CONTRACT.md](WITNESS-CONTRACT.md) for the normative specification.
+See [WITNESS-CONTRACT.md](https://github.com/jkomkov/bulla/blob/main/WITNESS-CONTRACT.md) for the normative specification.
 
 ## License
 
-[Business Source License 1.1](LICENSE)
+[Business Source License 1.1](https://github.com/jkomkov/bulla/blob/main/LICENSE)
 
 Use grant: non-competing use, plus commercial use processing fewer than 1,000 compositions per month. Converts to Apache 2.0 on 2030-04-01.

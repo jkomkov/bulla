@@ -1,0 +1,2667 @@
+{
+  "source_kind": "openapi",
+  "source_id": "intercom-2-13",
+  "schema_hash": "8b42aad28530a3e312ed4efd858d9d8dd3b990a62aca36d9ac400aec844ecebf",
+  "captured_at": "2026-05-02T20:35:33.437283+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "614aa67ae498e841a1f42084343b9d41f739e5678f1f271c1e2a03e8864bee04",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "65a946aee1b4b6585df08554171fd5a5c749793180ace1b8de8efd74fd663517",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.1",
+      "hash": "d1caf350ea5d6f1a4023c6d15670e3ec25dfa832a015348ffeb5a4d3f70dec3a",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+        "source_hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.1",
+      "hash": "4313a1301e360fb9f40823328a75592039aedd2821d63b80be9cf45ed765c32a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+        "source_hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.1",
+      "hash": "2ed09413af1da88d807787fe901c2b430a8a9304ba27f235e28b31d0ef67e4a8",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-05-02",
+        "source_uri": "https://ref.gs1.org/ai/",
+        "source_hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "0aab1b08537ae2835ab1a05adb8a0800eaf7a7ce98ad6937f6cc3f7ee721a997",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "d95ea9d09a69dd1ba4a5679e890a2509185167a10357ae8f8591d8fcde73ff0a",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.1",
+      "hash": "fe87dbb4b7125cab4135f2af6775b75d798390e91ab0849c3496900f43662b52",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2026",
+        "source_uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+        "source_hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "cf7e4bbfb6c7bd012e8508a5b07d9719bbe35b8970a60bddc3128d05e7e2598f",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "0205810517db330b61965d089f78f1b427ea7fc0caec471025929ac965ffd583",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "2a3143742f52266ba08484a16e889d63761d409f1055d95021dab7a03da25a2e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7092871334e53492b46e4835ab2ef1f5d0ac9e184ed257c68ee212692f926c53",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "b16d83cbe515dc7e52d778f5fcb7d016e4a1f292cd8340307b85066141f5be65",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "b2396f760586f9656bd4b806127d5e3404f80d770288f1445beb04b27bae105d",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.1",
+      "hash": "8daa8d898578ac4feaebc986a3f0a8ce367d866054aec9b0654d01bb8f8f71cd",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+        "source_hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "6e653a3d4f730cc93b673893ac69b5215a0f3fbeb25059b3014aa83f5d339d69",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "tool_name": "identifyAdmin",
+      "description": "Identify an admin\n\n\nYou can view the currently authorised admin along with the embedded app object (a \"workspace\" in legacy terminology).\n\n> \ud83d\udea7 Single Sign On\n>\n> If you are building a custom \"Log in with Intercom\" flow for your site, and you call the `/me` endpoint to identify the logged-in user, you should not accept any sign-ins from users with unverified email addresses as it poses a potential impersonation security risk.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "setAwayAdmin",
+      "description": "Set an admin to away\n\nYou can set an Admin as away for the Inbox.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier of a given admin"
+        },
+        {
+          "field_name": "away_mode_enabled",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Set to \"true\" to change the status of the admin to away."
+        },
+        {
+          "field_name": "away_mode_reassign",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Set to \"true\" to assign any new conversation replies to your default inbox."
+        }
+      ]
+    },
+    {
+      "tool_name": "listActivityLogs",
+      "description": "List all activity logs\n\nYou can get a log of activities by all admins in an app.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "created_at_after",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The start date that you request data for. It must be formatted as a UNIX timestamp."
+        },
+        {
+          "field_name": "created_at_before",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The end date that you request data for. It must be formatted as a UNIX timestamp."
+        }
+      ]
+    },
+    {
+      "tool_name": "listAdmins",
+      "description": "List all admins\n\nYou can fetch a list of admins for a given workspace.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "display_avatar",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "If set to true, the response will include the admin's avatar object containing the image URL. Defaults to false."
+        }
+      ]
+    },
+    {
+      "tool_name": "retrieveAdmin",
+      "description": "Retrieve an admin\n\nYou can retrieve the details of a single admin.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier of a given admin"
+        }
+      ]
+    },
+    {
+      "tool_name": "listContentImportSources",
+      "description": "List content import sources\n\nYou can retrieve a list of all content import sources for a workspace.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "createContentImportSource",
+      "description": "Create a content import source\n\nYou can create a new content import source by sending a POST request to this endpoint.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "deleteContentImportSource",
+      "description": "Delete a content import source\n\nYou can delete a content import source by making a DELETE request this endpoint. This will also delete all external pages that were imported from this source.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "getContentImportSource",
+      "description": "Retrieve a content import source",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "updateContentImportSource",
+      "description": "Update a content import source\n\nYou can update an existing content import source.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "listExternalPages",
+      "description": "List external pages\n\nYou can retrieve a list of all external pages for a workspace.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "createExternalPage",
+      "description": "Create an external page (or update an external page by external ID)\n\nYou can create a new external page by sending a POST request to this endpoint. If an external page already exists with the specified source_id and external_id, it will be updated instead.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "deleteExternalPage",
+      "description": "Delete an external page\n\nSending a DELETE request for an external page will remove it from the content library UI and from being used for AI answers.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "getExternalPage",
+      "description": "Retrieve an external page\n\nYou can retrieve an external page.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "updateExternalPage",
+      "description": "Update an external page\n\nYou can update an existing external page (if it was created via the API).",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "listArticles",
+      "description": "List all articles\n\nYou can fetch a list of all articles by making a GET request to `https://api.intercom.io/articles`.\n\n> \ud83d\udcd8 How are the articles sorted and ordered?\n>\n> Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we'll show the most recently updated articles first.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "sort_direction"
+          ],
+          "confidence": "inferred",
+          "description": "List all articles\n\nYou can fetch a list of all articles by making a GET request to `https://api.intercom.io/articles`.\n\n> \ud83d\udcd8 How are the articles sorted and ordered?\n>\n> Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we'll show the most recently updated articles first."
+        }
+      ]
+    },
+    {
+      "tool_name": "createArticle",
+      "description": "Create an article\n\nYou can create a new article by making a POST request to `https://api.intercom.io/articles`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "retrieveArticle",
+      "description": "Retrieve an article\n\nYou can fetch the details of a single article by making a GET request to `https://api.intercom.io/articles/<id>`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier for the article which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "updateArticle",
+      "description": "Update an article\n\nYou can update the details of a single article by making a PUT request to `https://api.intercom.io/articles/<id>`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier for the article which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "deleteArticle",
+      "description": "Delete an article\n\nYou can delete a single article by making a DELETE request to `https://api.intercom.io/articles/<id>`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier for the article which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "searchArticles",
+      "description": "Search for articles\n\nYou can search for articles by making a GET request to `https://api.intercom.io/articles/search`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "phrase",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The phrase within your articles to search for."
+        },
+        {
+          "field_name": "state",
+          "dimensions": [
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The state of the Articles returned. One of `published`, `draft` or `all`."
+        },
+        {
+          "field_name": "help_center_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The ID of the Help Center to search in."
+        },
+        {
+          "field_name": "highlight",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Return a highlighted version of the matching content within your articles. Refer to the response schema for more details."
+        }
+      ]
+    },
+    {
+      "tool_name": "listAllCollections",
+      "description": "List all collections\n\nYou can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.\n\nCollections will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we'll show the most recently updated collections first.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "sort_direction"
+          ],
+          "confidence": "inferred",
+          "description": "List all collections\n\nYou can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.\n\nCollections will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we'll show the most recently updated collections first."
+        }
+      ]
+    },
+    {
+      "tool_name": "createCollection",
+      "description": "Create a collection\n\nYou can create a new collection by making a POST request to `https://api.intercom.io/help_center/collections.`",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "retrieveCollection",
+      "description": "Retrieve a collection\n\nYou can fetch the details of a single collection by making a GET request to `https://api.intercom.io/help_center/collections/<id>`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier for the collection which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "updateCollection",
+      "description": "Update a collection\n\nYou can update the details of a single collection by making a PUT request to `https://api.intercom.io/collections/<id>`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier for the collection which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "deleteCollection",
+      "description": "Delete a collection\n\nYou can delete a single collection by making a DELETE request to `https://api.intercom.io/collections/<id>`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier for the collection which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "retrieveHelpCenter",
+      "description": "Retrieve a Help Center\n\nYou can fetch the details of a single Help Center by making a GET request to `https://api.intercom.io/help_center/help_center/<id>`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier for the collection which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "listHelpCenters",
+      "description": "List all Help Centers\n\nYou can list all Help Centers by making a GET request to `https://api.intercom.io/help_center/help_centers`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "listInternalArticles",
+      "description": "List all articles\n\nYou can fetch a list of all internal articles by making a GET request to `https://api.intercom.io/internal_articles`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "createInternalArticle",
+      "description": "Create an internal article\n\nYou can create a new internal article by making a POST request to `https://api.intercom.io/internal_articles`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "retrieveInternalArticle",
+      "description": "Retrieve an internal article\n\nYou can fetch the details of a single internal article by making a GET request to `https://api.intercom.io/internal_articles/<id>`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier for the article which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "updateInternalArticle",
+      "description": "Update an internal article\n\nYou can update the details of a single internal article by making a PUT request to `https://api.intercom.io/internal_articles/<id>`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier for the internal article which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "deleteInternalArticle",
+      "description": "Delete an internal article\n\nYou can delete a single internal article by making a DELETE request to `https://api.intercom.io/internal_articles/<id>`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier for the internal article which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "searchInternalArticles",
+      "description": "Search for internal articles\n\nYou can search for internal articles by making a GET request to `https://api.intercom.io/internal_articles/search`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "folder_id",
+          "dimensions": [
+            "path_convention"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The ID of the folder to search in."
+        }
+      ]
+    },
+    {
+      "tool_name": "createOrUpdateCompany",
+      "description": "Create or Update a company\n\nYou can create or update a company.\n\nCompanies will be only visible in Intercom when there is at least one associated user.\n\nCompanies are looked up via `company_id` in a `POST` request, if not found via `company_id`, the new company will be created, if found, that company will be updated.\n\n{% admonition type=\"warning\" name=\"Using `company_id`\" %}\n  You can set a unique `company_id` value when creating a company. However, it is not possible to update `company_id`. Be sure to set a unique value once upon creation of the company.\n{% /admonition %}",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "retrieveCompany",
+      "description": "Retrieve companies\n\nYou can fetch a single company by passing in `company_id` or `name`.\n\n  `https://api.intercom.io/companies?name={name}`\n\n  `https://api.intercom.io/companies?company_id={company_id}`\n\nYou can fetch all companies and filter by `segment_id` or `tag_id` as a query parameter.\n\n  `https://api.intercom.io/companies?tag_id={tag_id}`\n\n  `https://api.intercom.io/companies?segment_id={segment_id}`",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The `name` of the company to filter by."
+        },
+        {
+          "field_name": "company_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The `company_id` of the company to filter by."
+        },
+        {
+          "field_name": "tag_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The `tag_id` of the company to filter by."
+        },
+        {
+          "field_name": "segment_id",
+          "dimensions": [
+            "hl7_v2_segment"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The `segment_id` of the company to filter by."
+        },
+        {
+          "field_name": "page",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "The page of results to fetch. Defaults to first page"
+        },
+        {
+          "field_name": "per_page",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "How many results to display per page. Defaults to 15"
+        }
+      ]
+    },
+    {
+      "tool_name": "RetrieveACompanyById",
+      "description": "Retrieve a company by ID\n\nYou can fetch a single company.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the company which is given by Intercom"
+        }
+      ]
+    },
+    {
+      "tool_name": "UpdateCompany",
+      "description": "Update a company\n\nYou can update a single company using the Intercom provisioned `id`.\n\n{% admonition type=\"warning\" name=\"Using `company_id`\" %}\n  When updating a company it is not possible to update `company_id`. This can only be set once upon creation of the company.\n{% /admonition %}",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the company which is given by Intercom"
+        }
+      ]
+    },
+    {
+      "tool_name": "deleteCompany",
+      "description": "Delete a company\n\nYou can delete a single company.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the company which is given by Intercom"
+        }
+      ]
+    },
+    {
+      "tool_name": "ListAttachedContacts",
+      "description": "List attached contacts\n\nYou can fetch a list of all contacts that belong to a company.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the company which is given by Intercom"
+        }
+      ]
+    },
+    {
+      "tool_name": "ListAttachedSegmentsForCompanies",
+      "description": "List attached segments for companies\n\nYou can fetch a list of all segments that belong to a company.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the company which is given by Intercom"
+        }
+      ]
+    },
+    {
+      "tool_name": "listAllCompanies",
+      "description": "List all companies\n\nYou can list companies. The company list is sorted by the `last_request_at` field and by default is ordered descending, most recently requested first.\n\nNote that the API does not include companies who have no associated users in list responses.\n\nWhen using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the [Scroll API](https://developers.intercom.com/reference#iterating-over-all-companies).\n{% admonition type=\"warning\" name=\"Pagination\" %}\n  You can use pagination to limit the number of results returned. The default is `20` results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.\n{% /admonition %}",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "page",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "The page of results to fetch. Defaults to first page"
+        },
+        {
+          "field_name": "per_page",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "How many results to return per page. Defaults to 15"
+        },
+        {
+          "field_name": "order",
+          "dimensions": [
+            "sort_direction"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "`asc` or `desc`. Return the companies in ascending or descending order. Defaults to desc"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "sort_direction"
+          ],
+          "confidence": "inferred",
+          "description": "List all companies\n\nYou can list companies. The company list is sorted by the `last_request_at` field and by default is ordered descending, most recently requested first.\n\nNote that the API does not include companies who have no associated users in list responses.\n\nWhen using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the [Scroll API](https://developers.intercom.com/reference#iterating-over-all-companies).\n{% admonition type=\"warning\" name=\"Pagination\" %}\n  You can use pagination to limit the number of results returned. The default is `20` results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.\n{% /admonition %}"
+        }
+      ]
+    },
+    {
+      "tool_name": "scrollOverAllCompanies",
+      "description": "Scroll over all companies\n\n      The `list all companies` functionality does not work well for huge datasets, and can result in errors and performance problems when paging deeply. The Scroll API provides an efficient mechanism for iterating over all companies in a dataset.\n\n- Each app can only have 1 scroll open at a time. You'll get an error message if you try to have more than one open per app.\n- If the scroll isn't used for 1 minute, it expires and calls with that scroll param will fail\n- If the end of the scroll is reached, \"companies\" will be empty and the scroll parameter will expire\n\n{% admonition type=\"info\" name=\"Scroll Parameter\" %}\n  You can get the first page of companies by simply sending a GET request to the scroll endpoint.\n  For subsequent requests you will need to use the scroll parameter from the response.\n{% /admonition %}\n{% admonition type=\"danger\" name=\"Scroll network timeouts\" %}\n  Since scroll is often used on large datasets network errors such as timeouts can be encountered. When this occurs you will see a HTTP 500 error with the following message:\n  \"Request failed due to an internal network error. Please restart the scroll operation.\"\n  If this happens, you will need to restart your scroll query: It is not possible to continue from a specific point when using scroll.\n{% /admonition %}",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "scroll_param",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "attachContactToACompany",
+      "description": "Attach a Contact to a Company\n\nYou can attach a company to a single contact.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the company which is given by Intercom"
+        }
+      ]
+    },
+    {
+      "tool_name": "listCompaniesForAContact",
+      "description": "List attached companies for contact\n\nYou can fetch a list of companies that are associated to a contact.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the contact which is given by Intercom"
+        },
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "detachContactFromACompany",
+      "description": "Detach a contact from a company\n\nYou can detach a company from a single contact.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "contact_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the contact which is given by Intercom"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the company which is given by Intercom"
+        }
+      ]
+    },
+    {
+      "tool_name": "listNotes",
+      "description": "List all notes\n\nYou can fetch a list of notes that are associated to a contact.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier of a contact."
+        },
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "createNote",
+      "description": "Create a note\n\nYou can add a note to a single contact.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier of a given contact."
+        },
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The text of the note."
+        },
+        {
+          "field_name": "contact_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier of a given contact."
+        },
+        {
+          "field_name": "admin_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier of a given admin."
+        }
+      ]
+    },
+    {
+      "tool_name": "listSegmentsForAContact",
+      "description": "List attached segments for contact\n\nYou can fetch a list of segments that are associated to a contact.",
+      "fields": [
+        {
+          "field_name": "contact_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the contact which is given by Intercom"
+        },
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "listSubscriptionsForAContact",
+      "description": "List subscriptions for a contact\n\nYou can fetch a list of subscription types that are attached to a contact. These can be subscriptions that a user has 'opted-in' to or has 'opted-out' from, depending on the subscription type.\nThis will return a list of Subscription Type objects that the contact is associated with.\n\nThe data property will show a combined list of:\n\n  1.Opt-out subscription types that the user has opted-out from.\n  2.Opt-in subscription types that the user has opted-in to receiving.",
+      "fields": [
+        {
+          "field_name": "contact_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the contact which is given by Intercom"
+        },
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "attachSubscriptionTypeToContact",
+      "description": "Add subscription to a contact\n\nYou can add a specific subscription to a contact. In Intercom, we have two different subscription types based on user consent - opt-out and opt-in:\n\n  1.Attaching a contact to an opt-out subscription type will opt that user out from receiving messages related to that subscription type.\n\n  2.Attaching a contact to an opt-in subscription type will opt that user in to receiving messages related to that subscription type.\n\nThis will return a subscription type model for the subscription type that was added to the contact.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "contact_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the contact which is given by Intercom"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the subscription which is given by Intercom"
+        },
+        {
+          "field_name": "consent_type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The consent_type of a subscription, opt_out or opt_in."
+        }
+      ]
+    },
+    {
+      "tool_name": "detachSubscriptionTypeToContact",
+      "description": "Remove subscription from a contact\n\nYou can remove a specific subscription from a contact. This will return a subscription type model for the subscription type that was removed from the contact.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "contact_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the contact which is given by Intercom"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the subscription type which is given by Intercom"
+        }
+      ]
+    },
+    {
+      "tool_name": "listTagsForAContact",
+      "description": "List tags attached to a contact\n\nYou can fetch a list of all tags that are attached to a specific contact.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "contact_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the contact which is given by Intercom"
+        }
+      ]
+    },
+    {
+      "tool_name": "attachTagToContact",
+      "description": "Add tag to a contact\n\nYou can tag a specific contact. This will return a tag object for the tag that was added to the contact.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "contact_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the contact which is given by Intercom"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the tag which is given by Intercom"
+        }
+      ]
+    },
+    {
+      "tool_name": "detachTagFromContact",
+      "description": "Remove tag from a contact\n\nYou can remove tag from a specific contact. This will return a tag object for the tag that was removed from the contact.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "contact_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the contact which is given by Intercom"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the tag which is given by Intercom"
+        }
+      ]
+    },
+    {
+      "tool_name": "UpdateContact",
+      "description": "Update a contact\n\nYou can update an existing contact (ie. user or lead).\n\n{% admonition type=\"info\" %}\n  This endpoint handles both **contact updates** and **custom object associations**.\n\n  See _`update a contact with an association to a custom object instance`_ in the request/response examples to see the custom object association format.\n{% /admonition %}",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "id"
+        }
+      ]
+    },
+    {
+      "tool_name": "ShowContact",
+      "description": "Get a contact\n\nYou can fetch the details of a single contact.\n\n{% admonition type=\"warning\" name=\"Merged contacts\" %}\n  If a contact has been merged into another contact via the Merge endpoint (POST /contacts/merge), requesting it by its original ID will return a `404 Not Found` error. Use the merged-into contact's ID instead.\n{% /admonition %}",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "id"
+        }
+      ]
+    },
+    {
+      "tool_name": "DeleteContact",
+      "description": "Delete a contact\n\nYou can delete a single contact.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "id"
+        }
+      ]
+    },
+    {
+      "tool_name": "MergeContact",
+      "description": "Merge a lead and a user\n\nYou can merge a contact with a `role` of `lead` into a contact with a `role` of `user`.\n\n{% admonition type=\"warning\" name=\"Merged contacts are not retrievable via the API\" %}\n  Once a merge is completed, the source contact (`from`) is permanently removed from the active contact list. This means:\n  - **GET /contacts/{id}** \u2014 Requesting the source contact by its original ID will return a `404 Not Found` error.\n  - **POST /contacts/search** \u2014 The source contact will not appear in search results, including queries filtered by `updated_at`.\n  - **GET /contacts** \u2014 The source contact will not appear in list results.\n\n  Only the target contact (`into`) remains accessible. If your application stores contact IDs, update them to use the target contact's ID after a merge.\n{% /admonition %}",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "SearchContacts",
+      "description": "Search contacts\n\nYou can search for multiple contacts by the value of their attributes in order to fetch exactly who you want.\n\nTo search for contacts, you need to send a `POST` request to `https://api.intercom.io/contacts/search`.\n\nThis will accept a query object in the body which will define your filters in order to search for contacts.\n\n{% admonition type=\"warning\" name=\"Optimizing search queries\" %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the `AND` and `OR` operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is `50` results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the `starting_after` param.\n{% /admonition %}\n### Merged Contacts\n\nContacts that have been merged (via POST /contacts/merge) are excluded from search results. If a contact was recently merged into another, it will no longer appear in queries filtered by `updated_at` or any other field. Only the target contact from the merge remains searchable.\n\n### Contact Creation Delay\n\nIf a contact has recently been created, there is a possibility that it will not yet be available when searching. This means that it may not appear in the response. This delay can take a few minutes. If you need to be instantly notified it is recommended to use webhooks and iterate to see if they match your search filters.\n\n### Nesting & Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiple's there can be:\n* There's a limit of max 2 nested filters\n* There's a limit of max 15 filters for each AND or OR group\n\n### Searching for Timestamp Fields\n\nAll timestamp fields (created_at, updated_at etc.) are indexed as Dates for Contact Search queries; Datetime queries are not currently supported. This means you can only query for timestamp fields by day - not hour, minute or second.\nFor example, if you search for all Contacts with a created_at value greater (>) than 1577869200 (the UNIX timestamp for January 1st, 2020 9:00 AM), that will be interpreted as 1577836800 (January 1st, 2020 12:00 AM). The search results will then include Contacts created from January 2nd, 2020 12:00 AM onwards.\nIf you'd like to get contacts created on January 1st, 2020 you should search with a created_at value equal (=) to 1577836800 (January 1st, 2020 12:00 AM).\nThis behaviour applies only to timestamps used in search queries. The search results will still contain the full UNIX timestamp and be sorted accordingly.\n\n### Accepted Fields\n\nMost key listed as part of the Contacts Model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as `created_at` accepts a date, the `value` cannot be a string such as `\"foorbar\"`).\n\n| Field                              | Type                           |\n| ---------------------------------- | ------------------------------ |\n| id                                 | String                         |\n| role                               | String<br>Accepts user or lead |\n| name                               | String                         |\n| avatar                             | String                         |\n| owner_id                           | Integer                        |\n| email                              | String                         |\n| email_domain                       | String                         |\n| phone                              | String                         |\n| external_id                        | String                         |\n| created_at                         | Date (UNIX Timestamp)          |\n| signed_up_at                       | Date (UNIX Timestamp)          |\n| updated_at                         | Date (UNIX Timestamp)          |\n| last_seen_at                       | Date (UNIX Timestamp)          |\n| last_contacted_at                  | Date (UNIX Timestamp)          |\n| last_replied_at                    | Date (UNIX Timestamp)          |\n| last_email_opened_at               | Date (UNIX Timestamp)          |\n| last_email_clicked_at              | Date (UNIX Timestamp)          |\n| language_override                  | String                         |\n| browser                            | String                         |\n| browser_language                   | String                         |\n| os                                 | String                         |\n| location.country                   | String                         |\n| location.region                    | String                         |\n| location.city                      | String                         |\n| unsubscribed_from_emails           | Boolean                        |\n| marked_email_as_spam               | Boolean                        |\n| has_hard_bounced                   | Boolean                        |\n| ios_last_seen_at                   | Date (UNIX Timestamp)          |\n| ios_app_version                    | String                         |\n| ios_device                         | String                         |\n| ios_app_device                     | String                         |\n| ios_os_version                     | String                         |\n| ios_app_name                       | String                         |\n| ios_sdk_version                    | String                         |\n| android_last_seen_at               | Date (UNIX Timestamp)          |\n| android_app_version                | String                         |\n| android_device                     | String                         |\n| android_app_name                   | String                         |\n| andoid_sdk_version                 | String                         |\n| segment_id                         | String                         |\n| tag_id                             | String                         |\n| custom_attributes.{attribute_name} | String                         |\n\n### Accepted Operators\n\n{% admonition type=\"warning\" name=\"Searching based on `created_at`\" %}\n  You cannot use the `<=` or `>=` operators to search by `created_at`.\n{% /admonition %}\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (`\"=\"`). The operator has to be compatible with the field's type (eg. you cannot search with `>` for a given string value as it's only compatible for integer's and dates).\n\n| Operator | Valid Types                      | Description                                                      |\n| :------- | :------------------------------- | :--------------------------------------------------------------- |\n| =        | All                              | Equals                                                           |\n| !=       | All                              | Doesn't Equal                                                    |\n| IN       | All                              | In<br>Shortcut for `OR` queries<br>Values must be in Array       |\n| NIN      | All                              | Not In<br>Shortcut for `OR !` queries<br>Values must be in Array |\n| >        | Integer<br>Date (UNIX Timestamp) | Greater than                                                     |\n| <       | Integer<br>Date (UNIX Timestamp) | Lower than                                                       |\n| ~        | String                           | Contains                                                         |\n| !~       | String                           | Doesn't Contain                                                  |\n| ^        | String                           | Starts With                                                      |\n| $        | String                           | Ends With                                                        |",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Search contacts\n\nYou can search for multiple contacts by the value of their attributes in order to fetch exactly who you want.\n\nTo search for contacts, you need to send a `POST` request to `https://api.intercom.io/contacts/search`.\n\nThis will accept a query object in the body which will define your filters in order to search for contacts.\n\n{% admonition type=\"warning\" name=\"Optimizing search queries\" %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the `AND` and `OR` operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is `50` results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the `starting_after` param.\n{% /admonition %}\n### Merged Contacts\n\nContacts that have been merged (via POST /contacts/merge) are excluded from search results. If a contact was recently merged into another, it will no longer appear in queries filtered by `updated_at` or any other field. Only the target contact from the merge remains searchable.\n\n### Contact Creation Delay\n\nIf a contact has recently been created, there is a possibility that it will not yet be available when searching. This means that it may not appear in the response. This delay can take a few minutes. If you need to be instantly notified it is recommended to use webhooks and iterate to see if they match your search filters.\n\n### Nesting & Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiple's there can be:\n* There's a limit of max 2 nested filters\n* There's a limit of max 15 filters for each AND or OR group\n\n### Searching for Timestamp Fields\n\nAll timestamp fields (created_at, updated_at etc.) are indexed as Dates for Contact Search queries; Datetime queries are not currently supported. This means you can only query for timestamp fields by day - not hour, minute or second.\nFor example, if you search for all Contacts with a created_at value greater (>) than 1577869200 (the UNIX timestamp for January 1st, 2020 9:00 AM), that will be interpreted as 1577836800 (January 1st, 2020 12:00 AM). The search results will then include Contacts created from January 2nd, 2020 12:00 AM onwards.\nIf you'd like to get contacts created on January 1st, 2020 you should search with a created_at value equal (=) to 1577836800 (January 1st, 2020 12:00 AM).\nThis behaviour applies only to timestamps used in search queries. The search results will still contain the full UNIX timestamp and be sorted accordingly.\n\n### Accepted Fields\n\nMost key listed as part of the Contacts Model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as `created_at` accepts a date, the `value` cannot be a string such as `\"foorbar\"`).\n\n| Field                              | Type                           |\n| ---------------------------------- | ------------------------------ |\n| id                                 | String                         |\n| role                               | String<br>Accepts user or lead |\n| name                               | String                         |\n| avatar                             | String                         |\n| owner_id                           | Integer                        |\n| email                              | String                         |\n| email_domain                       | String                         |\n| phone                              | String                         |\n| external_id                        | String                         |\n| created_at                         | Date (UNIX Timestamp)          |\n| signed_up_at                       | Date (UNIX Timestamp)          |\n| updated_at                         | Date (UNIX Timestamp)          |\n| last_seen_at                       | Date (UNIX Timestamp)          |\n| last_contacted_at                  | Date (UNIX Timestamp)          |\n| last_replied_at                    | Date (UNIX Timestamp)          |\n| last_email_opened_at               | Date (UNIX Timestamp)          |\n| last_email_clicked_at              | Date (UNIX Timestamp)          |\n| language_override                  | String                         |\n| browser                            | String                         |\n| browser_language                   | String                         |\n| os                                 | String                         |\n| location.country                   | String                         |\n| location.region                    | String                         |\n| location.city                      | String                         |\n| unsubscribed_from_emails           | Boolean                        |\n| marked_email_as_spam               | Boolean                        |\n| has_hard_bounced                   | Boolean                        |\n| ios_last_seen_at                   | Date (UNIX Timestamp)          |\n| ios_app_version                    | String                         |\n| ios_device                         | String                         |\n| ios_app_device                     | String                         |\n| ios_os_version                     | String                         |\n| ios_app_name                       | String                         |\n| ios_sdk_version                    | String                         |\n| android_last_seen_at               | Date (UNIX Timestamp)          |\n| android_app_version                | String                         |\n| android_device                     | String                         |\n| android_app_name                   | String                         |\n| andoid_sdk_version                 | String                         |\n| segment_id                         | String                         |\n| tag_id                             | String                         |\n| custom_attributes.{attribute_name} | String                         |\n\n### Accepted Operators\n\n{% admonition type=\"warning\" name=\"Searching based on `created_at`\" %}\n  You cannot use the `<=` or `>=` operators to search by `created_at`.\n{% /admonition %}\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (`\"=\"`). The operator has to be compatible with the field's type (eg. you cannot search with `>` for a given string value as it's only compatible for integer's and dates).\n\n| Operator | Valid Types                      | Description                                                      |\n| :------- | :------------------------------- | :--------------------------------------------------------------- |\n| =        | All                              | Equals                                                           |\n| !=       | All                              | Doesn't Equal                                                    |\n| IN       | All                              | In<br>Shortcut for `OR` queries<br>Values must be in Array       |\n| NIN      | All                              | Not In<br>Shortcut for `OR !` queries<br>Values must be in Array |\n| >        | Integer<br>Date (UNIX Timestamp) | Greater than                                                     |\n| <       | Integer<br>Date (UNIX Timestamp) | Lower than                                                       |\n| ~        | String                           | Contains                                                         |\n| !~       | String                           | Doesn't Contain                                                  |\n| ^        | String                           | Starts With                                                      |\n| $        | String                           | Ends With                                                        |"
+        }
+      ]
+    },
+    {
+      "tool_name": "ListContacts",
+      "description": "List all contacts\n\nYou can fetch a list of all contacts (ie. users or leads) in your workspace.\n{% admonition type=\"info\" name=\"Merged contacts\" %}\n  Contacts that have been merged (via POST /contacts/merge) will not appear in list results. Only the target contact from the merge remains accessible.\n{% /admonition %}\n{% admonition type=\"warning\" name=\"Pagination\" %}\n  You can use pagination to limit the number of results returned. The default is `50` results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.\n{% /admonition %}",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "CreateContact",
+      "description": "Create contact\n\nYou can create a new contact (ie. user or lead).",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "ShowContactByExternalId",
+      "description": "Get a contact by External ID\n\nYou can fetch the details of a single contact by external ID. Note that this endpoint only supports users and not leads.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "external_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The external ID of the user that you want to retrieve"
+        }
+      ]
+    },
+    {
+      "tool_name": "ArchiveContact",
+      "description": "Archive contact\n\nYou can archive a single contact.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "id"
+        }
+      ]
+    },
+    {
+      "tool_name": "UnarchiveContact",
+      "description": "Unarchive contact\n\nYou can unarchive a single contact.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "id"
+        }
+      ]
+    },
+    {
+      "tool_name": "BlockContact",
+      "description": "Block contact\n\nBlock a single contact.<br>**Note:** conversations of the contact will also be archived during the process.<br>More details in [FAQ How do I block Inbox spam?](https://www.intercom.com/help/en/articles/8838656-inbox-faqs)",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "id"
+        }
+      ]
+    },
+    {
+      "tool_name": "attachTagToConversation",
+      "description": "Add tag to a conversation\n\nYou can tag a specific conversation. This will return a tag object for the tag that was added to the conversation.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "conversation_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "conversation_id"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the tag which is given by Intercom"
+        },
+        {
+          "field_name": "admin_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the admin which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "detachTagFromConversation",
+      "description": "Remove tag from a conversation\n\nYou can remove tag from a specific conversation. This will return a tag object for the tag that was removed from the conversation.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "conversation_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "conversation_id"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "id"
+        },
+        {
+          "field_name": "admin_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the admin which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "listConversations",
+      "description": "List all conversations\n\nYou can fetch a list of all conversations.\n\nYou can optionally request the result page size and the cursor to start after to fetch the result.\n{% admonition type=\"warning\" name=\"Pagination\" %}\n  You can use pagination to limit the number of results returned. The default is `20` results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.\n{% /admonition %}",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "per_page",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "How many results per page"
+        },
+        {
+          "field_name": "starting_after",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "String used to get the next page of conversations."
+        }
+      ]
+    },
+    {
+      "tool_name": "createConversation",
+      "description": "Creates a conversation\n\nYou can create a conversation that has been initiated by a contact (ie. user or lead).\nThe conversation can be an in-app message only.\n\n{% admonition type=\"info\" name=\"Sending for visitors\" %}\nYou can also send a message from a visitor by specifying their `user_id` or `id` value in the `from` field, along with a `type` field value of `contact`.\nThis visitor will be automatically converted to a contact with a lead role once the conversation is created.\n{% /admonition %}\n\nThis will return the Message model that has been created.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "retrieveConversation",
+      "description": "Retrieve a conversation\n\n\nYou can fetch the details of a single conversation.\n\nThis will return a single Conversation model with all its conversation parts.\n\n{% admonition type=\"warning\" name=\"Hard limit of 500 parts\" %}\nThe maximum number of conversation parts that can be returned via the API is 500. If you have more than that we will return the 500 most recent conversation parts.\n{% /admonition %}\n\nFor AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The id of the conversation to target"
+        },
+        {
+          "field_name": "display_as",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Set to plaintext to retrieve conversation messages in plain text."
+        }
+      ]
+    },
+    {
+      "tool_name": "updateConversation",
+      "description": "Update a conversation\n\n\nYou can update an existing conversation.\n\n{% admonition type=\"info\" name=\"Replying and other actions\" %}\nIf you want to reply to a coveration or take an action such as assign, unassign, open, close or snooze, take a look at the reply and manage endpoints.\n{% /admonition %}\n\n{% admonition type=\"info\" %}\n  This endpoint handles both **conversation updates** and **custom object associations**.\n\n  See _`update a conversation with an association to a custom object instance`_ in the request/response examples to see the custom object association format.\n{% /admonition %}",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The id of the conversation to target"
+        },
+        {
+          "field_name": "display_as",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Set to plaintext to retrieve conversation messages in plain text."
+        }
+      ]
+    },
+    {
+      "tool_name": "deleteConversation",
+      "description": "Delete a conversation\n\n{% admonition type=\"warning\" name=\"Irreversible operation\" %}\nDeleting a conversation is permanent and cannot be reversed.\n{% /admonition %}\n\nDeleting a conversation permanently removes it from the inbox. All sensitive data is deleted, including admin and user replies, conversation attributes, uploads, and related content. The conversation will still appear in reporting, though some data may be incomplete due to the deletion.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "id"
+        }
+      ]
+    },
+    {
+      "tool_name": "searchConversations",
+      "description": "Search conversations\n\nYou can search for multiple conversations by the value of their attributes in order to fetch exactly which ones you want.\n\nTo search for conversations, you need to send a `POST` request to `https://api.intercom.io/conversations/search`.\n\nThis will accept a query object in the body which will define your filters in order to search for conversations.\n{% admonition type=\"warning\" name=\"Optimizing search queries\" %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the `AND` and `OR` operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is `20` results per page and maximum is `150`.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the `starting_after` param.\n{% /admonition %}\n\n### Nesting & Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiple's there can be:\n- There's a limit of max 2 nested filters\n- There's a limit of max 15 filters for each AND or OR group\n\n### Accepted Fields\n\nMost keys listed as part of the conversation model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as `created_at` accepts a date, the `value` cannot be a string such as `\"foorbar\"`).\nThe `source.body` field is unique as the search will not be performed against the entire value, but instead against every element of the value separately. For example, when searching for a conversation with a `\"I need support\"` body - the query should contain a `=` operator with the value `\"support\"` for such conversation to be returned. A query with a `=` operator and a `\"need support\"` value will not yield a result.\n\n| Field                                     | Type                                                                                                                                                   |\n| :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |\n| id                                        | String                                                                                                                                                 |\n| created_at                                | Date (UNIX timestamp)                                                                                                                                  |\n| updated_at                                | Date (UNIX timestamp)                                                                                                                                  |\n| source.type                               | String<br>Accepted fields are `conversation`, `email`, `facebook`, `instagram`, `phone_call`, `phone_switch`, `push`, `sms`, `twitter` and `whatsapp`. |\n| source.id                                 | String                                                                                                                                                 |\n| source.delivered_as                       | String                                                                                                                                                 |\n| source.subject                            | String                                                                                                                                                 |\n| source.body                               | String                                                                                                                                                 |\n| source.author.id                          | String                                                                                                                                                 |\n| source.author.type                        | String                                                                                                                                                 |\n| source.author.name                        | String                                                                                                                                                 |\n| source.author.email                       | String                                                                                                                                                 |\n| source.url                                | String                                                                                                                                                 |\n| contact_ids                               | String                                                                                                                                                 |\n| teammate_ids                              | String                                                                                                                                                 |\n| admin_assignee_id                         | Integer                                                                                                                                                |\n| team_assignee_id                          | Integer                                                                                                                                                |\n| channel_initiated                         | String                                                                                                                                                 |\n| open                                      | Boolean                                                                                                                                                |\n| read                                      | Boolean                                                                                                                                                |\n| state                                     | String                                                                                                                                                 |\n| waiting_since                             | Date (UNIX timestamp)                                                                                                                                  |\n| snoozed_until                             | Date (UNIX timestamp)                                                                                                                                  |\n| tag_ids                                   | String                                                                                                                                                 |\n| priority                                  | String                                                                                                                                                 |\n| statistics.time_to_assignment             | Integer                                                                                                                                                |\n| statistics.time_to_admin_reply            | Integer                                                                                                                                                |\n| statistics.time_to_first_close            | Integer                                                                                                                                                |\n| statistics.time_to_last_close             | Integer                                                                                                                                                |\n| statistics.median_time_to_reply           | Integer                                                                                                                                                |\n| statistics.first_contact_reply_at         | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.first_assignment_at            | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.first_admin_reply_at           | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.first_close_at                 | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_assignment_at             | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_assignment_admin_reply_at | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_contact_reply_at          | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_admin_reply_at            | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_close_at                  | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_closed_by_id              | String                                                                                                                                                 |\n| statistics.count_reopens                  | Integer                                                                                                                                                |\n| statistics.count_assignments              | Integer                                                                                                                                                |\n| statistics.count_conversation_parts       | Integer                                                                                                                                                |\n| conversation_rating.requested_at          | Date (UNIX timestamp)                                                                                                                                  |\n| conversation_rating.replied_at            | Date (UNIX timestamp)                                                                                                                                  |\n| conversation_rating.score                 | Integer                                                                                                                                                |\n| conversation_rating.remark                | String                                                                                                                                                 |\n| conversation_rating.contact_id            | String                                                                                                                                                 |\n| conversation_rating.admin_d               | String                                                                                                                                                 |\n| ai_agent_participated                     | Boolean                                                                                                                                                |\n| ai_agent.resolution_state                 | String                                                                                                                                                 |\n| ai_agent.last_answer_type                 | String                                                                                                                                                 |\n| ai_agent.rating                           | Integer                                                                                                                                                |\n| ai_agent.rating_remark                    | String                                                                                                                                                 |\n| ai_agent.source_type                      | String                                                                                                                                                 |\n| ai_agent.source_title                     | String                                                                                                                                                 |\n\n### Accepted Operators\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (`\"=\"`). The operator has to be compatible with the field's type  (eg. you cannot search with `>` for a given string value as it's only compatible for integer's and dates).\n\n| Operator | Valid Types                    | Description                                                  |\n| :------- | :----------------------------- | :----------------------------------------------------------- |\n| =        | All                            | Equals                                                       |\n| !=       | All                            | Doesn't Equal                                                |\n| IN       | All                            | In  Shortcut for `OR` queries  Values most be in Array       |\n| NIN      | All                            | Not In  Shortcut for `OR !` queries  Values must be in Array |\n| >        | Integer  Date (UNIX Timestamp) | Greater (or equal) than                                      |\n| <       | Integer  Date (UNIX Timestamp) | Lower (or equal) than                                        |\n| ~        | String                         | Contains                                                     |\n| !~       | String                         | Doesn't Contain                                              |\n| ^        | String                         | Starts With                                                  |\n| $        | String                         | Ends With                                                    |",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Search conversations\n\nYou can search for multiple conversations by the value of their attributes in order to fetch exactly which ones you want.\n\nTo search for conversations, you need to send a `POST` request to `https://api.intercom.io/conversations/search`.\n\nThis will accept a query object in the body which will define your filters in order to search for conversations.\n{% admonition type=\"warning\" name=\"Optimizing search queries\" %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the `AND` and `OR` operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is `20` results per page and maximum is `150`.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the `starting_after` param.\n{% /admonition %}\n\n### Nesting & Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiple's there can be:\n- There's a limit of max 2 nested filters\n- There's a limit of max 15 filters for each AND or OR group\n\n### Accepted Fields\n\nMost keys listed as part of the conversation model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as `created_at` accepts a date, the `value` cannot be a string such as `\"foorbar\"`).\nThe `source.body` field is unique as the search will not be performed against the entire value, but instead against every element of the value separately. For example, when searching for a conversation with a `\"I need support\"` body - the query should contain a `=` operator with the value `\"support\"` for such conversation to be returned. A query with a `=` operator and a `\"need support\"` value will not yield a result.\n\n| Field                                     | Type                                                                                                                                                   |\n| :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |\n| id                                        | String                                                                                                                                                 |\n| created_at                                | Date (UNIX timestamp)                                                                                                                                  |\n| updated_at                                | Date (UNIX timestamp)                                                                                                                                  |\n| source.type                               | String<br>Accepted fields are `conversation`, `email`, `facebook`, `instagram`, `phone_call`, `phone_switch`, `push`, `sms`, `twitter` and `whatsapp`. |\n| source.id                                 | String                                                                                                                                                 |\n| source.delivered_as                       | String                                                                                                                                                 |\n| source.subject                            | String                                                                                                                                                 |\n| source.body                               | String                                                                                                                                                 |\n| source.author.id                          | String                                                                                                                                                 |\n| source.author.type                        | String                                                                                                                                                 |\n| source.author.name                        | String                                                                                                                                                 |\n| source.author.email                       | String                                                                                                                                                 |\n| source.url                                | String                                                                                                                                                 |\n| contact_ids                               | String                                                                                                                                                 |\n| teammate_ids                              | String                                                                                                                                                 |\n| admin_assignee_id                         | Integer                                                                                                                                                |\n| team_assignee_id                          | Integer                                                                                                                                                |\n| channel_initiated                         | String                                                                                                                                                 |\n| open                                      | Boolean                                                                                                                                                |\n| read                                      | Boolean                                                                                                                                                |\n| state                                     | String                                                                                                                                                 |\n| waiting_since                             | Date (UNIX timestamp)                                                                                                                                  |\n| snoozed_until                             | Date (UNIX timestamp)                                                                                                                                  |\n| tag_ids                                   | String                                                                                                                                                 |\n| priority                                  | String                                                                                                                                                 |\n| statistics.time_to_assignment             | Integer                                                                                                                                                |\n| statistics.time_to_admin_reply            | Integer                                                                                                                                                |\n| statistics.time_to_first_close            | Integer                                                                                                                                                |\n| statistics.time_to_last_close             | Integer                                                                                                                                                |\n| statistics.median_time_to_reply           | Integer                                                                                                                                                |\n| statistics.first_contact_reply_at         | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.first_assignment_at            | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.first_admin_reply_at           | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.first_close_at                 | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_assignment_at             | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_assignment_admin_reply_at | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_contact_reply_at          | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_admin_reply_at            | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_close_at                  | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_closed_by_id              | String                                                                                                                                                 |\n| statistics.count_reopens                  | Integer                                                                                                                                                |\n| statistics.count_assignments              | Integer                                                                                                                                                |\n| statistics.count_conversation_parts       | Integer                                                                                                                                                |\n| conversation_rating.requested_at          | Date (UNIX timestamp)                                                                                                                                  |\n| conversation_rating.replied_at            | Date (UNIX timestamp)                                                                                                                                  |\n| conversation_rating.score                 | Integer                                                                                                                                                |\n| conversation_rating.remark                | String                                                                                                                                                 |\n| conversation_rating.contact_id            | String                                                                                                                                                 |\n| conversation_rating.admin_d               | String                                                                                                                                                 |\n| ai_agent_participated                     | Boolean                                                                                                                                                |\n| ai_agent.resolution_state                 | String                                                                                                                                                 |\n| ai_agent.last_answer_type                 | String                                                                                                                                                 |\n| ai_agent.rating                           | Integer                                                                                                                                                |\n| ai_agent.rating_remark                    | String                                                                                                                                                 |\n| ai_agent.source_type                      | String                                                                                                                                                 |\n| ai_agent.source_title                     | String                                                                                                                                                 |\n\n### Accepted Operators\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (`\"=\"`). The operator has to be compatible with the field's type  (eg. you cannot search with `>` for a given string value as it's only compatible for integer's and dates).\n\n| Operator | Valid Types                    | Description                                                  |\n| :------- | :----------------------------- | :----------------------------------------------------------- |\n| =        | All                            | Equals                                                       |\n| !=       | All                            | Doesn't Equal                                                |\n| IN       | All                            | In  Shortcut for `OR` queries  Values most be in Array       |\n| NIN      | All                            | Not In  Shortcut for `OR !` queries  Values must be in Array |\n| >        | Integer  Date (UNIX Timestamp) | Greater (or equal) than                                      |\n| <       | Integer  Date (UNIX Timestamp) | Lower (or equal) than                                        |\n| ~        | String                         | Contains                                                     |\n| !~       | String                         | Doesn't Contain                                              |\n| ^        | String                         | Starts With                                                  |\n| $        | String                         | Ends With                                                    |"
+        }
+      ]
+    },
+    {
+      "tool_name": "replyConversation",
+      "description": "Reply to a conversation\n\nYou can reply to a conversation with a message from an admin or on behalf of a contact, or with a note for admins.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The Intercom provisioned identifier for the conversation or the string \"last\" to reply to the last part of the conversation"
+        }
+      ]
+    },
+    {
+      "tool_name": "manageConversation",
+      "description": "Manage a conversation\n\nFor managing conversations you can:\n- Close a conversation\n- Snooze a conversation to reopen on a future date\n- Open a conversation which is `snoozed` or `closed`\n- Assign a conversation to an admin and/or team.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The identifier for the conversation as given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "attachContactToConversation",
+      "description": "Attach a contact to a conversation\n\nYou can add participants who are contacts to a conversation, on behalf of either another contact or an admin.\n\n{% admonition type=\"warning\" name=\"Contacts without an email\" %}\nIf you add a contact via the email parameter and there is no user/lead found on that workspace with he given email, then we will create a new contact with `role` set to `lead`.\n{% /admonition %}",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The identifier for the conversation as given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "detachContactFromConversation",
+      "description": "Detach a contact from a group conversation\n\nYou can add participants who are contacts to a conversation, on behalf of either another contact or an admin.\n\n{% admonition type=\"warning\" name=\"Contacts without an email\" %}\nIf you add a contact via the email parameter and there is no user/lead found on that workspace with he given email, then we will create a new contact with `role` set to `lead`.\n{% /admonition %}",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "conversation_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The identifier for the conversation as given by Intercom."
+        },
+        {
+          "field_name": "contact_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The identifier for the contact as given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "redactConversation",
+      "description": "Redact a conversation part\n\nYou can redact a conversation part or the source message of a conversation (as seen in the source object).\n\n{% admonition type=\"info\" name=\"Redacting parts and messages\" %}\nIf you are redacting a conversation part, it must have a `body`. If you are redacting a source message, it must have been created by a contact. We will return a `conversation_part_not_redactable` error if these criteria are not met.\n{% /admonition %}",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "convertConversationToTicket",
+      "description": "Convert a conversation to a ticket\n\nYou can convert a conversation to a ticket.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The id of the conversation to target"
+        }
+      ]
+    },
+    {
+      "tool_name": "createCustomObjectInstances",
+      "description": "Create or Update a Custom Object Instance\n\nCreate or update a custom object instance",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "getCustomObjectInstancesByExternalId",
+      "description": "Get Custom Object Instance by External ID\n\nFetch a Custom Object Instance by external_id.",
+      "fields": [
+        {
+          "field_name": "external_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the instance in the external system it originated from."
+        },
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "deleteCustomObjectInstancesById",
+      "description": "Delete a Custom Object Instance by External ID\n\nDelete a single Custom Object instance by external_id.",
+      "fields": [
+        {
+          "field_name": "external_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the instance in the external system it originated from."
+        },
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "getCustomObjectInstancesById",
+      "description": "Get Custom Object Instance by ID\n\nFetch a Custom Object Instance by id.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id or external_id of the custom object instance"
+        },
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "deleteCustomObjectInstancesByExternalId",
+      "description": "Delete a Custom Object Instance by ID\n\nDelete a single Custom Object instance using the Intercom defined id.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The Intercom defined id of the custom object instance"
+        },
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "lisDataAttributes",
+      "description": "List all data attributes\n\nYou can fetch a list of all data attributes belonging to a workspace for contacts, companies or conversations.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "model",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Specify the data attribute model to return."
+        },
+        {
+          "field_name": "include_archived",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Include archived attributes in the list. By default we return only non archived data attributes."
+        }
+      ]
+    },
+    {
+      "tool_name": "createDataAttribute",
+      "description": "Create a data attribute\n\nYou can create a data attributes for a `contact` or a `company`.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "updateDataAttribute",
+      "description": "Update a data attribute\n\n\nYou can update a data attribute.\n\n> \ud83d\udea7 Updating the data type is not possible\n>\n> It is currently a dangerous action to execute changing a data attribute's type via the API. You will need to update the type via the UI instead.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The data attribute id"
+        }
+      ]
+    },
+    {
+      "tool_name": "createDataEvent",
+      "description": "Submit a data event\n\n\nYou will need an Access Token that has write permissions to send Events. Once you have a key you can submit events via POST to the Events resource, which is located at https://api.intercom.io/events, or you can send events using one of the client libraries. When working with the HTTP API directly a client should send the event with a `Content-Type` of `application/json`.\n\nWhen using the JavaScript API, [adding the code to your app](http://docs.intercom.io/configuring-Intercom/tracking-user-events-in-your-app) makes the Events API available. Once added, you can submit an event using the `trackEvent` method. This will associate the event with the Lead or currently logged-in user or logged-out visitor/lead and send it to Intercom. The final parameter is a map that can be used to send optional metadata about the event.\n\nWith the Ruby client you pass a hash describing the event to `Intercom::Event.create`, or call the `track_user` method directly on the current user object (e.g. `user.track_event`).\n\n**NB: For the JSON object types, please note that we do not currently support nested JSON structure.**\n\n| Type            | Description                                                                                                                                                                                                     | Example                                                                           |\n| :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |\n| String          | The value is a JSON String                                                                                                                                                                                      | `\"source\":\"desktop\"`                                                              |\n| Number          | The value is a JSON Number                                                                                                                                                                                      | `\"load\": 3.67`                                                                    |\n| Date            | The key ends with the String `_date` and the value is a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time), assumed to be in the [UTC](http://en.wikipedia.org/wiki/Coordinated_Universal_Time) timezone. | `\"contact_date\": 1392036272`                                                      |\n| Link            | The value is a HTTP or HTTPS URI.                                                                                                                                                                               | `\"article\": \"https://example.org/ab1de.html\"`                                     |\n| Rich Link       | The value is a JSON object that contains `url` and `value` keys.                                                                                                                                                | `\"article\": {\"url\": \"https://example.org/ab1de.html\", \"value\":\"the dude abides\"}` |\n| Monetary Amount | The value is a JSON object that contains `amount` and `currency` keys. The `amount` key is a positive integer representing the amount in cents. The price in the example to the right denotes \u20ac349.99.          | `\"price\": {\"amount\": 34999, \"currency\": \"eur\"}`                                   |\n\n**Lead Events**\n\nWhen submitting events for Leads, you will need to specify the Lead's `id`.\n\n**Metadata behaviour**\n\n- We currently limit the number of tracked metadata keys to 10 per event. Once the quota is reached, we ignore any further keys we receive. The first 10 metadata keys are determined by the order in which they are sent in with the event.\n- It is not possible to change the metadata keys once the event has been sent. A new event will need to be created with the new keys and you can archive the old one.\n- There might be up to 24 hrs delay when you send a new metadata for an existing event.\n\n**Event de-duplication**\n\nThe API may detect and ignore duplicate events. Each event is uniquely identified as a combination of the following data - the Workspace identifier, the Contact external identifier, the Data Event name and the Data Event created time. As a result, it is **strongly recommended** to send a second granularity Unix timestamp in the `created_at` field.\n\nDuplicated events are responded to using the normal `202 Accepted` code - an error is not thrown, however repeat requests will be counted against any rate limit that is in place.\n\n### HTTP API Responses\n\n- Successful responses to submitted events return `202 Accepted` with an empty body.\n- Unauthorised access will be rejected with a `401 Unauthorized` or `403 Forbidden` response code.\n- Events sent about users that cannot be found will return a `404 Not Found`.\n- Event lists containing duplicate events will have those duplicates ignored.\n- Server errors will return a `500` response code and may contain an error message in the body.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "amount_unit",
+            "date_format",
+            "temporal_format",
+            "timezone"
+          ],
+          "confidence": "inferred",
+          "description": "Submit a data event\n\n\nYou will need an Access Token that has write permissions to send Events. Once you have a key you can submit events via POST to the Events resource, which is located at https://api.intercom.io/events, or you can send events using one of the client libraries. When working with the HTTP API directly a client should send the event with a `Content-Type` of `application/json`.\n\nWhen using the JavaScript API, [adding the code to your app](http://docs.intercom.io/configuring-Intercom/tracking-user-events-in-your-app) makes the Events API available. Once added, you can submit an event using the `trackEvent` method. This will associate the event with the Lead or currently logged-in user or logged-out visitor/lead and send it to Intercom. The final parameter is a map that can be used to send optional metadata about the event.\n\nWith the Ruby client you pass a hash describing the event to `Intercom::Event.create`, or call the `track_user` method directly on the current user object (e.g. `user.track_event`).\n\n**NB: For the JSON object types, please note that we do not currently support nested JSON structure.**\n\n| Type            | Description                                                                                                                                                                                                     | Example                                                                           |\n| :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |\n| String          | The value is a JSON String                                                                                                                                                                                      | `\"source\":\"desktop\"`                                                              |\n| Number          | The value is a JSON Number                                                                                                                                                                                      | `\"load\": 3.67`                                                                    |\n| Date            | The key ends with the String `_date` and the value is a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time), assumed to be in the [UTC](http://en.wikipedia.org/wiki/Coordinated_Universal_Time) timezone. | `\"contact_date\": 1392036272`                                                      |\n| Link            | The value is a HTTP or HTTPS URI.                                                                                                                                                                               | `\"article\": \"https://example.org/ab1de.html\"`                                     |\n| Rich Link       | The value is a JSON object that contains `url` and `value` keys.                                                                                                                                                | `\"article\": {\"url\": \"https://example.org/ab1de.html\", \"value\":\"the dude abides\"}` |\n| Monetary Amount | The value is a JSON object that contains `amount` and `currency` keys. The `amount` key is a positive integer representing the amount in cents. The price in the example to the right denotes \u20ac349.99.          | `\"price\": {\"amount\": 34999, \"currency\": \"eur\"}`                                   |\n\n**Lead Events**\n\nWhen submitting events for Leads, you will need to specify the Lead's `id`.\n\n**Metadata behaviour**\n\n- We currently limit the number of tracked metadata keys to 10 per event. Once the quota is reached, we ignore any further keys we receive. The first 10 metadata keys are determined by the order in which they are sent in with the event.\n- It is not possible to change the metadata keys once the event has been sent. A new event will need to be created with the new keys and you can archive the old one.\n- There might be up to 24 hrs delay when you send a new metadata for an existing event.\n\n**Event de-duplication**\n\nThe API may detect and ignore duplicate events. Each event is uniquely identified as a combination of the following data - the Workspace identifier, the Contact external identifier, the Data Event name and the Data Event created time. As a result, it is **strongly recommended** to send a second granularity Unix timestamp in the `created_at` field.\n\nDuplicated events are responded to using the normal `202 Accepted` code - an error is not thrown, however repeat requests will be counted against any rate limit that is in place.\n\n### HTTP API Responses\n\n- Successful responses to submitted events return `202 Accepted` with an empty body.\n- Unauthorised access will be rejected with a `401 Unauthorized` or `403 Forbidden` response code.\n- Events sent about users that cannot be found will return a `404 Not Found`.\n- Event lists containing duplicate events will have those duplicates ignored.\n- Server errors will return a `500` response code and may contain an error message in the body."
+        }
+      ]
+    },
+    {
+      "tool_name": "lisDataEvents",
+      "description": "List all data events\n\n\n> \ud83d\udea7\n>\n> Please note that you can only 'list' events that are less than 90 days old. Event counts and summaries will still include your events older than 90 days but you cannot 'list' these events individually if they are older than 90 days\n\nThe events belonging to a customer can be listed by sending a GET request to `https://api.intercom.io/events` with a user or lead identifier along with a `type` parameter. The identifier parameter can be one of `user_id`, `email` or `intercom_user_id`. The `type` parameter value must be `user`.\n\n- `https://api.intercom.io/events?type=user&user_id={user_id}`\n- `https://api.intercom.io/events?type=user&email={email}`\n- `https://api.intercom.io/events?type=user&intercom_user_id={id}` (this call can be used to list leads)\n\nThe `email` parameter value should be [url encoded](http://en.wikipedia.org/wiki/Percent-encoding) when sending.\n\nYou can optionally define the result page size as well with the `per_page` parameter.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "filter",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object"
+        },
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The value must be user"
+        },
+        {
+          "field_name": "summary",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "summary flag"
+        }
+      ]
+    },
+    {
+      "tool_name": "dataEventSummaries",
+      "description": "Create event summaries\n\nCreate event summaries for a user. Event summaries are used to track the number of times an event has occurred, the first time it occurred and the last time it occurred.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "createDataExport",
+      "description": "Create content data export\n\nTo create your export job, you need to send a `POST` request to the export endpoint `https://api.intercom.io/export/content/data`.\n\nThis endpoint exports **message delivery and engagement data** for outbound content (Emails, Posts, Custom Bots, Surveys, Tours, Series, and more). The exported data includes who received each message, when they received it, and how they engaged with it (opens, clicks, replies, completions, dismissals, unsubscribes, and bounces). It does not export raw message or conversation content.\n\nThe only parameters you need to provide are the range of dates that you want exported.\n\n>\ud83d\udea7 Limit of one active job\n>\n> You can only have one active job per workspace. You will receive a HTTP status code of 429 with the message Exceeded rate limit of 1 pending message data export jobs if you attempt to create a second concurrent job.\n\n>\u2757\ufe0f Updated_at not included\n>\n> It should be noted that the timeframe only includes messages sent during the time period and not messages that were only updated during this period. For example, if a message was updated yesterday but sent two days ago, you would need to set the created_at_after date before the message was sent to include that in your retrieval job.\n\n>\ud83d\udcd8 Date ranges are inclusive\n>\n> Requesting data for 2018-06-01 until 2018-06-30 will get all data for those days including those specified - e.g. 2018-06-01 00:00:00 until 2018-06-30 23:59:99.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "getDataExport",
+      "description": "Show content data export\n\nYou can view the status of your job by sending a `GET` request to the URL\n`https://api.intercom.io/export/content/data/{job_identifier}` - the `{job_identifier}` is the value returned in the response when you first created the export job. More on it can be seen in the Export Job Model.\n\n> \ud83d\udea7 Jobs expire after two days\n> All jobs that have completed processing (and are thus available to download from the provided URL) will have an expiry limit of two days from when the export ob completed. After this, the data will no longer be available.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "job_identifier",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "job_identifier"
+        }
+      ]
+    },
+    {
+      "tool_name": "cancelDataExport",
+      "description": "Cancel content data export\n\nYou can cancel your job",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "job_identifier",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "job_identifier"
+        }
+      ]
+    },
+    {
+      "tool_name": "downloadDataExport",
+      "description": "Download content data export\n\nWhen a job has a status of complete, and thus a filled download_url, you can download your data by hitting that provided URL, formatted like so: https://api.intercom.io/download/content/data/xyz1234.\n\nYour exported message data will be streamed continuously back down to you in a gzipped CSV format.\n\n> \ud83d\udcd8 Octet header required\n>\n> You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "job_identifier",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "job_identifier"
+        }
+      ]
+    },
+    {
+      "tool_name": "createMessage",
+      "description": "Create a message\n\nYou can create a message that has been initiated by an admin. The conversation can be either an in-app message or an email.\n\n> \ud83d\udea7 Sending for visitors\n>\n> There can be a short delay between when a contact is created and when a contact becomes available to be messaged through the API. A 404 Not Found error will be returned in this case.\n\nThis will return the Message model that has been created.\n\n> \ud83d\udea7 Retrieving Associated Conversations\n>\n> As this is a message, there will be no conversation present until the contact responds. Once they do, you will have to search for a contact's conversations with the id of the message.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "listNewsItems",
+      "description": "List all news items\n\nYou can fetch a list of all news items",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "createNewsItem",
+      "description": "Create a news item\n\nYou can create a news item",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "retrieveNewsItem",
+      "description": "Retrieve a news item\n\nYou can fetch the details of a single news item.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier for the news item which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "updateNewsItem",
+      "description": "Update a news item",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier for the news item which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "deleteNewsItem",
+      "description": "Delete a news item\n\nYou can delete a single news item.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier for the news item which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "listLiveNewsfeedItems",
+      "description": "List all live newsfeed items\n\nYou can fetch a list of all news items that are live on a given newsfeed",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the news feed item which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "listNewsfeeds",
+      "description": "List all newsfeeds\n\nYou can fetch a list of all newsfeeds",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "retrieveNewsfeed",
+      "description": "Retrieve a newsfeed\n\nYou can fetch the details of a single newsfeed",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the news feed item which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "retrieveNote",
+      "description": "Retrieve a note\n\nYou can fetch the details of a single note.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier of a given note"
+        }
+      ]
+    },
+    {
+      "tool_name": "listSegments",
+      "description": "List all segments\n\nYou can fetch a list of all segments.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "include_count",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "It includes the count of contacts that belong to each segment."
+        }
+      ]
+    },
+    {
+      "tool_name": "retrieveSegment",
+      "description": "Retrieve a segment\n\nYou can fetch the details of a single segment.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identified of a given segment."
+        }
+      ]
+    },
+    {
+      "tool_name": "listSubscriptionTypes",
+      "description": "List subscription types\n\nYou can list all subscription types. A list of subscription type objects will be returned.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "createPhoneSwitch",
+      "description": "Create a phone Switch\n\nYou can use the API to deflect phone calls to the Intercom Messenger.\nCalling this endpoint will send an SMS with a link to the Messenger to the phone number specified.\n\nIf custom attributes are specified, they will be added to the user or lead's custom data attributes.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "listTags",
+      "description": "List all tags\n\nYou can fetch a list of all tags for a given workspace.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "createTag",
+      "description": "Create or update a tag, Tag or untag companies, Tag contacts\n\nYou can use this endpoint to perform the following operations:\n\n  **1. Create a new tag:** You can create a new tag by passing in the tag name as specified in \"Create or Update Tag Request Payload\" described below.\n\n  **2. Update an existing tag:** You can update an existing tag by passing the id of the tag as specified in \"Create or Update Tag Request Payload\" described below.\n\n  **3. Tag Companies:** You can tag single company or a list of companies. You can tag a company by passing in the tag name and the company details as specified in \"Tag Company Request Payload\" described below. Also, if the tag doesn't exist then a new one will be created automatically.\n\n  **4. Untag Companies:** You can untag a single company or a list of companies. You can untag a company by passing in the tag id and the company details as specified in \"Untag Company Request Payload\" described below.\n\n  **5. Tag Multiple Users:** You can tag a list of users. You can tag the users by passing in the tag name and the user details as specified in \"Tag Users Request Payload\" described below.\n\nEach operation will return a tag object.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "findTag",
+      "description": "Find a specific tag\n\nYou can fetch the details of tags that are on the workspace by their id.\nThis will return a tag object.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier of a given tag"
+        }
+      ]
+    },
+    {
+      "tool_name": "deleteTag",
+      "description": "Delete tag\n\nYou can delete the details of tags that are on the workspace by passing in the id.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier of a given tag"
+        }
+      ]
+    },
+    {
+      "tool_name": "listTeams",
+      "description": "List all teams\n\nThis will return a list of team objects for the App.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "retrieveTeam",
+      "description": "Retrieve a team\n\nYou can fetch the details of a single team, containing an array of admins that belong to this team.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier of a given team."
+        }
+      ]
+    },
+    {
+      "tool_name": "listTicketStates",
+      "description": "List all ticket states\n\nYou can get a list of all ticket states for a workspace.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "createTicketTypeAttribute",
+      "description": "Create a new attribute for a ticket type\n\nYou can create a new attribute for a ticket type.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "ticket_type_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the ticket type which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "updateTicketTypeAttribute",
+      "description": "Update an existing attribute for a ticket type\n\nYou can update an existing attribute for a ticket type.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "ticket_type_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the ticket type which is given by Intercom."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the ticket type attribute which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "listTicketTypes",
+      "description": "List all ticket types\n\nYou can get a list of all ticket types for a workspace.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "createTicketType",
+      "description": "Create a ticket type\n\nYou can create a new ticket type.\n> \ud83d\udcd8 Creating ticket types.\n>\n> Every ticket type will be created with two default attributes: _default_title_ and _default_description_.\n> For the `icon` propery, use an emoji from [Twemoji Cheatsheet](https://twemoji-cheatsheet.vercel.app/)",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "getTicketType",
+      "description": "Retrieve a ticket type\n\nYou can fetch the details of a single ticket type.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the ticket type which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "updateTicketType",
+      "description": "Update a ticket type\n\n\nYou can update a ticket type.\n\n> \ud83d\udcd8 Updating a ticket type.\n>\n> For the `icon` propery, use an emoji from [Twemoji Cheatsheet](https://twemoji-cheatsheet.vercel.app/)",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the ticket type which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "replyTicket",
+      "description": "Reply to a ticket\n\nYou can reply to a ticket with a message from an admin or on behalf of a contact, or with a note for admins.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id of the ticket to target.\n{% admonition type=\"info\" name=\"Not the Inbox ticket ID\" %}\nThis is the internal `id` field from the API response, not the `ticket_id` displayed in the Intercom Inbox (e.g., #12345). Use the `id` value from the ticket object returned by the API.\n{% /admonition %}\n"
+        },
+        {
+          "field_name": "skip_notifications",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Option to disable notifications when replying to a Ticket."
+        }
+      ]
+    },
+    {
+      "tool_name": "attachTagToTicket",
+      "description": "Add tag to a ticket\n\nYou can tag a specific ticket. This will return a tag object for the tag that was added to the ticket.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "ticket_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ticket_id"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the tag which is given by Intercom"
+        },
+        {
+          "field_name": "admin_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the admin which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "detachTagFromTicket",
+      "description": "Remove tag from a ticket\n\nYou can remove tag from a specific ticket. This will return a tag object for the tag that was removed from the ticket.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "ticket_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ticket_id"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the tag which is given by Intercom"
+        },
+        {
+          "field_name": "admin_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the admin which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "createTicket",
+      "description": "Create a ticket\n\nYou can create a new ticket.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "skip_notifications",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Option to disable notifications when a Ticket is created."
+        }
+      ]
+    },
+    {
+      "tool_name": "updateTicket",
+      "description": "Update a ticket\n\nYou can update a ticket.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the ticket which is given by Intercom.\n{% admonition type=\"info\" name=\"Not the Inbox ticket ID\" %}\nThis is the internal `id` field from the API response, not the `ticket_id` displayed in the Intercom Inbox (e.g., #12345). Use the `id` value from the ticket object returned by the API.\n{% /admonition %}\n"
+        },
+        {
+          "field_name": "skip_notifications",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Option to disable notifications when a Ticket is updated."
+        }
+      ]
+    },
+    {
+      "tool_name": "getTicket",
+      "description": "Retrieve a ticket\n\nYou can fetch the details of a single ticket.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the ticket which is given by Intercom.\n{% admonition type=\"info\" name=\"Not the Inbox ticket ID\" %}\nThis is the internal `id` field from the API response, not the `ticket_id` displayed in the Intercom Inbox (e.g., #12345). Use the `id` value from the ticket object returned by the API.\n{% /admonition %}\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "deleteTicket",
+      "description": "Delete a ticket\n\n{% admonition type=\"warning\" name=\"Irreversible operation\" %}\nDeleting a ticket is permanent and cannot be reversed.\n{% /admonition %}\n\nDeleting a ticket permanently removes it from the inbox. All sensitive data is deleted, including admin and user replies, ticket attributes, uploads, and related content. The ticket will still appear in reporting, though some data may be incomplete due to the deletion.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The unique identifier for the ticket which is given by Intercom."
+        }
+      ]
+    },
+    {
+      "tool_name": "searchTickets",
+      "description": "Search tickets\n\nYou can search for multiple tickets by the value of their attributes in order to fetch exactly which ones you want.\n\nTo search for tickets, you send a `POST` request to `https://api.intercom.io/tickets/search`.\n\nThis will accept a query object in the body which will define your filters.\n{% admonition type=\"warning\" name=\"Optimizing search queries\" %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the `AND` and `OR` operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is `20` results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the `starting_after` param.\n{% /admonition %}\n\n### Nesting & Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiples there can be:\n- There's a limit of max 2 nested filters\n- There's a limit of max 15 filters for each AND or OR group\n\n### Accepted Fields\n\nMost keys listed as part of the Ticket model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as `created_at` accepts a date, the `value` cannot be a string such as `\"foobar\"`).\nThe `source.body` field is unique as the search will not be performed against the entire value, but instead against every element of the value separately. For example, when searching for a conversation with a `\"I need support\"` body - the query should contain a `=` operator with the value `\"support\"` for such conversation to be returned. A query with a `=` operator and a `\"need support\"` value will not yield a result.\n\n| Field                                     | Type                                                                                     |\n| :---------------------------------------- | :--------------------------------------------------------------------------------------- |\n| id                                        | String                                                                                   |\n| created_at                                | Date (UNIX timestamp)                                                                    |\n| updated_at                                | Date (UNIX timestamp)                                                                    |\n| title                           | String                                                                                   |\n| description                     | String                                                                                   |\n| category                                  | String                                                                                   |\n| ticket_type_id                            | String                                                                                   |\n| contact_ids                               | String                                                                                   |\n| teammate_ids                              | String                                                                                   |\n| admin_assignee_id                         | String                                                                                   |\n| team_assignee_id                          | String                                                                                   |\n| open                                      | Boolean                                                                                  |\n| state                                     | String                                                                                   |\n| snoozed_until                             | Date (UNIX timestamp)                                                                    |\n| ticket_attribute.{id}                     | String or Boolean or Date (UNIX timestamp) or Float or Integer                           |\n\n### Accepted Operators\n\n{% admonition type=\"info\" name=\"Searching based on `created_at`\" %}\n  You may use the `<=` or `>=` operators to search by `created_at`.\n{% /admonition %}\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (`\"=\"`). The operator has to be compatible with the field's type  (eg. you cannot search with `>` for a given string value as it's only compatible for integer's and dates).\n\n| Operator | Valid Types                    | Description                                                  |\n| :------- | :----------------------------- | :----------------------------------------------------------- |\n| =        | All                            | Equals                                                       |\n| !=       | All                            | Doesn't Equal                                                |\n| IN       | All                            | In  Shortcut for `OR` queries  Values most be in Array       |\n| NIN      | All                            | Not In  Shortcut for `OR !` queries  Values must be in Array |\n| >        | Integer  Date (UNIX Timestamp) | Greater (or equal) than                                      |\n| <       | Integer  Date (UNIX Timestamp) | Lower (or equal) than                                        |\n| ~        | String                         | Contains                                                     |\n| !~       | String                         | Doesn't Contain                                              |\n| ^        | String                         | Starts With                                                  |\n| $        | String                         | Ends With                                                    |",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Search tickets\n\nYou can search for multiple tickets by the value of their attributes in order to fetch exactly which ones you want.\n\nTo search for tickets, you send a `POST` request to `https://api.intercom.io/tickets/search`.\n\nThis will accept a query object in the body which will define your filters.\n{% admonition type=\"warning\" name=\"Optimizing search queries\" %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the `AND` and `OR` operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is `20` results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the `starting_after` param.\n{% /admonition %}\n\n### Nesting & Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiples there can be:\n- There's a limit of max 2 nested filters\n- There's a limit of max 15 filters for each AND or OR group\n\n### Accepted Fields\n\nMost keys listed as part of the Ticket model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as `created_at` accepts a date, the `value` cannot be a string such as `\"foobar\"`).\nThe `source.body` field is unique as the search will not be performed against the entire value, but instead against every element of the value separately. For example, when searching for a conversation with a `\"I need support\"` body - the query should contain a `=` operator with the value `\"support\"` for such conversation to be returned. A query with a `=` operator and a `\"need support\"` value will not yield a result.\n\n| Field                                     | Type                                                                                     |\n| :---------------------------------------- | :--------------------------------------------------------------------------------------- |\n| id                                        | String                                                                                   |\n| created_at                                | Date (UNIX timestamp)                                                                    |\n| updated_at                                | Date (UNIX timestamp)                                                                    |\n| title                           | String                                                                                   |\n| description                     | String                                                                                   |\n| category                                  | String                                                                                   |\n| ticket_type_id                            | String                                                                                   |\n| contact_ids                               | String                                                                                   |\n| teammate_ids                              | String                                                                                   |\n| admin_assignee_id                         | String                                                                                   |\n| team_assignee_id                          | String                                                                                   |\n| open                                      | Boolean                                                                                  |\n| state                                     | String                                                                                   |\n| snoozed_until                             | Date (UNIX timestamp)                                                                    |\n| ticket_attribute.{id}                     | String or Boolean or Date (UNIX timestamp) or Float or Integer                           |\n\n### Accepted Operators\n\n{% admonition type=\"info\" name=\"Searching based on `created_at`\" %}\n  You may use the `<=` or `>=` operators to search by `created_at`.\n{% /admonition %}\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (`\"=\"`). The operator has to be compatible with the field's type  (eg. you cannot search with `>` for a given string value as it's only compatible for integer's and dates).\n\n| Operator | Valid Types                    | Description                                                  |\n| :------- | :----------------------------- | :----------------------------------------------------------- |\n| =        | All                            | Equals                                                       |\n| !=       | All                            | Doesn't Equal                                                |\n| IN       | All                            | In  Shortcut for `OR` queries  Values most be in Array       |\n| NIN      | All                            | Not In  Shortcut for `OR !` queries  Values must be in Array |\n| >        | Integer  Date (UNIX Timestamp) | Greater (or equal) than                                      |\n| <       | Integer  Date (UNIX Timestamp) | Lower (or equal) than                                        |\n| ~        | String                         | Contains                                                     |\n| !~       | String                         | Doesn't Contain                                              |\n| ^        | String                         | Starts With                                                  |\n| $        | String                         | Ends With                                                    |"
+        }
+      ]
+    },
+    {
+      "tool_name": "updateVisitor",
+      "description": "Update a visitor\n\nSending a PUT request to `/visitors` will result in an update of an existing Visitor.\n\n**Option 1.** You can update a visitor by passing in the `user_id` of the visitor in the Request body.\n\n**Option 2.** You can update a visitor by passing in the `id` of the visitor in the Request body.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "retrieveVisitorWithUserId",
+      "description": "Retrieve a visitor with User ID\n\nYou can fetch the details of a single visitor.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "user_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user_id of the Visitor you want to retrieve."
+        }
+      ]
+    },
+    {
+      "tool_name": "convertVisitor",
+      "description": "Convert a visitor\n\nYou can merge a Visitor to a Contact of role type `lead` or `user`.\n\n> \ud83d\udcd8 What happens upon a visitor being converted?\n>\n> If the User exists, then the Visitor will be merged into it, the Visitor deleted and the User returned. If the User does not exist, the Visitor will be converted to a User, with the User identifiers replacing it's Visitor identifiers.",
+      "fields": [
+        {
+          "field_name": "Intercom-Version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "n_tools": 133,
+    "n_fields": 260,
+    "n_declared": 0,
+    "n_inferred": 9,
+    "n_unknown": 251,
+    "n_dim_signals": 24,
+    "dim_hits": {
+      "date_format": 7,
+      "temporal_format": 6,
+      "sort_direction": 4,
+      "state_filter": 1,
+      "path_convention": 1,
+      "hl7_v2_segment": 1,
+      "id_offset": 2,
+      "amount_unit": 1,
+      "timezone": 1
+    }
+  },
+  "capture_hash": "3f2ed65dfb3648d92b90e53e285903d32d3f0a8fe3b53ad32cad30a78b0a04e8"
+}

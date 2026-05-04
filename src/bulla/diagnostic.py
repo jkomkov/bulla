@@ -52,9 +52,28 @@ def diagnose(
             fields on the returned ``Diagnostic`` (leverage scores,
             N_eff, coloops, loops, greedy disclosure set). Defaults to
             False so existing callers see no behavior change.
+
+    Note on `coherence_fee` validity (Sprint 8):
+        The fee formula `coherence_fee = h1_obs − h1_internal = rank_internal − rank_obs`
+        is only interpretable as a non-negative coherence fee when
+        `rank_internal ≥ rank_obs`. This *well-formedness* predicate is
+        empirically true for 967/967 real-MCP composition pairs sampled in
+        Sprint 8, but fails on ~40% of compositions produced by the broad
+        `bulla.model` API (random-stress regime). Callers handling
+        compositions of unknown provenance should consult `bulla.regime.classify`
+        and check `is_well_formed_for_fee` before interpreting a negative
+        `coherence_fee` as a fee.
     """
     tool_map = {t.name: t for t in comp.tools}
 
+    # Naming caveat (Sprint 8 audit): `delta_full` here is built with
+    # `use_internal=True`, which selects the *internal-state* fields ONLY,
+    # not the union of internal and observable. So `delta_full` is more
+    # accurately `delta_internal` — the rank measures obstruction visible
+    # from the hidden-state side. The original "full" naming is preserved
+    # to avoid a code-wide rename. See `bulla.regime` for the well-formedness
+    # predicate (`rank_internal ≥ rank_obs`) that ensures `coherence_fee` is
+    # non-negative; in real-MCP corpora this holds in 967/967 pairs sampled.
     delta_obs, v_obs, e_obs = build_coboundary(
         comp.tools, comp.edges, use_internal=False
     )
@@ -63,10 +82,10 @@ def diagnose(
     )
 
     rank_obs = matrix_rank(delta_obs)
-    rank_full = matrix_rank(delta_full)
+    rank_full = matrix_rank(delta_full)  # actually rank_internal
     dim_c1 = len(e_obs)
     h1_obs = dim_c1 - rank_obs
-    h1_full = dim_c1 - rank_full
+    h1_full = dim_c1 - rank_full         # actually h1_internal
 
     blind_spots: list[BlindSpot] = []
     for edge in comp.edges:

@@ -13,29 +13,65 @@
 Every `values_registry.hash` is one of two forms:
 
 - **`sha256:<64-hex>`** — a real content hash from an actual fetch.
-  The verifier compares fetched content against this hash. Today,
-  6 open packs carry real hashes (UCUM, NAICS 2022, ISO 639,
-  IANA Media Types, FHIR R4, FHIR R5).
+  The verifier compares fetched content against this hash. After the
+  Dimension Pack Enhancement Sprint (Phase 1), **all 11 fetchable
+  open packs carry real hashes**: UCUM, NAICS 2022, ISO 639, IANA
+  Media Types, FHIR R4, FHIR R5, FIX 4.4, FIX 5.0, GS1,
+  UN-EDIFACT, ICD-10-CM.
 - **`placeholder:<reason>`** — a sentinel indicating the pack is
   structurally ready to verify but no real ingest has happened yet.
   Two reasons in use today:
   - `placeholder:awaiting-ingest` — open registry, hash will be
     computed by `compute_real_hashes.py` once the URL is fetchable
-    in the build environment.
+    in the build environment. **No open pack should remain on this
+    sentinel post-sprint.** The provenance-invariant test
+    (`tests/test_pack_provenance_invariants.py::TestOpenPackHashCoverage`)
+    fails CI if it ever does.
   - `placeholder:awaiting-license` — license-gated registry; a
     consumer holding the license will substitute the real hash
-    after performing their own ingest.
+    after performing their own ingest. The 5 restricted packs
+    (`who-icd-10`, `swift-mt-mx`, `hl7-v2`, `umls-mappings`,
+    `iso-20022`) all stay on this sentinel by design.
 
 The validator REJECTS literal `sha256:0...0` (a valid-shaped hash
 that the verifier would silently treat as "checked, mismatched").
 Use the placeholder sentinel instead.
 
+Real hashes propagate to `derives_from.source_hash` whenever
+`derives_from.source_uri == values_registry.uri` (so the source-
+hash and registry-hash bind to the same fetched artifact). The
+Phase-3 invariant test
+(`TestSourceHashUriBinding::test_when_source_uri_matches_values_registry_uri_hashes_agree`)
+fails CI if the two ever drift.
+
 Refresh the real-hash subset by running:
 
 ```bash
+# 1. Re-fetch every open registry (browser-UA fallback + retries).
 python scripts/standards-ingest/compute_real_hashes.py
-# Then re-run any affected build_*.py and validate
+
+# 2. Regenerate every seed pack whose registry was refreshed.
+for s in iana_mime ucum naics iso_639 fix gs1 un_edifact icd_10_cm fhir; do
+  case "$s" in
+    fix)  python scripts/standards-ingest/build_fix.py 4.4 > src/bulla/packs/seed/fix-4.4.yaml
+          python scripts/standards-ingest/build_fix.py 5.0 > src/bulla/packs/seed/fix-5.0.yaml ;;
+    fhir) python scripts/standards-ingest/build_fhir.py R4 > src/bulla/packs/seed/fhir-r4.yaml
+          python scripts/standards-ingest/build_fhir.py R5 > src/bulla/packs/seed/fhir-r5.yaml ;;
+    iana_mime)   python scripts/standards-ingest/build_iana_mime.py   > src/bulla/packs/seed/iana-media-types.yaml ;;
+    ucum)        python scripts/standards-ingest/build_ucum.py        > src/bulla/packs/seed/ucum.yaml ;;
+    naics)       python scripts/standards-ingest/build_naics.py       > src/bulla/packs/seed/naics-2022.yaml ;;
+    iso_639)     python scripts/standards-ingest/build_iso_639.py     > src/bulla/packs/seed/iso-639.yaml ;;
+    gs1)         python scripts/standards-ingest/build_gs1.py         > src/bulla/packs/seed/gs1.yaml ;;
+    un_edifact)  python scripts/standards-ingest/build_un_edifact.py  > src/bulla/packs/seed/un-edifact.yaml ;;
+    icd_10_cm)   python scripts/standards-ingest/build_icd_10_cm.py   > src/bulla/packs/seed/icd-10-cm.yaml ;;
+  esac
+done
+
+# 3. Validate.
 for f in src/bulla/packs/seed/*.yaml; do python -m bulla pack validate "$f"; done
+
+# 4. Confirm provenance invariants.
+python -m pytest tests/test_pack_provenance_invariants.py
 ```
 
 ## What lives where

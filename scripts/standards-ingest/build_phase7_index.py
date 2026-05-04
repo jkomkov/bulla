@@ -13,16 +13,20 @@ the Phase 7 deliverable:
 
 Sources for the seed (per the plan's diversity-first principle):
 
-  1. **Existing 63 MCP manifests** captured at
+  1. **Existing 57 MCP manifests** captured at
      ``calibration/data/registry/manifests/`` — already real-world,
      no network required.
   2. **Curated synthetic schemas** for canonical commercial seams
      (Stripe, GitHub, Shopify, Slack, Twilio, AWS S3, ICD-10-CM,
      UCUM-bearing FHIR Quantity) — small, illustrative, hand-built
-     to exercise specific seed-pack dimensions.
-  3. **Postman / SwaggerHub / RapidAPI** — placeholder source_id
-     entries that will be filled in by a follow-on ingest run when
-     a network-fetcher is wired in.
+     to exercise specific seed-pack dimensions. **These are
+     pipeline-validation fixtures, not real-world coverage.**
+  3. **Real public OpenAPI/GraphQL specs** fetched at build time
+     (Phase 7-growth lever). The fetcher (``_external_fetcher.py``)
+     content-addresses each download and caches under
+     ``calibration/data/api-registry/_cache/``. A failed fetch
+     skips the entry and continues; one bad URL must not block
+     the whole rebuild.
 
 The pipeline accepts any future source addition without modification;
 this script's curation is just the Phase 7 seed.
@@ -31,6 +35,7 @@ this script's curation is just the Phase 7 seed.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -46,6 +51,14 @@ from bulla.api_registry import (  # noqa: E402
     capture_to_dir,
 )
 from bulla.infer.classifier import _reset_taxonomy_cache, configure_packs  # noqa: E402
+
+# Local helper — must not pull in src/bulla/.
+sys.path.insert(0, str(Path(__file__).parent))
+from _external_fetcher import (  # noqa: E402
+    FetchError,
+    ParseError,
+    fetch_and_parse,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -63,6 +76,10 @@ def _captured_mcp_dir() -> Path:
 
 def _api_registry_dir() -> Path:
     return REPO_ROOT / "calibration" / "data" / "api-registry"
+
+
+def _external_cache_dir() -> Path:
+    return _api_registry_dir() / "_cache"
 
 
 # ── Curated synthetic schemas (commercial seams) ─────────────────────
@@ -492,7 +509,7 @@ def gs1_traceability_openapi() -> dict:
     }
 
 
-SYNTHETIC_SOURCES = [
+SYNTHETIC_SOURCES: list[tuple[str, str, callable]] = [
     ("openapi", "stripe-charges",        stripe_charges_openapi),
     ("graphql", "shopify-admin",         shopify_admin_graphql),
     ("openapi", "github-v3",             github_v3_openapi),
@@ -502,6 +519,210 @@ SYNTHETIC_SOURCES = [
     ("openapi", "fix-trading-orders",    fix_trade_openapi),
     ("openapi", "gs1-traceability",      gs1_traceability_openapi),
 ]
+
+
+# ── Curated real public schemas (Phase 7 growth) ─────────────────────
+#
+# Each entry is (source_kind, source_id, url). The source_id must not
+# collide with a SYNTHETIC_SOURCES entry — by convention the real
+# entries carry a vendor-flavored or version-flavored suffix.
+#
+# These were probed at curation time and confirmed reachable. Network
+# failures during a build are non-fatal — the pipeline records the
+# skip and continues. To add or refresh entries, run the build; to
+# force a refetch of a cached URL, delete the entry from
+# ``_cache/manifest.json``.
+
+EXTERNAL_SOURCES: list[tuple[str, str, str]] = [
+    # Canonical official OpenAPI specs from vendor repos.
+    (
+        "openapi", "github-rest",
+        "https://raw.githubusercontent.com/github/rest-api-description/main/"
+        "descriptions/api.github.com/api.github.com.json",
+    ),
+    (
+        "openapi", "stripe-openapi",
+        "https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.json",
+    ),
+    (
+        "openapi", "slack-web-official",
+        "https://raw.githubusercontent.com/slackapi/slack-api-specs/master/"
+        "web-api/slack_web_openapi_v2.json",
+    ),
+    (
+        "openapi", "twilio-2010",
+        "https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/"
+        "twilio_api_v2010.json",
+    ),
+    (
+        "openapi", "discord-api",
+        "https://raw.githubusercontent.com/discord/discord-api-spec/main/"
+        "specs/openapi.json",
+    ),
+    (
+        "openapi", "spotify-web",
+        "https://raw.githubusercontent.com/sonallux/spotify-web-api/main/"
+        "fixed-spotify-open-api.yml",
+    ),
+    (
+        "openapi", "box-api",
+        "https://raw.githubusercontent.com/box/box-openapi/main/openapi.json",
+    ),
+    (
+        "openapi", "intercom-2-13",
+        "https://raw.githubusercontent.com/intercom/Intercom-OpenAPI/main/"
+        "descriptions/2.13/api.intercom.io.yaml",
+    ),
+    (
+        "openapi", "zoom-v2",
+        "https://raw.githubusercontent.com/zoom/api/master/openapi.v2.json",
+    ),
+    (
+        "openapi", "plaid-api",
+        "https://raw.githubusercontent.com/plaid/plaid-openapi/master/"
+        "2020-09-14.yml",
+    ),
+    (
+        "openapi", "asana-api",
+        "https://raw.githubusercontent.com/asana/openapi/master/defs/"
+        "asana_oas.yaml",
+    ),
+    (
+        "openapi", "weather-gov",
+        "https://api.weather.gov/openapi.json",
+    ),
+    # APIs.guru directory snapshots — community-vetted OpenAPI for
+    # vendors that don't publish a single canonical URL we can hit.
+    (
+        "openapi", "openai-platform",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/openai.com/1.2.0/openapi.yaml",
+    ),
+    (
+        "openapi", "notion-api",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/notion.com/1.0.0/openapi.yaml",
+    ),
+    (
+        "openapi", "square-connect",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/squareup.com/2.0/openapi.yaml",
+    ),
+    (
+        "openapi", "sendgrid-api",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/sendgrid.com/1.0.0/openapi.yaml",
+    ),
+    (
+        "openapi", "plaid-apis-guru",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/plaid.com/2020-09-14_1.345.1/openapi.yaml",
+    ),
+    (
+        "openapi", "twilio-apis-guru",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/twilio.com/api/1.55.0/openapi.yaml",
+    ),
+    (
+        "openapi", "spotify-apis-guru",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/spotify.com/1.0.0/openapi.yaml",
+    ),
+    (
+        "openapi", "stripe-apis-guru",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/stripe.com/2022-11-15/openapi.yaml",
+    ),
+    (
+        "openapi", "zoom-apis-guru",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/zoom.us/2.0.0/openapi.yaml",
+    ),
+    (
+        "openapi", "slack-apis-guru",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/slack.com/1.7.0/openapi.yaml",
+    ),
+    # Healthcare valuesets (FHIR R4/R5 official). These are valueset
+    # JSON, not full OpenAPI. The capture pipeline accepts any dict;
+    # the classifier just runs over their fields.
+    (
+        "openapi", "fhir-r4-resource-types",
+        "https://hl7.org/fhir/R4/valueset-resource-types.json",
+    ),
+    (
+        "openapi", "fhir-r5-resource-types",
+        "https://hl7.org/fhir/R5/valueset-resource-types.json",
+    ),
+    # Cloud / infrastructure / dev-tooling APIs
+    (
+        "openapi", "digitalocean-api",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/digitalocean.com/2.0/openapi.yaml",
+    ),
+    (
+        "openapi", "linode-api",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/linode.com/4.151.1/openapi.yaml",
+    ),
+    (
+        "openapi", "atlassian-jira",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/atlassian.com/jira/1001.0.0-SNAPSHOT/openapi.yaml",
+    ),
+    (
+        "openapi", "circleci-v1",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/circleci.com/v1/openapi.yaml",
+    ),
+    (
+        "openapi", "wikimedia-api",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/wikimedia.org/1.0.0/swagger.yaml",
+    ),
+    (
+        "openapi", "mailchimp-3",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/mailchimp.com/3.0.55/openapi.yaml",
+    ),
+    # Google APIs — multiple surfaces, each touches different
+    # dimensions (calendar → temporal, drive → mime, youtube →
+    # language, sheets → unit-of-measure-adjacent fields).
+    (
+        "openapi", "google-calendar",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/googleapis.com/calendar/v3/openapi.yaml",
+    ),
+    (
+        "openapi", "google-gmail",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/googleapis.com/gmail/v1/openapi.yaml",
+    ),
+    (
+        "openapi", "google-drive",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/googleapis.com/drive/v3/openapi.yaml",
+    ),
+    (
+        "openapi", "google-sheets",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/googleapis.com/sheets/v4/openapi.yaml",
+    ),
+    (
+        "openapi", "google-youtube",
+        "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/"
+        "APIs/googleapis.com/youtube/v3/openapi.yaml",
+    ),
+]
+
+
+# Toggle: set BULLA_NO_NETWORK=1 to skip external fetches entirely
+# (deterministic builds in offline CI; the cache is honored if it
+# already covers a URL).
+
+
+def _network_disabled() -> bool:
+    return os.environ.get("BULLA_NO_NETWORK", "").strip() not in ("", "0", "false", "False")
 
 
 # ── Pipeline driver ──────────────────────────────────────────────────
@@ -562,9 +783,64 @@ def main() -> None:
         synthetic_count += 1
     print(f"  {synthetic_count} synthetic schemas captured", file=sys.stderr)
 
-    # 3. Aggregate
+    # 3. Curated real external schemas (network-fetched + cached)
+    if _network_disabled():
+        print(
+            "Skipping external real-schema fetches "
+            "(BULLA_NO_NETWORK=1)…",
+            file=sys.stderr,
+        )
+        external_count = 0
+        external_skipped = 0
+    else:
+        print(
+            f"Capturing {len(EXTERNAL_SOURCES)} real external schemas "
+            "(cached at calibration/data/api-registry/_cache/)…",
+            file=sys.stderr,
+        )
+        cache_dir = _external_cache_dir()
+        external_count = 0
+        external_skipped = 0
+        for source_kind, source_id, url in EXTERNAL_SOURCES:
+            print(f"  ext  {source_kind}/{source_id} ← {url}", file=sys.stderr)
+            try:
+                raw, sha, n_bytes = fetch_and_parse(
+                    url, cache_dir=cache_dir
+                )
+            except (FetchError, ParseError) as e:
+                print(f"    SKIP  {e}", file=sys.stderr)
+                external_skipped += 1
+                continue
+            cap = capture(raw, source_kind=source_kind, source_id=source_id)
+            captures.append(cap)
+            capture_to_dir(
+                raw,
+                source_kind=source_kind,
+                source_id=source_id,
+                out_dir=out_dir,
+                captured_at=cap.captured_at,
+            )
+            external_count += 1
+            print(
+                f"    OK  {n_bytes} bytes  sha256:{sha[:16]}…",
+                file=sys.stderr,
+            )
+
+    # 4. Aggregate
     print(f"\nBuilding coverage map across {len(captures)} schemas...", file=sys.stderr)
     coverage = build_coverage_map(captures)
+    # Annotate the coverage map with explicit real-vs-synthetic counts.
+    # The plan is unambiguous: synthetic fixtures are validation-only,
+    # not real-world coverage. Surfacing the split lets every consumer
+    # of coverage.json reason about the corpus honestly without
+    # having to reconstruct the categorization from source_id heuristics.
+    coverage.setdefault("totals", {})
+    coverage["totals"]["n_real_mcp"] = mcp_count
+    coverage["totals"]["n_synthetic_fixtures"] = synthetic_count
+    coverage["totals"]["n_real_external"] = external_count
+    coverage["totals"]["n_external_skipped"] = external_skipped
+    coverage["totals"]["n_real"] = mcp_count + external_count
+    coverage["totals"]["n_synthetic"] = synthetic_count
     coverage_path = out_dir / "coverage.json"
     coverage_path.write_text(json.dumps(coverage, indent=2), encoding="utf-8")
     print(f"  wrote {coverage_path}", file=sys.stderr)
@@ -583,8 +859,15 @@ def main() -> None:
     print(f"PHASE 7 INDEX BUILD RESULTS", file=sys.stderr)
     print(f"{'='*60}", file=sys.stderr)
     print(f"Sources captured:         {len(captures)}", file=sys.stderr)
-    print(f"  - MCP manifests:        {mcp_count}", file=sys.stderr)
-    print(f"  - Synthetic schemas:    {synthetic_count}", file=sys.stderr)
+    print(f"  - Real MCP manifests:   {mcp_count}", file=sys.stderr)
+    print(f"  - Real external specs:  {external_count} "
+          f"(skipped {external_skipped} of {len(EXTERNAL_SOURCES)})",
+          file=sys.stderr)
+    print(f"  - Synthetic fixtures:   {synthetic_count}", file=sys.stderr)
+    print(
+        f"  - Real total:           {mcp_count + external_count}",
+        file=sys.stderr,
+    )
     print(f"Tools indexed:            {coverage['totals']['n_tools']}", file=sys.stderr)
     print(f"Fields indexed:           {coverage['totals']['n_fields']}", file=sys.stderr)
     print(f"Distinct dimensions hit:  {total_dims}", file=sys.stderr)

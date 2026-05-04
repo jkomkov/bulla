@@ -1,13 +1,14 @@
 pack_name: ucum
-pack_version: 0.1.0
+pack_version: 0.1.1
 license:
   spdx_id: Public-Domain
   source_url: https://ucum.org/
   registry_license: open
 derives_from:
   standard: UCUM
-  version: snapshot-2026-04-26
+  version: snapshot-2026-05-02
   source_uri: https://ucum.org/ucum-essence.xml
+  source_hash: sha256:551f66c86ebc6a9f008f0e8db2981e55111edceffb3961c19dba14e6b9a846f7
 dimensions:
   unit_of_measure:
     description: UCUM (Unified Code for Units of Measure) atomic unit. The full registry
@@ -234,5 +235,5 @@ dimensions:
       - pound_force_second
     values_registry:
       uri: https://ucum.org/ucum-essence.xml
-      hash: sha256:b78e1fc5d9c025f8c0062152e02e51a77fdbc489cb22a893e7c187fd0f44e027
+      hash: sha256:551f66c86ebc6a9f008f0e8db2981e55111edceffb3961c19dba14e6b9a846f7
       version: snapshot

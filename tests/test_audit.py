@@ -206,10 +206,11 @@ class TestAuditCli:
         ]
         text, _, _ = self._run_audit([], _make_scan_results(), entries)
 
-        assert "server(s) scanned" in text
-        assert "Coherence fee:" in text
-        assert "Cross-server risk:" in text
-        assert "Boundary fee:" in text
+        assert "bulla audit" in text
+        assert "2 servers" in text
+        assert "BOUNDARY FEE" in text
+        assert "within fee" in text
+        assert "cross-server" in text
 
     def test_audit_json_output(self):
         entries = [
@@ -225,6 +226,8 @@ class TestAuditCli:
         assert isinstance(data["servers"], list)
         assert len(data["servers"]) == 2
         assert any(s["name"] == "filesystem" for s in data["servers"])
+        assert "audit_report" in data
+        assert data["audit_report"]["boundary_fee"] == data["cross_server_decomposition"]["boundary_fee"]
 
     def test_audit_threshold_fail(self):
         entries = [
@@ -248,8 +251,8 @@ class TestAuditCli:
         text, _, _ = self._run_audit([], results, entries)
 
         assert "1 skipped" in text
-        assert "FAILED" in text
         assert "broken" in text
+        assert "✗" in text or "Cannot spawn" in text
 
     def test_audit_sarif_output(self):
         entries = [
@@ -334,6 +337,29 @@ class TestServerPrefixedNames:
         assert "srv_b" in servers
         a_tools = {t for t, s in tool_to_server.items() if s == "srv_a"}
         assert len(a_tools) == 2
+
+
+class TestAuditReceiptGolden:
+    GOLDEN = Path(__file__).parent / "golden" / "audit_canonical_manifests.txt"
+    CANONICAL_MANIFESTS = (
+        Path(__file__).parent.parent / "examples" / "canonical-demo" / "manifests"
+    )
+
+    def test_canonical_manifests_matches_golden(self):
+        import re
+
+        r = _run_audit("--manifests", str(self.CANONICAL_MANIFESTS))
+        assert r.returncode == 0
+        expected = self.GOLDEN.read_text(encoding="utf-8")
+        # Strip non-deterministic elapsed time (e.g. "· 3.1s") from both
+        _strip_time = lambda s: re.sub(r" · \d+\.\d+s", "", s)
+        assert _strip_time(r.stdout) == _strip_time(expected)
+
+    def test_audit_report_packaging_import(self):
+        from bulla.audit_report import AuditReport, build_audit_report
+
+        assert "boundary_fee" in AuditReport.__dataclass_fields__
+        assert callable(build_audit_report)
 
 
 # ── Real-world audit smoke test ──────────────────────────────────────

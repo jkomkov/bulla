@@ -1,6 +1,6 @@
 # Contributing to Bulla
 
-Bulla's diagnostic power depends on its vocabulary — the set of convention dimensions it can recognize. The most impactful contribution is discovering and submitting new dimensions.
+Bulla's diagnostic coverage depends on its vocabulary — the set of convention dimensions it can recognize. The most valuable contribution is discovering and submitting new dimensions.
 
 ## Contributing a Dimension
 

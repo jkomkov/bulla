@@ -1,13 +1,14 @@
 pack_name: gs1
-pack_version: 0.1.0
+pack_version: 0.1.1
 license:
   spdx_id: Proprietary-Open-Reference
   source_url: https://www.gs1.org/standards/barcodes-epcrfid-id-keys/general-specifications
   registry_license: open
 derives_from:
   standard: GS1-General-Specifications
-  version: snapshot-2026-04-26
-  source_uri: https://www.gs1.org/standards/barcodes-epcrfid-id-keys/general-specifications
+  version: snapshot-2026-05-02
+  source_uri: https://ref.gs1.org/ai/
+  source_hash: sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224
 dimensions:
   gs1_application_identifier:
     description: GS1 Application Identifier (AI) — the 2-4 digit prefix that identifies
@@ -97,9 +98,9 @@ dimensions:
       aliases:
       - country-of-origin
     values_registry:
-      uri: https://www.gs1.org/sites/default/files/docs/barcodes/GS1_General_Specifications.pdf
-      hash: placeholder:awaiting-ingest
-      version: '2026-04-26'
+      uri: https://ref.gs1.org/ai/
+      hash: sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224
+      version: snapshot
   gs1_id_key_type:
     description: GS1 identification-key type (GTIN, GLN, SSCC, GRAI, GIAI, GSIN, GSRN).
       Closed enum at this level.

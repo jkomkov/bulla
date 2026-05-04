@@ -1,5 +1,628 @@
 # Changelog
 
+## 0.37.0 — 2026-05-03
+
+Consolidates seven post-0.36.0 sprints into a single publishing event. Headline additions: `bulla.translate` (typed runtime translators), `bulla.Session` (online incremental composition), `bulla.LiveSession` (online MCP proxy), native `bulla.langgraph` and `bulla.crewai` adapters with callback handlers, narrative `bulla scan` with a 39-entry dimension explanation registry and auto-detect across seven hosts (Cursor, Claude Code, Claude Desktop, Cline, Windsurf, Zed, Codex), `bulla certify` per-composition certificate including the v1.0 schema with claim-structured assertions and a stable `certificate_content_hash`, the composition-only obstruction demo (3-tool synthetic where every pairwise certificate certifies fee=0 yet the global certificate finds fee=1), and the Dimension Pack Enhancement (all 11 fetchable open packs on real SHA-256, classifier corpus 880 → 27,651 rows, 10 → 28 firing dimensions). 124 new tests for framework adapters, 46 for translators, 21 for `LiveSession`, 18 + 29 + 8 + 2 for certificates and the obstruction demo, 6 corpus-growth gates, 5 provenance invariants, plus the load-bearing 10,000-seed property test that pins `Session` to bitwise equality with a from-scratch `witness_gram` recompute.
+
+The detailed sprint logs follow as seven subsections.
+
+### Sprint 15: Composition-Only Obstruction Demo
+
+A 3-tool deterministic synthetic where every pairwise v1.0 certificate
+certifies `coherence_fee == 0` AND `exact_disclosure_equivalence` is
+certified, while the global certificate (with parent hashes pinned to
+the pairwise content hashes) discovers `coherence_fee == 1` and
+retracts the disclosure-equivalence claim. **Local witnesses are
+evidence, not proof of global validity.**
+
+### Added
+
+- **`bulla.certificate.certify(parent_certificate_hashes=...)`** — Sprint 15
+  extension to populate the v1.0 reserved slot. Adding parents changes
+  the certificate's `certificate_content_hash` (per the discipline
+  sentence: hash changes under parent changes), structurally binding
+  parentage to identity. Default `()` preserves Sprint 14 behavior.
+- **Sprint 15 demo fixture + runner** at
+  `papers/composition-doctrine/sprint15_demo/`:
+  - `fixture.py` — canonical 3-tool hub-and-spoke (DFD-respecting):
+    A.p observable; B.p, C.p hidden; edges A→B and A→C with
+    `from_field=p, to_field=p`.
+  - `runner.py` — deterministic non-LLM CLI script. Builds 3 pairwise
+    certs, then 1 global cert with parent hashes set to the pairwise
+    content hashes. Prints terminal receipt; writes `output.json`.
+    Exit 0 iff trigger AND discipline checks fire.
+  - `report.md` — one-page report. Tagline: *"Local witnesses certified
+    zero fee; the global witness found obstruction."* Mechanism:
+    *"Projection can collapse distinct global obligations into identical
+    local observations."*
+- **Phase 0 search script** at
+  `bulla/calibration/scripts/sprint15_search.py`. Synthetic + 80-triple
+  registry scan. Synthetic hub-and-spoke triggers for k ∈ {2..5} spokes;
+  registry triples did not naturally trigger (real-MCP triples have
+  nonzero pairwise fees). Top-pick was 3-tool 2-spoke (smallest, with
+  `pair_exact_conservative=True` bonus).
+- **8 regression tests** in `bulla/tests/test_sprint15_demo.py`
+  including the rank-story regression (`rank_obs=1, rank_internal=2,
+  fee=1`), trigger condition, parent-hash chain, anti-overclaim guard
+  against `bundle_composes_globally` / `global_validity_implied_by_parents`,
+  and end-to-end runner CI gate.
+- **2 unit tests** added to `bulla/tests/test_certificate.py` for the
+  new `parent_certificate_hashes` kwarg (slot population +
+  content-hash sensitivity).
+
+### What this sprint does NOT do
+
+- ❌ No `WitnessBundle` class, no incremental recertification, no
+  LiveSession integration (Sprint 16+ work).
+- ❌ No signing or anchoring of certificates.
+- ❌ No `bulla repair` command.
+- ❌ No claim asserts that local certificates imply global validity. The
+  `bundle_composes_globally` claim slot is reserved but explicitly NOT
+  emitted in v1.0; its semantics depend on Sprint 16+ bundle-merge logic.
+- ❌ No new theory, no Lean modules, no new corpora.
+- ❌ Real-MCP triples did not produce the trigger in Phase 0's 80-triple
+  scan — this is a synthetic demo of the principle, not a real-MCP
+  artifact.
+
+### Sprint 14: Witness-Ready Certificate Schema (v1.0)
+
+Bumps the per-composition certificate schema to v1.0 with structured
+top-level blocks, claim-structured assertions, a stable
+`certificate_content_hash`, and reserved slots (`parent_certificate_hashes`,
+`issuer`, `signature`, `supersedes`, `attestation_hash`, `receipt_hash`)
+for future incremental-bundle / signing / supersession infrastructure. **This is a deliberate schema
+bump; v0 byte-shape from Sprint 13 is intentionally NOT preserved.**
+
+### Schema v1.0 layout
+
+Eighteen top-level keys in canonical order: `certificate_schema_version`
+(literal "1.0"), `subject`, `method`, `regime`, `diagnostic`, `claims`,
+`scope`, `parent_certificate_hashes`, `issuer`, `signature`,
+`supersedes`, `violations`, `display`, `timestamp`, `bulla_version`,
+`certificate_content_hash`, `attestation_hash`, `receipt_hash`.
+
+### Claims block (six structured assertions)
+
+Each claim is `{value, status, licensed_by[, not_licensed]}`. `status`
+∈ `{"certified", "candidate", "not_certified", "not_applicable"}`.
+
+- `schema_shape_valid` — Sprint 9 structural predicate.
+- `fee_is_nonnegative`, `fee_is_interpretable` — Sprint 8 measured rank
+  predicate (kept as separate claims for forward compat; identical
+  derivation in v1.0).
+- `exact_disclosure_equivalence` — Sprint 11/12 theorem regime claim.
+  Refined during implementation: requires BOTH `is_well_formed_for_fee`
+  AND `is_exact_regime_conservative` (the structural-conservative
+  predicates alone aren't enough — an ill-formed composition can satisfy
+  DFD+CHP yet have negative fee).
+- `repair_basis_status` — bridge to Sprint 15+ repair logic. When
+  `candidate`, the `not_licensed` field explicitly carries
+  `exact_disclosure_equivalence` to make the regime gap visible.
+- `subject_bound` — internal-consistency claim.
+
+### `certificate_content_hash` discipline
+
+- Format: `"sha256:<64 hex chars>"`. Prefix mandatory.
+- SHA-256 over `json.dumps(canonical_dict, sort_keys=True, separators=(',',':'))`.
+- Excluded from preimage: `timestamp`, `signature`, `certificate_content_hash` itself, `attestation_hash`, `receipt_hash`, and `display` (UI-only — wording edits must not invalidate parent-cert hashes).
+- Determinism gate: two `certify()` calls on the same composition produce
+  identical hashes.
+- Sensitivity gate: different compositions produce different hashes.
+- Signature-invariance gate: changing `signature` post-hoc does NOT change
+  the hash.
+
+### What's reserved but not implemented
+
+`parent_certificate_hashes`: empty list (Sprint 15+ incremental bundles).
+`issuer.id`, `signature`: null (future signing). `supersedes`: null
+(future supersession). `pack_stack_sha256`, `manifest_hashes`: null/[]
+(future pack-aware certify).
+
+### Tests
+
+29 tests in `bulla/tests/test_certificate.py` (schema version, hash
+determinism + sensitivity + signature-invariance, claim coverage across
+all 4 status enum values for the regime lattice, display back-compat,
+method versioning, JSON round-trip, multi-server cross-decomposition,
+witness-geometry on/off, schema-shape violation propagation, Sprint
+11/12 discipline anti-overclaim). Plus 3-test canonical seed-set
+regression in `bulla/tests/test_sprint13_seed_certificates.py`,
+regenerated under v1.0.
+
+### Out of scope
+
+No signing implementation. No issuer DID / key infrastructure. No
+supersession logic. No parent-certificate computation, bundle merging,
+or `LiveSession` integration. No `bundle_composes_globally` claim
+(deferred — pairwise validity does NOT imply global validity, and we
+don't claim it does until Sprint 15+ implements bundle merging). No
+`bulla repair` command, no demo, no composition-only obstruction
+artifact, no Lean modules, no new corpora.
+
+### Awareness-Gap Sprint (`bulla scan` narrative output)
+
+The framework integration sprint and the indispensability push made
+the substrate mature. This sprint flips the default `bulla scan`
+output from JSON-receipt to plain prose so a first-time user reads
+the diagnosis in under 10 seconds.
+
+### Changed — `bulla scan` defaults to narrative output
+
+- New `--format narrative` (default for `bulla scan`) renders a
+  prose block: header naming the config and servers, headline fee,
+  per-blind-spot explanations from a 39-entry dimension registry,
+  and the pairwise-vs-global comparison block.
+- `--json` is a shortcut for `--format json` (the prior programmatic-
+  consumer path).
+- The legacy mathematician-grade `text` format with β₁/H¹/δ₀ rank is
+  preserved under `--format text` for power users.
+- `--no-pairwise` skips the pairwise comparison; defaults to running
+  it for compositions of 2–8 servers.
+
+### Added — `bulla.explanations`
+
+- 39-entry plain-language registry covering every dimension that
+  `Diagnostic.blind_spots[i].dimension` can carry. Each entry is one
+  sentence of explanation plus one sentence of failure mode, written
+  with concrete examples.
+- `tests/test_explanations.py` locks the registry to the dimension
+  universe: every name in `src/bulla/packs/{seed,community}/*.yaml`
+  plus every hardcoded pattern in `bulla.infer.classifier` must have
+  an entry. CI fails when a new pack dimension is added without an
+  explanation.
+- `explain(dimension)` falls back gracefully on unknown names and
+  strips the `_match` suffix that `compose_multi` appends to edge-
+  inferred dimension names.
+
+### Added — `bulla.scan_format`
+
+- `format_scan_narrative(diagnostic, server_names, ...)` is a pure
+  string formatter over a `Diagnostic`. It runs no I/O.
+- The pairwise-vs-global block (the moat case) fires only when
+  `global_fee > 0 AND max(pairwise_fees) == 0` — the exact regime
+  where pairwise type-checking literally cannot find what bulla
+  finds. Suppressing the block in any other case keeps the output
+  focused.
+- Cross-server seam filtering. With multiple servers, narrative
+  output prioritizes blind spots whose endpoints span two distinct
+  server prefixes (the `<server>__<tool>` convention). Within-server
+  drift is real but isn't the awareness-gap story.
+- Display cap of 8 blind spots per scan with a footer pointing at
+  `--json` for the full list. Real compositions can produce 50–100+;
+  truncation keeps the prose readable.
+
+### Fixed — Claude Code auto-detect
+
+- The Claude Code host detector now checks `~/.claude.json` (the
+  canonical user-scoped config in current builds), with fallbacks to
+  `~/.claude/settings.json` (older builds), `<cwd>/.mcp.json`
+  (project-scoped canonical), and `<cwd>/.claude/settings.json`
+  (workspace overrides).
+- The parser walks `projects[<cwd-prefix>].mcpServers` so a scan
+  run inside a project subdirectory finds the project's servers,
+  not just the (often empty) top-level `mcpServers` block. Longest
+  matching prefix wins.
+
+### Added — Awareness-gap demo
+
+- New `examples/awareness-gap-demo/` bundle: `repro.py`,
+  `manifests/{filesystem,github}.json`, `README.md`,
+  `requirements.txt`.
+- `repro.py` runs deterministically without LLM, npm, or live MCP
+  servers. It simulates GitHub's path-validation failure with the
+  filesystem server's absolute-path output, runs `bulla.compose_multi`
+  on the canned manifests, and demonstrates the bridge runtime fix.
+- Anyone who clones the repo can run the script and see the same
+  fee, the same blind-spot list, the same translation receipts. The
+  re-runnability is the moat against "you cherry-picked."
+
+### Fixed — Two rounds of post-sprint review
+
+Round 1 (`016a8dc`):
+- `path_convention` translator registered in `bulla.bridges`.
+  Three-tier root resolution (`BULLA_REPO_ROOT` → `git rev-parse
+  --show-toplevel` → `os.getcwd()` fallback). Demo Step 3 now
+  closes the loop on the dimension it diagnosed in Step 2 instead
+  of punting to a `currency_code` illustration.
+- Headline reframe: scan output now reads `"Coherence fee: 22
+  (across 1 convention dimension)"` so the actionable count is
+  visible alongside the rank-of-H¹ math.
+- `bulla scan` with no args triggers auto-detect via registered
+  hosts and produces a structured no-config error that
+  distinguishes three states (host configs unrecognized as MCP /
+  parsed but empty / none found anywhere).
+
+Round 2 (`878a30e` + `9dcd204`):
+- Three structural bugs in `_cmd_scan` flagged in the second
+  review:
+  1. `server_names` was the flattened tool name list
+     (`["filesystem__read_file", ...]`), so the narrative header
+     printed every tool as a server. Now `sorted(server_tools.keys())`
+     from the per-server dict.
+  2. Pairwise reconstruction used `inputSchema={}`. Empty schemas
+     made `compute_pairwise_fees` always return 0, firing the
+     moat-case block on every fee>0 composition. Now the original
+     per-server tool dicts (with real schemas) are passed straight
+     through.
+  3. The auto-detect path never set `config_source` or computed
+     pairwise because the gates checked `args.commands` (always
+     empty on auto-detect) instead of the local `commands` /
+     `chosen_path` variables.
+- Refactored `_cmd_scan` into `_resolve_scan_targets`,
+  `_scan_explicit_commands`, `_scan_named_entries`,
+  `_flatten_for_guard`, `_render_scan_narrative`. The three input
+  branches (positional commands / `--config` / auto-detect)
+  produce the same `(server_tools, config_source)` shape so
+  downstream rendering is unconditional.
+- New regression test pins Bug 2: `compute_pairwise_fees` on the
+  canonical-demo manifests must return fee>0 on filesystem×github,
+  proving the empty-schema reconstruction is gone.
+
+### Native LangGraph + CrewAI Runtime Integration Sprint
+
+The previous sprint shipped `bulla.translate` and `bulla.Session`. This
+sprint puts the substrate inside the agent runtimes where users
+actually compose tools — LangGraph and CrewAI. Two adapters, two
+callback handlers, ~600 LOC, 124 new tests (50-seed property tests
+each plus 12–13 unit tests, all gated by `pytest.importorskip`).
+
+### Added — `bulla.langgraph`
+
+- **`bulla.langgraph.bind(graph) -> Session`** — snapshots a live
+  `langgraph.graph.StateGraph` (compiled or not) into a
+  `bulla.Session`. Walks `nodes`, `edges`, `branches`, `channels` and
+  builds a Composition whose `composition_hash` is deterministic
+  with respect to the order LangGraph happened to add things
+  internally. Pre-execution `session.fee` is immediately available;
+  `session.diagnose()` returns a full `WitnessReceipt`.
+- **`BullaCallbackHandler`** — a `langchain_core.callbacks.BaseCallbackHandler`
+  subclass. Records actual tool invocations (`on_tool_start` /
+  `on_tool_end`) into the Session's receipt chain during
+  `graph.invoke()` / `.stream()`. Emits a terminal `WitnessReceipt`
+  on outermost `on_chain_end`.
+- Conditional edges declared without a `path_map` default to
+  conservative fan-out (matching LangGraph's runtime behavior); the
+  `on_unknown_branch="skip"` kwarg opts out.
+- LOAD-BEARING property test: 50 seeded random graph constructions
+  assert that `bind()` is order-independent — `bind(g_a)` and
+  `bind(g_b)` on graphs built from the same nodes/edges in different
+  orders produce identical `composition_hash`.
+
+### Added — `bulla.crewai`
+
+- **`bulla.crewai.bind(crew) -> Session`** — same shape, walks
+  `crew.agents`, `crew.tasks`, `task.context`, `task.tools`,
+  `agent.tools`, and `crew.process`. Sequential mode emits edges
+  between consecutive tasks' tools; `task.context` emits explicit
+  dependency edges; hierarchical mode emits manager-to-worker edges.
+- **`BullaCrewCallback`** — wraps CrewAI's `step_callback` and
+  `task_callback` plumbing. `handler.finalize()` after `crew.kickoff()`
+  emits the terminal receipt.
+- Tool names are namespaced as `"{agent.role}.{tool.name}"` so two
+  agents sharing a tool name (e.g. both have `search`) are kept
+  distinct in the composition.
+- Same 50-seed order-independence property test as the LangGraph
+  adapter.
+
+### Added — Output-schema policy (both adapters)
+
+- LangChain's `BaseTool.args_schema` and CrewAI's `BaseTool.args_schema`
+  cover input fields but no standardized output schema exists.
+- Both adapters accept an `output_schemas={tool_name: jsonschema}`
+  kwarg on `bind()`. When supplied, output fields land on the
+  `ToolSpec.observable_schema` so output-side fee detection works.
+- When omitted, a one-line warning per unschematized node logs the
+  gap, and the adapter falls back to input-only fee detection.
+  Honest under-reporting beats silent magic.
+
+### Naming and import discipline
+
+- New public symbols: 4 (`bind` ×2, callback class ×2). New files: 6
+  (two adapters, two shims, two test files). New CLI commands: 0.
+- `import bulla.langgraph` and `import bulla.crewai` succeed even
+  without the framework extras installed; symbols only fail at call
+  time when the framework itself isn't importable.
+- `bulla.__init__` does NOT auto-export framework symbols. Users
+  import them explicitly via `from bulla.langgraph import ...` to
+  keep the optional-dep boundary visible.
+- Static AST adapters (`bulla.frameworks.langgraph`, `crewai`) are
+  unchanged. Source-file scanning and live-object snapshots cohabit;
+  the runtime adapters live in `bulla.frameworks.{langgraph,crewai}_runtime`.
+
+### pyproject.toml
+
+- `langgraph` extra now pins `["langchain-core>=0.3", "langgraph>=1.1"]`
+  (added the framework itself).
+- `crewai` extra unchanged at `["crewai>=0.80"]`.
+
+### Sprint 13: Composition Certification Suite
+
+Per-composition regime certificate as a first-class user-surface artifact.
+Closes the gap between `bulla regime` (lattice predicates only) and `bulla
+diagnose` (fee + blind spots) by bundling both with a fee-interpretation
+label and repair semantics into one structured JSON object.
+
+### Added
+
+- **`bulla.certificate`** — new module with `CompositionCertificate`
+  dataclass + `certify(comp, source_path=..., include_witness_geometry=...)`
+  + `to_dict` / `to_json` serializers. Composition certificate has 5
+  layers: identity, regime (Sprint 8/9/11), diagnostic (fee + blind
+  spots + bridges), cross-server decomposition (multi-server compositions
+  only), witness geometry (fee > 0 only). Plus `fee_interpretation` and
+  `repair_semantics` short labels, regime violations from
+  `validate_regime`.
+- **`bulla certify` CLI subcommand** — emits per-composition certificate(s)
+  in text or JSON format. Accepts file paths, directories, or
+  `--seed-set` for the canonical Sprint 13 10-composition seed set.
+  Optional `--output FILE` to write rather than print. Reuses existing
+  `_load_with_regime_warning` helper (Sprint 11/12) for parser + regime
+  warning emission.
+- **Sprint 13 seed set** — 10 compositions covering the regime lattice
+  (registry pairs `filesystem+github` + `github+notion`, 4 curated YAMLs,
+  2 regime-break fixtures, A_{3,4} cycle family, and a malformed
+  negative control). Canonical certificate output committed at
+  `papers/composition-doctrine/sprint13_seed_certificates.json`.
+- **Canonical-output regression test**
+  (`test_sprint13_seed_certificates.py`) — re-generates the seed set
+  in-memory and asserts byte-identity with the committed fixture, modulo
+  `timestamp` + `bulla_version`. Same gate pattern as Sprint 12's
+  `test_diagnose_default_json_regression`.
+- **18 unit tests** (`test_certificate.py`) covering all five
+  `fee_interpretation` lookup-table branches, all four `repair_semantics`
+  branches, JSON round-trip stability, witness-geometry on/off, multi-
+  server cross-decomposition detection, deterministic SHA-256, and the
+  malformed negative control.
+- **Sprint 13 figure** rendered as pure SVG (no matplotlib dep) at
+  `papers/composition-doctrine/sprint13_certification_suite_figure.svg`.
+  Reuses Sprint 11 lattice-audit data; one chart, regime predicate rates
+  by corpus.
+- **One-page report** at `papers/composition-doctrine/sprint13_certification_suite.md`
+  with TL;DR, schema, lookup table, seed-set table, BABEL relation,
+  explicit anti-overreach scope.
+
+### Changed
+
+- **`bulla/docs/REGIME.md`** — new section linking the regime guide to
+  `bulla certify` for users who want the full bundle (regime + fee +
+  interpretation) in one artifact.
+
+### Out of scope (intentional non-goals)
+
+- No new theory, no new Lean modules, no new diagnostics.
+- No task-level validation correlating fee with real failure rates
+  (deferred to Sprint 14+; would require failure-data infrastructure
+  the project does not yet have).
+- No predictive-validity claims about fee.
+- No leaderboard / scoring / ranking — certificates attest, they do not
+  compare.
+- No BABEL integration beyond a single cross-reference paragraph.
+
+### Indispensability Push Sprint
+
+Three coupled deliverables that move Bulla from **diagnostic** (here is
+your fee) to **prescriptive** (here is the typed translator that fixes
+it) to **online** (here is the live delta as you compose).
+
+### Added — Phase A: `bulla.translate` runtime
+
+- **`bulla.bridges`** — new module exposing typed value translators on
+  top of the existing Extension E `mappings:` substrate. Public verb is
+  `bulla.translate(dimension, value=..., to_convention=...)` returning
+  a `TranslationResult{value, evidence, receipt}`. Reuses the existing
+  `WitnessReceipt` (no new model class) so chaining via
+  `parent_receipt_hashes`, content-addressing, and signature work for
+  free.
+- **Five canonical translators** ship at registration time:
+  `currency_code` (ISO-4217 ↔ Stripe-lower / numeric), `country_code`
+  (alpha-2 ↔ alpha-3 ↔ numeric), `language_code` (ISO-639-1 ↔ -3 ↔
+  BCP-47), `temporal_format` (ISO-8601 ↔ Unix seconds / millis), and
+  `fhir_resource_type` (R4 ↔ R5 capitalization edges).
+- **Pluggable registry** via the `@bulla.bridges.register` decorator;
+  closed-by-default so the canonical translators are deterministic.
+- **Mapping-derived path** — when no hand-written translator exists,
+  the runtime walks the active pack stack's `mappings:` blocks
+  (substrate: `bulla.mappings.translate`).
+- **Restricted-pack invariant**: licensed values never surface raw —
+  when the only resolver is a `restricted` / `research-only` pack, the
+  runtime raises `TranslationUnavailable(license_required=...)` instead
+  of returning the value.
+- **Naming discipline** — the function is `translate` (not `bridge`)
+  to avoid the case-collision with the diagnostic `Bridge` dataclass
+  (`from bulla import Bridge` vs `from bulla import bridge` is exactly
+  the import that breaks once and ships). The diagnostic-side `Bridge`
+  is unchanged.
+- **CLI**: new `bulla translate --dimension X --value V --to T`
+  subcommand. The existing `bulla bridge` (diagnostic-bridge YAML
+  rewriter) is untouched — different operation, different command.
+- **Tests** — 46 in `tests/test_translate.py` covering all five
+  canonical translators, registry mechanics, mapping-derived path,
+  restricted-pack redaction, receipt chaining, and the naming-
+  discipline import surface.
+
+### Added — Phase B: `bulla.Session` for online incremental composition
+
+- **`bulla.Session`** — new long-lived class for building a composition
+  tool by tool. `add_tool` / `add_edge` / `add_tools_and_edges` mutate
+  the session and return an `AddToolResult{delta_fee, fee_after,
+  new_hidden_fields, ...}`. `checkpoint()` emits a mini-receipt;
+  `diagnose()` runs the full witness pipeline.
+- **`IncrementalDiagnostic.extend(new_tools, new_edges)`** — new
+  method on the existing rank-1-Schur incremental class. Validates
+  that tool names are unique and edge endpoints reference known
+  tools, then refreshes K and the hidden basis by recomputing
+  `witness_gram` on the extended composition. The API is forward-
+  compatible with a future block-update implementation; the property
+  test pins the externally-observable behavior so the swap is safe.
+- **Receipt chaining**: every `add_tool`, `translate(...)`,
+  `checkpoint()`, and `diagnose()` extends an internal
+  `parent_receipt_hashes` chain, so a session's full history is
+  reconstructable from the terminal receipt.
+- **Full P_O generality** — `Session` handles tool additions that
+  introduce new observables, not just new hidden fields.
+- **LOAD-BEARING TEST**: `tests/test_session.py::test_session_bitwise_equals_full_rebuild`
+  — 10,000 seeded random tool/edge sequences, each step asserts
+  bitwise equality between the session's accumulated state and a
+  from-scratch `witness_gram` computation. **All 10,000 seeds
+  pass.** Without this proof, the incrementality claim is unverified.
+- **Tests** — 15 additional unit tests covering add-validation,
+  receipt chaining, disposition tracking, `diagnose()` on real
+  compositions, and empty-session edge cases.
+
+### Added — Phase C: Glyph live-fee widget
+
+- **`/bulla/live-fee`** — new Glyph page where users paste two MCP
+  server tool descriptions and watch the coherence fee, blind spots,
+  and disposition compute in real time. Two paste-ready samples
+  (`fs vs github`, `fs vs stripe`).
+- **`glyph/api/bulla_diagnose.py`** — Vercel Python serverless
+  function that calls `bulla.compose_multi(...)` directly and returns
+  fee + blind-spots + disposition + receipt-hash JSON.
+  `glyph/api/requirements.txt` pins `bulla>=0.36.0`.
+- **`glyph/src/app/api/bulla/diagnose/route.ts`** — Next.js TS route
+  that proxies to the Vercel Python function (when
+  `BULLA_BACKEND_URL` env var is set) or falls back to a canned demo
+  response. The `mode: "live" | "demo"` field on the response lets
+  the widget surface which path executed.
+- **`glyph/src/components/LiveFeeWidget.tsx`** — `'use client'`
+  interactive widget with debounced live-update on textarea edits,
+  per-pane parse-error display, and a structured result panel
+  (fee, boundary fee, bridges-required, disposition, blind-spot
+  list, active packs, receipt-hash preview).
+
+### Added — Phase D: `bulla.LiveSession` online proxy
+
+- **`bulla.LiveSession`** — unified online composition proxy that
+  combines `Session` (incremental fee tracking) with
+  `BullaProxySession` (call tracing). `add_server()` registers MCP
+  servers dynamically and returns `AddServerResult{delta_fee,
+  fee_after, new_tools, new_edges, new_blind_spots}`.
+  `record_call()` traces live tool invocations with flow-conflict
+  detection. `translate()`, `checkpoint()`, and `diagnose()` delegate
+  to the underlying Session for receipt chaining.
+- **`LiveSession.from_server_tools()`** — convenience constructor that
+  adds all servers at once from a `dict[str, list[dict]]`.
+- Mathematical invariant: `live.fee` after all `add_server` calls
+  equals `compose_multi(all_server_tools).diagnostic.coherence_fee`.
+  Tested with fee-independence-of-server-ordering property test.
+- 21 tests covering: fee invariant (1/2/3 servers), delta correctness,
+  call tracing with flow conflicts, receipt chaining, translation,
+  replay trace, proxy rebuild on server addition, ordering invariance.
+
+### Naming discipline
+
+| Function | Module | Purpose |
+|---|---|---|
+| `bulla.translate(...)` | `bulla.bridges` | Runtime value translation across conventions |
+| `bulla.Bridge` (dataclass) | `bulla.diagnostic` | Field-keyed structural metadata for blind-spot repair |
+| `bulla.bridges.register` | `bulla.bridges` | Decorator to register a typed translator |
+| `bulla.bridge` (CLI subcommand) | `bulla.cli` | Existing diagnostic-bridge YAML rewriter, untouched |
+| `bulla.translate` (CLI subcommand) | `bulla.cli` | New runtime translation subcommand |
+
+The function is **not** named `bridge` — the case-collision with
+`Bridge` is an API design problem, not a doc problem.
+
+### Dimension Pack Enhancement Sprint
+
+The four-phase sprint moves the seed corpus from "good seed baseline"
+to a stronger production footing.
+
+### Added — Phase 1: closed open-registry hash gaps
+
+- **All 11 fetchable open packs now carry real SHA-256 registry hashes**
+  (UCUM, NAICS 2022, ISO 639, IANA Media Types, FHIR R4, FHIR R5,
+  FIX 4.4, FIX 5.0, GS1, UN-EDIFACT, ICD-10-CM). Previously 5 of 11
+  open packs (FIX 4.4, FIX 5.0, GS1, UN-EDIFACT, ICD-10-CM) shipped
+  on the `placeholder:awaiting-ingest` sentinel because their fetch
+  URLs had drifted or required browser-shaped UAs.
+- **`scripts/standards-ingest/compute_real_hashes.py`** rewritten:
+  per-target header overrides, exponential-backoff retries, browser-
+  UA fallback for hosts that gate non-browser UAs (CMS, GS1).
+  Eleven targets, all OK in a clean rebuild.
+- **`scripts/standards-ingest/_hash_lookup.py` plumbed through every
+  generator**. The five generators that hadn't been wired
+  (`build_fix.py`, `build_gs1.py`, `build_un_edifact.py`,
+  `build_icd_10_cm.py`) now share the same
+  `_hash_for(pack, dimension, version)` lookup as the pre-existing
+  six.
+- **Updated registry URIs** to the live machine-readable artifacts
+  the hash table now binds to:
+  - FIX 4.4/5.0 → `quickfix/quickfix` C++ repo (the `quickfix-j`
+    Java fork no longer carries the dictionaries at the historical
+    path).
+  - GS1 → `https://ref.gs1.org/ai/` JSON catalogue (the legacy
+    `gs1.org` PDF returned 403 to non-browser UAs).
+  - ICD-10-CM → `<year>-code-descriptions-tabular-order.zip` URL
+    pattern (the legacy `<year>-icd-10-cm-code-files.zip` pattern
+    was retired; switched to FY2026 release).
+
+### Added — Phase 2: real-coverage corpus expansion
+
+- **`scripts/standards-ingest/_external_fetcher.py`** — new fetcher +
+  parser for external OpenAPI/GraphQL specs. Content-addressed
+  cache under `calibration/data/api-registry/_cache/`, lenient YAML
+  loader (handles malformed timestamps, the `tag:yaml.org,2002:value`
+  tag, and non-printable scalars seen in real upstream specs),
+  graceful per-URL skip on parse failure.
+- **35 curated real public OpenAPI/GraphQL specs added to the
+  Phase 7 build** (vendor repos: GitHub, Stripe, Slack, Twilio,
+  Discord, Spotify, Box, Intercom, Zoom, Plaid, Asana, weather.gov,
+  FHIR R4/R5; APIs.guru directory: OpenAI, Notion, Square, SendGrid,
+  DigitalOcean, Linode, Atlassian Jira, CircleCI, Wikimedia,
+  Mailchimp, Google Calendar/Gmail/Drive/Sheets/YouTube; plus
+  duplicate APIs.guru entries for Stripe, Slack, Twilio, Spotify,
+  Plaid, Zoom). Captured corpus grows from **65 sources (57 MCP +
+  8 synthetic) to 100 sources (57 MCP + 35 external + 8 synthetic)**
+  with the synthetic fixtures preserved as validation-only.
+- **`coverage.json` carries explicit real-vs-synthetic breakdown**:
+  `n_real_mcp`, `n_real_external`, `n_synthetic_fixtures`, `n_real`,
+  `n_synthetic`, `n_external_skipped`. Consumers no longer have to
+  reconstruct the split from `source_id` heuristics.
+- Classifier corpus grows from ~880 rows to **27,651 rows**;
+  distinct dimensions firing grows from 10 to 28.
+- **`BULLA_NO_NETWORK=1`** environment toggle for deterministic
+  offline builds (uses the on-disk cache for any URL it has already
+  seen and skips the rest).
+
+### Added — Phase 3: provenance hardening
+
+- **`derives_from.source_hash` propagated to every fetchable open
+  pack**. When `derives_from.source_uri == values_registry.uri`,
+  `source_hash` and `values_registry.hash` are sourced from the
+  same `_hash_for` lookup (so they bind to the same fetched
+  artifact byte-for-byte).
+- **`derives_from.source_uri` aligned to the registry artifact**
+  for IANA Media Types and FHIR R4/R5 (previously `source_uri`
+  pointed at the human-readable landing page; the human pointer is
+  now exposed via `license.source_url` instead).
+- **`tests/test_pack_provenance_invariants.py`** new — 5 invariants
+  tested across the seed corpus and `registry-hashes.json`:
+  1. `source_hash` agrees with `values_registry.hash` whenever
+     `source_uri == values_registry.uri`.
+  2. Every ok entry in `registry-hashes.json` round-trips into the
+     corresponding seed pack.
+  3. No open pack remains on `placeholder:awaiting-ingest` (Phase 1
+     gap closure invariant).
+  4. Every restricted pack uses `placeholder:awaiting-license` —
+     real hashes never appear on a restricted pointer.
+  5. Loaded `PackRef.derives_from.source_hash` round-trips byte-
+     identical from the pack file.
+
+### Added — Phase 4: tightened CI quality gates
+
+- **`tests/test_phase7_index.py::TestSprintGrowthGates`** — 6 new
+  gates pinning the post-sprint deliverables (≥ 20 real external
+  sources, ≥ 75 real total, synthetic count == 8, ≥ 10000 corpus
+  rows, ≥ 15 distinct dimensions firing, ≥ 8 seed-pack dimensions
+  firing). Each threshold sits a few sources below the actual ship
+  to leave headroom for transient upstream-host failures.
+- **Tightened minimum-real-hashes threshold** from 4 to 10 in
+  `test_placeholder_sentinel.py::TestSeedCorpusHashFormatInvariant::test_at_least_some_real_hashes_present`.
+- The Phase 3 invariant tests (5 of them) all double as CI gates:
+  any future PR that introduces a placeholder on an open pack, or
+  drifts `source_hash` out of step with `values_registry.hash`, or
+  silently puts inline values on a restricted pointer, fails CI.
+
 ## 0.36.0
 
 ### Added — Standards Ingestion sprint output
@@ -31,7 +654,7 @@
 - **Seed-pack scale**: 14 open + 5 restricted = 19 seed packs, all validate clean. ISO 639 dropped from 656 KB inline-everything to 8.7 KB seed + `values_registry` (75× smaller) — the architectural-consistency fix the Extension B rationale was designed to enforce.
 - **Real-hash fetches** (6 of 12 open): UCUM (`ucum-essence.xml`, 545 KB, sha256:b78e1fc5…), NAICS 2022 (`2-6_digit_2022_Codes.xlsx`, 82 KB, sha256:be12ba41…), ISO 639-3 SIL (178 KB, sha256:9697ac84…), IANA Media Types XHTML (946 KB, sha256:e6d05584…), FHIR R4 valueset-resource-types (2 KB, sha256:82ae2b62…), FHIR R5 valueset-resource-types (63 KB, sha256:6ed6a7d2…).
 - **Phase 5 empirical metrics** (revised post-feedback to distinguish two distinct claims):
-  - **Claim B (load-bearing — classifier discovery on unlabeled MCP schemas)**: 29.4% signal-density increase on the 57-manifest calibration corpus, target ≥25%, **PASS**. This is the framework's value-prop metric — the classifier identifying standards-dimensions in raw `inputSchema` properties.
+  - **Claim B (load-bearing — classifier discovery on unlabeled MCP schemas)**: 29.4% signal-density increase on the 57-manifest calibration corpus, target ≥25%, **PASS**. This is the key metric — the classifier identifying standards-dimensions in raw `inputSchema` properties.
   - **Claim A (baseline sanity — coboundary correctness on labeled graphs)**: 30/30 incident-corpus detection (100%), target ≥80%, **PASS**. Note: incident YAMLs encode pre-labeled dimension edges by construction; this validates the measurement layer (δ₀) on a known-good case but does NOT exercise the discovery layer.
   - **Auxiliary** (incident-corpus field-name classifier): 18.8% reduction on a 198-field cross-domain corpus, target ≥15%, **PASS**. The original wrong-shaped 50% claim was retired after honest accounting — ~70% of incident fields are structural identifiers (patient_id, claim_id, trade_id) that no standards pack should classify.
 - **Zero-licensed-content audit**: `git grep` confirms zero licensed values in any pack file across the 5 restricted packs. The validator's metadata-only invariant is the single line of defense; CI re-checks.
@@ -44,6 +667,8 @@ No new Lean work ships **inside** the Bulla wheel this cycle — Standards Inges
 
 ### Changed
 
+- **`bulla audit` default text** is now a compact **instrument receipt** (new `bulla.audit_report` module): boundary fee leads, grouped cross-server finding cards (schema contrast + convention contrast + fix), collapsed within-server blind-spot counts, action-item footer. Default output avoids sheaf / rank notation; use `bulla diagnose`, `-v`, or `--format json` for depth. JSON adds an optional additive **`audit_report`** block without removing existing keys. When no MCP config is detected, stderr suggests a copy-paste **`bulla scan …`** command plus `bulla audit <path>`.
+- **Path/URL seam classification**: `path_convention` name patterns now include `url` / `uri` in addition to file-path tokens. This surfaces browser-navigation versus filesystem/repository-locator seams as cross-server findings when schemas only expose unconstrained locator strings.
 - **Pack-hash canonicalization** (Extension B): `_hash_pack` strips inline `known_values` from any dimension that also has a `values_registry` pointer before hashing. Authors can curate inline documentation without producing pack-hash drift; the registry pointer is the binding object. Dimensions WITHOUT `values_registry` keep their inline values in the hash exactly as before — preserving 0.35.0 behavior for all base/community/financial packs.
 - **Phase 4 / restricted-pack verifier precedence**: when a `values_registry` pointer carries the `placeholder:` sentinel, the verifier short-circuits before the credential gate. A restricted pack with `placeholder:awaiting-license` returns `status='placeholder'`, NOT `status='license_required'`. This is the architecturally correct precedence — the placeholder is "structurally not yet checkable" which is deeper than the credential question. The credential gate still fires when a real `sha256:...` hash meets a missing credential.
 - **CLI `bulla pack verify` rendering**: distinguishes placeholder hashes (yellow `PLACEHOLDER (awaiting-ingest)` / `PLACEHOLDER (awaiting-license)`) from real `sha256:...` hashes in the per-pointer summary line.

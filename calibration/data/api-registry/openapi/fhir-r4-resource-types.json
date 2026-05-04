@@ -1,0 +1,224 @@
+{
+  "source_kind": "openapi",
+  "source_id": "fhir-r4-resource-types",
+  "schema_hash": "385a84ed0e77a044d3691058d85cc1b6c17573c66fc90794b5071485596b53e1",
+  "captured_at": "2026-05-02T20:35:56.448785+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "614aa67ae498e841a1f42084343b9d41f739e5678f1f271c1e2a03e8864bee04",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "65a946aee1b4b6585df08554171fd5a5c749793180ace1b8de8efd74fd663517",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.1",
+      "hash": "d1caf350ea5d6f1a4023c6d15670e3ec25dfa832a015348ffeb5a4d3f70dec3a",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+        "source_hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.1",
+      "hash": "4313a1301e360fb9f40823328a75592039aedd2821d63b80be9cf45ed765c32a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+        "source_hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.1",
+      "hash": "2ed09413af1da88d807787fe901c2b430a8a9304ba27f235e28b31d0ef67e4a8",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-05-02",
+        "source_uri": "https://ref.gs1.org/ai/",
+        "source_hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "0aab1b08537ae2835ab1a05adb8a0800eaf7a7ce98ad6937f6cc3f7ee721a997",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "d95ea9d09a69dd1ba4a5679e890a2509185167a10357ae8f8591d8fcde73ff0a",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.1",
+      "hash": "fe87dbb4b7125cab4135f2af6775b75d798390e91ab0849c3496900f43662b52",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2026",
+        "source_uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+        "source_hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "cf7e4bbfb6c7bd012e8508a5b07d9719bbe35b8970a60bddc3128d05e7e2598f",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "0205810517db330b61965d089f78f1b427ea7fc0caec471025929ac965ffd583",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "2a3143742f52266ba08484a16e889d63761d409f1055d95021dab7a03da25a2e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7092871334e53492b46e4835ab2ef1f5d0ac9e184ed257c68ee212692f926c53",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "b16d83cbe515dc7e52d778f5fcb7d016e4a1f292cd8340307b85066141f5be65",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "b2396f760586f9656bd4b806127d5e3404f80d770288f1445beb04b27bae105d",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.1",
+      "hash": "8daa8d898578ac4feaebc986a3f0a8ce367d866054aec9b0654d01bb8f8f71cd",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+        "source_hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "6e653a3d4f730cc93b673893ac69b5215a0f3fbeb25059b3014aa83f5d339d69",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [],
+  "aggregate": {
+    "n_tools": 0,
+    "n_fields": 0,
+    "n_declared": 0,
+    "n_inferred": 0,
+    "n_unknown": 0,
+    "n_dim_signals": 0,
+    "dim_hits": {}
+  },
+  "capture_hash": "4be0fb4aa05a8665b814f1d962b149b92f671e1c957df017abffd7dec1247e6a"
+}

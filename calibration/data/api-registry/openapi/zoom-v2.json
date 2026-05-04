@@ -1,0 +1,1550 @@
+{
+  "source_kind": "openapi",
+  "source_id": "zoom-v2",
+  "schema_hash": "71b1c4bef34de994e3e2162b6db8ea230e9b4fc80975989fe7859bf44b0a7d54",
+  "captured_at": "2026-05-02T20:35:33.497143+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "614aa67ae498e841a1f42084343b9d41f739e5678f1f271c1e2a03e8864bee04",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "65a946aee1b4b6585df08554171fd5a5c749793180ace1b8de8efd74fd663517",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.1",
+      "hash": "d1caf350ea5d6f1a4023c6d15670e3ec25dfa832a015348ffeb5a4d3f70dec3a",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+        "source_hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.1",
+      "hash": "4313a1301e360fb9f40823328a75592039aedd2821d63b80be9cf45ed765c32a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+        "source_hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.1",
+      "hash": "2ed09413af1da88d807787fe901c2b430a8a9304ba27f235e28b31d0ef67e4a8",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-05-02",
+        "source_uri": "https://ref.gs1.org/ai/",
+        "source_hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "0aab1b08537ae2835ab1a05adb8a0800eaf7a7ce98ad6937f6cc3f7ee721a997",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "d95ea9d09a69dd1ba4a5679e890a2509185167a10357ae8f8591d8fcde73ff0a",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.1",
+      "hash": "fe87dbb4b7125cab4135f2af6775b75d798390e91ab0849c3496900f43662b52",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2026",
+        "source_uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+        "source_hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "cf7e4bbfb6c7bd012e8508a5b07d9719bbe35b8970a60bddc3128d05e7e2598f",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "0205810517db330b61965d089f78f1b427ea7fc0caec471025929ac965ffd583",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "2a3143742f52266ba08484a16e889d63761d409f1055d95021dab7a03da25a2e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7092871334e53492b46e4835ab2ef1f5d0ac9e184ed257c68ee212692f926c53",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "b16d83cbe515dc7e52d778f5fcb7d016e4a1f292cd8340307b85066141f5be65",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "b2396f760586f9656bd4b806127d5e3404f80d770288f1445beb04b27bae105d",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.1",
+      "hash": "8daa8d898578ac4feaebc986a3f0a8ce367d866054aec9b0654d01bb8f8f71cd",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+        "source_hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "6e653a3d4f730cc93b673893ac69b5215a0f3fbeb25059b3014aa83f5d339d69",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "tool_name": "accounts",
+      "description": "List sub accounts\n\nList all the sub accounts under the master account",
+      "fields": []
+    },
+    {
+      "tool_name": "accountCreate",
+      "description": "Create a sub account\n\nCreate a sub account under the master account. <aside>Your account must be a master account and have this privilege to create sub account. Zoom only assigns this privilege to trusted partners. The created user will not receive a confirmation email.</aside>.",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Account"
+        }
+      ]
+    },
+    {
+      "tool_name": "account",
+      "description": "Retrieve a sub account\n\nRetrieve a sub account under the master account. <aside>Your account must be a master account and have this privilege to read sub accounts. Zoom only assigns this privilege to trusted partners</aside>.",
+      "fields": []
+    },
+    {
+      "tool_name": "accountDisassociate",
+      "description": "Disassociate an account\n\nDisassociate a sub account from the master account. This will leave the account intact but the sub account will not longer be associated with the master account.",
+      "fields": []
+    },
+    {
+      "tool_name": "accountOptionsUpdate",
+      "description": "Update a sub account's options\n\nUpdate a sub account's options under the master account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "accountSettings",
+      "description": "Retrieve a sub account's settings\n\nRetrieve a sub account's settings under the master account",
+      "fields": []
+    },
+    {
+      "tool_name": "accountSettingsUpdate",
+      "description": "Update a sub account's settings\n\nUpdate a sub account's settings under the master account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "accountManagedDomain",
+      "description": "Retrieve a sub account's managed domains\n\nRetrieve a sub account's managed domains under the master account",
+      "fields": []
+    },
+    {
+      "tool_name": "accountBilling",
+      "description": "Retrieve billing information for a sub account\n\nRetrieve billing information for a sub account under the master account",
+      "fields": []
+    },
+    {
+      "tool_name": "accountBillingUpdate",
+      "description": "Update billing information for a sub account\n\nUpdate billing information for a sub account under the master account <aside>Only for the sub account which is a paid account and paid by master account</aside>",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "accountPlans",
+      "description": "Retrieve plan information for a sub account\n\nRetrieve plan information for a sub account under the master account  <aside>Only for the sub account which is paid by master account</aside>",
+      "fields": []
+    },
+    {
+      "tool_name": "accountPlanCreate",
+      "description": "Subscribe plans for a sub account\n\nSubscribe plans for a sub account of the master account <aside>Can only subscribe plans for the sub account which is a free account and paid by master account</aside>",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "accountPlanBaseUpdate",
+      "description": "Update a base plan for a sub account\n\nUpdate a base plan for a sub account <aside>Can only update a base plan for the sub account which is a paid account and paid by master account</aside>",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "accountPlanAddonCreate",
+      "description": "Add an additional plan for sub account\n\nAdd an additional plan for sub account <aside>Can only add an Additional plan for the sub account which is a paid account and paid by master account</aside>",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "accountPlanAddonUpdate",
+      "description": "Update an additional plan for sub account\n\nUpdate an additional plan for sub account<aside>Can only update an Additional plan for the sub account which is a paid account and paid by master account</aside>",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "groups",
+      "description": "List groups\n\nList groups under your account",
+      "fields": []
+    },
+    {
+      "tool_name": "groupCreate",
+      "description": "Create a group\n\nCreate a group under your account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "group",
+      "description": "Retrieve a group\n\nRetrieve a group under your account",
+      "fields": []
+    },
+    {
+      "tool_name": "groupUpdate",
+      "description": "Update a group\n\nUpdate a group under your account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "groupDelete",
+      "description": "Delete a group\n\nDelete a group under your account",
+      "fields": []
+    },
+    {
+      "tool_name": "groupMembers",
+      "description": "List a group's members\n\nList a group's members under your account",
+      "fields": []
+    },
+    {
+      "tool_name": "groupMembersCreate",
+      "description": "Add group members\n\nAdd members to a group under your account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "groupMembersDelete",
+      "description": "Delete a group member\n\nDelete a member from a group under your account",
+      "fields": []
+    },
+    {
+      "tool_name": "deviceList",
+      "description": "List H.323/SIP Devices.\n\nList H.323/SIP Devices on your Zoom account.",
+      "fields": []
+    },
+    {
+      "tool_name": "deviceCreate",
+      "description": "Create a H.323/SIP Device\n\nCreate a H.323/SIP Device on your Zoom account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "H.323/SIP Device"
+        }
+      ]
+    },
+    {
+      "tool_name": "deviceUpdate",
+      "description": "Update a H.323/SIP Device\n\nUpdate a H.323/SIP Device on your Zoom account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "deviceDelete",
+      "description": "Delete a H.323/SIP Device\n\nDelete a H.323/SIP Device on your Zoom account",
+      "fields": []
+    },
+    {
+      "tool_name": "trackingfieldList",
+      "description": "List Tracking Fields.\n\nList Tracking Fields on your Zoom account.",
+      "fields": []
+    },
+    {
+      "tool_name": "trackingfieldCreate",
+      "description": "Create a Tracking Field\n\nCreate a Tracking Field on your Zoom account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Tracking Field"
+        }
+      ]
+    },
+    {
+      "tool_name": "trackingfieldGet",
+      "description": "Retrieve a tracking field\n\nRetrieve a tracking field",
+      "fields": [
+        {
+          "field_name": "fieldId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The Tracking Field ID"
+        }
+      ]
+    },
+    {
+      "tool_name": "trackingfieldUpdate",
+      "description": "Update a Tracking Field\n\nUpdate a Tracking Field on your Zoom account",
+      "fields": [
+        {
+          "field_name": "fieldId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The Tracking Field ID"
+        },
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "trackingfieldDelete",
+      "description": "Delete a Tracking Field\n\nDelete a Tracking Field on your Zoom account",
+      "fields": [
+        {
+          "field_name": "fieldId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The Tracking Field ID"
+        }
+      ]
+    },
+    {
+      "tool_name": "imGroups",
+      "description": "List IM Groups\n\nList IM groups under your account",
+      "fields": []
+    },
+    {
+      "tool_name": "imGroupCreate",
+      "description": "Create an IM Group\n\nCreate a IM Group under your account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "imGroup",
+      "description": "Retrieve an IM Group\n\nRetrieve an IM Group under your account",
+      "fields": []
+    },
+    {
+      "tool_name": "imGroupUpdate",
+      "description": "Update an IM Group\n\nUpdate an IM Group under your account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "imGroupDelete",
+      "description": "Delete an IM Group\n\nDelete an IM Group under your account",
+      "fields": []
+    },
+    {
+      "tool_name": "imGroupMembers",
+      "description": "List an IM Group's members\n\nList an IM Group's members under your account",
+      "fields": []
+    },
+    {
+      "tool_name": "imGroupMembersCreate",
+      "description": "Add IM Group members\n\nAdd members to an IM Group under your account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "imGroupMembersDelete",
+      "description": "Delete an IM Group member\n\nDelete a member from an IM Group under your account",
+      "fields": []
+    },
+    {
+      "tool_name": "imChatSessions",
+      "description": "Retrieve IM Chat sessions\n\nRetrieve IM Chat sessions for a specified period <aside>This API only supports oauth2.</aside>",
+      "fields": []
+    },
+    {
+      "tool_name": "imChatMessages",
+      "description": "Retrieve IM Chat messages\n\nRetrieve IM Chat messages for a specified period <aside>This API only supports oauth2.</aside>",
+      "fields": []
+    },
+    {
+      "tool_name": "meetings",
+      "description": "List meetings\n\nList meetings for a user",
+      "fields": []
+    },
+    {
+      "tool_name": "meetingCreate",
+      "description": "Create a meeting\n\nCreate a meeting for a user <aside>The expiration time of start_url is two hours. But for API users, the expiration time is 90 days.</aside>",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Meeting object"
+        }
+      ]
+    },
+    {
+      "tool_name": "meeting",
+      "description": "Retrieve a meeting\n\nRetrieve a meeting's details",
+      "fields": []
+    },
+    {
+      "tool_name": "meetingUpdate",
+      "description": "Update a meeting\n\nUpdate a meeting's details",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Meeting"
+        }
+      ]
+    },
+    {
+      "tool_name": "meetingDelete",
+      "description": "Delete a meeting\n\nDelete a meeting",
+      "fields": []
+    },
+    {
+      "tool_name": "meetingStatus",
+      "description": "Update a meeting's status\n\nUpdate a meeting's status",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "meetingInvitation",
+      "description": "Retrieve meeting invitation\n\nRetrieve a meeting invitation",
+      "fields": []
+    },
+    {
+      "tool_name": "meetingRegistrants",
+      "description": "List a meeting's registrants\n\nList registrants of a meeting",
+      "fields": []
+    },
+    {
+      "tool_name": "meetingRegistrantCreate",
+      "description": "Add a meeting registrant\n\nRegister a participant for a meeting",
+      "fields": [
+        {
+          "field_name": "occurrence_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Occurrence IDs. You can find these with the meeting get API. Multiple values separated by comma."
+        },
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "meetingRegistrantStatus",
+      "description": "Update a meeting registrant's status\n\nUpdate a meeting registrant's status",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "meetingLiveStreamUpdate",
+      "description": "Update a meeting live stream\n\nUpdate a meeting's live stream",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Meeting"
+        }
+      ]
+    },
+    {
+      "tool_name": "meetingLiveStreamStatusUpdate",
+      "description": "Update a meeting live stream status\n\nUpdate a meeting's live stream status",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Meeting"
+        }
+      ]
+    },
+    {
+      "tool_name": "pastMeetingDetails",
+      "description": "Retrieve past meeting details\n\nRetrieve ended meeting details",
+      "fields": []
+    },
+    {
+      "tool_name": "pastMeetingParticipants",
+      "description": "Retrieve past meeting participants\n\nRetrieve ended meeting participants",
+      "fields": []
+    },
+    {
+      "tool_name": "pastMeetings",
+      "description": "List of ended meeting instances\n\nList of ended meeting instances",
+      "fields": []
+    },
+    {
+      "tool_name": "meetingPolls",
+      "description": "List a meeting's polls \n\nList polls of a meeting",
+      "fields": []
+    },
+    {
+      "tool_name": "meetingPollCreate",
+      "description": "Create a meeting's poll\n\nCreate a poll for a meeting",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Meeting poll object"
+        }
+      ]
+    },
+    {
+      "tool_name": "meetingPollGet",
+      "description": "Retrieve a meeting's poll\n\nRetrieve a meeting's poll",
+      "fields": [
+        {
+          "field_name": "pollId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The poll ID"
+        }
+      ]
+    },
+    {
+      "tool_name": "meetingPollUpdate",
+      "description": "Update a meeting's poll\n\nUpdate a meeting's poll",
+      "fields": [
+        {
+          "field_name": "pollId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The poll ID"
+        },
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Meeting Poll"
+        }
+      ]
+    },
+    {
+      "tool_name": "meetingPollDelete",
+      "description": "Delete a meeting's Poll\n\nDelete a meeting's Poll",
+      "fields": [
+        {
+          "field_name": "pollId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The poll ID"
+        }
+      ]
+    },
+    {
+      "tool_name": "recordingsList",
+      "description": "List all the recordings\n\nList all the recordings",
+      "fields": []
+    },
+    {
+      "tool_name": "recordingGet",
+      "description": "Retrieve a meeting\u2019s all recordings\n\nRetrieve a meeting\u2019s all recordings",
+      "fields": []
+    },
+    {
+      "tool_name": "recordingDelete",
+      "description": "Delete a meeting's recordings\n\nDelete a meeting's recordings",
+      "fields": []
+    },
+    {
+      "tool_name": "recordingDeleteOne",
+      "description": "Delete one meeting recording file\n\nDelete one meeting recording file",
+      "fields": []
+    },
+    {
+      "tool_name": "recordingStatusUpdate",
+      "description": "Recover a meeting's recordings\n\nRecover a meeting's recordings",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "recordingStatusUpdateOne",
+      "description": "Recover a single recording\n\nRecover a single recording",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "recordingSettingUpdate",
+      "description": "Retrieve a meeting recording's settings\n\nRetrieve a meeting recording's settings",
+      "fields": []
+    },
+    {
+      "tool_name": "recordingSettingsUpdate",
+      "description": "Update a meeting recording's settings\n\nUpdate a meeting recording's settings",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Meeting recording Settings"
+        }
+      ]
+    },
+    {
+      "tool_name": "dashboardMeetings",
+      "description": "List meetings\n\nList live meetings or past meetings for a specified period",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardMeetingDetail",
+      "description": "Retrieve meeting detail\n\nRetrieve live or past meetings detail",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardMeetingParticipants",
+      "description": "Retrieve meeting participants\n\nRetrieve live or past meetings participants",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardMeetingParticipantQOS",
+      "description": "Retrieve meeting participant QOS\n\nRetrieve live or past meetings participant quality of service",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardMeetingParticipantsQOS",
+      "description": "List meeting participants QOS\n\nRetrieve list of live or past meetings participants quality of service",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardMeetingParticipantShare",
+      "description": "Retrieve sharing/recording details of meeting participant\n\nRetrieve sharing/recording details of live or past meetings participant",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardWebinars",
+      "description": "List webinars\n\nList live webinars or past webinars for a specified period",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardWebinarDetail",
+      "description": "Retrieve webinar detail\n\nRetrieve live  or past webinars detail",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardWebinarParticipants",
+      "description": "Retrieve webinar participants\n\nRetrieve live or past webinar participants",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardWebinarParticipantQOS",
+      "description": "Retrieve webinar participant QOS\n\nRetrieve live or past webinar participant quality of service",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardWebinarParticipantsQOS",
+      "description": "List webinar participant QOS\n\nRetrieve list of live or past webinar participants quality of service",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardWebinarParticipantShare",
+      "description": "Retrieve sharing/recording details of webinar participant\n\nRetrieve sharing/recording details of live or past webinar participant",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardZoomRooms",
+      "description": "List Zoom Rooms\n\nList all zoom rooms on account",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardZoomRoom",
+      "description": "Retrieve Zoom Room\n\nRetrieve zoom room on account",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardCRC",
+      "description": "Retrieve CRC Port Usage\n\nGet CRC Port usage hour by hour for a specified time period <aside class='notice'>We will report a maximum of one month. For example, if \"from\" is set to \"2017-08-05\" and \"to\" is \"2017-10-10\" we will adjust \"from\" to \"2017-09-10\"</aside>.",
+      "fields": []
+    },
+    {
+      "tool_name": "dashboardIM",
+      "description": "Retrieve IM\n\nRetrieve metrics of Zoom IM",
+      "fields": []
+    },
+    {
+      "tool_name": "reportDaily",
+      "description": "Retrieve daily report\n\nRetrieve daily report for one month, can only get daily report for recent 6 months",
+      "fields": [
+        {
+          "field_name": "year",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Year for this report"
+        },
+        {
+          "field_name": "month",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Month for this report"
+        }
+      ]
+    },
+    {
+      "tool_name": "reportUsers",
+      "description": "Retrieve hosts report\n\nRetrieve active or inactive hosts report for a specified period",
+      "fields": [
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Active hosts or inactive hosts"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "description": "Retrieve hosts report\n\nRetrieve active or inactive hosts report for a specified period"
+        }
+      ]
+    },
+    {
+      "tool_name": "reportMeetings",
+      "description": "Retrieve meetings report\n\nRetrieve ended meetings report for a specified period",
+      "fields": []
+    },
+    {
+      "tool_name": "reportMeetingDetails",
+      "description": "Retrieve meeting details report\n\nRetrieve ended meeting details report",
+      "fields": []
+    },
+    {
+      "tool_name": "reportMeetingParticipants",
+      "description": "Retrieve meeting participants report\n\nRetrieve ended meeting participants report",
+      "fields": []
+    },
+    {
+      "tool_name": "reportMeetingPolls",
+      "description": "Retrieve meeting polls report\n\nRetrieve ended meeting polls report",
+      "fields": []
+    },
+    {
+      "tool_name": "reportWebinarDetails",
+      "description": "Retrieve webinar details report\n\nRetrieve ended webinar details report",
+      "fields": []
+    },
+    {
+      "tool_name": "reportWebinarParticipants",
+      "description": "Retrieve webinar participants report\n\nRetrieve ended webinar participants report",
+      "fields": []
+    },
+    {
+      "tool_name": "reportWebinarPolls",
+      "description": "Retrieve webinar polls report\n\nRetrieve ended webinar polls report",
+      "fields": []
+    },
+    {
+      "tool_name": "reportWebinarQA",
+      "description": "Retrieve webinar Q&A report\n\nRetrieve ended webinar Q&A report",
+      "fields": []
+    },
+    {
+      "tool_name": "reportTelephone",
+      "description": "Retrieve telephone report\n\nRetrieve telephone report for a specified period <aside>Toll Report option would be removed.</aside>.",
+      "fields": [
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Audio type"
+        }
+      ]
+    },
+    {
+      "tool_name": "reportCloudRecording",
+      "description": "Retrieve cloud recording usage report\n\nRetrieve cloud recording usage report for a specified period. You can only get cloud recording reports for the most recent period of 6 months. The date gap between from and to dates should be smaller or equal to 30 days.",
+      "fields": []
+    },
+    {
+      "tool_name": "tsp",
+      "description": "Retrieve account's TSP information\n\nRetrieve TSP information on account level",
+      "fields": []
+    },
+    {
+      "tool_name": "tspUpdate",
+      "description": "Update account's TSP information\n\nUpdate TSP information on account level",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "TSP Account"
+        }
+      ]
+    },
+    {
+      "tool_name": "users",
+      "description": "List Users\n\nList users on your account",
+      "fields": [
+        {
+          "field_name": "status",
+          "dimensions": [
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "description": "User status"
+        }
+      ]
+    },
+    {
+      "tool_name": "userCreate",
+      "description": "Create a user\n\nCreate a user on your account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object",
+          "description": "User"
+        },
+        {
+          "field_name": "body.action",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Specify how to create the new user"
+        },
+        {
+          "field_name": "body.user_info",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "user",
+      "description": "Retrieve a user\n\nRetrieve a user on your account",
+      "fields": []
+    },
+    {
+      "tool_name": "userUpdate",
+      "description": "Update a user\n\nUpdate a user on your account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "User"
+        }
+      ]
+    },
+    {
+      "tool_name": "userDelete",
+      "description": "Delete a user\n\nDelete a user on your account",
+      "fields": [
+        {
+          "field_name": "action",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Delete action type"
+        }
+      ]
+    },
+    {
+      "tool_name": "userAssistants",
+      "description": "List a user's assistants\n\nList a user's assistants",
+      "fields": []
+    },
+    {
+      "tool_name": "userAssistantCreate",
+      "description": "Add assistants\n\nAdd assistants to a user",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "User assistant"
+        }
+      ]
+    },
+    {
+      "tool_name": "userAssistantsDelete",
+      "description": "Delete a user's assistants\n\nDelete all of a user'sassitants",
+      "fields": []
+    },
+    {
+      "tool_name": "userAssistantDelete",
+      "description": "Delete a user's assistant\n\nDelete one of a user's assistants",
+      "fields": [
+        {
+          "field_name": "assistantId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Assistant's ID"
+        }
+      ]
+    },
+    {
+      "tool_name": "userSchedulers",
+      "description": "List a user's schedulers\n\nList a user's schedulers",
+      "fields": []
+    },
+    {
+      "tool_name": "userSchedulersDelete",
+      "description": "Delete a user's schedulers\n\nDelete all of a user'schedulers",
+      "fields": []
+    },
+    {
+      "tool_name": "userSchedulerDelete",
+      "description": "Delete a user's scheduler\n\nDelete one of a user's schedulers",
+      "fields": [
+        {
+          "field_name": "schedulerId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Scheduler's ID"
+        }
+      ]
+    },
+    {
+      "tool_name": "userPicture",
+      "description": "Upload a user's picture\n\nUpload a user's profile picture",
+      "fields": [
+        {
+          "field_name": "pic_file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "User picture file, must be a jpg/jpeg file"
+        }
+      ]
+    },
+    {
+      "tool_name": "userSettings",
+      "description": "Retrieve a user's settings\n\nRetrieve a user's settings",
+      "fields": []
+    },
+    {
+      "tool_name": "userSettingsUpdate",
+      "description": "Update a user's settings\n\nUpdate a user's settings",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "User Settings"
+        }
+      ]
+    },
+    {
+      "tool_name": "userStatus",
+      "description": "Update a user's status\n\nUpdate a user's status",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object",
+          "description": "The action"
+        },
+        {
+          "field_name": "body.action",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The action type"
+        }
+      ]
+    },
+    {
+      "tool_name": "userPassword",
+      "description": "Update a user's password\n\nUpdate a user's password",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object",
+          "description": "User password"
+        },
+        {
+          "field_name": "body.password",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User\u2019s password. Character length is less than 32,"
+        }
+      ]
+    },
+    {
+      "tool_name": "userPermission",
+      "description": "Retrieve a user's permissions\n\nRetrieve a user's permissions",
+      "fields": []
+    },
+    {
+      "tool_name": "userPACs",
+      "description": "List user's PAC accounts\n\nList user's PAC accounts",
+      "fields": []
+    },
+    {
+      "tool_name": "userTSPs",
+      "description": "List user's TSP accounts\n\nList user's TSP accounts",
+      "fields": []
+    },
+    {
+      "tool_name": "userTSPCreate",
+      "description": "Add a user's TSP account\n\nAdd a user's TSP account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "TSP Account"
+        }
+      ]
+    },
+    {
+      "tool_name": "userTSP",
+      "description": "Retrieve a user's TSP account\n\nRetrieve a user's TSP account",
+      "fields": []
+    },
+    {
+      "tool_name": "userTSPUpdate",
+      "description": "Update a TSP account\n\nUpdate a user's TSP account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "TSP Account"
+        }
+      ]
+    },
+    {
+      "tool_name": "userTSPDelete",
+      "description": "Delete a user's TSP account\n\nDelete a user's TSP account",
+      "fields": []
+    },
+    {
+      "tool_name": "userToken",
+      "description": "Retrieve a user's token\n\nRetrieve a user's token",
+      "fields": [
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "User token type"
+        }
+      ]
+    },
+    {
+      "tool_name": "userSSOTokenDelete",
+      "description": "Revoke a user's SSO token\n\nRevoke a user's SSO token",
+      "fields": []
+    },
+    {
+      "tool_name": "userEmailUpdate",
+      "description": "Update a user's email\n\nUpdate a user's email",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "object",
+          "description": "User email"
+        },
+        {
+          "field_name": "body.email",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User\u2019s email. Character length is less than 128."
+        }
+      ]
+    },
+    {
+      "tool_name": "userZPK",
+      "description": "Verify a user's zpk (Deprecated\n\nCheck if the zpk is expired. The zpk is used to authenticate a user.",
+      "fields": [
+        {
+          "field_name": "zpk",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "User zpk"
+        }
+      ]
+    },
+    {
+      "tool_name": "userEmail",
+      "description": "Check a user's email\n\nCheck if the user email exists",
+      "fields": [
+        {
+          "field_name": "email",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Zoom work email"
+        }
+      ]
+    },
+    {
+      "tool_name": "userVanityName",
+      "description": "Check a user's personal meeting room name\n\nCheck if the user's personal meeting room name exists",
+      "fields": [
+        {
+          "field_name": "vanity_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Personal meeting room name"
+        }
+      ]
+    },
+    {
+      "tool_name": "webinars",
+      "description": "List webinars\n\nList webinars for a user",
+      "fields": []
+    },
+    {
+      "tool_name": "webinarCreate",
+      "description": "Create a webinar\n\nCreate a webinar for a user <aside>The expiration time of start_url is two hours. But for API users, the expiration time is 90 days.</aside>",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "User"
+        }
+      ]
+    },
+    {
+      "tool_name": "webinar",
+      "description": "Retrieve a webinar\n\nRetrieve a webinar",
+      "fields": []
+    },
+    {
+      "tool_name": "webinarUpdate",
+      "description": "Update a webinar\n\nUpdate a webinar",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Webinar"
+        }
+      ]
+    },
+    {
+      "tool_name": "webinarDelete",
+      "description": "Delete a webinar\n\nDelete a webinar",
+      "fields": []
+    },
+    {
+      "tool_name": "webinarStatus",
+      "description": "Update a webinar's status\n\nUpdate a webinar's status",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "webinarPanelists",
+      "description": "List a webinar's panelists\n\nList panelists for a webinar",
+      "fields": []
+    },
+    {
+      "tool_name": "webinarPanelistCreate",
+      "description": "Add a webinar panelist\n\nAdd panelist to webinar",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "webinarPanelistsDelete",
+      "description": "Remove a webinar's panelists\n\nRemove all panelists from a webinar",
+      "fields": []
+    },
+    {
+      "tool_name": "webinarPanelistDelete",
+      "description": "Remove a webinar panelist\n\nRemove a panelist from a webinar",
+      "fields": [
+        {
+          "field_name": "panelistId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The panelist ID"
+        }
+      ]
+    },
+    {
+      "tool_name": "webinarRegistrants",
+      "description": "List a webinar's registrants\n\nList registrants for a webinar",
+      "fields": []
+    },
+    {
+      "tool_name": "webinarRegistrantCreate",
+      "description": "Add a webinar registrant\n\nAdd a registrant for a webinar",
+      "fields": [
+        {
+          "field_name": "occurrence_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Occurrence IDs, could get this value from Webinar Get API. Multiple value separated by comma."
+        },
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "webinarRegistrantStatus",
+      "description": "Update a webinar registrant's status\n\nUpdate a webinar registrant's status",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "pastWebinars",
+      "description": "List of ended webinar instances\n\nList of ended webinar instances",
+      "fields": []
+    },
+    {
+      "tool_name": "webinarPolls",
+      "description": "List a webinar's polls \n\nList polls of a webinar",
+      "fields": []
+    },
+    {
+      "tool_name": "webinarPollCreate",
+      "description": "Create a webinar's poll\n\nCreate a poll for a webinar",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Webinar poll object"
+        }
+      ]
+    },
+    {
+      "tool_name": "webinarPollGet",
+      "description": "Retrieve a webinar's poll\n\nRetrieve a webinar's poll",
+      "fields": [
+        {
+          "field_name": "pollId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The poll ID"
+        }
+      ]
+    },
+    {
+      "tool_name": "webinarPollUpdate",
+      "description": "Update a webinar's poll\n\nUpdate a webinar's poll",
+      "fields": [
+        {
+          "field_name": "pollId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The poll ID"
+        },
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Webinar Poll"
+        }
+      ]
+    },
+    {
+      "tool_name": "webinarPollDelete",
+      "description": "Delete a webinar's Poll\n\nDelete a webinar's Poll",
+      "fields": [
+        {
+          "field_name": "pollId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The poll ID"
+        }
+      ]
+    },
+    {
+      "tool_name": "webhookSwitch",
+      "description": "Switch webhook version\n\nSwitch webhook version",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "webhooks",
+      "description": "List webhooks\n\nList webhooks for a account",
+      "fields": []
+    },
+    {
+      "tool_name": "webhookCreate",
+      "description": "Create a webhook\n\nCreate a webhook for a account",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Webhook"
+        }
+      ]
+    },
+    {
+      "tool_name": "webhook",
+      "description": "Retrieve a webhook\n\nRetrieve a webhook",
+      "fields": []
+    },
+    {
+      "tool_name": "webhookUpdate",
+      "description": "Update a webhook\n\nUpdate a webhook",
+      "fields": [
+        {
+          "field_name": "body",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Webhook"
+        }
+      ]
+    },
+    {
+      "tool_name": "webhookDelete",
+      "description": "Delete a webhook\n\nDelete a webhook",
+      "fields": []
+    }
+  ],
+  "aggregate": {
+    "n_tools": 155,
+    "n_fields": 81,
+    "n_declared": 0,
+    "n_inferred": 1,
+    "n_unknown": 80,
+    "n_dim_signals": 2,
+    "dim_hits": {
+      "state_filter": 2
+    }
+  },
+  "capture_hash": "be80e26c64d4e8155eba7a8eee95363506e86d1dcbaaa82f9c1db9a05ef29a63"
+}

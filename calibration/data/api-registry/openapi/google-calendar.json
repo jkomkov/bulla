@@ -1,0 +1,1529 @@
+{
+  "source_kind": "openapi",
+  "source_id": "google-calendar",
+  "schema_hash": "9a966d33174a0777bc0ce17cc60a8f48e38d2a940e9216f0d377ccbac983eb75",
+  "captured_at": "2026-05-02T20:36:13.550582+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "614aa67ae498e841a1f42084343b9d41f739e5678f1f271c1e2a03e8864bee04",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "65a946aee1b4b6585df08554171fd5a5c749793180ace1b8de8efd74fd663517",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.1",
+      "hash": "d1caf350ea5d6f1a4023c6d15670e3ec25dfa832a015348ffeb5a4d3f70dec3a",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+        "source_hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.1",
+      "hash": "4313a1301e360fb9f40823328a75592039aedd2821d63b80be9cf45ed765c32a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+        "source_hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.1",
+      "hash": "2ed09413af1da88d807787fe901c2b430a8a9304ba27f235e28b31d0ef67e4a8",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-05-02",
+        "source_uri": "https://ref.gs1.org/ai/",
+        "source_hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "0aab1b08537ae2835ab1a05adb8a0800eaf7a7ce98ad6937f6cc3f7ee721a997",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "d95ea9d09a69dd1ba4a5679e890a2509185167a10357ae8f8591d8fcde73ff0a",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.1",
+      "hash": "fe87dbb4b7125cab4135f2af6775b75d798390e91ab0849c3496900f43662b52",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2026",
+        "source_uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+        "source_hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "cf7e4bbfb6c7bd012e8508a5b07d9719bbe35b8970a60bddc3128d05e7e2598f",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "0205810517db330b61965d089f78f1b427ea7fc0caec471025929ac965ffd583",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "2a3143742f52266ba08484a16e889d63761d409f1055d95021dab7a03da25a2e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7092871334e53492b46e4835ab2ef1f5d0ac9e184ed257c68ee212692f926c53",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "b16d83cbe515dc7e52d778f5fcb7d016e4a1f292cd8340307b85066141f5be65",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "b2396f760586f9656bd4b806127d5e3404f80d770288f1445beb04b27bae105d",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.1",
+      "hash": "8daa8d898578ac4feaebc986a3f0a8ce367d866054aec9b0654d01bb8f8f71cd",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+        "source_hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "6e653a3d4f730cc93b673893ac69b5215a0f3fbeb25059b3014aa83f5d339d69",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "tool_name": "calendar.calendars.insert",
+      "description": "Creates a secondary calendar.",
+      "fields": []
+    },
+    {
+      "tool_name": "calendar.calendars.delete",
+      "description": "Deletes a secondary calendar. Use calendars.clear for clearing all events on primary calendars.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.calendars.get",
+      "description": "Returns metadata for a calendar.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.calendars.patch",
+      "description": "Updates metadata for a calendar. This method supports patch semantics.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.calendars.update",
+      "description": "Updates metadata for a calendar.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.acl.list",
+      "description": "Returns the rules in the access control list for the calendar.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token specifying which result page to return. Optional."
+        },
+        {
+          "field_name": "showDeleted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to \"none\". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False."
+        },
+        {
+          "field_name": "syncToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.acl.insert",
+      "description": "Creates an access control rule.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "sendNotifications",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to send notifications about the calendar sharing change. Optional. The default is True."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.acl.watch",
+      "description": "Watch for changes to ACL resources.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token specifying which result page to return. Optional."
+        },
+        {
+          "field_name": "showDeleted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to \"none\". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False."
+        },
+        {
+          "field_name": "syncToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.acl.delete",
+      "description": "Deletes an access control rule.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "ruleId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ACL rule identifier."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.acl.get",
+      "description": "Returns an access control rule.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "ruleId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ACL rule identifier."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.acl.patch",
+      "description": "Updates an access control rule. This method supports patch semantics.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "ruleId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ACL rule identifier."
+        },
+        {
+          "field_name": "sendNotifications",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to send notifications about the calendar sharing change. Note that there are no notifications on access removal. Optional. The default is True."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.acl.update",
+      "description": "Updates an access control rule.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "ruleId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ACL rule identifier."
+        },
+        {
+          "field_name": "sendNotifications",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to send notifications about the calendar sharing change. Note that there are no notifications on access removal. Optional. The default is True."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.calendars.clear",
+      "description": "Clears a primary calendar. This operation deletes all events associated with the primary calendar of an account.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.events.list",
+      "description": "Returns events on the specified calendar.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "alwaysIncludeEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Deprecated and ignored."
+        },
+        {
+          "field_name": "eventTypes",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Event types to return. Optional. This parameter can be repeated multiple times to return events of different types. The default is [\"default\", \"focusTime\", \"outOfOffice\"]."
+        },
+        {
+          "field_name": "iCalUID",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Specifies an event ID in the iCalendar format to be provided in the response. Optional. Use this if you want to search for an event by its iCalendar ID."
+        },
+        {
+          "field_name": "maxAttendees",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Maximum number of events returned on one result page. The number of events in the resulting page may be less than this value, or none at all, even if there are more events matching the query. Incomplete pages can be detected by a non-empty nextPageToken field in the response. By default the value is 250 events. The page size can never be larger than 2500 events. Optional."
+        },
+        {
+          "field_name": "orderBy",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The order of the events returned in the result. Optional. The default is an unspecified, stable order."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token specifying which result page to return. Optional."
+        },
+        {
+          "field_name": "privateExtendedProperty",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Extended properties constraint specified as propertyName=value. Matches only private properties. This parameter might be repeated multiple times to return events that match all given constraints."
+        },
+        {
+          "field_name": "q",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Free text search terms to find events that match these terms in the following fields:\n\n- summary \n- description \n- location \n- attendee's displayName \n- attendee's email \n- organizer's displayName \n- organizer's email \n- workingLocationProperties.officeLocation.buildingId \n- workingLocationProperties.officeLocation.deskId \n- workingLocationProperties.officeLocation.label \n- workingLocationProperties.customLocation.label \nThese search terms also match predefined keywords against all display title translations of working location, out-of-office, and focus-time events. For example, searching for \"Office\" or \"Bureau\" returns working location events of type officeLocation, whereas searching for \"Out of office\" or \"Abwesend\" returns out-of-office events. Optional."
+        },
+        {
+          "field_name": "sharedExtendedProperty",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints."
+        },
+        {
+          "field_name": "showDeleted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to include deleted events (with status equals \"cancelled\") in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if showDeleted and singleEvents are both False. If showDeleted and singleEvents are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False."
+        },
+        {
+          "field_name": "showHiddenInvitations",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to include hidden invitations in the result. Optional. The default is False."
+        },
+        {
+          "field_name": "singleEvents",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves. Optional. The default is False."
+        },
+        {
+          "field_name": "syncToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nThere are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.\n\nThese are: \n- iCalUID \n- orderBy \n- privateExtendedProperty \n- q \n- sharedExtendedProperty \n- timeMin \n- timeMax \n- updatedMin All other query parameters should be the same as for the initial synchronization to avoid undefined behavior. If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries."
+        },
+        {
+          "field_name": "timeMax",
+          "dimensions": [
+            "date_format",
+            "temporal_format",
+            "timezone"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMin is set, timeMax must be greater than timeMin."
+        },
+        {
+          "field_name": "timeMin",
+          "dimensions": [
+            "date_format",
+            "temporal_format",
+            "timezone"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Lower bound (exclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMax is set, timeMin must be smaller than timeMax."
+        },
+        {
+          "field_name": "timeZone",
+          "dimensions": [
+            "timezone"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Time zone used in the response. Optional. The default is the time zone of the calendar."
+        },
+        {
+          "field_name": "updatedMin",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Lower bound for an event's last modification time (as a RFC3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.events.insert",
+      "description": "Creates an event.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "conferenceDataVersion",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0."
+        },
+        {
+          "field_name": "maxAttendees",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional."
+        },
+        {
+          "field_name": "sendNotifications",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Deprecated. Please use sendUpdates instead.\n\nWhether to send notifications about the creation of the new event. Note that some emails might still be sent even if you set the value to false. The default is false."
+        },
+        {
+          "field_name": "sendUpdates",
+          "dimensions": [
+            "currency_code",
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false."
+        },
+        {
+          "field_name": "supportsAttachments",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether API client performing operation supports event attachments. Optional. The default is False."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.events.import",
+      "description": "Imports an event. This operation is used to add a private copy of an existing event to a calendar.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "conferenceDataVersion",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0."
+        },
+        {
+          "field_name": "supportsAttachments",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether API client performing operation supports event attachments. Optional. The default is False."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.events.quickAdd",
+      "description": "Creates an event based on a simple text string.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "text",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The text describing the event to be created."
+        },
+        {
+          "field_name": "sendNotifications",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Deprecated. Please use sendUpdates instead.\n\nWhether to send notifications about the creation of the event. Note that some emails might still be sent even if you set the value to false. The default is false."
+        },
+        {
+          "field_name": "sendUpdates",
+          "dimensions": [
+            "currency_code",
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Guests who should receive notifications about the creation of the new event."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.events.watch",
+      "description": "Watch for changes to Events resources.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "alwaysIncludeEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Deprecated and ignored."
+        },
+        {
+          "field_name": "eventTypes",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Event types to return. Optional. This parameter can be repeated multiple times to return events of different types. The default is [\"default\", \"focusTime\", \"outOfOffice\"]."
+        },
+        {
+          "field_name": "iCalUID",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Specifies an event ID in the iCalendar format to be provided in the response. Optional. Use this if you want to search for an event by its iCalendar ID."
+        },
+        {
+          "field_name": "maxAttendees",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Maximum number of events returned on one result page. The number of events in the resulting page may be less than this value, or none at all, even if there are more events matching the query. Incomplete pages can be detected by a non-empty nextPageToken field in the response. By default the value is 250 events. The page size can never be larger than 2500 events. Optional."
+        },
+        {
+          "field_name": "orderBy",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The order of the events returned in the result. Optional. The default is an unspecified, stable order."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token specifying which result page to return. Optional."
+        },
+        {
+          "field_name": "privateExtendedProperty",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Extended properties constraint specified as propertyName=value. Matches only private properties. This parameter might be repeated multiple times to return events that match all given constraints."
+        },
+        {
+          "field_name": "q",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Free text search terms to find events that match these terms in the following fields:\n\n- summary \n- description \n- location \n- attendee's displayName \n- attendee's email \n- organizer's displayName \n- organizer's email \n- workingLocationProperties.officeLocation.buildingId \n- workingLocationProperties.officeLocation.deskId \n- workingLocationProperties.officeLocation.label \n- workingLocationProperties.customLocation.label \nThese search terms also match predefined keywords against all display title translations of working location, out-of-office, and focus-time events. For example, searching for \"Office\" or \"Bureau\" returns working location events of type officeLocation, whereas searching for \"Out of office\" or \"Abwesend\" returns out-of-office events. Optional."
+        },
+        {
+          "field_name": "sharedExtendedProperty",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints."
+        },
+        {
+          "field_name": "showDeleted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to include deleted events (with status equals \"cancelled\") in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if showDeleted and singleEvents are both False. If showDeleted and singleEvents are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False."
+        },
+        {
+          "field_name": "showHiddenInvitations",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to include hidden invitations in the result. Optional. The default is False."
+        },
+        {
+          "field_name": "singleEvents",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves. Optional. The default is False."
+        },
+        {
+          "field_name": "syncToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nThere are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.\n\nThese are: \n- iCalUID \n- orderBy \n- privateExtendedProperty \n- q \n- sharedExtendedProperty \n- timeMin \n- timeMax \n- updatedMin All other query parameters should be the same as for the initial synchronization to avoid undefined behavior. If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries."
+        },
+        {
+          "field_name": "timeMax",
+          "dimensions": [
+            "date_format",
+            "temporal_format",
+            "timezone"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMin is set, timeMax must be greater than timeMin."
+        },
+        {
+          "field_name": "timeMin",
+          "dimensions": [
+            "date_format",
+            "temporal_format",
+            "timezone"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Lower bound (exclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMax is set, timeMin must be smaller than timeMax."
+        },
+        {
+          "field_name": "timeZone",
+          "dimensions": [
+            "timezone"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Time zone used in the response. Optional. The default is the time zone of the calendar."
+        },
+        {
+          "field_name": "updatedMin",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Lower bound for an event's last modification time (as a RFC3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.events.delete",
+      "description": "Deletes an event.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "eventId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Event identifier."
+        },
+        {
+          "field_name": "sendNotifications",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Deprecated. Please use sendUpdates instead.\n\nWhether to send notifications about the deletion of the event. Note that some emails might still be sent even if you set the value to false. The default is false."
+        },
+        {
+          "field_name": "sendUpdates",
+          "dimensions": [
+            "currency_code",
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Guests who should receive notifications about the deletion of the event."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.events.get",
+      "description": "Returns an event based on its Google Calendar ID. To retrieve an event using its iCalendar ID, call the events.list method using the iCalUID parameter.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "eventId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Event identifier."
+        },
+        {
+          "field_name": "alwaysIncludeEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided)."
+        },
+        {
+          "field_name": "maxAttendees",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional."
+        },
+        {
+          "field_name": "timeZone",
+          "dimensions": [
+            "timezone"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Time zone used in the response. Optional. The default is the time zone of the calendar."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.events.patch",
+      "description": "Updates an event. This method supports patch semantics.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "eventId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Event identifier."
+        },
+        {
+          "field_name": "alwaysIncludeEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided)."
+        },
+        {
+          "field_name": "conferenceDataVersion",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0."
+        },
+        {
+          "field_name": "maxAttendees",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional."
+        },
+        {
+          "field_name": "sendNotifications",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Deprecated. Please use sendUpdates instead.\n\nWhether to send notifications about the event update (for example, description changes, etc.). Note that some emails might still be sent even if you set the value to false. The default is false."
+        },
+        {
+          "field_name": "sendUpdates",
+          "dimensions": [
+            "currency_code",
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Guests who should receive notifications about the event update (for example, title changes, etc.)."
+        },
+        {
+          "field_name": "supportsAttachments",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether API client performing operation supports event attachments. Optional. The default is False."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.events.update",
+      "description": "Updates an event.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "eventId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Event identifier."
+        },
+        {
+          "field_name": "alwaysIncludeEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided)."
+        },
+        {
+          "field_name": "conferenceDataVersion",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0."
+        },
+        {
+          "field_name": "maxAttendees",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional."
+        },
+        {
+          "field_name": "sendNotifications",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Deprecated. Please use sendUpdates instead.\n\nWhether to send notifications about the event update (for example, description changes, etc.). Note that some emails might still be sent even if you set the value to false. The default is false."
+        },
+        {
+          "field_name": "sendUpdates",
+          "dimensions": [
+            "currency_code",
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Guests who should receive notifications about the event update (for example, title changes, etc.)."
+        },
+        {
+          "field_name": "supportsAttachments",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether API client performing operation supports event attachments. Optional. The default is False."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.events.instances",
+      "description": "Returns instances of the specified recurring event.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "eventId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Recurring event identifier."
+        },
+        {
+          "field_name": "alwaysIncludeEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided)."
+        },
+        {
+          "field_name": "maxAttendees",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Maximum number of events returned on one result page. By default the value is 250 events. The page size can never be larger than 2500 events. Optional."
+        },
+        {
+          "field_name": "originalStart",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The original start time of the instance in the result. Optional."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token specifying which result page to return. Optional."
+        },
+        {
+          "field_name": "showDeleted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to include deleted events (with status equals \"cancelled\") in the result. Cancelled instances of recurring events will still be included if singleEvents is False. Optional. The default is False."
+        },
+        {
+          "field_name": "timeMax",
+          "dimensions": [
+            "date_format",
+            "temporal_format",
+            "timezone"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset."
+        },
+        {
+          "field_name": "timeMin",
+          "dimensions": [
+            "date_format",
+            "temporal_format",
+            "timezone"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset."
+        },
+        {
+          "field_name": "timeZone",
+          "dimensions": [
+            "timezone"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Time zone used in the response. Optional. The default is the time zone of the calendar."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.events.move",
+      "description": "Moves an event to another calendar, i.e. changes an event's organizer. Note that only default events can be moved; outOfOffice, focusTime and workingLocation events cannot be moved.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier of the source calendar where the event currently is on."
+        },
+        {
+          "field_name": "eventId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Event identifier."
+        },
+        {
+          "field_name": "destination",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier of the target calendar where the event is to be moved to."
+        },
+        {
+          "field_name": "sendNotifications",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Deprecated. Please use sendUpdates instead.\n\nWhether to send notifications about the change of the event's organizer. Note that some emails might still be sent even if you set the value to false. The default is false."
+        },
+        {
+          "field_name": "sendUpdates",
+          "dimensions": [
+            "currency_code",
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Guests who should receive notifications about the change of the event's organizer."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.channels.stop",
+      "description": "Stop watching resources through this channel",
+      "fields": []
+    },
+    {
+      "tool_name": "calendar.colors.get",
+      "description": "Returns the color definitions for calendars and events.",
+      "fields": []
+    },
+    {
+      "tool_name": "calendar.freebusy.query",
+      "description": "Returns free/busy information for a set of calendars.",
+      "fields": []
+    },
+    {
+      "tool_name": "calendar.calendarList.list",
+      "description": "Returns the calendars on the user's calendar list.",
+      "fields": [
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional."
+        },
+        {
+          "field_name": "minAccessRole",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The minimum access role for the user in the returned entries. Optional. The default is no restriction."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token specifying which result page to return. Optional."
+        },
+        {
+          "field_name": "showDeleted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to include deleted calendar list entries in the result. Optional. The default is False."
+        },
+        {
+          "field_name": "showHidden",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to show hidden entries. Optional. The default is False."
+        },
+        {
+          "field_name": "syncToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.\nTo ensure client state consistency minAccessRole query parameter cannot be specified together with nextSyncToken.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.calendarList.insert",
+      "description": "Inserts an existing calendar into the user's calendar list.",
+      "fields": [
+        {
+          "field_name": "colorRgbFormat",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.calendarList.watch",
+      "description": "Watch for changes to CalendarList resources.",
+      "fields": [
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional."
+        },
+        {
+          "field_name": "minAccessRole",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The minimum access role for the user in the returned entries. Optional. The default is no restriction."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token specifying which result page to return. Optional."
+        },
+        {
+          "field_name": "showDeleted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to include deleted calendar list entries in the result. Optional. The default is False."
+        },
+        {
+          "field_name": "showHidden",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to show hidden entries. Optional. The default is False."
+        },
+        {
+          "field_name": "syncToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.\nTo ensure client state consistency minAccessRole query parameter cannot be specified together with nextSyncToken.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.calendarList.delete",
+      "description": "Removes a calendar from the user's calendar list.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.calendarList.get",
+      "description": "Returns a calendar from the user's calendar list.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.calendarList.patch",
+      "description": "Updates an existing calendar on the user's calendar list. This method supports patch semantics.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "colorRgbFormat",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.calendarList.update",
+      "description": "Updates an existing calendar on the user's calendar list.",
+      "fields": [
+        {
+          "field_name": "calendarId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword."
+        },
+        {
+          "field_name": "colorRgbFormat",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.settings.list",
+      "description": "Returns all user settings for the authenticated user.",
+      "fields": [
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token specifying which result page to return. Optional."
+        },
+        {
+          "field_name": "syncToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.settings.watch",
+      "description": "Watch for changes to Settings resources.",
+      "fields": [
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token specifying which result page to return. Optional."
+        },
+        {
+          "field_name": "syncToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries."
+        }
+      ]
+    },
+    {
+      "tool_name": "calendar.settings.get",
+      "description": "Returns a single user setting.",
+      "fields": [
+        {
+          "field_name": "setting",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id of the user setting."
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "n_tools": 37,
+    "n_fields": 145,
+    "n_declared": 0,
+    "n_inferred": 22,
+    "n_unknown": 123,
+    "n_dim_signals": 42,
+    "dim_hits": {
+      "date_format": 8,
+      "temporal_format": 8,
+      "timezone": 10,
+      "rate_scale": 4,
+      "currency_code": 6,
+      "state_filter": 6
+    }
+  },
+  "capture_hash": "185a95ad462173f5e2b83055ece81b636471c8b06f51253df738a0a79378457f"
+}

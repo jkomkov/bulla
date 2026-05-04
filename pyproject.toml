@@ -4,23 +4,33 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bulla"
-version = "0.36.0"
-description = "Witness kernel for agentic compositions — diagnose, attest, seal"
+version = "0.37.0"
+description = "Witness kernel for agentic compositions: diagnoses convention mismatches between MCP servers, LangGraph graphs, and CrewAI crews"
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.10"
-authors = [{ name = "Glyph" }]
-keywords = ["mcp", "agents", "witness", "bulla", "composition", "coherence"]
+authors = [{ name = "Glyph", email = "jk@gvt.ai" }]
+keywords = [
+    "mcp", "agents", "witness", "bulla", "composition", "coherence",
+    "coherence-fee", "witness-receipt",
+    "langgraph", "crewai", "anthropic-mcp",
+    "cursor", "claude-desktop", "claude-code", "windsurf", "zed", "cline",
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
     "License :: Other/Proprietary License",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
     "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+    "Topic :: System :: Distributed Computing",
 ]
 dependencies = [
     "pyyaml>=6.0",
@@ -32,9 +42,10 @@ dependencies = [
 ots = ["opentimestamps-client>=0.7"]
 discover = ["openai>=1.0", "anthropic>=0.20"]
 # Framework adapters — optional. Static AST parsing has no runtime dep on
-# the framework itself; these extras enable schema-validation helpers and
-# reserve the dependency surface for future ParseMode.RUNTIME support.
-langgraph = ["langchain-core>=0.3"]
+# the framework itself. These extras pull in the framework when the user
+# wants the runtime adapters (`bulla.langgraph.bind`, `bulla.crewai.bind`)
+# that snapshot live framework objects into a bulla.Session.
+langgraph = ["langchain-core>=0.3", "langgraph>=1.1"]
 crewai = ["crewai>=0.80"]
 all = ["bulla[ots,discover,langgraph,crewai]"]
 
@@ -43,9 +54,10 @@ bulla = "bulla.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/jkomkov/bulla"
-Documentation = "https://github.com/jkomkov/bulla/blob/main/WITNESS-CONTRACT.md"
+Documentation = "https://github.com/jkomkov/bulla/tree/main/docs"
 Issues = "https://github.com/jkomkov/bulla/issues"
 Changelog = "https://github.com/jkomkov/bulla/blob/main/CHANGELOG.md"
+Spec = "https://github.com/jkomkov/bulla/blob/main/WITNESS-CONTRACT.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/bulla"]

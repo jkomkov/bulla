@@ -149,19 +149,68 @@ Orders, GS1 Traceability). The synthetics are pipeline-validation
 fixtures — they exercise dimensions the real MCP corpus doesn't
 reach (currency, FIX, FHIR, GS1, etc.) and prove the pipeline
 end-to-end, but they're test fixtures, not real-world coverage.
-Honest accounting: 57 real-world schemas indexed + 8 synthetic
-test fixtures = 65 capture records.
+
+**Phase 2 of the Dimension Pack Enhancement Sprint** added a
+network-fetch path that pulls **35 real public OpenAPI/GraphQL
+specs** from vendor repositories and the APIs.guru directory at
+build time, raising the captured corpus to **100 sources** (57
+MCP + 35 external + 8 synthetic). Real total: **92 sources**.
+The fetcher (`scripts/standards-ingest/_external_fetcher.py`)
+caches every download under `calibration/data/api-registry/_cache/`
+content-addressed by SHA-256, so re-runs are deterministic and a
+single transient upstream failure does not block the rebuild.
+
+`coverage.json` now carries an explicit real-vs-synthetic
+breakdown so consumers don't have to reconstruct the split from
+`source_id` heuristics:
+
+```json
+"totals": {
+  "n_sources": 100,
+  "n_real_mcp": 57,
+  "n_real_external": 35,
+  "n_synthetic_fixtures": 8,
+  "n_real": 92,
+  "n_synthetic": 8,
+  "n_external_skipped": 0,
+  ...
+}
+```
+
+To run with no network (deterministic offline build), set
+`BULLA_NO_NETWORK=1` before `build_phase7_index.py`. The fetcher
+will use the on-disk cache for any URL it has already seen and
+skip the rest.
+
+### Fetcher is a developer tool, not CI infrastructure
+
+`build_phase7_index.py` and `_external_fetcher.py` are run by a
+maintainer when refreshing the corpus, the same posture as
+`compute_real_hashes.py`. **CI does not invoke the fetcher.** The
+deliverables that matter are committed:
+
+- `coverage.json` — aggregate map
+- `classifier-corpus.jsonl` — flat training rows
+- per-source capture JSONs under `mcp/`, `openapi/`, `graphql/`
+
+Phase 7 tests (`tests/test_phase7_index.py`) validate those
+committed artifacts and `pytest.skip` if missing — they never
+trigger a network fetch. Don't wire the build step into CI; doing
+so converts a one-shot corpus-refresh tool into an ongoing
+maintenance surface that depends on 30+ external hosts.
+
+The cache directory (`calibration/data/api-registry/_cache/`) is
+git-ignored at the `*.bin` level so raw blobs are not committed;
+`manifest.json` is committed so the URL→hash binding is durable
+between refreshes.
 
 **Future schemas land without modification to the pipeline.**
-
-The plan-bounded curation target is ~100 schemas with diversity
-across sources (Postman Public Collections, SwaggerHub, RapidAPI,
-cloud SDKs, MCP aggregators, FIX/SWIFT/FHIR implementations). The
-Phase 7 seed at 65 sources falls short of 100 only because the
-network-fetch implementation needed to pull from external sources
-(Postman / SwaggerHub / RapidAPI) is itself a follow-on; the pipeline
-already accepts those source kinds. **Adding the network fetcher and
-the next 35 schemas is a follow-on task, not a sprint blocker.**
+Add an entry to `EXTERNAL_SOURCES` in `build_phase7_index.py`,
+re-run the build, commit the refreshed `coverage.json` /
+`classifier-corpus.jsonl` / capture JSONs / `manifest.json`. The
+SprintGrowthGates pin a sane lower bound on real-source count so
+a regression that drops the fetcher silently fails CI even though
+CI itself never calls the fetcher.
 
 ## Forward-compatibility with the deferred Part B
 

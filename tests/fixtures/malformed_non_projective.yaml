@@ -1,0 +1,34 @@
+name: malformed_non_projective
+
+# Sprint 10 negative fixture: hand-authored composition that violates
+# the Sprint 9 schema-shape invariant.
+#
+# Each tool exposes 'secret' in its observable_schema, but 'secret' is
+# NOT in the tool's internal_state. By the schema-shape theorem this
+# can produce negative coherence_fee — the diagnostic CLI must surface
+# a regime warning before reporting any fee value.
+#
+# This fixture exists to gate `bulla diagnose` and the regime-validation
+# tests: any code path that loads a composition without checking the
+# regime predicate would silently mis-report negative fees as fees.
+
+tools:
+  t1:
+    internal_state:
+      - hidden_a
+    observable_schema:
+      - secret  # NOT in internal_state — VIOLATION
+
+  t2:
+    internal_state:
+      - hidden_b
+    observable_schema:
+      - secret  # NOT in internal_state — VIOLATION
+
+edges:
+  - from_tool: t1
+    to_tool: t2
+    dimensions:
+      - name: secret_match
+        from_field: secret
+        to_field: secret

@@ -145,5 +145,4 @@ table and the transaction went through her. The proxy IS the notary.
 2. **Phase 2** (next) -- Composition-aware proxy with session state
 3. **Phase 3** (when proxy is proven) -- Framework integrations
 
-Each phase is independently valuable. Each makes the next one more
-powerful.
+Each phase is independently valuable. Each extends the next.

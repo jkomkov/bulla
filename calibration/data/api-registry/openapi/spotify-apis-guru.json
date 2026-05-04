@@ -1,0 +1,1862 @@
+{
+  "source_kind": "openapi",
+  "source_id": "spotify-apis-guru",
+  "schema_hash": "7c8cca727bd6d8d273fffcb93fa4a1bc90d9a4ffcbb259a0326adde4fbce824c",
+  "captured_at": "2026-05-02T20:35:45.639111+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "614aa67ae498e841a1f42084343b9d41f739e5678f1f271c1e2a03e8864bee04",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "65a946aee1b4b6585df08554171fd5a5c749793180ace1b8de8efd74fd663517",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.1",
+      "hash": "d1caf350ea5d6f1a4023c6d15670e3ec25dfa832a015348ffeb5a4d3f70dec3a",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+        "source_hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.1",
+      "hash": "4313a1301e360fb9f40823328a75592039aedd2821d63b80be9cf45ed765c32a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+        "source_hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.1",
+      "hash": "2ed09413af1da88d807787fe901c2b430a8a9304ba27f235e28b31d0ef67e4a8",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-05-02",
+        "source_uri": "https://ref.gs1.org/ai/",
+        "source_hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "0aab1b08537ae2835ab1a05adb8a0800eaf7a7ce98ad6937f6cc3f7ee721a997",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "d95ea9d09a69dd1ba4a5679e890a2509185167a10357ae8f8591d8fcde73ff0a",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.1",
+      "hash": "fe87dbb4b7125cab4135f2af6775b75d798390e91ab0849c3496900f43662b52",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2026",
+        "source_uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+        "source_hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "cf7e4bbfb6c7bd012e8508a5b07d9719bbe35b8970a60bddc3128d05e7e2598f",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "0205810517db330b61965d089f78f1b427ea7fc0caec471025929ac965ffd583",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "2a3143742f52266ba08484a16e889d63761d409f1055d95021dab7a03da25a2e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7092871334e53492b46e4835ab2ef1f5d0ac9e184ed257c68ee212692f926c53",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "b16d83cbe515dc7e52d778f5fcb7d016e4a1f292cd8340307b85066141f5be65",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "b2396f760586f9656bd4b806127d5e3404f80d770288f1445beb04b27bae105d",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.1",
+      "hash": "8daa8d898578ac4feaebc986a3f0a8ce367d866054aec9b0654d01bb8f8f71cd",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+        "source_hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "6e653a3d4f730cc93b673893ac69b5215a0f3fbeb25059b3014aa83f5d339d69",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "tool_name": "get-multiple-albums",
+      "description": "Get Several Albums\n\n\nGet Spotify catalog information for multiple albums identified by their Spotify IDs.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-an-album",
+      "description": "Get Album\n\n\nGet Spotify catalog information for a single album.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-an-albums-tracks",
+      "description": "Get Album Tracks\n\n\nGet Spotify catalog information about an album\u2019s tracks.\nOptional parameters can be used to limit the number of tracks returned.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-multiple-artists",
+      "description": "Get Several Artists\n\n\nGet Spotify catalog information for several artists based on their Spotify IDs.",
+      "fields": [
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the artists. Maximum: 50 IDs.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-an-artist",
+      "description": "Get Artist\n\n\nGet Spotify catalog information for a single artist identified by their unique Spotify ID.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-an-artists-albums",
+      "description": "Get Artist's Albums\n\n\nGet Spotify catalog information about an artist's albums.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-an-artists-related-artists",
+      "description": "Get Artist's Related Artists\n\n\nGet Spotify catalog information about artists similar to a given artist. Similarity is based on analysis of the Spotify community's [listening history](http://news.spotify.com/se/2010/02/03/related-artists/).",
+      "fields": []
+    },
+    {
+      "tool_name": "get-an-artists-top-tracks",
+      "description": "Get Artist's Top Tracks\n\n\nGet Spotify catalog information about an artist's top tracks by country.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-audio-analysis",
+      "description": "Get Track's Audio Analysis\n\n\nGet a low-level audio analysis for a track in the Spotify catalog. The audio analysis describes the track\u2019s structure and musical content, including rhythm, pitch, and timbre.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)\nfor the track.\n"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "Get Track's Audio Analysis\n\n\nGet a low-level audio analysis for a track in the Spotify catalog. The audio analysis describes the track\u2019s structure and musical content, including rhythm, pitch, and timbre."
+        }
+      ]
+    },
+    {
+      "tool_name": "get-several-audio-features",
+      "description": "Get Tracks' Audio Features\n\n\nGet audio features for multiple tracks based on their Spotify IDs.",
+      "fields": [
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids)\nfor the tracks. Maximum: 100 IDs.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-audio-features",
+      "description": "Get Track's Audio Features\n\n\nGet audio feature information for a single track identified by its unique\nSpotify ID.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the track.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-multiple-audiobooks",
+      "description": "Get Several Audiobooks\n\n\nGet Spotify catalog information for several audiobooks identified by their Spotify IDs.<br />\n**Note: Audiobooks are only available for the US, UK, Ireland, New Zealand and Australia markets.**",
+      "fields": []
+    },
+    {
+      "tool_name": "get-an-audiobook",
+      "description": "Get an Audiobook\n\n\nGet Spotify catalog information for a single audiobook.<br />\n**Note: Audiobooks are only available for the US, UK, Ireland, New Zealand and Australia markets.**",
+      "fields": []
+    },
+    {
+      "tool_name": "get-audiobook-chapters",
+      "description": "Get Audiobook Chapters\n\n\nGet Spotify catalog information about an audiobook's chapters.<br />\n**Note: Audiobooks are only available for the US, UK, Ireland, New Zealand and Australia markets.**",
+      "fields": []
+    },
+    {
+      "tool_name": "get-categories",
+      "description": "Get Several Browse Categories\n\n\nGet a list of categories used to tag items in Spotify (on, for example, the Spotify player\u2019s \u201cBrowse\u201d tab).",
+      "fields": [
+        {
+          "field_name": "country",
+          "dimensions": [
+            "country_code"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want to narrow the list of returned categories to those relevant to a particular country. If omitted, the returned items will be globally relevant.\n"
+        },
+        {
+          "field_name": "locale",
+          "dimensions": [
+            "country_code",
+            "encoding",
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1) language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning \"Spanish (Mexico)\". Provide this parameter if you want the category metadata returned in a particular language. <br/>\n_**Note**: if `locale` is not supplied, or if the specified language is not available, all strings will be returned in the Spotify default language (American English). The `locale` parameter, combined with the `country` parameter, may give odd results if not carefully matched. For example `country=SE&locale=de_DE` will return a list of categories relevant to Sweden but as German language strings._\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-a-category",
+      "description": "Get Single Browse Category\n\n\nGet a single category used to tag items in Spotify (on, for example, the Spotify player\u2019s \u201cBrowse\u201d tab).",
+      "fields": [
+        {
+          "field_name": "category_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The [Spotify category ID](/documentation/web-api/concepts/spotify-uris-ids) for the category.\n"
+        },
+        {
+          "field_name": "country",
+          "dimensions": [
+            "country_code"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter to ensure that the category exists for a particular country.\n"
+        },
+        {
+          "field_name": "locale",
+          "dimensions": [
+            "country_code",
+            "encoding",
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1) language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning &quot;Spanish (Mexico)&quot;. Provide this parameter if you want the category strings returned in a particular language.<br/> _**Note**: if `locale` is not supplied, or if the specified language is not available, the category strings returned will be in the Spotify default language (American English)._\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-a-categories-playlists",
+      "description": "Get Category's Playlists\n\n\nGet a list of Spotify playlists tagged with a particular category.",
+      "fields": [
+        {
+          "field_name": "category_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The [Spotify category ID](/documentation/web-api/concepts/spotify-uris-ids) for the category.\n"
+        },
+        {
+          "field_name": "country",
+          "dimensions": [
+            "country_code"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter to ensure that the category exists for a particular country.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-featured-playlists",
+      "description": "Get Featured Playlists\n\n\nGet a list of Spotify featured playlists (shown, for example, on a Spotify player's 'Browse' tab).",
+      "fields": [
+        {
+          "field_name": "country",
+          "dimensions": [
+            "country_code"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want the list of returned items to be relevant to a particular country. If omitted, the returned items will be relevant to all countries.\n"
+        },
+        {
+          "field_name": "locale",
+          "dimensions": [
+            "country_code",
+            "encoding",
+            "language_code"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The desired language, consisting of a lowercase [ISO 639-1 language code](http://en.wikipedia.org/wiki/ISO_639-1) and an uppercase [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning \"Spanish (Mexico)\". Provide this parameter if you want the results returned in a particular language (where available). <br/>\n_**Note**: if `locale` is not supplied, or if the specified language is not available, all strings will be returned in the Spotify default language (American English). The `locale` parameter, combined with the `country` parameter, may give odd results if not carefully matched. For example `country=SE&locale=de_DE` will return a list of categories relevant to Sweden but as German language strings._\n"
+        },
+        {
+          "field_name": "timestamp",
+          "dimensions": [
+            "date_format",
+            "temporal_format",
+            "timezone"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "A timestamp in [ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601): `yyyy-MM-ddTHH:mm:ss`. Use this parameter to specify the user's local time to get results tailored for that specific date and time in the day. If not provided, the response defaults to the current UTC time. Example: \"2014-10-23T09:00:00\" for a user whose local time is 9AM. If there were no featured playlists (or there is no data) at the specified time, the response will revert to the current UTC time.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-new-releases",
+      "description": "Get New Releases\n\n\nGet a list of new album releases featured in Spotify (shown, for example, on a Spotify player\u2019s \u201cBrowse\u201d tab).",
+      "fields": [
+        {
+          "field_name": "country",
+          "dimensions": [
+            "country_code"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want the list of returned items to be relevant to a particular country. If omitted, the returned items will be relevant to all countries.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-several-chapters",
+      "description": "Get Several Chapters\n\n\nGet Spotify catalog information for several chapters identified by their Spotify IDs.<br />\n**Note: Chapters are only available for the US, UK, Ireland, New Zealand and Australia markets.**",
+      "fields": []
+    },
+    {
+      "tool_name": "get-a-chapter",
+      "description": "Get a Chapter\n\n\nGet Spotify catalog information for a single chapter.<br />\n**Note: Chapters are only available for the US, UK, Ireland, New Zealand and Australia markets.**",
+      "fields": []
+    },
+    {
+      "tool_name": "get-multiple-episodes",
+      "description": "Get Several Episodes\n\n\nGet Spotify catalog information for several episodes based on their Spotify IDs.",
+      "fields": [
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the episodes. Maximum: 50 IDs.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-an-episode",
+      "description": "Get Episode\n\n\nGet Spotify catalog information for a single episode identified by its\nunique Spotify ID.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids) for the episode."
+        }
+      ]
+    },
+    {
+      "tool_name": "get-available-markets",
+      "description": "Get Available Markets\n\n\nGet the list of markets where Spotify is available.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-current-users-profile",
+      "description": "Get Current User's Profile\n\n\nGet detailed profile information about the current user (including the\ncurrent user's username).",
+      "fields": []
+    },
+    {
+      "tool_name": "remove-albums-user",
+      "description": "Remove Users' Saved Albums\n\n\nRemove one or more albums from the current user's 'Your Music' library.",
+      "fields": [
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `[\"4iV5W9uYEdYUVa79Axb7Rh\", \"1301WleyT98MSxVHPZCA6M\"]`<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._\n"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "Remove Users' Saved Albums\n\n\nRemove one or more albums from the current user's 'Your Music' library."
+        }
+      ]
+    },
+    {
+      "tool_name": "get-users-saved-albums",
+      "description": "Get User's Saved Albums\n\n\nGet a list of the albums saved in the current Spotify user's 'Your Music' library.",
+      "fields": [
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "Get User's Saved Albums\n\n\nGet a list of the albums saved in the current Spotify user's 'Your Music' library."
+        }
+      ]
+    },
+    {
+      "tool_name": "save-albums-user",
+      "description": "Save Albums for Current User\n\n\nSave one or more albums to the current user's 'Your Music' library.",
+      "fields": [
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `[\"4iV5W9uYEdYUVa79Axb7Rh\", \"1301WleyT98MSxVHPZCA6M\"]`<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._\n"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "Save Albums for Current User\n\n\nSave one or more albums to the current user's 'Your Music' library."
+        }
+      ]
+    },
+    {
+      "tool_name": "check-users-saved-albums",
+      "description": "Check User's Saved Albums\n\n\nCheck if one or more albums is already saved in the current Spotify user's 'Your Music' library.",
+      "fields": [
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "Check User's Saved Albums\n\n\nCheck if one or more albums is already saved in the current Spotify user's 'Your Music' library."
+        }
+      ]
+    },
+    {
+      "tool_name": "remove-audiobooks-user",
+      "description": "Remove User's Saved Audiobooks\n\n\nRemove one or more audiobooks from the Spotify user's library.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-users-saved-audiobooks",
+      "description": "Get User's Saved Audiobooks\n\n\nGet a list of the audiobooks saved in the current Spotify user's 'Your Music' library.",
+      "fields": [
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "Get User's Saved Audiobooks\n\n\nGet a list of the audiobooks saved in the current Spotify user's 'Your Music' library."
+        }
+      ]
+    },
+    {
+      "tool_name": "save-audiobooks-user",
+      "description": "Save Audiobooks for Current User\n\n\nSave one or more audiobooks to the current Spotify user's library.",
+      "fields": []
+    },
+    {
+      "tool_name": "check-users-saved-audiobooks",
+      "description": "Check User's Saved Audiobooks\n\n\nCheck if one or more audiobooks are already saved in the current Spotify user's library.",
+      "fields": []
+    },
+    {
+      "tool_name": "remove-episodes-user",
+      "description": "Remove User's Saved Episodes\n\n\nRemove one or more episodes from the current user's library.<br/>\nThis API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).",
+      "fields": [
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). <br/>A maximum of 50 items can be specified in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-users-saved-episodes",
+      "description": "Get User's Saved Episodes\n\n\nGet a list of the episodes saved in the current Spotify user's library.<br/>\nThis API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).",
+      "fields": []
+    },
+    {
+      "tool_name": "save-episodes-user",
+      "description": "Save Episodes for Current User\n\n\nSave one or more episodes to the current user's library.<br/>\nThis API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).",
+      "fields": [
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). <br/>A maximum of 50 items can be specified in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "check-users-saved-episodes",
+      "description": "Check User's Saved Episodes\n\n\nCheck if one or more episodes is already saved in the current Spotify user's 'Your Episodes' library.<br/>\nThis API endpoint is in __beta__ and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer)..",
+      "fields": [
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A comma-separated list of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for the episodes. Maximum: 50 IDs.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "unfollow-artists-users",
+      "description": "Unfollow Artists or Users\n\n\nRemove the current user as a follower of one or more artists or other Spotify users.",
+      "fields": [
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID type: either `artist` or `user`.\n"
+        },
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A JSON array of the artist or user [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `{ids:[\"74ASZWbe4lXaubB36ztrGX\", \"08td7MxkoHQkXnWAYD8d6Q\"]}`. A maximum of 50 IDs can be sent in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-followed",
+      "description": "Get Followed Artists\n\n\nGet the current user's followed artists.",
+      "fields": [
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID type: currently only `artist` is supported.\n"
+        },
+        {
+          "field_name": "after",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The last artist ID retrieved from the previous request.\n"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The maximum number of items to return. Default: 20\\. Minimum: 1\\. Maximum: 50\\.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "follow-artists-users",
+      "description": "Follow Artists or Users\n\n\nAdd the current user as a follower of one or more artists or other Spotify users.",
+      "fields": [
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID type.\n"
+        },
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A JSON array of the artist or user [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids).\nFor example: `{ids:[\"74ASZWbe4lXaubB36ztrGX\", \"08td7MxkoHQkXnWAYD8d6Q\"]}`. A maximum of 50 IDs can be sent in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "check-current-user-follows",
+      "description": "Check If User Follows Artists or Users\n\n\nCheck to see if the current user is following one or more artists or other Spotify users.",
+      "fields": [
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID type: either `artist` or `user`.\n"
+        },
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A comma-separated list of the artist or the user [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) to check. For example: `ids=74ASZWbe4lXaubB36ztrGX,08td7MxkoHQkXnWAYD8d6Q`. A maximum of 50 IDs can be sent in one request.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-information-about-the-users-current-playback",
+      "description": "Get Playback State\n\n\nGet information about the user\u2019s current playback state, including track or episode, progress, and active device.",
+      "fields": []
+    },
+    {
+      "tool_name": "transfer-a-users-playback",
+      "description": "Transfer Playback\n\n\nTransfer playback to a new device and determine if it should start playing.",
+      "fields": [
+        {
+          "field_name": "device_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A JSON array containing the ID of the device on which playback should be started/transferred.<br/>For example:`{device_ids:[\"74ASZWbe4lXaubB36ztrGX\"]}`<br/>_**Note**: Although an array is accepted, only a single device_id is currently supported. Supplying more than one will return `400 Bad Request`_\n"
+        },
+        {
+          "field_name": "play",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "**true**: ensure playback happens on new device.<br/>**false** or not provided: keep the current playback state.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-the-users-currently-playing-track",
+      "description": "Get Currently Playing Track\n\n\nGet the object currently being played on the user's Spotify account.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-a-users-available-devices",
+      "description": "Get Available Devices\n\n\nGet information about a user\u2019s available devices.",
+      "fields": []
+    },
+    {
+      "tool_name": "skip-users-playback-to-next-track",
+      "description": "Skip To Next\n\n\nSkips to next track in the user\u2019s queue.",
+      "fields": [
+        {
+          "field_name": "device_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id of the device this command is targeting. If not supplied, the user's currently active device is the target."
+        }
+      ]
+    },
+    {
+      "tool_name": "pause-a-users-playback",
+      "description": "Pause Playback\n\n\nPause playback on the user's account.",
+      "fields": [
+        {
+          "field_name": "device_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id of the device this command is targeting. If not supplied, the user's currently active device is the target.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "start-a-users-playback",
+      "description": "Start/Resume Playback\n\n\nStart a new context or resume current playback on the user's active device.",
+      "fields": [
+        {
+          "field_name": "device_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id of the device this command is targeting. If not supplied, the user's currently active device is the target."
+        },
+        {
+          "field_name": "context_uri",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Optional. Spotify URI of the context to play.\nValid contexts are albums, artists & playlists.\n`{context_uri:\"spotify:album:1Je1IMUlBXcx1Fz0WE7oPT\"}`\n"
+        },
+        {
+          "field_name": "offset",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "object",
+          "description": "Optional. Indicates from where in the context playback should start. Only available when context_uri corresponds to an album or playlist object\n\"position\" is zero based and can\u2019t be negative. Example: `\"offset\": {\"position\": 5}`\n\"uri\" is a string representing the uri of the item to start at. Example: `\"offset\": {\"uri\": \"spotify:track:1301WleyT98MSxVHPZCA6M\"}`\n"
+        },
+        {
+          "field_name": "position_ms",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "integer"
+        },
+        {
+          "field_name": "uris",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Optional. A JSON array of the Spotify track URIs to play.\nFor example: `{\"uris\": [\"spotify:track:4iV5W9uYEdYUVa79Axb7Rh\", \"spotify:track:1301WleyT98MSxVHPZCA6M\"]}`\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "skip-users-playback-to-previous-track",
+      "description": "Skip To Previous\n\n\nSkips to previous track in the user\u2019s queue.",
+      "fields": [
+        {
+          "field_name": "device_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id of the device this command is targeting. If\nnot supplied, the user's currently active device is the target.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-queue",
+      "description": "Get the User's Queue\n\n\nGet the list of objects that make up the user's queue.",
+      "fields": []
+    },
+    {
+      "tool_name": "add-to-queue",
+      "description": "Add Item to Playback Queue\n\n\nAdd an item to the end of the user's current playback queue.",
+      "fields": [
+        {
+          "field_name": "uri",
+          "dimensions": [
+            "path_convention"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The uri of the item to add to the queue. Must be a track or an episode uri.\n"
+        },
+        {
+          "field_name": "device_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id of the device this command is targeting. If\nnot supplied, the user's currently active device is the target.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-recently-played",
+      "description": "Get Recently Played Tracks\n\n\nGet tracks from the current user's recently played tracks.\n_**Note**: Currently doesn't support podcast episodes._",
+      "fields": [
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.\n"
+        },
+        {
+          "field_name": "after",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "A Unix timestamp in milliseconds. Returns all items\nafter (but not including) this cursor position. If `after` is specified, `before`\nmust not be specified.\n"
+        },
+        {
+          "field_name": "before",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "A Unix timestamp in milliseconds. Returns all items\nbefore (but not including) this cursor position. If `before` is specified,\n`after` must not be specified.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "set-repeat-mode-on-users-playback",
+      "description": "Set Repeat Mode\n\n\nSet the repeat mode for the user's playback. Options are repeat-track,\nrepeat-context, and off.",
+      "fields": [
+        {
+          "field_name": "state",
+          "dimensions": [
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "**track**, **context** or **off**.<br/>\n**track** will repeat the current track.<br/>\n**context** will repeat the current context.<br/>\n**off** will turn repeat off.\n"
+        },
+        {
+          "field_name": "device_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id of the device this command is targeting. If\nnot supplied, the user's currently active device is the target.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "seek-to-position-in-currently-playing-track",
+      "description": "Seek To Position\n\n\nSeeks to the given position in the user\u2019s currently playing track.",
+      "fields": [
+        {
+          "field_name": "position_ms",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "The position in milliseconds to seek to. Must be a\npositive number. Passing in a position that is greater than the length of\nthe track will cause the player to start playing the next song.\n"
+        },
+        {
+          "field_name": "device_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id of the device this command is targeting. If\nnot supplied, the user's currently active device is the target.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "toggle-shuffle-for-users-playback",
+      "description": "Toggle Playback Shuffle\n\n\nToggle shuffle on or off for user\u2019s playback.",
+      "fields": [
+        {
+          "field_name": "state",
+          "dimensions": [
+            "state_filter"
+          ],
+          "confidence": "inferred",
+          "schema_type": "boolean",
+          "description": "**true** : Shuffle user's playback.<br/>\n**false** : Do not shuffle user's playback.\n"
+        },
+        {
+          "field_name": "device_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id of the device this command is targeting. If\nnot supplied, the user's currently active device is the target.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "set-volume-for-users-playback",
+      "description": "Set Playback Volume\n\n\nSet the volume for the user\u2019s current playback device.",
+      "fields": [
+        {
+          "field_name": "volume_percent",
+          "dimensions": [
+            "rate_scale",
+            "score_range"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "The volume to set. Must be a value from 0 to 100 inclusive.\n"
+        },
+        {
+          "field_name": "device_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The id of the device this command is targeting. If not supplied, the user's currently active device is the target.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-a-list-of-current-users-playlists",
+      "description": "Get Current User's Playlists\n\n\nGet a list of the playlists owned or followed by the current Spotify\nuser.",
+      "fields": [
+        {
+          "field_name": "offset",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "'The index of the first playlist to return. Default:\n0 (the first object). Maximum offset: 100.000\\. Use with `limit` to get the\nnext set of playlists.'\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "remove-shows-user",
+      "description": "Remove User's Saved Shows\n\n\nDelete one or more shows from current Spotify user's library.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-users-saved-shows",
+      "description": "Get User's Saved Shows\n\n\nGet a list of shows saved in the current Spotify user's library. Optional parameters can be used to limit the number of shows returned.",
+      "fields": []
+    },
+    {
+      "tool_name": "save-shows-user",
+      "description": "Save Shows for Current User\n\n\nSave one or more shows to current Spotify user's library.",
+      "fields": []
+    },
+    {
+      "tool_name": "check-users-saved-shows",
+      "description": "Check User's Saved Shows\n\n\nCheck if one or more shows is already saved in the current Spotify user's library.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-users-top-artists-and-tracks",
+      "description": "Get User's Top Items\n\n\nGet the current user's top artists or tracks based on calculated affinity.",
+      "fields": [
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The type of entity to return. Valid values: `artists` or `tracks`\n"
+        },
+        {
+          "field_name": "time_range",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Over what time frame the affinities are computed. Valid values: `long_term` (calculated from several years of data and including all new data as it becomes available), `medium_term` (approximately last 6 months), `short_term` (approximately last 4 weeks). Default: `medium_term`\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "remove-tracks-user",
+      "description": "Remove User's Saved Tracks\n\n\nRemove one or more tracks from the current user's 'Your Music' library.",
+      "fields": [
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `[\"4iV5W9uYEdYUVa79Axb7Rh\", \"1301WleyT98MSxVHPZCA6M\"]`<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._\n"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "Remove User's Saved Tracks\n\n\nRemove one or more tracks from the current user's 'Your Music' library."
+        }
+      ]
+    },
+    {
+      "tool_name": "get-users-saved-tracks",
+      "description": "Get User's Saved Tracks\n\n\nGet a list of the songs saved in the current Spotify user's 'Your Music' library.",
+      "fields": [
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "Get User's Saved Tracks\n\n\nGet a list of the songs saved in the current Spotify user's 'Your Music' library."
+        }
+      ]
+    },
+    {
+      "tool_name": "save-tracks-user",
+      "description": "Save Tracks for Current User\n\n\nSave one or more tracks to the current user's 'Your Music' library.",
+      "fields": [
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A JSON array of the [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids). For example: `[\"4iV5W9uYEdYUVa79Axb7Rh\", \"1301WleyT98MSxVHPZCA6M\"]`<br/>A maximum of 50 items can be specified in one request. _**Note**: if the `ids` parameter is present in the query string, any IDs listed here in the body will be ignored._\n"
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "Save Tracks for Current User\n\n\nSave one or more tracks to the current user's 'Your Music' library."
+        }
+      ]
+    },
+    {
+      "tool_name": "check-users-saved-tracks",
+      "description": "Check User's Saved Tracks\n\n\nCheck if one or more tracks is already saved in the current Spotify user's 'Your Music' library.",
+      "fields": [
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "Check User's Saved Tracks\n\n\nCheck if one or more tracks is already saved in the current Spotify user's 'Your Music' library."
+        }
+      ]
+    },
+    {
+      "tool_name": "get-playlist",
+      "description": "Get Playlist\n\n\nGet a playlist owned by a Spotify user.",
+      "fields": [
+        {
+          "field_name": "fields",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filters for the query: a comma-separated list of the\nfields to return. If omitted, all fields are returned. For example, to get\njust the playlist''s description and URI: `fields=description,uri`. A dot\nseparator can be used to specify non-reoccurring fields, while parentheses\ncan be used to specify reoccurring fields within objects. For example, to\nget just the added date and user ID of the adder: `fields=tracks.items(added_at,added_by.id)`.\nUse multiple parentheses to drill down into nested objects, for example: `fields=tracks.items(track(name,href,album(name,href)))`.\nFields can be excluded by prefixing them with an exclamation mark, for example:\n`fields=tracks.items(track(name,href,album(!name,href)))`\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "change-playlist-details",
+      "description": "Change Playlist Details\n\n\nChange a playlist's name and public/private state. (The user must, of\ncourse, own the playlist.)",
+      "fields": [
+        {
+          "field_name": "collaborative",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "If `true`, the playlist will become collaborative and other users will be able to modify the playlist in their Spotify client. <br/>\n_**Note**: You can only set `collaborative` to `true` on non-public playlists._\n"
+        },
+        {
+          "field_name": "description",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Value for playlist description as displayed in Spotify Clients and in the Web API.\n"
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The new name for the playlist, for example `\"My New Playlist Title\"`\n"
+        },
+        {
+          "field_name": "public",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "If `true` the playlist will be public, if `false` it will be private.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "unfollow-playlist",
+      "description": "Unfollow Playlist\n\n\nRemove the current user as a follower of a playlist.",
+      "fields": []
+    },
+    {
+      "tool_name": "follow-playlist",
+      "description": "Follow Playlist\n\n\nAdd the current user as a follower of a playlist.",
+      "fields": [
+        {
+          "field_name": "public",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Defaults to `true`. If `true` the playlist will be included in user's public playlists, if `false` it will remain private.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "check-if-user-follows-playlist",
+      "description": "Check if Users Follow Playlist\n\n\nCheck to see if one or more Spotify users are following a specified playlist.",
+      "fields": [
+        {
+          "field_name": "ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A comma-separated list of [Spotify User IDs](/documentation/web-api/concepts/spotify-uris-ids) ; the ids of the users that you want to check to see if they follow the playlist. Maximum: 5 ids.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-playlist-cover",
+      "description": "Get Playlist Cover Image\n\n\nGet the current image associated with a specific playlist.",
+      "fields": []
+    },
+    {
+      "tool_name": "upload-custom-playlist-cover",
+      "description": "Add Custom Playlist Cover Image\n\n\nReplace the image used to represent a specific playlist.",
+      "fields": []
+    },
+    {
+      "tool_name": "remove-tracks-playlist",
+      "description": "Remove Playlist Items\n\n\nRemove one or more items from a user's playlist.",
+      "fields": [
+        {
+          "field_name": "snapshot_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The playlist's snapshot ID against which you want to make the changes.\nThe API will validate that the specified items exist and in the specified positions and make the changes,\neven if more recent changes have been made to the playlist.\n"
+        },
+        {
+          "field_name": "tracks",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of objects containing [Spotify URIs](/documentation/web-api/concepts/spotify-uris-ids) of the tracks or episodes to remove.\nFor example: `{ \"tracks\": [{ \"uri\": \"spotify:track:4iV5W9uYEdYUVa79Axb7Rh\" },{ \"uri\": \"spotify:track:1301WleyT98MSxVHPZCA6M\" }] }`. A maximum of 100 objects can be sent at once.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-playlists-tracks",
+      "description": "Get Playlist Items\n\n\nGet full details of the items of a playlist owned by a Spotify user.",
+      "fields": [
+        {
+          "field_name": "fields",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filters for the query: a comma-separated list of the\nfields to return. If omitted, all fields are returned. For example, to get\njust the total number of items and the request limit:<br/>`fields=total,limit`<br/>A\ndot separator can be used to specify non-reoccurring fields, while parentheses\ncan be used to specify reoccurring fields within objects. For example, to\nget just the added date and user ID of the adder:<br/>`fields=items(added_at,added_by.id)`<br/>Use\nmultiple parentheses to drill down into nested objects, for example:<br/>`fields=items(track(name,href,album(name,href)))`<br/>Fields\ncan be excluded by prefixing them with an exclamation mark, for example:<br/>`fields=items.track.album(!external_urls,images)`\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "add-tracks-to-playlist",
+      "description": "Add Items to Playlist\n\n\nAdd one or more items to a user's playlist.",
+      "fields": [
+        {
+          "field_name": "position",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "The position to insert the items, a zero-based index. For example, to insert the items in the first position: `position=0` ; to insert the items in the third position: `position=2`. If omitted, the items will be appended to the playlist. Items are added in the order they appear in the uris array. For example: `{\"uris\": [\"spotify:track:4iV5W9uYEdYUVa79Axb7Rh\",\"spotify:track:1301WleyT98MSxVHPZCA6M\"], \"position\": 3}`\n"
+        },
+        {
+          "field_name": "uris",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A JSON array of the [Spotify URIs](/documentation/web-api/concepts/spotify-uris-ids) to add. For example: `{\"uris\": [\"spotify:track:4iV5W9uYEdYUVa79Axb7Rh\",\"spotify:track:1301WleyT98MSxVHPZCA6M\", \"spotify:episode:512ojhOuo1ktJprKbVcKyQ\"]}`<br/>A maximum of 100 items can be added in one request. _**Note**: if the `uris` parameter is present in the query string, any URIs listed here in the body will be ignored._\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "reorder-or-replace-playlists-tracks",
+      "description": "Update Playlist Items\n\n\nEither reorder or replace items in a playlist depending on the request's parameters.\nTo reorder items, include `range_start`, `insert_before`, `range_length` and `snapshot_id` in the request's body.\nTo replace items, include `uris` as either a query parameter or in the request's body.\nReplacing items in a playlist will overwrite its existing items. This operation can be used for replacing or clearing items in a playlist.\n<br/>\n**Note**: Replace and reorder are mutually exclusive operations which share the same endpoint, but have different parameters.\nThese operations can't be applied together in a single request.",
+      "fields": [
+        {
+          "field_name": "uris",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "insert_before",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "The position where the items should be inserted.<br/>To reorder the items to the end of the playlist, simply set _insert_before_ to the position after the last item.<br/>Examples:<br/>To reorder the first item to the last position in a playlist with 10 items, set _range_start_ to 0, and _insert_before_ to 10.<br/>To reorder the last item in a playlist with 10 items to the start of the playlist, set _range_start_ to 9, and _insert_before_ to 0.\n"
+        },
+        {
+          "field_name": "range_length",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The amount of items to be reordered. Defaults to 1 if not set.<br/>The range of items to be reordered begins from the _range_start_ position, and includes the _range_length_ subsequent items.<br/>Example:<br/>To move the items at index 9-10 to the start of the playlist, _range_start_ is set to 9, and _range_length_ is set to 2.\n"
+        },
+        {
+          "field_name": "range_start",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The position of the first item to be reordered.\n"
+        },
+        {
+          "field_name": "snapshot_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The playlist's snapshot ID against which you want to make the changes.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-recommendations",
+      "description": "Get Recommendations\n\n\nRecommendations are generated based on the available information for a given seed entity and matched against similar artists and tracks. If there is sufficient information about the provided seeds, a list of tracks will be returned together with pool size details.\n\nFor artists and tracks that are very new or obscure there might not be enough data to generate a list of tracks.",
+      "fields": [
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The target size of the list of recommended tracks. For seeds with unusually small pools or when highly restrictive filtering is applied, it may be impossible to generate the requested number of recommended tracks. Debugging information for such cases is available in the response. Default: 20\\. Minimum: 1\\. Maximum: 100.\n"
+        },
+        {
+          "field_name": "seed_artists",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A comma separated list of [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for seed artists.  Up to 5 seed values may be provided in any combination of `seed_artists`, `seed_tracks` and `seed_genres`.\n"
+        },
+        {
+          "field_name": "seed_genres",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A comma separated list of any genres in the set of [available genre seeds](#available-genre-seeds).  Up to 5 seed values may be provided in any combination of `seed_artists`, `seed_tracks` and `seed_genres`.\n"
+        },
+        {
+          "field_name": "seed_tracks",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A comma separated list of [Spotify IDs](/documentation/web-api/concepts/spotify-uris-ids) for a seed track.  Up to 5 seed values may be provided in any combination of `seed_artists`, `seed_tracks` and `seed_genres`.\n"
+        },
+        {
+          "field_name": "min_acousticness",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_acousticness",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_acousticness",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.\n"
+        },
+        {
+          "field_name": "min_danceability",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_danceability",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_danceability",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.\n"
+        },
+        {
+          "field_name": "min_duration_ms",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_duration_ms",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_duration_ms",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Target duration of the track (ms)"
+        },
+        {
+          "field_name": "min_energy",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_energy",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_energy",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.\n"
+        },
+        {
+          "field_name": "min_instrumentalness",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_instrumentalness",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_instrumentalness",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.\n"
+        },
+        {
+          "field_name": "min_key",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_key",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_key",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.\n"
+        },
+        {
+          "field_name": "min_liveness",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_liveness",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_liveness",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.\n"
+        },
+        {
+          "field_name": "min_loudness",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_loudness",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_loudness",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.\n"
+        },
+        {
+          "field_name": "min_mode",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_mode",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_mode",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.\n"
+        },
+        {
+          "field_name": "min_popularity",
+          "dimensions": [
+            "score_range"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_popularity",
+          "dimensions": [
+            "score_range"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_popularity",
+          "dimensions": [
+            "score_range"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.\n"
+        },
+        {
+          "field_name": "min_speechiness",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_speechiness",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_speechiness",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.\n"
+        },
+        {
+          "field_name": "min_tempo",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_tempo",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_tempo",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number",
+          "description": "Target tempo (BPM)"
+        },
+        {
+          "field_name": "min_time_signature",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_time_signature",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_time_signature",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.\n"
+        },
+        {
+          "field_name": "min_valence",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard floor on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `min_tempo=140` would restrict results to only those tracks with a tempo of greater than 140 beats per minute.\n"
+        },
+        {
+          "field_name": "max_valence",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each tunable track attribute, a hard ceiling on the selected track attribute\u2019s value can be provided. See tunable track attributes below for the list of available options. For example, `max_instrumentalness=0.35` would filter out most tracks that are likely to be instrumental.\n"
+        },
+        {
+          "field_name": "target_valence",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "number",
+          "description": "For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-recommendation-genres",
+      "description": "Get Available Genre Seeds\n\n\nRetrieve a list of available genres seed parameter values for [recommendations](/documentation/web-api/reference/get-recommendations).",
+      "fields": []
+    },
+    {
+      "tool_name": "search",
+      "description": "Search for Item\n\n\nGet Spotify catalog information about albums, artists, playlists, tracks, shows, episodes or audiobooks\nthat match a keyword string.<br />\n**Note: Audiobooks are only available for the US, UK, Ireland, New Zealand and Australia markets.**",
+      "fields": [
+        {
+          "field_name": "q",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Your search query.\n\nYou can narrow down your search using field filters. The available filters are `album`, `artist`, `track`, `year`, `upc`, `tag:hipster`, `tag:new`, `isrc`, and `genre`. Each field filter only applies to certain result types.\n\nThe `artist` and `year` filters can be used while searching albums, artists and tracks. You can filter on a single `year` or a range (e.g. 1955-1960).<br />\nThe `album` filter can be used while searching albums and tracks.<br />\nThe `genre` filter can be used while searching artists and tracks.<br />\nThe `isrc` and `track` filters can be used while searching tracks.<br />\nThe `upc`, `tag:new` and `tag:hipster` filters can only be used while searching albums. The `tag:new` filter will return albums released in the past two weeks and `tag:hipster` can be used to return only albums with the lowest 10% popularity.<br />\n"
+        },
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A comma-separated list of item types to search across. Search results include hits\nfrom all the specified item types. For example: `q=abacab&type=album,track` returns\nboth albums and tracks matching \"abacab\".\n"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The maximum number of results to return in each item type.\n"
+        },
+        {
+          "field_name": "offset",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "The index of the first result to return. Use\nwith limit to get the next page of search results.\n"
+        },
+        {
+          "field_name": "include_external",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "If `include_external=audio` is specified it signals that the client can play externally hosted audio content, and marks\nthe content as playable in the response. By default externally hosted audio content is marked as unplayable in the response.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-multiple-shows",
+      "description": "Get Several Shows\n\n\nGet Spotify catalog information for several shows based on their Spotify IDs.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-a-show",
+      "description": "Get Show\n\n\nGet Spotify catalog information for a single show identified by its\nunique Spotify ID.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-a-shows-episodes",
+      "description": "Get Show Episodes\n\n\nGet Spotify catalog information about an show\u2019s episodes. Optional parameters can be used to limit the number of episodes returned.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-several-tracks",
+      "description": "Get Several Tracks\n\n\nGet Spotify catalog information for multiple tracks based on their Spotify IDs.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-track",
+      "description": "Get Track\n\n\nGet Spotify catalog information for a single track identified by its\nunique Spotify ID.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The [Spotify ID](/documentation/web-api/concepts/spotify-uris-ids)\nfor the track.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "get-users-profile",
+      "description": "Get User's Profile\n\n\nGet public profile information about a Spotify user.",
+      "fields": []
+    },
+    {
+      "tool_name": "get-list-users-playlists",
+      "description": "Get User's Playlists\n\n\nGet a list of the playlists owned or followed by a Spotify user.",
+      "fields": [
+        {
+          "field_name": "offset",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "The index of the first playlist to return. Default:\n0 (the first object). Maximum offset: 100.000\\. Use with `limit` to get the\nnext set of playlists.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "create-playlist",
+      "description": "Create Playlist\n\n\nCreate a playlist for a Spotify user. (The playlist will be empty until\nyou [add tracks](/documentation/web-api/reference/add-tracks-to-playlist).)",
+      "fields": [
+        {
+          "field_name": "collaborative",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Defaults to `false`. If `true` the playlist will be collaborative. _**Note**: to create a collaborative playlist you must also set `public` to `false`. To create collaborative playlists you must have granted `playlist-modify-private` and `playlist-modify-public` [scopes](/documentation/web-api/concepts/scopes/#list-of-scopes)._\n"
+        },
+        {
+          "field_name": "description",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "value for playlist description as displayed in Spotify Clients and in the Web API.\n"
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The name for the new playlist, for example `\"Your Coolest Playlist\"`. This name does not need to be unique; a user may have several playlists with the same name.\n"
+        },
+        {
+          "field_name": "public",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Defaults to `true`. If `true` the playlist will be public, if `false` it will be private. To be able to create private playlists, the user must have granted the `playlist-modify-private` [scope](/documentation/web-api/concepts/scopes/#list-of-scopes)\n"
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "n_tools": 88,
+    "n_fields": 133,
+    "n_declared": 0,
+    "n_inferred": 55,
+    "n_unknown": 78,
+    "n_dim_signals": 76,
+    "dim_hits": {
+      "industry_code": 10,
+      "country_code": 8,
+      "encoding": 3,
+      "language_code": 3,
+      "date_format": 5,
+      "temporal_format": 7,
+      "timezone": 1,
+      "id_offset": 7,
+      "path_convention": 1,
+      "state_filter": 2,
+      "rate_scale": 25,
+      "score_range": 4
+    }
+  },
+  "capture_hash": "7f0c55de95e53066242ac788272e1f2c2558f50b38e7543abbfcbc4dc936f4c5"
+}

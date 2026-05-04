@@ -1,0 +1,5374 @@
+{
+  "source_kind": "openapi",
+  "source_id": "slack-web-official",
+  "schema_hash": "757f16c42c4d4bf118881a2d3ce0da974d68e23e4935c28e7962fe45f065fd3a",
+  "captured_at": "2026-05-02T20:35:31.664637+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "614aa67ae498e841a1f42084343b9d41f739e5678f1f271c1e2a03e8864bee04",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "65a946aee1b4b6585df08554171fd5a5c749793180ace1b8de8efd74fd663517",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.1",
+      "hash": "d1caf350ea5d6f1a4023c6d15670e3ec25dfa832a015348ffeb5a4d3f70dec3a",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+        "source_hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.1",
+      "hash": "4313a1301e360fb9f40823328a75592039aedd2821d63b80be9cf45ed765c32a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+        "source_hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.1",
+      "hash": "2ed09413af1da88d807787fe901c2b430a8a9304ba27f235e28b31d0ef67e4a8",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-05-02",
+        "source_uri": "https://ref.gs1.org/ai/",
+        "source_hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "0aab1b08537ae2835ab1a05adb8a0800eaf7a7ce98ad6937f6cc3f7ee721a997",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "d95ea9d09a69dd1ba4a5679e890a2509185167a10357ae8f8591d8fcde73ff0a",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.1",
+      "hash": "fe87dbb4b7125cab4135f2af6775b75d798390e91ab0849c3496900f43662b52",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2026",
+        "source_uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+        "source_hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "cf7e4bbfb6c7bd012e8508a5b07d9719bbe35b8970a60bddc3128d05e7e2598f",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "0205810517db330b61965d089f78f1b427ea7fc0caec471025929ac965ffd583",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "2a3143742f52266ba08484a16e889d63761d409f1055d95021dab7a03da25a2e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7092871334e53492b46e4835ab2ef1f5d0ac9e184ed257c68ee212692f926c53",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "b16d83cbe515dc7e52d778f5fcb7d016e4a1f292cd8340307b85066141f5be65",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "b2396f760586f9656bd4b806127d5e3404f80d770288f1445beb04b27bae105d",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.1",
+      "hash": "8daa8d898578ac4feaebc986a3f0a8ce367d866054aec9b0654d01bb8f8f71cd",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+        "source_hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "6e653a3d4f730cc93b673893ac69b5215a0f3fbeb25059b3014aa83f5d339d69",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "tool_name": "admin_apps_approve",
+      "description": "Approve an app for installation on a workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.apps:write`"
+        },
+        {
+          "field_name": "app_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The id of the app to approve."
+        },
+        {
+          "field_name": "request_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The id of the request to approve."
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_apps_approved_list",
+      "description": "List approved apps for an org or workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.apps:read`"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Must be between 1 - 1000 both inclusive."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set `cursor` to `next_cursor` returned by the previous call to list items in the next page"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "enterprise_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_apps_requests_list",
+      "description": "List app requests for a team/workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.apps:read`"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Must be between 1 - 1000 both inclusive."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set `cursor` to `next_cursor` returned by the previous call to list items in the next page"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_apps_restrict",
+      "description": "Restrict an app for installation on a workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.apps:write`"
+        },
+        {
+          "field_name": "app_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The id of the app to restrict."
+        },
+        {
+          "field_name": "request_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The id of the request to restrict."
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_apps_restricted_list",
+      "description": "List restricted apps for an org or workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.apps:read`"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Must be between 1 - 1000 both inclusive."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set `cursor` to `next_cursor` returned by the previous call to list items in the next page"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "enterprise_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_archive",
+      "description": "Archive a public or private channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:write`"
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel to archive."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_convertToPrivate",
+      "description": "Convert a public channel to a private channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:write`"
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel to convert to private."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_create",
+      "description": "Create a public or private channel-based conversation.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:write`"
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Name of the public or private channel to create."
+        },
+        {
+          "field_name": "description",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Description of the public or private channel to create."
+        },
+        {
+          "field_name": "is_private",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "When `true`, creates a private channel instead of a public channel"
+        },
+        {
+          "field_name": "org_wide",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "When `true`, the channel will be available org-wide. Note: if the channel is not `org_wide=true`, you must specify a `team_id` for this channel"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The workspace to create the channel in. Note: this argument is required unless you set `org_wide=true`."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_delete",
+      "description": "Delete a public or private channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:write`"
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel to delete."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_disconnectShared",
+      "description": "Disconnect a connected channel from one or more workspaces.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:write`"
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel to be disconnected from some workspaces."
+        },
+        {
+          "field_name": "leaving_team_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The team to be removed from the channel. Currently only a single team id can be specified."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_ekm_listOriginalConnectedChannelInfo",
+      "description": "List all disconnected channels\u2014i.e., channels that were once connected to other workspaces and then disconnected\u2014and the corresponding original channel IDs for key revocation with EKM.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:read`"
+        },
+        {
+          "field_name": "channel_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A comma-separated list of channels to filter to."
+        },
+        {
+          "field_name": "team_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A comma-separated list of the workspaces to which the channels you would like returned belong."
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Must be between 1 - 1000 both inclusive."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set `cursor` to `next_cursor` returned by the previous call to list items in the next page."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_getConversationPrefs",
+      "description": "Get conversation preferences for a public or private channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:read`"
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel to get preferences for."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_getTeams",
+      "description": "Get all the workspaces a given public or private channel is connected to within this Enterprise org.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:read`"
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel to determine connected workspaces within the organization for."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set `cursor` to `next_cursor` returned by the previous call to list items in the next page"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Must be between 1 - 1000 both inclusive."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_invite",
+      "description": "Invite a user to a public or private channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:write`"
+        },
+        {
+          "field_name": "user_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The users to invite."
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel that the users will be invited to."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_rename",
+      "description": "Rename a public or private channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:write`"
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel to rename."
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_restrictAccess_addGroup",
+      "description": "Add an allowlist of IDP groups for accessing a channel",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization."
+        },
+        {
+          "field_name": "group_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The [IDP Group](https://slack.com/help/articles/115001435788-Connect-identity-provider-groups-to-your-Enterprise-Grid-org) ID to be an allowlist for the private channel."
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel to link this group to."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_restrictAccess_listGroups",
+      "description": "List all IDP Groups linked to a channel",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:read`"
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_restrictAccess_removeGroup",
+      "description": "Remove a linked IDP group linked from a private channel",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization."
+        },
+        {
+          "field_name": "group_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The [IDP Group](https://slack.com/help/articles/115001435788-Connect-identity-provider-groups-to-your-Enterprise-Grid-org) ID to remove from the private channel."
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel to remove the linked group from."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_search",
+      "description": "Search for public or private channels in an Enterprise organization.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:read`"
+        },
+        {
+          "field_name": "team_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Comma separated string of team IDs, signifying the workspaces to search through."
+        },
+        {
+          "field_name": "query",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Name of the the channel to query by."
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Maximum number of items to be returned. Must be between 1 - 20 both inclusive. Default is 10."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set `cursor` to `next_cursor` returned by the previous call to list items in the next page."
+        },
+        {
+          "field_name": "search_channel_types",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The type of channel to include or exclude in the search. For example `private` will search private channels, while `private_exclude` will exclude them. For a full list of types, check the [Types section](#types)."
+        },
+        {
+          "field_name": "sort",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Possible values are `relevant` (search ranking based on what we think is closest), `name` (alphabetical), `member_count` (number of users in the channel), and `created` (date channel was created). You can optionally pair this with the `sort_dir` arg to change how it is sorted "
+        },
+        {
+          "field_name": "sort_dir",
+          "dimensions": [
+            "sort_direction"
+          ],
+          "confidence": "inferred",
+          "description": "Sort direction. Possible values are `asc` for ascending order like (1, 2, 3) or (a, b, c), and `desc` for descending order like (3, 2, 1) or (c, b, a)"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_setConversationPrefs",
+      "description": "Set the posting permissions for a public or private channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:write`"
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel to set the prefs for"
+        },
+        {
+          "field_name": "prefs",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The prefs for this channel in a stringified JSON format."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_setTeams",
+      "description": "Set the workspaces in an Enterprise grid org that connect to a public or private channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:write`"
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The encoded `channel_id` to add or remove to workspaces."
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The workspace to which the channel belongs. Omit this argument if the channel is a cross-workspace shared channel."
+        },
+        {
+          "field_name": "target_team_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A comma-separated list of workspaces to which the channel should be shared. Not required if the channel is being shared org-wide."
+        },
+        {
+          "field_name": "org_channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "True if channel has to be converted to an org channel"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_conversations_unarchive",
+      "description": "Unarchive a public or private channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.conversations:write`"
+        },
+        {
+          "field_name": "channel_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel to unarchive."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_emoji_add",
+      "description": "Add an emoji.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:write`"
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The name of the emoji to be removed. Colons (`:myemoji:`) around the value are not required, although they may be included."
+        },
+        {
+          "field_name": "url",
+          "dimensions": [
+            "path_convention"
+          ],
+          "confidence": "inferred",
+          "description": "The URL of a file to use as an image for the emoji. Square images under 128KB and with transparent backgrounds work best."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_emoji_addAlias",
+      "description": "Add an emoji alias.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:write`"
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The name of the emoji to be aliased. Colons (`:myemoji:`) around the value are not required, although they may be included."
+        },
+        {
+          "field_name": "alias_for",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The alias of the emoji."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_emoji_list",
+      "description": "List emoji for an Enterprise Grid organization.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:read`"
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set `cursor` to `next_cursor` returned by the previous call to list items in the next page"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Must be between 1 - 1000 both inclusive."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_emoji_remove",
+      "description": "Remove an emoji across an Enterprise Grid organization",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:write`"
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The name of the emoji to be removed. Colons (`:myemoji:`) around the value are not required, although they may be included."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_emoji_rename",
+      "description": "Rename an emoji.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:write`"
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The name of the emoji to be renamed. Colons (`:myemoji:`) around the value are not required, although they may be included."
+        },
+        {
+          "field_name": "new_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The new name of the emoji."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_inviteRequests_approve",
+      "description": "Approve a workspace invite request.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.invites:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID for the workspace where the invite request was made."
+        },
+        {
+          "field_name": "invite_request_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of the request to invite."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_inviteRequests_approved_list",
+      "description": "List all approved workspace invite requests.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.invites:read`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID for the workspace where the invite requests were made."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Value of the `next_cursor` field sent as part of the previous API response"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_inviteRequests_denied_list",
+      "description": "List all denied workspace invite requests.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.invites:read`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID for the workspace where the invite requests were made."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Value of the `next_cursor` field sent as part of the previous api response"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The number of results that will be returned by the API on each invocation. Must be between 1 - 1000 both inclusive"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_inviteRequests_deny",
+      "description": "Deny a workspace invite request.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.invites:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID for the workspace where the invite request was made."
+        },
+        {
+          "field_name": "invite_request_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of the request to invite."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_inviteRequests_list",
+      "description": "List all pending workspace invite requests.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.invites:read`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID for the workspace where the invite requests were made."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Value of the `next_cursor` field sent as part of the previous API response"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_teams_admins_list",
+      "description": "List all of the admins on a given workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:read`"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set `cursor` to `next_cursor` returned by the previous call to list items in the next page."
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_teams_create",
+      "description": "Create an Enterprise team.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:write`"
+        },
+        {
+          "field_name": "team_domain",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Team domain (for example, slacksoftballteam)."
+        },
+        {
+          "field_name": "team_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Team name (for example, Slack Softball Team)."
+        },
+        {
+          "field_name": "team_description",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Description for the team."
+        },
+        {
+          "field_name": "team_discoverability",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Who can join the team. A team's discoverability can be `open`, `closed`, `invite_only`, or `unlisted`."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_teams_list",
+      "description": "List all teams on an Enterprise organization",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:read`"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Must be between 1 - 100 both inclusive."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set `cursor` to `next_cursor` returned by the previous call to list items in the next page."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_teams_owners_list",
+      "description": "List all of the owners on a given workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:read`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Must be between 1 - 1000 both inclusive."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set `cursor` to `next_cursor` returned by the previous call to list items in the next page."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_teams_settings_info",
+      "description": "Fetch information about settings in a workspace",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:read`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_teams_settings_setDefaultChannels",
+      "description": "Set the default channels of a workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID for the workspace to set the default channel for."
+        },
+        {
+          "field_name": "channel_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "An array of channel IDs."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_teams_settings_setDescription",
+      "description": "Set the description of a given workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID for the workspace to set the description for."
+        },
+        {
+          "field_name": "description",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The new description for the workspace."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_teams_settings_setDiscoverability",
+      "description": "An API method that allows admins to set the discoverability of a given workspace",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID of the workspace to set discoverability on."
+        },
+        {
+          "field_name": "discoverability",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "This workspace's discovery setting. It must be set to one of `open`, `invite_only`, `closed`, or `unlisted`."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_teams_settings_setIcon",
+      "description": "Sets the icon of a workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:write`"
+        },
+        {
+          "field_name": "image_url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Image URL for the icon"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID for the workspace to set the icon for."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_teams_settings_setName",
+      "description": "Set the name of a given workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID for the workspace to set the name for."
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The new name of the workspace."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_usergroups_addChannels",
+      "description": "Add one or more default channels to an IDP group.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.usergroups:write`"
+        },
+        {
+          "field_name": "usergroup_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of the IDP group to add default channels for."
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The workspace to add default channels in."
+        },
+        {
+          "field_name": "channel_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Comma separated string of channel IDs."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_usergroups_addTeams",
+      "description": "Associate one or more default workspaces with an organization-wide IDP group.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.teams:write`"
+        },
+        {
+          "field_name": "usergroup_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "An encoded usergroup (IDP Group) ID."
+        },
+        {
+          "field_name": "team_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A comma separated list of encoded team (workspace) IDs. Each workspace *MUST* belong to the organization associated with the token."
+        },
+        {
+          "field_name": "auto_provision",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "When `true`, this method automatically creates new workspace accounts for the IDP group members."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_usergroups_listChannels",
+      "description": "List the channels linked to an org-level IDP group (user group).",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.usergroups:read`"
+        },
+        {
+          "field_name": "usergroup_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of the IDP group to list default channels for."
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of the the workspace."
+        },
+        {
+          "field_name": "include_num_members",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Flag to include or exclude the count of members per channel."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_usergroups_removeChannels",
+      "description": "Remove one or more default channels from an org-level IDP group (user group).",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.usergroups:write`"
+        },
+        {
+          "field_name": "usergroup_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of the IDP Group"
+        },
+        {
+          "field_name": "channel_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Comma-separated string of channel IDs"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_users_assign",
+      "description": "Add an Enterprise user to a workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.users:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID (`T1234`) of the workspace."
+        },
+        {
+          "field_name": "user_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID of the user to add to the workspace."
+        },
+        {
+          "field_name": "is_restricted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "True if user should be added to the workspace as a guest."
+        },
+        {
+          "field_name": "is_ultra_restricted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "True if user should be added to the workspace as a single-channel guest."
+        },
+        {
+          "field_name": "channel_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Comma separated values of channel IDs to add user in the new workspace."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_users_invite",
+      "description": "Invite a user to a workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.users:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID (`T1234`) of the workspace."
+        },
+        {
+          "field_name": "email",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The email address of the person to invite."
+        },
+        {
+          "field_name": "channel_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A comma-separated list of `channel_id`s for this user to join. At least one channel is required."
+        },
+        {
+          "field_name": "custom_message",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "An optional message to send to the user in the invite email."
+        },
+        {
+          "field_name": "real_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Full name of the user."
+        },
+        {
+          "field_name": "resend",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Allow this invite to be resent in the future if a user has not signed up yet. (default: false)"
+        },
+        {
+          "field_name": "is_restricted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Is this user a multi-channel guest user? (default: false)"
+        },
+        {
+          "field_name": "is_ultra_restricted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Is this user a single channel guest user? (default: false)"
+        },
+        {
+          "field_name": "guest_expiration_ts",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Timestamp when guest account should be disabled. Only include this timestamp if you are inviting a guest user and you want their account to expire on a certain date."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_users_list",
+      "description": "List users on a workspace",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.users:read`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID (`T1234`) of the workspace."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set `cursor` to `next_cursor` returned by the previous call to list items in the next page."
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Limit for how many users to be retrieved per page"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_users_remove",
+      "description": "Remove a user from a workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.users:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID (`T1234`) of the workspace."
+        },
+        {
+          "field_name": "user_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID of the user to remove."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_users_session_invalidate",
+      "description": "Invalidate a single session for a user by session_id",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.users:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of the team that the session belongs to"
+        },
+        {
+          "field_name": "session_id",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_users_session_reset",
+      "description": "Wipes all valid sessions on all devices for a given user",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.users:write`"
+        },
+        {
+          "field_name": "user_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID of the user to wipe sessions for"
+        },
+        {
+          "field_name": "mobile_only",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Only expire mobile sessions (default: false)"
+        },
+        {
+          "field_name": "web_only",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Only expire web sessions (default: false)"
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_users_setAdmin",
+      "description": "Set an existing guest, regular user, or owner to be an admin user.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.users:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID (`T1234`) of the workspace."
+        },
+        {
+          "field_name": "user_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID of the user to designate as an admin."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_users_setExpiration",
+      "description": "Set an expiration for a guest user",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.users:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID (`T1234`) of the workspace."
+        },
+        {
+          "field_name": "user_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID of the user to set an expiration for."
+        },
+        {
+          "field_name": "expiration_ts",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Timestamp when guest account should be disabled."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_users_setOwner",
+      "description": "Set an existing guest, regular user, or admin user to be a workspace owner.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.users:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID (`T1234`) of the workspace."
+        },
+        {
+          "field_name": "user_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Id of the user to promote to owner."
+        }
+      ]
+    },
+    {
+      "tool_name": "admin_users_setRegular",
+      "description": "Set an existing guest user, admin user, or owner to be a regular user.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin.users:write`"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID (`T1234`) of the workspace."
+        },
+        {
+          "field_name": "user_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID of the user to designate as a regular user."
+        }
+      ]
+    },
+    {
+      "tool_name": "api_test",
+      "description": "Checks API calling code.",
+      "fields": [
+        {
+          "field_name": "error",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Error response to return"
+        },
+        {
+          "field_name": "foo",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "example property to return"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_event_authorizations_list",
+      "description": "Get a list of authorizations for the given event context. Each authorization represents an app installation that the event is visible to.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `authorizations:read`"
+        },
+        {
+          "field_name": "event_context",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_permissions_info",
+      "description": "Returns list of permissions this app has on a team.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_permissions_request",
+      "description": "Allows an app to request additional scopes",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        },
+        {
+          "field_name": "scopes",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A comma separated list of scopes to request for"
+        },
+        {
+          "field_name": "trigger_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Token used to trigger the permissions API"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_permissions_resources_list",
+      "description": "Returns list of resource grants this app has on a team.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more detail."
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return."
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_permissions_scopes_list",
+      "description": "Returns list of scopes this app has on a team.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_permissions_users_list",
+      "description": "Returns list of user grants and corresponding scopes this app has on a team.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more detail."
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return."
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_permissions_users_request",
+      "description": "Enables an app to trigger a permissions modal to grant an app access to a user access scope.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        },
+        {
+          "field_name": "scopes",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A comma separated list of user scopes to request for"
+        },
+        {
+          "field_name": "trigger_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Token used to trigger the request"
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The user this scope is being requested for"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_uninstall",
+      "description": "Uninstalls your app from a workspace.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        },
+        {
+          "field_name": "client_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Issued when you created your application."
+        },
+        {
+          "field_name": "client_secret",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Issued when you created your application."
+        }
+      ]
+    },
+    {
+      "tool_name": "auth_revoke",
+      "description": "Revokes a token.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        },
+        {
+          "field_name": "test",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Setting this parameter to `1` triggers a _testing mode_ where the specified token will not actually be revoked."
+        }
+      ]
+    },
+    {
+      "tool_name": "auth_test",
+      "description": "Checks authentication & identity.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        }
+      ]
+    },
+    {
+      "tool_name": "bots_info",
+      "description": "Gets information about a bot user.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `users:read`"
+        },
+        {
+          "field_name": "bot",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Bot user to get info on"
+        }
+      ]
+    },
+    {
+      "tool_name": "calls_add",
+      "description": "Registers a new Call.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `calls:write`"
+        },
+        {
+          "field_name": "external_unique_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "An ID supplied by the 3rd-party Call provider. It must be unique across all Calls from that service."
+        },
+        {
+          "field_name": "external_display_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "An optional, human-readable ID supplied by the 3rd-party Call provider. If supplied, this ID will be displayed in the Call object."
+        },
+        {
+          "field_name": "join_url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The URL required for a client to join the Call."
+        },
+        {
+          "field_name": "desktop_app_join_url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "When supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL."
+        },
+        {
+          "field_name": "date_start",
+          "dimensions": [
+            "date_format",
+            "temporal_format",
+            "timezone"
+          ],
+          "confidence": "inferred",
+          "description": "Call start time in UTC UNIX timestamp format"
+        },
+        {
+          "field_name": "title",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The name of the Call."
+        },
+        {
+          "field_name": "created_by",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The valid Slack user ID of the user who created this Call. When this method is called with a user token, the `created_by` field is optional and defaults to the authed user of the token. Otherwise, the field is required."
+        },
+        {
+          "field_name": "users",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The list of users to register as participants in the Call. [Read more on how to specify users here](/apis/calls#users)."
+        }
+      ]
+    },
+    {
+      "tool_name": "calls_end",
+      "description": "Ends a Call.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `calls:write`"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "`id` returned when registering the call using the [`calls.add`](/methods/calls.add) method."
+        },
+        {
+          "field_name": "duration",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Call duration in seconds"
+        }
+      ]
+    },
+    {
+      "tool_name": "calls_info",
+      "description": "Returns information about a Call.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `calls:read`"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "`id` of the Call returned by the [`calls.add`](/methods/calls.add) method."
+        }
+      ]
+    },
+    {
+      "tool_name": "calls_participants_add",
+      "description": "Registers new participants added to a Call.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `calls:write`"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "`id` returned by the [`calls.add`](/methods/calls.add) method."
+        },
+        {
+          "field_name": "users",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The list of users to add as participants in the Call. [Read more on how to specify users here](/apis/calls#users)."
+        }
+      ]
+    },
+    {
+      "tool_name": "calls_participants_remove",
+      "description": "Registers participants removed from a Call.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `calls:write`"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "`id` returned by the [`calls.add`](/methods/calls.add) method."
+        },
+        {
+          "field_name": "users",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The list of users to remove as participants in the Call. [Read more on how to specify users here](/apis/calls#users)."
+        }
+      ]
+    },
+    {
+      "tool_name": "calls_update",
+      "description": "Updates information about a Call.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `calls:write`"
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "`id` returned by the [`calls.add`](/methods/calls.add) method."
+        },
+        {
+          "field_name": "title",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The name of the Call."
+        },
+        {
+          "field_name": "join_url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The URL required for a client to join the Call."
+        },
+        {
+          "field_name": "desktop_app_join_url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "When supplied, available Slack clients will attempt to directly launch the 3rd-party Call with this URL."
+        }
+      ]
+    },
+    {
+      "tool_name": "chat_delete",
+      "description": "Deletes a message.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `chat:write`"
+        },
+        {
+          "field_name": "ts",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Timestamp of the message to be deleted."
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel containing the message to be deleted."
+        },
+        {
+          "field_name": "as_user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Pass true to delete the message as the authed user with `chat:write:user` scope. [Bot users](/bot-users) in this context are considered authed users. If unused or false, the message will be deleted with `chat:write:bot` scope."
+        }
+      ]
+    },
+    {
+      "tool_name": "chat_deleteScheduledMessage",
+      "description": "Deletes a pending scheduled message from the queue.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `chat:write`"
+        },
+        {
+          "field_name": "as_user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Pass true to delete the message as the authed user with `chat:write:user` scope. [Bot users](/bot-users) in this context are considered authed users. If unused or false, the message will be deleted with `chat:write:bot` scope."
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel the scheduled_message is posting to"
+        },
+        {
+          "field_name": "scheduled_message_id",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred",
+          "description": "`scheduled_message_id` returned from call to chat.scheduleMessage"
+        }
+      ]
+    },
+    {
+      "tool_name": "chat_getPermalink",
+      "description": "Retrieve a permalink URL for a specific extant message",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID of the conversation or channel containing the message"
+        },
+        {
+          "field_name": "message_ts",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A message's `ts` value, uniquely identifying it within a channel"
+        }
+      ]
+    },
+    {
+      "tool_name": "chat_meMessage",
+      "description": "Share a me message into a channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `chat:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name."
+        },
+        {
+          "field_name": "text",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Text of the message to send."
+        }
+      ]
+    },
+    {
+      "tool_name": "chat_postEphemeral",
+      "description": "Sends an ephemeral message to a user in a channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `chat:write`"
+        },
+        {
+          "field_name": "as_user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false."
+        },
+        {
+          "field_name": "attachments",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A JSON-based array of structured attachments, presented as a URL-encoded string."
+        },
+        {
+          "field_name": "blocks",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A JSON-based array of structured blocks, presented as a URL-encoded string."
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name."
+        },
+        {
+          "field_name": "icon_emoji",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Emoji to use as the icon for this message. Overrides `icon_url`. Must be used in conjunction with `as_user` set to `false`, otherwise ignored. See [authorship](#authorship) below."
+        },
+        {
+          "field_name": "icon_url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "URL to an image to use as the icon for this message. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below."
+        },
+        {
+          "field_name": "link_names",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Find and link channel names and usernames."
+        },
+        {
+          "field_name": "parse",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Change how messages are treated. Defaults to `none`. See [below](#formatting)."
+        },
+        {
+          "field_name": "text",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "How this field works and whether it is required depends on other fields you use in your API call. [See below](#text_usage) for more detail."
+        },
+        {
+          "field_name": "thread_ts",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Provide another message's `ts` value to post this message in a thread. Avoid using a reply's `ts` value; use its parent's value instead. Ephemeral messages in threads are only shown if there is already an active thread."
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "`id` of the user who will receive the ephemeral message. The user should be in the channel specified by the `channel` argument."
+        },
+        {
+          "field_name": "username",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set your bot's user name. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below."
+        }
+      ]
+    },
+    {
+      "tool_name": "chat_postMessage",
+      "description": "Sends a message to a channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `chat:write`"
+        },
+        {
+          "field_name": "as_user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See [authorship](#authorship) below."
+        },
+        {
+          "field_name": "attachments",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A JSON-based array of structured attachments, presented as a URL-encoded string."
+        },
+        {
+          "field_name": "blocks",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A JSON-based array of structured blocks, presented as a URL-encoded string."
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. See [below](#channels) for more details."
+        },
+        {
+          "field_name": "icon_emoji",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Emoji to use as the icon for this message. Overrides `icon_url`. Must be used in conjunction with `as_user` set to `false`, otherwise ignored. See [authorship](#authorship) below."
+        },
+        {
+          "field_name": "icon_url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "URL to an image to use as the icon for this message. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below."
+        },
+        {
+          "field_name": "link_names",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Find and link channel names and usernames."
+        },
+        {
+          "field_name": "mrkdwn",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Disable Slack markup parsing by setting to `false`. Enabled by default."
+        },
+        {
+          "field_name": "parse",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Change how messages are treated. Defaults to `none`. See [below](#formatting)."
+        },
+        {
+          "field_name": "reply_broadcast",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Used in conjunction with `thread_ts` and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to `false`."
+        },
+        {
+          "field_name": "text",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "How this field works and whether it is required depends on other fields you use in your API call. [See below](#text_usage) for more detail."
+        },
+        {
+          "field_name": "thread_ts",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Provide another message's `ts` value to make this message a reply. Avoid using a reply's `ts` value; use its parent instead."
+        },
+        {
+          "field_name": "unfurl_links",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Pass true to enable unfurling of primarily text-based content."
+        },
+        {
+          "field_name": "unfurl_media",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Pass false to disable unfurling of media content."
+        },
+        {
+          "field_name": "username",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set your bot's user name. Must be used in conjunction with `as_user` set to false, otherwise ignored. See [authorship](#authorship) below."
+        }
+      ]
+    },
+    {
+      "tool_name": "chat_scheduleMessage",
+      "description": "Schedules a message to be sent to a channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `chat:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See [below](#channels) for more details."
+        },
+        {
+          "field_name": "text",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "How this field works and whether it is required depends on other fields you use in your API call. [See below](#text_usage) for more detail."
+        },
+        {
+          "field_name": "post_at",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Unix EPOCH timestamp of time in future to send the message."
+        },
+        {
+          "field_name": "parse",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Change how messages are treated. Defaults to `none`. See [chat.postMessage](chat.postMessage#formatting)."
+        },
+        {
+          "field_name": "as_user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See [chat.postMessage](chat.postMessage#authorship)."
+        },
+        {
+          "field_name": "link_names",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Find and link channel names and usernames."
+        },
+        {
+          "field_name": "attachments",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A JSON-based array of structured attachments, presented as a URL-encoded string."
+        },
+        {
+          "field_name": "blocks",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A JSON-based array of structured blocks, presented as a URL-encoded string."
+        },
+        {
+          "field_name": "unfurl_links",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Pass true to enable unfurling of primarily text-based content."
+        },
+        {
+          "field_name": "unfurl_media",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Pass false to disable unfurling of media content."
+        },
+        {
+          "field_name": "thread_ts",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Provide another message's `ts` value to make this message a reply. Avoid using a reply's `ts` value; use its parent instead."
+        },
+        {
+          "field_name": "reply_broadcast",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Used in conjunction with `thread_ts` and indicates whether reply should be made visible to everyone in the channel or conversation. Defaults to `false`."
+        }
+      ]
+    },
+    {
+      "tool_name": "chat_scheduledMessages_list",
+      "description": "Returns a list of scheduled messages.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The channel of the scheduled messages"
+        },
+        {
+          "field_name": "latest",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "A UNIX timestamp of the latest value in the time range"
+        },
+        {
+          "field_name": "oldest",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "A UNIX timestamp of the oldest value in the time range"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Maximum number of original entries to return."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "For pagination purposes, this is the `cursor` value returned from a previous call to `chat.scheduledmessages.list` indicating where you want to start this call from."
+        }
+      ]
+    },
+    {
+      "tool_name": "chat_unfurl",
+      "description": "Provide custom unfurl behavior for user-posted URLs",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `links:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel ID of the message"
+        },
+        {
+          "field_name": "ts",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Timestamp of the message to add unfurl behavior to."
+        },
+        {
+          "field_name": "unfurls",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments."
+        },
+        {
+          "field_name": "user_auth_message",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior"
+        },
+        {
+          "field_name": "user_auth_required",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set to `true` or `1` to indicate the user must install your Slack app to trigger unfurls for this domain"
+        },
+        {
+          "field_name": "user_auth_url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Send users to this custom URL where they will complete authentication in your app to fully trigger unfurling. Value should be properly URL-encoded."
+        }
+      ]
+    },
+    {
+      "tool_name": "chat_update",
+      "description": "Updates a message.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `chat:write`"
+        },
+        {
+          "field_name": "as_user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Pass true to update the message as the authed user. [Bot users](/bot-users) in this context are considered authed users."
+        },
+        {
+          "field_name": "attachments",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting `text`. If you don't include this field, the message's previous `attachments` will be retained. To remove previous `attachments`, include an empty array for this field."
+        },
+        {
+          "field_name": "blocks",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A JSON-based array of [structured blocks](/block-kit/building), presented as a URL-encoded string. If you don't include this field, the message's previous `blocks` will be retained. To remove previous `blocks`, include an empty array for this field."
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel containing the message to be updated."
+        },
+        {
+          "field_name": "link_names",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Find and link channel names and usernames. Defaults to `none`. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, `none`."
+        },
+        {
+          "field_name": "parse",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Change how messages are treated. Defaults to `client`, unlike `chat.postMessage`. Accepts either `none` or `full`. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, `client`."
+        },
+        {
+          "field_name": "text",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "New text for the message, using the [default formatting rules](/reference/surfaces/formatting). It's not required when presenting `blocks` or `attachments`."
+        },
+        {
+          "field_name": "ts",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Timestamp of the message to be updated."
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_archive",
+      "description": "Archives a conversation.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of conversation to archive"
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_close",
+      "description": "Closes a direct message or multi-person direct message.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Conversation to close."
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_create",
+      "description": "Initiates a public or private channel-based conversation",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:write`"
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Name of the public or private channel to create"
+        },
+        {
+          "field_name": "is_private",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Create a private channel instead of a public one"
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_history",
+      "description": "Fetches a conversation's history of messages and events.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:history`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Conversation ID to fetch history for."
+        },
+        {
+          "field_name": "latest",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "End of time range of messages to include in results."
+        },
+        {
+          "field_name": "oldest",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Start of time range of messages to include in results."
+        },
+        {
+          "field_name": "inclusive",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Include messages with latest or oldest timestamp in results only when either timestamp is specified."
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more detail."
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_info",
+      "description": "Retrieve information about a conversation.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:read`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Conversation ID to learn more about"
+        },
+        {
+          "field_name": "include_locale",
+          "dimensions": [
+            "encoding"
+          ],
+          "confidence": "inferred",
+          "description": "Set this to `true` to receive the locale for this conversation. Defaults to `false`"
+        },
+        {
+          "field_name": "include_num_members",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set to `true` to include the member count for the specified conversation. Defaults to `false`"
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_invite",
+      "description": "Invites users to a channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID of the public or private channel to invite user(s) to."
+        },
+        {
+          "field_name": "users",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A comma separated list of user IDs. Up to 1000 users may be listed."
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_join",
+      "description": "Joins an existing conversation.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `channels:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of conversation to join"
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_kick",
+      "description": "Removes a user from a conversation.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of conversation to remove user from."
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "User ID to be removed."
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_leave",
+      "description": "Leaves a conversation.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Conversation to leave"
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_list",
+      "description": "Lists all channels in a Slack team.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:read`"
+        },
+        {
+          "field_name": "exclude_archived",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set to `true` to exclude archived channels from the list"
+        },
+        {
+          "field_name": "types",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more detail."
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_mark",
+      "description": "Sets the read cursor in a channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel or conversation to set the read cursor for."
+        },
+        {
+          "field_name": "ts",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Unique identifier of message you want marked as most recently seen in this conversation."
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_members",
+      "description": "Retrieve members of a conversation.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:read`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of the conversation to retrieve members for"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more detail."
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_open",
+      "description": "Opens or resumes a direct message or multi-person direct message.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Resume a conversation by supplying an `im` or `mpim`'s ID. Or provide the `users` field instead."
+        },
+        {
+          "field_name": "users",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Comma separated lists of users. If only one user is included, this creates a 1:1 DM.  The ordering of the users is preserved whenever a multi-person direct message is returned. Supply a `channel` when not supplying `users`."
+        },
+        {
+          "field_name": "return_im",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Boolean, indicates you want the full IM channel definition in the response."
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_rename",
+      "description": "Renames a conversation.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of conversation to rename"
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "New name for conversation."
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_replies",
+      "description": "Retrieve a thread of messages posted to a conversation",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:history`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Conversation ID to fetch thread from."
+        },
+        {
+          "field_name": "ts",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Unique identifier of a thread's parent message. `ts` must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by `ts` will return - it is just an ordinary, unthreaded message."
+        },
+        {
+          "field_name": "latest",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "End of time range of messages to include in results."
+        },
+        {
+          "field_name": "oldest",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Start of time range of messages to include in results."
+        },
+        {
+          "field_name": "inclusive",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Include messages with latest or oldest timestamp in results only when either timestamp is specified."
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more detail."
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_setPurpose",
+      "description": "Sets the purpose for a conversation.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Conversation to set the purpose of"
+        },
+        {
+          "field_name": "purpose",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A new, specialer purpose"
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_setTopic",
+      "description": "Sets the topic for a conversation.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Conversation to set the topic of"
+        },
+        {
+          "field_name": "topic",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The new topic string. Does not support formatting or linkification."
+        }
+      ]
+    },
+    {
+      "tool_name": "conversations_unarchive",
+      "description": "Reverses conversation archival.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of conversation to unarchive"
+        }
+      ]
+    },
+    {
+      "tool_name": "dialog_open",
+      "description": "Open a dialog with a user",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        },
+        {
+          "field_name": "dialog",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The dialog definition. This must be a JSON-encoded string."
+        },
+        {
+          "field_name": "trigger_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Exchange a trigger to post to the user."
+        }
+      ]
+    },
+    {
+      "tool_name": "dnd_endDnd",
+      "description": "Ends the current user's Do Not Disturb session immediately.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `dnd:write`"
+        }
+      ]
+    },
+    {
+      "tool_name": "dnd_endSnooze",
+      "description": "Ends the current user's snooze mode immediately.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `dnd:write`"
+        }
+      ]
+    },
+    {
+      "tool_name": "dnd_info",
+      "description": "Retrieves a user's current Do Not Disturb status.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `dnd:read`"
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "User to fetch status for (defaults to current user)"
+        }
+      ]
+    },
+    {
+      "tool_name": "dnd_setSnooze",
+      "description": "Turns on Do Not Disturb mode for the current user, or changes its duration.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `dnd:write`"
+        },
+        {
+          "field_name": "num_minutes",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Number of minutes, from now, to snooze until."
+        }
+      ]
+    },
+    {
+      "tool_name": "dnd_teamInfo",
+      "description": "Retrieves the Do Not Disturb status for up to 50 users on a team.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `dnd:read`"
+        },
+        {
+          "field_name": "users",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Comma-separated list of users to fetch Do Not Disturb status for"
+        }
+      ]
+    },
+    {
+      "tool_name": "emoji_list",
+      "description": "Lists custom emoji for a team.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `emoji:read`"
+        }
+      ]
+    },
+    {
+      "tool_name": "files_comments_delete",
+      "description": "Deletes an existing comment on a file.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `files:write:user`"
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File to delete a comment from."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The comment to delete."
+        }
+      ]
+    },
+    {
+      "tool_name": "files_delete",
+      "description": "Deletes a file.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `files:write:user`"
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of file to delete."
+        }
+      ]
+    },
+    {
+      "tool_name": "files_info",
+      "description": "Gets information about a file.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `files:read`"
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Specify a file by providing its ID."
+        },
+        {
+          "field_name": "count",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "page",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Parameter for pagination. File comments are paginated for a single file. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first \"page\" of the collection of comments. See [pagination](/docs/pagination) for more details."
+        }
+      ]
+    },
+    {
+      "tool_name": "files_list",
+      "description": "List for a team, in a channel, or from a user with applied filters.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `files:read`"
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Filter files created by a single user."
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Filter files appearing in a specific channel, indicated by its ID."
+        },
+        {
+          "field_name": "ts_from",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Filter files created after this timestamp (inclusive)."
+        },
+        {
+          "field_name": "ts_to",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Filter files created before this timestamp (inclusive)."
+        },
+        {
+          "field_name": "types",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Filter files by type ([see below](#file_types)). You can pass multiple values in the types argument, like `types=spaces,snippets`.The default value is `all`, which does not filter the list."
+        },
+        {
+          "field_name": "count",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "page",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "show_files_hidden_by_limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Show truncated file info for files hidden due to being too old, and the team who owns the file being over the file limit."
+        }
+      ]
+    },
+    {
+      "tool_name": "files_remote_add",
+      "description": "Adds a file from a remote service",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `remote_files:write`"
+        },
+        {
+          "field_name": "external_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Creator defined GUID for the file."
+        },
+        {
+          "field_name": "title",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Title of the file being shared."
+        },
+        {
+          "field_name": "filetype",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "type of file"
+        },
+        {
+          "field_name": "external_url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "URL of the remote file."
+        },
+        {
+          "field_name": "preview_image",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Preview of the document via `multipart/form-data`."
+        },
+        {
+          "field_name": "indexable_file_contents",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A text file (txt, pdf, doc, etc.) containing textual search terms that are used to improve discovery of the remote file."
+        }
+      ]
+    },
+    {
+      "tool_name": "files_remote_info",
+      "description": "Retrieve information about a remote file added to Slack",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `remote_files:read`"
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Specify a file by providing its ID."
+        },
+        {
+          "field_name": "external_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Creator defined GUID for the file."
+        }
+      ]
+    },
+    {
+      "tool_name": "files_remote_list",
+      "description": "Retrieve information about a remote file added to Slack",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `remote_files:read`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Filter files appearing in a specific channel, indicated by its ID."
+        },
+        {
+          "field_name": "ts_from",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Filter files created after this timestamp (inclusive)."
+        },
+        {
+          "field_name": "ts_to",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Filter files created before this timestamp (inclusive)."
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more detail."
+        }
+      ]
+    },
+    {
+      "tool_name": "files_remote_remove",
+      "description": "Remove a remote file.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `remote_files:write`"
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Specify a file by providing its ID."
+        },
+        {
+          "field_name": "external_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Creator defined GUID for the file."
+        }
+      ]
+    },
+    {
+      "tool_name": "files_remote_share",
+      "description": "Share a remote file into a channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `remote_files:share`"
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Specify a file registered with Slack by providing its ID. Either this field or `external_id` or both are required."
+        },
+        {
+          "field_name": "external_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The globally unique identifier (GUID) for the file, as set by the app registering the file with Slack.  Either this field or `file` or both are required."
+        },
+        {
+          "field_name": "channels",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Comma-separated list of channel IDs where the file will be shared."
+        }
+      ]
+    },
+    {
+      "tool_name": "files_remote_update",
+      "description": "Updates an existing remote file.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `remote_files:write`"
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Specify a file by providing its ID."
+        },
+        {
+          "field_name": "external_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Creator defined GUID for the file."
+        },
+        {
+          "field_name": "title",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Title of the file being shared."
+        },
+        {
+          "field_name": "filetype",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "type of file"
+        },
+        {
+          "field_name": "external_url",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "URL of the remote file."
+        },
+        {
+          "field_name": "preview_image",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Preview of the document via `multipart/form-data`."
+        },
+        {
+          "field_name": "indexable_file_contents",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File containing contents that can be used to improve searchability for the remote file."
+        }
+      ]
+    },
+    {
+      "tool_name": "files_revokePublicURL",
+      "description": "Revokes public/external sharing access for a file",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `files:write:user`"
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File to revoke"
+        }
+      ]
+    },
+    {
+      "tool_name": "files_sharedPublicURL",
+      "description": "Enables a file for public/external sharing.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `files:write:user`"
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File to share"
+        }
+      ]
+    },
+    {
+      "tool_name": "files_upload",
+      "description": "Uploads or creates a file.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `files:write:user`"
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File contents via `multipart/form-data`. If omitting this parameter, you must submit `content`."
+        },
+        {
+          "field_name": "content",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File contents via a POST variable. If omitting this parameter, you must provide a `file`."
+        },
+        {
+          "field_name": "filetype",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A [file type](/types/file#file_types) identifier."
+        },
+        {
+          "field_name": "filename",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Filename of file."
+        },
+        {
+          "field_name": "title",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Title of file."
+        },
+        {
+          "field_name": "initial_comment",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The message text introducing the file in specified `channels`."
+        },
+        {
+          "field_name": "channels",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Comma-separated list of channel names or IDs where the file will be shared."
+        },
+        {
+          "field_name": "thread_ts",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Provide another message's `ts` value to upload this file as a reply. Never use a reply's `ts` value; use its parent instead."
+        }
+      ]
+    },
+    {
+      "tool_name": "migration_exchange",
+      "description": "For Enterprise Grid workspaces, map local user IDs to global user IDs",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "Authentication token. Requires scope: `tokens.basic`"
+        },
+        {
+          "field_name": "users",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A comma-separated list of user ids, up to 400 per request"
+        },
+        {
+          "field_name": "team_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Specify team_id starts with `T` in case of Org Token"
+        },
+        {
+          "field_name": "to_old",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Specify `true` to convert `W` global user IDs to workspace-specific `U` IDs. Defaults to `false`."
+        }
+      ]
+    },
+    {
+      "tool_name": "oauth_access",
+      "description": "Exchanges a temporary OAuth verifier code for an access token.",
+      "fields": [
+        {
+          "field_name": "client_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Issued when you created your application."
+        },
+        {
+          "field_name": "client_secret",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Issued when you created your application."
+        },
+        {
+          "field_name": "code",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The `code` param returned via the OAuth callback."
+        },
+        {
+          "field_name": "redirect_uri",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "This must match the originally submitted URI (if one was sent)."
+        },
+        {
+          "field_name": "single_channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Request the user to add your app only to a single channel. Only valid with a [legacy workspace app](https://api.slack.com/legacy-workspace-apps)."
+        }
+      ]
+    },
+    {
+      "tool_name": "oauth_token",
+      "description": "Exchanges a temporary OAuth verifier code for a workspace token.",
+      "fields": [
+        {
+          "field_name": "client_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Issued when you created your application."
+        },
+        {
+          "field_name": "client_secret",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Issued when you created your application."
+        },
+        {
+          "field_name": "code",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The `code` param returned via the OAuth callback."
+        },
+        {
+          "field_name": "redirect_uri",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "This must match the originally submitted URI (if one was sent)."
+        },
+        {
+          "field_name": "single_channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Request the user to add your app only to a single channel."
+        }
+      ]
+    },
+    {
+      "tool_name": "oauth_v2_access",
+      "description": "Exchanges a temporary OAuth verifier code for an access token.",
+      "fields": [
+        {
+          "field_name": "client_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Issued when you created your application."
+        },
+        {
+          "field_name": "client_secret",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Issued when you created your application."
+        },
+        {
+          "field_name": "code",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The `code` param returned via the OAuth callback."
+        },
+        {
+          "field_name": "redirect_uri",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "This must match the originally submitted URI (if one was sent)."
+        }
+      ]
+    },
+    {
+      "tool_name": "pins_add",
+      "description": "Pins an item to a channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `pins:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel to pin the item in."
+        },
+        {
+          "field_name": "timestamp",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Timestamp of the message to pin."
+        }
+      ]
+    },
+    {
+      "tool_name": "pins_list",
+      "description": "Lists items pinned to a channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `pins:read`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel to get pinned items for."
+        }
+      ]
+    },
+    {
+      "tool_name": "pins_remove",
+      "description": "Un-pins an item from a channel.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `pins:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel where the item is pinned to."
+        },
+        {
+          "field_name": "timestamp",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Timestamp of the message to un-pin."
+        }
+      ]
+    },
+    {
+      "tool_name": "reactions_add",
+      "description": "Adds a reaction to an item.",
+      "fields": [
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel where the message to add reaction to was posted."
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Reaction (emoji) name."
+        },
+        {
+          "field_name": "timestamp",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Timestamp of the message to add reaction to."
+        },
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `reactions:write`"
+        }
+      ]
+    },
+    {
+      "tool_name": "reactions_get",
+      "description": "Gets reactions for an item.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `reactions:read`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel where the message to get reactions for was posted."
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File to get reactions for."
+        },
+        {
+          "field_name": "file_comment",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File comment to get reactions for."
+        },
+        {
+          "field_name": "full",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If true always return the complete reaction list."
+        },
+        {
+          "field_name": "timestamp",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Timestamp of the message to get reactions for."
+        }
+      ]
+    },
+    {
+      "tool_name": "reactions_list",
+      "description": "Lists reactions made by a user.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `reactions:read`"
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Show reactions made by this user. Defaults to the authed user."
+        },
+        {
+          "field_name": "full",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "If true always return the complete reaction list."
+        },
+        {
+          "field_name": "count",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "page",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more details."
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached."
+        }
+      ]
+    },
+    {
+      "tool_name": "reactions_remove",
+      "description": "Removes a reaction from an item.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `reactions:write`"
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Reaction (emoji) name."
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File to remove reaction from."
+        },
+        {
+          "field_name": "file_comment",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File comment to remove reaction from."
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Channel where the message to remove reaction from was posted."
+        },
+        {
+          "field_name": "timestamp",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Timestamp of the message to remove reaction from."
+        }
+      ]
+    },
+    {
+      "tool_name": "reminders_add",
+      "description": "Creates a reminder.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `reminders:write`"
+        },
+        {
+          "field_name": "text",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The content of the reminder"
+        },
+        {
+          "field_name": "time",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "When this reminder should happen: the Unix timestamp (up to five years from now), the number of seconds until the reminder (if within 24 hours), or a natural language description (Ex. \"in 15 minutes,\" or \"every Thursday\")"
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The user who will receive the reminder. If no user is specified, the reminder will go to user who created it."
+        }
+      ]
+    },
+    {
+      "tool_name": "reminders_complete",
+      "description": "Marks a reminder as complete.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `reminders:write`"
+        },
+        {
+          "field_name": "reminder",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID of the reminder to be marked as complete"
+        }
+      ]
+    },
+    {
+      "tool_name": "reminders_delete",
+      "description": "Deletes a reminder.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `reminders:write`"
+        },
+        {
+          "field_name": "reminder",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID of the reminder"
+        }
+      ]
+    },
+    {
+      "tool_name": "reminders_info",
+      "description": "Gets information about a reminder.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `reminders:read`"
+        },
+        {
+          "field_name": "reminder",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The ID of the reminder"
+        }
+      ]
+    },
+    {
+      "tool_name": "reminders_list",
+      "description": "Lists all reminders created by or for a given user.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `reminders:read`"
+        }
+      ]
+    },
+    {
+      "tool_name": "rtm_connect",
+      "description": "Starts a Real Time Messaging session.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `rtm:stream`"
+        },
+        {
+          "field_name": "batch_presence_aware",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Batch presence deliveries via subscription. Enabling changes the shape of `presence_change` events. See [batch presence](/docs/presence-and-status#batching)."
+        },
+        {
+          "field_name": "presence_sub",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Only deliver presence events when requested by subscription. See [presence subscriptions](/docs/presence-and-status#subscriptions)."
+        }
+      ]
+    },
+    {
+      "tool_name": "search_messages",
+      "description": "Searches for messages matching a query.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `search:read`"
+        },
+        {
+          "field_name": "count",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Pass the number of results you want per \"page\". Maximum of `100`."
+        },
+        {
+          "field_name": "highlight",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Pass a value of `true` to enable query highlight markers (see below)."
+        },
+        {
+          "field_name": "page",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "query",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Search query."
+        },
+        {
+          "field_name": "sort",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Return matches sorted by either `score` or `timestamp`."
+        },
+        {
+          "field_name": "sort_dir",
+          "dimensions": [
+            "sort_direction"
+          ],
+          "confidence": "inferred",
+          "description": "Change sort direction to ascending (`asc`) or descending (`desc`)."
+        }
+      ]
+    },
+    {
+      "tool_name": "stars_add",
+      "description": "Adds a star to an item.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `stars:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Channel to add star to, or channel where the message to add star to was posted (used with `timestamp`)."
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File to add star to."
+        },
+        {
+          "field_name": "file_comment",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File comment to add star to."
+        },
+        {
+          "field_name": "timestamp",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Timestamp of the message to add star to."
+        }
+      ]
+    },
+    {
+      "tool_name": "stars_list",
+      "description": "Lists stars for a user.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `stars:read`"
+        },
+        {
+          "field_name": "count",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "page",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more details."
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached."
+        }
+      ]
+    },
+    {
+      "tool_name": "stars_remove",
+      "description": "Removes a star from an item.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `stars:write`"
+        },
+        {
+          "field_name": "channel",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Channel to remove star from, or channel where the message to remove star from was posted (used with `timestamp`)."
+        },
+        {
+          "field_name": "file",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File to remove star from."
+        },
+        {
+          "field_name": "file_comment",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File comment to remove star from."
+        },
+        {
+          "field_name": "timestamp",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Timestamp of the message to remove star from."
+        }
+      ]
+    },
+    {
+      "tool_name": "team_accessLogs",
+      "description": "Gets the access logs for the current team.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin`"
+        },
+        {
+          "field_name": "before",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred",
+          "description": "End of time range of logs to include in results (inclusive)."
+        },
+        {
+          "field_name": "count",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "page",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred"
+        }
+      ]
+    },
+    {
+      "tool_name": "team_billableInfo",
+      "description": "Gets billable users information for the current team.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin`"
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A user to retrieve the billable information for. Defaults to all users."
+        }
+      ]
+    },
+    {
+      "tool_name": "team_info",
+      "description": "Gets information about the current team.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `team:read`"
+        },
+        {
+          "field_name": "team",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Team to get info on, if omitted, will return information about the current team. Will only return team that the authenticated token is allowed to see through external shared channels"
+        }
+      ]
+    },
+    {
+      "tool_name": "team_integrationLogs",
+      "description": "Gets the integration logs for the current team.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `admin`"
+        },
+        {
+          "field_name": "app_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Filter logs to this Slack app. Defaults to all logs."
+        },
+        {
+          "field_name": "change_type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Filter logs with this change type. Defaults to all logs."
+        },
+        {
+          "field_name": "count",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "page",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "service_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Filter logs to this service. Defaults to all logs."
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Filter logs generated by this user\u2019s actions. Defaults to all logs."
+        }
+      ]
+    },
+    {
+      "tool_name": "team_profile_get",
+      "description": "Retrieve a team's profile.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `users.profile:read`"
+        },
+        {
+          "field_name": "visibility",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Filter by visibility."
+        }
+      ]
+    },
+    {
+      "tool_name": "usergroups_create",
+      "description": "Create a User Group",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `usergroups:write`"
+        },
+        {
+          "field_name": "channels",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A comma separated string of encoded channel IDs for which the User Group uses as a default."
+        },
+        {
+          "field_name": "description",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A short description of the User Group."
+        },
+        {
+          "field_name": "handle",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A mention handle. Must be unique among channels, users and User Groups."
+        },
+        {
+          "field_name": "include_count",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Include the number of users in each User Group."
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A name for the User Group. Must be unique among User Groups."
+        }
+      ]
+    },
+    {
+      "tool_name": "usergroups_disable",
+      "description": "Disable an existing User Group",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `usergroups:write`"
+        },
+        {
+          "field_name": "include_count",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Include the number of users in the User Group."
+        },
+        {
+          "field_name": "usergroup",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The encoded ID of the User Group to disable."
+        }
+      ]
+    },
+    {
+      "tool_name": "usergroups_enable",
+      "description": "Enable a User Group",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `usergroups:write`"
+        },
+        {
+          "field_name": "include_count",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Include the number of users in the User Group."
+        },
+        {
+          "field_name": "usergroup",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The encoded ID of the User Group to enable."
+        }
+      ]
+    },
+    {
+      "tool_name": "usergroups_list",
+      "description": "List all User Groups for a team",
+      "fields": [
+        {
+          "field_name": "include_users",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Include the list of users for each User Group."
+        },
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `usergroups:read`"
+        },
+        {
+          "field_name": "include_count",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Include the number of users in each User Group."
+        },
+        {
+          "field_name": "include_disabled",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Include disabled User Groups."
+        }
+      ]
+    },
+    {
+      "tool_name": "usergroups_update",
+      "description": "Update an existing User Group",
+      "fields": [
+        {
+          "field_name": "handle",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A mention handle. Must be unique among channels, users and User Groups."
+        },
+        {
+          "field_name": "description",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A short description of the User Group."
+        },
+        {
+          "field_name": "channels",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A comma separated string of encoded channel IDs for which the User Group uses as a default."
+        },
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `usergroups:write`"
+        },
+        {
+          "field_name": "include_count",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Include the number of users in the User Group."
+        },
+        {
+          "field_name": "usergroup",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The encoded ID of the User Group to update."
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A name for the User Group. Must be unique among User Groups."
+        }
+      ]
+    },
+    {
+      "tool_name": "usergroups_users_list",
+      "description": "List all users in a User Group",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `usergroups:read`"
+        },
+        {
+          "field_name": "include_disabled",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Allow results that involve disabled User Groups."
+        },
+        {
+          "field_name": "usergroup",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The encoded ID of the User Group to update."
+        }
+      ]
+    },
+    {
+      "tool_name": "usergroups_users_update",
+      "description": "Update the list of users for a User Group",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `usergroups:write`"
+        },
+        {
+          "field_name": "include_count",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Include the number of users in the User Group."
+        },
+        {
+          "field_name": "usergroup",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The encoded ID of the User Group to update."
+        },
+        {
+          "field_name": "users",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A comma separated string of encoded user IDs that represent the entire list of users for the User Group."
+        }
+      ]
+    },
+    {
+      "tool_name": "users_conversations",
+      "description": "List conversations the calling user may access.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `conversations:read`"
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Browse conversations by a specific user ID's membership. Non-public channels are restricted to those where the calling user shares membership."
+        },
+        {
+          "field_name": "types",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im`"
+        },
+        {
+          "field_name": "exclude_archived",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Set to `true` to exclude archived channels from the list"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more detail."
+        }
+      ]
+    },
+    {
+      "tool_name": "users_deletePhoto",
+      "description": "Delete the user profile photo",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `users.profile:write`"
+        }
+      ]
+    },
+    {
+      "tool_name": "users_getPresence",
+      "description": "Gets user presence information.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `users:read`"
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "User to get presence info on. Defaults to the authed user."
+        }
+      ]
+    },
+    {
+      "tool_name": "users_identity",
+      "description": "Get a user's identity.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "Authentication token. Requires scope: `identity.basic`"
+        }
+      ]
+    },
+    {
+      "tool_name": "users_info",
+      "description": "Gets information about a user.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `users:read`"
+        },
+        {
+          "field_name": "include_locale",
+          "dimensions": [
+            "encoding"
+          ],
+          "confidence": "inferred",
+          "description": "Set this to `true` to receive the locale for this user. Defaults to `false`"
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "User to get info on"
+        }
+      ]
+    },
+    {
+      "tool_name": "users_list",
+      "description": "Lists all users in a Slack team.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `users:read`"
+        },
+        {
+          "field_name": "limit",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. Providing no `limit` value will result in Slack attempting to deliver you the entire result set. If the collection is too large you may experience `limit_required` or HTTP 500 errors."
+        },
+        {
+          "field_name": "cursor",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first \"page\" of the collection. See [pagination](/docs/pagination) for more detail."
+        },
+        {
+          "field_name": "include_locale",
+          "dimensions": [
+            "encoding"
+          ],
+          "confidence": "inferred",
+          "description": "Set this to `true` to receive the locale for users. Defaults to `false`"
+        }
+      ]
+    },
+    {
+      "tool_name": "users_lookupByEmail",
+      "description": "Find a user with an email address.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `users:read.email`"
+        },
+        {
+          "field_name": "email",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "An email address belonging to a user in the workspace"
+        }
+      ]
+    },
+    {
+      "tool_name": "users_profile_get",
+      "description": "Retrieves a user's profile information.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `users.profile:read`"
+        },
+        {
+          "field_name": "include_labels",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Include labels for each ID in custom profile fields"
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "User to retrieve profile info for"
+        }
+      ]
+    },
+    {
+      "tool_name": "users_profile_set",
+      "description": "Set the profile information for a user.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `users.profile:write`"
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Name of a single key to set. Usable only if `profile` is not passed."
+        },
+        {
+          "field_name": "profile",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Collection of key:value pairs presented as a URL-encoded JSON hash. At most 50 fields may be set. Each field name is limited to 255 characters."
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "ID of user to change. This argument may only be specified by team admins on paid teams."
+        },
+        {
+          "field_name": "value",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Value to set a single key to. Usable only if `profile` is not passed."
+        }
+      ]
+    },
+    {
+      "tool_name": "users_setActive",
+      "description": "Marked a user as active. Deprecated and non-functional.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `users:write`"
+        }
+      ]
+    },
+    {
+      "tool_name": "users_setPhoto",
+      "description": "Set the user profile photo",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `users.profile:write`"
+        },
+        {
+          "field_name": "crop_w",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Width/height of crop box (always square)"
+        },
+        {
+          "field_name": "crop_x",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "X coordinate of top-left corner of crop box"
+        },
+        {
+          "field_name": "crop_y",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Y coordinate of top-left corner of crop box"
+        },
+        {
+          "field_name": "image",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "File contents via `multipart/form-data`."
+        }
+      ]
+    },
+    {
+      "tool_name": "users_setPresence",
+      "description": "Manually sets user presence.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `users:write`"
+        },
+        {
+          "field_name": "presence",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Either `auto` or `away`"
+        }
+      ]
+    },
+    {
+      "tool_name": "views_open",
+      "description": "Open a view for a user.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        },
+        {
+          "field_name": "trigger_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Exchange a trigger to post to the user."
+        },
+        {
+          "field_name": "view",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A [view payload](/reference/surfaces/views). This must be a JSON-encoded string."
+        }
+      ]
+    },
+    {
+      "tool_name": "views_publish",
+      "description": "Publish a static view for a User.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        },
+        {
+          "field_name": "user_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "`id` of the user you want publish a view to."
+        },
+        {
+          "field_name": "view",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A [view payload](/reference/surfaces/views). This must be a JSON-encoded string."
+        },
+        {
+          "field_name": "hash",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A string that represents view state to protect against possible race conditions."
+        }
+      ]
+    },
+    {
+      "tool_name": "views_push",
+      "description": "Push a view onto the stack of a root view.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        },
+        {
+          "field_name": "trigger_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Exchange a trigger to post to the user."
+        },
+        {
+          "field_name": "view",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A [view payload](/reference/surfaces/views). This must be a JSON-encoded string."
+        }
+      ]
+    },
+    {
+      "tool_name": "views_update",
+      "description": "Update an existing view.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `none`"
+        },
+        {
+          "field_name": "view_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A unique identifier of the view to be updated. Either `view_id` or `external_id` is required."
+        },
+        {
+          "field_name": "external_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A unique identifier of the view set by the developer. Must be unique for all views on a team. Max length of 255 characters. Either `view_id` or `external_id` is required."
+        },
+        {
+          "field_name": "view",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A [view object](/reference/surfaces/views). This must be a JSON-encoded string."
+        },
+        {
+          "field_name": "hash",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A string that represents view state to protect against possible race conditions."
+        }
+      ]
+    },
+    {
+      "tool_name": "workflows_stepCompleted",
+      "description": "Indicate that an app's step in a workflow completed execution.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `workflow.steps:execute`"
+        },
+        {
+          "field_name": "workflow_step_execute_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Context identifier that maps to the correct workflow step execution."
+        },
+        {
+          "field_name": "outputs",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Key-value object of outputs from your step. Keys of this object reflect the configured `key` properties of your [`outputs`](/reference/workflows/workflow_step#output) array from your `workflow_step` object."
+        }
+      ]
+    },
+    {
+      "tool_name": "workflows_stepFailed",
+      "description": "Indicate that an app's step in a workflow failed to execute.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `workflow.steps:execute`"
+        },
+        {
+          "field_name": "workflow_step_execute_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Context identifier that maps to the correct workflow step execution."
+        },
+        {
+          "field_name": "error",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A JSON-based object with a `message` property that should contain a human readable error message."
+        }
+      ]
+    },
+    {
+      "tool_name": "workflows_updateStep",
+      "description": "Update the configuration for a workflow extension step.",
+      "fields": [
+        {
+          "field_name": "token",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Authentication token. Requires scope: `workflow.steps:execute`"
+        },
+        {
+          "field_name": "workflow_step_edit_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A context identifier provided with `view_submission` payloads used to call back to `workflows.updateStep`."
+        },
+        {
+          "field_name": "inputs",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A JSON key-value map of inputs required from a user during configuration. This is the data your app expects to receive when the workflow step starts. **Please note**: the embedded variable format is set and replaced by the workflow system. You cannot create custom variables that will be replaced at runtime. [Read more about variables in workflow steps here](/workflows/steps#variables)."
+        },
+        {
+          "field_name": "outputs",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "An JSON array of output objects used during step execution. This is the data your app agrees to provide when your workflow step was executed."
+        },
+        {
+          "field_name": "step_name",
+          "dimensions": [
+            "null_handling"
+          ],
+          "confidence": "inferred",
+          "description": "An optional field that can be used to override the step name that is shown in the Workflow Builder."
+        },
+        {
+          "field_name": "step_image_url",
+          "dimensions": [
+            "null_handling"
+          ],
+          "confidence": "inferred",
+          "description": "An optional field that can be used to override app image that is shown in the Workflow Builder."
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "n_tools": 174,
+    "n_fields": 671,
+    "n_declared": 0,
+    "n_inferred": 46,
+    "n_unknown": 625,
+    "n_dim_signals": 52,
+    "dim_hits": {
+      "sort_direction": 2,
+      "path_convention": 1,
+      "temporal_format": 27,
+      "date_format": 7,
+      "timezone": 1,
+      "encoding": 3,
+      "id_offset": 7,
+      "industry_code": 2,
+      "null_handling": 2
+    }
+  },
+  "capture_hash": "3e83492ad5fb64a2c175f6d1dc2380a861bd7a6475073e212cf102e52a84d9a0"
+}

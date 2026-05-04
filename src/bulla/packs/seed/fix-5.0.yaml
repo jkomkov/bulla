@@ -1,5 +1,5 @@
 pack_name: fix-5.0
-pack_version: 0.1.0
+pack_version: 0.1.1
 license:
   spdx_id: Apache-2.0
   source_url: https://www.fixtrading.org/standards/fix-5-0/
@@ -7,7 +7,8 @@ license:
 derives_from:
   standard: FIX-5.0
   version: '5.0'
-  source_uri: https://github.com/connamara/quickfixengine/raw/main/spec/FIX50.xml
+  source_uri: https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml
+  source_hash: sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3
 dimensions:
   fix_msg_type:
     description: FIX 5.0 MsgType (Tag 35). Single-character or two-character codes
@@ -89,8 +90,8 @@ dimensions:
       aliases:
       - BusinessMessageReject
     values_registry:
-      uri: https://github.com/connamara/quickfixengine/raw/main/spec/FIX50.xml
-      hash: placeholder:awaiting-ingest
+      uri: https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml
+      hash: sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3
       version: '5.0'
   fix_side:
     description: FIX Side (Tag 54) — buy/sell/etc. Closed enum, stable across FIX

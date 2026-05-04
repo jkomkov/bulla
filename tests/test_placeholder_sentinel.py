@@ -212,9 +212,13 @@ class TestSeedCorpusHashFormatInvariant:
         assert not bad, f"malformed hashes: {bad}"
 
     def test_at_least_some_real_hashes_present(self):
-        """Step #2 fetched real hashes for several open standards;
-        confirm at least 4 real sha256 hashes survive in the
-        committed pack files."""
+        """Phase 1 of the Dimension Pack Enhancement Sprint closed
+        the open-registry hash gaps for FIX 4.4, FIX 5.0, GS1,
+        UN-EDIFACT, and ICD-10-CM on top of the existing 6 real
+        hashes (UCUM, NAICS 2022, ISO 639, IANA MIME, FHIR R4,
+        FHIR R5). Eleven open packs now carry real registry hashes;
+        a regression that drops below 10 real hashes signals an
+        unintentional re-promotion to placeholder."""
         real_count = 0
         for path in _seed_dir().glob("*.yaml"):
             parsed = yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -224,9 +228,11 @@ class TestSeedCorpusHashFormatInvariant:
                     h = reg.get("hash", "")
                     if h.startswith("sha256:") and len(h) == 71:
                         real_count += 1
-        assert real_count >= 4, (
+        assert real_count >= 10, (
             f"only {real_count} real sha256 hashes in seed packs; "
-            f"expected ≥ 4 (UCUM, NAICS, ISO 639, IANA MIME, FHIR R4, FHIR R5)"
+            f"sprint deliverable is ≥ 10 (UCUM, NAICS, ISO 639, "
+            f"IANA MIME, FHIR R4, FHIR R5, FIX 4.4, FIX 5.0, GS1, "
+            f"UN-EDIFACT, ICD-10-CM)"
         )
 
     def test_restricted_packs_use_awaiting_license(self):
@@ -257,24 +263,28 @@ class TestSeedCorpusHashFormatInvariant:
 
 
 class TestBatchVerifyWithPlaceholders:
+    # The Phase-1 hash-closure sprint moved every fetchable open pack
+    # off placeholder, so the always-placeholder fixture now has to be
+    # a restricted pack (placeholder:awaiting-license). The verifier's
+    # placeholder short-circuit fires on either reason form, so the
+    # status assertion still binds the load-bearing behavior.
+    _PLACEHOLDER_FIXTURE = "who-icd-10.yaml"
+
     def test_seed_pack_verify_surfaces_placeholder_status(self):
         """Verifying a seed pack with placeholder hashes must produce
         clean status='placeholder' results — not unavailable, not
         hash_mismatch, not license_required."""
-        path = _seed_dir() / "ucum.yaml"
-        parsed = yaml.safe_load(path.read_text(encoding="utf-8"))
-        # UCUM has a real hash now (post-fetch), so this test uses an
-        # explicitly-placeholder pack instead.
-        path = _seed_dir() / "fix-4.4.yaml"  # still placeholder
+        path = _seed_dir() / self._PLACEHOLDER_FIXTURE
         parsed = yaml.safe_load(path.read_text(encoding="utf-8"))
         results = verify_pack_registries(parsed, fetcher=DictFetcher({}))
-        # FIX is open + still on placeholder.
+        assert results, "fixture pack has no values_registry pointers"
         assert all(r.status == "placeholder" for r in results), (
-            f"expected all placeholder, got {[(r.reference.dimension, r.status) for r in results]}"
+            f"expected all placeholder, got "
+            f"{[(r.reference.dimension, r.status) for r in results]}"
         )
 
     def test_strict_mode_aborts_on_first_placeholder(self):
-        path = _seed_dir() / "fix-4.4.yaml"
+        path = _seed_dir() / self._PLACEHOLDER_FIXTURE
         parsed = yaml.safe_load(path.read_text(encoding="utf-8"))
         with pytest.raises(RegistryAccessError) as exc:
             verify_pack_registries(

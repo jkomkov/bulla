@@ -1,0 +1,12 @@
+# Awareness-gap demo dependencies.
+#
+# The repro.py script imports bulla directly from the worktree's
+# src/ directory (see the sys.path.insert at the top), so this
+# requirements.txt is informational — it documents what a clean-
+# room reproduction needs.
+#
+# For a pip-only reproduction:
+#   pip install -r requirements.txt
+#   python repro.py
+#
+bulla>=0.36.0

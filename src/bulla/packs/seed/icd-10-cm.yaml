@@ -1,5 +1,5 @@
 pack_name: icd-10-cm
-pack_version: 0.1.0
+pack_version: 0.1.1
 license:
   spdx_id: Public-Domain
   source_url: https://www.cms.gov/medicare/coding-billing/icd-10-codes
@@ -7,8 +7,9 @@ license:
   attribution: sha256:cms-icd-10-cm-notices
 derives_from:
   standard: ICD-10-CM
-  version: '2024'
-  source_uri: https://www.cms.gov/files/zip/2024-icd-10-cm-code-files.zip
+  version: '2026'
+  source_uri: https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip
+  source_hash: sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11
 dimensions:
   icd_10_cm_code:
     description: ICD-10-CM diagnosis code. The full registry has ~70k codes; the inline
@@ -123,9 +124,9 @@ dimensions:
       - chapter-21
       - factors-influencing-health
     values_registry:
-      uri: https://www.cms.gov/files/zip/2024-icd-10-cm-code-files.zip
-      hash: placeholder:awaiting-ingest
-      version: '2024'
+      uri: https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip
+      hash: sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11
+      version: '2026'
 mappings:
   icd-9-cm:
     icd_9_cm_code:

@@ -48,11 +48,17 @@ NAICS_2022_SECTORS = [
 ]
 
 
+_REGISTRY_URI = (
+    "https://www.census.gov/naics/2022NAICS/"
+    "2-6%20digit_2022_Codes.xlsx"
+)
+
+
 def build_pack() -> dict:
     today = _dt.date.today().isoformat()
     pack = {
         "pack_name": "naics-2022",
-        "pack_version": "0.1.0",
+        "pack_version": "0.1.1",
         "license": {
             "spdx_id": "Public-Domain",
             "source_url": "https://www.census.gov/naics/?68967",
@@ -61,10 +67,8 @@ def build_pack() -> dict:
         "derives_from": {
             "standard": "NAICS",
             "version": "2022",
-            "source_uri": (
-                "https://www.census.gov/naics/2022NAICS/"
-                "2-6%20digit_2022_Codes.xlsx"
-            ),
+            "source_uri": _REGISTRY_URI,
+            "source_hash": _hash_for("naics-2022", "industry_code", "2022"),
         },
         "dimensions": {
             "industry_code": {
@@ -100,10 +104,7 @@ def build_pack() -> dict:
                 "domains": ["universal"],
                 "known_values": NAICS_2022_SECTORS,
                 "values_registry": {
-                    "uri": (
-                        "https://www.census.gov/naics/2022NAICS/"
-                        "2-6%20digit_2022_Codes.xlsx"
-                    ),
+                    "uri": _REGISTRY_URI,
                     "hash": _hash_for("naics-2022", "industry_code", "2022"),
                     "version": "2022",
                 },

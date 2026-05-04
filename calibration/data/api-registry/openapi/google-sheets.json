@@ -1,0 +1,621 @@
+{
+  "source_kind": "openapi",
+  "source_id": "google-sheets",
+  "schema_hash": "f96888409df38f34fc1d141de14178cb3e8c51914f55ce33a40c241ddf04e394",
+  "captured_at": "2026-05-02T20:36:14.368813+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "614aa67ae498e841a1f42084343b9d41f739e5678f1f271c1e2a03e8864bee04",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "65a946aee1b4b6585df08554171fd5a5c749793180ace1b8de8efd74fd663517",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.1",
+      "hash": "d1caf350ea5d6f1a4023c6d15670e3ec25dfa832a015348ffeb5a4d3f70dec3a",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+        "source_hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.1",
+      "hash": "4313a1301e360fb9f40823328a75592039aedd2821d63b80be9cf45ed765c32a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+        "source_hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.1",
+      "hash": "2ed09413af1da88d807787fe901c2b430a8a9304ba27f235e28b31d0ef67e4a8",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-05-02",
+        "source_uri": "https://ref.gs1.org/ai/",
+        "source_hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "0aab1b08537ae2835ab1a05adb8a0800eaf7a7ce98ad6937f6cc3f7ee721a997",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "d95ea9d09a69dd1ba4a5679e890a2509185167a10357ae8f8591d8fcde73ff0a",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.1",
+      "hash": "fe87dbb4b7125cab4135f2af6775b75d798390e91ab0849c3496900f43662b52",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2026",
+        "source_uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+        "source_hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "cf7e4bbfb6c7bd012e8508a5b07d9719bbe35b8970a60bddc3128d05e7e2598f",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "0205810517db330b61965d089f78f1b427ea7fc0caec471025929ac965ffd583",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "2a3143742f52266ba08484a16e889d63761d409f1055d95021dab7a03da25a2e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7092871334e53492b46e4835ab2ef1f5d0ac9e184ed257c68ee212692f926c53",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "b16d83cbe515dc7e52d778f5fcb7d016e4a1f292cd8340307b85066141f5be65",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "b2396f760586f9656bd4b806127d5e3404f80d770288f1445beb04b27bae105d",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.1",
+      "hash": "8daa8d898578ac4feaebc986a3f0a8ce367d866054aec9b0654d01bb8f8f71cd",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+        "source_hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "6e653a3d4f730cc93b673893ac69b5215a0f3fbeb25059b3014aa83f5d339d69",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "tool_name": "sheets.spreadsheets.create",
+      "description": "Creates a spreadsheet, returning the newly created spreadsheet.",
+      "fields": []
+    },
+    {
+      "tool_name": "sheets.spreadsheets.get",
+      "description": "Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. By default, data within grids is not returned. You can include grid data in one of 2 ways: * Specify a [field mask](https://developers.google.com/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData URL parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want. To retrieve only subsets of spreadsheet data, use the ranges URL parameter. Ranges are specified using [A1 notation](/sheets/api/guides/concepts#cell). You can define a single cell (for example, `A1`) or multiple cells (for example, `A1:D5`). You can also get cells from other sheets within the same spreadsheet (for example, `Sheet2!A1:C4`) or retrieve multiple ranges at once (for example, `?ranges=A1:D5&ranges=Sheet2!A1:C4`). Limiting the range returns only the portions of the spreadsheet that intersect the requested ranges.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The spreadsheet to request."
+        },
+        {
+          "field_name": "includeGridData",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "True if grid data should be returned. This parameter is ignored if a field mask was set in the request."
+        },
+        {
+          "field_name": "ranges",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The ranges to retrieve from the spreadsheet."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.developerMetadata.get",
+      "description": "Returns the developer metadata with the specified ID. The caller must specify the spreadsheet ID and the developer metadata's unique metadataId.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the spreadsheet to retrieve metadata from."
+        },
+        {
+          "field_name": "metadataId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The ID of the developer metadata to retrieve."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.developerMetadata.search",
+      "description": "Returns all developer metadata matching the specified DataFilter. If the provided DataFilter represents a DeveloperMetadataLookup object, this will return all DeveloperMetadata entries selected by it. If the DataFilter represents a location in a spreadsheet, this will return all developer metadata associated with locations intersecting that region.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the spreadsheet to retrieve metadata from."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.sheets.copyTo",
+      "description": "Copies a single sheet from a spreadsheet to another spreadsheet. Returns the properties of the newly created sheet.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the spreadsheet containing the sheet to copy."
+        },
+        {
+          "field_name": "sheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The ID of the sheet to copy."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.values.get",
+      "description": "Returns a range of values from a spreadsheet. The caller must specify the spreadsheet ID and a range.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the spreadsheet to retrieve data from."
+        },
+        {
+          "field_name": "range",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The [A1 notation or R1C1 notation](/sheets/api/guides/concepts#cell) of the range to retrieve values from."
+        },
+        {
+          "field_name": "dateTimeRenderOption",
+          "dimensions": [
+            "gs1_application_identifier",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "How dates, times, and durations should be represented in the output. This is ignored if value_render_option is FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER."
+        },
+        {
+          "field_name": "majorDimension",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The major dimension that results should use. For example, if the spreadsheet data in Sheet1 is: `A1=1,B1=2,A2=3,B2=4`, then requesting `range=Sheet1!A1:B2?majorDimension=ROWS` returns `[[1,2],[3,4]]`, whereas requesting `range=Sheet1!A1:B2?majorDimension=COLUMNS` returns `[[1,3],[2,4]]`."
+        },
+        {
+          "field_name": "valueRenderOption",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "How values should be represented in the output. The default render option is FORMATTED_VALUE."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.values.update",
+      "description": "Sets values in a range of a spreadsheet. The caller must specify the spreadsheet ID, range, and a valueInputOption.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the spreadsheet to update."
+        },
+        {
+          "field_name": "range",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The [A1 notation](/sheets/api/guides/concepts#cell) of the values to update."
+        },
+        {
+          "field_name": "includeValuesInResponse",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Determines if the update response should include the values of the cells that were updated. By default, responses do not include the updated values. If the range to write was larger than the range actually written, the response includes all values in the requested range (excluding trailing empty rows and columns)."
+        },
+        {
+          "field_name": "responseDateTimeRenderOption",
+          "dimensions": [
+            "gs1_application_identifier",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Determines how dates, times, and durations in the response should be rendered. This is ignored if response_value_render_option is FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER."
+        },
+        {
+          "field_name": "responseValueRenderOption",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Determines how values in the response should be rendered. The default render option is FORMATTED_VALUE."
+        },
+        {
+          "field_name": "valueInputOption",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "How the input data should be interpreted."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.values.append",
+      "description": "Appends values to a spreadsheet. The input range is used to search for existing data and find a \"table\" within that range. Values will be appended to the next row of the table, starting with the first column of the table. See the [guide](/sheets/api/guides/values#appending_values) and [sample code](/sheets/api/samples/writing#append_values) for specific details of how tables are detected and data is appended. The caller must specify the spreadsheet ID, range, and a valueInputOption. The `valueInputOption` only controls how the input data will be added to the sheet (column-wise or row-wise), it does not influence what cell the data starts being written to.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the spreadsheet to update."
+        },
+        {
+          "field_name": "range",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The [A1 notation](/sheets/api/guides/concepts#cell) of a range to search for a logical table of data. Values are appended after the last row of the table."
+        },
+        {
+          "field_name": "includeValuesInResponse",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Determines if the update response should include the values of the cells that were appended. By default, responses do not include the updated values."
+        },
+        {
+          "field_name": "insertDataOption",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "How the input data should be inserted."
+        },
+        {
+          "field_name": "responseDateTimeRenderOption",
+          "dimensions": [
+            "gs1_application_identifier",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Determines how dates, times, and durations in the response should be rendered. This is ignored if response_value_render_option is FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER."
+        },
+        {
+          "field_name": "responseValueRenderOption",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Determines how values in the response should be rendered. The default render option is FORMATTED_VALUE."
+        },
+        {
+          "field_name": "valueInputOption",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "How the input data should be interpreted."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.values.clear",
+      "description": "Clears values from a spreadsheet. The caller must specify the spreadsheet ID and range. Only values are cleared -- all other properties of the cell (such as formatting, data validation, etc..) are kept.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the spreadsheet to update."
+        },
+        {
+          "field_name": "range",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The [A1 notation or R1C1 notation](/sheets/api/guides/concepts#cell) of the values to clear."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.values.batchClear",
+      "description": "Clears one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more ranges. Only values are cleared -- all other properties of the cell (such as formatting and data validation) are kept.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the spreadsheet to update."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.values.batchClearByDataFilter",
+      "description": "Clears one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more DataFilters. Ranges matching any of the specified data filters will be cleared. Only values are cleared -- all other properties of the cell (such as formatting, data validation, etc..) are kept.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the spreadsheet to update."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.values.batchGet",
+      "description": "Returns one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more ranges.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the spreadsheet to retrieve data from."
+        },
+        {
+          "field_name": "dateTimeRenderOption",
+          "dimensions": [
+            "gs1_application_identifier",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "How dates, times, and durations should be represented in the output. This is ignored if value_render_option is FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER."
+        },
+        {
+          "field_name": "majorDimension",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The major dimension that results should use. For example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`, then requesting `ranges=[\"A1:B2\"],majorDimension=ROWS` returns `[[1,2],[3,4]]`, whereas requesting `ranges=[\"A1:B2\"],majorDimension=COLUMNS` returns `[[1,3],[2,4]]`."
+        },
+        {
+          "field_name": "ranges",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "The [A1 notation or R1C1 notation](/sheets/api/guides/concepts#cell) of the range to retrieve values from."
+        },
+        {
+          "field_name": "valueRenderOption",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "How values should be represented in the output. The default render option is ValueRenderOption.FORMATTED_VALUE."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.values.batchGetByDataFilter",
+      "description": "Returns one or more ranges of values that match the specified data filters. The caller must specify the spreadsheet ID and one or more DataFilters. Ranges that match any of the data filters in the request will be returned.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the spreadsheet to retrieve data from."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.values.batchUpdate",
+      "description": "Sets values in one or more ranges of a spreadsheet. The caller must specify the spreadsheet ID, a valueInputOption, and one or more ValueRanges.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the spreadsheet to update."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.values.batchUpdateByDataFilter",
+      "description": "Sets values in one or more ranges of a spreadsheet. The caller must specify the spreadsheet ID, a valueInputOption, and one or more DataFilterValueRanges.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the spreadsheet to update."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.batchUpdate",
+      "description": "Applies one or more updates to the spreadsheet. Each request is validated before being applied. If any request is not valid then the entire request will fail and nothing will be applied. Some requests have replies to give you some information about how they are applied. The replies will mirror the requests. For example, if you applied 4 updates and the 3rd one had a reply, then the response will have 2 empty replies, the actual reply, and another empty reply, in that order. Due to the collaborative nature of spreadsheets, it is not guaranteed that the spreadsheet will reflect exactly your changes after this completes, however it is guaranteed that the updates in the request will be applied together atomically. Your changes may be altered with respect to collaborator changes. If there are no collaborators, the spreadsheet should reflect your changes.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The spreadsheet to apply the updates to."
+        }
+      ]
+    },
+    {
+      "tool_name": "sheets.spreadsheets.getByDataFilter",
+      "description": "Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. This method differs from GetSpreadsheet in that it allows selecting which subsets of spreadsheet data to return by specifying a dataFilters parameter. Multiple DataFilters can be specified. Specifying one or more data filters returns the portions of the spreadsheet that intersect ranges matched by any of the filters. By default, data within grids is not returned. You can include grid data one of 2 ways: * Specify a [field mask](https://developers.google.com/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want.",
+      "fields": [
+        {
+          "field_name": "spreadsheetId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The spreadsheet to request."
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "n_tools": 17,
+    "n_fields": 40,
+    "n_declared": 0,
+    "n_inferred": 4,
+    "n_unknown": 36,
+    "n_dim_signals": 8,
+    "dim_hits": {
+      "gs1_application_identifier": 4,
+      "temporal_format": 4
+    }
+  },
+  "capture_hash": "b610f466a9b837fb4fac4e090dade6fff2a23d2e94052cbb8018428343ad430c"
+}

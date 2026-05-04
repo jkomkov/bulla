@@ -14,14 +14,29 @@ deprecated companion standard.
 ICD-10-CM is US public domain (CMS publishes annually); the
 upstream registry license is ``open``. WHO ICD-10 (international,
 non-CM) is a *separate* restricted-source pack (Phase 4A).
+
+The CMS download URL pattern is
+``<year>-code-descriptions-tabular-order.zip`` (the legacy
+``<year>-icd-10-cm-code-files.zip`` pattern was retired and now
+returns 404).
 """
 
 from __future__ import annotations
 
-import datetime as _dt
 import sys
 
 import yaml
+
+# Resolve real registry hashes when an ingest has been performed,
+# else fall back to the placeholder sentinel.
+sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent))
+from _hash_lookup import lookup as _hash_for  # noqa: E402
+
+
+# Annual cutover is October 1; the released-year label is the
+# fiscal-year-tagged form (FY2026 release ships late 2025 for use
+# from October 2025 through September 2026).
+ICD_10_CM_RELEASE_YEAR = "2026"
 
 
 # ICD-10-CM chapter prefix codes (the 21 disease-class chapters).
@@ -62,11 +77,16 @@ SAMPLE_GEMS = [
 ]
 
 
+def _registry_uri(year: str) -> str:
+    return f"https://www.cms.gov/files/zip/{year}-code-descriptions-tabular-order.zip"
+
+
 def build_pack() -> dict:
-    today = _dt.date.today().isoformat()
+    year = ICD_10_CM_RELEASE_YEAR
+    registry_uri = _registry_uri(year)
     pack = {
         "pack_name": "icd-10-cm",
-        "pack_version": "0.1.0",
+        "pack_version": "0.1.1",
         "license": {
             "spdx_id": "Public-Domain",  # US public domain
             "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
@@ -75,11 +95,9 @@ def build_pack() -> dict:
         },
         "derives_from": {
             "standard": "ICD-10-CM",
-            "version": "2024",
-            "source_uri": (
-                "https://www.cms.gov/files/zip/"
-                "2024-icd-10-cm-code-files.zip"
-            ),
+            "version": year,
+            "source_uri": registry_uri,
+            "source_hash": _hash_for("icd-10-cm", "icd_10_cm_code", year),
         },
         "dimensions": {
             "icd_10_cm_code": {
@@ -116,12 +134,9 @@ def build_pack() -> dict:
                 "domains": ["healthcare"],
                 "known_values": ICD_10_CM_CHAPTERS,
                 "values_registry": {
-                    "uri": (
-                        "https://www.cms.gov/files/zip/"
-                        "2024-icd-10-cm-code-files.zip"
-                    ),
-                    "hash": "placeholder:awaiting-ingest",
-                    "version": "2024",
+                    "uri": registry_uri,
+                    "hash": _hash_for("icd-10-cm", "icd_10_cm_code", year),
+                    "version": year,
                 },
             },
         },

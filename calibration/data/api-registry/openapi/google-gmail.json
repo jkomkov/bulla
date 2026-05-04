@@ -1,0 +1,1805 @@
+{
+  "source_kind": "openapi",
+  "source_id": "google-gmail",
+  "schema_hash": "26a94267eb598dd13776275f94e6ecdca0b842384ed792eefbbe7d751e29bd6d",
+  "captured_at": "2026-05-02T20:36:13.799598+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "614aa67ae498e841a1f42084343b9d41f739e5678f1f271c1e2a03e8864bee04",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "65a946aee1b4b6585df08554171fd5a5c749793180ace1b8de8efd74fd663517",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.1",
+      "hash": "d1caf350ea5d6f1a4023c6d15670e3ec25dfa832a015348ffeb5a4d3f70dec3a",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+        "source_hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.1",
+      "hash": "4313a1301e360fb9f40823328a75592039aedd2821d63b80be9cf45ed765c32a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+        "source_hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.1",
+      "hash": "2ed09413af1da88d807787fe901c2b430a8a9304ba27f235e28b31d0ef67e4a8",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-05-02",
+        "source_uri": "https://ref.gs1.org/ai/",
+        "source_hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "0aab1b08537ae2835ab1a05adb8a0800eaf7a7ce98ad6937f6cc3f7ee721a997",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "d95ea9d09a69dd1ba4a5679e890a2509185167a10357ae8f8591d8fcde73ff0a",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.1",
+      "hash": "fe87dbb4b7125cab4135f2af6775b75d798390e91ab0849c3496900f43662b52",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2026",
+        "source_uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+        "source_hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "cf7e4bbfb6c7bd012e8508a5b07d9719bbe35b8970a60bddc3128d05e7e2598f",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "0205810517db330b61965d089f78f1b427ea7fc0caec471025929ac965ffd583",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "2a3143742f52266ba08484a16e889d63761d409f1055d95021dab7a03da25a2e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7092871334e53492b46e4835ab2ef1f5d0ac9e184ed257c68ee212692f926c53",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "b16d83cbe515dc7e52d778f5fcb7d016e4a1f292cd8340307b85066141f5be65",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "b2396f760586f9656bd4b806127d5e3404f80d770288f1445beb04b27bae105d",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.1",
+      "hash": "8daa8d898578ac4feaebc986a3f0a8ce367d866054aec9b0654d01bb8f8f71cd",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+        "source_hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "6e653a3d4f730cc93b673893ac69b5215a0f3fbeb25059b3014aa83f5d339d69",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "tool_name": "gmail.users.drafts.list",
+      "description": "Lists the drafts in the user's mailbox.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "includeSpamTrash",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Include drafts from `SPAM` and `TRASH` in the results."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Maximum number of drafts to return. This field defaults to 100. The maximum allowed value for this field is 500."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Page token to retrieve a specific page of results in the list."
+        },
+        {
+          "field_name": "q",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Only return draft messages matching the specified query. Supports the same query format as the Gmail search box. For example, `\"from:someuser@example.com rfc822msgid: is:unread\"`."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.drafts.create",
+      "description": "Creates a new draft with the `DRAFT` label.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.drafts.send",
+      "description": "Sends the specified, existing draft to the recipients in the `To`, `Cc`, and `Bcc` headers.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.drafts.delete",
+      "description": "Immediately and permanently deletes the specified draft. Does not simply trash it.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the draft to delete."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.drafts.get",
+      "description": "Gets the specified draft.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the draft to retrieve."
+        },
+        {
+          "field_name": "format",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The format to return the draft in."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.drafts.update",
+      "description": "Replaces a draft's content.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the draft to update."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.history.list",
+      "description": "Lists the history of all changes to the given mailbox. History results are returned in chronological order (increasing `historyId`).",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "historyTypes",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "History types to be returned by the function"
+        },
+        {
+          "field_name": "labelId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Only return messages with a label matching the ID."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Maximum number of history records to return. This field defaults to 100. The maximum allowed value for this field is 500."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Page token to retrieve a specific page of results in the list."
+        },
+        {
+          "field_name": "startHistoryId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Required. Returns history records after the specified `startHistoryId`. The supplied `startHistoryId` should be obtained from the `historyId` of a message, thread, or previous `list` response. History IDs increase chronologically but are not contiguous with random gaps in between valid IDs. Supplying an invalid or out of date `startHistoryId` typically returns an `HTTP 404` error code. A `historyId` is typically valid for at least a week, but in some rare circumstances may be valid for only a few hours. If you receive an `HTTP 404` error response, your application should perform a full sync. If you receive no `nextPageToken` in the response, there are no updates to retrieve and you can store the returned `historyId` for a future request."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.labels.list",
+      "description": "Lists all labels in the user's mailbox.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.labels.create",
+      "description": "Creates a new label.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.labels.delete",
+      "description": "Immediately and permanently deletes the specified label and removes it from any messages and threads that it is applied to.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the label to delete."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.labels.get",
+      "description": "Gets the specified label.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the label to retrieve."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.labels.patch",
+      "description": "Patch the specified label.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the label to update."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.labels.update",
+      "description": "Updates the specified label.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the label to update."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.messages.list",
+      "description": "Lists the messages in the user's mailbox.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "includeSpamTrash",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Include messages from `SPAM` and `TRASH` in the results."
+        },
+        {
+          "field_name": "labelIds",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Only return messages with labels that match all of the specified label IDs. Messages in a thread might have labels that other messages in the same thread don't have. To learn more, see [Manage labels on messages and threads](https://developers.google.com/gmail/api/guides/labels#manage_labels_on_messages_threads)."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Page token to retrieve a specific page of results in the list."
+        },
+        {
+          "field_name": "q",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Only return messages matching the specified query. Supports the same query format as the Gmail search box. For example, `\"from:someuser@example.com rfc822msgid: is:unread\"`. Parameter cannot be used when accessing the api using the gmail.metadata scope."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.messages.insert",
+      "description": "Directly inserts a message into only this user's mailbox similar to `IMAP APPEND`, bypassing most scanning and classification. Does not send a message.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "deleted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for Google Workspace accounts."
+        },
+        {
+          "field_name": "internalDateSource",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Source for Gmail's internal date of the message."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.messages.batchDelete",
+      "description": "Deletes many messages by message ID. Provides no guarantees that messages were not already deleted or even existed at all.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.messages.batchModify",
+      "description": "Modifies the labels on the specified messages.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.messages.import",
+      "description": "Imports a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP. This method doesn't perform SPF checks, so it might not work for some spam messages, such as those attempting to perform domain spoofing. This method does not send a message.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "deleted",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for Google Workspace accounts."
+        },
+        {
+          "field_name": "internalDateSource",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Source for Gmail's internal date of the message."
+        },
+        {
+          "field_name": "neverMarkSpam",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox."
+        },
+        {
+          "field_name": "processForCalendar",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Process calendar invites in the email and add any extracted meetings to the Google Calendar for this user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.messages.send",
+      "description": "Sends the specified message to the recipients in the `To`, `Cc`, and `Bcc` headers. For example usage, see [Sending email](https://developers.google.com/gmail/api/guides/sending).",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.messages.delete",
+      "description": "Immediately and permanently deletes the specified message. This operation cannot be undone. Prefer `messages.trash` instead.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the message to delete."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.messages.get",
+      "description": "Gets the specified message.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the message to retrieve. This ID is usually retrieved using `messages.list`. The ID is also contained in the result when a message is inserted (`messages.insert`) or imported (`messages.import`)."
+        },
+        {
+          "field_name": "format",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The format to return the message in."
+        },
+        {
+          "field_name": "metadataHeaders",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "When given and format is `METADATA`, only include headers specified."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.messages.modify",
+      "description": "Modifies the labels on the specified message.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the message to modify."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.messages.trash",
+      "description": "Moves the specified message to the trash.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the message to Trash."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.messages.untrash",
+      "description": "Removes the specified message from the trash.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the message to remove from Trash."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.messages.attachments.get",
+      "description": "Gets the specified message attachment.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "messageId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the message containing the attachment."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the attachment."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.getProfile",
+      "description": "Gets the current user's Gmail profile.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.getAutoForwarding",
+      "description": "Gets the auto-forwarding setting for the specified account.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.updateAutoForwarding",
+      "description": "Updates the auto-forwarding setting for the specified account. A verified forwarding address must be specified when auto-forwarding is enabled. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.cse.identities.list",
+      "description": "Lists the client-side encrypted identities for an authenticated user.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The requester's primary email address. To indicate the authenticated user, you can use the special value `me`."
+        },
+        {
+          "field_name": "pageSize",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The number of identities to return. If not provided, the page size will default to 20 entries."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Pagination token indicating which page of identities to return. If the token is not supplied, then the API will return the first page of results."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.cse.identities.create",
+      "description": "Creates and configures a client-side encryption identity that's authorized to send mail from the user account. Google publishes the S/MIME certificate to a shared domain-wide directory so that people within a Google Workspace organization can encrypt and send mail to the identity.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The requester's primary email address. To indicate the authenticated user, you can use the special value `me`."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.cse.identities.delete",
+      "description": "Deletes a client-side encryption identity. The authenticated user can no longer use the identity to send encrypted messages. You cannot restore the identity after you delete it. Instead, use the CreateCseIdentity method to create another identity with the same configuration.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The requester's primary email address. To indicate the authenticated user, you can use the special value `me`."
+        },
+        {
+          "field_name": "cseEmailAddress",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The primary email address associated with the client-side encryption identity configuration that's removed."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.cse.identities.get",
+      "description": "Retrieves a client-side encryption identity configuration.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The requester's primary email address. To indicate the authenticated user, you can use the special value `me`."
+        },
+        {
+          "field_name": "cseEmailAddress",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The primary email address associated with the client-side encryption identity configuration that's retrieved."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.cse.identities.patch",
+      "description": "Associates a different key pair with an existing client-side encryption identity. The updated key pair must validate against Google's [S/MIME certificate profiles](https://support.google.com/a/answer/7300887).",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The requester's primary email address. To indicate the authenticated user, you can use the special value `me`."
+        },
+        {
+          "field_name": "emailAddress",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The email address of the client-side encryption identity to update."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.cse.keypairs.list",
+      "description": "Lists client-side encryption key pairs for an authenticated user.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The requester's primary email address. To indicate the authenticated user, you can use the special value `me`."
+        },
+        {
+          "field_name": "pageSize",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The number of key pairs to return. If not provided, the page size will default to 20 entries."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Pagination token indicating which page of key pairs to return. If the token is not supplied, then the API will return the first page of results."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.cse.keypairs.create",
+      "description": "Creates and uploads a client-side encryption S/MIME public key certificate chain and private key metadata for the authenticated user.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The requester's primary email address. To indicate the authenticated user, you can use the special value `me`."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.cse.keypairs.get",
+      "description": "Retrieves an existing client-side encryption key pair.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The requester's primary email address. To indicate the authenticated user, you can use the special value `me`."
+        },
+        {
+          "field_name": "keyPairId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The identifier of the key pair to retrieve."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.cse.keypairs.disable",
+      "description": "Turns off a client-side encryption key pair. The authenticated user can no longer use the key pair to decrypt incoming CSE message texts or sign outgoing CSE mail. To regain access, use the EnableCseKeyPair to turn on the key pair. After 30 days, you can permanently delete the key pair by using the ObliterateCseKeyPair method.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The requester's primary email address. To indicate the authenticated user, you can use the special value `me`."
+        },
+        {
+          "field_name": "keyPairId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The identifier of the key pair to turn off."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.cse.keypairs.enable",
+      "description": "Turns on a client-side encryption key pair that was turned off. The key pair becomes active again for any associated client-side encryption identities.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The requester's primary email address. To indicate the authenticated user, you can use the special value `me`."
+        },
+        {
+          "field_name": "keyPairId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The identifier of the key pair to turn on."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.cse.keypairs.obliterate",
+      "description": "Deletes a client-side encryption key pair permanently and immediately. You can only permanently delete key pairs that have been turned off for more than 30 days. To turn off a key pair, use the DisableCseKeyPair method. Gmail can't restore or decrypt any messages that were encrypted by an obliterated key. Authenticated users and Google Workspace administrators lose access to reading the encrypted messages.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The requester's primary email address. To indicate the authenticated user, you can use the special value `me`."
+        },
+        {
+          "field_name": "keyPairId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The identifier of the key pair to obliterate."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.delegates.list",
+      "description": "Lists the delegates for the specified account. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.delegates.create",
+      "description": "Adds a delegate with its verification status set directly to `accepted`, without sending any verification email. The delegate user must be a member of the same Google Workspace organization as the delegator user. Gmail imposes limitations on the number of delegates and delegators each user in a Google Workspace organization can have. These limits depend on your organization, but in general each user can have up to 25 delegates and up to 10 delegators. Note that a delegate user must be referred to by their primary email address, and not an email alias. Also note that when a new delegate is created, there may be up to a one minute delay before the new delegate is available for use. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.delegates.delete",
+      "description": "Removes the specified delegate (which can be of any verification status), and revokes any verification that may have been required for using it. Note that a delegate user must be referred to by their primary email address, and not an email alias. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "delegateEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The email address of the user to be removed as a delegate."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.delegates.get",
+      "description": "Gets the specified delegate. Note that a delegate user must be referred to by their primary email address, and not an email alias. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "delegateEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The email address of the user whose delegate relationship is to be retrieved."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.filters.list",
+      "description": "Lists the message filters of a Gmail user.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.filters.create",
+      "description": "Creates a filter. Note: you can only create a maximum of 1,000 filters.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.filters.delete",
+      "description": "Immediately and permanently deletes the specified filter.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the filter to be deleted."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.filters.get",
+      "description": "Gets a filter.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the filter to be fetched."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.forwardingAddresses.list",
+      "description": "Lists the forwarding addresses for the specified account.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.forwardingAddresses.create",
+      "description": "Creates a forwarding address. If ownership verification is required, a message will be sent to the recipient and the resource's verification status will be set to `pending`; otherwise, the resource will be created with verification status set to `accepted`. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.forwardingAddresses.delete",
+      "description": "Deletes the specified forwarding address and revokes any verification that may have been required. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "forwardingEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The forwarding address to be deleted."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.forwardingAddresses.get",
+      "description": "Gets the specified forwarding address.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "forwardingEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The forwarding address to be retrieved."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.getImap",
+      "description": "Gets IMAP settings.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.updateImap",
+      "description": "Updates IMAP settings.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.getLanguage",
+      "description": "Gets language settings.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.updateLanguage",
+      "description": "Updates language settings. If successful, the return object contains the `displayLanguage` that was saved for the user, which may differ from the value passed into the request. This is because the requested `displayLanguage` may not be directly supported by Gmail but have a close variant that is, and so the variant may be chosen and saved instead.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.getPop",
+      "description": "Gets POP settings.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.updatePop",
+      "description": "Updates POP settings.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.sendAs.list",
+      "description": "Lists the send-as aliases for the specified account. The result includes the primary send-as address associated with the account as well as any custom \"from\" aliases.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.sendAs.create",
+      "description": "Creates a custom \"from\" send-as alias. If an SMTP MSA is specified, Gmail will attempt to connect to the SMTP service to validate the configuration before creating the alias. If ownership verification is required for the alias, a message will be sent to the email address and the resource's verification status will be set to `pending`; otherwise, the resource will be created with verification status set to `accepted`. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.sendAs.delete",
+      "description": "Deletes the specified send-as alias. Revokes any verification that may have been required for using it. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "sendAsEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The send-as alias to be deleted."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.sendAs.get",
+      "description": "Gets the specified send-as alias. Fails with an HTTP 404 error if the specified address is not a member of the collection.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "sendAsEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The send-as alias to be retrieved."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.sendAs.patch",
+      "description": "Patch the specified send-as alias.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "sendAsEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The send-as alias to be updated."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.sendAs.update",
+      "description": "Updates a send-as alias. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias. Addresses other than the primary address for the account can only be updated by service account clients that have been delegated domain-wide authority.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "sendAsEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The send-as alias to be updated."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.sendAs.smimeInfo.list",
+      "description": "Lists S/MIME configs for the specified send-as alias.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "sendAsEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The email address that appears in the \"From:\" header for mail sent using this alias."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.sendAs.smimeInfo.insert",
+      "description": "Insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "sendAsEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The email address that appears in the \"From:\" header for mail sent using this alias."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.sendAs.smimeInfo.delete",
+      "description": "Deletes the specified S/MIME config for the specified send-as alias.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "sendAsEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The email address that appears in the \"From:\" header for mail sent using this alias."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The immutable ID for the SmimeInfo."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.sendAs.smimeInfo.get",
+      "description": "Gets the specified S/MIME config for the specified send-as alias.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "sendAsEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The email address that appears in the \"From:\" header for mail sent using this alias."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The immutable ID for the SmimeInfo."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.sendAs.smimeInfo.setDefault",
+      "description": "Sets the default S/MIME config for the specified send-as alias.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "sendAsEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The email address that appears in the \"From:\" header for mail sent using this alias."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The immutable ID for the SmimeInfo."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.sendAs.verify",
+      "description": "Sends a verification email to the specified send-as alias address. The verification status must be `pending`. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "sendAsEmail",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The send-as alias to be verified."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.getVacation",
+      "description": "Gets vacation responder settings.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.settings.updateVacation",
+      "description": "Updates vacation responder settings.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "User's email address. The special value \"me\" can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.stop",
+      "description": "Stop receiving push notifications for the given user mailbox.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.threads.list",
+      "description": "Lists the threads in the user's mailbox.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "includeSpamTrash",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Include threads from `SPAM` and `TRASH` in the results."
+        },
+        {
+          "field_name": "labelIds",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "Only return threads with labels that match all of the specified label IDs."
+        },
+        {
+          "field_name": "maxResults",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Maximum number of threads to return. This field defaults to 100. The maximum allowed value for this field is 500."
+        },
+        {
+          "field_name": "pageToken",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Page token to retrieve a specific page of results in the list."
+        },
+        {
+          "field_name": "q",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Only return threads matching the specified query. Supports the same query format as the Gmail search box. For example, `\"from:someuser@example.com rfc822msgid: is:unread\"`. Parameter cannot be used when accessing the api using the gmail.metadata scope."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.threads.delete",
+      "description": "Immediately and permanently deletes the specified thread. Any messages that belong to the thread are also deleted. This operation cannot be undone. Prefer `threads.trash` instead.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "ID of the Thread to delete."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.threads.get",
+      "description": "Gets the specified thread.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the thread to retrieve."
+        },
+        {
+          "field_name": "format",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The format to return the messages in."
+        },
+        {
+          "field_name": "metadataHeaders",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "When given and format is METADATA, only include headers specified."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.threads.modify",
+      "description": "Modifies the labels applied to the thread. This applies to all messages in the thread.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the thread to modify."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.threads.trash",
+      "description": "Moves the specified thread to the trash. Any messages that belong to the thread are also moved to the trash.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the thread to Trash."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.threads.untrash",
+      "description": "Removes the specified thread from the trash. Any messages that belong to the thread are also removed from the trash.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        },
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the thread to remove from Trash."
+        }
+      ]
+    },
+    {
+      "tool_name": "gmail.users.watch",
+      "description": "Set up or update a push notification watch on the given user mailbox.",
+      "fields": [
+        {
+          "field_name": "userId",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The user's email address. The special value `me` can be used to indicate the authenticated user."
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "n_tools": 79,
+    "n_fields": 158,
+    "n_declared": 0,
+    "n_inferred": 0,
+    "n_unknown": 158,
+    "n_dim_signals": 0,
+    "dim_hits": {}
+  },
+  "capture_hash": "e4506bb27ff044fe9ba441f851279596a5e426698da150e9fbc2af16869f7519"
+}

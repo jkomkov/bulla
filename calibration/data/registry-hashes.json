@@ -1,6 +1,6 @@
 {
-  "version": "0.1.0",
-  "fetched_at": "2026-04-26T19:45:23.814325+00:00",
+  "version": "0.2.0",
+  "fetched_at": "2026-05-02T20:09:55.372873+00:00",
   "entries": [
     {
       "pack": "iana-media-types",
@@ -16,7 +16,7 @@
       "dimension": "unit_of_measure",
       "version": "snapshot",
       "uri": "https://ucum.org/ucum-essence.xml",
-      "hash": "sha256:b78e1fc5d9c025f8c0062152e02e51a77fdbc489cb22a893e7c187fd0f44e027",
+      "hash": "sha256:551f66c86ebc6a9f008f0e8db2981e55111edceffb3961c19dba14e6b9a846f7",
       "bytes_fetched": 545431,
       "status": "ok"
     },
@@ -42,19 +42,19 @@
       "pack": "fix-4.4",
       "dimension": "fix_msg_type",
       "version": "4.4",
-      "uri": "https://raw.githubusercontent.com/quickfix-j/quickfixj/master/quickfixj-core/src/main/resources/FIX44.xml",
-      "hash": null,
-      "bytes_fetched": 0,
-      "status": "fetch_failed"
+      "uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+      "hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425",
+      "bytes_fetched": 315399,
+      "status": "ok"
     },
     {
       "pack": "fix-5.0",
       "dimension": "fix_msg_type",
       "version": "5.0",
-      "uri": "https://raw.githubusercontent.com/quickfix-j/quickfixj/master/quickfixj-core/src/main/resources/FIX50.xml",
-      "hash": null,
-      "bytes_fetched": 0,
-      "status": "fetch_failed"
+      "uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+      "hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3",
+      "bytes_fetched": 1471310,
+      "status": "ok"
     },
     {
       "pack": "fhir-r4",
@@ -72,6 +72,33 @@
       "uri": "https://hl7.org/fhir/R5/valueset-resource-types.json",
       "hash": "sha256:6ed6a7d2179d67c9c8b8423dc2695607d85336cc34036a0c00a1b198c9a1e85e",
       "bytes_fetched": 63326,
+      "status": "ok"
+    },
+    {
+      "pack": "gs1",
+      "dimension": "gs1_application_identifier",
+      "version": "snapshot",
+      "uri": "https://ref.gs1.org/ai/",
+      "hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224",
+      "bytes_fetched": 478246,
+      "status": "ok"
+    },
+    {
+      "pack": "un-edifact",
+      "dimension": "edifact_message_type",
+      "version": "D.21B",
+      "uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+      "hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f",
+      "bytes_fetched": 1694669,
+      "status": "ok"
+    },
+    {
+      "pack": "icd-10-cm",
+      "dimension": "icd_10_cm_code",
+      "version": "2026",
+      "uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+      "hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11",
+      "bytes_fetched": 2204985,
       "status": "ok"
     }
   ]

@@ -1,5 +1,5 @@
 pack_name: un-edifact
-pack_version: 0.1.0
+pack_version: 0.1.1
 license:
   spdx_id: Public-Domain
   source_url: https://service.unece.org/trade/untdid/welcome.html
@@ -7,7 +7,8 @@ license:
 derives_from:
   standard: UN-EDIFACT
   version: D.21B
-  source_uri: https://service.unece.org/trade/untdid/d21b/d21b.htm
+  source_uri: https://service.unece.org/trade/untdid/d21b/d21b.zip
+  source_hash: sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f
 dimensions:
   edifact_message_type:
     description: UN/EDIFACT message type — the 6-character code at the head of every
@@ -92,5 +93,5 @@ dimensions:
       - inventory-report
     values_registry:
       uri: https://service.unece.org/trade/untdid/d21b/d21b.zip
-      hash: placeholder:awaiting-ingest
+      hash: sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f
       version: D.21B

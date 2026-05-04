@@ -1,0 +1,3070 @@
+{
+  "source_kind": "openapi",
+  "source_id": "digitalocean-api",
+  "schema_hash": "904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c",
+  "captured_at": "2026-05-02T20:35:57.943014+00:00",
+  "active_packs": [
+    {
+      "name": "base",
+      "version": "0.1.0",
+      "hash": "19cacb7b147ead1353de29106932c6ae26161df36cb2c41eaed3b937fff4eb35"
+    },
+    {
+      "name": "community",
+      "version": "0.1.0",
+      "hash": "d2d9589ee323ad9468331344212b22734f89269fb760c53c60497eacf21905ba"
+    },
+    {
+      "name": "fhir-r4",
+      "version": "0.1.0",
+      "hash": "614aa67ae498e841a1f42084343b9d41f739e5678f1f271c1e2a03e8864bee04",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R4",
+        "source_uri": "https://hl7.org/fhir/R4/downloads.html"
+      }
+    },
+    {
+      "name": "fhir-r5",
+      "version": "0.1.0",
+      "hash": "65a946aee1b4b6585df08554171fd5a5c749793180ace1b8de8efd74fd663517",
+      "derives_from": {
+        "standard": "HL7-FHIR",
+        "version": "R5",
+        "source_uri": "https://hl7.org/fhir/R5/downloads.html"
+      }
+    },
+    {
+      "name": "fix-4.4",
+      "version": "0.1.1",
+      "hash": "d1caf350ea5d6f1a4023c6d15670e3ec25dfa832a015348ffeb5a4d3f70dec3a",
+      "derives_from": {
+        "standard": "FIX-4.4",
+        "version": "4.4",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+        "source_hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425"
+      }
+    },
+    {
+      "name": "fix-5.0",
+      "version": "0.1.1",
+      "hash": "4313a1301e360fb9f40823328a75592039aedd2821d63b80be9cf45ed765c32a",
+      "derives_from": {
+        "standard": "FIX-5.0",
+        "version": "5.0",
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+        "source_hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3"
+      }
+    },
+    {
+      "name": "gs1",
+      "version": "0.1.1",
+      "hash": "2ed09413af1da88d807787fe901c2b430a8a9304ba27f235e28b31d0ef67e4a8",
+      "derives_from": {
+        "standard": "GS1-General-Specifications",
+        "version": "snapshot-2026-05-02",
+        "source_uri": "https://ref.gs1.org/ai/",
+        "source_hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224"
+      }
+    },
+    {
+      "name": "hl7-v2",
+      "version": "0.1.0",
+      "hash": "0aab1b08537ae2835ab1a05adb8a0800eaf7a7ce98ad6937f6cc3f7ee721a997",
+      "derives_from": {
+        "standard": "HL7-v2",
+        "version": "2.5.1",
+        "source_uri": "https://www.hl7.org/implement/standards/"
+      }
+    },
+    {
+      "name": "iana-media-types",
+      "version": "0.1.0",
+      "hash": "d95ea9d09a69dd1ba4a5679e890a2509185167a10357ae8f8591d8fcde73ff0a",
+      "derives_from": {
+        "standard": "IANA-Media-Types",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.iana.org/assignments/media-types/media-types.csv"
+      }
+    },
+    {
+      "name": "icd-10-cm",
+      "version": "0.1.1",
+      "hash": "fe87dbb4b7125cab4135f2af6775b75d798390e91ab0849c3496900f43662b52",
+      "derives_from": {
+        "standard": "ICD-10-CM",
+        "version": "2026",
+        "source_uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+        "source_hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11"
+      }
+    },
+    {
+      "name": "iso-20022",
+      "version": "0.1.0",
+      "hash": "cf7e4bbfb6c7bd012e8508a5b07d9719bbe35b8970a60bddc3128d05e7e2598f",
+      "derives_from": {
+        "standard": "ISO-20022",
+        "version": "2024",
+        "source_uri": "https://www.iso20022.org/iso-20022-message-definitions"
+      }
+    },
+    {
+      "name": "iso-3166",
+      "version": "0.1.0",
+      "hash": "55b903fb31e34fb8631eb5d69f18f9f671eb56680be151f7a2959b198fd52437",
+      "derives_from": {
+        "standard": "ISO-3166-1",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.iso.org/iso-3166-country-codes.html"
+      }
+    },
+    {
+      "name": "iso-4217",
+      "version": "0.1.0",
+      "hash": "318db1edef0560feedf19c0958b658c8c82dedd80d7c7623f8f9bd94ecf0257f",
+      "derives_from": {
+        "standard": "ISO-4217",
+        "version": "pycountry-snapshot-2026-04-26",
+        "source_uri": "https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml"
+      }
+    },
+    {
+      "name": "iso-639",
+      "version": "0.2.0",
+      "hash": "0205810517db330b61965d089f78f1b427ea7fc0caec471025929ac965ffd583",
+      "derives_from": {
+        "standard": "ISO-639-3",
+        "version": "sil-snapshot-2026-04-26",
+        "source_uri": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
+      }
+    },
+    {
+      "name": "iso-8601",
+      "version": "0.1.0",
+      "hash": "6f83088e50bf17629d4d8a631d922a6d2edccbebf444e1eaad44b4aca8ed3bdf",
+      "derives_from": {
+        "standard": "ISO-8601 / RFC-3339",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://www.rfc-editor.org/rfc/rfc3339"
+      }
+    },
+    {
+      "name": "naics-2022",
+      "version": "0.1.0",
+      "hash": "2a3143742f52266ba08484a16e889d63761d409f1055d95021dab7a03da25a2e",
+      "derives_from": {
+        "standard": "NAICS",
+        "version": "2022",
+        "source_uri": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx"
+      }
+    },
+    {
+      "name": "swift-mt-mx",
+      "version": "0.1.0",
+      "hash": "7092871334e53492b46e4835ab2ef1f5d0ac9e184ed257c68ee212692f926c53",
+      "derives_from": {
+        "standard": "SWIFT-MT-MX",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://developer.swift.com/"
+      }
+    },
+    {
+      "name": "ucum",
+      "version": "0.1.0",
+      "hash": "b16d83cbe515dc7e52d778f5fcb7d016e4a1f292cd8340307b85066141f5be65",
+      "derives_from": {
+        "standard": "UCUM",
+        "version": "snapshot-2026-04-26",
+        "source_uri": "https://ucum.org/ucum-essence.xml"
+      }
+    },
+    {
+      "name": "umls-mappings",
+      "version": "0.1.0",
+      "hash": "b2396f760586f9656bd4b806127d5e3404f80d770288f1445beb04b27bae105d",
+      "derives_from": {
+        "standard": "UMLS-Metathesaurus",
+        "version": "2024AB",
+        "source_uri": "https://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html"
+      }
+    },
+    {
+      "name": "un-edifact",
+      "version": "0.1.1",
+      "hash": "8daa8d898578ac4feaebc986a3f0a8ce367d866054aec9b0654d01bb8f8f71cd",
+      "derives_from": {
+        "standard": "UN-EDIFACT",
+        "version": "D.21B",
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+        "source_hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f"
+      }
+    },
+    {
+      "name": "who-icd-10",
+      "version": "0.1.0",
+      "hash": "6e653a3d4f730cc93b673893ac69b5215a0f3fbeb25059b3014aa83f5d339d69",
+      "derives_from": {
+        "standard": "WHO-ICD-10",
+        "version": "2019",
+        "source_uri": "https://icd.who.int/browse10/2019/en"
+      }
+    }
+  ],
+  "tools": [
+    {
+      "tool_name": "oneClicks_list",
+      "description": "List 1-Click Applications\n\nTo list all available 1-Click applications, send a GET request to `/v2/1-clicks`. The `type` may\nbe provided as query paramater in order to restrict results to a certain type of 1-Click, for\nexample: `/v2/1-clicks?type=droplet`. Current supported types are `kubernetes` and `droplet`.\n\nThe response will be a JSON object with a key called `1_clicks`. This will be set to an array of\n1-Click application data, each of which will contain the the slug and type for the 1-Click.",
+      "fields": [
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Restrict results to a certain type of 1-Click."
+        }
+      ]
+    },
+    {
+      "tool_name": "oneClicks_install_kubernetes",
+      "description": "Install Kubernetes 1-Click Applications\n\nTo install a Kubernetes 1-Click application on a cluster, send a POST request to\n`/v2/1-clicks/kubernetes`. The `addon_slugs` and `cluster_uuid` must be provided as body\nparameter in order to specify which 1-Click application(s) to install. To list all available\n1-Click Kubernetes applications, send a request to `/v2/1-clicks?type=kubernetes`.",
+      "fields": [
+        {
+          "field_name": "addon_slugs",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of 1-Click Application slugs to be installed to the Kubernetes cluster."
+        },
+        {
+          "field_name": "cluster_uuid",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique ID for the Kubernetes cluster to which the 1-Click Applications will be installed."
+        }
+      ]
+    },
+    {
+      "tool_name": "account_get",
+      "description": "Get User Information\n\nTo show information about the current user account, send a GET request to `/v2/account`.",
+      "fields": []
+    },
+    {
+      "tool_name": "sshKeys_list",
+      "description": "List All SSH Keys\n\nTo list all of the keys in your account, send a GET request to `/v2/account/keys`. The response will be a JSON object with a key set to `ssh_keys`. The value of this will be an array of ssh_key objects, each of which contains the standard ssh_key attributes.",
+      "fields": [
+        {
+          "field_name": "per_page",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "Number of items returned per page"
+        },
+        {
+          "field_name": "page",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "Which 'page' of paginated results to return."
+        }
+      ]
+    },
+    {
+      "tool_name": "sshKeys_create",
+      "description": "Create a New SSH Key\n\nTo add a new SSH public key to your DigitalOcean account, send a POST request to `/v2/account/keys`. Set the `name` attribute to the name you wish to use and the `public_key` attribute to the full public key you are adding.",
+      "fields": []
+    },
+    {
+      "tool_name": "sshKeys_delete",
+      "description": "Delete an SSH Key\n\nTo destroy a public SSH key that you have in your account, send a DELETE request to `/v2/account/keys/$KEY_ID` or `/v2/account/keys/$KEY_FINGERPRINT`.\nA 204 status will be returned, indicating that the action was successful and that the response body is empty.",
+      "fields": []
+    },
+    {
+      "tool_name": "sshKeys_get",
+      "description": "Retrieve an Existing SSH Key\n\nTo get information about a key, send a GET request to `/v2/account/keys/$KEY_ID` or `/v2/account/keys/$KEY_FINGERPRINT`.\nThe response will be a JSON object with the key `ssh_key` and value an ssh_key object which contains the standard ssh_key attributes.",
+      "fields": [
+        {
+          "field_name": "ssh_key_identifier",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Either the ID or the fingerprint of an existing SSH key."
+        }
+      ]
+    },
+    {
+      "tool_name": "sshKeys_update",
+      "description": "Update an SSH Key's Name\n\nTo update the name of an SSH key, send a PUT request to either `/v2/account/keys/$SSH_KEY_ID` or `/v2/account/keys/$SSH_KEY_FINGERPRINT`. Set the `name` attribute to the new name you want to use.",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "actions_list",
+      "description": "List All Actions\n\nThis will be the entire list of actions taken on your account, so it will be quite large. As with any large collection returned by the API, the results will be paginated with only 20 on each page by default.",
+      "fields": []
+    },
+    {
+      "tool_name": "actions_get",
+      "description": "Retrieve an Existing Action\n\nTo retrieve a specific action object, send a GET request to `/v2/actions/$ACTION_ID`.",
+      "fields": [
+        {
+          "field_name": "action_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "A unique numeric ID that can be used to identify and reference an action."
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_list",
+      "description": "List All Apps\n\nList all apps on your account. Information about the current active deployment as well as any in progress ones will also be included for each app.",
+      "fields": [
+        {
+          "field_name": "with_projects",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether the project_id of listed apps should be fetched and included."
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_create",
+      "description": "Create a New App\n\nCreate a new app by submitting an app specification. For documentation on app specifications (`AppSpec` objects), please refer to [the product documentation](https://docs.digitalocean.com/products/app-platform/reference/app-spec/).",
+      "fields": [
+        {
+          "field_name": "Accept",
+          "dimensions": [
+            "media_type"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The content-type that should be used by the response. By default, the response will be `application/json`. `application/yaml` is also supported."
+        },
+        {
+          "field_name": "Content-Type",
+          "dimensions": [
+            "media_type"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The content-type used for the request. By default, the requests are assumed to use `application/json`. `application/yaml` is also supported."
+        },
+        {
+          "field_name": "project_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the project the app should be assigned to. If omitted, it will be assigned to your default project."
+        },
+        {
+          "field_name": "spec",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_list_metrics_bandwidth_daily",
+      "description": "Retrieve Multiple Apps' Daily Bandwidth Metrics\n\nRetrieve daily bandwidth usage metrics for multiple apps.",
+      "fields": [
+        {
+          "field_name": "app_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A list of app IDs to query bandwidth metrics for."
+        },
+        {
+          "field_name": "date",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Optional day to query. Only the date component of the timestamp will be considered. Default: yesterday."
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_validate_appSpec",
+      "description": "Propose an App Spec\n\nTo propose and validate a spec for a new or existing app, send a POST request to the `/v2/apps/propose` endpoint. The request returns some information about the proposed app, including app cost and upgrade cost. If an existing app ID is specified, the app spec is treated as a proposed update to the existing app.",
+      "fields": [
+        {
+          "field_name": "app_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "An optional ID of an existing app. If set, the spec will be treated as a proposed update to the specified app. The existing app is not modified using this method."
+        },
+        {
+          "field_name": "spec",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_list_regions",
+      "description": "List App Regions\n\nList all regions supported by App Platform.",
+      "fields": []
+    },
+    {
+      "tool_name": "apps_list_tiers",
+      "description": "List App Tiers\n\nList all app tiers.",
+      "fields": []
+    },
+    {
+      "tool_name": "apps_list_instanceSizes",
+      "description": "List Instance Sizes\n\nList all instance sizes for `service`, `worker`, and `job` components.",
+      "fields": []
+    },
+    {
+      "tool_name": "apps_get_instanceSize",
+      "description": "Retrieve an Instance Size\n\nRetrieve information about a specific instance size for `service`, `worker`, and `job` components.",
+      "fields": [
+        {
+          "field_name": "slug",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The slug of the instance size"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_get_tier",
+      "description": "Retrieve an App Tier\n\nRetrieve information about a specific app tier.",
+      "fields": [
+        {
+          "field_name": "slug",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The slug of the tier"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_list_alerts",
+      "description": "List all app alerts\n\nList alerts associated to the app and any components. This includes configuration information about the alerts including emails, slack webhooks, and triggering events or conditions.",
+      "fields": []
+    },
+    {
+      "tool_name": "apps_assign_alertDestinations",
+      "description": "Update destinations for alerts\n\nUpdates the emails and slack webhook destinations for app alerts. Emails must be associated to a user with access to the app.",
+      "fields": [
+        {
+          "field_name": "alert_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The alert ID"
+        },
+        {
+          "field_name": "emails",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "slack_webhooks",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_get_logs_active_deployment",
+      "description": "Retrieve Active Deployment Logs\n\nRetrieve the logs of the active deployment if one exists. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment. Note log_type=BUILD logs will return logs associated with the current active deployment (being served). To view build logs associated with in-progress build, the query must explicitly reference the deployment id.",
+      "fields": [
+        {
+          "field_name": "app_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The app ID"
+        },
+        {
+          "field_name": "component_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "An optional component name. If set, logs will be limited to this component only."
+        },
+        {
+          "field_name": "follow",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether the logs should follow live updates."
+        },
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The type of logs to retrieve\n- BUILD: Build-time logs\n- DEPLOY: Deploy-time logs\n- RUN: Live run-time logs"
+        },
+        {
+          "field_name": "pod_connection_timeout",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "An optional time duration to wait if the underlying component instance is not immediately available. Default: `3m`."
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_list_deployments",
+      "description": "List App Deployments\n\nList all deployments of an app.",
+      "fields": []
+    },
+    {
+      "tool_name": "apps_create_deployment",
+      "description": "Create an App Deployment\n\nCreating an app deployment will pull the latest changes from your repository and schedule a new deployment for your app.",
+      "fields": [
+        {
+          "field_name": "force_build",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_get_deployment",
+      "description": "Retrieve an App Deployment\n\nRetrieve information about an app deployment.",
+      "fields": [
+        {
+          "field_name": "deployment_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The deployment ID"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_cancel_deployment",
+      "description": "Cancel a Deployment\n\nImmediately cancel an in-progress deployment.",
+      "fields": []
+    },
+    {
+      "tool_name": "apps_get_logs",
+      "description": "Retrieve Deployment Logs\n\nRetrieve the logs of a past, in-progress, or active deployment. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.",
+      "fields": []
+    },
+    {
+      "tool_name": "apps_get_logs_aggregate",
+      "description": "Retrieve Aggregate Deployment Logs\n\nRetrieve the logs of a past, in-progress, or active deployment. If a component name is specified, the logs will be limited to only that component. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.",
+      "fields": []
+    },
+    {
+      "tool_name": "apps_get_logs_active_deployment_aggregate",
+      "description": "Retrieve Active Deployment Aggregate Logs\n\nRetrieve the logs of the active deployment if one exists. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment. Note log_type=BUILD logs will return logs associated with the current active deployment (being served). To view build logs associated with in-progress build, the query must explicitly reference the deployment id.",
+      "fields": []
+    },
+    {
+      "tool_name": "apps_get_metrics_bandwidth_daily",
+      "description": "Retrieve App Daily Bandwidth Metrics\n\nRetrieve daily bandwidth usage metrics for a single app.",
+      "fields": [
+        {
+          "field_name": "date",
+          "dimensions": [
+            "date_format",
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Optional day to query. Only the date component of the timestamp will be considered. Default: yesterday."
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_create_rollback",
+      "description": "Rollback App\n\nRollback an app to a previous deployment. A new deployment will be created to perform the rollback.\nThe app will be pinned to the rollback deployment preventing any new deployments from being created,\neither manually or through Auto Deploy on Push webhooks. To resume deployments, the rollback must be\neither committed or reverted.\n\nIt is recommended to use the Validate App Rollback endpoint to double check if the rollback is\nvalid and if there are any warnings.",
+      "fields": [
+        {
+          "field_name": "deployment_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the deployment to rollback to."
+        },
+        {
+          "field_name": "skip_pin",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Whether to skip pinning the rollback deployment. If false, the rollback deployment will be pinned and any new deployments including Auto Deploy on Push hooks will be disabled until the rollback is either manually committed or reverted via the CommitAppRollback or RevertAppRollback endpoints respectively. If true, the rollback will be immediately committed and the app will remain unpinned."
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_commit_rollback",
+      "description": "Commit App Rollback\n\nCommit an app rollback. This action permanently applies the rollback and unpins the app to resume new deployments.",
+      "fields": []
+    },
+    {
+      "tool_name": "apps_revert_rollback",
+      "description": "Revert App Rollback\n\nRevert an app rollback. This action reverts the active rollback by creating a new deployment from the\nlatest app spec prior to the rollback and unpins the app to resume new deployments.",
+      "fields": []
+    },
+    {
+      "tool_name": "apps_validate_rollback",
+      "description": "Validate App Rollback\n\nCheck whether an app can be rolled back to a specific deployment. This endpoint can also be used\nto check if there are any warnings or validation conditions that will cause the rollback to proceed\nunder unideal circumstances. For example, if a component must be rebuilt as part of the rollback\ncausing it to take longer than usual.",
+      "fields": []
+    },
+    {
+      "tool_name": "apps_delete",
+      "description": "Delete an App\n\nDelete an existing app. Once deleted, all active deployments will be permanently shut down and the app deleted. If needed, be sure to back up your app specification so that you may re-create it at a later time.",
+      "fields": [
+        {
+          "field_name": "id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the app"
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_get",
+      "description": "Retrieve an Existing App\n\nRetrieve details about an existing app by either its ID or name. To retrieve an app by its name, do not include an ID in the request path. Information about the current active deployment as well as any in progress ones will also be included in the response.",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The name of the app to retrieve."
+        }
+      ]
+    },
+    {
+      "tool_name": "apps_update",
+      "description": "Update an App\n\nUpdate an existing app by submitting a new app specification. For documentation on app specifications (`AppSpec` objects), please refer to [the product documentation](https://docs.digitalocean.com/products/app-platform/reference/app-spec/).",
+      "fields": [
+        {
+          "field_name": "spec",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "cdn_list_endpoints",
+      "description": "List All CDN Endpoints\n\nTo list all of the CDN endpoints available on your account, send a GET request to `/v2/cdn/endpoints`.",
+      "fields": []
+    },
+    {
+      "tool_name": "cdn_create_endpoint",
+      "description": "Create a New CDN Endpoint\n\nTo create a new CDN endpoint, send a POST request to `/v2/cdn/endpoints`. The\norigin attribute must be set to the fully qualified domain name (FQDN) of a\nDigitalOcean Space. Optionally, the TTL may be configured by setting the `ttl`\nattribute.\n\nA custom subdomain may be configured by specifying the `custom_domain` and\n`certificate_id` attributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "cdn_delete_endpoint",
+      "description": "Delete a CDN Endpoint\n\nTo delete a specific CDN endpoint, send a DELETE request to\n`/v2/cdn/endpoints/$ENDPOINT_ID`.\n\nA status of 204 will be given. This indicates that the request was processed\nsuccessfully, but that no response body is needed.",
+      "fields": []
+    },
+    {
+      "tool_name": "cdn_get_endpoint",
+      "description": "Retrieve an Existing CDN Endpoint\n\nTo show information about an existing CDN endpoint, send a GET request to `/v2/cdn/endpoints/$ENDPOINT_ID`.",
+      "fields": [
+        {
+          "field_name": "cdn_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique identifier for a CDN endpoint."
+        }
+      ]
+    },
+    {
+      "tool_name": "cdn_update_endpoints",
+      "description": "Update a CDN Endpoint\n\nTo update the TTL, certificate ID, or the FQDN of the custom subdomain for\nan existing CDN endpoint, send a PUT request to\n`/v2/cdn/endpoints/$ENDPOINT_ID`.",
+      "fields": [
+        {
+          "field_name": "certificate_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of a DigitalOcean managed TLS certificate used for SSL when a custom subdomain is provided."
+        },
+        {
+          "field_name": "custom_domain",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The fully qualified domain name (FQDN) of the custom subdomain used with the CDN endpoint."
+        },
+        {
+          "field_name": "ttl",
+          "dimensions": [
+            "country_code",
+            "currency_code"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "The amount of time the content is cached by the CDN's edge servers in seconds. TTL must be one of 60, 600, 3600, 86400, or 604800. Defaults to 3600 (one hour) when excluded."
+        }
+      ]
+    },
+    {
+      "tool_name": "cdn_purge_cache",
+      "description": "Purge the Cache for an Existing CDN Endpoint\n\nTo purge cached content from a CDN endpoint, send a DELETE request to\n`/v2/cdn/endpoints/$ENDPOINT_ID/cache`. The body of the request should include\na `files` attribute containing a list of cached file paths to be purged. A\npath may be for a single file or may contain a wildcard (`*`) to recursively\npurge all files under a directory. When only a wildcard is provided, all\ncached files will be purged. There is a rate limit of 50 files per 20 seconds \nthat can be purged.",
+      "fields": [
+        {
+          "field_name": "files",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of strings containing the path to the content to be purged from the CDN cache."
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "path_convention"
+          ],
+          "confidence": "inferred",
+          "description": "Purge the Cache for an Existing CDN Endpoint\n\nTo purge cached content from a CDN endpoint, send a DELETE request to\n`/v2/cdn/endpoints/$ENDPOINT_ID/cache`. The body of the request should include\na `files` attribute containing a list of cached file paths to be purged. A\npath may be for a single file or may contain a wildcard (`*`) to recursively\npurge all files under a directory. When only a wildcard is provided, all\ncached files will be purged. There is a rate limit of 50 files per 20 seconds \nthat can be purged."
+        }
+      ]
+    },
+    {
+      "tool_name": "certificates_list",
+      "description": "List All Certificates\n\nTo list all of the certificates available on your account, send a GET request to `/v2/certificates`.",
+      "fields": []
+    },
+    {
+      "tool_name": "certificates_create",
+      "description": "Create a New Certificate\n\nTo upload new SSL certificate which you have previously generated, send a POST\nrequest to `/v2/certificates`.\n\nWhen uploading a user-generated certificate, the `private_key`,\n`leaf_certificate`, and optionally the `certificate_chain` attributes should\nbe provided. The type must be set to `custom`.\n\nWhen using Let's Encrypt to create a certificate, the `dns_names` attribute\nmust be provided, and the type must be set to `lets_encrypt`.",
+      "fields": []
+    },
+    {
+      "tool_name": "certificates_delete",
+      "description": "Delete a Certificate\n\nTo delete a specific certificate, send a DELETE request to\n`/v2/certificates/$CERTIFICATE_ID`.",
+      "fields": []
+    },
+    {
+      "tool_name": "certificates_get",
+      "description": "Retrieve an Existing Certificate\n\nTo show information about an existing certificate, send a GET request to `/v2/certificates/$CERTIFICATE_ID`.",
+      "fields": [
+        {
+          "field_name": "certificate_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique identifier for a certificate."
+        }
+      ]
+    },
+    {
+      "tool_name": "balance_get",
+      "description": "Get Customer Balance\n\nTo retrieve the balances on a customer's account, send a GET request to `/v2/customers/my/balance`.",
+      "fields": []
+    },
+    {
+      "tool_name": "billingHistory_list",
+      "description": "List Billing History\n\nTo retrieve a list of all billing history entries, send a GET request to `/v2/customers/my/billing_history`.",
+      "fields": []
+    },
+    {
+      "tool_name": "invoices_list",
+      "description": "List All Invoices\n\nTo retrieve a list of all invoices, send a GET request to `/v2/customers/my/invoices`.",
+      "fields": []
+    },
+    {
+      "tool_name": "invoices_get_byUUID",
+      "description": "Retrieve an Invoice by UUID\n\nTo retrieve the invoice items for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID`.",
+      "fields": [
+        {
+          "field_name": "invoice_uuid",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "UUID of the invoice"
+        }
+      ]
+    },
+    {
+      "tool_name": "invoices_get_csvByUUID",
+      "description": "Retrieve an Invoice CSV by UUID\n\nTo retrieve a CSV for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID/csv`.",
+      "fields": []
+    },
+    {
+      "tool_name": "invoices_get_pdfByUUID",
+      "description": "Retrieve an Invoice PDF by UUID\n\nTo retrieve a PDF for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID/pdf`.",
+      "fields": []
+    },
+    {
+      "tool_name": "invoices_get_summaryByUUID",
+      "description": "Retrieve an Invoice Summary by UUID\n\nTo retrieve a summary for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID/summary`.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_list_clusters",
+      "description": "List All Database Clusters\n\nTo list all of the database clusters available on your account, send a GET request to `/v2/databases`. To limit the results to database clusters with a specific tag, include the `tag_name` query parameter set to the name of the tag. For example, `/v2/databases?tag_name=$TAG_NAME`.\nThe result will be a JSON object with a `databases` key. This will be set to an array of database objects, each of which will contain the standard database attributes.\nThe embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster:\nThe embedded `maintenance_window` object will contain information about any scheduled maintenance for the database cluster.",
+      "fields": [
+        {
+          "field_name": "tag_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Limits the results to database clusters with a specific tag."
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "null_handling"
+          ],
+          "confidence": "inferred",
+          "description": "List All Database Clusters\n\nTo list all of the database clusters available on your account, send a GET request to `/v2/databases`. To limit the results to database clusters with a specific tag, include the `tag_name` query parameter set to the name of the tag. For example, `/v2/databases?tag_name=$TAG_NAME`.\nThe result will be a JSON object with a `databases` key. This will be set to an array of database objects, each of which will contain the standard database attributes.\nThe embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster:\nThe embedded `maintenance_window` object will contain information about any scheduled maintenance for the database cluster."
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_create_cluster",
+      "description": "Create a New Database Cluster\n\nTo create a database cluster, send a POST request to `/v2/databases`.\nThe response will be a JSON object with a key called `database`. The value of this will be an object that contains the standard attributes associated with a database cluster. The initial value of the database cluster's `status` attribute will be `creating`. When the cluster is ready to receive traffic, this will transition to `online`.\nThe embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster.\nDigitalOcean managed PostgreSQL and MySQL database clusters take automated daily backups. To create a new database cluster based on a backup of an existing cluster, send a POST request to `/v2/databases`. In addition to the standard database cluster attributes, the JSON body must include a key named `backup_restore` with the name of the original database cluster and the timestamp of the backup to be restored. Creating a database from a backup is the same as forking a database in the control panel.\nNote: Backups are not supported for Redis clusters.",
+      "fields": [
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "Create a New Database Cluster\n\nTo create a database cluster, send a POST request to `/v2/databases`.\nThe response will be a JSON object with a key called `database`. The value of this will be an object that contains the standard attributes associated with a database cluster. The initial value of the database cluster's `status` attribute will be `creating`. When the cluster is ready to receive traffic, this will transition to `online`.\nThe embedded `connection` and `private_connection` objects will contain the information needed to access the database cluster.\nDigitalOcean managed PostgreSQL and MySQL database clusters take automated daily backups. To create a new database cluster based on a backup of an existing cluster, send a POST request to `/v2/databases`. In addition to the standard database cluster attributes, the JSON body must include a key named `backup_restore` with the name of the original database cluster and the timestamp of the backup to be restored. Creating a database from a backup is the same as forking a database in the control panel.\nNote: Backups are not supported for Redis clusters."
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_list_options",
+      "description": "List Database Options\n\nTo list all of the options available for the offered database engines, send a GET request to `/v2/databases/options`.\nThe result will be a JSON object with an `options` key.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_destroy_cluster",
+      "description": "Destroy a Database Cluster\n\nTo destroy a specific database, send a DELETE request to `/v2/databases/$DATABASE_ID`.\nA status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_get_cluster",
+      "description": "Retrieve an Existing Database Cluster\n\nTo show information about an existing database cluster, send a GET request to `/v2/databases/$DATABASE_ID`.\nThe response will be a JSON object with a database key. This will be set to an object containing the standard database cluster attributes.\nThe embedded connection and private_connection objects will contain the information needed to access the database cluster.\nThe embedded maintenance_window object will contain information about any scheduled maintenance for the database cluster.",
+      "fields": [
+        {
+          "field_name": "database_cluster_uuid",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique identifier for a database cluster."
+        },
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "null_handling"
+          ],
+          "confidence": "inferred",
+          "description": "Retrieve an Existing Database Cluster\n\nTo show information about an existing database cluster, send a GET request to `/v2/databases/$DATABASE_ID`.\nThe response will be a JSON object with a database key. This will be set to an object containing the standard database cluster attributes.\nThe embedded connection and private_connection objects will contain the information needed to access the database cluster.\nThe embedded maintenance_window object will contain information about any scheduled maintenance for the database cluster."
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_list_backups",
+      "description": "List Backups for a Database Cluster\n\nTo list all of the available backups of a PostgreSQL or MySQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/backups`.\n**Note**: Backups are not supported for Redis clusters.\nThe result will be a JSON object with a `backups key`. This will be set to an array of backup objects, each of which will contain the size of the backup and the timestamp at which it was created.",
+      "fields": [
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "description": "List Backups for a Database Cluster\n\nTo list all of the available backups of a PostgreSQL or MySQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/backups`.\n**Note**: Backups are not supported for Redis clusters.\nThe result will be a JSON object with a `backups key`. This will be set to an array of backup objects, each of which will contain the size of the backup and the timestamp at which it was created."
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_get_ca",
+      "description": "Retrieve the Public Certificate\n\nTo retrieve the public certificate used to secure the connection to the database cluster send a GET request to\n`/v2/databases/$DATABASE_ID/ca`.\n\nThe response will be a JSON object with a `ca` key. This will be set to an object\ncontaining the base64 encoding of the public key certificate.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_get_config",
+      "description": "Retrieve an Existing Database Cluster Configuration\n\nShows configuration parameters for an existing database cluster by sending a GET request to\n`/v2/databases/$DATABASE_ID/config`.\nThe response is a JSON object with a `config` key, which is set to an object\ncontaining any database configuration parameters.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_patch_config",
+      "description": "Update the Database Configuration for an Existing Database\n\nTo update the configuration for an existing database cluster, send a PATCH request to\n`/v2/databases/$DATABASE_ID/config`.",
+      "fields": [
+        {
+          "field_name": "config",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_list",
+      "description": "List All Databases\n\nTo list all of the databases in a clusters, send a GET request to\n`/v2/databases/$DATABASE_ID/dbs`.\n\nThe result will be a JSON object with a `dbs` key. This will be set to an array\nof database objects, each of which will contain the standard database attributes.\n\nNote: Database management is not supported for Redis clusters.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_add",
+      "description": "Add a New Database\n\nTo add a new database to an existing cluster, send a POST request to\n`/v2/databases/$DATABASE_ID/dbs`.\n\nNote: Database management is not supported for Redis clusters.\n\nThe response will be a JSON object with a key called `db`. The value of this will be\nan object that contains the standard attributes associated with a database.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_delete",
+      "description": "Delete a Database\n\nTo delete a specific database, send a DELETE request to\n`/v2/databases/$DATABASE_ID/dbs/$DB_NAME`.\n\nA status of 204 will be given. This indicates that the request was processed\nsuccessfully, but that no response body is needed.\n\nNote: Database management is not supported for Redis clusters.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_get",
+      "description": "Retrieve an Existing Database\n\nTo show information about an existing database cluster, send a GET request to\n`/v2/databases/$DATABASE_ID/dbs/$DB_NAME`.\n\nNote: Database management is not supported for Redis clusters.\n\nThe response will be a JSON object with a `db` key. This will be set to an object\ncontaining the standard database attributes.",
+      "fields": [
+        {
+          "field_name": "database_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The name of the database."
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_get_evictionPolicy",
+      "description": "Retrieve the Eviction Policy for a Redis Cluster\n\nTo retrieve the configured eviction policy for an existing Redis cluster, send a GET request to `/v2/databases/$DATABASE_ID/eviction_policy`.\nThe response will be a JSON object with an `eviction_policy` key. This will be set to a string representing the eviction policy.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_update_evictionPolicy",
+      "description": "Configure the Eviction Policy for a Redis Cluster\n\nTo configure an eviction policy for an existing Redis cluster, send a PUT request to `/v2/databases/$DATABASE_ID/eviction_policy` specifying the desired policy.",
+      "fields": [
+        {
+          "field_name": "eviction_policy",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_list_firewall_rules",
+      "description": "List Firewall Rules (Trusted Sources) for a Database Cluster\n\nTo list all of a database cluster's firewall rules (known as \"trusted sources\" in the control panel), send a GET request to `/v2/databases/$DATABASE_ID/firewall`.\nThe result will be a JSON object with a `rules` key.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_update_firewall_rules",
+      "description": "Update Firewall Rules (Trusted Sources) for a Database\n\nTo update a database cluster's firewall rules (known as \"trusted sources\" in the control panel), send a PUT request to `/v2/databases/$DATABASE_ID/firewall` specifying which resources should be able to open connections to the database. You may limit connections to specific Droplets, Kubernetes clusters, or IP addresses. When a tag is provided, any Droplet or Kubernetes node with that tag applied to it will have access. The firewall is limited to 100 rules (or trusted sources). When possible, we recommend [placing your databases into a VPC network](https://www.digitalocean.com/docs/networking/vpc/) to limit access to them instead of using a firewall.\nA successful",
+      "fields": [
+        {
+          "field_name": "rules",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_update_maintenanceWindow",
+      "description": "Configure a Database Cluster's Maintenance Window\n\nTo configure the window when automatic maintenance should be performed for a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/maintenance`.\nA successful request will receive a 204 No Content status code with no body in response.",
+      "fields": [
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "null_handling"
+          ],
+          "confidence": "inferred",
+          "description": "Configure a Database Cluster's Maintenance Window\n\nTo configure the window when automatic maintenance should be performed for a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/maintenance`.\nA successful request will receive a 204 No Content status code with no body in response."
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_update_region",
+      "description": "Migrate a Database Cluster to a New Region\n\nTo migrate a database cluster to a new region, send a `PUT` request to\n`/v2/databases/$DATABASE_ID/migrate`. The body of the request must specify a\n`region` attribute.\n\nA successful request will receive a 202 Accepted status code with no body in\nresponse. Querying the database cluster will show that its `status` attribute\nwill now be set to `migrating`. This will transition back to `online` when the\nmigration has completed.",
+      "fields": [
+        {
+          "field_name": "region",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A slug identifier for the region to which the database cluster will be migrated."
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_get_migrationStatus",
+      "description": "Retrieve the Status of an Online Migration\n\nTo retrieve the status of the most recent online migration, send a GET request to `/v2/databases/$DATABASE_ID/online-migration`.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_update_onlineMigration",
+      "description": "Start an Online Migration\n\nTo start an online migration, send a PUT request to `/v2/databases/$DATABASE_ID/online-migration` endpoint. Migrating a cluster establishes a connection with an existing cluster and replicates its contents to the target cluster. Online migration is only available for MySQL, PostgreSQL, and Redis clusters.",
+      "fields": [
+        {
+          "field_name": "disable_ssl",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Enables SSL encryption when connecting to the source database."
+        },
+        {
+          "field_name": "source",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_delete_onlineMigration",
+      "description": "Stop an Online Migration\n\nTo stop an online migration, send a DELETE request to `/v2/databases/$DATABASE_ID/online-migration/$MIGRATION_ID`.\n\nA status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.",
+      "fields": [
+        {
+          "field_name": "migration_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique identifier assigned to the online migration."
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_list_connectionPools",
+      "description": "List Connection Pools (PostgreSQL)\n\nTo list all of the connection pools available to a PostgreSQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/pools`.\nThe result will be a JSON object with a `pools` key. This will be set to an array of connection pool objects.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_add_connectionPool",
+      "description": "Add a New Connection Pool (PostgreSQL)\n\nFor PostgreSQL database clusters, connection pools can be used to allow a\ndatabase to share its idle connections. The popular PostgreSQL connection\npooling utility PgBouncer is used to provide this service. [See here for more information](https://www.digitalocean.com/docs/databases/postgresql/how-to/manage-connection-pools/)\nabout how and why to use PgBouncer connection pooling including\ndetails about the available transaction modes.\n\nTo add a new connection pool to a PostgreSQL database cluster, send a POST\nrequest to `/v2/databases/$DATABASE_ID/pools` specifying a name for the pool,\nthe user to connect with, the database to connect to, as well as its desired\nsize and transaction mode.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_delete_connectionPool",
+      "description": "Delete a Connection Pool (PostgreSQL)\n\nTo delete a specific connection pool for a PostgreSQL database cluster, send\na DELETE request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`.\n\nA status of 204 will be given. This indicates that the request was processed\nsuccessfully, but that no response body is needed.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_get_connectionPool",
+      "description": "Retrieve Existing Connection Pool (PostgreSQL)\n\nTo show information about an existing connection pool for a PostgreSQL database cluster, send a GET request to `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`.\nThe response will be a JSON object with a `pool` key.",
+      "fields": [
+        {
+          "field_name": "pool_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The name used to identify the connection pool."
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_update_connectionPool",
+      "description": "Update Connection Pools (PostgreSQL)\n\nTo update a connection pool for a PostgreSQL database cluster, send a PUT request to  `/v2/databases/$DATABASE_ID/pools/$POOL_NAME`.",
+      "fields": [
+        {
+          "field_name": "db",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The database for use with the connection pool."
+        },
+        {
+          "field_name": "mode",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The PGBouncer transaction mode for the connection pool. The allowed values are session, transaction, and statement."
+        },
+        {
+          "field_name": "size",
+          "dimensions": [
+            "null_handling"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "The desired size of the PGBouncer connection pool. The maximum allowed size is determined by the size of the cluster's primary node. 25 backend server connections are allowed for every 1GB of RAM. Three are reserved for maintenance. For example, a primary node with 1 GB of RAM allows for a maximum of 22 backend server connections while one with 4 GB would allow for 97. Note that these are shared across all connection pools in a cluster."
+        },
+        {
+          "field_name": "user",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The name of the user for use with the connection pool. When excluded, all sessions connect to the database as the inbound user."
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_list_replicas",
+      "description": "List All Read-only Replicas\n\nTo list all of the read-only replicas associated with a database cluster, send a GET request to `/v2/databases/$DATABASE_ID/replicas`.\n\n**Note**: Read-only replicas are not supported for Redis clusters.\n\nThe result will be a JSON object with a `replicas` key. This will be set to an array of database replica objects, each of which will contain the standard database replica attributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_create_replica",
+      "description": "Create a Read-only Replica\n\nTo create a read-only replica for a PostgreSQL or MySQL database cluster, send a POST request to `/v2/databases/$DATABASE_ID/replicas` specifying the name it should be given, the size of the node to be used, and the region where it will be located.\n\n**Note**: Read-only replicas are not supported for Redis clusters.\n\nThe response will be a JSON object with a key called `replica`. The value of this will be an object that contains the standard attributes associated with a database replica. The initial value of the read-only replica's `status` attribute will be `forking`. When the replica is ready to receive traffic, this will transition to `active`.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_destroy_replica",
+      "description": "Destroy a Read-only Replica\n\nTo destroy a specific read-only replica, send a DELETE request to `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`.\n\n**Note**: Read-only replicas are not supported for Redis clusters.\n\nA status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_get_replica",
+      "description": "Retrieve an Existing Read-only Replica\n\nTo show information about an existing database replica, send a GET request to `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME`.\n\n**Note**: Read-only replicas are not supported for Redis clusters.\n\nThe response will be a JSON object with a `replica key`. This will be set to an object containing the standard database replica attributes.",
+      "fields": [
+        {
+          "field_name": "replica_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The name of the database replica."
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_promote_replica",
+      "description": "Promote a Read-only Replica to become a Primary Cluster\n\nTo promote a specific read-only replica, send a PUT request to `/v2/databases/$DATABASE_ID/replicas/$REPLICA_NAME/promote`.\n\n**Note**: Read-only replicas are not supported for Redis clusters.\n\nA status of 204 will be given. This indicates that the request was processed successfully, but that no response body is needed.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_update_clusterSize",
+      "description": "Resize a Database Cluster\n\nTo resize a database cluster, send a PUT request to `/v2/databases/$DATABASE_ID/resize`. The body of the request must specify both the size and num_nodes attributes.\nA successful request will receive a 202 Accepted status code with no body in response. Querying the database cluster will show that its status attribute will now be set to resizing. This will transition back to online when the resize operation has completed.",
+      "fields": [
+        {
+          "field_name": "num_nodes",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The number of nodes in the database cluster. Valid values are are 1-3. In addition to the primary node, up to two standby nodes may be added for highly available configurations."
+        },
+        {
+          "field_name": "size",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A slug identifier representing desired the size of the nodes in the database cluster."
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_get_sql_mode",
+      "description": "Retrieve the SQL Modes for a MySQL Cluster\n\nTo retrieve the configured SQL modes for an existing MySQL cluster, send a GET request to `/v2/databases/$DATABASE_ID/sql_mode`.\nThe response will be a JSON object with a `sql_mode` key. This will be set to a string representing the configured SQL modes.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_update_sql_mode",
+      "description": "Update SQL Mode for a Cluster\n\nTo configure the SQL modes for an existing MySQL cluster, send a PUT request to `/v2/databases/$DATABASE_ID/sql_mode` specifying the desired modes. See the official MySQL 8 documentation for a [full list of supported SQL modes](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sql-mode-full).\nA successful request will receive a 204 No Content status code with no body in response.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_update_major_version",
+      "description": "Upgrade Major Version for a Database\n\nTo upgrade the major version of a database, send a PUT request to `/v2/databases/$DATABASE_ID/upgrade`, specifying the target version.\nA successful request will receive a 204 No Content status code with no body in response.",
+      "fields": [
+        {
+          "field_name": "version",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_list_users",
+      "description": "List all Database Users\n\nTo list all of the users for your database cluster, send a GET request to\n`/v2/databases/$DATABASE_ID/users`.\n\nNote: User management is not supported for Redis clusters.\n\nThe result will be a JSON object with a `users` key. This will be set to an array\nof database user objects, each of which will contain the standard database user attributes.\n\nFor MySQL clusters, additional options will be contained in the mysql_settings object.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_add_user",
+      "description": "Add a Database User\n\nTo add a new database user, send a POST request to `/v2/databases/$DATABASE_ID/users`\nwith the desired username.\n\nNote: User management is not supported for Redis clusters.\n\nWhen adding a user to a MySQL cluster, additional options can be configured in the\n`mysql_settings` object.\n\nThe response will be a JSON object with a key called `user`. The value of this will be an\nobject that contains the standard attributes associated with a database user including\nits randomly generated password.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_delete_user",
+      "description": "Remove a Database User\n\nTo remove a specific database user, send a DELETE request to\n`/v2/databases/$DATABASE_ID/users/$USERNAME`.\n\nA status of 204 will be given. This indicates that the request was processed\nsuccessfully, but that no response body is needed.\n\nNote: User management is not supported for Redis clusters.",
+      "fields": []
+    },
+    {
+      "tool_name": "databases_get_user",
+      "description": "Retrieve an Existing Database User\n\nTo show information about an existing database user, send a GET request to\n`/v2/databases/$DATABASE_ID/users/$USERNAME`.\n\nNote: User management is not supported for Redis clusters.\n\nThe response will be a JSON object with a `user` key. This will be set to an object\ncontaining the standard database user attributes.\n\nFor MySQL clusters, additional options will be contained in the mysql_settings\nobject.",
+      "fields": [
+        {
+          "field_name": "username",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The name of the database user."
+        }
+      ]
+    },
+    {
+      "tool_name": "databases_reset_auth",
+      "description": "Reset a Database User's Password or Authentication Method\n\nTo reset the password for a database user, send a POST request to\n`/v2/databases/$DATABASE_ID/users/$USERNAME/reset_auth`.\n\nFor `mysql` databases, the authentication method can be specifying by\nincluding a key in the JSON body called `mysql_settings` with the `auth_plugin`\nvalue specified.\n\nThe response will be a JSON object with a `user` key. This will be set to an\nobject containing the standard database user attributes.",
+      "fields": [
+        {
+          "field_name": "mysql_settings",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "domains_list",
+      "description": "List All Domains\n\nTo retrieve a list of all of the domains in your account, send a GET request to `/v2/domains`.",
+      "fields": []
+    },
+    {
+      "tool_name": "domains_create",
+      "description": "Create a New Domain\n\nTo create a new domain, send a POST request to `/v2/domains`. Set the \"name\"\nattribute to the domain name you are adding. Optionally, you may set the\n\"ip_address\" attribute, and an A record will be automatically created pointing\nto the apex domain.",
+      "fields": []
+    },
+    {
+      "tool_name": "domains_delete",
+      "description": "Delete a Domain\n\nTo delete a domain, send a DELETE request to `/v2/domains/$DOMAIN_NAME`.",
+      "fields": []
+    },
+    {
+      "tool_name": "domains_get",
+      "description": "Retrieve an Existing Domain\n\nTo get details about a specific domain, send a GET request to `/v2/domains/$DOMAIN_NAME`.",
+      "fields": [
+        {
+          "field_name": "domain_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The name of the domain itself."
+        }
+      ]
+    },
+    {
+      "tool_name": "domains_list_records",
+      "description": "List All Domain Records\n\nTo get a listing of all records configured for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records`.\nThe list of records returned can be filtered by using the `name` and `type` query parameters. For example, to only include A records for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records?type=A`. `name` must be a fully qualified record name. For example, to only include records matching `sub.example.com`, send a GET request to `/v2/domains/$DOMAIN_NAME/records?name=sub.example.com`. Both name and type may be used together.",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A fully qualified record name. For example, to only include records matching sub.example.com, send a GET request to `/v2/domains/$DOMAIN_NAME/records?name=sub.example.com`."
+        },
+        {
+          "field_name": "type",
+          "dimensions": [
+            "unit_of_measure"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The type of the DNS record. For example: A, CNAME, TXT, ..."
+        }
+      ]
+    },
+    {
+      "tool_name": "domains_create_record",
+      "description": "Create a New Domain Record\n\nTo create a new record to a domain, send a POST request to\n`/v2/domains/$DOMAIN_NAME/records`.\n\nThe request must include all of the required fields for the domain record type\nbeing added.\n\nSee the [attribute table](#tag/Domain-Records) for details regarding record\ntypes and their respective required attributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "domains_delete_record",
+      "description": "Delete a Domain Record\n\nTo delete a record for a domain, send a DELETE request to\n`/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`.\n\nThe record will be deleted and the response status will be a 204. This\nindicates a successful request with no body returned.",
+      "fields": []
+    },
+    {
+      "tool_name": "domains_get_record",
+      "description": "Retrieve an Existing Domain Record\n\nTo retrieve a specific domain record, send a GET request to `/v2/domains/$DOMAIN_NAME/records/$RECORD_ID`.",
+      "fields": [
+        {
+          "field_name": "domain_record_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The unique identifier of the domain record."
+        }
+      ]
+    },
+    {
+      "tool_name": "domains_patch_record",
+      "description": "Update a Domain Record\n\nTo update an existing record, send a PATCH request to\n`/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for\nthe record type can be set to a new value for the record.\n\nSee the [attribute table](#tag/Domain-Records) for details regarding record\ntypes and their respective attributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "domains_update_record",
+      "description": "Update a Domain Record\n\nTo update an existing record, send a PUT request to\n`/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for\nthe record type can be set to a new value for the record.\n\nSee the [attribute table](#tag/Domain-Records) for details regarding record\ntypes and their respective attributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "droplets_destroy_byTag",
+      "description": "Deleting Droplets by Tag\n\nTo delete **all** Droplets assigned to a specific tag, include the `tag_name`\nquery parameter set to the name of the tag in your DELETE request. For\nexample,  `/v2/droplets?tag_name=$TAG_NAME`.\n\nA successful request will receive a 204 status code with no body in response.\nThis indicates that the request was processed successfully.",
+      "fields": [
+        {
+          "field_name": "tag_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Specifies Droplets to be deleted by tag."
+        }
+      ]
+    },
+    {
+      "tool_name": "droplets_list",
+      "description": "List All Droplets\n\nTo list all Droplets in your account, send a GET request to `/v2/droplets`.\n\nThe response body will be a JSON object with a key of `droplets`. This will be\nset to an array containing objects each representing a Droplet. These will\ncontain the standard Droplet attributes.\n\n### Filtering Results by Tag\n\nIt's possible to request filtered results by including certain query parameters.\nTo only list Droplets assigned to a specific tag, include the `tag_name` query\nparameter set to the name of the tag in your GET request. For example,\n`/v2/droplets?tag_name=$TAG_NAME`.",
+      "fields": [
+        {
+          "field_name": "tag_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Used to filter Droplets by a specific tag. Can not be combined with `name`."
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Used to filter list response by Droplet name returning only exact matches. It is case-insensitive and can not be combined with `tag_name`."
+        }
+      ]
+    },
+    {
+      "tool_name": "droplets_create",
+      "description": "Create a New Droplet\n\nTo create a new Droplet, send a POST request to `/v2/droplets` setting the\nrequired attributes.\n\nA Droplet will be created using the provided information. The response body\nwill contain a JSON object with a key called `droplet`. The value will be an\nobject containing the standard attributes for your new Droplet. The response\ncode, 202 Accepted, does not indicate the success or failure of the operation,\njust that the request has been accepted for processing. The `actions` returned\nas part of the response's `links` object can be used to check the status\nof the Droplet create event.\n\n### Create Multiple Droplets\n\nCreating multiple Droplets is very similar to creating a single Droplet.\nInstead of sending `name` as a string, send `names` as an array of strings. A\nDroplet will be created for each name you send using the associated\ninformation. Up to ten Droplets may be created this way at a time.\n\nRather than returning a single Droplet, the response body will contain a JSON\narray with a key called `droplets`. This will be set to an array of JSON\nobjects, each of which will contain the standard Droplet attributes. The\nresponse code, 202 Accepted, does not indicate the success or failure of any\noperation, just that the request has been accepted for processing. The array\nof `actions` returned as part of the response's `links` object can be used to\ncheck the status of each individual Droplet create event.",
+      "fields": []
+    },
+    {
+      "tool_name": "dropletActions_post_byTag",
+      "description": "Acting on Tagged Droplets\n\nSome actions can be performed in bulk on tagged Droplets. The actions can be\ninitiated by sending a POST to `/v2/droplets/actions?tag_name=$TAG_NAME` with\nthe action arguments.\n\nOnly a sub-set of action types are supported:\n\n- `power_cycle`\n- `power_on`\n- `power_off`\n- `shutdown`\n- `enable_ipv6`\n- `enable_backups`\n- `disable_backups`\n- `snapshot`",
+      "fields": []
+    },
+    {
+      "tool_name": "droplets_destroy",
+      "description": "Delete an Existing Droplet\n\nTo delete a Droplet, send a DELETE request to `/v2/droplets/$DROPLET_ID`.\n\nA successful request will receive a 204 status code with no body in response.\nThis indicates that the request was processed successfully.",
+      "fields": []
+    },
+    {
+      "tool_name": "droplets_get",
+      "description": "Retrieve an Existing Droplet\n\nTo show information about an individual Droplet, send a GET request to\n`/v2/droplets/$DROPLET_ID`.",
+      "fields": [
+        {
+          "field_name": "droplet_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "A unique identifier for a Droplet instance."
+        }
+      ]
+    },
+    {
+      "tool_name": "dropletActions_list",
+      "description": "List Actions for a Droplet\n\nTo retrieve a list of all actions that have been executed for a Droplet, send\na GET request to `/v2/droplets/$DROPLET_ID/actions`.\n\nThe results will be returned as a JSON object with an `actions` key. This will\nbe set to an array filled with `action` objects containing the standard\n`action` attributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "dropletActions_post",
+      "description": "Initiate a Droplet Action\n\nTo initiate an action on a Droplet send a POST request to\n`/v2/droplets/$DROPLET_ID/actions`. In the JSON body to the request,\nset the `type` attribute to on of the supported action types:\n\n| Action                                   | Details |\n| ---------------------------------------- | ----------- |\n| <nobr>`enable_backups`</nobr>            | Enables backups for a Droplet |\n| <nobr>`disable_backups`</nobr>           | Disables backups for a Droplet |\n| <nobr>`reboot`</nobr>                    | Reboots a Droplet. A `reboot` action is an attempt to reboot the Droplet in a graceful way, similar to using the `reboot` command from the console. |\n| <nobr>`power_cycle`</nobr>               | Power cycles a Droplet. A `powercycle` action is similar to pushing the reset button on a physical machine, it's similar to booting from scratch. |\n| <nobr>`shutdown`</nobr>                  | Shutsdown a Droplet. A shutdown action is an attempt to shutdown the Droplet in a graceful way, similar to using the `shutdown` command from the console. Since a `shutdown` command can fail, this action guarantees that the command is issued, not that it succeeds. The preferred way to turn off a Droplet is to attempt a shutdown, with a reasonable timeout, followed by a `power_off` action to ensure the Droplet is off. |\n| <nobr>`power_off`</nobr>                 | Powers off a Droplet. A `power_off` event is a hard shutdown and should only be used if the `shutdown` action is not successful. It is similar to cutting the power on a server and could lead to complications. |\n| <nobr>`power_on`</nobr>                  | Powers on a Droplet. |\n| <nobr>`restore`</nobr>                   | Restore a Droplet using a backup image. The image ID that is passed in must be a backup of the current Droplet instance. The operation will leave any embedded SSH keys intact. |\n| <nobr>`password_reset`</nobr>            | Resets the root password for a Droplet. A new password will be provided via email. It must be changed after first use. |\n| <nobr>`resize`</nobr>                    | Resizes a Droplet. Set the `size` attribute to a size slug. If a permanent resize with disk changes included is desired, set the `disk` attribute to `true`. |\n| <nobr>`rebuild`</nobr>                   | Rebuilds a Droplet from a new base image. Set the `image` attribute to an image ID or slug. |\n| <nobr>`rename`</nobr>                    | Renames a Droplet. |\n| <nobr>`change_kernel`</nobr>             | Changes a Droplet's kernel. Only applies to Droplets with externally managed kernels. All Droplets created after March 2017 use internal kernels by default. |\n| <nobr>`enable_ipv6`</nobr>               | Enables IPv6 for a Droplet. |\n| <nobr>`snapshot`</nobr>                  | Takes a snapshot of a Droplet. |",
+      "fields": [
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "Initiate a Droplet Action\n\nTo initiate an action on a Droplet send a POST request to\n`/v2/droplets/$DROPLET_ID/actions`. In the JSON body to the request,\nset the `type` attribute to on of the supported action types:\n\n| Action                                   | Details |\n| ---------------------------------------- | ----------- |\n| <nobr>`enable_backups`</nobr>            | Enables backups for a Droplet |\n| <nobr>`disable_backups`</nobr>           | Disables backups for a Droplet |\n| <nobr>`reboot`</nobr>                    | Reboots a Droplet. A `reboot` action is an attempt to reboot the Droplet in a graceful way, similar to using the `reboot` command from the console. |\n| <nobr>`power_cycle`</nobr>               | Power cycles a Droplet. A `powercycle` action is similar to pushing the reset button on a physical machine, it's similar to booting from scratch. |\n| <nobr>`shutdown`</nobr>                  | Shutsdown a Droplet. A shutdown action is an attempt to shutdown the Droplet in a graceful way, similar to using the `shutdown` command from the console. Since a `shutdown` command can fail, this action guarantees that the command is issued, not that it succeeds. The preferred way to turn off a Droplet is to attempt a shutdown, with a reasonable timeout, followed by a `power_off` action to ensure the Droplet is off. |\n| <nobr>`power_off`</nobr>                 | Powers off a Droplet. A `power_off` event is a hard shutdown and should only be used if the `shutdown` action is not successful. It is similar to cutting the power on a server and could lead to complications. |\n| <nobr>`power_on`</nobr>                  | Powers on a Droplet. |\n| <nobr>`restore`</nobr>                   | Restore a Droplet using a backup image. The image ID that is passed in must be a backup of the current Droplet instance. The operation will leave any embedded SSH keys intact. |\n| <nobr>`password_reset`</nobr>            | Resets the root password for a Droplet. A new password will be provided via email. It must be changed after first use. |\n| <nobr>`resize`</nobr>                    | Resizes a Droplet. Set the `size` attribute to a size slug. If a permanent resize with disk changes included is desired, set the `disk` attribute to `true`. |\n| <nobr>`rebuild`</nobr>                   | Rebuilds a Droplet from a new base image. Set the `image` attribute to an image ID or slug. |\n| <nobr>`rename`</nobr>                    | Renames a Droplet. |\n| <nobr>`change_kernel`</nobr>             | Changes a Droplet's kernel. Only applies to Droplets with externally managed kernels. All Droplets created after March 2017 use internal kernels by default. |\n| <nobr>`enable_ipv6`</nobr>               | Enables IPv6 for a Droplet. |\n| <nobr>`snapshot`</nobr>                  | Takes a snapshot of a Droplet. |"
+        }
+      ]
+    },
+    {
+      "tool_name": "dropletActions_get",
+      "description": "Retrieve a Droplet Action\n\nTo retrieve a Droplet action, send a GET request to\n`/v2/droplets/$DROPLET_ID/actions/$ACTION_ID`.\n\nThe response will be a JSON object with a key called `action`. The value will\nbe a Droplet action object.",
+      "fields": []
+    },
+    {
+      "tool_name": "droplets_list_backups",
+      "description": "List Backups for a Droplet\n\nTo retrieve any backups associated with a Droplet, send a GET request to\n`/v2/droplets/$DROPLET_ID/backups`.\n\nYou will get back a JSON object that has a `backups` key. This will be set to\nan array of backup objects, each of which contain the standard\nDroplet backup attributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "droplets_list_associatedResources",
+      "description": "List Associated Resources for a Droplet\n\nTo list the associated billable resources that can be destroyed along with a\nDroplet, send a GET request to the\n`/v2/droplets/$DROPLET_ID/destroy_with_associated_resources` endpoint.\n\nThe response will be a JSON object containing `snapshots`, `volumes`, and\n`volume_snapshots` keys. Each will be set to an array of objects containing\ninformation about the associated resources.",
+      "fields": []
+    },
+    {
+      "tool_name": "droplets_destroy_withAssociatedResourcesDangerous",
+      "description": "Destroy a Droplet and All of its Associated Resources (Dangerous)\n\nTo destroy a Droplet along with all of its associated resources, send a DELETE\nrequest to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/dangerous`\nendpoint. The headers of this request must include an `X-Dangerous` key set to\n`true`. To preview which resources will be destroyed, first query the\nDroplet's associated resources. This operation _can not_ be reverse and should\nbe used with caution.\n\nA successful response will include a 202 response code and no content. Use the\nstatus endpoint to check on the success or failure of the destruction of the\nindividual resources.",
+      "fields": [
+        {
+          "field_name": "X-Dangerous",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Acknowledge this action will destroy the Droplet and all associated resources and _can not_ be reversed."
+        }
+      ]
+    },
+    {
+      "tool_name": "droplets_destroy_retryWithAssociatedResources",
+      "description": "Retry a Droplet Destroy with Associated Resources Request\n\nIf the status of a request to destroy a Droplet with its associated resources\nreported any errors, it can be retried by sending a POST request to the\n`/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/retry` endpoint.\n\nOnly one destroy can be active at a time per Droplet. If a retry is issued\nwhile another destroy is in progress for the Droplet a 409 status code will\nbe returned. A successful response will include a 202 response code and no\ncontent.",
+      "fields": []
+    },
+    {
+      "tool_name": "droplets_destroy_withAssociatedResourcesSelective",
+      "description": "Selectively Destroy a Droplet and its Associated Resources\n\nTo destroy a Droplet along with a sub-set of its associated resources, send a\nDELETE request to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/selective`\nendpoint. The JSON body of the request should include `reserved_ips`, `snapshots`, `volumes`,\nor `volume_snapshots` keys each set to an array of IDs for the associated\nresources to be destroyed. The IDs can be found by querying the Droplet's\nassociated resources. Any associated resource not included in the request\nwill remain and continue to accrue changes on your account.\n\nA successful response will include a 202 response code and no content. Use\nthe status endpoint to check on the success or failure of the destruction of\nthe individual resources.",
+      "fields": [
+        {
+          "field_name": "floating_ips",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of unique identifiers for the floating IPs to be scheduled for deletion."
+        },
+        {
+          "field_name": "reserved_ips",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of unique identifiers for the reserved IPs to be scheduled for deletion."
+        },
+        {
+          "field_name": "snapshots",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of unique identifiers for the snapshots to be scheduled for deletion."
+        },
+        {
+          "field_name": "volume_snapshots",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of unique identifiers for the volume snapshots to be scheduled for deletion."
+        },
+        {
+          "field_name": "volumes",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of unique identifiers for the volumes to be scheduled for deletion."
+        }
+      ]
+    },
+    {
+      "tool_name": "droplets_get_DestroyAssociatedResourcesStatus",
+      "description": "Check Status of a Droplet Destroy with Associated Resources Request\n\nTo check on the status of a request to destroy a Droplet with its associated\nresources, send a GET request to the\n`/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/status` endpoint.",
+      "fields": []
+    },
+    {
+      "tool_name": "droplets_list_firewalls",
+      "description": "List all Firewalls Applied to a Droplet\n\nTo retrieve a list of all firewalls available to a Droplet, send a GET request\nto `/v2/droplets/$DROPLET_ID/firewalls`\n\nThe response will be a JSON object that has a key called `firewalls`. This will\nbe set to an array of `firewall` objects, each of which contain the standard\n`firewall` attributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "droplets_list_kernels",
+      "description": "List All Available Kernels for a Droplet\n\nTo retrieve a list of all kernels available to a Droplet, send a GET request\nto `/v2/droplets/$DROPLET_ID/kernels`\n\nThe response will be a JSON object that has a key called `kernels`. This will\nbe set to an array of `kernel` objects, each of which contain the standard\n`kernel` attributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "droplets_list_neighbors",
+      "description": "List Neighbors for a Droplet\n\nTo retrieve a list of any \"neighbors\" (i.e. Droplets that are co-located on\nthe same physical hardware) for a specific Droplet, send a GET request to\n`/v2/droplets/$DROPLET_ID/neighbors`.\n\nThe results will be returned as a JSON object with a key of `droplets`. This\nwill be set to an array containing objects representing any other Droplets\nthat share the same physical hardware. An empty array indicates that the\nDroplet is not co-located any other Droplets associated with your account.",
+      "fields": [
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "List Neighbors for a Droplet\n\nTo retrieve a list of any \"neighbors\" (i.e. Droplets that are co-located on\nthe same physical hardware) for a specific Droplet, send a GET request to\n`/v2/droplets/$DROPLET_ID/neighbors`.\n\nThe results will be returned as a JSON object with a key of `droplets`. This\nwill be set to an array containing objects representing any other Droplets\nthat share the same physical hardware. An empty array indicates that the\nDroplet is not co-located any other Droplets associated with your account."
+        }
+      ]
+    },
+    {
+      "tool_name": "droplets_list_snapshots",
+      "description": "List Snapshots for a Droplet\n\nTo retrieve the snapshots that have been created from a Droplet, send a GET\nrequest to `/v2/droplets/$DROPLET_ID/snapshots`.\n\nYou will get back a JSON object that has a `snapshots` key. This will be set\nto an array of snapshot objects, each of which contain the standard Droplet\nsnapshot attributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "firewalls_list",
+      "description": "List All Firewalls\n\nTo list all of the firewalls available on your account, send a GET request to `/v2/firewalls`.",
+      "fields": []
+    },
+    {
+      "tool_name": "firewalls_create",
+      "description": "Create a New Firewall\n\nTo create a new firewall, send a POST request to `/v2/firewalls`. The request\nmust contain at least one inbound or outbound access rule.",
+      "fields": []
+    },
+    {
+      "tool_name": "firewalls_delete",
+      "description": "Delete a Firewall\n\nTo delete a firewall send a DELETE request to `/v2/firewalls/$FIREWALL_ID`.\n\nNo response body will be sent back, but the response code will indicate\nsuccess. Specifically, the response code will be a 204, which means that the\naction was successful with no returned body data.",
+      "fields": []
+    },
+    {
+      "tool_name": "firewalls_get",
+      "description": "Retrieve an Existing Firewall\n\nTo show information about an existing firewall, send a GET request to `/v2/firewalls/$FIREWALL_ID`.",
+      "fields": [
+        {
+          "field_name": "firewall_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique ID that can be used to identify and reference a firewall."
+        }
+      ]
+    },
+    {
+      "tool_name": "firewalls_update",
+      "description": "Update a Firewall\n\nTo update the configuration of an existing firewall, send a PUT request to\n`/v2/firewalls/$FIREWALL_ID`. The request should contain a full representation\nof the firewall including existing attributes. **Note that any attributes that\nare not provided will be reset to their default values.**",
+      "fields": []
+    },
+    {
+      "tool_name": "firewalls_delete_droplets",
+      "description": "Remove Droplets from a Firewall\n\nTo remove a Droplet from a firewall, send a DELETE request to\n`/v2/firewalls/$FIREWALL_ID/droplets`. In the body of the request, there should\nbe a `droplet_ids` attribute containing a list of Droplet IDs.\n\nNo response body will be sent back, but the response code will indicate\nsuccess. Specifically, the response code will be a 204, which means that the\naction was successful with no returned body data.",
+      "fields": [
+        {
+          "field_name": "droplet_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array containing the IDs of the Droplets to be removed from the firewall."
+        }
+      ]
+    },
+    {
+      "tool_name": "firewalls_assign_droplets",
+      "description": "Add Droplets to a Firewall\n\nTo assign a Droplet to a firewall, send a POST request to\n`/v2/firewalls/$FIREWALL_ID/droplets`. In the body of the request, there\nshould be a `droplet_ids` attribute containing a list of Droplet IDs.\n\nNo response body will be sent back, but the response code will indicate\nsuccess. Specifically, the response code will be a 204, which means that the\naction was successful with no returned body data.",
+      "fields": [
+        {
+          "field_name": "droplet_ids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array containing the IDs of the Droplets to be assigned to the firewall."
+        }
+      ]
+    },
+    {
+      "tool_name": "firewalls_delete_rules",
+      "description": "Remove Rules from a Firewall\n\nTo remove access rules from a firewall, send a DELETE request to\n`/v2/firewalls/$FIREWALL_ID/rules`. The body of the request may include an\n`inbound_rules` and/or `outbound_rules` attribute containing an array of rules\nto be removed.\n\nNo response body will be sent back, but the response code will indicate\nsuccess. Specifically, the response code will be a 204, which means that the\naction was successful with no returned body data.",
+      "fields": []
+    },
+    {
+      "tool_name": "firewalls_add_rules",
+      "description": "Add Rules to a Firewall\n\nTo add additional access rules to a firewall, send a POST request to\n`/v2/firewalls/$FIREWALL_ID/rules`. The body of the request may include an\ninbound_rules and/or outbound_rules attribute containing an array of rules to\nbe added.\n\nNo response body will be sent back, but the response code will indicate\nsuccess. Specifically, the response code will be a 204, which means that the\naction was successful with no returned body data.",
+      "fields": []
+    },
+    {
+      "tool_name": "firewalls_delete_tags",
+      "description": "Remove Tags from a Firewall\n\nTo remove a tag representing a group of Droplets from a firewall, send a\nDELETE request to `/v2/firewalls/$FIREWALL_ID/tags`. In the body of the\nrequest, there should be a `tags` attribute containing a list of tag names.\n\nNo response body will be sent back, but the response code will indicate\nsuccess. Specifically, the response code will be a 204, which means that the\naction was successful with no returned body data.",
+      "fields": [
+        {
+          "field_name": "tags",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "firewalls_add_tags",
+      "description": "Add Tags to a Firewall\n\nTo assign a tag representing a group of Droplets to a firewall, send a POST\nrequest to `/v2/firewalls/$FIREWALL_ID/tags`. In the body of the request,\nthere should be a `tags` attribute containing a list of tag names.\n\nNo response body will be sent back, but the response code will indicate\nsuccess. Specifically, the response code will be a 204, which means that the\naction was successful with no returned body data.",
+      "fields": [
+        {
+          "field_name": "tags",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "floatingIPs_list",
+      "description": "List All Floating IPs\n\nTo list all of the floating IPs available on your account, send a GET request to `/v2/floating_ips`.",
+      "fields": []
+    },
+    {
+      "tool_name": "floatingIPs_create",
+      "description": "Create a New Floating IP\n\nOn creation, a floating IP must be either assigned to a Droplet or reserved to a region.\n* To create a new floating IP assigned to a Droplet, send a POST\n  request to `/v2/floating_ips` with the `droplet_id` attribute.\n\n* To create a new floating IP reserved to a region, send a POST request to\n  `/v2/floating_ips` with the `region` attribute.\n\n**Note**:  In addition to the standard rate limiting, only 12 floating IPs may be created per 60 seconds.",
+      "fields": []
+    },
+    {
+      "tool_name": "floatingIPs_delete",
+      "description": "Delete a Floating IP\n\nTo delete a floating IP and remove it from your account, send a DELETE request\nto `/v2/floating_ips/$FLOATING_IP_ADDR`.\n\nA successful request will receive a 204 status code with no body in response.\nThis indicates that the request was processed successfully.",
+      "fields": []
+    },
+    {
+      "tool_name": "floatingIPs_get",
+      "description": "Retrieve an Existing Floating IP\n\nTo show information about a floating IP, send a GET request to `/v2/floating_ips/$FLOATING_IP_ADDR`.",
+      "fields": [
+        {
+          "field_name": "floating_ip",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A floating IP address."
+        }
+      ]
+    },
+    {
+      "tool_name": "floatingIPsAction_list",
+      "description": "List All Actions for a Floating IP\n\nTo retrieve all actions that have been executed on a floating IP, send a GET request to `/v2/floating_ips/$FLOATING_IP/actions`.",
+      "fields": []
+    },
+    {
+      "tool_name": "floatingIPsAction_post",
+      "description": "Initiate a Floating IP Action\n\nTo initiate an action on a floating IP send a POST request to\n`/v2/floating_ips/$FLOATING_IP/actions`. In the JSON body to the request,\nset the `type` attribute to on of the supported action types:\n\n| Action     | Details\n|------------|--------\n| `assign`   | Assigns a floating IP to a Droplet\n| `unassign` | Unassign a floating IP from a Droplet",
+      "fields": []
+    },
+    {
+      "tool_name": "floatingIPsAction_get",
+      "description": "Retrieve an Existing Floating IP Action\n\nTo retrieve the status of a floating IP action, send a GET request to `/v2/floating_ips/$FLOATING_IP/actions/$ACTION_ID`.",
+      "fields": []
+    },
+    {
+      "tool_name": "functions_list_namespaces",
+      "description": "List Namespaces\n\nReturns a list of namespaces associated with the current user. To get all namespaces, send a GET request to `/v2/functions/namespaces`.",
+      "fields": []
+    },
+    {
+      "tool_name": "functions_create_namespace",
+      "description": "Create Namespace\n\nCreates a new serverless functions namespace in the desired region and associates it with the provided label. A namespace is a collection of functions and their associated packages, triggers, and project specifications. To create a namespace, send a POST request to `/v2/functions/namespaces` with the `region` and `label` properties.",
+      "fields": [
+        {
+          "field_name": "label",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The namespace's unique name."
+        },
+        {
+          "field_name": "region",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The [datacenter region](https://docs.digitalocean.com/products/platform/availability-matrix/#available-datacenters) in which to create the namespace."
+        }
+      ]
+    },
+    {
+      "tool_name": "functions_delete_namespace",
+      "description": "Delete Namespace\n\nDeletes the given namespace.  When a namespace is deleted all assets, in the namespace are deleted, this includes packages, functions and triggers. Deleting a namespace is a destructive operation and assets in the namespace are not recoverable after deletion. Some metadata is retained, such as activations, or soft deleted for reporting purposes.\nTo delete namespace, send a DELETE request to `/v2/functions/namespaces/$NAMESPACE_ID`.\nA successful deletion returns a 204 response.",
+      "fields": []
+    },
+    {
+      "tool_name": "functions_get_namespace",
+      "description": "Get Namespace\n\nGets the namespace details for the given namespace UUID. To get namespace details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID` with no parameters.",
+      "fields": [
+        {
+          "field_name": "namespace_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the namespace to be managed."
+        }
+      ]
+    },
+    {
+      "tool_name": "functions_list_triggers",
+      "description": "List Triggers\n\nReturns a list of triggers associated with the current user and namespace. To get all triggers, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers`.",
+      "fields": []
+    },
+    {
+      "tool_name": "functions_create_trigger",
+      "description": "Create Trigger\n\nCreates a new trigger for a given function in a namespace. To create a trigger, send a POST request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers` with the `name`, `function`, `type`, `is_enabled` and `scheduled_details` properties.",
+      "fields": [
+        {
+          "field_name": "function",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Name of function(action) that exists in the given namespace."
+        },
+        {
+          "field_name": "is_enabled",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Indicates weather the trigger is paused or unpaused."
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The trigger's unique name within the namespace."
+        },
+        {
+          "field_name": "scheduled_details",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        },
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "One of different type of triggers. Currently only SCHEDULED is supported."
+        }
+      ]
+    },
+    {
+      "tool_name": "functions_delete_trigger",
+      "description": "Delete Trigger\n\nDeletes the given trigger.\nTo delete trigger, send a DELETE request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`.\nA successful deletion returns a 204 response.",
+      "fields": []
+    },
+    {
+      "tool_name": "functions_get_trigger",
+      "description": "Get Trigger\n\nGets the trigger details. To get the trigger details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`.",
+      "fields": [
+        {
+          "field_name": "trigger_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The name of the trigger to be managed."
+        }
+      ]
+    },
+    {
+      "tool_name": "functions_update_trigger",
+      "description": "Update Trigger\n\nUpdates the details of the given trigger. To update a trigger, send a PUT request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME` with new values for the `is_enabled ` or `scheduled_details` properties.",
+      "fields": [
+        {
+          "field_name": "is_enabled",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Indicates weather the trigger is paused or unpaused."
+        },
+        {
+          "field_name": "scheduled_details",
+          "dimensions": [
+            "date_format"
+          ],
+          "confidence": "inferred"
+        }
+      ]
+    },
+    {
+      "tool_name": "images_list",
+      "description": "List All Images\n\nTo list all of the images available on your account, send a GET request to /v2/images.\n\n## Filtering Results\n-----\n\nIt's possible to request filtered results by including certain query parameters.\n\n**Image Type**\n\nEither 1-Click Application or OS Distribution images can be filtered by using the `type` query parameter.\n\n> Important: The `type` query parameter does not directly relate to the `type` attribute.\n\nTo retrieve only ***distribution*** images, include the `type` query parameter set to distribution, `/v2/images?type=distribution`.\n\nTo retrieve only ***application*** images, include the `type` query parameter set to application, `/v2/images?type=application`.\n\n**User Images**\n\nTo retrieve only the private images of a user, include the `private` query parameter set to true, `/v2/images?private=true`.\n\n**Tags**\n\nTo list all images assigned to a specific tag, include the `tag_name` query parameter set to the name of the tag in your GET request. For example, `/v2/images?tag_name=$TAG_NAME`.",
+      "fields": [
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Filters results based on image type which can be either `application` or `distribution`."
+        },
+        {
+          "field_name": "private",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "Used to filter only user images."
+        },
+        {
+          "field_name": "tag_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Used to filter images by a specific tag."
+        }
+      ]
+    },
+    {
+      "tool_name": "images_create_custom",
+      "description": "Create a Custom Image\n\nTo create a new custom image, send a POST request to /v2/images.\nThe body must contain a url attribute pointing to a Linux virtual machine\nimage to be imported into DigitalOcean.\nThe image must be in the raw, qcow2, vhdx, vdi, or vmdk format.\nIt may be compressed using gzip or bzip2 and must be smaller than 100 GB after\n being decompressed.",
+      "fields": []
+    },
+    {
+      "tool_name": "images_delete",
+      "description": "Delete an Image\n\nTo delete a snapshot or custom image, send a `DELETE` request to `/v2/images/$IMAGE_ID`.",
+      "fields": []
+    },
+    {
+      "tool_name": "images_get",
+      "description": "Retrieve an Existing Image\n\nTo retrieve information about an image, send a `GET` request to\n`/v2/images/$IDENTIFIER`.",
+      "fields": [
+        {
+          "field_name": "image_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "A unique number (id) or string (slug) used to identify and reference a\nspecific image.\n\n**Public** images can be identified by image `id` or `slug`.\n\n**Private** images *must* be identified by image `id`.\n"
+        }
+      ]
+    },
+    {
+      "tool_name": "images_update",
+      "description": "Update an Image\n\nTo update an image, send a `PUT` request to `/v2/images/$IMAGE_ID`.\nSet the `name` attribute to the new value you would like to use.\nFor custom images, the `description` and `distribution` attributes may also be updated.",
+      "fields": [
+        {
+          "field_name": "image_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "A unique number that can be used to identify and reference a specific image."
+        }
+      ]
+    },
+    {
+      "tool_name": "imageActions_list",
+      "description": "List All Actions for an Image\n\nTo retrieve all actions that have been executed on an image, send a GET request to `/v2/images/$IMAGE_ID/actions`.",
+      "fields": []
+    },
+    {
+      "tool_name": "imageActions_post",
+      "description": "Initiate an Image Action\n\nThe following actions are available on an Image.\n\n## Convert an Image to a Snapshot\n\nTo convert an image, for example, a backup to a snapshot, send a POST request\nto `/v2/images/$IMAGE_ID/actions`. Set the `type` attribute to `convert`.\n\n## Transfer an Image\n\nTo transfer an image to another region, send a POST request to\n`/v2/images/$IMAGE_ID/actions`. Set the `type` attribute to `transfer` and set\n`region` attribute to the slug identifier of the region you wish to transfer\nto.",
+      "fields": []
+    },
+    {
+      "tool_name": "imageActions_get",
+      "description": "Retrieve an Existing Action\n\nTo retrieve the status of an image action, send a GET request to `/v2/images/$IMAGE_ID/actions/$IMAGE_ACTION_ID`.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_list_clusters",
+      "description": "List All Kubernetes Clusters\n\nTo list all of the Kubernetes clusters on your account, send a GET request\nto `/v2/kubernetes/clusters`.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_create_cluster",
+      "description": "Create a New Kubernetes Cluster\n\nTo create a new Kubernetes cluster, send a POST request to\n`/v2/kubernetes/clusters`. The request must contain at least one node pool\nwith at least one worker.\n\nThe request may contain a maintenance window policy describing a time period\nwhen disruptive maintenance tasks may be carried out. Omitting the policy\nimplies that a window will be chosen automatically. See\n[here](https://www.digitalocean.com/docs/kubernetes/how-to/upgrade-cluster/)\nfor details.",
+      "fields": [
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "null_handling"
+          ],
+          "confidence": "inferred",
+          "description": "Create a New Kubernetes Cluster\n\nTo create a new Kubernetes cluster, send a POST request to\n`/v2/kubernetes/clusters`. The request must contain at least one node pool\nwith at least one worker.\n\nThe request may contain a maintenance window policy describing a time period\nwhen disruptive maintenance tasks may be carried out. Omitting the policy\nimplies that a window will be chosen automatically. See\n[here](https://www.digitalocean.com/docs/kubernetes/how-to/upgrade-cluster/)\nfor details."
+        }
+      ]
+    },
+    {
+      "tool_name": "kubernetes_delete_cluster",
+      "description": "Delete a Kubernetes Cluster\n\nTo delete a Kubernetes cluster and all services deployed to it, send a DELETE\nrequest to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`.\n\nA 204 status code with no body will be returned in response to a successful\nrequest.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_get_cluster",
+      "description": "Retrieve an Existing Kubernetes Cluster\n\nTo show information about an existing Kubernetes cluster, send a GET request\nto `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`.",
+      "fields": [
+        {
+          "field_name": "cluster_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique ID that can be used to reference a Kubernetes cluster."
+        }
+      ]
+    },
+    {
+      "tool_name": "kubernetes_update_cluster",
+      "description": "Update a Kubernetes Cluster\n\nTo update a Kubernetes cluster, send a PUT request to\n`/v2/kubernetes/clusters/$K8S_CLUSTER_ID` and specify one or more of the\nattributes below.",
+      "fields": [
+        {
+          "field_name": "auto_upgrade",
+          "dimensions": [
+            "null_handling"
+          ],
+          "confidence": "inferred",
+          "schema_type": "boolean",
+          "description": "A boolean value indicating whether the cluster will be automatically upgraded to new patch releases during its maintenance window."
+        },
+        {
+          "field_name": "ha",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "A boolean value indicating whether the control plane is run in a highly available configuration in the cluster. Highly available control planes incur less downtime. The property cannot be disabled."
+        },
+        {
+          "field_name": "maintenance_policy",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A human-readable name for a Kubernetes cluster."
+        },
+        {
+          "field_name": "surge_upgrade",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "A boolean value indicating whether surge upgrade is enabled/disabled for the cluster. Surge upgrade makes cluster upgrades fast and reliable by bringing up new nodes before destroying the outdated nodes."
+        },
+        {
+          "field_name": "tags",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of tags applied to the Kubernetes cluster. All clusters are automatically tagged `k8s` and `k8s:$K8S_CLUSTER_ID`."
+        }
+      ]
+    },
+    {
+      "tool_name": "kubernetes_get_clusterLintResults",
+      "description": "Fetch Clusterlint Diagnostics for a Kubernetes Cluster\n\nTo request clusterlint diagnostics for your cluster, send a GET request to\n`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. If the `run_id` query\nparameter is provided, then the diagnostics for the specific run is fetched.\nBy default, the latest results are shown.\n\nTo find out how to address clusterlint feedback, please refer to\n[the clusterlint check documentation](https://github.com/digitalocean/clusterlint/blob/master/checks.md).",
+      "fields": [
+        {
+          "field_name": "run_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Specifies the clusterlint run whose results will be retrieved."
+        }
+      ]
+    },
+    {
+      "tool_name": "kubernetes_run_clusterLint",
+      "description": "Run Clusterlint Checks on a Kubernetes Cluster\n\nClusterlint helps operators conform to Kubernetes best practices around\nresources, security and reliability to avoid common problems while operating\nor upgrading the clusters.\n\nTo request a clusterlint run on your cluster, send a POST request to\n`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. This will run all\nchecks present in the `doks` group by default, if a request body is not\nspecified. Optionally specify the below attributes.\n\nFor information about the available checks, please refer to\n[the clusterlint check documentation](https://github.com/digitalocean/clusterlint/blob/master/checks.md).",
+      "fields": [
+        {
+          "field_name": "exclude_checks",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of checks that will be run when clusterlint executes checks."
+        },
+        {
+          "field_name": "exclude_groups",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of check groups that will be omitted when clusterlint executes checks."
+        },
+        {
+          "field_name": "include_checks",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of checks that will be run when clusterlint executes checks."
+        },
+        {
+          "field_name": "include_groups",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of check groups that will be run when clusterlint executes checks."
+        }
+      ]
+    },
+    {
+      "tool_name": "kubernetes_get_credentials",
+      "description": "Retrieve Credentials for a Kubernetes Cluster\n\nThis endpoint returns a JSON object . It can be used to programmatically\nconstruct Kubernetes clients which cannot parse kubeconfig files.\n\nThe resulting JSON object contains token-based authentication for clusters\nsupporting it, and certificate-based authentication otherwise. For a list of\nsupported versions and more information, see \"[How to Connect to a DigitalOcean\nKubernetes Cluster with kubectl](https://www.digitalocean.com/docs/kubernetes/how-to/connect-with-kubectl/)\".\n\nTo retrieve credentials for accessing a Kubernetes cluster, send a GET\nrequest to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/credentials`.\n\nClusters supporting token-based authentication may define an expiration by\npassing a duration in seconds as a query parameter to\n`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/kubeconfig?expiry_seconds=$DURATION_IN_SECONDS`.\nIf not set or 0, then the token will have a 7 day expiry. The query parameter\nhas no impact in certificate-based authentication.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_list_associatedResources",
+      "description": "List Associated Resources for Cluster Deletion\n\nTo list the associated billable resources that can be destroyed along with a cluster, send a GET request to the `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources` endpoint.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_destroy_associatedResourcesDangerous",
+      "description": "Delete a Cluster and All of its Associated Resources (Dangerous)\n\nTo delete a Kubernetes cluster with all of its associated resources, send a\nDELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources/dangerous`.\nA 204 status code with no body will be returned in response to a successful request.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_destroy_associatedResourcesSelective",
+      "description": "Selectively Delete a Cluster and its Associated Resources\n\nTo delete a Kubernetes cluster along with a subset of its associated resources,\nsend a DELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources/selective`.\n\nThe JSON body of the request should include `load_balancers`, `volumes`, or\n`volume_snapshots` keys each set to an array of IDs for the associated\nresources to be destroyed.\n\nThe IDs can be found by querying the cluster's associated resources endpoint.\nAny associated resource not included in the request will remain and continue\nto accrue changes on your account.",
+      "fields": [
+        {
+          "field_name": "load_balancers",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A list of IDs for associated load balancers to destroy along with the cluster."
+        },
+        {
+          "field_name": "volume_snapshots",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A list of IDs for associated volume snapshots to destroy along with the cluster."
+        },
+        {
+          "field_name": "volumes",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A list of IDs for associated volumes to destroy along with the cluster."
+        }
+      ]
+    },
+    {
+      "tool_name": "kubernetes_get_kubeconfig",
+      "description": "Retrieve the kubeconfig for a Kubernetes Cluster\n\nThis endpoint returns a kubeconfig file in YAML format. It can be used to\nconnect to and administer the cluster using the Kubernetes command line tool,\n`kubectl`, or other programs supporting kubeconfig files (e.g., client libraries).\n\nThe resulting kubeconfig file uses token-based authentication for clusters\nsupporting it, and certificate-based authentication otherwise. For a list of\nsupported versions and more information, see \"[How to Connect to a DigitalOcean\nKubernetes Cluster with kubectl](https://www.digitalocean.com/docs/kubernetes/how-to/connect-with-kubectl/)\".\n\nTo retrieve a kubeconfig file for use with a Kubernetes cluster, send a GET\nrequest to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/kubeconfig`.\n\nClusters supporting token-based authentication may define an expiration by\npassing a duration in seconds as a query parameter to\n`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/kubeconfig?expiry_seconds=$DURATION_IN_SECONDS`.\nIf not set or 0, then the token will have a 7 day expiry. The query parameter\nhas no impact in certificate-based authentication.",
+      "fields": [
+        {
+          "field_name": "expiry_seconds",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The duration in seconds that the returned Kubernetes credentials will be valid. If not set or 0, the credentials will have a 7 day expiry."
+        }
+      ]
+    },
+    {
+      "tool_name": "kubernetes_list_nodePools",
+      "description": "List All Node Pools in a Kubernetes Clusters\n\nTo list all of the node pools in a Kubernetes clusters, send a GET request to\n`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools`.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_add_nodePool",
+      "description": "Add a Node Pool to a Kubernetes Cluster\n\nTo add an additional node pool to a Kubernetes clusters, send a POST request\nto `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools` with the following\nattributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_delete_nodePool",
+      "description": "Delete a Node Pool in a Kubernetes Cluster\n\nTo delete a node pool, send a DELETE request to\n`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`.\n\nA 204 status code with no body will be returned in response to a successful\nrequest. Nodes in the pool will subsequently be drained and deleted.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_get_nodePool",
+      "description": "Retrieve a Node Pool for a Kubernetes Cluster\n\nTo show information about a specific node pool in a Kubernetes cluster, send\na GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`.",
+      "fields": [
+        {
+          "field_name": "node_pool_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique ID that can be used to reference a Kubernetes node pool."
+        }
+      ]
+    },
+    {
+      "tool_name": "kubernetes_update_nodePool",
+      "description": "Update a Node Pool in a Kubernetes Cluster\n\nTo update the name of a node pool, edit the tags applied to it, or adjust its\nnumber of nodes, send a PUT request to\n`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID` with the\nfollowing attributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_delete_node",
+      "description": "Delete a Node in a Kubernetes Cluster\n\nTo delete a single node in a pool, send a DELETE request to\n`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID/nodes/$NODE_ID`.\n\nAppending the `skip_drain=1` query parameter to the request causes node\ndraining to be skipped. Omitting the query parameter or setting its value to\n`0` carries out draining prior to deletion.\n\nAppending the `replace=1` query parameter to the request causes the node to\nbe replaced by a new one after deletion. Omitting the query parameter or\nsetting its value to `0` deletes without replacement.",
+      "fields": [
+        {
+          "field_name": "node_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique ID that can be used to reference a node in a Kubernetes node pool."
+        },
+        {
+          "field_name": "skip_drain",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "Specifies whether or not to drain workloads from a node before it is deleted. Setting it to `1` causes node draining to be skipped. Omitting the query parameter or setting its value to `0` carries out draining prior to deletion."
+        },
+        {
+          "field_name": "replace",
+          "dimensions": [
+            "rate_scale"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "Specifies whether or not to replace a node after it has been deleted. Setting it to `1` causes the node to be replaced by a new one after deletion. Omitting the query parameter or setting its value to `0` deletes without replacement."
+        }
+      ]
+    },
+    {
+      "tool_name": "kubernetes_recycle_node_pool",
+      "description": "Recycle a Kubernetes Node Pool\n\nThe endpoint has been deprecated. Please use the DELETE\n`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID/nodes/$NODE_ID`\nmethod instead.",
+      "fields": [
+        {
+          "field_name": "nodes",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        }
+      ]
+    },
+    {
+      "tool_name": "kubernetes_upgrade_cluster",
+      "description": "Upgrade a Kubernetes Cluster\n\nTo immediately upgrade a Kubernetes cluster to a newer patch release of\nKubernetes, send a POST request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrade`.\nThe body of the request must specify a version attribute.\n\nAvailable upgrade versions for a cluster can be fetched from\n`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrades`.",
+      "fields": [
+        {
+          "field_name": "version",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The slug identifier for the version of Kubernetes that the cluster will be upgraded to."
+        }
+      ]
+    },
+    {
+      "tool_name": "kubernetes_get_availableUpgrades",
+      "description": "Retrieve Available Upgrades for an Existing Kubernetes Cluster\n\nTo determine whether a cluster can be upgraded, and the versions to which it\ncan be upgraded, send a GET request to\n`/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrades`.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_get_clusterUser",
+      "description": "Retrieve User Information for a Kubernetes Cluster\n\nTo show information the user associated with a Kubernetes cluster, send a GET\nrequest to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/user`.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_list_options",
+      "description": "List Available Regions, Node Sizes, and Versions of Kubernetes\n\nTo list the versions of Kubernetes available for use, the regions that support Kubernetes, and the available node sizes, send a GET request to `/v2/kubernetes/options`.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_remove_registry",
+      "description": "Remove Container Registry from Kubernetes Clusters\n\nTo remove the container registry from Kubernetes clusters, send a DELETE request to `/v2/kubernetes/registry`.",
+      "fields": []
+    },
+    {
+      "tool_name": "kubernetes_add_registry",
+      "description": "Add Container Registry to Kubernetes Clusters\n\nTo integrate the container registry with Kubernetes clusters, send a POST request to `/v2/kubernetes/registry`.",
+      "fields": [
+        {
+          "field_name": "cluster_uuids",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array containing the UUIDs of Kubernetes clusters."
+        }
+      ]
+    },
+    {
+      "tool_name": "loadBalancers_list",
+      "description": "List All Load Balancers\n\nTo list all of the load balancer instances on your account, send a GET request\nto `/v2/load_balancers`.",
+      "fields": []
+    },
+    {
+      "tool_name": "loadBalancers_create",
+      "description": "Create a New Load Balancer\n\nTo create a new load balancer instance, send a POST request to\n`/v2/load_balancers`.\n\nYou can specify the Droplets that will sit behind the load balancer using one\nof two methods:\n\n* Set `droplet_ids` to a list of specific Droplet IDs.\n* Set `tag` to the name of a tag. All Droplets with this tag applied will be\n  assigned to the load balancer. Additional Droplets will be automatically\n  assigned as they are tagged.\n\nThese methods are mutually exclusive.",
+      "fields": []
+    },
+    {
+      "tool_name": "loadBalancers_delete",
+      "description": "Delete a Load Balancer\n\nTo delete a load balancer instance, disassociating any Droplets assigned to it\nand removing it from your account, send a DELETE request to\n`/v2/load_balancers/$LOAD_BALANCER_ID`.\n\nA successful request will receive a 204 status code with no body in response.\nThis indicates that the request was processed successfully.",
+      "fields": []
+    },
+    {
+      "tool_name": "loadBalancers_get",
+      "description": "Retrieve an Existing Load Balancer\n\nTo show information about a load balancer instance, send a GET request to\n`/v2/load_balancers/$LOAD_BALANCER_ID`.",
+      "fields": [
+        {
+          "field_name": "lb_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique identifier for a load balancer."
+        }
+      ]
+    },
+    {
+      "tool_name": "loadBalancers_update",
+      "description": "Update a Load Balancer\n\nTo update a load balancer's settings, send a PUT request to\n`/v2/load_balancers/$LOAD_BALANCER_ID`. The request should contain a full\nrepresentation of the load balancer including existing attributes. It may\ncontain _one of_ the `droplets_ids` or `tag` attributes as they are mutually\nexclusive. **Note that any attribute that is not provided will be reset to its\ndefault value.**",
+      "fields": []
+    },
+    {
+      "tool_name": "loadBalancers_remove_droplets",
+      "description": "Remove Droplets from a Load Balancer\n\nTo remove a Droplet from a load balancer instance, send a DELETE request to\n`/v2/load_balancers/$LOAD_BALANCER_ID/droplets`. In the body of the request,\nthere should be a `droplet_ids` attribute containing a list of Droplet IDs.\n\nNo response body will be sent back, but the response code will indicate\nsuccess. Specifically, the response code will be a 204, which means that the\naction was successful with no returned body data.",
+      "fields": []
+    },
+    {
+      "tool_name": "loadBalancers_add_droplets",
+      "description": "Add Droplets to a Load Balancer\n\nTo assign a Droplet to a load balancer instance, send a POST request to\n`/v2/load_balancers/$LOAD_BALANCER_ID/droplets`. In the body of the request,\nthere should be a `droplet_ids` attribute containing a list of Droplet IDs.\nIndividual Droplets can not be added to a load balancer configured with a\nDroplet tag. Attempting to do so will result in a \"422 Unprocessable Entity\"\nresponse from the API.\n\nNo response body will be sent back, but the response code will indicate\nsuccess. Specifically, the response code will be a 204, which means that the\naction was successful with no returned body data.",
+      "fields": []
+    },
+    {
+      "tool_name": "loadBalancers_remove_forwardingRules",
+      "description": "Remove Forwarding Rules from a Load Balancer\n\nTo remove forwarding rules from a load balancer instance, send a DELETE\nrequest to `/v2/load_balancers/$LOAD_BALANCER_ID/forwarding_rules`. In the\nbody of the request, there should be a `forwarding_rules` attribute containing\nan array of rules to be removed.\n\nNo response body will be sent back, but the response code will indicate\nsuccess. Specifically, the response code will be a 204, which means that the\naction was successful with no returned body data.",
+      "fields": [
+        {
+          "field_name": "forwarding_rules",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        }
+      ]
+    },
+    {
+      "tool_name": "loadBalancers_add_forwardingRules",
+      "description": "Add Forwarding Rules to a Load Balancer\n\nTo add an additional forwarding rule to a load balancer instance, send a POST\nrequest to `/v2/load_balancers/$LOAD_BALANCER_ID/forwarding_rules`. In the body\nof the request, there should be a `forwarding_rules` attribute containing an\narray of rules to be added.\n\nNo response body will be sent back, but the response code will indicate\nsuccess. Specifically, the response code will be a 204, which means that the\naction was successful with no returned body data.",
+      "fields": [
+        {
+          "field_name": "forwarding_rules",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        }
+      ]
+    },
+    {
+      "tool_name": "monitoring_list_alertPolicy",
+      "description": "List Alert Policies\n\nReturns all alert policies that are configured for the given account. To List all alert policies, send a GET request to `/v2/monitoring/alerts`.",
+      "fields": []
+    },
+    {
+      "tool_name": "monitoring_create_alertPolicy",
+      "description": "Create Alert Policy\n\nTo create a new alert, send a POST request to `/v2/monitoring/alerts`.",
+      "fields": [
+        {
+          "field_name": "alerts",
+          "dimensions": [],
+          "confidence": "unknown"
+        },
+        {
+          "field_name": "compare",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "description",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "enabled",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean"
+        },
+        {
+          "field_name": "entities",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "tags",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array"
+        },
+        {
+          "field_name": "type",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        },
+        {
+          "field_name": "value",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "number"
+        },
+        {
+          "field_name": "window",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string"
+        }
+      ]
+    },
+    {
+      "tool_name": "monitoring_delete_alertPolicy",
+      "description": "Delete an Alert Policy\n\nTo delete an alert policy, send a DELETE request to `/v2/monitoring/alerts/{alert_uuid}`",
+      "fields": []
+    },
+    {
+      "tool_name": "monitoring_get_alertPolicy",
+      "description": "Retrieve an Existing Alert Policy\n\nTo retrieve a given alert policy, send a GET request to `/v2/monitoring/alerts/{alert_uuid}`",
+      "fields": [
+        {
+          "field_name": "alert_uuid",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique identifier for an alert policy."
+        }
+      ]
+    },
+    {
+      "tool_name": "monitoring_update_alertPolicy",
+      "description": "Update an Alert Policy\n\nTo update en existing policy, send a PUT request to `v2/monitoring/alerts/{alert_uuid}`.",
+      "fields": []
+    },
+    {
+      "tool_name": "monitoring_get_dropletBandwidthMetrics",
+      "description": "Get Droplet Bandwidth Metrics\n\nTo retrieve bandwidth metrics for a given Droplet, send a GET request to `/v2/monitoring/metrics/droplet/bandwidth`. Use the `interface` query parameter to specify if the results should be for the `private` or `public` interface. Use the `direction` query parameter to specify if the results should be for `inbound` or `outbound` traffic.",
+      "fields": [
+        {
+          "field_name": "host_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The droplet ID."
+        },
+        {
+          "field_name": "interface",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The network interface."
+        },
+        {
+          "field_name": "direction",
+          "dimensions": [
+            "sort_direction"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "The traffic direction."
+        },
+        {
+          "field_name": "start",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Timestamp to start metric window."
+        },
+        {
+          "field_name": "end",
+          "dimensions": [
+            "temporal_format"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Timestamp to end metric window."
+        }
+      ]
+    },
+    {
+      "tool_name": "monitoring_get_DropletCpuMetrics",
+      "description": "Get Droplet CPU Metrics\n\nTo retrieve CPU metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/cpu`.",
+      "fields": []
+    },
+    {
+      "tool_name": "monitoring_get_dropletFilesystemFreeMetrics",
+      "description": "Get Droplet Filesystem Free Metrics\n\nTo retrieve filesystem free metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/filesystem_free`.",
+      "fields": []
+    },
+    {
+      "tool_name": "monitoring_get_dropletFilesystemSizeMetrics",
+      "description": "Get Droplet Filesystem Size Metrics\n\nTo retrieve filesystem size metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/filesystem_size`.",
+      "fields": []
+    },
+    {
+      "tool_name": "monitoring_get_dropletLoad1Metrics",
+      "description": "Get Droplet Load1 Metrics\n\nTo retrieve 1 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_1`.",
+      "fields": []
+    },
+    {
+      "tool_name": "monitoring_get_dropletLoad15Metrics",
+      "description": "Get Droplet Load15 Metrics\n\nTo retrieve 15 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_15`.",
+      "fields": []
+    },
+    {
+      "tool_name": "monitoring_get_dropletLoad5Metrics",
+      "description": "Get Droplet Load5 Metrics\n\nTo retrieve 5 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_5`.",
+      "fields": []
+    },
+    {
+      "tool_name": "monitoring_get_dropletMemoryAvailableMetrics",
+      "description": "Get Droplet Available Memory Metrics\n\nTo retrieve available memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_available`.",
+      "fields": []
+    },
+    {
+      "tool_name": "monitoring_get_dropletMemoryCachedMetrics",
+      "description": "Get Droplet Cached Memory Metrics\n\nTo retrieve cached memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_cached`.",
+      "fields": []
+    },
+    {
+      "tool_name": "monitoring_get_dropletMemoryFreeMetrics",
+      "description": "Get Droplet Free Memory Metrics\n\nTo retrieve free memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_free`.",
+      "fields": []
+    },
+    {
+      "tool_name": "monitoring_get_dropletMemoryTotalMetrics",
+      "description": "Get Droplet Total Memory Metrics\n\nTo retrieve total memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_total`.",
+      "fields": []
+    },
+    {
+      "tool_name": "projects_list",
+      "description": "List All Projects\n\nTo list all your projects, send a GET request to `/v2/projects`.",
+      "fields": []
+    },
+    {
+      "tool_name": "projects_create",
+      "description": "Create a Project\n\nTo create a project, send a POST request to `/v2/projects`.",
+      "fields": []
+    },
+    {
+      "tool_name": "projects_get_default",
+      "description": "Retrieve the Default Project\n\nTo get your default project, send a GET request to `/v2/projects/default`.",
+      "fields": []
+    },
+    {
+      "tool_name": "projects_patch_default",
+      "description": "Patch the Default Project\n\nTo update only specific attributes of your default project, send a PATCH request to `/v2/projects/default`. At least one of the following attributes needs to be sent.",
+      "fields": []
+    },
+    {
+      "tool_name": "projects_update_default",
+      "description": "Update the Default Project\n\nTo update you default project, send a PUT request to `/v2/projects/default`. All of the following attributes must be sent.",
+      "fields": []
+    },
+    {
+      "tool_name": "projects_list_resources_default",
+      "description": "List Default Project Resources\n\nTo list all your resources in your default project, send a GET request to `/v2/projects/default/resources`.",
+      "fields": []
+    },
+    {
+      "tool_name": "projects_assign_resources_default",
+      "description": "Assign Resources to Default Project\n\nTo assign resources to your default project, send a POST request to `/v2/projects/default/resources`.",
+      "fields": []
+    },
+    {
+      "tool_name": "projects_delete",
+      "description": "Delete an Existing Project\n\nTo delete a project, send a DELETE request to `/v2/projects/$PROJECT_ID`. To\nbe deleted, a project must not have any resources assigned to it. Any existing\nresources must first be reassigned or destroyed, or you will receive a 412 error.\n\nA successful request will receive a 204 status code with no body in response.\nThis indicates that the request was processed successfully.",
+      "fields": []
+    },
+    {
+      "tool_name": "projects_get",
+      "description": "Retrieve an Existing Project\n\nTo get a project, send a GET request to `/v2/projects/$PROJECT_ID`.",
+      "fields": [
+        {
+          "field_name": "project_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique identifier for a project."
+        }
+      ]
+    },
+    {
+      "tool_name": "projects_patch",
+      "description": "Patch a Project\n\nTo update only specific attributes of a project, send a PATCH request to `/v2/projects/$PROJECT_ID`. At least one of the following attributes needs to be sent.",
+      "fields": []
+    },
+    {
+      "tool_name": "projects_update",
+      "description": "Update a Project\n\nTo update a project, send a PUT request to `/v2/projects/$PROJECT_ID`. All of the following attributes must be sent.",
+      "fields": []
+    },
+    {
+      "tool_name": "projects_list_resources",
+      "description": "List Project Resources\n\nTo list all your resources in a project, send a GET request to `/v2/projects/$PROJECT_ID/resources`.",
+      "fields": []
+    },
+    {
+      "tool_name": "projects_assign_resources",
+      "description": "Assign Resources to a Project\n\nTo assign resources to a project, send a POST request to `/v2/projects/$PROJECT_ID/resources`.",
+      "fields": [
+        {
+          "field_name": "resources",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "A list of uniform resource names (URNs) to be added to a project."
+        }
+      ]
+    },
+    {
+      "tool_name": "regions_list",
+      "description": "List All Data Center Regions\n\nTo list all of the regions that are available, send a GET request to `/v2/regions`.\nThe response will be a JSON object with a key called `regions`. The value of this will be an array of `region` objects, each of which will contain the standard region attributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "registry_delete",
+      "description": "Delete Container Registry\n\nTo delete your container registry, destroying all container image data stored in it, send a DELETE request to `/v2/registry`.",
+      "fields": []
+    },
+    {
+      "tool_name": "registry_get",
+      "description": "Get Container Registry Information\n\nTo get information about your container registry, send a GET request to `/v2/registry`.",
+      "fields": []
+    },
+    {
+      "tool_name": "registry_create",
+      "description": "Create Container Registry\n\nTo create your container registry, send a POST request to `/v2/registry`.\n\nThe `name` becomes part of the URL for images stored in the registry. For\nexample, if your registry is called `example`, an image in it will have the\nURL `registry.digitalocean.com/example/image:tag`.",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A globally unique name for the container registry. Must be lowercase and be composed only of numbers, letters and `-`, up to a limit of 63 characters."
+        },
+        {
+          "field_name": "region",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "Slug of the region where registry data is stored. When not provided, a region will be selected."
+        },
+        {
+          "field_name": "subscription_tier_slug",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The slug of the subscription tier to sign up for. Valid values can be retrieved using the options endpoint."
+        }
+      ]
+    },
+    {
+      "tool_name": "registry_get_dockerCredentials",
+      "description": "Get Docker Credentials for Container Registry\n\nIn order to access your container registry with the Docker client or from a\nKubernetes cluster, you will need to configure authentication. The necessary\nJSON configuration can be retrieved by sending a GET request to\n`/v2/registry/docker-credentials`.\n\nThe response will be in the format of a Docker `config.json` file. To use the\nconfig in your Kubernetes cluster, create a Secret with:\n\n    kubectl create secret generic docr \\\n      --from-file=.dockerconfigjson=config.json \\\n      --type=kubernetes.io/dockerconfigjson\n\nBy default, the returned credentials have read-only access to your registry\nand cannot be used to push images. This is appropriate for most Kubernetes\nclusters. To retrieve read/write credentials, suitable for use with the Docker\nclient or in a CI system, read_write may be provided as query parameter. For\nexample: `/v2/registry/docker-credentials?read_write=true`\n\nBy default, the returned credentials will not expire. To retrieve credentials\nwith an expiry set, expiry_seconds may be provided as a query parameter. For\nexample: `/v2/registry/docker-credentials?expiry_seconds=3600` will return\ncredentials that expire after one hour.",
+      "fields": [
+        {
+          "field_name": "expiry_seconds",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "integer",
+          "description": "The duration in seconds that the returned registry credentials will be valid. If not set or 0, the credentials will not expire."
+        },
+        {
+          "field_name": "read_write",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "By default, the registry credentials allow for read-only access. Set this query parameter to `true` to obtain read-write credentials."
+        }
+      ]
+    },
+    {
+      "tool_name": "registry_get_options",
+      "description": "List Registry Options (Subscription Tiers and Available Regions)\n\nThis endpoint serves to provide additional information as to which option values are available when creating a container registry.\nThere are multiple subscription tiers available for container registry. Each tier allows a different number of image repositories to be created in your registry, and has a different amount of storage and transfer included.\nThere are multiple regions available for container registry and controls where your data is stored.\nTo list the available options, send a GET request to `/v2/registry/options`.",
+      "fields": []
+    },
+    {
+      "tool_name": "registry_get_subscription",
+      "description": "Get Subscription Information\n\nA subscription is automatically created when you configure your container registry. To get information about your subscription, send a GET request to `/v2/registry/subscription`.",
+      "fields": []
+    },
+    {
+      "tool_name": "registry_update_subscription",
+      "description": "Update Subscription Tier\n\nAfter creating your registry, you can switch to a different subscription tier to better suit your needs. To do this, send a POST request to `/v2/registry/subscription`.",
+      "fields": [
+        {
+          "field_name": "tier_slug",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The slug of the subscription tier to sign up for."
+        }
+      ]
+    },
+    {
+      "tool_name": "registry_validate_name",
+      "description": "Validate a Container Registry Name\n\nTo validate that a container registry name is available for use, send a POST\nrequest to `/v2/registry/validate-name`.\n\nIf the name is both formatted correctly and available, the response code will\nbe 204 and contain no body. If the name is already in use, the response will\nbe a 409 Conflict.",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A globally unique name for the container registry. Must be lowercase and be composed only of numbers, letters and `-`, up to a limit of 63 characters."
+        }
+      ]
+    },
+    {
+      "tool_name": "registry_get_garbageCollection",
+      "description": "Get Active Garbage Collection\n\nTo get information about the currently-active garbage collection for a registry, send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collection`.",
+      "fields": []
+    },
+    {
+      "tool_name": "registry_run_garbageCollection",
+      "description": "Start Garbage Collection\n\nGarbage collection enables users to clear out unreferenced blobs (layer &\nmanifest data) after deleting one or more manifests from a repository. If\nthere are no unreferenced blobs resulting from the deletion of one or more\nmanifests, garbage collection is effectively a noop.\n[See here for more information](https://www.digitalocean.com/docs/container-registry/how-to/clean-up-container-registry/)\nabout how and why you should clean up your container registry periodically.\n\nTo request a garbage collection run on your registry, send a POST request to\n`/v2/registry/$REGISTRY_NAME/garbage-collection`. This will initiate the\nfollowing sequence of events on your registry.\n\n* Set the registry to read-only mode, meaning no further write-scoped\n  JWTs will be issued to registry clients. Existing write-scoped JWTs will\n  continue to work until they expire which can take up to 15 minutes.\n* Wait until all existing write-scoped JWTs have expired.\n* Scan all registry manifests to determine which blobs are unreferenced.\n* Delete all unreferenced blobs from the registry.\n* Record the number of blobs deleted and bytes freed, mark the garbage\n  collection status as `success`.\n* Remove the read-only mode restriction from the registry, meaning write-scoped\n  JWTs will once again be issued to registry clients.",
+      "fields": []
+    },
+    {
+      "tool_name": "registry_update_garbageCollection",
+      "description": "Update Garbage Collection\n\nTo cancel the currently-active garbage collection for a registry, send a PUT request to `/v2/registry/$REGISTRY_NAME/garbage-collection/$GC_UUID` and specify one or more of the attributes below.",
+      "fields": [
+        {
+          "field_name": "garbage_collection_uuid",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The UUID of a garbage collection run."
+        },
+        {
+          "field_name": "cancel",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "boolean",
+          "description": "A boolean value indicating that the garbage collection should be cancelled."
+        }
+      ]
+    },
+    {
+      "tool_name": "registry_list_garbageCollections",
+      "description": "List Garbage Collections\n\nTo get information about past garbage collections for a registry, send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collections`.",
+      "fields": []
+    },
+    {
+      "tool_name": "registry_list_repositories",
+      "description": "List All Container Registry Repositories\n\nThis endpoint has been deprecated in favor of the _List All Container Registry Repositories [V2]_ endpoint.\n\nTo list all repositories in your container registry, send a GET\nrequest to `/v2/registry/$REGISTRY_NAME/repositories`.",
+      "fields": [
+        {
+          "field_name": "registry_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The name of a container registry."
+        }
+      ]
+    },
+    {
+      "tool_name": "registry_list_repositoriesV2",
+      "description": "List All Container Registry Repositories (V2)\n\nTo list all repositories in your container registry, send a GET request to `/v2/registry/$REGISTRY_NAME/repositoriesV2`.",
+      "fields": [
+        {
+          "field_name": "page",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "integer",
+          "description": "Which 'page' of paginated results to return. Ignored when 'page_token' is provided."
+        },
+        {
+          "field_name": "page_token",
+          "dimensions": [
+            "id_offset"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Token to retrieve of the next or previous set of results more quickly than using 'page'."
+        }
+      ]
+    },
+    {
+      "tool_name": "registry_list_repositoryManifests",
+      "description": "List All Container Registry Repository Manifests\n\nTo list all manifests in your container registry repository, send a GET\nrequest to `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests`.\n\nNote that if your repository name contains `/` characters, it must be\nURL-encoded in the request URL. For example, to list manifests for\n`registry.digitalocean.com/example/my/repo`, the path would be\n`/v2/registry/example/repositories/my%2Frepo/digests`.",
+      "fields": []
+    },
+    {
+      "tool_name": "registry_delete_repositoryManifest",
+      "description": "Delete Container Registry Repository Manifest\n\nTo delete a container repository manifest by digest, send a DELETE request to\n`/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests/$MANIFEST_DIGEST`.\n\nNote that if your repository name contains `/` characters, it must be\nURL-encoded in the request URL. For example, to delete\n`registry.digitalocean.com/example/my/repo@sha256:abcd`, the path would be\n`/v2/registry/example/repositories/my%2Frepo/digests/sha256:abcd`.\n\nA successful request will receive a 204 status code with no body in response.\nThis indicates that the request was processed successfully.",
+      "fields": [
+        {
+          "field_name": "manifest_digest",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The manifest digest of a container registry repository tag."
+        }
+      ]
+    },
+    {
+      "tool_name": "registry_list_repositoryTags",
+      "description": "List All Container Registry Repository Tags\n\nTo list all tags in your container registry repository, send a GET\nrequest to `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags`.\n\nNote that if your repository name contains `/` characters, it must be\nURL-encoded in the request URL. For example, to list tags for\n`registry.digitalocean.com/example/my/repo`, the path would be\n`/v2/registry/example/repositories/my%2Frepo/tags`.",
+      "fields": [
+        {
+          "field_name": "repository_name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The name of a container registry repository. If the name contains `/` characters, they must be URL-encoded, e.g. `%2F`."
+        }
+      ]
+    },
+    {
+      "tool_name": "registry_delete_repositoryTag",
+      "description": "Delete Container Registry Repository Tag\n\nTo delete a container repository tag, send a DELETE request to\n`/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags/$TAG`.\n\nNote that if your repository name contains `/` characters, it must be\nURL-encoded in the request URL. For example, to delete\n`registry.digitalocean.com/example/my/repo:mytag`, the path would be\n`/v2/registry/example/repositories/my%2Frepo/tags/mytag`.\n\nA successful request will receive a 204 status code with no body in response.\nThis indicates that the request was processed successfully.",
+      "fields": [
+        {
+          "field_name": "repository_tag",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The name of a container registry repository tag."
+        }
+      ]
+    },
+    {
+      "tool_name": "droplets_list_neighborsIds",
+      "description": "List All Droplet Neighbors\n\nTo retrieve a list of all Droplets that are co-located on the same physical\nhardware, send a GET request to `/v2/reports/droplet_neighbors_ids`.\n\nThe results will be returned as a JSON object with a key of `neighbor_ids`.\nThis will be set to an array of arrays. Each array will contain a set of\nDroplet IDs for Droplets that share a physical server. An empty array\nindicates that all Droplets associated with your account are located on\nseparate physical hardware.",
+      "fields": [
+        {
+          "field_name": "_description",
+          "dimensions": [
+            "industry_code"
+          ],
+          "confidence": "inferred",
+          "description": "List All Droplet Neighbors\n\nTo retrieve a list of all Droplets that are co-located on the same physical\nhardware, send a GET request to `/v2/reports/droplet_neighbors_ids`.\n\nThe results will be returned as a JSON object with a key of `neighbor_ids`.\nThis will be set to an array of arrays. Each array will contain a set of\nDroplet IDs for Droplets that share a physical server. An empty array\nindicates that all Droplets associated with your account are located on\nseparate physical hardware."
+        }
+      ]
+    },
+    {
+      "tool_name": "reservedIPs_list",
+      "description": "List All Reserved IPs\n\nTo list all of the reserved IPs available on your account, send a GET request to `/v2/reserved_ips`.",
+      "fields": []
+    },
+    {
+      "tool_name": "reservedIPs_create",
+      "description": "Create a New Reserved IP\n\nOn creation, a reserved IP must be either assigned to a Droplet or reserved to a region.\n* To create a new reserved IP assigned to a Droplet, send a POST\n  request to `/v2/reserved_ips` with the `droplet_id` attribute.\n\n* To create a new reserved IP reserved to a region, send a POST request to\n  `/v2/reserved_ips` with the `region` attribute.\n\n**Note**:  In addition to the standard rate limiting, only 12 reserved IPs may be created per 60 seconds.",
+      "fields": []
+    },
+    {
+      "tool_name": "reservedIPs_delete",
+      "description": "Delete a Reserved IP\n\nTo delete a reserved IP and remove it from your account, send a DELETE request\nto `/v2/reserved_ips/$RESERVED_IP_ADDR`.\n\nA successful request will receive a 204 status code with no body in response.\nThis indicates that the request was processed successfully.",
+      "fields": []
+    },
+    {
+      "tool_name": "reservedIPs_get",
+      "description": "Retrieve an Existing Reserved IP\n\nTo show information about a reserved IP, send a GET request to `/v2/reserved_ips/$RESERVED_IP_ADDR`.",
+      "fields": [
+        {
+          "field_name": "reserved_ip",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A reserved IP address."
+        }
+      ]
+    },
+    {
+      "tool_name": "reservedIPsActions_list",
+      "description": "List All Actions for a Reserved IP\n\nTo retrieve all actions that have been executed on a reserved IP, send a GET request to `/v2/reserved_ips/$RESERVED_IP/actions`.",
+      "fields": []
+    },
+    {
+      "tool_name": "reservedIPsActions_post",
+      "description": "Initiate a Reserved IP Action\n\nTo initiate an action on a reserved IP send a POST request to\n`/v2/reserved_ips/$RESERVED_IP/actions`. In the JSON body to the request,\nset the `type` attribute to on of the supported action types:\n\n| Action     | Details\n|------------|--------\n| `assign`   | Assigns a reserved IP to a Droplet\n| `unassign` | Unassign a reserved IP from a Droplet",
+      "fields": []
+    },
+    {
+      "tool_name": "reservedIPsActions_get",
+      "description": "Retrieve an Existing Reserved IP Action\n\nTo retrieve the status of a reserved IP action, send a GET request to `/v2/reserved_ips/$RESERVED_IP/actions/$ACTION_ID`.",
+      "fields": []
+    },
+    {
+      "tool_name": "sizes_list",
+      "description": "List All Droplet Sizes\n\nTo list all of available Droplet sizes, send a GET request to `/v2/sizes`.\nThe response will be a JSON object with a key called `sizes`. The value of this will be an array of `size` objects each of which contain the standard size attributes.",
+      "fields": []
+    },
+    {
+      "tool_name": "snapshots_list",
+      "description": "List All Snapshots\n\nTo list all of the snapshots available on your account, send a GET request to\n`/v2/snapshots`.\n\nThe response will be a JSON object with a key called `snapshots`. This will be\nset to an array of `snapshot` objects, each of which will contain the standard\nsnapshot attributes.\n\n### Filtering Results by Resource Type\n\nIt's possible to request filtered results by including certain query parameters.\n\n#### List Droplet Snapshots\n\nTo retrieve only snapshots based on Droplets, include the `resource_type`\nquery parameter set to `droplet`. For example, `/v2/snapshots?resource_type=droplet`.\n\n#### List Volume Snapshots\n\nTo retrieve only snapshots based on volumes, include the `resource_type`\nquery parameter set to `volume`. For example, `/v2/snapshots?resource_type=volume`.",
+      "fields": [
+        {
+          "field_name": "resource_type",
+          "dimensions": [
+            "fhir_resource_type"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Used to filter snapshots by a resource type."
+        }
+      ]
+    },
+    {
+      "tool_name": "snapshots_delete",
+      "description": "Delete a Snapshot\n\nBoth Droplet and volume snapshots are managed through the `/v2/snapshots/`\nendpoint. To delete a snapshot, send a DELETE request to\n`/v2/snapshots/$SNAPSHOT_ID`.\n\nA status of 204 will be given. This indicates that the request was processed\nsuccessfully, but that no response body is needed.",
+      "fields": []
+    },
+    {
+      "tool_name": "snapshots_get",
+      "description": "Retrieve an Existing Snapshot\n\nTo retrieve information about a snapshot, send a GET request to\n`/v2/snapshots/$SNAPSHOT_ID`.\n\nThe response will be a JSON object with a key called `snapshot`. The value of\nthis will be an snapshot object containing the standard snapshot attributes.",
+      "fields": [
+        {
+          "field_name": "snapshot_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "Either the ID of an existing snapshot. This will be an integer for a Droplet snapshot or a string for a volume snapshot."
+        }
+      ]
+    },
+    {
+      "tool_name": "tags_list",
+      "description": "List All Tags\n\nTo list all of your tags, you can send a GET request to `/v2/tags`.",
+      "fields": []
+    },
+    {
+      "tool_name": "tags_create",
+      "description": "Create a New Tag\n\nTo create a tag you can send a POST request to `/v2/tags` with a `name` attribute.",
+      "fields": []
+    },
+    {
+      "tool_name": "tags_delete",
+      "description": "Delete a Tag\n\nA tag can be deleted by sending a `DELETE` request to `/v2/tags/$TAG_NAME`. Deleting a tag also untags all the resources that have previously been tagged by the Tag",
+      "fields": []
+    },
+    {
+      "tool_name": "tags_get",
+      "description": "Retrieve a Tag\n\nTo retrieve an individual tag, you can send a `GET` request to `/v2/tags/$TAG_NAME`.",
+      "fields": [
+        {
+          "field_name": "tag_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The name of the tag. Tags may contain letters, numbers, colons, dashes, and underscores. There is a limit of 255 characters per tag."
+        }
+      ]
+    },
+    {
+      "tool_name": "tags_unassign_resources",
+      "description": "Untag a Resource\n\nResources can be untagged by sending a DELETE request to `/v2/tags/$TAG_NAME/resources` with an array of json objects containing `resource_id` and `resource_type` attributes.\nCurrently only untagging of Droplets, Databases, Images, Volumes, and Volume Snapshots is supported. `resource_type` is expected to be the string `droplet`, `database`, `image`, `volume` or `volume_snapshot`. `resource_id` is expected to be the ID of the resource as a string.",
+      "fields": []
+    },
+    {
+      "tool_name": "tags_assign_resources",
+      "description": "Tag a Resource\n\nResources can be tagged by sending a POST request to `/v2/tags/$TAG_NAME/resources` with an array of json objects containing `resource_id` and `resource_type` attributes.\nCurrently only tagging of Droplets, Databases, Images, Volumes, and Volume Snapshots is supported. `resource_type` is expected to be the string `droplet`, `database`, `image`, `volume` or `volume_snapshot`. `resource_id` is expected to be the ID of the resource as a string.",
+      "fields": [
+        {
+          "field_name": "resources",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "array",
+          "description": "An array of objects containing resource_id and resource_type  attributes."
+        }
+      ]
+    },
+    {
+      "tool_name": "uptime_checks_list",
+      "description": "List All Checks\n\nTo list all of the Uptime checks on your account, send a GET request to `/v2/uptime/checks`.",
+      "fields": []
+    },
+    {
+      "tool_name": "uptime_check_create",
+      "description": "Create a New Check\n\nTo create an Uptime check, send a POST request to `/v2/uptime/checks` specifying the attributes\nin the table below in the JSON body.",
+      "fields": []
+    },
+    {
+      "tool_name": "uptime_check_delete",
+      "description": "Delete a Check\n\nTo delete an Uptime check, send a DELETE request to `/v2/uptime/checks/$CHECK_ID`. A 204 status\ncode with no body will be returned in response to a successful request.\n\n\nDeleting a check will also delete alerts associated with the check.",
+      "fields": []
+    },
+    {
+      "tool_name": "uptime_check_get",
+      "description": "Retrieve an Existing Check\n\nTo show information about an existing check, send a GET request to `/v2/uptime/checks/$CHECK_ID`.",
+      "fields": [
+        {
+          "field_name": "check_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique identifier for a check."
+        }
+      ]
+    },
+    {
+      "tool_name": "uptime_check_update",
+      "description": "Update a Check\n\nTo update the settings of an Uptime check, send a PUT request to `/v2/uptime/checks/$CHECK_ID`.",
+      "fields": []
+    },
+    {
+      "tool_name": "uptime_check_alerts_list",
+      "description": "List All Alerts\n\nTo list all of the alerts for an Uptime check, send a GET request to `/v2/uptime/checks/$CHECK_ID/alerts`.",
+      "fields": []
+    },
+    {
+      "tool_name": "uptime_alert_create",
+      "description": "Create a New Alert\n\nTo create an Uptime alert, send a POST request to `/v2/uptime/checks/$CHECK_ID/alerts` specifying the attributes\nin the table below in the JSON body.",
+      "fields": []
+    },
+    {
+      "tool_name": "uptime_alert_delete",
+      "description": "Delete an Alert\n\nTo delete an Uptime alert, send a DELETE request to `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`. A 204 status\ncode with no body will be returned in response to a successful request.",
+      "fields": []
+    },
+    {
+      "tool_name": "uptime_alert_get",
+      "description": "Retrieve an Existing Alert\n\nTo show information about an existing alert, send a GET request to `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.",
+      "fields": [
+        {
+          "field_name": "alert_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique identifier for an alert."
+        }
+      ]
+    },
+    {
+      "tool_name": "uptime_alert_update",
+      "description": "Update an Alert\n\nTo update the settings of an Uptime alert, send a PUT request to `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.",
+      "fields": []
+    },
+    {
+      "tool_name": "uptime_check_state_get",
+      "description": "Retrieve Check State\n\nTo show information about an existing check's state, send a GET request to `/v2/uptime/checks/$CHECK_ID/state`.",
+      "fields": []
+    },
+    {
+      "tool_name": "volumes_delete_byName",
+      "description": "Delete a Block Storage Volume by Name\n\nBlock storage volumes may also be deleted by name by sending a DELETE request with the volume's **name** and the **region slug** for the region it is located in as query parameters to `/v2/volumes?name=$VOLUME_NAME&region=nyc1`.\nNo response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.",
+      "fields": []
+    },
+    {
+      "tool_name": "volumes_list",
+      "description": "List All Block Storage Volumes\n\nTo list all of the block storage volumes available on your account, send a GET request to `/v2/volumes`.\n## Filtering Results\n### By Region\nThe `region` may be provided as query parameter in order to restrict results to volumes available in a specific region. For example: `/v2/volumes?region=nyc1`\n### By Name\nIt is also possible to list volumes on your account that match a specified name. To do so, send a GET request with the volume's name as a query parameter to `/v2/volumes?name=$VOLUME_NAME`.\n**Note:** You can only create one volume per region with the same name.\n### By Name and Region\nIt is also possible to retrieve information about a block storage volume by name. To do so, send a GET request with the volume's name and the region slug for the region it is located in as query parameters to `/v2/volumes?name=$VOLUME_NAME&region=nyc1`.",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The block storage volume's name."
+        },
+        {
+          "field_name": "region",
+          "dimensions": [],
+          "confidence": "unknown",
+          "description": "The slug identifier for the region where the resource is available."
+        }
+      ]
+    },
+    {
+      "tool_name": "volumes_create",
+      "description": "Create a New Block Storage Volume\n\nTo create a new volume, send a POST request to `/v2/volumes`. Optionally, a `filesystem_type` attribute may be provided in order to automatically format the volume's filesystem. Pre-formatted volumes are automatically mounted when attached to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April 26, 2018. Attaching pre-formatted volumes to Droplets without support for auto-mounting is not recommended.",
+      "fields": []
+    },
+    {
+      "tool_name": "volumeActions_post",
+      "description": "Initiate A Block Storage Action By Volume Name\n\nTo initiate an action on a block storage volume by Name, send a POST request to\n`~/v2/volumes/actions`. The body should contain the appropriate\nattributes for the respective action.\n\n## Attach a Block Storage Volume to a Droplet\n\n| Attribute   | Details                                                             |\n| ----------- | ------------------------------------------------------------------- |\n| type        | This must be `attach`                                               |\n| volume_name | The name of the block storage volume                                |\n| droplet_id  | Set to the Droplet's ID                                             |\n| region      | Set to the slug representing the region where the volume is located |\n\nEach volume may only be attached to a single Droplet. However, up to five\nvolumes may be attached to a Droplet at a time. Pre-formatted volumes will be\nautomatically mounted to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS\nDroplets created on or after April 26, 2018 when attached. On older Droplets,\n[additional configuration](https://www.digitalocean.com/community/tutorials/how-to-partition-and-format-digitalocean-block-storage-volumes-in-linux#mounting-the-filesystems)\nis required.\n\n## Remove a Block Storage Volume from a Droplet\n\n| Attribute   | Details                                                             |\n| ----------- | ------------------------------------------------------------------- |\n| type        | This must be `detach`                                               |\n| volume_name | The name of the block storage volume                                |\n| droplet_id  | Set to the Droplet's ID                                             |\n| region      | Set to the slug representing the region where the volume is located |",
+      "fields": []
+    },
+    {
+      "tool_name": "volumeSnapshots_delete_byId",
+      "description": "Delete a Volume Snapshot\n\nTo delete a volume snapshot, send a DELETE request to\n`/v2/snapshots/$SNAPSHOT_ID`.\n\nA status of 204 will be given. This indicates that the request was processed\nsuccessfully, but that no response body is needed.",
+      "fields": []
+    },
+    {
+      "tool_name": "volumeSnapshots_get_byId",
+      "description": "Retrieve an Existing Volume Snapshot\n\nTo retrieve the details of a snapshot that has been created from a volume, send a GET request to `/v2/volumes/snapshots/$SNAPSHOT_ID`.",
+      "fields": []
+    },
+    {
+      "tool_name": "volumes_delete",
+      "description": "Delete a Block Storage Volume\n\nTo delete a block storage volume, destroying all data and removing it from your account, send a DELETE request to `/v2/volumes/$VOLUME_ID`.\nNo response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.",
+      "fields": []
+    },
+    {
+      "tool_name": "volumes_get",
+      "description": "Retrieve an Existing Block Storage Volume\n\nTo show information about a block storage volume, send a GET request to `/v2/volumes/$VOLUME_ID`.",
+      "fields": [
+        {
+          "field_name": "volume_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "The ID of the block storage volume."
+        }
+      ]
+    },
+    {
+      "tool_name": "volumeActions_list",
+      "description": "List All Actions for a Volume\n\nTo retrieve all actions that have been executed on a volume, send a GET request to `/v2/volumes/$VOLUME_ID/actions`.",
+      "fields": []
+    },
+    {
+      "tool_name": "volumeActions_post_byId",
+      "description": "Initiate A Block Storage Action By Volume Id\n\nTo initiate an action on a block storage volume by Id, send a POST request to\n`~/v2/volumes/$VOLUME_ID/actions`. The body should contain the appropriate\nattributes for the respective action.\n\n## Attach a Block Storage Volume to a Droplet\n\n| Attribute  | Details                                                             |\n| ---------- | ------------------------------------------------------------------- |\n| type       | This must be `attach`                                               |\n| droplet_id | Set to the Droplet's ID                                             |\n| region     | Set to the slug representing the region where the volume is located |\n\nEach volume may only be attached to a single Droplet. However, up to seven\nvolumes may be attached to a Droplet at a time. Pre-formatted volumes will be\nautomatically mounted to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS\nDroplets created on or after April 26, 2018 when attached. On older Droplets,\n[additional configuration](https://www.digitalocean.com/community/tutorials/how-to-partition-and-format-digitalocean-block-storage-volumes-in-linux#mounting-the-filesystems)\nis required.\n\n## Remove a Block Storage Volume from a Droplet\n\n| Attribute  | Details                                                             |\n| ---------- | ------------------------------------------------------------------- |\n| type       | This must be `detach`                                               |\n| droplet_id | Set to the Droplet's ID                                             |\n| region     | Set to the slug representing the region where the volume is located |\n\n## Resize a Volume\n\n| Attribute      | Details                                                             |\n| -------------- | ------------------------------------------------------------------- |\n| type           | This must be `resize`                                               |\n| size_gigabytes | The new size of the block storage volume in GiB (1024^3)            |\n| region         | Set to the slug representing the region where the volume is located |\n\nVolumes may only be resized upwards. The maximum size for a volume is 16TiB.",
+      "fields": []
+    },
+    {
+      "tool_name": "volumeActions_get",
+      "description": "Retrieve an Existing Volume Action\n\nTo retrieve the status of a volume action, send a GET request to `/v2/volumes/$VOLUME_ID/actions/$ACTION_ID`.",
+      "fields": []
+    },
+    {
+      "tool_name": "volumeSnapshots_list",
+      "description": "List Snapshots for a Volume\n\nTo retrieve the snapshots that have been created from a volume, send a GET request to `/v2/volumes/$VOLUME_ID/snapshots`.",
+      "fields": []
+    },
+    {
+      "tool_name": "volumeSnapshots_create",
+      "description": "Create Snapshot from a Volume\n\nTo create a snapshot from a volume, sent a POST request to `/v2/volumes/$VOLUME_ID/snapshots`.",
+      "fields": [
+        {
+          "field_name": "name",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A human-readable name for the volume snapshot."
+        },
+        {
+          "field_name": "tags",
+          "dimensions": [],
+          "confidence": "unknown"
+        }
+      ]
+    },
+    {
+      "tool_name": "vpcs_list",
+      "description": "List All VPCs\n\nTo list all of the VPCs on your account, send a GET request to `/v2/vpcs`.",
+      "fields": []
+    },
+    {
+      "tool_name": "vpcs_create",
+      "description": "Create a New VPC\n\nTo create a VPC, send a POST request to `/v2/vpcs` specifying the attributes\nin the table below in the JSON body.\n\n**Note:** If you do not currently have a VPC network in a specific datacenter\nregion, the first one that you create will be set as the default for that\nregion. The default VPC for a region cannot be changed or deleted.",
+      "fields": []
+    },
+    {
+      "tool_name": "vpcs_delete",
+      "description": "Delete a VPC\n\nTo delete a VPC, send a DELETE request to `/v2/vpcs/$VPC_ID`. A 204 status\ncode with no body will be returned in response to a successful request.\n\nThe default VPC for a region can not be deleted. Additionally, a VPC can only\nbe deleted if it does not contain any member resources. Attempting to delete\na region's default VPC or a VPC that still has members will result in a\n403 Forbidden error response.",
+      "fields": []
+    },
+    {
+      "tool_name": "vpcs_get",
+      "description": "Retrieve an Existing VPC\n\nTo show information about an existing VPC, send a GET request to `/v2/vpcs/$VPC_ID`.",
+      "fields": [
+        {
+          "field_name": "vpc_id",
+          "dimensions": [],
+          "confidence": "unknown",
+          "schema_type": "string",
+          "description": "A unique identifier for a VPC."
+        }
+      ]
+    },
+    {
+      "tool_name": "vpcs_patch",
+      "description": "Partially Update a VPC\n\nTo update a subset of information about a VPC, send a PATCH request to\n`/v2/vpcs/$VPC_ID`.",
+      "fields": []
+    },
+    {
+      "tool_name": "vpcs_update",
+      "description": "Update a VPC\n\nTo update information about a VPC, send a PUT request to `/v2/vpcs/$VPC_ID`.",
+      "fields": []
+    },
+    {
+      "tool_name": "vpcs_list_members",
+      "description": "List the Member Resources of a VPC\n\nTo list all of the resources that are members of a VPC, send a GET request to\n`/v2/vpcs/$VPC_ID/members`.\n\nTo only list resources of a specific type that are members of the VPC,\nincluded a `resource_type` query parameter. For example, to only list Droplets\nin the VPC, send a GET request to `/v2/vpcs/$VPC_ID/members?resource_type=droplet`.",
+      "fields": [
+        {
+          "field_name": "resource_type",
+          "dimensions": [
+            "fhir_resource_type"
+          ],
+          "confidence": "inferred",
+          "schema_type": "string",
+          "description": "Used to filter VPC members by a resource type."
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "n_tools": 290,
+    "n_fields": 171,
+    "n_declared": 0,
+    "n_inferred": 20,
+    "n_unknown": 151,
+    "n_dim_signals": 33,
+    "dim_hits": {
+      "id_offset": 3,
+      "media_type": 2,
+      "date_format": 4,
+      "temporal_format": 6,
+      "country_code": 1,
+      "currency_code": 1,
+      "path_convention": 1,
+      "null_handling": 6,
+      "unit_of_measure": 1,
+      "industry_code": 3,
+      "rate_scale": 2,
+      "sort_direction": 1,
+      "fhir_resource_type": 2
+    }
+  },
+  "capture_hash": "31540b5af54b40aaf8a654757b4abfdea9fea0121057ec8d231fee7afb0bd7a7"
+}

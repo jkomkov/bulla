@@ -1,0 +1,166 @@
+{
+  "version": "1",
+  "description": "Operational truth set for URL/path seam classification.",
+  "gates": {
+    "max_false_positives": 0,
+    "max_false_negatives": 0,
+    "min_true_positives": 2
+  },
+  "cases": [
+    {
+      "id": "fs_path_to_puppeteer_url",
+      "expect_seam": true,
+      "rationale": "Filesystem path can be mistakenly routed into browser URL input; both are unconstrained strings.",
+      "tools": [
+        {
+          "server": "filesystem",
+          "name": "read_file",
+          "description": "Read local file",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "path": { "type": "string" },
+              "content": { "type": "string" }
+            }
+          }
+        },
+        {
+          "server": "puppeteer",
+          "name": "navigate",
+          "description": "Navigate browser",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "url": { "type": "string" },
+              "waitUntil": { "type": "string" }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "github_path_to_puppeteer_url",
+      "expect_seam": true,
+      "rationale": "Repo-relative path and browser URL are both locator strings and can be crossed by an agent.",
+      "tools": [
+        {
+          "server": "github",
+          "name": "create_or_update_file",
+          "description": "Write repository file",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "path": { "type": "string" },
+              "owner": { "type": "string" }
+            }
+          }
+        },
+        {
+          "server": "puppeteer",
+          "name": "navigate",
+          "description": "Navigate browser",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "url": { "type": "string" },
+              "waitUntil": { "type": "string" }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "github_query_to_puppeteer_url",
+      "expect_seam": false,
+      "rationale": "Repository query semantics are not path conventions and should not create path seam edges.",
+      "tools": [
+        {
+          "server": "github",
+          "name": "search_repositories",
+          "description": "Search repositories",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "query": { "type": "string" },
+              "perPage": { "type": "number" }
+            }
+          }
+        },
+        {
+          "server": "puppeteer",
+          "name": "navigate",
+          "description": "Navigate browser",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "url": { "type": "string" },
+              "waitUntil": { "type": "string" }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "memory_name_to_filesystem_path",
+      "expect_seam": false,
+      "rationale": "Entity names are generic identifiers; they should not be classified as path conventions.",
+      "tools": [
+        {
+          "server": "memory",
+          "name": "create_entities",
+          "description": "Create memory entities",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "entityType": { "type": "string" }
+            }
+          }
+        },
+        {
+          "server": "filesystem",
+          "name": "read_file",
+          "description": "Read local file",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "path": { "type": "string" },
+              "content": { "type": "string" }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "memory_query_to_puppeteer_url",
+      "expect_seam": false,
+      "rationale": "Memory query text should not be treated as path/URL locator convention.",
+      "tools": [
+        {
+          "server": "memory",
+          "name": "search_nodes",
+          "description": "Search memory graph",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "query": { "type": "string" },
+              "limit": { "type": "integer" }
+            }
+          }
+        },
+        {
+          "server": "puppeteer",
+          "name": "navigate",
+          "description": "Navigate browser",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "url": { "type": "string" },
+              "waitUntil": { "type": "string" }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

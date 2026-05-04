@@ -2,7 +2,7 @@
   "source_kind": "mcp",
   "source_id": "cognee-mcp-server",
   "schema_hash": "77e14c7f125b5a08dedc2607d8bca352b4dd89245f774be9845543cc13bbd0d4",
-  "captured_at": "2026-04-26T19:32:52.809635+00:00",
+  "captured_at": "2026-05-02T20:35:30.176799+00:00",
   "active_packs": [
     {
       "name": "base",
@@ -17,7 +17,7 @@
     {
       "name": "fhir-r4",
       "version": "0.1.0",
-      "hash": "a7c0737771859f2ee620d02cf4f60e3c2e0b5cc084146df1b5fb99d55511c7f7",
+      "hash": "614aa67ae498e841a1f42084343b9d41f739e5678f1f271c1e2a03e8864bee04",
       "derives_from": {
         "standard": "HL7-FHIR",
         "version": "R4",
@@ -27,7 +27,7 @@
     {
       "name": "fhir-r5",
       "version": "0.1.0",
-      "hash": "0a649c78eac4c0e5ceaaba5647d5a64882eaa2fed9a263e93cf9832365f14094",
+      "hash": "65a946aee1b4b6585df08554171fd5a5c749793180ace1b8de8efd74fd663517",
       "derives_from": {
         "standard": "HL7-FHIR",
         "version": "R5",
@@ -36,38 +36,41 @@
     },
     {
       "name": "fix-4.4",
-      "version": "0.1.0",
-      "hash": "c6cc93a8395021f67b77edb248a53ebfa6bd7618555db99151dbb2e391c103f8",
+      "version": "0.1.1",
+      "hash": "d1caf350ea5d6f1a4023c6d15670e3ec25dfa832a015348ffeb5a4d3f70dec3a",
       "derives_from": {
         "standard": "FIX-4.4",
         "version": "4.4",
-        "source_uri": "https://github.com/connamara/quickfixengine/raw/main/spec/FIX44.xml"
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX44.xml",
+        "source_hash": "sha256:a82655b54363aa9c6d1b2f21f294f1198c0d7125d7b44c26d93d3179f3358425"
       }
     },
     {
       "name": "fix-5.0",
-      "version": "0.1.0",
-      "hash": "8dbae15ec0545f05d04270a553de710fa8ee8b2dbabd177366596e0b477c3d4a",
+      "version": "0.1.1",
+      "hash": "4313a1301e360fb9f40823328a75592039aedd2821d63b80be9cf45ed765c32a",
       "derives_from": {
         "standard": "FIX-5.0",
         "version": "5.0",
-        "source_uri": "https://github.com/connamara/quickfixengine/raw/main/spec/FIX50.xml"
+        "source_uri": "https://raw.githubusercontent.com/quickfix/quickfix/master/spec/FIX50SP2.xml",
+        "source_hash": "sha256:7d34e565586dd4096a08691d10e415b5a2fd531a8dadfcfc831daea419d3c3f3"
       }
     },
     {
       "name": "gs1",
-      "version": "0.1.0",
-      "hash": "b4e26a401bdba7c6d4a5106901f3e0f97779a6cb06cf2db3b55433f35f19ac88",
+      "version": "0.1.1",
+      "hash": "2ed09413af1da88d807787fe901c2b430a8a9304ba27f235e28b31d0ef67e4a8",
       "derives_from": {
         "standard": "GS1-General-Specifications",
-        "version": "snapshot-2026-04-26",
-        "source_uri": "https://www.gs1.org/standards/barcodes-epcrfid-id-keys/general-specifications"
+        "version": "snapshot-2026-05-02",
+        "source_uri": "https://ref.gs1.org/ai/",
+        "source_hash": "sha256:01e985153cb17c9492a07da87a3d934bfe737db8be0a436ba56a7849e4762224"
       }
     },
     {
       "name": "hl7-v2",
       "version": "0.1.0",
-      "hash": "19d66479952cf92981c0282976a0c28993f0050f19665c31da0b0fb4af11447b",
+      "hash": "0aab1b08537ae2835ab1a05adb8a0800eaf7a7ce98ad6937f6cc3f7ee721a997",
       "derives_from": {
         "standard": "HL7-v2",
         "version": "2.5.1",
@@ -77,7 +80,7 @@
     {
       "name": "iana-media-types",
       "version": "0.1.0",
-      "hash": "e9bd2147d7790eca0a71e6e74386781444f30a9e7babc3fd90e0a4ed57686903",
+      "hash": "d95ea9d09a69dd1ba4a5679e890a2509185167a10357ae8f8591d8fcde73ff0a",
       "derives_from": {
         "standard": "IANA-Media-Types",
         "version": "snapshot-2026-04-26",
@@ -86,18 +89,19 @@
     },
     {
       "name": "icd-10-cm",
-      "version": "0.1.0",
-      "hash": "f47f0a8306d1ce8d2912217b2c19b2d9377b56b9b10ebfb8803791d24d058084",
+      "version": "0.1.1",
+      "hash": "fe87dbb4b7125cab4135f2af6775b75d798390e91ab0849c3496900f43662b52",
       "derives_from": {
         "standard": "ICD-10-CM",
-        "version": "2024",
-        "source_uri": "https://www.cms.gov/files/zip/2024-icd-10-cm-code-files.zip"
+        "version": "2026",
+        "source_uri": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+        "source_hash": "sha256:55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11"
       }
     },
     {
       "name": "iso-20022",
       "version": "0.1.0",
-      "hash": "7db538fb7c2a168d64aee40b446e2e3622823aed2711cd7bde180f7fcae84f86",
+      "hash": "cf7e4bbfb6c7bd012e8508a5b07d9719bbe35b8970a60bddc3128d05e7e2598f",
       "derives_from": {
         "standard": "ISO-20022",
         "version": "2024",
@@ -127,7 +131,7 @@
     {
       "name": "iso-639",
       "version": "0.2.0",
-      "hash": "5ef8e2f31445e76abe14f399aa054accdbac55c55cece18f1c4dcdbf775cae18",
+      "hash": "0205810517db330b61965d089f78f1b427ea7fc0caec471025929ac965ffd583",
       "derives_from": {
         "standard": "ISO-639-3",
         "version": "sil-snapshot-2026-04-26",
@@ -147,7 +151,7 @@
     {
       "name": "naics-2022",
       "version": "0.1.0",
-      "hash": "73474a16f37220bd5856cddf48d3692eb06a794ae113f6abb1e05b5485426c8e",
+      "hash": "2a3143742f52266ba08484a16e889d63761d409f1055d95021dab7a03da25a2e",
       "derives_from": {
         "standard": "NAICS",
         "version": "2022",
@@ -157,7 +161,7 @@
     {
       "name": "swift-mt-mx",
       "version": "0.1.0",
-      "hash": "7e9a1fbc360a252f3fceebe50ddf8c178da6103e47f71cee724eba5aac47ecbc",
+      "hash": "7092871334e53492b46e4835ab2ef1f5d0ac9e184ed257c68ee212692f926c53",
       "derives_from": {
         "standard": "SWIFT-MT-MX",
         "version": "snapshot-2026-04-26",
@@ -167,7 +171,7 @@
     {
       "name": "ucum",
       "version": "0.1.0",
-      "hash": "fa26826eea49a71d9512aeb2c747e4eaaefae276b45bbd8fc5a2d42e8cd271c3",
+      "hash": "b16d83cbe515dc7e52d778f5fcb7d016e4a1f292cd8340307b85066141f5be65",
       "derives_from": {
         "standard": "UCUM",
         "version": "snapshot-2026-04-26",
@@ -177,7 +181,7 @@
     {
       "name": "umls-mappings",
       "version": "0.1.0",
-      "hash": "3e5bb7e321d082cedd6b9f5f4a97cad04db7a3711a7905a7027b8aa285bab9c1",
+      "hash": "b2396f760586f9656bd4b806127d5e3404f80d770288f1445beb04b27bae105d",
       "derives_from": {
         "standard": "UMLS-Metathesaurus",
         "version": "2024AB",
@@ -186,18 +190,19 @@
     },
     {
       "name": "un-edifact",
-      "version": "0.1.0",
-      "hash": "4b99b5c630db2df578696d954d9b7834fbb23295adcce9a1bd3f3d017184bbd0",
+      "version": "0.1.1",
+      "hash": "8daa8d898578ac4feaebc986a3f0a8ce367d866054aec9b0654d01bb8f8f71cd",
       "derives_from": {
         "standard": "UN-EDIFACT",
         "version": "D.21B",
-        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.htm"
+        "source_uri": "https://service.unece.org/trade/untdid/d21b/d21b.zip",
+        "source_hash": "sha256:5a14430210582deebcc04bd7393e1425875c1ac4ce48f360b0edc42e1588412f"
       }
     },
     {
       "name": "who-icd-10",
       "version": "0.1.0",
-      "hash": "a36c6d4b5a88f2f98286c78f3e7868b9c53c172472e641a1821ea408cf252347",
+      "hash": "6e653a3d4f730cc93b673893ac69b5215a0f3fbeb25059b3014aa83f5d339d69",
       "derives_from": {
         "standard": "WHO-ICD-10",
         "version": "2019",
@@ -246,5 +251,5 @@
     "n_dim_signals": 0,
     "dim_hits": {}
   },
-  "capture_hash": "50fa48cfa4a293f8894f352f48c18397875af7706315e809b677d054268b6f6c"
+  "capture_hash": "267e55bafef7cbab2e15e3cf9a3b3450bafb6df02409b97db66f634b968424cf"
 }

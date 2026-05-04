@@ -137,6 +137,139 @@ class TestPhase7DeliverableShape:
         )
 
 
+# ── Phase-4 (sprint) tightened thresholds ────────────────────────────
+
+
+class TestSprintGrowthGates:
+    """The Dimension Pack Enhancement Sprint added a network-fetch
+    path to ``build_phase7_index.py`` and curated ~35 real public
+    OpenAPI/GraphQL specs on top of the 57 MCP manifests + 8
+    synthetic fixtures. These gates pin the post-sprint deliverable
+    so a regression that drops a fetcher (or silently re-promotes
+    synthetics into the real count) is caught.
+
+    The gates compare against ``coverage.json``'s explicit
+    real-vs-synthetic breakdown — that field was added by the sprint
+    so consumers don't have to reconstruct the split from
+    ``source_id`` heuristics.
+
+    Each threshold sits a few sources below the actual sprint
+    ship to leave headroom for transient external-host failures
+    (one upstream URL drift shouldn't fail CI).
+    """
+
+    def _totals(self) -> dict:
+        cov = _load_coverage()
+        totals = cov.get("totals") or {}
+        # If the totals breakdown isn't present, derive a best-effort
+        # one from by_source so an old coverage.json doesn't make these
+        # tests vacuously pass with the wrong values.
+        if "n_real_mcp" not in totals:
+            mcp = sum(
+                1 for r in cov["by_source"] if r["source_kind"] == "mcp"
+            )
+            ext = sum(
+                1 for r in cov["by_source"]
+                if r["source_kind"] in {"openapi", "graphql"}
+                and not r["source_id"].startswith((
+                    "stripe-charges", "shopify-admin", "github-v3",
+                    "fhir-patient", "slack-web", "twilio-messages",
+                    "fix-trading-orders", "gs1-traceability",
+                ))
+            )
+            synth = sum(
+                1 for r in cov["by_source"]
+                if r["source_id"] in {
+                    "stripe-charges", "shopify-admin", "github-v3",
+                    "fhir-patient", "slack-web", "twilio-messages",
+                    "fix-trading-orders", "gs1-traceability",
+                }
+            )
+            totals = dict(totals)
+            totals["n_real_mcp"] = mcp
+            totals["n_real_external"] = ext
+            totals["n_synthetic_fixtures"] = synth
+            totals["n_real"] = mcp + ext
+            totals["n_synthetic"] = synth
+        return totals
+
+    def test_at_least_20_real_external_sources(self):
+        """The sprint added ≥ 20 successfully-fetched real public
+        OpenAPI/GraphQL specs to the corpus — beyond the 57 MCP
+        manifests + 8 synthetic fixtures."""
+        totals = self._totals()
+        n_ext = totals.get("n_real_external", 0)
+        assert n_ext >= 20, (
+            f"only {n_ext} real external schemas in the corpus; "
+            f"sprint deliverable is ≥ 20 (curated set is ~35)"
+        )
+
+    def test_at_least_75_real_sources_total(self):
+        """Real total = 57 MCP + ≥ 20 external = ≥ 77 in practice; gate
+        at 75 to leave one or two upstream-drift skips of headroom."""
+        totals = self._totals()
+        n_real = totals.get("n_real", 0)
+        assert n_real >= 75, (
+            f"only {n_real} real sources in the corpus "
+            f"(MCP + external); sprint deliverable is ≥ 75"
+        )
+
+    def test_synthetic_count_unchanged(self):
+        """The 8 hand-built synthetic fixtures are pipeline-validation,
+        not coverage. A change to this count signals a fixture
+        rename or accidental re-promotion of a real source into
+        the synthetic bucket — either deserves explicit review."""
+        totals = self._totals()
+        assert totals.get("n_synthetic") == 8 or totals.get("n_synthetic_fixtures") == 8, (
+            f"synthetic count drifted: totals={totals}"
+        )
+
+    def test_classifier_corpus_at_least_10000_rows(self):
+        """Post-sprint corpus is 25k+ rows; gate at 10k to keep
+        headroom for upstream changes that drop a few large specs."""
+        rows = _load_corpus_lines()
+        assert len(rows) >= 10_000, (
+            f"classifier corpus has only {len(rows)} rows; "
+            f"sprint deliverable is ≥ 10000"
+        )
+
+    def test_at_least_15_distinct_dimensions_fire(self):
+        """Pre-sprint: ~10 dimensions firing on the 65-source corpus.
+        Post-sprint: 28 firing on 100 sources. Gate at 15 to keep
+        headroom for upstream changes that dim out a particular
+        cluster."""
+        cov = _load_coverage()
+        n_dims = len(cov.get("by_dimension", []))
+        assert n_dims >= 15, (
+            f"only {n_dims} distinct dimensions firing; sprint "
+            f"deliverable is ≥ 15"
+        )
+
+    def test_at_least_8_seed_pack_dimensions_fire(self):
+        """Tighter version of ``test_at_least_5_distinct_seed_pack_dimensions_fire``
+        — with the expanded corpus we now cover at least 8 of the 21
+        seed-pack dimensions."""
+        cov = _load_coverage()
+        seed_dimensions = {
+            "currency_code", "temporal_format", "country_code",
+            "language_code", "media_type", "industry_code",
+            "unit_of_measure", "fix_msg_type", "fix_side",
+            "gs1_application_identifier", "gs1_id_key_type",
+            "edifact_message_type", "fhir_resource_type",
+            "icd_10_cm_code",
+            "who_icd_10_code", "swift_mt_message_type",
+            "swift_mx_message_type", "hl7_v2_segment",
+            "hl7_v2_message_type", "umls_concept_id",
+            "iso_20022_message_type",
+        }
+        hit_dimensions = {row["dimension"] for row in cov["by_dimension"]}
+        seed_hits = hit_dimensions & seed_dimensions
+        assert len(seed_hits) >= 8, (
+            f"only {len(seed_hits)} seed-pack dimensions fired in the "
+            f"index: {sorted(seed_hits)}. Sprint expectation is ≥ 8."
+        )
+
+
 # ── Synthetic-schema-driven dimensions actually fire ─────────────────
 
 

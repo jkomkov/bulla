@@ -1,5 +1,5 @@
 pack_name: naics-2022
-pack_version: 0.1.0
+pack_version: 0.1.1
 license:
   spdx_id: Public-Domain
   source_url: https://www.census.gov/naics/?68967
@@ -8,6 +8,7 @@ derives_from:
   standard: NAICS
   version: '2022'
   source_uri: https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx
+  source_hash: sha256:be12ba41002803359f49181c9bf33a03fbd08578f4f4a4c0bbad7aadaaea0316
 dimensions:
   industry_code:
     description: NAICS 2022 industry classification code. The full registry covers

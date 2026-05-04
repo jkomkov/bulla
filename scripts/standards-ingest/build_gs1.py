@@ -9,6 +9,11 @@ values_registry pointer.
 GTIN miscoding (e.g. shifting a check digit, swapping GTIN-13 vs
 GTIN-14) is a well-documented FDA-recall failure mode that this
 pack's classifier signal makes detectable at composition time.
+
+The values_registry pointer targets the official ref.gs1.org JSON
+catalogue (machine-readable, content-stable). The legacy PDF URL on
+``www.gs1.org`` returned 403 to non-browser UAs and the PDF is
+content-unstable across cosmetic revisions.
 """
 
 from __future__ import annotations
@@ -17,6 +22,11 @@ import datetime as _dt
 import sys
 
 import yaml
+
+# Resolve real registry hashes when an ingest has been performed,
+# else fall back to the placeholder sentinel.
+sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent))
+from _hash_lookup import lookup as _hash_for  # noqa: E402
 
 
 # Most-common GS1 Application Identifiers (the AI prefix codes).
@@ -44,11 +54,14 @@ COMMON_AIS = [
 ]
 
 
+_REGISTRY_URI = "https://ref.gs1.org/ai/"
+
+
 def build_pack() -> dict:
     today = _dt.date.today().isoformat()
     pack = {
         "pack_name": "gs1",
-        "pack_version": "0.1.0",
+        "pack_version": "0.1.1",
         "license": {
             "spdx_id": "Proprietary-Open-Reference",
             "source_url": (
@@ -60,9 +73,9 @@ def build_pack() -> dict:
         "derives_from": {
             "standard": "GS1-General-Specifications",
             "version": f"snapshot-{today}",
-            "source_uri": (
-                "https://www.gs1.org/standards/barcodes-epcrfid-id-keys/"
-                "general-specifications"
+            "source_uri": _REGISTRY_URI,
+            "source_hash": _hash_for(
+                "gs1", "gs1_application_identifier", "snapshot"
             ),
         },
         "dimensions": {
@@ -90,12 +103,11 @@ def build_pack() -> dict:
                 "domains": ["universal"],
                 "known_values": COMMON_AIS,
                 "values_registry": {
-                    "uri": (
-                        "https://www.gs1.org/sites/default/files/docs/"
-                        "barcodes/GS1_General_Specifications.pdf"
+                    "uri": _REGISTRY_URI,
+                    "hash": _hash_for(
+                        "gs1", "gs1_application_identifier", "snapshot"
                     ),
-                    "hash": "placeholder:awaiting-ingest",
-                    "version": today,
+                    "version": "snapshot",
                 },
             },
             "gs1_id_key_type": {

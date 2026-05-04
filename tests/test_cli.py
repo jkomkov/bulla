@@ -180,8 +180,8 @@ class TestAuditManifestsFlag:
     def test_audit_manifests_text(self):
         r = _run("audit", "--manifests", str(MANIFESTS_DIR))
         assert r.returncode == 0
-        assert "Coherence fee:" in r.stdout
-        assert "Boundary fee:" in r.stdout
+        assert "BOUNDARY FEE" in r.stdout
+        assert "within fee" in r.stdout
 
     def test_audit_manifests_json(self):
         r = _run("audit", "--manifests", str(MANIFESTS_DIR), "--format", "json")
@@ -190,6 +190,8 @@ class TestAuditManifestsFlag:
         assert data["coherence_fee"] > 0
         assert "cross_server_decomposition" in data
         assert data["cross_server_decomposition"]["boundary_fee"] > 0
+        assert "audit_report" in data
+        assert data["audit_report"]["boundary_fee"] > 0
 
     def test_audit_manifests_sarif(self):
         r = _run("audit", "--manifests", str(MANIFESTS_DIR), "--format", "sarif")
