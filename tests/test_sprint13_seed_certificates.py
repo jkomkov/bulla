@@ -105,9 +105,13 @@ def test_seed_set_canonical_output_matches_fixture():
     manifest drift; failures on certs 3-9 indicate a code drift.
     """
     if not CANONICAL_FIXTURE.exists():
-        pytest.fail(
-            f"Canonical fixture missing: {CANONICAL_FIXTURE}. "
-            f"Generate it via `bulla certify --seed-set --format json --output ...`."
+        # monorepo-only: the canonical fixture lives under papers/ (absent in the
+        # standalone package / public mirror). Skip cleanly there; in the monorepo
+        # the fixture is present, so this still runs and guards against drift.
+        pytest.skip(
+            f"canonical fixture {CANONICAL_FIXTURE} absent (standalone package / "
+            "public mirror); regenerate in the monorepo via "
+            "`bulla certify --seed-set --format json --output ...`"
         )
 
     fixture = json.loads(CANONICAL_FIXTURE.read_text())
