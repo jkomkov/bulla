@@ -1,0 +1,105 @@
+{
+  "experiment": "type_layer_slash_M1 (D1 build + M1 correctness)",
+  "primitive": "completeness_slash: slash iff recompute(declared).fee > attested_fee",
+  "provenance": "EXECUTION_INDEPENDENT",
+  "layer": "type (value-blind, machine-speed, no oracle)",
+  "cases": [
+    {
+      "case": "under_declarer",
+      "true_fee": 1,
+      "attested_fee": 0,
+      "well_formed": true,
+      "expected_well_formed": true,
+      "slash": true,
+      "expected_slash": true,
+      "passed": true,
+      "required_disclosures": [
+        [
+          "filesystem",
+          "path_root"
+        ]
+      ],
+      "rationale": "fee=1 obstruction hidden, attested 0 -> caught"
+    },
+    {
+      "case": "honest_zero",
+      "true_fee": 0,
+      "attested_fee": 0,
+      "well_formed": true,
+      "expected_well_formed": true,
+      "slash": false,
+      "expected_slash": false,
+      "passed": true,
+      "required_disclosures": [],
+      "rationale": "convention observable (fee 0), attested 0 -> spared"
+    },
+    {
+      "case": "honest_high_fee",
+      "true_fee": 2,
+      "attested_fee": 2,
+      "well_formed": true,
+      "expected_well_formed": true,
+      "slash": false,
+      "expected_slash": false,
+      "passed": true,
+      "required_disclosures": [
+        [
+          "t0",
+          "money"
+        ],
+        [
+          "t1",
+          "money"
+        ]
+      ],
+      "rationale": "fee=2 truthfully declared and refused -> spared (false-positive guard)"
+    },
+    {
+      "case": "over_declarer",
+      "true_fee": 1,
+      "attested_fee": 2,
+      "well_formed": true,
+      "expected_well_formed": true,
+      "slash": false,
+      "expected_slash": false,
+      "passed": true,
+      "required_disclosures": [
+        [
+          "filesystem",
+          "path_root"
+        ]
+      ],
+      "rationale": "conservative over-declaration (attested 2 > true 1) -> spared"
+    },
+    {
+      "case": "nuisance_field",
+      "true_fee": 1,
+      "attested_fee": 1,
+      "well_formed": true,
+      "expected_well_formed": true,
+      "slash": false,
+      "expected_slash": false,
+      "passed": true,
+      "required_disclosures": [
+        [
+          "filesystem",
+          "path_root"
+        ]
+      ],
+      "rationale": "hidden field on no edge changes nothing -> spared"
+    },
+    {
+      "case": "ill_formed",
+      "true_fee": -1,
+      "attested_fee": 0,
+      "well_formed": false,
+      "expected_well_formed": false,
+      "slash": false,
+      "expected_slash": false,
+      "passed": true,
+      "required_disclosures": [],
+      "rationale": "observes an unheld field (fee<0) -> slash REFUSES to judge (reject, not spare)"
+    }
+  ],
+  "VERDICT": "M1_PASS"
+}

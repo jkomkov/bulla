@@ -6,7 +6,7 @@ agents compose tools across MCP servers, LangGraph graphs, or CrewAI
 crews. Exact rationals throughout, no numpy, no LLM calls.
 """
 
-__version__ = "0.37.0"
+__version__ = "0.41.0"
 
 from bulla.model import (
     BlindSpot,
@@ -36,6 +36,7 @@ from bulla.model import (
 )
 from bulla.diagnostic import (
     ConditionalDiagnostic,
+    DimensionFeeDecomposition,
     FeeDecomposition,
     OpenPort,
     Resolution,
@@ -43,15 +44,21 @@ from bulla.diagnostic import (
     check_obligations,
     conditional_diagnose,
     decompose_fee,
+    decompose_fee_by_dimension,
     diagnose,
+    disjoint_field_decomposition_violations,
+    has_disjoint_field_decomposition,
     minimum_disclosure_set,
     prescriptive_disclosure,
     resolve_conditional,
     satisfies_obligations,
 )
 from bulla.repair import (
+    ClarificationQuestion,
     ConvergenceResult,
     RepairResult,
+    WitnessGuidedPlan,
+    build_witness_guided_plan,
     coordination_step,
     detect_contradictions,
     detect_contradictions_across,
@@ -72,6 +79,13 @@ from bulla.update import (
     repair,
 )
 from bulla.parser import load_composition
+from bulla.action_receipt import (
+    ActionReceipt,
+    build_action_receipt,
+    build_release_receipt,
+    build_tool_call_receipt,
+    verify_receipt as verify_action_receipt,
+)
 from bulla.guard import BullaGuard, BullaCheckError
 from bulla.witness import (
     verify_receipt_consistency,
@@ -119,12 +133,14 @@ __all__ = [
     "ContradictionReport",
     "ContradictionSeverity",
     "ConvergenceResult",
+    "ClarificationQuestion",
     "BullaGuard",
     "Composition",
     "ConditionalDiagnostic",
     "DEFAULT_POLICY_PROFILE",
     "Diagnostic",
     "Disposition",
+    "DimensionFeeDecomposition",
     "FeeDecomposition",
     "Edge",
     "FieldInfo",
@@ -143,6 +159,7 @@ __all__ = [
     "OpenPort",
     "ProbeResult",
     "RepairResult",
+    "WitnessGuidedPlan",
     "Resolution",
     "WitnessReceipt",
     "boundary_obligations_from_decomposition",
@@ -151,11 +168,15 @@ __all__ = [
     "compare_fields",
     "coordination_step",
     "decompose_fee",
+    "decompose_fee_by_dimension",
     "detect_contradictions",
     "detect_contradictions_across",
     "detect_expected_value_contradictions",
     "diagnose",
+    "disjoint_field_decomposition_violations",
+    "has_disjoint_field_decomposition",
     "extract_pack_from_probes",
+    "build_witness_guided_plan",
     "minimum_disclosure_set",
     "prescriptive_disclosure",
     "repair_composition",
@@ -165,6 +186,11 @@ __all__ = [
     "scan_composition",
     "schema_similarity",
     "load_composition",
+    "ActionReceipt",
+    "build_action_receipt",
+    "build_release_receipt",
+    "build_tool_call_receipt",
+    "verify_action_receipt",
     "verify_receipt_consistency",
     "verify_receipt_integrity",
     "witness",

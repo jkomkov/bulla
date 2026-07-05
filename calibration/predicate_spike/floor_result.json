@@ -1,0 +1,212 @@
+{
+  "n_compositions": 703,
+  "floor_hits": 17,
+  "floor_fraction": 0.0242,
+  "bar_fraction": 0.05,
+  "passed": false,
+  "ceiling_same_type_instances": 36,
+  "top_divergences": [
+    {
+      "a": "exa",
+      "b": "notion",
+      "fields": [
+        {
+          "field": "type",
+          "a": "exa",
+          "b": "notion",
+          "sig_a": [
+            "enum",
+            [
+              "auto",
+              "fast"
+            ]
+          ],
+          "sig_b": [
+            "type",
+            "object"
+          ]
+        }
+      ]
+    },
+    {
+      "a": "exa",
+      "b": "ns-mcp-server",
+      "fields": [
+        {
+          "field": "type",
+          "a": "exa",
+          "b": "ns-mcp-server",
+          "sig_a": [
+            "enum",
+            [
+              "auto",
+              "fast"
+            ]
+          ],
+          "sig_b": [
+            "enum",
+            [
+              "DISRUPTION",
+              "MAINTENANCE"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "a": "exa",
+      "b": "playwright",
+      "fields": [
+        {
+          "field": "type",
+          "a": "exa",
+          "b": "playwright",
+          "sig_a": [
+            "enum",
+            [
+              "auto",
+              "fast"
+            ]
+          ],
+          "sig_b": [
+            "enum",
+            [
+              "all",
+              "debug",
+              "error",
+              "exception",
+              "info",
+              "log",
+              "warning"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "a": "notion",
+      "b": "ns-mcp-server",
+      "fields": [
+        {
+          "field": "type",
+          "a": "notion",
+          "b": "ns-mcp-server",
+          "sig_a": [
+            "type",
+            "object"
+          ],
+          "sig_b": [
+            "enum",
+            [
+              "DISRUPTION",
+              "MAINTENANCE"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "a": "notion",
+      "b": "playwright",
+      "fields": [
+        {
+          "field": "type",
+          "a": "notion",
+          "b": "playwright",
+          "sig_a": [
+            "type",
+            "object"
+          ],
+          "sig_b": [
+            "enum",
+            [
+              "all",
+              "debug",
+              "error",
+              "exception",
+              "info",
+              "log",
+              "warning"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "a": "ns-mcp-server",
+      "b": "playwright",
+      "fields": [
+        {
+          "field": "type",
+          "a": "ns-mcp-server",
+          "b": "playwright",
+          "sig_a": [
+            "enum",
+            [
+              "DISRUPTION",
+              "MAINTENANCE"
+            ]
+          ],
+          "sig_b": [
+            "enum",
+            [
+              "all",
+              "debug",
+              "error",
+              "exception",
+              "info",
+              "log",
+              "warning"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "a": "flightradar24-mcp-server",
+      "b": "tavily",
+      "fields": [
+        {
+          "field": "limit",
+          "a": "flightradar24-mcp-server",
+          "b": "tavily",
+          "sig_a": [
+            "num",
+            "number",
+            null,
+            null
+          ],
+          "sig_b": [
+            "num",
+            "integer",
+            1,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "a": "github",
+      "b": "mcp-server-rememberizer",
+      "fields": [
+        {
+          "field": "page",
+          "a": "github",
+          "b": "mcp-server-rememberizer",
+          "sig_a": [
+            "num",
+            "number",
+            null,
+            null
+          ],
+          "sig_b": [
+            "num",
+            "integer",
+            1,
+            null
+          ]
+        }
+      ]
+    }
+  ]
+}

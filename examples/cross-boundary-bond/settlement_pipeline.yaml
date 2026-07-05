@@ -1,0 +1,206 @@
+name: Financial Settlement Pipeline
+
+tools:
+  price_fetch:
+    internal_state:
+      - prices
+      - ticker
+      - price_source
+      - quote_currency
+      - timestamp
+    observable_schema:
+      - prices
+      - ticker
+      - timestamp
+
+  currency_convert:
+    internal_state:
+      - amount
+      - from_currency
+      - to_currency
+      - exchange_rate
+      - rounding_mode
+      - decimal_precision
+    observable_schema:
+      - amount
+      - from_currency
+      - to_currency
+      - exchange_rate
+
+  compliance_check:
+    internal_state:
+      - entity_id
+      - jurisdiction
+      - threshold_currency
+      - passed
+      - reason
+    observable_schema:
+      - entity_id
+      - passed
+      - reason
+
+  risk_assess:
+    internal_state:
+      - risk_score
+      - risk_model_version
+      - confidence_interval
+      - amount
+    observable_schema:
+      - risk_score
+      - amount
+
+  ledger_write:
+    internal_state:
+      - tx_id
+      - amount
+      - accounting_standard
+      - decimal_precision
+      - posted
+    observable_schema:
+      - tx_id
+      - amount
+      - posted
+
+  audit_log:
+    internal_state:
+      - log_id
+      - tx_ref
+      - timestamp_format
+      - timezone
+      - event_type
+    observable_schema:
+      - log_id
+      - tx_ref
+      - event_type
+
+  notification:
+    internal_state:
+      - recipient
+      - message
+      - timezone
+      - locale
+      - sent
+    observable_schema:
+      - recipient
+      - message
+      - sent
+
+  archive:
+    internal_state:
+      - archive_id
+      - retention_policy
+      - compression_format
+      - stored
+    observable_schema:
+      - archive_id
+      - stored
+
+edges:
+  # Price data convention: the quoted price (prices) must be interpreted
+  # in the same currency denomination (quote_currency) that the converter
+  # uses as its input currency (from_currency).  quote_currency is hidden
+  # in price_fetch, so this convention is unverifiable bilaterally.
+  - from: price_fetch
+    to: currency_convert
+    dimensions:
+      - name: price_data
+        from_field: prices
+        to_field: amount
+      - name: quote_currency_match
+        from_field: quote_currency
+        to_field: from_currency
+
+  # Rounding convention: the converter's internal rounding_mode determines
+  # how fractional amounts are truncated; compliance_check's threshold_currency
+  # assumes a specific rounding convention for regulatory thresholds.
+  # Both fields are hidden, creating a two-sided blind spot.
+  - from: currency_convert
+    to: compliance_check
+    dimensions:
+      - name: amount_flow
+        from_field: amount
+        to_field: entity_id
+      - name: rounding_match
+        from_field: rounding_mode
+        to_field: threshold_currency
+
+  # Jurisdiction convention: compliance_check's jurisdiction determines
+  # which regulatory framework applies; risk_assess's risk_model_version
+  # must use the matching regulatory model.  jurisdiction is hidden in
+  # compliance_check, so the risk model may silently use the wrong framework.
+  - from: compliance_check
+    to: risk_assess
+    dimensions:
+      - name: compliance_pass
+        from_field: passed
+        to_field: risk_score
+      - name: jurisdiction_match
+        from_field: jurisdiction
+        to_field: risk_model_version
+
+  # Confidence convention: risk_assess's confidence_interval determines
+  # the certainty level of the risk score; ledger_write's accounting_standard
+  # requires a specific confidence threshold for posting.  Both are hidden.
+  - from: risk_assess
+    to: ledger_write
+    dimensions:
+      - name: amount_to_ledger
+        from_field: amount
+        to_field: amount
+      - name: confidence_match
+        from_field: confidence_interval
+        to_field: accounting_standard
+
+  # Precision convention: ledger_write's decimal_precision determines
+  # the numeric format of posted amounts; audit_log's timestamp_format
+  # must align for consistent audit trail reconstruction.  Both hidden.
+  - from: ledger_write
+    to: audit_log
+    dimensions:
+      - name: tx_ref_match
+        from_field: tx_id
+        to_field: tx_ref
+      - name: precision_to_format
+        from_field: decimal_precision
+        to_field: timestamp_format
+
+  # Timezone convention: audit_log records events in its internal
+  # timezone; notification must deliver in the same timezone for
+  # accurate event timing.  timezone is hidden in audit_log.
+  - from: audit_log
+    to: notification
+    dimensions:
+      - name: event_notify
+        from_field: event_type
+        to_field: message
+      - name: timezone_match
+        from_field: timezone
+        to_field: timezone
+
+  # Locale convention: notification's locale determines message
+  # formatting and language; archive's retention_policy depends on
+  # the locale's regulatory retention requirements.  locale is hidden
+  # in notification, retention_policy hidden in archive.
+  - from: notification
+    to: archive
+    dimensions:
+      - name: message_archive
+        from_field: message
+        to_field: archive_id
+      - name: locale_retention
+        from_field: locale
+        to_field: retention_policy
+
+  # Feedback loop: audit_log feeds back to compliance_check, creating
+  # a cycle (betti_1 = 1).  timezone in audit_log must match the
+  # jurisdiction convention in compliance_check for consistent
+  # regulatory event classification.  Both fields are hidden.
+  - from: audit_log
+    to: compliance_check
+    dimensions:
+      - name: feedback_loop
+        from_field: log_id
+        to_field: entity_id
+      - name: timezone_jurisdiction
+        from_field: timezone
+        to_field: jurisdiction

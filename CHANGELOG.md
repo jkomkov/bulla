@@ -1,5 +1,74 @@
 # Changelog
 
+## 0.41.0 — 2026-07-04
+
+**ActionReceipt v0.1 — the receipt a bond slashes against.** Bulla's diagnostic layer answers "is this composition coherent?"; this release adds the object that answers the next question: *an agent changed the world — under whose authority, within what bounds, with what recomputable verdict, and how is it contested?*
+
+- **`bulla.action_receipt`** — one `ActionReceipt` envelope (the single new abstraction). A release *is* a tool call, so `action.type` is open vocabulary (`package.release`, `github.create_file`), not a family of types. Builders `build_release_receipt` / `build_tool_call_receipt`. Fields: `action`, `mandate` (authority+bounds — ex ante legitimacy), `remedy` (challenge/forum/remedies — ex post contestation, reusing the `RecourseEnvelope` modality law), a `diagnostic_ref` that is **never bare null** (the recomputable verdict — the differentiator), `evidence_refs`, `retention` (the civic asymmetry as classes), a **reserved** `stake` slot (the bond), and four hashes each answering one question: `content` (recompute the verdict), `event` (which occurrence), `attestation` (who vouched), `log_leaf` (where logged, RFC 6962).
+- **`bulla receipt verify <file>`** — one verifier over `{action_receipt, witness_receipt, certificate}` that reports `verified_to: digest | attestation | log_inclusion` rather than a lying boolean. A forged receipt whose hashes were recomputed still fails at `attestation` (the signature is over `content`).
+- **`bulla coverage --anchor git`** — omission detection: coverage as a plain set difference against a declared anchor (never a bare, gameable percentage). Run on bulla's own history it finds a real gap: 0.37.0 shipped to PyPI with no git tag.
+- **Wire spec + JSON Schema + golden vectors** (`bulla/spec/`) with a stdlib-only `independent_check.py` that imports no bulla — a second implementer can verify a receipt from the spec alone.
+- **Cross-boundary bonded transaction demo** (`bulla/examples/cross-boundary-bond/`): a stateless agent posts a bond, acts, and vanishes; a bystander recomputes the verdict from pinned inputs and slashes — no oracle. The senior tranche slashes on the objective trigger (the fee); pricing severity is the junior tranche (deferred).
+- **`ActionReceipt → EU AI Act Article 12`** field-level mapping (`bulla/docs/`), scoped as *traceability*, never *compliance*.
+
+## 0.40.1 — 2026-07-03
+
+Documentation and packaging patch — no library behavior changes. An external reviewer ran the 0.40.0 README against the wheel and found the flagship `Session` example did not execute: it called `add_tool(name, fields=…, conventions=…)` and `add_edge("a","b")`, but the real API is `add_tool(spec: ToolSpec)` / `add_edge(edge: Edge)`. The `translate` example used `to_convention="numeric"` (the registered convention is `iso-4217-numeric`) and read a non-existent `evidence.kind`. Fixed, and — taking the package's own medicine — the README is now gated as a composition: `tests/test_readme_examples.py` extracts every fenced `python` block and runs it as a standalone script against the installed wheel, so doc↔code drift fails CI. Blocks that genuinely need external state (a live MCP server, a framework extra, an object built in prose) opt out with an HTML-comment marker that is invisible in rendered Markdown but auditable in source — the gate can loudly skip a marked block, never silently pass a broken one. Three flagship blocks (`translate`, `Session`, the Python API) now run green.
+
+### Fixed
+- README `Session` example corrected to the real `ToolSpec` / `Edge` constructors.
+- README `translate` example corrected to `to_convention="iso-4217-numeric"` and the real `TranslationEvidence` attributes (`from_convention`, `equivalence`).
+- README Python-API example made self-contained (`load_composition(text=…)`) so it runs without an external file.
+
+### Added
+- `py.typed` marker — the package is annotated; consumers' type checkers now see it as typed (PEP 561).
+- `tests/test_readme_examples.py` — the README-as-composition gate, wired into root CI.
+
+### Changed
+- The `g23-a3` optional extra is renamed to `interp-sae` (the old internal codename leaked into the public install surface). `pip install bulla[g23-a3]` still resolves for one release via a deprecated alias.
+
+## 0.40.0 — 2026-07-03
+
+The recourse-layer release. Where 0.37.0 measured compositional obstruction, 0.40.0 makes the record of it **contestable**: a signed, recomputable coherence deed that any party re-derives from pinned inputs (`deed = f(composition@h, algorithm@v)`), an append-only RFC-6962 registry whose omission is *checkable* and whose root cannot be forged by the host serving it, an in-proxy gate that refuses an unreceipted cross-owner side effect before it happens and names the cure, and — new in this release — a per-deed **recourse envelope** whose every remedy attaches to an artifact or a stake rather than to a vanished actor. Plus a GF(2) fast path that takes the full-registry audit from ~22 min to ~17 s with bit-identical fees, and the live MCP proxy hardened into a safety co-pilot. The keystone is unchanged and now shipped end to end: verification is cheap; recourse is scarce.
+
+### New optional extras
+
+- **`bulla[identity]`** (`PyNaCl`) — sign coherence certificates under an ed25519 / `did:key` identity the agent already holds. Bulla signs, never mints.
+- **`bulla[scitt]`** (`cbor2`, `PyNaCl`) — serialize a deed as a COSE_Sign1 Signed Statement (RFC 9052) for SCITT-shaped transparency services. See `SCITT-MAPPING.md`.
+- **`bulla[ots]`** (`opentimestamps-client`) — anchor a deed's attestation hash to the Bitcoin timechain (closes backdating).
+
+### Added — the recourse stack
+
+- **Signed coherence deeds + registry** (`bulla.identity`, `bulla.certificate`, `bulla.registry`, `bulla.http_registry`). A signed `CompositionCertificate` is a deed; `DeedLog` is an append-only RFC-6962 Merkle log with inclusion + consistency proofs. `bulla registry serve` exposes a read-only HTTP registry; `HttpRegistry` + `bulla verify --registry` consume it.
+- **Pin-the-Root** — the omission rung made trustless against a malicious host: an inclusion proof is only honored against a root the consumer pins independently (own log / `--trusted-root` / an OTS-anchored root); a host-asserted root is refused, an equivocating root is refused.
+- **`bulla__deed_{emit,verify,lookup}`** in-loop MCP meta-tools (`bulla.live_proxy`): sign+log the current composition's deed at machine speed; demand inclusion against an independently-trusted root; look up deeds by composition hash.
+- **The recourse gate** (`bulla.recourse_gate`, `bulla gate`) — OBSERVE → ENFORCE. Refuses a cross-owner `tools/call` whose counterparty deed is not authentic, included under a pinned root, and certifying `fee = 0`, emitting a signed, recomputable `RefusalCertificate` that names the disclosure cure — before the backend is ever touched.
+- **Deed v0.2 — the recourse envelope** (`bulla.envelope`): optional `authority` (delegation chain to a surviving principal + `policy@hash`), `bounds` (scope / expiry / rollback), and `recourse` (challenge window, Pin-the-Root forum, and remedies) fields, plus `retention_class` / `disclosure_class` stubs. Committed inside the attestation hash, excluded from the content hash — so a v0.1 deed hashes byte-identically and the recomputable core stays pure. Every remedy is `{rung, verifier, anchor}` on the ladder recompute → challenge → cure → revert → slash → escalate; a remedy that names no stateful anchor cannot be constructed, and a hash-correct envelope that violates that rule is refused on read.
+- **Gateway modes** (`bulla proxy --shadow` / `--enforce`, `bulla.side_effects`) — side-effect classification (read/notify/write/commit from MCP `ToolAnnotations`, conservative default: unknown ⇒ write). Shadow mode emits a signed per-call deed with a recourse envelope for every side-effecting call and never blocks; enforce mode gates side-effecting calls only (`--gate-reads` to gate everything).
+- **Recourse-conformance v0** (`bulla.conformance`, `python -m bulla.conformance.scenarios`) — 24 named scenarios (recompute / log / appeal / cure / gate) a relying party can run against a host-controlling adversary.
+- **`bulla certify-cost`** — a Coherence Cost Certificate: the coherence floor (the fee) and its witness fields, and with `--observed-cost` the portion of an intermediary's charge not required by coherence itself.
+
+### Added — live proxy, diagnostics, and refinement types
+
+- **Live MCP proxy** (`bulla proxy`) as an agent safety co-pilot: injects `bulla__{fee,blind_spots,bridge,should_proceed,why}`; `bulla__why` returns Aristotle-verified formal provenance. Unified `tools/call` telemetry (JSON-Lines, credential-redacted) and an adversarial consequence-analysis pipeline.
+- **Per-dimension fee decomposition** with the additivity theorem, surfaced through `bulla__blind_spots`.
+- **`bulla.lambda_nabla`** — the λ_∇ cohomological-refinement-types elaborator (research surface for the B3 paper).
+
+### Performance
+
+- **GF(2) fast rank** where the coboundary is totally unimodular: the full-registry coherence audit drops from ~22 min to ~17 s, with fees bit-identical to the exact-rational path.
+
+### Fixed
+
+- Reap the whole MCP-server process tree on proxy/scan shutdown (no orphaned backends).
+- Bundle the showcase MCP manifests into the wheel so `bulla showcase` runs from a `pip install`.
+- Registry read-side self-auditability, verified-submission-boundary scoping, and borrowed-inclusion binding (an inclusion proof for deed A can no longer authenticate deed B).
+
+### Consistency
+
+- `LICENSE` "Licensed Work" version synced to the release (was lagging at v0.34.0).
+- `scitt` added to the `all` extra.
+
 ## 0.37.0 — 2026-05-03
 
 Consolidates seven post-0.36.0 sprints into a single publishing event. Headline additions: `bulla.translate` (typed runtime translators), `bulla.Session` (online incremental composition), `bulla.LiveSession` (online MCP proxy), native `bulla.langgraph` and `bulla.crewai` adapters with callback handlers, narrative `bulla scan` with a 39-entry dimension explanation registry and auto-detect across seven hosts (Cursor, Claude Code, Claude Desktop, Cline, Windsurf, Zed, Codex), `bulla certify` per-composition certificate including the v1.0 schema with claim-structured assertions and a stable `certificate_content_hash`, the composition-only obstruction demo (3-tool synthetic where every pairwise certificate certifies fee=0 yet the global certificate finds fee=1), and the Dimension Pack Enhancement (all 11 fetchable open packs on real SHA-256, classifier corpus 880 → 27,651 rows, 10 → 28 firing dimensions). 124 new tests for framework adapters, 46 for translators, 21 for `LiveSession`, 18 + 29 + 8 + 2 for certificates and the obstruction demo, 6 corpus-growth gates, 5 provenance invariants, plus the load-bearing 10,000-seed property test that pins `Session` to bitwise equality with a from-scratch `witness_gram` recompute.

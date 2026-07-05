@@ -1,0 +1,60 @@
+# Trusted Publishing to PyPI — no token, ever.
+#
+# This workflow lives under bulla/.github/ in the res-agentica monorepo (inert
+# there — GitHub Actions only runs a repo's ROOT .github/workflows/) and
+# activates on the public mirror github.com/jkomkov/bulla, where bulla/ is the
+# repo root. That placement is deliberate: the public repo is the standard's
+# home, so the published wheel's provenance points at a public tag that exists,
+# and mirror-currency becomes structural (a stale mirror can't cut a release)
+# rather than remembered.
+#
+# It uses PyPI Trusted Publishing (OIDC, PEP 740 attestations): no API token is
+# stored anywhere. ACTIVATION (one-time, user-side on pypi.org):
+#   pypi.org -> the `bulla` project -> Manage -> Publishing -> Add a new
+#   publisher:  owner=jkomkov, repo=bulla, workflow=publish.yml,
+#   environment=pypi. Then push a `v*` tag to the mirror to release.
+#
+# Any token pasted into a chat/transcript is exposed and should be REVOKED —
+# this workflow makes the manual-token path obsolete.
+
+name: publish
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write   # OIDC for Trusted Publishing + build provenance attestations
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build sdist + wheel
+        run: |
+          python -m pip install --upgrade build
+          python -m build
+
+      # Fail closed if the tag doesn't match the built version (e.g. a v0.40.1
+      # tag on a tree that still says 0.40.0) — a released wheel whose version
+      # disagrees with its tag is exactly the provenance defect this file fixes.
+      - name: Verify tag matches package version
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          PKG=$(ls dist/bulla-*.tar.gz | sed -E 's#.*/bulla-(.*)\.tar\.gz#\1#')
+          echo "tag=$TAG package=$PKG"
+          test "$TAG" = "$PKG"
+
+      - name: Publish to PyPI (Trusted Publishing + attestations)
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          attestations: true

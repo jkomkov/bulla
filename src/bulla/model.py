@@ -88,6 +88,14 @@ class SemanticDimension:
     name: str
     from_field: str | None = None
     to_field: str | None = None
+    # RESERVED (predicate layer): the KIND of convention this dimension carries.
+    # "field" = a declared tool-field convention (the only kind today). "predicate"
+    # is reserved for the runtime-invented, definition-carrying predicates the
+    # coherence-topos vocabulary-evolution program governs — so that layer arrives
+    # as a filled field, not a schema migration. Deliberately EXCLUDED from
+    # ``Composition.canonical_hash`` (which lists name/from_field/to_field
+    # explicitly), so reserving it leaves every existing receipt byte-identical.
+    kind: str = "field"
 
 
 @dataclass(frozen=True)

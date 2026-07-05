@@ -94,6 +94,7 @@ def _validate_edge(edge_data: Any, index: int, tool_names: set[str]) -> Edge:
                 name=name,
                 from_field=d.get("from_field"),
                 to_field=d.get("to_field"),
+                kind=d.get("kind", "field"),  # reserved; "field" today
             )
         )
 

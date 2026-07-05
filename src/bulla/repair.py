@@ -14,6 +14,7 @@ from bulla.diagnostic import (
     boundary_obligations_from_decomposition,
     decompose_fee,
     diagnose,
+    minimum_disclosure_set,
 )
 from bulla.model import (
     BoundaryObligation,
@@ -482,3 +483,72 @@ def detect_contradictions_across(
                 if s not in merged["provenance"]["source_tools"]:
                     merged["provenance"]["source_tools"].append(s)
     return detect_contradictions({"dimensions": merged_dims})
+
+
+# ── Witness-guided clarification engine (G28) ───────────────────────
+
+
+@dataclass(frozen=True)
+class ClarificationQuestion:
+    tool: str
+    field: str
+    cost: float
+    prompt: str
+
+
+@dataclass(frozen=True)
+class WitnessGuidedPlan:
+    initial_fee: int
+    basis: tuple[tuple[str, str], ...]
+    questions: tuple[ClarificationQuestion, ...]
+    total_cost: float
+
+
+def build_witness_guided_plan(
+    comp: Composition,
+    *,
+    costs: dict[str, float] | None = None,
+    max_questions: int | None = None,
+) -> WitnessGuidedPlan:
+    """Construct a minimal clarification plan from witness basis fields.
+
+    Cost keys use ``"tool:field"``.
+    """
+    diag = diagnose(comp, include_witness_geometry=True)
+    fee = diag.coherence_fee
+    if fee <= 0:
+        return WitnessGuidedPlan(
+            initial_fee=0,
+            basis=(),
+            questions=(),
+            total_cost=0.0,
+        )
+
+    basis = tuple(diag.disclosure_set) if diag.disclosure_set else tuple(minimum_disclosure_set(comp))
+    costs = costs or {}
+    scored: list[tuple[tuple[str, str], float]] = []
+    for tool, field in basis:
+        key = f"{tool}:{field}"
+        scored.append(((tool, field), float(costs.get(key, 1.0))))
+    scored.sort(key=lambda x: (x[1], x[0][0], x[0][1]))
+    if max_questions is not None:
+        scored = scored[:max_questions]
+
+    questions = tuple(
+        ClarificationQuestion(
+            tool=tool,
+            field=field,
+            cost=cost,
+            prompt=(
+                f"Clarify semantic convention for `{tool}.{field}` "
+                "and provide the canonical declaration to bridge this seam."
+            ),
+        )
+        for (tool, field), cost in scored
+    )
+    return WitnessGuidedPlan(
+        initial_fee=fee,
+        basis=basis,
+        questions=questions,
+        total_cost=sum(q.cost for q in questions),
+    )

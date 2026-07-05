@@ -1,0 +1,66 @@
+{
+  "experiment": "fee_breach_calibration_git (S1a \u2014 substrate-wiring + fee-constructibility check; NOT a calibration)",
+  "substrate": "K-consumer filesystem->git star; fee == K verified; label = real `git show` exit code",
+  "provenance": "EXECUTION_INDEPENDENT",
+  "seed": 2026,
+  "p_absolute": 0.3,
+  "instances_per_fee": 400,
+  "curve": [
+    {
+      "fee": 0,
+      "schema_hamming": 0,
+      "breach_rate": 0.0,
+      "mean_failures": 0.0,
+      "analytic_breach_rate": 0.0
+    },
+    {
+      "fee": 1,
+      "schema_hamming": 1,
+      "breach_rate": 0.255,
+      "mean_failures": 0.255,
+      "analytic_breach_rate": 0.3
+    },
+    {
+      "fee": 2,
+      "schema_hamming": 2,
+      "breach_rate": 0.4975,
+      "mean_failures": 0.575,
+      "analytic_breach_rate": 0.51
+    },
+    {
+      "fee": 3,
+      "schema_hamming": 3,
+      "breach_rate": 0.665,
+      "mean_failures": 0.925,
+      "analytic_breach_rate": 0.657
+    },
+    {
+      "fee": 4,
+      "schema_hamming": 4,
+      "breach_rate": 0.765,
+      "mean_failures": 1.2025,
+      "analytic_breach_rate": 0.7599
+    },
+    {
+      "fee": 5,
+      "schema_hamming": 5,
+      "breach_rate": 0.86,
+      "mean_failures": 1.5,
+      "analytic_breach_rate": 0.8319
+    },
+    {
+      "fee": 6,
+      "schema_hamming": 6,
+      "breach_rate": 0.905,
+      "mean_failures": 1.875,
+      "analytic_breach_rate": 0.8824
+    }
+  ],
+  "breach_is_modeled_bernoulli": true,
+  "is_calibration": false,
+  "is_deflation_test": false,
+  "substrate_wired_and_fee_constructible": true,
+  "fee_equals_schema_hamming": true,
+  "VERDICT": "PROCEED",
+  "scope": "NOT a calibration and NOT a deflation test. Breach here is a per-crossing Bernoulli emission model, so the curve is the arithmetic 1-(1-p)^k and cannot fail for p>0 \u2014 the genuine empirical content is only (1) the EXECUTION_INDEPENDENT git substrate is wired and (2) fee==k is constructible. Nor can it distinguish fee from the cheap baseline: on this single-dimension substrate the schema fee EQUALS the schema convention-distance (Hamming) exactly (corr=1, by construction). The measured, decoupled calibration \u2014 breach by real value propagation where fee = sum_d fee_d and scalar Hamming separate \u2014 is S1b (convention_distance_collapse.md:13-16, :60-68)."
+}

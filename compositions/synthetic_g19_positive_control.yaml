@@ -1,0 +1,102 @@
+name: synthetic_g19_positive_control
+
+# G19.0 preflight fixture: cross-metric discriminator for persistent.py.
+# Field names chosen so:
+#   data_encoding, data_charset, file_path, dir_path -> base.yaml pack-aware
+#     via *_encoding, *_charset, *_path field-patterns
+#   audit_log_entry, unique_xi_marker, payload_blob_special -> app-specific
+# Dimension names exhibit designed LCP / Jaccard / pack-tag behavior;
+# pre-registered expected (birth, death) intervals per filtration in
+# papers/composition-doctrine/sprint_g19_synthetic_control_expected_results.md.
+# All 3 filtrations must recover the designed structure within +-1 epsilon-step
+# (G19.0 gate) before any real-composition runs.
+
+tools:
+  source:
+    internal_state:
+      - data_in
+      - data_encoding
+      - data_charset
+      - file_path
+      - dir_path
+      - unique_xi_marker
+      - audit_log_entry
+    observable_schema:
+      - data_in
+
+  middleware:
+    internal_state:
+      - data_mid
+      - data_encoding
+      - data_charset
+      - file_path
+      - dir_path
+      - audit_log_entry
+      - unique_xi_marker
+    observable_schema:
+      - data_mid
+
+  sink:
+    internal_state:
+      - data_out
+      - data_encoding
+      - file_path
+      - audit_log_entry
+      - payload_blob_special
+    observable_schema:
+      - data_out
+
+  validator:
+    internal_state:
+      - validation_report
+      - audit_log_entry
+      - payload_blob_special
+    observable_schema:
+      - validation_report
+
+edges:
+  - from: source
+    to: middleware
+    dimensions:
+      - name: data_encoding_match    # alpha-pair member 1: LCP@0.227 with data_charset_match
+        from_field: data_encoding
+        to_field: data_encoding
+      - name: data_charset_match     # alpha-pair member 2
+        from_field: data_charset
+        to_field: data_charset
+      - name: file_path_match        # beta-pair member 1: LCP=0 with dir_path_match (no shared prefix)
+        from_field: file_path
+        to_field: file_path
+      - name: dir_path_match         # beta-pair member 2
+        from_field: dir_path
+        to_field: dir_path
+      - name: unique_xi_marker_link  # gamma1 (filtration-invariant; truly isolated name)
+        from_field: unique_xi_marker
+        to_field: unique_xi_marker
+
+  - from: middleware
+    to: sink
+    dimensions:
+      - name: data_encoding_handoff  # alpha-pair extension: LCP@0.636 with data_encoding_match
+        from_field: data_encoding
+        to_field: data_encoding
+      - name: file_path_handoff      # beta-pair extension: LCP@0.556 with file_path_match
+        from_field: file_path
+        to_field: file_path
+
+  - from: sink
+    to: validator
+    dimensions:
+      - name: audit_log_entry_track       # delta-pair member 1
+        from_field: audit_log_entry
+        to_field: audit_log_entry
+      - name: payload_blob_special_carry  # gamma2 (filtration-invariant)
+        from_field: payload_blob_special
+        to_field: payload_blob_special
+
+  - from: validator
+    to: source
+    dimensions:
+      - name: audit_log_entry_loopback   # delta-pair member 2: LCP@0.667 with track
+        from_field: audit_log_entry
+        to_field: audit_log_entry

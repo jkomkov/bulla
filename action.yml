@@ -8,7 +8,7 @@ branding:
 
 inputs:
   mode:
-    description: "Analysis mode: 'check' (composition YAMLs) or 'audit' (MCP manifests)"
+    description: "Analysis mode: 'check' (composition YAMLs), 'audit' (MCP manifests), or 'semver' (old/new semantic delta)"
     required: false
     default: "check"
   path:
@@ -21,6 +21,26 @@ inputs:
     default: ""
   mcp-config:
     description: "Path to MCP config file for live scan (audit mode)"
+    required: false
+    default: ""
+  old-path:
+    description: "Old/baseline composition YAML (semver mode)"
+    required: false
+    default: ""
+  new-path:
+    description: "New/updated composition YAML (semver mode)"
+    required: false
+    default: ""
+  fail-on-major:
+    description: "Fail semver mode when update-kind is semantic-major"
+    required: false
+    default: "false"
+  fail-on-minor:
+    description: "Fail semver mode when update-kind is semantic-minor or semantic-major"
+    required: false
+    default: "false"
+  max-delta-r:
+    description: "Fail semver mode when delta-r exceeds this integer threshold"
     required: false
     default: ""
   max-fee:
@@ -61,6 +81,24 @@ outputs:
   boundary-fee:
     description: "Cross-server boundary fee (audit mode)"
     value: ${{ steps.run.outputs.boundary_fee }}
+  delta-r:
+    description: "Semantic rank delta (semver mode)"
+    value: ${{ steps.run.outputs.delta_r }}
+  update-kind:
+    description: "semantic-patch | semantic-minor | semantic-major (semver mode)"
+    value: ${{ steps.run.outputs.update_kind }}
+  coherence-preserving:
+    description: "Whether update preserves coherence class (semver mode)"
+    value: ${{ steps.run.outputs.coherence_preserving }}
+  old-fee:
+    description: "Baseline coherence fee (semver mode)"
+    value: ${{ steps.run.outputs.old_fee }}
+  new-fee:
+    description: "Updated coherence fee (semver mode)"
+    value: ${{ steps.run.outputs.new_fee }}
+  minimum-bridge-delta:
+    description: "Lower-bound bridge receipts needed to restore previous class (semver mode)"
+    value: ${{ steps.run.outputs.minimum_bridge_delta }}
 
 runs:
   using: "composite"
@@ -120,6 +158,58 @@ runs:
 
           # Run SARIF output
           eval "$AUDIT_CMD --format sarif" > "${SARIF_FILE}" 2>/dev/null || EXIT_CODE=$?
+
+        elif [ "$MODE" = "semver" ]; then
+          if [ -z "${{ inputs.old-path }}" ] || [ -z "${{ inputs.new-path }}" ]; then
+            echo "::error::semver mode requires both old-path and new-path inputs"
+            exit 1
+          fi
+          JSON_OUT=$(bulla certify-update "${{ inputs.old-path }}" "${{ inputs.new-path }}" --format json) || EXIT_CODE=$?
+          if [ -n "$JSON_OUT" ]; then
+            DR=$(echo "$JSON_OUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('delta_r',0))")
+            UK=$(echo "$JSON_OUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('update_kind','semantic-patch'))")
+            CP=$(echo "$JSON_OUT" | python3 -c "import sys,json; print(str(json.load(sys.stdin).get('coherence_preserving',True)).lower())")
+            OF=$(echo "$JSON_OUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('old_fee',0))")
+            NF=$(echo "$JSON_OUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('new_fee',0))")
+            MBD=$(echo "$JSON_OUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('minimum_bridge_delta',0))")
+            echo "delta_r=${DR}" >> "$GITHUB_OUTPUT"
+            echo "update_kind=${UK}" >> "$GITHUB_OUTPUT"
+            echo "coherence_preserving=${CP}" >> "$GITHUB_OUTPUT"
+            echo "old_fee=${OF}" >> "$GITHUB_OUTPUT"
+            echo "new_fee=${NF}" >> "$GITHUB_OUTPUT"
+            echo "minimum_bridge_delta=${MBD}" >> "$GITHUB_OUTPUT"
+
+            POLICY_ERRORS=()
+            if [ "${{ inputs.fail-on-major }}" = "true" ] && [ "$UK" = "semantic-major" ]; then
+              POLICY_ERRORS+=("Policy violation: semantic-major update blocked by fail-on-major=true")
+            fi
+            if [ "${{ inputs.fail-on-minor }}" = "true" ] && { [ "$UK" = "semantic-minor" ] || [ "$UK" = "semantic-major" ]; }; then
+              POLICY_ERRORS+=("Policy violation: semantic-minor/major update blocked by fail-on-minor=true")
+            fi
+            if [ -n "${{ inputs.max-delta-r }}" ]; then
+              MAX_DR="${{ inputs.max-delta-r }}"
+              if ! [[ "$MAX_DR" =~ ^-?[0-9]+$ ]]; then
+                echo "::error::max-delta-r must be an integer, got '$MAX_DR'"
+                EXIT_CODE=1
+              elif [ "$DR" -gt "$MAX_DR" ]; then
+                POLICY_ERRORS+=("Policy violation: delta_r=${DR} exceeds max-delta-r=${MAX_DR}")
+              fi
+            fi
+            if [ ${#POLICY_ERRORS[@]} -gt 0 ]; then
+              for msg in "${POLICY_ERRORS[@]}"; do
+                echo "::error::${msg}"
+              done
+              EXIT_CODE=3
+            fi
+          fi
+          LEVEL="note"
+          if [ "${UK:-semantic-patch}" = "semantic-major" ]; then
+            LEVEL="warning"
+          fi
+          if [ "$EXIT_CODE" -ne 0 ]; then
+            LEVEL="error"
+          fi
+          python3 -c "import json,sys;sarif_file,level,uk,dr,cp=sys.argv[1:6];payload={'\$schema':'https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json','version':'2.1.0','runs':[{'tool':{'driver':{'name':'bulla','version':'semver'}},'results':[{'ruleId':f'semantic-semver-{uk}','level':level,'message':{'text':f'Semantic update classified as {uk} (delta_r={dr}, coherence_preserving={cp}).'}}]}]};open(sarif_file,'w').write(json.dumps(payload))" "$SARIF_FILE" "$LEVEL" "${UK:-semantic-patch}" "${DR:-0}" "${CP:-true}"
 
         else
           # Check mode (backward compatible)

@@ -33,6 +33,45 @@ jobs:
           sarif_file: bulla.sarif
         continue-on-error: true
 
+  semver-smoke:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: SemVer action smoke (allow mode)
+        id: semver_allow
+        uses: ./bulla
+        with:
+          mode: semver
+          old-path: bulla/compositions/auth_pipeline.yaml
+          new-path: bulla/compositions/financial_pipeline.yaml
+          upload-sarif: true
+
+      - name: Validate semver outputs
+        run: |
+          test -n "${{ steps.semver_allow.outputs.delta-r }}"
+          test -n "${{ steps.semver_allow.outputs.update-kind }}"
+          test -n "${{ steps.semver_allow.outputs.coherence-preserving }}"
+          test -n "${{ steps.semver_allow.outputs.old-fee }}"
+          test -n "${{ steps.semver_allow.outputs.new-fee }}"
+          test -n "${{ steps.semver_allow.outputs.minimum-bridge-delta }}"
+
+      - name: SemVer policy gate blocks major
+        id: semver_block
+        continue-on-error: true
+        uses: ./bulla
+        with:
+          mode: semver
+          old-path: bulla/compositions/auth_pipeline.yaml
+          new-path: bulla/compositions/financial_pipeline.yaml
+          fail-on-major: true
+          upload-sarif: false
+
+      - name: Assert policy gate failure occurred
+        run: test "${{ steps.semver_block.outcome }}" = "failure"
+
   tests:
     runs-on: ubuntu-latest
     strategy:

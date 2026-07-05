@@ -35,9 +35,11 @@ Schema layout (v1.0, locked):
       "display":     { fee_interpretation, repair_semantics },  # v0 free-text labels (UI-only)
       "timestamp":   "<UTC ISO>",
       "bulla_version": "<X.Y.Z>",
-      "certificate_content_hash": "sha256:<hex64>",         # over canonical JSON minus timestamp,
-                                                            # signature, the hash itself,
-                                                            # attestation_hash, receipt_hash, display
+      "certificate_content_hash": "sha256:<hex64>",         # content-address of the ASSERTION:
+                                                            # canonical JSON minus producer/env
+                                                            # provenance (timestamp, bulla_version,
+                                                            # method, signature, attestation_hash,
+                                                            # receipt_hash, display, subject.source_path)
       "attestation_hash": null,                             # reserved for future signed envelope
       "receipt_hash": null                                  # reserved for future operational receipts
     }
@@ -50,11 +52,14 @@ Design discipline:
     invalidate parent-cert hashes.
   * `regime` is evidence (predicate values); claims are derived FROM it
     but distinct.
-  * `certificate_content_hash` is determined by every meaningful field
-    except timestamp, signature, the hash itself, the future
-    attestation/receipt slots, and display — so two `certify()` calls
-    on the same composition (with the same parents) produce identical
-    content hashes regardless of when run.
+  * `certificate_content_hash` is a content-address of the ASSERTION: it
+    is determined by the semantic fields (subject identity, regime,
+    diagnostic, claims, scope, parents, issuer, violations) and EXCLUDES
+    all producer/environment provenance (timestamp, bulla_version, method,
+    signature, the hash itself, attestation/receipt slots, display, and
+    subject.source_path). So the same assertion produces the same hash on
+    any machine and any bulla version — "recompute the deed" is machine-
+    and version-independent. (Provenance still lives in the body for audit.)
   * `parent_certificate_hashes` are sorted canonically inside `certify()`
     so parent permutations do not change the content hash. v1.0 treats
     parent order as set-semantics, not causal/supersession order.
@@ -78,11 +83,13 @@ from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import dataclass, field
+import os
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
 from typing import Any, Optional
 
 from bulla import __version__
+from bulla._canonical import ALGORITHM_VERSION
 from bulla.diagnostic import decompose_fee, diagnose
 from bulla.model import Composition
 from bulla.regime import RegimeReport, RegimeViolation, classify, validate_regime
@@ -319,10 +326,12 @@ class CompositionCertificate:
     # --- scope (sorted; for future parentage comparison) ---
     scope: dict
 
-    # --- reserved slots for incremental bundles / signing / supersession ---
+    # --- incremental bundles / signing / supersession ---
     parent_certificate_hashes: tuple[str, ...]
-    issuer: dict
-    signature: Optional[str]
+    issuer: dict                  # the agent identity; {type:'local', id:null} unsigned,
+                                  # {type:'did:key', id:'did:key:z…'} when signed. In the content hash.
+    signature: Optional[dict]     # the ed25519 proof object when signed (bulla.identity); null otherwise.
+                                  # Excluded from the content hash — signing a cert does not perturb its hash.
     supersedes: Optional[str]
 
     # --- schema-shape violations (Sprint 10) ---
@@ -336,9 +345,10 @@ class CompositionCertificate:
     bulla_version: str
 
     # --- hash anchors (Sprint 14 refinement) ---
-    # `certificate_content_hash` is the deterministic semantic anchor.
-    # It is stable under display/timestamp/signature changes, but changes
-    # under subject, method, regime, diagnostic, claims, scope, parent,
+    # `certificate_content_hash` is the deterministic content-address of the
+    # assertion. Stable under producer/environment provenance (display,
+    # timestamp, bulla_version, method, signature, subject.source_path); changes
+    # under subject identity, regime, diagnostic, claims, scope, parent,
     # issuer, supersession, or violation changes.
     #
     # `attestation_hash` is reserved for the future signed timed artifact
@@ -349,6 +359,21 @@ class CompositionCertificate:
     certificate_content_hash: str
     attestation_hash: Optional[str]
     receipt_hash: Optional[str]
+
+    # --- algorithm version (the deed's `f`) ---
+    # Committed in the content hash (NOT excluded): the deed names which algorithm
+    # produced the verdict, so a recomputing verifier knows what to run. Defaulted
+    # so existing constructors and `dataclasses.replace` carry it unchanged. See
+    # `bulla._canonical.ALGORITHM_VERSION` for the bump rule and the ladder.
+    algorithm_version: str = ALGORITHM_VERSION
+
+    # --- Deed v0.2: the recourse envelope (bulla.envelope) ---
+    # Optional signed-envelope dict {deed_schema, authority?, bounds?, recourse?,
+    # retention_class?, disclosure_class?}. Like `signature`, EXCLUDED from the
+    # content hash (the recomputable core stays pure) and committed inside
+    # `attestation_hash` — tamper-evident, signed, anchored transitively.
+    # Absent (None) ⇒ the attestation preimage is byte-identical to v0.1.
+    recourse_envelope: Optional[dict] = None
 
 
 # ---- Helpers ----
@@ -386,9 +411,13 @@ def _detect_servers(comp: Composition) -> list[str]:
 
 
 def _build_subject(comp: Composition, source_path: Optional[str]) -> dict:
+    # The composition's identity is `composition_sha256`; `source_path` is only
+    # human provenance. Store the BASENAME, never the absolute path — the cert is
+    # published/anchored, and an absolute path would leak the local filesystem
+    # layout into a public, non-retractable artifact.
     return {
         "name": comp.name,
-        "source_path": source_path,
+        "source_path": os.path.basename(source_path) if source_path else source_path,
         "composition_sha256": _composition_sha256(comp),
         "pack_stack_sha256": None,  # reserved; populated by future pack-aware certify
         "manifest_hashes": [],       # reserved; populated when callers supply manifest provenance
@@ -507,28 +536,51 @@ def _canonicalize_scope(comp: Composition) -> dict:
     return {"tools": tool_names, "edges": edges_canon}
 
 
+# Producer / environment provenance. Recorded in the certificate body for audit,
+# but NOT part of the deed's content-address: the address is the ASSERTION (what
+# was certified about the composition), not who / which version / where / when
+# produced it. Excluding these makes `certificate_content_hash` a true
+# content-address — the same assertion yields the same hash on any machine and any
+# bulla version, so "recompute the deed" is machine- AND version-independent. The
+# excluded values still live in the certificate body for audit; they just don't
+# bind the identity.
+_PROVENANCE_EXCLUDED = (
+    "timestamp",                 # clock
+    "bulla_version",             # producer version
+    "method",                    # producer module@version strings
+    "signature",                 # added after hashing (so signing can't perturb the hash)
+    "recourse_envelope",         # Deed v0.2: committed in the ATTESTATION preimage, not here —
+                                 # the recomputable core must not depend on the appeal path
+    "certificate_content_hash",  # the hash itself
+    "attestation_hash",          # signed-envelope hash, filled at signing
+    "receipt_hash",              # reserved
+    "display",                   # UI-only free text
+)
+
+
+def _content_hash_preimage(d: dict) -> dict:
+    """The canonical preimage of `certificate_content_hash`, over a serialized
+    certificate dict. Excludes `_PROVENANCE_EXCLUDED` AND `subject.source_path`
+    (an input path, not the composition's identity — `subject.composition_sha256`
+    is). This is the single source of truth for the preimage: both `certify()`
+    (signing) and `verify_certificate_integrity()` (verification) go through here,
+    so they can never disagree on what was hashed.
+
+    The preimage IS sensitive to the assertion: subject (minus source_path),
+    regime, diagnostic, claims, scope, parent_certificate_hashes, issuer,
+    supersedes, violations, certificate_schema_version, and **algorithm_version**
+    (the deed's `f` — so the hash pins which algorithm produced the verdict)."""
+    out = {k: v for k, v in d.items() if k not in _PROVENANCE_EXCLUDED}
+    subj = out.get("subject")
+    if isinstance(subj, dict):
+        out["subject"] = {k: v for k, v in subj.items() if k != "source_path"}
+    return out
+
+
 def _certificate_dict_for_content_hash(cert: CompositionCertificate) -> dict:
-    """Build the canonical dict over which `certificate_content_hash` is
-    computed.
-
-    Sprint 14 refined preimage: excludes `timestamp` (clock-dependent),
-    `signature` (mutable post-issuance), `certificate_content_hash` itself
-    (cannot be self-referential), the future signed-envelope slots
-    `attestation_hash` and `receipt_hash` (will be filled later without
-    invalidating content hash), and `display` (UI-only — wording edits
-    must not change parent-cert hashes).
-
-    The preimage IS sensitive to: subject, method, regime, diagnostic,
-    claims, scope, parent_certificate_hashes, issuer, supersedes,
-    violations, certificate_schema_version, bulla_version."""
-    d = _to_dict_internal(cert)
-    d.pop("timestamp", None)
-    d.pop("signature", None)
-    d.pop("certificate_content_hash", None)
-    d.pop("attestation_hash", None)
-    d.pop("receipt_hash", None)
-    d.pop("display", None)
-    return d
+    """The content-hash preimage of a certificate object (see
+    `_content_hash_preimage`)."""
+    return _content_hash_preimage(_to_dict_internal(cert))
 
 
 def _compute_certificate_content_hash(cert: CompositionCertificate) -> str:
@@ -549,6 +601,7 @@ def _to_dict_internal(cert: CompositionCertificate) -> dict:
     Field order matches the canonical v1.0 schema layout (Sprint 14)."""
     out: dict[str, Any] = {
         "certificate_schema_version": cert.certificate_schema_version,
+        "algorithm_version": cert.algorithm_version,  # the deed's `f`; in the content hash
         "subject": dict(cert.subject),
         "method": dict(cert.method),
         "regime": _regime_to_dict(cert.regime),
@@ -567,6 +620,8 @@ def _to_dict_internal(cert: CompositionCertificate) -> dict:
         "attestation_hash": cert.attestation_hash,
         "receipt_hash": cert.receipt_hash,
     }
+    if cert.recourse_envelope is not None:
+        out["recourse_envelope"] = dict(cert.recourse_envelope)
     return out
 
 
@@ -684,3 +739,95 @@ def to_json(cert: CompositionCertificate, *, indent: int = 2) -> str:
     """JSON text in the canonical v1.0 layout. `indent=2` matches existing
     `bulla diagnose --format json` convention."""
     return json.dumps(to_dict(cert), indent=indent)
+
+
+# ---- Signing: bind a certificate to an external agent identity (bulla[identity]) ----
+#
+# Bulla SIGNS, never MINTS. `sign_certificate` issues a certificate under an
+# identity the agent already holds (default scheme: did:key). The issuer is
+# committed inside the content hash; the detached signature is excluded from it.
+# The anchored object is the *attestation hash* — a commitment to BOTH the
+# coherence content and who signed it — so anchoring it (bulla.ots) records, at a
+# public time, "this issuer committed to this coherence claim."
+
+def _attestation_hash(
+    content_hash: str, proof: dict, recourse_envelope: dict | None = None
+) -> str:
+    """Hash of the signed envelope = commitment to {coherence content, signer,
+    and — Deed v0.2 — the recourse envelope when present}. This is the deed
+    identity, and the object anchored by `bulla.ots`.
+
+    Backward compatibility is byte-exact: with ``recourse_envelope=None`` the
+    preimage is the v0.1 two-key object, so every existing deed's
+    ``attestation_hash`` verifies unchanged."""
+    preimage: dict = {"certificate_content_hash": content_hash, "signature": proof}
+    if recourse_envelope is not None:
+        preimage["recourse_envelope"] = recourse_envelope
+    envelope = json.dumps(preimage, sort_keys=True, separators=(",", ":"))
+    return f"sha256:{hashlib.sha256(envelope.encode('utf-8')).hexdigest()}"
+
+
+def sign_certificate(
+    cert: CompositionCertificate, signer: Any, *, envelope: Any = None
+) -> CompositionCertificate:
+    """Issue a signed certificate under ``signer``'s identity.
+
+    Signing is a **creation-time** operation: because the issuer lives inside the
+    content-hash preimage, setting it yields a *new* certificate with a *new*
+    ``certificate_content_hash``. You cannot retro-sign an existing
+    ``{type:'local', id:null}`` certificate without minting a new hash — by design
+    (the hash binds the issuer). ``signature`` is excluded from the preimage, so
+    the signature itself does not perturb the (new) content hash.
+
+    ``signer`` is any object exposing ``issuer_block() -> dict`` and
+    ``sign(content_hash: str) -> dict`` (see ``bulla.identity.LocalEd25519Signer``).
+
+    ``envelope`` (Deed v0.2) optionally attaches the recourse triple
+    (``bulla.envelope.RecourseEnvelope``). It is validated at attach time (the
+    modality law: every remedy names a verifier and a stateful anchor), carried
+    outside the content hash, and committed inside ``attestation_hash`` — so
+    the appeal path is signed and tamper-evident without perturbing the
+    recomputable core.
+    """
+    envelope_dict: dict | None = None
+    if envelope is not None:
+        from bulla.envelope import RecourseEnvelope
+
+        if isinstance(envelope, RecourseEnvelope):
+            envelope_dict = envelope.to_dict()
+        else:
+            # dict input: reconstruct to re-run validation (modality law)
+            envelope_dict = RecourseEnvelope.from_dict(dict(envelope)).to_dict()
+
+    staged = replace(
+        cert,
+        issuer=signer.issuer_block(),
+        signature=None,
+        attestation_hash=None,
+        certificate_content_hash="",
+        recourse_envelope=envelope_dict,
+    )
+    content_hash = _compute_certificate_content_hash(staged)
+    proof = signer.sign(content_hash)
+    return replace(
+        staged,
+        certificate_content_hash=content_hash,
+        signature=proof,
+        attestation_hash=_attestation_hash(content_hash, proof, envelope_dict),
+    )
+
+
+def verify_certificate_integrity(cert_dict: dict) -> bool:
+    """Recompute ``certificate_content_hash`` from a serialized certificate dict
+    and compare it to the stored value, via the SAME `_content_hash_preimage`
+    used at signing time (so the two can never disagree on what was hashed).
+    Tamper-evident over the assertion — including ``issuer``, so swapping the
+    issuer without re-signing is caught. Mirrors ``witness.verify_receipt_integrity``."""
+    claimed = cert_dict.get("certificate_content_hash")
+    if not claimed:
+        return False
+    payload = json.dumps(
+        _content_hash_preimage(cert_dict), sort_keys=True, separators=(",", ":")
+    )
+    computed = f"sha256:{hashlib.sha256(payload.encode('utf-8')).hexdigest()}"
+    return computed == claimed

@@ -1,0 +1,29 @@
+name: semantic-semver
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  semver-gate:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Semantic version gate
+        id: semver
+        uses: jkomkov/bulla@v0.21.0
+        with:
+          mode: semver
+          old-path: compositions/pipeline_old.yaml
+          new-path: compositions/pipeline_new.yaml
+          fail-on-major: "true"
+          upload-sarif: "true"
+
+      - name: Print verdict
+        run: |
+          echo "delta-r=${{ steps.semver.outputs.delta-r }}"
+          echo "update-kind=${{ steps.semver.outputs.update-kind }}"
+          echo "coherence-preserving=${{ steps.semver.outputs.coherence-preserving }}"

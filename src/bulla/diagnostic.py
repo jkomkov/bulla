@@ -317,6 +317,152 @@ def decompose_fee(
 
 
 @dataclass(frozen=True)
+class DimensionFeeDecomposition:
+    """Per-dimension fee decomposition with additivity diagnostics.
+
+    One object answering "what is each dimension's fee, does it explain the
+    whole fee, and if not why" — so callers need not compose
+    :func:`diagnose`, :func:`decompose_fee_by_dimension`, and
+    :func:`has_disjoint_field_decomposition` by hand.
+
+    Attributes:
+      by_dimension: dimension name -> ``fee_d`` (non-negative), insertion
+        ordered by first appearance in the edge list.
+      total_fee: the composition's coherence fee
+        (``rank(delta_full) - rank(delta_obs)``).
+      residual: ``sum(by_dimension) - total_fee``. By Lemma 1 of the
+        Per-Dimension Additivity theorem this equals ``Delta_full - Delta_obs``,
+        the **cross-dimensional interaction score**: ``0`` means the dimensions
+        are modular (the per-dimension fees explain the whole fee); a nonzero
+        value means hidden state couples dimensions that the row partition
+        treats as independent. Sign is not constrained in general.
+      dfd_holds: whether Disjoint Field Decomposition holds — a *sufficient*
+        condition for ``residual == 0`` (DFD ``=>`` additive; the converse is
+        not guaranteed, since ``residual`` can vanish without DFD).
+      shared_columns: ``{(tool, field): {dim names}}`` for every column shared
+        by two or more dimensions (empty iff ``dfd_holds``).
+    """
+
+    by_dimension: dict[str, int]
+    total_fee: int
+    residual: int
+    dfd_holds: bool
+    shared_columns: dict[tuple[str, str], frozenset[str]]
+
+    @property
+    def is_additive(self) -> bool:
+        """True iff the per-dimension fees sum exactly to the total fee."""
+        return self.residual == 0
+
+
+def decompose_fee_by_dimension(comp: Composition) -> DimensionFeeDecomposition:
+    """Decompose the coherence fee over semantic *dimension* names.
+
+    Where :func:`decompose_fee` partitions by tool group, this partitions
+    the coboundary's *rows* by their semantic dimension. Each row of the
+    coboundary is an ``(edge, dimension)`` pair (see
+    ``coboundary._edge_basis``), and the row basis is identical for the
+    observable and full operators. For each dimension name ``d`` the
+    per-dimension fee is the independent rank contribution of that
+    dimension's rows::
+
+        fee_d = rank(delta_full[rows of d]) - rank(delta_obs[rows of d])
+
+    Returns a :class:`DimensionFeeDecomposition` carrying the per-dimension
+    fees, the total fee, the additivity ``residual`` (the cross-dimensional
+    interaction score ``sum(fee_d) - total_fee``), and the DFD status.
+
+    Additivity (``residual == 0``) holds when the dimension blocks act on
+    disjoint field supports — the Disjoint Field Decomposition (DFD) regime
+    (see :func:`has_disjoint_field_decomposition` and
+    ``papers/coherence-cliff/results/per_dimension_additivity_theorem.md``).
+    DFD is sufficient for ``residual == 0`` but not necessary. Per-dimension
+    fees are individually non-negative.
+    """
+    from bulla.coboundary import build_coboundary, matrix_rank
+
+    delta_obs, _v_obs, e_basis = build_coboundary(
+        list(comp.tools), list(comp.edges), use_internal=False
+    )
+    delta_full, _v_full, e_basis_full = build_coboundary(
+        list(comp.tools), list(comp.edges), use_internal=True
+    )
+    # Row bases depend only on edges, not on use_internal, so they coincide.
+    assert e_basis == e_basis_full, "obs/full row bases must coincide"
+
+    dim_order: list[str] = []
+    seen: set[str] = set()
+    for _label, dim_name in e_basis:
+        if dim_name not in seen:
+            seen.add(dim_name)
+            dim_order.append(dim_name)
+
+    by_dimension: dict[str, int] = {}
+    for d in dim_order:
+        rows_obs = [delta_obs[i] for i, (_l, dn) in enumerate(e_basis) if dn == d]
+        rows_full = [delta_full[i] for i, (_l, dn) in enumerate(e_basis) if dn == d]
+        by_dimension[d] = matrix_rank(rows_full) - matrix_rank(rows_obs)
+
+    total_fee = matrix_rank(delta_full) - matrix_rank(delta_obs)
+    residual = sum(by_dimension.values()) - total_fee
+    violations = disjoint_field_decomposition_violations(comp)
+    return DimensionFeeDecomposition(
+        by_dimension=by_dimension,
+        total_fee=total_fee,
+        residual=residual,
+        dfd_holds=not violations,
+        shared_columns={col: frozenset(dims) for col, dims in violations.items()},
+    )
+
+
+def dimension_column_supports(comp: Composition) -> dict[str, set[tuple[str, str]]]:
+    """Map each semantic dimension name to the set of ``(tool, field)`` columns
+    its edges are incident to (in the full coboundary).
+
+    A dimension-``d`` row for edge ``e`` is incident to
+    ``(e.from_tool, dim.from_field)`` and ``(e.to_tool, dim.to_field)``.
+    """
+    supports: dict[str, set[tuple[str, str]]] = {}
+    for edge in comp.edges:
+        for dim in edge.dimensions:
+            cols = supports.setdefault(dim.name, set())
+            if dim.from_field:
+                cols.add((edge.from_tool, dim.from_field))
+            if dim.to_field:
+                cols.add((edge.to_tool, dim.to_field))
+    return supports
+
+
+def disjoint_field_decomposition_violations(
+    comp: Composition,
+) -> dict[tuple[str, str], set[str]]:
+    """Return the columns shared by more than one dimension (DFD violations).
+
+    A composition satisfies *Disjoint Field Decomposition* (DFD) when distinct
+    semantic dimensions have disjoint ``(tool, field)`` column supports. This
+    returns ``{(tool, field): {dim names}}`` for every column touched by two or
+    more dimensions; an empty dict means DFD holds.
+    """
+    supports = dimension_column_supports(comp)
+    col_to_dims: dict[tuple[str, str], set[str]] = {}
+    for dim_name, cols in supports.items():
+        for col in cols:
+            col_to_dims.setdefault(col, set()).add(dim_name)
+    return {col: dims for col, dims in col_to_dims.items() if len(dims) > 1}
+
+
+def has_disjoint_field_decomposition(comp: Composition) -> bool:
+    """True iff distinct dimensions have disjoint column supports (DFD).
+
+    Under DFD the per-dimension restriction makes both coboundary operators
+    block-diagonal (dimension-disjoint rows x DFD-disjoint columns), so their
+    ranks add and :func:`decompose_fee_by_dimension` satisfies
+    ``sum(fee_d) == coherence_fee`` exactly (Per-Dimension Additivity theorem).
+    """
+    return not disjoint_field_decomposition_violations(comp)
+
+
+@dataclass(frozen=True)
 class OpenPort:
     """An unconnected port in a partial composition.
 

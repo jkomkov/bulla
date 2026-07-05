@@ -1,0 +1,26 @@
+{
+  "artifact": "composition-completeness measurement (the DCIChecker contrast + scoping factor)",
+  "provenance": "value-blind, deterministic, seed=2026; real-tool chains (constructed, M2-class)",
+  "n_compositions": 300,
+  "invisible_to_per_tool__fee_positive": {
+    "count": 219,
+    "prevalence": 0.73,
+    "meaning": "an obstruction present in NO single tool -> a per-tool check (DCIChecker) cannot see it"
+  },
+  "joint_obstruction__boundary_fee_positive": {
+    "count": 108,
+    "prevalence": 0.36,
+    "meaning": "a JOINT obstruction not captured by analyzing the parts independently (Theorem A / M2's object) -- the non-local term per-component analysis misses. NOT claimed as 'no pair sees it' (computed on block splits, so a cross-block pair could sometimes reach it)."
+  },
+  "scoping__deterministic_complete_narrowing": {
+    "median_F_over_K_vs_naive_allpairs": 695.3,
+    "mean_F_over_K_vs_naive_allpairs": 950.4,
+    "meaning": "Bulla narrows the Layer-2 value-check to the K conventions a composition actually requires. The DEFENSIBLE claim is that the narrowing is DETERMINISTIC + COMPLETE (a noisy oracle cannot guarantee either). The magnitude F/K is vs a NAIVE all-field-pairs baseline (a strawman: a real oracle self-narrows), so it is a ceiling, reported for scale only -- not the claim."
+  },
+  "named_contrast": "DCIChecker measured per-tool honesty (9.93% of 2,214 servers inconsistent). We measured cross-composition declaration-completeness on the real registry: 73% of compositions carry an obstruction invisible to any per-tool check (in no single tool), and 36% carry a JOINT obstruction the parts-decomposition misses (Theorem A) -- value-blind, deterministic, complete, no oracle. And Layer 1 narrows the downstream value-check to the conventions a composition actually requires -- deterministically and completely (the narrowing is the claim; its magnitude vs naive all-pairs is a 695x ceiling, not a headline).",
+  "honest_bounds": [
+    "declaration-completeness is complete w.r.t. the KNOWN dimension vocabulary, not absolutely (link to the commons)",
+    "chains constructed from real tools (a notch below a live corpus, as M2)",
+    "F/K is vs the naive all-field-pairs baseline; the point is Bulla narrows deterministically + completely"
+  ]
+}

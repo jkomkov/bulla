@@ -1,0 +1,54 @@
+{
+  "experiment": "execution_gap",
+  "prereg": "witness_market_prereg.md (90db6a7)",
+  "part_b_constructed_control": {
+    "fee": 0,
+    "breach": true,
+    "detail": "decode:UnicodeDecodeError",
+    "attributable_transport_clears": true,
+    "provenance": "CONSTRUCTED",
+    "note": "fee=0 yet real execution breaks on encoding (the blind spot); transport clears, ablate returns."
+  },
+  "negative_control": {
+    "fee": 0,
+    "breach": false,
+    "detail": "ok"
+  },
+  "grid_EXECUTION_INDEPENDENT": {
+    "disclosed_tool_set": {
+      "encodings": [
+        "utf-8",
+        "latin-1",
+        "ascii"
+      ],
+      "eols": [
+        "'\\n'",
+        "'\\r\\n'"
+      ],
+      "path_roots": [
+        "rel",
+        "abs"
+      ]
+    },
+    "fee0": {
+      "breaches": 30,
+      "total": 36,
+      "breach_rate_authored": 0.8333
+    },
+    "feepos": {
+      "breaches": 3,
+      "total": 4,
+      "breach_rate_authored": 0.75
+    },
+    "examples_fee0_breach": [
+      "utf-8/'\\r\\n'->utf-8/'\\n':content-mismatch",
+      "utf-8/'\\n'->latin-1/'\\n':content-mismatch",
+      "utf-8/'\\n'->latin-1/'\\r\\n':content-mismatch",
+      "utf-8/'\\r\\n'->latin-1/'\\n':content-mismatch",
+      "utf-8/'\\r\\n'->latin-1/'\\r\\n':content-mismatch",
+      "utf-8/'\\n'->ascii/'\\n':decode:UnicodeDecodeError"
+    ]
+  },
+  "VERDICT": "MECHANISM VALIDATED (not a sampled verdict). The gap is REAL: a fee=0 composition breaches at real execution and is attributable=True (control); the harness does NOT false-positive (neg control ok). The blind spot spans multiple convention types (encoding AND EOL) \u2014 fee=0 compositions breach across both. The grid's breach RATES are artifacts of the authored tool set (uniform convention diversity) and are reported only to show the gap is broad, NOT as the pre-registered r/b \u2014 they yield NO FLOOR-SUFFICES/MARKET-REAL verdict (which requires the sampled, non-authored corpus: live servers, pre-reg \u00a73a). What is earned: the harness + oracle + attribution work, and the fee blind spot is real.",
+  "honest_scope": "fee=0 breaches here are value-level (encoding/EOL); fee>0 cases hide path_convention. Real execution, real labels; tool set authored, so the RATE is illustrative, the EXISTENCE + ATTRIBUTABILITY of the gap is the result."
+}

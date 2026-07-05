@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.1",
+  "kind": "action_receipt",
+  "action": {
+    "type": "package.release",
+    "subject": {
+      "package": "bulla",
+      "version": "0.37.0",
+      "git_commit": "c3c3bd36f5db5c7921c5b704ffea8a30ece02445",
+      "git_tag": ""
+    }
+  },
+  "diagnostic_ref": {
+    "status": "deferred",
+    "note": "retroactive reconstruction \u2014 no release-gate WitnessReceipt was minted at release time"
+  },
+  "evidence_refs": [
+    {
+      "name": "wheel",
+      "hash": "sha256:5870fbf176f3ed043f9ade8ac6659b48ec316889425344177b69441a1cd28550"
+    },
+    {
+      "name": "sdist",
+      "hash": "sha256:fd0ab7c836e15064e4447f4620c734856a793819aea8975d6c9db893a167f997"
+    }
+  ],
+  "anchor_ref": {
+    "kind": "pypi",
+    "ref": "bulla 0.37.0"
+  },
+  "mandate": {
+    "authority": {
+      "principal": "github:jkomkov",
+      "policy": "policy://bulla/release",
+      "delegation": [
+        "pypi:project:bulla"
+      ]
+    },
+    "bounds": {
+      "scope": "pypi:bulla version:0.37.0"
+    }
+  },
+  "remedy": {
+    "challenge_window": "P90D",
+    "forum": {
+      "log_endpoint": "https://pypi.org/project/bulla/",
+      "trusted_root_ref": "pypi:project:bulla"
+    },
+    "remedies": [
+      {
+        "rung": "recompute",
+        "verifier": "pip download + sha256 vs PyPI",
+        "anchor": "pypi:bulla==0.37.0"
+      },
+      {
+        "rung": "revert",
+        "verifier": "pypi yank",
+        "anchor": "pypi:bulla==0.37.0"
+      },
+      {
+        "rung": "escalate",
+        "verifier": "maintainer review",
+        "anchor": "github:jkomkov"
+      }
+    ]
+  },
+  "retention": {
+    "record": "authority-permanent",
+    "disclosure": "public"
+  },
+  "stake": null,
+  "signature": null,
+  "timestamp": "2026-05-03T00:00:00+00:00",
+  "producer": {
+    "bulla_version": "0.41.0",
+    "reconstructed": "2026-07-04",
+    "note": "retroactive \u2014 not minted at release time; unsigned by construction"
+  },
+  "hashes": {
+    "content": "sha256:01d5cfab95fa6f5512d77309c65e9b7318814178ea83df48e7a47e6f7a3b477a",
+    "event": "sha256:51d7ae49702bbad5495325f570530295609d0b69a65acad95513757078af23c1",
+    "attestation": "sha256:19c0bd091ff0b913adeab10d61c0394fc17f5c2d4369f0aa9d0e0b291fd5e159",
+    "log_leaf": "sha256:2a5bce25d305bac527f8f2aaff19134944ceea5e7f5bcf308dd28d7f246e7d47"
+  }
+}

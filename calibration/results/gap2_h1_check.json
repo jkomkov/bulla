@@ -1,0 +1,99 @@
+{
+  "experiment": "gap2_h1_check (Bulla seam-complex fee vs SHEAF nerve H^1)",
+  "sheaf_construction": "Cech H^1 of agent-overlap nerve (sheaf.tex:186 def:nerve); canonical S^1 example line 203",
+  "bulla_construction": "fee = rank(delta_full)-rank(delta_obs), seam complex (NOT tool-graph b_1)",
+  "rows": [
+    {
+      "scenario": "3-agent S^1 (pairwise, NO triple) \u2014 SHEAF canonical",
+      "n_agents": 3,
+      "n_edges": 3,
+      "n_triangles": 0,
+      "SHEAF_nerve_H1": 1,
+      "tool_graph_b1": 1,
+      "bulla_fee_k1": 2,
+      "bulla_fee_k2": 4,
+      "fee==H1": false,
+      "fee==k*H1(k=2)": false,
+      "fee==V-1(allhidden conn)": true
+    },
+    {
+      "scenario": "3-agent FILLED (triple overlap)",
+      "n_agents": 3,
+      "n_edges": 3,
+      "n_triangles": 1,
+      "SHEAF_nerve_H1": 0,
+      "tool_graph_b1": 1,
+      "bulla_fee_k1": 2,
+      "bulla_fee_k2": 4,
+      "fee==H1": false,
+      "fee==k*H1(k=2)": false,
+      "fee==V-1(allhidden conn)": true
+    },
+    {
+      "scenario": "4-agent square S^1 (4-cycle, no fills)",
+      "n_agents": 4,
+      "n_edges": 4,
+      "n_triangles": 0,
+      "SHEAF_nerve_H1": 1,
+      "tool_graph_b1": 1,
+      "bulla_fee_k1": 3,
+      "bulla_fee_k2": 6,
+      "fee==H1": false,
+      "fee==k*H1(k=2)": false,
+      "fee==V-1(allhidden conn)": true
+    },
+    {
+      "scenario": "3-agent TREE (path, no cycle)",
+      "n_agents": 3,
+      "n_edges": 2,
+      "n_triangles": 0,
+      "SHEAF_nerve_H1": 0,
+      "tool_graph_b1": 0,
+      "bulla_fee_k1": 2,
+      "bulla_fee_k2": 4,
+      "fee==H1": false,
+      "fee==k*H1(k=2)": false,
+      "fee==V-1(allhidden conn)": true
+    },
+    {
+      "scenario": "4-agent TREE (star: 0-1,0-2,0-3)",
+      "n_agents": 4,
+      "n_edges": 3,
+      "n_triangles": 0,
+      "SHEAF_nerve_H1": 0,
+      "tool_graph_b1": 0,
+      "bulla_fee_k1": 3,
+      "bulla_fee_k2": 6,
+      "fee==H1": false,
+      "fee==k*H1(k=2)": false,
+      "fee==V-1(allhidden conn)": true
+    },
+    {
+      "scenario": "single edge (2 agents)",
+      "n_agents": 2,
+      "n_edges": 1,
+      "n_triangles": 0,
+      "SHEAF_nerve_H1": 0,
+      "tool_graph_b1": 0,
+      "bulla_fee_k1": 1,
+      "bulla_fee_k2": 2,
+      "fee==H1": false,
+      "fee==k*H1(k=2)": false,
+      "fee==V-1(allhidden conn)": true
+    }
+  ],
+  "summary": {
+    "all_fee==H1": false,
+    "all_fee==2*H1": false,
+    "all_fee==V-1(connectivity)": true,
+    "fee_tracks_tool_graph_b1": false
+  },
+  "three_objects_the_critique_fused": {
+    "1_bulla_fee": "dim H^1(SEAM complex) = a VALUE-BLIND disclosure/connectivity count (V-1). Schema-only.",
+    "2_sheaf_dim_H1": "dim H^1(NERVE) = b_1 of the agent-overlap nerve = a TOPOLOGICAL overlap-cycle count.",
+    "3_sheaf_obstruction_class": "[alpha] in H^1(nerve) = the VALUE-AWARE HOLONOMY (does a global reconciliation exist). SHEAF's actual diagnostic.",
+    "relation": "1 != 2 (computed: different complexes). 1 is BLIND to 3: fee's signature is schema-only, so (8a56a00) it is constant across ALL reconciliation data while [alpha] is a function of that data -- mapping-independent. So Bulla fee is neither SHEAF dimension nor SHEAF obstruction."
+  },
+  "harmonization": "SHEAF's obstruction class [alpha] (value-aware holonomy) aligns with the program's deferred PERFORMANCE layer (the premium / cycle-holonomy), NOT the value-blind TYPE-layer fee. So SHEAF slots into the type/performance split as the performance-side obstruction; the two registers are the program's TWO LAYERS, not one H^1. The value-blindness foreclosure (8a56a00) is exactly the wedge between them. Bulla's own holonomy/severity (cycle-holonomy law mu_G, severity doctrine) is the right counterpart to compare against SHEAF's [alpha] -- a separate, value-aware comparison, not this value-blind fee.",
+  "VERDICT": "NOT ONE H^1 \u2014 the critique's unity is REFUTED. Bulla fee = dim H^1(SEAM complex) tracks CONNECTIVITY/disclosure (V-1); SHEAF dim H^1(NERVE) tracks CYCLES (b_1). They are dim H^1 of DIFFERENT complexes -> different numbers (2 vs 1 on the canonical S^1; >0 vs 0 on trees), and filling a triple overlap drops SHEAF's H^1 to 0 but leaves fee unmoved. Honest prior confirmed."
+}

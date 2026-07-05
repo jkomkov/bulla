@@ -421,6 +421,17 @@ def _cmd_certify(args: argparse.Namespace) -> None:
         certify(comp, source_path=src) for comp, src in pairs
     ]
 
+    # Optionally sign each certificate under an agent identity (bulla[identity]).
+    # Signing is creation-time: it sets the issuer (committed in the content hash)
+    # and a detached ed25519 signature. Bulla signs, never mints.
+    if getattr(args, "sign", False):
+        from bulla.certificate import sign_certificate
+
+        signer = _load_signer_or_exit(
+            getattr(args, "key", None), getattr(args, "issuer", None)
+        )
+        certs = [sign_certificate(c, signer) for c in certs]
+
     # Optional output file
     output = getattr(args, "output", None)
 
@@ -452,6 +463,482 @@ def _cmd_certify(args: argparse.Namespace) -> None:
               file=sys.stderr)
     else:
         print(text, end="")
+
+
+# ── identity: sign / verify / anchor (bulla[identity], bulla[ots]) ──────────
+#
+# Bulla SIGNS coherence attestations under an identity the agent already holds
+# (default: a self-certifying did:key); it never mints identity. The signed
+# certificate is the *deed*; anchoring it to the timechain (a public registry)
+# is what makes the deed non-repudiable across time.
+
+def _default_key_path() -> Path:
+    return Path.home() / ".bulla" / "identity.json"
+
+
+def _load_signer_or_exit(key_path, issuer):
+    """Load a LocalEd25519Signer from a key file (or the default), applying an
+    optional external issuer override. Exits with a clear message on failure."""
+    try:
+        from bulla.identity import LocalEd25519Signer
+    except ImportError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+    path = Path(key_path) if key_path else _default_key_path()
+    if not path.exists():
+        print(
+            f"Error: no signing key at {path}.\n"
+            f"  Run `bulla key gen` first, or pass --key FILE.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    signer = LocalEd25519Signer.from_keyfile_dict(json.loads(path.read_text()))
+    if issuer and issuer != signer.issuer:
+        signer = LocalEd25519Signer(seed=signer.seed, issuer_override=issuer)
+    return signer
+
+
+def _cmd_key(args: argparse.Namespace) -> None:
+    """Bare `bulla key` → show help for the key subcommands."""
+    print(
+        "usage: bulla key gen [-o FILE] [--force]\n\n"
+        "Generate the local ed25519 signing identity (a did:key). Bulla signs\n"
+        "coherence attestations under it; it never issues identities.",
+        file=sys.stderr,
+    )
+    sys.exit(2)
+
+
+def _cmd_key_gen(args: argparse.Namespace) -> None:
+    try:
+        from bulla.identity import LocalEd25519Signer
+    except ImportError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+    path = Path(args.output) if getattr(args, "output", None) else _default_key_path()
+    if path.exists() and not getattr(args, "force", False):
+        print(
+            f"Error: {path} already exists. Use --force to overwrite, or -o to pick another path.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    signer = LocalEd25519Signer.generate()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(signer.to_keyfile_dict(), indent=2) + "\n")
+    try:
+        path.chmod(0o600)
+    except OSError:
+        pass
+    print(
+        f"Generated ed25519 identity:\n"
+        f"  did   {signer.verification_method}\n"
+        f"  key   {path}  (contains the secret key — keep it safe)",
+        file=sys.stderr,
+    )
+
+
+def _cmd_verify(args: argparse.Namespace) -> None:
+    """Verify a certificate: integrity (hash, always), authenticity (signature),
+    and anchor (a `.ots` sidecar, if present)."""
+    from bulla.certificate import verify_certificate_integrity
+
+    cert = json.loads(Path(args.certificate).read_text())
+    integrity = verify_certificate_integrity(cert)
+
+    authenticity = None
+    sig = cert.get("signature")
+    if sig:
+        from bulla.identity import verify_proof
+
+        pub = None
+        if getattr(args, "key", None):
+            import base64
+
+            kd = json.loads(Path(args.key).read_text())
+            if isinstance(kd, dict) and kd.get("public_key_b64"):
+                pub = base64.b64decode(kd["public_key_b64"])
+        res = verify_proof(cert.get("certificate_content_hash", ""), sig, public_key=pub)
+        authenticity = {
+            "authentic": res.authentic,
+            "method": res.method,
+            "issuer": res.issuer,
+            "detail": res.detail,
+        }
+
+    anchor = None
+    ots_path = Path(str(args.certificate) + ".ots")
+    if ots_path.exists():
+        try:
+            from bulla.ots import verify_certificate_anchor
+
+            anchor = verify_certificate_anchor(cert, ots_path.read_text().strip())
+        except ImportError:
+            anchor = {"valid": False, "error": "install bulla[ots] to verify anchors"}
+
+    # inclusion: the omission-closer (rung 4). Demand the deed be logged in the
+    # registry YOU name (local path or a remote read-only URL). Refuse the unlogged.
+    included = None
+    root_trust = None
+    root_ok = False
+    if getattr(args, "registry", None):
+        from bulla.registry import classify_root_trust, deed_leaf, verify_inclusion_record
+
+        reg = _open_registry(args.registry)
+        att = cert.get("attestation_hash")
+        trusted_root = getattr(args, "trusted_root", None)
+        root_ots = None
+        if getattr(args, "root_ots", None):
+            p = Path(args.root_ots)
+            root_ots = p.read_text().strip() if p.exists() else str(args.root_ots)
+        # bind the inclusion proof to THIS cert's leaf (else a host can borrow a valid
+        # proof for an unrelated leaf under the same root)
+        expected_leaf = deed_leaf({
+            "issuer": (cert.get("issuer") or {}).get("id"),
+            "content_hash": cert.get("certificate_content_hash"),
+            "attestation_hash": att,
+        }) if att and cert.get("certificate_content_hash") else None
+        try:  # fail closed: an unreachable registry cannot confirm inclusion
+            proof = reg.inclusion_by_attestation(att) if att else None
+            served_root = proof.get("root") if proof else None
+            included = bool(proof) and verify_inclusion_record(
+                proof, expected_leaf=expected_leaf)
+            root_trust, root_ok = classify_root_trust(
+                getattr(reg, "is_remote", False), served_root, trusted_root, root_ots)
+        except Exception as e:
+            print(f"inclusion     UNREACHABLE — {e} (refusing)", file=sys.stderr)
+            included, root_trust, root_ok = False, "unreachable", False
+
+    result = {"integrity": integrity, "authenticity": authenticity, "anchor": anchor}
+    if included is not None:
+        result["included"] = included
+        result["root_trust"] = root_trust
+
+    if getattr(args, "format", "text") == "json":
+        print(json.dumps(result, indent=2))
+    else:
+        print(f"integrity     {'OK — content hash matches' if integrity else 'FAILED — tampered'}")
+        if authenticity is None:
+            print("authenticity  unsigned (content-hash only)")
+        else:
+            verdict = "OK" if authenticity["authentic"] else "FAILED"
+            extra = f"  ({authenticity['detail']})" if authenticity["detail"] else ""
+            print(
+                f"authenticity  {verdict} via {authenticity['method']}  "
+                f"issuer={authenticity['issuer']}{extra}"
+            )
+        if anchor is None:
+            print("anchor        none — run `bulla anchor` to record the deed publicly")
+        elif anchor.get("valid"):
+            print(f"anchor        {anchor.get('status')}")
+        else:
+            print(f"anchor        invalid — {anchor.get('error')}")
+        if included is not None:
+            if not included:
+                print("inclusion     ABSENT — refuse the unlogged")
+            elif root_trust == "mismatch":
+                print("inclusion     ROOT MISMATCH — host served a different root "
+                      "than you pinned (refuse)")
+            elif root_ok:
+                print(f"inclusion     OK — logged against a root you trust ({root_trust})")
+            else:
+                print(f"inclusion     {root_trust.upper().replace('-', ' ')} — not "
+                      "independently trusted; pin the root (--trusted-root/--root-ots) "
+                      "to proceed, else you trust the operator")
+
+    ok = integrity and (authenticity is None or authenticity["authentic"])
+    if included is not None:
+        ok = ok and included and root_ok  # proceed requires an independently trusted root
+    sys.exit(0 if ok else 1)
+
+
+def _cmd_gate(args: argparse.Namespace) -> None:
+    """The recourse GATE — the OBSERVE -> ENFORCE move. Where `bulla verify` REPORTS the
+    checks, `gate` ENFORCES a relying-party policy: proceed only if the counterparty's
+    deed is authentic AND included under a root you trust independently of the host AND
+    certifies coherence_fee <= --require-fee. On refuse it emits a contestable refusal
+    certificate naming the deficiency and the cure. Exit 0 = PROCEED, 1 = REFUSE.
+
+    Parameterized entirely by flags — point it at YOUR registry + composition; nothing is
+    hardcoded. This is the neutrality bar made executable (a relying party need not route
+    through an interested party)."""
+    from bulla.recourse_gate import build_refusal_certificate, evaluate_gate, GatePolicy
+
+    def _load_json(path: str, label: str) -> dict:
+        try:
+            return json.loads(Path(path).read_text())
+        except FileNotFoundError:
+            print(f"Error: {label} file not found: {path}", file=sys.stderr)
+            sys.exit(2)
+        except json.JSONDecodeError as e:
+            print(f"Error: {label} is not valid JSON ({path}): {e}\n"
+                  f"  Tip: emit a JSON certificate with "
+                  f"`bulla certify --sign <comp>.yaml --key <key> --output <cert>.json --format json`.",
+                  file=sys.stderr)
+            sys.exit(2)
+
+    cert = _load_json(args.certificate, "--certificate") if getattr(args, "certificate", None) else None
+    deed = _load_json(args.deed, "--deed") if getattr(args, "deed", None) else {}
+    if cert and not deed:  # derive the deed triple from the certificate
+        deed = {
+            "issuer": (cert.get("issuer") or {}).get("id"),
+            "content_hash": cert.get("certificate_content_hash"),
+            "attestation_hash": cert.get("attestation_hash"),
+            "composition_hash": (cert.get("subject") or {}).get("composition_sha256"),
+        }
+    att = deed.get("attestation_hash") or (cert or {}).get("attestation_hash")
+    if not att:
+        print("Error: pass --certificate or --deed (an attestation_hash is required).", file=sys.stderr)
+        sys.exit(2)
+
+    reg = _open_registry(args.registry)
+    if reg is None:
+        print("Error: `bulla gate` needs --registry (a local path or an http(s) URL).", file=sys.stderr)
+        sys.exit(2)
+
+    root_ots = None
+    if getattr(args, "root_ots", None):
+        p = Path(args.root_ots)
+        root_ots = p.read_text().strip() if p.exists() else str(args.root_ots)
+    signer = _load_signer_or_exit(args.key, getattr(args, "issuer", None)) if getattr(args, "key", None) else None
+
+    policy = GatePolicy(
+        max_fee=getattr(args, "require_fee", 0),
+        expected_composition_hash=getattr(args, "composition_hash", None),
+    )
+    try:  # fail closed: an unreachable registry cannot confirm inclusion
+        proof = reg.inclusion_by_attestation(att)
+    except Exception as e:
+        print(f"gate          REFUSE — could not reach the registry ({e})", file=sys.stderr)
+        sys.exit(1)
+
+    decision = evaluate_gate(
+        deed_rec=deed, inclusion_rec=proof, certificate=cert,
+        trusted_root=getattr(args, "trusted_root", None), root_ots=root_ots,
+        is_remote=getattr(reg, "is_remote", False), policy=policy)
+
+    out = {
+        "disposition": decision.disposition,
+        "deficiency": decision.deficiency,
+        "root_trust": decision.root_trust,
+        "fee": decision.fee,
+        "included": decision.included,
+        "reason": decision.reason,
+    }
+    if not decision.proceed:
+        out["refusal_certificate"] = build_refusal_certificate(
+            decision, subject_deed=deed,
+            disclose=tuple(getattr(args, "disclose", None) or ()), signer=signer)
+
+    if getattr(args, "format", "text") == "json":
+        print(json.dumps(out, indent=2))
+    elif decision.proceed:
+        print(f"gate          PROCEED — {decision.reason}")
+    else:
+        print(f"gate          REFUSE [{decision.deficiency}] — {decision.reason}")
+        cure = (out.get("refusal_certificate") or {}).get("cure") or {}
+        if cure.get("human"):
+            print(f"cure          {cure['human']}")
+    sys.exit(0 if decision.proceed else 1)
+
+
+def _cmd_anchor(args: argparse.Namespace) -> None:
+    """Anchor a signed certificate's attestation hash to the Bitcoin timechain,
+    writing a `<cert>.ots` sidecar. The anchor is the public registry record that
+    makes the signed deed non-repudiable across time."""
+    cert = json.loads(Path(args.certificate).read_text())
+    if not cert.get("signature"):
+        print(
+            "Error: certificate is unsigned. Sign it first: `bulla certify --sign`.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    try:
+        from bulla.ots import anchor_certificate
+    except ImportError:
+        print(
+            "Error: anchoring requires the [ots] extra: pip install bulla[ots]",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    try:
+        proof_b64 = anchor_certificate(cert)
+    except Exception as e:
+        print(f"Error anchoring: {e}", file=sys.stderr)
+        sys.exit(1)
+    ots_path = Path(str(args.certificate) + ".ots")
+    ots_path.write_text(proof_b64 + "\n")
+    print(
+        f"Anchored {args.certificate} → {ots_path}\n"
+        f"  attestation_hash {cert.get('attestation_hash')}\n"
+        f"  submitted to the Bitcoin timechain (pending; re-verify with `bulla verify` in ~2h).",
+        file=sys.stderr,
+    )
+
+
+# ── registry: the append-only deed log ──────────────────────────────────────
+
+def _default_registry_path() -> Path:
+    return Path.home() / ".bulla" / "registry.jsonl"
+
+
+def _open_deed_log(args):
+    from bulla.registry import DeedLog
+
+    log_path = getattr(args, "log", None)
+    return DeedLog(Path(log_path) if log_path else _default_registry_path())
+
+
+def _cmd_registry(args: argparse.Namespace) -> None:
+    print(
+        "usage: bulla registry {append,log,prove,root,anchor,serve} …\n\n"
+        "The append-only deed log: any party can relay a certificate its issuer\n"
+        "signed; once logged, a deed cannot be deleted or reordered, and the full\n"
+        "logged set under an issuer is enumerable. Closes deletion; makes omission\n"
+        "checkable (a relying party demands an inclusion proof) — it does not compel\n"
+        "an agent to log a deed, and does not resist rekey.",
+        file=sys.stderr,
+    )
+    sys.exit(2)
+
+
+def _cmd_registry_append(args: argparse.Namespace) -> None:
+    cert = json.loads(Path(args.certificate).read_text())
+    log = _open_deed_log(args)
+    try:
+        idx = log.append_certificate(cert)  # the verified submission boundary
+    except ValueError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+    print(
+        f"Appended deed at index {idx}\n"
+        f"  issuer  {(cert.get('issuer') or {}).get('id')}\n"
+        f"  deed    {cert.get('attestation_hash')}\n"
+        f"  root    {log.root()}  (anchor it: `bulla registry root` then anchor)",
+        file=sys.stderr,
+    )
+    print(idx)
+
+
+def _cmd_registry_log(args: argparse.Namespace) -> None:
+    log = _open_deed_log(args)
+    issuer = getattr(args, "issuer", None)
+    rows = log.deeds(issuer)
+    if getattr(args, "format", "text") == "json":
+        print(json.dumps({
+            "tree_size": len(log),
+            "root": log.root(),
+            "deeds": [
+                {"index": i, "issuer": d.issuer, "content_hash": d.content_hash,
+                 "attestation_hash": d.attestation_hash, "signature": d.signature}
+                for i, d in rows
+            ],
+        }, indent=2))
+        return
+    print(f"deed log: {len(log)} deed(s)  root {log.root()}")
+    if issuer:
+        print(f"issuer {issuer}: {len(rows)} deed(s)")
+    for i, d in rows:
+        print(f"  [{i}] {d.issuer}  {d.attestation_hash}")
+
+
+def _cmd_registry_prove(args: argparse.Namespace) -> None:
+    log = _open_deed_log(args)
+    if not 0 <= args.index < len(log):
+        print(
+            f"Error: index {args.index} out of range (the log has {len(log)} deed(s))",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    print(json.dumps(log.inclusion(args.index), indent=2))
+
+
+def _cmd_registry_root(args: argparse.Namespace) -> None:
+    print(_open_deed_log(args).root())
+
+
+def _cmd_registry_anchor(args: argparse.Namespace) -> None:
+    import base64
+
+    log = _open_deed_log(args)
+    if len(log) == 0:
+        print("Error: the log is empty; nothing to anchor.", file=sys.stderr)
+        sys.exit(1)
+    try:
+        from bulla.ots import stamp_hash
+    except ImportError:
+        print(
+            "Error: anchoring requires the [ots] extra: pip install bulla[ots]",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    root = log.root()
+    hex_root = root.split(":", 1)[1]
+    try:
+        proof = stamp_hash(hex_root)
+    except Exception as e:
+        print(f"Error anchoring: {e}", file=sys.stderr)
+        sys.exit(1)
+    out = Path(f"{log.path}.root.{hex_root[:12]}.ots")
+    out.write_text(base64.b64encode(proof).decode("ascii") + "\n")
+    print(
+        f"Anchored registry root {root} → {out}\n"
+        f"  tree_size {len(log)} (a checkpoint; re-anchor as the log grows)",
+        file=sys.stderr,
+    )
+
+
+def _cmd_registry_serve(args: argparse.Namespace) -> None:
+    """Serve the deed log read-only over HTTP — the online surface. A relying party
+    on another machine can demand inclusion and look up deeds-by-composition. The
+    proof verifies against the root THIS host returns, so a remote verifier must pin
+    that root (an OTS anchor, or a value obtained out of band) to trust it — see
+    `bulla verify --trusted-root/--root-ots`. Absent a pin it is trusting the operator."""
+    log = _open_deed_log(args)
+    from bulla.http_registry import make_server
+
+    srv = make_server(log, host=args.host, port=args.port)
+    host, port = srv.server_address
+    print(
+        f"bulla registry serving {log.path} read-only at http://{host}:{port}\n"
+        f"  tree_size {len(log)}  root {log.root()}\n"
+        f"  GET /root · /inclusion?attestation=<id> · /by-composition?composition=<hash>\n"
+        f"  (remote verifiers must pin this root — `bulla verify --trusted-root <hash>` —"
+        f" or they are trusting this operator)",
+        file=sys.stderr,
+    )
+    try:
+        srv.serve_forever()
+    except KeyboardInterrupt:
+        srv.shutdown()
+
+
+def _cmd_certify_update(args: argparse.Namespace) -> None:
+    """G26: semantic update certification for old/new compositions."""
+    _configure_packs_from_args(args)
+    try:
+        old_comp = _load_with_regime_warning(args.old_file)
+        new_comp = _load_with_regime_warning(args.new_file)
+    except CompositionError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    from bulla.compute.semver import assess_update
+
+    assessment = assess_update(old_comp, new_comp)
+    if args.format == "json":
+        print(json.dumps(assessment.to_dict(), indent=2))
+        return
+
+    print("Semantic update assessment")
+    print(f"  old_fee:               {assessment.old_fee}")
+    print(f"  new_fee:               {assessment.new_fee}")
+    print(f"  delta_r:               {assessment.delta_r}")
+    print(f"  coherence_preserving:  {assessment.coherence_preserving}")
+    print(f"  update_kind:           {assessment.update_kind}")
+    print(f"  minimum_bridge_delta:  {assessment.minimum_bridge_delta}")
 
 
 def _cmd_diagnose(args: argparse.Namespace) -> None:
@@ -675,6 +1162,24 @@ def _cmd_check(args: argparse.Namespace) -> None:
         else:
             print("  Result: PASS")
         print()
+
+    # ── Certificate output (v0.38.0: unify check + certify primitives) ──
+    # Writes BEFORE exit so certificates are produced regardless of the
+    # CI gate verdict. Used by G24 self-host pipeline-CI to record state
+    # at each commit hash in the historical analysis window.
+    cert_out = getattr(args, "certificate_out", None)
+    if cert_out is not None:
+        cert_dicts = [
+            to_dict(certify(_load_with_regime_warning(path),
+                            source_path=str(path)))
+            for _, path in diagnostics
+        ]
+        payload = cert_dicts[0] if len(cert_dicts) == 1 else cert_dicts
+        cert_out.write_text(json.dumps(payload, indent=2) + "\n")
+        print(
+            f"  Wrote {len(cert_dicts)} certificate(s) to {cert_out}",
+            file=sys.stderr,
+        )
 
     sys.exit(1 if failed else 0)
 
@@ -1057,6 +1562,144 @@ def _cmd_witness(args: argparse.Namespace) -> None:
         print(json.dumps(receipts, indent=2))
 
 
+def _format_compose_prescriptive(
+    diag,
+    receipt,
+    comp,
+    path: Path,
+) -> str:
+    """Format a single composition's diagnostic + receipt in natural-language
+    'developer-actionable' form: explain the obstruction, list the precise
+    fields to expose, and point to the auto-bridge command.
+
+    This is the Shannon-moment output: an engineer brings a composition,
+    gets back exactly what to do next — no JSON parsing required.
+    """
+    lines: list[str] = []
+    rule = "═" * 64
+    soft = "─" * 64
+    lines.append(rule)
+    lines.append(f"  Bulla Compose Report — {path.name}")
+    lines.append(rule)
+    lines.append("")
+    fee = diag.coherence_fee
+    n_bs = len(diag.blind_spots)
+    disposition = receipt.disposition.value if hasattr(receipt.disposition, "value") else str(receipt.disposition)
+    if fee == 0:
+        lines.append(f"  Witness rank (fee): 0  ✓ COMPOSITION IS COHERENT")
+        lines.append("")
+        lines.append("  No obstructions detected. This composition is structurally safe:")
+        lines.append("  no hidden convention dimensions, no cross-server blind spots.")
+        lines.append("")
+        return "\n".join(lines)
+
+    lines.append(f"  Witness rank (fee): {fee}  ⚠ {disposition}")
+    lines.append("")
+    if n_bs == fee:
+        bs_note = (
+            f"  {n_bs} blind-spot dimension{'s' if n_bs != 1 else ''} forming "
+            f"{fee} independent obstruction class{'es' if fee != 1 else ''}."
+        )
+    else:
+        bs_note = (
+            f"  {n_bs} blind-spot dimension{'s' if n_bs != 1 else ''} "
+            f"collapse into {fee} independent obstruction class{'es' if fee != 1 else ''}."
+        )
+    lines.append(bs_note)
+    lines.append("")
+
+    patches = receipt.patches
+    if patches:
+        lines.append(f"  To make this composition safe, expose {len(patches)} field"
+                     f"{'s' if len(patches) != 1 else ''}:")
+        lines.append("")
+        for i, p in enumerate(patches, 1):
+            lines.append(f"    {i}. tool `{p.target_tool}`, field `{p.field}`")
+            lines.append(f"       Action: add `{p.field}` to {p.target_tool}.observable_schema")
+            lines.append(f"       Bridges blind spot on edge: {p.eliminates_blind_spot}")
+            if p.expected_fee_delta < 0:
+                lines.append(f"       Expected fee delta: {p.expected_fee_delta}")
+            lines.append("")
+
+        lines.append(soft)
+        lines.append("  Apply all bridges automatically:")
+        lines.append(f"    bulla bridge {path} --output {path.stem}_bridged.yaml")
+        lines.append("")
+        lines.append("  Or apply manually by editing the YAML — each `Action:` line")
+        lines.append("  above tells you the precise change. After bridging, re-run:")
+        lines.append(f"    bulla compose {path.stem}_bridged.yaml")
+        lines.append("  and you should see `fee = 0`.")
+        lines.append("")
+    else:
+        lines.append(f"  Fee = {fee} but no machine-actionable patches were generated.")
+        lines.append("  This typically means the obstructions involve unknown dimensions")
+        lines.append("  (run `bulla discover` or `bulla audit` for diagnosis).")
+        lines.append("")
+
+    return "\n".join(lines)
+
+
+def _cmd_compose(args: argparse.Namespace) -> None:
+    """Bulla compose: diagnose one or more compositions and emit a
+    prescriptive (developer-actionable) report.
+
+    Wraps `diagnose` + `witness` into a single command with output
+    tailored for engineers: instead of JSON, prints a natural-language
+    explanation of what to change and a copy-pasteable next command.
+
+    Use `--format json` for the same structured WitnessReceipt that
+    `bulla witness` emits.
+    """
+    from bulla.witness import witness as build_witness_receipt
+
+    paths = _resolve_paths(args.files)
+    if not paths:
+        print("No composition files found.", file=sys.stderr)
+        sys.exit(1)
+
+    fmt = getattr(args, "format", "prescriptive")
+
+    diagnostics_and_receipts = []
+    for path in paths:
+        try:
+            comp = _load_with_regime_warning(path)
+            diag = diagnose(comp)
+        except CompositionError as e:
+            print(f"Error: {e}", file=sys.stderr)
+            sys.exit(1)
+        except Exception as e:
+            print(f"Error processing {path}: {e}", file=sys.stderr)
+            sys.exit(1)
+
+        receipt = build_witness_receipt(diag, comp)
+        diagnostics_and_receipts.append((diag, receipt, comp, path))
+
+    if fmt == "json":
+        receipts = [r.to_dict() for _, r, _, _ in diagnostics_and_receipts]
+        if len(receipts) == 1:
+            print(json.dumps(receipts[0], indent=2))
+        else:
+            print(json.dumps(receipts, indent=2))
+    else:
+        # prescriptive (default)
+        for i, (diag, receipt, comp, path) in enumerate(diagnostics_and_receipts):
+            if i > 0:
+                print()
+            print(_format_compose_prescriptive(diag, receipt, comp, path))
+
+        # Summary footer for multi-file invocations
+        if len(diagnostics_and_receipts) > 1:
+            fees = [d.coherence_fee for d, _, _, _ in diagnostics_and_receipts]
+            coherent = sum(1 for f in fees if f == 0)
+            obstructed = sum(1 for f in fees if f > 0)
+            print("═" * 64)
+            print(
+                f"  Summary: {len(fees)} composition{'s' if len(fees) != 1 else ''} "
+                f"— {coherent} coherent, {obstructed} requiring disclosure."
+            )
+            print("═" * 64)
+
+
 def _load_manifest_dir(manifests_dir: Path) -> dict[str, list[dict]]:
     """Load {server_name: tools_list} from a manifest directory."""
     if not manifests_dir.exists():
@@ -1107,6 +1750,180 @@ def _proxy_record_to_dict(record: "ProxyCallRecord") -> dict[str, object]:
     if rg is not None:
         d["epistemic_receipt"] = rg.epistemic_view().to_dict()
     return d
+
+
+def _cmd_proxy_dispatch(args: argparse.Namespace) -> None:
+    """Route `bulla proxy` to the live shim, replayer, or prompt-injector.
+
+    Branching:
+      - ``--inject-prompt`` → print bulla/agents/system_prompt_v1.md and
+        exit. No backends are spawned.
+      - ``--manifests`` set → legacy trace-replayer path. Emits a
+        deprecation warning and forwards to ``_cmd_proxy``.
+      - otherwise → live MCP proxy: parse ``--config`` or positional
+        commands, run ``live_proxy.serve``.
+    """
+    if getattr(args, "inject_prompt", False):
+        _emit_system_prompt()
+        return
+    if args.manifests is not None:
+        print(
+            "[bulla] deprecation: `bulla proxy --manifests ...` is the old "
+            "trace replayer; use `bulla replay` instead. Forwarding for now.",
+            file=sys.stderr,
+        )
+        _cmd_proxy(args)
+        return
+    _cmd_proxy_live(args)
+
+
+def _emit_system_prompt() -> None:
+    """Print the v1 agent system-prompt fragment to stdout.
+
+    Reads from the in-package copy at
+    ``bulla.agents.system_prompt_v1`` via ``importlib.resources`` so
+    the command works for both source checkouts and pip-installed
+    users.
+    """
+    try:
+        from bulla.agents import get_system_prompt_v1
+        sys.stdout.write(get_system_prompt_v1())
+        return
+    except Exception as exc:
+        print(
+            f"[bulla] could not load agent system prompt: {exc}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+
+def _cmd_proxy_live(args: argparse.Namespace) -> None:
+    """Run the live MCP proxy."""
+    import asyncio
+
+    from bulla.live_proxy import serve
+
+    backend_specs: list[tuple[str, str, dict[str, str] | None]] = []
+    used_names: set[str] = set()
+    if args.config is not None:
+        backend_specs.extend(_parse_live_proxy_config(args.config))
+        used_names.update(spec[0] for spec in backend_specs)
+    for i, cmd in enumerate(args.commands or []):
+        base = _guess_server_name(cmd, i)
+        name = base
+        suffix = 1
+        while name in used_names:
+            name = f"{base}_{suffix}"
+            suffix += 1
+        used_names.add(name)
+        backend_specs.append((name, cmd, None))
+    if not backend_specs:
+        print(
+            "Error: `bulla proxy` needs at least one backend. "
+            "Pass server commands positionally (after `--`) or use "
+            "`--config servers.yaml`.",
+            file=sys.stderr,
+        )
+        sys.exit(2)
+    telemetry_path = getattr(args, "telemetry_out", None)
+    signer = None
+    if getattr(args, "key", None) is not None:
+        signer = _load_signer_or_exit(args.key, getattr(args, "issuer", None))
+    registry = _open_registry(getattr(args, "registry", None))
+    mandate = None
+    if getattr(args, "mandate_principal", None):
+        mandate = {
+            "principal": args.mandate_principal,
+            "policy": getattr(args, "mandate_policy", None) or "sha256:unspecified",
+        }
+    try:
+        asyncio.run(serve(
+            backend_specs,
+            telemetry_path=telemetry_path,
+            signer=signer,
+            registry=registry,
+            enforce=getattr(args, "enforce", False),
+            trusted_root=getattr(args, "trusted_root", None),
+            shadow=getattr(args, "shadow", False),
+            mandate=mandate,
+            gate_reads=getattr(args, "gate_reads", False),
+        ))
+    except KeyboardInterrupt:
+        pass
+
+
+def _open_registry(spec):
+    """Open a deed registry from a CLI spec: an ``http(s)://`` URL -> a read-only
+    ``HttpRegistry`` (verify/lookup only); any other value -> a local appendable
+    ``DeedLog`` (emit + verify + lookup). ``None`` -> ``None`` (no deed surface)."""
+    if not spec:
+        return None
+    if str(spec).startswith(("http://", "https://")):
+        from bulla.http_registry import HttpRegistry
+        return HttpRegistry(str(spec))
+    from bulla.registry import DeedLog
+    return DeedLog(Path(spec))
+
+
+def _parse_live_proxy_config(
+    path: Path,
+) -> list[tuple[str, str, dict[str, str] | None]]:
+    """Parse a YAML config: ``{servers: {name: {command, env}}}``."""
+    import yaml
+
+    data = yaml.safe_load(path.read_text()) or {}
+    servers = data.get("servers", {}) or {}
+    if not isinstance(servers, dict):
+        raise SystemExit(
+            f"Error: {path}: top-level `servers` must be a mapping"
+        )
+    out: list[tuple[str, str, dict[str, str] | None]] = []
+    for name, cfg in servers.items():
+        if not isinstance(cfg, dict):
+            raise SystemExit(
+                f"Error: {path}: server {name!r} must be a mapping"
+            )
+        command = cfg.get("command", "")
+        env = cfg.get("env") or None
+        if not command:
+            raise SystemExit(
+                f"Error: {path}: server {name!r} has no `command`"
+            )
+        out.append((str(name), str(command), env))
+    return out
+
+
+def _guess_server_name(command: str, index: int) -> str:
+    """Pick a stable name for a positional backend command.
+
+    Skips interpreter / wrapper prefixes (``python``, ``npx``, ``bunx``,
+    ``uvx``, ``node``) and uses the script/package name. Falls back to
+    ``server_<i>`` if no usable identifier can be extracted.
+    """
+    import re
+    import shlex
+
+    parts = shlex.split(command)
+    if not parts:
+        return f"server_{index}"
+    interpreter = re.compile(r"^(python[0-9.]*|node|bunx?|npx|uvx?)$")
+    token = parts[0]
+    if interpreter.match(parts[0]):
+        for p in parts[1:]:
+            if not p.startswith("-"):
+                token = p
+                break
+    bare = token.rsplit("/", 1)[-1].split("@")[-1]
+    if "/" in token and not bare:
+        bare = token.rsplit("/", 1)[-1]
+    for suffix in (".py", ".js", ".ts", ".mjs"):
+        if bare.endswith(suffix):
+            bare = bare[: -len(suffix)]
+            break
+    cleaned = re.sub(r"[^A-Za-z0-9_]", "_", bare).strip("_")
+    if not cleaned:
+        return f"server_{index}"
+    return cleaned
 
 
 def _cmd_proxy(args: argparse.Namespace) -> None:
@@ -1890,6 +2707,13 @@ def _cmd_frameworks_list(args: argparse.Namespace) -> None:
         print(f"{fw.name:<22}  {s:<7}  {r:<8}  {fw.display_name}")
     print()
     print("Use 'bulla import <framework> <source>' to convert to a Bulla manifest.")
+
+
+def _cmd_showcase(args: argparse.Namespace) -> None:
+    """Run the full algebraic repair loop demo on bundled MCP manifests."""
+    from bulla.showcase import run_showcase
+
+    run_showcase(json_output=getattr(args, "json", False))
 
 
 def _cmd_import(args: argparse.Namespace) -> None:
@@ -3202,6 +4026,17 @@ def _no_config_found_message() -> str:
     return "\n".join(lines) + "\n"
 
 
+def _cmd_certify_cost(args: argparse.Namespace) -> None:
+    """Coherence Cost Certificate v0 — see bulla.certify_cost."""
+    import json as _json
+
+    from bulla.certify_cost import build_certificate
+    from bulla.parser import load_composition
+
+    comp = load_composition(args.composition)
+    print(_json.dumps(build_certificate(comp, args.observed_cost), indent=2))
+
+
 def _cmd_scan(args: argparse.Namespace) -> None:
     _configure_packs_from_args(args)
 
@@ -3463,6 +4298,110 @@ def _render_scan_narrative(
     print(narrative, end="")
 
 
+def _cmd_receipt(args: argparse.Namespace) -> None:
+    """`bulla receipt` with no subcommand — point at `verify`."""
+    if not getattr(args, "receipt_command", None):
+        print("usage: bulla receipt verify <file.json>")
+        print("  Verify an action / witness / certificate receipt — hashes, the")
+        print("  recourse envelope (modality law), and signature — honest about depth.")
+        sys.exit(2)
+
+
+def _cmd_receipt_verify(args: argparse.Namespace) -> None:
+    """One verifier over the tagged union {action_receipt, witness_receipt,
+    certificate}. Dispatches on ``kind``, reports the ``verified_to`` depth, and
+    fails closed. Exit 0 iff the receipt verifies; 1 on a verification failure;
+    2 on unreadable input or an unknown kind."""
+    import base64
+
+    try:
+        doc = json.loads(Path(args.receipt).read_text())
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"✗ cannot read receipt: {exc}")
+        sys.exit(2)
+
+    pub = None
+    if getattr(args, "key", None):
+        kd = json.loads(Path(args.key).read_text())
+        if isinstance(kd, dict) and kd.get("public_key_b64"):
+            pub = base64.b64decode(kd["public_key_b64"])
+
+    kind = doc.get("kind")
+    if kind == "action_receipt":
+        from bulla.action_receipt import verify_receipt
+
+        res = verify_receipt(doc, public_key=pub)
+        payload = {
+            "kind": kind, "ok": res.ok, "verified_to": res.verified_to,
+            "checks": res.checks, "reasons": list(res.reasons),
+        }
+    elif kind == "certificate" or "certificate_content_hash" in doc:
+        from bulla.certificate import verify_certificate_integrity
+
+        integ = verify_certificate_integrity(doc)
+        checks: dict = {"integrity": integ}
+        reasons: list[str] = [] if integ else ["certificate content-hash mismatch"]
+        vt = "digest" if integ else "none"
+        sig = doc.get("signature")
+        if integ and sig:
+            from bulla.identity import verify_proof
+
+            a = verify_proof(doc.get("certificate_content_hash", ""), sig, public_key=pub)
+            checks["signature"] = a.authentic
+            vt = "attestation" if a.authentic else "digest"
+            if not a.authentic:
+                reasons.append(f"signature not authentic ({a.method})")
+        ok = integ and checks.get("signature", True)
+        payload = {"kind": "certificate", "ok": ok, "verified_to": vt, "checks": checks, "reasons": reasons}
+    elif kind == "witness_receipt" or ("receipt_version" in doc and "composition_hash" in doc):
+        from bulla.witness import verify_receipt_integrity
+
+        ok = verify_receipt_integrity(doc)
+        payload = {
+            "kind": "witness_receipt", "ok": ok,
+            "verified_to": "digest" if ok else "none",
+            "checks": {"integrity": ok},
+            "reasons": [] if ok else ["receipt_hash mismatch"],
+        }
+    else:
+        print(f"✗ unknown receipt kind {kind!r} — expected action_receipt / witness_receipt / certificate")
+        sys.exit(2)
+
+    if getattr(args, "format", "text") == "json":
+        print(json.dumps(payload, indent=2))
+    else:
+        mark = "✓" if payload["ok"] else "✗"
+        print(f"{mark} {payload['kind']}  verified_to={payload['verified_to']}")
+        for name, val in payload["checks"].items():
+            print(f"    {'✓' if val else '✗'} {name}")
+        for r in payload["reasons"]:
+            print(f"    · {r}")
+    sys.exit(0 if payload["ok"] else 1)
+
+
+def _cmd_coverage(args: argparse.Namespace) -> None:
+    """Receipt coverage against a declared anchor (v0.1: git). Prints the
+    min-over-anchors headline and the unreceipted-delta list — omission
+    detection is the audit product, not a vanity percentage."""
+    from bulla.coverage import coverage_headline, git_coverage
+
+    rep = git_coverage(str(args.receipts), match=args.match, repo=args.repo)
+    if getattr(args, "format", "text") == "json":
+        print(json.dumps(rep, indent=2))
+        return
+    print(coverage_headline([rep]))
+    print(
+        f"  anchor={rep['anchor']}  "
+        f"{rep['receipted']}/{rep['total_anchored']} anchored actions receipted"
+    )
+    if rep["unreceipted_delta"]:
+        print(f"  unreceipted delta ({len(rep['unreceipted_delta'])}) — anchored, no receipt:")
+        for a in rep["unreceipted_delta"]:
+            print(f"    · {a}")
+    else:
+        print("  no unreceipted delta against this anchor")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         prog="bulla",
@@ -3576,8 +4515,273 @@ def main() -> None:
         default=None,
         help="Write certificate(s) to FILE instead of stdout",
     )
+    p_certify.add_argument(
+        "--sign",
+        action="store_true",
+        help=(
+            "Sign each certificate under an agent identity (requires bulla[identity]); "
+            "uses --key or the default key from `bulla key gen`"
+        ),
+    )
+    p_certify.add_argument(
+        "--key", type=Path, default=None, metavar="FILE",
+        help="ed25519 key file to sign with (default: ~/.bulla/identity.json)",
+    )
+    p_certify.add_argument(
+        "--issuer", type=str, default=None, metavar="URI",
+        help=(
+            "External issuer URI (did:web:…, eip155:…, an Entra/SPIFFE id) to bind to; "
+            "default is the key's self-certifying did:key"
+        ),
+    )
     _add_pack_args(p_certify)
     p_certify.set_defaults(func=_cmd_certify)
+
+    # ── key ───────────────────────────────────────────────────────────
+    # The local ed25519 signing identity. Bulla signs receipts/certificates
+    # under an identity the agent already holds; it never issues one.
+    p_key = subparsers.add_parser(
+        "key", help="Manage the local ed25519 signing identity (did:key)"
+    )
+    key_sub = p_key.add_subparsers(dest="key_command")
+    p_key_gen = key_sub.add_parser(
+        "gen", help="Generate a local ed25519 keypair (a self-certifying did:key)"
+    )
+    p_key_gen.add_argument(
+        "-o", "--output", type=Path, default=None, metavar="FILE",
+        help="Write the key file (default: ~/.bulla/identity.json)",
+    )
+    p_key_gen.add_argument(
+        "--force", action="store_true", help="Overwrite an existing key file",
+    )
+    p_key_gen.set_defaults(func=_cmd_key_gen)
+    p_key.set_defaults(func=_cmd_key)
+
+    # ── verify ────────────────────────────────────────────────────────
+    p_verify = subparsers.add_parser(
+        "verify",
+        help="Verify a signed certificate: content integrity, signature authenticity, and anchor",
+    )
+    p_verify.add_argument("certificate", type=Path, help="Certificate JSON file")
+    p_verify.add_argument(
+        "--key", type=Path, default=None, metavar="FILE",
+        help="Public key file to verify a non-did:key issuer against",
+    )
+    p_verify.add_argument(
+        "--registry", type=str, default=None, metavar="PATH_OR_URL",
+        help=(
+            "Also demand the deed be logged in this registry (a local JSONL path "
+            "or an http(s) URL to `bulla registry serve`). Refuses the unlogged "
+            "— the omission-closer. Exit code is nonzero if absent."
+        ),
+    )
+    p_verify.add_argument(
+        "--trusted-root", type=str, default=None, metavar="HASH",
+        help=(
+            "Pin the registry root: for a REMOTE registry, the served root must "
+            "equal this (obtained out of band), else verify refuses (a host-asserted "
+            "root proves nothing). A mismatch is flagged as possible equivocation."
+        ),
+    )
+    p_verify.add_argument(
+        "--root-ots", type=str, default=None, metavar="FILE_OR_PROOF",
+        help=(
+            "An OTS proof (path or base64) anchoring the served root to the "
+            "timechain — an alternative to --trusted-root for trusting a remote root."
+        ),
+    )
+    p_verify.add_argument("--format", choices=["text", "json"], default="text")
+    p_verify.set_defaults(func=_cmd_verify)
+
+    # ── receipt ───────────────────────────────────────────────────────
+    p_receipt = subparsers.add_parser(
+        "receipt",
+        help="Verify action receipts — the accountable record a bond slashes against",
+    )
+    receipt_sub = p_receipt.add_subparsers(dest="receipt_command")
+    p_receipt_verify = receipt_sub.add_parser(
+        "verify",
+        help=(
+            "Verify a receipt (action / witness / certificate): recompute the four "
+            "hashes, re-validate the recourse envelope (modality law), check the "
+            "signature — and report how far it got (verified_to: digest|attestation|"
+            "log_inclusion) rather than a lying pass/fail boolean"
+        ),
+    )
+    p_receipt_verify.add_argument("receipt", type=Path, help="Receipt JSON file")
+    p_receipt_verify.add_argument(
+        "--key", type=Path, default=None, metavar="FILE",
+        help="Public key file to verify a non-did:key signature against",
+    )
+    p_receipt_verify.add_argument("--format", choices=["text", "json"], default="text")
+    p_receipt_verify.set_defaults(func=_cmd_receipt_verify)
+    p_receipt.set_defaults(func=_cmd_receipt)
+
+    # ── coverage ──────────────────────────────────────────────────────
+    p_coverage = subparsers.add_parser(
+        "coverage",
+        help=(
+            "Receipt coverage against a declared anchor (omission detection): "
+            "which anchored actions have no receipt. Reports coverage relative to "
+            "the anchor — never a bare, gameable percentage"
+        ),
+    )
+    p_coverage.add_argument(
+        "--anchor", choices=["git"], default="git",
+        help="The record to reconcile against (v0.1 ships one: git)",
+    )
+    p_coverage.add_argument(
+        "--receipts", type=Path, required=True, metavar="DIR",
+        help="Directory of release ActionReceipts",
+    )
+    p_coverage.add_argument(
+        "--match", default="v[0-9]*", metavar="GLOB",
+        help="git tag glob selecting release tags (default: version tags)",
+    )
+    p_coverage.add_argument("--repo", default=".", help="Repo path (default: cwd)")
+    p_coverage.add_argument("--format", choices=["text", "json"], default="text")
+    p_coverage.set_defaults(func=_cmd_coverage)
+
+    # ── gate ──────────────────────────────────────────────────────────
+    p_gate = subparsers.add_parser(
+        "gate",
+        help=(
+            "Recourse gate: PROCEED or REFUSE on a counterparty's deed, enforcing "
+            "coherence_fee=0 + inclusion under a root you trust independently. Exit 0 = "
+            "proceed, 1 = refuse (with a contestable refusal certificate). Where `verify` "
+            "reports the checks, `gate` enforces the decision."
+        ),
+    )
+    p_gate.add_argument(
+        "--certificate", type=Path, default=None, metavar="FILE",
+        help="The counterparty's full signed certificate (required to prove fee=0).",
+    )
+    p_gate.add_argument(
+        "--deed", type=Path, default=None, metavar="FILE",
+        help="The counterparty's deed record (the triple) — a fee-blind alternative to --certificate.",
+    )
+    p_gate.add_argument(
+        "--registry", type=str, required=True, metavar="PATH_OR_URL",
+        help="The registry you demand inclusion in: a local path or an http(s) URL.",
+    )
+    p_gate.add_argument(
+        "--trusted-root", type=str, default=None, metavar="HASH",
+        help="A root you pin INDEPENDENTLY of the host (else a remote, host-asserted root is refused).",
+    )
+    p_gate.add_argument(
+        "--root-ots", type=str, default=None, metavar="FILE_OR_PROOF",
+        help="An OTS proof anchoring the served root — an alternative to --trusted-root.",
+    )
+    p_gate.add_argument(
+        "--composition-hash", type=str, default=None, metavar="HASH",
+        help="Demand the deed be for THIS composition (fail closed otherwise).",
+    )
+    p_gate.add_argument(
+        "--require-fee", type=int, default=0, metavar="N",
+        help="Maximum coherence_fee to accept (default 0).",
+    )
+    p_gate.add_argument(
+        "--key", type=Path, default=None, metavar="FILE",
+        help="Your ed25519 key (run `bulla key gen`) — signs the refusal certificate so it is non-repudiable.",
+    )
+    p_gate.add_argument(
+        "--issuer", type=str, default=None, metavar="URI",
+        help="External issuer URI for your signing key (default: its did:key).",
+    )
+    p_gate.add_argument(
+        "--disclose", action="append", default=None, metavar="DIM",
+        help="Name a convention the cure must disclose (repeatable; e.g. --disclose path_root).",
+    )
+    p_gate.add_argument("--format", choices=["text", "json"], default="text")
+    p_gate.set_defaults(func=_cmd_gate)
+
+    # ── anchor ────────────────────────────────────────────────────────
+    p_anchor = subparsers.add_parser(
+        "anchor",
+        help="Anchor a signed certificate to the Bitcoin timechain (writes a .ots sidecar)",
+    )
+    p_anchor.add_argument("certificate", type=Path, help="Signed certificate JSON file")
+    p_anchor.set_defaults(func=_cmd_anchor)
+
+    # ── registry ──────────────────────────────────────────────────────
+    # The append-only deed log: the audit layer under signed deeds. This is the
+    # auditable reference primitive; the operated, distributed registry is the
+    # product. It closes deletion/reordering and makes omission *checkable*; it
+    # does not close omission itself (a relying party must demand inclusion) and
+    # does not resist rekey (that's the external identity's job).
+    p_registry = subparsers.add_parser(
+        "registry",
+        help="Append-only deed log: append, enumerate, and prove signed certificates",
+    )
+    reg_sub = p_registry.add_subparsers(dest="registry_command")
+
+    def _reg_log_arg(p: argparse.ArgumentParser) -> None:
+        p.add_argument(
+            "--log", type=Path, default=None, metavar="FILE",
+            help="Deed log file (default: ~/.bulla/registry.jsonl)",
+        )
+
+    p_reg_append = reg_sub.add_parser("append", help="Append a signed certificate as a deed")
+    p_reg_append.add_argument("certificate", type=Path, help="Signed certificate JSON")
+    _reg_log_arg(p_reg_append)
+    p_reg_append.set_defaults(func=_cmd_registry_append)
+
+    p_reg_log = reg_sub.add_parser(
+        "log", help="Enumerate the logged deeds (the audit query; optionally one issuer)"
+    )
+    p_reg_log.add_argument("--issuer", type=str, default=None, metavar="URI")
+    p_reg_log.add_argument("--format", choices=["text", "json"], default="text")
+    _reg_log_arg(p_reg_log)
+    p_reg_log.set_defaults(func=_cmd_registry_log)
+
+    p_reg_prove = reg_sub.add_parser("prove", help="Emit an inclusion proof for a deed index")
+    p_reg_prove.add_argument("index", type=int, help="Leaf index")
+    _reg_log_arg(p_reg_prove)
+    p_reg_prove.set_defaults(func=_cmd_registry_prove)
+
+    p_reg_root = reg_sub.add_parser(
+        "root", help="Print the current Merkle root (anchor it to timestamp the whole log)"
+    )
+    _reg_log_arg(p_reg_root)
+    p_reg_root.set_defaults(func=_cmd_registry_root)
+
+    p_reg_anchor = reg_sub.add_parser(
+        "anchor", help="Anchor the current root to the Bitcoin timechain (a log checkpoint)"
+    )
+    _reg_log_arg(p_reg_anchor)
+    p_reg_anchor.set_defaults(func=_cmd_registry_anchor)
+
+    p_reg_serve = reg_sub.add_parser(
+        "serve", help="Serve the registry read-only over HTTP (the online surface)"
+    )
+    p_reg_serve.add_argument("--host", type=str, default="127.0.0.1", metavar="HOST")
+    p_reg_serve.add_argument("--port", type=int, default=8087, metavar="PORT")
+    _reg_log_arg(p_reg_serve)
+    p_reg_serve.set_defaults(func=_cmd_registry_serve)
+
+    p_registry.set_defaults(func=_cmd_registry)
+
+    # ── certify-update ────────────────────────────────────────────────
+    p_certify_update = subparsers.add_parser(
+        "certify-update",
+        help="Assess semantic compatibility delta between two composition manifests",
+    )
+    p_certify_update.add_argument(
+        "old_file", type=Path,
+        help="Old/baseline composition YAML",
+    )
+    p_certify_update.add_argument(
+        "new_file", type=Path,
+        help="New/updated composition YAML",
+    )
+    p_certify_update.add_argument(
+        "--format",
+        choices=["text", "json"],
+        default="text",
+        help="Output format (default: text)",
+    )
+    _add_pack_args(p_certify_update)
+    p_certify_update.set_defaults(func=_cmd_certify_update)
 
     # ── check ─────────────────────────────────────────────────────────
     p_check = subparsers.add_parser(
@@ -3640,6 +4844,24 @@ def main() -> None:
             "changed) OR if the current state has regressed (higher "
             "fee, worse disposition, new blind spots). Requires "
             "exactly one composition file."
+        ),
+    )
+    p_check.add_argument(
+        "--certificate-out",
+        type=Path,
+        default=None,
+        metavar="PATH.json",
+        help=(
+            "Write a CompositionCertificate (v1.0 schema) for each "
+            "checked composition to PATH.json. Single composition: "
+            "writes one certificate object. Multiple compositions: "
+            "writes a JSON array of certificates. Independent of "
+            "the CI gate result; certificates are written before exit "
+            "regardless of pass/fail. Unifies the check (CI gate) and "
+            "certify (record-keeping) primitives at the v0.38.0 CLI "
+            "surface — used by G24 self-host pipeline-CI to record "
+            "the certified state at each commit hash in the historical "
+            "analysis window."
         ),
     )
     _add_pack_args(p_check)
@@ -3736,6 +4958,17 @@ def main() -> None:
     )
     _add_pack_args(p_scan)
     p_scan.set_defaults(func=_cmd_scan)
+
+    # ── certify-cost ───────────────────────────────────────────────────
+    p_ccost = subparsers.add_parser(
+        "certify-cost",
+        help="Coherence Cost Certificate (v0): the irreducible coherence floor "
+             "+ witness fields; with --observed-cost, the unexplained premium",
+    )
+    p_ccost.add_argument("composition", type=Path, help="composition JSON file")
+    p_ccost.add_argument("--observed-cost", type=float, default=None,
+                         help="the intermediary's observed charge, in your unit")
+    p_ccost.set_defaults(func=_cmd_certify_cost)
 
     # ── gauge ──────────────────────────────────────────────────────────
     p_gauge = subparsers.add_parser(
@@ -4006,6 +5239,25 @@ def main() -> None:
     )
     p_witness.set_defaults(func=_cmd_witness)
 
+    # ── compose (developer-facing prescriptive output) ────────────────
+    p_compose = subparsers.add_parser(
+        "compose",
+        help="Diagnose composition(s) and emit a prescriptive report "
+        "(natural-language fix instructions for engineers).",
+    )
+    p_compose.add_argument(
+        "files", nargs="+", type=Path,
+        help="YAML composition file(s)",
+    )
+    p_compose.add_argument(
+        "--format",
+        choices=["prescriptive", "json"],
+        default="prescriptive",
+        help="Output format. 'prescriptive' (default) gives human-readable "
+        "fix instructions; 'json' emits the same WitnessReceipt as `bulla witness`.",
+    )
+    p_compose.set_defaults(func=_cmd_compose)
+
     # ── discover ──────────────────────────────────────────────────────
     p_discover = subparsers.add_parser(
         "discover",
@@ -4126,37 +5378,173 @@ def main() -> None:
     )
     p_merge.set_defaults(func=_cmd_merge)
 
-    # ── proxy ─────────────────────────────────────────────────────────
-    p_proxy = subparsers.add_parser(
-        "proxy",
+    # ── replay (was: proxy) ────────────────────────────────────────────
+    # Renamed 2026-05-17 (live-mcp-proxy sprint). The new `proxy`
+    # subcommand is the live stdio MCP proxy; this trace-replayer
+    # retains its semantics under the clearer `replay` name. A back-
+    # compat alias `proxy` is registered below with a deprecation
+    # warning so existing invocations keep working.
+    def _add_replay_arguments(p: argparse.ArgumentParser) -> None:
+        p.add_argument(
+            "--manifests",
+            type=Path,
+            required=True,
+            metavar="DIR",
+            help="Directory of captured MCP manifest JSON files",
+        )
+        p.add_argument(
+            "trace",
+            type=Path,
+            help="JSON trace file (array or object with 'calls')",
+        )
+        p.add_argument(
+            "--format",
+            choices=["text", "json"],
+            default="text",
+            help="Output format (default: text)",
+        )
+        p.add_argument(
+            "-o", "--output",
+            type=Path,
+            default=None,
+            metavar="FILE",
+            help="Write output to file instead of stdout",
+        )
+
+    p_replay = subparsers.add_parser(
+        "replay",
         help="Replay a composition-aware proxy trace against captured manifests",
     )
+    _add_replay_arguments(p_replay)
+    p_replay.set_defaults(func=_cmd_proxy)
+
+    # ── proxy (live) ──────────────────────────────────────────────────
+    p_proxy = subparsers.add_parser(
+        "proxy",
+        help=(
+            "Run a live MCP proxy. Aggregates N backend MCP servers, "
+            "injects bulla__* meta-tools, computes incremental witness "
+            "rank. Speaks stdio JSON-RPC to the upstream client. "
+            "(For the old trace-replayer use `bulla replay`.)"
+        ),
+    )
+    # Live-proxy mode: positional command lines, no required --manifests.
     p_proxy.add_argument(
-        "--manifests",
-        type=Path,
-        required=True,
-        metavar="DIR",
-        help="Directory of captured MCP manifest JSON files",
+        "commands",
+        nargs="*",
+        metavar="COMMAND",
+        help=(
+            "Backend MCP server commands (one per backend). Auto-named "
+            "server_0, server_1, ... unless --config supplies names."
+        ),
     )
     p_proxy.add_argument(
-        "trace",
-        type=Path,
-        help="JSON trace file (array or object with 'calls')",
-    )
-    p_proxy.add_argument(
-        "--format",
-        choices=["text", "json"],
-        default="text",
-        help="Output format (default: text)",
-    )
-    p_proxy.add_argument(
-        "-o", "--output",
+        "--config",
         type=Path,
         default=None,
         metavar="FILE",
-        help="Write output to file instead of stdout",
+        help="YAML config: {servers: {name: {command, env}}}",
     )
-    p_proxy.set_defaults(func=_cmd_proxy)
+    p_proxy.add_argument(
+        "--telemetry-out",
+        type=Path,
+        default=None,
+        metavar="FILE",
+        help="Write per-call telemetry as JSON Lines.",
+    )
+    p_proxy.add_argument(
+        "--inject-prompt",
+        action="store_true",
+        help=(
+            "Print the agent system-prompt fragment to stdout and exit. "
+            "Paste this into your agent's system prompt so it knows "
+            "how to consult bulla__* meta-tools."
+        ),
+    )
+    # The deed surface: an identity to sign under and a registry to log/verify
+    # against. With both, the proxy exposes bulla__deed_emit/verify/lookup.
+    p_proxy.add_argument(
+        "--key", type=Path, default=None, metavar="FILE",
+        help=(
+            "ed25519 key file to sign deeds with (run `bulla key gen` first). "
+            "Together with a local --registry, enables bulla__deed_emit. "
+            "Requires bulla[identity]."
+        ),
+    )
+    p_proxy.add_argument(
+        "--issuer", type=str, default=None, metavar="URI",
+        help="External issuer URI to bind to (default: the key's did:key).",
+    )
+    p_proxy.add_argument(
+        "--registry", type=str, default=None, metavar="PATH_OR_URL",
+        help=(
+            "Deed registry: a local JSONL path (read+append) or an http(s) URL "
+            "to a `bulla registry serve` endpoint (read-only). Enables "
+            "bulla__deed_verify/lookup; a local path also enables emit."
+        ),
+    )
+    p_proxy.add_argument(
+        "--enforce", action="store_true",
+        help=(
+            "ENFORCE mode (OBSERVE -> ENFORCE): refuse a cross-owner tools/call whose "
+            "counterparty deed is not authentic + included under a trusted root + "
+            "certifying fee=0, BEFORE the backend is touched. The counterparty presents "
+            "its cert via the `_bulla_certificate` argument. Default off (advisory)."
+        ),
+    )
+    p_proxy.add_argument(
+        "--trusted-root", type=str, default=None, metavar="HASH",
+        help=(
+            "With --enforce against a remote registry: the root you pin independently "
+            "of the host. Absent a pin, a host-asserted root is refused."
+        ),
+    )
+    p_proxy.add_argument(
+        "--shadow", action="store_true",
+        help=(
+            "SHADOW mode (the observe-grade gateway): emit a signed per-call deed — "
+            "carrying the v0.2 recourse envelope — for every side-effecting tools/call "
+            "(MCP annotations else conservative default: unknown = write). Never blocks; "
+            "needs --key and a local --registry, else degrades to telemetry-only."
+        ),
+    )
+    p_proxy.add_argument(
+        "--mandate-principal", type=str, default=None, metavar="REF",
+        help=(
+            "The surviving principal for shadow receipts' authority block (e.g. "
+            "did:web:acme.example#ops) — the terminus of the escalate rung."
+        ),
+    )
+    p_proxy.add_argument(
+        "--mandate-policy", type=str, default=None, metavar="HASH",
+        help="Policy reference (policy@hash) for the shadow receipts' authority block.",
+    )
+    p_proxy.add_argument(
+        "--gate-reads", action="store_true",
+        help=(
+            "With --enforce: gate ALL calls, including reads. Default gates only "
+            "side-effecting calls (the gateway law is 'no unreceipted side effects')."
+        ),
+    )
+    # Legacy fallthrough: support the old `bulla proxy --manifests ...
+    # trace.json` invocation for one release cycle by accepting the
+    # same flags. If --manifests is supplied, we dispatch the replayer.
+    p_proxy.add_argument(
+        "--manifests",
+        type=Path,
+        default=None,
+        metavar="DIR",
+        help=argparse.SUPPRESS,
+    )
+    p_proxy.add_argument(
+        "--format", choices=["text", "json"], default=None,
+        help=argparse.SUPPRESS,
+    )
+    p_proxy.add_argument(
+        "-o", "--output", type=Path, default=None, metavar="FILE",
+        help=argparse.SUPPRESS,
+    )
+    p_proxy.set_defaults(func=_cmd_proxy_dispatch)
 
     # ── serve ─────────────────────────────────────────────────────────
     p_serve = subparsers.add_parser(
@@ -4251,6 +5639,17 @@ def main() -> None:
     )
     p_import.set_defaults(func=_cmd_import)
 
+    # ── showcase ────────────────────────────────────────────────────────
+    p_showcase = subparsers.add_parser(
+        "showcase",
+        help="Run the full algebraic repair loop demo on bundled MCP manifests",
+    )
+    p_showcase.add_argument(
+        "--json", action="store_true",
+        help="Emit machine-readable JSON instead of human-readable output",
+    )
+    p_showcase.set_defaults(func=_cmd_showcase)
+
     args = parser.parse_args()
 
     if not args.command:
@@ -4272,6 +5671,7 @@ def main() -> None:
         print("  bulla bridge comp.yaml -o bridged.yaml  # auto-bridge blind spots")
         print("  bulla proxy --manifests DIR trace.json  # replay proxy trace")
         print("  bulla witness comp.yaml        # emit witness receipt (JSON)")
+        print("  bulla showcase                 # full algebraic repair loop demo")
         print("  bulla serve                    # run as MCP server (stdio)")
         print("  bulla manifest --from-json tools.json  # generate manifests")
         print("  bulla pack validate pack.yaml  # validate a convention pack")

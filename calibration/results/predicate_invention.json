@@ -1,0 +1,35 @@
+{
+  "experiment": "invention vs disclosure \u2014 the provenance axis (corrected after QA-1)",
+  "provenance": "architectural illustration; value-blind kernel; no execution oracle",
+  "qa_correction": "draft dressed DISCLOSURE (a held/latent encoding) as INVENTION; the homotopy slice is the wrong axis \u2014 the invention/disclosure axis is provenance, invisible to the schema.",
+  "A_schema_indistinguishable": {
+    "current_fingerprint_fee": 0,
+    "identical_across_histories": true
+  },
+  "B_provenance_separates": {
+    "encoding_in_prior_disclosure": true,
+    "encoding_in_prior_invention": false,
+    "fee_prior_disclosure": 1,
+    "fee_prior_invention": 0,
+    "registry_classifies": true
+  },
+  "C_enforcement_free": {
+    "slash": true,
+    "recomputed_fee": 1,
+    "necessarily_invention_agnostic": true
+  },
+  "D_homotopy_is_not_the_invention_axis": {
+    "thm": "refinement-types Thm 7.2 (paper.md:746); fee-changing => beyond chain-homotopy slice (paper.md:779)",
+    "disclosure_update_fee": [
+      1,
+      0
+    ],
+    "invention_update_fee": [
+      0,
+      1
+    ],
+    "both_fee_changing_so_homotopy_does_not_separate_them": true
+  },
+  "VERDICT": "ARCHITECTURAL FINDING (illustrated; not a falsifiable experiment): the value-blind kernel CANNOT distinguish invention from disclosure \u2014 same schema operation; provenance is the missing axis.",
+  "north_star_factorization": "ENFORCE = the value-blind slash (free, machine-speed, necessarily invention-agnostic). CLASSIFY novelty = the provenance REGISTRY/commons (absent=invention, present=disclosure) -- the genuine non-trivial role of the commons, NOT the can't-fail compounding story. DETECT the need = execution (the deferred performance layer). So 'in-line predicate invention' is honest as: a fee-changing schema extension (Thm 7.2 line-779 regime) whose NOVELTY is adjudicated by the registry and whose ENFORCEMENT is the value-blind slash -- not 'value-blind invention', and not a retreat to 'mere disclosure'."
+}

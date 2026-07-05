@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from bulla import __version__
+from bulla._subproc import session_kwargs, terminate_tree
 
 
 class ScanError(Exception):
@@ -105,6 +106,7 @@ def scan_mcp_server(
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             env=spawn_env,
+            **session_kwargs(),
         )
     except FileNotFoundError as e:
         raise ScanError(f"Cannot spawn server: {e}") from e
@@ -136,11 +138,7 @@ def scan_mcp_server(
                 pass
         raise ScanError(f"Scan failed: {e}\nServer stderr: {stderr_out}") from e
     finally:
-        proc.terminate()
-        try:
-            proc.wait(timeout=3)
-        except subprocess.TimeoutExpired:
-            proc.kill()
+        terminate_tree(proc)
 
 
 def scan_mcp_servers(

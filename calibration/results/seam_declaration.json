@@ -1,0 +1,648 @@
+{
+  "artifact": "seam-declaration receipt (containment b \u2014 the convention layer the transports omit)",
+  "provenance": "value-blind schema computation over the real registry; deterministic",
+  "registry_servers": 38,
+  "cross_owner_pairs": 703,
+  "pairs_with_undeclared_convention_seam": 385,
+  "fraction": 0.548,
+  "example_receipts": [
+    {
+      "seam": "filesystem <-> github",
+      "owners": [
+        "filesystem",
+        "github"
+      ],
+      "coherence_fee": 22,
+      "undeclared_conventions": [
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "declare_at": [
+        {
+          "tool": "filesystem__create_directory",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__directory_tree",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__edit_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__get_file_info",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__list_directory",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__list_directory_with_sizes",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_media_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_multiple_files",
+          "field": "paths"
+        },
+        {
+          "tool": "filesystem__read_text_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__search_files",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__write_file",
+          "field": "path"
+        },
+        {
+          "tool": "github__create_or_update_file",
+          "field": "path"
+        },
+        {
+          "tool": "github__list_commits",
+          "field": "page"
+        },
+        {
+          "tool": "github__list_issues",
+          "field": "direction"
+        },
+        {
+          "tool": "github__list_issues",
+          "field": "page"
+        },
+        {
+          "tool": "github__list_issues",
+          "field": "state"
+        },
+        {
+          "tool": "github__search_code",
+          "field": "page"
+        },
+        {
+          "tool": "github__search_issues",
+          "field": "page"
+        },
+        {
+          "tool": "github__search_repositories",
+          "field": "page"
+        },
+        {
+          "tool": "github__search_users",
+          "field": "page"
+        },
+        {
+          "tool": "github__update_issue",
+          "field": "state"
+        }
+      ]
+    },
+    {
+      "seam": "filesystem <-> playwright",
+      "owners": [
+        "filesystem",
+        "playwright"
+      ],
+      "coherence_fee": 19,
+      "undeclared_conventions": [
+        "path_convention_match"
+      ],
+      "declare_at": [
+        {
+          "tool": "filesystem__create_directory",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__directory_tree",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__edit_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__get_file_info",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__list_directory",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__list_directory_with_sizes",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_media_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_multiple_files",
+          "field": "paths"
+        },
+        {
+          "tool": "filesystem__read_text_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__search_files",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__write_file",
+          "field": "path"
+        },
+        {
+          "tool": "playwright__playwright_delete",
+          "field": "url"
+        },
+        {
+          "tool": "playwright__playwright_get",
+          "field": "url"
+        },
+        {
+          "tool": "playwright__playwright_navigate",
+          "field": "url"
+        },
+        {
+          "tool": "playwright__playwright_patch",
+          "field": "url"
+        },
+        {
+          "tool": "playwright__playwright_post",
+          "field": "url"
+        },
+        {
+          "tool": "playwright__playwright_put",
+          "field": "url"
+        },
+        {
+          "tool": "playwright__playwright_upload_file",
+          "field": "filePath"
+        }
+      ]
+    },
+    {
+      "seam": "github <-> playwright",
+      "owners": [
+        "github",
+        "playwright"
+      ],
+      "coherence_fee": 18,
+      "undeclared_conventions": [
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "declare_at": [
+        {
+          "tool": "github__create_or_update_file",
+          "field": "path"
+        },
+        {
+          "tool": "github__get_file_contents",
+          "field": "path"
+        },
+        {
+          "tool": "github__list_commits",
+          "field": "page"
+        },
+        {
+          "tool": "github__list_issues",
+          "field": "direction"
+        },
+        {
+          "tool": "github__list_issues",
+          "field": "page"
+        },
+        {
+          "tool": "github__list_issues",
+          "field": "state"
+        },
+        {
+          "tool": "github__search_code",
+          "field": "page"
+        },
+        {
+          "tool": "github__search_issues",
+          "field": "page"
+        },
+        {
+          "tool": "github__search_repositories",
+          "field": "page"
+        },
+        {
+          "tool": "github__search_users",
+          "field": "page"
+        },
+        {
+          "tool": "github__update_issue",
+          "field": "state"
+        },
+        {
+          "tool": "playwright__playwright_delete",
+          "field": "url"
+        },
+        {
+          "tool": "playwright__playwright_get",
+          "field": "url"
+        },
+        {
+          "tool": "playwright__playwright_navigate",
+          "field": "url"
+        },
+        {
+          "tool": "playwright__playwright_patch",
+          "field": "url"
+        },
+        {
+          "tool": "playwright__playwright_post",
+          "field": "url"
+        },
+        {
+          "tool": "playwright__playwright_put",
+          "field": "url"
+        },
+        {
+          "tool": "playwright__playwright_upload_file",
+          "field": "filePath"
+        }
+      ]
+    },
+    {
+      "seam": "fetch-mcp <-> filesystem",
+      "owners": [
+        "fetch-mcp",
+        "filesystem"
+      ],
+      "coherence_fee": 15,
+      "undeclared_conventions": [
+        "path_convention_match"
+      ],
+      "declare_at": [
+        {
+          "tool": "fetch_mcp__fetch_html",
+          "field": "url"
+        },
+        {
+          "tool": "fetch_mcp__fetch_json",
+          "field": "url"
+        },
+        {
+          "tool": "fetch_mcp__fetch_markdown",
+          "field": "url"
+        },
+        {
+          "tool": "fetch_mcp__fetch_txt",
+          "field": "url"
+        },
+        {
+          "tool": "filesystem__create_directory",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__directory_tree",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__edit_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__list_directory",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__list_directory_with_sizes",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_media_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_multiple_files",
+          "field": "paths"
+        },
+        {
+          "tool": "filesystem__read_text_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__search_files",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__write_file",
+          "field": "path"
+        }
+      ]
+    },
+    {
+      "seam": "filesystem <-> mcp-server-fetch",
+      "owners": [
+        "filesystem",
+        "mcp-server-fetch"
+      ],
+      "coherence_fee": 15,
+      "undeclared_conventions": [
+        "path_convention_match"
+      ],
+      "declare_at": [
+        {
+          "tool": "filesystem__create_directory",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__directory_tree",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__edit_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__get_file_info",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__list_directory",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__list_directory_with_sizes",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_media_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_multiple_files",
+          "field": "paths"
+        },
+        {
+          "tool": "filesystem__read_text_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__search_files",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__write_file",
+          "field": "path"
+        },
+        {
+          "tool": "mcp_server_fetch__fetch_html",
+          "field": "url"
+        },
+        {
+          "tool": "mcp_server_fetch__fetch_markdown",
+          "field": "url"
+        },
+        {
+          "tool": "mcp_server_fetch__fetch_txt",
+          "field": "url"
+        }
+      ]
+    },
+    {
+      "seam": "fetch-mcp <-> github",
+      "owners": [
+        "fetch-mcp",
+        "github"
+      ],
+      "coherence_fee": 14,
+      "undeclared_conventions": [
+        "id_offset_match",
+        "path_convention_match",
+        "sort_direction_match",
+        "state_filter_match"
+      ],
+      "declare_at": [
+        {
+          "tool": "fetch_mcp__fetch_html",
+          "field": "url"
+        },
+        {
+          "tool": "fetch_mcp__fetch_json",
+          "field": "url"
+        },
+        {
+          "tool": "fetch_mcp__fetch_markdown",
+          "field": "url"
+        },
+        {
+          "tool": "fetch_mcp__fetch_txt",
+          "field": "url"
+        },
+        {
+          "tool": "github__create_or_update_file",
+          "field": "path"
+        },
+        {
+          "tool": "github__list_commits",
+          "field": "page"
+        },
+        {
+          "tool": "github__list_issues",
+          "field": "direction"
+        },
+        {
+          "tool": "github__list_issues",
+          "field": "page"
+        },
+        {
+          "tool": "github__list_issues",
+          "field": "state"
+        },
+        {
+          "tool": "github__search_code",
+          "field": "page"
+        },
+        {
+          "tool": "github__search_issues",
+          "field": "page"
+        },
+        {
+          "tool": "github__search_repositories",
+          "field": "page"
+        },
+        {
+          "tool": "github__search_users",
+          "field": "page"
+        },
+        {
+          "tool": "github__update_issue",
+          "field": "state"
+        }
+      ]
+    },
+    {
+      "seam": "filesystem <-> mcp-playwright",
+      "owners": [
+        "filesystem",
+        "mcp-playwright"
+      ],
+      "coherence_fee": 14,
+      "undeclared_conventions": [
+        "path_convention_match"
+      ],
+      "declare_at": [
+        {
+          "tool": "filesystem__create_directory",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__directory_tree",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__edit_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__get_file_info",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__list_directory",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__list_directory_with_sizes",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_media_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_multiple_files",
+          "field": "paths"
+        },
+        {
+          "tool": "filesystem__read_text_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__search_files",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__write_file",
+          "field": "path"
+        },
+        {
+          "tool": "mcp_playwright__playwright_post",
+          "field": "url"
+        },
+        {
+          "tool": "mcp_playwright__playwright_put",
+          "field": "url"
+        }
+      ]
+    },
+    {
+      "seam": "filesystem <-> mcp-xmind",
+      "owners": [
+        "filesystem",
+        "mcp-xmind"
+      ],
+      "coherence_fee": 14,
+      "undeclared_conventions": [
+        "path_convention_match"
+      ],
+      "declare_at": [
+        {
+          "tool": "filesystem__create_directory",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__directory_tree",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__edit_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__get_file_info",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__list_directory",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__list_directory_with_sizes",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_media_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__read_multiple_files",
+          "field": "paths"
+        },
+        {
+          "tool": "filesystem__read_text_file",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__search_files",
+          "field": "path"
+        },
+        {
+          "tool": "filesystem__write_file",
+          "field": "path"
+        },
+        {
+          "tool": "mcp_xmind__extract_node",
+          "field": "path"
+        },
+        {
+          "tool": "mcp_xmind__search_xmind_files",
+          "field": "directory"
+        }
+      ]
+    }
+  ],
+  "reading": "Each receipt names a REAL cross-owner seam where a convention is latent in both tools and declared by neither \u2014 exactly the assumption-conflict Garlan calls architectural mismatch and the SIS-not-followed seam that lost Mars Climate Orbiter. The transports (MCP/A2A/ACP) would let these two agents compose and act; none of them would surface the undeclared convention. The receipt IS the missing containment: it forces the meaning explicit at the seam BEFORE a consequential action. Positive and today-useful; needs no bond and no absent-master world to be worth running."
+}

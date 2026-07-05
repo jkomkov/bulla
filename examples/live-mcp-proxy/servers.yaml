@@ -1,0 +1,15 @@
+# Bulla live MCP proxy — backend configuration
+#
+# Usage:
+#   bulla proxy --config servers.yaml [--telemetry-out events.jsonl]
+#
+# Each entry is one backend MCP server the proxy will spawn and front.
+# Tool names appear to upstream clients as `<server-name>__<tool-name>`.
+# The proxy also injects the five `bulla__*` meta-tools that agents
+# can call to get formally-verified safety verdicts.
+
+servers:
+  fetch:
+    command: "npx -y @modelcontextprotocol/server-fetch"
+  memory:
+    command: "npx -y @modelcontextprotocol/server-memory"

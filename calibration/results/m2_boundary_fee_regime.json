@@ -1,0 +1,63 @@
+{
+  "experiment": "m2_boundary_fee_regime (type-layer regime crux)",
+  "prereg": "papers/refinement-types/type_layer_enforcement_sprint.md (64dda33)",
+  "provenance": "value-blind schema computation; no execution oracle",
+  "seed": 2026,
+  "manifest_sha256": "6c932fc424cb6986acc4eae09da71a6eecced53aff53e19605b5b46bd90a2dd3",
+  "n_servers": 38,
+  "chains_per_n": 100,
+  "chain_lengths": [
+    3,
+    4,
+    5
+  ],
+  "size_cap": {
+    "max_tools": 100,
+    "max_edges": 3000
+  },
+  "elapsed_sec": 76.5,
+  "counts": {
+    "chains": 300,
+    "well_formed": 300,
+    "ill_formed": 0,
+    "skipped_oversize": 0,
+    "errors": 0
+  },
+  "boundary_fee": {
+    "n_splits": 900,
+    "min": 0,
+    "max": 4,
+    "mean": 0.37,
+    "frac_zero": 0.6867,
+    "frac_positive": 0.3133,
+    "frac_negative": 0.0,
+    "histogram": {
+      "0": 618,
+      "1": 246,
+      "2": 24,
+      "3": 9,
+      "4": 3
+    }
+  },
+  "dfd": {
+    "n": 300,
+    "holds": 300,
+    "fraction": 1.0
+  },
+  "F1_any_negative_boundary_fee": {
+    "fired": false,
+    "examples": []
+  },
+  "F2_ill_formed_dominant": {
+    "fired": false,
+    "ill_formed_fraction": 0.0,
+    "threshold": 0.5
+  },
+  "F3_dfd_rare": {
+    "fired": false,
+    "dfd_fraction": 1.0,
+    "threshold": 0.5
+  },
+  "VERDICT": "SYSTEMIC_RISK_LIVE (boundary_fee>0 common \u2014 per-link bonds insufficient)",
+  "interpretation": "PRIMARY (genuine measurement): the structural systemic term is LIVE \u2014 31.3% of 900 prefix/suffix splits carry boundary_fee>0 (an obstruction in the composition but no local piece; max 4, mean 0.37), so per-link bonds are insufficient on ~31% of real cuts. It is computable ex-ante and non-trivially non-zero, but structurally SMALL on today's simple corpus (a few obstruction dimensions, NOT a dollar cascade); 'grows as the corpus complexifies' is a grounded extrapolation, not shown here. F1 (boundary_fee<0) is the genuine empirical falsifier and PASSED: 0/900 negative -> the claimed-not-asserted non-negativity holds; the cap is well-defined. F2 (well-formed 300/300) and F3 (DFD 300/300) are REGIME CONFIRMATIONS, NOT adversarial falsifications: real-MCP is well-formed (consistent with the 967/967 claim; the ~40% ill-formed finding was a different broad-API population) and DFD-holding (consistent with V2 45/45), so these regimes are not reached by real-MCP chains."
+}

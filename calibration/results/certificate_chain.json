@@ -1,0 +1,90 @@
+{
+  "artifact": "certificate_chain (D3 / composition bond) \u2014 link vs boundary slash separation",
+  "provenance": "EXECUTION_INDEPENDENT (deterministic recomputation; trustless given I1 hash-bind)",
+  "depends_on": {
+    "slash": "29108ac",
+    "boundary_fee_live": "b357e84 (M2)"
+  },
+  "cases": [
+    {
+      "case": "joint_boundary_singletons",
+      "local_fees": [
+        0,
+        0,
+        0
+      ],
+      "boundary_fee": 2,
+      "link_slashes": [],
+      "passed": true,
+      "note": "whole obstruction is joint; no single tool at fault (Theorem A)"
+    },
+    {
+      "case": "link_under_declares",
+      "local_fees": [
+        1,
+        0
+      ],
+      "attested": [
+        0,
+        0
+      ],
+      "boundary_fee": 1,
+      "link_slashes": [
+        {
+          "link": [
+            "t0",
+            "t1"
+          ],
+          "recomputed_local": 1,
+          "attested": 0,
+          "under_by": 1
+        }
+      ],
+      "passed": true,
+      "note": "only the under-declaring link is slashed; boundary unaffected"
+    },
+    {
+      "case": "honest_chain",
+      "local_fees": [
+        1,
+        0
+      ],
+      "attested": [
+        1,
+        0
+      ],
+      "boundary_fee": 1,
+      "link_slashes": [],
+      "passed": true,
+      "note": "honest links spared; boundary is the joint term -> coverage fork"
+    },
+    {
+      "case": "I1_hash_bind",
+      "matched_hash_rejected": false,
+      "decoy_hash_rejected": true,
+      "passed": true,
+      "note": "the deterministic oracle refuses a substituted composition (trustless precondition)"
+    },
+    {
+      "case": "boundary_allocation_by_leverage",
+      "boundary_fee": 1,
+      "sum_allocation": "1",
+      "allocation": {
+        "t0.money": "1/6",
+        "t1.money": "1/6",
+        "t2.money": "2/3"
+      },
+      "passed": true,
+      "note": "(d): boundary allocated to bonded field owners by leverage; sums to boundary_fee, deterministic"
+    }
+  ],
+  "VERDICT": "PASS",
+  "boundary_allocation_rule": {
+    "decided": "(d) leverage allocation = total_leverage - local_leverage",
+    "why_trustless": "deterministic schema recomputation charged to the schema-named bonded field owners; sums to boundary_fee exactly. (b)/(c) 'charge the composer' would require off-chain composer identification -> adjudication -> the value/plutocracy regime the type layer escaped",
+    "coloops_bear_full": "leverage 1 = must-disclose, no substitute",
+    "loops_bear_zero": "leverage 0 = the geometry certifies the field could not have prevented the obstruction",
+    "correction": "the naive 'restrict witness_gram to cross rows' sums to the total cross-rank, NOT boundary_fee (it misses the modulo-internal); total-minus-local is the correct, verified rule"
+  },
+  "I1_precondition": "the slash is trustless only if recomputation is bound to receipt.composition_hash"
+}

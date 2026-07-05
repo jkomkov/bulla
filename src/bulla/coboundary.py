@@ -12,15 +12,20 @@ internal state (δ_full). The rank difference rank(δ_full) - rank(δ_obs)
 is the coherence fee — the number of independent semantic mismatch
 dimensions invisible to pairwise verification.
 
-No numpy dependency. Uses fractions.Fraction for exact arithmetic.
-The coboundary matrix is totally unimodular: each row has at most one
-+1 and one −1 entry, making δ a signed incidence matrix of a directed
-multigraph (Schrijver, Theory of Linear and Integer Programming,
-Thm 19.3). TU implies all minors are in {−1, 0, +1}, all derived
-quantities are rational, and rank is field-independent — the fee is
-the same whether computed over Q, F_2, or any other field.
-Typical compositions produce matrices well under 100×300, where exact
-Gaussian elimination completes in microseconds.
+The *typical* coboundary is a signed incidence matrix — each row has at
+most one +1 and one −1 — hence totally unimodular (Schrijver, Theory of
+Linear and Integer Programming, Thm 19.3): all minors in {−1, 0, +1} and
+rank field-independent, so the fee is the same over Q, F_2, or any field.
+``matrix_rank`` exploits this with a GF(2) bit-rank that is ~600× faster
+than Fraction Gaussian elimination on large compositions.
+
+CAVEAT (do not over-read the TU claim): coupled / multi-field compositions
+produce coboundaries that are NOT signed-incidence and NOT TU, where the
+GF(2) rank genuinely differs from the Q rank. ``matrix_rank`` therefore
+CHECKS ``_is_signed_incidence`` per matrix and falls back to the exact Q
+oracle (``matrix_rank_exact``) off that regime — the field-independence is
+verified per call, never assumed (an earlier blanket-TU shortcut shipped
+wrong fees). See ``test_rank_equivalence``.
 """
 
 from __future__ import annotations
@@ -30,8 +35,14 @@ from fractions import Fraction
 from bulla.model import Edge, ToolSpec
 
 
-def matrix_rank(matrix: list[list[Fraction]]) -> int:
-    """Gaussian elimination to compute rank. Exact arithmetic, no tolerance."""
+def matrix_rank_exact(matrix: list[list[Fraction]]) -> int:
+    """The exact ℚ rank via Gaussian elimination over ``Fraction`` — the REFERENCE ORACLE.
+
+    Correct for any matrix, but the rational pivot fill-in is super-polynomial (this was the
+    audit's 22-minute hot path: 5.6e9 calls / 5e8 ``Fraction`` allocations on a 57-server
+    registry). Production code calls ``matrix_rank`` (the GF(2) fast path); the two are
+    asserted bit-for-bit equal on the corpus by ``test_rank_equivalence``. Kept as the
+    oracle so the equivalence is *checkable*, not merely claimed."""
     if not matrix or not matrix[0]:
         return 0
     rows = [row[:] for row in matrix]
@@ -57,6 +68,74 @@ def matrix_rank(matrix: list[list[Fraction]]) -> int:
                 ]
         rank += 1
     return rank
+
+
+def _is_signed_incidence(matrix: list[list[Fraction]]) -> bool:
+    """True iff every row has entries in {−1, 0, +1} with at most one +1 and one −1 — a
+    signed incidence matrix of a directed multigraph, hence **totally unimodular**
+    (Schrijver Thm 19.3), hence its GF(2) rank equals its ℚ rank. O(cells), and it is the
+    PER-MATRIX gate for the fast path: the field-independence is checked here, never
+    assumed. (Coupled / multi-field coboundaries fall outside this regime — there GF(2)
+    would return a WRONG rank, so they take the exact path.)"""
+    for row in matrix:
+        pos = neg = 0
+        for x in row:
+            if x.denominator != 1:
+                return False
+            v = x.numerator
+            if v == 1:
+                pos += 1
+            elif v == -1:
+                neg += 1
+            elif v != 0:
+                return False
+        if pos > 1 or neg > 1:
+            return False
+    return True
+
+
+def _rank_gf2(matrix: list[list[Fraction]]) -> int:
+    """Rank over GF(2) via an XOR linear basis (each row packed into one int). Valid ONLY
+    on a totally-unimodular matrix (where rank is field-independent); callers must gate on
+    ``_is_signed_incidence``. O(rows × rank) bit ops, no ``Fraction`` fill-in."""
+    basis: dict[int, int] = {}
+    rank = 0
+    for row in matrix:
+        cur = 0
+        for j, v in enumerate(row):
+            if v.numerator % 2:      # entry odd over ℤ ⇔ |v| == 1 (the GF(2) image)
+                cur |= 1 << j
+        while cur:
+            hb = cur.bit_length() - 1
+            pv = basis.get(hb)
+            if pv is None:
+                basis[hb] = cur
+                rank += 1
+                break
+            cur ^= pv
+    return rank
+
+
+def matrix_rank(matrix: list[list[Fraction]]) -> int:
+    """Exact rank — the DEFAULT, called wherever a coboundary rank (hence the fee) is needed.
+
+    For a signed-incidence (totally unimodular) coboundary the rank is *field-independent*
+    (Schrijver Thm 19.3), so it is computed over GF(2): O(rows × rank) bit ops, no
+    super-polynomial rational fill-in (the audit's former 22-minute hot path). OFF that
+    regime — a non-TU / coupled matrix, where GF(2) ≠ ℚ — it falls back to the exact ``Q``
+    path, so the answer is **always** ``matrix_rank_exact``'s answer, just fast where the
+    structure permits.
+
+    The regime is **checked per matrix, never assumed** (an earlier "TU everywhere" shortcut
+    shipped wrong fees on coupled compositions). ``test_rank_equivalence`` asserts
+    ``matrix_rank == matrix_rank_exact`` across the corpus; recomputability is preserved and
+    strengthened — a verifier running any field-correct rank recomputes the same deed.
+    """
+    if not matrix or not matrix[0]:
+        return 0
+    if _is_signed_incidence(matrix):
+        return _rank_gf2(matrix)
+    return matrix_rank_exact(matrix)
 
 
 def _vertex_basis(

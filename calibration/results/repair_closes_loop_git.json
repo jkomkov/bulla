@@ -1,0 +1,22 @@
+{
+  "seam": "filesystem(abs) -> git(repo-relative); local git stands in for github",
+  "provenance": "EXECUTION_INDEPENDENT",
+  "fee": 1,
+  "disclosures": [
+    [
+      "filesystem",
+      "path_root"
+    ]
+  ],
+  "n_runtime_crossings": 3,
+  "convention_failures_present_on_disk": true,
+  "negative_control_absent_on_disk": true,
+  "convention_failures_pre": 3,
+  "convention_failures_post_transport": 0,
+  "ablation_failures": 3,
+  "negative_control_ok_before": false,
+  "negative_control_ok_after": false,
+  "sufficiency": true,
+  "necessity": true,
+  "specificity": true
+}

@@ -1,0 +1,14 @@
+{
+  "blank-remedy-anchor.json": {
+    "ok": false,
+    "verified_to": "none"
+  },
+  "tampered-evidence.json": {
+    "ok": false,
+    "verified_to": "none"
+  },
+  "valid-release.json": {
+    "ok": true,
+    "verified_to": "digest"
+  }
+}

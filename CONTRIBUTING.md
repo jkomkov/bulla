@@ -85,6 +85,19 @@ The classifier's deduplication logic keeps the most specific child when both par
 
 **Code contributions** — the kernel (measurement, witness, SDK) is stable and intentionally minimal. If you're proposing a code change, open an issue first to discuss scope.
 
+## Merge Policy for `src/bulla`
+
+`src/bulla` on `main` is authoritative. Research branches sometimes carry their
+own copies of kernel modules (in particular `registry.py` predating the
+Pin-the-Root and inclusion-leaf-binding hardening). When such a branch merges,
+those files surface as add/add or content conflicts — **always resolve toward
+`main`'s copy**, then rebase the research work on top. Never resolve a
+`src/bulla` conflict toward a research copy: the read-side trust semantics
+(host-asserted roots refused, borrowed inclusion refused) would silently
+regress. `tests/test_registry_merge_guard.py` exists to make that mistake fail
+loudly at collection time; if it fails after a merge, the merge took the wrong
+side.
+
 ## License
 
 By contributing, you agree that your contributions will be licensed under the project's [Business Source License 1.1](LICENSE).

@@ -20,6 +20,24 @@ Three hashes, three concerns: what was proposed, what was measured, what was wit
 
 Rationale: the hash must be computable at witness time. Anchor ref arrives later. Conditional fields (`parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`, `contradictions`, `structural_contradictions`, `unmet_obligations`, `contradiction_score`) are included only when non-None/non-zero to preserve backward compatibility: pre-v0.25.0 receipts (which lack `boundary_obligations`), pre-v0.30.0 receipts (which lack `contradictions`), pre-v0.32.0 receipts (which lack `unmet_obligations`), and pre-v0.34.0 receipts (which lack `structural_contradictions` and `contradiction_score`) verify correctly with new code because their hash was computed without these keys, and the verifier only hashes keys that are present.
 
+## Canonicity — the deed is a recomputable certificate
+
+Bitcoin's canonicity comes from *work*; Bulla's comes from *determinism over pinned inputs*. A deed is not a signed opinion — it is a **recomputable certificate of a computation**: anyone re-runs `f` and converges on the same content hash.
+
+```
+deed = f(composition@h, algorithm@v)
+```
+
+**Decision rule for what enters the content hash: *affects the verdict → in the hash; else out.*** Pinning a non-verdict input would fragment the convergence address (same composition + same verdict → *different* hash) for no reason, breaking reputation-by-recomputation. Concretely:
+
+- **composition** — pinned by `subject.composition_sha256 = comp.canonical_hash()` (the structure, machine-independent).
+- **algorithm** — pinned by the committed top-level `algorithm_version` (`bulla._canonical.ALGORITHM_VERSION`). The deed *names its `f`*, so a verifier knows which algorithm to run; a mismatch is a *version difference*, not "tampered". It bumps only on a **verdict-affecting** change (`diagnose`/`classify`/`coboundary`/`witness_geometry`), never per release.
+- **NOT inputs (verified by test, not by reading):** **packs/registry** — `diagnose`/`classify` are pack-independent (packs only shape the *upstream inference* that builds the Composition, and the Composition is already pinned); **policy/disposition** — lives in the witness `receipt` (`policy_profile`, hashed there), not the certificate; the **registry** is where deeds are *logged*, not an input to the verdict. Excluded provenance stays excluded: `timestamp`, `bulla_version`, `method`, `signature`, `display`, `subject.source_path`.
+
+**`algorithm_version` is the one trusted human input — name its ladder.** The semver is forget-prone (a person must bump it), and the seed golden (`test_sprint13_seed_certificates.py`, which pins canonical hashes) is a **stopgap for the missing auto-coupling between `f`'s source and its version**, not the guarantee. Ladder: **now** — semver, golden-guarded → **next** — derive it from the *content* of `f` (forget-proof) → **target** — bind it to the Lean-spec hash / Aristotle stamp that *defines* the fee, so recomputability becomes provable *correctness*. (`bulla/src/bulla/_canonical.py`.)
+
+**Enforced, not asserted (`tests/test_deed_recomputable.py`).** `test_hash_invariant_across_pack_versions` certifies one fixed composition under two pack stacks and asserts byte-identical hashes — *this is the proof that packs/registry are not verdict inputs*; `test_hash_identical_under_perturbed_environment` and `test_hash_identical_across_pythonhashseed` (subprocess) guard the body-leak and `set`/`dict`-order paths (the `source_path` leak generalized). The seed golden is the **verdict-change guard**: a verdict drift without an `ALGORITHM_VERSION` bump fails it.
+
 ## Policy Semantics
 
 `PolicyProfile` fields: `name`, `max_blind_spots`, `max_fee`, `max_unknown`, `require_bridge`, `max_unmet_obligations`, `max_contradictions`, `max_structural_contradictions`.
@@ -79,6 +97,33 @@ Invariant: `witness_basis is not None` implies `receipt.unknown_dimensions == wi
 **`verify_receipt_consistency(receipt, comp, diag)`**: Checks composition hash, diagnostic hash, fee, blind spots count, bridges required, and basis/unknown agreement. Requires kernel objects.
 
 **`verify_receipt_integrity(receipt_dict)`**: Self-contained tamper detection. Reconstructs the hash input from a serialized dict and compares to the claimed `receipt_hash`. No kernel required. The `to_dict()` round-trip is the verification path.
+
+## Identity Binding (v0.38.0)
+
+A signed `CompositionCertificate` is a **deed**: a coherence claim, signed under an identity the agent already holds, recorded in a public registry. Bulla **signs, never mints** — it binds to an external identity and never issues one (`bulla.identity`, the `[identity]` extra, ed25519 via PyNaCl).
+
+**Fields.** `issuer = {type, id}` is the agent identity (default scheme `did:key`); `signature` is a detached ed25519 proof `{type, issuer, verificationMethod, proofValue}`. `issuer` is **in** the content-hash preimage (so identity is committed and tampering it breaks integrity); `signature` and `attestation_hash` are **excluded** (so signing does not perturb the content hash — see Hash Coverage).
+
+**Signing is creation-time.** `sign_certificate(cert, signer)` sets the issuer, recomputes `certificate_content_hash` over the new preimage, signs that hash, and fills `signature` + `attestation_hash`. You cannot retro-sign a `{type:'local', id:null}` certificate without minting a new hash — by design.
+
+**Three independent verdicts** (`bulla verify <cert>`):
+- **integrity** — `verify_certificate_integrity(cert_dict)` recomputes the content hash from the serialized dict (excluding the same six fields the preimage excludes). Always available; catches any content tamper, including an issuer swap.
+- **authenticity** — `identity.verify_proof(content_hash, proof, public_key=None)`. For a `did:key` issuer the key is *derived from the issuer*, so a forged issuer (sign with key A, stamp issuer B) fails by construction — no resolution needed. For external schemes (did:web, eip155/ERC-8004, Entra, SPIFFE) authenticity is `unresolved` unless a key is supplied or the proof's `verificationMethod` is itself a `did:key` (which proves the VM key signed, not that the external issuer authorized it). Key resolution is out of scope here.
+- **anchor** — `attestation_hash = sha256({content_hash, signature})` commits to *what* and *who*; `ots.anchor_certificate(cert_dict)` stamps it to the Bitcoin timechain (a `.ots` sidecar). This closes exactly one attack: **forgery/backdating** — a shown deed cannot be fabricated as an old, clean history. It does **not** close **omission** (a holder can still withhold the deeds that count against them) or **rekey/sybil** (a fresh `did:key` is free). Each anchored certificate is a non-repudiable deed; the anchor notarizes entries, it does not compel a complete set.
+
+**The registry makes the history *checkable*; completeness is the relying party's to demand.** In the gluing picture the `fee` is obstruction-to-gluing across **tools** (space) and selective-disclosure/rekey is the same obstruction across **time**: the anchor timestamps each local section (proves each is old), but it cannot certify that no section is withheld. An **append-only, enumerable deed-registry** closes the mechanical part of that gap — **deletion and reordering** (a consistency proof against an anchored root fails if any logged deed is removed) — and makes the rest *auditable*: a relying party can enumerate the logged deeds under an issuer and **demand an inclusion proof** for each one it expects. What the registry does **not** do is *compel* a complete set — an agent can still omit a deed it simply never logs. Closing **omission** needs a relying party that refuses to act on a deed without an inclusion proof (the counterparty + bond layer); the registry only makes that refusal possible. The external persistent identity it binds to (e.g. KYA's KYC'd owner, an Entra tenant) is what resists rekey. Registry + bond are the next layer.
+
+**Enforcement bridge (bond not built).** The signed `issuer` is the slashable entity the witness-pool thesis needs: a bond attaches to `issuer.id`, and invariant `I1` binds slash-recomputation to `composition_hash`. Attribution + non-repudiation (this section) plus the append-only registry (`bulla.registry`, RFC 6962 — the audit layer that makes a deed's deletion detectable and its omission checkable) are built. The **bond/economic layer** that turns a logged-but-false deed into an actual slash — and that gives a relying party a reason to *demand* inclusion — is the next ship.
+
+**Scope.** Certificate signing ships. Receipt-envelope signing (`WitnessReceipt`) is a separate schema migration and is **not** activated — the receipt reserves no issuer/signature fields today. W3C-VC and a proposed ERC-8004 coherence-validation-type are documented mappings, not exporters.
+
+## Deed v0.2 — the Recourse Envelope (`bulla.envelope`)
+
+A deed may carry an optional signed **recourse envelope** — the minimal triple `authority` / `bounds` / `recourse`, plus `retention_class` / `disclosure_class` stubs. Placement is the load-bearing choice: the envelope is **excluded from `certificate_content_hash`** (the recomputable core stays pure — any party re-derives the coherence verdict without the appeal path) and **committed inside `attestation_hash = sha256({content_hash, signature, envelope})`** — signed, tamper-evident, transitively bound to the registry root, and anchored by OTS. With no envelope the preimage is byte-identical to v0.1; every existing deed verifies unchanged.
+
+**The modality law (design invariant, enforced at construction and re-checked on served data).** Recourse under the absent master cannot assume a stateful respondent — the acting process is gone at contest time. Every remedy therefore attaches to an artifact or a stake, never to the vanished actor: a `Remedy` is `{rung, verifier, anchor}`, all three required, with `rung` drawn from the escalation ladder **recompute → challenge → cure → revert → slash → escalate**. The first rung is the deed itself (adjudication-as-recomputation); `challenge` executes against the log under a root the consumer pins (the `forum` must carry a `trusted_root_ref` — Pin-the-Root applies to appeal paths too); `cure` against the composition; `revert` within `bounds.rollback_window`; `slash` against the bond reference (field format ships, mechanism gated on adoption); `escalate` terminates at the **surviving principal** named in `authority` — the deliberate hand-off point into human jurisdiction, which is why an `escalate` remedy requires `authority`. `verify_deed_record` refuses a tampered, stripped, or swapped envelope (the attestation the leaf committed to no longer matches) AND a hash-correct envelope that violates the modality law (a correct hash proves the issuer signed it, not that it is a well-formed appeal path).
+
+**Constitutional mapping** (abridged Appendix C): Act = the certified content scope · Authority = `authority` (delegation chain → surviving principal + `policy@hash`) · Bounds = `bounds` · Justification = the recomputable diagnostic itself · Appeal Path = `recourse`. The civic asymmetry is a schema invariant from day one — `retention_class ∈ {authority-permanent, operational, personal-expiring}` — while the forgetting *mechanism* is a later, separately pre-registered instrument.
 
 ## Hierarchical Fee Decomposition
 

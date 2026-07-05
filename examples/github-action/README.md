@@ -1,9 +1,10 @@
 # Bulla GitHub Action
 
-Bulla provides a GitHub Action for automated coherence analysis of agentic compositions. It supports two modes:
+Bulla provides a GitHub Action for automated coherence analysis of agentic compositions. It supports three modes:
 
 - **Check mode** (default): Analyzes composition YAML files for blind spots
 - **Audit mode**: Scans MCP server manifests for cross-server convention risk
+- **SemVer mode**: Computes semantic rank delta between old/new compositions
 
 ## Quick Start: Audit Mode
 
@@ -42,9 +43,14 @@ Copy `coherence-audit.yml` to `.github/workflows/coherence-audit.yml`, or add th
 
 | Input | Default | Description |
 |-------|---------|-------------|
-| `mode` | `check` | `check` for composition YAMLs, `audit` for MCP manifests |
+| `mode` | `check` | `check` for composition YAMLs, `audit` for MCP manifests, `semver` for old/new semantic delta |
 | `manifests-dir` | — | Directory of manifest JSON files (audit mode) |
 | `mcp-config` | — | MCP config file for live server scan (audit mode) |
+| `old-path` | — | Baseline composition YAML (semver mode) |
+| `new-path` | — | Updated composition YAML (semver mode) |
+| `fail-on-major` | `false` | Fail semver mode when update-kind is `semantic-major` |
+| `fail-on-minor` | `false` | Fail semver mode when update-kind is `semantic-minor` or `semantic-major` |
+| `max-delta-r` | — | Integer threshold; fail if `delta-r` exceeds it |
 | `max-fee` | — | Fail if coherence fee exceeds this value (audit mode) |
 | `max-blind-spots` | `0` (check) | Fail if blind spots exceed this value |
 | `max-unbridged` | `0` | Fail if unbridged edges exceed this value (check mode) |
@@ -60,6 +66,12 @@ Copy `coherence-audit.yml` to `.github/workflows/coherence-audit.yml`, or add th
 | `sarif-file` | Path to generated SARIF file |
 | `coherence-fee` | Total coherence fee (audit mode) |
 | `boundary-fee` | Cross-server boundary fee (audit mode) |
+| `delta-r` | Semantic rank delta `new_fee - old_fee` (semver mode) |
+| `update-kind` | `semantic-patch` / `semantic-minor` / `semantic-major` (semver mode) |
+| `coherence-preserving` | `true` iff `delta-r <= 0` (semver mode) |
+| `old-fee` | Baseline coherence fee (semver mode) |
+| `new-fee` | Updated coherence fee (semver mode) |
+| `minimum-bridge-delta` | Lower-bound bridge receipts needed to restore prior class (semver mode) |
 
 ## What SARIF Annotations Mean
 
@@ -92,3 +104,18 @@ The original check mode still works for composition YAML analysis:
     path: compositions/
     max-blind-spots: "0"
 ```
+
+## Semantic SemVer Mode
+
+Use `mode: semver` to gate interface updates by witness-rank delta:
+
+```yaml
+- uses: jkomkov/bulla@v0.21.0
+  with:
+    mode: semver
+    old-path: compositions/pipeline_old.yaml
+    new-path: compositions/pipeline_new.yaml
+    fail-on-major: "true"
+```
+
+For a full workflow example, see [`semantic-semver.yml`](semantic-semver.yml).

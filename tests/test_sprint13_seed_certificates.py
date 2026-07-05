@@ -14,6 +14,15 @@ If a future sprint shifts the certificate schema, this test fails loudly
 with the regenerated payload available for diff review. The same gate
 pattern as Sprint 12's `test_diagnose_default_json_regression`.
 
+**This golden is also the verdict-change GUARD for canonicity.** Because it pins
+canonical `certificate_content_hash` values, a verdict-affecting change to
+`diagnose`/`classify`/`coboundary`/`witness_geometry` that is NOT accompanied by an
+`ALGORITHM_VERSION` bump (`bulla._canonical`) makes these hashes drift and fails
+here — forcing the bump. NOTE: this is a *stopgap* for the missing auto-coupling
+between `f`'s source and its version (it only covers the seed set); the canonical
+fix is to derive `algorithm_version` from `f`'s content / the Lean-spec hash. See
+the canonicity ladder in `bulla/src/bulla/_canonical.py`.
+
 Re-generate the fixture (when intentional schema drift):
     PYTHONPATH=bulla/src python3.11 -m bulla certify --seed-set --format json \
         --output papers/composition-doctrine/sprint13_seed_certificates.json
@@ -42,22 +51,31 @@ def _strip_nondeterministic(certs: list[dict]) -> list[dict]:
     """Remove version-dependent and time-dependent fields so byte-
     identity can be asserted across runs and across release bumps.
 
-    Fields stripped:
+    Strips only producer/environment provenance that lives in the certificate
+    BODY but is NOT part of the deed's content-address:
       - timestamp (clock-dependent)
       - bulla_version (release-dependent)
-      - certificate_content_hash (depends on bulla_version via method block)
-      - method (versioned strings inside)
-      - attestation_hash (currently None; future signed envelopes will populate)
-      - receipt_hash (currently None; future operational receipts will populate)
+      - method (versioned producer strings)
+      - attestation_hash / receipt_hash (filled only at signing; None here)
+
+    PINNED (deliberately NOT stripped):
+      - certificate_content_hash — now a true content-address: it excludes all of
+        the above plus subject.source_path, so it is machine- AND version-
+        independent. This test therefore *pins* it (stronger coverage than the
+        old behavior, which popped it because it used to depend on bulla_version).
+      - subject.source_path — now a portable basename (never an absolute path), so
+        it is compared rather than stripped.
+
+    A drift in the pinned hash or the basename is a real regression (or an
+    intended semantic change); regenerate the fixture only then.
     """
     out = []
     for c in certs:
         c2 = dict(c)
         c2.pop("timestamp", None)
         c2.pop("bulla_version", None)
-        c2.pop("certificate_content_hash", None)
-        c2.pop("certificate_hash", None)  # legacy v0 name; harmless
         c2.pop("method", None)
+        c2.pop("certificate_hash", None)  # legacy v0 name; harmless
         c2.pop("attestation_hash", None)
         c2.pop("receipt_hash", None)
         out.append(c2)

@@ -1,0 +1,74 @@
+{
+  "experiment": "recourse_gate_closes_loop_git",
+  "seam": "filesystem(abs) -> git(repo-relative); local git stands in for github",
+  "provenance": "EXECUTION_INDEPENDENT (labels = real `git show` exit codes, fee-independent)",
+  "fee_before": 1,
+  "fee_after": 0,
+  "disclosure": [
+    "path_root"
+  ],
+  "acts": {
+    "act0_no_gate": {
+      "gate": false,
+      "git_invoked": true,
+      "git_ok": false,
+      "git_detail": "fatal: path '<REPO>/README.md' exists on disk, but not in 'HEAD'",
+      "breach": true,
+      "note": "consumer acted on the producer's absolute path; git show HEAD:<abs> failed."
+    },
+    "act1_gate_refuses": {
+      "git_invoked": false,
+      "all_refused": true,
+      "cases": {
+        "1a_no_deed": {
+          "deficiency": "OMITTED_FROM_LOG",
+          "refusal_content_hash": "sha256:cb13165f195f357efbd7cc60d4393e72e317ef3cd9652c7ca4f1f8579ef90e2b",
+          "signed": true,
+          "recomputable": true,
+          "cure_disclose": [
+            "path_root"
+          ]
+        },
+        "1b_host_asserted_root": {
+          "deficiency": "UNPINNED_ROOT",
+          "root_trust": "host-asserted",
+          "refusal_content_hash": "sha256:5fa7d95d305c9ea4f2b9eda1cfeba1a555679832db9adc976b394cf6adb77bb1",
+          "signed": true,
+          "recomputable": true,
+          "cure_disclose": [
+            "path_root"
+          ]
+        },
+        "1c_fee_positive": {
+          "deficiency": "FEE_POSITIVE",
+          "fee": 1,
+          "included": true,
+          "refusal_content_hash": "sha256:94f4155cc392184b606a606714c925faa5b39a2e0d96c3bff4a95f09c2908ac1",
+          "signed": true,
+          "recomputable": true,
+          "cure_disclose": [
+            "path_root"
+          ]
+        }
+      },
+      "note": "each refusal is a signed, recomputable certificate naming the cure; git show is never invoked, so the breach is prevented by construction."
+    },
+    "act2_cure_proceed": {
+      "cured": true,
+      "fee_before": 1,
+      "fee_after": 0,
+      "disclosed": [
+        "path_root"
+      ],
+      "gate": "proceed",
+      "proceeded": true,
+      "root_trust": "own-log",
+      "git_invoked": true,
+      "git_ok": true,
+      "git_detail": "ok",
+      "note": "disclosing path_root cleared the fee 1->0 AND let transport rewrite abs->rel; the gate proceeded and git show HEAD:<rel> succeeded."
+    }
+  },
+  "loop_closed": true,
+  "causal_chain": "The coherence cure and the execution fix are the SAME disclosure. The undeclared path_root is simultaneously (1) the one term the gate refuses on \u2014 the producer's deed certifies coherence_fee = 1 \u2014 and (2) exactly what transport() needs to rewrite abs->repo-relative. Disclosing it drives the fee 1->0 (so a re-emitted deed satisfies the gate's fee=0 policy) and, by the same disclosure, makes `git show HEAD:<rel>` resolve. WITHOUT the gate the consumer acts on the absolute path and git fails (a real, execution-attributed breach); WITH the gate the breach is refused before git runs; the cure that satisfies the gate is identically the cure that makes git succeed. The label is git's exit code at every step \u2014 the fee only governs whether the gate lets git run."
+}

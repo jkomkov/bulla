@@ -491,10 +491,24 @@ def test_subject_block_has_composition_sha256():
     assert subject["manifest_hashes"] == []      # reserved
 
 
-def test_subject_source_path_passes_through():
-    cert = certify(_build_cycle(2, 4), source_path="custom/path.yaml")
-    d = to_dict(cert)
-    assert d["subject"]["source_path"] == "custom/path.yaml"
+def test_subject_source_path_basenamed_and_excluded_from_content_hash():
+    """source_path is provenance, not identity. In a signed, anchored, public deed
+    it must (a) never leak local filesystem layout, so it is basenamed in the body,
+    and (b) never perturb the content-address, so it is excluded from the hash
+    preimage entirely. The composition's identity is `composition_sha256`."""
+    # (a) Body carries only the basename, even for a path with directory structure.
+    d = to_dict(certify(_build_cycle(2, 4), source_path="custom/nested/path.yaml"))
+    assert d["subject"]["source_path"] == "path.yaml"
+
+    # (b) The content hash is independent of where the input lived: an absolute
+    # path and a bare filename for the same composition canonicalize identically.
+    h_abs = to_dict(
+        certify(_build_cycle(2, 4), source_path="/Users/alice/secret/a.yaml")
+    )["certificate_content_hash"]
+    h_bare = to_dict(
+        certify(_build_cycle(2, 4), source_path="b.yaml")
+    )["certificate_content_hash"]
+    assert h_abs == h_bare
 
 
 # ---- 13. Scope canonicalization ----

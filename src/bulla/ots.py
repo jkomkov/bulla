@@ -54,13 +54,19 @@ def commitment_hash(manifest_path: Path) -> str:
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
-def stamp_manifest(
-    manifest_path: Path,
+def stamp_hash(
+    hash_hex: str,
     calendar_urls: list[str] | None = None,
     timeout: int = 10,
     min_attestations: int = 1,
 ) -> bytes:
-    """Submit manifest commitment hash to OTS calendars. Returns proof bytes."""
+    """Submit an arbitrary SHA-256 hash (hex) to OTS calendars; return proof bytes.
+
+    The generic timechain-anchoring primitive. ``stamp_manifest`` (a manifest's
+    commitment hash) and ``anchor_certificate`` (a signed certificate's
+    attestation hash — a public, non-repudiable record that an issuer committed
+    to a coherence claim) both reduce to this.
+    """
     _check_ots_available()
 
     from opentimestamps.core.op import OpAppend, OpSHA256
@@ -68,7 +74,6 @@ def stamp_manifest(
     from opentimestamps.core.timestamp import DetachedTimestampFile, Timestamp
 
     urls = calendar_urls or CALENDAR_URLS
-    hash_hex = commitment_hash(manifest_path)
     hash_bytes = bytes.fromhex(hash_hex)
 
     # Build detached timestamp
@@ -118,6 +123,89 @@ def stamp_manifest(
     ctx = StreamSerializationContext(buf)
     file_timestamp.serialize(ctx)
     return buf.getvalue()
+
+
+def stamp_manifest(manifest_path: Path, **kwargs: Any) -> bytes:
+    """Submit a manifest's commitment hash to OTS calendars. Returns proof bytes."""
+    return stamp_hash(commitment_hash(manifest_path), **kwargs)
+
+
+def _hex_of(anchor_hash: str) -> str:
+    """Strip an optional 'sha256:' prefix; return the bare 64-hex string."""
+    return anchor_hash.split(":", 1)[1] if anchor_hash.startswith("sha256:") else anchor_hash
+
+
+def anchor_certificate(cert_dict: dict, **kwargs: Any) -> str:
+    """Anchor a SIGNED certificate's ``attestation_hash`` to the Bitcoin timechain.
+
+    Returns the base64 OTS proof (the caller writes it as a ``.ots`` sidecar — the
+    anchor is an external artifact, kept out of the certificate so its content hash
+    stays stable). The anchored object commits to BOTH the coherence content and who
+    signed it, so the timestamp closes **forgery/backdating**: a shown deed cannot be
+    fabricated as old. It does NOT close omission (a holder can withhold a deed) or
+    rekey — completeness of an agent's deed-set is an enumerable registry's job, not
+    the anchor's.
+    """
+    att = cert_dict.get("attestation_hash")
+    if not att:
+        raise ValueError(
+            "certificate has no attestation_hash — sign it first "
+            "(bulla certify --sign), then anchor the signed certificate"
+        )
+    return base64.b64encode(stamp_hash(_hex_of(att), **kwargs)).decode("ascii")
+
+
+def verify_hash(hash_hex: str, proof_b64: str) -> dict[str, Any]:
+    """Verify an OTS proof anchors exactly ``hash_hex``. Returns a status dict
+    (the generic counterpart to ``verify_manifest``)."""
+    _check_ots_available()
+
+    from opentimestamps.core.notary import (
+        BitcoinBlockHeaderAttestation,
+        PendingAttestation,
+    )
+    from opentimestamps.core.serialize import StreamDeserializationContext
+    from opentimestamps.core.timestamp import DetachedTimestampFile
+
+    try:
+        detached = DetachedTimestampFile.deserialize(
+            StreamDeserializationContext(io.BytesIO(base64.b64decode(proof_b64)))
+        )
+    except Exception as exc:
+        return {"valid": False, "error": f"could not parse OTS proof: {exc}"}
+
+    if detached.timestamp.msg != bytes.fromhex(_hex_of(hash_hex)):
+        return {"valid": False, "error": "proof does not anchor this hash"}
+
+    attestations = _collect_attestations(detached.timestamp)
+    confirmed = [a for a in attestations if isinstance(a, BitcoinBlockHeaderAttestation)]
+    pending = [a for a in attestations if isinstance(a, PendingAttestation)]
+    if confirmed:
+        return {
+            "valid": True,
+            "status": "confirmed",
+            "anchored_hash": _hex_of(hash_hex),
+            "bitcoin_block_heights": [a.height for a in confirmed],
+        }
+    if pending:
+        return {
+            "valid": True,
+            "status": "pending",
+            "anchored_hash": _hex_of(hash_hex),
+            "pending_calendars": [
+                a.uri.decode() if isinstance(a.uri, bytes) else a.uri for a in pending
+            ],
+            "note": "Submitted but not yet confirmed on Bitcoin. Re-verify after ~2 hours.",
+        }
+    return {"valid": False, "error": "proof contains no attestations"}
+
+
+def verify_certificate_anchor(cert_dict: dict, proof_b64: str) -> dict[str, Any]:
+    """Verify a ``.ots`` proof anchors this signed certificate's attestation hash."""
+    att = cert_dict.get("attestation_hash")
+    if not att:
+        return {"valid": False, "error": "certificate has no attestation_hash (not signed)"}
+    return verify_hash(att, proof_b64)
 
 
 def _submit_to_calendar(

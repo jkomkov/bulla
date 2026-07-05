@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bulla.dev/spec/action-receipt-v0.1.schema.json",
+  "title": "ActionReceipt v0.1",
+  "description": "The receipt for one consequential agent action. See action-receipt-v0.1.md for canonicalization and hashing (the schema validates shape; the spec defines the hashes).",
+  "type": "object",
+  "required": ["schema_version", "kind", "action", "diagnostic_ref", "mandate", "remedy", "hashes"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "kind": { "const": "action_receipt" },
+    "action": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string", "minLength": 1, "description": "Open vocabulary, e.g. package.release, github.create_file" },
+        "subject": { "type": "object" }
+      }
+    },
+    "diagnostic_ref": {
+      "type": "object",
+      "required": ["status"],
+      "description": "The recomputable verdict — never bare null.",
+      "properties": {
+        "status": { "enum": ["reference", "not_applicable", "deferred"] },
+        "ref": { "type": "string" }
+      },
+      "allOf": [
+        { "if": { "properties": { "status": { "const": "reference" } } },
+          "then": { "required": ["ref"] } }
+      ]
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "hash"],
+        "properties": { "name": { "type": "string", "minLength": 1 }, "hash": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "anchor_ref": { "type": "object" },
+    "mandate": {
+      "type": "object",
+      "description": "Ex ante legitimacy: authority + bounds.",
+      "properties": {
+        "authority": {
+          "type": "object",
+          "required": ["principal", "policy"],
+          "properties": {
+            "principal": { "type": "string", "minLength": 1 },
+            "policy": { "type": "string", "minLength": 1 },
+            "delegation": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "bounds": {
+          "type": "object",
+          "required": ["scope"],
+          "properties": {
+            "scope": { "type": "string", "minLength": 1 },
+            "expires": { "type": "string" },
+            "rollback_window": { "type": "string" }
+          }
+        }
+      }
+    },
+    "remedy": {
+      "type": "object",
+      "description": "Ex post contestation: challenge window, forum, remedy ladder.",
+      "required": ["challenge_window", "forum", "remedies"],
+      "properties": {
+        "challenge_window": { "type": "string", "minLength": 1 },
+        "forum": {
+          "type": "object",
+          "required": ["log_endpoint", "trusted_root_ref"],
+          "properties": {
+            "log_endpoint": { "type": "string", "minLength": 1 },
+            "trusted_root_ref": { "type": "string", "minLength": 1 }
+          }
+        },
+        "remedies": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["rung", "verifier", "anchor"],
+            "properties": {
+              "rung": { "enum": ["recompute", "challenge", "cure", "revert", "slash", "escalate"] },
+              "verifier": { "type": "string", "minLength": 1 },
+              "anchor": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    "retention": {
+      "type": "object",
+      "properties": {
+        "record": { "type": "string" },
+        "disclosure": { "type": "string" }
+      }
+    },
+    "stake": { "type": "null", "description": "RESERVED (the bond slot) — always null in v0.1." },
+    "signature": { "type": ["object", "null"] },
+    "timestamp": { "type": "string" },
+    "producer": { "type": "object" },
+    "hashes": {
+      "type": "object",
+      "required": ["content", "event", "attestation", "log_leaf"],
+      "properties": {
+        "content": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "event": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "attestation": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "log_leaf": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+      }
+    }
+  }
+}

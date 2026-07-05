@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bulla"
-version = "0.37.0"
+version = "0.41.0"
 description = "Witness kernel for agentic compositions: diagnoses convention mismatches between MCP servers, LangGraph graphs, and CrewAI crews"
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -40,6 +40,12 @@ dependencies = [
 
 [project.optional-dependencies]
 ots = ["opentimestamps-client>=0.7"]
+# Sign coherence attestations under an external agent identity (ed25519 / did:key).
+# Bulla signs, never mints — see bulla.identity. One small, pure-Python dep.
+identity = ["PyNaCl>=1.5"]
+# COSE_Sign1 serialization of deeds as SCITT Signed Statements — see
+# SCITT-MAPPING.md. Signing additionally needs [identity].
+scitt = ["cbor2>=5.6", "PyNaCl>=1.5"]
 discover = ["openai>=1.0", "anthropic>=0.20"]
 # Framework adapters — optional. Static AST parsing has no runtime dep on
 # the framework itself. These extras pull in the framework when the user
@@ -47,7 +53,33 @@ discover = ["openai>=1.0", "anthropic>=0.20"]
 # that snapshot live framework objects into a bulla.Session.
 langgraph = ["langchain-core>=0.3", "langgraph>=1.1"]
 crewai = ["crewai>=0.80"]
-all = ["bulla[ots,discover,langgraph,crewai]"]
+# G23 Stage A A3: cross-model 2-cover with restriction-map ablation.
+# Heavy dependencies (torch, transformers, sae-lens, sentence-transformers,
+# modal) are gated behind this extras tag to preserve the "zero heavy
+# dependencies" promise of bulla's core install. Modules under
+# bulla.adapters.{sae_data,sae_lens_backend,restriction_maps,sae_compose,
+# sae_baseline} use lazy imports + TYPE_CHECKING guards so they import
+# without torch installed (raising a clear ImportError with install hint
+# at first instantiation that requires torch). NOT included in the `all`
+# extras: interpretability research is heavyweight and a user doing
+# `pip install bulla[all]` should not pay for ~5GB of weights they may
+# not use.
+# sae-lens minor pinned: 5.x is changing rapidly; minor-floating breaks
+# reproducibility silently (2026-05-06 lesson).
+interp-sae = [
+    "sae-lens>=5.5,<6.0",
+    "transformers>=4.46,<5.0",
+    "torch>=2.4,<3.0",
+    "huggingface-hub>=0.26",
+    "scipy>=1.14",
+    "python-dotenv>=1.0",
+    "sentence-transformers>=3.0",
+    "modal>=0.65",
+]
+# Deprecated alias for the old internal codename; kept one release for
+# `pip install bulla[g23-a3]` callers. Prefer `interp-sae`.
+g23-a3 = ["bulla[interp-sae]"]
+all = ["bulla[ots,identity,scitt,discover,langgraph,crewai]"]
 
 [project.scripts]
 bulla = "bulla.cli:main"
@@ -62,5 +94,23 @@ Spec = "https://github.com/jkomkov/bulla/blob/main/WITNESS-CONTRACT.md"
 [tool.hatch.build.targets.wheel]
 packages = ["src/bulla"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"src/bulla/agents/system_prompt_v1.md" = "bulla/agents/system_prompt_v1.md"
+"src/bulla/data/showcase/filesystem.json" = "bulla/data/showcase/filesystem.json"
+"src/bulla/data/showcase/github.json" = "bulla/data/showcase/github.json"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# A fresh `git clone && pytest` runs the CODE suite — green, hang-free, offline. Three
+# categories are deselected by default; each runs explicitly via its marker:
+#   network    — needs network (a model download); `pytest -m network`
+#   editorial  — asserts manuscript content/drift in papers/, not library behaviour, so a
+#                code contributor's red/green never depends on an ambiguous citation bracket;
+#                `pytest -m editorial`
+#   quarantine — known-broken-in-suite, root cause under investigation; `pytest -m quarantine`
+addopts = "-m 'not network and not editorial and not quarantine'"
+markers = [
+    "network: requires network access (model download / live registry / OTS calendar); deselected by default — run with `pytest -m network`.",
+    "editorial: asserts manuscript content or drift in papers/ (not library behaviour); deselected from the code suite — run with `pytest -m editorial`.",
+    "quarantine: known-broken when collected in-suite, root cause under investigation; deselected by default — run with `pytest -m quarantine`.",
+]
