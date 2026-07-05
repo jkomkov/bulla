@@ -45,7 +45,12 @@ from bulla.diagnostic import diagnose
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-assert (REPO_ROOT / "papers").is_dir()
+if not (REPO_ROOT / "papers").is_dir():
+    pytest.skip(
+        f"monorepo-only: {REPO_ROOT} has no papers/ subdir "
+        "(standalone package / public mirror)",
+        allow_module_level=True,
+    )
 
 
 class TestPipelineSyntheticControls:

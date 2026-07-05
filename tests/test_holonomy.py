@@ -5,6 +5,10 @@ from __future__ import annotations
 import pathlib
 import sys
 
+import pytest
+
+pytest.importorskip("numpy")  # research-only dep; skip cleanly in the standalone package
+
 import numpy as np
 
 # Make the in-tree package importable without an editable install.

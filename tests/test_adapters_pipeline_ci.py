@@ -48,10 +48,15 @@ from bulla.model import Composition
 # Repo root: walk up from this file to the worktree root (where bulla/
 # and papers/ both exist).
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-assert (REPO_ROOT / "papers").is_dir(), (
-    f"Repo root resolution failed: {REPO_ROOT} has no papers/ subdir. "
-    "Tests must run from a worktree containing both bulla/ and papers/."
-)
+if not (REPO_ROOT / "papers").is_dir():
+    # monorepo-only: these tests encode the whole repo tree, which needs a sibling
+    # papers/ dir. Absent in the standalone package / public mirror, so skip cleanly
+    # at collection time rather than erroring.
+    pytest.skip(
+        f"monorepo-only: {REPO_ROOT} has no papers/ subdir "
+        "(standalone package / public mirror)",
+        allow_module_level=True,
+    )
 
 
 class TestLockedTooling:

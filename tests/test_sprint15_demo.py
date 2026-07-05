@@ -31,6 +31,17 @@ REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / "bulla" / "src"))
 sys.path.insert(0, str(REPO / "papers" / "composition-doctrine" / "sprint15_demo"))
 
+import pytest
+
+if not (REPO / "papers" / "composition-doctrine" / "sprint15_demo").is_dir():
+    # monorepo-only: the demo `fixture` module lives under papers/. Absent in the
+    # standalone package / public mirror — skip cleanly rather than failing import.
+    pytest.skip(
+        "monorepo-only: needs papers/composition-doctrine/sprint15_demo/fixture.py "
+        "(standalone package / public mirror)",
+        allow_module_level=True,
+    )
+
 from bulla.certificate import certify
 from bulla.regime import classify
 from fixture import build_demo_composition, induced_pair_compositions
