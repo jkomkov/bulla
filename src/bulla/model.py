@@ -313,7 +313,7 @@ class SchemaContradiction:
     Structural contradictions are about observable fields that disagree
     on constraints.  This is a different failure class from blind spots
     (hidden fields): the caller CAN see both fields, but the schemas
-    are incompatible and the composition will fail at runtime.
+    are incompatible, so the composition can fail at runtime.
     """
 
     field_a: str

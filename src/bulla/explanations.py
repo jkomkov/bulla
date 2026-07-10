@@ -40,7 +40,10 @@ class DimensionExplanation:
     """One sentence describing what the dimension covers."""
 
     failure_mode: str
-    """One sentence describing what goes wrong when two tools disagree."""
+    """One sentence illustrating what *could* go wrong if two tools diverge on
+    this convention — an educational example of the divergence, not a prediction
+    that it will occur. bulla flags the undisclosed convention; the fee does not
+    predict execution failure (see FALSIFICATIONS.md)."""
 
 
 # ── The 39 entries ──────────────────────────────────────────────────

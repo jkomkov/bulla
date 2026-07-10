@@ -98,6 +98,11 @@ regress. `tests/test_registry_merge_guard.py` exists to make that mistake fail
 loudly at collection time; if it fails after a merge, the merge took the wrong
 side.
 
-## License
+## License and sign-off (DCO)
 
-By contributing, you agree that your contributions will be licensed under the project's [Business Source License 1.1](LICENSE).
+By contributing, you agree that your contributions are licensed under the
+project's [Apache License 2.0](LICENSE) — inbound equals outbound (Apache-2.0
+§5). There is no CLA. Instead we use the lightweight
+[Developer Certificate of Origin](https://developercertificate.org/): add a
+`Signed-off-by` line to every commit with **`git commit -s`**, certifying you
+wrote the change (or otherwise have the right to submit it) under Apache-2.0.

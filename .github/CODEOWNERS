@@ -1,0 +1,16 @@
+# Every change is reviewed by the maintainer of record. The crypto/receipt
+# core and the wire spec carry the heaviest integrity burden — called out
+# explicitly so a future co-maintainer split keeps them under a named owner.
+
+*                       @jkomkov
+
+# Integrity-critical surfaces (canonicalization, signing, the transparency log,
+# the wire spec + its independent verifier).
+/src/bulla/_canonical.py    @jkomkov
+/src/bulla/identity.py      @jkomkov
+/src/bulla/registry.py      @jkomkov
+/src/bulla/certificate.py   @jkomkov
+/src/bulla/action_receipt.py @jkomkov
+/spec/                      @jkomkov
+/WITNESS-CONTRACT.md        @jkomkov
+/.github/workflows/         @jkomkov

@@ -3,9 +3,11 @@
 No LLM.  No network.  No randomness.  Deterministic from first line to last.
 
 Two servers (filesystem + GitHub), 40 tools, 114 cross-server edges.
-Schema validation sees nothing wrong.  Bulla finds 22 hidden mismatches
-across 4 categories, computes the exact minimum fix, simulates the repair,
-and issues a cryptographic receipt backed by Lean 4 proofs.
+Schema validation sees nothing wrong.  Bulla surfaces 22 undisclosed
+conventions across 4 categories, computes the exact minimum disclosure,
+simulates the repair, and issues a cryptographic receipt backed by Lean 4
+proofs.  (The fee counts undisclosed conventions — a disclosure/omission
+measure — not predicted failures; see FALSIFICATIONS.md.)
 """
 
 from __future__ import annotations
@@ -210,18 +212,19 @@ def run_showcase(*, json_output: bool = False) -> None:
     # Phase 2 — The problem
     _section("2. What Schema Validation Misses")
 
-    print(f"    Bulla found {total_fee} hidden mismatches that schema")
-    print("    validation cannot detect.  These are fields that exist")
+    print(f"    Bulla found {total_fee} undisclosed conventions that schema")
+    print("    validation cannot see.  These are fields that exist")
     print("    inside one tool but aren't visible to tools that depend on them.")
     print()
     print("    Example: filesystem's read_file has an internal `path` field")
     print("    that uses absolute paths (/Users/you/project/README.md).")
     print("    GitHub's create_or_update_file also has `path` — but it expects")
     print("    repo-relative paths (README.md).  An agent chaining them assumes")
-    print("    they mean the same thing.  They don't.  The write silently targets")
-    print("    the wrong file.")
+    print("    they mean the same thing.  If they diverge, the write can silently")
+    print("    target the wrong file — the fee flags the undisclosed convention,")
+    print("    not that this outcome will occur.")
     print()
-    _kv("Hidden mismatches (coherence fee)", total_fee)
+    _kv("Undisclosed conventions (coherence fee)", total_fee)
     _kv("Affected tool pairs", len(diag.blind_spots))
     print()
 
@@ -376,9 +379,9 @@ def run_showcase(*, json_output: bool = False) -> None:
     print()
 
     # Coda
-    _header("Schema validation: 0 problems.  Bulla: 22.")
+    _header("Schema validation: 0 problems.  Bulla: 22 undisclosed conventions.")
 
-    print(f"    {total_fee} hidden mismatches across {len(decomp.by_dimension)} categories.")
+    print(f"    {total_fee} undisclosed conventions across {len(decomp.by_dimension)} categories.")
     print(f"    {len(mds)}-field minimum fix, mathematically optimal.")
     print("    Repair verified.  Cryptographic receipt issued.")
     print("    Lean 4 theorem provenance on every claim.")

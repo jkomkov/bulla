@@ -1,0 +1,18 @@
+name: Feature request
+description: Propose a capability or change (open one before a large PR — see CONTRIBUTING.md)
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What can't you do today? Who hits this?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed direction
+      description: Sketch the shape. If it touches the wire format / trust semantics, say how old artifacts stay verifiable.
+    validations:
+      required: true

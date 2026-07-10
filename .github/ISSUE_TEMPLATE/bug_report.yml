@@ -1,0 +1,30 @@
+name: Bug report
+description: Something bulla does is wrong or crashes (not a security issue — see SECURITY.md)
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For a **security** problem (signature/forgery/log/canonicalization/anchor),
+        do NOT file here — follow `SECURITY.md` (private disclosure).
+  - type: input
+    id: version
+    attributes:
+      label: bulla version
+      description: "`bulla --version` or `pip show bulla`"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened vs. what you expected
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: A composition/receipt/command that shows it. Recomputable > described.
+      render: shell
+    validations:
+      required: true

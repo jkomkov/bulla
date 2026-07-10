@@ -315,7 +315,10 @@ def g1_no_deed_refused_before_execution() -> bool:
 
 
 def g2_fee_positive_deed_refused() -> bool:
-    from bulla.recourse_gate import DEFAULT_GATE_POLICY, evaluate_gate
+    # Fee-gating is an *opt-in disclosure demand* (STRICT_GATE_POLICY), not the default:
+    # the fee is a disclosure/omission signal, not a failure predictor (FALSIFICATIONS.md).
+    # Under STRICT, a fee-positive deed is refused pending disclosure.
+    from bulla.recourse_gate import STRICT_GATE_POLICY, evaluate_gate
     from bulla.registry import Deed
 
     cert = _signed(False)  # fee = 1
@@ -325,7 +328,7 @@ def g2_fee_positive_deed_refused() -> bool:
     incl = log.inclusion_by_attestation(deed.attestation_hash)
     d = evaluate_gate(deed_rec=log.by_composition(deed.composition_hash)[0],
                       inclusion_rec=incl, certificate=cert,
-                      is_remote=False, policy=DEFAULT_GATE_POLICY)
+                      is_remote=False, policy=STRICT_GATE_POLICY)
     return d.disposition.lower().startswith("refuse")
 
 

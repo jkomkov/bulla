@@ -187,21 +187,24 @@ def _convention_contrast_line(
 
 
 def _risk_hint_line(bs: "BlindSpot") -> str:
+    # Illustrative consequence *if* this undisclosed convention actually
+    # diverges — bulla detects the structural gap, not that the outcome
+    # will occur (the fee does not predict execution failure; FALSIFICATIONS.md).
     dim = bs.dimension
     if dim == "path_convention":
         return (
-            "risk: writes land in the wrong tree or silently wrong file targets"
+            "if mismatched: writes could land in the wrong tree or wrong file targets"
         )
     if dim in ("encoding", "charset"):
-        return "risk: text corruption or mistaken binary handling"
+        return "if mismatched: text corruption or mistaken binary handling"
     if dim in ("currency", "currency_unit", "amount_unit"):
-        return "risk: wrong monetary magnitude or unit drift across tools"
+        return "if mismatched: wrong monetary magnitude or unit drift across tools"
     if dim in ("timestamp_format", "date_format", "datetime"):
-        return "risk: ordering / TTL / reconciliation bugs from skewed time semantics"
+        return "if mismatched: ordering / TTL / reconciliation bugs from skewed time semantics"
     if dim in ("id_offset", "pagination", "page_index"):
-        return "risk: skipped / duplicated records across paginated calls"
+        return "if mismatched: skipped / duplicated records across paginated calls"
     return (
-        f"risk: `{bs.from_field}` ↔ `{bs.to_field}` may diverge silently "
+        f"if mismatched: `{bs.from_field}` ↔ `{bs.to_field}` may diverge silently "
         "across the seam"
     )
 

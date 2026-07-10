@@ -1,0 +1,28 @@
+Bulla — a witness kernel for agentic compositions.
+
+Copyright 2025 John Komkov
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+---
+
+"Glyph" is the open coherence-receipt standard (the composition rule, the
+recomputable receipt format, and the convention registry). "bulla" (this
+repository) is its Apache-2.0 reference implementation.
+
+Convention packs under src/bulla/packs/ carry metadata authored for this
+project (openly licensed as above). Where a pack points at an external
+standards registry (ISO, FHIR, FIX, ICD-10, …) via `values_registry`, the
+licensing posture recorded is that of the *upstream registry*, not of this
+package; a consumer obtains any license required to fetch those values. See
+src/bulla/packs/seed/ and docs/STANDARDS-INGEST-SOURCES.md.

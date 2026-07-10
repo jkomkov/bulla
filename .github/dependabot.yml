@@ -1,0 +1,21 @@
+version: 2
+updates:
+  # Keep the GitHub Actions in the release/CI path current — the release job
+  # holds id-token: write, so a stale, vulnerable action there is a supply-chain
+  # risk. Dependabot proposes SHA bumps (we pin by SHA) with the version in the
+  # comment kept in sync.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels: ["dependencies", "ci"]
+
+  # Python deps are minimal (pyyaml + optional extras); watch for security
+  # advisories on the ones that touch the crypto path (PyNaCl, cbor2, OTS).
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels: ["dependencies", "python"]

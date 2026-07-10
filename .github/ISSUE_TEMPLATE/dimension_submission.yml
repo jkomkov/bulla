@@ -1,0 +1,34 @@
+name: Convention dimension submission
+description: Propose a new semantic convention dimension for the vocabulary (see CONTRIBUTING.md)
+labels: ["dimension"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The most valuable contribution to bulla's detection coverage is a new
+        convention *dimension*. Small additions can go straight to a PR editing
+        `src/bulla/packs/community.yaml`; use this issue to discuss first.
+  - type: input
+    id: name
+    attributes:
+      label: Dimension name
+      placeholder: e.g. day_count_convention
+    validations:
+      required: true
+  - type: textarea
+    id: disagreement
+    attributes:
+      label: The silent disagreement
+      description: |
+        A dimension must be a convention two tools could use the SAME field name for
+        while meaning different things, passing schema validation but failing silently.
+        Give two concrete conflicting values (e.g. "30/360" vs "actual/actual").
+    validations:
+      required: true
+  - type: textarea
+    id: signals
+    attributes:
+      label: Signals
+      description: field_patterns (glob) and/or description_keywords that identify it.
+    validations:
+      required: true

@@ -1,12 +1,20 @@
-"""bulla: Witness kernel for agentic compositions.
+"""bulla: recomputable receipts for authorless action.
 
-Computes the coherence fee — the exact number of independent semantic
-dimensions that bilateral schema validation cannot detect — when AI
-agents compose tools across MCP servers, LangGraph graphs, or CrewAI
-crews. Exact rationals throughout, no numpy, no LLM calls.
+A *bulla* was the clay envelope a Mesopotamian scribe sealed around a
+record so it survived the absence of the parties who made it. This
+package does the same for agent actions: an ActionReceipt records —
+recomputably — what was done, under whose authority, within what bounds,
+and how it is contested; ``bulla coverage`` measures how much of what
+agents did left no receipt at all, against an anchor you did not mint.
+Exact rationals throughout, no numpy, no LLM calls.
+
+The coherence fee (the original diagnostic) remains as one measurable a
+receipt can carry: on execution-derived labels it is a disclosure/omission
+signal — how much convention two tools leave undisclosed at their seam —
+not an execution-failure predictor. See FALSIFICATIONS.md.
 """
 
-__version__ = "0.41.0"
+__version__ = "0.42.0"
 
 from bulla.model import (
     BlindSpot,

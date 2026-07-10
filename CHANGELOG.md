@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.42.0 — 2026-07-08
+
+**The integrity-of-the-integrity-tool release, and the relicense to Apache-2.0.** A world-class-systems-engineer audit found the craft strong but flagged a cluster of "the integrity tool has integrity gaps" defects — individually cheap, collectively credibility-defining. This release closes them and moves the project to a license fit for neutral infrastructure.
+
+### License
+- **Relicensed BSL 1.1 → Apache License 2.0** — permissive, OSI-approved, with an explicit patent grant, from day one. A transparency substrate others recompute and reimplement cannot sit behind a single gatekeeper, and the repo already called Glyph an "open standard." Added `NOTICE`; `pyproject` now carries the SPDX `License-Expression: Apache-2.0`. Contributions are inbound=outbound via a **DCO** sign-off (`git commit -s`) — no CLA.
+- **Owner of record unified to John Komkov** across LICENSE, NOTICE, `pyproject` authors, `action.yml`, and the deprecated `seam-lint` shim; email normalized to `jk@gvt.ai`.
+
+### Integrity & determinism
+- **One canonicalization rule (`CANON_VERSION` 1 → 2).** Every hash is now taken over `bulla._canonical.canonical_json` (compact, key-sorted, ASCII), single-sourced and imported everywhere — no more copy-paste. The measurement layer previously hashed with *spaced* separators while the deed layer used *compact*, so a stranger following the spec could not reproduce a `WitnessReceipt` hash. Deed-layer hashes are byte-unchanged (releases, `spec/vectors`, certificates verify identically); the measurement layer moved to compact. **Survival preserved:** `verify_receipt_integrity` accepts the legacy v1 form, so every pre-0.42 receipt still verifies (a format change is a version difference, not tampering). Drift-guarded by `tests/test_canonicalization.py`. Normative "Canonicalization" section added to `WITNESS-CONTRACT.md`.
+- **Single source of version truth.** `pyproject` version is now `dynamic`, read from `src/bulla/__init__.py`; `tests/test_version_single_source.py` asserts the built metadata equals `__version__` (version is stamped into every receipt's provenance, so drift was a provenance defect).
+
+### CI, gates & supply chain
+- **CI actually enforces now.** The `tests` job installs a new `[test]` extra so the signing/forgery/registry-authenticity suite *runs* (not ImportError) and the numpy instrument test is exercised; a **coverage floor** (90%) guards the crypto/receipt core; a new **`lint` job** runs `ruff` (blocking) and `mypy` on the core allowlist (config added — none existed).
+- **Release path hardened.** `publish.yml` now runs the full suite on the exact tagged commit before a signed wheel can ship (no green, no ship), and **every third-party action in both workflows is pinned by full SHA** — including `gh-action-pypi-publish` in the attestation-minting job.
+- **`SECURITY.md`** added (private disclosure, coordinated fix) — a security-attestation product finally has a disclosure channel.
+
+### Governance
+- Added `GOVERNANCE.md` (BDFL-now, with an explicit path to open governance of the *standard*), `CODE_OF_CONDUCT.md`, `.github/CODEOWNERS` (naming the owner of each integrity-critical surface), issue/PR templates, and `dependabot.yml`.
+
 ## 0.41.0 — 2026-07-04
 
 **ActionReceipt v0.1 — the receipt a bond slashes against.** Bulla's diagnostic layer answers "is this composition coherent?"; this release adds the object that answers the next question: *an agent changed the world — under whose authority, within what bounds, with what recomputable verdict, and how is it contested?*

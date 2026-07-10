@@ -1,12 +1,14 @@
 # bulla
 
-Witness kernel for agentic compositions.
+**Recomputable receipts for authorless action.**
 
-When AI agents compose tools into pipelines, implicit semantic assumptions (date formats, unit scales, path conventions) can silently produce wrong results. Schema validation passes, but the pipeline is broken. Bulla computes the **coherence fee**: the exact number of independent semantic dimensions that bilateral verification cannot detect.
+A *bulla* was the clay envelope a Mesopotamian scribe sealed around a record so it survived the absence of the parties who made it. When an autonomous agent acts and then vanishes, the same problem returns: the act outlives its author and no one is left to answer for it. A bulla **ActionReceipt** is the record that survives — what was done, under whose **authority**, within what **bounds**, with a **recomputable verdict**, and how it is **contested** — and `bulla coverage` answers the question the receipts make askable: *how much of what your agents did left no receipt at all?*, measured against an anchor you did not mint (a git history, a transport log, an audit trail).
 
 **Zero heavy dependencies.** Only requires PyYAML. No numpy, no scipy, no LLM calls. Installs in under a second.
 
-> **Naming**: **Glyph** is the open standard — the composition rule, the recomputable receipt format, and the convention registry ([glyphstandard.com](https://glyphstandard.com)). ***bulla*** (this repo) is its reference implementation. *SEAM* is the underlying theory ([paper](https://www.resagentica.com/papers/seam-paper.pdf)); the wider research program is [Res Agentica](https://www.resagentica.com).
+> **The coherence fee** — bulla's original diagnostic — is still here, now as one field a receipt can carry. On execution-derived labels it is a *disclosure/omission* signal (how much convention two tools leave undisclosed at their seam), **not** a mismatch-or-failure predictor; see [FALSIFICATIONS.md](FALSIFICATIONS.md). The receipt and its coverage are the load-bearing claims.
+
+> **Naming**: this repo is the reference implementation, and its wire format is specified independently in [`spec/`](spec/) — an ActionReceipt spec plus a zero-dependency conformance checker (`spec/vectors/independent_check.py`) a second implementer can run without this library. *Glyph* is the name for that open format ([glyphstandard.com](https://glyphstandard.com)); *SEAM* is the underlying theory ([paper](https://www.resagentica.com/papers/seam-paper.pdf)); the wider research program is [Res Agentica](https://www.resagentica.com).
 
 ## Try it now
 
@@ -153,21 +155,21 @@ never modifies agent traffic.
 
 ## The seam problem
 
-Two MCP servers. One uses absolute paths (`/tmp/src/main.py`), the other uses repository-relative paths (`src/main.py`). Schema validation passes. The agent silently puts the file in the wrong place. Bulla catches this before execution.
+Two MCP servers. One uses absolute paths (`/tmp/src/main.py`), the other uses repository-relative paths (`src/main.py`). Schema validation passes. The path convention crosses the seam **undisclosed** — bulla surfaces that undisclosed convention from the schemas alone, before execution. (Whether it *causes* a wrong write is not something the fee predicts — see [the calibration note](#calibration-results) and [FALSIFICATIONS.md](FALSIFICATIONS.md).)
 
 **[See the canonical demo →](https://github.com/jkomkov/bulla/tree/main/examples/canonical-demo)** — frozen MCP manifests, real fee, walks through the bridge runtime.
 
 ## Calibration results
 
-Tested across 10 real MCP servers (filesystem, github, notion, playwright, tavily, etc.) in 45 pairwise compositions. Labels are **annotation-derived** (schema-vs-convention), not execution-derived — so this is calibration on a labelled corpus, and real-traffic failure prediction remains open:
+Tested across 10 real MCP servers (filesystem, github, notion, playwright, tavily, etc.) in 45 pairwise compositions. **Read this as disclosure-presence, not failure-probability.** Labels are **annotation-derived** (schema-vs-convention), *not* execution-derived; the column below is the annotated-mismatch **co-occurrence** rate on this labelled corpus — not a probability that a chain breaks at runtime:
 
-| Zone | Fee | P(mismatch) | Compositions |
-|------|-----|-------------|--------------|
+| Zone | Fee | Annotated-mismatch co-occurrence | Compositions |
+|------|-----|----------------------------------|--------------|
 | **Safe** | 0 | 0% | 15 compositions, all clean |
 | **Uncertain** | 1–3 | 0–33% | 12 compositions |
 | **Unsafe** | 4+ | ~100% | 18 compositions, all confirmed |
 
-On this corpus, fee=0 had **zero** annotated convention mismatches and fee≥4 concentrated the confirmed mismatches. The fee is computed from schemas alone — no execution required.
+A higher fee co-occurs with more conventions left undisclosed. It does **not** follow that a higher fee predicts an execution failure: on execution-derived labels the fee does not discriminate a breaking seam from a safe one (see [FALSIFICATIONS.md](FALSIFICATIONS.md)). The fee is computed from schemas alone — an omission measure, no execution required.
 
 See [calibration data](https://github.com/jkomkov/bulla/blob/main/calibration/data/tier3/report/state-of-agent-coherence.md) for the full report.
 
@@ -504,6 +506,6 @@ See [WITNESS-CONTRACT.md](https://github.com/jkomkov/bulla/blob/main/WITNESS-CON
 
 ## License
 
-[Business Source License 1.1](https://github.com/jkomkov/bulla/blob/main/LICENSE)
+[Apache License 2.0](https://github.com/jkomkov/bulla/blob/main/LICENSE) — permissive, OSI-approved, with an explicit patent grant.
 
-Use grant: non-competing use, plus commercial use processing fewer than 1,000 compositions per month. Converts to Apache 2.0 on 2030-04-01.
+Glyph is an **open standard** and *bulla* is its open reference implementation: both are Apache-2.0 from day one, because neutral infrastructure others recompute and reimplement cannot sit behind a single gatekeeper. Contributions are under the same license via a [DCO](https://developercertificate.org/) sign-off (`git commit -s`); see [CONTRIBUTING.md](https://github.com/jkomkov/bulla/blob/main/CONTRIBUTING.md).

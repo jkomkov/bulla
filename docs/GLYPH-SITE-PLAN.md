@@ -2,6 +2,8 @@
 
 *Revised 2026-04-06. Incorporates three rounds of editorial review + logo integration.*
 
+> **⚠ Superseded planning doc (2026-07).** Written before the fee-truth pivot. Any copy below claiming the coherence fee "predicts failure" or "guarantees safety" (e.g. "Fee = 0 means safe", "predicts failure with 95–100% accuracy") is **retired**: the fee is a disclosure/omission measure, not an execution-failure predictor. See [FALSIFICATIONS.md](../FALSIFICATIONS.md). Kept for historical planning context only.
+
 ---
 
 ## The argument for building now
@@ -312,7 +314,7 @@ Two paragraphs. No more.
 
 **Paragraph 1:** "Glyph Standard builds verification infrastructure for tool-composition coordination. Bulla is our first product — a witness kernel that detects semantic convention mismatches in MCP server compositions before execution. The people who get it are our users."
 
-**Paragraph 2:** "Bulla is licensed under the Business Source License 1.1. It converts to Apache 2.0 on 2030-04-01. The BSL means you can use Bulla freely for internal tooling, evaluation, and non-production purposes. Production use by organizations with >$10M revenue requires a commercial license." (Adjust terms to match actual LICENSE.)
+**Paragraph 2:** "Glyph is an open standard and Bulla is its open reference implementation, both under the Apache License 2.0 — permissive, with a patent grant, from day one. Neutral infrastructure that others recompute and reimplement cannot sit behind a single gatekeeper. Use it freely, in production, commercially; contribute back under the same license."
 
 Links: GitHub, PyPI, resagentica.com (one sentence: "Bulla operationalizes the compositional coherence theory developed in the Res Agentica research program.").
 

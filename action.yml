@@ -1,6 +1,6 @@
 name: "bulla"
 description: "Run bulla coherence analysis on agentic compositions"
-author: "Glyph"
+author: "John Komkov"
 
 branding:
   icon: "shield"

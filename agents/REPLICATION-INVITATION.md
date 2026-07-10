@@ -133,4 +133,4 @@ exploratory until someone other than us reproduces it. We'd rather
 discover early that the test is model-version-sensitive or has a
 hidden confounder than discover it from a referee.
 
-— John Komkov, jkomkov@gvt.ai
+— John Komkov, jk@gvt.ai

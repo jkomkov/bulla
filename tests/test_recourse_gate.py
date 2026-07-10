@@ -17,7 +17,7 @@ from bulla.identity import LocalEd25519Signer, verify_proof
 from bulla.model import Composition, Edge, SemanticDimension, ToolSpec
 from bulla.recourse_gate import (
     build_refusal_certificate, evaluate_gate, verify_refusal_certificate,
-    DEFAULT_GATE_POLICY, GatePolicy,
+    DEFAULT_GATE_POLICY, STRICT_GATE_POLICY, GatePolicy,
     BORROWED_INCLUSION, EQUIVOCATED_ROOT, FEE_POSITIVE, FEE_UNVERIFIABLE,
     INAUTHENTIC, OMITTED_FROM_LOG, UNPINNED_ROOT,
 )
@@ -137,7 +137,7 @@ def test_gate_refuses_fee_positive_after_inclusion_and_root_pass(tmp_path):
     cert = _cert(_seam(), signer); _log_cert(reg, cert, signer)   # fee = 1
     incl = reg.inclusion_by_attestation(cert["attestation_hash"])
     d = evaluate_gate(deed_rec=_rec(cert), inclusion_rec=incl, certificate=cert,
-                      is_remote=False)
+                      is_remote=False, policy=STRICT_GATE_POLICY)  # opt-in fee/disclosure gate
     assert d.included is True                # inclusion passed…
     assert d.fee == 1
     assert not d.proceed and d.deficiency == FEE_POSITIVE   # …and fee still refused
@@ -151,7 +151,7 @@ def test_gate_refuses_fee_unverifiable_without_cert(tmp_path):
     cert = _cert(_coherent(), signer); _log_cert(reg, cert, signer)
     incl = reg.inclusion_by_attestation(cert["attestation_hash"])
     d = evaluate_gate(deed_rec=_rec(cert), inclusion_rec=incl, certificate=None,
-                      is_remote=False)      # no certificate
+                      is_remote=False, policy=STRICT_GATE_POLICY)   # opt-in fee/disclosure gate; no certificate
     assert not d.proceed and d.deficiency == FEE_UNVERIFIABLE
 
 
@@ -192,7 +192,7 @@ def test_refusal_certificate_names_deficiency_and_cure(tmp_path):
     cert = _cert(_seam(), signer); _log_cert(reg, cert, signer)
     incl = reg.inclusion_by_attestation(cert["attestation_hash"])
     d = evaluate_gate(deed_rec=_rec(cert), inclusion_rec=incl, certificate=cert,
-                      is_remote=False)
+                      is_remote=False, policy=STRICT_GATE_POLICY)  # opt-in fee/disclosure gate
     ref = build_refusal_certificate(d, subject_deed=_rec(cert), disclose=("path_root",))
     assert ref["deficiency"] == FEE_POSITIVE
     assert ref["cure"]["disclose"] == ["path_root"]
@@ -224,13 +224,13 @@ def test_cure_loop_flips_refuse_to_proceed(tmp_path):
     seam_cert = _cert(_seam(), signer); _log_cert(reg, seam_cert, signer)
     before = evaluate_gate(deed_rec=_rec(seam_cert),
                            inclusion_rec=reg.inclusion_by_attestation(seam_cert["attestation_hash"]),
-                           certificate=seam_cert, is_remote=False)
+                           certificate=seam_cert, is_remote=False, policy=STRICT_GATE_POLICY)
     assert not before.proceed and before.deficiency == FEE_POSITIVE
     # the cure: disclose path_root -> fee = 0; re-emit, re-log, re-present
     cured_cert = _cert(_disclosed(), signer); _log_cert(reg, cured_cert, signer)
     after = evaluate_gate(deed_rec=_rec(cured_cert),
                           inclusion_rec=reg.inclusion_by_attestation(cured_cert["attestation_hash"]),
-                          certificate=cured_cert, is_remote=False)
+                          certificate=cured_cert, is_remote=False, policy=STRICT_GATE_POLICY)
     assert after.proceed and after.fee == 0
 
 

@@ -219,8 +219,9 @@ def _render_pairwise_block(
     out.append("")
     out.append(f"Global composition: fee = {global_fee}")
     out.append("")
-    out.append("  Every pair looks clean. The full composition doesn't.")
-    out.append("  This is what schema validation and pairwise checking miss.")
+    out.append("  Every pair looks clean. The full composition carries an")
+    out.append("  undisclosed convention no pairwise check can see (a structural")
+    out.append("  obstruction, not a predicted failure — see FALSIFICATIONS.md).")
     return out
 
 

@@ -2,11 +2,11 @@
 
 An agent copies a file from a local filesystem server to a GitHub repository. The file lands in the wrong location. No error is thrown.
 
-Schema validation, model evals, and runtime observability all pass. The composition still silently fails.
+Schema validation, model evals, and runtime observability all pass. The composition can still silently produce the wrong result.
 
-The filesystem server uses absolute paths (`/Users/me/repo/src/main.py`). The GitHub server uses repo-relative paths (`src/main.py`). Neither server declares this convention. No existing tool can detect the mismatch.
+The filesystem server uses absolute paths (`/Users/me/repo/src/main.py`). The GitHub server uses repo-relative paths (`src/main.py`). Neither server declares this convention. No existing tool surfaces the undisclosed mismatch.
 
-Bulla catches this.
+Bulla surfaces this undisclosed convention — from the schemas alone. (It flags the disclosure gap, not a prediction that the write *will* land wrong; on execution-derived labels the fee does not predict failure — see [FALSIFICATIONS.md](https://github.com/jkomkov/bulla/blob/main/FALSIFICATIONS.md).)
 
 ## Output
 

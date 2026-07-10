@@ -53,20 +53,26 @@ UNREACHABLE = "UNREACHABLE"                # registry could not be reached (call
 
 @dataclass(frozen=True)
 class GatePolicy:
-    """What a relying party demands before it will proceed. Two knobs are the whole
-    policy: *require fee=0* and *require an independently-trusted root*. (The advisory
-    surface relaxes the fee knobs; nothing else.)"""
+    """What a relying party demands before it will proceed. The legitimate recourse gate
+    is *an independently-trusted root* (Pin-the-Root) plus inclusion and authenticity.
+    The coherence *fee* is a disclosure/omission signal, NOT an execution-failure
+    predictor (see bulla/FALSIFICATIONS.md), so the default does **not** block a PROCEED
+    on it — fee-gating is explicit opt-in (``STRICT_GATE_POLICY``, or ``max_fee=0``)."""
 
-    max_fee: int | None = 0                 # refuse fee>max_fee; None = do not gate on fee value
+    max_fee: int | None = None              # None = do not gate on fee (default); set 0 to opt in
     require_independently_trusted_root: bool = True   # refuse host-asserted / none roots
-    require_certificate_for_fee: bool = True          # a bare deed cannot prove fee=0 -> refuse
+    require_certificate_for_fee: bool = False         # only relevant when max_fee is set
     expected_composition_hash: str | None = None      # if set, the deed must be for this composition
 
 
 DEFAULT_GATE_POLICY = GatePolicy()
-# The shipped advisory behaviour of bulla__deed_verify: gate on inclusion/root/authenticity,
-# but only *report* fee (never block on it, and never demand a certificate).
+# The recourse gate proceeds on inclusion + independently-trusted root + authenticity, and
+# *reports* the fee without blocking on it (a disclosure signal, not a safety gate —
+# bulla/FALSIFICATIONS.md). ADVISORY is retained as an equivalent alias.
 ADVISORY_GATE_POLICY = GatePolicy(max_fee=None, require_certificate_for_fee=False)
+# Opt-in strict mode: refuse a PROCEED until an undisclosed convention is disclosed
+# (certified fee=0). This is a *disclosure* demand, not a failure prediction.
+STRICT_GATE_POLICY = GatePolicy(max_fee=0, require_certificate_for_fee=True)
 
 
 @dataclass(frozen=True)

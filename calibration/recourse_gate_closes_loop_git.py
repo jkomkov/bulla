@@ -64,7 +64,7 @@ from bulla.diagnostic import diagnose, minimum_disclosure_set  # noqa: E402
 from bulla.identity import LocalEd25519Signer  # noqa: E402
 from bulla.model import Composition, Edge, SemanticDimension, ToolSpec  # noqa: E402
 from bulla.recourse_gate import (  # noqa: E402
-    build_refusal_certificate, evaluate_gate, DEFAULT_GATE_POLICY,
+    build_refusal_certificate, evaluate_gate, STRICT_GATE_POLICY,
 )
 from bulla.registry import Deed, DeedLog  # noqa: E402
 
@@ -156,7 +156,7 @@ def main() -> int:
 
     # 1a — no deed presented at all
     da = evaluate_gate(deed_rec={}, inclusion_rec=None, certificate=None,
-                       is_remote=False, policy=DEFAULT_GATE_POLICY)
+                       is_remote=False, policy=STRICT_GATE_POLICY)
     # (the proxy maps "no attestation" to MISSING; at the library level a bare call with no
     #  deed is OMITTED — both are "present a deed", and both REFUSE before git. We report
     #  the library deficiency and confirm git is never invoked.)
@@ -170,14 +170,14 @@ def main() -> int:
         remote = HttpRegistry(f"http://{srv.server_address[0]}:{srv.server_address[1]}")
         incl_remote = remote.inclusion_by_attestation(rec_ob["attestation_hash"])
         db = evaluate_gate(deed_rec=rec_ob, inclusion_rec=incl_remote, certificate=cert_obstructed,
-                           trusted_root=None, is_remote=True, policy=DEFAULT_GATE_POLICY)
+                           trusted_root=None, is_remote=True, policy=STRICT_GATE_POLICY)
     finally:
         srv.shutdown()
 
     # 1c — a deed that certifies fee = 1 (the seam BEFORE disclosure), own-log, fully logged
     incl_ob = log.inclusion_by_attestation(rec_ob["attestation_hash"])
     dc = evaluate_gate(deed_rec=rec_ob, inclusion_rec=incl_ob, certificate=cert_obstructed,
-                       is_remote=False, policy=DEFAULT_GATE_POLICY)
+                       is_remote=False, policy=STRICT_GATE_POLICY)
 
     refused = [da, db, dc]
     acts["act1_gate_refuses"] = {
@@ -198,7 +198,7 @@ def main() -> int:
     rec_cured = _deed_rec(cert_cured)
     incl_cured = log.inclusion_by_attestation(rec_cured["attestation_hash"])
     proceed = evaluate_gate(deed_rec=rec_cured, inclusion_rec=incl_cured, certificate=cert_cured,
-                            is_remote=False, policy=DEFAULT_GATE_POLICY)   # own-log, fee = 0
+                            is_remote=False, policy=STRICT_GATE_POLICY)   # own-log, fee = 0
     # only NOW does the consumer act — and the SAME path_root disclosure lets transport fix it
     ok_rel, detail_rel = (False, "not reached")
     if proceed.proceed:
