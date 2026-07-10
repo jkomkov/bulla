@@ -38,7 +38,7 @@ classifiers = [
     "Topic :: System :: Distributed Computing",
 ]
 dependencies = [
-    "pyyaml>=6.0",
+    "pyyaml>=6.0.3",
     # tomllib is stdlib on 3.11+; tomli is the canonical backport for 3.10.
     "tomli>=2.0; python_version < '3.11'",
 ]
