@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2",
+  "kind": "action_receipt",
+  "action": {
+    "type": "package.release",
+    "subject": {
+      "package": "bulla",
+      "version": "0.43.0",
+      "git_commit": "1aad12312a1300d60487bae8a1c90cf63d15327b",
+      "git_tag": "",
+      "test_result": "12549 passed, 18 skipped (pre-tag worktree run 2026-07-13)"
+    }
+  },
+  "diagnostic_ref": {
+    "status": "reference",
+    "ref": "sha256:3f944b20999c2d5c7231764aeaf6672443050cf0f2606e6b7a5dd3a7d2198f58"
+  },
+  "evidence_refs": [
+    {
+      "name": "wheel",
+      "hash": "sha256:72711e0b32c27c82edc4eec32f6fe5a7610006cc2d8edf85950ab3fefe553265",
+      "grounding": "third_party_anchored"
+    },
+    {
+      "name": "sdist",
+      "hash": "sha256:471c4cea19f740a16ff300ca3cd84ba8c74d297e77c19595ebe9fe9aceef4dd0",
+      "grounding": "third_party_anchored"
+    },
+    {
+      "name": "tree",
+      "hash": "sha256:3ccbc9e8a63bf8a765ab20cbc63d31a330da9a7b",
+      "grounding": "third_party_anchored"
+    }
+  ],
+  "anchor_ref": {
+    "kind": "pypi",
+    "ref": "bulla 0.43.0",
+    "root_of_trust": {
+      "scheme": "sigstore-pep740"
+    }
+  },
+  "mandate": {
+    "authority": {
+      "principal": "github:jkomkov",
+      "policy": "policy://bulla/release",
+      "delegation": [
+        "pypi:project:bulla"
+      ]
+    },
+    "bounds": {
+      "scope": "pypi:bulla version:0.43.0"
+    }
+  },
+  "remedy": {
+    "challenge_window": "P90D",
+    "forum": {
+      "log_endpoint": "https://pypi.org/project/bulla/",
+      "trusted_root_ref": "rekor:sigstore-pep740"
+    },
+    "remedies": [
+      {
+        "rung": "recompute",
+        "verifier": "pip download + sha256 vs PyPI",
+        "anchor": "pypi:bulla==0.43.0"
+      },
+      {
+        "rung": "revert",
+        "verifier": "pypi yank",
+        "anchor": "pypi:bulla==0.43.0"
+      },
+      {
+        "rung": "escalate",
+        "verifier": "maintainer review",
+        "anchor": "github:jkomkov"
+      }
+    ]
+  },
+  "retention": {
+    "record": "authority-permanent",
+    "disclosure": "public"
+  },
+  "stake": null,
+  "conventions": [],
+  "signature": {
+    "type": "bulla/ed25519-2026",
+    "issuer": "did:key:z6Mksw5XAZtcqTQ8aCA9eRJCz47SrVxDnNWBjxHQhYcLU5HH",
+    "verificationMethod": "did:key:z6Mksw5XAZtcqTQ8aCA9eRJCz47SrVxDnNWBjxHQhYcLU5HH",
+    "proofValue": "WHELQaKMsQ3Gdpz6Kt3Yh8+I5f5SdYAe0CeR8R+89A+ZcWTPuTiYfN75/3qOEYff+ozUGSsFa5OzvLxefbMTBQ=="
+  },
+  "timestamp": "2026-07-13T16:51:23.057526+00:00",
+  "producer": {
+    "bulla_version": "0.43.0",
+    "minted": "release-candidate-build",
+    "workflow": "local"
+  },
+  "hashes": {
+    "content": "sha256:f9ada6a575921f215ef04bdc2a0c8402ff44af1ea6c51da8c9432deb7a43a685",
+    "event": "sha256:860e21ba4ed729822436ac04a0a16c9c144cc89f7fa8f5c5748e247e09388d56",
+    "attestation": "sha256:9f64219eb468db900b2e78fa49c2d4c5e86a6151d2ea7d01131706cd8ef2241a",
+    "log_leaf": "sha256:4372b086ada5e4eeb84c0225170cdaf95ab6479a2841b62294c53c637eaa749b"
+  }
+}

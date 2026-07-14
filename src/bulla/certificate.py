@@ -89,7 +89,7 @@ from datetime import datetime, timezone
 from typing import Any, Optional
 
 from bulla import __version__
-from bulla._canonical import ALGORITHM_VERSION
+from bulla._canonical import ALGORITHM_VERSION, canonical_json
 from bulla.diagnostic import decompose_fee, diagnose
 from bulla.model import Composition
 from bulla.regime import RegimeReport, RegimeViolation, classify, validate_regime
@@ -591,7 +591,7 @@ def _compute_certificate_content_hash(cert: CompositionCertificate) -> str:
     See `_certificate_dict_for_content_hash` for the preimage discipline.
     """
     canonical = _certificate_dict_for_content_hash(cert)
-    payload = json.dumps(canonical, sort_keys=True, separators=(",", ":"))
+    payload = canonical_json(canonical)
     h = hashlib.sha256(payload.encode("utf-8")).hexdigest()
     return f"sha256:{h}"
 
@@ -763,7 +763,7 @@ def _attestation_hash(
     preimage: dict = {"certificate_content_hash": content_hash, "signature": proof}
     if recourse_envelope is not None:
         preimage["recourse_envelope"] = recourse_envelope
-    envelope = json.dumps(preimage, sort_keys=True, separators=(",", ":"))
+    envelope = canonical_json(preimage)
     return f"sha256:{hashlib.sha256(envelope.encode('utf-8')).hexdigest()}"
 
 
@@ -826,8 +826,6 @@ def verify_certificate_integrity(cert_dict: dict) -> bool:
     claimed = cert_dict.get("certificate_content_hash")
     if not claimed:
         return False
-    payload = json.dumps(
-        _content_hash_preimage(cert_dict), sort_keys=True, separators=(",", ":")
-    )
+    payload = canonical_json(_content_hash_preimage(cert_dict))
     computed = f"sha256:{hashlib.sha256(payload.encode('utf-8')).hexdigest()}"
     return computed == claimed

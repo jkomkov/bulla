@@ -14,6 +14,15 @@
 #   publisher:  owner=jkomkov, repo=bulla, workflow=publish.yml,
 #   environment=pypi. Then push a `v*` tag to the mirror to release.
 #
+# RELEASE RECEIPT (0.43.0, closing the retroactive seam): the `release` job
+# runs the full suite on the exact tagged commit, then mints the
+# package.release ActionReceipt from the very dist/ that ships — signed when
+# the `BULLA_RELEASE_KEY` secret holds an ed25519 keyfile JSON (`bulla key
+# gen`), OTS-anchored best-effort — and uploads receipt + witness sidecar +
+# .ots proof as the `release-receipt` artifact. Without the secret the mint
+# is UNSIGNED and says so in producer; configuring the secret is the
+# activation step, mirroring the Trusted Publishing note above.
+#
 # Any token pasted into a chat/transcript is exposed and should be REVOKED —
 # this workflow makes the manual-token path obsolete.
 
@@ -39,6 +48,14 @@ jobs:
         with:
           python-version: "3.11"
 
+      # No green, no ship: the FULL suite on the exact tagged commit, before
+      # a wheel can be published under this tag.
+      - name: Run full test suite on the tagged commit
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .[identity,ots] pytest pytest-timeout
+          python -m pytest tests/ -q --timeout=600 | tee pytest-summary.txt
+
       - name: Build sdist + wheel
         run: |
           python -m pip install --upgrade build
@@ -53,6 +70,30 @@ jobs:
           PKG=$(ls dist/bulla-*.tar.gz | sed -E 's#.*/bulla-(.*)\.tar\.gz#\1#')
           echo "tag=$TAG package=$PKG"
           test "$TAG" = "$PKG"
+
+      # Mint the release receipt AT release time, from the dist/ that ships.
+      # Signed iff BULLA_RELEASE_KEY is configured; the unsigned fallback is
+      # stated in the receipt's producer, never hidden.
+      - name: Mint release receipt (signed when key configured, OTS best-effort)
+        env:
+          BULLA_RELEASE_KEY: ${{ secrets.BULLA_RELEASE_KEY }}
+        run: |
+          TESTS=$(tail -1 pytest-summary.txt)
+          mkdir -p release-receipt
+          if [ -n "$BULLA_RELEASE_KEY" ]; then
+            python scripts/mint_release_receipt.py --dist dist --out "release-receipt/${GITHUB_REF_NAME#v}.json" --ots --test-result "$TESTS"
+          else
+            echo "::warning::BULLA_RELEASE_KEY not configured — minting UNSIGNED release receipt (stated in producer)"
+            python scripts/mint_release_receipt.py --dist dist --out "release-receipt/${GITHUB_REF_NAME#v}.json" --ots --test-result "$TESTS" --allow-unsigned
+          fi
+          python -m bulla receipt verify "release-receipt/${GITHUB_REF_NAME#v}.json"
+
+      - name: Upload release receipt artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-receipt
+          path: release-receipt/
+          if-no-files-found: error
 
       - name: Publish to PyPI (Trusted Publishing + attestations)
         uses: pypa/gh-action-pypi-publish@release/v1

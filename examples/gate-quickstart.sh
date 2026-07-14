@@ -2,16 +2,19 @@
 # bulla gate — the 5-minute quickstart.
 #
 # The recourse gate decides PROCEED / REFUSE on a counterparty's coherence deed, and emits
-# a CURABLE refusal when it refuses. It gates on TYPE signals only — coherence (fee=0) +
-# authenticity + inclusion under a root you trust INDEPENDENTLY of the host. It does NOT
-# verify delivery (a coherent liar passes; performance bonding is roadmap).
+# a CURABLE refusal when it refuses. It gates on TYPE signals only — authenticity +
+# inclusion under a root you trust INDEPENDENTLY of the host; the coherence fee is
+# REPORTED by default and gated on only when you opt in (--require-fee N — a disclosure
+# demand, not an execution predictor; see FALSIFICATIONS.md). It does NOT verify
+# delivery (a coherent liar passes; performance bonding is roadmap).
 #
 #   prereq:  pip install -e .            # from the bulla/ directory
 #   run:     examples/gate-quickstart.sh [your-composition.yaml]   # the arg is optional: BYO
 #
 # It signs two real shipped compositions, logs them, and gates them:
 #   - auth_pipeline.yaml        (coherent, fee=0)     -> PROCEED  (exit 0)
-#   - mcp_filesystem_git.yaml   (a real seam, fee>0)  -> REFUSE   (exit 1) + a cure
+#   - mcp_filesystem_git.yaml   (a real seam, fee>0)  -> REFUSE   (exit 1) + a cure,
+#     under the explicit disclosure demand --require-fee 0
 set -euo pipefail
 
 BULLA=${BULLA:-bulla}
@@ -36,7 +39,8 @@ set +e
 $BULLA gate --certificate "$D/coherent.json" --registry "$D/log.jsonl"; proceed_rc=$?
 echo
 echo "▸ 5/5  GATE an incoherent deed (a real filesystem↔git convention seam)  ->  expect REFUSE + a cure"
-$BULLA gate --certificate "$D/seam.json" --registry "$D/log.jsonl" --disclose path_separator; refuse_rc=$?
+# --require-fee 0 is the explicit opt-in: demand disclosure (fee=0) before proceeding.
+$BULLA gate --certificate "$D/seam.json" --registry "$D/log.jsonl" --require-fee 0 --disclose path_separator; refuse_rc=$?
 set -e
 
 if [ "$proceed_rc" -ne 0 ] || [ "$refuse_rc" -ne 1 ]; then

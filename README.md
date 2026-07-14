@@ -16,10 +16,45 @@ A *bulla* was the clay envelope a Mesopotamian scribe sealed around a record so 
 pip install bulla
 ```
 
-### 30-second quickstart: compose two compositions
+### 30-second quickstart: mint a receipt, verify it, hand it to a stranger
 
-The fastest way to see what Bulla does — a human-readable report of
-exactly which fields to expose to make a composition safe:
+The trunk of bulla is the **receipt**: one consequential action, made
+accountable — and recomputable by anyone, from the
+[wire spec](spec/action-receipt-v0.2.md) alone:
+
+```bash
+# Mint a receipt for one action (sign it by adding --key after `bulla key gen`)
+bulla receipt create --type github.create_file \
+  --subject repo=acme/site --subject path=docs/x.md \
+  --evidence diff=sha256:1111...:self_asserted \
+  --forum-endpoint https://log.example --forum-root ots:root \
+  --out receipt.json
+
+# Verify: four hashes, the recourse envelope (modality law), grounding,
+# convention conformance — honest about depth, never a lying boolean
+bulla receipt verify receipt.json
+
+# Omission detection: which anchored actions have NO receipt at all,
+# measured against an anchor you did not mint
+bulla coverage --anchor git --receipts releases/
+```
+
+Receipts can carry **conventions** — rules two agents coin at their seam
+(units, quanta, formats), committed inside the content hash so they can be
+neither altered nor silently dropped. Executable conventions are recomputed by
+any verifier; semantic ones are hash-pinned with a named forum. See
+[spec §5](spec/action-receipt-v0.2.md).
+
+The stranger test is executable: `python spec/vectors/independent_check.py`
+reverifies every golden vector with the Python standard library and **zero
+bulla imports** — the spec, not this repo, is the contract.
+
+### The seam diagnostic: compose two compositions
+
+The original diagnostic layer — a human-readable report of exactly which
+fields to expose to make a composition safe (the **coherence fee** is a
+disclosure/omission signal a receipt can carry; see
+[FALSIFICATIONS.md](FALSIFICATIONS.md) for what it is *not*):
 
 ```bash
 # From a checkout of the bulla repo:
@@ -75,9 +110,11 @@ caught because relying parties refuse the unlogged.
 
 Where `bulla compose` *reports* the seam, the **recourse gate** *enforces* a decision on a
 counterparty's signed, logged coherence deed — **PROCEED**, or **REFUSE** with a curable
-refusal that names the cure. It gates on **type signals only**: coherence (`fee = 0`) +
-authenticity + inclusion under a root you trust *independently of the host*. It does **not**
-verify delivery — a coherent liar passes; performance bonding is roadmap.
+refusal that names the cure. It gates on **type signals only**: authenticity + inclusion
+under a root you trust *independently of the host*; the coherence fee is *reported*, and
+gated on only when you opt in (`--require-fee N` — a disclosure demand, not an execution
+predictor). It does **not** verify delivery — a coherent liar passes; performance bonding
+is roadmap.
 
 ```bash
 # From a checkout, after `pip install -e .`:
@@ -125,8 +162,8 @@ bulla proxy --config servers.yaml    # spawn backends, listen on stdio
 ```
 
 The proxy fronts N backend MCP servers as one logical server, namespaces
-their tools as `server__tool`, AND injects five `bulla__*` meta-tools
-the agent itself calls:
+their tools as `server__tool`, AND injects eight `bulla__*` meta-tools
+the agent itself calls — five advisory, three deed:
 
 | Meta-tool | What it returns |
 |---|---|
@@ -135,6 +172,9 @@ the agent itself calls:
 | `bulla__bridge` | Repair advice classified `value` (apply now) vs `schema` (manifest edit required) |
 | `bulla__should_proceed` | Ternary verdict for a pending call: `safe` / `advise` / `refuse` |
 | `bulla__why` | Aristotle stamp + Lean theorem name backing the recommendation |
+| `bulla__deed_emit` | Sign + append the current composition's deed to the registry |
+| `bulla__deed_verify` | Demand a counterparty's deed is logged (inclusion-checked) |
+| `bulla__deed_lookup` | Deeds by composition hash (factual lookup) |
 
 The agent is the consumer. The system prompt at
 [`agents/system_prompt_v1.md`](agents/system_prompt_v1.md) tells it

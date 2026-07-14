@@ -55,7 +55,7 @@ PYTHON=python3.11 ./run_demo.sh
 ```
 
 This pipes a canned JSON-RPC sequence (initialize, tools/list, then
-each of the five `bulla__*` meta-tools) through `bulla proxy` and
+four of the eight `bulla__*` meta-tools) through `bulla proxy` and
 prints the responses. The two backends are minimal Python scripts in
 this directory (`fake_fetch_backend.py`, `fake_memory_backend.py`)
 that respond as MCP servers without needing npx or network.
@@ -76,7 +76,7 @@ This loads captured `tools/list` responses from
 `@modelcontextprotocol/server-filesystem` and `server-github`
 (in `bulla/examples/real_world_audit/manifests/`), runs them
 through `BullaGuard.from_tools_list` (the same auto-discovery the
-live proxy uses against real backends), and dispatches the five
+live proxy uses against real backends), and dispatches four of the
 meta-tools. Expected output: `fee=22, blind_spots=27,
 verdict=refuse` for a `filesystem.write_file` call — 13 schema-level
 obstructions touching that single call. Real conventions on real
@@ -112,7 +112,7 @@ bulla proxy --config servers.yaml --telemetry-out events.jsonl
 ```
 
 The proxy spawns both backends, fronts them as one logical MCP server,
-and injects the five `bulla__*` meta-tools into the aggregated
+and injects all eight `bulla__*` meta-tools into the aggregated
 `tools/list` response. Per-call telemetry streams to `events.jsonl`.
 
 ### C. (Alternative) Zero-config

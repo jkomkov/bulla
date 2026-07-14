@@ -1,0 +1,48 @@
+{
+  "receipt_version": "0.1.0",
+  "kernel_version": "0.43.0",
+  "composition_hash": "03dee8849df4af3aca826569f87160d68c4e1226ab117d30107bdd0b5150b4d6",
+  "diagnostic_hash": "c7834c311f8d22b17d8125be8aca87454bf816b3da24d0c21b5244df935f75d6",
+  "policy_profile": {
+    "name": "witness.default.v1",
+    "max_blind_spots": 0,
+    "max_fee": 0,
+    "max_unknown": -1,
+    "require_bridge": true,
+    "max_unmet_obligations": -1,
+    "max_contradictions": -1,
+    "max_structural_contradictions": -1
+  },
+  "fee": 1,
+  "blind_spots_count": 1,
+  "bridges_required": 1,
+  "unknown_dimensions": 0,
+  "disposition": "refuse_pending_disclosure",
+  "timestamp": "2026-07-13T00:00:00+00:00",
+  "patches": [
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "a",
+      "field": "y",
+      "path": "/observable_schema/y",
+      "dimension": "d",
+      "eliminates": "d",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "b",
+      "field": "z",
+      "path": "/observable_schema/z",
+      "dimension": "d",
+      "eliminates": "d",
+      "expected_fee_delta": 0
+    }
+  ],
+  "active_packs": [],
+  "witness_basis": null,
+  "receipt_hash": "e66570e1fc2950d9deee3ea0125c32eedc0c0da2cafc587efe4144bc8479dcc2",
+  "anchor_ref": null
+}

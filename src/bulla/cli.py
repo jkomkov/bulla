@@ -701,8 +701,10 @@ def _cmd_gate(args: argparse.Namespace) -> None:
         root_ots = p.read_text().strip() if p.exists() else str(args.root_ots)
     signer = _load_signer_or_exit(args.key, getattr(args, "issuer", None)) if getattr(args, "key", None) else None
 
+    # Fee-gating is explicit opt-in (--require-fee N): the fee is a
+    # disclosure/omission signal, not an execution predictor (FALSIFICATIONS.md).
     policy = GatePolicy(
-        max_fee=getattr(args, "require_fee", 0),
+        max_fee=getattr(args, "require_fee", None),
         expected_composition_hash=getattr(args, "composition_hash", None),
     )
     try:  # fail closed: an unreachable registry cannot confirm inclusion
@@ -4299,12 +4301,132 @@ def _render_scan_narrative(
 
 
 def _cmd_receipt(args: argparse.Namespace) -> None:
-    """`bulla receipt` with no subcommand — point at `verify`."""
+    """`bulla receipt` with no subcommand — point at `create` / `verify`."""
     if not getattr(args, "receipt_command", None):
-        print("usage: bulla receipt verify <file.json>")
-        print("  Verify an action / witness / certificate receipt — hashes, the")
-        print("  recourse envelope (modality law), and signature — honest about depth.")
+        print("usage: bulla receipt create --type <act> [--subject k=v ...] --forum-endpoint URL --forum-root REF")
+        print("       bulla receipt verify <file.json>")
+        print("  create: mint an ActionReceipt for one consequential action (sign with --key).")
+        print("  verify: recompute the hashes, the recourse envelope (modality law), the")
+        print("          signature, convention conformance — honest about depth.")
         sys.exit(2)
+
+
+def _parse_kv_value(raw: str):
+    """`k=v` values: JSON scalar when it parses (1250 -> int, true -> bool),
+    else the raw string — so quantum/conformance checks see real types."""
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        return raw
+
+
+def _cmd_receipt_create(args: argparse.Namespace) -> None:
+    """Mint an ActionReceipt from flags — the stranger's ergonomic: one
+    command from act to signed, verifiable receipt, no Python required."""
+    from bulla.action_receipt import build_action_receipt
+    from bulla.envelope import (
+        Authority, Bounds, EnvelopeError, Forum, Recourse, RecourseEnvelope, Remedy,
+    )
+
+    subject: dict = {}
+    if getattr(args, "subject_json", None):
+        subject.update(json.loads(Path(args.subject_json).read_text()))
+    for kv in args.subject or []:
+        if "=" not in kv:
+            print(f"Error: --subject expects k=v, got {kv!r}", file=sys.stderr)
+            sys.exit(2)
+        k, v = kv.split("=", 1)
+        subject[k] = _parse_kv_value(v)
+
+    if args.diagnostic_ref:
+        diagnostic_ref = {"status": "reference", "ref": args.diagnostic_ref}
+    else:
+        diagnostic_ref = {"status": args.diagnostic_status}
+
+    evidence: list[dict] = []
+    for spec_ in args.evidence or []:
+        parts = spec_.split("=", 1)
+        if len(parts) != 2:
+            print(f"Error: --evidence expects name=hash[:grounding], got {spec_!r}", file=sys.stderr)
+            sys.exit(2)
+        name, rest = parts
+        grounding = "self_asserted"
+        h = rest
+        for g in ("self_asserted", "counterparty_signed", "third_party_anchored", "execution_verified"):
+            if rest.endswith(":" + g):
+                h, grounding = rest[: -len(g) - 1], g
+                break
+        evidence.append({"name": name, "hash": h, "grounding": grounding})
+
+    conventions: list[dict] = []
+    for cpath in args.convention or []:
+        conventions.append(json.loads(Path(cpath).read_text()))
+
+    remedies: list[Remedy] = []
+    for rspec in args.remedy or ["recompute:bulla receipt verify:hashes.content"]:
+        bits = rspec.split(":", 2)
+        if len(bits) != 3:
+            print(f"Error: --remedy expects rung:verifier:anchor, got {rspec!r}", file=sys.stderr)
+            sys.exit(2)
+        remedies.append(Remedy(rung=bits[0], verifier=bits[1], anchor=bits[2]))
+
+    anchor_ref: dict = {}
+    if args.anchor:
+        if "=" not in args.anchor:
+            print(f"Error: --anchor expects kind=ref, got {args.anchor!r}", file=sys.stderr)
+            sys.exit(2)
+        kind_, ref_ = args.anchor.split("=", 1)
+        anchor_ref = {"kind": kind_, "ref": ref_}
+
+    try:
+        envelope = RecourseEnvelope(
+            authority=(
+                Authority(principal=args.principal, policy=args.policy or "policy://unstated")
+                if args.principal else None
+            ),
+            bounds=Bounds(scope=args.scope) if args.scope else None,
+            recourse=Recourse(
+                challenge_window=args.challenge_window,
+                forum=Forum(log_endpoint=args.forum_endpoint, trusted_root_ref=args.forum_root),
+                remedies=tuple(remedies),
+            ),
+            retention_class=args.retention,
+            disclosure_class=args.disclosure,
+        )
+    except EnvelopeError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(2)
+
+    from datetime import datetime, timezone
+    timestamp = args.timestamp or datetime.now(timezone.utc).isoformat()
+    producer = {"bulla_version": __version__}
+
+    kwargs = dict(
+        action={"type": args.type, "subject": subject},
+        diagnostic_ref=diagnostic_ref,
+        envelope=envelope,
+        anchor_ref=anchor_ref,
+        evidence_refs=tuple(evidence),
+        conventions=tuple(conventions),
+        timestamp=timestamp,
+        producer=producer,
+    )
+    try:
+        receipt = build_action_receipt(**kwargs)
+        if getattr(args, "key", None):
+            signer = _load_signer_or_exit(args.key, getattr(args, "issuer", None))
+            receipt = build_action_receipt(**kwargs, signature=signer.sign(receipt.content_hash))
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(2)
+
+    out = receipt.to_json()
+    if getattr(args, "out", None):
+        Path(args.out).write_text(out + "\n")
+        signed = "signed" if receipt.signature else "unsigned"
+        print(f"receipt       {args.out} ({signed})  content={receipt.content_hash}")
+    else:
+        print(out)
 
 
 def _cmd_receipt_verify(args: argparse.Namespace) -> None:
@@ -4335,6 +4457,10 @@ def _cmd_receipt_verify(args: argparse.Namespace) -> None:
             "kind": kind, "ok": res.ok, "verified_to": res.verified_to,
             "checks": res.checks, "reasons": list(res.reasons),
         }
+        if res.effective_grounding is not None:
+            payload["effective_grounding"] = res.effective_grounding
+        if res.conventions:
+            payload["conventions"] = res.conventions
     elif kind == "certificate" or "certificate_content_hash" in doc:
         from bulla.certificate import verify_certificate_integrity
 
@@ -4354,14 +4480,22 @@ def _cmd_receipt_verify(args: argparse.Namespace) -> None:
         ok = integ and checks.get("signature", True)
         payload = {"kind": "certificate", "ok": ok, "verified_to": vt, "checks": checks, "reasons": reasons}
     elif kind == "witness_receipt" or ("receipt_version" in doc and "composition_hash" in doc):
-        from bulla.witness import verify_receipt_integrity
+        from bulla.witness import receipt_integrity_report
 
-        ok = verify_receipt_integrity(doc)
+        rep = receipt_integrity_report(doc)
+        ok = rep["ok"]
+        reasons = [] if ok else ["receipt_hash mismatch (neither canon-2 nor legacy canon-1 form)"]
+        if ok and rep["canon"] == 1:
+            reasons.append(
+                "legacy canonicalization (CANON_VERSION 1, spaced) — a format "
+                "change is a version difference, not tampering"
+            )
         payload = {
             "kind": "witness_receipt", "ok": ok,
             "verified_to": "digest" if ok else "none",
             "checks": {"integrity": ok},
-            "reasons": [] if ok else ["receipt_hash mismatch"],
+            "canon_version": rep["canon"],
+            "reasons": reasons,
         }
     else:
         print(f"✗ unknown receipt kind {kind!r} — expected action_receipt / witness_receipt / certificate")
@@ -4374,6 +4508,11 @@ def _cmd_receipt_verify(args: argparse.Namespace) -> None:
         print(f"{mark} {payload['kind']}  verified_to={payload['verified_to']}")
         for name, val in payload["checks"].items():
             print(f"    {'✓' if val else '✗'} {name}")
+        if payload.get("effective_grounding"):
+            print(f"    grounding  {payload['effective_grounding']} (minimum over carried evidence)")
+        for cname, status in (payload.get("conventions") or {}).items():
+            cm = {"conforms": "✓", "violates": "✗", "pinned": "·"}[status]
+            print(f"    {cm} convention {cname}: {status}")
         for r in payload["reasons"]:
             print(f"    · {r}")
     sys.exit(0 if payload["ok"] else 1)
@@ -4406,9 +4545,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         prog="bulla",
         description=(
-            "Witness kernel for agentic compositions. "
-            "Diagnoses blind spots invisible to bilateral verification, "
-            "attests to composition integrity, and recommends bridge annotations."
+            "Recomputable receipts for authorless agent action. "
+            "Trunk: `receipt create` / `receipt verify` (one consequential action, "
+            "made accountable — authority, bounds, recourse, grounding, coined "
+            "conventions) and `coverage` (which anchored actions left NO receipt). "
+            "Diagnostic layer: `compose` / `audit` / `gauge` measure seam blind "
+            "spots and the coherence fee — a disclosure signal a receipt can carry."
         ),
     )
     parser.add_argument(
@@ -4596,9 +4738,83 @@ def main() -> None:
     # ── receipt ───────────────────────────────────────────────────────
     p_receipt = subparsers.add_parser(
         "receipt",
-        help="Verify action receipts — the accountable record a bond slashes against",
+        help=(
+            "Create and verify action receipts — the accountable record of one "
+            "consequential agent action, and the object a bond slashes against"
+        ),
     )
     receipt_sub = p_receipt.add_subparsers(dest="receipt_command")
+    p_receipt_create = receipt_sub.add_parser(
+        "create",
+        help=(
+            "Mint an ActionReceipt for one consequential action: act + verdict slot + "
+            "mandate/remedy envelope (modality law enforced) + evidence grounding + "
+            "coined conventions. Sign with --key; verify with `bulla receipt verify`."
+        ),
+    )
+    p_receipt_create.add_argument(
+        "--type", required=True, metavar="ACT",
+        help="The act, open vocabulary (e.g. github.create_file, package.release).",
+    )
+    p_receipt_create.add_argument(
+        "--subject", action="append", metavar="K=V",
+        help="Subject field (repeatable). Values parse as JSON scalars when they can.",
+    )
+    p_receipt_create.add_argument(
+        "--subject-json", type=Path, default=None, metavar="FILE",
+        help="Subject as a JSON object file (merged before --subject overrides).",
+    )
+    p_receipt_create.add_argument(
+        "--diagnostic-ref", default=None, metavar="SHA",
+        help="The recomputable verdict this act ran under (sets status=reference).",
+    )
+    p_receipt_create.add_argument(
+        "--diagnostic-status", choices=["not_applicable", "deferred"], default="not_applicable",
+        help="Why there is no verdict reference — never bare null (default: not_applicable).",
+    )
+    p_receipt_create.add_argument(
+        "--evidence", action="append", metavar="NAME=HASH[:GROUNDING]",
+        help=(
+            "Evidence ref (repeatable). Grounding ∈ {self_asserted, counterparty_signed, "
+            "third_party_anchored, execution_verified}; default self_asserted — the "
+            "receipt inherits the grounding of its weakest necessary anchor."
+        ),
+    )
+    p_receipt_create.add_argument(
+        "--convention", action="append", metavar="FILE",
+        help=(
+            "A convention entry as JSON (repeatable) — a rule coined at this seam, "
+            "committed inside the content hash. definition_hash is computed if absent."
+        ),
+    )
+    p_receipt_create.add_argument("--principal", default=None, help="authority.principal (the surviving principal).")
+    p_receipt_create.add_argument("--policy", default=None, help="authority.policy (policy@hash reference).")
+    p_receipt_create.add_argument("--scope", default=None, help="bounds.scope for the act.")
+    p_receipt_create.add_argument("--challenge-window", default="P7D", metavar="ISO8601-DURATION")
+    p_receipt_create.add_argument(
+        "--forum-endpoint", required=True, metavar="URL",
+        help="Where a challenge is heard (remedy forum).",
+    )
+    p_receipt_create.add_argument(
+        "--forum-root", required=True, metavar="REF",
+        help="The root reference YOU pin — never the host's served root (Pin-the-Root).",
+    )
+    p_receipt_create.add_argument(
+        "--remedy", action="append", metavar="RUNG:VERIFIER:ANCHOR",
+        help=(
+            "A remedy (repeatable): rung ∈ {recompute,challenge,cure,revert,slash,escalate}; "
+            "verifier and anchor are required (modality law). "
+            "Default: 'recompute:bulla receipt verify:hashes.content'."
+        ),
+    )
+    p_receipt_create.add_argument("--retention", choices=["authority-permanent", "operational", "personal-expiring"], default="operational")
+    p_receipt_create.add_argument("--disclosure", choices=["public", "party", "auditor"], default=None)
+    p_receipt_create.add_argument("--anchor", default=None, metavar="KIND=REF", help="anchor_ref, e.g. git=commit:abc123.")
+    p_receipt_create.add_argument("--key", type=Path, default=None, metavar="FILE", help="ed25519 key (bulla key gen) — signs content_hash.")
+    p_receipt_create.add_argument("--issuer", default=None, metavar="URI", help="External issuer URI (default: the key's did:key).")
+    p_receipt_create.add_argument("--timestamp", default=None, help="ISO-8601 (default: now, UTC).")
+    p_receipt_create.add_argument("--out", type=Path, default=None, metavar="FILE", help="Write here (default: stdout).")
+    p_receipt_create.set_defaults(func=_cmd_receipt_create)
     p_receipt_verify = receipt_sub.add_parser(
         "verify",
         help=(
@@ -4646,15 +4862,16 @@ def main() -> None:
     p_gate = subparsers.add_parser(
         "gate",
         help=(
-            "Recourse gate: PROCEED or REFUSE on a counterparty's deed, enforcing "
-            "coherence_fee=0 + inclusion under a root you trust independently. Exit 0 = "
+            "Recourse gate: PROCEED or REFUSE on a counterparty's deed — inclusion "
+            "under a root you trust independently, authenticity, integrity. Exit 0 = "
             "proceed, 1 = refuse (with a contestable refusal certificate). Where `verify` "
-            "reports the checks, `gate` enforces the decision."
+            "reports the checks, `gate` enforces the decision. The coherence fee is "
+            "reported, never blocked on, unless you opt in with --require-fee."
         ),
     )
     p_gate.add_argument(
         "--certificate", type=Path, default=None, metavar="FILE",
-        help="The counterparty's full signed certificate (required to prove fee=0).",
+        help="The counterparty's full signed certificate (carries the fee; required for --require-fee).",
     )
     p_gate.add_argument(
         "--deed", type=Path, default=None, metavar="FILE",
@@ -4677,8 +4894,12 @@ def main() -> None:
         help="Demand the deed be for THIS composition (fail closed otherwise).",
     )
     p_gate.add_argument(
-        "--require-fee", type=int, default=0, metavar="N",
-        help="Maximum coherence_fee to accept (default 0).",
+        "--require-fee", type=int, default=None, metavar="N",
+        help=(
+            "OPT IN to fee-gating: refuse when the certified coherence_fee exceeds N. "
+            "Default: report the fee, do not gate on it (a disclosure signal, not an "
+            "execution predictor — see FALSIFICATIONS.md)."
+        ),
     )
     p_gate.add_argument(
         "--key", type=Path, default=None, metavar="FILE",

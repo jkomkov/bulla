@@ -26,8 +26,7 @@ tests for correctness of the SAE-feature → ToolSpec lifting under
 designed obstruction. If either fails, the SAE adapter is broken
 before any real-data spend.
 
-Per the G23 plan
-(``/Users/jkomkov/.claude/plans/review-where-we-are-ancient-peach.md``):
+Per the G23 plan:
     "Build the known-non-vanishing positive control before the
     known-vanishing negative control. Negative controls catch code
     bugs; positive controls catch modeling errors. Modeling errors

@@ -5,17 +5,20 @@ a counterparty's coherence deed. This module lets it *act* on the check: refuse 
 proceed on a transient counterparty's unverifiable deed, and emit a contestable
 ``RefusalCertificate`` the counterparty can CURE. It is the OBSERVE -> ENFORCE move.
 
-``evaluate_gate`` is the single decision core. The proxy's advisory ``bulla__deed_verify``
-calls it with ``ADVISORY_GATE_POLICY`` (the shipped behaviour: gate on inclusion +
-root-trust + authenticity, *report* fee but do not block on it); the enforcing proxy
-interceptor and ``bulla gate`` call it with ``DEFAULT_GATE_POLICY`` (additionally require
-a full signed certificate proving ``fee == 0``). Only the fee arms differ, so there is
-one decision implementation, not two that can drift.
+``evaluate_gate`` is the single decision core. Every default path — the proxy's
+advisory ``bulla__deed_verify``, the enforcing interceptor, and ``bulla gate`` — gates
+on inclusion + root-trust + authenticity and *reports* the fee without blocking on it
+(``DEFAULT_GATE_POLICY`` / ``ADVISORY_GATE_POLICY``, which are equivalent). Fee-gating
+is explicit opt-in (``STRICT_GATE_POLICY`` or ``--require-fee``): the fee is a
+disclosure demand, not an execution predictor (see ``bulla/FALSIFICATIONS.md``). Only
+the fee arms differ across policies, so there is one decision implementation, not two
+that can drift.
 
 What the gate gates on — TYPE signals only:
-  * **coherence** — the deed's certificate must certify ``fee == 0`` (no undisclosed
-    cross-owner convention). Trustworthy only from an integrity-verified certificate,
-    because a deed *record* (a registry leaf) does not carry the fee.
+  * **coherence (opt-in)** — under a fee-gating policy, the deed's certificate must
+    certify ``fee <= max_fee`` (no undisclosed cross-owner convention). Trustworthy
+    only from an integrity-verified certificate, because a deed *record* (a registry
+    leaf) does not carry the fee.
   * **authenticity** — the certificate/deed is signed by the issuer it claims.
   * **inclusion under an independently-trusted root** — the deed is in a log whose root
     you pinned yourself (own-log / ``trusted_root`` / OTS-anchored), *never* the host's
@@ -32,10 +35,10 @@ operator is refused, not trusted. The test where the host is adversarial IS the 
 from __future__ import annotations
 
 import hashlib
-import json
 from dataclasses import dataclass
 from typing import Any
 
+from bulla._canonical import canonical_json
 from bulla.model import Disposition
 
 # ── deficiency taxonomy — the named reason a deed fails the gate, and the seed of a cure
@@ -273,7 +276,7 @@ def evaluate_gate(
 def _content_hash(body: dict) -> str:
     """SHA-256 over canonical JSON — the same discipline as the certificate's content
     hash (`certificate._compute_certificate_content_hash`), applied to a refusal."""
-    payload = json.dumps(body, sort_keys=True, separators=(",", ":"))
+    payload = canonical_json(body)
     return f"sha256:{hashlib.sha256(payload.encode('utf-8')).hexdigest()}"
 
 

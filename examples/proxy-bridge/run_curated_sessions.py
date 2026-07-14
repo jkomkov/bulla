@@ -64,7 +64,7 @@ def run_curated_sessions() -> dict[str, Any]:
         )
 
     report = {
-        "manifest_dir": str(MANIFESTS_DIR),
+        "manifest_dir": "examples/real_world_audit/manifests",  # repo-relative: the report is checked in
         "sessions": sessions,
     }
     out_path = BASE_DIR / "curated_session_report.json"

@@ -16,6 +16,8 @@ from datetime import datetime, timezone
 from enum import Enum
 from fractions import Fraction
 
+from bulla._canonical import CANON_VERSION, canonical_json
+
 
 @dataclass(frozen=True)
 class ToolSpec:
@@ -839,6 +841,10 @@ class WitnessReceipt:
     file (Phase 6 deliverable). When all active packs carry only ``open``
     registry licenses with no attribution requirement, this is None.
     """
+    conventions: tuple[dict, ...] | None = None
+    """Rules coined at the measured seam (spec v0.2 §5) — the same entry shape
+    as ``ActionReceipt.conventions``, validated by the action-receipt layer.
+    Conditional-included in the receipt hash (None = absent = pre-v0.2)."""
 
     def _hash_input(self) -> dict:
         """Single source of truth for the receipt's hashable content.
@@ -853,11 +859,17 @@ class WitnessReceipt:
         ``boundary_obligations``, ``contradictions``,
         ``unmet_obligations``, ``structural_contradictions``,
         ``contradiction_score``, and ``pack_attributions`` are included
-        ONLY when non-None/non-zero to preserve backward compatibility:
-        pre-existing receipts must produce the same hash when verified
-        by new code.
+        ONLY when non-None/non-zero, so absent fields never perturb the
+        hash across versions.
+
+        ``canon_version`` is stamped unconditionally (CANON_VERSION 2):
+        v2 receipts declare which serialization rule minted their hash.
+        Pre-v2 receipts (no ``canon_version``, spaced serialization)
+        still verify via the legacy fallback in
+        ``witness.verify_receipt_integrity``.
         """
         d: dict = {
+            "canon_version": CANON_VERSION,
             "receipt_version": self.receipt_version,
             "kernel_version": self.kernel_version,
             "composition_hash": self.composition_hash,
@@ -895,6 +907,8 @@ class WitnessReceipt:
             d["contradiction_score"] = self.contradiction_score
         if self.pack_attributions is not None:
             d["pack_attributions"] = list(self.pack_attributions)
+        if self.conventions is not None:
+            d["conventions"] = [dict(c) for c in self.conventions]
         return d
 
     @property
@@ -908,12 +922,18 @@ class WitnessReceipt:
 
         Cached after first computation. Safe because the dataclass is
         frozen — the hash input cannot change.
+
+        CANON_VERSION 2: hashed over ``bulla._canonical.canonical_json``
+        (compact), the same rule as the deed layer. The hash input stamps
+        ``canon_version`` so a verifier knows which rule to run;
+        ``witness.verify_receipt_integrity`` accepts the legacy spaced
+        form for pre-v2 receipts.
         """
         try:
             return object.__getattribute__(self, "_cached_receipt_hash")
         except AttributeError:
             h = hashlib.sha256(
-                json.dumps(self._hash_input(), sort_keys=True).encode()
+                canonical_json(self._hash_input()).encode()
             ).hexdigest()
             object.__setattr__(self, "_cached_receipt_hash", h)
             return h

@@ -87,7 +87,7 @@ def filesystem_read_file_returns(filename: str) -> str:
     returns absolute paths within that sandbox. We mirror that here
     so the demo is honest about the convention.
     """
-    return f"/Users/jkomkov/projects/myrepo/{filename}"
+    return f"/home/user/projects/myrepo/{filename}"
 
 
 # ── 2. The demo flow ────────────────────────────────────────────────
@@ -171,7 +171,7 @@ def run_demo(*, with_fix: bool = True) -> int:
     # real agent loop, the env var is set once at deploy time, or
     # the user registers a project-specific translator.
     import os
-    os.environ["BULLA_REPO_ROOT"] = "/Users/jkomkov/projects/myrepo"
+    os.environ["BULLA_REPO_ROOT"] = "/home/user/projects/myrepo"
 
     print(f"  bulla.translate('path_convention', value={fs_path!r},")
     print(f"                  from_convention='filesystem-absolute',")

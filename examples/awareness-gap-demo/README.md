@@ -14,7 +14,7 @@ tools that take a `path: string` field.
 
 The agent calls `filesystem.read_file(name="README.md")`. The server
 returns the file contents and the absolute path
-`/Users/jkomkov/projects/myrepo/README.md`. The agent passes that
+`/home/user/projects/myrepo/README.md`. The agent passes that
 path verbatim to `github.create_file(path=..., content=...)`. The
 GitHub API rejects the request with a path-validation error, because
 GitHub's `create_file` expects a repository-relative path like
@@ -78,11 +78,11 @@ trail.
 
 ```
 import os
-os.environ["BULLA_REPO_ROOT"] = "/Users/jkomkov/projects/myrepo"
+os.environ["BULLA_REPO_ROOT"] = "/home/user/projects/myrepo"
 
 bulla.translate(
     "path_convention",
-    value="/Users/jkomkov/projects/myrepo/README.md",
+    value="/home/user/projects/myrepo/README.md",
     from_convention="filesystem-absolute",
     to_convention="repo-relative",
 )

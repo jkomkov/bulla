@@ -1,5 +1,10 @@
 # ActionReceipt v0.1 — wire spec
 
+**Status:** superseded for producers by `action-receipt-v0.2.md`
+(2026-07-13); retained in full — a v0.1 receipt recomputes with its own
+`schema_version` forever, and this document remains its verification
+reference.
+
 A receipt records **one consequential agent action**: what was done, under whose
 authority, within what bounds, with what recomputable verdict, and how it is
 contested. This document is sufficient to verify a receipt **without the bulla

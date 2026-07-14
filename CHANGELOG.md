@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.43.0 — 2026-07-13
+
+**The v0.2 receipt: one canonicalization rule, and the convention field.** The trunk story is now the minimal recomputable receipt a stranger verifies from the spec directory and a Python stdlib — no bulla install, no server, no trust in this repo's prose.
+
+### Erratum (0.42.0)
+The 0.42.0 entry below describes "One canonicalization rule (`CANON_VERSION` 1 → 2)" — including `bulla._canonical.canonical_json`, the legacy-acceptance fallback, `tests/test_canonicalization.py`, and a `WITNESS-CONTRACT.md` canonicalization section — as shipped. **It had not shipped**: 0.42.0's code still hashed the measurement layer with spaced separators and contained none of those artifacts. Parts of the same entry's CI paragraph (the `[test]` extra, the 90% coverage floor, the `ruff`/`mypy` lint job, full-SHA action pins, the publish-time test gate) also did not match the shipped tree. The canonicalization work ships **here**, in 0.43.0, with the publish-time test gate; the remaining CI items are open work, not shipped features. The changelog is a record, so the false entry is corrected rather than rewritten.
+
+### Canonicalization (`CANON_VERSION` 2 — actually shipped)
+- `bulla._canonical.canonical_json` (compact, key-sorted; RFC 8785-compatible with two documented deviations) single-sourced across the action-receipt, certificate/deed, envelope, refusal, and witness layers.
+- Witness `receipt_hash` moves spaced → compact and stamps `canon_version: 2` inside the hash. `verify_receipt_integrity` accepts the legacy spaced form; new `receipt_integrity_report` names which form matched — a format change is a version difference, not tampering.
+- Deed-layer and action-receipt hashes byte-unchanged (that layer was always compact); gated by `tests/test_canonicalization.py` (byte-exact vectors both layers, legacy path, releases corpus).
+- Normative "Canonicalization" section added to `WITNESS-CONTRACT.md`; `Composition.canonical_hash()` / `Diagnostic.content_hash()` stay on their original serialization as pinned input identities (a dated CANON_VERSION-3 decision).
+
+### ActionReceipt v0.2 (`spec/action-receipt-v0.2.md`, normative)
+- **`conventions`** — rules two parties coin at the seam, committed inside the content hash (neither mutable nor strippable without breaking it). `kind` is the decidability boundary: `executable` (the closed `jsonschema+quantum/1` form; conformance recomputed by any verifier against `action.subject`) vs `semantic` (opaque, hash-pinned, forum required under the envelope's Pin-the-Root law; reported `pinned`, never "checked"). Per ADR-001 the global convention graph is emergent, never an operated product. Also available on `WitnessReceipt` (conditional-include, backward-compatible).
+- **Evidence grounding classes** (`self_asserted` / `counterparty_signed` / `third_party_anchored` / `execution_verified`), required per evidence ref in v0.2; verifiers surface the **minimum over necessary evidence** — a digest-valid receipt on self-asserted evidence is attested testimony, nothing more.
+- Any-log verification and standing recomputability written in as normative principles (ADR-001); tolerance semantics (`verification_semantics`) specified as a claim-level carrier that changes nothing about byte-equality at the receipt layer.
+- v0.1 receipts verify forever with their own `schema_version`; the golden vectors gate this.
+
+### Receipt-first defaults (NOT yet the diet)
+- README and CLI re-led on the receipt: create → verify → coverage. The coherence fee is one optional diagnostic a receipt can carry, not the trunk story. **Honest label:** this release changes defaults and framing only — the fee/diagnostic mass (`coboundary`, `guard`, geometry, …) still ships in the core install, which is *larger* than 0.42.0, not smaller. The actual diet (extraction behind a `bulla[fee]`-style extra so the default install IS the receipt) remains owed, dated open (2026-07-13).
+- `bulla receipt create` — the missing ergonomic: mint a signed-or-unsigned ActionReceipt from flags, no Python required.
+- `bulla gate --require-fee` now defaults to **not** gating on fee (report, don't block) — removing the last default that treated the fee as an execution predictor (FALSIFICATIONS.md); `--require-fee N` remains the explicit opt-in.
+
+### Vectors & the stranger test
+- `spec/vectors/` adds a CANON-2 WitnessReceipt, a convention-carrying ActionReceipt (executable + semantic), and a legacy-v1 witness vector that must verify via the fallback.
+- `spec/vectors/independent_check.py` extended to the new vectors — witness hashes (both canon forms), convention pins, and executable conformance recomputed with zero bulla imports.
+- Release ceremony: `publish.yml` now runs the full suite on the exact tagged commit and mints the release receipt **at** release time (signed when a release key is configured, OTS-anchored best-effort) — closing the retroactive-receipt seam recorded in `releases/reconstruct.py`. Scope honesty: a receipt bulla mints, signs, and verifies for its own release is dogfooding (the operator vouching for the operator); the independence claim rests on `independent_check.py`, not on this receipt.
+
 ## 0.42.0 — 2026-07-08
 
 **The integrity-of-the-integrity-tool release, and the relicense to Apache-2.0.** A world-class-systems-engineer audit found the craft strong but flagged a cluster of "the integrity tool has integrity gaps" defects — individually cheap, collectively credibility-defining. This release closes them and moves the project to a license fit for neutral infrastructure.

@@ -1,13 +1,43 @@
 {
   "blank-remedy-anchor.json": {
+    "kind": "action_receipt",
+    "ok": false,
+    "verified_to": "none"
+  },
+  "convention-receipt.json": {
+    "conventions": {
+      "amount-in-usd-cents": "conforms",
+      "refund-honored-in-full": "pinned"
+    },
+    "effective_grounding": "self_asserted",
+    "kind": "action_receipt",
+    "ok": true,
+    "verified_to": "digest"
+  },
+  "tampered-convention.json": {
+    "kind": "action_receipt",
     "ok": false,
     "verified_to": "none"
   },
   "tampered-evidence.json": {
+    "kind": "action_receipt",
     "ok": false,
     "verified_to": "none"
   },
   "valid-release.json": {
+    "kind": "action_receipt",
+    "ok": true,
+    "verified_to": "digest"
+  },
+  "witness-canon2.json": {
+    "canon": 2,
+    "kind": "witness_receipt",
+    "ok": true,
+    "verified_to": "digest"
+  },
+  "witness-legacy-v1.json": {
+    "canon": 1,
+    "kind": "witness_receipt",
     "ok": true,
     "verified_to": "digest"
   }

@@ -12,9 +12,24 @@ Normative reference for the witness kernel. Deviation between code and this spec
 
 Three hashes, three concerns: what was proposed, what was measured, what was witnessed.
 
+## Canonicalization (normative — `CANON_VERSION` 2)
+
+`receipt_hash` is SHA-256 over the **canonical JSON** of the hash input:
+
+```
+canonical(x)   = json.dumps(x, sort_keys=True, separators=(",", ":"))   # UTF-8, compact
+receipt_hash   = hex(sha256(canonical(hash_input)))                     # bare hex, no prefix (historical)
+```
+
+This is the same rule as the deed and action-receipt layers, single-sourced in `bulla._canonical.canonical_json`; the RFC 8785 relationship and its two deliberate deviations are specified in `spec/action-receipt-v0.2.md` §1. The hash input stamps `canon_version: 2`.
+
+**Legacy acceptance.** Before CANON_VERSION 2 this layer hashed the *spaced* form `json.dumps(x, sort_keys=True)` and stamped no `canon_version`. `verify_receipt_integrity` tries the canonical form first, then the spaced form; `receipt_integrity_report` names which matched. A format change is a version difference, not tampering — every pre-v2 receipt still verifies.
+
+`Composition.canonical_hash()` and `Diagnostic.content_hash()` are *input identities* pinned inside receipts, deeds, and the golden seed certificates; they retain their original (spaced) serialization deliberately — changing them would re-key every registry leaf and parent-hash chain for zero verification benefit, since a verifier compares these stored values rather than recomputing them from a serialized receipt. Migrating them is a CANON_VERSION-3 decision, dated open (2026-07-13).
+
 ## Hash Coverage
 
-`receipt_hash` includes: `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `active_packs`, `witness_basis`, and conditionally `parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`, `contradictions`, `structural_contradictions` (each only when not None), `unmet_obligations` (only when > 0), and `contradiction_score` (only when > 0).
+`receipt_hash` includes: `canon_version` (stamped from `CANON_VERSION`), `receipt_version`, `kernel_version`, `composition_hash`, `diagnostic_hash`, `policy_profile`, `fee`, `blind_spots_count`, `bridges_required`, `unknown_dimensions`, `disposition`, `timestamp`, `patches`, `active_packs`, `witness_basis`, and conditionally `parent_receipt_hashes`, `inline_dimensions`, `boundary_obligations`, `contradictions`, `structural_contradictions`, `conventions` (each only when not None), `unmet_obligations` (only when > 0), and `contradiction_score` (only when > 0).
 
 `receipt_hash` excludes: `anchor_ref` (external publication proof, added after witness event).
 

@@ -1,0 +1,69 @@
+{
+  "canon_version": 2,
+  "receipt_version": "0.1.0",
+  "kernel_version": "0.43.0",
+  "composition_hash": "cd0a727ece4e360aed988d9b6558f7ba7452e165b911c87b9603e08e8f272a5a",
+  "diagnostic_hash": "67fc5616f2ebc2d9886466d56bbc9d6c1eb671d693a1edb15d1dda646b2fae64",
+  "policy_profile": {
+    "name": "witness.default.v1",
+    "max_blind_spots": 0,
+    "max_fee": 0,
+    "max_unknown": -1,
+    "require_bridge": true,
+    "max_unmet_obligations": -1,
+    "max_contradictions": -1,
+    "max_structural_contradictions": -1
+  },
+  "fee": 2,
+  "blind_spots_count": 2,
+  "bridges_required": 2,
+  "unknown_dimensions": 0,
+  "disposition": "refuse_pending_disclosure",
+  "timestamp": "2026-07-13T16:51:23.034022+00:00",
+  "patches": [
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "fetch",
+      "field": "encoding",
+      "path": "/observable_schema/encoding",
+      "dimension": "encoding_match",
+      "eliminates": "encoding_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "memory",
+      "field": "encoding",
+      "path": "/observable_schema/encoding",
+      "dimension": "encoding_match",
+      "eliminates": "encoding_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "fetch",
+      "field": "content_format",
+      "path": "/observable_schema/content_format",
+      "dimension": "format_match",
+      "eliminates": "format_match",
+      "expected_fee_delta": 0
+    },
+    {
+      "bulla_patch_version": "0.1.0",
+      "action": "expose",
+      "target_tool": "memory",
+      "field": "observation_format",
+      "path": "/observable_schema/observation_format",
+      "dimension": "format_match",
+      "eliminates": "format_match",
+      "expected_fee_delta": 0
+    }
+  ],
+  "active_packs": [],
+  "witness_basis": null,
+  "receipt_hash": "3f944b20999c2d5c7231764aeaf6672443050cf0f2606e6b7a5dd3a7d2198f58",
+  "anchor_ref": null
+}

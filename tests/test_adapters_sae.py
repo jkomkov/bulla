@@ -12,7 +12,6 @@ real-data spend:
        must recover k EXACTLY (±0 tolerance).
 
 Per the G23 plan
-(``/Users/jkomkov/.claude/plans/review-where-we-are-ancient-peach.md``)
 gate criteria for Stage A → Stage B PROMOTE:
     Gate 2: same-model identity → H¹ = 0 (known-vanishing) on ≥ 95% of cases
     Gate 3: known-non-vanishing toy → recovers exact H¹ = k on

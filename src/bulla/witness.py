@@ -13,10 +13,10 @@ beyond the disposition thresholds.
 from __future__ import annotations
 
 import hashlib
-import json
 from datetime import datetime, timezone
 
 from bulla import __version__
+from bulla._canonical import canonical_json, legacy_json_v1
 from bulla.model import (
     BoundaryObligation,
     BridgePatch,
@@ -147,6 +147,7 @@ def witness(
     contradiction_count: int = 0,
     structural_contradictions: tuple[SchemaContradiction, ...] | None = None,
     contradiction_score: int = 0,
+    conventions: tuple[dict, ...] | None = None,
 ) -> WitnessReceipt:
     """Produce a WitnessReceipt from a Diagnostic and Composition.
 
@@ -171,6 +172,13 @@ def witness(
         raise ValueError(
             "Provide parent_receipt_hash or parent_receipt_hashes, not both"
         )
+
+    if conventions is not None:
+        # Same entry law as ActionReceipt.conventions — a coined rule is only
+        # auditable if its shape and pin validate before it is hashed.
+        from bulla.action_receipt import _validate_convention
+        for c in conventions:
+            _validate_convention(c)
 
     resolved_parents: tuple[str, ...] | None = parent_receipt_hashes
     if parent_receipt_hash is not None:
@@ -219,6 +227,7 @@ def witness(
         unmet_obligations=unmet_obligations,
         structural_contradictions=structural_contradictions,
         contradiction_score=contradiction_score,
+        conventions=conventions,
     )
 
 
@@ -272,27 +281,46 @@ def verify_receipt_consistency(
 _HASH_EXCLUDED_KEYS = frozenset({"receipt_hash", "anchor_ref"})
 
 
+def receipt_integrity_report(receipt_dict: dict) -> dict:
+    """Tamper detection with the canon form named: recompute the receipt hash
+    from a serialized dict and report **which** canonicalization rule matched.
+
+    Returns ``{"ok": bool, "canon": 2 | 1 | None}``:
+
+      * ``canon: 2`` — the hash recomputes under ``canonical_json``
+        (CANON_VERSION 2, compact — the only form new receipts mint).
+      * ``canon: 1`` — the hash recomputes under the legacy spaced form
+        (pre-v2 measurement layer). A format change is a **version
+        difference, not tampering** — the receipt is intact.
+      * ``canon: None`` — neither form matches: missing hash or tampered.
+
+    The contract: ``receipt_hash`` covers every field in ``to_dict()``
+    except ``receipt_hash`` itself and ``anchor_ref``. The hash input is
+    reconstructed by excluding those two keys, so it survives future
+    field additions without code changes.
+    """
+    claimed = receipt_dict.get("receipt_hash")
+    if claimed is None:
+        return {"ok": False, "canon": None}
+
+    obj = {k: v for k, v in receipt_dict.items()
+           if k not in _HASH_EXCLUDED_KEYS}
+    if hashlib.sha256(canonical_json(obj).encode()).hexdigest() == claimed:
+        return {"ok": True, "canon": 2}
+    if hashlib.sha256(legacy_json_v1(obj).encode()).hexdigest() == claimed:
+        return {"ok": True, "canon": 1}
+    return {"ok": False, "canon": None}
+
+
 def verify_receipt_integrity(receipt_dict: dict) -> bool:
     """Tamper detection: recompute receipt hash from a serialized dict.
 
     Self-contained — requires only the dict (e.g. from JSON or an MCP
-    response), not the kernel or any original objects.
-
-    The contract: ``receipt_hash`` covers every field in ``to_dict()``
-    except ``receipt_hash`` itself and ``anchor_ref``. This function
-    reconstructs the hash input by excluding those two keys, so it
-    survives future field additions without code changes.
+    response), not the kernel or any original objects. Accepts both the
+    CANON_VERSION-2 (compact) and legacy v1 (spaced) forms — see
+    :func:`receipt_integrity_report` for which form matched.
 
     Verification requires the **serialized dict** produced by
     ``WitnessReceipt.to_dict()``, which includes the timestamp.
     """
-    claimed = receipt_dict.get("receipt_hash")
-    if claimed is None:
-        return False
-
-    obj = {k: v for k, v in receipt_dict.items()
-           if k not in _HASH_EXCLUDED_KEYS}
-    computed = hashlib.sha256(
-        json.dumps(obj, sort_keys=True).encode()
-    ).hexdigest()
-    return computed == claimed
+    return receipt_integrity_report(receipt_dict)["ok"]

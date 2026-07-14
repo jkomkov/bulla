@@ -32,8 +32,16 @@ def test_independent_verifier_reproduces_bulla_verdicts():
     assert expected, "no vectors"
     for name, want in expected.items():
         doc = json.loads((_VECTORS / name).read_text())
-        ok, _verified_to, reasons = ind.verify(doc)
-        assert ok == want["ok"], f"{name}: independent ok={ok} != expected {want['ok']} ({reasons})"
+        if want.get("kind") == "witness_receipt":
+            got = ind.verify_witness_receipt(doc)
+        else:
+            got = ind.verify_action_receipt(doc)
+        for key, val in want.items():
+            if key == "kind":
+                continue
+            assert got.get(key) == val, (
+                f"{name}: independent {key}={got.get(key)!r} != expected {val!r} ({got['reasons']})"
+            )
 
 
 def test_spec_hashing_equals_implementation():
@@ -42,13 +50,14 @@ def test_spec_hashing_equals_implementation():
     ind = _load_independent()
     from bulla.action_receipt import ActionReceipt
 
-    doc = json.loads((_VECTORS / "valid-release.json").read_text())
-    r = ActionReceipt.from_dict(doc)
-    c = ind.content_hash(doc)
-    assert c == r.content_hash
-    assert ind.attestation_hash(doc, c) == r.attestation_hash
-    assert ind.log_leaf(r.attestation_hash) == r.log_leaf
-    assert ind.event_hash(c, doc["timestamp"]) == r.event_hash
+    for vector in ("valid-release.json", "convention-receipt.json"):
+        doc = json.loads((_VECTORS / vector).read_text())
+        r = ActionReceipt.from_dict(doc)
+        c = ind.content_hash(doc)
+        assert c == r.content_hash, vector
+        assert ind.attestation_hash(doc, c) == r.attestation_hash, vector
+        assert ind.log_leaf(r.attestation_hash) == r.log_leaf, vector
+        assert ind.event_hash(c, doc["timestamp"]) == r.event_hash, vector
 
 
 def test_receipts_validate_against_json_schema():

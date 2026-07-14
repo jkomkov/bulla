@@ -63,7 +63,7 @@ def _receipt(**over) -> ActionReceipt:
         diagnostic_ref={"status": "reference", "ref": "sha256:witness"},
         envelope=_envelope(),
         anchor_ref={"kind": "git", "ref": "commit:abc"},
-        evidence_refs=({"name": "diff", "hash": "sha256:1111"},),
+        evidence_refs=({"name": "diff", "hash": "sha256:1111", "grounding": "self_asserted"},),
         timestamp="2026-07-04T00:00:00+00:00",
         producer={"bulla_version": "0.41.0"},
     )
@@ -228,6 +228,162 @@ def test_tool_call_receipt_shape():
     d = r.to_dict()
     assert d["action"]["type"] == "github.create_file"
     assert verify_receipt(d).ok
+
+
+# ── conventions: predicate invention, auditable (spec v0.2 §5) ──────────────
+
+EXEC_CONVENTION = {
+    "name": "amount-in-usd-cents",
+    "scope": "seam:caller->payments.charge",
+    "kind": "executable",
+    "definition": {
+        "form": "jsonschema+quantum/1",
+        "schema": {
+            "type": "object",
+            "required": ["amount", "currency"],
+            "properties": {
+                "amount": {"type": "integer", "minimum": 0},
+                "currency": {"const": "USD"},
+            },
+        },
+        "quantum": {"amount": {"unit": "USD_cents", "multipleOf": 1}},
+    },
+}
+
+SEMANTIC_CONVENTION = {
+    "name": "gdpr-erasure-honored",
+    "scope": "seam:caller->crm.delete_record",
+    "kind": "semantic",
+    "definition": "Erasure is complete when no primary or derived record remains.",
+    "forum": {"log_endpoint": "https://log.example", "trusted_root_ref": "ots:root"},
+}
+
+
+def _charge_receipt(subject: dict, conventions=(EXEC_CONVENTION,)) -> ActionReceipt:
+    return build_tool_call_receipt(
+        tool="payments.charge",
+        call_subject=subject,
+        diagnostic_ref={"status": "reference", "ref": "sha256:witness"},
+        envelope=_envelope(),
+        conventions=conventions,
+        timestamp="2026-07-13T00:00:00+00:00",
+    )
+
+
+def test_convention_conforming_act_surfaced():
+    d = _charge_receipt({"amount": 1250, "currency": "USD"}).to_dict()
+    # the builder computed the pin
+    assert d["conventions"][0]["definition_hash"].startswith("sha256:")
+    v = verify_receipt(d)
+    assert v.ok
+    assert v.conventions == {"amount-in-usd-cents": "conforms"}
+
+
+def test_convention_violating_act_surfaced_not_gating():
+    """A dollars-float act against a cents-integer convention: the record's
+    integrity holds (ok), the act's non-conformance is surfaced."""
+    d = _charge_receipt({"amount": 12.50, "currency": "USD"}).to_dict()
+    v = verify_receipt(d)
+    assert v.ok  # the record of a non-conforming act is still a valid record
+    assert v.conventions == {"amount-in-usd-cents": "violates"}
+    assert any("does not conform" in r for r in v.reasons)
+
+
+def test_semantic_convention_pinned_and_forum_required():
+    d = _charge_receipt({"amount": 1, "currency": "USD"},
+                        conventions=(SEMANTIC_CONVENTION,)).to_dict()
+    v = verify_receipt(d)
+    assert v.ok and v.conventions == {"gdpr-erasure-honored": "pinned"}
+    bad = dict(SEMANTIC_CONVENTION)
+    bad.pop("forum")
+    with pytest.raises(ActionReceiptError, match="forum"):
+        _charge_receipt({"amount": 1, "currency": "USD"}, conventions=(bad,))
+
+
+def test_forge_mutate_convention_fails_digest():
+    """THE forgery test: a coined rule lives inside the content hash, so an
+    adversary cannot relax the convention after the fact."""
+    from bulla.action_receipt import convention_definition_hash
+    d = _charge_receipt({"amount": 1250, "currency": "USD"}).to_dict()
+    d["conventions"][0]["definition"]["quantum"]["amount"]["multipleOf"] = 100
+    # the adversary keeps the entry internally consistent (pin recomputed)...
+    d["conventions"][0]["definition_hash"] = convention_definition_hash(
+        d["conventions"][0]["definition"]
+    )
+    # ...but the content hash was minted over the ORIGINAL convention.
+    v = verify_receipt(d)
+    assert not v.ok and not v.checks["hash_content"]
+
+
+def test_forge_strip_conventions_fails_digest():
+    d = _charge_receipt({"amount": 1250, "currency": "USD"}).to_dict()
+    d["conventions"] = []
+    v = verify_receipt(d)
+    assert not v.ok and not v.checks["hash_content"]
+
+
+def test_convention_definition_hash_mismatch_refused():
+    c = dict(EXEC_CONVENTION)
+    c["definition_hash"] = "sha256:" + "0" * 64
+    with pytest.raises(ActionReceiptError, match="definition_hash"):
+        _receipt(conventions=(c,))
+
+
+def test_executable_convention_unknown_keyword_fails_closed():
+    c = {
+        "name": "x", "scope": "s", "kind": "executable",
+        "definition": {
+            "form": "jsonschema+quantum/1",
+            "schema": {"type": "object", "properties": {"a": {"format": "uri"}}},
+        },
+    }
+    with pytest.raises(ActionReceiptError, match="fail closed"):
+        _receipt(conventions=(c,))
+
+
+def test_effective_grounding_is_min_over_evidence():
+    r = _receipt(evidence_refs=(
+        {"name": "log", "hash": "sha256:aa", "grounding": "execution_verified"},
+        {"name": "note", "hash": "sha256:bb", "grounding": "self_asserted"},
+    ))
+    v = verify_receipt(r.to_dict())
+    assert v.effective_grounding == "self_asserted"
+    assert any("attested testimony" in x for x in v.reasons)
+
+
+def test_v02_requires_grounding_on_evidence():
+    with pytest.raises(ActionReceiptError, match="grounding"):
+        _receipt(evidence_refs=({"name": "diff", "hash": "sha256:11"},))
+
+
+def test_v01_receipts_still_verify_without_grounding():
+    """A served v0.1 receipt (schema_version 0.1, no grounding, no conventions)
+    recomputes with its OWN schema_version — the golden vectors' guarantee."""
+    vectors = Path(__file__).resolve().parents[1] / "spec" / "vectors"
+    d = json.loads((vectors / "valid-release.json").read_text())
+    assert d["schema_version"] == "0.1"
+    v = verify_receipt(d)
+    assert v.ok and v.effective_grounding is None
+
+
+def test_witness_receipt_carries_conventions():
+    from bulla.diagnostic import diagnose
+    from bulla.model import Composition, Edge, SemanticDimension, ToolSpec
+    from bulla.witness import verify_receipt_integrity, witness
+    comp = Composition(
+        name="c", tools=(ToolSpec("a", ("x",), ("x",)), ToolSpec("b", ("x",), ("x",))),
+        edges=(Edge("a", "b", (SemanticDimension("d", "x", "x"),)),),
+    )
+    diag = diagnose(comp)
+    filled = dict(EXEC_CONVENTION)
+    from bulla.action_receipt import convention_definition_hash
+    filled["definition_hash"] = convention_definition_hash(filled["definition"])
+    r = witness(diag, comp, conventions=(filled,))
+    d = r.to_dict()
+    assert d["conventions"][0]["name"] == "amount-in-usd-cents"
+    assert verify_receipt_integrity(d)
+    d["conventions"][0]["scope"] = "somewhere-else"   # inside the hash
+    assert not verify_receipt_integrity(d)
 
 
 # ── the committed retroactive corpus stays valid ─────────────────────────────

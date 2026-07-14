@@ -48,8 +48,9 @@ later, separately pre-registered instrument.
 
 from __future__ import annotations
 
-import json
 from dataclasses import dataclass, field
+
+from bulla._canonical import canonical_json
 
 DEED_SCHEMA_VERSION = "0.2"
 
@@ -273,8 +274,8 @@ class RecourseEnvelope:
 
     def canonical(self) -> str:
         """Deterministic JSON — the exact string committed inside the
-        attestation preimage."""
-        return json.dumps(self.to_dict(), sort_keys=True, separators=(",", ":"))
+        attestation preimage (``bulla._canonical.canonical_json``)."""
+        return canonical_json(self.to_dict())
 
     @classmethod
     def from_dict(cls, d: dict) -> "RecourseEnvelope":

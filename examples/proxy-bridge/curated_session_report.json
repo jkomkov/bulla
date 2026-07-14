@@ -1,5 +1,5 @@
 {
-  "manifest_dir": "/Users/jkomkov/Documents/GitHub/res-agentica/bulla/examples/real_world_audit/manifests",
+  "manifest_dir": "examples/real_world_audit/manifests",
   "sessions": [
     {
       "name": "clean_memory_puppeteer",

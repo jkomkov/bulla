@@ -592,3 +592,55 @@ class TestComposeCommand:
         """Compose with no files exits with error."""
         r = _run("compose")
         assert r.returncode != 0
+
+
+class TestReceiptCreateCommand:
+    """`bulla receipt create` — the stranger's ergonomic (v0.2 diet)."""
+
+    def _create(self, tmp_path, *extra: str) -> Path:
+        out = tmp_path / "receipt.json"
+        r = _run(
+            "receipt", "create", "--type", "demo.echo",
+            "--subject", "msg=hello", "--subject", "amount=1250",
+            "--forum-endpoint", "https://log.example", "--forum-root", "ots:root",
+            "--timestamp", "2026-07-13T00:00:00+00:00",
+            "--out", str(out), *extra,
+        )
+        assert r.returncode == 0, r.stderr
+        return out
+
+    def test_create_then_verify_roundtrip(self, tmp_path):
+        out = self._create(tmp_path)
+        doc = json.loads(out.read_text())
+        assert doc["schema_version"] == "0.2"
+        assert doc["action"]["subject"]["amount"] == 1250  # k=v parsed as JSON scalar
+        r = _run("receipt", "verify", str(out))
+        assert r.returncode == 0
+        assert "verified_to=digest" in r.stdout
+
+    def test_create_with_convention_surfaces_conformance(self, tmp_path):
+        conv = tmp_path / "conv.json"
+        conv.write_text(json.dumps({
+            "name": "amount-in-usd-cents",
+            "scope": "seam:demo",
+            "kind": "executable",
+            "definition": {
+                "form": "jsonschema+quantum/1",
+                "schema": {"type": "object", "required": ["amount"],
+                           "properties": {"amount": {"type": "integer", "minimum": 0}}},
+                "quantum": {"amount": {"unit": "USD_cents", "multipleOf": 1}},
+            },
+        }))
+        out = self._create(tmp_path, "--convention", str(conv))
+        r = _run("receipt", "verify", str(out))
+        assert r.returncode == 0
+        assert "convention amount-in-usd-cents: conforms" in r.stdout
+
+    def test_create_refuses_missing_forum(self, tmp_path):
+        r = _run("receipt", "create", "--type", "demo.echo", "--out", str(tmp_path / "x.json"))
+        assert r.returncode == 2  # argparse: forum endpoint+root are required (modality law)
+
+    def test_gate_help_does_not_promise_fee_gating_by_default(self):
+        r = _run("gate", "--help")
+        assert r.returncode == 0
+        assert "OPT IN to fee-gating" in r.stdout
