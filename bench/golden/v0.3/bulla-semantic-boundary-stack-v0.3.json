@@ -1,0 +1,56 @@
+{
+  "content": {
+    "classification": "INTERNAL_CAPTIVE_FOREIGN_SUBSTRATE",
+    "frozen_main_commit": "619efa975819b5171c8589aa15f35506bca345e3",
+    "golden_roots": {
+      "v0.1_manifest_file_sha256": "sha256:ba1c19d8aba1575c41b9193d0d9fa775fb0122b88ad73b6f47141317cb72ec6a",
+      "v0.2_freeze_manifest_file_sha256": "sha256:13d77f032634de21fb0c962a2d012123a7a47d3c89336db02ded0b2184f1eee5",
+      "v0.3_manifest_file_sha256": "sha256:b0467642b0fe3e1a580f735df895a6d9d44d308c6dbb4a9f657915d251546a02"
+    },
+    "known_external_gaps": [
+      "reviewer-originated hidden cases not created",
+      "independent clean-room implementation not observed",
+      "found-data adjudication not performed",
+      "no production settlement or legal-validity evidence",
+      "GitHub runners and the sprint signer are not independent witnesses"
+    ],
+    "lean_digests": {
+      "InterpolantEnvelope.lean": "sha256:7de9d430cd3f48a1880b804833c2f90efff112b44a7c0242c567e863b92b2ea6",
+      "InterpolantEnvelope/Axioms.lean": "sha256:c1981e5d802f3c3becc655d6101abc92abd15279c4134f5821150ff43485655b",
+      "InterpolantEnvelope/Boundary.lean": "sha256:c247bef6e75863991140586787896c77c19c63c2803c6a55985b26b2a0e14721"
+    },
+    "merge_commits": {
+      "pr_171": "6e04700931394443301a55a08d98971a54799407",
+      "pr_172": "79c2f57ac8de9b0c22ccb4c83134d6d9bd698fa4",
+      "pr_173": "619efa975819b5171c8589aa15f35506bca345e3"
+    },
+    "oci_observation": {
+      "dockerfile_sha256": "sha256:edae5718b46b6a9e1d40fe4aee02e86808294e9e7c8ff9e4f82fb53300a0b65d",
+      "image_id": "sha256:6668f3a098b9cf52d1421b5c8ad7379766aa169e2886f7d83024eddc22e24352",
+      "observation_file_sha256": "sha256:06b7d0bca216c2b77e1907300c74afd9e244e82a6d43d7741b0584fce3b46518",
+      "registry_repo_digests": [],
+      "run_id": 29705307691,
+      "status": "OBSERVED_LOCAL_IMAGE_ID_NOT_REGISTRY_DIGEST"
+    },
+    "profile": "bulla.semantic-boundary-stack/0.3-freeze",
+    "schema_version": "0.3-stack-freeze",
+    "source_heads": {
+      "pr_171": "70334d15126ed70d52965242c280253748b91d1f",
+      "pr_172": "eab83c4ef0275c58f88bdc66a07fb144a3a101e8",
+      "pr_173": "abbf178dbeb91f5f1e07abe3e16cf7ccc87d33d3"
+    },
+    "specification_sha256": "sha256:53dd6f5456e52032f0e69a3097cd9928bd972cca0d52502c2c013739e5ba25fe",
+    "stable_surface": {
+      "algorithm": "sha256 over sorted shasum output for tracked bulla/src/bulla files excluding bulla/src/bulla/experimental",
+      "file_count": 153,
+      "sha256": "sha256:ee0d6406e3e9cf8ac676c3f72f9a0c891c87d4bd10848ee5b1e32caf02ce267c"
+    }
+  },
+  "content_hash": "sha256:8cbfed375581faa33cbe79d80c262b983bf655bfaade839aa2d9cc8f6459865a",
+  "proof": {
+    "issuer": "did:key:z6MkjTAVMkcXJZeRCaEZZsKzLAj43RKPQ72hWKW2i5gbSzFh",
+    "proofValue": "gNDuWeN/3i7afnxPeCGl2DqFl38rgmtMsGiHE9/oFk+Oib4TzxZWXotn99UuMIJlgFgD+5a+muV5CUYkvVx7DA==",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkjTAVMkcXJZeRCaEZZsKzLAj43RKPQ72hWKW2i5gbSzFh"
+  }
+}

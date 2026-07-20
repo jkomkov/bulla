@@ -10,10 +10,10 @@ hashes exactly as before.
 THE MODALITY LAW (design invariant, enforced at construction). Recourse under
 the absent master cannot assume a stateful respondent: the acting process is
 gone at contest time; nothing can be served, confined, or made to answer.
-Every remedy therefore attaches to an artifact or a stake — something that IS
-persistent and stateful — never to the vanished actor. A remedy must name its
-`verifier` (how the remedy's execution is checked) and its `anchor` (the
-artifact or stake it executes against). A remedy without a stateful anchor is
+Every remedy therefore attaches to a persistent, stateful reference — never to
+the vanished actor. A remedy must name its `verifier` (how the remedy's
+execution is checked) and its `anchor` (the artifact or external policy it
+executes against). A remedy without a stateful anchor is
 process theater, and this module refuses to construct one.
 
 The remedy ladder, in escalation order:
@@ -26,9 +26,9 @@ The remedy ladder, in escalation order:
                  loop). Anchor: the composition hash.
     revert     — bounded rollback / compensating action within
                  `bounds.rollback_window`. Anchor: the acted-on resource.
-    slash      — the bond staked on the spec-hash. FRONTIER RUNG: the field
-                 format ships now; the mechanism is gated on adoption. Anchor:
-                 the bond reference.
+    slash      — an external settlement policy's adverse remedy. Bulla carries
+                 only its verifier and anchor reference; it provides no
+                 collateral, pricing, or settlement mechanism.
     escalate   — the surviving principal, via the mandate/delegation chain in
                  `authority`. The ladder deliberately ENDS in human
                  jurisdiction; it never simulates a court mid-ladder. Anchor:
@@ -51,8 +51,14 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from bulla._canonical import canonical_json
+from bulla.executable_form import ExecutableFormError, validate_executable_definition
 
 DEED_SCHEMA_VERSION = "0.2"
+#: Envelope schema versions this build speaks. "0.3" adds structured, signed
+#: delegation grants (see spec/delegation-design-note.md); "0.2" carries opaque
+#: string delegation references. A version is committed inside `to_dict`, so the
+#: attestation hash covers which shape a receipt used — no silent reinterpretation.
+DEED_SCHEMA_VERSIONS = ("0.2", "0.3")
 
 #: The remedy ladder, in escalation order. Order is normative for conformance
 #: (a well-formed recourse block lists remedies in non-decreasing rung order);
@@ -75,7 +81,7 @@ class Remedy:
     """One rung of the ladder: what can be done, checked how, against what.
 
     `verifier` names how execution of the remedy is checked (a command, a
-    proof kind, an endpoint). `anchor` names the stateful artifact or stake
+    proof kind, an endpoint). `anchor` names the stateful artifact or external policy
     the remedy executes against. Both are required — that IS the modality law.
     """
 
@@ -96,7 +102,7 @@ class Remedy:
         if not (self.anchor or "").strip():
             raise EnvelopeError(
                 f"remedy {self.rung!r} names no stateful anchor — a remedy must "
-                "execute against an artifact or a stake, never against the "
+                "execute against an artifact or external policy, never against the "
                 "vanished actor (modality law)"
             )
 
@@ -138,15 +144,35 @@ class Authority:
 
 @dataclass(frozen=True)
 class Bounds:
-    """Scope, expiry, and rollback window for the certified act."""
+    """Scope, expiry, and rollback window for the certified act.
 
-    scope: str
+    ``scope`` is EITHER prose (a ``str`` — unconstrained, hashed as its UTF-8 bytes,
+    the historical behaviour) OR a structured ``jsonschema+quantum/1`` predicate (a
+    ``dict``) over the act's declared ``subject``. A structured scope is what makes
+    ``bounds_conformance`` decidable — a verifier recomputes *did the act obey its
+    scope*, not merely *does the chain convey a matching digest*. A structured scope
+    is a v0.3 feature (``deed_schema: "0.3"``, gated in :class:`RecourseEnvelope`)."""
+
+    scope: str | dict
     expires: str | None = None
     rollback_window: str | None = None
 
     def __post_init__(self) -> None:
-        if not (self.scope or "").strip():
-            raise EnvelopeError("bounds.scope is required")
+        if isinstance(self.scope, dict):
+            # Validated at CONSTRUCTION (fail closed) exactly like an executable
+            # convention, so a malformed predicate can never ride in a hashed receipt.
+            try:
+                validate_executable_definition(self.scope)
+            except ExecutableFormError as exc:
+                raise EnvelopeError(f"bounds.scope (structured predicate): {exc}") from exc
+        elif isinstance(self.scope, str):
+            if not self.scope.strip():
+                raise EnvelopeError("bounds.scope is required")
+        else:
+            raise EnvelopeError(
+                "bounds.scope must be a non-empty string (prose) or a structured "
+                "jsonschema+quantum/1 predicate (object)"
+            )
 
     def to_dict(self) -> dict:
         d: dict = {"scope": self.scope}
@@ -223,10 +249,34 @@ class RecourseEnvelope:
     deed_schema: str = DEED_SCHEMA_VERSION
 
     def __post_init__(self) -> None:
-        if self.deed_schema != DEED_SCHEMA_VERSION:
+        if self.deed_schema not in DEED_SCHEMA_VERSIONS:
             raise EnvelopeError(
                 f"unknown deed_schema {self.deed_schema!r} (this build speaks "
-                f"{DEED_SCHEMA_VERSION!r})"
+                f"{DEED_SCHEMA_VERSIONS})"
+            )
+        # Versioned delegation shape (no silent reinterpretation): "0.2" carries
+        # opaque string references; "0.3" carries structured signed grant objects.
+        if self.authority is not None and self.authority.delegation:
+            entries = self.authority.delegation
+            if self.deed_schema == "0.2" and any(not isinstance(e, str) for e in entries):
+                raise EnvelopeError(
+                    "deed_schema '0.2' delegation entries must be opaque strings; "
+                    "structured grants require deed_schema '0.3'"
+                )
+            if self.deed_schema == "0.3" and any(not isinstance(e, dict) for e in entries):
+                raise EnvelopeError(
+                    "deed_schema '0.3' delegation entries must be structured grant objects"
+                )
+        # A structured (executable) bounds.scope is a v0.3 feature — no silent
+        # reinterpretation of a prose-only shape a v0.2 verifier committed to.
+        if (
+            self.bounds is not None
+            and isinstance(self.bounds.scope, dict)
+            and self.deed_schema != "0.3"
+        ):
+            raise EnvelopeError(
+                "a structured bounds.scope predicate requires deed_schema '0.3' "
+                "(prose scope remains valid under any version)"
             )
         if self.retention_class is not None and self.retention_class not in RETENTION_CLASSES:
             raise EnvelopeError(

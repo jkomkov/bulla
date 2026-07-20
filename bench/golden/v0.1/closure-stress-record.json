@@ -1,0 +1,1175 @@
+{
+  "closure_breaches": 64,
+  "finality_reversals": 64,
+  "outside_neighborhood_stale": 32,
+  "reserve_shortfalls": 32,
+  "trial_count": 64,
+  "trials": [
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 1100000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 0,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": false,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": false,
+      "within_declared_neighborhood": true
+    },
+    {
+      "base_outcomes": [
+        "CUSTODY"
+      ],
+      "closure_breach": true,
+      "expanded_outcomes": [
+        "CUSTODY",
+        "DISPATCH"
+      ],
+      "finality_reversal": true,
+      "held_reserve_microunits": 600000,
+      "neighborhood_hash": "sha256:eb3fe0a0c607e64aaae3c9c73e0b5cacebdf87b701169d7dd1140167274595cc",
+      "new_epoch_required": true,
+      "required_reserve_microunits": 1100000,
+      "reserve_shortfall_microunits": 500000,
+      "term_stale": true,
+      "within_declared_neighborhood": false
+    }
+  ],
+  "width_trajectory": {
+    "claim_boundary": "synthetic-oracle-envelope-counts",
+    "revision_new_epoch_reset": [
+      16
+    ],
+    "same_epoch_refinement": [
+      16,
+      12,
+      8,
+      4,
+      2,
+      1
+    ]
+  }
+}

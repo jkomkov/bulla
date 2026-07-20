@@ -1,0 +1,35 @@
+{
+  "abstention_order": [
+    "confirmed_unsafe_acceptance",
+    "confirmed_unsafe_refusal",
+    "unauthorized_governance_selection",
+    "unsupported_acceptance_under_disagreement",
+    "typed_correct_abstention",
+    "useful_evidence_requests",
+    "safe_coverage",
+    "non_scalar_burden_coordinates"
+  ],
+  "custody": {
+    "adjudicators_minimum": 6,
+    "cleanroom_implementers": 1,
+    "curator_count": 3,
+    "hidden_adjudication_or_open_world": 12,
+    "hidden_machine_or_property": 24,
+    "hidden_total": 36,
+    "implementation_team_key_access": false,
+    "sops_key_groups": 3,
+    "sops_shamir_threshold": 2
+  },
+  "external_shortfall_rule": "BLOCKED; never substitute implementation-team identities",
+  "frozen_before_reviewer_case_creation": true,
+  "internal_denominators": {
+    "found_data_cases": 120,
+    "metamorphic_bases": 96,
+    "metamorphic_relations": 14,
+    "mutants": 248,
+    "scaling_design": 192,
+    "scaling_holdout": 48
+  },
+  "profile": "bulla.golden-suite/0.2-experimental",
+  "schema_version": "0.2-preregistration"
+}

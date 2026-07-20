@@ -1,0 +1,30 @@
+{
+  "archive": {
+    "digest": "sha256:05317c9739042181db61a9aaefd77afa6d1341c4c207fb377f9b30b9c049a86c",
+    "historical_epoch": "bulla.seed-certificates/pre-completeness",
+    "historical_results_remain_valid": true,
+    "path": "calibration/fixtures/archive/epoch-pre-completeness/sprint13_seed_certificates.json",
+    "retention": "archive-permanent"
+  },
+  "authorization": {
+    "basis": "CORE_RELEASE_MAINTAINER",
+    "receipt_action": "bulla.fixture.supersede",
+    "retirement_authority": "github:jkomkov/res-agentica:maintainer",
+    "status": "BINDS_ON_RELEASE_MERGE"
+  },
+  "classification": "EXPECTATION_DRIFT",
+  "first_known_divergence": {
+    "commit": "92f658125a0c4657254bbcf49b8ba6850e8c79d6",
+    "release": "0.44.0-development",
+    "reason": "display.completeness became a required truthful disclosure"
+  },
+  "former_canonical_path": "calibration/fixtures/sprint13_seed_certificates.json",
+  "record_type": "bulla.fixture.lifecycle/0.1",
+  "replacement": {
+    "digest": "sha256:678af9b855f9f0e7176153188ec0789d9c9b1a5efdefb3fc08c2633d2edad8b1",
+    "epoch": "bulla.seed-certificates/v0.44",
+    "path": "calibration/fixtures/sprint13_seed_certificates-v044.json"
+  },
+  "scope": "sprint13-seed-certificate-regression",
+  "status": "SUPERSEDED_FOR_CURRENT_TOOLING"
+}

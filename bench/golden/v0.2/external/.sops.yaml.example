@@ -1,0 +1,10 @@
+creation_rules:
+  - path_regex: reviewer-oracles\\.json$
+    shamir_threshold: 2
+    key_groups:
+      - age:
+          - REVIEWER_1_AGE_RECIPIENT
+      - age:
+          - REVIEWER_2_AGE_RECIPIENT
+      - age:
+          - REVIEWER_3_AGE_RECIPIENT

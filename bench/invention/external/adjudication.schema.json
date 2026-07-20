@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Blind external seam adjudication v0.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "instance_id", "adjudicator_id", "seam_exit",
+    "application_verdicts", "unnecessary_escalation", "protected_meanings_preserved",
+    "grammar_limit", "enrichment_useful", "governance_required",
+    "countermodel_useful", "notes_hash"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.2-blind-adjudication"},
+    "instance_id": {"type": "string"},
+    "adjudicator_id": {"type": "string"},
+    "seam_exit": {
+      "enum": ["COMPILED", "PARTIAL", "ESCALATE", "CHOICE_REQUIRED", "INDETERMINATE", "INVALID_INPUT"]
+    },
+    "application_verdicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["application_id", "decision", "safe_ground_truth"],
+        "properties": {
+          "application_id": {"type": "string"},
+          "decision": {"enum": ["RELY", "REFUSE", "ESCALATE"]},
+          "safe_ground_truth": {"enum": ["yes", "no", "undetermined"]}
+        }
+      }
+    },
+    "unnecessary_escalation": {"enum": ["yes", "no", "not_applicable", "undetermined"]},
+    "protected_meanings_preserved": {"enum": ["yes", "no", "undetermined"]},
+    "grammar_limit": {"enum": ["yes", "no", "undetermined"]},
+    "enrichment_useful": {"enum": ["yes", "no", "not_applicable", "undetermined"]},
+    "governance_required": {"enum": ["yes", "no", "undetermined"]},
+    "countermodel_useful": {"enum": ["yes", "no", "not_applicable", "undetermined"]},
+    "notes_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

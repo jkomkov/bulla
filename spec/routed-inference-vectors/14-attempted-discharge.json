@@ -1,0 +1,524 @@
+{
+  "profile": "bulla.routed-inference/0.1-draft",
+  "trace_id": "14-attempted-discharge",
+  "term_document": {
+    "profile": "bulla.routed-inference/0.1-draft",
+    "route_topology": "single_route_single_provider",
+    "term_disclosure": "full",
+    "request_ref": "sha256:08d535b26e845511d9034f4be47a0704052d3689efa9b0d77ff63754c6d5518b",
+    "process_constraints": {
+      "permitted_providers": [
+        "provider-a",
+        "provider-b"
+      ],
+      "permitted_models": [
+        "hermes-4-70b",
+        "hermes-4-405b"
+      ],
+      "min_precision_bits": 8,
+      "approved_hardware_classes": [
+        "h100",
+        "b200"
+      ],
+      "randomness_policy": "declared-seed",
+      "max_route_depth": 1,
+      "resource_ceilings": {
+        "input_tokens": 20000,
+        "output_tokens": 4000
+      }
+    },
+    "evidence_policy": {
+      "minimum_process_grounding": "third_party_anchored",
+      "appraisal_policy_ref": "appraisal://process-evidence-v1"
+    },
+    "budget_policy": {
+      "mode": "disclosed_components",
+      "unit": "usd_micros",
+      "ceiling": 1000
+    },
+    "deadline": {
+      "domain": "fixture-log",
+      "value": 100
+    },
+    "witness_policy_ref": "witness-policy://two-independent@sha256:demo",
+    "remedy_adapter_ref": "remedy://routed-inference-v0.1",
+    "forum_ref": "forum://routed-inference-review",
+    "reliance_policy_ref": "reliance.pragmatic.v1@sha256:2549faa0f297c8e43d9462a28b464cd2e0813e986b58555d9b29572351fc0b88"
+  },
+  "term_root": "sha256:f69204280f08e08c835fac17e323e0bcdc67c088af46412a0a9a98323cf5b1c8",
+  "receipts": [
+    {
+      "schema_version": "0.3",
+      "kind": "action_receipt",
+      "action": {
+        "type": "inference.order",
+        "profile": "bulla.routed-inference/0.1-draft",
+        "parents": [],
+        "slot_id": "slot:routed-inference-0001",
+        "term_root": "sha256:f69204280f08e08c835fac17e323e0bcdc67c088af46412a0a9a98323cf5b1c8",
+        "subject": {
+          "slot_id": "slot:routed-inference-0001",
+          "term_root": "sha256:f69204280f08e08c835fac17e323e0bcdc67c088af46412a0a9a98323cf5b1c8",
+          "request_ref": "sha256:08d535b26e845511d9034f4be47a0704052d3689efa9b0d77ff63754c6d5518b",
+          "budget_ceiling": 1000,
+          "budget_unit": "usd_micros",
+          "remedy_adapter_ref": "remedy://routed-inference-v0.1",
+          "witness_policy_ref": "witness-policy://two-independent@sha256:demo"
+        }
+      },
+      "diagnostic_ref": {
+        "status": "not_applicable"
+      },
+      "evidence_refs": [],
+      "anchor_ref": {},
+      "mandate": {
+        "authority": {
+          "principal": "did:key:z6MknE8hm1BSAJX9fQsxpu8iiMSYSpqfYQ1eFjpTPeVV3udr",
+          "policy": "policy://routed-inference@sha256:demo",
+          "delegation": []
+        }
+      },
+      "remedy": {
+        "challenge_window": "P7D",
+        "forum": {
+          "log_endpoint": "https://witness.example",
+          "trusted_root_ref": "fixture:independently-pinned-root"
+        },
+        "remedies": [
+          {
+            "rung": "recompute",
+            "verifier": "python3 check.py",
+            "anchor": "hashes.content"
+          },
+          {
+            "rung": "escalate",
+            "verifier": "named routed-inference forum",
+            "anchor": "remedy://routed-inference-v0.1"
+          }
+        ]
+      },
+      "retention": {},
+      "stake": null,
+      "conventions": [],
+      "signature": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "content",
+        "issuer": "did:key:z6MknE8hm1BSAJX9fQsxpu8iiMSYSpqfYQ1eFjpTPeVV3udr",
+        "verificationMethod": "did:key:z6MknE8hm1BSAJX9fQsxpu8iiMSYSpqfYQ1eFjpTPeVV3udr",
+        "proofValue": "ZTd7Aamlzcx/DC3LfYFMFsZVrdFLxWZF2GOF0n4R0xIH0+cPIDN3CtEeU8WZAXo2tshEnscodHhacFktyg+3Ag=="
+      },
+      "authorization": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "authorization",
+        "issuer": "did:key:z6MknE8hm1BSAJX9fQsxpu8iiMSYSpqfYQ1eFjpTPeVV3udr",
+        "verificationMethod": "did:key:z6MknE8hm1BSAJX9fQsxpu8iiMSYSpqfYQ1eFjpTPeVV3udr",
+        "proofValue": "XCB2ljf5sAIM0A/vtlWfgKyjBjLJkfaVh+l/J9zoD1iw9qkc9VOm6CgSfGx1o3q1d+kE5hyJeT8u6Z+prf/fCg=="
+      },
+      "timestamp": "2026-07-17T00:00:01+00:00",
+      "producer": {
+        "bulla_version": "0.44.0",
+        "fixture": "bulla.routed-inference/0.1-draft"
+      },
+      "hashes": {
+        "content": "sha256:9e6ce833138a32e5dea448b05b1c94f43338aee48528016cc167898be0326f21",
+        "event": "sha256:55ad55a63fa1fb112ad6d9841ff54d79904e58b1a4ba7df2b8ca48b68055ad49",
+        "attestation": "sha256:22583c8c211e3f1ba08c92022bda41076f662b95bd90d86a9f4707bbabcd8eb8",
+        "log_leaf": "sha256:313af436faa3566cc5a05f2351f86f91a26d4d7422b6197a0769b6a1f25d8318"
+      }
+    },
+    {
+      "schema_version": "0.3",
+      "kind": "action_receipt",
+      "action": {
+        "type": "inference.route",
+        "profile": "bulla.routed-inference/0.1-draft",
+        "parents": [
+          {
+            "event": "sha256:55ad55a63fa1fb112ad6d9841ff54d79904e58b1a4ba7df2b8ca48b68055ad49",
+            "attestation": "sha256:22583c8c211e3f1ba08c92022bda41076f662b95bd90d86a9f4707bbabcd8eb8"
+          }
+        ],
+        "slot_id": "slot:routed-inference-0001",
+        "term_root": "sha256:f69204280f08e08c835fac17e323e0bcdc67c088af46412a0a9a98323cf5b1c8",
+        "subject": {
+          "slot_id": "slot:routed-inference-0001",
+          "term_root": "sha256:f69204280f08e08c835fac17e323e0bcdc67c088af46412a0a9a98323cf5b1c8",
+          "selection": {
+            "provider": "provider-a",
+            "model": "hermes-4-70b",
+            "precision_bits": 8,
+            "hardware_class": "h100",
+            "randomness_policy": "declared-seed",
+            "route_depth": 1
+          },
+          "budget_ledger": {
+            "unit": "usd_micros",
+            "charge_to_upstream": 900,
+            "charge_from_downstream": 700,
+            "retained_amount": 200
+          }
+        },
+        "discharges": [
+          {
+            "event": "sha256:55ad55a63fa1fb112ad6d9841ff54d79904e58b1a4ba7df2b8ca48b68055ad49",
+            "attestation": "sha256:22583c8c211e3f1ba08c92022bda41076f662b95bd90d86a9f4707bbabcd8eb8"
+          }
+        ]
+      },
+      "diagnostic_ref": {
+        "status": "not_applicable"
+      },
+      "evidence_refs": [],
+      "anchor_ref": {},
+      "mandate": {
+        "authority": {
+          "principal": "did:key:z6Mkhbgrq7ygLoBz8Q3hTTU96uojfY6kkoCKWx9FaGeCKTek",
+          "policy": "policy://routed-inference@sha256:demo",
+          "delegation": []
+        }
+      },
+      "remedy": {
+        "challenge_window": "P7D",
+        "forum": {
+          "log_endpoint": "https://witness.example",
+          "trusted_root_ref": "fixture:independently-pinned-root"
+        },
+        "remedies": [
+          {
+            "rung": "recompute",
+            "verifier": "python3 check.py",
+            "anchor": "hashes.content"
+          },
+          {
+            "rung": "escalate",
+            "verifier": "named routed-inference forum",
+            "anchor": "remedy://routed-inference-v0.1"
+          }
+        ]
+      },
+      "retention": {},
+      "stake": null,
+      "conventions": [],
+      "signature": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "content",
+        "issuer": "did:key:z6Mkhbgrq7ygLoBz8Q3hTTU96uojfY6kkoCKWx9FaGeCKTek",
+        "verificationMethod": "did:key:z6Mkhbgrq7ygLoBz8Q3hTTU96uojfY6kkoCKWx9FaGeCKTek",
+        "proofValue": "DyrdYigig9ZKMv8wyAuK64OS+FkBI8JCA4TciTVS9MqEie1X9axo1xVWHeamvyQEZpXEKQIlZOo6nl/fmynRDA=="
+      },
+      "authorization": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "authorization",
+        "issuer": "did:key:z6Mkhbgrq7ygLoBz8Q3hTTU96uojfY6kkoCKWx9FaGeCKTek",
+        "verificationMethod": "did:key:z6Mkhbgrq7ygLoBz8Q3hTTU96uojfY6kkoCKWx9FaGeCKTek",
+        "proofValue": "4G1a7XZWly9Db1/wT7V5PhYIm5iWxOdJV5hrxCkz/O5j0IVgm4XBrKwcvvHQHbW1Ymlsls+kuRNWU4obLqVRCg=="
+      },
+      "timestamp": "2026-07-17T00:00:02+00:00",
+      "producer": {
+        "bulla_version": "0.44.0",
+        "fixture": "bulla.routed-inference/0.1-draft"
+      },
+      "hashes": {
+        "content": "sha256:1e8d2079f7212fd0224a39a22fbece0907559515475899bac95437caf4219139",
+        "event": "sha256:5be7a8b27626598352eaafc43ca0c002117a7ecdb332900bf4bc11aeaf8c9408",
+        "attestation": "sha256:42448ee7eeea9d4731a369ad181eaaf2297bdaff02fbacbd6fe99466b9ff1bf3",
+        "log_leaf": "sha256:07251c55b566f9ccdba18a140e068411e05e5b8c347a3d719d51d5e6166f8562"
+      }
+    },
+    {
+      "schema_version": "0.3",
+      "kind": "action_receipt",
+      "action": {
+        "type": "inference.accept",
+        "profile": "bulla.routed-inference/0.1-draft",
+        "parents": [
+          {
+            "event": "sha256:5be7a8b27626598352eaafc43ca0c002117a7ecdb332900bf4bc11aeaf8c9408",
+            "attestation": "sha256:42448ee7eeea9d4731a369ad181eaaf2297bdaff02fbacbd6fe99466b9ff1bf3"
+          }
+        ],
+        "slot_id": "slot:routed-inference-0001",
+        "term_root": "sha256:f69204280f08e08c835fac17e323e0bcdc67c088af46412a0a9a98323cf5b1c8",
+        "subject": {
+          "slot_id": "slot:routed-inference-0001",
+          "term_root": "sha256:f69204280f08e08c835fac17e323e0bcdc67c088af46412a0a9a98323cf5b1c8",
+          "accepted_route": {
+            "event": "sha256:5be7a8b27626598352eaafc43ca0c002117a7ecdb332900bf4bc11aeaf8c9408",
+            "attestation": "sha256:42448ee7eeea9d4731a369ad181eaaf2297bdaff02fbacbd6fe99466b9ff1bf3"
+          },
+          "accepted_selection": {
+            "provider": "provider-a",
+            "model": "hermes-4-70b",
+            "precision_bits": 8,
+            "hardware_class": "h100",
+            "randomness_policy": "declared-seed",
+            "route_depth": 1
+          },
+          "remedy_adapter_ref": "remedy://routed-inference-v0.1",
+          "witness_policy_ref": "witness-policy://two-independent@sha256:demo",
+          "budget_ledger": {
+            "unit": "usd_micros",
+            "charge_to_upstream": 700,
+            "charge_from_downstream": 0,
+            "retained_amount": 700
+          }
+        }
+      },
+      "diagnostic_ref": {
+        "status": "not_applicable"
+      },
+      "evidence_refs": [],
+      "anchor_ref": {},
+      "mandate": {
+        "authority": {
+          "principal": "did:key:z6Mkk1ckCK1yKi6w2LjLYK1xvf1rSuhXDj1synVcHTknfESt",
+          "policy": "policy://routed-inference@sha256:demo",
+          "delegation": []
+        }
+      },
+      "remedy": {
+        "challenge_window": "P7D",
+        "forum": {
+          "log_endpoint": "https://witness.example",
+          "trusted_root_ref": "fixture:independently-pinned-root"
+        },
+        "remedies": [
+          {
+            "rung": "recompute",
+            "verifier": "python3 check.py",
+            "anchor": "hashes.content"
+          },
+          {
+            "rung": "escalate",
+            "verifier": "named routed-inference forum",
+            "anchor": "remedy://routed-inference-v0.1"
+          }
+        ]
+      },
+      "retention": {},
+      "stake": null,
+      "conventions": [],
+      "signature": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "content",
+        "issuer": "did:key:z6Mkk1ckCK1yKi6w2LjLYK1xvf1rSuhXDj1synVcHTknfESt",
+        "verificationMethod": "did:key:z6Mkk1ckCK1yKi6w2LjLYK1xvf1rSuhXDj1synVcHTknfESt",
+        "proofValue": "nQmQ6vVUrstJNhqKH2m7Q7VXuunbYe9wha4aTo0AJ9vejYfGFGxT+QdDzLeXazTl3CgGSZWfO5Zb10lQYqjZAA=="
+      },
+      "authorization": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "authorization",
+        "issuer": "did:key:z6Mkk1ckCK1yKi6w2LjLYK1xvf1rSuhXDj1synVcHTknfESt",
+        "verificationMethod": "did:key:z6Mkk1ckCK1yKi6w2LjLYK1xvf1rSuhXDj1synVcHTknfESt",
+        "proofValue": "1H84WGj4tj8lBH3ZTv1U7i2ZOVXzBb0z4sdW1uWsEF+Enlo5wPuVvkJsdNVXR5PBheZuc3e8SMWGWGU0LfI3AA=="
+      },
+      "timestamp": "2026-07-17T00:00:03+00:00",
+      "producer": {
+        "bulla_version": "0.44.0",
+        "fixture": "bulla.routed-inference/0.1-draft"
+      },
+      "hashes": {
+        "content": "sha256:9d07ddba59439a3215cb0402f95e8a575b6db7be4dea49e9fb0d6bee9c42201f",
+        "event": "sha256:aa28aa57ad8ffb005a1aa1cebfc1e064da1d41486585c739a5a5fefad0016b15",
+        "attestation": "sha256:2a39a0c8cb29a9cc3ccdc082638d355354cacf11cd7ed496d4ad762467b7327e",
+        "log_leaf": "sha256:00520a3fd1c8e8272cbaeceac8cf59ecde8225cb4499ae49d0c6b833e682f8fa"
+      }
+    },
+    {
+      "schema_version": "0.3",
+      "kind": "action_receipt",
+      "action": {
+        "type": "inference.delivery",
+        "profile": "bulla.routed-inference/0.1-draft",
+        "parents": [
+          {
+            "event": "sha256:aa28aa57ad8ffb005a1aa1cebfc1e064da1d41486585c739a5a5fefad0016b15",
+            "attestation": "sha256:2a39a0c8cb29a9cc3ccdc082638d355354cacf11cd7ed496d4ad762467b7327e"
+          }
+        ],
+        "slot_id": "slot:routed-inference-0001",
+        "term_root": "sha256:f69204280f08e08c835fac17e323e0bcdc67c088af46412a0a9a98323cf5b1c8",
+        "subject": {
+          "slot_id": "slot:routed-inference-0001",
+          "term_root": "sha256:f69204280f08e08c835fac17e323e0bcdc67c088af46412a0a9a98323cf5b1c8",
+          "selection": {
+            "provider": "provider-a",
+            "model": "hermes-4-70b",
+            "precision_bits": 8,
+            "hardware_class": "h100",
+            "randomness_policy": "declared-seed",
+            "route_depth": 1
+          },
+          "artifact_ref": "sha256:211950f185adf5b3c56afdc375a98dad80bb4feea664410496193fc882ada837",
+          "resource_usage": {
+            "deltas": {
+              "input_tokens": 1000,
+              "output_tokens": 250
+            },
+            "grounding": "third_party_anchored"
+          }
+        }
+      },
+      "diagnostic_ref": {
+        "status": "not_applicable"
+      },
+      "evidence_refs": [
+        {
+          "name": "process_evidence",
+          "hash": "sha256:67dc8be7da76f8d759ab68bf96cfe6dd1b2978b1f5d2d55f4922c752da72a718",
+          "grounding": "third_party_anchored"
+        }
+      ],
+      "anchor_ref": {},
+      "mandate": {
+        "authority": {
+          "principal": "did:key:z6Mkk1ckCK1yKi6w2LjLYK1xvf1rSuhXDj1synVcHTknfESt",
+          "policy": "policy://routed-inference@sha256:demo",
+          "delegation": []
+        }
+      },
+      "remedy": {
+        "challenge_window": "P7D",
+        "forum": {
+          "log_endpoint": "https://witness.example",
+          "trusted_root_ref": "fixture:independently-pinned-root"
+        },
+        "remedies": [
+          {
+            "rung": "recompute",
+            "verifier": "python3 check.py",
+            "anchor": "hashes.content"
+          },
+          {
+            "rung": "escalate",
+            "verifier": "named routed-inference forum",
+            "anchor": "remedy://routed-inference-v0.1"
+          }
+        ]
+      },
+      "retention": {},
+      "stake": null,
+      "conventions": [],
+      "signature": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "content",
+        "issuer": "did:key:z6Mkk1ckCK1yKi6w2LjLYK1xvf1rSuhXDj1synVcHTknfESt",
+        "verificationMethod": "did:key:z6Mkk1ckCK1yKi6w2LjLYK1xvf1rSuhXDj1synVcHTknfESt",
+        "proofValue": "E8IZIeROC3pzV+i7Dh6jZLVQ6Ybp98YtmJh0QPOg5+9yk3eveYG6S9GeAAQY5/TbTpJoUAfukI2kMxaPGN6kAA=="
+      },
+      "authorization": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "authorization",
+        "issuer": "did:key:z6Mkk1ckCK1yKi6w2LjLYK1xvf1rSuhXDj1synVcHTknfESt",
+        "verificationMethod": "did:key:z6Mkk1ckCK1yKi6w2LjLYK1xvf1rSuhXDj1synVcHTknfESt",
+        "proofValue": "dZ7XVfM3FbK7PH+fvRe0rBAt0kc5/RVYTriP+HCZD24cric8//9HqScZc53SeC5H9nq1FTJjZoPsQarwD6U3Bw=="
+      },
+      "timestamp": "2026-07-17T00:00:04+00:00",
+      "producer": {
+        "bulla_version": "0.44.0",
+        "fixture": "bulla.routed-inference/0.1-draft"
+      },
+      "hashes": {
+        "content": "sha256:e46597ce4967325cfa46690f16fc2c853feabb4aca65ebc5dff4b9f2b12609d3",
+        "event": "sha256:9eaffb6b8a9c65ea446e76a059e48b8c6cf1a7f0c67cefaca9c624a799f11142",
+        "attestation": "sha256:233a947274e6aa8340f3d6570ecf3f4ac8c0291b8e2003079825aa109d4b4918",
+        "log_leaf": "sha256:1717720740cc91cdbbf4cc6a7a86a60d28fe657ff490cb8a3357cf45abdb8cf5"
+      }
+    },
+    {
+      "schema_version": "0.3",
+      "kind": "action_receipt",
+      "action": {
+        "type": "bulla.rely",
+        "subject": {
+          "relied_on": {
+            "event": "sha256:9eaffb6b8a9c65ea446e76a059e48b8c6cf1a7f0c67cefaca9c624a799f11142",
+            "attestation": "sha256:233a947274e6aa8340f3d6570ecf3f4ac8c0291b8e2003079825aa109d4b4918"
+          },
+          "policy": "reliance.pragmatic.v1@sha256:2549faa0f297c8e43d9462a28b464cd2e0813e986b58555d9b29572351fc0b88",
+          "decision": "rely"
+        },
+        "profile": "bulla.routed-inference/0.1-draft",
+        "parents": [
+          {
+            "event": "sha256:9eaffb6b8a9c65ea446e76a059e48b8c6cf1a7f0c67cefaca9c624a799f11142",
+            "attestation": "sha256:233a947274e6aa8340f3d6570ecf3f4ac8c0291b8e2003079825aa109d4b4918"
+          }
+        ],
+        "slot_id": "slot:routed-inference-0001",
+        "term_root": "sha256:f69204280f08e08c835fac17e323e0bcdc67c088af46412a0a9a98323cf5b1c8"
+      },
+      "diagnostic_ref": {
+        "status": "reference",
+        "ref": "sha256:320ec5d2cad8bca0318b80621009f17b2d6b9ea84b018a867d9cf3ca1d56b16b"
+      },
+      "evidence_refs": [
+        {
+          "name": "relied_on",
+          "hash": "sha256:233a947274e6aa8340f3d6570ecf3f4ac8c0291b8e2003079825aa109d4b4918",
+          "grounding": "counterparty_signed"
+        }
+      ],
+      "anchor_ref": {},
+      "mandate": {
+        "authority": {
+          "principal": "did:key:z6Mkv8C56wuv1E6ibDbZqQ8QzBcpjb6szfYDPvoAJ2At468E",
+          "policy": "policy://routed-inference@sha256:demo",
+          "delegation": []
+        }
+      },
+      "remedy": {
+        "challenge_window": "P7D",
+        "forum": {
+          "log_endpoint": "https://witness.example",
+          "trusted_root_ref": "fixture:independently-pinned-root"
+        },
+        "remedies": [
+          {
+            "rung": "recompute",
+            "verifier": "python3 check.py",
+            "anchor": "hashes.content"
+          },
+          {
+            "rung": "escalate",
+            "verifier": "named routed-inference forum",
+            "anchor": "remedy://routed-inference-v0.1"
+          }
+        ]
+      },
+      "retention": {},
+      "stake": null,
+      "conventions": [],
+      "signature": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "content",
+        "issuer": "did:key:z6Mkv8C56wuv1E6ibDbZqQ8QzBcpjb6szfYDPvoAJ2At468E",
+        "verificationMethod": "did:key:z6Mkv8C56wuv1E6ibDbZqQ8QzBcpjb6szfYDPvoAJ2At468E",
+        "proofValue": "gfsXFF0AabJYGZDfQFBnYgM42t9dkRzVtYgJOFl/uraOX9d0ZqBmV2wOo2N19+qvJKhRyV995Ffg7kPeDGq2Ag=="
+      },
+      "authorization": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "authorization",
+        "issuer": "did:key:z6Mkv8C56wuv1E6ibDbZqQ8QzBcpjb6szfYDPvoAJ2At468E",
+        "verificationMethod": "did:key:z6Mkv8C56wuv1E6ibDbZqQ8QzBcpjb6szfYDPvoAJ2At468E",
+        "proofValue": "jys6WMmTtQCf8YAFQ7vn0BFRTceEbrfqFqrb7h2wWRj31q2DfRE+RUrk6di2p9x0lbvS5dJKPPG3Lqje3vXBDA=="
+      },
+      "timestamp": "2026-07-17T00:00:06+00:00",
+      "producer": {
+        "bulla_version": "0.44.0",
+        "fixture": "bulla.routed-inference/0.1-draft"
+      },
+      "hashes": {
+        "content": "sha256:f6d9c23b7c09cc08675d0721c89308218ae9d8deabe06a8148b940abe716ebb0",
+        "event": "sha256:12d97df3c65d47aa400e3ef6dcb6c54548ea575d169cca5dab36cab41ede7cbb",
+        "attestation": "sha256:f7bb8f77b6340afc0ff122b71a1d13bcdab43d02b02871e02e051bfadb1e1502",
+        "log_leaf": "sha256:cc9b4092b1d944b71f86f3c90e8829dca0667bfd58dba6a7ed1b1411ac4f0674"
+      }
+    }
+  ],
+  "witness": {
+    "status": "not_exercised",
+    "heads": []
+  },
+  "settlement_evidence": []
+}

@@ -1,0 +1,14 @@
+{
+  "slot_id": "slot:acme-order-0006",
+  "ordering": "local-host",
+  "deadline": { "checkpoint_ref": "host_log_size", "value": 100 },
+  "evaluation_checkpoint": { "checkpoint_ref": "host_log_size", "value": 130 },
+  "events": [
+    { "type": "order", "slot_id": "slot:acme-order-0006", "seq": 10, "term_root": "sha256:fff", "by": "buyer", "receipt_hash": "sha256:order-6", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "countersign", "slot_id": "slot:acme-order-0006", "seq": 12, "parent_seq": 10, "by": "seller", "receipt_hash": "sha256:countersign-6", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "close", "slot_id": "slot:acme-order-0006", "close_type": "delivery", "seq": 60, "parent_seq": 12, "conforming": true, "receipt_hash": "sha256:forged-delivery-6", "receipt_validated": true, "receipt_authority": "forged", "countersigned_valid": true, "parent_chain_valid": true }
+  ],
+  "host_served_state": "closed",
+  "expected_finding": "REJECTED_FORGED_CLOSE",
+  "note": "The close is an ActionReceipt whose envelope was swapped and downstream hashes recomputed while keeping the content signature — the exact I3 attack (see spec/vectors/tampered-authority.json). The slot layer inherits authority binding: a close whose authority_authentic='forged' is not a valid close, so the slot rejects it rather than treating the forged mandate as a delivery."
+}

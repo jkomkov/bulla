@@ -142,6 +142,69 @@ def _repair_semantics(report: RegimeReport) -> str:
     )
 
 
+# Scope riders shown with EVERY completeness verdict (non-negotiable honesty):
+# completeness is (i) coherence/convention-layer only, never delivery/value;
+# (ii) relative to the loaded vocabulary packs.
+_COMPLETENESS_RIDERS: tuple[str, ...] = (
+    "Coherence completeness only: certifies that the loaded conventions compose "
+    "(the type/convention layer). It does NOT certify that the composition "
+    "delivers the right result — the value/delivery layer is separate and out "
+    "of scope.",
+    "Relative to the loaded vocabulary: completeness is with respect to the "
+    "loaded convention packs; an obstruction in an unloaded dimension is not "
+    "seen.",
+)
+
+
+def _completeness_verdict(report: RegimeReport) -> dict:
+    """v0 free-text completeness verdict for the `display` block.
+
+    UI-only and EXCLUDED from the content-hash preimage (like the other
+    display strings); machine consumers must read
+    `claims.exact_disclosure_equivalence.status` — this verdict is derived from
+    the SAME predicates that license that claim, so it never says more.
+
+    Verdict states:
+      - "proven"         : exact regime (DFD ∧ CHP) ∧ well-formed — the fee is
+                           exact and the minimum disclosure set is provably
+                           minimal (composition-doctrine Lemma 3.9 / the
+                           exact-conservative matroid equivalence).
+      - "lower_bound"    : well-formed but surrogate regime — the fee is a
+                           floor; more obstruction may exist and the disclosure
+                           set may not be minimal.
+      - "not_applicable" : not well-formed for the fee.
+
+    The two scope riders are ALWAYS present (see `_COMPLETENESS_RIDERS`)."""
+    if not report.is_well_formed_for_fee:
+        return {
+            "verdict": "not_applicable",
+            "interpretation": (
+                "Composition not well-formed for the fee (observable_schema "
+                "must be a subset of internal_state per tool)."
+            ),
+            "scope": list(_COMPLETENESS_RIDERS),
+        }
+    if report.is_exact_regime_conservative:
+        return {
+            "verdict": "proven",
+            "interpretation": (
+                "Complete: on this composition the coherence fee is exact and "
+                "the prescribed disclosures are provably minimal — no "
+                "convention mismatch is missed and no smaller fix suffices."
+            ),
+            "scope": list(_COMPLETENESS_RIDERS),
+        }
+    return {
+        "verdict": "lower_bound",
+        "interpretation": (
+            "Lower bound: the fee is a floor. The exact-regime guarantee "
+            "(DFD ∧ CHP) does not hold here, so additional obstruction may "
+            "exist and the disclosure set may not be minimal."
+        ),
+        "scope": _COMPLETENESS_RIDERS,
+    }
+
+
 # ---- Structured Claim ----
 
 @dataclass(frozen=True)
@@ -693,6 +756,7 @@ def certify(
         display={
             "fee_interpretation": _fee_interpretation(report),
             "repair_semantics": _repair_semantics(report),
+            "completeness": _completeness_verdict(report),
         },
         timestamp=datetime.now(timezone.utc).isoformat(),
         bulla_version=__version__,

@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.1",
+  "name": "SMTInterpol",
+  "version": "2.5-1453-gedae1f37",
+  "version_contains": "SMTInterpol 2.5-1453-gedae1f37",
+  "binary_url": "https://ultimate.informatik.uni-freiburg.de/smtinterpol/smtinterpol-2.5-1453-gedae1f37.jar",
+  "binary_sha256": "sha256:8d42e87614fcdbe6fce5233b91f20563dfd9a854d999127d70cfb42853e091c7",
+  "source_url": "https://ultimate.informatik.uni-freiburg.de/smtinterpol/smtinterpol-2.5-1453-gedae1f37-sources.jar",
+  "source_sha256": "sha256:ebc39743398f01a45eed9199df348d54f5a035d96292088c8984be89bb4981cb",
+  "license": "LGPL-3.0-or-later",
+  "proof_format": "RESOLUTE",
+  "proof_checker_class": "de.uni_freiburg.informatik.ultimate.smtinterpol.proof.checker.Main"
+}

@@ -1,0 +1,38 @@
+{
+  "artifact_hashes": {
+    "SPEC.md": "sha256:7d4e66e3b048d2861cbb25dc57b9dd3ca779e3fcfd61a1a25a8f2cf146d6ef2c",
+    "abstention-scorecard.json": "sha256:7126e2d8f750a78ca640de4b4cf335bc03ab39d6fc171e537bb95153de3653a8",
+    "challenge-ledger.json": "sha256:d2b03733757ae98b1cd1b4fcf94a01886730c077969e011081536e0c44dc868d",
+    "drift-stress.json": "sha256:385abbc030e4a938d8658a5c7b989338eb74a7dac6b84c1ff7a8c9b4c29ad1c3",
+    "economic-model-check.json": "sha256:9d362fef33a42bd2288bf34ed941f2d24a1a328c079e2f39dfae9c3b517ed253",
+    "external-status.json": "sha256:1ec730c251303d9ffe0b5a5ad9b0b5f5ff7a9f4a6782d334b0b21288aa66dcd5",
+    "falsification-ledger.json": "sha256:fba6cd3ecba50b76d451b2ce90a75b4a78aecf1422a2d3f4e8e28c598647370f",
+    "formal-audit.json": "sha256:05ba41d2bcd5711632cae7376819841a7a4e8838ee909fa265f3a60bdc17a534",
+    "found-data-status.json": "sha256:17f62477a8dee29daa6446c75532ac19b7fcc6b434867346dd731ae70a51518f",
+    "internal-summary.json": "sha256:c0041ca383dad1bc2bc44c869c9ef0584d251982bfab286fed3a33ae2086a97a",
+    "metamorphic-report.json": "sha256:358f477014ce4cb0365837f2c5abbf7d80bdce0acefb953da9850181a8691282",
+    "mutation-campaign.json": "sha256:9310f798acb8c2b0361eb494cb82bc8371ba08702fe4fba8638d4fc2f3d5e7fb",
+    "pathology-regression.json": "sha256:2630e7ae5696c861e929d913ea9cf18ef8690da25dbc0d59688c13cf989f75f4",
+    "portability-observation.json": "sha256:cc2b287bf6761ffbbd37d5de7f29df8feec9c6193f08119221ecfeb2e564042c",
+    "preregistration.json": "sha256:631adf54e534a2ecca899a306f00ef3c069d09b0a8a373386994a45948467aea",
+    "provenance-cards.json": "sha256:568f627807ba1cd6c6a3c24868cd8cece31bde7e65904752d5c684db67b15dd9",
+    "provenance-dag-scout.json": "sha256:cc8b04af5830b2f0f6c942e4f67c5425d0ecf9c66a8adae3440d424202eb9d2a",
+    "scaling-report.json": "sha256:a17f457618659a9ae2809d1b96315418c63e1c8b84197afa8edec789392a0c86",
+    "source-accessibility-audit.json": "sha256:1e3f5ea217877fa8fa59a3894bc12bcd7ab618356ccaa365b0706aeca9b8e08e"
+  },
+  "blindness_mode_requested": "REVIEWER_ORIGINATED_BLIND",
+  "candidate_commit": "3f9ea464211f7ea9af7fee0e7e2a9e953d0b71a6",
+  "external_status": "BLOCKED_MISSING_EXTERNAL_PARTICIPANTS",
+  "manifest_hash": "sha256:e6462565c92acdbf486ad43e9b9ed50ed32f12ec0972263a3c0c74700b789337",
+  "profile": "bulla.golden-suite/0.2-experimental",
+  "reviewer_cases_created": 0,
+  "runner_hashes": {
+    "run_drift.py": "sha256:77dc2f46f40549aad34c232bbc3f7e392b53e8746f02414e25d75486ded75ac3",
+    "run_pathology_regression.py": "sha256:aefa7e8f986c926553a834a490ecd20faa1e4837776c421432c6a29e76458230",
+    "run_scaling.py": "sha256:8b98a2c47da4d68181db11da1d72545a9036e35451737f1a160d74632df81fd4",
+    "run_suite.py": "sha256:309c58b4bdf64f1cba56861bb638cfc881350b2686c5938eb5fb241890d45977"
+  },
+  "scoring_hash": "sha256:4b0a524475fcc90982443574c705596a066aca723aa572d6ffe739cd3bd206c5",
+  "specification_hash": "sha256:7d4e66e3b048d2861cbb25dc57b9dd3ca779e3fcfd61a1a25a8f2cf146d6ef2c",
+  "v01_lineage_commit": "2129cc1a"
+}

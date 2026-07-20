@@ -1,0 +1,20 @@
+{
+  "cleanroom_submissions": {
+    "received": 0,
+    "required": 1
+  },
+  "custody_reveal": {
+    "received": false,
+    "required": true
+  },
+  "primary_adjudication_ratings": {
+    "received": 0,
+    "required": 240
+  },
+  "reason": "No synthetic identities or implementation-team oracle may satisfy an external gate.",
+  "reviewer_originated_hidden_cases": {
+    "received": 0,
+    "required": 36
+  },
+  "status": "BLOCKED_MISSING_EXTERNAL_PARTICIPANTS"
+}

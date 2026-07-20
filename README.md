@@ -19,8 +19,10 @@ pip install bulla
 ### 30-second quickstart: mint a receipt, verify it, hand it to a stranger
 
 The trunk of bulla is the **receipt**: one consequential action, made
-accountable — and recomputable by anyone, from the
-[wire spec](spec/action-receipt-v0.2.md) alone:
+accountable — and recomputable by anyone, from the normative
+[v0.2 wire spec](spec/action-receipt-v0.2.md) alone. Adding `--key` opts into
+the released implementation of the non-normative
+[v0.3 authority-binding draft](spec/action-receipt-v0.3-draft.md):
 
 ```bash
 # Mint a receipt for one action (sign it by adding --key after `bulla key gen`)
@@ -34,9 +36,8 @@ bulla receipt create --type github.create_file \
 # convention conformance — honest about depth, never a lying boolean
 bulla receipt verify receipt.json
 
-# Omission detection: which anchored actions have NO receipt at all,
-# measured against an anchor you did not mint
-bulla coverage --anchor git --receipts releases/
+# Omission detection: PyPI is the release denominator; candidates do not count
+bulla coverage --anchor pypi --receipts releases/
 ```
 
 Receipts can carry **conventions** — rules two agents coin at their seam
@@ -49,10 +50,29 @@ The stranger test is executable: `python spec/vectors/independent_check.py`
 reverifies every golden vector with the Python standard library and **zero
 bulla imports** — the spec, not this repo, is the contract.
 
+### Reproduce the routed-inference draft
+
+The draft profile applies ordinary ActionReceipts to one harness, one router, one
+provider, one delivery assertion, and one reliance decision. It requires full term
+disclosure, retains every binding, and distinguishes conveyed recourse from unverified
+operational reachability. It is not a live provider or settlement integration.
+
+```bash
+python spec/routed-inference-vectors/check.py
+# OK: 14/14 routed-inference traces
+
+PYTHONPATH=src python examples/routed-inference/run_demo.py --fixture-keys
+```
+
+`python spec/build_routed_profile_bundle.py` creates a deterministic external
+reproduction package. Passing its supplied checker reproduces fixtures; an independent
+implementation must be written from the profile and return the included conformance
+report.
+
 ### The seam diagnostic: compose two compositions
 
-The original diagnostic layer — a human-readable report of exactly which
-fields to expose to make a composition safe (the **coherence fee** is a
+The original diagnostic layer — a human-readable report of which fields are
+currently undisclosed at a composition seam (the **coherence fee** is a
 disclosure/omission signal a receipt can carry; see
 [FALSIFICATIONS.md](FALSIFICATIONS.md) for what it is *not*):
 
@@ -68,7 +88,7 @@ Output:
 
   2 blind-spot dimensions forming 2 independent obstruction classes.
 
-  To make this composition safe, expose 4 fields:
+  To reduce this disclosure deficit, expose 4 fields:
 
     1. tool `fetch`, field `encoding`
        Action: add `encoding` to fetch.observable_schema
@@ -102,9 +122,11 @@ bulla registry anchor                          # timestamp the whole log (OpenTi
 The trust rule is strict by design: an inclusion proof only counts against a root
 you obtained **independently of the host** — your own log, a pinned root, or an
 OTS-anchored checkpoint. A remote registry's bare claim about itself is classified
-`host-asserted` and refused. What this buys: the record survives the operator
-(append-only, no deletion), can't be backdated past its anchor, and omission is
-caught because relying parties refuse the unlogged.
+`host-asserted` and refused. What this buys: deletion or reordering becomes
+detectable against a pinned root, the shown record cannot be backdated past its
+anchor, and omission is caught because relying parties refuse the unlogged. A
+separately operated ActionReceipt witness is a later service surface; this deed
+registry does not pretend to be one.
 
 ### Recourse gate: PROCEED / REFUSE on a deed
 
@@ -113,8 +135,15 @@ counterparty's signed, logged coherence deed — **PROCEED**, or **REFUSE** with
 refusal that names the cure. It gates on **type signals only**: authenticity + inclusion
 under a root you trust *independently of the host*; the coherence fee is *reported*, and
 gated on only when you opt in (`--require-fee N` — a disclosure demand, not an execution
-predictor). It does **not** verify delivery — a coherent liar passes; performance bonding
-is roadmap.
+predictor). It does **not** verify delivery — a coherent liar passes. Any collateral or
+settlement policy is an external sidecar, not a fee-derived Bulla guarantee.
+
+The research program treats Bulla's security foundation as four separate
+requirements: authenticity, inclusion under an independently trusted root,
+independently persistent witnessing where occurrence coverage is required, and
+an executable recourse path. Today's default gate implements the first two and
+checks the recourse material it is given; it does not infer coverage or remedy
+from a coherence score.
 
 ```bash
 # From a checkout, after `pip install -e .`:
@@ -150,7 +179,7 @@ bulla audit --manifests examples/canonical-demo/manifests/
 
 `bulla audit` auto-detects your MCP configuration when possible, scans servers, and prints a short **receipt**: **boundary fee** first (cross-server seams), then within-server blind spots, then copy-paste next steps (`--max-fee`, `--format json`). If no config is found, stderr suggests a **`bulla scan …`** command you can run with zero setup.
 
-## Bulla as MCP proxy — the safety co-pilot agents query
+## Bulla as MCP proxy — a provenance and disclosure adviser
 
 `bulla audit` and `bulla compose` analyze YAML *before* deployment. The
 **live MCP proxy** sits between an agent and its MCP backends while
@@ -185,8 +214,9 @@ compositions for humans. The Bulla proxy is the participant the agent
 itself queries — and `bulla__why` returns an Aristotle run hash plus
 the Lean theorem (`disclosure_characterization`,
 `sheaf_realization_characterization_via_cohomology`) that backs the
-recommendation. No competitor can attach formally-verified provenance
-to safety claims without an analogous formalization arc.
+recommendation. The provenance attaches a run hash and a theorem name to a
+scoped disclosure recommendation; it does not turn that recommendation into a
+safety proof or an execution-failure prediction.
 
 See [examples/live-mcp-proxy/README.md](https://github.com/jkomkov/bulla/tree/main/examples/live-mcp-proxy#readme)
 for the runnable demo, telemetry walkthrough, and trust-ladder model

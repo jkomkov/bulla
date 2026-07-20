@@ -1,0 +1,1698 @@
+{
+  "schema_version": "0.1-experimental",
+  "split": "all",
+  "freeze_hash": "sha256:ec63681d7713f4fd10adabec9b0151cd1f2dfe84600fc63d8c3b67b904697411",
+  "instance_count": 60,
+  "status_counts": {
+    "CHOICE_REQUIRED": 12,
+    "COMPILED": 24,
+    "ESCALATE": 12,
+    "PARTIAL": 12
+  },
+  "expected_status_agreement": 1.0,
+  "sound_packages_or_certificates": 60,
+  "independently_rejected_emissions": 0,
+  "compile_rate": 0.4,
+  "p95_synthesis_seconds": 6.011415082990425,
+  "p95_predicate_ast_nodes": 2,
+  "product_gate": {
+    "compile_rate_at_least_25_percent": true,
+    "compile_rate_below_kill_10_percent": false,
+    "p95_under_10_seconds": true,
+    "p95_under_256_nodes": true
+  },
+  "adversarial_controls": [
+    {
+      "id": "vacuous-predicate",
+      "passed": true,
+      "expected": "INVALID_INPUT",
+      "actual": "INVALID_INPUT",
+      "replay": null
+    },
+    {
+      "id": "hidden-state-leakage",
+      "passed": true,
+      "expected": "ESCALATE",
+      "actual": "ESCALATE",
+      "replay": null
+    },
+    {
+      "id": "contradictory-local-definitions",
+      "passed": true,
+      "expected": "INVALID_INPUT",
+      "actual": "INVALID_INPUT",
+      "replay": null
+    },
+    {
+      "id": "topology-obstruction",
+      "passed": true,
+      "expected": "ESCALATE",
+      "actual": "ESCALATE",
+      "replay": null
+    },
+    {
+      "id": "query-only-conservativity",
+      "passed": true,
+      "expected": "fail",
+      "actual": "fail",
+      "reasons": [
+        "package local definitions differ from the emitted global surface",
+        "package.formula[0] leaks non-shared relations ['target']"
+      ]
+    },
+    {
+      "id": "unauthorized-authority-expansion",
+      "passed": true,
+      "expected": "fail",
+      "actual": "fail",
+      "reasons": [
+        "package authority differs from the requested authority"
+      ]
+    },
+    {
+      "id": "unstable-equivalent-hash",
+      "passed": true,
+      "expected": "fail",
+      "actual": "fail",
+      "reasons": [
+        "package local definitions differ from the emitted global surface",
+        "package.formula[0] is not in canonical FRSL-1 form"
+      ]
+    },
+    {
+      "id": "repair-one-break-another",
+      "passed": true,
+      "expected": "fail",
+      "actual": "fail",
+      "reasons": [
+        "protected signature pins do not match the problem"
+      ]
+    }
+  ],
+  "all_controls_pass": true,
+  "standalone_parity": {
+    "enabled": true,
+    "accepted_count": 60,
+    "hash_agreement_count": 60
+  },
+  "instances": [
+    {
+      "id": "units-0",
+      "family": "units",
+      "split": "holdout",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021175833011511713,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:b202a2bdcf7ac354ce8cad341ab83336aa3cbf55dda1aee821f7745f9e4ab30c",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:b202a2bdcf7ac354ce8cad341ab83336aa3cbf55dda1aee821f7745f9e4ab30c",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "units-1",
+      "family": "units",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021379041994805448,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:0e9dc8dad00a016735f505a860da4182a227fe7a507a96a86f79134052dee842",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:0e9dc8dad00a016735f505a860da4182a227fe7a507a96a86f79134052dee842",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "units-2",
+      "family": "units",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 6.0606112079985905,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:0ec74f4f807462b383f14e0a1a35da25a775a169109be4927c7bbc0b8613a1b4",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "PARTIAL",
+        "result_hash": "sha256:0ec74f4f807462b383f14e0a1a35da25a775a169109be4927c7bbc0b8613a1b4",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "units-3",
+      "family": "units",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0019362090097274631,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:7ea8316bd50cd247c48084abd9c631510baa81b15fc96fe170cdaed0e16acb2a",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "ESCALATE",
+        "result_hash": "sha256:7ea8316bd50cd247c48084abd9c631510baa81b15fc96fe170cdaed0e16acb2a",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "units-4",
+      "family": "units",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.3230827920051524,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:e29dbee16751c8210dac4b92a7645be9e950e2916e337b7b12b14285bab00e57",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "CHOICE_REQUIRED",
+        "result_hash": "sha256:e29dbee16751c8210dac4b92a7645be9e950e2916e337b7b12b14285bab00e57",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "bounded_time-0",
+      "family": "bounded_time",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02147870800399687,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:588eddc0f6188cdbd0491400ced8349306139281b90f6115d2cce02c7c5cdfde",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:588eddc0f6188cdbd0491400ced8349306139281b90f6115d2cce02c7c5cdfde",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "bounded_time-1",
+      "family": "bounded_time",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0224820000003092,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:61eef220311c3cc1b21d930ca6d64cd235ed3db1786a03df634c5829eb8fac94",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:61eef220311c3cc1b21d930ca6d64cd235ed3db1786a03df634c5829eb8fac94",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "bounded_time-2",
+      "family": "bounded_time",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 5.867311750000226,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:13561f9c38a2c8690f9ad63e50032673c30f27a771a6a2e2def1dc8619338dec",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "PARTIAL",
+        "result_hash": "sha256:13561f9c38a2c8690f9ad63e50032673c30f27a771a6a2e2def1dc8619338dec",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "bounded_time-3",
+      "family": "bounded_time",
+      "split": "holdout",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0021791250037495047,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:279f64dde627b3c2443ea629085005bf67a7a03d1cb4c50b89cc0f7c480169dd",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "ESCALATE",
+        "result_hash": "sha256:279f64dde627b3c2443ea629085005bf67a7a03d1cb4c50b89cc0f7c480169dd",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "bounded_time-4",
+      "family": "bounded_time",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.299946541999816,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:52b83cb52010f080e9626b306f0ffc4bffc84d4ccc9055ac8d3fd44acf506dc6",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "CHOICE_REQUIRED",
+        "result_hash": "sha256:52b83cb52010f080e9626b306f0ffc4bffc84d4ccc9055ac8d3fd44acf506dc6",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "interval_boundaries-0",
+      "family": "interval_boundaries",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02590591700572986,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:095a99fac88afec21d98e9d5c5fc3cb08fa503339c3189ddb5ddf343e99debcc",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:095a99fac88afec21d98e9d5c5fc3cb08fa503339c3189ddb5ddf343e99debcc",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "interval_boundaries-1",
+      "family": "interval_boundaries",
+      "split": "holdout",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.023040250001940876,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:1446350d29c9e4de36ad5234a0d7bbbf456b09254288d4bafca88a34c6dcffb1",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:1446350d29c9e4de36ad5234a0d7bbbf456b09254288d4bafca88a34c6dcffb1",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "interval_boundaries-2",
+      "family": "interval_boundaries",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 5.914188415990793,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:e19ed2d816a1f43679a3998467dc500c5478540033ca2fd99c0718bcc5870120",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "PARTIAL",
+        "result_hash": "sha256:e19ed2d816a1f43679a3998467dc500c5478540033ca2fd99c0718bcc5870120",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "interval_boundaries-3",
+      "family": "interval_boundaries",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0022200829989742488,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:0e5e27800e7aacba32a6e200e3ce2899bb258db6647c836b088ebc7ae09a2565",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "ESCALATE",
+        "result_hash": "sha256:0e5e27800e7aacba32a6e200e3ce2899bb258db6647c836b088ebc7ae09a2565",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "interval_boundaries-4",
+      "family": "interval_boundaries",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.2982873750006547,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:95922ede6a4bd0fd69090aa1ed7b6bc67bd9f8f10ea7de10d008ab950ba90af2",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "CHOICE_REQUIRED",
+        "result_hash": "sha256:95922ede6a4bd0fd69090aa1ed7b6bc67bd9f8f10ea7de10d008ab950ba90af2",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "enums-0",
+      "family": "enums",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02152958299848251,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:ebf3ea314b9e68e5260e36afcf9c7a80f7a0bf572fa11269092b9e365cc93201",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:ebf3ea314b9e68e5260e36afcf9c7a80f7a0bf572fa11269092b9e365cc93201",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "enums-1",
+      "family": "enums",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02184920800209511,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:6b94864cbec82f5d69fc5aa5f260f479b787c968ea9bcedba4363c2fb6e645a8",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:6b94864cbec82f5d69fc5aa5f260f479b787c968ea9bcedba4363c2fb6e645a8",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "enums-2",
+      "family": "enums",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 6.025142250000499,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:5d3def0bcc11926c87f05498e74a70ad46202c139124a8ab7bd907d750d6e8c6",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "PARTIAL",
+        "result_hash": "sha256:5d3def0bcc11926c87f05498e74a70ad46202c139124a8ab7bd907d750d6e8c6",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "enums-3",
+      "family": "enums",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.001840041994000785,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:1e9b30521a98b17e9ef622c3ca5f09f26a50b559b36f8e6ee447f319d084e797",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "ESCALATE",
+        "result_hash": "sha256:1e9b30521a98b17e9ef622c3ca5f09f26a50b559b36f8e6ee447f319d084e797",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "enums-4",
+      "family": "enums",
+      "split": "holdout",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.3044870830053696,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:43bb95984fd0e278e2f433110f5f0c40bba562f39a628a7d0be8f3a03d379f34",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "CHOICE_REQUIRED",
+        "result_hash": "sha256:43bb95984fd0e278e2f433110f5f0c40bba562f39a628a7d0be8f3a03d379f34",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "null_absent-0",
+      "family": "null_absent",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021150750006199814,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:6ad603582608440f69e985a042e0fde2f2be33519dca9204d8e38008018212c7",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:6ad603582608440f69e985a042e0fde2f2be33519dca9204d8e38008018212c7",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "null_absent-1",
+      "family": "null_absent",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021507291996385902,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:e3c82a0ea508be277ede4eb3ac264b04d2fed10e8780117a82548db9be8abe85",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:e3c82a0ea508be277ede4eb3ac264b04d2fed10e8780117a82548db9be8abe85",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "null_absent-2",
+      "family": "null_absent",
+      "split": "holdout",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 6.098923249999643,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:0d459d49337fba4d4fc1404e62be7e6450dac915e692a0adca39dee7741cda77",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "PARTIAL",
+        "result_hash": "sha256:0d459d49337fba4d4fc1404e62be7e6450dac915e692a0adca39dee7741cda77",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "null_absent-3",
+      "family": "null_absent",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0023301250039367005,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:3a5408cf487a5e189e5aa2a1ca042d24e5e37de4d5a78def88c0ed215e7a241e",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "ESCALATE",
+        "result_hash": "sha256:3a5408cf487a5e189e5aa2a1ca042d24e5e37de4d5a78def88c0ed215e7a241e",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "null_absent-4",
+      "family": "null_absent",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.3163274169928627,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:c6316b58f6f893b8b177940b158d56027a6a19563ff74af43ec03df24209f48c",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "CHOICE_REQUIRED",
+        "result_hash": "sha256:c6316b58f6f893b8b177940b158d56027a6a19563ff74af43ec03df24209f48c",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "namespaces-0",
+      "family": "namespaces",
+      "split": "holdout",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021355292003136128,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:2e457d44780ed1d6caa1c5a809b3bd96585af6a08e2693aea1efade9af8f8ae7",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:2e457d44780ed1d6caa1c5a809b3bd96585af6a08e2693aea1efade9af8f8ae7",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "namespaces-1",
+      "family": "namespaces",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021944958993117325,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:45f94b216494fd8ee57d9efaf233af76de81759d7cf2c47c949f445fda85c245",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:45f94b216494fd8ee57d9efaf233af76de81759d7cf2c47c949f445fda85c245",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "namespaces-2",
+      "family": "namespaces",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 6.011415082990425,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:3a9454b5b5faf374ddd3c602e769e2a74318f1108e1a698c482977ec8fa64524",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "PARTIAL",
+        "result_hash": "sha256:3a9454b5b5faf374ddd3c602e769e2a74318f1108e1a698c482977ec8fa64524",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "namespaces-3",
+      "family": "namespaces",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0018977920117322356,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:4e78b590e59da8a19ed008e7f661dc8dfdc768c5028157320dea1b763094972e",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "ESCALATE",
+        "result_hash": "sha256:4e78b590e59da8a19ed008e7f661dc8dfdc768c5028157320dea1b763094972e",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "namespaces-4",
+      "family": "namespaces",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.311758000010741,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:54659f1dbe30fbdca495247f8e968026418d91d28572ad7ddeb08f0d8dfc34c5",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "CHOICE_REQUIRED",
+        "result_hash": "sha256:54659f1dbe30fbdca495247f8e968026418d91d28572ad7ddeb08f0d8dfc34c5",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "integer_rounding-0",
+      "family": "integer_rounding",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021096957992995158,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:fc1809a59bca7ac16a6dc1a6d44455540bc8b3e8af2a659d03ad6c8b4c716441",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:fc1809a59bca7ac16a6dc1a6d44455540bc8b3e8af2a659d03ad6c8b4c716441",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "integer_rounding-1",
+      "family": "integer_rounding",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021755583002232015,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:1233221aac224215f9ea561bf6193f6bc221b757f893f2376b4200fc6eaf9b39",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:1233221aac224215f9ea561bf6193f6bc221b757f893f2376b4200fc6eaf9b39",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "integer_rounding-2",
+      "family": "integer_rounding",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 5.988833416995476,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:26195838fb3bcdf9446e0da279a61c181a8f497d480a599e51fb9ac759aa7255",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "PARTIAL",
+        "result_hash": "sha256:26195838fb3bcdf9446e0da279a61c181a8f497d480a599e51fb9ac759aa7255",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "integer_rounding-3",
+      "family": "integer_rounding",
+      "split": "holdout",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.001894832996185869,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:b096171139fd621ff5f2e0b9a35a7dd8768bfc77fee9019f5b75779af283b011",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "ESCALATE",
+        "result_hash": "sha256:b096171139fd621ff5f2e0b9a35a7dd8768bfc77fee9019f5b75779af283b011",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "integer_rounding-4",
+      "family": "integer_rounding",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.4156063749978784,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:56e14834ba19b5ed4f7e2546ce97a183fedefa357fdc798e04aed081c20aa5ad",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "CHOICE_REQUIRED",
+        "result_hash": "sha256:56e14834ba19b5ed4f7e2546ce97a183fedefa357fdc798e04aed081c20aa5ad",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "delivery_acceptance-0",
+      "family": "delivery_acceptance",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021298082996509038,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:50eb746526f815ad54fdb1bd6a9816622da7a71fd144e86905ee5fc1bc43cdc6",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:50eb746526f815ad54fdb1bd6a9816622da7a71fd144e86905ee5fc1bc43cdc6",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "delivery_acceptance-1",
+      "family": "delivery_acceptance",
+      "split": "holdout",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.041735582999535836,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:f7d911cb253a9c03c71bee07614507ca957a960cc0e41328c37a19e54b59ed84",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:f7d911cb253a9c03c71bee07614507ca957a960cc0e41328c37a19e54b59ed84",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "delivery_acceptance-2",
+      "family": "delivery_acceptance",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 5.907620167010464,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:a64aea43bff6d7579d8625e46179e0f9606f99157f2e3380c02ac20403c13841",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "PARTIAL",
+        "result_hash": "sha256:a64aea43bff6d7579d8625e46179e0f9606f99157f2e3380c02ac20403c13841",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "delivery_acceptance-3",
+      "family": "delivery_acceptance",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0019256249943282455,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:ff17d33fd0ca3f7429ba78a7a52739c943d87c020d669f9737a3e08a9472d2ae",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "ESCALATE",
+        "result_hash": "sha256:ff17d33fd0ca3f7429ba78a7a52739c943d87c020d669f9737a3e08a9472d2ae",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "delivery_acceptance-4",
+      "family": "delivery_acceptance",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.327228207999724,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:9138645c581baca5f57f0a1537a2521772ca840262087953cd03cd2343f749f5",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "CHOICE_REQUIRED",
+        "result_hash": "sha256:9138645c581baca5f57f0a1537a2521772ca840262087953cd03cd2343f749f5",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "evidence_floors-0",
+      "family": "evidence_floors",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02113745799579192,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:a596539630a221d3f0994ac4b045244f2181dbc1bcb39a6b68f391c62a63a21b",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:a596539630a221d3f0994ac4b045244f2181dbc1bcb39a6b68f391c62a63a21b",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "evidence_floors-1",
+      "family": "evidence_floors",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021685084007913247,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:9ac94d6b7e831ae58600bfb918f8f9a1683c79a14ed6892835febaf2341c66a1",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:9ac94d6b7e831ae58600bfb918f8f9a1683c79a14ed6892835febaf2341c66a1",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "evidence_floors-2",
+      "family": "evidence_floors",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 5.937296083997353,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:20218ce9012f9169dd8e5a48ace5c0a0692d97e73a1ae2455507cdb474ea5d8a",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "PARTIAL",
+        "result_hash": "sha256:20218ce9012f9169dd8e5a48ace5c0a0692d97e73a1ae2455507cdb474ea5d8a",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "evidence_floors-3",
+      "family": "evidence_floors",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0021504580072360113,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:511b0a4645ade553f45ce6bd7656d12917abe93c5ceca04dcda37fc0234edcc4",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "ESCALATE",
+        "result_hash": "sha256:511b0a4645ade553f45ce6bd7656d12917abe93c5ceca04dcda37fc0234edcc4",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "evidence_floors-4",
+      "family": "evidence_floors",
+      "split": "holdout",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.3226964159985073,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:b21adeb6ef2deca77ffd0bba944f44dcee46a6ede76145250fddf3a3a2056489",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "CHOICE_REQUIRED",
+        "result_hash": "sha256:b21adeb6ef2deca77ffd0bba944f44dcee46a6ede76145250fddf3a3a2056489",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "revocation_windows-0",
+      "family": "revocation_windows",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021321209002053365,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:f06adcda43110a336c940023ee753072684814b7c4b93d5793a942c5c8def8e9",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:f06adcda43110a336c940023ee753072684814b7c4b93d5793a942c5c8def8e9",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "revocation_windows-1",
+      "family": "revocation_windows",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.022239124999032356,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:e4d3e5dbf0d0d7986557226c3ce9b07c6f64f18ec56785e1630ab55344c331f5",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:e4d3e5dbf0d0d7986557226c3ce9b07c6f64f18ec56785e1630ab55344c331f5",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "revocation_windows-2",
+      "family": "revocation_windows",
+      "split": "holdout",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 5.928066292006406,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:672c9584007620144e37cbf01eb4ca45b0a4418bf0e3672589698a813ae2e24a",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "PARTIAL",
+        "result_hash": "sha256:672c9584007620144e37cbf01eb4ca45b0a4418bf0e3672589698a813ae2e24a",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "revocation_windows-3",
+      "family": "revocation_windows",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.002394791998085566,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:5bf8af91c6fda43fc3efebae7dad9303ca069550674dc1a5db99ffd12bed89ed",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "ESCALATE",
+        "result_hash": "sha256:5bf8af91c6fda43fc3efebae7dad9303ca069550674dc1a5db99ffd12bed89ed",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "revocation_windows-4",
+      "family": "revocation_windows",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.3215002920042025,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:623efb705f34d8e6727a365e53d4812f4e087e93143de8a7eeac14064df67cf0",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "CHOICE_REQUIRED",
+        "result_hash": "sha256:623efb705f34d8e6727a365e53d4812f4e087e93143de8a7eeac14064df67cf0",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "authority_scopes-0",
+      "family": "authority_scopes",
+      "split": "holdout",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.043843874998856336,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:c0b4ff977cf38a99f6a47e2166d2d8440968da4a53f60f37bf7c978f3cf45464",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:c0b4ff977cf38a99f6a47e2166d2d8440968da4a53f60f37bf7c978f3cf45464",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "authority_scopes-1",
+      "family": "authority_scopes",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.023585584000102244,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:bb688d6ce0096c3103c7a88ccac920e75b5816df5884b6f226b25458e6524d92",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:bb688d6ce0096c3103c7a88ccac920e75b5816df5884b6f226b25458e6524d92",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "authority_scopes-2",
+      "family": "authority_scopes",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 5.866430167006911,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:c2759a7ade3addc54de778dd00136f7e63ab372dd58fa66c5fd3f70c0267ae0e",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "PARTIAL",
+        "result_hash": "sha256:c2759a7ade3addc54de778dd00136f7e63ab372dd58fa66c5fd3f70c0267ae0e",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "authority_scopes-3",
+      "family": "authority_scopes",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.002167708007618785,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:ff19545150e9929ae7b2a8c775e7fd43d73c1d384f3eca114d8318c5f1c8f0a6",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "ESCALATE",
+        "result_hash": "sha256:ff19545150e9929ae7b2a8c775e7fd43d73c1d384f3eca114d8318c5f1c8f0a6",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "authority_scopes-4",
+      "family": "authority_scopes",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.3080962079984602,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:66257722dab550d2b972202dde9fcd715e98bda3c2606e6b2c275350141af42e",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "CHOICE_REQUIRED",
+        "result_hash": "sha256:66257722dab550d2b972202dde9fcd715e98bda3c2606e6b2c275350141af42e",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "nondefinable-0",
+      "family": "nondefinable",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02141654200386256,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:9cf55ae9db22b543144ad5a3096fc10454506241c62fa2acbe308b3ab2570070",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:9cf55ae9db22b543144ad5a3096fc10454506241c62fa2acbe308b3ab2570070",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "nondefinable-1",
+      "family": "nondefinable",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02198458299972117,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:bf56f35e573d56776b7abbb0953660bd68575e4e6ede725e858b269452cb35d3",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "COMPILED",
+        "result_hash": "sha256:bf56f35e573d56776b7abbb0953660bd68575e4e6ede725e858b269452cb35d3",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "nondefinable-2",
+      "family": "nondefinable",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 5.905347667008755,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:641bdf7d84bcad87223ed198355317200926782dcc452453ac08f11136bc67ae",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      },
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "PARTIAL",
+        "result_hash": "sha256:641bdf7d84bcad87223ed198355317200926782dcc452453ac08f11136bc67ae",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "nondefinable-3",
+      "family": "nondefinable",
+      "split": "holdout",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0018424169975332916,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:d907a08fa5c1d7eb183076539a72e330b6c645504f7e02ddca13741170075466",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "ESCALATE",
+        "result_hash": "sha256:d907a08fa5c1d7eb183076539a72e330b6c645504f7e02ddca13741170075466",
+        "hash_agreement": true,
+        "error": null
+      }
+    },
+    {
+      "id": "nondefinable-4",
+      "family": "nondefinable",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.3614418749930337,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:f8ffb10f73105fbc80ac5932310214ee74a5683b658306c518b648ebb6919f1a",
+      "replay": null,
+      "standalone": {
+        "ok": true,
+        "returncode": 0,
+        "status": "CHOICE_REQUIRED",
+        "result_hash": "sha256:f8ffb10f73105fbc80ac5932310214ee74a5683b658306c518b648ebb6919f1a",
+        "hash_agreement": true,
+        "error": null
+      }
+    }
+  ],
+  "comparison_arms": {
+    "exhaustive_reference": "run",
+    "smtinterpol": "adapter implemented; requires separately pinned jar",
+    "cegis": "DNF exact-cover search is internal to reference backend",
+    "frozen_llm_repairs": {
+      "source": "papers/bridge/demos/hidden_repair",
+      "frozen_unchanged": true,
+      "exact": 14,
+      "partial": 1,
+      "misses": 0,
+      "convergent_scenarios": 4,
+      "total_scenarios": 5,
+      "use": "candidate-generation baseline only"
+    },
+    "llm_candidate_plus_verifier": "not run without a preregistered provider snapshot"
+  },
+  "freeze_checks": {
+    "instance_count": true,
+    "family_count": true,
+    "holdout_count": true,
+    "holdout_ids": true,
+    "design_hash": true,
+    "holdout_hash": true,
+    "controls_hash": true,
+    "payload_hash": true
+  }
+}

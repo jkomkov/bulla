@@ -1,0 +1,16 @@
+{
+  "accessibility_audit": {
+    "captured_count": 35,
+    "failed_count": 0,
+    "report_hash": "sha256:1e3f5ea217877fa8fa59a3894bc12bcd7ab618356ccaa365b0706aeca9b8e08e",
+    "source_count": 35
+  },
+  "case_count": 120,
+  "claim_boundary": "Candidate compatibility edges with provenance; not demonstrated compositions or traffic.",
+  "direct_public_harvest_permitted": false,
+  "direct_redistributable_owner_count": 0,
+  "direct_redistributable_source_count": 0,
+  "label": "seed-corpus",
+  "primary_ratings_received": 0,
+  "primary_ratings_required": 240
+}

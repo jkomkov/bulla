@@ -1,0 +1,11 @@
+{
+  "oracle_material_included": false,
+  "packet_hashes": {
+    "adjudication": "sha256:d0e9f91fbc80ceac16bcf152e52956467a04e8fd6d273749b25ac88f7f3f58e6",
+    "cleanroom": "sha256:8428777b50e6986d800ac9fee56abb11917ba8933a0b499f77ac55d27eb7f413",
+    "curator": "sha256:4ad01797f05bc078002a0b3e2ade6625c845a34f59754651cf946ccc628b8be6"
+  },
+  "profile": "bulla.golden-suite/0.2-experimental",
+  "reviewer_originated_cases_included": false,
+  "status": "TEMPLATES_ONLY_EXTERNAL_ACTIONS_BLOCKED"
+}

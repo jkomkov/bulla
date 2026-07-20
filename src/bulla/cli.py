@@ -229,9 +229,14 @@ def _seed_set_compositions(repo_root: Path) -> list[tuple[Composition, str]]:
     curated YAMLs + Sprint 10 negative-control fixture."""
     out: list[tuple[Composition, str]] = []
 
+    # Accept both the res-agentica monorepo root and the standalone Bulla root.
+    # The earlier implementation silently produced a smaller seed set in the
+    # standalone mirror because it always assumed a nested ``bulla/`` directory.
+    bulla_root = repo_root / "bulla" if (repo_root / "bulla").is_dir() else repo_root
+
     # Registry pairs (inlined Sprint 4 helpers; no module-import side effects)
     manifests_dir = (
-        repo_root / "bulla" / "calibration" / "data" / "registry" / "manifests"
+        bulla_root / "calibration" / "data" / "registry" / "manifests"
     )
     manifests = _seed_set_load_registry_manifests(manifests_dir)
     for a, b in _SEED_SET_REGISTRY_PAIRS:
@@ -245,6 +250,8 @@ def _seed_set_compositions(repo_root: Path) -> list[tuple[Composition, str]]:
     # Curated YAMLs
     for rel in _SEED_SET_CURATED_YAMLS:
         p = repo_root / rel
+        if not p.exists() and rel.startswith("bulla/"):
+            p = bulla_root / rel.removeprefix("bulla/")
         if p.exists():
             try:
                 comp = load_composition(p)
@@ -358,6 +365,17 @@ def _format_certify_text(cert) -> str:
             lines.append(f"      licensed_by: {list(c.licensed_by)}")
         if c.not_licensed:
             lines.append(f"      not_licensed: {list(c.not_licensed)}")
+    lines.append("")
+    comp = cert.display["completeness"]
+    _verdict_glyph = {
+        "proven": "✓ PROVEN",
+        "lower_bound": "~ LOWER BOUND",
+        "not_applicable": "– N/A",
+    }
+    lines.append(f"  COMPLETENESS: {_verdict_glyph.get(comp['verdict'], comp['verdict'])}")
+    lines.append(f"    {comp['interpretation']}")
+    for rider in comp["scope"]:
+        lines.append(f"    · {rider}")
     lines.append("")
     lines.append("  DISPLAY (v0 free-text labels; UI back-compat — do NOT parse):")
     lines.append(f"    fee_interpretation:      {cert.display['fee_interpretation']!r}")
@@ -731,8 +749,25 @@ def _cmd_gate(args: argparse.Namespace) -> None:
             decision, subject_deed=deed,
             disclose=tuple(getattr(args, "disclose", None) or ()), signer=signer)
 
-    if getattr(args, "format", "text") == "json":
+    output_format = getattr(args, "format", "text")
+    if output_format == "json":
         print(json.dumps(out, indent=2))
+    elif output_format == "brief":
+        included = str(bool(decision.included)).lower()
+        if decision.proceed:
+            print(
+                f"PROCEED  included={included} · root_trust={decision.root_trust}"
+            )
+        else:
+            print(
+                f"REFUSE   {decision.deficiency} · included={included} · "
+                f"root_trust={decision.root_trust}"
+            )
+            cure = (out.get("refusal_certificate") or {}).get("cure") or {}
+            if decision.deficiency == "UNPINNED_ROOT":
+                print("CURE     present the deed under an independently trusted root")
+            elif cure.get("human"):
+                print(f"CURE     {cure['human']}")
     elif decision.proceed:
         print(f"gate          PROCEED — {decision.reason}")
     else:
@@ -4323,7 +4358,7 @@ def _parse_kv_value(raw: str):
 def _cmd_receipt_create(args: argparse.Namespace) -> None:
     """Mint an ActionReceipt from flags — the stranger's ergonomic: one
     command from act to signed, verifiable receipt, no Python required."""
-    from bulla.action_receipt import build_action_receipt
+    from bulla.action_receipt import build_action_receipt, sign_action_receipt
     from bulla.envelope import (
         Authority, Bounds, EnvelopeError, Forum, Recourse, RecourseEnvelope, Remedy,
     )
@@ -4415,7 +4450,7 @@ def _cmd_receipt_create(args: argparse.Namespace) -> None:
         receipt = build_action_receipt(**kwargs)
         if getattr(args, "key", None):
             signer = _load_signer_or_exit(args.key, getattr(args, "issuer", None))
-            receipt = build_action_receipt(**kwargs, signature=signer.sign(receipt.content_hash))
+            receipt = sign_action_receipt(receipt, signer)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(2)
@@ -4455,12 +4490,42 @@ def _cmd_receipt_verify(args: argparse.Namespace) -> None:
         res = verify_receipt(doc, public_key=pub)
         payload = {
             "kind": kind, "ok": res.ok, "verified_to": res.verified_to,
+            "authority_authentic": res.authority_authentic,
             "checks": res.checks, "reasons": list(res.reasons),
         }
+        # Preserve the verifier's existing independent dimensions at the CLI
+        # boundary. They are not folded into a new boolean or reliance policy.
+        for dimension in (
+            "chain_integrity", "principal_binding", "policy_binding",
+            "scope_binding", "temporal_status", "revocation_status",
+            "bounds_conformance",
+        ):
+            payload[dimension] = getattr(res, dimension)
         if res.effective_grounding is not None:
             payload["effective_grounding"] = res.effective_grounding
         if res.conventions:
             payload["conventions"] = res.conventions
+        remedy = doc.get("remedy") if isinstance(doc.get("remedy"), dict) else {}
+        forum = remedy.get("forum") if isinstance(remedy.get("forum"), dict) else {}
+        content_signature = res.checks.get("signature")
+        payload["answerability"] = {
+            "integrity": "VERIFIED" if res.ok else "INVALID",
+            "authenticity": (
+                "VERIFIED" if content_signature is True
+                else "INVALID" if content_signature is False
+                else "UNVERIFIED"
+            ),
+            "authority": res.authority_authentic.upper(),
+            "scope": (
+                res.bounds_conformance.upper()
+                if res.bounds_conformance != "not_applicable"
+                else res.scope_binding.upper()
+            ),
+            "grounding": (res.effective_grounding or "UNRESOLVED").upper(),
+            "recourse": "NAMED" if forum.get("log_endpoint") else "UNRESOLVED",
+            "reachability": "UNVERIFIED",
+            "reliance_decision": "NOT_COMPUTED",
+        }
     elif kind == "certificate" or "certificate_content_hash" in doc:
         from bulla.certificate import verify_certificate_integrity
 
@@ -4505,7 +4570,11 @@ def _cmd_receipt_verify(args: argparse.Namespace) -> None:
         print(json.dumps(payload, indent=2))
     else:
         mark = "✓" if payload["ok"] else "✗"
-        print(f"{mark} {payload['kind']}  verified_to={payload['verified_to']}")
+        authority = (
+            f"  authority={payload['authority_authentic']}"
+            if "authority_authentic" in payload else ""
+        )
+        print(f"{mark} {payload['kind']}  verified_to={payload['verified_to']}{authority}")
         for name, val in payload["checks"].items():
             print(f"    {'✓' if val else '✗'} {name}")
         if payload.get("effective_grounding"):
@@ -4519,26 +4588,837 @@ def _cmd_receipt_verify(args: argparse.Namespace) -> None:
 
 
 def _cmd_coverage(args: argparse.Namespace) -> None:
-    """Receipt coverage against a declared anchor (v0.1: git). Prints the
-    min-over-anchors headline and the unreceipted-delta list — omission
-    detection is the audit product, not a vanity percentage."""
-    from bulla.coverage import coverage_headline, git_coverage
+    """Receipt coverage against PyPI (primary) or strict-SemVer Git tags."""
+    from bulla.coverage import (
+        coverage_headline,
+        git_coverage,
+        load_pypi_project,
+        pypi_coverage,
+    )
 
-    rep = git_coverage(str(args.receipts), match=args.match, repo=args.repo)
+    if args.anchor == "pypi":
+        project_doc = load_pypi_project(args.snapshot) if args.snapshot else None
+        try:
+            rep = pypi_coverage(
+                str(args.receipts),
+                project=args.project,
+                project_doc=project_doc,
+                verify_integrity=not args.no_integrity,
+                expected_repository=args.expected_repository,
+            )
+        except RuntimeError as exc:
+            print(f"Error: {exc}", file=sys.stderr)
+            sys.exit(2)
+    else:
+        rep = git_coverage(str(args.receipts), match=args.match, repo=args.repo)
     if getattr(args, "format", "text") == "json":
         print(json.dumps(rep, indent=2))
         return
-    print(coverage_headline([rep]))
+    if rep.get("status_counts"):
+        print("Release coverage · PyPI instrument")
+    else:
+        print(coverage_headline([rep]))
+    anchor_unit = "published releases" if rep["anchor"] == "pypi" else "stable package tags"
     print(
         f"  anchor={rep['anchor']}  "
-        f"{rep['receipted']}/{rep['total_anchored']} anchored actions receipted"
+        f"{rep['receipted']}/{rep['total_anchored']} {anchor_unit} with verified receipts"
     )
+    counts = rep.get("status_counts")
+    if counts:
+        print(
+            "  "
+            + " · ".join(
+                f"{name}={counts[name]}"
+                for name in ("contemporaneous", "reconstructed", "missing", "invalid")
+            )
+        )
+        for row in rep["releases"]:
+            receipt = f"  receipt={row['receipt']}" if row.get("receipt") else ""
+            print(f"    {row['version']:<12} {row['status']}{receipt}")
+        if rep.get("candidates"):
+            print(f"  candidates ({len(rep['candidates'])}) — excluded from the release denominator:")
+            for candidate in rep["candidates"]:
+                print(f"    · {candidate['version']}  {candidate['path']}")
+        if rep.get("invalid_receipts"):
+            print(f"  invalid artifacts ({len(rep['invalid_receipts'])}):")
+            for invalid in rep["invalid_receipts"]:
+                print(f"    · {invalid.get('path', '?')}: {invalid['reason']}")
     if rep["unreceipted_delta"]:
         print(f"  unreceipted delta ({len(rep['unreceipted_delta'])}) — anchored, no receipt:")
         for a in rep["unreceipted_delta"]:
             print(f"    · {a}")
     else:
         print("  no unreceipted delta against this anchor")
+
+
+def _cmd_receipt_check_equivocation(args: argparse.Namespace) -> None:
+    """Check the experimental, objective same-size equivocation predicate."""
+    from bulla.experimental.equivocation import verify_equivocation_evidence
+
+    try:
+        document = json.loads(args.evidence.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"Error: could not read equivocation evidence: {exc}", file=sys.stderr)
+        sys.exit(2)
+    result = verify_equivocation_evidence(document)
+    if args.format == "json":
+        print(json.dumps(result, indent=2))
+    else:
+        if result["equivocation"]:
+            print(
+                "EQUIVOCATION  "
+                f"operator={result['operator_id']} log={result['log_id']} "
+                f"tree_size={result['tree_size']}"
+            )
+            for root in result["roots"]:
+                print(f"  root {root}")
+        else:
+            print("NOT ESTABLISHED")
+            for reason in result["reasons"]:
+                print(f"  · {reason}")
+    sys.exit(0 if result["equivocation"] else 1)
+
+
+def _cmd_experimental(args: argparse.Namespace) -> None:
+    print(
+        "usage: bulla experimental "
+        "<invent|verify-invention|explain-invention|select-invention|"
+        "apply-invention|plan-enrichment|respond-enrichment|refine-envelope|"
+        "verify-refinement|assess-finality|repair-reliance|checkpoint> ..."
+    )
+    print("Research-only surface; no output is part of the stable Bulla API.")
+    sys.exit(2)
+
+
+def _load_invention_problem(path: Path):
+    from bulla.experimental.invention import SeamProblem
+
+    try:
+        document = json.loads(path.read_text(encoding="utf-8"))
+        return SeamProblem.from_dict(document)
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        print(f"Error: invalid seam problem: {exc}", file=sys.stderr)
+        sys.exit(2)
+
+
+def _load_invention_result(path: Path):
+    from bulla.experimental.invention import SynthesisResult
+
+    try:
+        document = json.loads(path.read_text(encoding="utf-8"))
+        return SynthesisResult.from_dict(document)
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        print(f"Error: invalid synthesis result: {exc}", file=sys.stderr)
+        sys.exit(2)
+
+
+def _cmd_experimental_invent(args: argparse.Namespace) -> None:
+    from datetime import datetime, timezone
+
+    from bulla.experimental.invention import mint_invention_receipt, synthesize
+
+    problem = _load_invention_problem(args.problem)
+    result = synthesize(problem)
+    rendered = json.dumps(result.to_dict(), indent=2)
+    if args.output:
+        args.output.write_text(rendered + "\n", encoding="utf-8")
+    else:
+        print(rendered)
+
+    if args.receipt:
+        missing = [
+            name
+            for name in ("principal", "policy", "forum_endpoint", "forum_root")
+            if not getattr(args, name)
+        ]
+        if missing:
+            print(
+                "Error: --receipt requires " + ", ".join("--" + x.replace("_", "-") for x in missing),
+                file=sys.stderr,
+            )
+            sys.exit(2)
+        from bulla.envelope import (
+            Authority,
+            Bounds,
+            Forum,
+            Recourse,
+            RecourseEnvelope,
+            Remedy,
+        )
+
+        envelope = RecourseEnvelope(
+            authority=Authority(principal=args.principal, policy=args.policy),
+            bounds=Bounds(scope=args.receipt_scope or f"predicate invention for {problem.problem_id}"),
+            recourse=Recourse(
+                challenge_window=args.challenge_window,
+                forum=Forum(
+                    log_endpoint=args.forum_endpoint,
+                    trusted_root_ref=args.forum_root,
+                ),
+                remedies=(
+                    Remedy(
+                        rung="recompute",
+                        verifier="bulla experimental verify-invention",
+                        anchor=result.result_hash,
+                    ),
+                    Remedy(
+                        rung="escalate",
+                        verifier=args.principal,
+                        anchor=args.policy,
+                    ),
+                ),
+            ),
+            retention_class="authority-permanent",
+            disclosure_class="auditor",
+        )
+        receipt = mint_invention_receipt(
+            problem,
+            result,
+            envelope=envelope,
+            timestamp=datetime.now(timezone.utc).isoformat(),
+            producer={"bulla_version": __version__, "surface": "experimental"},
+        )
+        args.receipt.write_text(receipt.to_json() + "\n", encoding="utf-8")
+
+    if args.output:
+        print(
+            f"{result.status.value}  result={args.output}  hash={result.result_hash}",
+            file=sys.stderr,
+        )
+    if args.receipt:
+        print(f"receipt={args.receipt}", file=sys.stderr)
+
+
+def _cmd_experimental_verify_invention(args: argparse.Namespace) -> None:
+    from bulla.experimental.invention import (
+        GateStatus,
+        SynthesisStatus,
+        verify_failure_certificate,
+        verify_package,
+    )
+
+    problem = _load_invention_problem(args.problem)
+    result = _load_invention_result(args.result)
+    binding_ok = result.problem_hash == problem.problem_hash
+    package_report = (
+        verify_package(problem, result.package)
+        if result.package is not None
+        else None
+    )
+    certificate_valid = (
+        verify_failure_certificate(
+            problem,
+            result.certificate,
+            alternatives=result.alternatives,
+        )
+        if result.certificate is not None
+        else None
+    )
+    minimality_ok = bool(
+        package_report is not None
+        and result.package is not None
+        and (
+            (
+                result.package.cost.get("minimality")
+                == "exact-finite-candidate-space"
+                and package_report.minimality is GateStatus.PASS
+            )
+            or (
+                result.package.cost.get("minimality") == "unresolved"
+                and package_report.minimality is GateStatus.UNRESOLVED
+            )
+        )
+    )
+    if result.status is SynthesisStatus.COMPILED:
+        ok = bool(
+            binding_ok
+            and package_report is not None
+            and package_report.gluing is GateStatus.PASS
+            and package_report.conservativity is GateStatus.PASS
+            and package_report.definability is GateStatus.PASS
+            and package_report.preserved_refusals is GateStatus.PASS
+            and package_report.receipt_binding is GateStatus.PASS
+            and minimality_ok
+        )
+    elif result.status is SynthesisStatus.PARTIAL:
+        ok = bool(
+            binding_ok
+            and package_report is not None
+            and package_report.gluing is GateStatus.PASS
+            and package_report.conservativity is GateStatus.PASS
+            and package_report.preserved_refusals is GateStatus.PASS
+            and package_report.receipt_binding is GateStatus.PASS
+            and minimality_ok
+            and certificate_valid
+        )
+    elif result.status in (SynthesisStatus.ESCALATE, SynthesisStatus.CHOICE_REQUIRED):
+        ok = bool(binding_ok and certificate_valid)
+    else:
+        ok = False
+    payload = {
+        "ok": ok,
+        "status": result.status.value,
+        "problem_binding": binding_ok,
+        "package_gates": package_report.to_dict() if package_report is not None else None,
+        "certificate_valid": certificate_valid,
+        "result_hash": result.result_hash,
+    }
+    if args.format == "json":
+        print(json.dumps(payload, indent=2))
+    else:
+        print(f"{'PASS' if ok else 'FAIL'}  {result.status.value}")
+        print(f"  problem_binding={binding_ok}")
+        if package_report is not None:
+            for name, value in package_report.to_dict().items():
+                if name != "reasons":
+                    print(f"  {name}={value}")
+            for reason in package_report.reasons:
+                print(f"  reason={reason}")
+        if certificate_valid is not None:
+            print(f"  certificate_valid={certificate_valid}")
+    sys.exit(0 if ok else 1)
+
+
+def _cmd_experimental_explain_invention(args: argparse.Namespace) -> None:
+    result = _load_invention_result(args.result)
+    print(f"Outcome: {result.status.value}")
+    print(f"Problem: {result.problem_hash}")
+    if result.package is not None:
+        print(f"Package: {result.package.package_hash} ({result.package.mode})")
+        print(
+            "Gates: "
+            + ", ".join(
+                f"{name}={value}"
+                for name, value in result.gate_report.to_dict().items()
+                if name != "reasons"
+            )
+        )
+        if result.package.mode == "partial":
+            print("Residual: ESCALATE (the shared vocabulary does not determine it)")
+    if result.certificate is not None:
+        print(f"Certificate: {result.certificate.kind.value}")
+        print(f"  {result.certificate.statement}")
+    if result.alternatives:
+        print(f"Choices: {len(result.alternatives)} exact-minimal packages")
+        for package in result.alternatives:
+            print(f"  {package.package_hash}")
+    for reason in result.gate_report.reasons:
+        print(f"Reason: {reason}")
+
+
+def _cmd_experimental_apply_invention(args: argparse.Namespace) -> None:
+    from bulla.experimental.control_plane import apply_package
+
+    problem = _load_invention_problem(args.problem)
+    result = _load_invention_result(args.result)
+    package = result.package
+    if args.package_hash:
+        package = next(
+            (item for item in result.alternatives if item.package_hash == args.package_hash),
+            None,
+        )
+    if package is None:
+        print("Error: result has no selected executable package", file=sys.stderr)
+        sys.exit(2)
+    try:
+        structure = json.loads(args.structure.read_text(encoding="utf-8"))
+        application = apply_package(
+            problem,
+            package,
+            shared_structure=structure,
+            target_arguments=args.argument,
+            adapter_version=args.adapter_version,
+        )
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        print(f"Error: cannot apply invention: {exc}", file=sys.stderr)
+        sys.exit(2)
+    print(json.dumps(application.to_dict(), indent=2))
+    sys.exit(0 if application.status.value == "RELY" else 1)
+
+
+def _cmd_experimental_select_invention(args: argparse.Namespace) -> None:
+    from datetime import datetime, timezone
+
+    from bulla.action_receipt import sign_action_receipt
+    from bulla.envelope import Authority, Bounds, RecourseEnvelope
+    from bulla.experimental.control_plane import mint_selection_receipt
+
+    problem = _load_invention_problem(args.problem)
+    result = _load_invention_result(args.result)
+    signer = _load_signer_or_exit(args.key, args.issuer)
+    envelope = RecourseEnvelope(
+        authority=Authority(principal=args.principal, policy=args.policy),
+        bounds=Bounds(scope=args.scope),
+    )
+    try:
+        receipt = mint_selection_receipt(
+            problem,
+            result,
+            selected_package_hash=args.package_hash,
+            envelope=envelope,
+            timestamp=args.timestamp or datetime.now(timezone.utc).isoformat(),
+            producer={"bulla_version": __version__, "surface": "experimental"},
+        )
+        signed = sign_action_receipt(receipt, signer)
+        args.output.write_text(signed.to_json() + "\n", encoding="utf-8")
+    except (OSError, ValueError) as exc:
+        print(f"Error: cannot select invention: {exc}", file=sys.stderr)
+        sys.exit(2)
+    print(f"selection={args.output} package={args.package_hash}")
+
+
+def _cmd_experimental_repair_reliance(args: argparse.Namespace) -> None:
+    from bulla.experimental.repairs import RepairCatalog, minimal_repairs
+    from bulla.reliance import ReliancePolicy
+
+    try:
+        view = json.loads(args.verification.read_text(encoding="utf-8"))
+        policy = ReliancePolicy(**json.loads(args.policy.read_text(encoding="utf-8")))
+        catalog = RepairCatalog.from_dict(json.loads(args.catalog.read_text(encoding="utf-8")))
+        plans = minimal_repairs(view, policy, catalog)
+    except (OSError, json.JSONDecodeError, TypeError, ValueError) as exc:
+        print(f"Error: cannot compute repair antichain: {exc}", file=sys.stderr)
+        sys.exit(2)
+    payload = {
+        "catalog_hash": catalog.catalog_hash,
+        "exact_within_declared_catalog": True,
+        "plans": [plan.to_dict() for plan in plans],
+    }
+    rendered = json.dumps(payload, indent=2)
+    if args.output:
+        args.output.write_text(rendered + "\n", encoding="utf-8")
+    else:
+        print(rendered)
+    sys.exit(0 if plans else 1)
+
+
+def _load_json_or_exit(path: Path, *, label: str):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"Error: invalid {label}: {exc}", file=sys.stderr)
+        sys.exit(2)
+
+
+def _write_json_or_print(document, output: Path | None) -> None:
+    rendered = json.dumps(document, indent=2) + "\n"
+    if output is None:
+        print(rendered, end="")
+    else:
+        output.write_text(rendered, encoding="utf-8")
+
+
+def _cmd_experimental_plan_enrichment(args: argparse.Namespace) -> None:
+    from bulla.experimental.observability import (
+        ConservationManifest,
+        LogicPassport,
+        ObservableOffer,
+        build_enrichment_request,
+        plan_enrichment,
+    )
+
+    problem = _load_invention_problem(args.problem)
+    result = _load_invention_result(args.result)
+    catalog = _load_json_or_exit(args.offers, label="observable catalog")
+    if isinstance(catalog, dict) and set(catalog) == {"offers"}:
+        catalog = catalog["offers"]
+    if not isinstance(catalog, list):
+        print("Error: observable catalog must be an array or {'offers': [...]}", file=sys.stderr)
+        sys.exit(2)
+    try:
+        offers = tuple(ObservableOffer.from_dict(item) for item in catalog)
+        passport = (
+            LogicPassport.from_dict(_load_json_or_exit(args.passport, label="logic passport"))
+            if args.passport
+            else LogicPassport.for_problem(problem)
+        )
+        manifest = (
+            ConservationManifest.from_dict(
+                _load_json_or_exit(args.manifest, label="conservation manifest")
+            )
+            if args.manifest
+            else ConservationManifest.for_problem(problem)
+        )
+        planning = plan_enrichment(
+            problem,
+            offers,
+            passport=passport,
+            manifest=manifest,
+        )
+        request = build_enrichment_request(
+            problem,
+            result,
+            planning,
+            offers,
+            passport=passport,
+            manifest=manifest,
+            requester_authority=problem.authority,
+        )
+    except (KeyError, TypeError, ValueError) as exc:
+        print(f"Error: enrichment planning failed: {exc}", file=sys.stderr)
+        sys.exit(2)
+    packet = {
+        "schema_version": "0.1-experimental",
+        "problem_hash": problem.problem_hash,
+        "result_hash": result.result_hash,
+        "passport": passport.to_dict(),
+        "manifest": manifest.to_dict(),
+        "offers": [offer.to_dict() for offer in offers],
+        "planning": planning.to_dict(),
+        "request": request.to_dict(),
+    }
+    _write_json_or_print(packet, args.output)
+
+
+def _load_enrichment_packet(path: Path):
+    from bulla.experimental.observability import (
+        ConservationManifest,
+        EnrichmentPlanningResult,
+        EnrichmentRequest,
+        LogicPassport,
+        ObservableOffer,
+    )
+
+    document = _load_json_or_exit(path, label="enrichment packet")
+    expected = {
+        "schema_version",
+        "problem_hash",
+        "result_hash",
+        "passport",
+        "manifest",
+        "offers",
+        "planning",
+        "request",
+    }
+    if not isinstance(document, dict) or set(document) != expected:
+        raise ValueError(f"enrichment packet fields must be exactly {sorted(expected)}")
+    if document["schema_version"] != "0.1-experimental":
+        raise ValueError("unsupported enrichment packet schema")
+    return (
+        document,
+        LogicPassport.from_dict(document["passport"]),
+        ConservationManifest.from_dict(document["manifest"]),
+        tuple(ObservableOffer.from_dict(item) for item in document["offers"]),
+        EnrichmentPlanningResult.from_dict(document["planning"]),
+        EnrichmentRequest.from_dict(document["request"]),
+    )
+
+
+def _cmd_experimental_respond_enrichment(args: argparse.Namespace) -> None:
+    from bulla.experimental.observability import (
+        EnrichmentResponse,
+        ObservableOffer,
+        ProvidedFact,
+        ResponseStatus,
+        sign_enrichment_response,
+    )
+
+    try:
+        _, _, _, _, _, request = _load_enrichment_packet(args.packet)
+        signer = _load_signer_or_exit(args.key, args.issuer)
+        status = ResponseStatus(args.status)
+        facts_doc = (
+            _load_json_or_exit(args.facts, label="provided facts") if args.facts else []
+        )
+        counteroffers_doc = (
+            _load_json_or_exit(args.counteroffers, label="counteroffers")
+            if args.counteroffers
+            else []
+        )
+        if not isinstance(facts_doc, list) or not isinstance(counteroffers_doc, list):
+            raise ValueError("facts and counteroffers must be JSON arrays")
+        response = sign_enrichment_response(
+            EnrichmentResponse(
+                request_hash=request.request_hash,
+                responder=signer.issuer,
+                status=status,
+                selected_plan_hash=args.plan_hash,
+                provided_facts=tuple(ProvidedFact.from_dict(item) for item in facts_doc),
+                counteroffers=tuple(
+                    ObservableOffer.from_dict(item) for item in counteroffers_doc
+                ),
+                reason=args.reason or "",
+            ),
+            signer,
+        )
+    except (KeyError, TypeError, ValueError) as exc:
+        print(f"Error: cannot sign enrichment response: {exc}", file=sys.stderr)
+        sys.exit(2)
+    _write_json_or_print(response.to_dict(), args.output)
+
+
+def _cmd_experimental_refine_envelope(args: argparse.Namespace) -> None:
+    from bulla.experimental.observability import EnrichmentResponse
+    from bulla.experimental.refinement import (
+        authority_epoch,
+        build_evidence_admission,
+        refine_envelope,
+    )
+
+    problem = _load_invention_problem(args.problem)
+    prior_result = _load_invention_result(args.prior_result)
+    try:
+        _, passport, manifest, _, _, request = _load_enrichment_packet(args.packet)
+        responses = tuple(
+            EnrichmentResponse.from_dict(
+                _load_json_or_exit(path, label=f"enrichment response {path}")
+            )
+            for path in args.response
+        )
+        admission = build_evidence_admission(
+            problem,
+            request,
+            selected_plan_hash=args.plan_hash,
+            responses=responses,
+            passport=passport,
+            manifest=manifest,
+            epoch=authority_epoch(problem.authority),
+        )
+        bundle = refine_envelope(
+            problem,
+            prior_result,
+            admission,
+            passport=passport,
+            manifest=manifest,
+        )
+    except (KeyError, TypeError, ValueError) as exc:
+        print(f"Error: refinement failed: {exc}", file=sys.stderr)
+        sys.exit(2)
+    _write_json_or_print(bundle.to_dict(), args.output)
+
+
+def _cmd_experimental_verify_refinement(args: argparse.Namespace) -> None:
+    from bulla.experimental.refinement import RefinementBundle, verify_refinement
+
+    try:
+        bundle = RefinementBundle.from_dict(
+            _load_json_or_exit(args.bundle, label="refinement bundle")
+        )
+        ok = verify_refinement(bundle)
+        payload = {
+            "ok": ok,
+            "bundle_hash": bundle.bundle_hash,
+            "certificate_hash": bundle.certificate.certificate_hash,
+            "gates": bundle.certificate.to_dict(),
+        }
+    except (KeyError, TypeError, ValueError) as exc:
+        payload = {"ok": False, "error": str(exc)}
+    print(json.dumps(payload, indent=2))
+    sys.exit(0 if payload["ok"] else 1)
+
+
+def _cmd_experimental_assess_finality(args: argparse.Namespace) -> None:
+    """Run the closed Semantic Finality v0.1 decision order."""
+
+    from bulla.experimental.constitutional import ModelClosureWarrant
+    from bulla.experimental.refinement import EnvelopeSnapshot
+    from bulla.experimental.semantic_finality import (
+        AmbiguityReserve,
+        ConsequenceProfile,
+        ExternalLock,
+        SemanticFinalityPolicy,
+        assess_finality,
+    )
+
+    try:
+        case = _load_json_or_exit(args.case, label="semantic finality case")
+        assessment = assess_finality(
+            snapshot=EnvelopeSnapshot.from_dict(case["snapshot"]),
+            current_semantic_epoch=case["current_semantic_epoch"],
+            closure_warrant=ModelClosureWarrant.from_dict(case["closure_warrant"]),
+            authority_regime_hash=case["authority_regime_hash"],
+            consequence_profile=ConsequenceProfile.from_dict(case["consequence_profile"]),
+            represented_outcomes=tuple(case["represented_outcomes"]),
+            policy=SemanticFinalityPolicy.from_dict(case["policy"]),
+            certified_surface=case["certified_surface"],
+            reserve=(AmbiguityReserve.from_dict(case["reserve"]) if case.get("reserve") else None),
+            external_lock=(ExternalLock.from_dict(case["external_lock"]) if case.get("external_lock") else None),
+            conflict_certificate_hash=case.get("conflict_certificate_hash"),
+            evidence_plan_hashes=tuple(case.get("evidence_plan_hashes", ())),
+            evidence_classes=tuple(case.get("evidence_classes", ())),
+            route_options=tuple(case.get("route_options", ())),
+            receipt_references=tuple(case.get("receipt_references", ())),
+            action_type=case.get("action_type", "procurement.payment"),
+        )
+        payload = assessment.to_dict()
+        payload["assessment_hash"] = assessment.assessment_hash
+    except (KeyError, TypeError, ValueError) as exc:
+        print(f"Error: finality assessment failed: {exc}", file=sys.stderr)
+        sys.exit(2)
+    _write_json_or_print(payload, args.output)
+
+
+def _cmd_experimental_explain_finality(args: argparse.Namespace) -> None:
+    """Emit or independently replay a finite finality-obstruction explanation."""
+
+    from bulla.experimental.claim_flow import (
+        DerivationBudgetPolicy,
+        FinalityProblem,
+        explain_finality,
+    )
+
+    try:
+        case = _load_json_or_exit(args.case, label="finality explanation case")
+        problem = FinalityProblem.from_dict(case["problem"])
+        budget = DerivationBudgetPolicy.from_dict(case["budget"])
+        explanation = explain_finality(
+            problem,
+            budget=budget,
+            backend_hash=case["backend_hash"],
+            backend_version_hash=case["backend_version_hash"],
+            run_sequence=case["run_sequence"],
+            observed_wall_millis=case.get("observed_wall_millis", 0),
+            observed_peak_memory_bytes=case.get("observed_peak_memory_bytes", 0),
+        )
+        payload = explanation.to_dict()
+        payload["explanation_hash"] = explanation.explanation_hash
+        if args.verify is not None:
+            expected = _load_json_or_exit(args.verify, label="finality explanation")
+            expected = dict(expected)
+            expected.pop("explanation_hash", None)
+            ok = expected == explanation.to_dict()
+            payload = {
+                "ok": ok,
+                "problem_hash": problem.problem_hash,
+                "explanation_hash": explanation.explanation_hash,
+                "cause": explanation.cause if not ok else "REPLAY_AGREES",
+            }
+            print(json.dumps(payload, indent=2))
+            sys.exit(0 if ok else 1)
+    except (KeyError, TypeError, ValueError) as exc:
+        print(f"Error: finality explanation failed: {exc}", file=sys.stderr)
+        sys.exit(2)
+    _write_json_or_print(payload, args.output)
+
+
+def _cmd_experimental_checkpoint_issue(args: argparse.Namespace) -> None:
+    from datetime import datetime, timezone
+
+    from bulla.experimental.checkpoint import CheckpointArchive, WitnessCheckpoint, issue_checkpoint
+    from bulla.registry import DeedLog
+
+    signer = _load_signer_or_exit(args.key, args.issuer)
+    try:
+        previous = (
+            WitnessCheckpoint.from_dict(json.loads(args.previous.read_text(encoding="utf-8")))
+            if args.previous
+            else None
+        )
+        log = DeedLog(args.registry)
+        checkpoint = issue_checkpoint(
+            log,
+            signer,
+            log_id=args.log_id,
+            previous=previous,
+            issued_at=args.issued_at or datetime.now(timezone.utc).isoformat(),
+        )
+        consistency = log.consistency(previous.tree_size) if previous is not None else None
+        if args.consistency_output:
+            if consistency is None:
+                raise ValueError("--consistency-output requires --previous")
+            args.consistency_output.write_text(
+                json.dumps(consistency, indent=2) + "\n", encoding="utf-8"
+            )
+        if args.archive:
+            CheckpointArchive(args.archive).append(
+                checkpoint,
+                consistency_from_previous=consistency,
+            )
+        args.output.write_text(json.dumps(checkpoint.to_dict(), indent=2) + "\n", encoding="utf-8")
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        print(f"Error: cannot issue checkpoint: {exc}", file=sys.stderr)
+        sys.exit(2)
+    print(f"checkpoint={args.output} size={checkpoint.tree_size} root={checkpoint.root}")
+
+
+def _cmd_experimental_checkpoint_serve(args: argparse.Namespace) -> None:
+    from bulla.experimental.checkpoint import CheckpointArchive, make_checkpoint_server
+
+    try:
+        archive = CheckpointArchive(args.archive)
+        server = make_checkpoint_server(archive, args.host, args.port)
+    except (OSError, ValueError) as exc:
+        print(f"Error: cannot serve checkpoint archive: {exc}", file=sys.stderr)
+        sys.exit(2)
+    host, port = server.server_address[:2]
+    print(f"checkpoint archive serving read-only at http://{host}:{port}")
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        server.server_close()
+
+
+def _cmd_experimental_checkpoint_verify(args: argparse.Namespace) -> None:
+    from bulla.experimental.checkpoint import (
+        WitnessCheckpoint,
+        verify_checkpoint,
+        verify_checkpoint_extension,
+    )
+
+    try:
+        checkpoint = WitnessCheckpoint.from_dict(
+            json.loads(args.checkpoint.read_text(encoding="utf-8"))
+        )
+        report = verify_checkpoint(checkpoint)
+        extension = None
+        if args.previous or args.consistency:
+            if not args.previous or not args.consistency:
+                raise ValueError("--previous and --consistency must be supplied together")
+            previous = WitnessCheckpoint.from_dict(
+                json.loads(args.previous.read_text(encoding="utf-8"))
+            )
+            consistency = json.loads(args.consistency.read_text(encoding="utf-8"))
+            extension = verify_checkpoint_extension(previous, checkpoint, consistency)
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        print(f"Error: invalid checkpoint: {exc}", file=sys.stderr)
+        sys.exit(2)
+    payload = {
+        "ok": report.ok and (extension is None or extension.ok),
+        "checkpoint": report.to_dict(),
+        "extension": extension.to_dict() if extension is not None else None,
+    }
+    print(json.dumps(payload, indent=2))
+    sys.exit(0 if payload["ok"] else 1)
+
+
+def _cmd_experimental_check_candidate(args: argparse.Namespace) -> None:
+    from bulla.experimental.hybrid import (
+        CandidateProvenance,
+        DisclosureBudget,
+        HybridStatus,
+        check_candidate,
+    )
+
+    problem = _load_invention_problem(args.problem)
+    try:
+        candidate = json.loads(args.candidate.read_text(encoding="utf-8"))
+        budget_doc = json.loads(args.budget.read_text(encoding="utf-8"))
+        budget = DisclosureBudget(
+            allowed_relations=tuple(budget_doc["allowed_relations"]),
+            reveal_target_value=budget_doc["reveal_target_value"],
+            max_countermodels=budget_doc["max_countermodels"],
+            max_ground_facts=budget_doc["max_ground_facts"],
+        )
+        provenance = CandidateProvenance(
+            args.generator,
+            args.generator_version,
+            args.prompt_hash,
+            args.attempt,
+        )
+        result = check_candidate(
+            problem,
+            candidate,
+            provenance=provenance,
+            disclosure_budget=budget,
+            emitted_countermodels=args.emitted_countermodels,
+        )
+    except (OSError, json.JSONDecodeError, KeyError, TypeError, ValueError) as exc:
+        print(f"Error: cannot check candidate: {exc}", file=sys.stderr)
+        sys.exit(2)
+    print(json.dumps(result.to_dict(), indent=2))
+    sys.exit(0 if result.status is HybridStatus.ACCEPTED else 1)
 
 
 def main() -> None:
@@ -4740,7 +5620,7 @@ def main() -> None:
         "receipt",
         help=(
             "Create and verify action receipts — the accountable record of one "
-            "consequential agent action, and the object a bond slashes against"
+            "consequential agent action and the durable object recourse can reference"
         ),
     )
     receipt_sub = p_receipt.add_subparsers(dest="receipt_command")
@@ -4831,6 +5711,20 @@ def main() -> None:
     )
     p_receipt_verify.add_argument("--format", choices=["text", "json"], default="text")
     p_receipt_verify.set_defaults(func=_cmd_receipt_verify)
+    p_receipt_equivocation = receipt_sub.add_parser(
+        "check-equivocation",
+        help=(
+            "EXPERIMENTAL: authenticate two log heads and establish only the "
+            "same-operator, same-log, same-size, different-root predicate"
+        ),
+    )
+    p_receipt_equivocation.add_argument(
+        "evidence", type=Path, help="EquivocationEvidence JSON file"
+    )
+    p_receipt_equivocation.add_argument(
+        "--format", choices=["text", "json"], default="text"
+    )
+    p_receipt_equivocation.set_defaults(func=_cmd_receipt_check_equivocation)
     p_receipt.set_defaults(func=_cmd_receipt)
 
     # ── coverage ──────────────────────────────────────────────────────
@@ -4843,8 +5737,8 @@ def main() -> None:
         ),
     )
     p_coverage.add_argument(
-        "--anchor", choices=["git"], default="git",
-        help="The record to reconcile against (v0.1 ships one: git)",
+        "--anchor", choices=["pypi", "git"], default="pypi",
+        help="External release record (default: pypi; git is secondary)",
     )
     p_coverage.add_argument(
         "--receipts", type=Path, required=True, metavar="DIR",
@@ -4852,9 +5746,22 @@ def main() -> None:
     )
     p_coverage.add_argument(
         "--match", default="v[0-9]*", metavar="GLOB",
-        help="git tag glob selecting release tags (default: version tags)",
+        help="git tag glob; results are restricted to stable vX.Y.Z package tags",
     )
     p_coverage.add_argument("--repo", default=".", help="Repo path (default: cwd)")
+    p_coverage.add_argument("--project", default="bulla", help="PyPI project (default: bulla)")
+    p_coverage.add_argument(
+        "--snapshot", type=Path, default=None, metavar="FILE",
+        help="Read a saved PyPI project JSON response instead of the live API",
+    )
+    p_coverage.add_argument(
+        "--no-integrity", action="store_true",
+        help="Do not resolve Integrity API objects (for an offline snapshot check)",
+    )
+    p_coverage.add_argument(
+        "--expected-repository", default="jkomkov/bulla", metavar="OWNER/REPO",
+        help="Required GitHub Trusted Publisher identity for contemporaneous receipts",
+    )
     p_coverage.add_argument("--format", choices=["text", "json"], default="text")
     p_coverage.set_defaults(func=_cmd_coverage)
 
@@ -4913,7 +5820,7 @@ def main() -> None:
         "--disclose", action="append", default=None, metavar="DIM",
         help="Name a convention the cure must disclose (repeatable; e.g. --disclose path_root).",
     )
-    p_gate.add_argument("--format", choices=["text", "json"], default="text")
+    p_gate.add_argument("--format", choices=["text", "brief", "json"], default="text")
     p_gate.set_defaults(func=_cmd_gate)
 
     # ── anchor ────────────────────────────────────────────────────────
@@ -5859,6 +6766,219 @@ def main() -> None:
         help="Parse mode (default: static; runtime reserved for future sprint)",
     )
     p_import.set_defaults(func=_cmd_import)
+
+    # ── experimental predicate invention ─────────────────────────────
+    p_experimental = subparsers.add_parser(
+        "experimental",
+        help="Research-only surfaces (not part of the stable Bulla API)",
+    )
+    experimental_sub = p_experimental.add_subparsers(dest="experimental_command")
+    p_invent = experimental_sub.add_parser(
+        "invent",
+        help="Synthesize an FRSL-1 predicate package or a checked negative exit",
+    )
+    p_invent.add_argument("problem", type=Path, help="SeamProblem JSON file")
+    p_invent.add_argument(
+        "-o",
+        "--output",
+        type=Path,
+        help="Write SynthesisResult JSON to this path (default: stdout)",
+    )
+    p_invent.add_argument(
+        "--receipt",
+        type=Path,
+        help="Also mint an ordinary ActionReceipt with action.type=bulla.invent",
+    )
+    p_invent.add_argument("--principal", help="Surviving authority principal for --receipt")
+    p_invent.add_argument("--policy", help="Pinned authority policy for --receipt")
+    p_invent.add_argument("--forum-endpoint", help="Persistent challenge endpoint for --receipt")
+    p_invent.add_argument("--forum-root", help="Independently pinned forum root for --receipt")
+    p_invent.add_argument("--receipt-scope", help="Prose bounds.scope for --receipt")
+    p_invent.add_argument(
+        "--challenge-window",
+        default="P30D",
+        help="Receipt challenge window (default: P30D)",
+    )
+    p_invent.set_defaults(func=_cmd_experimental_invent)
+
+    p_verify_invention = experimental_sub.add_parser(
+        "verify-invention",
+        help="Replay package gates and objective failure certificates",
+    )
+    p_verify_invention.add_argument("problem", type=Path, help="SeamProblem JSON file")
+    p_verify_invention.add_argument("result", type=Path, help="SynthesisResult JSON file")
+    p_verify_invention.add_argument(
+        "--format",
+        choices=("text", "json"),
+        default="text",
+    )
+    p_verify_invention.set_defaults(func=_cmd_experimental_verify_invention)
+
+    p_explain_invention = experimental_sub.add_parser(
+        "explain-invention",
+        help="Render a compact human explanation of a synthesis result",
+    )
+    p_explain_invention.add_argument("result", type=Path, help="SynthesisResult JSON file")
+    p_explain_invention.set_defaults(func=_cmd_experimental_explain_invention)
+
+    p_apply_invention = experimental_sub.add_parser(
+        "apply-invention",
+        help="Apply an independently checked package to one shared-vocabulary structure",
+    )
+    p_apply_invention.add_argument("problem", type=Path)
+    p_apply_invention.add_argument("result", type=Path)
+    p_apply_invention.add_argument("structure", type=Path)
+    p_apply_invention.add_argument(
+        "--argument", action="append", required=True,
+        help="Target argument (repeat once per target-predicate argument)",
+    )
+    p_apply_invention.add_argument("--adapter-version", required=True)
+    p_apply_invention.add_argument(
+        "--package-hash",
+        help="Select one offered package from a CHOICE_REQUIRED result",
+    )
+    p_apply_invention.set_defaults(func=_cmd_experimental_apply_invention)
+
+    p_select_invention = experimental_sub.add_parser(
+        "select-invention",
+        help="Govern an offered non-unique package with a signed selection receipt",
+    )
+    p_select_invention.add_argument("problem", type=Path)
+    p_select_invention.add_argument("result", type=Path)
+    p_select_invention.add_argument("--package-hash", required=True)
+    p_select_invention.add_argument("--principal", required=True)
+    p_select_invention.add_argument("--policy", required=True)
+    p_select_invention.add_argument("--scope", required=True)
+    p_select_invention.add_argument("--key", type=Path, required=True)
+    p_select_invention.add_argument("--issuer")
+    p_select_invention.add_argument("--timestamp")
+    p_select_invention.add_argument("-o", "--output", type=Path, required=True)
+    p_select_invention.set_defaults(func=_cmd_experimental_select_invention)
+
+    p_plan_enrichment = experimental_sub.add_parser(
+        "plan-enrichment",
+        help="Compute exact Pareto-minimal observable plans and a justified request",
+    )
+    p_plan_enrichment.add_argument("problem", type=Path)
+    p_plan_enrichment.add_argument("result", type=Path)
+    p_plan_enrichment.add_argument("offers", type=Path)
+    p_plan_enrichment.add_argument("--passport", type=Path)
+    p_plan_enrichment.add_argument("--manifest", type=Path)
+    p_plan_enrichment.add_argument("-o", "--output", type=Path)
+    p_plan_enrichment.set_defaults(func=_cmd_experimental_plan_enrichment)
+
+    p_respond_enrichment = experimental_sub.add_parser(
+        "respond-enrichment",
+        help="Sign CONSENT, REFUSE, COUNTEROFFER, or PROVIDE for one plan",
+    )
+    p_respond_enrichment.add_argument("packet", type=Path)
+    p_respond_enrichment.add_argument(
+        "--status",
+        required=True,
+        choices=("CONSENT", "REFUSE", "COUNTEROFFER", "PROVIDE"),
+    )
+    p_respond_enrichment.add_argument("--plan-hash")
+    p_respond_enrichment.add_argument("--facts", type=Path)
+    p_respond_enrichment.add_argument("--counteroffers", type=Path)
+    p_respond_enrichment.add_argument("--reason")
+    p_respond_enrichment.add_argument("--key", type=Path, required=True)
+    p_respond_enrichment.add_argument("--issuer")
+    p_respond_enrichment.add_argument("-o", "--output", type=Path)
+    p_respond_enrichment.set_defaults(func=_cmd_experimental_respond_enrichment)
+
+    p_refine_envelope = experimental_sub.add_parser(
+        "refine-envelope",
+        help="Admit consented evidence and emit a monotone refinement certificate",
+    )
+    p_refine_envelope.add_argument("problem", type=Path)
+    p_refine_envelope.add_argument("prior_result", type=Path)
+    p_refine_envelope.add_argument("packet", type=Path)
+    p_refine_envelope.add_argument("--response", type=Path, action="append", required=True)
+    p_refine_envelope.add_argument("--plan-hash", required=True)
+    p_refine_envelope.add_argument("-o", "--output", type=Path)
+    p_refine_envelope.set_defaults(func=_cmd_experimental_refine_envelope)
+
+    p_verify_refinement = experimental_sub.add_parser(
+        "verify-refinement",
+        help="Replay state inclusion and all envelope-refinement gates",
+    )
+    p_verify_refinement.add_argument("bundle", type=Path)
+    p_verify_refinement.set_defaults(func=_cmd_experimental_verify_refinement)
+
+    p_assess_finality = experimental_sub.add_parser(
+        "assess-finality",
+        help="Apply the experimental closure/authority/reserve finality controller",
+    )
+    p_assess_finality.add_argument("case", type=Path)
+    p_assess_finality.add_argument("-o", "--output", type=Path)
+    p_assess_finality.set_defaults(func=_cmd_experimental_assess_finality)
+
+    p_explain_finality = experimental_sub.add_parser(
+        "explain-finality",
+        help="Emit or replay typed minimal blockers and sufficient finality routes",
+    )
+    p_explain_finality.add_argument("case", type=Path)
+    p_explain_finality.add_argument(
+        "--verify",
+        type=Path,
+        help="Replay and compare a previously emitted explanation",
+    )
+    p_explain_finality.add_argument("-o", "--output", type=Path)
+    p_explain_finality.set_defaults(func=_cmd_experimental_explain_finality)
+
+    p_repair_reliance = experimental_sub.add_parser(
+        "repair-reliance",
+        help="Enumerate exact inclusion-minimal repairs in a declared finite catalog",
+    )
+    p_repair_reliance.add_argument("verification", type=Path)
+    p_repair_reliance.add_argument("policy", type=Path)
+    p_repair_reliance.add_argument("catalog", type=Path)
+    p_repair_reliance.add_argument("-o", "--output", type=Path)
+    p_repair_reliance.set_defaults(func=_cmd_experimental_repair_reliance)
+
+    p_check_candidate = experimental_sub.add_parser(
+        "check-candidate",
+        help="Gate an external FRSL-1 proposal under an explicit disclosure budget",
+    )
+    p_check_candidate.add_argument("problem", type=Path)
+    p_check_candidate.add_argument("candidate", type=Path)
+    p_check_candidate.add_argument("budget", type=Path)
+    p_check_candidate.add_argument("--generator", required=True)
+    p_check_candidate.add_argument("--generator-version", required=True)
+    p_check_candidate.add_argument("--prompt-hash", required=True)
+    p_check_candidate.add_argument("--attempt", type=int, default=1)
+    p_check_candidate.add_argument("--emitted-countermodels", type=int, default=0)
+    p_check_candidate.set_defaults(func=_cmd_experimental_check_candidate)
+
+    p_checkpoint = experimental_sub.add_parser(
+        "checkpoint",
+        help="Issue or verify a signed append-only witness checkpoint",
+    )
+    checkpoint_sub = p_checkpoint.add_subparsers(dest="checkpoint_command")
+    p_checkpoint_issue = checkpoint_sub.add_parser("issue", help="Sign the current local log head")
+    p_checkpoint_issue.add_argument("--registry", type=Path, required=True)
+    p_checkpoint_issue.add_argument("--log-id", required=True)
+    p_checkpoint_issue.add_argument("--key", type=Path, required=True)
+    p_checkpoint_issue.add_argument("--issuer")
+    p_checkpoint_issue.add_argument("--previous", type=Path)
+    p_checkpoint_issue.add_argument("--archive", type=Path)
+    p_checkpoint_issue.add_argument("--consistency-output", type=Path)
+    p_checkpoint_issue.add_argument("--issued-at")
+    p_checkpoint_issue.add_argument("-o", "--output", type=Path, required=True)
+    p_checkpoint_issue.set_defaults(func=_cmd_experimental_checkpoint_issue)
+    p_checkpoint_verify = checkpoint_sub.add_parser("verify", help="Verify a head and optional extension")
+    p_checkpoint_verify.add_argument("checkpoint", type=Path)
+    p_checkpoint_verify.add_argument("--previous", type=Path)
+    p_checkpoint_verify.add_argument("--consistency", type=Path)
+    p_checkpoint_verify.set_defaults(func=_cmd_experimental_checkpoint_verify)
+    p_checkpoint_serve = checkpoint_sub.add_parser(
+        "serve", help="Serve latest, history, and adjacent consistency read-only"
+    )
+    p_checkpoint_serve.add_argument("archive", type=Path)
+    p_checkpoint_serve.add_argument("--host", default="127.0.0.1")
+    p_checkpoint_serve.add_argument("--port", type=int, default=0)
+    p_checkpoint_serve.set_defaults(func=_cmd_experimental_checkpoint_serve)
+    p_experimental.set_defaults(func=_cmd_experimental)
 
     # ── showcase ────────────────────────────────────────────────────────
     p_showcase = subparsers.add_parser(

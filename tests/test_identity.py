@@ -53,7 +53,53 @@ def test_supplied_key_path():
     signer = LocalEd25519Signer.generate()
     res = verify_proof(_HASH, signer.sign(_HASH), public_key=signer.public_key)
     assert res.authentic is True
-    assert res.method == "supplied-key"
+    # A supplied key may confirm, never override, a self-certifying did:key.
+    assert res.method == "did:key"
+
+
+def test_supplied_key_cannot_override_self_certifying_did_key():
+    victim = LocalEd25519Signer.generate()
+    attacker = LocalEd25519Signer.generate()
+    proof = dict(attacker.sign(_HASH))
+    proof["issuer"] = victim.verification_method
+    proof["verificationMethod"] = victim.verification_method
+    res = verify_proof(_HASH, proof, public_key=attacker.public_key)
+    assert res.authentic is False
+    assert res.method == "did:key"
+    assert "conflicts" in res.detail
+
+
+def test_did_key_verification_method_must_equal_issuer():
+    signer = LocalEd25519Signer.generate()
+    other = LocalEd25519Signer.generate()
+    proof = dict(signer.sign(_HASH), verificationMethod=other.verification_method)
+    res = verify_proof(_HASH, proof)
+    assert res.authentic is False
+    assert "verificationMethod must equal" in res.detail
+
+
+def test_unknown_proof_members_fail_closed():
+    signer = LocalEd25519Signer.generate()
+    proof = dict(signer.sign(_HASH), role="admin")
+    res = verify_proof(_HASH, proof)
+    assert res.authentic is False
+    assert "fields must be exactly" in res.detail
+
+
+def test_noncanonical_base64_proof_value_fails_closed():
+    signer = LocalEd25519Signer.generate()
+    proof = dict(signer.sign(_HASH))
+    proof["proofValue"] += "\n"
+    res = verify_proof(_HASH, proof)
+    assert res.authentic is False
+
+
+def test_unknown_proof_type_fails_closed():
+    signer = LocalEd25519Signer.generate()
+    proof = dict(signer.sign(_HASH), type="attacker/looks-like-ed25519")
+    res = verify_proof(_HASH, proof)
+    assert res.authentic is False
+    assert "unsupported proof type" in res.detail
 
 
 def test_external_issuer_vm_signature_is_not_attributable():

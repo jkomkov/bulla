@@ -1,0 +1,168 @@
+{
+  "schema_version": "0.1-experimental",
+  "freeze_hash": "sha256:ec63681d7713f4fd10adabec9b0151cd1f2dfe84600fc63d8c3b67b904697411",
+  "holdout_count": 12,
+  "noncompiled_count": 7,
+  "exit_distribution": {
+    "CHOICE_REQUIRED": 2,
+    "ESCALATE": 3,
+    "PARTIAL": 2
+  },
+  "information_limited_count": 5,
+  "governance_limited_count": 2,
+  "pure_language_extension_candidates": 0,
+  "finding": "Within this exhaustive finite corpus, the noncompiled residue is an information/governance boundary, not evidence that richer syntax over the same reduct would raise coverage.",
+  "records": [
+    {
+      "id": "bounded_time-3",
+      "family": "bounded_time",
+      "status": "ESCALATE",
+      "cause": "fixed_language_non_definability",
+      "result_hash": "sha256:279f64dde627b3c2443ea629085005bf67a7a03d1cb4c50b89cc0f7c480169dd",
+      "evidence_axis": {
+        "lower_bound": "at least one new shared bit is necessary",
+        "basis": "two certified expansions agree on the full current shared reduct",
+        "candidate": "disclose or witness one jointly authorized observable separating the pair",
+        "global_sufficiency": "unresolved"
+      },
+      "language_axis": {
+        "pure_grammar_extension": "provably_insufficient_for_witness",
+        "reason": "every deterministic formula or operator over identical reducts has identical value",
+        "minimum_information_change": "one new shared relation value for the witnessed pair",
+        "frsl2_roadmap_credit": false,
+        "witness_target_arguments": [
+          "after"
+        ]
+      },
+      "governance_axis": null
+    },
+    {
+      "id": "enums-4",
+      "family": "enums",
+      "status": "CHOICE_REQUIRED",
+      "cause": "non_unique_minimum",
+      "result_hash": "sha256:43bb95984fd0e278e2f433110f5f0c40bba562f39a628a7d0be8f3a03d379f34",
+      "evidence_axis": null,
+      "language_axis": {
+        "pure_grammar_extension": "does_not_resolve_authority",
+        "reason": "multiple exact-minimal conservative packages remain",
+        "frsl2_roadmap_credit": false
+      },
+      "governance_axis": {
+        "minimum": "one receipted selection under the declared synthesis-policy mandate",
+        "alternative_count": 2,
+        "choice_kind": "normative"
+      }
+    },
+    {
+      "id": "null_absent-2",
+      "family": "null_absent",
+      "status": "PARTIAL",
+      "cause": "partial_definition",
+      "result_hash": "sha256:0d459d49337fba4d4fc1404e62be7e6450dac915e692a0adca39dee7741cda77",
+      "evidence_axis": {
+        "lower_bound": "at least one new shared bit is necessary",
+        "basis": "two certified expansions agree on the full current shared reduct",
+        "candidate": "disclose or witness one jointly authorized observable separating the pair",
+        "global_sufficiency": "unresolved"
+      },
+      "language_axis": {
+        "pure_grammar_extension": "provably_insufficient_for_witness",
+        "reason": "every deterministic formula or operator over identical reducts has identical value",
+        "minimum_information_change": "one new shared relation value for the witnessed pair",
+        "frsl2_roadmap_credit": false,
+        "witness_target_arguments": [
+          "absent"
+        ]
+      },
+      "governance_axis": null
+    },
+    {
+      "id": "integer_rounding-3",
+      "family": "integer_rounding",
+      "status": "ESCALATE",
+      "cause": "fixed_language_non_definability",
+      "result_hash": "sha256:b096171139fd621ff5f2e0b9a35a7dd8768bfc77fee9019f5b75779af283b011",
+      "evidence_axis": {
+        "lower_bound": "at least one new shared bit is necessary",
+        "basis": "two certified expansions agree on the full current shared reduct",
+        "candidate": "disclose or witness one jointly authorized observable separating the pair",
+        "global_sufficiency": "unresolved"
+      },
+      "language_axis": {
+        "pure_grammar_extension": "provably_insufficient_for_witness",
+        "reason": "every deterministic formula or operator over identical reducts has identical value",
+        "minimum_information_change": "one new shared relation value for the witnessed pair",
+        "frsl2_roadmap_credit": false,
+        "witness_target_arguments": [
+          "above_quantum"
+        ]
+      },
+      "governance_axis": null
+    },
+    {
+      "id": "evidence_floors-4",
+      "family": "evidence_floors",
+      "status": "CHOICE_REQUIRED",
+      "cause": "non_unique_minimum",
+      "result_hash": "sha256:b21adeb6ef2deca77ffd0bba944f44dcee46a6ede76145250fddf3a3a2056489",
+      "evidence_axis": null,
+      "language_axis": {
+        "pure_grammar_extension": "does_not_resolve_authority",
+        "reason": "multiple exact-minimal conservative packages remain",
+        "frsl2_roadmap_credit": false
+      },
+      "governance_axis": {
+        "minimum": "one receipted selection under the declared synthesis-policy mandate",
+        "alternative_count": 2,
+        "choice_kind": "normative"
+      }
+    },
+    {
+      "id": "revocation_windows-2",
+      "family": "revocation_windows",
+      "status": "PARTIAL",
+      "cause": "partial_definition",
+      "result_hash": "sha256:672c9584007620144e37cbf01eb4ca45b0a4418bf0e3672589698a813ae2e24a",
+      "evidence_axis": {
+        "lower_bound": "at least one new shared bit is necessary",
+        "basis": "two certified expansions agree on the full current shared reduct",
+        "candidate": "disclose or witness one jointly authorized observable separating the pair",
+        "global_sufficiency": "unresolved"
+      },
+      "language_axis": {
+        "pure_grammar_extension": "provably_insufficient_for_witness",
+        "reason": "every deterministic formula or operator over identical reducts has identical value",
+        "minimum_information_change": "one new shared relation value for the witnessed pair",
+        "frsl2_roadmap_credit": false,
+        "witness_target_arguments": [
+          "active"
+        ]
+      },
+      "governance_axis": null
+    },
+    {
+      "id": "nondefinable-3",
+      "family": "nondefinable",
+      "status": "ESCALATE",
+      "cause": "fixed_language_non_definability",
+      "result_hash": "sha256:d907a08fa5c1d7eb183076539a72e330b6c645504f7e02ddca13741170075466",
+      "evidence_axis": {
+        "lower_bound": "at least one new shared bit is necessary",
+        "basis": "two certified expansions agree on the full current shared reduct",
+        "candidate": "disclose or witness one jointly authorized observable separating the pair",
+        "global_sufficiency": "unresolved"
+      },
+      "language_axis": {
+        "pure_grammar_extension": "provably_insufficient_for_witness",
+        "reason": "every deterministic formula or operator over identical reducts has identical value",
+        "minimum_information_change": "one new shared relation value for the witnessed pair",
+        "frsl2_roadmap_credit": false,
+        "witness_target_arguments": [
+          "hidden_state"
+        ]
+      },
+      "governance_axis": null
+    }
+  ]
+}

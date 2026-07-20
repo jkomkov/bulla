@@ -1,0 +1,46 @@
+{
+  "schema_version": "0.1-semantic-settlement-falsification",
+  "frozen_at": "2026-07-18T00:00:00Z",
+  "entries": [
+    {
+      "claim": "revision can occur without exact supersession authority",
+      "disposition": "falsified_by_implementation",
+      "evidence": "test_semantic_settlement.py and authorize_revision fail closed before mutation"
+    },
+    {
+      "claim": "one witness or two aliases of one witness suffice",
+      "disposition": "falsified_by_implementation",
+      "evidence": "authorize_revision requires exactly two distinct configured operators and verified inclusions"
+    },
+    {
+      "claim": "open-world closure may silently finalize",
+      "disposition": "falsified_by_test",
+      "evidence": "OPEN_WORLD and UNKNOWN_COVERAGE are excluded from closure_finalizable"
+    },
+    {
+      "claim": "conflict creates a fifth mutating state transition",
+      "disposition": "falsified_by_formal_and_executable_layers",
+      "evidence": "CONFLICT is a ROUTE cause; prior state hash is preserved"
+    },
+    {
+      "claim": "refinement can increase reserve in the same action and epoch",
+      "disposition": "falsified_by_formal_and_executable_layers",
+      "evidence": "release_reserve requires outcome inclusion and antitonicity; Lean theorem audits clean"
+    },
+    {
+      "claim": "simulated escrow proves real custody or collectibility",
+      "disposition": "retracted_by_scope",
+      "evidence": "adapter and artifacts carry an explicit mechanics-only claim boundary"
+    },
+    {
+      "claim": "the live 12-seam external slice completed",
+      "disposition": "blocked",
+      "evidence": "no external participant events were available; synthetic identities were not substituted"
+    },
+    {
+      "claim": "independent external reproduction completed",
+      "disposition": "blocked",
+      "evidence": "blind packet prepared; no external implementation result received"
+    }
+  ]
+}

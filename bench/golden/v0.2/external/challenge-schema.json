@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_hash": {"pattern": "^sha256:[0-9a-f]{64}$", "type": "string"},
+    "challenge_id": {"minLength": 1, "type": "string"},
+    "challenger_id": {"minLength": 1, "type": "string"},
+    "claim": {"minLength": 1, "type": "string"},
+    "disposition": {"enum": ["PENDING", "ACCEPTED", "REJECTED", "DISPUTED"]},
+    "evidence_hashes": {
+      "items": {"pattern": "^sha256:[0-9a-f]{64}$", "type": "string"},
+      "type": "array"
+    },
+    "signature": {"type": ["object", "null"]}
+  },
+  "required": ["challenge_id", "challenger_id", "artifact_hash", "claim", "evidence_hashes", "disposition", "signature"],
+  "type": "object"
+}

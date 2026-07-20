@@ -94,7 +94,7 @@ Homepage = "https://github.com/jkomkov/bulla"
 Documentation = "https://github.com/jkomkov/bulla/tree/main/docs"
 Issues = "https://github.com/jkomkov/bulla/issues"
 Changelog = "https://github.com/jkomkov/bulla/blob/main/CHANGELOG.md"
-Spec = "https://github.com/jkomkov/bulla/blob/main/WITNESS-CONTRACT.md"
+Spec = "https://github.com/jkomkov/bulla/blob/main/spec/action-receipt-v0.2.md"
 
 [tool.hatch.version]
 path = "src/bulla/__init__.py"

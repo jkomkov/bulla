@@ -1,0 +1,104 @@
+{
+  "schema_version": "0.3",
+  "kind": "action_receipt",
+  "action": {
+    "type": "payments.charge",
+    "subject": {
+      "amount": 1250
+    }
+  },
+  "diagnostic_ref": {
+    "status": "reference",
+    "ref": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  },
+  "evidence_refs": [],
+  "anchor_ref": {},
+  "mandate": {
+    "deed_schema": "0.3",
+    "authority": {
+      "principal": "did:key:z6MktNWXFy7fn9kNfwfvD9e2rDK3RPetS4MRKtZH8AxQzg9y",
+      "policy": "policy://payments@sha256:aa",
+      "delegation": [
+        {
+          "grantor": "did:key:z6MktNWXFy7fn9kNfwfvD9e2rDK3RPetS4MRKtZH8AxQzg9y",
+          "grantee": "did:key:z6MkmgoN6DceCkjksTeZo42bhE9MdUpKSfdehRSfrWR9AQPV",
+          "principal": "did:key:z6MktNWXFy7fn9kNfwfvD9e2rDK3RPetS4MRKtZH8AxQzg9y",
+          "parent": null,
+          "policy_digest": "sha256:395e0f5d8bba201b0279611c32441a9542e445c41f1dd13de7fc3f10450ef92c",
+          "scope_digest": "sha256:8aa5af1ff00f7e905fc3f11097988a85c624fa3ef5cba3d5f3c126c7458e19f0",
+          "proof": {
+            "type": "bulla/ed25519-2026",
+            "purpose": "delegation-grant",
+            "issuer": "did:key:z6MktNWXFy7fn9kNfwfvD9e2rDK3RPetS4MRKtZH8AxQzg9y",
+            "verificationMethod": "did:key:z6MktNWXFy7fn9kNfwfvD9e2rDK3RPetS4MRKtZH8AxQzg9y",
+            "proofValue": "DwO4apu0O6+XYOnWLjPSLRXXksSwPPiDnCZPVHbCxPekQ8dSOhqVvR3H4MecVFz9T77E6Z5x4QpYY2fUFRl5AQ=="
+          }
+        },
+        {
+          "grantor": "did:key:z6MkmgoN6DceCkjksTeZo42bhE9MdUpKSfdehRSfrWR9AQPV",
+          "grantee": "did:key:z6MkuBbLDXJVzgPqAFoZUXCkkSXLfDgyBhM6F5Y4Cj1cfJbF",
+          "principal": "did:key:z6MktNWXFy7fn9kNfwfvD9e2rDK3RPetS4MRKtZH8AxQzg9y",
+          "parent": "sha256:a1b5c03e5c725d187b41c978df5103d17ec218089ddf4a998b5881b23349494e",
+          "policy_digest": "sha256:395e0f5d8bba201b0279611c32441a9542e445c41f1dd13de7fc3f10450ef92c",
+          "scope_digest": "sha256:8aa5af1ff00f7e905fc3f11097988a85c624fa3ef5cba3d5f3c126c7458e19f0",
+          "proof": {
+            "type": "bulla/ed25519-2026",
+            "purpose": "delegation-grant",
+            "issuer": "did:key:z6MkmgoN6DceCkjksTeZo42bhE9MdUpKSfdehRSfrWR9AQPV",
+            "verificationMethod": "did:key:z6MkmgoN6DceCkjksTeZo42bhE9MdUpKSfdehRSfrWR9AQPV",
+            "proofValue": "I9ad5855n4d5+lCQeqaagADozitkBWlN2uDqazyjYMlWNvO8sGpDa2ZMZnJ4LImxjpjs7QE7Cin8Eaj3FyQEAA=="
+          }
+        }
+      ]
+    },
+    "bounds": {
+      "scope": "payments.charge amount<=100000"
+    }
+  },
+  "remedy": {
+    "challenge_window": "P7D",
+    "forum": {
+      "log_endpoint": "https://log.example",
+      "trusted_root_ref": "ots:root"
+    },
+    "remedies": [
+      {
+        "rung": "recompute",
+        "verifier": "bulla receipt verify",
+        "anchor": "hashes.content"
+      },
+      {
+        "rung": "escalate",
+        "verifier": "maintainer review",
+        "anchor": "did:key:z6MktNWXFy7fn9kNfwfvD9e2rDK3RPetS4MRKtZH8AxQzg9y"
+      }
+    ]
+  },
+  "retention": {},
+  "stake": null,
+  "conventions": [],
+  "signature": {
+    "type": "bulla/ed25519-2026",
+    "purpose": "content",
+    "issuer": "did:key:z6MkuBbLDXJVzgPqAFoZUXCkkSXLfDgyBhM6F5Y4Cj1cfJbF",
+    "verificationMethod": "did:key:z6MkuBbLDXJVzgPqAFoZUXCkkSXLfDgyBhM6F5Y4Cj1cfJbF",
+    "proofValue": "NTsrmMORmUW1h5lfBuWifJegbQhHAc1t2hZgYwgz5pqP/buFAcOGei/qIj7SS55Jr6AJj6HKKGOcBBZuAI/0Cg=="
+  },
+  "authorization": {
+    "type": "bulla/ed25519-2026",
+    "purpose": "authorization",
+    "issuer": "did:key:z6MkuBbLDXJVzgPqAFoZUXCkkSXLfDgyBhM6F5Y4Cj1cfJbF",
+    "verificationMethod": "did:key:z6MkuBbLDXJVzgPqAFoZUXCkkSXLfDgyBhM6F5Y4Cj1cfJbF",
+    "proofValue": "A1vw5vy+BPL2SOM3HlUjlJhaSqIJct3QGGnftvamUGGYcB4akQC8jLBRCnZ2+7EJ2YdC17fg7wM36iyjUDqEBQ=="
+  },
+  "timestamp": "2026-07-13T00:00:00+00:00",
+  "producer": {
+    "bulla_version": "0.44.0"
+  },
+  "hashes": {
+    "content": "sha256:1a6e7a4b3874439bc85e3726801b02165b24acd08771ec897ddac047b1c1a82a",
+    "event": "sha256:0c6242e609e4267f2a2b7f7ba275534d0a6afd32e81a9a07117a1e794f15887a",
+    "attestation": "sha256:957cb2e88cc4e9b80843831241a62f878b76acc0205b3a3f4d970a60511b6f3c",
+    "log_leaf": "sha256:0f8316e50bcf3af3cdf5cad0fccd071fd6e8e9bd7f5a2387e7ab63001fdac0c5"
+  }
+}

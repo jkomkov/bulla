@@ -1,0 +1,141 @@
+{
+  "profile": "bulla.certified-semantic-refinement/0.1-experimental",
+  "mode": "live-local-subprocess-and-transparency-mechanism-demo",
+  "decisions": {
+    "total": "RELY",
+    "partial_residual": "ESCALATE",
+    "after_enrichment": "RELY",
+    "after_epoch_change": "ESCALATE",
+    "stale_cause": "TERM_STALE"
+  },
+  "transitions": {
+    "unchanged_context": "PRESERVE",
+    "admitted_constraint": "REFINE",
+    "unresolved_case": "ROUTE",
+    "authority_epoch_change": "REVISE"
+  },
+  "downstream_actions": [
+    "continue_automatically",
+    "route_to_named_forum"
+  ],
+  "observability": {
+    "opposing_pair_count": 76,
+    "plan_count": 1,
+    "indispensable": [
+      "source-final-disposition"
+    ],
+    "request_hash": "sha256:ec775110024e71ddeba74692e1403fc5576d6ec6a538d94eabc0070d9d68e8a0",
+    "admission_hash": "sha256:0f149b158d25ff6a877f20b041cbc3968edb60878f44ce5192286007f48e1bb7"
+  },
+  "refinement": {
+    "prior_ambiguous_cells": 27,
+    "new_ambiguous_cells": 0,
+    "certificate": {
+      "schema_version": "0.1-experimental",
+      "prior_state_hash": "sha256:c544ed3ebddad0f02bd804992a25a4598a14387545b24a688f01823dc33e8f56",
+      "new_state_hash": "sha256:9a6b1edde5e2c6f5d802c93d4234cd729e3f559be77cf5f428ab209d05c3aa29",
+      "admitted_constraint_hash": "sha256:72e578a00702746cecd890e56a9b18bf319a340ad879363f53d2cad04420a937",
+      "prior_snapshot_hash": "sha256:a8855c92679d22051249696251f12f770fb77589906d2adb0afcdf510df9ff1b",
+      "new_snapshot_hash": "sha256:9d0fec356dd091ee0ce625623157b6c4fac0e7876235c116fc42e06a6cf9ea48",
+      "state_inclusion": true,
+      "retained_rely": true,
+      "retained_refuse": true,
+      "ambiguity_narrowed": true,
+      "authority_preserved": true,
+      "verifier": {
+        "id": "bulla.experimental.refinement.reference",
+        "version": "0.1-experimental",
+        "trust": "direct-finite-enumeration"
+      }
+    }
+  },
+  "governance": {
+    "status": "CHOICE_REQUIRED",
+    "selected_package_hash": "sha256:b0a8996f3dd4657229a7d39b2db3c3c186a1de8e98bd4443d4e397f92b783da5",
+    "selection_receipt_ok": true
+  },
+  "transparency": {
+    "receipt_count": 8,
+    "receipts": [
+      {
+        "action_type": "bulla.invent",
+        "content_hash": "sha256:2bd6b118efeff506e19acd8e5718a8e6ef293430da94e53d67a40e9c89c240fd",
+        "attestation_hash": "sha256:b46d6f3f0d940d906ee1477810253947fe39ea5fc912960af0cbfc903f9358cb",
+        "index": 0
+      },
+      {
+        "action_type": "bulla.invent",
+        "content_hash": "sha256:cd8f1fb90c3e525f9b0944dad68e1df3a00b0410df48b6064d12e6e5ff8d1a8c",
+        "attestation_hash": "sha256:3f56df6831117c084c1888e8e04cd73aa3f9cad926ea922cd34319f2986ed67c",
+        "index": 1
+      },
+      {
+        "action_type": "bulla.enrich.request",
+        "content_hash": "sha256:1ab9da73c3c518ab12696cbfcbadee3f1d5356c6bb8c87b4f959d5f6118b4b0d",
+        "attestation_hash": "sha256:a51e148dde4c5c57d8b9c1894393330a6792ab856559f242d3f36c721848f7c2",
+        "index": 2
+      },
+      {
+        "action_type": "bulla.enrich.respond",
+        "content_hash": "sha256:b13f3f90e230e256a1c9062312a4d757f17d9caae2b4cb40790509e40f0e33c4",
+        "attestation_hash": "sha256:e2b479042002e54f5e2d93a49a28484822eb8f01d18d6d9365c5cc001f846bc4",
+        "index": 3
+      },
+      {
+        "action_type": "bulla.enrich.apply",
+        "content_hash": "sha256:ef79e6fad54b18f70a8d67924b0a1e8dfff9a10ae85e6480c0147c6eae85072c",
+        "attestation_hash": "sha256:6945693f67b705f3d28391b9db4ef4ddc872699169c09e89351e1d0ec5c7c099",
+        "index": 4
+      },
+      {
+        "action_type": "bulla.envelope.refine",
+        "content_hash": "sha256:55a43630e327150aa8b8a7b6f5aa6d8239ed412c3d722b98d411037d795f0b1c",
+        "attestation_hash": "sha256:9a3309eb25ef7aee9361f2397e0285c7568287f6e516036effc76dcb16aeb7de",
+        "index": 5
+      },
+      {
+        "action_type": "bulla.invent.select",
+        "content_hash": "sha256:798eb0d6aad21a920c33ad87431f2c7e77de84d964462734e8e912259b71dc39",
+        "attestation_hash": "sha256:2542e566328ace397c8aad2e372ba7cadfb6ed4942569ae8b76d1f9dafa6e7f7",
+        "index": 6
+      },
+      {
+        "action_type": "bulla.term.supersede",
+        "content_hash": "sha256:f563f5c50e4232c2664b3d9f35952da27a3cda332646ea6ba4bcb25333221a32",
+        "attestation_hash": "sha256:8fcf4806df32702860d5aa0cde136ff68a47cbde9d4191d2949d0ed2268efd21",
+        "index": 7
+      }
+    ],
+    "inclusion_ok": true,
+    "checkpoint_hash": "sha256:6023c7e88e7dd468ec4585fb2e553530a8d1c4184abb86f54ba18fe6e7a2692a",
+    "checkpoint_ok": true,
+    "split_view_detected": true,
+    "mechanism_validation_not_independent_plurality": true
+  },
+  "standalone": {
+    "planning": {
+      "ok": true,
+      "planning_hash": "sha256:f5f7ee5caaa3da3edf3151badc44424bf14b5d346e037a3270ca864980d8b3cd",
+      "expected_hash": "sha256:f5f7ee5caaa3da3edf3151badc44424bf14b5d346e037a3270ca864980d8b3cd",
+      "mismatched_fields": [],
+      "expected_field_hashes": {},
+      "actual_field_hashes": {},
+      "opposing_pair_count": 76,
+      "plan_count": 1
+    },
+    "refinement": {
+      "ok": true,
+      "checks": {
+        "prior_snapshot": true,
+        "new_snapshot": true,
+        "certificate": true,
+        "all_gates": true
+      },
+      "bundle_hash": "sha256:d1a6a7b251368d46e81b6308a182b9cf5954d190780853efe713c64c97124d91",
+      "certificate_hash": "sha256:363fc0996c838289d26668e3901bdace84e50a47750353f50a788073cb773a42",
+      "prior_result_hash": "sha256:0d459d49337fba4d4fc1404e62be7e6450dac915e692a0adca39dee7741cda77",
+      "new_result_hash": "sha256:bb690446d8a5c306f1b58735ccd5d45ede3a4b591a69dd2580be23cfbb00af5a"
+    }
+  },
+  "claim_boundary": "Demonstrates local protocol mechanics and replay; it does not establish external plurality, production recourse, or benchmark generality."
+}

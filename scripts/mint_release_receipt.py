@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""Mint the release receipt AT release time — closing the retroactive seam.
+"""Mint the release receipt only AFTER PyPI accepts the release.
 
 ``releases/reconstruct.py`` records the honest gap: every receipt before
 0.43.0 was reconstructed after the fact, unsigned by construction. This
-script is the other half — run by ``publish.yml`` at tag time (and runnable
-locally against a built ``dist/``), it mints the ``package.release``
-ActionReceipt while the wheel that ships is on disk:
+script is the other half — run by ``publish.yml`` after Trusted Publishing —
+and mints the ``package.release`` ActionReceipt only after the wheel and sdist
+on disk match PyPI's accepted digests and expose Integrity API provenance:
 
-  * evidence  — sha256 of the actual ``dist/`` wheel + sdist
-                (``third_party_anchored`` once PyPI serves the same bytes);
+  * evidence  — sha256 of the exact wheel + sdist PyPI serves;
   * verdict   — a real, recomputable release-gate ``WitnessReceipt`` minted
                 here over the flagship example composition and written as a
                 ``.witness.json`` sidecar (``diagnostic_ref`` points at it);
@@ -20,7 +19,7 @@ ActionReceipt while the wheel that ships is on disk:
                 (``--ots``, best-effort: calendars answer with a pending
                 attestation that upgrades to a Bitcoin block later).
 
-    python scripts/mint_release_receipt.py --dist dist --out releases/0.43.0.json \
+    python scripts/mint_release_receipt.py --dist dist --out releases/0.44.0.json \
         --key ~/.bulla/release-key.json --ots
 """
 
@@ -37,6 +36,7 @@ from pathlib import Path
 
 from bulla import __version__
 from bulla.action_receipt import build_release_receipt, verify_receipt
+from bulla.coverage import fetch_pypi_project, fetch_pypi_provenance, integrity_url
 from bulla.diagnostic import diagnose
 from bulla.envelope import (
     Authority, Bounds, Forum, Recourse, RecourseEnvelope, Remedy,
@@ -56,6 +56,23 @@ def _git(*args: str) -> str:
     return subprocess.run(
         ["git", *args], capture_output=True, text=True, cwd=_REPO, timeout=30
     ).stdout.strip()
+
+
+def _git_tree_sha256() -> str | None:
+    """Hash the exact Git tree object payload without mislabeling its SHA-1 id."""
+    tree = _git("rev-parse", "HEAD^{tree}")
+    if not tree:
+        return None
+    result = subprocess.run(
+        ["git", "cat-file", "tree", tree],
+        capture_output=True,
+        cwd=_REPO,
+        timeout=30,
+        check=False,
+    )
+    if result.returncode:
+        return None
+    return "sha256:" + hashlib.sha256(result.stdout).hexdigest()
 
 
 def _release_envelope(version: str) -> RecourseEnvelope:
@@ -104,6 +121,8 @@ def main() -> int:
     ap.add_argument("--allow-unsigned", action="store_true", help="Mint without a signature, stating the gap in producer.")
     ap.add_argument("--ots", action="store_true", help="OpenTimestamps-anchor the attestation hash (writes .ots sidecar, base64).")
     ap.add_argument("--test-result", default=None, help="e.g. '12549 passed' — the suite result on this exact commit.")
+    ap.add_argument("--project", default="bulla", help="PyPI project name.")
+    ap.add_argument("--repository", default="jkomkov/bulla", help="Expected GitHub Trusted Publisher owner/repo.")
     args = ap.parse_args()
 
     wheels = sorted(args.dist.glob(f"bulla-{__version__}-*.whl"))
@@ -113,9 +132,42 @@ def main() -> int:
               file=sys.stderr)
         return 2
 
+    try:
+        project_doc = fetch_pypi_project(args.project)
+        published = {
+            item["filename"]: item
+            for item in (project_doc.get("releases") or {}).get(__version__, [])
+        }
+        accepted = []
+        for artifact in (wheels[0], sdists[0]):
+            record = published.get(artifact.name)
+            if record is None:
+                raise RuntimeError(f"PyPI has not accepted {artifact.name}")
+            local_digest = _sha256_file(artifact).removeprefix("sha256:")
+            remote_digest = (record.get("digests") or {}).get("sha256")
+            if local_digest != remote_digest:
+                raise RuntimeError(
+                    f"PyPI digest mismatch for {artifact.name}: local={local_digest} remote={remote_digest}"
+                )
+            provenance = fetch_pypi_provenance(args.project, __version__, artifact.name)
+            bundles = provenance.get("attestation_bundles") or []
+            if not any(
+                (bundle.get("publisher") or {}).get("kind") == "GitHub"
+                and (bundle.get("publisher") or {}).get("repository") == args.repository
+                and bundle.get("attestations")
+                for bundle in bundles
+            ):
+                raise RuntimeError(
+                    f"Integrity API has no {args.repository} Trusted Publisher attestation for {artifact.name}"
+                )
+            accepted.append(record)
+    except RuntimeError as exc:
+        print(f"Error: post-publication verification failed: {exc}", file=sys.stderr)
+        return 1
+
     commit = _git("rev-parse", "HEAD")
     tag = os.environ.get("GITHUB_REF_NAME") or _git("describe", "--exact-match", "--tags") or ""
-    tree = _git("rev-parse", "HEAD^{tree}")
+    tree_hash = _git_tree_sha256()
 
     out = args.out or (_REPO / "releases" / f"{__version__}.json")
     sidecar = out.with_suffix(".witness.json")
@@ -136,13 +188,11 @@ def main() -> int:
               file=sys.stderr)
         return 2
 
-    # Honest provenance: only a CI tag-time mint may claim "at-release"; a
-    # local run is a release-candidate build (the wheel PyPI serves is the
-    # one CI builds, so a local receipt must not pose as the shipping one).
     producer: dict = {
         "bulla_version": __version__,
-        "minted": "at-release" if os.environ.get("GITHUB_ACTIONS") else "release-candidate-build",
+        "minted": "post-publication",
         "workflow": os.environ.get("GITHUB_WORKFLOW", "local"),
+        "pypi_project": args.project,
     }
     if signer is None:
         producer["note"] = "UNSIGNED — no release key configured at mint time (stated, not hidden)"
@@ -152,13 +202,20 @@ def main() -> int:
         version=__version__,
         git_commit=commit,
         git_tag=tag,
-        wheel_sha256=_sha256_file(wheels[0]),
-        sdist_sha256=_sha256_file(sdists[0]),
-        tree_hash="sha256:" + tree if tree else None,
+        wheel_sha256="sha256:" + accepted[0]["digests"]["sha256"],
+        sdist_sha256="sha256:" + accepted[1]["digests"]["sha256"],
+        tree_hash=tree_hash,
         test_result=args.test_result,
         diagnostic_ref=diagnostic_ref,
         envelope=_release_envelope(__version__),
-        root_of_trust={"scheme": "sigstore-pep740"},  # rekor_log_index known only post-publish
+        root_of_trust={
+            "scheme": "sigstore-pep740",
+            "publisher": f"github:{args.repository}",
+            "integrity_api": [
+                integrity_url(args.project, __version__, item["filename"])
+                for item in accepted
+            ],
+        },
         timestamp=datetime.now(timezone.utc).isoformat(),
         producer=producer,
     )

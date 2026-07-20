@@ -1,0 +1,3393 @@
+{
+  "coverage": {
+    "abstract_state_count": 196,
+    "accepted_transition_count": 323,
+    "causes": [
+      "CONFLICT_NON_MUTATION",
+      "EPOCH_MISMATCH",
+      "EXPIRED",
+      "FINALITY_PRECONDITION_FAILED",
+      "FINALIZED",
+      "INSUFFICIENT_LOCK",
+      "INVALID_REFINEMENT",
+      "INVALID_RELEASE",
+      "LOCKED",
+      "LOCK_SHORTFALL",
+      "LOCK_STATE_INVALID",
+      "PROVISIONAL",
+      "REFINED",
+      "RELEASED",
+      "RELEASE_STATE_INVALID",
+      "ROUTED",
+      "SUPERSESSION_REQUIRED",
+      "TERMINAL_STATE",
+      "TERM_STALE"
+    ],
+    "covered_guard_boundary_count": 82,
+    "fairness_model": {
+      "authorized_completion_reaches_finalized": true,
+      "authorized_completion_trace": [
+        {
+          "accepted": true,
+          "cause": "LOCKED",
+          "event": {
+            "amount_microunits": 2,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "LOCK"
+          },
+          "step": 1
+        },
+        {
+          "accepted": true,
+          "cause": "PROVISIONAL",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "EXECUTE"
+          },
+          "step": 2
+        },
+        {
+          "accepted": true,
+          "cause": "REFINED",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": true,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "REFINE"
+          },
+          "step": 3
+        },
+        {
+          "accepted": true,
+          "cause": "RELEASED",
+          "event": {
+            "amount_microunits": 2,
+            "authorized": true,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "RELEASE"
+          },
+          "step": 4
+        },
+        {
+          "accepted": true,
+          "cause": "FINALIZED",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": true,
+            "closure_permitted": true,
+            "epoch": 0,
+            "kind": "FINALIZE"
+          },
+          "step": 5
+        }
+      ],
+      "bounded_liveness_scope": "finite abstract model under declared fairness only",
+      "kind": "weak-fairness-with-witness-clock",
+      "minimal_unfair_nonprogress": [
+        {
+          "enabled": "FINALIZE",
+          "phase": "PROVISIONAL",
+          "step": 0
+        },
+        {
+          "enabled": "FINALIZE",
+          "event": "NOOP",
+          "step": 1
+        }
+      ],
+      "statement": "A continuously enabled authorized completion action eventually executes while the witness clock advances.",
+      "watchdog_resolution": {
+        "cause": "EXPIRED",
+        "event": "EXPIRE"
+      }
+    },
+    "guard_boundary_count": 82,
+    "invariant_violations": [],
+    "rejected_transition_count": 12809,
+    "schema_version": "0.2-experimental",
+    "shortest_witnesses": {
+      "CONFLICT_NON_MUTATION": [
+        {
+          "accepted": false,
+          "cause": "CONFLICT_NON_MUTATION",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "CONFLICT"
+          },
+          "next_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        }
+      ],
+      "EPOCH_MISMATCH": [
+        {
+          "accepted": false,
+          "cause": "EPOCH_MISMATCH",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 1,
+            "kind": "EXECUTE"
+          },
+          "next_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        }
+      ],
+      "EXPIRED": [
+        {
+          "accepted": true,
+          "cause": "EXPIRED",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "EXPIRE"
+          },
+          "next_hash": "sha256:48695a8992a715f1362456f3673874760410062b6fadca8b719d6e85f67bad7a",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        }
+      ],
+      "FINALITY_PRECONDITION_FAILED": [
+        {
+          "accepted": false,
+          "cause": "FINALITY_PRECONDITION_FAILED",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "FINALIZE"
+          },
+          "next_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        }
+      ],
+      "FINALIZED": [
+        {
+          "accepted": true,
+          "cause": "REFINED",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": true,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "REFINE"
+          },
+          "next_hash": "sha256:6a395446b9f6eb7648e002bfb5b2c9676e29de2627dff2f8a54782ac34308668",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        },
+        {
+          "accepted": true,
+          "cause": "LOCKED",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "LOCK"
+          },
+          "next_hash": "sha256:6f3637601a9c150df7469bc53b82c6d5b5d0a4b659a5a5754d45ccdb3a3f6805",
+          "prior_hash": "sha256:6a395446b9f6eb7648e002bfb5b2c9676e29de2627dff2f8a54782ac34308668"
+        },
+        {
+          "accepted": true,
+          "cause": "PROVISIONAL",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "EXECUTE"
+          },
+          "next_hash": "sha256:fa37f045e008ebdbe6f3e33bf272837fbff35ecaaf4fc2bd9ce33d9d44a691cf",
+          "prior_hash": "sha256:6f3637601a9c150df7469bc53b82c6d5b5d0a4b659a5a5754d45ccdb3a3f6805"
+        },
+        {
+          "accepted": true,
+          "cause": "FINALIZED",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": true,
+            "closure_permitted": true,
+            "epoch": 0,
+            "kind": "FINALIZE"
+          },
+          "next_hash": "sha256:e1e477f42315f5e7f5b586920b4120bdab056996088bc1cb348d03767aafd179",
+          "prior_hash": "sha256:fa37f045e008ebdbe6f3e33bf272837fbff35ecaaf4fc2bd9ce33d9d44a691cf"
+        }
+      ],
+      "INSUFFICIENT_LOCK": [
+        {
+          "accepted": false,
+          "cause": "INSUFFICIENT_LOCK",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "EXECUTE"
+          },
+          "next_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        }
+      ],
+      "INVALID_REFINEMENT": [
+        {
+          "accepted": false,
+          "cause": "INVALID_REFINEMENT",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "REFINE"
+          },
+          "next_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        }
+      ],
+      "INVALID_RELEASE": [
+        {
+          "accepted": true,
+          "cause": "LOCKED",
+          "event": {
+            "amount_microunits": 2,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "LOCK"
+          },
+          "next_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        },
+        {
+          "accepted": true,
+          "cause": "PROVISIONAL",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "EXECUTE"
+          },
+          "next_hash": "sha256:bbb3cc4970b9cda0602fdbf5cc6b34cf16f0a294df9e6d32607bb971c594fb52",
+          "prior_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0"
+        },
+        {
+          "accepted": false,
+          "cause": "INVALID_RELEASE",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "RELEASE"
+          },
+          "next_hash": "sha256:bbb3cc4970b9cda0602fdbf5cc6b34cf16f0a294df9e6d32607bb971c594fb52",
+          "prior_hash": "sha256:bbb3cc4970b9cda0602fdbf5cc6b34cf16f0a294df9e6d32607bb971c594fb52"
+        }
+      ],
+      "LOCKED": [
+        {
+          "accepted": true,
+          "cause": "LOCKED",
+          "event": {
+            "amount_microunits": 2,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "LOCK"
+          },
+          "next_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        }
+      ],
+      "LOCK_SHORTFALL": [
+        {
+          "accepted": false,
+          "cause": "LOCK_SHORTFALL",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "LOCK"
+          },
+          "next_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        }
+      ],
+      "LOCK_STATE_INVALID": [
+        {
+          "accepted": true,
+          "cause": "LOCKED",
+          "event": {
+            "amount_microunits": 2,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "LOCK"
+          },
+          "next_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        },
+        {
+          "accepted": false,
+          "cause": "LOCK_STATE_INVALID",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "LOCK"
+          },
+          "next_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0",
+          "prior_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0"
+        }
+      ],
+      "PROVISIONAL": [
+        {
+          "accepted": true,
+          "cause": "LOCKED",
+          "event": {
+            "amount_microunits": 2,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "LOCK"
+          },
+          "next_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        },
+        {
+          "accepted": true,
+          "cause": "PROVISIONAL",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "EXECUTE"
+          },
+          "next_hash": "sha256:bbb3cc4970b9cda0602fdbf5cc6b34cf16f0a294df9e6d32607bb971c594fb52",
+          "prior_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0"
+        }
+      ],
+      "REFINED": [
+        {
+          "accepted": true,
+          "cause": "REFINED",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": true,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "REFINE"
+          },
+          "next_hash": "sha256:6a395446b9f6eb7648e002bfb5b2c9676e29de2627dff2f8a54782ac34308668",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        }
+      ],
+      "RELEASED": [
+        {
+          "accepted": true,
+          "cause": "LOCKED",
+          "event": {
+            "amount_microunits": 2,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "LOCK"
+          },
+          "next_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        },
+        {
+          "accepted": true,
+          "cause": "PROVISIONAL",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "EXECUTE"
+          },
+          "next_hash": "sha256:bbb3cc4970b9cda0602fdbf5cc6b34cf16f0a294df9e6d32607bb971c594fb52",
+          "prior_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0"
+        },
+        {
+          "accepted": true,
+          "cause": "RELEASED",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": true,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "RELEASE"
+          },
+          "next_hash": "sha256:bbb3cc4970b9cda0602fdbf5cc6b34cf16f0a294df9e6d32607bb971c594fb52",
+          "prior_hash": "sha256:bbb3cc4970b9cda0602fdbf5cc6b34cf16f0a294df9e6d32607bb971c594fb52"
+        }
+      ],
+      "RELEASE_STATE_INVALID": [
+        {
+          "accepted": false,
+          "cause": "RELEASE_STATE_INVALID",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "RELEASE"
+          },
+          "next_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        }
+      ],
+      "ROUTED": [
+        {
+          "accepted": true,
+          "cause": "ROUTED",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "ROUTE"
+          },
+          "next_hash": "sha256:862964495be88c697838b92ee9416a47ecbe6a7ef34e50834c6ea1e33beccdc1",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        }
+      ],
+      "SUPERSESSION_REQUIRED": [
+        {
+          "accepted": false,
+          "cause": "SUPERSESSION_REQUIRED",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "REVISE"
+          },
+          "next_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        }
+      ],
+      "TERMINAL_STATE": [
+        {
+          "accepted": true,
+          "cause": "EXPIRED",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "EXPIRE"
+          },
+          "next_hash": "sha256:48695a8992a715f1362456f3673874760410062b6fadca8b719d6e85f67bad7a",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        },
+        {
+          "accepted": false,
+          "cause": "TERMINAL_STATE",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": false,
+            "closure_permitted": false,
+            "epoch": 0,
+            "kind": "CONFLICT"
+          },
+          "next_hash": "sha256:48695a8992a715f1362456f3673874760410062b6fadca8b719d6e85f67bad7a",
+          "prior_hash": "sha256:48695a8992a715f1362456f3673874760410062b6fadca8b719d6e85f67bad7a"
+        }
+      ],
+      "TERM_STALE": [
+        {
+          "accepted": true,
+          "cause": "TERM_STALE",
+          "event": {
+            "amount_microunits": 0,
+            "authorized": true,
+            "closure_permitted": false,
+            "epoch": 1,
+            "kind": "REVISE"
+          },
+          "next_hash": "sha256:43510c7138f62a2240d5962273b93083167589005dd21081301b28b6946cf1c2",
+          "prior_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205"
+        }
+      ]
+    },
+    "terminal_phases": [
+      "EXPIRED",
+      "FINALIZED",
+      "ROUTED",
+      "STALE"
+    ],
+    "transition_count": 13132
+  },
+  "coverage_guided_scheduler": {
+    "cause_count": 17,
+    "claim_boundary": "Supplement to exhaustive fixed-point evidence, not a replacement.",
+    "first_64_steps": [
+      {
+        "accepted": true,
+        "cause": "LOCKED",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "LOCK"
+        },
+        "state_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0",
+        "step": 1
+      },
+      {
+        "accepted": true,
+        "cause": "PROVISIONAL",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "EXECUTE"
+        },
+        "state_hash": "sha256:bbb3cc4970b9cda0602fdbf5cc6b34cf16f0a294df9e6d32607bb971c594fb52",
+        "step": 2
+      },
+      {
+        "accepted": true,
+        "cause": "REFINED",
+        "event": {
+          "amount_microunits": 1,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "REFINE"
+        },
+        "state_hash": "sha256:bf5bd8933c0156d5caf952582fe5ae9e68275d07a6c4bf5b6818cc82a620cca0",
+        "step": 3
+      },
+      {
+        "accepted": true,
+        "cause": "RELEASED",
+        "event": {
+          "amount_microunits": 1,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "RELEASE"
+        },
+        "state_hash": "sha256:5ec9293b19a38fa53f8b00a461844a090e6e28d760bfcb9c60da7778cd0ed061",
+        "step": 4
+      },
+      {
+        "accepted": true,
+        "cause": "ROUTED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "ROUTE"
+        },
+        "state_hash": "sha256:9b187886874f967a86ad5b10d4510a10bfb0a9bb632c1516f96654b54bf53e19",
+        "step": 5
+      },
+      {
+        "accepted": true,
+        "cause": "EXPIRED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "EXPIRE"
+        },
+        "state_hash": "sha256:48695a8992a715f1362456f3673874760410062b6fadca8b719d6e85f67bad7a",
+        "step": 6
+      },
+      {
+        "accepted": true,
+        "cause": "TERM_STALE",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 1,
+          "kind": "REVISE"
+        },
+        "state_hash": "sha256:43510c7138f62a2240d5962273b93083167589005dd21081301b28b6946cf1c2",
+        "step": 7
+      },
+      {
+        "accepted": true,
+        "cause": "REFINED",
+        "event": {
+          "amount_microunits": 1,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "REFINE"
+        },
+        "state_hash": "sha256:1542cd4c22efd052edc1a54cd0aa37876ca4e5b67c8d13cdad8936b1409ab8fb",
+        "step": 8
+      },
+      {
+        "accepted": true,
+        "cause": "LOCKED",
+        "event": {
+          "amount_microunits": 1,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "LOCK"
+        },
+        "state_hash": "sha256:a10174f7f7ce4b012ffd6080e5ffc0383399f1fc32b2e53ed8865e598ad2d478",
+        "step": 9
+      },
+      {
+        "accepted": true,
+        "cause": "ROUTED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "ROUTE"
+        },
+        "state_hash": "sha256:7866cb1ffd32283071bcde2435ac20039d6e57da80d1d1430bfd2109b313df23",
+        "step": 10
+      },
+      {
+        "accepted": true,
+        "cause": "LOCKED",
+        "event": {
+          "amount_microunits": 3,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "LOCK"
+        },
+        "state_hash": "sha256:1e1d5f55808e42eca2e13c341f51c1460624f32b2a19a5adc54994d59184226c",
+        "step": 11
+      },
+      {
+        "accepted": true,
+        "cause": "REFINED",
+        "event": {
+          "amount_microunits": 1,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "REFINE"
+        },
+        "state_hash": "sha256:125cbee2fc9abf6f0c5cd298757fba58e3f39fdc9790be7dd14374524598a11f",
+        "step": 12
+      },
+      {
+        "accepted": true,
+        "cause": "PROVISIONAL",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "EXECUTE"
+        },
+        "state_hash": "sha256:a44d258976625b2906867e0337a27ffd9f39a6306b09f346fd241078f128dd91",
+        "step": 13
+      },
+      {
+        "accepted": true,
+        "cause": "RELEASED",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "RELEASE"
+        },
+        "state_hash": "sha256:c5766de7dee51019ebee8198029bf2d28c4cb50c69727c3ddc69a81b9c3609a9",
+        "step": 14
+      },
+      {
+        "accepted": true,
+        "cause": "REFINED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "REFINE"
+        },
+        "state_hash": "sha256:2bdf1edc4f184fd8159d14b4bc81aa7e208df4f5dcab7b6377a4c2f927e1153c",
+        "step": 15
+      },
+      {
+        "accepted": true,
+        "cause": "FINALIZED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": true,
+          "closure_permitted": true,
+          "epoch": 0,
+          "kind": "FINALIZE"
+        },
+        "state_hash": "sha256:e5cd5ccf082786205156dc313c445d34248e22d5f7f6f0dfe41a9c6923d8472b",
+        "step": 16
+      },
+      {
+        "accepted": true,
+        "cause": "ROUTED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "ROUTE"
+        },
+        "state_hash": "sha256:862964495be88c697838b92ee9416a47ecbe6a7ef34e50834c6ea1e33beccdc1",
+        "step": 17
+      },
+      {
+        "accepted": true,
+        "cause": "REFINED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "REFINE"
+        },
+        "state_hash": "sha256:6a395446b9f6eb7648e002bfb5b2c9676e29de2627dff2f8a54782ac34308668",
+        "step": 18
+      },
+      {
+        "accepted": true,
+        "cause": "ROUTED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "ROUTE"
+        },
+        "state_hash": "sha256:b53c041a5ee534c08d31a054e9657f992476df032ff9f122147d364c56b4b477",
+        "step": 19
+      },
+      {
+        "accepted": true,
+        "cause": "LOCKED",
+        "event": {
+          "amount_microunits": 4,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "LOCK"
+        },
+        "state_hash": "sha256:0026f40cad3c0dd46deb41ac56cf39d47d5131f69518748979325875294d802f",
+        "step": 20
+      },
+      {
+        "accepted": true,
+        "cause": "EXPIRED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "EXPIRE"
+        },
+        "state_hash": "sha256:4b9f5971ec9c72de6cb13abe802aa61f7800210340c372c537843277ccac80d9",
+        "step": 21
+      },
+      {
+        "accepted": false,
+        "cause": "CONFLICT_NON_MUTATION",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "CONFLICT"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 22
+      },
+      {
+        "accepted": false,
+        "cause": "INVALID_REFINEMENT",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "REFINE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 23
+      },
+      {
+        "accepted": false,
+        "cause": "EPOCH_MISMATCH",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 1,
+          "kind": "REFINE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 24
+      },
+      {
+        "accepted": false,
+        "cause": "RELEASE_STATE_INVALID",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "RELEASE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 25
+      },
+      {
+        "accepted": false,
+        "cause": "LOCK_SHORTFALL",
+        "event": {
+          "amount_microunits": 1,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "LOCK"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 26
+      },
+      {
+        "accepted": false,
+        "cause": "FINALITY_PRECONDITION_FAILED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": true,
+          "closure_permitted": true,
+          "epoch": 0,
+          "kind": "FINALIZE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 27
+      },
+      {
+        "accepted": false,
+        "cause": "INSUFFICIENT_LOCK",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "EXECUTE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 28
+      },
+      {
+        "accepted": false,
+        "cause": "SUPERSESSION_REQUIRED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 1,
+          "kind": "REVISE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 29
+      },
+      {
+        "accepted": false,
+        "cause": "CONFLICT_NON_MUTATION",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "CONFLICT"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 30
+      },
+      {
+        "accepted": false,
+        "cause": "CONFLICT_NON_MUTATION",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "CONFLICT"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 31
+      },
+      {
+        "accepted": true,
+        "cause": "LOCKED",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "LOCK"
+        },
+        "state_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0",
+        "step": 32
+      },
+      {
+        "accepted": true,
+        "cause": "TERM_STALE",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 1,
+          "kind": "REVISE"
+        },
+        "state_hash": "sha256:84e10efab60937db48bcf72ddc0aeff3f72eb9b392229b4394d30524b959ba0f",
+        "step": 33
+      },
+      {
+        "accepted": false,
+        "cause": "INVALID_REFINEMENT",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "REFINE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 34
+      },
+      {
+        "accepted": false,
+        "cause": "CONFLICT_NON_MUTATION",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "CONFLICT"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 35
+      },
+      {
+        "accepted": true,
+        "cause": "REFINED",
+        "event": {
+          "amount_microunits": 1,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "REFINE"
+        },
+        "state_hash": "sha256:1542cd4c22efd052edc1a54cd0aa37876ca4e5b67c8d13cdad8936b1409ab8fb",
+        "step": 36
+      },
+      {
+        "accepted": true,
+        "cause": "EXPIRED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "EXPIRE"
+        },
+        "state_hash": "sha256:c7d5df82ae33a090abb2abe4ef0ae80d6eb531e9fe11ab1e236a364a4fbdd31b",
+        "step": 37
+      },
+      {
+        "accepted": false,
+        "cause": "EPOCH_MISMATCH",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 1,
+          "kind": "REFINE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 38
+      },
+      {
+        "accepted": false,
+        "cause": "CONFLICT_NON_MUTATION",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "CONFLICT"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 39
+      },
+      {
+        "accepted": false,
+        "cause": "EPOCH_MISMATCH",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 1,
+          "kind": "REFINE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 40
+      },
+      {
+        "accepted": true,
+        "cause": "LOCKED",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "LOCK"
+        },
+        "state_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0",
+        "step": 41
+      },
+      {
+        "accepted": true,
+        "cause": "ROUTED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "ROUTE"
+        },
+        "state_hash": "sha256:f834b7b4d7e42a5bc132d3b8a80c520583d48b71e98408911a02ce31aa6dedcf",
+        "step": 42
+      },
+      {
+        "accepted": false,
+        "cause": "RELEASE_STATE_INVALID",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "RELEASE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 43
+      },
+      {
+        "accepted": false,
+        "cause": "CONFLICT_NON_MUTATION",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "CONFLICT"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 44
+      },
+      {
+        "accepted": false,
+        "cause": "RELEASE_STATE_INVALID",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "RELEASE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 45
+      },
+      {
+        "accepted": true,
+        "cause": "LOCKED",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "LOCK"
+        },
+        "state_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0",
+        "step": 46
+      },
+      {
+        "accepted": true,
+        "cause": "REFINED",
+        "event": {
+          "amount_microunits": 1,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "REFINE"
+        },
+        "state_hash": "sha256:b5b0ec5c15a361912dedae54e14b42b6172553cf10b9886d6f65aa5444769b93",
+        "step": 47
+      },
+      {
+        "accepted": true,
+        "cause": "TERM_STALE",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 1,
+          "kind": "REVISE"
+        },
+        "state_hash": "sha256:879b8ed58ae5c5e97e2276745b62c9472ae3879a7bb482252fa55a3b24f514d3",
+        "step": 48
+      },
+      {
+        "accepted": false,
+        "cause": "LOCK_SHORTFALL",
+        "event": {
+          "amount_microunits": 1,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "LOCK"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 49
+      },
+      {
+        "accepted": false,
+        "cause": "CONFLICT_NON_MUTATION",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "CONFLICT"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 50
+      },
+      {
+        "accepted": false,
+        "cause": "LOCK_SHORTFALL",
+        "event": {
+          "amount_microunits": 1,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "LOCK"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 51
+      },
+      {
+        "accepted": true,
+        "cause": "LOCKED",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "LOCK"
+        },
+        "state_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0",
+        "step": 52
+      },
+      {
+        "accepted": true,
+        "cause": "EXPIRED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "EXPIRE"
+        },
+        "state_hash": "sha256:a75807958157d2760baa2c67ae25d0f95478a309f75feb355b62d40f019050a7",
+        "step": 53
+      },
+      {
+        "accepted": false,
+        "cause": "FINALITY_PRECONDITION_FAILED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": true,
+          "closure_permitted": true,
+          "epoch": 0,
+          "kind": "FINALIZE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 54
+      },
+      {
+        "accepted": false,
+        "cause": "CONFLICT_NON_MUTATION",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "CONFLICT"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 55
+      },
+      {
+        "accepted": false,
+        "cause": "FINALITY_PRECONDITION_FAILED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": true,
+          "closure_permitted": true,
+          "epoch": 0,
+          "kind": "FINALIZE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 56
+      },
+      {
+        "accepted": true,
+        "cause": "LOCKED",
+        "event": {
+          "amount_microunits": 2,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "LOCK"
+        },
+        "state_hash": "sha256:630ad4318f823a89c984ac92d56e06613d6051ce77bbe26765c84b94349af2b0",
+        "step": 57
+      },
+      {
+        "accepted": true,
+        "cause": "REFINED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": true,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "REFINE"
+        },
+        "state_hash": "sha256:edc22782085c26ded396402a81b1827cac383993988ca9d5a3b0d8e8ff8a313b",
+        "step": 58
+      },
+      {
+        "accepted": true,
+        "cause": "PROVISIONAL",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "EXECUTE"
+        },
+        "state_hash": "sha256:08b2ea7b68075c788c1e6e820c7824143c9979f529e27c81d14c22828e72ff04",
+        "step": 59
+      },
+      {
+        "accepted": true,
+        "cause": "FINALIZED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": true,
+          "closure_permitted": true,
+          "epoch": 0,
+          "kind": "FINALIZE"
+        },
+        "state_hash": "sha256:82c8eb0ebf5a1dbcdb9ca14c9302b0c9a2cf437d13d808053955f15bf9f2b9a7",
+        "step": 60
+      },
+      {
+        "accepted": false,
+        "cause": "INSUFFICIENT_LOCK",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "EXECUTE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 61
+      },
+      {
+        "accepted": false,
+        "cause": "CONFLICT_NON_MUTATION",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "CONFLICT"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 62
+      },
+      {
+        "accepted": true,
+        "cause": "ROUTED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 0,
+          "kind": "ROUTE"
+        },
+        "state_hash": "sha256:862964495be88c697838b92ee9416a47ecbe6a7ef34e50834c6ea1e33beccdc1",
+        "step": 63
+      },
+      {
+        "accepted": false,
+        "cause": "SUPERSESSION_REQUIRED",
+        "event": {
+          "amount_microunits": 0,
+          "authorized": false,
+          "closure_permitted": false,
+          "epoch": 1,
+          "kind": "REVISE"
+        },
+        "state_hash": "sha256:237d44e2f64871045f67c503a0b077168943212c041a1609c841d73e2fd59205",
+        "step": 64
+      }
+    ],
+    "reward_coordinates": [
+      "new_state",
+      "new_cause",
+      "new_transition_cause_pair",
+      "reserve_boundary",
+      "long_unresolved_commitment",
+      "witness_divergence",
+      "invariant_proximity"
+    ],
+    "scheduler": "deterministic-coverage-guided",
+    "state_count": 34,
+    "steps": 2048,
+    "trace_hash": "sha256:0cbf9ce8df0aacc7d9ee6b0cf01e66ec82311325c5a515775f9f3b279f31efcb",
+    "transition_cause_pair_count": 72
+  },
+  "event_variant_count": 67,
+  "initial_state": {
+    "action_executed": false,
+    "available_lock": 0,
+    "epoch": 0,
+    "expiry_step": 99,
+    "locked_microunits": 0,
+    "phase": "OPEN",
+    "released_microunits": 0,
+    "required_reserve_microunits": 2
+  },
+  "states": [
+    {
+      "action_executed": false,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "LOCKED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": false,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 1,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": false,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "PROVISIONAL",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "STALE",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "PROVISIONAL",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": false,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "LOCKED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "PROVISIONAL",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "OPEN",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "FINALIZED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "ROUTED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "PROVISIONAL",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "PROVISIONAL",
+      "released_microunits": 4,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "LOCKED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "LOCKED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "PROVISIONAL",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": false,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "OPEN",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "EXPIRED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "PROVISIONAL",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 3,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": false,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "PROVISIONAL",
+      "released_microunits": 2,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "FINALIZED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "STALE",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 3,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "STALE",
+      "released_microunits": 1,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "PROVISIONAL",
+      "released_microunits": 2,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "ROUTED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "STALE",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 4,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 4,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "STALE",
+      "released_microunits": 1,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": false,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": false,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "EXPIRED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 3,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 2,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "PROVISIONAL",
+      "released_microunits": 1,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": false,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "PROVISIONAL",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "PROVISIONAL",
+      "released_microunits": 1,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "PROVISIONAL",
+      "released_microunits": 1,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "PROVISIONAL",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": false,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "LOCKED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": false,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 4,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "FINALIZED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "FINALIZED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "OPEN",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "EXPIRED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": false,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "LOCKED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "FINALIZED",
+      "released_microunits": 3,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "ROUTED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": false,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": false,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "LOCKED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": false,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "LOCKED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "PROVISIONAL",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "EXPIRED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "EXPIRED",
+      "released_microunits": 3,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "STALE",
+      "released_microunits": 2,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "FINALIZED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": false,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "PROVISIONAL",
+      "released_microunits": 3,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "FINALIZED",
+      "released_microunits": 3,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "EXPIRED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 3,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": false,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": false,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "ROUTED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "PROVISIONAL",
+      "released_microunits": 3,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "PROVISIONAL",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "LOCKED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": false,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "PROVISIONAL",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": false,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "PROVISIONAL",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "PROVISIONAL",
+      "released_microunits": 1,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": false,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "PROVISIONAL",
+      "released_microunits": 1,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "EXPIRED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "ROUTED",
+      "released_microunits": 3,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "LOCKED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "ROUTED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "PROVISIONAL",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": false,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "LOCKED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "PROVISIONAL",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "PROVISIONAL",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "FINALIZED",
+      "released_microunits": 4,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "STALE",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "PROVISIONAL",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "EXPIRED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "FINALIZED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "PROVISIONAL",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 3,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": false,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 3,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "PROVISIONAL",
+      "released_microunits": 2,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 2,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": false,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "ROUTED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "STALE",
+      "released_microunits": 3,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "PROVISIONAL",
+      "released_microunits": 3,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "ROUTED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "FINALIZED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "EXPIRED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "ROUTED",
+      "released_microunits": 1,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "FINALIZED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "FINALIZED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "FINALIZED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 1,
+      "phase": "FINALIZED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "PROVISIONAL",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "STALE",
+      "released_microunits": 1,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "FINALIZED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "ROUTED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "LOCKED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 3,
+      "phase": "EXPIRED",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 3,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 1,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": false,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": false,
+      "available_lock": 4,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "EXPIRED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 1
+    },
+    {
+      "action_executed": true,
+      "available_lock": 1,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "STALE",
+      "released_microunits": 1,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": false,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 4,
+      "phase": "STALE",
+      "released_microunits": 2,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 0,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 0,
+      "phase": "PROVISIONAL",
+      "released_microunits": 0,
+      "required_reserve_microunits": 0
+    },
+    {
+      "action_executed": true,
+      "available_lock": 2,
+      "epoch": 0,
+      "expiry_step": 99,
+      "locked_microunits": 2,
+      "phase": "ROUTED",
+      "released_microunits": 0,
+      "required_reserve_microunits": 2
+    }
+  ],
+  "transition_digest": "sha256:f0608271b6856e549aed978ce3da39ea82413ea3859016efdf573f46d0f04308",
+  "two_commitment": {
+    "claim_boundary": "abstract guard model; not custody or collectibility evidence",
+    "model": "bounded-two-commitment-shared-collateral",
+    "reserve_per_commitment": 2,
+    "shortest_boundary_witnesses": {
+      "correlated_lock_insolvency": [
+        0,
+        0,
+        1,
+        false
+      ],
+      "double_pledge_rejected": [
+        0,
+        0,
+        1,
+        false
+      ],
+      "verifier_failure_rejected": [
+        0,
+        0,
+        0,
+        false
+      ]
+    },
+    "state_count": 90,
+    "violations": []
+  }
+}

@@ -1,0 +1,305 @@
+{
+  "case_count": 24,
+  "cases": [
+    {
+      "authority_available": true,
+      "case_id": "definition-observation-00",
+      "computationally_complete": true,
+      "definition_available": true,
+      "derivation_status": "CERTIFIED",
+      "exit": "FINALIZE",
+      "ground_observed": true,
+      "unresolved_boundaries": []
+    },
+    {
+      "authority_available": true,
+      "case_id": "definition-observation-01",
+      "computationally_complete": true,
+      "definition_available": false,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": true,
+      "unresolved_boundaries": [
+        "SEMANTIC"
+      ]
+    },
+    {
+      "authority_available": true,
+      "case_id": "definition-observation-02",
+      "computationally_complete": true,
+      "definition_available": true,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": false,
+      "unresolved_boundaries": [
+        "GROUNDING"
+      ]
+    },
+    {
+      "authority_available": true,
+      "case_id": "definition-observation-03",
+      "computationally_complete": true,
+      "definition_available": false,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": false,
+      "unresolved_boundaries": [
+        "SEMANTIC",
+        "GROUNDING"
+      ]
+    },
+    {
+      "authority_available": false,
+      "case_id": "definition-observation-04",
+      "computationally_complete": true,
+      "definition_available": true,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": true,
+      "unresolved_boundaries": [
+        "AUTHORITY"
+      ]
+    },
+    {
+      "authority_available": false,
+      "case_id": "definition-observation-05",
+      "computationally_complete": true,
+      "definition_available": false,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": true,
+      "unresolved_boundaries": [
+        "SEMANTIC",
+        "AUTHORITY"
+      ]
+    },
+    {
+      "authority_available": false,
+      "case_id": "definition-observation-06",
+      "computationally_complete": true,
+      "definition_available": true,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": false,
+      "unresolved_boundaries": [
+        "GROUNDING",
+        "AUTHORITY"
+      ]
+    },
+    {
+      "authority_available": false,
+      "case_id": "definition-observation-07",
+      "computationally_complete": true,
+      "definition_available": false,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": false,
+      "unresolved_boundaries": [
+        "SEMANTIC",
+        "GROUNDING",
+        "AUTHORITY"
+      ]
+    },
+    {
+      "authority_available": true,
+      "case_id": "definition-observation-08",
+      "computationally_complete": false,
+      "definition_available": true,
+      "derivation_status": "RESOURCE_BOUNDED",
+      "exit": "ROUTE",
+      "ground_observed": true,
+      "unresolved_boundaries": []
+    },
+    {
+      "authority_available": true,
+      "case_id": "definition-observation-09",
+      "computationally_complete": false,
+      "definition_available": false,
+      "derivation_status": "RESOURCE_BOUNDED",
+      "exit": "ROUTE",
+      "ground_observed": true,
+      "unresolved_boundaries": [
+        "SEMANTIC"
+      ]
+    },
+    {
+      "authority_available": true,
+      "case_id": "definition-observation-10",
+      "computationally_complete": false,
+      "definition_available": true,
+      "derivation_status": "RESOURCE_BOUNDED",
+      "exit": "ROUTE",
+      "ground_observed": false,
+      "unresolved_boundaries": [
+        "GROUNDING"
+      ]
+    },
+    {
+      "authority_available": true,
+      "case_id": "definition-observation-11",
+      "computationally_complete": false,
+      "definition_available": false,
+      "derivation_status": "RESOURCE_BOUNDED",
+      "exit": "ROUTE",
+      "ground_observed": false,
+      "unresolved_boundaries": [
+        "SEMANTIC",
+        "GROUNDING"
+      ]
+    },
+    {
+      "authority_available": false,
+      "case_id": "definition-observation-12",
+      "computationally_complete": false,
+      "definition_available": true,
+      "derivation_status": "RESOURCE_BOUNDED",
+      "exit": "ROUTE",
+      "ground_observed": true,
+      "unresolved_boundaries": [
+        "AUTHORITY"
+      ]
+    },
+    {
+      "authority_available": false,
+      "case_id": "definition-observation-13",
+      "computationally_complete": false,
+      "definition_available": false,
+      "derivation_status": "RESOURCE_BOUNDED",
+      "exit": "ROUTE",
+      "ground_observed": true,
+      "unresolved_boundaries": [
+        "SEMANTIC",
+        "AUTHORITY"
+      ]
+    },
+    {
+      "authority_available": false,
+      "case_id": "definition-observation-14",
+      "computationally_complete": false,
+      "definition_available": true,
+      "derivation_status": "RESOURCE_BOUNDED",
+      "exit": "ROUTE",
+      "ground_observed": false,
+      "unresolved_boundaries": [
+        "GROUNDING",
+        "AUTHORITY"
+      ]
+    },
+    {
+      "authority_available": false,
+      "case_id": "definition-observation-15",
+      "computationally_complete": false,
+      "definition_available": false,
+      "derivation_status": "RESOURCE_BOUNDED",
+      "exit": "ROUTE",
+      "ground_observed": false,
+      "unresolved_boundaries": [
+        "SEMANTIC",
+        "GROUNDING",
+        "AUTHORITY"
+      ]
+    },
+    {
+      "authority_available": true,
+      "case_id": "definition-observation-16",
+      "computationally_complete": true,
+      "definition_available": true,
+      "derivation_status": "CERTIFIED",
+      "exit": "FINALIZE",
+      "ground_observed": true,
+      "unresolved_boundaries": []
+    },
+    {
+      "authority_available": true,
+      "case_id": "definition-observation-17",
+      "computationally_complete": true,
+      "definition_available": false,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": true,
+      "unresolved_boundaries": [
+        "SEMANTIC"
+      ]
+    },
+    {
+      "authority_available": true,
+      "case_id": "definition-observation-18",
+      "computationally_complete": true,
+      "definition_available": true,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": false,
+      "unresolved_boundaries": [
+        "GROUNDING"
+      ]
+    },
+    {
+      "authority_available": true,
+      "case_id": "definition-observation-19",
+      "computationally_complete": true,
+      "definition_available": false,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": false,
+      "unresolved_boundaries": [
+        "SEMANTIC",
+        "GROUNDING"
+      ]
+    },
+    {
+      "authority_available": false,
+      "case_id": "definition-observation-20",
+      "computationally_complete": true,
+      "definition_available": true,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": true,
+      "unresolved_boundaries": [
+        "AUTHORITY"
+      ]
+    },
+    {
+      "authority_available": false,
+      "case_id": "definition-observation-21",
+      "computationally_complete": true,
+      "definition_available": false,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": true,
+      "unresolved_boundaries": [
+        "SEMANTIC",
+        "AUTHORITY"
+      ]
+    },
+    {
+      "authority_available": false,
+      "case_id": "definition-observation-22",
+      "computationally_complete": true,
+      "definition_available": true,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": false,
+      "unresolved_boundaries": [
+        "GROUNDING",
+        "AUTHORITY"
+      ]
+    },
+    {
+      "authority_available": false,
+      "case_id": "definition-observation-23",
+      "computationally_complete": true,
+      "definition_available": false,
+      "derivation_status": "CERTIFIED",
+      "exit": "ROUTE",
+      "ground_observed": false,
+      "unresolved_boundaries": [
+        "SEMANTIC",
+        "GROUNDING",
+        "AUTHORITY"
+      ]
+    }
+  ],
+  "disposition": "RETAIN_AS_BOUNDARY_MODEL_NOT_PRODUCT_PLANNER",
+  "no_definition_ground_conflation": true,
+  "schema_version": "0.3-definition-observation-scout"
+}

@@ -1,0 +1,16 @@
+{
+  "slot_id": "slot:acme-order-0005",
+  "ordering": "local-host",
+  "deadline": { "checkpoint_ref": "host_log_size", "value": 100 },
+  "evaluation_checkpoint": { "checkpoint_ref": "host_log_size", "value": 140 },
+  "events": [
+    { "type": "order", "slot_id": "slot:acme-order-0005", "seq": 10, "term_root": "sha256:eee", "by": "buyer", "receipt_hash": "sha256:order-5", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "countersign", "slot_id": "slot:acme-order-0005", "seq": 12, "parent_seq": 10, "by": "seller", "receipt_hash": "sha256:countersign-5", "receipt_validated": true, "receipt_authority": "verified" }
+  ],
+  "host_served_state": "active",
+  "seller_inclusion_proof": { "verified": true, "slot_id": "slot:acme-order-0005", "checkpoint_ref": "host_log_size", "checkpoint": 140, "root_ref": "sha256:independently-pinned-root", "close_type": "delivery", "seq": 70, "proof": "sha256:seller-inclusion-of-close" },
+  "non_membership_proof": null,
+  "expected_finding": "UNDETERMINED_CLOSURE",
+  "expected_faults": ["POSSIBLE_HOST_CENSORSHIP"],
+  "note": "The host serves 'active' (no close) past the deadline, but the seller holds an inclusion proof of a delivery close (seq 70) under an INDEPENDENTLY pinned root. This is host censorship, not seller omission — a different fault class. The protocol refuses to convict the seller of omission on ambiguity."
+}

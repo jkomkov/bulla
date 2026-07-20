@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://resagentica.com/spec/action-receipt-v0.2.schema.json",
+  "title": "ActionReceipt v0.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "kind", "action", "diagnostic_ref", "evidence_refs",
+    "anchor_ref", "mandate", "remedy", "retention", "stake", "conventions",
+    "signature", "timestamp", "producer", "hashes"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.2" },
+    "kind": { "const": "action_receipt" },
+    "action": {
+      "type": "object",
+      "required": ["type", "subject"],
+      "properties": { "type": { "type": "string", "minLength": 1 }, "subject": { "type": "object" } },
+      "additionalProperties": true
+    },
+    "diagnostic_ref": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["reference", "not_applicable", "deferred"] },
+        "ref": { "$ref": "#/$defs/hash" }
+      },
+      "additionalProperties": false
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "hash", "grounding"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "hash": { "$ref": "#/$defs/hash" },
+          "grounding": { "enum": ["self_asserted", "counterparty_signed", "third_party_anchored", "execution_verified"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "anchor_ref": { "type": "object" },
+    "mandate": { "type": "object" },
+    "remedy": { "type": "object" },
+    "retention": { "type": "object" },
+    "stake": { "type": "null" },
+    "conventions": { "type": "array", "items": { "$ref": "#/$defs/convention" } },
+    "signature": { "type": ["object", "null"] },
+    "timestamp": { "type": "string", "minLength": 1 },
+    "producer": { "type": "object" },
+    "hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["content", "event", "attestation", "log_leaf"],
+      "properties": {
+        "content": { "$ref": "#/$defs/hash" },
+        "event": { "$ref": "#/$defs/hash" },
+        "attestation": { "$ref": "#/$defs/hash" },
+        "log_leaf": { "$ref": "#/$defs/hash" }
+      }
+    }
+  },
+  "$defs": {
+    "hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "convention": {
+      "type": "object",
+      "required": ["name", "scope", "kind", "definition_hash"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "scope": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["executable", "semantic"] },
+        "definition": {},
+        "definition_hash": { "$ref": "#/$defs/hash" },
+        "forum": { "type": "object" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

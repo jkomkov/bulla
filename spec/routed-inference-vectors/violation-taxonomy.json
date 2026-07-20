@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "profile": "bulla.routed-inference/0.1-draft",
+  "completeness_scope": "Finite one-order, one-router, one-provider, one-delivery, one-reliance grammar and the predicates named in the v0.1 profile.",
+  "excluded": [
+    "transport behavior",
+    "real execution",
+    "semantic disputes",
+    "operational recourse",
+    "selective disclosure",
+    "multi-hop or DAG routing",
+    "cryptographic primitive failure"
+  ],
+  "invariants": [
+    {
+      "id": "principal_coverage",
+      "predicate": "Every transition is an authentic v0.3 ActionReceipt bound to an attributable direct principal.",
+      "fault_codes": [
+        "AUTHORITY_INVALID",
+        "AUTHORITY_UNVERIFIED",
+        "RECEIPT_INTEGRITY_INVALID"
+      ],
+      "hostile_mutations": [
+        "remove a receipt wire field",
+        "remove or replace a proof",
+        "replace the authority principal",
+        "verify without the optional identity dependency"
+      ]
+    },
+    {
+      "id": "parent_continuity",
+      "predicate": "Every constrained transition has exactly the parent ReceiptRef required by the transition table.",
+      "fault_codes": [
+        "ORPHANED_TRANSITION",
+        "DUPLICATE_RELIANCE"
+      ],
+      "hostile_mutations": [
+        "remove a parent",
+        "alter parent.event",
+        "alter parent.attestation",
+        "duplicate a constrained action"
+      ]
+    },
+    {
+      "id": "binding_conservation",
+      "predicate": "Slot, term root, route selection, reliance target, and acceptance pins remain unchanged.",
+      "fault_codes": [
+        "SLOT_ID_CHANGED",
+        "TERM_ROOT_CHANGED",
+        "TERM_DOCUMENT_MALFORMED",
+        "ORDER_TERMS_MISMATCH",
+        "PARTIAL_ACCEPTANCE",
+        "SELECTION_MALFORMED",
+        "DELIVERY_ROUTE_SUBSTITUTION",
+        "PROVIDER_NOT_PERMITTED",
+        "MODEL_NOT_PERMITTED",
+        "PRECISION_BELOW_FLOOR",
+        "HARDWARE_NOT_PERMITTED",
+        "RANDOMNESS_POLICY_MISMATCH",
+        "ROUTE_DEPTH_EXCEEDED",
+        "RELIANCE_CLAIM_MISMATCH",
+        "RELIANCE_EVIDENCE_MISMATCH"
+      ],
+      "hostile_mutations": [
+        "alter slot_id",
+        "alter term_root",
+        "alter accepted route or selection",
+        "alter reliance subject, evidence, or diagnostic pin"
+      ]
+    },
+    {
+      "id": "recourse_conveyance",
+      "predicate": "Well-formed recourse, remedy adapter, and witness policy are signed and consistently inherited.",
+      "fault_codes": [
+        "RECOURSE_CONVEYANCE_INVALID",
+        "REMEDY_NOT_ACCEPTED",
+        "WITNESS_POLICY_NOT_ACCEPTED"
+      ],
+      "hostile_mutations": [
+        "remove a remedy field",
+        "substitute the accepted remedy adapter",
+        "substitute the accepted witness policy"
+      ]
+    },
+    {
+      "id": "binding_persistence",
+      "predicate": "v0.1 does not discharge an inherited binding.",
+      "fault_codes": [
+        "DISCHARGE_UNSUPPORTED"
+      ],
+      "hostile_mutations": [
+        "add a closure reference",
+        "add a novation reference",
+        "add any non-empty action.discharges"
+      ]
+    },
+    {
+      "id": "accounting_conservation",
+      "predicate": "Both signed ledgers balance, their shared edge agrees, and the router quote does not exceed the order ceiling.",
+      "fault_codes": [
+        "BUDGET_LEDGER_MALFORMED",
+        "BUDGET_LEDGER_UNBALANCED",
+        "DOWNSTREAM_CHARGE_MISMATCH",
+        "BUDGET_CEILING_EXCEEDED"
+      ],
+      "hostile_mutations": [
+        "delete a ledger component",
+        "break one local equation",
+        "mismatch the shared amount",
+        "raise a balanced root quote above the ceiling"
+      ]
+    },
+    {
+      "id": "process_grounding",
+      "predicate": "Necessary delivery evidence meets the pinned minimum grounding class.",
+      "fault_codes": [
+        "PROCESS_GROUNDING_BELOW_FLOOR",
+        "PROCESS_GROUNDING_UNDETERMINED",
+        "RESOURCE_USAGE_MALFORMED"
+      ],
+      "hostile_mutations": [
+        "lower the evidence class",
+        "remove process evidence",
+        "malform resource usage"
+      ]
+    },
+    {
+      "id": "delivery_and_ordering",
+      "predicate": "The profile has one delivery assertion and witnessed heads do not prove equivocation.",
+      "fault_codes": [
+        "DELIVERY_UNAVAILABLE",
+        "CONFLICTING_DELIVERIES",
+        "LOG_EQUIVOCATION",
+        "WITNESS_UNAVAILABLE",
+        "WITNESS_HEAD_INVALID",
+        "WITNESS_HEAD_UNVERIFIED"
+      ],
+      "hostile_mutations": [
+        "remove delivery evidence",
+        "add a conflicting delivery",
+        "present authentic same-size different-root heads",
+        "present normal different-size heads",
+        "remove witness-head authentication"
+      ]
+    }
+  ]
+}

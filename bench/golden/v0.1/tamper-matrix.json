@@ -1,0 +1,6 @@
+{
+  "all_failed_closed": true,
+  "mutation_count": 32,
+  "rejected_count": 32,
+  "structural_basis": "every closed top-level manifest and GoldenCase field plus cross-file hashes"
+}

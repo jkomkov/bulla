@@ -14,6 +14,113 @@
     "ok": true,
     "verified_to": "digest"
   },
+  "delegated-receipt.json": {
+    "bounds_conformance": "not_applicable",
+    "identity": {
+      "authority_authentic": "verified",
+      "chain_integrity": "verified",
+      "ok": true,
+      "policy_binding": "verified",
+      "principal_binding": "verified",
+      "revocation_status": "unresolved",
+      "scope_binding": "verified",
+      "signature_authentic": true,
+      "temporal_status": "unresolved",
+      "verified_to": "attestation"
+    },
+    "kind": "action_receipt",
+    "ok": true,
+    "verified_to": "digest"
+  },
+  "delegated-scope-conforms.json": {
+    "bounds_conformance": "conforms",
+    "identity": {
+      "authority_authentic": "verified",
+      "chain_integrity": "verified",
+      "ok": true,
+      "policy_binding": "verified",
+      "principal_binding": "verified",
+      "revocation_status": "unresolved",
+      "scope_binding": "verified",
+      "signature_authentic": true,
+      "temporal_status": "unresolved",
+      "verified_to": "attestation"
+    },
+    "kind": "action_receipt",
+    "ok": true,
+    "verified_to": "digest"
+  },
+  "delegated-scope-violates.json": {
+    "bounds_conformance": "violates",
+    "identity": {
+      "authority_authentic": "verified",
+      "chain_integrity": "verified",
+      "ok": true,
+      "policy_binding": "verified",
+      "principal_binding": "verified",
+      "revocation_status": "unresolved",
+      "scope_binding": "verified",
+      "signature_authentic": true,
+      "temporal_status": "unresolved",
+      "verified_to": "attestation"
+    },
+    "kind": "action_receipt",
+    "ok": true,
+    "verified_to": "digest"
+  },
+  "malformed-executable.json": {
+    "kind": "action_receipt",
+    "ok": false,
+    "verified_to": "none"
+  },
+  "reliance-rely.json": {
+    "bounds_conformance": "not_applicable",
+    "identity": {
+      "authority_authentic": "verified",
+      "ok": true,
+      "signature_authentic": true,
+      "verified_to": "attestation"
+    },
+    "kind": "action_receipt",
+    "ok": true,
+    "verified_to": "digest"
+  },
+  "signed-authorized.json": {
+    "bounds_conformance": "not_applicable",
+    "identity": {
+      "authority_authentic": "verified",
+      "ok": true,
+      "signature_authentic": true,
+      "verified_to": "attestation"
+    },
+    "kind": "action_receipt",
+    "ok": true,
+    "verified_to": "digest"
+  },
+  "tampered-authority-resigned.json": {
+    "bounds_conformance": "not_applicable",
+    "identity": {
+      "authority_authentic": "forged",
+      "ok": false,
+      "signature_authentic": true,
+      "verified_to": "digest"
+    },
+    "kind": "action_receipt",
+    "ok": true,
+    "verified_to": "digest"
+  },
+  "tampered-authority.json": {
+    "bounds_conformance": "not_applicable",
+    "identity": {
+      "authority_authentic": "forged",
+      "ok": false,
+      "signature_authentic": true,
+      "verified_to": "digest"
+    },
+    "kind": "action_receipt",
+    "ok": true,
+    "verified_to": "digest"
+  },
   "tampered-convention.json": {
     "kind": "action_receipt",
     "ok": false,

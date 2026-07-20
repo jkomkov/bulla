@@ -12,7 +12,13 @@ source** — a second implementer (Go, TypeScript, an auditor, a competitor) rea
 only this. The reference implementation is `bulla.action_receipt`; the golden
 vectors in `vectors/` pin every hash and verdict below.
 
-## Canonicalization (the one rule)
+## Canonicalization (the one rule — deed layer only)
+
+> **Scope note (2026-07-12):** this rule governs the DEED layer (ActionReceipt,
+> certificates) covered by this spec. The measurement layer (`WitnessReceipt`)
+> currently hashes with Python's default *spaced* separators — see
+> `WITNESS-CONTRACT.md` § Canonicalization. Unification is deferred to v0.2
+> (RFC 8785 decision, `ADR-001-standing-model.md`) so canon migrates once.
 
 Every hash is over the **canonical JSON** of a value:
 

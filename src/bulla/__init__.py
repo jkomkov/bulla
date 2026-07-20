@@ -14,7 +14,7 @@ signal — how much convention two tools leave undisclosed at their seam —
 not an execution-failure predictor. See FALSIFICATIONS.md.
 """
 
-__version__ = "0.43.0"
+__version__ = "0.44.0"
 
 from bulla.model import (
     BlindSpot,
@@ -92,7 +92,26 @@ from bulla.action_receipt import (
     build_action_receipt,
     build_release_receipt,
     build_tool_call_receipt,
+    sign_action_receipt,
     verify_receipt as verify_action_receipt,
+)
+from bulla.delegation import (
+    DelegationGrant,
+    DelegationVerdict,
+    sign_grant,
+    verify_delegation,
+)
+from bulla.reliance import (
+    PRAGMATIC_RELIANCE_POLICY,
+    STRICT_RELIANCE_POLICY,
+    ReceiptRef,
+    RelianceError,
+    ReliancePolicy,
+    RelianceDecision,
+    RelianceVerification,
+    build_reliance_receipt,
+    decide,
+    verify_reliance,
 )
 from bulla.guard import BullaGuard, BullaCheckError
 from bulla.witness import (
@@ -196,9 +215,20 @@ __all__ = [
     "load_composition",
     "ActionReceipt",
     "build_action_receipt",
+    "sign_action_receipt",
     "build_release_receipt",
     "build_tool_call_receipt",
     "verify_action_receipt",
+    "ReceiptRef",
+    "RelianceError",
+    "ReliancePolicy",
+    "RelianceDecision",
+    "RelianceVerification",
+    "STRICT_RELIANCE_POLICY",
+    "PRAGMATIC_RELIANCE_POLICY",
+    "build_reliance_receipt",
+    "decide",
+    "verify_reliance",
     "verify_receipt_consistency",
     "verify_receipt_integrity",
     "witness",

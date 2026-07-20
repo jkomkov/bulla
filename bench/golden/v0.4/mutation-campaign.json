@@ -1,0 +1,109 @@
+{
+  "critical_kill_rate": 1.0,
+  "critical_mutant_count": 6,
+  "interpretation": "Each guard-removal mutant is distinguished by at least one F11 case; no equivalent mutant was removed.",
+  "killed_count": 6,
+  "mutant_count": 6,
+  "mutants": [
+    {
+      "kill_case_ids": [
+        "F11-02-1",
+        "F11-02-2",
+        "F11-02-3",
+        "F11-02-4",
+        "F11-05-1",
+        "F11-05-2",
+        "F11-05-3",
+        "F11-05-4",
+        "F11-08-1",
+        "F11-08-2",
+        "F11-08-3",
+        "F11-08-4"
+      ],
+      "killed": true,
+      "mutant_id": "F11-MUT-01",
+      "non_equivalence_witness": "sha256:a9ea27880deeaa9c3a3ac9bbcf227c1abf8cf0e0c10f66b1b419fcb15670a7c7",
+      "non_equivalent": true,
+      "operator": "REMOVE_AUTHORITY_TOKEN"
+    },
+    {
+      "kill_case_ids": [
+        "F11-04-1",
+        "F11-04-2",
+        "F11-04-3",
+        "F11-04-4",
+        "F11-06-1",
+        "F11-06-2",
+        "F11-06-3",
+        "F11-06-4",
+        "F11-07-1",
+        "F11-07-2",
+        "F11-07-3",
+        "F11-07-4"
+      ],
+      "killed": true,
+      "mutant_id": "F11-MUT-02",
+      "non_equivalence_witness": "sha256:033b12c772db85493fc6db0c092bb487aeb6c203e77b4aa9086c436510107458",
+      "non_equivalent": true,
+      "operator": "ALTER_PRECEDENT_EFFECT"
+    },
+    {
+      "kill_case_ids": [
+        "F11-04-1",
+        "F11-04-2",
+        "F11-04-3",
+        "F11-04-4",
+        "F11-05-1",
+        "F11-05-2",
+        "F11-05-3",
+        "F11-05-4"
+      ],
+      "killed": true,
+      "mutant_id": "F11-MUT-03",
+      "non_equivalence_witness": "sha256:bdab3f955b9e709b7de47e40b06dba63ce24b70e9e3487c935dddccd1368d235",
+      "non_equivalent": true,
+      "operator": "FORGE_FORUM_FINDING"
+    },
+    {
+      "kill_case_ids": [
+        "F11-10-1",
+        "F11-10-2",
+        "F11-10-3",
+        "F11-10-4"
+      ],
+      "killed": true,
+      "mutant_id": "F11-MUT-04",
+      "non_equivalence_witness": "sha256:19015accaa3b3954d10b6a68410f085ef0d855e43c4d36960e2d28ea1534f116",
+      "non_equivalent": true,
+      "operator": "PRICE_CATEGORICAL_BAR"
+    },
+    {
+      "kill_case_ids": [
+        "F11-09-1",
+        "F11-09-2",
+        "F11-09-3",
+        "F11-09-4"
+      ],
+      "killed": true,
+      "mutant_id": "F11-MUT-05",
+      "non_equivalence_witness": "sha256:f69a3872616da26a8a04252a495361bd993ebdc5288ac2c3c90b34ced4a235f3",
+      "non_equivalent": true,
+      "operator": "CHANGE_SEMANTIC_EPOCH"
+    },
+    {
+      "kill_case_ids": [
+        "F11-13-1",
+        "F11-13-2",
+        "F11-13-3",
+        "F11-13-4"
+      ],
+      "killed": true,
+      "mutant_id": "F11-MUT-06",
+      "non_equivalence_witness": "sha256:57d712a0cb7a169502f5164b43f9df0c58150caca9b2006898d603fc4696704d",
+      "non_equivalent": true,
+      "operator": "TRUNCATE_BUDGET_FRONTIER"
+    }
+  ],
+  "profile": "bulla.golden-suite/0.4-experimental",
+  "schema_version": "0.4-experimental"
+}

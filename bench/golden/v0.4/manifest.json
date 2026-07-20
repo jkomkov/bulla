@@ -1,0 +1,33 @@
+{
+  "artifacts": {
+    "FALSIFICATION-LEDGER.md": "sha256:e6dec656442faa19fe97257ade4d15d87a1c24b429236a409caab488994f7064",
+    "FORMAL-AUDIT.md": "sha256:09f53b1c133f062aa8da61c56f8a805f4362efe91a2e7e40e0ea6c38947c9f71",
+    "PREREGISTRATION.md": "sha256:c98b0919dbed4adc3757b859f512c54a6ed6bfbea0210f9b203e31ac537ac628",
+    "PROFILE.md": "sha256:bb14be92b6258acdb51a8c46c413403ac3075181f5d70cdf6c8a793791d354e3",
+    "QA-REPORT.md": "sha256:0c56bf4abb56e70314d7d0023df3e35ba8c87e24b0b686c137cb6e077ea20ea4",
+    "STATUS.md": "sha256:d6c09419c85aac088c74859248fd779eca160d5bf74391e9243ea811c5e40b66",
+    "cases.jsonl": "sha256:4749b7649006f2c1fe1392adafd0640a48464f3cdaa65ee08c91a84a0a13735e",
+    "f11-laundering.json": "sha256:7180d740a74e5d6133fd18bc32f3a7d5b3c118259a8460dd63ce185cde3c301a",
+    "mutation-campaign.json": "sha256:088c2d7fa70048d2111690c4970f05059c44faebda92ec41630f3f0d7dcecc32",
+    "precedent-yield-report.json": "sha256:1d3a0278f1e59d5610a81d8936d17b6588d8f48604dd2ec03c36381a2227bdcf",
+    "regression-cohort.json": "sha256:4f6583db9a00d88e2ff817a6cdb845d34c61bf2918e4ce2b397ad7b3bb29c521",
+    "self-hosting-claim-flow.json": "sha256:081e87dfb7ab257ed8879fea1310cfaab40a8bc5fd48fee91fadd80569a808f5"
+  },
+  "case_merkle_root": "sha256:24654ce4e23c0fd9957aaf2bd40a32fa6179555211ce4e3ab978dc53ddccd137",
+  "claim_limits": [
+    "no external validation",
+    "no human adjudication",
+    "no economic-value claim",
+    "model-relative planted-rule experiment"
+  ],
+  "classification": "INTERNAL_CAPTIVE",
+  "f11_merkle_root": "sha256:82a1b402b0a1295eff7cc71d2922721ae8bf7670e6babaa07fad489d3fde4278",
+  "preserved_roots": {
+    "golden_v0.1_manifest": "sha256:ba1c19d8aba1575c41b9193d0d9fa775fb0122b88ad73b6f47141317cb72ec6a",
+    "golden_v0.2_freeze": "sha256:13d77f032634de21fb0c962a2d012123a7a47d3c89336db02ded0b2184f1eee5",
+    "golden_v0.3_manifest": "sha256:b0467642b0fe3e1a580f735df895a6d9d44d308c6dbb4a9f657915d251546a02",
+    "semantic_boundary_stack_v0.3": "sha256:615934933867b8f85c2b54463d967408ac7ea4cd0e02eb47c56e4a69cbef38bb"
+  },
+  "profile": "bulla.golden-suite/0.4-experimental",
+  "schema_version": "0.4-experimental"
+}

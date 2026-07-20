@@ -1,0 +1,21 @@
+{
+  "artifacts": {
+    "bulla/bench/golden/v0.2/drift-stress.json": "sha256:385abbc030e4a938d8658a5c7b989338eb74a7dac6b84c1ff7a8c9b4c29ad1c3",
+    "bulla/bench/golden/v0.2/internal-summary.json": "sha256:c0041ca383dad1bc2bc44c869c9ef0584d251982bfab286fed3a33ae2086a97a",
+    "bulla/bench/golden/v0.2/scaling-report.json": "sha256:a17f457618659a9ae2809d1b96315418c63e1c8b84197afa8edec789392a0c86"
+  },
+  "backend": "reference",
+  "observed": true,
+  "runner": {
+    "architecture": "arm64",
+    "implementation": "CPython",
+    "java": null,
+    "lean": null,
+    "locale": "C/C.UTF-8/C/C/C/C",
+    "os": "Darwin",
+    "os_release": "24.6.0",
+    "python": "3.12.9",
+    "timezone": "runner-default"
+  },
+  "schema_version": "0.2-portability-cell"
+}
