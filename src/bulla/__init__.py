@@ -8,7 +8,7 @@ what evidence is carried, what a relying party decided, and how the action
 can be contested. Verification reports what is established and what remains
 unresolved; it does not turn a signed record into worldly truth.
 
-The coherence fee (the original diagnostic) remains as one measurable a
+The coherence fee (the original diagnostic) remains one measurable diagnostic a
 receipt can carry: on execution-derived labels it is a disclosure/omission
 signal — how much convention two tools leave undisclosed at their seam —
 not an execution-failure predictor. See FALSIFICATIONS.md.

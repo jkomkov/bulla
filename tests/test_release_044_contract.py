@@ -77,3 +77,10 @@ def test_cli_front_door_uses_receipt_first_truth_boundary(
     assert "authorless agent action" not in help_text
     assert "coherence fee" in help_text
     assert "disclosure and omission signals" in help_text
+
+
+def test_package_copy_is_grammatical_and_keeps_the_legacy_diagnostic_bounded() -> None:
+    module_copy = " ".join((bulla.__doc__ or "").split())
+    assert "one measurable diagnostic a receipt can carry" in module_copy
+    assert "one measurable a receipt can carry" not in module_copy
+    assert "not an execution-failure predictor" in module_copy
