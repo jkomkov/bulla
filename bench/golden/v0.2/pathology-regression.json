@@ -1,0 +1,106 @@
+{
+  "all_compiled": true,
+  "all_under_64_nodes": true,
+  "all_verified": true,
+  "case_count": 12,
+  "cases": [
+    {
+      "ast_nodes": 1,
+      "case_id": "shared_vocabulary_width-09-0",
+      "new_exit": "COMPILED",
+      "old_exit": "INDETERMINATE",
+      "package_verified": true,
+      "under_64_nodes": true
+    },
+    {
+      "ast_nodes": 1,
+      "case_id": "shared_vocabulary_width-09-2",
+      "new_exit": "COMPILED",
+      "old_exit": "INDETERMINATE",
+      "package_verified": true,
+      "under_64_nodes": true
+    },
+    {
+      "ast_nodes": 1,
+      "case_id": "shared_vocabulary_width-09-4",
+      "new_exit": "COMPILED",
+      "old_exit": "INDETERMINATE",
+      "package_verified": true,
+      "under_64_nodes": true
+    },
+    {
+      "ast_nodes": 1,
+      "case_id": "shared_vocabulary_width-10-0",
+      "new_exit": "COMPILED",
+      "old_exit": "INDETERMINATE",
+      "package_verified": true,
+      "under_64_nodes": true
+    },
+    {
+      "ast_nodes": 1,
+      "case_id": "shared_vocabulary_width-10-2",
+      "new_exit": "COMPILED",
+      "old_exit": "INDETERMINATE",
+      "package_verified": true,
+      "under_64_nodes": true
+    },
+    {
+      "ast_nodes": 1,
+      "case_id": "shared_vocabulary_width-10-4",
+      "new_exit": "COMPILED",
+      "old_exit": "INDETERMINATE",
+      "package_verified": true,
+      "under_64_nodes": true
+    },
+    {
+      "ast_nodes": 1,
+      "case_id": "shared_vocabulary_width-11-0",
+      "new_exit": "COMPILED",
+      "old_exit": "INDETERMINATE",
+      "package_verified": true,
+      "under_64_nodes": true
+    },
+    {
+      "ast_nodes": 1,
+      "case_id": "shared_vocabulary_width-11-2",
+      "new_exit": "COMPILED",
+      "old_exit": "INDETERMINATE",
+      "package_verified": true,
+      "under_64_nodes": true
+    },
+    {
+      "ast_nodes": 1,
+      "case_id": "shared_vocabulary_width-11-4",
+      "new_exit": "COMPILED",
+      "old_exit": "INDETERMINATE",
+      "package_verified": true,
+      "under_64_nodes": true
+    },
+    {
+      "ast_nodes": 1,
+      "case_id": "shared_vocabulary_width-12-0",
+      "new_exit": "COMPILED",
+      "old_exit": "INDETERMINATE",
+      "package_verified": true,
+      "under_64_nodes": true
+    },
+    {
+      "ast_nodes": 1,
+      "case_id": "shared_vocabulary_width-12-2",
+      "new_exit": "COMPILED",
+      "old_exit": "INDETERMINATE",
+      "package_verified": true,
+      "under_64_nodes": true
+    },
+    {
+      "ast_nodes": 1,
+      "case_id": "shared_vocabulary_width-12-4",
+      "new_exit": "COMPILED",
+      "old_exit": "INDETERMINATE",
+      "package_verified": true,
+      "under_64_nodes": true
+    }
+  ],
+  "interpretation": "Original twelve-case AST pathology repair; generalization evidence is reported separately on scaling-report.json.",
+  "schema_version": "0.2-pathology-regression"
+}

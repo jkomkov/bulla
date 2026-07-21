@@ -1,0 +1,18 @@
+{
+  "blind_label_permitted": false,
+  "case_count": 704,
+  "design_oracles": 568,
+  "family_counts": {
+    "F1": 256,
+    "F2": 120,
+    "F3": 48,
+    "F4": 64,
+    "F5": 24,
+    "F6": 64,
+    "F7": 64,
+    "F8": 64
+  },
+  "holdout_oracles_committed": 136,
+  "manifest_hash": "sha256:b72731c84aed39681e91966d19a2b919d512e129ae8498f747404e48fdf45170",
+  "source_count": 92
+}

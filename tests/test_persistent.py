@@ -43,10 +43,8 @@ from bulla.persistent import (
 )
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-SYNTHETIC_FIXTURE = (
-    REPO_ROOT / "bulla" / "compositions" / "synthetic_g19_positive_control.yaml"
-)
+BULLA_ROOT = Path(__file__).resolve().parents[1]
+SYNTHETIC_FIXTURE = BULLA_ROOT / "compositions" / "synthetic_g19_positive_control.yaml"
 
 
 # ── Similarity functions ────────────────────────────────────────────
@@ -86,7 +84,7 @@ def test_canonical_merged_name_deterministic() -> None:
 
 def test_canonical_merged_name_no_collision_seed_set() -> None:
     """Generated merged names must not collide with any existing dim name in the seeds."""
-    seeds = _seed_set_compositions(REPO_ROOT)
+    seeds = _seed_set_compositions(BULLA_ROOT)
     existing_names: set[str] = set()
     for comp, _src in seeds:
         for e in comp.edges:
@@ -204,7 +202,7 @@ def test_functoriality_h1_monotone_jaccard(synthetic_comp: Composition) -> None:
 
 def test_functoriality_seed_set_lcp() -> None:
     """All Sprint 13 seeds produce monotone non-increasing H^1 under LCP filtration."""
-    seeds = _seed_set_compositions(REPO_ROOT)
+    seeds = _seed_set_compositions(BULLA_ROOT)
     for comp, _src in seeds:
         prev_h1 = None
         for step in range(0, 21):
@@ -231,7 +229,7 @@ def test_total_persistence_synthetic(synthetic_comp: Composition) -> None:
 
 def test_total_persistence_filesystem_github_multiplicity() -> None:
     """filesystem+github has dim names appearing on many edges -> multiplicity > 1."""
-    seeds = _seed_set_compositions(REPO_ROOT)
+    seeds = _seed_set_compositions(BULLA_ROOT)
     fs_gh = next(c for c, _ in seeds if c.name == "filesystem+github")
     bars = compute_barcode(fs_gh, filtration="lcp")
     multiplicities = [b.multiplicity for b in bars]

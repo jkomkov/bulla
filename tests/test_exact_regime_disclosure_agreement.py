@@ -35,8 +35,8 @@ from pathlib import Path
 
 import pytest
 
-REPO = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(REPO / "bulla" / "src"))
+BULLA_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(BULLA_ROOT / "src"))
 
 from bulla.diagnostic import minimum_disclosure_set
 from bulla.model import Composition, Edge, SemanticDimension, ToolSpec
@@ -117,7 +117,7 @@ def test_exact_conservative_curated_compositions_disclosure_agreement():
     n_set_agree = 0
     failures: list[tuple[str, dict]] = []
     for d in ["compositions", "audit"]:
-        for p in sorted((REPO / "bulla" / d).glob("*.yaml")):
+        for p in sorted((BULLA_ROOT / d).glob("*.yaml")):
             try:
                 comp = load_composition(p)
             except Exception:
@@ -176,7 +176,7 @@ def test_outside_exact_conservative_no_agreement_claim():
     being treated as universal.
     """
     # Reuse Sprint 7's well-known divergence example (random seed=10).
-    sys.path.insert(0, str(REPO / "bulla" / "tests"))
+    sys.path.insert(0, str(BULLA_ROOT / "tests"))
     from test_disclosure_semantics_random import random_composition
     import random
     rng = random.Random(10)

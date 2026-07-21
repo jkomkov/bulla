@@ -1,0 +1,98 @@
+{
+  "baseline_engine_commit": "30619618ed74c134aa94cbf7c6f5f8ef440df460",
+  "baseline_pilot_commit": "cbaa41da",
+  "candidate_commit": "cbaa41dab9f79d432b0d0840fcd0e99003fcf78c+working-tree@sha256:173b863abb11c16dc98c954a1893d9909daeae08afcedce322fe45ac6312e1a3",
+  "case_merkle_root": "sha256:f35fefcf984b413bf4f25d610698ab90514c98cc088eb3dffed575a7a512fe59",
+  "environment_matrix": [
+    {
+      "backend": "reference",
+      "os": "ubuntu",
+      "python": "3.10"
+    },
+    {
+      "backend": "reference",
+      "os": "ubuntu",
+      "python": "3.12"
+    },
+    {
+      "backend": "reference",
+      "os": "ubuntu",
+      "python": "3.13"
+    },
+    {
+      "backend": "smtinterpol",
+      "os": "ubuntu",
+      "python": "3.12"
+    },
+    {
+      "backend": "reference",
+      "os": "macos",
+      "python": "3.10"
+    },
+    {
+      "backend": "reference",
+      "os": "macos",
+      "python": "3.12"
+    },
+    {
+      "backend": "reference",
+      "os": "macos",
+      "python": "3.13"
+    },
+    {
+      "backend": "smtinterpol",
+      "os": "macos",
+      "python": "3.12"
+    },
+    {
+      "backend": "reference",
+      "os": "windows",
+      "python": "3.10"
+    },
+    {
+      "backend": "reference",
+      "os": "windows",
+      "python": "3.12"
+    },
+    {
+      "backend": "reference",
+      "os": "windows",
+      "python": "3.13"
+    },
+    {
+      "backend": "smtinterpol",
+      "os": "windows",
+      "python": "3.12"
+    }
+  ],
+  "evidence_status": "internally-verified/captive",
+  "external_replay_status": "blocked-by-sprint-scope",
+  "family_manifests": {
+    "F1": "sha256:c6addd7e4ea0a750df911ce951d5a5b32b1632b42f9ac5945fb7f13995cb19eb",
+    "F2": "sha256:67d168e7f65bf3901f45542d0e88b4629946d2f7e321ee61cf9d97bba67210c8",
+    "F3": "sha256:bd4139e9beaaddf49408f2b6219c8a2f4acf79956ed3989e204383505cb01e57",
+    "F4": "sha256:85b397d9bfd7da4098cbba74a0abf0831d2d78f01ce0448a1528676ee0ae900c",
+    "F5": "sha256:5db67fd7836952eaf74d9b83a3cf33536f5a95d26216ea8629df24826d82fc83",
+    "F6": "sha256:5d255feddf8d1a5516b07fbb4b1a034f82c5aae9c7e1a3528324e0fd7ab6e0fe",
+    "F7": "sha256:5410c69ceb6ca31064f6cceb15bee7e51165e926ff9f790590520ad14285aa13",
+    "F8": "sha256:7ce13172f5de05b4eb07247a0b5afe05159cd4615ad4f25972f960689d76ab50"
+  },
+  "manifest_hash": "sha256:b72731c84aed39681e91966d19a2b919d512e129ae8498f747404e48fdf45170",
+  "oracle_commitment_root": "sha256:898110214e200cfe2171cb61342e686130a236f9772d52a17d9c013f302f828a",
+  "profile": "bulla.golden-suite/0.1-experimental",
+  "source_inventory_hash": "sha256:36b554800a4bd020de6ec1513bbcf94daa904834341437bade26f41bc13625fc",
+  "suite_version": "0.1",
+  "verifier_hashes": {
+    "anytime_runner": "sha256:d322caa6f77d01c4d0fc575a688c58c2265975f99fff4833ddc69b960d72edf9",
+    "constitutional_kernel": "sha256:60b2e11f1d9ea86b6e7eb0a5318a25842087a1e59f513f2bd809bb01d2b55dd3",
+    "finality_kernel": "sha256:2856d52e5600b81b145e199871f1f86c15e19d074ef7d3ea116dda888fab1ef3",
+    "golden_lean": "sha256:3be4e8fd01fc83dac85cd47c6d79874bc3afec6a2eb28b00fcdb6a9066b94905",
+    "golden_module": "sha256:4cf31fe1e7f1ecd61c2f00f63cd7a917f9729d1aabe719efc4933ffc9a8fcaf9",
+    "invention_kernel": "sha256:496c791081f9084d0203cb0957fdd0adafb6091628af28fd5b50907aeae504da",
+    "observability_kernel": "sha256:e4728a805f1c44d97f1fa8eda142db9bed9077ce11e61f5ca22b9aa8c426585e",
+    "smt_smoke": "sha256:216a0f6de3bf2fc52d4f743d8e0284bb99a87646196f4b3cb778b8159b5ddd4d",
+    "suite_builder": "sha256:1d79b18f09429c934a72305c447630a84168a08384e511aa70bed6f4a572d690",
+    "suite_runner": "sha256:49235c83a1b6e8de8a67bc67bf154d387023a2f8fc29782141a1d870adb7f91c",
+    "zero_import": "sha256:ffa610664e465ee7db079b9d4c4ccb3f77d978bffa5c0b255394d48011fa58fa"
+  }
+}

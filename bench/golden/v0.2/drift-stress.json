@@ -1,0 +1,140 @@
+{
+  "ar1_levels": [
+    0.3,
+    0.7,
+    0.95
+  ],
+  "claim_boundary": "Synthetic streams only; calibration applies only where the fixed common-filtration conditional-mean null is declared valid.",
+  "declared_family_count": 8,
+  "injections": [
+    {
+      "carrier": "opaque",
+      "extraction_definition": "sum before alarm of exposure_t times drift_magnitude_t; exposure_t=1000 synthetic units",
+      "median_alarm_step": 19,
+      "median_undetected_extraction": 5700.0,
+      "power_by_step_64": 0.832,
+      "trials": 500
+    },
+    {
+      "carrier": "regenerated",
+      "extraction_definition": "sum before alarm of exposure_t times drift_magnitude_t; exposure_t=1000 synthetic units",
+      "median_alarm_step": 23,
+      "median_undetected_extraction": 6900.0,
+      "power_by_step_64": 0.812,
+      "trials": 500
+    },
+    {
+      "carrier": "simultaneous",
+      "extraction_definition": "sum before alarm of exposure_t times drift_magnitude_t; exposure_t=1000 synthetic units",
+      "median_alarm_step": 10,
+      "median_undetected_extraction": 6000.0,
+      "power_by_step_64": 0.96,
+      "trials": 500
+    }
+  ],
+  "matching_null_failures": [],
+  "null_stress": [
+    {
+      "calibration_gate": true,
+      "crossings": 16,
+      "empirical_rate": 0.0016,
+      "guarantee_applicable": true,
+      "one_sided_95_percent_binomial_upper": 0.0024291096333002686,
+      "steps": 64,
+      "streams": 10000,
+      "variant": "iid_boundary_hugging"
+    },
+    {
+      "calibration_gate": "NOT_APPLICABLE_MODEL_MISSPECIFIED",
+      "crossings": 2,
+      "empirical_rate": 0.0002,
+      "guarantee_applicable": false,
+      "one_sided_95_percent_binomial_upper": 0.0006294441486878743,
+      "steps": 64,
+      "streams": 10000,
+      "variant": "ar1_0p3"
+    },
+    {
+      "calibration_gate": "NOT_APPLICABLE_MODEL_MISSPECIFIED",
+      "crossings": 1,
+      "empirical_rate": 0.0001,
+      "guarantee_applicable": false,
+      "one_sided_95_percent_binomial_upper": 0.00047429765916538757,
+      "steps": 64,
+      "streams": 10000,
+      "variant": "ar1_0p7"
+    },
+    {
+      "calibration_gate": "NOT_APPLICABLE_MODEL_MISSPECIFIED",
+      "crossings": 0,
+      "empirical_rate": 0.0,
+      "guarantee_applicable": false,
+      "one_sided_95_percent_binomial_upper": 0.0002995283597756563,
+      "steps": 64,
+      "streams": 10000,
+      "variant": "ar1_0p95"
+    },
+    {
+      "calibration_gate": true,
+      "crossings": 0,
+      "empirical_rate": 0.0,
+      "guarantee_applicable": true,
+      "one_sided_95_percent_binomial_upper": 0.0002995283597756563,
+      "steps": 64,
+      "streams": 10000,
+      "variant": "heavy_tailed_innovations"
+    },
+    {
+      "calibration_gate": "NOT_APPLICABLE_MODEL_MISSPECIFIED",
+      "crossings": 50,
+      "empirical_rate": 0.005,
+      "guarantee_applicable": false,
+      "one_sided_95_percent_binomial_upper": 0.006324499770788552,
+      "steps": 64,
+      "streams": 10000,
+      "variant": "seasonality"
+    },
+    {
+      "calibration_gate": true,
+      "crossings": 3,
+      "empirical_rate": 0.0003,
+      "guarantee_applicable": true,
+      "one_sided_95_percent_binomial_upper": 0.0007751813790116923,
+      "steps": 64,
+      "streams": 10000,
+      "variant": "missingness"
+    },
+    {
+      "calibration_gate": true,
+      "crossings": 1,
+      "empirical_rate": 0.0001,
+      "guarantee_applicable": true,
+      "one_sided_95_percent_binomial_upper": 0.00047429765916538757,
+      "steps": 64,
+      "streams": 10000,
+      "variant": "asynchronous"
+    },
+    {
+      "calibration_gate": "NOT_APPLICABLE_MODEL_MISSPECIFIED",
+      "crossings": 1,
+      "empirical_rate": 0.0001,
+      "guarantee_applicable": false,
+      "one_sided_95_percent_binomial_upper": 0.00047429765916538757,
+      "steps": 64,
+      "streams": 10000,
+      "variant": "changing_baseline"
+    },
+    {
+      "calibration_gate": "NOT_APPLICABLE_MODEL_MISSPECIFIED",
+      "crossings": 17,
+      "empirical_rate": 0.0017,
+      "guarantee_applicable": false,
+      "one_sided_95_percent_binomial_upper": 0.002548839271552014,
+      "steps": 64,
+      "streams": 10000,
+      "variant": "correlated_seams"
+    }
+  ],
+  "schema_version": "0.2-drift-stress",
+  "variant_count": 10
+}

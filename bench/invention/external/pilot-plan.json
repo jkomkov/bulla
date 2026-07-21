@@ -1,0 +1,72 @@
+{
+  "schema_version": "0.2-preregistered",
+  "status": "recruitment_ready_awaiting_external_events",
+  "engine_commit": "30619618ed74c134aa94cbf7c6f5f8ef440df460",
+  "baseline_commit_at_protocol_draft": "0aadcdbddaa69fd6348fe064e5feb8eb7fb77f2e",
+  "frsl_1_spec_sha256": "sha256:68bbbb927354bcd17391fdd4ee0b77998e50b590d8c7a822ecca3eb0892f515b",
+  "domains": [
+    "commercial_commitments",
+    "identity_authorization",
+    "scheduling_logistics_data"
+  ],
+  "target_n_per_domain": 100,
+  "strata_per_domain": {
+    "hidden_generative_contract": 50,
+    "natural_expert": 50
+  },
+  "arms": [
+    "manual_conventional_integration",
+    "direct_llm_repair",
+    "engine_only",
+    "iterative_llm_inside_proof_checker"
+  ],
+  "primary_metric": {
+    "name": "unsafe_acceptance_rate",
+    "unit": "applied_RELY_decision",
+    "numerator": "RELY applications adjudicated unsafe",
+    "denominator": "all applied RELY decisions, including RELY from PARTIAL packages"
+  },
+  "required_copresent_metrics": [
+    "application_level_escalation_rate",
+    "seam_level_escalation_rate",
+    "certified_useful_yield"
+  ],
+  "secondary_metrics": [
+    "unnecessary_escalation_rate",
+    "protected_meaning_conservation",
+    "grammar_limit_share",
+    "enrichment_acceptance_rate",
+    "enrichment_rounds",
+    "disclosure_burden_vector",
+    "governance_frequency",
+    "term_reuse_count",
+    "countermodel_usefulness",
+    "adjudicator_disagreement",
+    "direct_llm_gate_rejection_rate",
+    "iterative_repair_within_budget_rate"
+  ],
+  "accounting_rules": [
+    "PARTIAL RELY applications enter the primary denominator",
+    "REFUSE and ESCALATE are never silently recoded as safe acceptance",
+    "application-level and seam-level results are reported separately",
+    "escalation and certified useful yield are always co-reported",
+    "no arm may improve its headline metric by changing the denominator"
+  ],
+  "iterative_arm_budget": {
+    "max_revisions": 3,
+    "max_countermodels": 2,
+    "max_disclosed_shared_ground_atoms_per_countermodel": 8,
+    "protected_only_relations_disclosed": 0,
+    "budget_exhaustion_exit": "INDETERMINATE"
+  },
+  "stop_rule": "no efficacy analysis before every domain and stratum quota closes and role separation passes",
+  "blindness": "adjudicators receive contracts, protected vocabulary, evidence, and candidate or typed exit without arm identity",
+  "logic_freeze": "FRSL-1 remains frozen unless at least three foreign-authored seams from two authors fail only for the same missing grammar primitive",
+  "promotion_blockers": [
+    "clean engine commit frozen before first intake",
+    "foreign-authored corpus frozen",
+    "blind adjudication complete",
+    "independent zero-import reproduction complete",
+    "one external service integration complete"
+  ]
+}

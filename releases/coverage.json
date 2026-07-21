@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-15T18:37:37.627145+00:00",
+  "anchor": "pypi",
+  "project": "bulla",
+  "source": "https://pypi.org/pypi/bulla/json",
+  "total_anchored": 23,
+  "receipted": 2,
+  "coverage": 0.087,
+  "status_counts": {
+    "contemporaneous": 0,
+    "reconstructed": 2,
+    "missing": 21,
+    "invalid": 0
+  },
+  "unreceipted_delta": [
+    "0.7.0",
+    "0.7.1",
+    "0.8.0",
+    "0.15.0",
+    "0.16.0",
+    "0.17.0",
+    "0.18.0",
+    "0.19.0",
+    "0.20.0",
+    "0.21.0",
+    "0.22.0",
+    "0.23.0",
+    "0.24.0",
+    "0.32.0",
+    "0.33.0",
+    "0.34.0",
+    "0.35.0",
+    "0.36.0",
+    "0.41.0",
+    "0.42.0",
+    "0.43.0"
+  ],
+  "releases": [
+    {
+      "version": "0.7.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.7.1",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.8.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.15.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.16.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.17.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.18.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.19.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.20.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.21.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.22.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.23.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.24.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.32.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.33.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.34.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.35.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.36.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.37.0",
+      "status": "reconstructed",
+      "receipt": "0.37.0.json",
+      "verified_to": "digest",
+      "artifacts": [
+        "bulla-0.37.0-py3-none-any.whl",
+        "bulla-0.37.0.tar.gz"
+      ]
+    },
+    {
+      "version": "0.40.0",
+      "status": "reconstructed",
+      "receipt": "0.40.0.json",
+      "verified_to": "digest",
+      "artifacts": [
+        "bulla-0.40.0-py3-none-any.whl",
+        "bulla-0.40.0.tar.gz"
+      ]
+    },
+    {
+      "version": "0.41.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.42.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    },
+    {
+      "version": "0.43.0",
+      "status": "missing",
+      "receipt": null,
+      "artifacts": []
+    }
+  ],
+  "candidates": [
+    {
+      "version": "0.43.0",
+      "path": "candidates/0.43.0-rc.json",
+      "verified_to": "attestation"
+    }
+  ],
+  "invalid_receipts": []
+}

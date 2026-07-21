@@ -1,8 +1,20 @@
 # Bulla Architecture
 
+> **Legacy diagnostic architecture.** This document explains Bulla's original
+> composition-measurement subsystem. It is not the architecture or trust model
+> of ActionReceipt verification in Bulla 0.44. See the
+> [package front door](../README.md), [capability reference](CAPABILITIES.md),
+> and [ActionReceipt specification](../spec/README.md) for the released system.
+> The coherence fee below is a bounded disclosure/omission measure; it is not a
+> mismatch, runtime-failure, or safety oracle.
+
 ## The Mathematical Design
 
-Bulla measures a quantity — the *coherence fee* — that tells you how many independent dimensions of semantic mismatch are invisible to pairwise verification of a tool composition. The measurement is exact (rational arithmetic, no floating-point), deterministic (same composition always produces the same fee), and constructive (it tells you exactly which fields to disclose to eliminate the fee).
+Bulla's legacy diagnostic subsystem measures a quantity — the *coherence fee* —
+that counts convention dimensions hidden from a declared observable model of a
+tool composition. The measurement is exact (rational arithmetic, no
+floating-point), deterministic for a fixed model, and constructive inside that
+model (it identifies fields whose disclosure eliminates the represented fee).
 
 The architecture follows from the mathematics. Understanding why the code is organized the way it is requires understanding what the mathematics demands.
 

@@ -1,0 +1,3631 @@
+{
+  "card_count": 120,
+  "cards": [
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:04cd5a7d5d335bf552412646929550dd68cc77c14614c342c12fdb214dea42f8",
+      "case_id": "F2-0000",
+      "content_hashes": [
+        "sha256:6fa525253b776ceddc0eae1803ab2ca2c4d18daf7c3de1dba2edd609f61f771c",
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.614914+00:00",
+        "2026-04-07T05:16:08.935801+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does fetch_html.url safely satisfy read_file.path?",
+      "source_ids": [
+        "fetch-mcp",
+        "filesystem"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "path_convention"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:87cc14ab71633e0f112d27e6c6304898f1c5d4fbe08fb34c4957a2c24040f7d6",
+      "case_id": "F2-0001",
+      "content_hashes": [
+        "sha256:6fa525253b776ceddc0eae1803ab2ca2c4d18daf7c3de1dba2edd609f61f771c",
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.614914+00:00",
+        "2026-04-07T05:16:08.935801+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does fetch_markdown.url safely satisfy read_file.path?",
+      "source_ids": [
+        "fetch-mcp",
+        "filesystem"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "path_convention"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:c453e5f3564f168e03acbd33d9c624c56a8c945a578ce732c313ab8b16efd062",
+      "case_id": "F2-0002",
+      "content_hashes": [
+        "sha256:6fa525253b776ceddc0eae1803ab2ca2c4d18daf7c3de1dba2edd609f61f771c",
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.614914+00:00",
+        "2026-04-07T05:16:08.935801+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does fetch_txt.url safely satisfy read_file.path?",
+      "source_ids": [
+        "fetch-mcp",
+        "filesystem"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "path_convention"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:6a8b872f682eb72db7ee49f7aa8a45d5e187d0da6f04f10fabda135efb3520e3",
+      "case_id": "F2-0003",
+      "content_hashes": [
+        "sha256:6fa525253b776ceddc0eae1803ab2ca2c4d18daf7c3de1dba2edd609f61f771c",
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.614914+00:00",
+        "2026-04-07T05:16:08.935801+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does fetch_json.url safely satisfy read_file.path?",
+      "source_ids": [
+        "fetch-mcp",
+        "filesystem"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "path_convention"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:6cc0a01e8231da6105a1289a58e77f6474ad77318a10459ecd018def724b1601",
+      "case_id": "F2-0004",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:10.552148+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_file.path safely satisfy create_or_update_file.owner?",
+      "source_ids": [
+        "filesystem",
+        "github"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:a3efb379e4393153fcc0c521ccf8b18ad290f8cb3d509f049b7a64f3f3e72bd1",
+      "case_id": "F2-0005",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:10.552148+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_text_file.path safely satisfy create_or_update_file.owner?",
+      "source_ids": [
+        "filesystem",
+        "github"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:b3afdd1a4df9e2bfcd481609bf9fc0a9b1b5f6af7494bba91fbae8d3b91aaf87",
+      "case_id": "F2-0006",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:10.552148+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_text_file._description safely satisfy create_or_update_file.owner?",
+      "source_ids": [
+        "filesystem",
+        "github"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:2df3b8ccce5709f1b894c7d61bdded2c0bfdee3cb01106435a91031e4abc9f6b",
+      "case_id": "F2-0007",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:10.552148+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_media_file.path safely satisfy create_or_update_file.owner?",
+      "source_ids": [
+        "filesystem",
+        "github"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:53f73893dfac2e6b72d0d6d567ecceb27c447ffd13f31203467ea9097687ef86",
+      "case_id": "F2-0008",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:10.552148+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_media_file._description safely satisfy create_or_update_file.owner?",
+      "source_ids": [
+        "filesystem",
+        "github"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:f6219d6792f338d17c5777c199873768634690503e6b52c3fed1af35084be3ee",
+      "case_id": "F2-0009",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:10.552148+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_multiple_files.paths safely satisfy create_or_update_file.owner?",
+      "source_ids": [
+        "filesystem",
+        "github"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:70a9b1a9b2dc6cfe9b47d38238bc7750b50aec8ea881bafaeaa10902892f0a29",
+      "case_id": "F2-0010",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:390097c942891b8e7d432908e3e0a40e4abd3e06897b9510b73e2fb17da23169"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.618118+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does list_issues.since safely satisfy semantic-search.date_range?",
+      "source_ids": [
+        "github",
+        "mcp-pinecone"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:3733c6eb6f970751498130dd7fd7acb115eb8b79cff80f5b64537a76289fcd82",
+      "case_id": "F2-0011",
+      "content_hashes": [
+        "sha256:390097c942891b8e7d432908e3e0a40e4abd3e06897b9510b73e2fb17da23169",
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.618118+00:00",
+        "2026-04-07T05:16:06.620849+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does semantic-search.date_range safely satisfy worker_put.compatibility_date?",
+      "source_ids": [
+        "mcp-pinecone",
+        "mcp-server-cloudflare"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "temporal_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:a46118544a63051d9f9bdcdfd67eb9f8549d8ec7264f9ae2de68e7b26a07ac89",
+      "case_id": "F2-0012",
+      "content_hashes": [
+        "sha256:390097c942891b8e7d432908e3e0a40e4abd3e06897b9510b73e2fb17da23169",
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.618118+00:00",
+        "2026-04-07T05:16:06.620849+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does semantic-search.date_range.start safely satisfy worker_put.compatibility_date?",
+      "source_ids": [
+        "mcp-pinecone",
+        "mcp-server-cloudflare"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:cc4db69a458dd85435acef04e915453362062a9594212838f20df9352dc974bd",
+      "case_id": "F2-0013",
+      "content_hashes": [
+        "sha256:390097c942891b8e7d432908e3e0a40e4abd3e06897b9510b73e2fb17da23169",
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.618118+00:00",
+        "2026-04-07T05:16:06.620849+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does semantic-search.date_range.end safely satisfy worker_put.compatibility_date?",
+      "source_ids": [
+        "mcp-pinecone",
+        "mcp-server-cloudflare"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:e0c3dc05e88dfed8f1f76ffcd79e5605d2ebe02c8fdf05769e1e4e6628cb5ef2",
+      "case_id": "F2-0014",
+      "content_hashes": [
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0",
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.620849+00:00",
+        "2026-04-07T05:16:06.623575+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does worker_put.compatibility_date safely satisfy SEARCH.from?",
+      "source_ids": [
+        "mcp-server-cloudflare",
+        "mcp-server-rememberizer"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "temporal_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:b7cd9654f530908586ba7b6ad80e16d06b4e64c333e0bcefbd0a0ae0d79f930e",
+      "case_id": "F2-0015",
+      "content_hashes": [
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0",
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.620849+00:00",
+        "2026-04-07T05:16:06.623575+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does analytics_get.since safely satisfy SEARCH.from?",
+      "source_ids": [
+        "mcp-server-cloudflare",
+        "mcp-server-rememberizer"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "date_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:69f6df66f71e591c1e06958f97925e97234ae8586173bbf9f7a1c02eaa8972f4",
+      "case_id": "F2-0016",
+      "content_hashes": [
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0",
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.620849+00:00",
+        "2026-04-07T05:16:06.623575+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does analytics_get.until safely satisfy SEARCH.from?",
+      "source_ids": [
+        "mcp-server-cloudflare",
+        "mcp-server-rememberizer"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "date_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:1b5fe4046cbad1af528f36fe431c93e42e30a66092881ccf991027750a4b647d",
+      "case_id": "F2-0017",
+      "content_hashes": [
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6",
+        "sha256:5dc634e11f25b9b20cc20bb5d2f6ab5917a971d6398950917a33110620e55791"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.623575+00:00",
+        "2026-04-07T05:16:38.485893+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does SEARCH.from safely satisfy API-post-search.sort?",
+      "source_ids": [
+        "mcp-server-rememberizer",
+        "notion"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "temporal_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:e20ef2ae6e56d8722f7b4204ccdce02379ee3ee499b03be01ec1e4cb4fd6bc3e",
+      "case_id": "F2-0018",
+      "content_hashes": [
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6",
+        "sha256:5dc634e11f25b9b20cc20bb5d2f6ab5917a971d6398950917a33110620e55791"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.623575+00:00",
+        "2026-04-07T05:16:38.485893+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does SEARCH.to safely satisfy API-post-search.sort?",
+      "source_ids": [
+        "mcp-server-rememberizer",
+        "notion"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "temporal_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:7f78b08d943d9bd2946ed65ac45e7b3b9037d8c08d93a2629b2baee4f1faf791",
+      "case_id": "F2-0019",
+      "content_hashes": [
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6",
+        "sha256:5dc634e11f25b9b20cc20bb5d2f6ab5917a971d6398950917a33110620e55791"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.623575+00:00",
+        "2026-04-07T05:16:38.485893+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does AGENTIC_SEARCH.from safely satisfy API-post-search.sort?",
+      "source_ids": [
+        "mcp-server-rememberizer",
+        "notion"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "temporal_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:dee07afdb82a84a9bd525e757111b85d793b1c053ceb316b96581320e48ffb92",
+      "case_id": "F2-0020",
+      "content_hashes": [
+        "sha256:bb0141f41e1bdb8a7c9f165b88b923dd672ac4802243472a1a0b6baaef9ecc0f",
+        "sha256:f96888409df38f34fc1d141de14178cb3e8c51914f55ce33a40c241ddf04e394"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does repos/update.security_and_analysis.secret_scanning_ai_detection safely satisfy sheets.spreadsheets.values.get.dateTimeRenderOption?",
+      "source_ids": [
+        "github-rest",
+        "google-sheets"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "gs1_application_identifier"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:fa130a291dd1fde5519dcc7641a4c0948c9a45712a3343eec666c3eb496366bb",
+      "case_id": "F2-0021",
+      "content_hashes": [
+        "sha256:f96888409df38f34fc1d141de14178cb3e8c51914f55ce33a40c241ddf04e394",
+        "sha256:cf41b614d5bf53a1d039d7dab66d49e4f31c8c3d19ec54ed0059661257a216c2"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does sheets.spreadsheets.values.get.dateTimeRenderOption safely satisfy createEvent.id_key_type?",
+      "source_ids": [
+        "google-sheets",
+        "gs1-traceability"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "gs1_application_identifier"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:0bce9882b9465e90d8e906b8dff3dc4beb5d7c77dabd1ee79bc1dcf05b023c7b",
+      "case_id": "F2-0022",
+      "content_hashes": [
+        "sha256:f96888409df38f34fc1d141de14178cb3e8c51914f55ce33a40c241ddf04e394",
+        "sha256:cf41b614d5bf53a1d039d7dab66d49e4f31c8c3d19ec54ed0059661257a216c2"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does sheets.spreadsheets.values.update.responseDateTimeRenderOption safely satisfy createEvent.id_key_type?",
+      "source_ids": [
+        "google-sheets",
+        "gs1-traceability"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "gs1_application_identifier"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:51ff84cdadc00806bee10fb0107047a9b1a956ee5aaaad7482b49f451317121b",
+      "case_id": "F2-0023",
+      "content_hashes": [
+        "sha256:f96888409df38f34fc1d141de14178cb3e8c51914f55ce33a40c241ddf04e394",
+        "sha256:cf41b614d5bf53a1d039d7dab66d49e4f31c8c3d19ec54ed0059661257a216c2"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does sheets.spreadsheets.values.append.responseDateTimeRenderOption safely satisfy createEvent.id_key_type?",
+      "source_ids": [
+        "google-sheets",
+        "gs1-traceability"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "gs1_application_identifier"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:c8528949b8748b8c86f959dc5492c010f51f6c5dfd0de31f70fb8714effc619e",
+      "case_id": "F2-0024",
+      "content_hashes": [
+        "sha256:f96888409df38f34fc1d141de14178cb3e8c51914f55ce33a40c241ddf04e394",
+        "sha256:cf41b614d5bf53a1d039d7dab66d49e4f31c8c3d19ec54ed0059661257a216c2"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does sheets.spreadsheets.values.batchGet.dateTimeRenderOption safely satisfy createEvent.id_key_type?",
+      "source_ids": [
+        "google-sheets",
+        "gs1-traceability"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "gs1_application_identifier"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:108c3d865cda1a7f506cf2e8bbe99a45516a44bbcd85fc9823162ea0f4b4c364",
+      "case_id": "F2-0025",
+      "content_hashes": [
+        "sha256:cf41b614d5bf53a1d039d7dab66d49e4f31c8c3d19ec54ed0059661257a216c2",
+        "sha256:b9fab6aabded21183d27a8f7e588e6bf4b4e49f09d928913c8a9de998737c0ed"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does createEvent.id_key_type safely satisfy PostBillingMeters.default_aggregation.formula?",
+      "source_ids": [
+        "gs1-traceability",
+        "stripe-openapi"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "gs1_application_identifier"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:9187b048f43493caa2875d7c19720c7a41f1d32fc754ace2f26a960fe37ec8d7",
+      "case_id": "F2-0026",
+      "content_hashes": [
+        "sha256:cf41b614d5bf53a1d039d7dab66d49e4f31c8c3d19ec54ed0059661257a216c2",
+        "sha256:b9fab6aabded21183d27a8f7e588e6bf4b4e49f09d928913c8a9de998737c0ed"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does createEvent.application_identifier safely satisfy PostBillingMeters.default_aggregation.formula?",
+      "source_ids": [
+        "gs1-traceability",
+        "stripe-openapi"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "gs1_application_identifier"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:9e8dc1342aa61d75bbe37b1ed5233a63ab6afa65f7c317b857d267e500b916e3",
+      "case_id": "F2-0027",
+      "content_hashes": [
+        "sha256:b9fab6aabded21183d27a8f7e588e6bf4b4e49f09d928913c8a9de998737c0ed",
+        "sha256:b1c3f5b47bdac296421508d06d79439d2b6ca9272bafbdb8fd664ff078201659"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does PostBillingMeters.default_aggregation.formula safely satisfy meetingCreate.settings.jbh_time?",
+      "source_ids": [
+        "stripe-openapi",
+        "zoom-apis-guru"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "gs1_application_identifier"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:93c03f0ef7f4c061cf99f47a32ab9ff32f1abcc4bbfb9690a9b7b668a958dbdc",
+      "case_id": "F2-0028",
+      "content_hashes": [
+        "sha256:b1c3f5b47bdac296421508d06d79439d2b6ca9272bafbdb8fd664ff078201659",
+        "sha256:bb0141f41e1bdb8a7c9f165b88b923dd672ac4802243472a1a0b6baaef9ecc0f"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does meetingCreate.settings.jbh_time safely satisfy repos/update.security_and_analysis.secret_scanning_ai_detection?",
+      "source_ids": [
+        "zoom-apis-guru",
+        "github-rest"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "gs1_application_identifier"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:3026d8b433db3425093c7720c3d2fd00c7bf20278613dc5802611a37890df8d5",
+      "case_id": "F2-0029",
+      "content_hashes": [
+        "sha256:bb0141f41e1bdb8a7c9f165b88b923dd672ac4802243472a1a0b6baaef9ecc0f",
+        "sha256:f96888409df38f34fc1d141de14178cb3e8c51914f55ce33a40c241ddf04e394"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does repos/update.security_and_analysis.secret_scanning_ai_detection safely satisfy sheets.spreadsheets.values.get.dateTimeRenderOption?",
+      "source_ids": [
+        "github-rest",
+        "google-sheets"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "gs1_application_identifier"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:441a0c9becce6644c9f97d81240dc3f637c359c8982ef3a35561c65f34d99672",
+      "case_id": "F2-0030",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:a3db152ffd4993558f9160e42243c3cc7590d7f0093816fc0a2668e73fabac59"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.615472+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does list_issues.direction safely satisfy update.status?",
+      "source_ids": [
+        "github",
+        "gtasks-mcp"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:e5ea20994615467774482d215c846a58d2a56d29f029fcd637202dadcdfe9ca0",
+      "case_id": "F2-0031",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:a3db152ffd4993558f9160e42243c3cc7590d7f0093816fc0a2668e73fabac59"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.615472+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does list_issues.state safely satisfy update.status?",
+      "source_ids": [
+        "github",
+        "gtasks-mcp"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "state_filter"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:63d8c7a97181bc5c3c8f6b056814611e1a9991033ece523329e7e846d9bf3a49",
+      "case_id": "F2-0032",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:a3db152ffd4993558f9160e42243c3cc7590d7f0093816fc0a2668e73fabac59"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.615472+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does update_issue.state safely satisfy update.status?",
+      "source_ids": [
+        "github",
+        "gtasks-mcp"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "state_filter"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:aa00a9cf1cb5f88a9fca5c910cc662e2f8a7457ffc901e10f727a18235f1ce6c",
+      "case_id": "F2-0033",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:a3db152ffd4993558f9160e42243c3cc7590d7f0093816fc0a2668e73fabac59"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.615472+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does search_code.order safely satisfy update.status?",
+      "source_ids": [
+        "github",
+        "gtasks-mcp"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:2690b9fd94defe974b055723c269057f141f12a0b86554f1c4d44676787d163e",
+      "case_id": "F2-0034",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:a3db152ffd4993558f9160e42243c3cc7590d7f0093816fc0a2668e73fabac59"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.615472+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does search_issues.order safely satisfy update.status?",
+      "source_ids": [
+        "github",
+        "gtasks-mcp"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:4e0e11d3617b3ef27eb747e85d1ea82f4e5fb3953bb864cb319d1c6061254427",
+      "case_id": "F2-0035",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:a3db152ffd4993558f9160e42243c3cc7590d7f0093816fc0a2668e73fabac59"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.615472+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does search_users.order safely satisfy update.status?",
+      "source_ids": [
+        "github",
+        "gtasks-mcp"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:8b3edfab00bf13a103b2e632e572b04fd58281f055a6c5bd7e526255b5dfd958",
+      "case_id": "F2-0036",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:a3db152ffd4993558f9160e42243c3cc7590d7f0093816fc0a2668e73fabac59"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.615472+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does list_pull_requests.state safely satisfy update.status?",
+      "source_ids": [
+        "github",
+        "gtasks-mcp"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "state_filter"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:7d1f2cb1da39a36e1983ed5dbd0c58919ba48f46b5f7bc3b264bb334d0f5e71c",
+      "case_id": "F2-0037",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:a3db152ffd4993558f9160e42243c3cc7590d7f0093816fc0a2668e73fabac59"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.615472+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does list_pull_requests.direction safely satisfy update.status?",
+      "source_ids": [
+        "github",
+        "gtasks-mcp"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:6e6bfee3473590a96807475d3100f1d8a5806095df1973468d2879b4e7518427",
+      "case_id": "F2-0038",
+      "content_hashes": [
+        "sha256:a3db152ffd4993558f9160e42243c3cc7590d7f0093816fc0a2668e73fabac59",
+        "sha256:5dc634e11f25b9b20cc20bb5d2f6ab5917a971d6398950917a33110620e55791"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.615472+00:00",
+        "2026-04-07T05:16:38.485893+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does update.status safely satisfy API-post-search.sort?",
+      "source_ids": [
+        "gtasks-mcp",
+        "notion"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:99fce5d0a9d1680ed124006698abcea106dc5ffdecca66145780fb55f66245d8",
+      "case_id": "F2-0039",
+      "content_hashes": [
+        "sha256:5dc634e11f25b9b20cc20bb5d2f6ab5917a971d6398950917a33110620e55791",
+        "sha256:a789e9a56bb849a41ea39599750158adaf012eaa8f00397fa071a0429219da04"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:38.485893+00:00",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does API-post-search.sort safely satisfy getAuditLogEvents._description?",
+      "source_ids": [
+        "notion",
+        "asana-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "sort_direction"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:0d3f71625007f33fa20ffad3566001f8a6ac6c3b84b038f6be12bf81a73037a6",
+      "case_id": "F2-0040",
+      "content_hashes": [
+        "sha256:3da47d95c78a82248cd574fdf813a3f3f400e5c038049e7e639cb916d9a629bf",
+        "sha256:56734de29576fca482966d5da599918e4aceb8ff6adf290ed231ad311ed0de90"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.624595+00:00",
+        "2026-04-07T05:16:34.843881+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does tavily_web_search._description safely satisfy tavily_search.search_depth?",
+      "source_ids": [
+        "mcp-tavily",
+        "tavily"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "industry_code"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:6da44c3c02a8a3b0ecd281b3be049258db4b489fd2f03a658b5d20cb0fcb1b5f",
+      "case_id": "F2-0041",
+      "content_hashes": [
+        "sha256:56734de29576fca482966d5da599918e4aceb8ff6adf290ed231ad311ed0de90",
+        "sha256:78da246a826ae30c1fca73cbbf5d3eeb91699634f0388bfbf5a66242d3fc7141"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:34.843881+00:00",
+        "2026-04-07T05:16:06.627757+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does tavily_search.search_depth safely satisfy todoist_create_task.priority?",
+      "source_ids": [
+        "tavily",
+        "todoist-mcp-server"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:934feb84cd3cb5fa7d12422b010d3fa215a536b7ab583c664ea8a00af6b52f31",
+      "case_id": "F2-0042",
+      "content_hashes": [
+        "sha256:78da246a826ae30c1fca73cbbf5d3eeb91699634f0388bfbf5a66242d3fc7141",
+        "sha256:a789e9a56bb849a41ea39599750158adaf012eaa8f00397fa071a0429219da04"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.627757+00:00",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does todoist_create_task.priority safely satisfy createAttachmentForObject._description?",
+      "source_ids": [
+        "todoist-mcp-server",
+        "asana-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:46102f39353a8700aa5edc811358d61a1023c87af519cc69f359569c5731f9c8",
+      "case_id": "F2-0043",
+      "content_hashes": [
+        "sha256:78da246a826ae30c1fca73cbbf5d3eeb91699634f0388bfbf5a66242d3fc7141",
+        "sha256:a789e9a56bb849a41ea39599750158adaf012eaa8f00397fa071a0429219da04"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.627757+00:00",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does todoist_get_tasks.priority safely satisfy createAttachmentForObject._description?",
+      "source_ids": [
+        "todoist-mcp-server",
+        "asana-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:f04b4df56fc8ae1726292525ed3c76d6195ecb25834d12065c8f40914deb1761",
+      "case_id": "F2-0044",
+      "content_hashes": [
+        "sha256:78da246a826ae30c1fca73cbbf5d3eeb91699634f0388bfbf5a66242d3fc7141",
+        "sha256:a789e9a56bb849a41ea39599750158adaf012eaa8f00397fa071a0429219da04"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.627757+00:00",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does todoist_update_task.priority safely satisfy createAttachmentForObject._description?",
+      "source_ids": [
+        "todoist-mcp-server",
+        "asana-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:f95603979ebab824a992e5320c5f827be24bc6450b06e9144064e5caa5c9b5b6",
+      "case_id": "F2-0045",
+      "content_hashes": [
+        "sha256:a789e9a56bb849a41ea39599750158adaf012eaa8f00397fa071a0429219da04",
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does createAttachmentForObject._description safely satisfy getFieldsPaginated._description?",
+      "source_ids": [
+        "asana-api",
+        "atlassian-jira"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "industry_code"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:5b7ef2dba0c185b7ce5a60e5066b76a5d1b3ce611b8f1e3627bb5ffaf165a862",
+      "case_id": "F2-0046",
+      "content_hashes": [
+        "sha256:a789e9a56bb849a41ea39599750158adaf012eaa8f00397fa071a0429219da04",
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does getGoals.is_workspace_level safely satisfy getFieldsPaginated._description?",
+      "source_ids": [
+        "asana-api",
+        "atlassian-jira"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:e31bdc762d0c4675980e0a34ccb36045e65eef72728ca052add8d41dea2160a9",
+      "case_id": "F2-0047",
+      "content_hashes": [
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766",
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does getFieldsPaginated._description safely satisfy post_metadata_queries_execute_read._description?",
+      "source_ids": [
+        "atlassian-jira",
+        "box-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "industry_code"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:b1d18e3a677b740c780d338d69dcc032fcc7539c6e6226114eeb91c8184dfcb6",
+      "case_id": "F2-0048",
+      "content_hashes": [
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766",
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does getAllFieldConfigurations._description safely satisfy post_metadata_queries_execute_read._description?",
+      "source_ids": [
+        "atlassian-jira",
+        "box-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "industry_code"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:13d26a196a1136a418b9fc426bf0045ec0705e55fa4c6a6ac46e6f5b07331e6c",
+      "case_id": "F2-0049",
+      "content_hashes": [
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766",
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does createFieldConfiguration._description safely satisfy post_metadata_queries_execute_read._description?",
+      "source_ids": [
+        "atlassian-jira",
+        "box-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "industry_code"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:f499fd132dfc9fd9bfc4eb1a79cd75382b06f5fbb0b7ca0839b8bff3f43acc29",
+      "case_id": "F2-0050",
+      "content_hashes": [
+        "sha256:f9307f5060db1af2f95f1416a8e9a1e7e91b884d10846548da5973cbaabc48f7",
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "2026-04-07T05:16:10.552148+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does draftOrderCreate.currencyCode safely satisfy list_issues.state?",
+      "source_ids": [
+        "shopify-admin",
+        "github"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "currency_code"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:8d9959c8dc4227d52173c4b617c7164351b002f7f3821e8795ef4bf7af8f0fd7",
+      "case_id": "F2-0051",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does list_issues.state safely satisfy get_users.user_type?",
+      "source_ids": [
+        "github",
+        "box-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "currency_code"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:b567191aca512378bc2147b5fef6488ba6fc4bf096735878672f87bba9d578df",
+      "case_id": "F2-0052",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does list_pull_requests.state safely satisfy get_users.user_type?",
+      "source_ids": [
+        "github",
+        "box-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "currency_code"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:89005c8907848da0614fe04a3077ccc9fb5ac6014fbbc73cb7aec4c6bb894c85",
+      "case_id": "F2-0053",
+      "content_hashes": [
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8",
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does get_users.user_type safely satisfy cdn_update_endpoints.ttl?",
+      "source_ids": [
+        "box-api",
+        "digitalocean-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "currency_code"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:f99bd7d97d52cecce52b0d142142b1ce324c89f69125ca50ea24b244dcf454c8",
+      "case_id": "F2-0054",
+      "content_hashes": [
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8",
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does get_events.stream_type safely satisfy cdn_update_endpoints.ttl?",
+      "source_ids": [
+        "box-api",
+        "digitalocean-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "currency_code"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:425862b7064c13e0b6bcfdcdf5998366d37ed5c0088f86be0c150fc4013fe741",
+      "case_id": "F2-0055",
+      "content_hashes": [
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c",
+        "sha256:dfa6f25cb38138400a303972bc585d398fbdd9b3c6281452faf8b5d400783dc2"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does cdn_update_endpoints.ttl safely satisfy submitOrder.currency?",
+      "source_ids": [
+        "digitalocean-api",
+        "fix-trading-orders"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "currency_code"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:25944aed092a10d82d187d19fcde32a4ae9951c45cfc340c511e913a88609021",
+      "case_id": "F2-0056",
+      "content_hashes": [
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c",
+        "sha256:dfa6f25cb38138400a303972bc585d398fbdd9b3c6281452faf8b5d400783dc2"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does kubernetes_delete_node.skip_drain safely satisfy submitOrder.currency?",
+      "source_ids": [
+        "digitalocean-api",
+        "fix-trading-orders"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:35e8af25265562648469241bcf0ef245080d8aa4c0dc50f2131ae73e07b6d7d9",
+      "case_id": "F2-0057",
+      "content_hashes": [
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c",
+        "sha256:dfa6f25cb38138400a303972bc585d398fbdd9b3c6281452faf8b5d400783dc2"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does kubernetes_delete_node.replace safely satisfy submitOrder.currency?",
+      "source_ids": [
+        "digitalocean-api",
+        "fix-trading-orders"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:50d2bf6ac4272356bdda71e1db00f83f14ae1eb09adda9f4906e6e92572a032d",
+      "case_id": "F2-0058",
+      "content_hashes": [
+        "sha256:dfa6f25cb38138400a303972bc585d398fbdd9b3c6281452faf8b5d400783dc2",
+        "sha256:bb0141f41e1bdb8a7c9f165b88b923dd672ac4802243472a1a0b6baaef9ecc0f"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does submitOrder.currency safely satisfy security-advisories/list-global-advisories.epss_percentage?",
+      "source_ids": [
+        "fix-trading-orders",
+        "github-rest"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:f88cb799adfd84547a6a90f994b71350fa6081f2a76bfa65c208021fbd380458",
+      "case_id": "F2-0059",
+      "content_hashes": [
+        "sha256:bb0141f41e1bdb8a7c9f165b88b923dd672ac4802243472a1a0b6baaef9ecc0f",
+        "sha256:9a966d33174a0777bc0ce17cc60a8f48e38d2a940e9216f0d377ccbac983eb75"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does security-advisories/list-global-advisories.epss_percentage safely satisfy calendar.events.insert.conferenceDataVersion?",
+      "source_ids": [
+        "github-rest",
+        "google-calendar"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "rate_scale"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:2244ae528cb3472bfb5e5819843adc9fe02073019e96ef001f6ae48f99899ff6",
+      "case_id": "F2-0060",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:06.620849+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_text_file._description safely satisfy r2_put_object.contentType?",
+      "source_ids": [
+        "filesystem",
+        "mcp-server-cloudflare"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:a84b12688b3c5bba1c3fdd04b3232bc3e3df65041a4fc7f298c65a4147f81a0c",
+      "case_id": "F2-0061",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:06.620849+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_media_file._description safely satisfy r2_put_object.contentType?",
+      "source_ids": [
+        "filesystem",
+        "mcp-server-cloudflare"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "media_type"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:3415dcc60365bb48425eed31cce4873c600169a5aaed12b497d9a2d367b58e4d",
+      "case_id": "F2-0062",
+      "content_hashes": [
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0",
+        "sha256:a789e9a56bb849a41ea39599750158adaf012eaa8f00397fa071a0429219da04"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.620849+00:00",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does r2_put_object.contentType safely satisfy createAttachmentForObject._description?",
+      "source_ids": [
+        "mcp-server-cloudflare",
+        "asana-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:8f4be67b2024e43e9ed738f8f206a14d02fd4df39810dec692b2b8257a0076d4",
+      "case_id": "F2-0063",
+      "content_hashes": [
+        "sha256:a789e9a56bb849a41ea39599750158adaf012eaa8f00397fa071a0429219da04",
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does createAttachmentForObject._description safely satisfy setPreference._description?",
+      "source_ids": [
+        "asana-api",
+        "atlassian-jira"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:2e5c85b8874973325584b500bed6dfb257786c36394c20b471480cd767f945d9",
+      "case_id": "F2-0064",
+      "content_hashes": [
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766",
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does setPreference._description safely satisfy post_files_id_copy.name?",
+      "source_ids": [
+        "atlassian-jira",
+        "box-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:63b637c4277a9eccf253a87df5d2f6da610b9fa769a18ca97a43fcc2e3b5c2e3",
+      "case_id": "F2-0065",
+      "content_hashes": [
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8",
+        "sha256:59c0f437724ccfb9ab315c2cf2c340ce48a0b37a2763b918b93b38290525f027"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does post_files_id_copy.name safely satisfy post_/project/{username}/{project}/ssh-key.Content-Type?",
+      "source_ids": [
+        "box-api",
+        "circleci-v1"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:9f165875414c3447c9117538c7962e387a15dcbc9c14a4dadd0e9b034f2619ad",
+      "case_id": "F2-0066",
+      "content_hashes": [
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8",
+        "sha256:59c0f437724ccfb9ab315c2cf2c340ce48a0b37a2763b918b93b38290525f027"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does put_folders_id.name safely satisfy post_/project/{username}/{project}/ssh-key.Content-Type?",
+      "source_ids": [
+        "box-api",
+        "circleci-v1"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:50fd79bd2b8dc28f5ce44ebe117302fa4d45dcea2a0432ff0be744aec0aebddf",
+      "case_id": "F2-0067",
+      "content_hashes": [
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8",
+        "sha256:59c0f437724ccfb9ab315c2cf2c340ce48a0b37a2763b918b93b38290525f027"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does post_folders.name safely satisfy post_/project/{username}/{project}/ssh-key.Content-Type?",
+      "source_ids": [
+        "box-api",
+        "circleci-v1"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:c75fb72a6c3281c117468606c8320b39bc825175341fcddbad8ce280c3aeffe5",
+      "case_id": "F2-0068",
+      "content_hashes": [
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8",
+        "sha256:59c0f437724ccfb9ab315c2cf2c340ce48a0b37a2763b918b93b38290525f027"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does post_folders_id_copy.name safely satisfy post_/project/{username}/{project}/ssh-key.Content-Type?",
+      "source_ids": [
+        "box-api",
+        "circleci-v1"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:69ff2776bef00cc5f6eb65444b5dff5269bfadbc474fee9057169b392eec8fbe",
+      "case_id": "F2-0069",
+      "content_hashes": [
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8",
+        "sha256:59c0f437724ccfb9ab315c2cf2c340ce48a0b37a2763b918b93b38290525f027"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does post_folder_locks.folder.type safely satisfy post_/project/{username}/{project}/ssh-key.Content-Type?",
+      "source_ids": [
+        "box-api",
+        "circleci-v1"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "media_type"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:4365aeae30d4fcb2ce7510762e72234998b6a7fd62914220f446971ccde043ea",
+      "case_id": "F2-0070",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:605c654a5920d29f454fb777185cd3cb9667ff9ad371f744f931d952921dcbb0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.616156+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does search_repositories.page safely satisfy search_profiles.offset?",
+      "source_ids": [
+        "github",
+        "inoyu-mcp-unomi-server"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "id_offset"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:157f633666fd159a7ac1febbdaf54cc541d73d8517be8818deb18ba41f134487",
+      "case_id": "F2-0071",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:605c654a5920d29f454fb777185cd3cb9667ff9ad371f744f931d952921dcbb0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.616156+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does list_commits.page safely satisfy search_profiles.offset?",
+      "source_ids": [
+        "github",
+        "inoyu-mcp-unomi-server"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "id_offset"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:3117e9b03315d4fd9bdb106a0236cbed01a5acf965d0d846ce4dd943ae4763ae",
+      "case_id": "F2-0072",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:605c654a5920d29f454fb777185cd3cb9667ff9ad371f744f931d952921dcbb0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.616156+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does list_issues.page safely satisfy search_profiles.offset?",
+      "source_ids": [
+        "github",
+        "inoyu-mcp-unomi-server"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "id_offset"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:f98bb2430561bd420839bf6269e598c010a5f4f9b8893cf71bce51e7b8898975",
+      "case_id": "F2-0073",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:605c654a5920d29f454fb777185cd3cb9667ff9ad371f744f931d952921dcbb0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.616156+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does search_code.page safely satisfy search_profiles.offset?",
+      "source_ids": [
+        "github",
+        "inoyu-mcp-unomi-server"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "id_offset"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:df7d2052500ea86c011f7483e785bdea993fcc5fca8836ab5f7e47fa7ccd3cdf",
+      "case_id": "F2-0074",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:605c654a5920d29f454fb777185cd3cb9667ff9ad371f744f931d952921dcbb0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.616156+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does search_issues.page safely satisfy search_profiles.offset?",
+      "source_ids": [
+        "github",
+        "inoyu-mcp-unomi-server"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "id_offset"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:f9d8a4b2bb22d7570fc5ef5b33342997128d1b53e54a1f9f7674532cfe4fe452",
+      "case_id": "F2-0075",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:605c654a5920d29f454fb777185cd3cb9667ff9ad371f744f931d952921dcbb0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.616156+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does search_users.page safely satisfy search_profiles.offset?",
+      "source_ids": [
+        "github",
+        "inoyu-mcp-unomi-server"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "id_offset"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:62463c0d8d96c470aad9c5e98daf4bda5985e536414b07e23642b77868d1c955",
+      "case_id": "F2-0076",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:605c654a5920d29f454fb777185cd3cb9667ff9ad371f744f931d952921dcbb0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.616156+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does list_pull_requests.page safely satisfy search_profiles.offset?",
+      "source_ids": [
+        "github",
+        "inoyu-mcp-unomi-server"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "id_offset"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:374b0c5b52cb9c32e5a0ae92825ea41e45c54b6c3c5ca7cb283394e9c218a5d8",
+      "case_id": "F2-0077",
+      "content_hashes": [
+        "sha256:605c654a5920d29f454fb777185cd3cb9667ff9ad371f744f931d952921dcbb0",
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.616156+00:00",
+        "2026-04-07T05:16:06.623575+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does search_profiles.offset safely satisfy SEARCH.from?",
+      "source_ids": [
+        "inoyu-mcp-unomi-server",
+        "mcp-server-rememberizer"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:0ab32df2351b8579c462af0e769ac04c8d192c3cc903c8a6e164fc2748f71234",
+      "case_id": "F2-0078",
+      "content_hashes": [
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6",
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.623575+00:00",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does SEARCH.from safely satisfy getAuditRecords.offset?",
+      "source_ids": [
+        "mcp-server-rememberizer",
+        "atlassian-jira"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:4e9b259f131546218abccfa82a449b7b104e3e6fdf2763850ab44185b0595953",
+      "case_id": "F2-0079",
+      "content_hashes": [
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6",
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.623575+00:00",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does SEARCH.to safely satisfy getAuditRecords.offset?",
+      "source_ids": [
+        "mcp-server-rememberizer",
+        "atlassian-jira"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:e86a84b23c793bd0fafab5219326b9ec2785f09828e0cc5a96940ddbac906d14",
+      "case_id": "F2-0080",
+      "content_hashes": [
+        "sha256:6fa525253b776ceddc0eae1803ab2ca2c4d18daf7c3de1dba2edd609f61f771c",
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.614914+00:00",
+        "2026-04-07T05:16:08.935801+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does fetch_html.url safely satisfy read_file.path?",
+      "source_ids": [
+        "fetch-mcp",
+        "filesystem"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "path_convention"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:c7c790b4be84014edb04bb4bb422e37e72f4b027287fc7c73573731f15d710a9",
+      "case_id": "F2-0081",
+      "content_hashes": [
+        "sha256:6fa525253b776ceddc0eae1803ab2ca2c4d18daf7c3de1dba2edd609f61f771c",
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.614914+00:00",
+        "2026-04-07T05:16:08.935801+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does fetch_markdown.url safely satisfy read_file.path?",
+      "source_ids": [
+        "fetch-mcp",
+        "filesystem"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "path_convention"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:0a8d09d3cf4637e5dd6512bb0ff79e8c43710eebaa5726d3b87cb3092f4b6b28",
+      "case_id": "F2-0082",
+      "content_hashes": [
+        "sha256:6fa525253b776ceddc0eae1803ab2ca2c4d18daf7c3de1dba2edd609f61f771c",
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.614914+00:00",
+        "2026-04-07T05:16:08.935801+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does fetch_txt.url safely satisfy read_file.path?",
+      "source_ids": [
+        "fetch-mcp",
+        "filesystem"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "path_convention"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:d6a506f39b8e7b300db20b77b83d790abb0024f17e44e93f989d8ec755868ad6",
+      "case_id": "F2-0083",
+      "content_hashes": [
+        "sha256:6fa525253b776ceddc0eae1803ab2ca2c4d18daf7c3de1dba2edd609f61f771c",
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.614914+00:00",
+        "2026-04-07T05:16:08.935801+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does fetch_json.url safely satisfy read_file.path?",
+      "source_ids": [
+        "fetch-mcp",
+        "filesystem"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "path_convention"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:cc47ce8519b935fd55798268c3330644c503846ad376d1e1082f013279ab7e0c",
+      "case_id": "F2-0084",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:10.552148+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_file.path safely satisfy create_or_update_file.owner?",
+      "source_ids": [
+        "filesystem",
+        "github"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:28940abe33258ad90bd0b9862d6396490d45a51e53ad9c32e497289035317633",
+      "case_id": "F2-0085",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:10.552148+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_text_file.path safely satisfy create_or_update_file.owner?",
+      "source_ids": [
+        "filesystem",
+        "github"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:7b2d0a27ebfeb91b78ae2f95c78a63c4f6445c4289bf5f0a5aca321ad83f88f0",
+      "case_id": "F2-0086",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:10.552148+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_text_file._description safely satisfy create_or_update_file.owner?",
+      "source_ids": [
+        "filesystem",
+        "github"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:50821b9a925ad3e2c09a7cd5bf194e16a301cd70f9131201725f838c62a6dfcb",
+      "case_id": "F2-0087",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:10.552148+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_media_file.path safely satisfy create_or_update_file.owner?",
+      "source_ids": [
+        "filesystem",
+        "github"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:eee709fe837e0d235c8e68bf56354c1f27d7be9e4063f6b0b4678d49109d309c",
+      "case_id": "F2-0088",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:10.552148+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_media_file._description safely satisfy create_or_update_file.owner?",
+      "source_ids": [
+        "filesystem",
+        "github"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:e7f641b1d0efea1586d9c959d8771362e17bd3214ba6bcf892cd1af4d2079032",
+      "case_id": "F2-0089",
+      "content_hashes": [
+        "sha256:be52f8d5603b7bee83bf7a3da906613b8ca8b4d640492e16c827beeacd1f6e6d",
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:08.935801+00:00",
+        "2026-04-07T05:16:10.552148+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does read_multiple_files.paths safely satisfy create_or_update_file.owner?",
+      "source_ids": [
+        "filesystem",
+        "github"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:0606edf619fc8f59a35d1f17d9ee5e56e30a527a3396eab7f728ded8836e8ea5",
+      "case_id": "F2-0090",
+      "content_hashes": [
+        "sha256:7fcf9e2b7f1a5361ec0d0b6c956fbc97fa143dbeb3270ff79680634b7a7bc80a",
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.626489+00:00",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does get_disruptions.type safely satisfy updateComponent._description?",
+      "source_ids": [
+        "ns-mcp-server",
+        "atlassian-jira"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "null_handling"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:71bc0363a257bf157de0da6cc47e27d48c577fc19cd532edeadf875c27bfe2a6",
+      "case_id": "F2-0091",
+      "content_hashes": [
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766",
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does updateComponent._description safely satisfy databases_list_clusters._description?",
+      "source_ids": [
+        "atlassian-jira",
+        "digitalocean-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "null_handling"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:f69b41dcce7a7b2012311e406e12fb368d757392aef86556764c7903ab414c7a",
+      "case_id": "F2-0092",
+      "content_hashes": [
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766",
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does getBulkPermissions._description safely satisfy databases_list_clusters._description?",
+      "source_ids": [
+        "atlassian-jira",
+        "digitalocean-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "null_handling"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:370d1f0e07056ca1435ec3dca9eec3fb1765bb86deaff452de0b3b0fd56d636e",
+      "case_id": "F2-0093",
+      "content_hashes": [
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766",
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does createProject._description safely satisfy databases_list_clusters._description?",
+      "source_ids": [
+        "atlassian-jira",
+        "digitalocean-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "null_handling"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:cb989f57361b9c2b2ce481de7ee6cba8eafb93348a488ed5be926be113e41ae5",
+      "case_id": "F2-0094",
+      "content_hashes": [
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766",
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does updateProjectEmail._description safely satisfy databases_list_clusters._description?",
+      "source_ids": [
+        "atlassian-jira",
+        "digitalocean-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "null_handling"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:00dedf8673b6e2a5d1a1f5bec252107b26f34c87c0250c2985826d26eb743848",
+      "case_id": "F2-0095",
+      "content_hashes": [
+        "sha256:2eb5e29a157207dd7fe598ca1c006e95770439a16a351a54f2bf41a4a4b56766",
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does createWorkflow._description safely satisfy databases_list_clusters._description?",
+      "source_ids": [
+        "atlassian-jira",
+        "digitalocean-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "null_handling"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:d935af2b13b7ee649eea229c7c33a05cc0165df1de46b0eacffafb7e620c27df",
+      "case_id": "F2-0096",
+      "content_hashes": [
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c",
+        "sha256:bb0141f41e1bdb8a7c9f165b88b923dd672ac4802243472a1a0b6baaef9ecc0f"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does databases_list_clusters._description safely satisfy orgs/create-artifact-deployment-record.github_repository?",
+      "source_ids": [
+        "digitalocean-api",
+        "github-rest"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "null_handling"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:51eab57c79d0773e14f907109dbecac445b269ea705da5101ec35f61631f878c",
+      "case_id": "F2-0097",
+      "content_hashes": [
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c",
+        "sha256:bb0141f41e1bdb8a7c9f165b88b923dd672ac4802243472a1a0b6baaef9ecc0f"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does databases_get_cluster._description safely satisfy orgs/create-artifact-deployment-record.github_repository?",
+      "source_ids": [
+        "digitalocean-api",
+        "github-rest"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "null_handling"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:601e8156eea48121a7b9a31411ecbbfe47088ee91623e73919722bc6d535d055",
+      "case_id": "F2-0098",
+      "content_hashes": [
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c",
+        "sha256:bb0141f41e1bdb8a7c9f165b88b923dd672ac4802243472a1a0b6baaef9ecc0f"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does databases_update_maintenanceWindow._description safely satisfy orgs/create-artifact-deployment-record.github_repository?",
+      "source_ids": [
+        "digitalocean-api",
+        "github-rest"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "null_handling"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:471d1716156892be5de0132cbb381fe32234a430c98d6fabd46617fba81ee403",
+      "case_id": "F2-0099",
+      "content_hashes": [
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c",
+        "sha256:bb0141f41e1bdb8a7c9f165b88b923dd672ac4802243472a1a0b6baaef9ecc0f"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does databases_update_connectionPool.size safely satisfy orgs/create-artifact-deployment-record.github_repository?",
+      "source_ids": [
+        "digitalocean-api",
+        "github-rest"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "null_handling"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:8d69b237b6c924559a6b9618f1b6932bf8d15fcfe44f3f23d91e79508dba684c",
+      "case_id": "F2-0100",
+      "content_hashes": [
+        "sha256:0cd2aba6addf69cb8904fb1b0169b1a20a25f65339b493929837623227bf27a3",
+        "sha256:390097c942891b8e7d432908e3e0a40e4abd3e06897b9510b73e2fb17da23169"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:10.552148+00:00",
+        "2026-04-07T05:16:06.618118+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does list_issues.since safely satisfy semantic-search.date_range?",
+      "source_ids": [
+        "github",
+        "mcp-pinecone"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:c6b8fcbc0836452a7442e5f5a79a288c9e7138f152c82a5fdf31e5a040017248",
+      "case_id": "F2-0101",
+      "content_hashes": [
+        "sha256:390097c942891b8e7d432908e3e0a40e4abd3e06897b9510b73e2fb17da23169",
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.618118+00:00",
+        "2026-04-07T05:16:06.620849+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does semantic-search.date_range safely satisfy worker_put.compatibility_date?",
+      "source_ids": [
+        "mcp-pinecone",
+        "mcp-server-cloudflare"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "temporal_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:fbd042a555db587f992fac5d6942c8459023b272a5e08bb6ad144b04d7d03ff2",
+      "case_id": "F2-0102",
+      "content_hashes": [
+        "sha256:390097c942891b8e7d432908e3e0a40e4abd3e06897b9510b73e2fb17da23169",
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.618118+00:00",
+        "2026-04-07T05:16:06.620849+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does semantic-search.date_range.start safely satisfy worker_put.compatibility_date?",
+      "source_ids": [
+        "mcp-pinecone",
+        "mcp-server-cloudflare"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:e5ffd5a0d7c021191239bf5757bca7344c64133cc0d32b8eb50a53b4c77f7c77",
+      "case_id": "F2-0103",
+      "content_hashes": [
+        "sha256:390097c942891b8e7d432908e3e0a40e4abd3e06897b9510b73e2fb17da23169",
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.618118+00:00",
+        "2026-04-07T05:16:06.620849+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does semantic-search.date_range.end safely satisfy worker_put.compatibility_date?",
+      "source_ids": [
+        "mcp-pinecone",
+        "mcp-server-cloudflare"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:06290d719abd15fde15eacd95b3fdc7059df6bebbe296ae790e2ba6ce747ea31",
+      "case_id": "F2-0104",
+      "content_hashes": [
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0",
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.620849+00:00",
+        "2026-04-07T05:16:06.623575+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does worker_put.compatibility_date safely satisfy SEARCH.from?",
+      "source_ids": [
+        "mcp-server-cloudflare",
+        "mcp-server-rememberizer"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "temporal_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:5c6fc20acc58a0307d5ae23ddf2aa29042cf46785c6c52e90456293763c8dc4f",
+      "case_id": "F2-0105",
+      "content_hashes": [
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0",
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.620849+00:00",
+        "2026-04-07T05:16:06.623575+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does analytics_get.since safely satisfy SEARCH.from?",
+      "source_ids": [
+        "mcp-server-cloudflare",
+        "mcp-server-rememberizer"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "date_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:c2001722f43719cd5e971b794283cc1f853a4e22d420e5589deb1e5f9b0b317d",
+      "case_id": "F2-0106",
+      "content_hashes": [
+        "sha256:a3314e4e5519028baa5f3f5412aa60cd793e1affefb97e42250ee497c244aed0",
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.620849+00:00",
+        "2026-04-07T05:16:06.623575+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does analytics_get.until safely satisfy SEARCH.from?",
+      "source_ids": [
+        "mcp-server-cloudflare",
+        "mcp-server-rememberizer"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "date_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:1a60597c3ffdc86cc3beafec6fb9ae744675f01660bab58afdbed0fda2491f5c",
+      "case_id": "F2-0107",
+      "content_hashes": [
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6",
+        "sha256:5dc634e11f25b9b20cc20bb5d2f6ab5917a971d6398950917a33110620e55791"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.623575+00:00",
+        "2026-04-07T05:16:38.485893+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does SEARCH.from safely satisfy API-post-search.sort?",
+      "source_ids": [
+        "mcp-server-rememberizer",
+        "notion"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "temporal_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:531099c749cbd5561a40f3b43c76a037be9cfb56e4d1085bcc928921c1c0d553",
+      "case_id": "F2-0108",
+      "content_hashes": [
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6",
+        "sha256:5dc634e11f25b9b20cc20bb5d2f6ab5917a971d6398950917a33110620e55791"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.623575+00:00",
+        "2026-04-07T05:16:38.485893+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does SEARCH.to safely satisfy API-post-search.sort?",
+      "source_ids": [
+        "mcp-server-rememberizer",
+        "notion"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "temporal_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:dcf6e24792059c043bff45873a13687b08c0e77e38b0b46ce4330b3d45a07ca0",
+      "case_id": "F2-0109",
+      "content_hashes": [
+        "sha256:99a0e1791fcdb2adbea4b56d259de533ffb56e01fb325aa53500e21a77a22bc6",
+        "sha256:5dc634e11f25b9b20cc20bb5d2f6ab5917a971d6398950917a33110620e55791"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.623575+00:00",
+        "2026-04-07T05:16:38.485893+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does AGENTIC_SEARCH.from safely satisfy API-post-search.sort?",
+      "source_ids": [
+        "mcp-server-rememberizer",
+        "notion"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "temporal_format"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:815ced019b263efc0c2d2d95df1076724796be3e7842ccd758dd0320b968aee0",
+      "case_id": "F2-0110",
+      "content_hashes": [
+        "sha256:a9459c3cd2dffde73dee80395b749752806c35ee1456359d4929ae2857bff541",
+        "sha256:131fff863984ca891fa1170859d0d618e657226b2f6fb93c418ab1d1a4ea444d"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:36.684289+00:00",
+        "2026-04-07T05:16:06.623921+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does web_search_exa.freshness safely satisfy get_trending.timeWindow?",
+      "source_ids": [
+        "exa",
+        "mcp-server-tmdb"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "unit_of_measure"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:c8bd00e27e34c2a075bef24cbf55955ba9c835c8baa895c21a4713bbe16fa73f",
+      "case_id": "F2-0111",
+      "content_hashes": [
+        "sha256:131fff863984ca891fa1170859d0d618e657226b2f6fb93c418ab1d1a4ea444d",
+        "sha256:56734de29576fca482966d5da599918e4aceb8ff6adf290ed231ad311ed0de90"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "redistributable",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:06.623921+00:00",
+        "2026-04-07T05:16:34.843881+00:00"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does get_trending.timeWindow safely satisfy tavily_search.time_range?",
+      "source_ids": [
+        "mcp-server-tmdb",
+        "tavily"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "unit_of_measure"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:a7b2e88a4467c3470f9bbc2a3512c9197c7e9e9cefd5a57a49d1b5e300cf9463",
+      "case_id": "F2-0112",
+      "content_hashes": [
+        "sha256:56734de29576fca482966d5da599918e4aceb8ff6adf290ed231ad311ed0de90",
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "2026-04-07T05:16:34.843881+00:00",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does tavily_search.time_range safely satisfy post_users.space_amount?",
+      "source_ids": [
+        "tavily",
+        "box-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:2413a8b8e9de7a979ae5eee4b7da1e9dfd5ac735dc12c18d01d555b3bebc7333",
+      "case_id": "F2-0113",
+      "content_hashes": [
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8",
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does post_users.space_amount safely satisfy domains_list_records.type?",
+      "source_ids": [
+        "box-api",
+        "digitalocean-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:141fce5c1b9fc2e274c887b06fcdeff2f580ce2a282b1e19b8f834d8fd62e301",
+      "case_id": "F2-0114",
+      "content_hashes": [
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8",
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does put_users_id.space_amount safely satisfy domains_list_records.type?",
+      "source_ids": [
+        "box-api",
+        "digitalocean-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:9536d29acfdf9d32fbd9daa9f720b19bd1ce663d599bd871ded802f50f491291",
+      "case_id": "F2-0115",
+      "content_hashes": [
+        "sha256:b00e732782fcae90e2ba80dcccf4b3be492574a03b2f271dda6238deef4ec5e8",
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does put_skill_invocations_id.usage.unit safely satisfy domains_list_records.type?",
+      "source_ids": [
+        "box-api",
+        "digitalocean-api"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "unit_of_measure"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:64f722becad2b5db226a2f63fb9c6f058749df52ebaa0438d9c1595a1c91318d",
+      "case_id": "F2-0116",
+      "content_hashes": [
+        "sha256:904e9b5fd257e0bd159103d9f362fe456104de766d3edfbb98f7592b8fcdf00c",
+        "sha256:de724c8ec78b404b1d116b8532a2e5b2363365ed997a3140556a8adac695c26e"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does domains_list_records.type safely satisfy readObservation._description?",
+      "source_ids": [
+        "digitalocean-api",
+        "fhir-patient"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "unit_of_measure"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:66a76839d8d844cfa88b929aac3324dbf250794fa003749f108efb9532bd7170",
+      "case_id": "F2-0117",
+      "content_hashes": [
+        "sha256:de724c8ec78b404b1d116b8532a2e5b2363365ed997a3140556a8adac695c26e",
+        "sha256:dfa6f25cb38138400a303972bc585d398fbdd9b3c6281452faf8b5d400783dc2"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does readObservation._description safely satisfy submitOrder.msg_type?",
+      "source_ids": [
+        "fhir-patient",
+        "fix-trading-orders"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "unit_of_measure"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:038b727f7557181aac15d5e39aec1d0a761d878bcd0ac11e31bd439fa3cb49f8",
+      "case_id": "F2-0118",
+      "content_hashes": [
+        "sha256:dfa6f25cb38138400a303972bc585d398fbdd9b3c6281452faf8b5d400783dc2",
+        "sha256:bb0141f41e1bdb8a7c9f165b88b923dd672ac4802243472a1a0b6baaef9ecc0f"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does submitOrder.msg_type safely satisfy billing/update-budget-org.budget_amount?",
+      "source_ids": [
+        "fix-trading-orders",
+        "github-rest"
+      ],
+      "transformation_history": [
+        {
+          "basis": [],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    },
+    {
+      "adjudication_status": "UNADJUDICATED",
+      "card_hash": "sha256:8c7992146d1d0cfd6b05b86c97808bb64f6ac0eaf3c50a5dfa956c1b43dff18b",
+      "case_id": "F2-0119",
+      "content_hashes": [
+        "sha256:dfa6f25cb38138400a303972bc585d398fbdd9b3c6281452faf8b5d400783dc2",
+        "sha256:bb0141f41e1bdb8a7c9f165b88b923dd672ac4802243472a1a0b6baaef9ecc0f"
+      ],
+      "license_status": "mixed-or-unverified",
+      "oracle_class": "ADJUDICATION",
+      "origin": "candidate compatibility edge from independently authored MCP schema captures",
+      "redistribution_status": "hash-only",
+      "retrieval_timestamps": [
+        "unknown",
+        "unknown"
+      ],
+      "schema_version": "0.2-experimental",
+      "semantic_question": "Does submitOrder.currency safely satisfy billing/update-budget-org.budget_amount?",
+      "source_ids": [
+        "fix-trading-orders",
+        "github-rest"
+      ],
+      "transformation_history": [
+        {
+          "basis": [
+            "amount_unit"
+          ],
+          "operation": "compatibility-graph-edge"
+        }
+      ]
+    }
+  ]
+}

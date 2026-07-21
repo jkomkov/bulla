@@ -1,0 +1,719 @@
+{
+  "profile": "bulla.semantic-finality/0.1-experimental",
+  "claim_boundary": "shadow mechanics only; no real custody or collectibility",
+  "steps": [
+    {
+      "step": 1,
+      "event": "dispatch-vs-custody residue",
+      "status": "AMBIGUOUS"
+    },
+    {
+      "step": 2,
+      "event": "carrier evidence offered",
+      "plan_hash": "sha256:88c43d4ebfd8aeee5d6596548a2f10c063df380b14aa1c3b3795eb90a5a66490"
+    },
+    {
+      "step": 3,
+      "event": "reserve locked",
+      "amount_microunits": 1100000
+    },
+    {
+      "step": 4,
+      "event": "payment provisional",
+      "status": "EXECUTE_PROVISIONALLY"
+    },
+    {
+      "step": 5,
+      "event": "carrier custody evidence admitted",
+      "authority": "did:key:z6Mkiq4a4VNRnPSU8UjiQoD5Z6xohYdAYmvUbLEc9r8Lto9f"
+    },
+    {
+      "step": 6,
+      "event": "reserve decreased",
+      "released_microunits": 1000000
+    },
+    {
+      "step": 7,
+      "event": "reserve released",
+      "release_hash": "sha256:dd3c4c346ab14dbbd18c5d38e0406697ff81a2f1cb3a7247afadcd37bfc98d09"
+    },
+    {
+      "step": 8,
+      "event": "action finalized",
+      "status": "FINALIZE"
+    },
+    {
+      "step": 9,
+      "event": "closure and authority revised",
+      "revision_hash": "sha256:b5cbea6298521c6238e81966ade6520e42dbd3f4c695e5cdc3c9368b42105e01"
+    },
+    {
+      "step": 10,
+      "event": "old term checked",
+      "status": "TERM_STALE"
+    },
+    {
+      "step": 11,
+      "event": "two witness views",
+      "distinct_roots": true
+    },
+    {
+      "step": 12,
+      "event": "governance-limited seams",
+      "causes": [
+        "CHOICE_REQUIRED",
+        "CHOICE_REQUIRED"
+      ]
+    }
+  ],
+  "authority_regime": {
+    "schema_version": "0.1-experimental",
+    "operative": {
+      "principal": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+      "policy": "procurement-operative@1",
+      "scopes": [
+        "payment"
+      ],
+      "delegations": []
+    },
+    "refinement": {
+      "principal": "did:key:z6Mkiq4a4VNRnPSU8UjiQoD5Z6xohYdAYmvUbLEc9r8Lto9f",
+      "policy": "procurement-refinement@1",
+      "scopes": [
+        "carrier-evidence"
+      ],
+      "delegations": []
+    },
+    "supersession": {
+      "principal": "did:key:z6MkuP97nu3stMJjuaX5zVhhHDycxWe39dy6pQufGcZWkCqx",
+      "policy": "procurement-supersession@1",
+      "scopes": [
+        "delivery-term"
+      ],
+      "delegations": []
+    },
+    "witness_operators": [
+      "did:key:z6MkrSedzC9nS7uDgAZ2NvfnEVkvE54j75dGanmkpaVofP7E",
+      "did:key:z6MkvQBXhrriXYrFpCxFs3gePwD7k6brbDTpSGSBSQ4qNRZc"
+    ],
+    "forum": "forum://procurement-governance"
+  },
+  "closure_warrant": {
+    "schema_version": "0.1-experimental",
+    "status": "BOUNDED_EXACT",
+    "model_class": {
+      "name": "procurement-delivery-worlds",
+      "version": "1"
+    },
+    "generation_method": {
+      "kind": "exhaustive",
+      "source": "shadow-fixtures/1"
+    },
+    "exclusions": [
+      "carrier fraud outside declared evidence model",
+      "unobserved off-ledger custody"
+    ],
+    "domain_authority": {
+      "principal": "did:example:procurement-board",
+      "policy": "closure@1"
+    },
+    "adversarial_expansion_evidence": [
+      {
+        "kind": "seller-buyer-disagreement",
+        "hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    ],
+    "scope": {
+      "invoice": "INV-17",
+      "shipment": "SHIP-17"
+    }
+  },
+  "consequence_profile": {
+    "schema_version": "0.1-experimental",
+    "action_hash": "sha256:77f034f090bf02031460b8b1897fec9b9f6bf29ec10d1d0a96addb996286c067",
+    "currency": "USD",
+    "target_arguments": [
+      "SHIP-17"
+    ],
+    "consequence_classes": [
+      {
+        "class_id": "SELLER_DISPATCH",
+        "predicate": {
+          "op": "true"
+        },
+        "loss_microunits": 1000000
+      },
+      {
+        "class_id": "BUYER_CUSTODY",
+        "predicate": {
+          "op": "false"
+        },
+        "loss_microunits": 0
+      }
+    ],
+    "mutual_exclusivity": "author-declared; verifier checks represented outcomes",
+    "maximum_credible_loss_microunits": 1000000,
+    "settlement_target": {
+      "kind": "simulated-escrow",
+      "invoice": "INV-17"
+    },
+    "external_verifier": {
+      "id": "shadow-escrow/1",
+      "recompute": "local"
+    }
+  },
+  "initial_reserve": {
+    "action_hash": "sha256:77f034f090bf02031460b8b1897fec9b9f6bf29ec10d1d0a96addb996286c067",
+    "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+    "represented_outcomes": [
+      "BUYER_CUSTODY",
+      "SELLER_DISPATCH"
+    ],
+    "worst_case_loss_microunits": 1000000,
+    "model_risk_buffer_microunits": 100000,
+    "required_reserve_microunits": 1100000,
+    "currency": "USD",
+    "external_lock_reference": "shadow-escrow://INV-17",
+    "collectibility_evidence": [
+      {
+        "kind": "simulated-ledger-entry",
+        "hash": "sha256:cf21003c264231a866c8a1a20cb5392a947f0a309f409aa179e33fe9292fd2af"
+      }
+    ],
+    "expiry": "2026-07-20T00:00:00Z",
+    "closure_warrant_hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+    "operator": "max-declared-loss-plus-explicit-buffer"
+  },
+  "refined_reserve": {
+    "action_hash": "sha256:77f034f090bf02031460b8b1897fec9b9f6bf29ec10d1d0a96addb996286c067",
+    "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+    "represented_outcomes": [
+      "BUYER_CUSTODY"
+    ],
+    "worst_case_loss_microunits": 0,
+    "model_risk_buffer_microunits": 100000,
+    "required_reserve_microunits": 100000,
+    "currency": "USD",
+    "external_lock_reference": null,
+    "collectibility_evidence": [],
+    "expiry": "2026-07-20T00:00:00Z",
+    "closure_warrant_hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+    "operator": "max-declared-loss-plus-explicit-buffer"
+  },
+  "release": {
+    "prior_reserve_hash": "sha256:d4b567a000c91648beadfc45cf816f8668f15b4f775bab9d0cb1ae067fa01ccb",
+    "new_reserve_hash": "sha256:2e281481b02c1f17d6bf976b7ba42374015387ed48999498bc888b3f07ad2bbb",
+    "released_microunits": 1000000,
+    "same_action_epoch": true,
+    "outcome_subset": true,
+    "antitone": true
+  },
+  "provisional_assessment": {
+    "profile": "bulla.semantic-finality/0.1-experimental",
+    "status": "EXECUTE_PROVISIONALLY",
+    "cause": "VERIFIED_AMBIGUITY_RESERVE",
+    "available_alternatives": [
+      {
+        "kind": "provisional",
+        "reserve_microunits": 1100000
+      },
+      {
+        "kind": "evidence",
+        "plan_hash": "sha256:88c43d4ebfd8aeee5d6596548a2f10c063df380b14aa1c3b3795eb90a5a66490"
+      },
+      {
+        "kind": "route",
+        "route": "forum://procurement-governance"
+      }
+    ],
+    "reserve": {
+      "action_hash": "sha256:77f034f090bf02031460b8b1897fec9b9f6bf29ec10d1d0a96addb996286c067",
+      "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+      "represented_outcomes": [
+        "BUYER_CUSTODY",
+        "SELLER_DISPATCH"
+      ],
+      "worst_case_loss_microunits": 1000000,
+      "model_risk_buffer_microunits": 100000,
+      "required_reserve_microunits": 1100000,
+      "currency": "USD",
+      "external_lock_reference": "shadow-escrow://INV-17",
+      "collectibility_evidence": [
+        {
+          "kind": "simulated-ledger-entry",
+          "hash": "sha256:cf21003c264231a866c8a1a20cb5392a947f0a309f409aa179e33fe9292fd2af"
+        }
+      ],
+      "expiry": "2026-07-20T00:00:00Z",
+      "closure_warrant_hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+      "operator": "max-declared-loss-plus-explicit-buffer"
+    },
+    "evidence_plan_hashes": [
+      "sha256:88c43d4ebfd8aeee5d6596548a2f10c063df380b14aa1c3b3795eb90a5a66490"
+    ],
+    "authority_regime_hash": "sha256:4b72112b9655b3966c79742a4a5ca582e886d08826f1f5cdfd51311241acce21",
+    "closure_warrant_hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+    "snapshot_hash": "sha256:74d48fd6b758899aaf05a0fac27a1cf70c58222c0b4b553d966288c2875c2ae3",
+    "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+    "policy_hash": "sha256:e37eb01eb43c20d81fd138bc63d1a2dd953ecea2ca4d1c275f8bc392f42be4ca",
+    "receipt_references": [],
+    "ambiguity_claim": "relative-to-model-class-and-warrant"
+  },
+  "final_assessment": {
+    "profile": "bulla.semantic-finality/0.1-experimental",
+    "status": "FINALIZE",
+    "cause": "CERTIFIED_RELY_AND_SUFFICIENT_CLOSURE",
+    "available_alternatives": [],
+    "reserve": null,
+    "evidence_plan_hashes": [],
+    "authority_regime_hash": "sha256:4b72112b9655b3966c79742a4a5ca582e886d08826f1f5cdfd51311241acce21",
+    "closure_warrant_hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+    "snapshot_hash": "sha256:74d48fd6b758899aaf05a0fac27a1cf70c58222c0b4b553d966288c2875c2ae3",
+    "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+    "policy_hash": "sha256:e37eb01eb43c20d81fd138bc63d1a2dd953ecea2ca4d1c275f8bc392f42be4ca",
+    "receipt_references": [
+      "sha256:dd3c4c346ab14dbbd18c5d38e0406697ff81a2f1cb3a7247afadcd37bfc98d09"
+    ],
+    "ambiguity_claim": "relative-to-model-class-and-warrant"
+  },
+  "stale_assessment": {
+    "profile": "bulla.semantic-finality/0.1-experimental",
+    "status": "TERM_STALE",
+    "cause": "EPOCH_OR_CLOSURE_MISMATCH",
+    "available_alternatives": [],
+    "reserve": null,
+    "evidence_plan_hashes": [],
+    "authority_regime_hash": "sha256:4b72112b9655b3966c79742a4a5ca582e886d08826f1f5cdfd51311241acce21",
+    "closure_warrant_hash": "sha256:c052a6ac60328583ef10855b681cc833696052f0af2a38640b7aecde2358306b",
+    "snapshot_hash": "sha256:74d48fd6b758899aaf05a0fac27a1cf70c58222c0b4b553d966288c2875c2ae3",
+    "semantic_epoch": "sha256:b3aefa189135f10c271d8bd0184a574b943f9b1778c63b1fe143b0c71b413b17",
+    "policy_hash": "sha256:e37eb01eb43c20d81fd138bc63d1a2dd953ecea2ca4d1c275f8bc392f42be4ca",
+    "receipt_references": [],
+    "ambiguity_claim": "relative-to-model-class-and-warrant"
+  },
+  "revision": {
+    "supersession": {
+      "snapshot_hash": "sha256:74d48fd6b758899aaf05a0fac27a1cf70c58222c0b4b553d966288c2875c2ae3",
+      "prior_authority_epoch": "sha256:280f814b3afc3a04c80f53caa5c658ea3a72ea37a70087bae6de328f354cf784",
+      "new_authority_epoch": "sha256:3899343f224f65fe593df44a75260cdf139755d3f0485515fb4a1f20e733771c",
+      "prior_closure_warrant_hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+      "new_closure_warrant_hash": "sha256:c052a6ac60328583ef10855b681cc833696052f0af2a38640b7aecde2358306b",
+      "prior_semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+      "new_semantic_epoch": "sha256:b3aefa189135f10c271d8bd0184a574b943f9b1778c63b1fe143b0c71b413b17",
+      "reason": "closure model expanded after carrier challenge",
+      "scope": "delivery-term"
+    },
+    "authorization_receipt_hash": "sha256:5c4cd1addce02c01eb4ba2b3cf7642eedea405d454e13bbd3fa85a5ca0cea6e5",
+    "supersession_receipt_hash": "sha256:5b69e17e02efc116b516582a35e73fd68e61fcfa71aa622a8245d943bbbc451c",
+    "witness_checkpoint_hashes": [
+      "sha256:7aa9da756c1d0be4b84f2b63bdbeba6ece59809a4fa0807d5b54cb2c776dce38",
+      "sha256:cbe5c990d5a60501cdbb83a45506977da4996af32cca4d19ac276239aa7c37e5"
+    ]
+  },
+  "witness_views": [
+    {
+      "operator": "did:key:z6MkrSedzC9nS7uDgAZ2NvfnEVkvE54j75dGanmkpaVofP7E",
+      "checkpoint": {
+        "schema_version": "0.1-draft",
+        "profile": "bulla.witness-checkpoint/0.1-draft",
+        "log_id": "log://semantic-settlement/witness-1",
+        "operator": "did:key:z6MkrSedzC9nS7uDgAZ2NvfnEVkvE54j75dGanmkpaVofP7E",
+        "tree_size": 1,
+        "root": "sha256:9dc43fdee467fcd8eb00de95b7bbc7d50f9ff3d00c2bb2a2b73e84e19f0c5600",
+        "previous_checkpoint_hash": null,
+        "ordering_domain": "sha256:a572761f4fc0bcb6fc2130966f1d5e0530a9fefa893eff8b36475f8156c69c2d",
+        "position": 1,
+        "issued_at": "2026-07-18T00:00:00Z",
+        "anchor_evidence": null,
+        "checkpoint_hash": "sha256:7aa9da756c1d0be4b84f2b63bdbeba6ece59809a4fa0807d5b54cb2c776dce38",
+        "proof": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "witness-checkpoint",
+          "issuer": "did:key:z6MkrSedzC9nS7uDgAZ2NvfnEVkvE54j75dGanmkpaVofP7E",
+          "verificationMethod": "did:key:z6MkrSedzC9nS7uDgAZ2NvfnEVkvE54j75dGanmkpaVofP7E",
+          "proofValue": "fFL6dBmK+C8rVN/TGRnzZONtlPzhQifvSBLvyAp8/6JuwF3SMeuCSHWA9DjSoP4/l/b9Zb/MM5587PLcWeqRCQ=="
+        }
+      },
+      "inclusion": {
+        "index": 0,
+        "tree_size": 1,
+        "leaf": "sha256:9dc43fdee467fcd8eb00de95b7bbc7d50f9ff3d00c2bb2a2b73e84e19f0c5600",
+        "proof": [],
+        "root": "sha256:9dc43fdee467fcd8eb00de95b7bbc7d50f9ff3d00c2bb2a2b73e84e19f0c5600"
+      }
+    },
+    {
+      "operator": "did:key:z6MkvQBXhrriXYrFpCxFs3gePwD7k6brbDTpSGSBSQ4qNRZc",
+      "checkpoint": {
+        "schema_version": "0.1-draft",
+        "profile": "bulla.witness-checkpoint/0.1-draft",
+        "log_id": "log://semantic-settlement/witness-2",
+        "operator": "did:key:z6MkvQBXhrriXYrFpCxFs3gePwD7k6brbDTpSGSBSQ4qNRZc",
+        "tree_size": 1,
+        "root": "sha256:10cd9486e221658468c49e0a60cc73899e7f6ee95f1c31e831b6962755c73c48",
+        "previous_checkpoint_hash": null,
+        "ordering_domain": "sha256:8312b945f141e678e1fdaed798442641a032ba2bb8646bea4828cf73aece3628",
+        "position": 1,
+        "issued_at": "2026-07-18T00:00:00Z",
+        "anchor_evidence": null,
+        "checkpoint_hash": "sha256:cbe5c990d5a60501cdbb83a45506977da4996af32cca4d19ac276239aa7c37e5",
+        "proof": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "witness-checkpoint",
+          "issuer": "did:key:z6MkvQBXhrriXYrFpCxFs3gePwD7k6brbDTpSGSBSQ4qNRZc",
+          "verificationMethod": "did:key:z6MkvQBXhrriXYrFpCxFs3gePwD7k6brbDTpSGSBSQ4qNRZc",
+          "proofValue": "x395Lv6PqAfb+rjAlnooSos7+m+5n2g6oLI2/02p7Jqqei/Uy836P8TYQAmnT/8OcnN3AWIo4LhIgwQrxhn0CA=="
+        }
+      },
+      "inclusion": {
+        "index": 0,
+        "tree_size": 1,
+        "leaf": "sha256:10cd9486e221658468c49e0a60cc73899e7f6ee95f1c31e831b6962755c73c48",
+        "proof": [],
+        "root": "sha256:10cd9486e221658468c49e0a60cc73899e7f6ee95f1c31e831b6962755c73c48"
+      }
+    }
+  ],
+  "receipts": {
+    "bulla.finality.assess": {
+      "schema_version": "0.3",
+      "kind": "action_receipt",
+      "action": {
+        "type": "bulla.finality.assess",
+        "subject": {
+          "profile": "bulla.semantic-finality/0.1-experimental",
+          "assessment_hash": "sha256:4359ed53cd19cbac9bf3a476930f61c9b5c27fdcd0fb9fc4c1539e11122f7c52",
+          "status": "EXECUTE_PROVISIONALLY",
+          "cause": "VERIFIED_AMBIGUITY_RESERVE",
+          "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4"
+        }
+      },
+      "diagnostic_ref": {
+        "status": "reference",
+        "ref": "sha256:4359ed53cd19cbac9bf3a476930f61c9b5c27fdcd0fb9fc4c1539e11122f7c52"
+      },
+      "evidence_refs": [
+        {
+          "name": "closure_warrant",
+          "hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+          "grounding": "execution_verified"
+        },
+        {
+          "name": "snapshot",
+          "hash": "sha256:74d48fd6b758899aaf05a0fac27a1cf70c58222c0b4b553d966288c2875c2ae3",
+          "grounding": "execution_verified"
+        }
+      ],
+      "anchor_ref": {},
+      "mandate": {
+        "authority": {
+          "principal": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+          "policy": "procurement-operative@1",
+          "delegation": []
+        },
+        "bounds": {
+          "scope": "payment"
+        }
+      },
+      "remedy": {},
+      "retention": {
+        "record": "authority-permanent",
+        "disclosure": "auditor"
+      },
+      "stake": null,
+      "conventions": [],
+      "signature": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "content",
+        "issuer": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "verificationMethod": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "proofValue": "00/5giR5ynHVA2WmZGxbITpozsxPPjyalufC6yU/Wxc37KuxWDa1D7tj1cpzkiClgB8tgQsfyVfmUkLS6YPADQ=="
+      },
+      "authorization": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "authorization",
+        "issuer": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "verificationMethod": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "proofValue": "WrSLELCHJ6rhTl57xvphK9tZ2EjSHnC8U7C3XWG7P5szmUXxqpNmOrK7eLOJVdJG8Tl7GeYKxcXgvI+10U4HDA=="
+      },
+      "timestamp": "2026-07-18T00:00:00Z",
+      "producer": {
+        "profile": "procurement-shadow/1"
+      },
+      "hashes": {
+        "content": "sha256:f9df8e6b2f99477a020c3fd4499760276ebf55417020d74f10819ce5b24e130f",
+        "event": "sha256:fd9527974d84c66ebd9b281274cc444e37a645241280c87d6926e12efbf494ef",
+        "attestation": "sha256:ceb854048ff42123d6c04ae0322242a6dea678170f904ae7e2e52a9b86083dcd",
+        "log_leaf": "sha256:c0c0ebbfc48d3de1b4f2b919e75b9b422152df465debfa653bc8de3d97bc299a"
+      }
+    },
+    "bulla.finality.reserve": {
+      "schema_version": "0.3",
+      "kind": "action_receipt",
+      "action": {
+        "type": "bulla.finality.reserve",
+        "subject": {
+          "profile": "bulla.semantic-finality/0.1-experimental",
+          "assessment_hash": "sha256:4359ed53cd19cbac9bf3a476930f61c9b5c27fdcd0fb9fc4c1539e11122f7c52",
+          "status": "EXECUTE_PROVISIONALLY",
+          "cause": "VERIFIED_AMBIGUITY_RESERVE",
+          "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+          "reserve_hash": "sha256:d4b567a000c91648beadfc45cf816f8668f15b4f775bab9d0cb1ae067fa01ccb"
+        }
+      },
+      "diagnostic_ref": {
+        "status": "reference",
+        "ref": "sha256:4359ed53cd19cbac9bf3a476930f61c9b5c27fdcd0fb9fc4c1539e11122f7c52"
+      },
+      "evidence_refs": [
+        {
+          "name": "closure_warrant",
+          "hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+          "grounding": "execution_verified"
+        },
+        {
+          "name": "snapshot",
+          "hash": "sha256:74d48fd6b758899aaf05a0fac27a1cf70c58222c0b4b553d966288c2875c2ae3",
+          "grounding": "execution_verified"
+        }
+      ],
+      "anchor_ref": {},
+      "mandate": {
+        "authority": {
+          "principal": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+          "policy": "procurement-operative@1",
+          "delegation": []
+        },
+        "bounds": {
+          "scope": "payment"
+        }
+      },
+      "remedy": {},
+      "retention": {
+        "record": "authority-permanent",
+        "disclosure": "auditor"
+      },
+      "stake": null,
+      "conventions": [],
+      "signature": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "content",
+        "issuer": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "verificationMethod": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "proofValue": "5OhvHiHBe/OIN/S2ue8A7/dx6oNjYefBkU70FZfsYl0TaQ2Q5nTcLkrohZqi/jYEuYDAvf9mVwabnIh51bpVBQ=="
+      },
+      "authorization": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "authorization",
+        "issuer": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "verificationMethod": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "proofValue": "v2IiF+SQd6cleLuEcI9Amxdr4+r397/xQXCoJ91d0plGxLdsjjudetuw92cWRajoWwr4m+ktRFMfeCDrAjVlAA=="
+      },
+      "timestamp": "2026-07-18T00:00:00Z",
+      "producer": {
+        "profile": "procurement-shadow/1"
+      },
+      "hashes": {
+        "content": "sha256:1c3f334a311a47bce19f2e31a7e82585c6ecabf245713a301888db94128fc146",
+        "event": "sha256:8545eb9cc49035cc561e54ff700826f1498c82aef6b1a4e692c05f1cb2990fc0",
+        "attestation": "sha256:d511e7e0761df91256b998588e550eadbd48ebeebe26e473ad1ab18823e7f6b9",
+        "log_leaf": "sha256:208a4cff1ebb2837f8f983680c1518e786af2bb51364f6a5fa7ba8229a11b780"
+      }
+    },
+    "bulla.finality.release": {
+      "schema_version": "0.3",
+      "kind": "action_receipt",
+      "action": {
+        "type": "bulla.finality.release",
+        "subject": {
+          "profile": "bulla.semantic-finality/0.1-experimental",
+          "assessment_hash": "sha256:f7918c8887b73fd1d8b5dc3924bb519240633e1c3499859a455618d215d2240a",
+          "status": "FINALIZE",
+          "cause": "CERTIFIED_RELY_AND_SUFFICIENT_CLOSURE",
+          "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+          "release_hash": "sha256:dd3c4c346ab14dbbd18c5d38e0406697ff81a2f1cb3a7247afadcd37bfc98d09"
+        }
+      },
+      "diagnostic_ref": {
+        "status": "reference",
+        "ref": "sha256:f7918c8887b73fd1d8b5dc3924bb519240633e1c3499859a455618d215d2240a"
+      },
+      "evidence_refs": [
+        {
+          "name": "closure_warrant",
+          "hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+          "grounding": "execution_verified"
+        },
+        {
+          "name": "snapshot",
+          "hash": "sha256:74d48fd6b758899aaf05a0fac27a1cf70c58222c0b4b553d966288c2875c2ae3",
+          "grounding": "execution_verified"
+        }
+      ],
+      "anchor_ref": {},
+      "mandate": {
+        "authority": {
+          "principal": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+          "policy": "procurement-operative@1",
+          "delegation": []
+        },
+        "bounds": {
+          "scope": "payment"
+        }
+      },
+      "remedy": {},
+      "retention": {
+        "record": "authority-permanent",
+        "disclosure": "auditor"
+      },
+      "stake": null,
+      "conventions": [],
+      "signature": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "content",
+        "issuer": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "verificationMethod": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "proofValue": "qyvezT+i2FuENDb6yzed3DPhjwOPVIgI+JqVoTXqbhsaztAc8JuNyNeSLIGZTQh9lV/YxWMdk94h1cnYto1fCA=="
+      },
+      "authorization": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "authorization",
+        "issuer": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "verificationMethod": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "proofValue": "ESI3gHRObtcsf/etFfY+DWhbhf/3iut0VXlm7M1rBq+Sj5DAk9cnCudaNXtQoQEyLlGcrIO6JPnbIeAxe22NAg=="
+      },
+      "timestamp": "2026-07-18T00:00:00Z",
+      "producer": {
+        "profile": "procurement-shadow/1"
+      },
+      "hashes": {
+        "content": "sha256:8c131991f9c742634ef5610d2c05a1ddfa67a0b76f27fd1fe2536a8922a2b673",
+        "event": "sha256:26ecba81f1befb5c92a855c2b88f07492f7a1574707c9ac577d54a814ac016f3",
+        "attestation": "sha256:979015635125ec58d7d88aa11e1480049baff4f2ff5c57f465c2764bb69a43ab",
+        "log_leaf": "sha256:e248b92c27e866bd99bdde444bd334c7c5943bab3f0bcef21287c5270f3da2f5"
+      }
+    },
+    "bulla.finality.finalize": {
+      "schema_version": "0.3",
+      "kind": "action_receipt",
+      "action": {
+        "type": "bulla.finality.finalize",
+        "subject": {
+          "profile": "bulla.semantic-finality/0.1-experimental",
+          "assessment_hash": "sha256:f7918c8887b73fd1d8b5dc3924bb519240633e1c3499859a455618d215d2240a",
+          "status": "FINALIZE",
+          "cause": "CERTIFIED_RELY_AND_SUFFICIENT_CLOSURE",
+          "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4"
+        }
+      },
+      "diagnostic_ref": {
+        "status": "reference",
+        "ref": "sha256:f7918c8887b73fd1d8b5dc3924bb519240633e1c3499859a455618d215d2240a"
+      },
+      "evidence_refs": [
+        {
+          "name": "closure_warrant",
+          "hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+          "grounding": "execution_verified"
+        },
+        {
+          "name": "snapshot",
+          "hash": "sha256:74d48fd6b758899aaf05a0fac27a1cf70c58222c0b4b553d966288c2875c2ae3",
+          "grounding": "execution_verified"
+        }
+      ],
+      "anchor_ref": {},
+      "mandate": {
+        "authority": {
+          "principal": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+          "policy": "procurement-operative@1",
+          "delegation": []
+        },
+        "bounds": {
+          "scope": "payment"
+        }
+      },
+      "remedy": {},
+      "retention": {
+        "record": "authority-permanent",
+        "disclosure": "auditor"
+      },
+      "stake": null,
+      "conventions": [],
+      "signature": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "content",
+        "issuer": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "verificationMethod": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "proofValue": "YU2+1mf3BVwpdFIX9xlh1ckQqS3kNnXRzoDodjfd1NYUdgSEGASkFmfSv+iOnn5S/kyj56BfVmLHC7d9E9vmCg=="
+      },
+      "authorization": {
+        "type": "bulla/ed25519-2026",
+        "purpose": "authorization",
+        "issuer": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "verificationMethod": "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+        "proofValue": "uf+MzndoEk0x/B+gii2ZztAoO8yMFJIZfbTuKKlrkC3hh4PIQcTjql6/vNDo3PH/J89pBCvCCcdGbs6qiqLcAg=="
+      },
+      "timestamp": "2026-07-18T00:00:00Z",
+      "producer": {
+        "profile": "procurement-shadow/1"
+      },
+      "hashes": {
+        "content": "sha256:d182678ec0be21912da165ba925e406275b627824809a97cbcf75b9eaa3719da",
+        "event": "sha256:4a8ab49f101dff34c05c3e3273fb9b19b22ae5d0af8d72a6c9cd11f2427a319e",
+        "attestation": "sha256:3769179ce222d6710d463bb44d0a8e478fd607d77b40b3da4cf496e4a3becc7e",
+        "log_leaf": "sha256:11cb0064633f2f74d699c9a17c8b5e9dea126d639270315c414dd99f34d1c978"
+      }
+    }
+  },
+  "governance_assessments": [
+    {
+      "profile": "bulla.semantic-finality/0.1-experimental",
+      "status": "ROUTE",
+      "cause": "CHOICE_REQUIRED",
+      "available_alternatives": [
+        {
+          "kind": "route",
+          "route": "forum://buyer-standard"
+        },
+        {
+          "kind": "route",
+          "route": "forum://seller-standard"
+        }
+      ],
+      "reserve": null,
+      "evidence_plan_hashes": [],
+      "authority_regime_hash": "sha256:4b72112b9655b3966c79742a4a5ca582e886d08826f1f5cdfd51311241acce21",
+      "closure_warrant_hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+      "snapshot_hash": "sha256:74d48fd6b758899aaf05a0fac27a1cf70c58222c0b4b553d966288c2875c2ae3",
+      "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+      "policy_hash": "sha256:e37eb01eb43c20d81fd138bc63d1a2dd953ecea2ca4d1c275f8bc392f42be4ca",
+      "receipt_references": [],
+      "ambiguity_claim": "relative-to-model-class-and-warrant"
+    },
+    {
+      "profile": "bulla.semantic-finality/0.1-experimental",
+      "status": "ROUTE",
+      "cause": "CHOICE_REQUIRED",
+      "available_alternatives": [
+        {
+          "kind": "route",
+          "route": "forum://buyer-standard"
+        },
+        {
+          "kind": "route",
+          "route": "forum://seller-standard"
+        }
+      ],
+      "reserve": null,
+      "evidence_plan_hashes": [],
+      "authority_regime_hash": "sha256:4b72112b9655b3966c79742a4a5ca582e886d08826f1f5cdfd51311241acce21",
+      "closure_warrant_hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+      "snapshot_hash": "sha256:74d48fd6b758899aaf05a0fac27a1cf70c58222c0b4b553d966288c2875c2ae3",
+      "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+      "policy_hash": "sha256:e37eb01eb43c20d81fd138bc63d1a2dd953ecea2ca4d1c275f8bc392f42be4ca",
+      "receipt_references": [],
+      "ambiguity_claim": "relative-to-model-class-and-warrant"
+    }
+  ]
+}

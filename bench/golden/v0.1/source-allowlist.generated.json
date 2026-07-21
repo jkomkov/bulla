@@ -1,0 +1,250 @@
+{
+  "schema_version": "0.1",
+  "sources": [
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "github-rest",
+      "upstream_owner": "github-org:github",
+      "url": "https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "stripe-openapi",
+      "upstream_owner": "github-org:stripe",
+      "url": "https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.json"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "slack-web-official",
+      "upstream_owner": "github-org:slackapi",
+      "url": "https://raw.githubusercontent.com/slackapi/slack-api-specs/master/web-api/slack_web_openapi_v2.json"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "twilio-2010",
+      "upstream_owner": "github-org:twilio",
+      "url": "https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_api_v2010.json"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "discord-api",
+      "upstream_owner": "github-org:discord",
+      "url": "https://raw.githubusercontent.com/discord/discord-api-spec/main/specs/openapi.json"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "spotify-web",
+      "upstream_owner": "github-org:sonallux",
+      "url": "https://raw.githubusercontent.com/sonallux/spotify-web-api/main/fixed-spotify-open-api.yml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "box-api",
+      "upstream_owner": "github-org:box",
+      "url": "https://raw.githubusercontent.com/box/box-openapi/main/openapi.json"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "intercom-2-13",
+      "upstream_owner": "github-org:intercom",
+      "url": "https://raw.githubusercontent.com/intercom/Intercom-OpenAPI/main/descriptions/2.13/api.intercom.io.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "zoom-v2",
+      "upstream_owner": "github-org:zoom",
+      "url": "https://raw.githubusercontent.com/zoom/api/master/openapi.v2.json"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "plaid-api",
+      "upstream_owner": "github-org:plaid",
+      "url": "https://raw.githubusercontent.com/plaid/plaid-openapi/master/2020-09-14.yml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "asana-api",
+      "upstream_owner": "github-org:asana",
+      "url": "https://raw.githubusercontent.com/asana/openapi/master/defs/asana_oas.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "weather-gov",
+      "upstream_owner": "NOAA",
+      "url": "https://api.weather.gov/openapi.json"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "openai-platform",
+      "upstream_owner": "api-provider:openai.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/openai.com/1.2.0/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "notion-api",
+      "upstream_owner": "api-provider:notion.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/notion.com/1.0.0/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "square-connect",
+      "upstream_owner": "api-provider:squareup.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/squareup.com/2.0/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "sendgrid-api",
+      "upstream_owner": "api-provider:sendgrid.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/sendgrid.com/1.0.0/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "plaid-apis-guru",
+      "upstream_owner": "api-provider:plaid.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/plaid.com/2020-09-14_1.345.1/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "twilio-apis-guru",
+      "upstream_owner": "api-provider:twilio.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/twilio.com/api/1.55.0/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "spotify-apis-guru",
+      "upstream_owner": "api-provider:spotify.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/spotify.com/1.0.0/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "stripe-apis-guru",
+      "upstream_owner": "api-provider:stripe.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/stripe.com/2022-11-15/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "zoom-apis-guru",
+      "upstream_owner": "api-provider:zoom.us",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/zoom.us/2.0.0/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "slack-apis-guru",
+      "upstream_owner": "api-provider:slack.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/slack.com/1.7.0/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "fhir-r4-resource-types",
+      "upstream_owner": "HL7",
+      "url": "https://hl7.org/fhir/R4/valueset-resource-types.json"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "fhir-r5-resource-types",
+      "upstream_owner": "HL7",
+      "url": "https://hl7.org/fhir/R5/valueset-resource-types.json"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "digitalocean-api",
+      "upstream_owner": "api-provider:digitalocean.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/digitalocean.com/2.0/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "linode-api",
+      "upstream_owner": "api-provider:linode.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/linode.com/4.151.1/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "atlassian-jira",
+      "upstream_owner": "api-provider:atlassian.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/atlassian.com/jira/1001.0.0-SNAPSHOT/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "circleci-v1",
+      "upstream_owner": "api-provider:circleci.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/circleci.com/v1/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "wikimedia-api",
+      "upstream_owner": "api-provider:wikimedia.org",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/wikimedia.org/1.0.0/swagger.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "mailchimp-3",
+      "upstream_owner": "api-provider:mailchimp.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/mailchimp.com/3.0.55/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "google-calendar",
+      "upstream_owner": "api-provider:googleapis.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/calendar/v3/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "google-gmail",
+      "upstream_owner": "api-provider:googleapis.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/gmail/v1/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "google-drive",
+      "upstream_owner": "api-provider:googleapis.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/drive/v3/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "google-sheets",
+      "upstream_owner": "api-provider:googleapis.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/sheets/v4/openapi.yaml"
+    },
+    {
+      "parser_hint": "openapi",
+      "redistribution_status": "hash-only",
+      "source_id": "google-youtube",
+      "upstream_owner": "api-provider:googleapis.com",
+      "url": "https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/youtube/v3/openapi.yaml"
+    }
+  ]
+}

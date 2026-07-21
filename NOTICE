@@ -1,4 +1,4 @@
-Bulla — a witness kernel for agentic compositions.
+Bulla — portable, recomputable receipts for consequential agent actions.
 
 Copyright 2025 John Komkov
 
@@ -16,9 +16,8 @@ limitations under the License.
 
 ---
 
-"Glyph" is the open coherence-receipt standard (the composition rule, the
-recomputable receipt format, and the convention registry). "bulla" (this
-repository) is its Apache-2.0 reference implementation.
+"Glyph" is the open ActionReceipt format and verification contract. "bulla"
+(this repository) is its Apache-2.0 Python reference implementation.
 
 Convention packs under src/bulla/packs/ carry metadata authored for this
 project (openly licensed as above). Where a pack points at an external

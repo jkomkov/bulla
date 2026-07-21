@@ -1,30 +1,15 @@
-# Trusted Publishing to PyPI — no token, ever.
+# Trusted Publishing to PyPI — no long-lived package token.
 #
-# This workflow lives under bulla/.github/ in the res-agentica monorepo (inert
-# there — GitHub Actions only runs a repo's ROOT .github/workflows/) and
-# activates on the public mirror github.com/jkomkov/bulla, where bulla/ is the
-# repo root. That placement is deliberate: the public repo is the standard's
-# home, so the published wheel's provenance points at a public tag that exists,
-# and mirror-currency becomes structural (a stale mirror can't cut a release)
-# rather than remembered.
+# This workflow is inert in the res-agentica monorepo and active in the public
+# github.com/jkomkov/bulla mirror, where this directory becomes the repo root.
+# PyPI Trusted Publishing must name owner=jkomkov, repo=bulla,
+# workflow=publish.yml, environment=pypi.
 #
-# It uses PyPI Trusted Publishing (OIDC, PEP 740 attestations): no API token is
-# stored anywhere. ACTIVATION (one-time, user-side on pypi.org):
-#   pypi.org -> the `bulla` project -> Manage -> Publishing -> Add a new
-#   publisher:  owner=jkomkov, repo=bulla, workflow=publish.yml,
-#   environment=pypi. Then push a `v*` tag to the mirror to release.
-#
-# RELEASE RECEIPT (0.43.0, closing the retroactive seam): the `release` job
-# runs the full suite on the exact tagged commit, then mints the
-# package.release ActionReceipt from the very dist/ that ships — signed when
-# the `BULLA_RELEASE_KEY` secret holds an ed25519 keyfile JSON (`bulla key
-# gen`), OTS-anchored best-effort — and uploads receipt + witness sidecar +
-# .ots proof as the `release-receipt` artifact. Without the secret the mint
-# is UNSIGNED and says so in producer; configuring the secret is the
-# activation step, mirroring the Trusted Publishing note above.
-#
-# Any token pasted into a chat/transcript is exposed and should be REVOKED —
-# this workflow makes the manual-token path obsolete.
+# The 0.44 discipline is publish -> verify accepted artifacts and PEP 740
+# provenance -> mint a signed ActionReceipt -> attach it durably. An unsigned or
+# pre-publication artifact is never called a contemporaneous release receipt.
+# If any post-publication step fails, rerun finalize-release.yml. Never retry
+# the immutable PyPI upload or use twine/package credentials as a workaround.
 
 name: publish
 
@@ -40,7 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
-      id-token: write   # OIDC for Trusted Publishing + build provenance attestations
+      id-token: write
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -48,22 +34,20 @@ jobs:
         with:
           python-version: "3.11"
 
-      # No green, no ship: the FULL suite on the exact tagged commit, before
-      # a wheel can be published under this tag.
       - name: Run full test suite on the tagged commit
         run: |
           python -m pip install --upgrade pip
           pip install -e .[identity,ots] pytest pytest-timeout
           python -m pytest tests/ -q --timeout=600 | tee pytest-summary.txt
 
-      - name: Build sdist + wheel
+      - name: Build sdist and wheel
         run: |
           python -m pip install --upgrade build
           python -m build
 
-      # Fail closed if the tag doesn't match the built version (e.g. a v0.40.1
-      # tag on a tree that still says 0.40.0) — a released wheel whose version
-      # disagrees with its tag is exactly the provenance defect this file fixes.
+      - name: Verify source, wheel, and sdist runtime parity
+        run: python scripts/verify_release_archive_parity.py --root . --dist dist
+
       - name: Verify tag matches package version
         run: |
           TAG="${GITHUB_REF_NAME#v}"
@@ -71,31 +55,45 @@ jobs:
           echo "tag=$TAG package=$PKG"
           test "$TAG" = "$PKG"
 
-      # Mint the release receipt AT release time, from the dist/ that ships.
-      # Signed iff BULLA_RELEASE_KEY is configured; the unsigned fallback is
-      # stated in the receipt's producer, never hidden.
-      - name: Mint release receipt (signed when key configured, OTS best-effort)
+      - name: Publish to PyPI with Trusted Publishing attestations
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          attestations: true
+
+      - name: Verify PyPI accepted the exact artifacts and publisher identity
+        run: |
+          python -m pip install --upgrade pypi-attestations
+          python scripts/verify_pypi_release.py \
+            --version "${GITHUB_REF_NAME#v}" \
+            --dist dist \
+            --repository jkomkov/bulla
+
+      - name: Mint signed post-publication release receipt
         env:
           BULLA_RELEASE_KEY: ${{ secrets.BULLA_RELEASE_KEY }}
         run: |
           TESTS=$(tail -1 pytest-summary.txt)
           mkdir -p release-receipt
-          if [ -n "$BULLA_RELEASE_KEY" ]; then
-            python scripts/mint_release_receipt.py --dist dist --out "release-receipt/${GITHUB_REF_NAME#v}.json" --ots --test-result "$TESTS"
-          else
-            echo "::warning::BULLA_RELEASE_KEY not configured — minting UNSIGNED release receipt (stated in producer)"
-            python scripts/mint_release_receipt.py --dist dist --out "release-receipt/${GITHUB_REF_NAME#v}.json" --ots --test-result "$TESTS" --allow-unsigned
-          fi
+          test -n "$BULLA_RELEASE_KEY" || { echo "BULLA_RELEASE_KEY is required" >&2; exit 1; }
+          python scripts/mint_release_receipt.py \
+            --dist dist \
+            --out "release-receipt/${GITHUB_REF_NAME#v}.json" \
+            --ots \
+            --test-result "$TESTS" \
+            --repository jkomkov/bulla
           python -m bulla receipt verify "release-receipt/${GITHUB_REF_NAME#v}.json"
 
-      - name: Upload release receipt artifact
+      - name: Attach receipt to durable GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || \
+            gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes
+          gh release upload "$GITHUB_REF_NAME" release-receipt/* --clobber
+
+      - name: Upload receipt to the workflow record
         uses: actions/upload-artifact@v4
         with:
           name: release-receipt
           path: release-receipt/
           if-no-files-found: error
-
-      - name: Publish to PyPI (Trusted Publishing + attestations)
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          attestations: true

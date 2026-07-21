@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-07-17",
+  "source": "routed-inference-vectors/*.json",
+  "trace_count": 14,
+  "receipt_sample_count": 69,
+  "compact_bytes": {
+    "min": 2397,
+    "median": 2696,
+    "p95_nearest_rank": 2898,
+    "max": 2898
+  },
+  "pretty_printed_bytes": {
+    "min": 2853,
+    "median": 3229,
+    "p95_nearest_rank": 3534,
+    "max": 3534
+  },
+  "claim_boundary": "Fixture measurement only; not a protocol size guarantee."
+}

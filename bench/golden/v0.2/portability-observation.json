@@ -1,0 +1,124 @@
+{
+  "blocked_count": 13,
+  "cells": [
+    {
+      "architecture": "x86_64",
+      "backend": "reference",
+      "os": "ubuntu",
+      "python": "3.10",
+      "status": "BLOCKED_NOT_OBSERVED"
+    },
+    {
+      "architecture": "x86_64",
+      "backend": "reference",
+      "os": "ubuntu",
+      "python": "3.12",
+      "status": "BLOCKED_NOT_OBSERVED"
+    },
+    {
+      "architecture": "x86_64",
+      "backend": "reference",
+      "os": "ubuntu",
+      "python": "3.13",
+      "status": "BLOCKED_NOT_OBSERVED"
+    },
+    {
+      "architecture": "x86_64",
+      "backend": "smtinterpol",
+      "java": "17",
+      "os": "ubuntu",
+      "python": "3.12",
+      "status": "BLOCKED_NOT_OBSERVED"
+    },
+    {
+      "architecture": "arm64",
+      "backend": "reference",
+      "os": "macos",
+      "python": "3.10",
+      "status": "BLOCKED_NOT_OBSERVED"
+    },
+    {
+      "architecture": "arm64",
+      "backend": "reference",
+      "observation_hash": "sha256:3246423584a3d77ac8aedf4137b56ff4af0fbd36af2d1d7a2497c5a9d343fa26",
+      "os": "macos",
+      "python": "3.12",
+      "status": "OBSERVED_LOCAL"
+    },
+    {
+      "architecture": "arm64",
+      "backend": "reference",
+      "os": "macos",
+      "python": "3.13",
+      "status": "BLOCKED_NOT_OBSERVED"
+    },
+    {
+      "architecture": "arm64",
+      "backend": "smtinterpol",
+      "java": "17",
+      "os": "macos",
+      "python": "3.12",
+      "status": "BLOCKED_NOT_OBSERVED"
+    },
+    {
+      "architecture": "x86_64",
+      "backend": "reference",
+      "os": "windows",
+      "python": "3.10",
+      "status": "BLOCKED_NOT_OBSERVED"
+    },
+    {
+      "architecture": "x86_64",
+      "backend": "reference",
+      "os": "windows",
+      "python": "3.12",
+      "status": "BLOCKED_NOT_OBSERVED"
+    },
+    {
+      "architecture": "x86_64",
+      "backend": "reference",
+      "os": "windows",
+      "python": "3.13",
+      "status": "BLOCKED_NOT_OBSERVED"
+    },
+    {
+      "architecture": "x86_64",
+      "backend": "smtinterpol",
+      "java": "17",
+      "os": "windows",
+      "python": "3.12",
+      "status": "BLOCKED_NOT_OBSERVED"
+    },
+    {
+      "architecture": "multi-platform",
+      "backend": "oci",
+      "base_manifest_digest": "sha256:57cd7c3a7a273101a6485ba99423ee568157882804b1124b4dd04266317710de",
+      "os": "linux",
+      "status": "BLOCKED_DOCKER_DAEMON_UNAVAILABLE_LOCAL_RUN_PENDING"
+    },
+    {
+      "architecture": "arm64",
+      "backend": "reference",
+      "native": true,
+      "os": "linux",
+      "status": "BLOCKED_NATIVE_RUNNER_UNAVAILABLE"
+    },
+    {
+      "backend": "lean",
+      "observation_hash": "sha256:05ba41d2bcd5711632cae7376819841a7a4e8838ee909fa265f3a60bdc17a534",
+      "status": "OBSERVED_LOCAL",
+      "toolchain": "leanprover/lean4:v4.28.0"
+    }
+  ],
+  "claim_boundary": "Only archived executions are observations; workflow configuration is not evidence.",
+  "local_environment": {
+    "architecture": "arm64",
+    "locale": "not-forced",
+    "os": "macOS-15.7.3-arm64-arm-64bit",
+    "python": "3.12.9",
+    "timezone": "not-forced"
+  },
+  "observed_count": 2,
+  "schema_version": "0.2-portability-observation",
+  "signed": false
+}

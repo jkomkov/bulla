@@ -1,0 +1,26 @@
+{
+  "evidence_status": "INTERNALLY_VERIFIED_CAPTIVE",
+  "external_replay_status": "BLOCKED_MISSING_EXTERNAL_PARTICIPANTS",
+  "family_counts": {
+    "F10": 128,
+    "F9": 48
+  },
+  "gates": {
+    "definition_grounding_separated": true,
+    "f10_zero_unsafe": true,
+    "f9_zero_unsafe": true,
+    "partial_coverage_reported": true
+  },
+  "lineage": {
+    "v0.1": "preserved",
+    "v0.2": "preserved"
+  },
+  "profile": "bulla.golden-suite/0.3-experimental",
+  "report_hashes": {
+    "definition-observation-scout.json": "sha256:dd554be6a8faaea46aa0fd236b3c69846abb2f00a64d614648d88a80d5ae0d29",
+    "f10-complexity-bombs.json": "sha256:5ad1c2d0ef636806ca93c2fa73f4fdd365ecc176a5113dc87daae1d2c6e585cc",
+    "f9-oracle-boundary.json": "sha256:1615c30f2075d578ea9cd32c1d00704f84046ae9e26a1bc3a6463cb899e8d0c5",
+    "partial-coverage.json": "sha256:f6ac24010c8dbe4cefea8a6da3d63465126cd542fe2bc09d9a23318381066e07"
+  },
+  "schema_version": "0.3-golden-manifest"
+}

@@ -1,0 +1,2014 @@
+{
+  "claim_boundary": "This is not line-by-line compiler mutation coverage of the Python interpreter or cryptographic libraries.",
+  "critical_killed": 248,
+  "critical_total": 248,
+  "exclusions": [],
+  "family_counts": {
+    "cryptographic": 40,
+    "economic": 48,
+    "lifecycle": 40,
+    "semantic": 48,
+    "structural": 40,
+    "witness": 32
+  },
+  "killed": 248,
+  "killed_by_family": {
+    "cryptographic": 40,
+    "economic": 48,
+    "lifecycle": 40,
+    "semantic": 48,
+    "structural": 40,
+    "witness": 32
+  },
+  "mutation_model": "preregistered operator-level fail-open mutants with per-mutant differentiating witnesses",
+  "mutation_score": 1.0,
+  "passes": true,
+  "schema_version": "0.2-experimental",
+  "total": 248,
+  "witnesses": [
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-000",
+      "non_equivalence_witness": "sha256:9e1e6b5b123d37fab4f19625f4e0c7fc4cd1904c5cc7d300983cc383e74a00c4",
+      "operator": "unknown_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-001",
+      "non_equivalence_witness": "sha256:ea29fc1f01f97f21c08eb783bc3b86d2efc006358719d9a16c9d8ee0bc80460f",
+      "operator": "missing_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-002",
+      "non_equivalence_witness": "sha256:33620d3e9f1f3e9408aa74f823b36fc243420b3eca0c306d1bff74f73a838642",
+      "operator": "type_confusion"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-003",
+      "non_equivalence_witness": "sha256:322ab8313a5d96a1e4e9ad1b26a00fa1c18e420e68f74b59ce6b7c75e755eb63",
+      "operator": "bad_digest"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-004",
+      "non_equivalence_witness": "sha256:11999299f97eecc73fc466cf394cdcc0e6df88f93ea0268cd902c5fc0ec0a942",
+      "operator": "unknown_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-005",
+      "non_equivalence_witness": "sha256:45fb410bd1241e9dcad2d582a3e7326d36d0f92e746d8b82203ba3d670cc0724",
+      "operator": "missing_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-006",
+      "non_equivalence_witness": "sha256:74a158f4fe34cd930ed6356ac95777bbb6ce60939380ecc99fd5260b2f002f3f",
+      "operator": "type_confusion"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-007",
+      "non_equivalence_witness": "sha256:f9b464ebe2bb360ebf985e94ed7665985024053e0aa7404bda920631811ccab4",
+      "operator": "bad_digest"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-008",
+      "non_equivalence_witness": "sha256:6502d1a336295762129356b15c9c02033c221eac685303e2e0b12981eabb9c52",
+      "operator": "unknown_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-009",
+      "non_equivalence_witness": "sha256:e175ee11af3292f26e41727d67b0d003ad14c4cc801a581ca5113d40f3da8659",
+      "operator": "missing_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-010",
+      "non_equivalence_witness": "sha256:7613d853dcf06725ab4a206bea9bb25be1dcee809bc97f0a636a78b12ad67f01",
+      "operator": "type_confusion"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-011",
+      "non_equivalence_witness": "sha256:6674552cef3f4d3611054e080df0feae0784fdb1702ee9ff977478f26dda5268",
+      "operator": "bad_digest"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-012",
+      "non_equivalence_witness": "sha256:b69dbaa93cda377298103dad7482193ca4dbea14fafafcabef2f54fecb614637",
+      "operator": "unknown_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-013",
+      "non_equivalence_witness": "sha256:3899fe0399ecffa87855a1367fb8604be8a2838f87b310fa63f77b0457067f36",
+      "operator": "missing_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-014",
+      "non_equivalence_witness": "sha256:239b4ebd89b6450a93a26015c2e0cd062079e8c12d8cf700cf3740249c269a52",
+      "operator": "type_confusion"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-015",
+      "non_equivalence_witness": "sha256:9353e3bd1b49d703f029866c3b0cd443336daf59b444f14172b59fbad9fef8c1",
+      "operator": "bad_digest"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-016",
+      "non_equivalence_witness": "sha256:f5ea602f89d9d5ab0200384433b4b998068661e04a2916a633eef569c4413c50",
+      "operator": "unknown_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-017",
+      "non_equivalence_witness": "sha256:5506152b256901801d13cc2b102e3b73e3c55d405b3251b66917a557c0bd3527",
+      "operator": "missing_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-018",
+      "non_equivalence_witness": "sha256:4eba6775f816745f3a04e619e2aca4adc5425d6a99d529348b590e80faae2e0b",
+      "operator": "type_confusion"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-019",
+      "non_equivalence_witness": "sha256:2f7a3faa3b7138b0dc3b84057c78a0f8d401b5e1026327a2dbd8052cd7c582cc",
+      "operator": "bad_digest"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-020",
+      "non_equivalence_witness": "sha256:7c5a6e593cc065c4c25250ee526c2d042de5f989cea0060ab72facae95470426",
+      "operator": "unknown_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-021",
+      "non_equivalence_witness": "sha256:0f51c0b11eb93afddcfd04676a33920aeef342fc894e20e338bdf5d5181ce671",
+      "operator": "missing_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-022",
+      "non_equivalence_witness": "sha256:9933b7872183a7e6e0d16a3309cccbf9a3d30edf6c7ee15bac663f79c18d1422",
+      "operator": "type_confusion"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-023",
+      "non_equivalence_witness": "sha256:e48e5f1ed9730635989ea184d56d2dce34fba29bb8c39c3ef0701e407cca5aae",
+      "operator": "bad_digest"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-024",
+      "non_equivalence_witness": "sha256:79bdcda175b774fcfaa2b23e7126b75bb747f7640da66f2c75be6b640abca77e",
+      "operator": "unknown_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-025",
+      "non_equivalence_witness": "sha256:6c9329ba4d5fe0faf1e8037aae7e7a4589b186ff98574bdf1d2631dd1899659a",
+      "operator": "missing_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-026",
+      "non_equivalence_witness": "sha256:cadc604a44b721fcfcaa68ac83b5e975f0409e40b2cf7d9db2468f9ba32b1a60",
+      "operator": "type_confusion"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-027",
+      "non_equivalence_witness": "sha256:ed3e2fa3a4beefc4696d40f3f0201ce9c6420c94ee8074798e5bbd79010a2d64",
+      "operator": "bad_digest"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-028",
+      "non_equivalence_witness": "sha256:e8d17c3138e79d7a815431729112d2ed5c7baec9b23f08ae69e9c17408bf27d0",
+      "operator": "unknown_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-029",
+      "non_equivalence_witness": "sha256:7965cc618bd20030e2b9d1a2c5cee7841a67ee5130692da894153cdbf939fcba",
+      "operator": "missing_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-030",
+      "non_equivalence_witness": "sha256:acd5f838475a8b0b5a642c5ee4472c452073e00cee80fd18a1eecd289cdc8712",
+      "operator": "type_confusion"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-031",
+      "non_equivalence_witness": "sha256:d78b670722384b9477417a313f4c238be0f64f7d157d3d6efddfe1f87814a088",
+      "operator": "bad_digest"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-032",
+      "non_equivalence_witness": "sha256:362766ec2a7131ec623bf502aa5d681092016a548824f83a89d4f39616227f54",
+      "operator": "unknown_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-033",
+      "non_equivalence_witness": "sha256:336e2b883d699b25a9027bc10c3670610b90d50c4da551801f127146641e1a44",
+      "operator": "missing_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-034",
+      "non_equivalence_witness": "sha256:0e8d1a769ec6e418a1bf08519be180e2d5a98d3067d180134654d1d3ee6c90c5",
+      "operator": "type_confusion"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-035",
+      "non_equivalence_witness": "sha256:56e3d959e0c9ba73d3da65a9075fd6212d1d256ef3b4dd8a54d8dd3d8d627aec",
+      "operator": "bad_digest"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-036",
+      "non_equivalence_witness": "sha256:f2f763e36222b16b50a1beeaed8b9214037242014b564dc8b3e94f621ac6ab13",
+      "operator": "unknown_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-037",
+      "non_equivalence_witness": "sha256:a9e0b0b057d2106ac651767d31883481cfc4d3c580342e8e5868df9b9a72ecce",
+      "operator": "missing_field"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-038",
+      "non_equivalence_witness": "sha256:9fb3749b1dfa4a34304d4195fac7ac168a48dbb04f13849e74cce14a19516fa8",
+      "operator": "type_confusion"
+    },
+    {
+      "critical": true,
+      "family": "structural",
+      "killed": true,
+      "mutant_id": "structural-039",
+      "non_equivalence_witness": "sha256:352955e4975fc48d45a86d1ce588ef3b14b5c006c89f46da50bb7b688529ab72",
+      "operator": "bad_digest"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-000",
+      "non_equivalence_witness": "sha256:5955e4ef87ce67f5b5ceb234f2f478a18941e6afdc5e3c4ec9de0c975667fa00",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-001",
+      "non_equivalence_witness": "sha256:37c083d068bd7c39276a76fbcdb35c0908e6e74c10adb162f67a49e454222cd2",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-002",
+      "non_equivalence_witness": "sha256:639b05e43ad19e159652b374b7c5ff7933d1c56aca53d09a405f879a974f347e",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-003",
+      "non_equivalence_witness": "sha256:21b9da68e7f75209bf73816e30b835662df797295cf5e9560f4e458140a6e81b",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-004",
+      "non_equivalence_witness": "sha256:b2e928405f1ec526dfcdc631c9d3b1505a4a8934fd7159c145bdf771d63e72e0",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-005",
+      "non_equivalence_witness": "sha256:fb3614cd031064c5847433daf9e30092a6e5461384b6ef523bbb06eacc4695ce",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-006",
+      "non_equivalence_witness": "sha256:847c756c349d737e97bce3f4965fa4348c8317399bb53c8831e76670401e0e1f",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-007",
+      "non_equivalence_witness": "sha256:1e0d5506f0e98bea695883a8e4a32c47d13228e4eead1405785a545bfc0a80d5",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-008",
+      "non_equivalence_witness": "sha256:17cff42400172f18e4a45efd9b958e780783c9a9d751cd3a588aa006ee73289c",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-009",
+      "non_equivalence_witness": "sha256:877c6732cee51181ef47737f7cb23a2c24a086b55ab7fe4ce46c9c688c672f7d",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-010",
+      "non_equivalence_witness": "sha256:6f0829289ecea4ecfc1fc942d5446ba30522e272395d33a4b8db88effc5648fa",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-011",
+      "non_equivalence_witness": "sha256:bd1c25e49d34c98fc700dd0f4fa02deecf867e25236729abc530d46a0a53f215",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-012",
+      "non_equivalence_witness": "sha256:afca8b6b1e54b5971bbbf4f4cc06b34f3c818a4851afcadfbc278e63b8afab8e",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-013",
+      "non_equivalence_witness": "sha256:9d35a82c344369b1070b7c808f26097b5c343088b02cfb19bc34fac28baf54e6",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-014",
+      "non_equivalence_witness": "sha256:e9de5616037b3b856f5d24aad613ea2249908b0ab7460f1e75a671536d1917a9",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-015",
+      "non_equivalence_witness": "sha256:0f88e1e274f2144c605f13471a4f1888c4c00d9ea3182e761aa1bee96bd53088",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-016",
+      "non_equivalence_witness": "sha256:d5df00509ce7c8e250cc095c49281fb5d6efecd143eeb72c44de0219ad1a07f2",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-017",
+      "non_equivalence_witness": "sha256:a34fb92f92c00929dd240f0b92db12489778bcdc34ed7e3257d8b750b44bb4e0",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-018",
+      "non_equivalence_witness": "sha256:6019d0ae47fcb7f69867939605dea3759114b3314d4eb5f02810af60c6552391",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-019",
+      "non_equivalence_witness": "sha256:693576b5d66f9540f707a8f1f3363e31894374ca1a59ede60950aee669d415d3",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-020",
+      "non_equivalence_witness": "sha256:9f36e34191d189b00239c2a0a7915ee8a4c16501c2674a59d49c15bfe8638445",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-021",
+      "non_equivalence_witness": "sha256:10a6d424614b0f7ca275d5c0cb7ae64e9a7a3755927347c5e28f5c8881c31581",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-022",
+      "non_equivalence_witness": "sha256:346c520d19d8a69206d3b7dde83fc764238c3633867cad8d74db03146583e72d",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-023",
+      "non_equivalence_witness": "sha256:5085b70165bb06f8f8b1b967589ac301fa3fdc6aa52b5de60732d5ca80004a73",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-024",
+      "non_equivalence_witness": "sha256:dce06a2a83b78f455afb9f231c01c461c83cd687423dd9318ca13bbbc7263996",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-025",
+      "non_equivalence_witness": "sha256:b79f9ae23e99ecf39392268e06118de6938116cb93406455476e15f03779b122",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-026",
+      "non_equivalence_witness": "sha256:628a3291f8581a20aeddedd0a5c334705e33eb280c78da046e5a895f5a599716",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-027",
+      "non_equivalence_witness": "sha256:26ff1ef98c465d3cf19f7c484ad66a8612de27519e5b5b87778df62a40cb464e",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-028",
+      "non_equivalence_witness": "sha256:afb087922a5f326ac3d25cfde7143031b5ed0f44459b1299a29b0010546c6af8",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-029",
+      "non_equivalence_witness": "sha256:f8f2fa570fdc0fdf4d0304fe76dcdccfa2ee7674fc484fa7aeb13aa8d13dff3b",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-030",
+      "non_equivalence_witness": "sha256:3ca3573d21702d6f2537bc4e79d133c5e47827947ca6ba5a410a41bb8cb2a16e",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-031",
+      "non_equivalence_witness": "sha256:5c7e91170d052aaf7433e3e5576e0465b750865ff2f1e0e5d2cea93c5c9e7165",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-032",
+      "non_equivalence_witness": "sha256:a212a4685fcae21d01ecaa77c03a9888d6227190f68d8f2523bbff0f4dcdeaba",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-033",
+      "non_equivalence_witness": "sha256:8a8d66d932f8b4ebdba03fb5cf7c2081730adc38499ddbfd868d39a848a6dc09",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-034",
+      "non_equivalence_witness": "sha256:a031f080749620bf929ffc1ba4ad63d9193526e23228fc15bc347ffa0dd18f44",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-035",
+      "non_equivalence_witness": "sha256:7183a63850d84ff91358d991ca3e843e99f83437f154c36d9f7e350be2ca2533",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-036",
+      "non_equivalence_witness": "sha256:d62e832f551798b5187d5e79c07568930f23f4cb72a8f28bfb483dd36630de72",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-037",
+      "non_equivalence_witness": "sha256:7201efabca414a1717a2b52c585804e18de833553d1042d0a48c25e7de5f8cfe",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-038",
+      "non_equivalence_witness": "sha256:09f6ab7883449eafb02b6ef3559abff184f51cb56155e99d206d4c0011db228d",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "cryptographic",
+      "killed": true,
+      "mutant_id": "cryptographic-039",
+      "non_equivalence_witness": "sha256:85e9f13596ef03bb9c428aa6cf6c47105077ad1b9754b5b84bb1d947bc756b99",
+      "operator": "nonce_or_oracle_domain_swap"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-000",
+      "non_equivalence_witness": "sha256:a179c17d358fdf935318e30b6671b772892bfcd931b7a6014d00299a17d157ef",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-001",
+      "non_equivalence_witness": "sha256:fb16431b50ccb1a1f0f91195abc9cc4c0ec35a0ea8448f6fc4000ecbab8a177b",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-002",
+      "non_equivalence_witness": "sha256:bac45434a7ed56df7b3dad49019859520979aaeefa73d23cab6b921fb2c1034c",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-003",
+      "non_equivalence_witness": "sha256:84be594dc97cb6b39e617459ef3f999ae43271fbb221d9ed3f424aee4784924b",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-004",
+      "non_equivalence_witness": "sha256:57de81de01e388f770916b6243ca00874ed0707a98e9d09b5a197548c992e276",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-005",
+      "non_equivalence_witness": "sha256:a581ad4cfba706afed58a165f88c6ae8ff3e3714b2bfd8f7d6b7be36d6898065",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-006",
+      "non_equivalence_witness": "sha256:93f399deecea2718a97b790a4f007ddac54bf27b82d2bff3df0a0833092353ee",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-007",
+      "non_equivalence_witness": "sha256:c0c1c44d5948149be274fba68d276ca65d0d128a607732352b8a9aefca804682",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-008",
+      "non_equivalence_witness": "sha256:f56f3234a3ebdf6e7b7c408f85fdebefd225e8568fe7a457e6d96be4d146b054",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-009",
+      "non_equivalence_witness": "sha256:356d655ee7307b5df0eb1b884fcfd28f2279a0df3426fc5da781a25f7f6ad502",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-010",
+      "non_equivalence_witness": "sha256:7b14db45635241d4b2b02b6a07a6fd34b5efb24d4f62480a2585a954281ea6ea",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-011",
+      "non_equivalence_witness": "sha256:1a8a3cf7263e6eb159f75f23db34c705f5790c918ff1e318fd47845e74dd5e45",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-012",
+      "non_equivalence_witness": "sha256:65328e3fde624ed8d6e54b00c969261c80dc91178fd4e00e3843531975687fc0",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-013",
+      "non_equivalence_witness": "sha256:92b5c5a6ce221a6c08ad0ed0d3c8bfbe8e7bd736568fbbcc9b10149234020856",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-014",
+      "non_equivalence_witness": "sha256:58339194a69d1bfa79d054bbb069ae9bf0b366f63108d9cf739378dd32c0e847",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-015",
+      "non_equivalence_witness": "sha256:cb1525caa62ef59bcb4ccbeceb740d780c97e9241152a93a0ac7a16e11cc5756",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-016",
+      "non_equivalence_witness": "sha256:c55660aab407f3880d7837b9786a42f8f00952eb6ef25354676d5449fe761a83",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-017",
+      "non_equivalence_witness": "sha256:8ae35d3846fa45434d7c0a3e4a00e879bd25290f32e463d32e185f3a487e3584",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-018",
+      "non_equivalence_witness": "sha256:6098ace4c11816b9eb01a0e18cdc1f2f68864fd11b283cdcfbc22dbc138f789b",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-019",
+      "non_equivalence_witness": "sha256:e1f1b676b7897987907fb9bd4ed231bb0ed400e75cd90686a88d85a5d2fd1e57",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-020",
+      "non_equivalence_witness": "sha256:aafbd74589a40f10b216557007b5f986eb0a86de21ab5d65f868e48b93fbd180",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-021",
+      "non_equivalence_witness": "sha256:98f5cf64060c111ca5630b02dfee83fc5dec664ab1d30becbf45d272c2b10e69",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-022",
+      "non_equivalence_witness": "sha256:32dc602a473c9049ddfe952bad73b201d231e97234ccaf6035b62128832f7797",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-023",
+      "non_equivalence_witness": "sha256:74b8868eb42ea3f15cd885188fc2f9ea0a86c5096e501eaf94a7e06da2e1ef5f",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-024",
+      "non_equivalence_witness": "sha256:471d643c5c294665647eb31089867dddf4bc91e67432fabd3b093b276cd18be1",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-025",
+      "non_equivalence_witness": "sha256:3b7291d624f4f65e7a1263e735eeb47b6be83d9cf1284b16fc9e589dfdbc7746",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-026",
+      "non_equivalence_witness": "sha256:b474ed48c9ddabd61972f10b81c1b3cebeccfbf467d8d9874cfa5f3c201180e4",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-027",
+      "non_equivalence_witness": "sha256:1da4df931ae07329dadfc85aef9f3f17dd22e69085d6eba1cef0a69bc0496b9b",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-028",
+      "non_equivalence_witness": "sha256:cba34b9c2f739a2ab2dc8771a72fea415cd06ac79f7144d9b4edd80c87897f99",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-029",
+      "non_equivalence_witness": "sha256:6009d4c5166fd6f0c54fd2155e8b8d42d4ec369c285e7624a3e309ecc5d9fb23",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-030",
+      "non_equivalence_witness": "sha256:343f67385a06ff554f4558b8f5d12d1d34749f78e499c0b6183caac52acb8ac5",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-031",
+      "non_equivalence_witness": "sha256:d56c02261e40becd1bb4f8bf537c49e5a0b5ffb8463af4bb4207e71dbd710b44",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-032",
+      "non_equivalence_witness": "sha256:6cbd8947f6b63fab8925a80649e44a96f2cc8882e7727bea0ec1fa81a307f84f",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-033",
+      "non_equivalence_witness": "sha256:667db177983e2b540daa5057548469a904cc909f31c7fdfad8e168133e9f73fb",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-034",
+      "non_equivalence_witness": "sha256:77d2fac3f99d3479b389fd4262beddf5fd6ad2dd603698dfc081c41d730cc3db",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-035",
+      "non_equivalence_witness": "sha256:24e47f534bdcebc584f987c15778a3a23a61d5bc6e698ccea30b61425cd6d622",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-036",
+      "non_equivalence_witness": "sha256:4c8c10bdc55ea66a4d0ddc0876f91c30f5ce16df9592d0f447a61abb73cb4238",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-037",
+      "non_equivalence_witness": "sha256:e3fa7a8921c1b99842583cd218c51aed9d583e441bb573dd602b1737c6e21658",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-038",
+      "non_equivalence_witness": "sha256:9564250a356088cdb354cd1eaddd16e06655f4d7fe99e7b9babeea737a5a6e9e",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-039",
+      "non_equivalence_witness": "sha256:986cb0595c7e76ed94ececf09eee501ad2042a0914afe04612a639f6b4727a5b",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-040",
+      "non_equivalence_witness": "sha256:41518f8a79d6a17e2ac19e32c214c03cec76b78ab3aba3017749e13469928663",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-041",
+      "non_equivalence_witness": "sha256:fb138bc360e95c572e0ebaed39a478050c6f3c1ef0b232b84c2c78c324f94334",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-042",
+      "non_equivalence_witness": "sha256:cf8a1304d00a4877d33d977bb0e2e3e6b0ee6da901164edf6c175ec8698ad08c",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-043",
+      "non_equivalence_witness": "sha256:0510920df9de5056aeab14a978a3b92d0d9c128f2e2c00f7562df885a966c813",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-044",
+      "non_equivalence_witness": "sha256:0df9ee07e9b6eb77c947075bda56b907ea75364141095d6343bee9b06aa4874e",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-045",
+      "non_equivalence_witness": "sha256:672b933bb25e86e4a933848930abee6d3573aae1619e05638342e4c40d71d373",
+      "operator": "same_reduct_ambiguity"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-046",
+      "non_equivalence_witness": "sha256:e1c497a257fdb9f110fe254966976cd8f80401b3a9c95ca0cf852c0f8a1d78df",
+      "operator": "protected_widening"
+    },
+    {
+      "critical": true,
+      "family": "semantic",
+      "killed": true,
+      "mutant_id": "semantic-047",
+      "non_equivalence_witness": "sha256:07a751b9f98f6e44eaa344bc56bc4db2c4430feeab79d776d2755c4949833dc0",
+      "operator": "refusal_erasure"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-000",
+      "non_equivalence_witness": "sha256:ae4f7fbf1f7406602a1f5c43ab324c5abcf93edaf668b8f1ed50a9cd91c21b7b",
+      "operator": "same_epoch_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-001",
+      "non_equivalence_witness": "sha256:80d305dc844ebb0f29f169ab7c9ba44da5ecf9f4e941987a4f06e463ab5a96ae",
+      "operator": "unauthorized_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-002",
+      "non_equivalence_witness": "sha256:99e0145aa410d1499588b8765bfa2ec335d76f9215ac780d471ee2d80976ec8c",
+      "operator": "conflict_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-003",
+      "non_equivalence_witness": "sha256:d2e4d4ab650339c2b8af5ee7e96cc578b47f0aef2c30bd7f5e9adfa0aa2101b3",
+      "operator": "post_terminal_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-004",
+      "non_equivalence_witness": "sha256:cd6e663c32520380dc334aef1a6db254c05fb05d6a25785a16937ea3ab7895d3",
+      "operator": "same_epoch_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-005",
+      "non_equivalence_witness": "sha256:47e75612bc01151a24feefb8673c438e5ecab6c58d86ab81c1afa602629a4620",
+      "operator": "unauthorized_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-006",
+      "non_equivalence_witness": "sha256:750e8ddf13527619036dedaa4546134217d755ebe5f390cecf1edaa78a89c7b9",
+      "operator": "conflict_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-007",
+      "non_equivalence_witness": "sha256:9cd9b28ca6592d259b1bd50272b94cecb949533f0d2967f7b8c39d500b06fd59",
+      "operator": "post_terminal_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-008",
+      "non_equivalence_witness": "sha256:9299d20b4ad8a50eb00a5700d011e59e9f73c2bf14f94e580cf8ab86e957c8b0",
+      "operator": "same_epoch_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-009",
+      "non_equivalence_witness": "sha256:e51f4f6459c68005ebd47df7b253f0f71c021d6bae251eef67ee380f786a5b4d",
+      "operator": "unauthorized_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-010",
+      "non_equivalence_witness": "sha256:d5b50cd3879c42549064e39af48129e9d6587385131e916c1f504213b8f69097",
+      "operator": "conflict_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-011",
+      "non_equivalence_witness": "sha256:95b90165beda3bc3ac4ac9c5b0bb46df9f9b75f1907593146a35a545ad634829",
+      "operator": "post_terminal_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-012",
+      "non_equivalence_witness": "sha256:5762ff17ed623349f86ae8706b715611a1b248874d71ae56534d64ce14f69707",
+      "operator": "same_epoch_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-013",
+      "non_equivalence_witness": "sha256:78c0f42b522db13ca0855095271c992c0c33bbdec0040741f7163ded00e73499",
+      "operator": "unauthorized_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-014",
+      "non_equivalence_witness": "sha256:c8f80e637f2eaee26b5affa7649d495536509a8f4d9d55d757fb64dacc467cdb",
+      "operator": "conflict_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-015",
+      "non_equivalence_witness": "sha256:a4baa48a5208e86cc5fc51d864a874bdb3a75008ff5357bece00751cc7593309",
+      "operator": "post_terminal_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-016",
+      "non_equivalence_witness": "sha256:82cb3a9189ef3ac0872e26e92e0f76f302d1a50797d644c60346f081053ab094",
+      "operator": "same_epoch_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-017",
+      "non_equivalence_witness": "sha256:33d63c0a0621a649f5d375a61d2f3a210ba56521d16856bf428daa596906667b",
+      "operator": "unauthorized_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-018",
+      "non_equivalence_witness": "sha256:3bfaefe62a990809299e7d35e827985ebc5c90a0ded0db65332ad620b213a151",
+      "operator": "conflict_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-019",
+      "non_equivalence_witness": "sha256:a6e7e51b3708017de7ddb1396dac1fc6b8a813e0e621d817eb8eed022de4b78d",
+      "operator": "post_terminal_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-020",
+      "non_equivalence_witness": "sha256:bf358ea4819e06890b499e58204e27d4acd43759212a8fee8e00373dc006885e",
+      "operator": "same_epoch_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-021",
+      "non_equivalence_witness": "sha256:cf8afcf6244f604111c7847a2bb6229bd31df1c548785a0b85b722617b1cf616",
+      "operator": "unauthorized_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-022",
+      "non_equivalence_witness": "sha256:e65650c22a0f4742fb7b939500b9bb956b7d36fed1eb304140756d9f514313ff",
+      "operator": "conflict_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-023",
+      "non_equivalence_witness": "sha256:607ef50bba1ccf588ea26ea553f5ba9500573cb97508d646735d3b490d81a855",
+      "operator": "post_terminal_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-024",
+      "non_equivalence_witness": "sha256:3b88513ace045345dab9819535760391a505d2fe3918222730d12cbe72196bcd",
+      "operator": "same_epoch_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-025",
+      "non_equivalence_witness": "sha256:3742cf2dc2697605f4072b574697100039dd168f94d6787f2e6960e52bb0d81d",
+      "operator": "unauthorized_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-026",
+      "non_equivalence_witness": "sha256:5561391ddf2e1def5b65860490a80b9f70f4032b8dfa076cec470cd9a8ea3af9",
+      "operator": "conflict_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-027",
+      "non_equivalence_witness": "sha256:e74f3af67486879e6d2a8a57f98085a73fd11a16a78ff870593ef0406ddcbc9d",
+      "operator": "post_terminal_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-028",
+      "non_equivalence_witness": "sha256:187279464d3cb0f8a7b608616b203380bd2b37d6d6256cfbdf9110f2d31f0627",
+      "operator": "same_epoch_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-029",
+      "non_equivalence_witness": "sha256:571015575339eae42528b8e760101a6453eb2f267d6cc084df106a7c1d0a5ef1",
+      "operator": "unauthorized_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-030",
+      "non_equivalence_witness": "sha256:68bb4e436173cc1891a2e24aa79c0ec2860ba2a07de1c831c07ee99ca6d7a5f8",
+      "operator": "conflict_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-031",
+      "non_equivalence_witness": "sha256:a83b191c97d9d0618fc7ca3cb4f075ca1ae5506ed4f96668c1d10a3a8b2d0d1e",
+      "operator": "post_terminal_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-032",
+      "non_equivalence_witness": "sha256:f48ab99d6c11f9c4914c4d6132176f0f6ba7b71f454b1ccd9c57b78b74182994",
+      "operator": "same_epoch_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-033",
+      "non_equivalence_witness": "sha256:743a5d0e3a80ac71f18c4ae3d92d76b98953ff04060e9415b5f18f5430d8fdf9",
+      "operator": "unauthorized_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-034",
+      "non_equivalence_witness": "sha256:95b777fba0fd7f54eac17bd3b9123d874542b3247ef09069a5e68900c5617b91",
+      "operator": "conflict_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-035",
+      "non_equivalence_witness": "sha256:8d673d25eafac0aa4aa77dda4e1fc0d6bd8fadcc4b470e8e2145501bf1e087a7",
+      "operator": "post_terminal_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-036",
+      "non_equivalence_witness": "sha256:4b47b7a76673a50a55d733f1899de751d66eb4ee8fc6ec217fb24770e32f3d2d",
+      "operator": "same_epoch_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-037",
+      "non_equivalence_witness": "sha256:8e806064df1f4d81586ce82cbb4c7a59f50afe53e58ad446300ca9654b95bb21",
+      "operator": "unauthorized_revise"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-038",
+      "non_equivalence_witness": "sha256:3047a3812e2c97eb16909af408eb2401c6536f6e43de72bb2144dd4369e3f9fe",
+      "operator": "conflict_mutation"
+    },
+    {
+      "critical": true,
+      "family": "lifecycle",
+      "killed": true,
+      "mutant_id": "lifecycle-039",
+      "non_equivalence_witness": "sha256:b9dcb0b8f29b39b28defff68253dbbdae70c3b0b98253b4f2ed0f522493078f0",
+      "operator": "post_terminal_mutation"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-000",
+      "non_equivalence_witness": "sha256:d1fb8243f2c7cb8741f15569b4a70759e7a1225d481ae467c9b47c0d5e55b176",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-001",
+      "non_equivalence_witness": "sha256:28b4d462c19e7047654e2674be996a3ad9cae6af84614574599530c1a0c244c5",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-002",
+      "non_equivalence_witness": "sha256:8a349f029af2cc8626cf6a38d3653866f9fe7254a1530e7b16a64ee5877cf834",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-003",
+      "non_equivalence_witness": "sha256:e0d1d29d9687c8ff4542ca8f4511475c50f4aa7d6a6ffa7725a4b12e744599b1",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-004",
+      "non_equivalence_witness": "sha256:fb38cc149dfd5d03ef6c45be4c320dcc57be7dcb753e559d46167c1423d00d21",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-005",
+      "non_equivalence_witness": "sha256:01d8790e9b99f659f3ecadb12c7f75e3c89088bb815e83594e17f6227f17d601",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-006",
+      "non_equivalence_witness": "sha256:24cdf97f61f22a7ccda51028a7267a47bfc268025e9ac9c48312607ac6ce3a40",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-007",
+      "non_equivalence_witness": "sha256:0a6bf47de5737d9f84aa830cf4039877ed4a707b83d7cd90c4238eda05bba24b",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-008",
+      "non_equivalence_witness": "sha256:1a4479e4e3dd089e5926e5d4d80034eff308876d1ca68276691e466603364f6c",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-009",
+      "non_equivalence_witness": "sha256:25bf1ed70d25fb1b80c50bca9c9a5a06fde29e239698aaa4b28502ac992f3542",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-010",
+      "non_equivalence_witness": "sha256:fa2fb0a61a8152185c9bbbb4ec2615ab751f71166bf3d5adb4babd3a8e50361a",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-011",
+      "non_equivalence_witness": "sha256:1c0a66174eeca5d9c2f55e4f02a5828ee3f0853d7cd12051a008a03a90798a32",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-012",
+      "non_equivalence_witness": "sha256:1cd10eca8215d47a9b1c70edfc5fdce2f2a1a136a4f5cbaee834989ea45ff4c1",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-013",
+      "non_equivalence_witness": "sha256:b6facb138f55d57b77242c0933f1ed66265319092d201dd78f7a2f384f9cbcb5",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-014",
+      "non_equivalence_witness": "sha256:9941da8be46291f9aa95380bc6c908440e1fea345dc504fc4bc60737ce09830e",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-015",
+      "non_equivalence_witness": "sha256:f8d404347b48496e26ec0a232ce443aec72e7bb918cef348b03035ca1f7ce981",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-016",
+      "non_equivalence_witness": "sha256:1a32a6cea9713e3634b761849b56afb226e2c3771417ace548f3cf15ebc909e8",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-017",
+      "non_equivalence_witness": "sha256:b1a6824def7c54d797ee988d550463f66b4158c215cbb1b4e1b3d9af65a01531",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-018",
+      "non_equivalence_witness": "sha256:6b70cfbd2d9c6739a33f6f81fa78306a9d013d55e9a034e8a40e30034b7ac5a6",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-019",
+      "non_equivalence_witness": "sha256:b687371f8861af36c7af64b2cad5b31dc6726de087c3d5f170f415517bf63770",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-020",
+      "non_equivalence_witness": "sha256:8592856446fb5407126295a927a1b462ae84081a5a96af1970af4fc36728d8c4",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-021",
+      "non_equivalence_witness": "sha256:d9bc6fd5f725fff8e5d26ecedbbea99cad56ba196a286625bede55b2536511c1",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-022",
+      "non_equivalence_witness": "sha256:9ed5954f642ed7f8b154fe0aa16b31e6e61092173d22ef72f52981eeebf331f9",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-023",
+      "non_equivalence_witness": "sha256:f4a76ae9f82039582f2444c0ddb0d886318f286600367898c725d0189ea4618c",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-024",
+      "non_equivalence_witness": "sha256:8025974fb43dae92d6591c992d65c3e33013f3a766e2945b13cd479f2d130f71",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-025",
+      "non_equivalence_witness": "sha256:5c9a00da54e3b5541cfa723d8ca6bab0f164f2f6db09fb0a4e0d68c3ca762729",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-026",
+      "non_equivalence_witness": "sha256:ca4cc16c48da36aa1368ed1ffb638032d1cac63a1eb7abc47cd6855d4e44ce5f",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-027",
+      "non_equivalence_witness": "sha256:85664bb99bf341818728bb4a64320a4b56e35882f1d7bde581723ff9bb7768a7",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-028",
+      "non_equivalence_witness": "sha256:aea3a41b2c8d62e9258dd39b03e25e1f1ea500ce71b5c875c0b538594fbc9828",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-029",
+      "non_equivalence_witness": "sha256:cc6e5be63585e019cac54e4fe40bf8a46fd04475c3381dc8778ebcbf2fa81525",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-030",
+      "non_equivalence_witness": "sha256:159d43086d921307c64e44c8f3b8767f1afaade12c32776a0fc776c29f625355",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "witness",
+      "killed": true,
+      "mutant_id": "witness-031",
+      "non_equivalence_witness": "sha256:3d1361c130c2d437d0d36fcf80df31c8af6dcecaf4f70f385ec5e76239bed0e3",
+      "operator": "correlated_control_as_independence"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-000",
+      "non_equivalence_witness": "sha256:51dbe545c047ae3d28cfa1b96e83be803a7e32740fcd8cc89347c9f7d57f9a71",
+      "operator": "execute_without_lock"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-001",
+      "non_equivalence_witness": "sha256:63f7ead9b95be0d3fc904131a057ce9d7d0d64d6286242f91933b707a5380e65",
+      "operator": "release_overage"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-002",
+      "non_equivalence_witness": "sha256:c504d8b76144bdb1721e623018418a5e5a7746f2b946488edadf6fa782cccc45",
+      "operator": "cross_epoch"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-003",
+      "non_equivalence_witness": "sha256:bcd670b5199c774671e8b34c8f94faf58eb8b3af4c8bf76824226b0fb44c1e76",
+      "operator": "impermissible_finalize"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-004",
+      "non_equivalence_witness": "sha256:27996d77b147f9c9b50ae69eacae2e96c6d21a7487b8f8754f4ad3b9ef9abbe0",
+      "operator": "execute_without_lock"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-005",
+      "non_equivalence_witness": "sha256:93f3863fc02b12edfcb92911ae3cf0c2ae0afefde4f88f6ba1346e430c2e8263",
+      "operator": "release_overage"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-006",
+      "non_equivalence_witness": "sha256:c1b12c700ae794e91699fece43decae2e0e963279bfc93f0bb6f81a813c0a7b8",
+      "operator": "cross_epoch"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-007",
+      "non_equivalence_witness": "sha256:150e5357cfb847bfdf5d42e0018f7d2b0f391ecb00cdc8e787619f1e54ccf7c8",
+      "operator": "impermissible_finalize"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-008",
+      "non_equivalence_witness": "sha256:b4db2742ccf6d4463fe15fb610022ceb5bbd5ad8cf5c02f86dd5bbe29ee68af0",
+      "operator": "execute_without_lock"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-009",
+      "non_equivalence_witness": "sha256:8b5d2b8841f2c0bb42293bdcf17cde68369aa9a0abda79ea26b807fde04aefb2",
+      "operator": "release_overage"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-010",
+      "non_equivalence_witness": "sha256:d8aa74dc1c3a3a801bee3ff4d11d097ed62cf346d7b389b992fb22b771b36a61",
+      "operator": "cross_epoch"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-011",
+      "non_equivalence_witness": "sha256:7217eb9d6eced3250801632cc03d52b902a4d27ade73a22773c34e8064631d42",
+      "operator": "impermissible_finalize"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-012",
+      "non_equivalence_witness": "sha256:be0c05e6b1a13e3eaf1fd3d84902b6d17cb22b043914e61959d8adef3570339a",
+      "operator": "execute_without_lock"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-013",
+      "non_equivalence_witness": "sha256:f4557c69b5d6893d40ec6c5ee799ebb7367ea64a3434a0bc45b6a455b3fa5198",
+      "operator": "release_overage"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-014",
+      "non_equivalence_witness": "sha256:d93a67c0f1eb60b9f359a21dc69dd1475a2a82de0a91095b589baedf7d590b82",
+      "operator": "cross_epoch"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-015",
+      "non_equivalence_witness": "sha256:e9ea656434e8ce63872e6ddce893fd00406a0e0568573eb0a079cbce52045b33",
+      "operator": "impermissible_finalize"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-016",
+      "non_equivalence_witness": "sha256:09dbe3c7785699c9b3694b655e6801585f166ab9aeba0c7a496901da6d65b27f",
+      "operator": "execute_without_lock"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-017",
+      "non_equivalence_witness": "sha256:420bcd6faa2ab129032d428127f91825076030d86d9a0043fbe7cb13767a3a6d",
+      "operator": "release_overage"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-018",
+      "non_equivalence_witness": "sha256:cc2387e15ef991a22df6f3a44627dcfa2e52647fe37d752376939651f894ee36",
+      "operator": "cross_epoch"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-019",
+      "non_equivalence_witness": "sha256:c611a275d202d3e2289467c726fe3e62a6229c9a7ed53a25310a523e34a00684",
+      "operator": "impermissible_finalize"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-020",
+      "non_equivalence_witness": "sha256:6d2ab451d2a1b9e52f7117511352af059d06e814348f8a2a282f86e6272e53ea",
+      "operator": "execute_without_lock"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-021",
+      "non_equivalence_witness": "sha256:635f72916de76017d9885b90d6c6f0913f836a1c07db021947348ca600677a69",
+      "operator": "release_overage"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-022",
+      "non_equivalence_witness": "sha256:00382e7c665962bc93a7805aac922102f92404dae85ea4d18c0c34ab8257e720",
+      "operator": "cross_epoch"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-023",
+      "non_equivalence_witness": "sha256:e76052c6f96123f4709a243ceca7b8729deb808ceba32473e7c2304a7caa8683",
+      "operator": "impermissible_finalize"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-024",
+      "non_equivalence_witness": "sha256:76da714eb2261fffc0714a70aafe4e39ac3a9922d9101fe43ed72e98eb46936b",
+      "operator": "execute_without_lock"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-025",
+      "non_equivalence_witness": "sha256:8e2461c2c7f7a129ee2779ebf0be1410c2164e3fc1ab64bdd950f6c2d0a2441d",
+      "operator": "release_overage"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-026",
+      "non_equivalence_witness": "sha256:357b6da510f3a1fccfa75c835a44f290a00ee3605fbac800202c5431b70be21c",
+      "operator": "cross_epoch"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-027",
+      "non_equivalence_witness": "sha256:9ef3078aa7ec53265e6365fb2a03ff752cb5bd14762dc4daaeb34a53c7239096",
+      "operator": "impermissible_finalize"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-028",
+      "non_equivalence_witness": "sha256:84e4d007b61cbff25dac61c1fb12725381a1658d4abdf70fae5acc27923a23c8",
+      "operator": "execute_without_lock"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-029",
+      "non_equivalence_witness": "sha256:8cbc1fe7e93511d6fd531df6d682a0be7eb0d931413b40a3d98bef408330544d",
+      "operator": "release_overage"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-030",
+      "non_equivalence_witness": "sha256:586b18e87b336172d495d791164f8085b259ae205394451f6f9f1c5054ce95f8",
+      "operator": "cross_epoch"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-031",
+      "non_equivalence_witness": "sha256:7f56bd38e74bc4b1c3218b790b29db6ee875148848016f63e3692d28c7fb233e",
+      "operator": "impermissible_finalize"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-032",
+      "non_equivalence_witness": "sha256:34d0cf8a57560c350e7b02537a91453b1d6eae7a655f93787c6c386a28155a09",
+      "operator": "execute_without_lock"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-033",
+      "non_equivalence_witness": "sha256:3225dea4859671c03052f9b0936650932eebd08082b56314d87336c1f430dfb3",
+      "operator": "release_overage"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-034",
+      "non_equivalence_witness": "sha256:b009e878ad720eb0bab598b469b72ed9341237c47411f22dd32805d5872d66d7",
+      "operator": "cross_epoch"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-035",
+      "non_equivalence_witness": "sha256:afb7ea005f197248a04bc29eeae55cf36f2ce9c31435b2bac1cd0462121e3ae4",
+      "operator": "impermissible_finalize"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-036",
+      "non_equivalence_witness": "sha256:260be19d12e031f3c02f89cc38d5e31202a894f8a8a49d3a7cb757a9b0f4fcbb",
+      "operator": "execute_without_lock"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-037",
+      "non_equivalence_witness": "sha256:48f914571f9077ac76fccd8f9b742f6839a8d6c71ac566c14dd04a4140a4c53d",
+      "operator": "release_overage"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-038",
+      "non_equivalence_witness": "sha256:19040418b355291b3aa355cd31be8a799576ffb51cc28bfd2d7f7409dada34f7",
+      "operator": "cross_epoch"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-039",
+      "non_equivalence_witness": "sha256:cec845df9a66782ab4903f791c93a80f5cf4c1e8516a188ffd852fd029e21caf",
+      "operator": "impermissible_finalize"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-040",
+      "non_equivalence_witness": "sha256:ac7b6626195c98a27772010dd775d661942fc50d908364d0304a595e236ec4fd",
+      "operator": "execute_without_lock"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-041",
+      "non_equivalence_witness": "sha256:fd1af73e6b3f973507d3926a2c4e765e8e064c2ecbb58b08c8712e0c44d51839",
+      "operator": "release_overage"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-042",
+      "non_equivalence_witness": "sha256:a1dfb797fb1fe2b1d9d874380b8a9faa9ee7ee8cbca3962930259b9ea2b79ef1",
+      "operator": "cross_epoch"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-043",
+      "non_equivalence_witness": "sha256:6d19cb8bdd0fa30b4b634a73407a59e6e7cd929758309154a7f5bdd7e49f59fe",
+      "operator": "impermissible_finalize"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-044",
+      "non_equivalence_witness": "sha256:2cd048a3701854c6c14ef4696be50f4e4637f44453485b36b7a7e37db25d6208",
+      "operator": "execute_without_lock"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-045",
+      "non_equivalence_witness": "sha256:4f6551771542b9d6100a289e62bc4bbb3590b84c913d397dd169178ed940a2f3",
+      "operator": "release_overage"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-046",
+      "non_equivalence_witness": "sha256:fbf025da0c9fcfddbb6b47234cdb6f85be181254cfb2fbd72b2752499c60d3d2",
+      "operator": "cross_epoch"
+    },
+    {
+      "critical": true,
+      "family": "economic",
+      "killed": true,
+      "mutant_id": "economic-047",
+      "non_equivalence_witness": "sha256:1a3ba5b9af7b99ac459f7f525ef09a4633a786ecfc0ae4411dbcef6882398537",
+      "operator": "impermissible_finalize"
+    }
+  ]
+}

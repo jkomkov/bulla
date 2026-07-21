@@ -1,0 +1,86 @@
+# Recovery only: verify and receipt an immutable PyPI release that was already
+# accepted. This workflow has no Trusted Publishing permission and no upload
+# step, so retrying it cannot republish a version.
+
+name: finalize published release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Existing PyPI version to verify and receipt
+        required: true
+        type: string
+      test_result:
+        description: Exact archived test result bound into the receipt
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    environment: pypi
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v${{ inputs.version }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install verifier from the tagged source
+        run: |
+          python -m pip install --upgrade pip pypi-attestations
+          python -m pip install .[identity,ots]
+
+      - name: Verify tagged source version
+        run: |
+          python - <<'PY'
+          import bulla
+          expected = "${{ inputs.version }}"
+          if bulla.__version__ != expected:
+              raise SystemExit(f"tagged source is {bulla.__version__}, expected {expected}")
+          PY
+
+      - name: Recover exact immutable artifacts accepted by PyPI
+        run: python scripts/download_pypi_release.py --version "${{ inputs.version }}" --dist dist
+
+      - name: Verify artifacts and Trusted Publishing provenance
+        run: |
+          python scripts/verify_pypi_release.py \
+            --version "${{ inputs.version }}" \
+            --dist dist \
+            --repository jkomkov/bulla
+
+      - name: Mint signed post-publication release receipt
+        env:
+          BULLA_RELEASE_KEY: ${{ secrets.BULLA_RELEASE_KEY }}
+        run: |
+          mkdir -p release-receipt
+          test -n "$BULLA_RELEASE_KEY" || { echo "BULLA_RELEASE_KEY is required" >&2; exit 1; }
+          python scripts/mint_release_receipt.py \
+            --dist dist \
+            --out "release-receipt/${{ inputs.version }}.json" \
+            --ots \
+            --test-result "${{ inputs.test_result }}" \
+            --repository jkomkov/bulla
+          python -m bulla receipt verify "release-receipt/${{ inputs.version }}.json"
+
+      - name: Attach receipt to durable GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "v${{ inputs.version }}" >/dev/null 2>&1 || \
+            gh release create "v${{ inputs.version }}" --title "v${{ inputs.version }}" --generate-notes
+          gh release upload "v${{ inputs.version }}" release-receipt/* --clobber
+
+      - name: Upload receipt to the workflow record
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-receipt-${{ inputs.version }}
+          path: release-receipt/
+          if-no-files-found: error

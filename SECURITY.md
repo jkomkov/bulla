@@ -1,8 +1,9 @@
 # Security Policy
 
-Bulla emits cryptographically signed, timestamp-anchored, recomputable
-attestations about software composition coherence. Its own integrity is the
-whole product, so security reports are taken seriously and credited.
+Bulla emits portable, recomputable records of consequential agent actions,
+including cryptographic authority bindings, evidence references, bounds, and
+recourse. Its own integrity is the whole product, so security reports are taken
+seriously and credited.
 
 ## Reporting a vulnerability
 
@@ -33,7 +34,7 @@ Anything that lets a party subvert the guarantees the receipts claim:
   proof for a leaf other than the deed's (`bulla.registry`, RFC 6962).
 - **Canonicalization ambiguity or collision** — two distinct objects that share
   a canonical hash, or a hash a conformant reimplementation cannot reproduce
-  from the spec (`bulla._canonical`, `WITNESS-CONTRACT.md`).
+  from the ActionReceipt specification (`bulla._canonical`, `spec/`).
 - **Anchor-binding bypass** — a receipt accepted as anchored to a timestamp it
   is not actually committed to (`bulla.ots`, OpenTimestamps).
 - **Determinism breaks** — inputs that make a content hash depend on wall-clock,
@@ -43,11 +44,14 @@ Anything that lets a party subvert the guarantees the receipts claim:
 
 ## Out of scope
 
-- The *detection* model's recall — that bulla does not flag a given seam is a
-  capability limit, honestly disclosed (see the README on annotation-derived
-  vs. execution-derived labels), not a security vulnerability.
-- Missing performance/delivery enforcement — the bond/oracle rung is documented
-  roadmap, not a shipped guarantee.
+- Failure to establish a worldly claim that the receipt explicitly reports as
+  self-asserted, unresolved, unreachable, not applicable, or outside its
+  declared verification depth.
+- Completeness of experimental semantic results outside their pinned finite
+  model class, closure warrant, vocabulary, and logical resource budget.
+- Missing independent witness operators, forum reachability, production
+  settlement custody, stake, or slashing. These are disclosed gaps, not shipped
+  guarantees.
 - Denial of service from pathologically large inputs.
 
 ## Supported versions

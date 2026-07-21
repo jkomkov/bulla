@@ -1,0 +1,10 @@
+{
+  "day_one_gate": 0.1,
+  "disposition": "KILLED",
+  "operation_count": 704,
+  "reason": "Current verification inputs have 0.14% structural reuse, below the preregistered 10% gate.",
+  "reused_operation_count": 1,
+  "runtime_module_created": false,
+  "structural_reuse_share": 0.0014204545454545455,
+  "unique_input_hash_count": 703
+}

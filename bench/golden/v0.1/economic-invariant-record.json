@@ -1,0 +1,28 @@
+{
+  "baselines": {
+    "bulla": {
+      "institutional_burdens_scalarized": false,
+      "replayable_transition_proofs": 1000000
+    },
+    "declared-model-finalize": {
+      "claim_boundary": "captive-closure-stress-only",
+      "false_finalization_on_expansion": 1000000
+    },
+    "route-all": {
+      "false_finalizations": 0,
+      "unnecessary_escalation": 1000000
+    },
+    "static-checklist": {
+      "replayable_transition_proofs": 0
+    }
+  },
+  "fair_trace_count": 1000,
+  "fair_trace_liveness_failures": 0,
+  "invariant_violations": 0,
+  "runtime_seconds": 25.540667542023584,
+  "schedule_count": 1000000,
+  "steps_per_adversarial_schedule": 12,
+  "terminal_phase_counts": {
+    "ROUTED": 1000000
+  }
+}

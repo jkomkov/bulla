@@ -1,0 +1,14 @@
+{
+  "slot_id": "slot:acme-order-0010",
+  "ordering": "local-host",
+  "deadline": { "checkpoint_ref": "host_log_size", "value": 100 },
+  "evaluation_checkpoint": { "checkpoint_ref": "host_log_size", "value": 140 },
+  "events": [
+    { "type": "order", "slot_id": "slot:acme-order-0010", "seq": 10, "term_root": "sha256:1010", "by": "buyer", "receipt_hash": "sha256:order-10", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "countersign", "slot_id": "slot:acme-order-0010", "seq": 12, "parent_seq": 10, "by": "seller", "receipt_hash": "sha256:countersign-10", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "close", "slot_id": "slot:acme-order-0010", "close_type": "delivery", "seq": 60, "parent_seq": 12, "conforming": true, "receipt_hash": "sha256:artifact-a", "receipt_validated": true, "receipt_authority": "verified", "countersigned_valid": true, "parent_chain_valid": true },
+    { "type": "close", "slot_id": "slot:acme-order-0010", "close_type": "delivery", "seq": 60, "parent_seq": 12, "conforming": true, "receipt_hash": "sha256:artifact-b", "receipt_validated": true, "receipt_authority": "verified", "countersigned_valid": true, "parent_chain_valid": true }
+  ],
+  "expected_finding": "EQUIVOCATED_CLOSURE",
+  "note": "Different terminal receipts at one winning position conflict even when close_type matches."
+}

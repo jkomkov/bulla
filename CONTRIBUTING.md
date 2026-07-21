@@ -1,6 +1,14 @@
 # Contributing to Bulla
 
-Bulla's diagnostic coverage depends on its vocabulary — the set of convention dimensions it can recognize. The most valuable contribution is discovering and submitting new dimensions.
+Bulla welcomes contributions to ActionReceipt canonicalization, verification,
+authority and delegation checks, reliance policy evaluation, release coverage,
+documentation, portability, and the legacy composition diagnostics. Security and
+trust-boundary defects are the highest-priority reports; use GitHub Security
+Advisories when public disclosure would put users at risk.
+
+The legacy diagnostic vocabulary also improves through well-evidenced convention
+dimensions. That contribution path is documented below, but it is one part of
+Bulla rather than the package's current product definition.
 
 ## Contributing a Dimension
 
@@ -83,7 +91,10 @@ The classifier's deduplication logic keeps the most specific child when both par
 
 **Bug reports and feature requests** — open an issue at [github.com/jkomkov/bulla/issues](https://github.com/jkomkov/bulla/issues).
 
-**Code contributions** — the kernel (measurement, witness, SDK) is stable and intentionally minimal. If you're proposing a code change, open an issue first to discuss scope.
+**Code contributions** — the stable receipt surface is intentionally narrow, and
+experimental semantic profiles are not re-exported from it. If you are proposing
+a new stable interface or trust claim, open an issue first so its specification,
+compatibility, and evidence requirements can be agreed before implementation.
 
 ## Merge Policy for `src/bulla`
 

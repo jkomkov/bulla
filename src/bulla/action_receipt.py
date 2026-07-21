@@ -3,10 +3,11 @@
 Bulla's diagnostic layer answers "is this composition coherent?" (`WitnessReceipt`).
 This module answers the next question: **an agent just changed the world — write
 a file, publish a package, move a record — under whose authority, within what
-bounds, with what verdict, and how is it contested?** That record is the substrate
-a bond will one day slash against: you cannot collect a remedy from an ephemeral
-actor, only from an artifact or a stake, and only against an *adjudicable record*
-of what was promised and what happened. The receipt is that record.
+bounds, with what verdict, and how is it contested?** You cannot contest an
+ephemeral actor directly, only a durable, *adjudicable record* of what was
+promised and what happened. Any collateral or settlement rail remains an
+external policy sidecar. The receipt is the record it may reference, not the
+collateral mechanism itself.
 
 THE ONE ABSTRACTION. There is a single new object here — the ActionReceipt
 envelope. A *release* is not a new type; it is an ``action.type`` (open
@@ -43,14 +44,26 @@ THE FOUR HASHES, each answering exactly one question (the CT leaf-vs-STH lesson)
                       re-derivations of the same claim share a ``content`` hash
                       but are distinct events.
   - ``attestation`` — "who vouched": commitment to {content, signature, the
-                      recourse envelope}. Mirrors ``certificate._attestation_hash``
-                      byte-for-byte in discipline; the signed, anchorable identity.
+                      recourse envelope, the authorization proof}. Mirrors
+                      ``certificate._attestation_hash`` in discipline; the signed,
+                      anchorable identity.
   - ``log_leaf``    — "where logged": the RFC 6962 leaf (``H(0x00‖…)``) of the
                       attestation hash, ready to append to a ``DeedLog``.
 
-RESERVED. ``stake`` (the bond slot) is declared and must be ``None`` in v0.1 —
-the field format ships now; the slashing mechanism is gated on a real
-cross-boundary counterparty, not built here.
+THE AUTHORITY BINDING (why ``content`` alone is not enough). ``content`` is
+envelope-free by design — the verdict must recompute without the appeal path.
+That same exclusion means a signature over ``content`` says nothing about the
+mandate or remedy: an adversary can keep the issuer's valid content signature,
+swap the ``authority``/``bounds``/``recourse`` envelope, recompute the two
+downstream hashes a verifier recomputes anyway, and present forged authority
+that still verifies. ``authorization_hash = H(content_hash, envelope_hash)`` is
+the fix: the issuer signs it (the ``authorization`` proof) to vouch for THIS
+envelope, so swapping the envelope breaks that proof. A verifier reports two
+authenticity facts, never one — content (the claim) and authority (the mandate).
+
+RESERVED. ``stake`` is declared and must be ``None``. Collateral belongs in an
+external settlement sidecar, and a future wire revision must not silently
+change the signed preimage.
 """
 
 from __future__ import annotations
@@ -62,8 +75,20 @@ from typing import Any
 
 from bulla._canonical import canonical_json
 from bulla.envelope import EnvelopeError, RecourseEnvelope
+from bulla.executable_form import (
+    EXECUTABLE_FORM,
+    ExecutableFormError,
+    check_definition,
+    definition_hash,
+    validate_executable_definition,
+)
 
 SCHEMA_VERSION = "0.2"
+# Authority binding changes the wire shape and the attestation preimage. It is
+# therefore a receipt-schema revision, not a silent amendment to shipped v0.2.
+# Builders continue to mint v0.2 unless callers use ``sign_action_receipt``,
+# which upgrades the receipt to this draft revision.
+AUTHORIZATION_SCHEMA_VERSION = "0.3"
 RECEIPT_KIND = "action_receipt"
 
 #: Evidence grounding classes (spec v0.2 §1), ordered LOWEST first for the
@@ -83,16 +108,10 @@ GROUNDING_CLASSES = (
 #: ``semantic`` conventions are pinned by hash and enforced by recourse.
 CONVENTION_KINDS = ("executable", "semantic")
 
-#: The one executable-definition form of v0.2 — a JSON-schema constraint
-#: subset plus an integer unit/quantum declaration. Deliberately NOT a general
-#: language: every keyword below is decidable with a stdlib-only verifier.
-EXECUTABLE_FORM = "jsonschema+quantum/1"
-
-#: The closed keyword vocabulary of ``jsonschema+quantum/1``. A definition
-#: using any other keyword is malformed — fail closed, never guess.
-_SCHEMA_TOP_KEYS = frozenset({"type", "properties", "required", "additionalProperties"})
-_SCHEMA_PROP_KEYS = frozenset({"type", "enum", "const", "minimum", "maximum", "pattern"})
-_SCHEMA_PROP_TYPES = frozenset({"string", "integer", "number", "boolean"})
+#: The one executable-definition form (``jsonschema+quantum/1``) and its closed
+#: keyword vocabulary now live in :mod:`bulla.executable_form`, a leaf module shared
+#: by conventions here and ``bounds.scope`` in the envelope. ``EXECUTABLE_FORM`` is
+#: re-exported above for callers that referenced it from this module.
 
 #: ``diagnostic_ref`` is never bare ``null`` — the ambiguity between "no
 #: composition existed to diagnose" and "we skipped it" is exactly where the
@@ -142,66 +161,19 @@ class ActionReceiptError(ValueError):
 # closure of referenced definitions — never an operated product.
 
 
-def convention_definition_hash(definition: Any) -> str:
-    """The pin: ``sha256:`` over ``canonical_json`` for a structured
-    (executable) definition, over raw UTF-8 bytes for an opaque (semantic)
-    definition string."""
-    if isinstance(definition, str):
-        return _sha(definition.encode("utf-8"))
-    return _canon_hash(definition)
+#: The pin over a definition — str → UTF-8, structured → canonical JSON. Single-sourced
+#: in :mod:`bulla.executable_form` and re-exported under its historical name here.
+convention_definition_hash = definition_hash
 
 
 def _validate_executable_definition(defn: Any) -> None:
-    """Well-formedness of a ``jsonschema+quantum/1`` definition — the closed
-    vocabulary is validated at CONSTRUCTION so a malformed convention can
-    never ride inside a hashed receipt."""
-    if not isinstance(defn, dict):
-        raise ActionReceiptError("executable convention definition must be an object")
-    if defn.get("form") != EXECUTABLE_FORM:
-        raise ActionReceiptError(
-            f"executable convention definition.form must be {EXECUTABLE_FORM!r} "
-            "(the one declared form of v0.2 — not a general language)"
-        )
-    extra = set(defn) - {"form", "schema", "quantum"}
-    if extra:
-        raise ActionReceiptError(f"unknown executable-definition keys {sorted(extra)} — fail closed")
-    schema = defn.get("schema")
-    if not isinstance(schema, dict):
-        raise ActionReceiptError("executable convention needs a 'schema' object")
-    unknown = set(schema) - _SCHEMA_TOP_KEYS
-    if unknown:
-        raise ActionReceiptError(f"unknown schema keywords {sorted(unknown)} — fail closed")
-    if schema.get("type", "object") != "object":
-        raise ActionReceiptError("schema.type must be 'object' (the act's subject)")
-    for pname, pschema in (schema.get("properties") or {}).items():
-        if not isinstance(pschema, dict):
-            raise ActionReceiptError(f"schema.properties[{pname!r}] must be an object")
-        bad = set(pschema) - _SCHEMA_PROP_KEYS
-        if bad:
-            raise ActionReceiptError(
-                f"unknown keywords {sorted(bad)} in schema.properties[{pname!r}] — fail closed"
-            )
-        if "type" in pschema and pschema["type"] not in _SCHEMA_PROP_TYPES:
-            raise ActionReceiptError(
-                f"schema.properties[{pname!r}].type must be one of {sorted(_SCHEMA_PROP_TYPES)}"
-            )
-    quantum = defn.get("quantum")
-    if quantum is not None:
-        if not isinstance(quantum, dict):
-            raise ActionReceiptError("quantum must map field name -> {unit, multipleOf}")
-        for fname, q in quantum.items():
-            if not isinstance(q, dict) or set(q) - {"unit", "multipleOf"}:
-                raise ActionReceiptError(
-                    f"quantum[{fname!r}] must be {{'unit': str, 'multipleOf': int}}"
-                )
-            if not (q.get("unit") or "").strip():
-                raise ActionReceiptError(f"quantum[{fname!r}].unit is required")
-            mo = q.get("multipleOf", 1)
-            if not isinstance(mo, int) or isinstance(mo, bool) or mo < 1:
-                raise ActionReceiptError(
-                    f"quantum[{fname!r}].multipleOf must be a positive integer "
-                    "(quantized fields are integers in minor units — decidable, no float ties)"
-                )
+    """Validate a ``jsonschema+quantum/1`` definition, raising ``ActionReceiptError``
+    (the convention layer's error type) on a malformed one. Delegates the closed-form
+    check to :func:`bulla.executable_form.validate_executable_definition`."""
+    try:
+        validate_executable_definition(defn)
+    except ExecutableFormError as exc:
+        raise ActionReceiptError(str(exc)) from exc
 
 
 def _validate_convention(c: Any) -> None:
@@ -274,53 +246,9 @@ def check_convention_conformance(convention: dict, subject: dict) -> tuple[str, 
     """
     if convention.get("kind") == "semantic":
         return "pinned", []
-    defn = convention["definition"]
-    schema, reasons = defn["schema"], []
-    props = schema.get("properties") or {}
-    for req in schema.get("required") or []:
-        if req not in subject:
-            reasons.append(f"required field {req!r} absent from action.subject")
-    if schema.get("additionalProperties") is False:
-        for k in subject:
-            if k not in props:
-                reasons.append(f"field {k!r} not permitted (additionalProperties: false)")
-    for pname, pschema in props.items():
-        if pname not in subject:
-            continue
-        v = subject[pname]
-        t = pschema.get("type")
-        type_ok = {
-            "string": isinstance(v, str),
-            "integer": isinstance(v, int) and not isinstance(v, bool),
-            "number": isinstance(v, (int, float)) and not isinstance(v, bool),
-            "boolean": isinstance(v, bool),
-            None: True,
-        }[t]
-        if not type_ok:
-            reasons.append(f"{pname!r} is not of type {t!r}")
-            continue
-        if "const" in pschema and v != pschema["const"]:
-            reasons.append(f"{pname!r} != const {pschema['const']!r}")
-        if "enum" in pschema and v not in pschema["enum"]:
-            reasons.append(f"{pname!r} not in enum {pschema['enum']!r}")
-        if "minimum" in pschema and isinstance(v, (int, float)) and v < pschema["minimum"]:
-            reasons.append(f"{pname!r} < minimum {pschema['minimum']}")
-        if "maximum" in pschema and isinstance(v, (int, float)) and v > pschema["maximum"]:
-            reasons.append(f"{pname!r} > maximum {pschema['maximum']}")
-        if "pattern" in pschema and isinstance(v, str):
-            import re
-            if re.search(pschema["pattern"], v) is None:
-                reasons.append(f"{pname!r} does not match pattern {pschema['pattern']!r}")
-    for fname, q in (defn.get("quantum") or {}).items():
-        if fname not in subject:
-            reasons.append(f"quantized field {fname!r} absent from action.subject")
-            continue
-        v = subject[fname]
-        if not isinstance(v, int) or isinstance(v, bool):
-            reasons.append(f"quantized field {fname!r} must be an integer in {q['unit']!r}")
-        elif v % q.get("multipleOf", 1) != 0:
-            reasons.append(f"{fname!r}={v} is not a multiple of {q['multipleOf']} {q['unit']!r}")
-    return ("conforms" if not reasons else "violates"), reasons
+    # Executable conformance is single-sourced in bulla.executable_form.check_definition
+    # — the same evaluator ``bounds_conformance`` uses over a scope predicate.
+    return check_definition(convention["definition"], subject)
 
 
 def effective_grounding(evidence_refs: tuple[dict, ...] | list[dict]) -> str | None:
@@ -347,6 +275,12 @@ def effective_grounding(evidence_refs: tuple[dict, ...] | list[dict]) -> str | N
 
 def _envelope_views(env: RecourseEnvelope) -> dict:
     mandate: dict = {}
+    # The envelope's schema version must survive the view round-trip (a v0.3
+    # envelope carries structured delegation grants). Conditional-include keeps
+    # v0.2 receipts byte-identical; the views are never hashed (the attestation
+    # preimage uses env.to_dict() directly), so this changes no hash.
+    if env.deed_schema != "0.2":
+        mandate["deed_schema"] = env.deed_schema
     if env.authority is not None:
         mandate["authority"] = env.authority.to_dict()
     if env.bounds is not None:
@@ -363,7 +297,10 @@ def _envelope_views(env: RecourseEnvelope) -> dict:
 def _views_to_envelope(mandate: dict, remedy: dict, retention: dict) -> RecourseEnvelope:
     """Reconstruct (and thereby re-validate) the envelope from the receipt's
     named views. Any modality-law violation raises here."""
-    ed: dict = {"deed_schema": RecourseEnvelope.__dataclass_fields__["deed_schema"].default}
+    ed: dict = {
+        "deed_schema": (mandate or {}).get("deed_schema")
+        or RecourseEnvelope.__dataclass_fields__["deed_schema"].default
+    }
     if mandate.get("authority"):
         ed["authority"] = mandate["authority"]
     if mandate.get("bounds"):
@@ -392,7 +329,8 @@ class ActionReceipt:
     evidence_refs: tuple[dict, ...] = ()             # ({"name", "hash", "grounding"(0.2)}, …)
     conventions: tuple[dict, ...] = ()               # coined-at-the-seam rules; inside content hash
     signature: dict | None = None                    # detached ed25519/COSE proof over content hash
-    stake: dict | None = None                        # RESERVED (the bond slot) — must be None
+    authorization: dict | None = None                # detached proof over authorization_hash — binds the envelope
+    stake: dict | None = None                        # RESERVED — collateral is an external sidecar
     timestamp: str = ""
     producer: dict = field(default_factory=dict)     # {"bulla_version": "…"} — provenance, not identity
     schema_version: str = SCHEMA_VERSION             # the version the PRODUCER spoke — in the preimage
@@ -409,9 +347,9 @@ class ActionReceipt:
             )
         if st == "reference" and not (self.diagnostic_ref.get("ref") or "").strip():
             raise ActionReceiptError("diagnostic_ref.status=='reference' requires a 'ref' (the recomputable verdict)")
-        if self.schema_version not in ("0.1", "0.2"):
+        if self.schema_version not in ("0.1", "0.2", AUTHORIZATION_SCHEMA_VERSION):
             raise ActionReceiptError(f"unknown schema_version {self.schema_version!r}")
-        is_v02 = self.schema_version == "0.2"
+        is_v02 = self.schema_version in ("0.2", AUTHORIZATION_SCHEMA_VERSION)
         for e in self.evidence_refs:
             if not (e.get("name") or "").strip() or not (e.get("hash") or "").strip():
                 raise ActionReceiptError("every evidence_ref needs a name and a hash")
@@ -429,7 +367,13 @@ class ActionReceipt:
         for c in self.conventions:
             _validate_convention(c)
         if self.stake is not None:
-            raise ActionReceiptError("stake is RESERVED (the bond slot) — must be None")
+            raise ActionReceiptError("stake is RESERVED — collateral belongs in an external sidecar; must be None")
+        if self.authorization is not None and not isinstance(self.authorization, dict):
+            raise ActionReceiptError("authorization must be a detached proof dict (over authorization_hash) or None")
+        if self.authorization is not None and self.schema_version != AUTHORIZATION_SCHEMA_VERSION:
+            raise ActionReceiptError(
+                "authorization is a v0.3 field; v0.1/v0.2 receipts cannot silently change wire semantics"
+            )
         if not isinstance(self.envelope, RecourseEnvelope):
             raise ActionReceiptError("envelope must be a RecourseEnvelope (mandate+remedy)")
 
@@ -438,7 +382,7 @@ class ActionReceipt:
         """The recomputable claim: act + verdict + evidence + anchor +
         conventions. Envelope-free (the recomputable core must not depend on
         the appeal path), time-free, signature-free — so it is identical on
-        any machine, any version, forever.
+        any conforming implementation for the receipt's own schema version.
 
         ``schema_version`` is the RECEIPT'S OWN (a v0.1 receipt recomputes
         with "0.1" forever). ``conventions`` enters the preimage whenever
@@ -467,11 +411,35 @@ class ActionReceipt:
         return _canon_hash({"content_hash": self.content_hash, "timestamp": self.timestamp})
 
     @property
+    def envelope_hash(self) -> str:
+        """Canonical hash of the recourse envelope alone — the object an
+        authorization proof binds. Derived, not stored: a verifier recomputes it
+        from the served mandate/remedy/retention views, so it cannot be lied
+        about independently of the envelope it summarizes."""
+        return _canon_hash(self.envelope.to_dict())
+
+    @property
+    def authorization_hash(self) -> str:
+        """*"Which mandate was authorized."* ``H({content_hash, envelope_hash})``
+        — the recomputable claim bound to its appeal path. The issuer signs THIS
+        (not ``content`` alone) to vouch for the envelope; swapping the envelope
+        moves ``envelope_hash``, so a proof over ``authorization_hash`` stops
+        verifying. Invariant to ``signature``/``authorization`` (both excluded
+        from the content and envelope preimages), so it is stable to sign against
+        before either proof exists."""
+        return _canon_hash({"content_hash": self.content_hash, "envelope_hash": self.envelope_hash})
+
+    @property
     def attestation_hash(self) -> str:
-        # commitment to {content, signer, recourse envelope} — mirrors
-        # certificate._attestation_hash's discipline; anchorable identity.
+        # commitment to {content, signer, recourse envelope, authority proof} —
+        # mirrors certificate._attestation_hash's discipline; anchorable identity.
+        # v0.3 always includes the authorization slot (including null) so the
+        # field cannot be stripped without changing the attestation hash.
+        # v0.1/v0.2 retain their historical preimage byte-for-byte.
         preimage: dict = {"content_hash": self.content_hash, "signature": self.signature}
         preimage["recourse_envelope"] = self.envelope.to_dict()
+        if self.schema_version == AUTHORIZATION_SCHEMA_VERSION:
+            preimage["authorization"] = self.authorization
         return _canon_hash(preimage)
 
     @property
@@ -502,10 +470,14 @@ class ActionReceipt:
             "stake": self.stake,                 # reserved (None)
             "conventions": [dict(c) for c in self.conventions],
             "signature": self.signature,
+        }
+        if self.schema_version == AUTHORIZATION_SCHEMA_VERSION:
+            out["authorization"] = self.authorization
+        out.update({
             "timestamp": self.timestamp,
             "producer": self.producer,
             "hashes": self.hashes(),
-        }
+        })
         return out
 
     def to_json(self, *, indent: int = 2) -> str:
@@ -521,6 +493,11 @@ class ActionReceipt:
             raise ActionReceiptError("receipt must be a dict")
         if d.get("kind") != RECEIPT_KIND:
             raise ActionReceiptError(f"not an {RECEIPT_KIND} (kind={d.get('kind')!r})")
+        schema_version = d.get("schema_version") or SCHEMA_VERSION
+        if "authorization" in d and schema_version != AUTHORIZATION_SCHEMA_VERSION:
+            raise ActionReceiptError("authorization member is only valid in schema_version '0.3'")
+        if schema_version == AUTHORIZATION_SCHEMA_VERSION and "authorization" not in d:
+            raise ActionReceiptError("v0.3 receipt is missing its authorization member")
         env = _views_to_envelope(
             d.get("mandate") or {}, d.get("remedy") or {}, d.get("retention") or {}
         )
@@ -532,10 +509,11 @@ class ActionReceipt:
             evidence_refs=tuple(d.get("evidence_refs") or ()),
             conventions=tuple(d.get("conventions") or ()),
             signature=d.get("signature"),
+            authorization=d.get("authorization"),
             stake=d.get("stake"),
             timestamp=d.get("timestamp") or "",
             producer=d.get("producer") or {},
-            schema_version=d.get("schema_version") or SCHEMA_VERSION,
+            schema_version=schema_version,
         )
 
 
@@ -577,6 +555,42 @@ def build_action_receipt(
     )
 
 
+def sign_action_receipt(receipt: ActionReceipt, signer: Any) -> ActionReceipt:
+    """Sign a receipt at full depth: a **content** proof (verdict authenticity)
+    AND an **authorization** proof (authority authenticity). Returns a new
+    receipt carrying both.
+
+    The two proofs answer different questions — *is the claim as signed?* and
+    *is the mandate/remedy as signed?* — and :func:`verify_receipt` reports them
+    separately. Signing only the content (``signature=signer.sign(content_hash)``
+    passed to ``build_*``) leaves the envelope unauthenticated: a verifier will
+    surface ``authority_authentic='unauthenticated'``. Use this helper whenever
+    the mandate matters, so a swapped envelope under a valid content signature is
+    caught as forgery rather than sailing through.
+
+    ``signer`` is any object with ``sign_domain(purpose, hash) -> proof``
+    (:class:`bulla.identity.LocalEd25519Signer`). v0.3 proofs are
+    **domain-separated**: content and authorization sign a canonical
+    ``{context, schema, purpose, digest}`` preimage, so neither can be replayed as
+    the other regardless of digest. Both hashes are invariant to the proofs
+    themselves, so the returned receipt's stored proofs verify."""
+    import dataclasses
+
+    if receipt.schema_version not in ("0.2", AUTHORIZATION_SCHEMA_VERSION):
+        raise ActionReceiptError(
+            "full authority signing upgrades v0.2 to v0.3; older receipt schemas must be migrated explicitly"
+        )
+    unsigned = dataclasses.replace(
+        receipt,
+        schema_version=AUTHORIZATION_SCHEMA_VERSION,
+        signature=None,
+        authorization=None,
+    )
+    signature = signer.sign_domain("content", unsigned.content_hash)
+    authorization = signer.sign_domain("authorization", unsigned.authorization_hash)
+    return dataclasses.replace(unsigned, signature=signature, authorization=authorization)
+
+
 # ── the two golden instances (same envelope, different action.type) ──────────
 #
 # These are NOT new types — a release IS a tool call (a side-effecting act), so
@@ -603,7 +617,7 @@ def build_release_receipt(
     """A ``package.release`` receipt — the genesis instance. Its root of trust is
     EXTERNAL: Bulla cannot vouch for the publication that introduces its own
     receipts (trusting-trust), so ``root_of_trust`` names the PEP 740 / Sigstore
-    attestation ({scheme, rekor_log_index, attestation_bundle_sha256}) and
+    attestation ({scheme, publisher, integrity_api}) and
     ``verify_receipt`` binds — never replaces — that public anchor. Ships as CI
     plumbing, not a launch story."""
     subject: dict = {
@@ -701,10 +715,85 @@ class ReceiptVerification:
     #: None when unspecified (v0.1). A digest-valid receipt whose necessary
     #: evidence is self_asserted is attested testimony, nothing more.
     effective_grounding: str | None = None
+    #: Authority authenticity — is the mandate/remedy the issuer vouched for?
+    #: Distinct from ``checks['signature']`` (content authenticity). One of:
+    #:   ``verified``        — an authorization proof binds this envelope and checks out;
+    #:   ``forged``          — an authorization proof is present but does NOT bind
+    #:                         this envelope (a swapped mandate/remedy) → ``ok`` is False;
+    #:   ``unauthenticated`` — the receipt carries an envelope but no authorization
+    #:                         proof; content may be signed, authority is not — do
+    #:                         not present the envelope as issuer-vouched;
+    #:   ``unresolved``      — a proof is present but bulla[identity] is absent;
+    #:   ``not_applicable``  — the envelope carries no authority/bounds/recourse.
+    authority_authentic: str = "not_applicable"
+    #: Delegation verdicts (v0.3 structured grants) — SIX INDEPENDENT dimensions,
+    #: never flattened. ``bulla.delegation.DelegationVerdict`` combines them into two
+    #: named predicates: ``cryptographically_bound`` (chain + principal + policy +
+    #: scope) is the bounded OFFLINE claim — "this principal delegated this exact
+    #: declared capability to this key" — and ``fully_delegated``, which additionally
+    #: demands positive temporal and revocation evidence and is therefore false today
+    #: (revocation transport is unbuilt). ``policy_binding``/``scope_binding`` are hash
+    #: agreement, NEVER a decision that the act obeys the policy. Default
+    #: "not_applicable" — no structured delegation was claimed. See bulla.delegation.
+    chain_integrity: str = "not_applicable"       # verified|broken|cycle|over_depth|not_applicable
+    principal_binding: str = "not_applicable"     # verified|wrong_principal|unresolved|not_applicable
+    policy_binding: str = "not_applicable"        # verified|mismatch|not_applicable
+    scope_binding: str = "not_applicable"         # verified|mismatch|not_applicable
+    temporal_status: str = "not_applicable"       # unresolved|within_window|expired|not_yet_valid|not_applicable
+    revocation_status: str = "not_applicable"     # unresolved|not_revoked|revoked|not_applicable
+    #: Did the ACT obey its declared scope? Recomputed at the digest rung (crypto-free)
+    #: when ``bounds.scope`` is a structured ``jsonschema+quantum/1`` predicate over
+    #: ``action.subject``. This is the missing half of authorization: ``scope_binding``
+    #: proves the chain CONVEYED scope S (hash agreement); ``bounds_conformance`` proves
+    #: the act was WITHIN S (predicate recompute). "not_applicable" for a prose scope;
+    #: "not_checkable" when a structured scope has no ``action.subject`` to evaluate.
+    bounds_conformance: str = "not_applicable"    # conforms|violates|not_checkable|not_applicable
+
+    def __bool__(self) -> bool:
+        # A ReceiptVerification has NO single truth value, and the most natural
+        # misuse — ``if verify_receipt(d): ...`` — would otherwise be unconditionally
+        # true (a plain object is always truthy), silently accepting a receipt that
+        # FAILED. Raise instead, numpy-style, so the footgun dies at the first test
+        # rather than in production. A record can be authentic yet unauthorized, or
+        # hash-valid yet unsigned; these are separate questions and must be asked by name.
+        raise TypeError(
+            "The truth value of a ReceiptVerification is ambiguous — do not write "
+            "`if verify_receipt(...):`. Read `.ok` for record integrity, the named "
+            "dimensions (`authority_authentic`, `scope_binding`, `bounds_conformance`, …) "
+            "for what each proves, or call `bulla.reliance.decide(v, policy)` for a "
+            "rely/refuse/escalate answer."
+        )
+
+    def to_dict(self) -> dict:
+        """The reliance-decision surface, serializable and pinnable (the raw object
+        cannot be hashed — ``checks``/``conventions`` are dicts). This is the view a
+        ``bulla.reliance`` policy decides over, and what a ``bulla.rely`` receipt pins;
+        ``reasons`` (human text) and ``checks`` (internal booleans) are omitted."""
+        return {
+            "ok": self.ok,
+            "verified_to": self.verified_to,
+            "authority_authentic": self.authority_authentic,
+            "effective_grounding": self.effective_grounding,
+            "conventions": dict(self.conventions),
+            "chain_integrity": self.chain_integrity,
+            "principal_binding": self.principal_binding,
+            "policy_binding": self.policy_binding,
+            "scope_binding": self.scope_binding,
+            "temporal_status": self.temporal_status,
+            "revocation_status": self.revocation_status,
+            "bounds_conformance": self.bounds_conformance,
+        }
 
     def summary(self) -> str:
         head = "OK" if self.ok else "FAIL"
-        return f"{head}  verified_to={self.verified_to}"
+        s = f"{head}  verified_to={self.verified_to}  authority={self.authority_authentic}"
+        if self.chain_integrity != "not_applicable" or self.principal_binding != "not_applicable":
+            s += (f"  delegation[chain={self.chain_integrity} principal={self.principal_binding} "
+                  f"policy={self.policy_binding} scope={self.scope_binding} "
+                  f"temporal={self.temporal_status} revoc={self.revocation_status}]")
+        if self.bounds_conformance != "not_applicable":
+            s += f"  bounds_conformance={self.bounds_conformance}"
+        return s
 
 
 def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerification:
@@ -712,16 +801,21 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
 
       digest         — hashes recompute, envelope re-validates (modality law),
                        evidence well-formed, verdict slot non-null. Zero deps.
-      attestation    — + the detached signature over ``content_hash`` verifies
-                       (needs ``bulla[identity]``; skipped, not failed, if the
-                       receipt is unsigned or the extra is absent).
+      attestation    — + the detached ``signature`` over ``content_hash`` and/or
+                       the ``authorization`` proof over ``authorization_hash``
+                       verify (needs ``bulla[identity]``; skipped, not failed,
+                       if the receipt is unsigned or the extra is absent).
       log_inclusion  — + an external inclusion proof verifies. v0.2 has no such
                        proof inline; reaching this rung is the ``bulla[sigstore]``
                        follow-up. Reported, never faked.
 
     Alongside the rung it reports (never folds in): ``effective_grounding``
-    (the minimum class over carried evidence — the display rule) and, per
-    convention, a recomputed ``conforms`` / ``violates`` / ``pinned`` status.
+    (the minimum class over carried evidence — the display rule); per
+    convention, a recomputed ``conforms`` / ``violates`` / ``pinned`` status;
+    and ``authority_authentic`` — whether the mandate/remedy envelope is the one
+    the issuer signed. Content authenticity (``checks['signature']``) and
+    authority authenticity are separate verdicts: a valid content signature over
+    a **swapped** envelope is caught here as ``authority_authentic='forged'``.
     """
     checks: dict = {}
     reasons: list[str] = []
@@ -737,10 +831,13 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
     recomputed = receipt.hashes()
     for name in ("content", "event", "attestation", "log_leaf"):
         got, want = recomputed[name], stored.get(name)
-        ok = (want is None) or (got == want)
+        ok = isinstance(want, str) and (got == want)
         checks[f"hash_{name}"] = ok
         if not ok:
-            reasons.append(f"{name} hash mismatch: recomputed {got} != stored {want}")
+            if want is None:
+                reasons.append(f"{name} hash missing from served receipt")
+            else:
+                reasons.append(f"{name} hash mismatch: recomputed {got} != stored {want}")
     digest_ok = all(checks[f"hash_{n}"] for n in ("content", "event", "attestation", "log_leaf"))
     if not digest_ok:
         return ReceiptVerification(False, "none", checks, tuple(reasons))
@@ -762,34 +859,167 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
                 f"convention {c['name']!r}: act does not conform — " + "; ".join(why)
             )
 
-    def done(ok: bool, rung: str) -> ReceiptVerification:
+    # ---- bounds_conformance: did the ACT obey its declared scope? (digest rung) ----
+    # Crypto-free — a pure recompute of action.subject against a structured bounds.scope
+    # predicate, surfaced (never folded into ``ok``) exactly like convention conformance.
+    # This is the missing half of authorization; ``scope_binding`` (delegation) proves the
+    # chain conveyed the scope, this proves the act stayed within it.
+    bounds_conf = "not_applicable"
+    _bounds = receipt.envelope.bounds
+    if _bounds is not None and isinstance(_bounds.scope, dict):
+        raw_subject = receipt.action.get("subject")
+        if not isinstance(raw_subject, dict):
+            bounds_conf = "not_checkable"
+            reasons.append(
+                "bounds.scope is a structured predicate but action.subject is absent — "
+                "cannot recompute conformance (not_checkable)"
+            )
+        else:
+            bounds_conf, why = check_definition(_bounds.scope, raw_subject)
+            if bounds_conf == "violates":
+                reasons.append(
+                    "act exceeds its declared bounds.scope — " + "; ".join(why)
+                )
+
+    def done(ok: bool, rung: str, authority: str, deleg: Any = None) -> ReceiptVerification:
+        dims = {
+            "chain_integrity": "not_applicable",
+            "principal_binding": "not_applicable",
+            "policy_binding": "not_applicable",
+            "scope_binding": "not_applicable",
+            "temporal_status": "not_applicable",
+            "revocation_status": "not_applicable",
+        }
+        if deleg is not None:
+            dims = deleg.to_dict()
         return ReceiptVerification(
             ok, rung, checks, tuple(reasons),
             conventions=conv_status, effective_grounding=grounding,
+            authority_authentic=authority, bounds_conformance=bounds_conf, **dims,
         )
 
-    # ---- attestation rung ----
+    # ---- attestation rung: content authenticity AND authority authenticity ----
     sig = receipt.signature
-    if not sig:
+    auth_proof = receipt.authorization
+    is_v03 = receipt.schema_version == AUTHORIZATION_SCHEMA_VERSION
+    env_dict = receipt.envelope.to_dict()
+    # Almost every ActionReceipt carries a non-trivial envelope (the modality law
+    # requires remedies), so an unsigned envelope is the common case to flag.
+    envelope_nontrivial = bool(
+        env_dict.get("authority") or env_dict.get("bounds") or env_dict.get("recourse")
+    )
+    default_authority = "unauthenticated" if envelope_nontrivial else "not_applicable"
+
+    if not sig and not auth_proof:
+        if envelope_nontrivial:
+            reasons.append(
+                "authority unauthenticated — no issuer authorization proof binds this "
+                "mandate/remedy; do not present the envelope as issuer-vouched"
+            )
         reasons.append("unsigned receipt — verified to digest only (no signature to check)")
-        return done(True, "digest")
-    try:
-        from bulla.identity import verify_proof
-    except Exception:  # pragma: no cover - identity extra absent
-        reasons.append("signature present but bulla[identity] not installed — verified to digest only")
-        return done(True, "digest")
-    auth = verify_proof(receipt.content_hash, sig, public_key=public_key)
-    checks["signature"] = bool(getattr(auth, "authentic", False))
-    if not checks["signature"]:
+        return done(True, "digest", default_authority)
+
+    if auth_proof and not sig:
+        checks["proof_pair"] = False
         reasons.append(
-            f"signature not authentic ({getattr(auth, 'method', '?')}: "
-            f"{getattr(auth, 'detail', None) or 'not authentic'})"
+            "authorization proof present without the required content signature — "
+            "refusing an incomplete full-depth proof pair"
         )
-        return done(False, "digest")
+        return done(False, "digest", "forged")
+
+    if is_v03 and sig and not auth_proof and envelope_nontrivial:
+        checks["authorization_required"] = False
+        reasons.append(
+            "v0.3 authorization proof missing — refusing a downgrade from the "
+            "full content+envelope proof pair"
+        )
+        return done(False, "digest", "unauthenticated")
+
+    try:
+        from bulla.identity import verify_proof, verify_proof_domain
+        import nacl.signing  # noqa: F401 — prove the optional crypto backend exists
+    except ImportError:  # pragma: no cover - identity extra absent
+        reasons.append("proof present but bulla[identity] not installed — verified to digest only")
+        return done(True, "digest", "unresolved" if auth_proof else default_authority)
+
+    def _vproof(purpose: str, digest: str, proof: dict):
+        # v0.3 proofs are domain-separated (purpose in the signed bytes); v0.2
+        # proofs sign the raw digest string. Dispatch on the receipt's own version.
+        if is_v03:
+            return verify_proof_domain(purpose, digest, proof, public_key=public_key)
+        return verify_proof(digest, proof, public_key=public_key)
+
+    # content authenticity — the claim/verdict (over content_hash)
+    if sig:
+        auth = _vproof("content", receipt.content_hash, sig)
+        checks["signature"] = bool(getattr(auth, "authentic", False))
+        if not checks["signature"]:
+            reasons.append(
+                f"signature not authentic ({getattr(auth, 'method', '?')}: "
+                f"{getattr(auth, 'detail', None) or 'not authentic'})"
+            )
+            return done(False, "digest", default_authority)
+
+    # authority authenticity — the mandate/remedy (over authorization_hash)
+    authority_status = default_authority
+    if auth_proof:
+        aauth = _vproof("authorization", receipt.authorization_hash, auth_proof)
+        checks["authorization"] = bool(getattr(aauth, "authentic", False))
+        if not checks["authorization"]:
+            reasons.append(
+                "authority not authentic — the authorization proof does not bind this "
+                f"envelope ({getattr(aauth, 'method', '?')}: "
+                f"{getattr(aauth, 'detail', None) or 'not authentic'}); the mandate/remedy "
+                "may have been swapped after signing"
+            )
+            return done(False, "digest", "forged")
+        # Both proofs must be made by the same declared signing identity. Domain
+        # separation stops cross-purpose replay; this stops signer-substitution —
+        # an attacker retaining the honest content signature and attaching their
+        # OWN valid authorization signature over a swapped envelope.
+        signer_fields = ("type", "issuer", "verificationMethod")
+        same_signer = all(sig.get(k) == auth_proof.get(k) for k in signer_fields)
+        checks["authorization_same_signer"] = same_signer
+        if not same_signer:
+            reasons.append(
+                "authority not authentic — content and authorization proofs name "
+                "different signing identities (possible signer-substitution attack)"
+            )
+            return done(False, "digest", "forged")
+        authority_status = "verified"
+    elif envelope_nontrivial:
+        reasons.append(
+            "authority unauthenticated — content is signed but no authorization proof "
+            "binds the mandate/remedy; verify the envelope out of band before relying on it"
+        )
+
+    # ---- delegation (v0.3 structured grants) — SURFACED, never folded into ok ----
+    # The six dimensions are independent and reported for a relying party to
+    # combine; a broken/mismatched chain does not change the record's integrity
+    # verdict, exactly like grounding and convention conformance. See bulla.delegation.
+    deleg = None
+    env_authority = receipt.envelope.authority
+    if is_v03 and receipt.envelope.deed_schema == "0.3" and env_authority is not None:
+        from bulla.delegation import verify_delegation
+        leaf_vm = (sig or {}).get("verificationMethod")
+        env_bounds = receipt.envelope.bounds
+        # `public_key` is deliberately NOT forwarded: it is the caller's override for
+        # THIS receipt's signer, and reusing it upstream would let one supplied key
+        # authenticate every grantor in the chain. Each grant's key is derived from
+        # its own `grantor` did:key inside verify_delegation.
+        deleg = verify_delegation(
+            env_authority.delegation,
+            principal=env_authority.principal,
+            policy_ref=env_authority.policy,
+            scope_ref=env_bounds.scope if env_bounds is not None else None,
+            leaf_verification_method=leaf_vm,
+        )
+        for r in deleg.reasons:
+            reasons.append("delegation: " + r)
 
     # ---- log_inclusion rung (no inline proof; honestly reported) ----
     reasons.append(
         "verified to attestation — log_inclusion (external Rekor/registry proof) "
         "is the bulla[sigstore] follow-up; no inline proof present"
     )
-    return done(True, "attestation")
+    return done(True, "attestation", authority_status, deleg)

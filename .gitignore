@@ -1,6 +1,10 @@
 __pycache__/
 *.pyc
 *.egg-info/
+bench/golden/v0.1/private/
+bench/golden/v0.2/private/
+bench/golden/v0.2/external/reviewer-oracles.json
+bench/golden/v0.2/external/*.agekey
 dist/
 build/
 .eggs/

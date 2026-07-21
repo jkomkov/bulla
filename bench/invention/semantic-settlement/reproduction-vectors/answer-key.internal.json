@@ -1,0 +1,7 @@
+{
+  "vector": "procurement-provisional.blind.json",
+  "input_hash": "sha256:25d0e3b2684bd29e5c08601231d59482898cd0f6cf15cf1dc96f3b7d681c3e19",
+  "expected_assessment_hash": "sha256:4359ed53cd19cbac9bf3a476930f61c9b5c27fdcd0fb9fc4c1539e11122f7c52",
+  "expected_status": "EXECUTE_PROVISIONALLY",
+  "expected_cause": "VERIFIED_AMBIGUITY_RESERVE"
+}

@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://resagentica.com/spec/action-receipt-v0.3.schema.json",
+  "title": "ActionReceipt v0.3 (draft authority binding)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "kind", "action", "diagnostic_ref", "evidence_refs",
+    "anchor_ref", "mandate", "remedy", "retention", "stake", "conventions",
+    "signature", "authorization", "timestamp", "producer", "hashes"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.3" },
+    "kind": { "const": "action_receipt" },
+    "action": {
+      "type": "object",
+      "required": ["type", "subject"],
+      "properties": {
+        "type": { "type": "string", "minLength": 1 },
+        "subject": { "type": "object" }
+      },
+      "additionalProperties": true
+    },
+    "diagnostic_ref": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["reference", "not_applicable", "deferred"] },
+        "ref": { "$ref": "#/$defs/hash" }
+      },
+      "additionalProperties": false
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "hash", "grounding"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "hash": { "$ref": "#/$defs/hash" },
+          "grounding": {
+            "enum": [
+              "self_asserted", "counterparty_signed",
+              "third_party_anchored", "execution_verified"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "anchor_ref": { "type": "object" },
+    "mandate": { "$ref": "#/$defs/mandate" },
+    "remedy": { "type": "object" },
+    "retention": { "type": "object" },
+    "stake": { "type": "null" },
+    "conventions": { "type": "array", "items": { "$ref": "#/$defs/convention" } },
+    "signature": { "oneOf": [{ "$ref": "#/$defs/contentProof" }, { "type": "null" }] },
+    "authorization": { "oneOf": [{ "$ref": "#/$defs/authorizationProof" }, { "type": "null" }] },
+    "timestamp": { "type": "string", "minLength": 1 },
+    "producer": { "type": "object" },
+    "hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["content", "event", "attestation", "log_leaf"],
+      "properties": {
+        "content": { "$ref": "#/$defs/hash" },
+        "event": { "$ref": "#/$defs/hash" },
+        "attestation": { "$ref": "#/$defs/hash" },
+        "log_leaf": { "$ref": "#/$defs/hash" }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "signature": { "$ref": "#/$defs/contentProof" },
+        "authorization": { "$ref": "#/$defs/authorizationProof" }
+      }
+    },
+    {
+      "properties": {
+        "signature": { "type": "null" },
+        "authorization": { "type": "null" }
+      }
+    }
+  ],
+  "$defs": {
+    "hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "purpose", "issuer", "verificationMethod", "proofValue"],
+      "properties": {
+        "type": { "const": "bulla/ed25519-2026" },
+        "purpose": { "enum": ["content", "authorization", "delegation-grant"] },
+        "issuer": { "type": "string", "minLength": 1 },
+        "verificationMethod": { "type": "string", "minLength": 1 },
+        "proofValue": { "type": "string", "minLength": 1 }
+      }
+    },
+    "contentProof": {
+      "allOf": [
+        { "$ref": "#/$defs/proof" },
+        { "properties": { "purpose": { "const": "content" } } }
+      ]
+    },
+    "authorizationProof": {
+      "allOf": [
+        { "$ref": "#/$defs/proof" },
+        { "properties": { "purpose": { "const": "authorization" } } }
+      ]
+    },
+    "grantProof": {
+      "allOf": [
+        { "$ref": "#/$defs/proof" },
+        { "properties": { "purpose": { "const": "delegation-grant" } } }
+      ]
+    },
+    "checkpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain", "value"],
+      "properties": {
+        "domain": { "type": "string", "minLength": 1 },
+        "value": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "delegationGrant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "grantor", "grantee", "principal", "parent", "policy_digest",
+        "scope_digest", "proof"
+      ],
+      "properties": {
+        "grantor": { "$ref": "#/$defs/didKey" },
+        "grantee": { "$ref": "#/$defs/didKey" },
+        "principal": { "$ref": "#/$defs/didKey" },
+        "parent": { "oneOf": [{ "$ref": "#/$defs/hash" }, { "type": "null" }] },
+        "policy_digest": { "$ref": "#/$defs/hash" },
+        "scope_digest": { "$ref": "#/$defs/hash" },
+        "not_before": { "$ref": "#/$defs/checkpoint" },
+        "not_after": { "$ref": "#/$defs/checkpoint" },
+        "proof": { "$ref": "#/$defs/grantProof" }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["principal", "policy", "delegation"],
+      "properties": {
+        "principal": { "type": "string", "minLength": 1 },
+        "policy": { "type": "string", "minLength": 1 },
+        "delegation": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "string", "minLength": 1 },
+              { "$ref": "#/$defs/delegationGrant" }
+            ]
+          },
+          "maxItems": 8
+        }
+      }
+    },
+    "bounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope"],
+      "properties": {
+        "scope": {
+          "oneOf": [
+            { "type": "string", "minLength": 1, "description": "prose scope (opaque, hashed as UTF-8)" },
+            { "type": "object", "description": "a jsonschema+quantum/1 predicate over action.subject (validated in code); enables bounds_conformance" }
+          ]
+        },
+        "expires": { "type": ["string", "null"] },
+        "rollback_window": { "type": ["string", "null"] }
+      }
+    },
+    "mandate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "deed_schema": { "enum": ["0.2", "0.3"] },
+        "authority": { "$ref": "#/$defs/authority" },
+        "bounds": { "$ref": "#/$defs/bounds" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": ["deed_schema"],
+            "properties": { "deed_schema": { "const": "0.3" } }
+          },
+          "then": {
+            "properties": {
+              "authority": {
+                "properties": {
+                  "delegation": { "items": { "$ref": "#/$defs/delegationGrant" } }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "authority": {
+                "properties": {
+                  "delegation": { "items": { "type": "string", "minLength": 1 } }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "didKey": {
+      "type": "string",
+      "pattern": "^did:key:z[1-9A-HJ-NP-Za-km-z]+$"
+    },
+    "convention": {
+      "type": "object",
+      "required": ["name", "scope", "kind", "definition_hash"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "scope": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["executable", "semantic"] },
+        "definition": {},
+        "definition_hash": { "$ref": "#/$defs/hash" },
+        "forum": { "type": "object" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

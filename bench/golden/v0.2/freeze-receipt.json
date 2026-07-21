@@ -1,0 +1,66 @@
+{
+  "action": {
+    "subject": {
+      "candidate_commit": "3f9ea464211f7ea9af7fee0e7e2a9e953d0b71a6",
+      "manifest_hash": "sha256:e6462565c92acdbf486ad43e9b9ed50ed32f12ec0972263a3c0c74700b789337",
+      "profile": "bulla.golden-suite/0.2-experimental"
+    },
+    "type": "bulla.golden.freeze"
+  },
+  "anchor_ref": {},
+  "conventions": [],
+  "diagnostic_ref": {
+    "ref": "sha256:e6462565c92acdbf486ad43e9b9ed50ed32f12ec0972263a3c0c74700b789337",
+    "status": "reference"
+  },
+  "evidence_refs": [
+    {
+      "grounding": "execution_verified",
+      "hash": "sha256:e6462565c92acdbf486ad43e9b9ed50ed32f12ec0972263a3c0c74700b789337",
+      "name": "golden_v02_freeze_manifest"
+    }
+  ],
+  "hashes": {
+    "attestation": "sha256:10eea9b0f4b203b744a9d572027eeacb3b0f878e265645c0998a0a6452c12550",
+    "content": "sha256:d42dce2674d463d1d809c0c0aa7acac0738ef4cc5418b1b32cfddf6fbc68f328",
+    "event": "sha256:c9319edabee8634b2b885d3af5016475422a4b28ba59c6249fe92f807ce540b8",
+    "log_leaf": "sha256:6b8fa1396e3e08dc53a3c5d61d50a1f212c43465938e27827be982cd3ed7581a"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy:golden-v02-preregistration@1",
+      "principal": "did:example:golden-v02-freeze"
+    },
+    "bounds": {
+      "scope": "bulla.golden-suite/0.2-experimental"
+    }
+  },
+  "producer": {
+    "component": "bulla.golden-suite",
+    "profile": "0.2-experimental"
+  },
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://github.com/Integral-Systems/res-agentica",
+      "trusted_root_ref": "git:golden-v02-candidate"
+    },
+    "remedies": [
+      {
+        "anchor": "freeze-manifest.json",
+        "rung": "recompute",
+        "verifier": "python -I bulla/scripts/verify_golden_v02.py"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "auditor",
+    "record": "authority-permanent"
+  },
+  "schema_version": "0.2",
+  "signature": null,
+  "stake": null,
+  "timestamp": "2026-07-19T21:49:57.483361+00:00"
+}

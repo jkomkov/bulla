@@ -1,0 +1,997 @@
+{
+  "schema_version": "0.1-experimental",
+  "split": "design",
+  "freeze_hash": "sha256:ec63681d7713f4fd10adabec9b0151cd1f2dfe84600fc63d8c3b67b904697411",
+  "instance_count": 48,
+  "status_counts": {
+    "CHOICE_REQUIRED": 10,
+    "COMPILED": 19,
+    "ESCALATE": 9,
+    "PARTIAL": 10
+  },
+  "expected_status_agreement": 1.0,
+  "sound_packages_or_certificates": 48,
+  "independently_rejected_emissions": 0,
+  "compile_rate": 0.3958333333333333,
+  "p95_synthesis_seconds": 6.227295832999516,
+  "p95_predicate_ast_nodes": 2,
+  "product_gate": {
+    "compile_rate_at_least_25_percent": true,
+    "compile_rate_below_kill_10_percent": false,
+    "p95_under_10_seconds": true,
+    "p95_under_256_nodes": true
+  },
+  "adversarial_controls": [
+    {
+      "id": "vacuous-predicate",
+      "passed": true,
+      "expected": "INVALID_INPUT",
+      "actual": "INVALID_INPUT",
+      "replay": null
+    },
+    {
+      "id": "hidden-state-leakage",
+      "passed": true,
+      "expected": "ESCALATE",
+      "actual": "ESCALATE",
+      "replay": null
+    },
+    {
+      "id": "contradictory-local-definitions",
+      "passed": true,
+      "expected": "INVALID_INPUT",
+      "actual": "INVALID_INPUT",
+      "replay": null
+    },
+    {
+      "id": "topology-obstruction",
+      "passed": true,
+      "expected": "ESCALATE",
+      "actual": "ESCALATE",
+      "replay": null
+    },
+    {
+      "id": "query-only-conservativity",
+      "passed": true,
+      "expected": "fail",
+      "actual": "fail",
+      "reasons": [
+        "package local definitions differ from the emitted global surface",
+        "package.formula[0] leaks non-shared relations ['target']"
+      ]
+    },
+    {
+      "id": "unauthorized-authority-expansion",
+      "passed": true,
+      "expected": "fail",
+      "actual": "fail",
+      "reasons": [
+        "package authority differs from the requested authority"
+      ]
+    },
+    {
+      "id": "unstable-equivalent-hash",
+      "passed": true,
+      "expected": "fail",
+      "actual": "fail",
+      "reasons": [
+        "package local definitions differ from the emitted global surface",
+        "package.formula[0] is not in canonical FRSL-1 form"
+      ]
+    },
+    {
+      "id": "repair-one-break-another",
+      "passed": true,
+      "expected": "fail",
+      "actual": "fail",
+      "reasons": [
+        "protected signature pins do not match the problem"
+      ]
+    }
+  ],
+  "all_controls_pass": true,
+  "instances": [
+    {
+      "id": "units-1",
+      "family": "units",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.023762833006912842,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:51f73b161736d066bf76216be140134002546d4f462f171b95babd976ce3c4f9",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "units-2",
+      "family": "units",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 6.11559479200514,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:f5565193d6830bc217c6ec5c89254f1fe1852eeade326887276bfa2348c453eb",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      }
+    },
+    {
+      "id": "units-3",
+      "family": "units",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0017407499981345609,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:29be5cf84c6da860979ec30de90509c86194c3023aeffb2c161605a499174db6",
+      "replay": null
+    },
+    {
+      "id": "units-4",
+      "family": "units",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.382117749992176,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:168a7164b07757007d04fa3e5de8771dd6c4be0aa7090d82beb05c16f4fc01e2",
+      "replay": null
+    },
+    {
+      "id": "bounded_time-0",
+      "family": "bounded_time",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02228629100136459,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:9358d5d44def20d6e2f4bf6e6ca8ad1ec0908b74311778b9ee7115c9b6e5ce1d",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "bounded_time-1",
+      "family": "bounded_time",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.022635707995505072,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:c7f275d23bc7550738bcb9268ce7ad06f10cfa8e5fe8fbede6b508a305c98321",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "bounded_time-2",
+      "family": "bounded_time",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 6.044628292002017,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:f9ae9a4678dfc44bc1274b309ae99340f5f693cd6634bd39906aca39ae2e0ecd",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      }
+    },
+    {
+      "id": "bounded_time-4",
+      "family": "bounded_time",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.3739679170103045,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:789ca57c3fced34caae5aaff979bc0e91e9d555fade8d0c6a95e2334cca55d9e",
+      "replay": null
+    },
+    {
+      "id": "interval_boundaries-0",
+      "family": "interval_boundaries",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.03637666600116063,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:d41066b74ec8fc64a3aab9c4c3f225b6712f0335e64d519ab93fd7ad843d5759",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "interval_boundaries-2",
+      "family": "interval_boundaries",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 6.284077292002621,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:91231bdf47f06a926cf1e44b32b8ce9c240b6adb0a83fbe0eb4a6ef1f7a18a73",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      }
+    },
+    {
+      "id": "interval_boundaries-3",
+      "family": "interval_boundaries",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.001741166997817345,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:cbf79864f176367f7f2e22c40b05b4209aa59b6286cb76f6cc17f5c1a73ab0f0",
+      "replay": null
+    },
+    {
+      "id": "interval_boundaries-4",
+      "family": "interval_boundaries",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.4121149999991758,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:7dfb40367dd1c4ef80ebab2a6689d6da403a9a4f07a14823fc8284be3c869fc2",
+      "replay": null
+    },
+    {
+      "id": "enums-0",
+      "family": "enums",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021646957990014926,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:b518578c26c09cc8242885f8e969f5e56e0467b81d29424beeafdeebfb8205de",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "enums-1",
+      "family": "enums",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02196737501071766,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:c57e4f915f97020da67ede26a4c42dd450617e69b849f77f49911c5f468c8655",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "enums-2",
+      "family": "enums",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 6.227295832999516,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:8c75c016a58bc5cd955c81ce5acb370030b031dfb00daa929599bee42cae355d",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      }
+    },
+    {
+      "id": "enums-3",
+      "family": "enums",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0017347919929306954,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:415d24fd42fd9962e53a5bb249987622373886a9fdf3e3ef6fcbfba8a51d5890",
+      "replay": null
+    },
+    {
+      "id": "null_absent-0",
+      "family": "null_absent",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02156908299366478,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:4842aba3c9b096624b02122dc9b8a2abc978194bac9b99676b9796090336b0cc",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "null_absent-1",
+      "family": "null_absent",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02187733400205616,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:bd6fecff804577baa999ca0b46885af254cdf9e07f0f71cbfd8f902dafa73ff6",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "null_absent-3",
+      "family": "null_absent",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0016894169966690242,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:2449286abacb73ecd4dfc3edf9bbd2187c98e510c2c8b31fa47069cf5f470136",
+      "replay": null
+    },
+    {
+      "id": "null_absent-4",
+      "family": "null_absent",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.3722753329930129,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:939e607bb17ba127a74757cb49660bc10e32b090f233c4ebddb5934900484896",
+      "replay": null
+    },
+    {
+      "id": "namespaces-1",
+      "family": "namespaces",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021817542001372203,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:848bba3812a13b573356bf9aeac94982441d8da0560ef3dcbf8081be0ac2748f",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "namespaces-2",
+      "family": "namespaces",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 6.033915291001904,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:57b2055b70a0bab294d5e4ecb4545e97103ff5ea8e93bccc9c19b63c334390f5",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      }
+    },
+    {
+      "id": "namespaces-3",
+      "family": "namespaces",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0017326669913018122,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:cafea990a49338c41f92c88027ac0b26cffd7bae5040e3f92c02d3f4e88fefde",
+      "replay": null
+    },
+    {
+      "id": "namespaces-4",
+      "family": "namespaces",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.3716365419968497,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:75c6feec80b624cb7bcbc11b025f49ae2eba9ad85d02fbb77edcd213909516c8",
+      "replay": null
+    },
+    {
+      "id": "integer_rounding-0",
+      "family": "integer_rounding",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.022451040989835747,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:f475468f8120b04f475822bc5b5ec492c8fa4e2734c52e8b43d96cde80c836b0",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "integer_rounding-1",
+      "family": "integer_rounding",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02287429200077895,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:19453a47915149ac660afab51efb21853cd1e8b1ac38ce6182f8f416dd05f7b5",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "integer_rounding-2",
+      "family": "integer_rounding",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 6.215566749990103,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:6eecef3b4ad7e9af1ec1b63102c8b23967088b38aeb1e585138db5394ba93f97",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      }
+    },
+    {
+      "id": "integer_rounding-4",
+      "family": "integer_rounding",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.4639522910001688,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:e9ef008f36e786b5d04efd67c5e3e8c52b6d96b966003af9bda9bf21d7cfaece",
+      "replay": null
+    },
+    {
+      "id": "delivery_acceptance-0",
+      "family": "delivery_acceptance",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021661499995389022,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:8cdbccf0cd4f3396f1937d96143c316f3887dd82286fb40f6f8938f78a1c74cf",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "delivery_acceptance-2",
+      "family": "delivery_acceptance",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 6.269434292000369,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:a15d029ef4b327152467f820602f03cc26dfa81419c1744c961ea6a4dbd03a5c",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      }
+    },
+    {
+      "id": "delivery_acceptance-3",
+      "family": "delivery_acceptance",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.001706292008748278,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:2f85c9da20d8c9bc1420104fcf2bb523afd4f80ae1ec3e849f0bc9528b07a157",
+      "replay": null
+    },
+    {
+      "id": "delivery_acceptance-4",
+      "family": "delivery_acceptance",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.2886045839986764,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:536a7812c08afae3ba9f92e738910d87321e7f23108a31861476bd79e04dfaa0",
+      "replay": null
+    },
+    {
+      "id": "evidence_floors-0",
+      "family": "evidence_floors",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02084662500419654,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:37470ea1409415ce9c32bba075b86fb9a640e4d22037610ef76d600e53b14d7b",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "evidence_floors-1",
+      "family": "evidence_floors",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021254459003102966,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:86f426b1f074c66665bd8ee68edd51e317168e09fa2459e20c0e677d6d69794c",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "evidence_floors-2",
+      "family": "evidence_floors",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 5.878329290993861,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:b31072123d7a0a2a826602c75c2bf9275fef076553658982e5e162f338ff420e",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      }
+    },
+    {
+      "id": "evidence_floors-3",
+      "family": "evidence_floors",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0016830829990794882,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:3b6b755e6655d20785fed9a532007090910e5b12aba356511a8a31ccf07084a9",
+      "replay": null
+    },
+    {
+      "id": "revocation_windows-0",
+      "family": "revocation_windows",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02073954200022854,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:e4681b882414e64bb39d9f1a2be0f27b2eee417a2d8c3d0b240a91323db1a964",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "revocation_windows-1",
+      "family": "revocation_windows",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021170084000914358,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:a64c98adfd16eb57bdf609f6f0cc0859b3ea58b1c29f0b7a7e8d7b7501c3d366",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "revocation_windows-3",
+      "family": "revocation_windows",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0016571250016568229,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:d0558fd9453e79ea51ab90b18fab8d606a47d9decc769e7100332e667c5a03cf",
+      "replay": null
+    },
+    {
+      "id": "revocation_windows-4",
+      "family": "revocation_windows",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.3049407090002205,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:b1a6549c4182e6c7c637c94c2559d26f161583dace058ead33c57c3dfd7045c2",
+      "replay": null
+    },
+    {
+      "id": "authority_scopes-1",
+      "family": "authority_scopes",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.02148158299678471,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:2b5ab1bae7360786bfd6912ea821a1543cc3e54d054dc28c6720eb9f1cc2a3bf",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "authority_scopes-2",
+      "family": "authority_scopes",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 5.926310124996235,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:01c753f5a0e096cfa3f19c94f855ef574b533ccc65de6819b12869c803550b27",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      }
+    },
+    {
+      "id": "authority_scopes-3",
+      "family": "authority_scopes",
+      "split": "design",
+      "expected_status": "ESCALATE",
+      "actual_status": "ESCALATE",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.0017190419894177467,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:fb7172aff8a65508761168ffd5e18cfcd9a511316280481ed777265a22906bc9",
+      "replay": null
+    },
+    {
+      "id": "authority_scopes-4",
+      "family": "authority_scopes",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.3103076669940492,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:5e8d9e8cafc6919ec5cd3dea4d0ce4250b2dffd42d0e3b7a7d293c1cd3f92a2b",
+      "replay": null
+    },
+    {
+      "id": "nondefinable-0",
+      "family": "nondefinable",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.020982374990126118,
+      "predicate_ast_nodes": 1,
+      "result_hash": "sha256:1281f5b4309d2cfc1dc9c738505fb4470a0b73c5ece7cc0ee25b2d712eceba97",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "nondefinable-1",
+      "family": "nondefinable",
+      "split": "design",
+      "expected_status": "COMPILED",
+      "actual_status": "COMPILED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 0.021441791992401704,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:491f742ea4d58a14a57ab7e12a6b86f70ac08daa49fe3f537c6c5a4242c4fd93",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "pass",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": []
+      }
+    },
+    {
+      "id": "nondefinable-2",
+      "family": "nondefinable",
+      "split": "design",
+      "expected_status": "PARTIAL",
+      "actual_status": "PARTIAL",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 5.925050875011948,
+      "predicate_ast_nodes": 2,
+      "result_hash": "sha256:477f42a13f7cca4c601c86331068ef1767a635699575f741dd56fc6dbd026785",
+      "replay": {
+        "gluing": "pass",
+        "conservativity": "pass",
+        "definability": "fail",
+        "preserved_refusals": "pass",
+        "minimality": "pass",
+        "receipt_binding": "pass",
+        "reasons": [
+          "partial envelope does not explicitly define the residual"
+        ]
+      }
+    },
+    {
+      "id": "nondefinable-4",
+      "family": "nondefinable",
+      "split": "design",
+      "expected_status": "CHOICE_REQUIRED",
+      "actual_status": "CHOICE_REQUIRED",
+      "expected_ok": true,
+      "sound": true,
+      "seconds": 1.305788166995626,
+      "predicate_ast_nodes": null,
+      "result_hash": "sha256:31bf7683beffb0b14a6e9b3e19a3cab3bfab2fb943fb879fce8c41baa30f4140",
+      "replay": null
+    }
+  ],
+  "comparison_arms": {
+    "exhaustive_reference": "run",
+    "smtinterpol": "adapter implemented; requires separately pinned jar",
+    "cegis": "DNF exact-cover search is internal to reference backend",
+    "frozen_llm_repairs": {
+      "source": "papers/bridge/demos/hidden_repair",
+      "frozen_unchanged": true,
+      "exact": 14,
+      "partial": 1,
+      "misses": 0,
+      "convergent_scenarios": 4,
+      "total_scenarios": 5,
+      "use": "candidate-generation baseline only"
+    },
+    "llm_candidate_plus_verifier": "not run without a preregistered provider snapshot"
+  },
+  "freeze_checks": {
+    "instance_count": true,
+    "family_count": true,
+    "holdout_count": true,
+    "holdout_ids": true,
+    "design_hash": true,
+    "holdout_hash": true,
+    "controls_hash": true,
+    "payload_hash": true
+  }
+}

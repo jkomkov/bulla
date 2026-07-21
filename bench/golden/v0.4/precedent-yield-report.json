@@ -1,0 +1,7110 @@
+{
+  "arms": [
+    "EXACT_PRECLUSION",
+    "AUTHORIZED_PRECEDENT",
+    "LABEL_ONLY_LEARNER",
+    "DECLARED_RULE_UPPER_BOUND"
+  ],
+  "case_count": 240,
+  "classification": "INTERNAL_CAPTIVE",
+  "design_count": 192,
+  "holdout_count": 48,
+  "lineage_count": 12,
+  "profile": "bulla.golden-suite/0.4-experimental",
+  "result": {
+    "claim_boundary": "model-relative captive lineage yield; not economic value",
+    "classification": "DEMONSTRATED_COMPOUNDING",
+    "cross_boundary_reuse": 0,
+    "holdout_lineages_authorized_dominates": 12,
+    "median_findings_to_80_improvement": 0.75,
+    "median_marginal_precedent_yield": 9.0,
+    "unsafe_transfer": 0
+  },
+  "runs": [
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-01-01",
+          "certified_mass": 2,
+          "finding_count": 1,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-01-02",
+          "certified_mass": 4,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-01-03",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-01-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-01-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-01-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 3,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-01-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "units",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        1,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-01-01",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-01-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "units",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-01-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "units",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-01-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "units",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-01-03",
+          "certified_mass": 3,
+          "finding_count": 1,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-01-01",
+          "certified_mass": 5,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-01-02",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-01-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-01-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-01-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 2,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-01-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "units",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-01-03",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-01-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "units",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-01-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "units",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-01-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-01-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "units",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-02-01",
+          "certified_mass": 2,
+          "finding_count": 1,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-02-02",
+          "certified_mass": 4,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-02-03",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-02-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-02-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-02-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 3,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-02-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "bounded-time",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        1,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-02-01",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-02-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "bounded-time",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-02-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "bounded-time",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-02-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "bounded-time",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-02-03",
+          "certified_mass": 3,
+          "finding_count": 1,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-02-01",
+          "certified_mass": 5,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-02-02",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-02-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-02-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-02-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 2,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-02-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "bounded-time",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-02-03",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-02-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "bounded-time",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-02-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "bounded-time",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-02-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-02-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "bounded-time",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-03-01",
+          "certified_mass": 2,
+          "finding_count": 1,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-03-02",
+          "certified_mass": 4,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-03-03",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-03-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-03-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-03-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 3,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-03-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "interval-boundaries",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        1,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-03-01",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-03-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "interval-boundaries",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-03-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "interval-boundaries",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-03-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "interval-boundaries",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-03-03",
+          "certified_mass": 3,
+          "finding_count": 1,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-03-01",
+          "certified_mass": 5,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-03-02",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-03-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-03-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-03-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 2,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-03-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "interval-boundaries",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-03-03",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-03-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "interval-boundaries",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-03-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "interval-boundaries",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-03-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-03-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "interval-boundaries",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-04-01",
+          "certified_mass": 2,
+          "finding_count": 1,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-04-02",
+          "certified_mass": 4,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-04-03",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-04-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-04-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-04-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 3,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-04-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "enums",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        1,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-04-01",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-04-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "enums",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-04-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "enums",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-04-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "enums",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-04-03",
+          "certified_mass": 3,
+          "finding_count": 1,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-04-01",
+          "certified_mass": 5,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-04-02",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-04-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-04-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-04-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 2,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-04-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "enums",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-04-03",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-04-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "enums",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-04-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "enums",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-04-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-04-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "enums",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-05-01",
+          "certified_mass": 2,
+          "finding_count": 1,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-05-02",
+          "certified_mass": 4,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-05-03",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-05-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-05-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-05-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 3,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-05-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "null-absent",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        1,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-05-01",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-05-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "null-absent",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-05-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "null-absent",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-05-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "null-absent",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-05-03",
+          "certified_mass": 3,
+          "finding_count": 1,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-05-01",
+          "certified_mass": 5,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-05-02",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-05-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-05-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-05-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 2,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-05-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "null-absent",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-05-03",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-05-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "null-absent",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-05-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "null-absent",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-05-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-05-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "null-absent",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-06-01",
+          "certified_mass": 2,
+          "finding_count": 1,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-06-02",
+          "certified_mass": 4,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-06-03",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-06-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-06-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-06-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 3,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-06-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "namespaces",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        1,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-06-01",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-06-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "namespaces",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-06-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "namespaces",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-06-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "namespaces",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-06-03",
+          "certified_mass": 3,
+          "finding_count": 1,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-06-01",
+          "certified_mass": 5,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-06-02",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-06-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-06-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-06-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 2,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-06-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "namespaces",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-06-03",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-06-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "namespaces",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-06-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "namespaces",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-06-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-06-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "namespaces",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-07-01",
+          "certified_mass": 2,
+          "finding_count": 1,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-07-02",
+          "certified_mass": 4,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-07-03",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-07-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-07-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-07-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 3,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-07-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "integer-rounding",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        1,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-07-01",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-07-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "integer-rounding",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-07-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "integer-rounding",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-07-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "integer-rounding",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-07-03",
+          "certified_mass": 3,
+          "finding_count": 1,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-07-01",
+          "certified_mass": 5,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-07-02",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-07-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-07-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-07-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 2,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-07-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "integer-rounding",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-07-03",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-07-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "integer-rounding",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-07-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "integer-rounding",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-07-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-07-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "integer-rounding",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-08-01",
+          "certified_mass": 2,
+          "finding_count": 1,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-08-02",
+          "certified_mass": 4,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-08-03",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-08-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-08-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-08-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 3,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-08-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "delivery-acceptance",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        1,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-08-01",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-08-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "delivery-acceptance",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-08-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "delivery-acceptance",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-08-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "delivery-acceptance",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-08-03",
+          "certified_mass": 3,
+          "finding_count": 1,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-08-01",
+          "certified_mass": 5,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-08-02",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-08-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-08-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-08-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 2,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-08-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "delivery-acceptance",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-08-03",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-08-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "delivery-acceptance",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-08-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "delivery-acceptance",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-08-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-08-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "delivery-acceptance",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-09-01",
+          "certified_mass": 2,
+          "finding_count": 1,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-09-02",
+          "certified_mass": 4,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-09-03",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-09-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-09-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-09-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 3,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-09-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "evidence-floors",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        1,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-09-01",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-09-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "evidence-floors",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-09-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "evidence-floors",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-09-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "evidence-floors",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-09-03",
+          "certified_mass": 3,
+          "finding_count": 1,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-09-01",
+          "certified_mass": 5,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-09-02",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-09-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-09-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-09-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 2,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-09-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "evidence-floors",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-09-03",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-09-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "evidence-floors",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-09-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "evidence-floors",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-09-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-09-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "evidence-floors",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-10-01",
+          "certified_mass": 2,
+          "finding_count": 1,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-10-02",
+          "certified_mass": 4,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-10-03",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-10-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-10-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-10-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 3,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-10-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "revocation-windows",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        1,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-10-01",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-10-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "revocation-windows",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-10-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "revocation-windows",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-10-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "revocation-windows",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-10-03",
+          "certified_mass": 3,
+          "finding_count": 1,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-10-01",
+          "certified_mass": 5,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-10-02",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-10-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-10-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-10-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 2,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-10-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "revocation-windows",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-10-03",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-10-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "revocation-windows",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-10-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "revocation-windows",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-10-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-10-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "revocation-windows",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-11-01",
+          "certified_mass": 2,
+          "finding_count": 1,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-11-02",
+          "certified_mass": 4,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-11-03",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-11-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-11-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-11-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 3,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-11-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "authority-scopes",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        1,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-11-01",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-11-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "authority-scopes",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-11-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "authority-scopes",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-11-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "authority-scopes",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-11-03",
+          "certified_mass": 3,
+          "finding_count": 1,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-11-01",
+          "certified_mass": 5,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-11-02",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-11-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-11-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-11-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 2,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-11-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "authority-scopes",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-11-03",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-11-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "authority-scopes",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-11-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "authority-scopes",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-11-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-11-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "authority-scopes",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 6,
+      "rely_mass": 4,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-12-01",
+          "certified_mass": 2,
+          "finding_count": 1,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-12-02",
+          "certified_mass": 4,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-12-03",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-12-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-12-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-12-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 3,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-12-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "nondefinability",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        1,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-12-01",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-12-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "nondefinability",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-12-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "nondefinability",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-12-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "nondefinability",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "CHRONOLOGICAL"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-12-03",
+          "certified_mass": 3,
+          "finding_count": 1,
+          "newly_certified_future_cases": 2,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 2,
+          "case_id": "PY04-12-01",
+          "certified_mass": 5,
+          "finding_count": 2,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 3,
+          "case_id": "PY04-12-02",
+          "certified_mass": 7,
+          "finding_count": 3,
+          "newly_certified_future_cases": 1,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 4,
+          "case_id": "PY04-12-08",
+          "certified_mass": 8,
+          "finding_count": 4,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 5,
+          "case_id": "PY04-12-14",
+          "certified_mass": 9,
+          "finding_count": 5,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        },
+        {
+          "act": 6,
+          "case_id": "PY04-12-16",
+          "certified_mass": 10,
+          "finding_count": 6,
+          "newly_certified_future_cases": 0,
+          "operation": "FORUM_FINDING/CASE_ONLY"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "EXACT_PRECLUSION",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 6,
+      "findings_to_50": 2,
+      "findings_to_80": 4,
+      "findings_to_90": 5,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-12-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ESCALATE/UNSEEN_CASE",
+          "reuse": "NONE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "EXACT_RECORD",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "nondefinability",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        2,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "proof_nodes": 12,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [
+        {
+          "act": 1,
+          "case_id": "PY04-12-03",
+          "certified_mass": 10,
+          "finding_count": 1,
+          "newly_certified_future_cases": 9,
+          "operation": "FORUM_FINDING+ADOPT_PRECEDENT/BINDING_WITHIN_SCOPE"
+        }
+      ],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "AUTHORIZED_PRECEDENT",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 1,
+      "findings_to_50": 1,
+      "findings_to_80": 1,
+      "findings_to_90": 1,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-12-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "nondefinability",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [
+        9
+      ],
+      "proof_nodes": 8,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 6,
+      "advisory_predictions": 10,
+      "arm": "LABEL_ONLY_LEARNER",
+      "design_eligible": 10,
+      "escalate_mass": 16,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 0,
+      "holdout": [
+        {
+          "case_id": "PY04-12-17",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-18",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-19",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "ADVISORY_ONLY/ESCALATE",
+          "reuse": "UNAUTHORIZED_STATISTICAL_GENERALIZATION",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "nondefinability",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 0,
+      "rely_mass": 0,
+      "schedule": "GREEDY"
+    },
+    {
+      "act_trace": [],
+      "advisory_errors": 0,
+      "advisory_predictions": 0,
+      "arm": "DECLARED_RULE_UPPER_BOUND",
+      "design_eligible": 10,
+      "escalate_mass": 6,
+      "findings": 0,
+      "findings_to_50": null,
+      "findings_to_80": null,
+      "findings_to_90": null,
+      "formula_nodes": 1,
+      "holdout": [
+        {
+          "case_id": "PY04-12-17",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-18",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "RELY",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-19",
+          "certified": true,
+          "cross_boundary": false,
+          "exit": "REFUSE",
+          "reuse": "REASON_PREDICATE",
+          "unsafe": false
+        },
+        {
+          "case_id": "PY04-12-20",
+          "certified": false,
+          "cross_boundary": false,
+          "exit": "LEGISLATION_REQUIRED/SCOPE_WIDENING",
+          "reuse": "NONE",
+          "unsafe": false
+        }
+      ],
+      "lineage": "nondefinability",
+      "logical_counters": {
+        "cases_examined": 16,
+        "reason_ast_nodes": 1
+      },
+      "marginal_yields": [],
+      "proof_nodes": 0,
+      "refuse_mass": 4,
+      "rely_mass": 6,
+      "schedule": "GREEDY"
+    }
+  ],
+  "schedules": [
+    "CHRONOLOGICAL",
+    "GREEDY"
+  ],
+  "schema_version": "0.4-experimental"
+}

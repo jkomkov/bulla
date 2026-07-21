@@ -79,6 +79,22 @@ def test_roundtrip_hashes_stable():
     assert ActionReceipt.from_dict(d).hashes() == r.hashes()
 
 
+def test_v02_rejects_v03_authorization_member_even_when_null():
+    d = _receipt().to_dict()
+    d["authorization"] = None
+    with pytest.raises(ActionReceiptError, match="only valid in schema_version '0.3'"):
+        ActionReceipt.from_dict(d)
+
+
+def test_missing_stored_hash_fails_closed():
+    d = _receipt().to_dict()
+    del d["hashes"]["content"]
+    v = verify_receipt(d)
+    assert not v.ok
+    assert v.checks["hash_content"] is False
+    assert any("content hash missing" in reason for reason in v.reasons)
+
+
 def test_four_hashes_present_and_distinct():
     h = _receipt().hashes()
     assert set(h) == {"content", "event", "attestation", "log_leaf"}
@@ -178,6 +194,153 @@ def test_forge_recompute_hashes_stale_signature_fails_at_attestation():
     assert not v.ok
     assert v.verified_to == "digest"           # got past digest...
     assert v.checks["signature"] is False      # ...died at attestation
+
+
+# ── authority binding: the envelope-swap attack and its fix ──────────────────
+#
+# content_hash is envelope-free by design, so a signature over content says
+# nothing about the mandate/remedy. authorization_hash = H(content, envelope)
+# closes that gap: the issuer signs it to vouch for THIS envelope.
+
+def test_authorization_hash_binds_content_and_envelope():
+    r = _receipt()
+    from bulla.action_receipt import _canon_hash  # type: ignore
+    assert r.authorization_hash == _canon_hash(
+        {"content_hash": r.content_hash, "envelope_hash": r.envelope_hash}
+    )
+    # invariant to the proofs themselves (so it is stable to sign against)
+    r2 = _receipt(signature={"type": "x", "proofValue": "y"})
+    assert r2.authorization_hash == r.authorization_hash
+
+
+def test_authorization_hash_moves_with_the_envelope():
+    """Swapping any envelope field moves authorization_hash — the whole point."""
+    r = _receipt()
+    swapped = _receipt(envelope=_envelope(scope="repo:victim/* path:*"))
+    assert swapped.content_hash == r.content_hash          # content unmoved...
+    assert swapped.authorization_hash != r.authorization_hash  # ...authority moved
+
+
+def test_content_only_signature_leaves_authority_unauthenticated():
+    """The honest split: signing content alone verifies the CLAIM, not the
+    mandate. The verifier says so instead of implying the envelope is vouched."""
+    if not _HAS_NACL:
+        pytest.skip("needs bulla[identity]")
+    env = _envelope()
+    r0 = _receipt(envelope=env)
+    signer = LocalEd25519Signer.generate()
+    r = _receipt(envelope=env, signature=signer.sign(r0.content_hash))
+    v = verify_receipt(r.to_dict(), public_key=signer.public_key)
+    assert v.ok and v.verified_to == "attestation"
+    assert v.checks["signature"] is True
+    assert v.authority_authentic == "unauthenticated"
+
+
+@pytest.mark.skipif(not _HAS_NACL, reason="needs bulla[identity]")
+def test_full_signing_verifies_both_content_and_authority():
+    from bulla.action_receipt import sign_action_receipt
+    signer = LocalEd25519Signer.generate()
+    r = sign_action_receipt(_receipt(), signer)
+    assert r.schema_version == "0.3"
+    v = verify_receipt(r.to_dict(), public_key=signer.public_key)
+    assert v.ok and v.verified_to == "attestation"
+    assert v.checks["signature"] is True
+    assert v.checks["authorization"] is True
+    assert v.authority_authentic == "verified"
+
+
+@pytest.mark.skipif(not _HAS_NACL, reason="needs bulla[identity]")
+def test_authorization_resigned_by_different_key_is_rejected():
+    """The strongest signer-substitution attack under v0.3 domain separation:
+    keep the honest content proof, swap the envelope, and attach a *cryptographically
+    valid* authorization proof made by the attacker's own key over the swapped
+    envelope (a proper domain-separated proof, so it clears verify_proof_domain).
+    Both proofs verify individually; the same-signer check rejects the pair."""
+    from bulla.action_receipt import sign_action_receipt
+
+    honest = LocalEd25519Signer.generate()
+    attacker = LocalEd25519Signer.generate()
+    d = sign_action_receipt(_receipt(), honest).to_dict()
+    d["mandate"]["bounds"]["scope"] = "repo:victim/* path:*"
+    forged = ActionReceipt.from_dict(d)
+    d["authorization"] = attacker.sign_domain("authorization", forged.authorization_hash)
+    d["hashes"] = ActionReceipt.from_dict(d).hashes()
+
+    v = verify_receipt(d)
+    assert not v.ok
+    assert v.checks["signature"] is True             # honest content proof still valid
+    assert v.checks["authorization"] is True         # attacker's proof is cryptographically valid…
+    assert v.checks["authorization_same_signer"] is False  # …but it is not the content signer
+    assert v.authority_authentic == "forged"
+
+
+@pytest.mark.skipif(not _HAS_NACL, reason="needs bulla[identity]")
+def test_authorization_without_content_signature_fails_closed():
+    from bulla.action_receipt import sign_action_receipt
+
+    signer = LocalEd25519Signer.generate()
+    d = sign_action_receipt(_receipt(), signer).to_dict()
+    d["signature"] = None
+    d["hashes"] = ActionReceipt.from_dict(d).hashes()
+    v = verify_receipt(d)
+    assert not v.ok
+    assert v.checks["proof_pair"] is False
+
+
+@pytest.mark.skipif(not _HAS_NACL, reason="needs bulla[identity]")
+def test_v03_stripped_authorization_is_a_failed_downgrade():
+    from bulla.action_receipt import sign_action_receipt
+
+    signer = LocalEd25519Signer.generate()
+    d = sign_action_receipt(_receipt(), signer).to_dict()
+    d["authorization"] = None
+    d["hashes"] = ActionReceipt.from_dict(d).hashes()
+    v = verify_receipt(d)
+    assert not v.ok
+    assert v.checks["authorization_required"] is False
+    assert v.authority_authentic == "unauthenticated"
+
+
+@pytest.mark.skipif(not _HAS_NACL, reason="needs bulla[identity]")
+def test_forge_swap_envelope_recompute_hashes_fails_authorization():
+    """THE strongest authority forgery: keep the issuer's valid content
+    signature, swap the mandate/remedy envelope, and recompute EVERY unsigned
+    downstream hash (attestation, log_leaf) so the receipt sails past digest.
+
+    Before authorization binding this verified to `attestation` with forged
+    authority. Now the authorization proof — over H(content, envelope) — no
+    longer binds the swapped envelope, and the receipt fails as `forged`."""
+    from bulla.action_receipt import sign_action_receipt
+    signer = LocalEd25519Signer.generate()
+    r = sign_action_receipt(_receipt(), signer)
+    d = r.to_dict()
+
+    # attacker rewrites the mandate to a different principal and a wider scope
+    d["mandate"]["authority"]["principal"] = "did:key:zATTACKER"
+    d["mandate"]["bounds"]["scope"] = "repo:victim/* path:*"
+    d["hashes"] = ActionReceipt.from_dict(d).hashes()  # recompute — passes digest
+
+    v = verify_receipt(d, public_key=signer.public_key)
+    assert not v.ok
+    assert v.checks["signature"] is True          # content signature still valid...
+    assert v.checks["authorization"] is False     # ...but authority does not bind
+    assert v.authority_authentic == "forged"
+
+
+@pytest.mark.skipif(not _HAS_NACL, reason="needs bulla[identity]")
+def test_swap_envelope_without_authorization_is_flagged_not_vouched():
+    """A content-only receipt whose envelope is swapped is NOT silently accepted:
+    the verifier reports `unauthenticated`, never presenting the swapped mandate
+    as issuer-vouched. (The strong FAIL requires an authorization proof to bind
+    against — see the test above.)"""
+    env = _envelope()
+    r0 = _receipt(envelope=env)
+    signer = LocalEd25519Signer.generate()
+    d = _receipt(envelope=env, signature=signer.sign(r0.content_hash)).to_dict()
+    d["mandate"]["authority"]["principal"] = "did:key:zATTACKER"
+    d["hashes"] = ActionReceipt.from_dict(d).hashes()
+    v = verify_receipt(d, public_key=signer.public_key)
+    assert v.authority_authentic == "unauthenticated"  # content signed, authority is not
 
 
 def test_forge_blank_remedy_anchor_refused_by_modality_law():
@@ -341,6 +504,53 @@ def test_executable_convention_unknown_keyword_fails_closed():
         _receipt(conventions=(c,))
 
 
+@pytest.mark.parametrize(
+    "schema",
+    [
+        {"properties": []},
+        {"properties": {}, "required": "amount"},
+        {"properties": {}, "additionalProperties": "no"},
+        {"properties": {"amount": {"type": "integer", "minimum": "zero"}}},
+        {"properties": {"name": {"type": "string", "pattern": "["}}},
+    ],
+)
+def test_executable_convention_malformed_containers_fail_closed(schema):
+    c = {
+        "name": "x", "scope": "s", "kind": "executable",
+        "definition": {"form": "jsonschema+quantum/1", "schema": schema},
+    }
+    with pytest.raises(ActionReceiptError):
+        _receipt(conventions=(c,))
+
+
+def test_portable_executable_subset_rejects_float_regex_and_unsafe_integer():
+    from bulla.executable_form import (
+        ExecutableFormError,
+        validate_portable_executable_definition,
+    )
+
+    for prop in (
+        {"type": "number"},
+        {"type": "string", "pattern": "^ok$"},
+        {"type": "integer", "maximum": 2**53},
+    ):
+        definition = {
+            "form": "jsonschema+quantum/1",
+            "schema": {"type": "object", "properties": {"value": prop}},
+        }
+        with pytest.raises(ExecutableFormError):
+            validate_portable_executable_definition(definition)
+
+    validate_portable_executable_definition({
+        "form": "jsonschema+quantum/1",
+        "schema": {
+            "type": "object",
+            "properties": {"amount": {"type": "integer", "minimum": 0, "maximum": 10}},
+        },
+        "quantum": {"amount": {"unit": "usd_micros", "multipleOf": 1}},
+    })
+
+
 def test_effective_grounding_is_min_over_evidence():
     r = _receipt(evidence_refs=(
         {"name": "log", "hash": "sha256:aa", "grounding": "execution_verified"},
@@ -392,7 +602,15 @@ _RELEASES = Path(__file__).resolve().parents[1] / "releases"
 
 
 @pytest.mark.skipif(not _RELEASES.is_dir(), reason="no releases corpus")
-@pytest.mark.parametrize("path", sorted(_RELEASES.glob("*.json")), ids=lambda p: p.name)
+@pytest.mark.parametrize(
+    "path",
+    [
+        path
+        for path in sorted(_RELEASES.glob("*.json"))
+        if json.loads(path.read_text()).get("kind") == "action_receipt"
+    ],
+    ids=lambda p: p.name,
+)
 def test_corpus_receipt_verifies(path):
     v = verify_receipt(json.loads(path.read_text()))
     assert v.ok and v.verified_to == "digest"  # unsigned reconstructions, honestly

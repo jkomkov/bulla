@@ -143,6 +143,23 @@ def test_gate_refuses_fee_positive_after_inclusion_and_root_pass(tmp_path):
     assert not d.proceed and d.deficiency == FEE_POSITIVE   # …and fee still refused
 
 
+def test_default_policy_proceeds_on_positive_fee_reporting_not_gating(tmp_path):
+    """Regression guard (northstar review 2026-07-09): the fee is a disclosure
+    signal, NOT a PROCEED precondition. Under the DEFAULT policy, a deed that is
+    authentic, included, own-log, and certifies fee=1 must PROCEED — the fee is
+    reported, never gated. Only the opt-in STRICT policy refuses on it (see the
+    test above). This keeps the retired detection thesis out of the enforcement
+    path: fee-gating cannot silently become the default again."""
+    signer = LocalEd25519Signer.generate()
+    reg = DeedLog(tmp_path / "r.jsonl")
+    cert = _cert(_seam(), signer); _log_cert(reg, cert, signer)   # fee = 1
+    incl = reg.inclusion_by_attestation(cert["attestation_hash"])
+    d = evaluate_gate(deed_rec=_rec(cert), inclusion_rec=incl, certificate=cert,
+                      is_remote=False, policy=DEFAULT_GATE_POLICY)
+    assert d.included is True and d.fee == 1     # inclusion passed, fee reported…
+    assert d.proceed is True and d.deficiency is None   # …and it did NOT gate
+
+
 def test_gate_refuses_fee_unverifiable_without_cert(tmp_path):
     """A bare deed record (no certificate) cannot prove fee=0 — the leaf carries no fee.
     REFUSE (FEE_UNVERIFIABLE), even though it is authentic + included + own-log."""
@@ -248,7 +265,12 @@ def test_recourse_gate_closes_loop_git():
 
     bulla_root = Path(__file__).resolve().parent.parent          # bulla/
     demo = bulla_root / "calibration" / "recourse_gate_closes_loop_git.py"
-    env = dict(os.environ, PYTHONPATH=str(bulla_root / "src"))
+    env = dict(os.environ)
+    env["PYTHONPATH"] = os.pathsep.join(
+        part
+        for part in (str(bulla_root / "src"), env.get("PYTHONPATH"))
+        if part
+    )
     r = subprocess.run([sys.executable, str(demo)], capture_output=True, text=True, env=env)
     if r.returncode == 2:
         pytest.skip(f"demo could not establish its control: {r.stdout.strip() or r.stderr.strip()}")

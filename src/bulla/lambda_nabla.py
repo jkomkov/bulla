@@ -32,13 +32,14 @@ under-determination oracle; this module is the thin typed surface over it:
     typecheck(comp)  -> TypingVerdict   (grade = fee, coercions = disclosure NF)
     elaborate(comp)  -> (coherent composition, the r coercions inserted)
 
-Guarantees we re-check here against the deployed checker (the paper's theorems,
-operationalized):
+Properties this wrapper re-checks against the deployed checker:
 
   * Repair duality (Thm 3.7 / [CD] Thm 6.2):  |coercions| == grade.
-  * Elaboration soundness (Cor 5.5):  elaborate(comp) has grade 0 -- coherent,
-    so by Coherence Soundness (Thm 5.4) its conventions glue: every cross-tool
-    reconciliation is forced by the declarations.
+  * Elaboration output: elaborate(comp) has grade 0 under the checker after the
+    selected disclosures are inserted.
+
+The former paper-level claim that grade 0 entails operational type soundness
+was refuted by counterexample and is not a guarantee of this module.
 
 This is the B3.4 capstone: the type theory of Parts I-III, run on real MCP
 composition machinery.

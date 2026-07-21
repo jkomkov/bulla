@@ -1,0 +1,14 @@
+{
+  "slot_id": "slot:acme-order-0007",
+  "ordering": "local-host",
+  "deadline": { "checkpoint_ref": "host_log_size", "value": 100 },
+  "evaluation_checkpoint": { "checkpoint_ref": "host_log_size", "value": 140 },
+  "events": [
+    { "type": "order", "slot_id": "slot:acme-order-0007", "seq": 10, "term_root": "sha256:777", "by": "buyer", "receipt_hash": "sha256:order-7", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "countersign", "slot_id": "slot:acme-order-0007", "seq": 12, "parent_seq": 10, "by": "seller", "receipt_hash": "sha256:countersign-7", "receipt_validated": true, "receipt_authority": "verified" }
+  ],
+  "non_membership_proof": { "verified": true, "slot_id": "slot:some-other-order", "checkpoint_ref": "host_log_size", "checkpoint": 140, "root_ref": "sha256:root-at-140", "proof": "sha256:borrowed-proof" },
+  "expected_finding": "UNDETERMINED_CLOSURE",
+  "expected_faults": ["INVALID_NON_MEMBERSHIP_PROOF"],
+  "note": "A valid-looking exclusion proof for another slot cannot convict this slot."
+}

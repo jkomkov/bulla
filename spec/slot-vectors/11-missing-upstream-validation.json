@@ -1,0 +1,13 @@
+{
+  "slot_id": "slot:acme-order-0011",
+  "ordering": "local-host",
+  "deadline": { "checkpoint_ref": "host_log_size", "value": 100 },
+  "evaluation_checkpoint": { "checkpoint_ref": "host_log_size", "value": 140 },
+  "events": [
+    { "type": "order", "slot_id": "slot:acme-order-0011", "seq": 10, "term_root": "sha256:1111", "by": "buyer", "receipt_hash": "sha256:order-11", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "countersign", "slot_id": "slot:acme-order-0011", "seq": 12, "parent_seq": 10, "by": "seller", "receipt_hash": "sha256:countersign-11", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "close", "slot_id": "slot:acme-order-0011", "close_type": "delivery", "seq": 60, "parent_seq": 12, "conforming": true, "receipt_hash": "sha256:unverified-delivery" }
+  ],
+  "expected_finding": "REJECTED_UNVERIFIED_CLOSE",
+  "note": "Missing validation verdicts never default to verified."
+}

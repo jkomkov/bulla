@@ -1,0 +1,6249 @@
+{
+  "adaptive_scout": {
+    "action_gating": "forbidden",
+    "case_count": 60,
+    "cases": [
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:e0a797720e0ce934e61c11f4508e67042960ffe169af2a97037a43a8d85a5f4a",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-0",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:8d65f5488156e0758a53e7aef001237cfc74f4aca5a82d148da07610e26a49af",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:9b9bc17fbce6f42c2578fd309eef2b25c11d64290ccb6a17cfb6c9d8c89cd1e4",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-1",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:d6b85b5345d013fb1fccdc087ec1ae82eb0a4770f13e89bd3aa092664a4bf70b",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:05dc63810148c1ab84004abb0172f8003e7a5c2661c31bf6625220b23b9031f5",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-0",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:14e454053f4d4058eab8370bfe9bb5f845693630c0825e866a17b6909fecfe63",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:ed91021a74d5b7275a0bc85ab4f21f361938fb3bac3001f76f1cbe65bf0f4781",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_0",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:caa922cfd28efcd6ddea6311f3e00610b492ab63167dfe00c0651b9e2d95a586",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_0",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:da2a29916d2f372e9e8d0095869fe3dc38eae5942d1eb1d7e25a10150fa234f3",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-3",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:673d4ab0d9f83a17f091f6c4472e40421d2c051c73e21990e9c37cd545fbfa42",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:a2d738247effdbee4b3e488c67758cfb8d91e9cf157c2d43efc81c3696eaf859",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:44690efb4efcd9ad5b7ff3bfbca8ff5a90d954d7e356f15c759e6ba1c073307b",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:31af21affb9d0063c5584bc83cbf7fb4d5a28a38f295342174f794076990d225",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-0",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:67e0d0df99ff75f5b783c90ecc458df5adc76b83350d6dae6c3b55863c08a1f4",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:ef74d6839c290b8953ea6c5ff20529459ed2181b76da5019f600fbf263966dba",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-1",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:2c9c6f9c176f88f644d905c0ac6c2e3d8c87f3f1dca1aeaa7db93bedc2d5d569",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:4f4a562d0f724b3c7a29dcbabb861c5ac2cd32c360b83b8b842842e50cd4d1cb",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-0",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:961255d69a0206158cd162be9e5114511c724c4d94d32a45ea6cb65b2e71020d",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:da766f1dd88d858deb66260292a96c417bd7f61948bc783b7dfa9341ce173818",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_0",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:a9b4faef26f17b95c6ada77d785cbdea93ca9e8ce660dc8e4d64c7b113c053ea",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_0",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:dbcbc065d06a19f1ba2baf17e59283a84ec399a0c51b9ed0596884a19c847e46",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-3",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:a1ae280277ae8d513fefe22c638b41b3eb36c79780098307bcb7c42d4c65b12c",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:560ff0c191482189889acce5a9e3bfed79ed2b98c0bf1655c27526d62b9520c1",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:daa43f1bf9c6ba46e42a23ba8210bb51ee88c32a575c61d26ea930fed692fc32",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:da6ec3ec7b96dfc88d23037defd6c6f050fa9d49e414ae4d339611093c223e19",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-0",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:7786d1c59428a2d90c7d2c7c8bf2e56ebb52fdd3247bbb0d3483ae7604a26168",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:690bf4d11b713fa9e2c4b8dba6844721a2d0931840cc64c503c92afc016161b5",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-1",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:462058714c82afce80ac794a7e4b43e3f2ce3a64d7666c6ccbbf3bcddabe5cf5",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:cd9e359a606421047ac5e1a012811e6b55d8bb92b7fd492a512b1d9c8569563a",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-0",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:c29f2a8e264aa9a519e7e6d58feeb158739ef18cec588a39fb97fa3a646a3c6d",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:64090746ec72b172b7bf7d02653bbf1d67892bf7cc70313174655e9d1252b98b",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_0",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:dfcdcbcaf15ab0fdf71f3010d06f8d81b8a50f0d4fc6a8f663430116c8f369b3",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_0",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:61baa9dbbebba64e3f794f546ffee26b946d257abe524257cfe371fbb827db04",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-3",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:3b045a619fa858551812beac23c08817135e13bdbb8c854ebdccb2100da4203c",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:320128cf17443110a9d310c20aaa9f9304aff00082c4a83e1c4edee79180b48e",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:16c808ac8340342987a560ba90774307c4149ad7d7052ee47716cc51fcd5e57a",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:9ba4c25cd2464842869e7561d0873039dbd9ce76520c362f53c9bdc1b63e6394",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-0",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:692122c4f1cd711ae6b715eb159cd79173ff6378a04229ea1ee6519cebcc4cfb",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:df3df6fde56543dca3c73e46f34f4b2893205f50e75c0c736fc9dc6abfb849fc",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-1",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:4bd87d1d557011ba18a483844ac7d8389c55c193643e516e7cc293d529cdb6dd",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:d023a4973ab05bef8743d44fe9a9c3320b9c5293cf664a5a2e0dd36f543cc4c4",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-0",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:e01298aedcf9274767e59f8c09747c3d9be54a8f1858ff54335395a721d93219",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:b1d90516f544e6740c2bc8da8754cd28069c70e486bdeaeed9a0b47217a98828",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_0",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:29086951cb8e7facf8311d0a385fee105b8d5d9edec1211dd8c0eaa6ea5314f6",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_0",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:ab57c636bcb5589a1b2a6696b5a4458e2f3bdfe0763a59fe2619083b5143a7d8",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-3",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:53b93d4177b70eb85d4f47a99a3537b5dbd5c4676531558aa3fe30dd39858b70",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:44d1069441f4999537b1b4b022de04a4eaa792d42189a2764325880bb9bef898",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:86960b6fef5b0470476e32470acc0123e6a7f9c487ae1055e445b0ce43a2489e",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:03947b18300e2386a9b86570559f7985a506c1317256285eb11906622c447745",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-0",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:20a6dbb703a4376b6054bb516d5723ef34728037ef582ee6d2558454c1993ced",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:40dd60043a902b86f7e2b013b0dff07968748b86ea2915c937042ebe00eed9ae",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-1",
+                "safe": true
+              }
+            },
+            "offer": "offer_1",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_2",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:a5046d089d87bef1a59ebbbf0e4ed404236547a6e3276b4eec0d20300b88265b",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:e95761d9bac5fcc8472608eea5f1bc83d144fa134a6c599a72fcdc33895c24c9",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-0",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:7e2dbb30e4e6554ce451839386a67f23f235787abf6387c6fc32b868c282925d",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_3",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_1",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:6dea528e45257d51df458c5a400f782a5ae4cca4e570756e7d2b2b54c88c0449",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_0",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:b4a7aa882e536ebeb669175be7e1503814ba4fb1f99562f179cfa8ae8963494c",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_3",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_0",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:80f901aaa784d2f0de12ab1d9222e33e593046a31242403241f94f6ef97b8e59",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_2",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_0",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-3",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 1857142,
+        "adaptive_safe": true,
+        "case_hash": "sha256:755cd8ce64baea7849ca5be17c257d3d6e897c4557fc00e0ad050f6b61e62496",
+        "disclosure_reduction_ppm": 380952,
+        "latency_reduction_ppm": 380952,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-3",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-0",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-1",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-2",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:8ad434c6f352103c290e856757a15bb5c8b06896ee80ae14403a2e7b597d6b8b",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-2",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-3",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-0",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-1",
+            "safe": true
+          }
+        }
+      },
+      {
+        "adaptive_expected_offers_ppm": 2000000,
+        "adaptive_safe": true,
+        "case_hash": "sha256:8cb3c4e92e738bf7e0e2c9f02139aa644dceceb6f4bd70cb0a92606ce4ec0686",
+        "disclosure_reduction_ppm": 333333,
+        "latency_reduction_ppm": 333333,
+        "max_depth": 4,
+        "offer_count": 4,
+        "resolved_probability_ppm": 1000000,
+        "static_offer_count": 3,
+        "static_safe": true,
+        "tree": {
+          "false": {
+            "false": {
+              "false": {
+                "leaf": "outcome-1",
+                "safe": true
+              },
+              "offer": "offer_1",
+              "true": {
+                "leaf": "outcome-2",
+                "safe": true
+              }
+            },
+            "offer": "offer_2",
+            "true": {
+              "leaf": "outcome-3",
+              "safe": true
+            }
+          },
+          "offer": "offer_3",
+          "true": {
+            "leaf": "outcome-0",
+            "safe": true
+          }
+        }
+      }
+    ],
+    "declared_prior": "integer weights normalized exactly per case",
+    "eligible_cases": 60,
+    "max_depth": 4,
+    "max_offers": 8,
+    "median_disclosure_reduction_ppm": 333333.0,
+    "pareto_improved_cases": 60,
+    "pareto_improved_share": 1.0,
+    "promotion_threshold_met": true,
+    "unsafe_terminal_leaves": 0
+  },
+  "artifact_hash": "sha256:a66c11dd71b75c6618e39e50979d1d82c96eabe874b4238c13f543339d6d08e9",
+  "conversion_curve": {
+    "by_mode_and_exit": {
+      "planning:INDETERMINATE": 14,
+      "planning:PLANNED": 10,
+      "synthesis:COMPILED": 6,
+      "synthesis:ESCALATE": 18,
+      "synthesis:INDETERMINATE": 21
+    },
+    "case_count": 69,
+    "cases": [
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-05-1",
+        "cause": "all target-disagreeing same-reduct pairs are exactly covered",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 1499,
+        "result_hash": "sha256:4f55583937ad77b0448eccc7675f1e70e7ab40aa969735a4cf7f609e917d96ac",
+        "seconds": 0.39617704099509865,
+        "status": "PLANNED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-05-3",
+        "cause": "all target-disagreeing same-reduct pairs are exactly covered",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 1499,
+        "result_hash": "sha256:6957891e4ab702c354275222d7e5be08fe74839d80cfe0718bf9f51cf2a42abe",
+        "seconds": 0.3912062919989694,
+        "status": "PLANNED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-06-1",
+        "cause": "all target-disagreeing same-reduct pairs are exactly covered",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 1499,
+        "result_hash": "sha256:64bb2bc36e1de6ebcb32378dbe051f6e9e5264c841c6a8ade2e5a9c93a68ae50",
+        "seconds": 1.717258832999505,
+        "status": "PLANNED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-06-3",
+        "cause": "all target-disagreeing same-reduct pairs are exactly covered",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 1499,
+        "result_hash": "sha256:0de30e3df35cc3fa4e51d9e3cbe52b404cbb36f018b1c8e93e7eb6ce273d8980",
+        "seconds": 1.667701833997853,
+        "status": "PLANNED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-07-1",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:96f01bdf047b57341db65471ee3a7a2a45418bf82c3a28a5b98f660c8e134900",
+        "seconds": 1.9470991249982035,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-07-3",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:97a9766852eaa097c18bc7068d5ed84e33abaa242d3e0f5cd19746b54968575a",
+        "seconds": 1.9501195410121,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-08-1",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:365bb46df61bf5e34ea7a58c03336c6709ee5419bab3ea899c5e2e7c9972fce9",
+        "seconds": 2.013683666998986,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-08-3",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:f90d8b9e010877f6da51593dd767a0d1095e724d303ad89c43262b314a038c56",
+        "seconds": 2.020001333003165,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-09-1",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:229d46e867f2ff2e4938e74047ca10fc5dd2d163823b019e19c9c5120ffbeb97",
+        "seconds": 2.0568152089981595,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-09-3",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:93b204c9e9ea8b5b98a8f3e3a94fc43987d7aa2df7ac4f048e96bd65a23aaefd",
+        "seconds": 2.0620428749971325,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-10-1",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:1fc21c3669ae912ddf598949e9241ef58ef662f44de453f2dff5cb552e8cf997",
+        "seconds": 2.157669708991307,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-10-3",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:ce4689ded8d56e777141172f8fff6210867c56812b6d16c4bafcc89507f859f6",
+        "seconds": 2.1620188749948284,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-11-1",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:3bc25c372024fe0d109ca47312cd3dee75718d9c7a3de5ce7d4cf121ddc71879",
+        "seconds": 2.4539937079971423,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-11-3",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:4f5088332d03e96f56bb0f8b7de83fefb09673ddc90ebd6b400f46954ddb4e85",
+        "seconds": 2.4749647499993443,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-12-1",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:2201b9f17e25ca048a487d645d3f84c8d31c4e39f4d17181c00d63156dcf0d4e",
+        "seconds": 3.0564611250010785,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "admissible_model_space-12-3",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:8794aba967690c952c965d009f5f12fff5f65524cffa0a928b874c091b99ab95",
+        "seconds": 3.0485703329904936,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-04-0",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 9 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 2076,
+        "result_hash": "sha256:4bd2ad644c0b7509a86f9aa4e720a58949193e99d30d95cc3e99ab4880263ceb",
+        "seconds": 0.5989869589975569,
+        "status": "COMPILED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-04-1",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 9 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 2860,
+        "result_hash": "sha256:c19f73f49137a41cd9a1833d6f0279afce3980a5ab8f1f1bb6828f6b31448db6",
+        "seconds": 0.006623000008403324,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-04-2",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 9 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 2076,
+        "result_hash": "sha256:10ee399808422b17c228691112bf78c74e861539691ad25c66f6031dab4aaecf",
+        "seconds": 0.7892152080021333,
+        "status": "COMPILED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-04-3",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 9 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 2860,
+        "result_hash": "sha256:49c0581e661420c97d09a6b2a72973241ccd29cab4ebd66722f1a0c74f4e6ccb",
+        "seconds": 0.00892258298699744,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-04-4",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 9 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 2076,
+        "result_hash": "sha256:3372ea8be779fdc0db58cdb3f2a434fe8c31423837167dac6f3953b4bc47dc8b",
+        "seconds": 0.6221540830010781,
+        "status": "COMPILED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-05-0",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 11 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 2077,
+        "result_hash": "sha256:7b1399f4a731847badda081618f12d3f1c4f581e096b70baf12ce6968c0c48f9",
+        "seconds": 9.951463290999527,
+        "status": "COMPILED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-05-1",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 11 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 2925,
+        "result_hash": "sha256:1449da6d57d744fdec22e4cea0e5c663f35fc355a52ad11b3bfcac41dc67c531",
+        "seconds": 0.013873500007321127,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-05-2",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 11 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 2077,
+        "result_hash": "sha256:3a0344ad630953550c540ef4138a8b92474dfb467771de4c983896852e61a843",
+        "seconds": 9.9281379590102,
+        "status": "COMPILED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-05-3",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 11 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 2925,
+        "result_hash": "sha256:b4f652ed48dceea01541740f858ba7ce02befb4f4455d4634545aea9d3455420",
+        "seconds": 0.014041374990483746,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-05-4",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 11 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 2077,
+        "result_hash": "sha256:67cf544c3b0f84669da25a2c3b059778ea679c481abf24a7a2c9f933ce48ab76",
+        "seconds": 9.795509249990573,
+        "status": "COMPILED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-06-0",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 13 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-06-1",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 13 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 2990,
+        "result_hash": "sha256:60af123d7b1ae40265e65e125c4d7250298db9d728debea4b6a6d60c8ce5752f",
+        "seconds": 0.030222417000913993,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-06-2",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 13 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-06-3",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 13 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 2990,
+        "result_hash": "sha256:28c6e019766d0ac1ae0c9e284922a0b57e9c60c7d5ff60d0c1e1c087d199666c",
+        "seconds": 0.029928415999165736,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-06-4",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 13 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-07-0",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 15 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-07-1",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 15 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 3055,
+        "result_hash": "sha256:527be103d4b53a4b999df2ccce8311b2a5ab35af8da6d4c7c26ac67c850dbfc0",
+        "seconds": 0.07029599999077618,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-07-2",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 15 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-07-3",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 15 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 3055,
+        "result_hash": "sha256:3e3f9f8fbb1067dc3b6a14ffb80964464be1308333e07759a54cd7c5123505b4",
+        "seconds": 0.07418658401002176,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-07-4",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 15 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-08-0",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 17 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-08-1",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 17 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 3120,
+        "result_hash": "sha256:b941cb226b64043cd7a6066522926366e1a00022812d36c68644a8f826b3ee31",
+        "seconds": 0.1570344159990782,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-08-2",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 17 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-08-3",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 17 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 3120,
+        "result_hash": "sha256:83db5559cf5f94ba22fab93b0aae3e043abf6172b5359171d42992da9f808589",
+        "seconds": 0.16597424999054056,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-08-4",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 17 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-09-0",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 19 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-09-1",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 19 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 3185,
+        "result_hash": "sha256:8ca4a870a731528b925abf970cff81367fdb01443560952d9ce66c70f9102fdc",
+        "seconds": 0.35404770899913274,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-09-1",
+        "cause": "all target-disagreeing same-reduct pairs are exactly covered",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 1499,
+        "result_hash": "sha256:dba66f66ecc4f83e71fe9933fcc8d85075ef3b2a4562640d49bf0877134d3a01",
+        "seconds": 0.6406957920116838,
+        "status": "PLANNED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-09-2",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 19 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-09-3",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 19 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 3185,
+        "result_hash": "sha256:17a9c0b187a0516314edbc7ff0206ecc62d418fef0e3e25ed4d39d4870f5f169",
+        "seconds": 0.35866833399632014,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-09-3",
+        "cause": "all target-disagreeing same-reduct pairs are exactly covered",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 1499,
+        "result_hash": "sha256:c0b02e9af3c039d51ca513aef924293044658d4d88b25abdd2076bc5ebb32f7a",
+        "seconds": 0.6797629590000724,
+        "status": "PLANNED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-09-4",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 19 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-10-0",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 21 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-10-1",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 21 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 3250,
+        "result_hash": "sha256:eabaa1c94b5efc162a6d1d2819d8fd73b9c8c9aa25180c9754c5a0ec6ae268dd",
+        "seconds": 1.9615041250071954,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-10-1",
+        "cause": "all target-disagreeing same-reduct pairs are exactly covered",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 1499,
+        "result_hash": "sha256:67151beb208d8cfe5d87b3789f04021ed47f39aa0eab0db2ca8f2bba30105d95",
+        "seconds": 2.0097393750038464,
+        "status": "PLANNED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-10-2",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 21 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-10-3",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 21 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 3250,
+        "result_hash": "sha256:78b22ab1835af5c5a13869474467e78cc96c9a6aaae861917d660c8f625bfdd3",
+        "seconds": 0.9052708329982124,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-10-3",
+        "cause": "all target-disagreeing same-reduct pairs are exactly covered",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 1499,
+        "result_hash": "sha256:26ef4406546b29c475122cde75d911d3763ab115401bc59487877b815a607839",
+        "seconds": 1.2814819170016563,
+        "status": "PLANNED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-10-4",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 21 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-11-0",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 23 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-11-1",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 23 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 3319,
+        "result_hash": "sha256:89d26cc9ce47e304c99dddd1070b0739387505cb7d20e02066423d7a4f044a0d",
+        "seconds": 0.33161620900500566,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-11-1",
+        "cause": "all target-disagreeing same-reduct pairs are exactly covered",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 1499,
+        "result_hash": "sha256:ee061439e67724bd8be87c79c12de347d46a033a81986f0e6b4bbbd78edc9300",
+        "seconds": 0.6469081250106683,
+        "status": "PLANNED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-11-2",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 23 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-11-3",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 23 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 3319,
+        "result_hash": "sha256:b4143772095e2c27f32b4feee43fc315852e7c15e503564d21f9ea7c1f25851c",
+        "seconds": 0.34510966700327117,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-11-3",
+        "cause": "all target-disagreeing same-reduct pairs are exactly covered",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 1499,
+        "result_hash": "sha256:f4886c7563af440adb287bd9c7a6fef99bab23d04c8a0b48c956bf5e5d10310d",
+        "seconds": 0.5386011250084266,
+        "status": "PLANNED",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-11-4",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 23 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-12-0",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 25 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-12-1",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 25 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 3388,
+        "result_hash": "sha256:20c5d5ced3926aac8a969d2fefe3c193c940e1e5aedac8031b9e48f1cf9c2a69",
+        "seconds": 0.6413046660018153,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-12-1",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:ab35dbea566e30ccc16f3761f4a66023004acb9e47ac76a335865e203343d727",
+        "seconds": 0.6449996250012191,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-12-2",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 25 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-12-3",
+        "cause": null,
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 25 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 3388,
+        "result_hash": "sha256:6c6d9d8e3b1ea4d5776ca160aab8e975b6976b6a7e572cb0ae2fa4f48c275df2",
+        "seconds": 0.6475892919988837,
+        "status": "ESCALATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-12-3",
+        "cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "mode": "planning",
+        "original_cause": "opposing-pair enumeration exceeded the pinned resource bound",
+        "original_exit": "INDETERMINATE",
+        "proof_bytes": 586,
+        "result_hash": "sha256:0eefa05e03fb323352f373898793cc1e147356d3f2b5e8512c06b8f6d10eddec",
+        "seconds": 0.6540215840068413,
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      },
+      {
+        "budget_multiplier": 10,
+        "case_id": "shared_vocabulary_width-12-4",
+        "cause": "subprocess_time_ceiling_20s",
+        "mode": "synthesis",
+        "original_cause": "candidate feature bound exceeded: 25 atoms > 8",
+        "original_exit": "INDETERMINATE",
+        "status": "INDETERMINATE",
+        "subprocess_address_space_limit_bytes": 1073741824,
+        "subprocess_time_limit_seconds": 20
+      }
+    ]
+  },
+  "exit_algebra": {
+    "agreement": true,
+    "case_count": 60,
+    "cases": [
+      {
+        "actual_exit": "COMPILED",
+        "case_id": "units-1",
+        "expected_exit": "COMPILED",
+        "proof_bytes": 2054,
+        "result_hash": "sha256:0e9dc8dad00a016735f505a860da4182a227fe7a507a96a86f79134052dee842"
+      },
+      {
+        "actual_exit": "COMPILED",
+        "case_id": "bounded_time-0",
+        "expected_exit": "COMPILED",
+        "proof_bytes": 2033,
+        "result_hash": "sha256:588eddc0f6188cdbd0491400ced8349306139281b90f6115d2cce02c7c5cdfde"
+      },
+      {
+        "actual_exit": "COMPILED",
+        "case_id": "bounded_time-1",
+        "expected_exit": "COMPILED",
+        "proof_bytes": 2073,
+        "result_hash": "sha256:61eef220311c3cc1b21d930ca6d64cd235ed3db1786a03df634c5829eb8fac94"
+      },
+      {
+        "actual_exit": "COMPILED",
+        "case_id": "interval_boundaries-0",
+        "expected_exit": "COMPILED",
+        "proof_bytes": 2050,
+        "result_hash": "sha256:095a99fac88afec21d98e9d5c5fc3cb08fa503339c3189ddb5ddf343e99debcc"
+      },
+      {
+        "actual_exit": "COMPILED",
+        "case_id": "enums-0",
+        "expected_exit": "COMPILED",
+        "proof_bytes": 2014,
+        "result_hash": "sha256:ebf3ea314b9e68e5260e36afcf9c7a80f7a0bf572fa11269092b9e365cc93201"
+      },
+      {
+        "actual_exit": "COMPILED",
+        "case_id": "enums-1",
+        "expected_exit": "COMPILED",
+        "proof_bytes": 2054,
+        "result_hash": "sha256:6b94864cbec82f5d69fc5aa5f260f479b787c968ea9bcedba4363c2fb6e645a8"
+      },
+      {
+        "actual_exit": "COMPILED",
+        "case_id": "null_absent-0",
+        "expected_exit": "COMPILED",
+        "proof_bytes": 2022,
+        "result_hash": "sha256:6ad603582608440f69e985a042e0fde2f2be33519dca9204d8e38008018212c7"
+      },
+      {
+        "actual_exit": "COMPILED",
+        "case_id": "null_absent-1",
+        "expected_exit": "COMPILED",
+        "proof_bytes": 2062,
+        "result_hash": "sha256:e3c82a0ea508be277ede4eb3ac264b04d2fed10e8780117a82548db9be8abe85"
+      },
+      {
+        "actual_exit": "COMPILED",
+        "case_id": "namespaces-1",
+        "expected_exit": "COMPILED",
+        "proof_bytes": 2069,
+        "result_hash": "sha256:45f94b216494fd8ee57d9efaf233af76de81759d7cf2c47c949f445fda85c245"
+      },
+      {
+        "actual_exit": "COMPILED",
+        "case_id": "integer_rounding-0",
+        "expected_exit": "COMPILED",
+        "proof_bytes": 2059,
+        "result_hash": "sha256:fc1809a59bca7ac16a6dc1a6d44455540bc8b3e8af2a659d03ad6c8b4c716441"
+      },
+      {
+        "actual_exit": "COMPILED",
+        "case_id": "integer_rounding-1",
+        "expected_exit": "COMPILED",
+        "proof_bytes": 2099,
+        "result_hash": "sha256:1233221aac224215f9ea561bf6193f6bc221b757f893f2376b4200fc6eaf9b39"
+      },
+      {
+        "actual_exit": "COMPILED",
+        "case_id": "delivery_acceptance-0",
+        "expected_exit": "COMPILED",
+        "proof_bytes": 2058,
+        "result_hash": "sha256:50eb746526f815ad54fdb1bd6a9816622da7a71fd144e86905ee5fc1bc43cdc6"
+      },
+      {
+        "actual_exit": "PARTIAL",
+        "case_id": "units-2",
+        "expected_exit": "PARTIAL",
+        "proof_bytes": 4024,
+        "result_hash": "sha256:0ec74f4f807462b383f14e0a1a35da25a775a169109be4927c7bbc0b8613a1b4"
+      },
+      {
+        "actual_exit": "PARTIAL",
+        "case_id": "bounded_time-2",
+        "expected_exit": "PARTIAL",
+        "proof_bytes": 4019,
+        "result_hash": "sha256:13561f9c38a2c8690f9ad63e50032673c30f27a771a6a2e2def1dc8619338dec"
+      },
+      {
+        "actual_exit": "PARTIAL",
+        "case_id": "interval_boundaries-2",
+        "expected_exit": "PARTIAL",
+        "proof_bytes": 4082,
+        "result_hash": "sha256:e19ed2d816a1f43679a3998467dc500c5478540033ca2fd99c0718bcc5870120"
+      },
+      {
+        "actual_exit": "PARTIAL",
+        "case_id": "enums-2",
+        "expected_exit": "PARTIAL",
+        "proof_bytes": 4018,
+        "result_hash": "sha256:5d3def0bcc11926c87f05498e74a70ad46202c139124a8ab7bd907d750d6e8c6"
+      },
+      {
+        "actual_exit": "PARTIAL",
+        "case_id": "namespaces-2",
+        "expected_exit": "PARTIAL",
+        "proof_bytes": 4081,
+        "result_hash": "sha256:3a9454b5b5faf374ddd3c602e769e2a74318f1108e1a698c482977ec8fa64524"
+      },
+      {
+        "actual_exit": "PARTIAL",
+        "case_id": "integer_rounding-2",
+        "expected_exit": "PARTIAL",
+        "proof_bytes": 4123,
+        "result_hash": "sha256:26195838fb3bcdf9446e0da279a61c181a8f497d480a599e51fb9ac759aa7255"
+      },
+      {
+        "actual_exit": "PARTIAL",
+        "case_id": "delivery_acceptance-2",
+        "expected_exit": "PARTIAL",
+        "proof_bytes": 4070,
+        "result_hash": "sha256:a64aea43bff6d7579d8625e46179e0f9606f99157f2e3380c02ac20403c13841"
+      },
+      {
+        "actual_exit": "PARTIAL",
+        "case_id": "evidence_floors-2",
+        "expected_exit": "PARTIAL",
+        "proof_bytes": 4112,
+        "result_hash": "sha256:20218ce9012f9169dd8e5a48ace5c0a0692d97e73a1ae2455507cdb474ea5d8a"
+      },
+      {
+        "actual_exit": "PARTIAL",
+        "case_id": "authority_scopes-2",
+        "expected_exit": "PARTIAL",
+        "proof_bytes": 4141,
+        "result_hash": "sha256:c2759a7ade3addc54de778dd00136f7e63ab372dd58fa66c5fd3f70c0267ae0e"
+      },
+      {
+        "actual_exit": "PARTIAL",
+        "case_id": "nondefinable-2",
+        "expected_exit": "PARTIAL",
+        "proof_bytes": 4053,
+        "result_hash": "sha256:641bdf7d84bcad87223ed198355317200926782dcc452453ac08f11136bc67ae"
+      },
+      {
+        "actual_exit": "PARTIAL",
+        "case_id": "null_absent-2",
+        "expected_exit": "PARTIAL",
+        "proof_bytes": 4056,
+        "result_hash": "sha256:0d459d49337fba4d4fc1404e62be7e6450dac915e692a0adca39dee7741cda77"
+      },
+      {
+        "actual_exit": "PARTIAL",
+        "case_id": "revocation_windows-2",
+        "expected_exit": "PARTIAL",
+        "proof_bytes": 4089,
+        "result_hash": "sha256:672c9584007620144e37cbf01eb4ca45b0a4418bf0e3672589698a813ae2e24a"
+      },
+      {
+        "actual_exit": "ESCALATE",
+        "case_id": "units-3",
+        "expected_exit": "ESCALATE",
+        "proof_bytes": 2683,
+        "result_hash": "sha256:7ea8316bd50cd247c48084abd9c631510baa81b15fc96fe170cdaed0e16acb2a"
+      },
+      {
+        "actual_exit": "ESCALATE",
+        "case_id": "interval_boundaries-3",
+        "expected_exit": "ESCALATE",
+        "proof_bytes": 2687,
+        "result_hash": "sha256:0e5e27800e7aacba32a6e200e3ce2899bb258db6647c836b088ebc7ae09a2565"
+      },
+      {
+        "actual_exit": "ESCALATE",
+        "case_id": "enums-3",
+        "expected_exit": "ESCALATE",
+        "proof_bytes": 2695,
+        "result_hash": "sha256:1e9b30521a98b17e9ef622c3ca5f09f26a50b559b36f8e6ee447f319d084e797"
+      },
+      {
+        "actual_exit": "ESCALATE",
+        "case_id": "null_absent-3",
+        "expected_exit": "ESCALATE",
+        "proof_bytes": 2671,
+        "result_hash": "sha256:3a5408cf487a5e189e5aa2a1ca042d24e5e37de4d5a78def88c0ed215e7a241e"
+      },
+      {
+        "actual_exit": "ESCALATE",
+        "case_id": "namespaces-3",
+        "expected_exit": "ESCALATE",
+        "proof_bytes": 2695,
+        "result_hash": "sha256:4e78b590e59da8a19ed008e7f661dc8dfdc768c5028157320dea1b763094972e"
+      },
+      {
+        "actual_exit": "ESCALATE",
+        "case_id": "delivery_acceptance-3",
+        "expected_exit": "ESCALATE",
+        "proof_bytes": 2703,
+        "result_hash": "sha256:ff17d33fd0ca3f7429ba78a7a52739c943d87c020d669f9737a3e08a9472d2ae"
+      },
+      {
+        "actual_exit": "ESCALATE",
+        "case_id": "evidence_floors-3",
+        "expected_exit": "ESCALATE",
+        "proof_bytes": 2699,
+        "result_hash": "sha256:511b0a4645ade553f45ce6bd7656d12917abe93c5ceca04dcda37fc0234edcc4"
+      },
+      {
+        "actual_exit": "ESCALATE",
+        "case_id": "revocation_windows-3",
+        "expected_exit": "ESCALATE",
+        "proof_bytes": 2687,
+        "result_hash": "sha256:5bf8af91c6fda43fc3efebae7dad9303ca069550674dc1a5db99ffd12bed89ed"
+      },
+      {
+        "actual_exit": "ESCALATE",
+        "case_id": "authority_scopes-3",
+        "expected_exit": "ESCALATE",
+        "proof_bytes": 2699,
+        "result_hash": "sha256:ff19545150e9929ae7b2a8c775e7fd43d73c1d384f3eca114d8318c5f1c8f0a6"
+      },
+      {
+        "actual_exit": "ESCALATE",
+        "case_id": "bounded_time-3",
+        "expected_exit": "ESCALATE",
+        "proof_bytes": 2683,
+        "result_hash": "sha256:279f64dde627b3c2443ea629085005bf67a7a03d1cb4c50b89cc0f7c480169dd"
+      },
+      {
+        "actual_exit": "ESCALATE",
+        "case_id": "integer_rounding-3",
+        "expected_exit": "ESCALATE",
+        "proof_bytes": 2743,
+        "result_hash": "sha256:b096171139fd621ff5f2e0b9a35a7dd8768bfc77fee9019f5b75779af283b011"
+      },
+      {
+        "actual_exit": "ESCALATE",
+        "case_id": "nondefinable-3",
+        "expected_exit": "ESCALATE",
+        "proof_bytes": 2715,
+        "result_hash": "sha256:d907a08fa5c1d7eb183076539a72e330b6c645504f7e02ddca13741170075466"
+      },
+      {
+        "actual_exit": "CHOICE_REQUIRED",
+        "case_id": "units-4",
+        "expected_exit": "CHOICE_REQUIRED",
+        "proof_bytes": 5942,
+        "result_hash": "sha256:e29dbee16751c8210dac4b92a7645be9e950e2916e337b7b12b14285bab00e57"
+      },
+      {
+        "actual_exit": "CHOICE_REQUIRED",
+        "case_id": "bounded_time-4",
+        "expected_exit": "CHOICE_REQUIRED",
+        "proof_bytes": 6018,
+        "result_hash": "sha256:52b83cb52010f080e9626b306f0ffc4bffc84d4ccc9055ac8d3fd44acf506dc6"
+      },
+      {
+        "actual_exit": "CHOICE_REQUIRED",
+        "case_id": "interval_boundaries-4",
+        "expected_exit": "CHOICE_REQUIRED",
+        "proof_bytes": 6054,
+        "result_hash": "sha256:95922ede6a4bd0fd69090aa1ed7b6bc67bd9f8f10ea7de10d008ab950ba90af2"
+      },
+      {
+        "actual_exit": "CHOICE_REQUIRED",
+        "case_id": "null_absent-4",
+        "expected_exit": "CHOICE_REQUIRED",
+        "proof_bytes": 5982,
+        "result_hash": "sha256:c6316b58f6f893b8b177940b158d56027a6a19563ff74af43ec03df24209f48c"
+      },
+      {
+        "actual_exit": "CHOICE_REQUIRED",
+        "case_id": "namespaces-4",
+        "expected_exit": "CHOICE_REQUIRED",
+        "proof_bytes": 5990,
+        "result_hash": "sha256:54659f1dbe30fbdca495247f8e968026418d91d28572ad7ddeb08f0d8dfc34c5"
+      },
+      {
+        "actual_exit": "CHOICE_REQUIRED",
+        "case_id": "integer_rounding-4",
+        "expected_exit": "CHOICE_REQUIRED",
+        "proof_bytes": 6034,
+        "result_hash": "sha256:56e14834ba19b5ed4f7e2546ce97a183fedefa357fdc798e04aed081c20aa5ad"
+      },
+      {
+        "actual_exit": "CHOICE_REQUIRED",
+        "case_id": "delivery_acceptance-4",
+        "expected_exit": "CHOICE_REQUIRED",
+        "proof_bytes": 6070,
+        "result_hash": "sha256:9138645c581baca5f57f0a1537a2521772ca840262087953cd03cd2343f749f5"
+      },
+      {
+        "actual_exit": "CHOICE_REQUIRED",
+        "case_id": "revocation_windows-4",
+        "expected_exit": "CHOICE_REQUIRED",
+        "proof_bytes": 6106,
+        "result_hash": "sha256:623efb705f34d8e6727a365e53d4812f4e087e93143de8a7eeac14064df67cf0"
+      },
+      {
+        "actual_exit": "CHOICE_REQUIRED",
+        "case_id": "authority_scopes-4",
+        "expected_exit": "CHOICE_REQUIRED",
+        "proof_bytes": 6018,
+        "result_hash": "sha256:66257722dab550d2b972202dde9fcd715e98bda3c2606e6b2c275350141af42e"
+      },
+      {
+        "actual_exit": "CHOICE_REQUIRED",
+        "case_id": "nondefinable-4",
+        "expected_exit": "CHOICE_REQUIRED",
+        "proof_bytes": 5966,
+        "result_hash": "sha256:f8ffb10f73105fbc80ac5932310214ee74a5683b658306c518b648ebb6919f1a"
+      },
+      {
+        "actual_exit": "CHOICE_REQUIRED",
+        "case_id": "enums-4",
+        "expected_exit": "CHOICE_REQUIRED",
+        "proof_bytes": 5902,
+        "result_hash": "sha256:43bb95984fd0e278e2f433110f5f0c40bba562f39a628a7d0be8f3a03d379f34"
+      },
+      {
+        "actual_exit": "CHOICE_REQUIRED",
+        "case_id": "evidence_floors-4",
+        "expected_exit": "CHOICE_REQUIRED",
+        "proof_bytes": 6038,
+        "result_hash": "sha256:b21adeb6ef2deca77ffd0bba944f44dcee46a6ede76145250fddf3a3a2056489"
+      },
+      {
+        "actual_exit": "INDETERMINATE",
+        "case_id": "forced-resource-04-0",
+        "exhaustion_cause": "candidate feature bound exceeded: 9 atoms > 1",
+        "expected_exit": "INDETERMINATE",
+        "proof_bytes": 2062,
+        "result_hash": "sha256:654614d29ff310f4769adc0f1d33c0db9a028717f70aa0a61a4f365135b5bcaa"
+      },
+      {
+        "actual_exit": "INDETERMINATE",
+        "case_id": "forced-resource-05-1",
+        "exhaustion_cause": "candidate feature bound exceeded: 11 atoms > 1",
+        "expected_exit": "INDETERMINATE",
+        "proof_bytes": 2189,
+        "result_hash": "sha256:53497adc408e4bf180a3f129bfc246eb3a198417ed7a99bf5ae078a777bbd91e"
+      },
+      {
+        "actual_exit": "INDETERMINATE",
+        "case_id": "forced-resource-06-2",
+        "exhaustion_cause": "candidate feature bound exceeded: 13 atoms > 1",
+        "expected_exit": "INDETERMINATE",
+        "proof_bytes": 2313,
+        "result_hash": "sha256:155bf2c718679d85914114084dcd217e4a427bcad0490c557364c0c339d6a02a"
+      },
+      {
+        "actual_exit": "INDETERMINATE",
+        "case_id": "forced-resource-07-3",
+        "exhaustion_cause": "candidate feature bound exceeded: 15 atoms > 1",
+        "expected_exit": "INDETERMINATE",
+        "proof_bytes": 2437,
+        "result_hash": "sha256:f3fddf5ab3bd94dcf0758b74bb9a168950ca83063803a170333b48f9c4f5d134"
+      },
+      {
+        "actual_exit": "INDETERMINATE",
+        "case_id": "forced-resource-08-4",
+        "exhaustion_cause": "candidate feature bound exceeded: 17 atoms > 1",
+        "expected_exit": "INDETERMINATE",
+        "proof_bytes": 2561,
+        "result_hash": "sha256:a39977e42dd14aacbcdc6f7052bb126a73a289f971f60572cc88171e263c8463"
+      },
+      {
+        "actual_exit": "INDETERMINATE",
+        "case_id": "forced-resource-09-0",
+        "exhaustion_cause": "candidate feature bound exceeded: 19 atoms > 1",
+        "expected_exit": "INDETERMINATE",
+        "proof_bytes": 2685,
+        "result_hash": "sha256:b39eb4137c26fc7605b725fa049875e12207d92eb3f7e08e939fc899d9995e40"
+      },
+      {
+        "actual_exit": "INDETERMINATE",
+        "case_id": "forced-resource-10-1",
+        "exhaustion_cause": "candidate feature bound exceeded: 21 atoms > 1",
+        "expected_exit": "INDETERMINATE",
+        "proof_bytes": 2809,
+        "result_hash": "sha256:d76bd69d583f075d55c81c136d339a1fd1d526e07c8e1cf7f8b7a8a315bc0132"
+      },
+      {
+        "actual_exit": "INDETERMINATE",
+        "case_id": "forced-resource-11-2",
+        "exhaustion_cause": "candidate feature bound exceeded: 23 atoms > 1",
+        "expected_exit": "INDETERMINATE",
+        "proof_bytes": 2935,
+        "result_hash": "sha256:163d2e6de7c1d850bb2753f122c83bf40da09c2b19747afed6a5c3249be8e0ac"
+      },
+      {
+        "actual_exit": "INDETERMINATE",
+        "case_id": "forced-resource-12-3",
+        "exhaustion_cause": "candidate feature bound exceeded: 25 atoms > 1",
+        "expected_exit": "INDETERMINATE",
+        "proof_bytes": 3061,
+        "result_hash": "sha256:21222e57c7950f29a9de5612b58e669e2b2280eada1cb9d5b8d9c5204a1c4d70"
+      },
+      {
+        "actual_exit": "INDETERMINATE",
+        "case_id": "forced-resource-04-4",
+        "exhaustion_cause": "candidate feature bound exceeded: 9 atoms > 1",
+        "expected_exit": "INDETERMINATE",
+        "proof_bytes": 2062,
+        "result_hash": "sha256:8bfff9aa912c76715c0e852f10f5bd903f4ecd19e53366ea9f9e00b8e1749875"
+      },
+      {
+        "actual_exit": "INDETERMINATE",
+        "case_id": "forced-resource-05-0",
+        "exhaustion_cause": "candidate feature bound exceeded: 11 atoms > 1",
+        "expected_exit": "INDETERMINATE",
+        "proof_bytes": 2189,
+        "result_hash": "sha256:0b7a913a3d12fbd393018d4feb29dfb5a9f610fb84b3ccb0d17d6ef0bb60fabc"
+      },
+      {
+        "actual_exit": "INDETERMINATE",
+        "case_id": "forced-resource-06-1",
+        "exhaustion_cause": "candidate feature bound exceeded: 13 atoms > 1",
+        "expected_exit": "INDETERMINATE",
+        "proof_bytes": 2313,
+        "result_hash": "sha256:1750568729ae7f770321f218bae668362ad7df1600dd4cb5f440c95481d2462c"
+      }
+    ],
+    "exit_counts": {
+      "CHOICE_REQUIRED": 12,
+      "COMPILED": 12,
+      "ESCALATE": 12,
+      "INDETERMINATE": 12,
+      "PARTIAL": 12
+    }
+  },
+  "frozen_240": {
+    "artifact_hash": "sha256:d8ad2e65cf5970efe70e83e5841b7b353dbed72eb9e8b104bde2f3c6aa7953cf",
+    "file_hash_after": "sha256:264a5d5d1ba647a7ab39321ed1c0a8b4a59e46c8f98c82523fcdc4404aaf1f5a",
+    "file_hash_before": "sha256:264a5d5d1ba647a7ab39321ed1c0a8b4a59e46c8f98c82523fcdc4404aaf1f5a",
+    "mutated": false,
+    "path": "bulla/bench/invention/results/refinement-scaling-2026-07-18.json"
+  },
+  "generated_at": "2026-07-18T00:00:00Z",
+  "phase_diagram": [
+    {
+      "case_id": "admissible_model_space-01-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2074,
+      "runtime_ms": 4.133042,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-01-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.099542,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-01-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2074,
+      "runtime_ms": 3.917084,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-01-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.10725,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-01-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2074,
+      "runtime_ms": 3.8867909999999997,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-02-0",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2074,
+      "runtime_ms": 4.8505,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-02-1",
+      "catalog_size": 1,
+      "model_count": 16,
+      "opposing_pairs": 32,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2695,
+      "runtime_ms": 1.538208,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-02-2",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2074,
+      "runtime_ms": 5.137499,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-02-3",
+      "catalog_size": 1,
+      "model_count": 16,
+      "opposing_pairs": 32,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2695,
+      "runtime_ms": 1.540668,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-02-4",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2074,
+      "runtime_ms": 4.821542,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-03-0",
+      "catalog_size": 1,
+      "model_count": 16,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 7.026541,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-03-1",
+      "catalog_size": 1,
+      "model_count": 32,
+      "opposing_pairs": 128,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2725,
+      "runtime_ms": 2.408166,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-03-2",
+      "catalog_size": 1,
+      "model_count": 16,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 6.9193739999999995,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-03-3",
+      "catalog_size": 1,
+      "model_count": 32,
+      "opposing_pairs": 128,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2725,
+      "runtime_ms": 2.476334,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-03-4",
+      "catalog_size": 1,
+      "model_count": 16,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 6.858874999999999,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-04-0",
+      "catalog_size": 1,
+      "model_count": 32,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 11.250124,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-04-1",
+      "catalog_size": 1,
+      "model_count": 64,
+      "opposing_pairs": 512,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2755,
+      "runtime_ms": 4.451416999999999,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-04-2",
+      "catalog_size": 1,
+      "model_count": 32,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 14.112542,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-04-3",
+      "catalog_size": 1,
+      "model_count": 64,
+      "opposing_pairs": 512,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2755,
+      "runtime_ms": 5.06775,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-04-4",
+      "catalog_size": 1,
+      "model_count": 32,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 13.066626,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-05-0",
+      "catalog_size": 1,
+      "model_count": 64,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 22.816125,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-05-1",
+      "catalog_size": 1,
+      "model_count": 128,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2785,
+      "runtime_ms": 8.964334000000001,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-05-2",
+      "catalog_size": 1,
+      "model_count": 64,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 31.649833,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-05-3",
+      "catalog_size": 1,
+      "model_count": 128,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2785,
+      "runtime_ms": 8.094625,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-05-4",
+      "catalog_size": 1,
+      "model_count": 64,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 20.430334000000002,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-06-0",
+      "catalog_size": 1,
+      "model_count": 128,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 35.857001,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-06-1",
+      "catalog_size": 1,
+      "model_count": 256,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2815,
+      "runtime_ms": 15.64575,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-06-2",
+      "catalog_size": 1,
+      "model_count": 128,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 35.604251000000005,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-06-3",
+      "catalog_size": 1,
+      "model_count": 256,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2815,
+      "runtime_ms": 15.591084,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-06-4",
+      "catalog_size": 1,
+      "model_count": 128,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 35.998542,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-07-0",
+      "catalog_size": 1,
+      "model_count": 256,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 68.437126,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-07-1",
+      "catalog_size": 1,
+      "model_count": 512,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2845,
+      "runtime_ms": 30.119334000000002,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-07-2",
+      "catalog_size": 1,
+      "model_count": 256,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 69.27924999999999,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-07-3",
+      "catalog_size": 1,
+      "model_count": 512,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2845,
+      "runtime_ms": 31.233333000000002,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-07-4",
+      "catalog_size": 1,
+      "model_count": 256,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 69.54120800000001,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-08-0",
+      "catalog_size": 1,
+      "model_count": 512,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 160.177625,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-08-1",
+      "catalog_size": 1,
+      "model_count": 1024,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2875,
+      "runtime_ms": 69.870708,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-08-2",
+      "catalog_size": 1,
+      "model_count": 512,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 136.112042,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-08-3",
+      "catalog_size": 1,
+      "model_count": 1024,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2875,
+      "runtime_ms": 62.497041,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-08-4",
+      "catalog_size": 1,
+      "model_count": 512,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 136.00354199999998,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-09-0",
+      "catalog_size": 1,
+      "model_count": 1024,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2077,
+      "runtime_ms": 296.106625,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-09-1",
+      "catalog_size": 1,
+      "model_count": 2048,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2905,
+      "runtime_ms": 135.95929199999998,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-09-2",
+      "catalog_size": 1,
+      "model_count": 1024,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2077,
+      "runtime_ms": 301.733834,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-09-3",
+      "catalog_size": 1,
+      "model_count": 2048,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2905,
+      "runtime_ms": 130.40724999999998,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-09-4",
+      "catalog_size": 1,
+      "model_count": 1024,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2077,
+      "runtime_ms": 293.196542,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-10-0",
+      "catalog_size": 1,
+      "model_count": 2048,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2077,
+      "runtime_ms": 577.658958,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-10-1",
+      "catalog_size": 1,
+      "model_count": 4096,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2935,
+      "runtime_ms": 274.882,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-10-2",
+      "catalog_size": 1,
+      "model_count": 2048,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2077,
+      "runtime_ms": 565.8093739999999,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-10-3",
+      "catalog_size": 1,
+      "model_count": 4096,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2935,
+      "runtime_ms": 287.647666,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-10-4",
+      "catalog_size": 1,
+      "model_count": 2048,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2077,
+      "runtime_ms": 580.391708,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-11-0",
+      "catalog_size": 1,
+      "model_count": 4096,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2077,
+      "runtime_ms": 1208.362249,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-11-1",
+      "catalog_size": 1,
+      "model_count": 8192,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2967,
+      "runtime_ms": 566.8734999999999,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-11-2",
+      "catalog_size": 1,
+      "model_count": 4096,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2077,
+      "runtime_ms": 1161.907375,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-11-3",
+      "catalog_size": 1,
+      "model_count": 8192,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2967,
+      "runtime_ms": 646.2971670000001,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-11-4",
+      "catalog_size": 1,
+      "model_count": 4096,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2077,
+      "runtime_ms": 1173.249957,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-12-0",
+      "catalog_size": 1,
+      "model_count": 8192,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2077,
+      "runtime_ms": 2506.193417,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-12-1",
+      "catalog_size": 1,
+      "model_count": 16384,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2999,
+      "runtime_ms": 1159.534374,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-12-2",
+      "catalog_size": 1,
+      "model_count": 8192,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2077,
+      "runtime_ms": 2432.889208,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-12-3",
+      "catalog_size": 1,
+      "model_count": 16384,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2999,
+      "runtime_ms": 1234.8980410000001,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "admissible_model_space-12-4",
+      "catalog_size": 1,
+      "model_count": 8192,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2077,
+      "runtime_ms": 2613.553083,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "shared_vocabulary_width-01-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 3.939208,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "shared_vocabulary_width-01-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.140584,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "shared_vocabulary_width-01-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 3.940667,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "shared_vocabulary_width-01-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.08525,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "shared_vocabulary_width-01-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 4.085542,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "shared_vocabulary_width-02-0",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 12.814625,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 2
+    },
+    {
+      "case_id": "shared_vocabulary_width-02-1",
+      "catalog_size": 1,
+      "model_count": 16,
+      "opposing_pairs": 16,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2730,
+      "runtime_ms": 2.3734159999999997,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 2
+    },
+    {
+      "case_id": "shared_vocabulary_width-02-2",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 13.452373999999999,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 2
+    },
+    {
+      "case_id": "shared_vocabulary_width-02-3",
+      "catalog_size": 1,
+      "model_count": 16,
+      "opposing_pairs": 16,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2730,
+      "runtime_ms": 1.9427919999999999,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 2
+    },
+    {
+      "case_id": "shared_vocabulary_width-02-4",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2075,
+      "runtime_ms": 13.098625,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 2
+    },
+    {
+      "case_id": "shared_vocabulary_width-03-0",
+      "catalog_size": 1,
+      "model_count": 16,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 105.067417,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 3
+    },
+    {
+      "case_id": "shared_vocabulary_width-03-1",
+      "catalog_size": 1,
+      "model_count": 32,
+      "opposing_pairs": 32,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2795,
+      "runtime_ms": 3.893334,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 3
+    },
+    {
+      "case_id": "shared_vocabulary_width-03-2",
+      "catalog_size": 1,
+      "model_count": 16,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 111.48970800000001,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 3
+    },
+    {
+      "case_id": "shared_vocabulary_width-03-3",
+      "catalog_size": 1,
+      "model_count": 32,
+      "opposing_pairs": 32,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2795,
+      "runtime_ms": 3.9566660000000002,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 3
+    },
+    {
+      "case_id": "shared_vocabulary_width-03-4",
+      "catalog_size": 1,
+      "model_count": 16,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 101.96195900000001,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 3
+    },
+    {
+      "case_id": "shared_vocabulary_width-04-0",
+      "catalog_size": 1,
+      "model_count": 32,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2062,
+      "runtime_ms": 3.6643339999999998,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 4
+    },
+    {
+      "case_id": "shared_vocabulary_width-04-1",
+      "catalog_size": 1,
+      "model_count": 64,
+      "opposing_pairs": 64,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2062,
+      "runtime_ms": 2.070833,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 4
+    },
+    {
+      "case_id": "shared_vocabulary_width-04-2",
+      "catalog_size": 1,
+      "model_count": 32,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2062,
+      "runtime_ms": 3.51575,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 4
+    },
+    {
+      "case_id": "shared_vocabulary_width-04-3",
+      "catalog_size": 1,
+      "model_count": 64,
+      "opposing_pairs": 64,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2062,
+      "runtime_ms": 2.413542,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 4
+    },
+    {
+      "case_id": "shared_vocabulary_width-04-4",
+      "catalog_size": 1,
+      "model_count": 32,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2062,
+      "runtime_ms": 3.747125,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 4
+    },
+    {
+      "case_id": "shared_vocabulary_width-05-0",
+      "catalog_size": 1,
+      "model_count": 64,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2189,
+      "runtime_ms": 7.062208,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 5
+    },
+    {
+      "case_id": "shared_vocabulary_width-05-1",
+      "catalog_size": 1,
+      "model_count": 128,
+      "opposing_pairs": 128,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2189,
+      "runtime_ms": 4.419208,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 5
+    },
+    {
+      "case_id": "shared_vocabulary_width-05-2",
+      "catalog_size": 1,
+      "model_count": 64,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2189,
+      "runtime_ms": 6.442125,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 5
+    },
+    {
+      "case_id": "shared_vocabulary_width-05-3",
+      "catalog_size": 1,
+      "model_count": 128,
+      "opposing_pairs": 128,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2189,
+      "runtime_ms": 3.7981670000000003,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 5
+    },
+    {
+      "case_id": "shared_vocabulary_width-05-4",
+      "catalog_size": 1,
+      "model_count": 64,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2189,
+      "runtime_ms": 6.233875,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 5
+    },
+    {
+      "case_id": "shared_vocabulary_width-06-0",
+      "catalog_size": 1,
+      "model_count": 128,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2313,
+      "runtime_ms": 12.05775,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 6
+    },
+    {
+      "case_id": "shared_vocabulary_width-06-1",
+      "catalog_size": 1,
+      "model_count": 256,
+      "opposing_pairs": 256,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2313,
+      "runtime_ms": 7.545042,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 6
+    },
+    {
+      "case_id": "shared_vocabulary_width-06-2",
+      "catalog_size": 1,
+      "model_count": 128,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2313,
+      "runtime_ms": 12.397791,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 6
+    },
+    {
+      "case_id": "shared_vocabulary_width-06-3",
+      "catalog_size": 1,
+      "model_count": 256,
+      "opposing_pairs": 256,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2313,
+      "runtime_ms": 7.273,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 6
+    },
+    {
+      "case_id": "shared_vocabulary_width-06-4",
+      "catalog_size": 1,
+      "model_count": 128,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2313,
+      "runtime_ms": 14.002208,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 6
+    },
+    {
+      "case_id": "shared_vocabulary_width-07-0",
+      "catalog_size": 1,
+      "model_count": 256,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2437,
+      "runtime_ms": 25.157251000000002,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 7
+    },
+    {
+      "case_id": "shared_vocabulary_width-07-1",
+      "catalog_size": 1,
+      "model_count": 512,
+      "opposing_pairs": 512,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2437,
+      "runtime_ms": 14.412208000000001,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 7
+    },
+    {
+      "case_id": "shared_vocabulary_width-07-2",
+      "catalog_size": 1,
+      "model_count": 256,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2437,
+      "runtime_ms": 25.760084,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 7
+    },
+    {
+      "case_id": "shared_vocabulary_width-07-3",
+      "catalog_size": 1,
+      "model_count": 512,
+      "opposing_pairs": 512,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2437,
+      "runtime_ms": 15.387,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 7
+    },
+    {
+      "case_id": "shared_vocabulary_width-07-4",
+      "catalog_size": 1,
+      "model_count": 256,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2437,
+      "runtime_ms": 25.125417,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 7
+    },
+    {
+      "case_id": "shared_vocabulary_width-08-0",
+      "catalog_size": 1,
+      "model_count": 512,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2561,
+      "runtime_ms": 49.991209,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 8
+    },
+    {
+      "case_id": "shared_vocabulary_width-08-1",
+      "catalog_size": 1,
+      "model_count": 1024,
+      "opposing_pairs": 1024,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2561,
+      "runtime_ms": 30.067251,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 8
+    },
+    {
+      "case_id": "shared_vocabulary_width-08-2",
+      "catalog_size": 1,
+      "model_count": 512,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2561,
+      "runtime_ms": 51.753709,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 8
+    },
+    {
+      "case_id": "shared_vocabulary_width-08-3",
+      "catalog_size": 1,
+      "model_count": 1024,
+      "opposing_pairs": 1024,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2561,
+      "runtime_ms": 30.887168,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 8
+    },
+    {
+      "case_id": "shared_vocabulary_width-08-4",
+      "catalog_size": 1,
+      "model_count": 512,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2561,
+      "runtime_ms": 50.512375,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 8
+    },
+    {
+      "case_id": "shared_vocabulary_width-09-0",
+      "catalog_size": 1,
+      "model_count": 1024,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2685,
+      "runtime_ms": 102.72533299999999,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 9
+    },
+    {
+      "case_id": "shared_vocabulary_width-09-1",
+      "catalog_size": 1,
+      "model_count": 2048,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2685,
+      "runtime_ms": 66.114459,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 9
+    },
+    {
+      "case_id": "shared_vocabulary_width-09-2",
+      "catalog_size": 1,
+      "model_count": 1024,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2685,
+      "runtime_ms": 102.150625,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 9
+    },
+    {
+      "case_id": "shared_vocabulary_width-09-3",
+      "catalog_size": 1,
+      "model_count": 2048,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2685,
+      "runtime_ms": 66.419375,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 9
+    },
+    {
+      "case_id": "shared_vocabulary_width-09-4",
+      "catalog_size": 1,
+      "model_count": 1024,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2685,
+      "runtime_ms": 102.093333,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 9
+    },
+    {
+      "case_id": "shared_vocabulary_width-10-0",
+      "catalog_size": 1,
+      "model_count": 2048,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2809,
+      "runtime_ms": 209.341042,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 10
+    },
+    {
+      "case_id": "shared_vocabulary_width-10-1",
+      "catalog_size": 1,
+      "model_count": 4096,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2809,
+      "runtime_ms": 138.19675,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 10
+    },
+    {
+      "case_id": "shared_vocabulary_width-10-2",
+      "catalog_size": 1,
+      "model_count": 2048,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2809,
+      "runtime_ms": 214.878583,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 10
+    },
+    {
+      "case_id": "shared_vocabulary_width-10-3",
+      "catalog_size": 1,
+      "model_count": 4096,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2809,
+      "runtime_ms": 139.071333,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 10
+    },
+    {
+      "case_id": "shared_vocabulary_width-10-4",
+      "catalog_size": 1,
+      "model_count": 2048,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2809,
+      "runtime_ms": 210.04475,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 10
+    },
+    {
+      "case_id": "shared_vocabulary_width-11-0",
+      "catalog_size": 1,
+      "model_count": 4096,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2935,
+      "runtime_ms": 432.051124,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 11
+    },
+    {
+      "case_id": "shared_vocabulary_width-11-1",
+      "catalog_size": 1,
+      "model_count": 8192,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2935,
+      "runtime_ms": 304.392667,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 11
+    },
+    {
+      "case_id": "shared_vocabulary_width-11-2",
+      "catalog_size": 1,
+      "model_count": 4096,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2935,
+      "runtime_ms": 426.976083,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 11
+    },
+    {
+      "case_id": "shared_vocabulary_width-11-3",
+      "catalog_size": 1,
+      "model_count": 8192,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 2935,
+      "runtime_ms": 305.42454100000003,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 11
+    },
+    {
+      "case_id": "shared_vocabulary_width-11-4",
+      "catalog_size": 1,
+      "model_count": 4096,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2935,
+      "runtime_ms": 425.98566700000003,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 11
+    },
+    {
+      "case_id": "shared_vocabulary_width-12-0",
+      "catalog_size": 1,
+      "model_count": 8192,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 3061,
+      "runtime_ms": 896.395583,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 12
+    },
+    {
+      "case_id": "shared_vocabulary_width-12-1",
+      "catalog_size": 1,
+      "model_count": 16384,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 3061,
+      "runtime_ms": 631.314167,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 12
+    },
+    {
+      "case_id": "shared_vocabulary_width-12-2",
+      "catalog_size": 1,
+      "model_count": 8192,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 3061,
+      "runtime_ms": 876.600875,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 12
+    },
+    {
+      "case_id": "shared_vocabulary_width-12-3",
+      "catalog_size": 1,
+      "model_count": 16384,
+      "opposing_pairs": 0,
+      "planning_exit": "INDETERMINATE",
+      "proof_size_bytes": 3061,
+      "runtime_ms": 633.439792,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 12
+    },
+    {
+      "case_id": "shared_vocabulary_width-12-4",
+      "catalog_size": 1,
+      "model_count": 8192,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 3061,
+      "runtime_ms": 884.344417,
+      "synthesis_exit": "INDETERMINATE",
+      "vocabulary_width": 12
+    },
+    {
+      "case_id": "observable_catalog_width-01-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 4.078666,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-01-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.086208,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-01-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.847876,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-01-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.1912500000000001,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-01-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 6.952624999999999,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-02-0",
+      "catalog_size": 2,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 4.03325,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-02-1",
+      "catalog_size": 2,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.124333,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-02-2",
+      "catalog_size": 2,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.917333,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-02-3",
+      "catalog_size": 2,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.069916,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-02-4",
+      "catalog_size": 2,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.928833,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-03-0",
+      "catalog_size": 3,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.810334,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-03-1",
+      "catalog_size": 3,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.072249,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-03-2",
+      "catalog_size": 3,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.890167,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-03-3",
+      "catalog_size": 3,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.0788739999999999,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-03-4",
+      "catalog_size": 3,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.876333,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-04-0",
+      "catalog_size": 4,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.8455,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-04-1",
+      "catalog_size": 4,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.081542,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-04-2",
+      "catalog_size": 4,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.832834,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-04-3",
+      "catalog_size": 4,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.078916,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-04-4",
+      "catalog_size": 4,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.9598750000000003,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-05-0",
+      "catalog_size": 5,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.9602500000000003,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-05-1",
+      "catalog_size": 5,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.082709,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-05-2",
+      "catalog_size": 5,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.9583749999999998,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-05-3",
+      "catalog_size": 5,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.087083,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-05-4",
+      "catalog_size": 5,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.847416,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-06-0",
+      "catalog_size": 6,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.9409159999999996,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-06-1",
+      "catalog_size": 6,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.106792,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-06-2",
+      "catalog_size": 6,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.846,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-06-3",
+      "catalog_size": 6,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.084166,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-06-4",
+      "catalog_size": 6,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.8555,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-07-0",
+      "catalog_size": 7,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.818041,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-07-1",
+      "catalog_size": 7,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.078333,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-07-2",
+      "catalog_size": 7,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 4.022958,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-07-3",
+      "catalog_size": 7,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.088458,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-07-4",
+      "catalog_size": 7,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.958208,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-08-0",
+      "catalog_size": 8,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 4.065624,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-08-1",
+      "catalog_size": 8,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.102416,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-08-2",
+      "catalog_size": 8,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 4.107875,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-08-3",
+      "catalog_size": 8,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.0979160000000001,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-08-4",
+      "catalog_size": 8,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.881459,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-09-0",
+      "catalog_size": 9,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.8873740000000003,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-09-1",
+      "catalog_size": 9,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.087333,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-09-2",
+      "catalog_size": 9,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 4.0432500000000005,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-09-3",
+      "catalog_size": 9,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.085167,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-09-4",
+      "catalog_size": 9,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.952292,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-10-0",
+      "catalog_size": 10,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.9542919999999997,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-10-1",
+      "catalog_size": 10,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.1152090000000001,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-10-2",
+      "catalog_size": 10,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.862833,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-10-3",
+      "catalog_size": 10,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.10075,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-10-4",
+      "catalog_size": 10,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.8381670000000003,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-11-0",
+      "catalog_size": 11,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.820501,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-11-1",
+      "catalog_size": 11,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.122625,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-11-2",
+      "catalog_size": 11,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 4.841626,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-11-3",
+      "catalog_size": 11,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.2301659999999999,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-11-4",
+      "catalog_size": 11,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 4.012625,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-12-0",
+      "catalog_size": 12,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 4.045957,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-12-1",
+      "catalog_size": 12,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.143791,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-12-2",
+      "catalog_size": 12,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.898667,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-12-3",
+      "catalog_size": 12,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.2021249999999999,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "observable_catalog_width-12-4",
+      "catalog_size": 12,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2076,
+      "runtime_ms": 3.891624,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-01-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 3.885375,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-01-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.085834,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-01-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 3.9111659999999997,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-01-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.094667,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-01-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 3.832125,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-02-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.043251,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-02-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.133833,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-02-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 3.989167,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-02-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.133458,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-02-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 3.928292,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-03-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.318875,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-03-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.208667,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-03-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.081542,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-03-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.223875,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-03-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.043042,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-04-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.156874999999999,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-04-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.252168,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-04-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.164167,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-04-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.256375,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-04-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.2797920000000005,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-05-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.313708999999999,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-05-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.367458,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-05-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.257791,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-05-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.312084,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-05-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.360541,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-06-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.3800419999999995,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-06-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.4227910000000001,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-06-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.403916000000001,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-06-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.3837490000000001,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-06-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.502042,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-07-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.647292,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-07-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.5394169999999998,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-07-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.503666,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-07-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.433791,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-07-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.46575,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-08-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.5632079999999995,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-08-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.5736249999999998,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-08-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.579708999999999,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-08-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.489708,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-08-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.581958,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-09-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.714709,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-09-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.6478329999999999,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-09-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.686541,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-09-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.572833,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-09-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.829251,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-10-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 5.056583,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-10-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.617,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-10-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.973084,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-10-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.615667,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-10-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.834625,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-11-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 4.884291,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-11-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.681334,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-11-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 5.011751,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-11-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.6829170000000002,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-11-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 5.119125,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-12-0",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 5.011334,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-12-1",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.776666,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-12-2",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 5.459834,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-12-3",
+      "catalog_size": 1,
+      "model_count": 8,
+      "opposing_pairs": 8,
+      "planning_exit": "PLANNED",
+      "proof_size_bytes": 2665,
+      "runtime_ms": 1.835292,
+      "synthesis_exit": "ESCALATE",
+      "vocabulary_width": 1
+    },
+    {
+      "case_id": "constraint_depth-12-4",
+      "catalog_size": 1,
+      "model_count": 4,
+      "opposing_pairs": 0,
+      "planning_exit": "NOT_NEEDED",
+      "proof_size_bytes": 2068,
+      "runtime_ms": 5.02425,
+      "synthesis_exit": "COMPILED",
+      "vocabulary_width": 1
+    }
+  ],
+  "schema_version": "0.1-semantic-settlement-evaluation"
+}

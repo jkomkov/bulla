@@ -618,6 +618,23 @@ class TestReceiptCreateCommand:
         assert r.returncode == 0
         assert "verified_to=digest" in r.stdout
 
+    def test_verify_json_exposes_answerability_without_inventing_reliance(self, tmp_path):
+        out = self._create(tmp_path)
+        r = _run("receipt", "verify", str(out), "--format", "json")
+        assert r.returncode == 0, r.stderr
+        payload = json.loads(r.stdout)
+        assert payload["bounds_conformance"] == "not_applicable"
+        assert payload["answerability"] == {
+            "integrity": "VERIFIED",
+            "authenticity": "UNVERIFIED",
+            "authority": "UNAUTHENTICATED",
+            "scope": "NOT_APPLICABLE",
+            "grounding": "UNRESOLVED",
+            "recourse": "NAMED",
+            "reachability": "UNVERIFIED",
+            "reliance_decision": "NOT_COMPUTED",
+        }
+
     def test_create_with_convention_surfaces_conformance(self, tmp_path):
         conv = tmp_path / "conv.json"
         conv.write_text(json.dumps({
@@ -635,6 +652,22 @@ class TestReceiptCreateCommand:
         r = _run("receipt", "verify", str(out))
         assert r.returncode == 0
         assert "convention amount-in-usd-cents: conforms" in r.stdout
+
+    def test_signed_create_uses_v03_full_authority_binding(self, tmp_path):
+        from bulla.identity import LocalEd25519Signer
+
+        signer = LocalEd25519Signer.generate()
+        key = tmp_path / "signer.json"
+        key.write_text(json.dumps(signer.to_keyfile_dict()))
+        out = self._create(tmp_path, "--key", str(key))
+        doc = json.loads(out.read_text())
+        assert doc["schema_version"] == "0.3"
+        assert doc["signature"]["issuer"] == doc["authorization"]["issuer"]
+
+        r = _run("receipt", "verify", str(out))
+        assert r.returncode == 0, r.stderr
+        assert "verified_to=attestation" in r.stdout
+        assert "authority=verified" in r.stdout
 
     def test_create_refuses_missing_forum(self, tmp_path):
         r = _run("receipt", "create", "--type", "demo.echo", "--out", str(tmp_path / "x.json"))
