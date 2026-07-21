@@ -1,4 +1,4 @@
-"""Release-boundary gates for Bulla 0.44.0."""
+"""Release-boundary gates for the Bulla 0.44 release line."""
 
 from __future__ import annotations
 
@@ -15,8 +15,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.44.0"
+    assert bulla.__version__ == "0.44.1"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    assert "## 0.44.1 — 2026-07-20" in changelog
     assert "## 0.44.0 — 2026-07-19" in changelog
     spec = (ROOT / "spec/README.md").read_text(encoding="utf-8")
     assert "**Normative version:** `0.2`" in spec
