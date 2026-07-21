@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.44.1 — 2026-07-20
+
+**Public truth copy correction.** This metadata-only patch corrects the PyPI
+front door after the immutable 0.44.0 description understated experimental
+code that the wheel actually contains. Semantic invention, partial envelopes,
+Semantic Finality, Claim Flow v0.4, and the finite Golden checker core are
+shipped under `bulla.experimental`; their maturity remains experimental and
+their evidence remains model-relative and captive. Generalization v0.5 and the
+benchmark packets remain source/research artifacts. No stable interface,
+ActionReceipt schema, FRSL-1 rule, or result algebra changed.
+
+- Replaces the remaining package-level "authorless action" description with
+  the receipt-first product and trust-boundary language.
+- Preserves 0.44.0 and its signed release receipt as immutable history; 0.44.1
+  receives its own tag, PyPI provenance, and contemporaneous receipt.
+
 ## 0.44.0 — 2026-07-19
 
 **Truth before witnessing.** This release repairs the public denominator and
