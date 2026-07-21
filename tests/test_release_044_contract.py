@@ -27,6 +27,7 @@ def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
     workflow = (ROOT / ".github/workflows/publish.yml").read_text(encoding="utf-8")
     steps = (
         "Run full test suite on the tagged commit",
+        "Verify tests left the tagged source tree unchanged",
         "Build sdist and wheel",
         "Verify source, wheel, and sdist runtime parity",
         "Publish to PyPI with Trusted Publishing attestations",
@@ -36,6 +37,10 @@ def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
     )
     positions = [workflow.index(step) for step in steps]
     assert positions == sorted(positions)
+    assert "git status --porcelain=v1 --untracked-files=all" in workflow
+    assert 'tee "$RUNNER_TEMP/pytest-summary.txt"' in workflow
+    assert 'tail -1 "$RUNNER_TEMP/pytest-summary.txt"' in workflow
+    assert "tee pytest-summary.txt" not in workflow
     assert "test -n \"$BULLA_RELEASE_KEY\"" in workflow
     assert "--repository jkomkov/bulla" in workflow
 

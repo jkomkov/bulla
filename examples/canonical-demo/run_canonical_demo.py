@@ -106,6 +106,10 @@ def main() -> None:
         "--live", action="store_true",
         help="Use real LLM for guided discovery (requires API key)",
     )
+    parser.add_argument(
+        "--no-write", action="store_true",
+        help="Run the demo without replacing the checked-in example receipt",
+    )
     args = parser.parse_args()
 
     demo_dir = Path(__file__).resolve().parent
@@ -165,8 +169,9 @@ def main() -> None:
     )
     receipt_dict = receipt.to_dict()
 
-    receipt_v030_path = receipts_dir / "audit_receipt_v030.json"
-    receipt_v030_path.write_text(json.dumps(receipt_dict, indent=2), encoding="utf-8")
+    if not args.no_write:
+        receipt_v030_path = receipts_dir / "audit_receipt_v030.json"
+        receipt_v030_path.write_text(json.dumps(receipt_dict, indent=2), encoding="utf-8")
     valid = verify_receipt_integrity(receipt_dict)
 
     bar = "\u2550" * 60
