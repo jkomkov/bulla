@@ -1,0 +1,75 @@
+{
+  "schema_version": "0.3",
+  "kind": "action_receipt",
+  "action": {
+    "type": "bulla.rely",
+    "subject": {
+      "relied_on": {
+        "event": "sha256:0c6242e609e4267f2a2b7f7ba275534d0a6afd32e81a9a07117a1e794f15887a",
+        "attestation": "sha256:957cb2e88cc4e9b80843831241a62f878b76acc0205b3a3f4d970a60511b6f3c"
+      },
+      "policy": "reliance.pragmatic.v1@sha256:2549faa0f297c8e43d9462a28b464cd2e0813e986b58555d9b29572351fc0b88",
+      "decision": "rely"
+    }
+  },
+  "diagnostic_ref": {
+    "status": "reference",
+    "ref": "sha256:af281d41ac3c5539b382cd2e764b441addabff85d4a5c16ce45c6a3b2d77a406"
+  },
+  "evidence_refs": [
+    {
+      "name": "relied_on",
+      "hash": "sha256:957cb2e88cc4e9b80843831241a62f878b76acc0205b3a3f4d970a60511b6f3c",
+      "grounding": "counterparty_signed"
+    }
+  ],
+  "anchor_ref": {},
+  "mandate": {
+    "authority": {
+      "principal": "did:key:z6MkqRTMfjEv6FD8bpLovxBnrtzeBYezLz3ESrLof4jWkE9Z",
+      "policy": "policy://relier@sha256:bb",
+      "delegation": []
+    }
+  },
+  "remedy": {
+    "challenge_window": "P7D",
+    "forum": {
+      "log_endpoint": "https://log.example",
+      "trusted_root_ref": "ots:root"
+    },
+    "remedies": [
+      {
+        "rung": "recompute",
+        "verifier": "bulla reliance verify",
+        "anchor": "hashes.content"
+      }
+    ]
+  },
+  "retention": {},
+  "stake": null,
+  "conventions": [],
+  "signature": {
+    "type": "bulla/ed25519-2026",
+    "purpose": "content",
+    "issuer": "did:key:z6MkqRTMfjEv6FD8bpLovxBnrtzeBYezLz3ESrLof4jWkE9Z",
+    "verificationMethod": "did:key:z6MkqRTMfjEv6FD8bpLovxBnrtzeBYezLz3ESrLof4jWkE9Z",
+    "proofValue": "7tl1vVXdwXIBSRBJfu/fryF8Z33q3/mtHNUXx9ESFFM4YA1lQHPZkC2o/iD2cjCRVWoRJQ9AIlJcfbe4cG7LDQ=="
+  },
+  "authorization": {
+    "type": "bulla/ed25519-2026",
+    "purpose": "authorization",
+    "issuer": "did:key:z6MkqRTMfjEv6FD8bpLovxBnrtzeBYezLz3ESrLof4jWkE9Z",
+    "verificationMethod": "did:key:z6MkqRTMfjEv6FD8bpLovxBnrtzeBYezLz3ESrLof4jWkE9Z",
+    "proofValue": "2s0x/oSVqfXDBmwDbHIIUYmW3DWXEn2py73/VkgP8oHvAnuQCkpWaPakBE+dxZh+azw04UlfzvWQz7Sgot0SCA=="
+  },
+  "timestamp": "2026-07-13T00:00:00+00:00",
+  "producer": {
+    "bulla_version": "0.44.0"
+  },
+  "hashes": {
+    "content": "sha256:6e54de0a4842c56711e03f5413af94b626de32dfa2733ee2083b38e445d2fc0d",
+    "event": "sha256:ee0af5c5993f4ae0ce3976c22d4ebc094620f2770001aa147997523f18833b0d",
+    "attestation": "sha256:3cf4d418b23d5889d432a7e19c8351a9674965463ee0191cf14b16890296add3",
+    "log_leaf": "sha256:87ee0b6f3711eb41c2d6c63c31afbdbbb6697846599917fbc2bc9a743040aa79"
+  }
+}

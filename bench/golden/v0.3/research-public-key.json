@@ -1,0 +1,9 @@
+{
+  "alg": "ed25519",
+  "did": "did:key:z6MkjTAVMkcXJZeRCaEZZsKzLAj43RKPQ72hWKW2i5gbSzFh",
+  "issuer": "did:key:z6MkjTAVMkcXJZeRCaEZZsKzLAj43RKPQ72hWKW2i5gbSzFh",
+  "public_key_b64": "SkQnGhWpxT67KzLEq0ktFt2c2x3FF0K1dNDbFSScEEA=",
+  "private_material_committed": false,
+  "role": "sprint-local-research-freeze-signer",
+  "version": 1
+}

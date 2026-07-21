@@ -1,0 +1,3232 @@
+[
+  {
+    "certificate_schema_version": "1.0",
+    "algorithm_version": "1",
+    "subject": {
+      "name": "filesystem+github",
+      "source_path": "<registry pair: filesystem+github>",
+      "composition_sha256": "754f99f32d05b14473e7d5c047b51d62c66026b28e9d4aeb45854fde353585dc",
+      "pack_stack_sha256": null,
+      "manifest_hashes": []
+    },
+    "method": {
+      "regime_classifier": "bulla.regime.classify@0.37.0",
+      "diagnostic": "bulla.diagnostic.diagnose@0.37.0",
+      "witness_geometry": "bulla.witness_geometry.compute_all@0.37.0",
+      "cross_server_decomposition": "bulla.diagnostic.decompose_fee@0.37.0"
+    },
+    "regime": {
+      "rank_obs": 0,
+      "rank_internal": 22,
+      "fee_formula": 22,
+      "is_all_hidden": false,
+      "is_all_observable": false,
+      "has_internal_dominance": true,
+      "has_balanced_ranks": false,
+      "has_obs_dominance": false,
+      "is_well_formed_for_fee": true,
+      "has_projective_observables": true,
+      "has_dfd_conservative": false,
+      "has_chp_conservative": false,
+      "is_exact_regime_conservative": false
+    },
+    "diagnostic": {
+      "coherence_fee": 22,
+      "blind_spots_count": 116,
+      "n_unbridged": 116,
+      "bridges_count": 232,
+      "cross_server_decomposition": {
+        "n_servers": 2,
+        "servers": [
+          "filesystem",
+          "github"
+        ],
+        "total_fee": 22,
+        "local_fees": [
+          11,
+          10
+        ],
+        "boundary_fee": 1
+      },
+      "witness_geometry": {
+        "schema_note": "All leverage scores and n_effective are exact rational strings ('p/q'), never floats.",
+        "n_effective": "2541/100",
+        "leverage": [
+          {
+            "tool": "filesystem__read_file",
+            "field": "path",
+            "score": "13/14"
+          },
+          {
+            "tool": "filesystem__read_text_file",
+            "field": "path",
+            "score": "13/14"
+          },
+          {
+            "tool": "filesystem__read_media_file",
+            "field": "path",
+            "score": "13/14"
+          },
+          {
+            "tool": "filesystem__read_multiple_files",
+            "field": "paths",
+            "score": "13/14"
+          },
+          {
+            "tool": "filesystem__write_file",
+            "field": "path",
+            "score": "13/14"
+          },
+          {
+            "tool": "filesystem__edit_file",
+            "field": "path",
+            "score": "13/14"
+          },
+          {
+            "tool": "filesystem__create_directory",
+            "field": "path",
+            "score": "13/14"
+          },
+          {
+            "tool": "filesystem__list_directory",
+            "field": "path",
+            "score": "13/14"
+          },
+          {
+            "tool": "filesystem__list_directory_with_sizes",
+            "field": "path",
+            "score": "13/14"
+          },
+          {
+            "tool": "filesystem__directory_tree",
+            "field": "path",
+            "score": "13/14"
+          },
+          {
+            "tool": "filesystem__search_files",
+            "field": "path",
+            "score": "13/14"
+          },
+          {
+            "tool": "filesystem__get_file_info",
+            "field": "path",
+            "score": "13/14"
+          },
+          {
+            "tool": "github__create_or_update_file",
+            "field": "path",
+            "score": "13/14"
+          },
+          {
+            "tool": "github__search_repositories",
+            "field": "page",
+            "score": "6/7"
+          },
+          {
+            "tool": "github__get_file_contents",
+            "field": "path",
+            "score": "13/14"
+          },
+          {
+            "tool": "github__list_commits",
+            "field": "page",
+            "score": "6/7"
+          },
+          {
+            "tool": "github__list_issues",
+            "field": "direction",
+            "score": "1/2"
+          },
+          {
+            "tool": "github__list_issues",
+            "field": "page",
+            "score": "6/7"
+          },
+          {
+            "tool": "github__list_issues",
+            "field": "since",
+            "score": "0"
+          },
+          {
+            "tool": "github__list_issues",
+            "field": "state",
+            "score": "2/3"
+          },
+          {
+            "tool": "github__update_issue",
+            "field": "state",
+            "score": "2/3"
+          },
+          {
+            "tool": "github__search_code",
+            "field": "page",
+            "score": "6/7"
+          },
+          {
+            "tool": "github__search_issues",
+            "field": "page",
+            "score": "6/7"
+          },
+          {
+            "tool": "github__search_users",
+            "field": "page",
+            "score": "6/7"
+          },
+          {
+            "tool": "github__list_pull_requests",
+            "field": "state",
+            "score": "2/3"
+          },
+          {
+            "tool": "github__list_pull_requests",
+            "field": "direction",
+            "score": "1/2"
+          },
+          {
+            "tool": "github__list_pull_requests",
+            "field": "page",
+            "score": "6/7"
+          }
+        ],
+        "coloops": [],
+        "loops": [
+          [
+            "github__list_issues",
+            "since"
+          ]
+        ],
+        "disclosure_set": [
+          [
+            "filesystem__read_file",
+            "path"
+          ],
+          [
+            "filesystem__read_text_file",
+            "path"
+          ],
+          [
+            "filesystem__read_media_file",
+            "path"
+          ],
+          [
+            "filesystem__read_multiple_files",
+            "paths"
+          ],
+          [
+            "filesystem__write_file",
+            "path"
+          ],
+          [
+            "filesystem__edit_file",
+            "path"
+          ],
+          [
+            "filesystem__create_directory",
+            "path"
+          ],
+          [
+            "filesystem__list_directory",
+            "path"
+          ],
+          [
+            "filesystem__list_directory_with_sizes",
+            "path"
+          ],
+          [
+            "filesystem__directory_tree",
+            "path"
+          ],
+          [
+            "filesystem__search_files",
+            "path"
+          ],
+          [
+            "filesystem__get_file_info",
+            "path"
+          ],
+          [
+            "github__create_or_update_file",
+            "path"
+          ],
+          [
+            "github__search_repositories",
+            "page"
+          ],
+          [
+            "github__list_commits",
+            "page"
+          ],
+          [
+            "github__list_issues",
+            "direction"
+          ],
+          [
+            "github__list_issues",
+            "page"
+          ],
+          [
+            "github__list_issues",
+            "state"
+          ],
+          [
+            "github__update_issue",
+            "state"
+          ],
+          [
+            "github__search_code",
+            "page"
+          ],
+          [
+            "github__search_issues",
+            "page"
+          ],
+          [
+            "github__search_users",
+            "page"
+          ]
+        ]
+      }
+    },
+    "claims": {
+      "schema_shape_valid": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "has_projective_observables"
+        ]
+      },
+      "fee_is_nonnegative": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "fee_is_interpretable": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "exact_disclosure_equivalence": {
+        "value": false,
+        "status": "not_certified",
+        "licensed_by": []
+      },
+      "repair_basis_status": {
+        "value": "candidate",
+        "status": "candidate",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ],
+        "not_licensed": [
+          "exact_disclosure_equivalence"
+        ]
+      },
+      "subject_bound": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "certificate_subject_hash"
+        ]
+      }
+    },
+    "scope": {
+      "tools": [
+        "filesystem__create_directory",
+        "filesystem__directory_tree",
+        "filesystem__edit_file",
+        "filesystem__get_file_info",
+        "filesystem__list_allowed_directories",
+        "filesystem__list_directory",
+        "filesystem__list_directory_with_sizes",
+        "filesystem__move_file",
+        "filesystem__read_file",
+        "filesystem__read_media_file",
+        "filesystem__read_multiple_files",
+        "filesystem__read_text_file",
+        "filesystem__search_files",
+        "filesystem__write_file",
+        "github__add_issue_comment",
+        "github__create_branch",
+        "github__create_issue",
+        "github__create_or_update_file",
+        "github__create_pull_request",
+        "github__create_pull_request_review",
+        "github__create_repository",
+        "github__fork_repository",
+        "github__get_file_contents",
+        "github__get_issue",
+        "github__get_pull_request",
+        "github__get_pull_request_comments",
+        "github__get_pull_request_files",
+        "github__get_pull_request_reviews",
+        "github__get_pull_request_status",
+        "github__list_commits",
+        "github__list_issues",
+        "github__list_pull_requests",
+        "github__merge_pull_request",
+        "github__push_files",
+        "github__search_code",
+        "github__search_issues",
+        "github__search_repositories",
+        "github__search_users",
+        "github__update_issue",
+        "github__update_pull_request_branch"
+      ],
+      "edges": [
+        {
+          "from_tool": "filesystem__create_directory",
+          "to_tool": "filesystem__directory_tree",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__create_directory",
+          "to_tool": "filesystem__get_file_info",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__create_directory",
+          "to_tool": "filesystem__list_directory",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__create_directory",
+          "to_tool": "filesystem__list_directory_with_sizes",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__create_directory",
+          "to_tool": "filesystem__search_files",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__create_directory",
+          "to_tool": "github__create_or_update_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__create_directory",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__directory_tree",
+          "to_tool": "filesystem__get_file_info",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__directory_tree",
+          "to_tool": "filesystem__search_files",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__directory_tree",
+          "to_tool": "github__create_or_update_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__directory_tree",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__edit_file",
+          "to_tool": "filesystem__create_directory",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__edit_file",
+          "to_tool": "filesystem__directory_tree",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__edit_file",
+          "to_tool": "filesystem__get_file_info",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__edit_file",
+          "to_tool": "filesystem__list_directory",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__edit_file",
+          "to_tool": "filesystem__list_directory_with_sizes",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__edit_file",
+          "to_tool": "filesystem__search_files",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__edit_file",
+          "to_tool": "github__create_or_update_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__edit_file",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__get_file_info",
+          "to_tool": "github__create_or_update_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__get_file_info",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__list_directory",
+          "to_tool": "filesystem__directory_tree",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__list_directory",
+          "to_tool": "filesystem__get_file_info",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__list_directory",
+          "to_tool": "filesystem__list_directory_with_sizes",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__list_directory",
+          "to_tool": "filesystem__search_files",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__list_directory",
+          "to_tool": "github__create_or_update_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__list_directory",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__list_directory_with_sizes",
+          "to_tool": "filesystem__directory_tree",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__list_directory_with_sizes",
+          "to_tool": "filesystem__get_file_info",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__list_directory_with_sizes",
+          "to_tool": "filesystem__search_files",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__list_directory_with_sizes",
+          "to_tool": "github__create_or_update_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__list_directory_with_sizes",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_file",
+          "to_tool": "filesystem__create_directory",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_file",
+          "to_tool": "filesystem__directory_tree",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_file",
+          "to_tool": "filesystem__edit_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_file",
+          "to_tool": "filesystem__get_file_info",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_file",
+          "to_tool": "filesystem__list_directory",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_file",
+          "to_tool": "filesystem__list_directory_with_sizes",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_file",
+          "to_tool": "filesystem__read_media_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_file",
+          "to_tool": "filesystem__read_multiple_files",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_file",
+          "to_tool": "filesystem__read_text_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_file",
+          "to_tool": "filesystem__search_files",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_file",
+          "to_tool": "filesystem__write_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_file",
+          "to_tool": "github__create_or_update_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_file",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_media_file",
+          "to_tool": "filesystem__create_directory",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_media_file",
+          "to_tool": "filesystem__directory_tree",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_media_file",
+          "to_tool": "filesystem__edit_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_media_file",
+          "to_tool": "filesystem__get_file_info",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_media_file",
+          "to_tool": "filesystem__list_directory",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_media_file",
+          "to_tool": "filesystem__list_directory_with_sizes",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_media_file",
+          "to_tool": "filesystem__read_multiple_files",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_media_file",
+          "to_tool": "filesystem__search_files",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_media_file",
+          "to_tool": "filesystem__write_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_media_file",
+          "to_tool": "github__create_or_update_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_media_file",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_multiple_files",
+          "to_tool": "filesystem__create_directory",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_multiple_files",
+          "to_tool": "filesystem__directory_tree",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_multiple_files",
+          "to_tool": "filesystem__edit_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_multiple_files",
+          "to_tool": "filesystem__get_file_info",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_multiple_files",
+          "to_tool": "filesystem__list_directory",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_multiple_files",
+          "to_tool": "filesystem__list_directory_with_sizes",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_multiple_files",
+          "to_tool": "filesystem__search_files",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_multiple_files",
+          "to_tool": "filesystem__write_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_multiple_files",
+          "to_tool": "github__create_or_update_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_multiple_files",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_text_file",
+          "to_tool": "filesystem__create_directory",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_text_file",
+          "to_tool": "filesystem__directory_tree",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_text_file",
+          "to_tool": "filesystem__edit_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_text_file",
+          "to_tool": "filesystem__get_file_info",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_text_file",
+          "to_tool": "filesystem__list_directory",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_text_file",
+          "to_tool": "filesystem__list_directory_with_sizes",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_text_file",
+          "to_tool": "filesystem__read_media_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_text_file",
+          "to_tool": "filesystem__read_multiple_files",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_text_file",
+          "to_tool": "filesystem__search_files",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_text_file",
+          "to_tool": "filesystem__write_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_text_file",
+          "to_tool": "github__create_or_update_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__read_text_file",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__search_files",
+          "to_tool": "filesystem__get_file_info",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__search_files",
+          "to_tool": "github__create_or_update_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__search_files",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__write_file",
+          "to_tool": "filesystem__create_directory",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__write_file",
+          "to_tool": "filesystem__directory_tree",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__write_file",
+          "to_tool": "filesystem__edit_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__write_file",
+          "to_tool": "filesystem__get_file_info",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__write_file",
+          "to_tool": "filesystem__list_directory",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__write_file",
+          "to_tool": "filesystem__list_directory_with_sizes",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__write_file",
+          "to_tool": "filesystem__search_files",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__write_file",
+          "to_tool": "github__create_or_update_file",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "filesystem__write_file",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "github__create_or_update_file",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_commits",
+          "to_tool": "github__list_issues",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_commits",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_commits",
+          "to_tool": "github__search_code",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_commits",
+          "to_tool": "github__search_issues",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_commits",
+          "to_tool": "github__search_users",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_issues",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "id_offset_match",
+            "sort_direction_match",
+            "state_filter_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_issues",
+          "to_tool": "github__search_code",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_issues",
+          "to_tool": "github__search_issues",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_issues",
+          "to_tool": "github__search_users",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_issues",
+          "to_tool": "github__update_issue",
+          "dimensions": [
+            "state_filter_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_code",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_code",
+          "to_tool": "github__search_issues",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_code",
+          "to_tool": "github__search_users",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_issues",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_issues",
+          "to_tool": "github__search_users",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_repositories",
+          "to_tool": "github__list_commits",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_repositories",
+          "to_tool": "github__list_issues",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_repositories",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_repositories",
+          "to_tool": "github__search_code",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_repositories",
+          "to_tool": "github__search_issues",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_repositories",
+          "to_tool": "github__search_users",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_users",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__update_issue",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "state_filter_match"
+          ]
+        }
+      ]
+    },
+    "parent_certificate_hashes": [],
+    "issuer": {
+      "type": "local",
+      "id": null
+    },
+    "signature": null,
+    "supersedes": null,
+    "violations": [],
+    "display": {
+      "fee_interpretation": "true non-negative fee (well-formed regime)",
+      "repair_semantics": "repairable as a non-negative fee; exact disclosure-set equivalence is NOT certified outside exact-conservative regime \u2014 use the matroid basis as a repair candidate, but verify against minimum_disclosure_set if the specific repair fields matter (see bulla/docs/REGIME.md regime lattice)"
+    },
+    "timestamp": "2026-06-27T00:34:09.813664+00:00",
+    "bulla_version": "0.37.0",
+    "certificate_content_hash": "sha256:298f521a82318cec32cb3c0411c9c169881953b7deb97c9fa32bcd73cfc395ed",
+    "attestation_hash": null,
+    "receipt_hash": null
+  },
+  {
+    "certificate_schema_version": "1.0",
+    "algorithm_version": "1",
+    "subject": {
+      "name": "github+notion",
+      "source_path": "<registry pair: github+notion>",
+      "composition_sha256": "31b9029dbb13f7ac9b0b6142ee6096b0ef0739caf0731142b8bcf0e715e0a04a",
+      "pack_stack_sha256": null,
+      "manifest_hashes": []
+    },
+    "method": {
+      "regime_classifier": "bulla.regime.classify@0.37.0",
+      "diagnostic": "bulla.diagnostic.diagnose@0.37.0",
+      "witness_geometry": "bulla.witness_geometry.compute_all@0.37.0",
+      "cross_server_decomposition": "bulla.diagnostic.decompose_fee@0.37.0"
+    },
+    "regime": {
+      "rank_obs": 0,
+      "rank_internal": 14,
+      "fee_formula": 14,
+      "is_all_hidden": false,
+      "is_all_observable": false,
+      "has_internal_dominance": true,
+      "has_balanced_ranks": false,
+      "has_obs_dominance": false,
+      "is_well_formed_for_fee": true,
+      "has_projective_observables": true,
+      "has_dfd_conservative": false,
+      "has_chp_conservative": false,
+      "is_exact_regime_conservative": false
+    },
+    "diagnostic": {
+      "coherence_fee": 14,
+      "blind_spots_count": 33,
+      "n_unbridged": 33,
+      "bridges_count": 66,
+      "cross_server_decomposition": {
+        "n_servers": 2,
+        "servers": [
+          "github",
+          "notion"
+        ],
+        "total_fee": 14,
+        "local_fees": [
+          10,
+          1
+        ],
+        "boundary_fee": 3
+      },
+      "witness_geometry": {
+        "schema_note": "All leverage scores and n_effective are exact rational strings ('p/q'), never floats.",
+        "n_effective": "1029/55",
+        "leverage": [
+          {
+            "tool": "github__create_or_update_file",
+            "field": "path",
+            "score": "2/3"
+          },
+          {
+            "tool": "github__search_repositories",
+            "field": "page",
+            "score": "6/7"
+          },
+          {
+            "tool": "github__get_file_contents",
+            "field": "path",
+            "score": "2/3"
+          },
+          {
+            "tool": "github__list_commits",
+            "field": "page",
+            "score": "6/7"
+          },
+          {
+            "tool": "github__list_issues",
+            "field": "direction",
+            "score": "2/3"
+          },
+          {
+            "tool": "github__list_issues",
+            "field": "page",
+            "score": "6/7"
+          },
+          {
+            "tool": "github__list_issues",
+            "field": "since",
+            "score": "2/3"
+          },
+          {
+            "tool": "github__list_issues",
+            "field": "state",
+            "score": "2/3"
+          },
+          {
+            "tool": "github__update_issue",
+            "field": "state",
+            "score": "2/3"
+          },
+          {
+            "tool": "github__search_code",
+            "field": "page",
+            "score": "6/7"
+          },
+          {
+            "tool": "github__search_issues",
+            "field": "page",
+            "score": "6/7"
+          },
+          {
+            "tool": "github__search_users",
+            "field": "page",
+            "score": "6/7"
+          },
+          {
+            "tool": "github__list_pull_requests",
+            "field": "state",
+            "score": "2/3"
+          },
+          {
+            "tool": "github__list_pull_requests",
+            "field": "direction",
+            "score": "2/3"
+          },
+          {
+            "tool": "github__list_pull_requests",
+            "field": "page",
+            "score": "6/7"
+          },
+          {
+            "tool": "notion__API_post_search",
+            "field": "sort.direction",
+            "score": "2/3"
+          },
+          {
+            "tool": "notion__API_post_search",
+            "field": "sort.timestamp",
+            "score": "2/3"
+          },
+          {
+            "tool": "notion__API_patch_block_children",
+            "field": "after",
+            "score": "2/3"
+          },
+          {
+            "tool": "notion__API_patch_page",
+            "field": "cover.external.url",
+            "score": "2/3"
+          }
+        ],
+        "coloops": [],
+        "loops": [],
+        "disclosure_set": [
+          [
+            "github__create_or_update_file",
+            "path"
+          ],
+          [
+            "github__search_repositories",
+            "page"
+          ],
+          [
+            "github__get_file_contents",
+            "path"
+          ],
+          [
+            "github__list_commits",
+            "page"
+          ],
+          [
+            "github__list_issues",
+            "direction"
+          ],
+          [
+            "github__list_issues",
+            "page"
+          ],
+          [
+            "github__list_issues",
+            "since"
+          ],
+          [
+            "github__list_issues",
+            "state"
+          ],
+          [
+            "github__update_issue",
+            "state"
+          ],
+          [
+            "github__search_code",
+            "page"
+          ],
+          [
+            "github__search_issues",
+            "page"
+          ],
+          [
+            "github__search_users",
+            "page"
+          ],
+          [
+            "github__list_pull_requests",
+            "direction"
+          ],
+          [
+            "notion__API_post_search",
+            "sort.timestamp"
+          ]
+        ]
+      }
+    },
+    "claims": {
+      "schema_shape_valid": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "has_projective_observables"
+        ]
+      },
+      "fee_is_nonnegative": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "fee_is_interpretable": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "exact_disclosure_equivalence": {
+        "value": false,
+        "status": "not_certified",
+        "licensed_by": []
+      },
+      "repair_basis_status": {
+        "value": "candidate",
+        "status": "candidate",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ],
+        "not_licensed": [
+          "exact_disclosure_equivalence"
+        ]
+      },
+      "subject_bound": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "certificate_subject_hash"
+        ]
+      }
+    },
+    "scope": {
+      "tools": [
+        "github__add_issue_comment",
+        "github__create_branch",
+        "github__create_issue",
+        "github__create_or_update_file",
+        "github__create_pull_request",
+        "github__create_pull_request_review",
+        "github__create_repository",
+        "github__fork_repository",
+        "github__get_file_contents",
+        "github__get_issue",
+        "github__get_pull_request",
+        "github__get_pull_request_comments",
+        "github__get_pull_request_files",
+        "github__get_pull_request_reviews",
+        "github__get_pull_request_status",
+        "github__list_commits",
+        "github__list_issues",
+        "github__list_pull_requests",
+        "github__merge_pull_request",
+        "github__push_files",
+        "github__search_code",
+        "github__search_issues",
+        "github__search_repositories",
+        "github__search_users",
+        "github__update_issue",
+        "github__update_pull_request_branch",
+        "notion__API_create_a_comment",
+        "notion__API_create_a_data_source",
+        "notion__API_delete_a_block",
+        "notion__API_get_block_children",
+        "notion__API_get_self",
+        "notion__API_get_user",
+        "notion__API_get_users",
+        "notion__API_list_data_source_templates",
+        "notion__API_move_page",
+        "notion__API_patch_block_children",
+        "notion__API_patch_page",
+        "notion__API_post_page",
+        "notion__API_post_search",
+        "notion__API_query_data_source",
+        "notion__API_retrieve_a_block",
+        "notion__API_retrieve_a_comment",
+        "notion__API_retrieve_a_data_source",
+        "notion__API_retrieve_a_database",
+        "notion__API_retrieve_a_page",
+        "notion__API_retrieve_a_page_property",
+        "notion__API_update_a_block",
+        "notion__API_update_a_data_source"
+      ],
+      "edges": [
+        {
+          "from_tool": "github__create_or_update_file",
+          "to_tool": "github__get_file_contents",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "github__create_or_update_file",
+          "to_tool": "notion__API_patch_page",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "github__get_file_contents",
+          "to_tool": "notion__API_patch_page",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_commits",
+          "to_tool": "github__list_issues",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_commits",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_commits",
+          "to_tool": "github__search_code",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_commits",
+          "to_tool": "github__search_issues",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_commits",
+          "to_tool": "github__search_users",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_issues",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "id_offset_match",
+            "sort_direction_match",
+            "state_filter_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_issues",
+          "to_tool": "github__search_code",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_issues",
+          "to_tool": "github__search_issues",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_issues",
+          "to_tool": "github__search_users",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_issues",
+          "to_tool": "github__update_issue",
+          "dimensions": [
+            "state_filter_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_issues",
+          "to_tool": "notion__API_patch_block_children",
+          "dimensions": [
+            "date_format_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_issues",
+          "to_tool": "notion__API_post_search",
+          "dimensions": [
+            "date_format_match",
+            "sort_direction_match"
+          ]
+        },
+        {
+          "from_tool": "github__list_pull_requests",
+          "to_tool": "notion__API_post_search",
+          "dimensions": [
+            "sort_direction_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_code",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_code",
+          "to_tool": "github__search_issues",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_code",
+          "to_tool": "github__search_users",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_issues",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_issues",
+          "to_tool": "github__search_users",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_repositories",
+          "to_tool": "github__list_commits",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_repositories",
+          "to_tool": "github__list_issues",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_repositories",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_repositories",
+          "to_tool": "github__search_code",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_repositories",
+          "to_tool": "github__search_issues",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_repositories",
+          "to_tool": "github__search_users",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__search_users",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "id_offset_match"
+          ]
+        },
+        {
+          "from_tool": "github__update_issue",
+          "to_tool": "github__list_pull_requests",
+          "dimensions": [
+            "state_filter_match"
+          ]
+        },
+        {
+          "from_tool": "notion__API_post_search",
+          "to_tool": "notion__API_patch_block_children",
+          "dimensions": [
+            "date_format_match"
+          ]
+        }
+      ]
+    },
+    "parent_certificate_hashes": [],
+    "issuer": {
+      "type": "local",
+      "id": null
+    },
+    "signature": null,
+    "supersedes": null,
+    "violations": [],
+    "display": {
+      "fee_interpretation": "true non-negative fee (well-formed regime)",
+      "repair_semantics": "repairable as a non-negative fee; exact disclosure-set equivalence is NOT certified outside exact-conservative regime \u2014 use the matroid basis as a repair candidate, but verify against minimum_disclosure_set if the specific repair fields matter (see bulla/docs/REGIME.md regime lattice)"
+    },
+    "timestamp": "2026-06-27T00:34:10.094346+00:00",
+    "bulla_version": "0.37.0",
+    "certificate_content_hash": "sha256:59d28e80bd09f92b4869345acac843da017834dccef957e1761c8df49da2f945",
+    "attestation_hash": null,
+    "receipt_hash": null
+  },
+  {
+    "certificate_schema_version": "1.0",
+    "algorithm_version": "1",
+    "subject": {
+      "name": "Filesystem \u2194 Git (from MCP server source)",
+      "source_path": "mcp_filesystem_git.yaml",
+      "composition_sha256": "dca1dba71803d1842ea0df10020b4820156818830d46238447cc1f6cdac2ab7e",
+      "pack_stack_sha256": null,
+      "manifest_hashes": []
+    },
+    "method": {
+      "regime_classifier": "bulla.regime.classify@0.37.0",
+      "diagnostic": "bulla.diagnostic.diagnose@0.37.0",
+      "witness_geometry": "bulla.witness_geometry.compute_all@0.37.0",
+      "cross_server_decomposition": "bulla.diagnostic.decompose_fee@0.37.0"
+    },
+    "regime": {
+      "rank_obs": 2,
+      "rank_internal": 5,
+      "fee_formula": 3,
+      "is_all_hidden": false,
+      "is_all_observable": false,
+      "has_internal_dominance": true,
+      "has_balanced_ranks": false,
+      "has_obs_dominance": false,
+      "is_well_formed_for_fee": true,
+      "has_projective_observables": true,
+      "has_dfd_conservative": true,
+      "has_chp_conservative": true,
+      "is_exact_regime_conservative": true
+    },
+    "diagnostic": {
+      "coherence_fee": 3,
+      "blind_spots_count": 4,
+      "n_unbridged": 4,
+      "bridges_count": 8,
+      "cross_server_decomposition": null,
+      "witness_geometry": {
+        "schema_note": "All leverage scores and n_effective are exact rational strings ('p/q'), never floats.",
+        "n_effective": "6",
+        "leverage": [
+          {
+            "tool": "filesystem",
+            "field": "encoding",
+            "score": "1/2"
+          },
+          {
+            "tool": "filesystem",
+            "field": "line_ending_convention",
+            "score": "1/2"
+          },
+          {
+            "tool": "filesystem",
+            "field": "path_separator",
+            "score": "1/2"
+          },
+          {
+            "tool": "git",
+            "field": "encoding",
+            "score": "1/2"
+          },
+          {
+            "tool": "git",
+            "field": "line_ending_convention",
+            "score": "1/2"
+          },
+          {
+            "tool": "git",
+            "field": "diff_format",
+            "score": "0"
+          },
+          {
+            "tool": "git",
+            "field": "date_format",
+            "score": "0"
+          },
+          {
+            "tool": "git",
+            "field": "path_separator",
+            "score": "1/2"
+          }
+        ],
+        "coloops": [],
+        "loops": [
+          [
+            "git",
+            "diff_format"
+          ],
+          [
+            "git",
+            "date_format"
+          ]
+        ],
+        "disclosure_set": [
+          [
+            "filesystem",
+            "encoding"
+          ],
+          [
+            "filesystem",
+            "line_ending_convention"
+          ],
+          [
+            "filesystem",
+            "path_separator"
+          ]
+        ]
+      }
+    },
+    "claims": {
+      "schema_shape_valid": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "has_projective_observables"
+        ]
+      },
+      "fee_is_nonnegative": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "fee_is_interpretable": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "exact_disclosure_equivalence": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee",
+          "is_exact_regime_conservative"
+        ]
+      },
+      "repair_basis_status": {
+        "value": "certified",
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee",
+          "is_exact_regime_conservative"
+        ]
+      },
+      "subject_bound": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "certificate_subject_hash"
+        ]
+      }
+    },
+    "scope": {
+      "tools": [
+        "filesystem",
+        "git"
+      ],
+      "edges": [
+        {
+          "from_tool": "filesystem",
+          "to_tool": "git",
+          "dimensions": [
+            "content_handoff",
+            "encoding_match",
+            "line_ending_match",
+            "path_format_match"
+          ]
+        },
+        {
+          "from_tool": "git",
+          "to_tool": "filesystem",
+          "dimensions": [
+            "diff_handoff",
+            "path_format_return"
+          ]
+        }
+      ]
+    },
+    "parent_certificate_hashes": [],
+    "issuer": {
+      "type": "local",
+      "id": null
+    },
+    "signature": null,
+    "supersedes": null,
+    "violations": [],
+    "display": {
+      "fee_interpretation": "true non-negative fee (theorem regime)",
+      "repair_semantics": "repairable; matroid basis = minimum disclosure set (strongest theorem-regime guarantees apply)"
+    },
+    "timestamp": "2026-06-27T00:34:10.095621+00:00",
+    "bulla_version": "0.37.0",
+    "certificate_content_hash": "sha256:7277b147eec5bd6248624d86d4f949018d1f7240bae8225b99ddfb0fa8f53e59",
+    "attestation_hash": null,
+    "receipt_hash": null
+  },
+  {
+    "certificate_schema_version": "1.0",
+    "algorithm_version": "1",
+    "subject": {
+      "name": "Financial Analysis Pipeline",
+      "source_path": "financial_pipeline.yaml",
+      "composition_sha256": "fd1546932a62bdd8bf48a7d8d807f679d9f2f54a5cdcfd2ef31fdd4a6b0ea7da",
+      "pack_stack_sha256": null,
+      "manifest_hashes": []
+    },
+    "method": {
+      "regime_classifier": "bulla.regime.classify@0.37.0",
+      "diagnostic": "bulla.diagnostic.diagnose@0.37.0",
+      "witness_geometry": "bulla.witness_geometry.compute_all@0.37.0",
+      "cross_server_decomposition": "bulla.diagnostic.decompose_fee@0.37.0"
+    },
+    "regime": {
+      "rank_obs": 6,
+      "rank_internal": 8,
+      "fee_formula": 2,
+      "is_all_hidden": false,
+      "is_all_observable": false,
+      "has_internal_dominance": true,
+      "has_balanced_ranks": false,
+      "has_obs_dominance": false,
+      "is_well_formed_for_fee": true,
+      "has_projective_observables": true,
+      "has_dfd_conservative": true,
+      "has_chp_conservative": true,
+      "is_exact_regime_conservative": true
+    },
+    "diagnostic": {
+      "coherence_fee": 2,
+      "blind_spots_count": 2,
+      "n_unbridged": 2,
+      "bridges_count": 4,
+      "cross_server_decomposition": null,
+      "witness_geometry": {
+        "schema_note": "All leverage scores and n_effective are exact rational strings ('p/q'), never floats.",
+        "n_effective": "4",
+        "leverage": [
+          {
+            "tool": "data_provider",
+            "field": "day_convention",
+            "score": "1/2"
+          },
+          {
+            "tool": "financial_analysis",
+            "field": "day_convention",
+            "score": "1/2"
+          },
+          {
+            "tool": "financial_analysis",
+            "field": "risk_metric",
+            "score": "1/2"
+          },
+          {
+            "tool": "portfolio_verification",
+            "field": "risk_metric",
+            "score": "1/2"
+          }
+        ],
+        "coloops": [],
+        "loops": [],
+        "disclosure_set": [
+          [
+            "data_provider",
+            "day_convention"
+          ],
+          [
+            "financial_analysis",
+            "risk_metric"
+          ]
+        ]
+      }
+    },
+    "claims": {
+      "schema_shape_valid": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "has_projective_observables"
+        ]
+      },
+      "fee_is_nonnegative": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "fee_is_interpretable": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "exact_disclosure_equivalence": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee",
+          "is_exact_regime_conservative"
+        ]
+      },
+      "repair_basis_status": {
+        "value": "certified",
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee",
+          "is_exact_regime_conservative"
+        ]
+      },
+      "subject_bound": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "certificate_subject_hash"
+        ]
+      }
+    },
+    "scope": {
+      "tools": [
+        "data_provider",
+        "financial_analysis",
+        "portfolio_verification"
+      ],
+      "edges": [
+        {
+          "from_tool": "data_provider",
+          "to_tool": "financial_analysis",
+          "dimensions": [
+            "data_match",
+            "day_conv_match",
+            "time_match"
+          ]
+        },
+        {
+          "from_tool": "financial_analysis",
+          "to_tool": "portfolio_verification",
+          "dimensions": [
+            "metric_type_match",
+            "rar_match",
+            "vol_match"
+          ]
+        },
+        {
+          "from_tool": "portfolio_verification",
+          "to_tool": "data_provider",
+          "dimensions": [
+            "feedback_match",
+            "granularity_match"
+          ]
+        }
+      ]
+    },
+    "parent_certificate_hashes": [],
+    "issuer": {
+      "type": "local",
+      "id": null
+    },
+    "signature": null,
+    "supersedes": null,
+    "violations": [],
+    "display": {
+      "fee_interpretation": "true non-negative fee (theorem regime)",
+      "repair_semantics": "repairable; matroid basis = minimum disclosure set (strongest theorem-regime guarantees apply)"
+    },
+    "timestamp": "2026-06-27T00:34:10.096979+00:00",
+    "bulla_version": "0.37.0",
+    "certificate_content_hash": "sha256:467d75adfcd0af65d2525516431dbd4a03695eaa8c860e874a6f7aa7061345e6",
+    "attestation_hash": null,
+    "receipt_hash": null
+  },
+  {
+    "certificate_schema_version": "1.0",
+    "algorithm_version": "1",
+    "subject": {
+      "name": "Fetch \u2192 Filesystem \u2192 Git (from MCP server source)",
+      "source_path": "mcp_fetch_filesystem_git.yaml",
+      "composition_sha256": "c53e730e8f5119823cf2fcde8ed73dfddf68d097a5aca3c3cd70cbc0ebe0a8a5",
+      "pack_stack_sha256": null,
+      "manifest_hashes": []
+    },
+    "method": {
+      "regime_classifier": "bulla.regime.classify@0.37.0",
+      "diagnostic": "bulla.diagnostic.diagnose@0.37.0",
+      "witness_geometry": "bulla.witness_geometry.compute_all@0.37.0",
+      "cross_server_decomposition": "bulla.diagnostic.decompose_fee@0.37.0"
+    },
+    "regime": {
+      "rank_obs": 3,
+      "rank_internal": 7,
+      "fee_formula": 4,
+      "is_all_hidden": false,
+      "is_all_observable": false,
+      "has_internal_dominance": true,
+      "has_balanced_ranks": false,
+      "has_obs_dominance": false,
+      "is_well_formed_for_fee": true,
+      "has_projective_observables": true,
+      "has_dfd_conservative": false,
+      "has_chp_conservative": true,
+      "is_exact_regime_conservative": false
+    },
+    "diagnostic": {
+      "coherence_fee": 4,
+      "blind_spots_count": 4,
+      "n_unbridged": 4,
+      "bridges_count": 8,
+      "cross_server_decomposition": null,
+      "witness_geometry": {
+        "schema_note": "All leverage scores and n_effective are exact rational strings ('p/q'), never floats.",
+        "n_effective": "48/7",
+        "leverage": [
+          {
+            "tool": "fetch",
+            "field": "encoding",
+            "score": "2/3"
+          },
+          {
+            "tool": "fetch",
+            "field": "content_format",
+            "score": "0"
+          },
+          {
+            "tool": "fetch",
+            "field": "truncation_boundary",
+            "score": "0"
+          },
+          {
+            "tool": "filesystem",
+            "field": "encoding",
+            "score": "2/3"
+          },
+          {
+            "tool": "filesystem",
+            "field": "line_ending_convention",
+            "score": "1/2"
+          },
+          {
+            "tool": "filesystem",
+            "field": "path_separator",
+            "score": "1/2"
+          },
+          {
+            "tool": "git",
+            "field": "encoding",
+            "score": "2/3"
+          },
+          {
+            "tool": "git",
+            "field": "line_ending_convention",
+            "score": "1/2"
+          },
+          {
+            "tool": "git",
+            "field": "diff_format",
+            "score": "0"
+          },
+          {
+            "tool": "git",
+            "field": "date_format",
+            "score": "0"
+          },
+          {
+            "tool": "git",
+            "field": "path_separator",
+            "score": "1/2"
+          }
+        ],
+        "coloops": [],
+        "loops": [
+          [
+            "fetch",
+            "content_format"
+          ],
+          [
+            "fetch",
+            "truncation_boundary"
+          ],
+          [
+            "git",
+            "diff_format"
+          ],
+          [
+            "git",
+            "date_format"
+          ]
+        ],
+        "disclosure_set": [
+          [
+            "fetch",
+            "encoding"
+          ],
+          [
+            "filesystem",
+            "encoding"
+          ],
+          [
+            "filesystem",
+            "line_ending_convention"
+          ],
+          [
+            "filesystem",
+            "path_separator"
+          ]
+        ]
+      }
+    },
+    "claims": {
+      "schema_shape_valid": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "has_projective_observables"
+        ]
+      },
+      "fee_is_nonnegative": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "fee_is_interpretable": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "exact_disclosure_equivalence": {
+        "value": false,
+        "status": "not_certified",
+        "licensed_by": []
+      },
+      "repair_basis_status": {
+        "value": "candidate",
+        "status": "candidate",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ],
+        "not_licensed": [
+          "exact_disclosure_equivalence"
+        ]
+      },
+      "subject_bound": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "certificate_subject_hash"
+        ]
+      }
+    },
+    "scope": {
+      "tools": [
+        "fetch",
+        "filesystem",
+        "git"
+      ],
+      "edges": [
+        {
+          "from_tool": "fetch",
+          "to_tool": "filesystem",
+          "dimensions": [
+            "content_handoff",
+            "encoding_fetch_fs"
+          ]
+        },
+        {
+          "from_tool": "filesystem",
+          "to_tool": "git",
+          "dimensions": [
+            "content_handoff_fs_git",
+            "encoding_fs_git",
+            "line_ending_match",
+            "path_format_match"
+          ]
+        },
+        {
+          "from_tool": "git",
+          "to_tool": "fetch",
+          "dimensions": [
+            "log_handoff"
+          ]
+        }
+      ]
+    },
+    "parent_certificate_hashes": [],
+    "issuer": {
+      "type": "local",
+      "id": null
+    },
+    "signature": null,
+    "supersedes": null,
+    "violations": [],
+    "display": {
+      "fee_interpretation": "true non-negative fee (well-formed regime)",
+      "repair_semantics": "repairable as a non-negative fee; exact disclosure-set equivalence is NOT certified outside exact-conservative regime \u2014 use the matroid basis as a repair candidate, but verify against minimum_disclosure_set if the specific repair fields matter (see bulla/docs/REGIME.md regime lattice)"
+    },
+    "timestamp": "2026-06-27T00:34:10.099062+00:00",
+    "bulla_version": "0.37.0",
+    "certificate_content_hash": "sha256:d02cf4f0084cf1fb3f2360dce6d4cf295407f8e52bc5b0565ad62822519d9b91",
+    "attestation_hash": null,
+    "receipt_hash": null
+  },
+  {
+    "certificate_schema_version": "1.0",
+    "algorithm_version": "1",
+    "subject": {
+      "name": "Auth-Data-Audit Pipeline",
+      "source_path": "auth_pipeline.yaml",
+      "composition_sha256": "95ff536f3f65fc91b7ab9e75c9526f5d5ae822b3eaa37a0d66206521b0a34dfd",
+      "pack_stack_sha256": null,
+      "manifest_hashes": []
+    },
+    "method": {
+      "regime_classifier": "bulla.regime.classify@0.37.0",
+      "diagnostic": "bulla.diagnostic.diagnose@0.37.0",
+      "witness_geometry": "bulla.witness_geometry.compute_all@0.37.0",
+      "cross_server_decomposition": "bulla.diagnostic.decompose_fee@0.37.0"
+    },
+    "regime": {
+      "rank_obs": 6,
+      "rank_internal": 6,
+      "fee_formula": 0,
+      "is_all_hidden": false,
+      "is_all_observable": false,
+      "has_internal_dominance": false,
+      "has_balanced_ranks": true,
+      "has_obs_dominance": false,
+      "is_well_formed_for_fee": true,
+      "has_projective_observables": true,
+      "has_dfd_conservative": true,
+      "has_chp_conservative": true,
+      "is_exact_regime_conservative": true
+    },
+    "diagnostic": {
+      "coherence_fee": 0,
+      "blind_spots_count": 0,
+      "n_unbridged": 0,
+      "bridges_count": 0,
+      "cross_server_decomposition": null,
+      "witness_geometry": null
+    },
+    "claims": {
+      "schema_shape_valid": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "has_projective_observables"
+        ]
+      },
+      "fee_is_nonnegative": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "fee_is_interpretable": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "exact_disclosure_equivalence": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee",
+          "is_exact_regime_conservative"
+        ]
+      },
+      "repair_basis_status": {
+        "value": "not_applicable",
+        "status": "not_applicable",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "subject_bound": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "certificate_subject_hash"
+        ]
+      }
+    },
+    "scope": {
+      "tools": [
+        "audit_logger",
+        "auth_service",
+        "data_service"
+      ],
+      "edges": [
+        {
+          "from_tool": "audit_logger",
+          "to_tool": "auth_service",
+          "dimensions": [
+            "compliance_match",
+            "user_refresh_match"
+          ]
+        },
+        {
+          "from_tool": "auth_service",
+          "to_tool": "data_service",
+          "dimensions": [
+            "permissions_match",
+            "token_match",
+            "user_match"
+          ]
+        },
+        {
+          "from_tool": "data_service",
+          "to_tool": "audit_logger",
+          "dimensions": [
+            "payload_match",
+            "user_audit_match"
+          ]
+        }
+      ]
+    },
+    "parent_certificate_hashes": [],
+    "issuer": {
+      "type": "local",
+      "id": null
+    },
+    "signature": null,
+    "supersedes": null,
+    "violations": [],
+    "display": {
+      "fee_interpretation": "no obstruction (exact-regime certified)",
+      "repair_semantics": "no repair needed; coherence_fee = 0"
+    },
+    "timestamp": "2026-06-27T00:34:10.099857+00:00",
+    "bulla_version": "0.37.0",
+    "certificate_content_hash": "sha256:2c1b65d2e2b63e9d43cc29e6ffd804e2b8c3d1c8bf3a288113e2aaae63518a30",
+    "attestation_hash": null,
+    "receipt_hash": null
+  },
+  {
+    "certificate_schema_version": "1.0",
+    "algorithm_version": "1",
+    "subject": {
+      "name": "DFD Violation Regime Break",
+      "source_path": "regime_break_dfd_violation.yaml",
+      "composition_sha256": "4edea451f304f091f65c9cc0c688a6df22cc174f10aa4cd7550aa284678e7bd6",
+      "pack_stack_sha256": null,
+      "manifest_hashes": []
+    },
+    "method": {
+      "regime_classifier": "bulla.regime.classify@0.37.0",
+      "diagnostic": "bulla.diagnostic.diagnose@0.37.0",
+      "witness_geometry": "bulla.witness_geometry.compute_all@0.37.0",
+      "cross_server_decomposition": "bulla.diagnostic.decompose_fee@0.37.0"
+    },
+    "regime": {
+      "rank_obs": 0,
+      "rank_internal": 3,
+      "fee_formula": 3,
+      "is_all_hidden": true,
+      "is_all_observable": false,
+      "has_internal_dominance": true,
+      "has_balanced_ranks": false,
+      "has_obs_dominance": false,
+      "is_well_formed_for_fee": true,
+      "has_projective_observables": true,
+      "has_dfd_conservative": false,
+      "has_chp_conservative": false,
+      "is_exact_regime_conservative": false
+    },
+    "diagnostic": {
+      "coherence_fee": 3,
+      "blind_spots_count": 3,
+      "n_unbridged": 3,
+      "bridges_count": 6,
+      "cross_server_decomposition": null,
+      "witness_geometry": {
+        "schema_note": "All leverage scores and n_effective are exact rational strings ('p/q'), never floats.",
+        "n_effective": "4",
+        "leverage": [
+          {
+            "tool": "tool_a",
+            "field": "x",
+            "score": "3/4"
+          },
+          {
+            "tool": "tool_a",
+            "field": "y",
+            "score": "3/4"
+          },
+          {
+            "tool": "tool_b",
+            "field": "u",
+            "score": "3/4"
+          },
+          {
+            "tool": "tool_b",
+            "field": "v",
+            "score": "3/4"
+          }
+        ],
+        "coloops": [],
+        "loops": [],
+        "disclosure_set": [
+          [
+            "tool_a",
+            "x"
+          ],
+          [
+            "tool_a",
+            "y"
+          ],
+          [
+            "tool_b",
+            "u"
+          ]
+        ]
+      }
+    },
+    "claims": {
+      "schema_shape_valid": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "has_projective_observables"
+        ]
+      },
+      "fee_is_nonnegative": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "fee_is_interpretable": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "exact_disclosure_equivalence": {
+        "value": false,
+        "status": "not_certified",
+        "licensed_by": []
+      },
+      "repair_basis_status": {
+        "value": "candidate",
+        "status": "candidate",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ],
+        "not_licensed": [
+          "exact_disclosure_equivalence"
+        ]
+      },
+      "subject_bound": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "certificate_subject_hash"
+        ]
+      }
+    },
+    "scope": {
+      "tools": [
+        "tool_a",
+        "tool_b"
+      ],
+      "edges": [
+        {
+          "from_tool": "tool_a",
+          "to_tool": "tool_b",
+          "dimensions": [
+            "dim1",
+            "dim2",
+            "dim3"
+          ]
+        }
+      ]
+    },
+    "parent_certificate_hashes": [],
+    "issuer": {
+      "type": "local",
+      "id": null
+    },
+    "signature": null,
+    "supersedes": null,
+    "violations": [],
+    "display": {
+      "fee_interpretation": "true non-negative fee (well-formed regime)",
+      "repair_semantics": "repairable as a non-negative fee; exact disclosure-set equivalence is NOT certified outside exact-conservative regime \u2014 use the matroid basis as a repair candidate, but verify against minimum_disclosure_set if the specific repair fields matter (see bulla/docs/REGIME.md regime lattice)"
+    },
+    "timestamp": "2026-06-27T00:34:10.100439+00:00",
+    "bulla_version": "0.37.0",
+    "certificate_content_hash": "sha256:bc03f7fe750a14d91652c5a38075ee81691322f39710530a510d56d8bf800673",
+    "attestation_hash": null,
+    "receipt_hash": null
+  },
+  {
+    "certificate_schema_version": "1.0",
+    "algorithm_version": "1",
+    "subject": {
+      "name": "Bridge Topology Regime Example",
+      "source_path": "regime_break_bridge_topology.yaml",
+      "composition_sha256": "c85e0596e9597dd0302532e7b35d268faaa293c93f7ed4a44d3fbfc9b8b59998",
+      "pack_stack_sha256": null,
+      "manifest_hashes": []
+    },
+    "method": {
+      "regime_classifier": "bulla.regime.classify@0.37.0",
+      "diagnostic": "bulla.diagnostic.diagnose@0.37.0",
+      "witness_geometry": "bulla.witness_geometry.compute_all@0.37.0",
+      "cross_server_decomposition": "bulla.diagnostic.decompose_fee@0.37.0"
+    },
+    "regime": {
+      "rank_obs": 0,
+      "rank_internal": 2,
+      "fee_formula": 2,
+      "is_all_hidden": true,
+      "is_all_observable": false,
+      "has_internal_dominance": true,
+      "has_balanced_ranks": false,
+      "has_obs_dominance": false,
+      "is_well_formed_for_fee": true,
+      "has_projective_observables": true,
+      "has_dfd_conservative": true,
+      "has_chp_conservative": true,
+      "is_exact_regime_conservative": true
+    },
+    "diagnostic": {
+      "coherence_fee": 2,
+      "blind_spots_count": 2,
+      "n_unbridged": 2,
+      "bridges_count": 4,
+      "cross_server_decomposition": null,
+      "witness_geometry": {
+        "schema_note": "All leverage scores and n_effective are exact rational strings ('p/q'), never floats.",
+        "n_effective": "3",
+        "leverage": [
+          {
+            "tool": "tool_a",
+            "field": "path",
+            "score": "2/3"
+          },
+          {
+            "tool": "tool_b",
+            "field": "path",
+            "score": "2/3"
+          },
+          {
+            "tool": "tool_c",
+            "field": "path",
+            "score": "2/3"
+          }
+        ],
+        "coloops": [],
+        "loops": [],
+        "disclosure_set": [
+          [
+            "tool_a",
+            "path"
+          ],
+          [
+            "tool_b",
+            "path"
+          ]
+        ]
+      }
+    },
+    "claims": {
+      "schema_shape_valid": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "has_projective_observables"
+        ]
+      },
+      "fee_is_nonnegative": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "fee_is_interpretable": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "exact_disclosure_equivalence": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee",
+          "is_exact_regime_conservative"
+        ]
+      },
+      "repair_basis_status": {
+        "value": "certified",
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee",
+          "is_exact_regime_conservative"
+        ]
+      },
+      "subject_bound": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "certificate_subject_hash"
+        ]
+      }
+    },
+    "scope": {
+      "tools": [
+        "tool_a",
+        "tool_b",
+        "tool_c"
+      ],
+      "edges": [
+        {
+          "from_tool": "tool_a",
+          "to_tool": "tool_b",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        },
+        {
+          "from_tool": "tool_b",
+          "to_tool": "tool_c",
+          "dimensions": [
+            "path_convention_match"
+          ]
+        }
+      ]
+    },
+    "parent_certificate_hashes": [],
+    "issuer": {
+      "type": "local",
+      "id": null
+    },
+    "signature": null,
+    "supersedes": null,
+    "violations": [],
+    "display": {
+      "fee_interpretation": "true non-negative fee (theorem regime)",
+      "repair_semantics": "repairable; matroid basis = minimum disclosure set (strongest theorem-regime guarantees apply)"
+    },
+    "timestamp": "2026-06-27T00:34:10.100758+00:00",
+    "bulla_version": "0.37.0",
+    "certificate_content_hash": "sha256:a0736226372dc1f414f7bf85971ab1c4ccf4410699c4cb66cb241c84c7357c95",
+    "attestation_hash": null,
+    "receipt_hash": null
+  },
+  {
+    "certificate_schema_version": "1.0",
+    "algorithm_version": "1",
+    "subject": {
+      "name": "A_3_4",
+      "source_path": "<cycle family k=3 m=4>",
+      "composition_sha256": "46345755d78aef954a6bdbcaa6e608f6121e02c12169e57b37de1703189b7728",
+      "pack_stack_sha256": null,
+      "manifest_hashes": []
+    },
+    "method": {
+      "regime_classifier": "bulla.regime.classify@0.37.0",
+      "diagnostic": "bulla.diagnostic.diagnose@0.37.0",
+      "witness_geometry": "bulla.witness_geometry.compute_all@0.37.0",
+      "cross_server_decomposition": "bulla.diagnostic.decompose_fee@0.37.0"
+    },
+    "regime": {
+      "rank_obs": 0,
+      "rank_internal": 9,
+      "fee_formula": 9,
+      "is_all_hidden": true,
+      "is_all_observable": false,
+      "has_internal_dominance": true,
+      "has_balanced_ranks": false,
+      "has_obs_dominance": false,
+      "is_well_formed_for_fee": true,
+      "has_projective_observables": true,
+      "has_dfd_conservative": true,
+      "has_chp_conservative": true,
+      "is_exact_regime_conservative": true
+    },
+    "diagnostic": {
+      "coherence_fee": 9,
+      "blind_spots_count": 12,
+      "n_unbridged": 12,
+      "bridges_count": 24,
+      "cross_server_decomposition": null,
+      "witness_geometry": {
+        "schema_note": "All leverage scores and n_effective are exact rational strings ('p/q'), never floats.",
+        "n_effective": "12",
+        "leverage": [
+          {
+            "tool": "t0",
+            "field": "f",
+            "score": "3/4"
+          },
+          {
+            "tool": "t1",
+            "field": "f",
+            "score": "3/4"
+          },
+          {
+            "tool": "t2",
+            "field": "f",
+            "score": "3/4"
+          },
+          {
+            "tool": "t3",
+            "field": "f",
+            "score": "3/4"
+          },
+          {
+            "tool": "t4",
+            "field": "f",
+            "score": "3/4"
+          },
+          {
+            "tool": "t5",
+            "field": "f",
+            "score": "3/4"
+          },
+          {
+            "tool": "t6",
+            "field": "f",
+            "score": "3/4"
+          },
+          {
+            "tool": "t7",
+            "field": "f",
+            "score": "3/4"
+          },
+          {
+            "tool": "t8",
+            "field": "f",
+            "score": "3/4"
+          },
+          {
+            "tool": "t9",
+            "field": "f",
+            "score": "3/4"
+          },
+          {
+            "tool": "t10",
+            "field": "f",
+            "score": "3/4"
+          },
+          {
+            "tool": "t11",
+            "field": "f",
+            "score": "3/4"
+          }
+        ],
+        "coloops": [],
+        "loops": [],
+        "disclosure_set": [
+          [
+            "t0",
+            "f"
+          ],
+          [
+            "t1",
+            "f"
+          ],
+          [
+            "t2",
+            "f"
+          ],
+          [
+            "t4",
+            "f"
+          ],
+          [
+            "t5",
+            "f"
+          ],
+          [
+            "t6",
+            "f"
+          ],
+          [
+            "t8",
+            "f"
+          ],
+          [
+            "t9",
+            "f"
+          ],
+          [
+            "t10",
+            "f"
+          ]
+        ]
+      }
+    },
+    "claims": {
+      "schema_shape_valid": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "has_projective_observables"
+        ]
+      },
+      "fee_is_nonnegative": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "fee_is_interpretable": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee"
+        ]
+      },
+      "exact_disclosure_equivalence": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee",
+          "is_exact_regime_conservative"
+        ]
+      },
+      "repair_basis_status": {
+        "value": "certified",
+        "status": "certified",
+        "licensed_by": [
+          "is_well_formed_for_fee",
+          "is_exact_regime_conservative"
+        ]
+      },
+      "subject_bound": {
+        "value": true,
+        "status": "certified",
+        "licensed_by": [
+          "certificate_subject_hash"
+        ]
+      }
+    },
+    "scope": {
+      "tools": [
+        "t0",
+        "t1",
+        "t10",
+        "t11",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6",
+        "t7",
+        "t8",
+        "t9"
+      ],
+      "edges": [
+        {
+          "from_tool": "t0",
+          "to_tool": "t1",
+          "dimensions": [
+            "f_match"
+          ]
+        },
+        {
+          "from_tool": "t1",
+          "to_tool": "t2",
+          "dimensions": [
+            "f_match"
+          ]
+        },
+        {
+          "from_tool": "t10",
+          "to_tool": "t11",
+          "dimensions": [
+            "f_match"
+          ]
+        },
+        {
+          "from_tool": "t11",
+          "to_tool": "t8",
+          "dimensions": [
+            "f_match"
+          ]
+        },
+        {
+          "from_tool": "t2",
+          "to_tool": "t3",
+          "dimensions": [
+            "f_match"
+          ]
+        },
+        {
+          "from_tool": "t3",
+          "to_tool": "t0",
+          "dimensions": [
+            "f_match"
+          ]
+        },
+        {
+          "from_tool": "t4",
+          "to_tool": "t5",
+          "dimensions": [
+            "f_match"
+          ]
+        },
+        {
+          "from_tool": "t5",
+          "to_tool": "t6",
+          "dimensions": [
+            "f_match"
+          ]
+        },
+        {
+          "from_tool": "t6",
+          "to_tool": "t7",
+          "dimensions": [
+            "f_match"
+          ]
+        },
+        {
+          "from_tool": "t7",
+          "to_tool": "t4",
+          "dimensions": [
+            "f_match"
+          ]
+        },
+        {
+          "from_tool": "t8",
+          "to_tool": "t9",
+          "dimensions": [
+            "f_match"
+          ]
+        },
+        {
+          "from_tool": "t9",
+          "to_tool": "t10",
+          "dimensions": [
+            "f_match"
+          ]
+        }
+      ]
+    },
+    "parent_certificate_hashes": [],
+    "issuer": {
+      "type": "local",
+      "id": null
+    },
+    "signature": null,
+    "supersedes": null,
+    "violations": [],
+    "display": {
+      "fee_interpretation": "true non-negative fee (theorem regime)",
+      "repair_semantics": "repairable; matroid basis = minimum disclosure set (strongest theorem-regime guarantees apply)"
+    },
+    "timestamp": "2026-06-27T00:34:10.107079+00:00",
+    "bulla_version": "0.37.0",
+    "certificate_content_hash": "sha256:f2f149563d1bf9bc1095713632a55a3cacad37e17a50a1828902a01a9f9ead04",
+    "attestation_hash": null,
+    "receipt_hash": null
+  },
+  {
+    "certificate_schema_version": "1.0",
+    "algorithm_version": "1",
+    "subject": {
+      "name": "malformed_non_projective_negative_control",
+      "source_path": "<negative control: parser-blocked YAML reproduced via Python API>",
+      "composition_sha256": "5329c1459529d97e6451301212f683d35c66c08fe982b8bfb0b770319c782887",
+      "pack_stack_sha256": null,
+      "manifest_hashes": []
+    },
+    "method": {
+      "regime_classifier": "bulla.regime.classify@0.37.0",
+      "diagnostic": "bulla.diagnostic.diagnose@0.37.0",
+      "witness_geometry": "bulla.witness_geometry.compute_all@0.37.0",
+      "cross_server_decomposition": "bulla.diagnostic.decompose_fee@0.37.0"
+    },
+    "regime": {
+      "rank_obs": 1,
+      "rank_internal": 0,
+      "fee_formula": -1,
+      "is_all_hidden": false,
+      "is_all_observable": false,
+      "has_internal_dominance": false,
+      "has_balanced_ranks": false,
+      "has_obs_dominance": true,
+      "is_well_formed_for_fee": false,
+      "has_projective_observables": false,
+      "has_dfd_conservative": true,
+      "has_chp_conservative": true,
+      "is_exact_regime_conservative": true
+    },
+    "diagnostic": {
+      "coherence_fee": -1,
+      "blind_spots_count": 0,
+      "n_unbridged": 0,
+      "bridges_count": 0,
+      "cross_server_decomposition": null,
+      "witness_geometry": null
+    },
+    "claims": {
+      "schema_shape_valid": {
+        "value": false,
+        "status": "not_certified",
+        "licensed_by": []
+      },
+      "fee_is_nonnegative": {
+        "value": false,
+        "status": "not_certified",
+        "licensed_by": []
+      },
+      "fee_is_interpretable": {
+        "value": false,
+        "status": "not_certified",
+        "licensed_by": []
+      },
+      "exact_disclosure_equivalence": {
+        "value": false,
+        "status": "not_certified",
+        "licensed_by": []
+      },
+      "repair_basis_status": {
+        "value": "not_certified",
+        "status": "not_certified",
+        "licensed_by": []
+      },
+      "subject_bound": {
+        "value": false,
+        "status": "not_certified",
+        "licensed_by": []
+      }
+    },
+    "scope": {
+      "tools": [
+        "t1",
+        "t2"
+      ],
+      "edges": [
+        {
+          "from_tool": "t1",
+          "to_tool": "t2",
+          "dimensions": [
+            "secret_match"
+          ]
+        }
+      ]
+    },
+    "parent_certificate_hashes": [],
+    "issuer": {
+      "type": "local",
+      "id": null
+    },
+    "signature": null,
+    "supersedes": null,
+    "violations": [
+      {
+        "kind": "projective_observables",
+        "tool_name": "t1",
+        "fields": [
+          "secret"
+        ],
+        "description": "tool `t1` exposes observable field(s) ['secret'] that are not in its internal_state. By the schema-shape invariant (Sprint 9), this can produce negative coherence_fee and break the fee interpretation. Add the missing fields to internal_state, or remove them from observable_schema."
+      },
+      {
+        "kind": "projective_observables",
+        "tool_name": "t2",
+        "fields": [
+          "secret"
+        ],
+        "description": "tool `t2` exposes observable field(s) ['secret'] that are not in its internal_state. By the schema-shape invariant (Sprint 9), this can produce negative coherence_fee and break the fee interpretation. Add the missing fields to internal_state, or remove them from observable_schema."
+      }
+    ],
+    "display": {
+      "fee_interpretation": "signed obstruction imbalance (NOT a fee \u2014 see regime warning)",
+      "repair_semantics": "fix schema definition \u2014 observable_schema must be a subset of internal_state per tool (Sprint 9 schema-shape invariant)"
+    },
+    "timestamp": "2026-06-27T00:34:10.107227+00:00",
+    "bulla_version": "0.37.0",
+    "certificate_content_hash": "sha256:1cc2eeaba5036e5461182449ad1cf4f912e250c556f93b79380d7029d32127cd",
+    "attestation_hash": null,
+    "receipt_hash": null
+  }
+]

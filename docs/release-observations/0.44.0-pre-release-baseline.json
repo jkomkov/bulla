@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1",
+  "observed_at": "2026-07-20",
+  "candidate_version": "0.44.0",
+  "publishing_preflight": {
+    "github_authentication": "BLOCKED_INVALID_LOCAL_GH_CREDENTIAL",
+    "trusted_publishing_workflow": "DECLARED_NOT_REMOTELY_CONFIRMED",
+    "pypi_environment": "NOT_REMOTELY_CONFIRMED",
+    "release_signing_secret": "NOT_REMOTELY_CONFIRMED",
+    "secret_values_observed": false
+  },
+  "standalone_repository": {
+    "repository": "jkomkov/bulla",
+    "public_main_commit": "f9e5a10cb48d6d2ba4eef2c997a0ef4f7604dd0d",
+    "public_v0_43_0_tag_commit": "f9e5a10cb48d6d2ba4eef2c997a0ef4f7604dd0d"
+  },
+  "pypi": {
+    "version": "0.43.0",
+    "artifacts": [
+      {
+        "filename": "bulla-0.43.0-py3-none-any.whl",
+        "sha256": "193647c26b70291e60f22079f4b015ad26139ba4e9b41f810b8c5b3d84398563"
+      },
+      {
+        "filename": "bulla-0.43.0.tar.gz",
+        "sha256": "febf5fca03d089f8f9e26d5b63d5b128938237813f9176bc11c2f535ee669166"
+      }
+    ]
+  },
+  "production_routes": [
+    {"url": "https://pypi.org/project/bulla/", "status": 200},
+    {"url": "https://raw.githubusercontent.com/jkomkov/bulla/main/README.md", "status": 200},
+    {"url": "https://glyphstandard.com/status", "status": 404},
+    {"url": "https://glyphstandard.com/participate", "status": 404},
+    {"url": "https://glyphstandard.com/review", "status": 200},
+    {"url": "https://glyphstandard.com/bulla/experimental", "status": 404},
+    {"url": "https://www.resagentica.com/status", "status": 404},
+    {"url": "https://www.resagentica.com/research/golden-gate", "status": 404},
+    {"url": "https://www.resagentica.com/research/interpolant-envelope", "status": 404},
+    {"url": "https://www.resagentica.com/research/no-free-precedent", "status": 404},
+    {"url": "https://www.resagentica.com/research/omnibus", "status": 200}
+  ],
+  "site_deployment_commits": {
+    "glyph": "UNKNOWN_NOT_EXPOSED_BY_PUBLIC_RESPONSE",
+    "res_agentica": "UNKNOWN_NOT_EXPOSED_BY_PUBLIC_RESPONSE"
+  }
+}

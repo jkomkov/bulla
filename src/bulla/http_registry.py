@@ -15,9 +15,11 @@ forge — an OTS anchor, or a root you obtained out of band — via
 recommend *proceed*. The single-operator case (you run the server, you verify
 against your own log) is sound; the cross-party case needs the pin.
 
-The server is a single-operator **reference** primitive, read-only by design; a
-writable / multi-tenant / hosted registry — and signed tree heads, which would stop
-an operator equivocating between anchors — are the operated product and out of scope.
+The server is a single-operator **reference** primitive, read-only by design. It
+does not issue signed tree heads. A separate experimental
+``bulla.witness-checkpoint/0.1-draft`` surface can sign and transport ordering
+checkpoints, but federation, plurality, and an operated writable / multi-tenant /
+hosted registry remain out of scope for this stable transport.
 
 Routes (all GET, all return JSON):
   GET /root                           -> {"root": "sha256:..", "tree_size": N}

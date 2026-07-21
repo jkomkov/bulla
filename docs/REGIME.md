@@ -115,6 +115,23 @@ See `papers/composition-doctrine/sprint13_certification_suite.md` for the v1.0 s
 - Read `bulla/docs/MATROID-STRUCTURE.md` for the per-regime guarantees on disclosure semantics.
 - File an issue if you see a regime warning on a composition that came from `BullaGuard.from_tools_list` — that pipeline is supposed to maintain the schema-shape invariant by construction.
 
+## The completeness verdict — when bulla can prove you're fully covered
+
+`bulla certify` prints a **COMPLETENESS** verdict. It answers a question most tools cannot: *is the fee missing anything, or is it provably the whole story here?* The verdict is a plain-language reading of the `exact_disclosure_equivalence` claim (which is the machine-readable source of truth — parse that, not the text); it never claims more than that claim licenses.
+
+| Verdict | When | What it means |
+|---|---|---|
+| **✓ PROVEN** | exact regime (DFD ∧ CHP) ∧ well-formed | The fee is exact and the prescribed disclosures are provably minimal (composition-doctrine Lemma 3.9 / the exact-conservative matroid equivalence): no convention mismatch is missed, and no smaller fix suffices. |
+| **~ LOWER BOUND** | well-formed but not exact-conservative (surrogate regime) | The fee is a floor. The exact-regime guarantee does not hold, so additional obstruction may exist and the disclosure set may not be minimal. |
+| **– N/A** | not well-formed for the fee | `observable_schema` is not a subset of `internal_state` per tool; classify with `bulla regime` and fix the schema shape first. |
+
+**Two scope riders are printed with every verdict, and they are not boilerplate:**
+
+1. **Coherence completeness only — not delivery.** A PROVEN verdict certifies that the loaded *conventions* compose (the type/convention layer). It does **not** certify that the composition delivers the right *result*. Whether the provider actually did what it should — the value/delivery layer — is a separate problem and out of scope for the fee.
+2. **Relative to the loaded vocabulary.** Completeness is with respect to the loaded convention packs. An obstruction in a dimension you did not load is not seen; `fee = 0` means "no conflict detectable under the loaded packs," not "no conflict possible."
+
+Because the verdict lives in the certificate's `display` block, it is **excluded from the content hash** — rewording it never changes the deed. The guarantee it reports comes entirely from the regime predicates in the signed `claims`.
+
 ## Empirical baseline (Sprint 8 + 9 + 11 audits)
 
 | Corpus | n | well-formed-for-fee | projective | exact-conservative |

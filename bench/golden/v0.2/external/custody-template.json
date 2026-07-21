@@ -1,0 +1,27 @@
+{
+  "profile": "bulla.golden-suite/0.2-experimental",
+  "status": "BLOCKED_MISSING_EXTERNAL_PARTICIPANTS",
+  "blindness_mode": "REVIEWER_ORIGINATED_BLIND",
+  "candidate_commit": null,
+  "specification_hash": null,
+  "scoring_hash": null,
+  "curators": [],
+  "cleanroom_implementer": null,
+  "adjudicators": [],
+  "implementation_team": [],
+  "sops": {
+    "key_groups": 3,
+    "shamir_threshold": 2,
+    "implementation_team_key_access": false,
+    "reviewer_supplied_age_recipients": []
+  },
+  "hidden_cases": {
+    "total": 36,
+    "machine_or_property": 24,
+    "adjudication_or_open_world": 12,
+    "committed": 0
+  },
+  "ciphertext_hash": null,
+  "commitment_root": null,
+  "claim_boundary": "A template is not a custody ceremony and cannot establish blindness."
+}

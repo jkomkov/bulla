@@ -1,0 +1,85 @@
+{
+  "content": {
+    "schema_version": "0.4-claim-flow-freeze",
+    "profile": "bulla.claim-flow/0.4-freeze",
+    "classification": "INTERNAL_CAPTIVE",
+    "merge_pr": 175,
+    "frozen_main_commit": "293f6e7f3cd1bbd32ef2c05ec458c34fe905c3dd",
+    "source_head": "9644be72c73a4b61ac0ff79b95495648c8d193ea",
+    "artifacts": [
+      {
+        "path": "bulla/bench/golden/v0.4/manifest.json",
+        "sha256": "6d6b7405aa5267037f3c3b54d6c7c0f04389b5f35f7de7430f39641c43394357"
+      },
+      {
+        "path": "bulla/bench/golden/v0.4/interpretation.json",
+        "sha256": "5e06fdae83015edf1bf752e97d50bbccf2448fe483f0f568ca0e16f656cc6c3e"
+      },
+      {
+        "path": "bulla/bench/golden/v0.4/precedent-yield-report.json",
+        "sha256": "1d3a0278f1e59d5610a81d8936d17b6588d8f48604dd2ec03c36381a2227bdcf"
+      },
+      {
+        "path": "bulla/bench/golden/v0.4/FALSIFICATION-LEDGER.md",
+        "sha256": "e6dec656442faa19fe97257ade4d15d87a1c24b429236a409caab488994f7064"
+      },
+      {
+        "path": "bulla/bench/golden/v0.4/FORMAL-AUDIT.md",
+        "sha256": "09f53b1c133f062aa8da61c56f8a805f4362efe91a2e7e40e0ea6c38947c9f71"
+      },
+      {
+        "path": "bulla/bench/golden/v0.4/QA-REPORT.md",
+        "sha256": "0c56bf4abb56e70314d7d0023df3e35ba8c87e24b0b686c137cb6e077ea20ea4"
+      },
+      {
+        "path": "bulla/bench/golden/v0.4/self-hosting-claim-flow.json",
+        "sha256": "081e87dfb7ab257ed8879fea1310cfaab40a8bc5fd48fee91fadd80569a808f5"
+      },
+      {
+        "path": "bulla/scripts/verify_golden_v04.py",
+        "sha256": "2ce0d45ce5b0a3bf6b56ddcc99155d0a11a633637de7a69d1f725a035b609fd2"
+      },
+      {
+        "path": "bulla/scripts/verify_golden_v04_interpretation.py",
+        "sha256": "1dcf9796b61f7545ff993f8d35b5c8ab6bf3e4ca4ef19211bf41c5872b50c514"
+      },
+      {
+        "path": "bulla/spec/claim-flow-v0.4-experimental.md",
+        "sha256": "8a6cf0bcd9bd218ff82a15ddc69026e3c24bc31611a9489d469760370b099c97"
+      },
+      {
+        "path": "papers/interpolant-envelope/lean/InterpolantEnvelope/ClaimFlow.lean",
+        "sha256": "3438c40adfe259547c95c755807887bccd08e81cdcf66310262a61b5c9769d4f"
+      }
+    ],
+    "ci_observations": [
+      {
+        "name": "checks",
+        "run_id": 29717226894,
+        "head_sha": "9644be72c73a4b61ac0ff79b95495648c8d193ea",
+        "conclusion": "success",
+        "url": "https://github.com/jkomkov/res-agentica/actions/runs/29717226894"
+      },
+      {
+        "name": "golden-suite",
+        "run_id": 29717226882,
+        "head_sha": "9644be72c73a4b61ac0ff79b95495648c8d193ea",
+        "conclusion": "success",
+        "url": "https://github.com/jkomkov/res-agentica/actions/runs/29717226882"
+      }
+    ],
+    "external_counts": {
+      "authors": 0,
+      "adjudicators": 0,
+      "implementations": 0,
+      "witnesses": 0
+    },
+    "known_external_gaps": [
+      "precedent lineages are team-authored and machine-planted",
+      "applicability has not been adjudicated on foreign-authored cases",
+      "no independent implementation parity has been observed",
+      "no independent witness or institutional-validity claim is made"
+    ]
+  },
+  "content_hash": "sha256:a4b4b70b37a54878950a42f78474ecfc7ae8f3dc5f53af779755b85ad5a423af"
+}

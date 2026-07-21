@@ -1,0 +1,105 @@
+{
+  "schema_version": "0.2",
+  "kind": "action_receipt",
+  "action": {
+    "type": "payments.charge",
+    "subject": {
+      "amount": 1250,
+      "currency": "USD",
+      "merchant": "acme"
+    }
+  },
+  "diagnostic_ref": {
+    "status": "reference",
+    "ref": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  "evidence_refs": [
+    {
+      "name": "result",
+      "hash": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "grounding": "self_asserted"
+    }
+  ],
+  "anchor_ref": {},
+  "mandate": {
+    "authority": {
+      "principal": "did:key:zSpecVector",
+      "policy": "policy://payments@sha256:aa",
+      "delegation": []
+    },
+    "bounds": {
+      "scope": "payments.charge amount<=100000"
+    }
+  },
+  "remedy": {
+    "challenge_window": "P7D",
+    "forum": {
+      "log_endpoint": "https://log.example",
+      "trusted_root_ref": "ots:root"
+    },
+    "remedies": [
+      {
+        "rung": "recompute",
+        "verifier": "bulla receipt verify",
+        "anchor": "hashes.content"
+      },
+      {
+        "rung": "escalate",
+        "verifier": "maintainer review",
+        "anchor": "did:key:zSpecVector"
+      }
+    ]
+  },
+  "retention": {
+    "record": "operational",
+    "disclosure": "party"
+  },
+  "stake": null,
+  "conventions": [
+    {
+      "name": "amount-in-usd-cents",
+      "scope": "seam:caller->payments.charge",
+      "kind": "executable",
+      "definition": {
+        "form": "jsonschema+quantum/1",
+        "schema": {
+          "type": "object",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": []
+        },
+        "quantum": {
+          "amount": {
+            "unit": "USD_cents",
+            "multipleOf": 1
+          }
+        }
+      },
+      "definition_hash": "sha256:f8f0fd30eb33abb3469d1b0dec4254a518c1322a29e6aa0ee028e5ca328fbb3e"
+    },
+    {
+      "name": "refund-honored-in-full",
+      "scope": "seam:caller->payments.charge",
+      "kind": "semantic",
+      "definition": "A refund request within the challenge window is honored in full.",
+      "forum": {
+        "log_endpoint": "https://log.example",
+        "trusted_root_ref": "ots:root"
+      },
+      "definition_hash": "sha256:d5ca4db6610492ef753de508dd4f41b313861634f0b88ad0dbdf165bbe9dd0b5"
+    }
+  ],
+  "signature": null,
+  "timestamp": "2026-07-13T00:00:00+00:00",
+  "producer": {
+    "bulla_version": "0.43.0"
+  },
+  "hashes": {
+    "content": "sha256:37cf38ae8a09be63b82b5ef02695d1ad63d31f5dc7b214755954b230d7d1c8cd",
+    "event": "sha256:28381b36e3cebb38b7bf81641524bf8c532f0bdacd2bfa6455da218966bbdb62",
+    "attestation": "sha256:c716d88740268c28d6211ff3478049934ff4b94c880c23c146f5394d2e7b1a23",
+    "log_leaf": "sha256:117b72692d5dde0d286c7011642053c1313ca99e4f128c292f85c94b0a34db62"
+  }
+}

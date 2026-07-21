@@ -1,0 +1,30 @@
+{
+  "claims": [
+    {
+      "claim": "Golden v0.1 randomized economic schedules supplied broad terminal or transition coverage.",
+      "evidence": "All one million recorded schedules terminated ROUTED.",
+      "status": "FALSIFIED"
+    },
+    {
+      "claim": "Checked cube compression converts only the original twelve one-atom pathologies.",
+      "evidence": "The harder 240-case suite has zero unsafe regions and converts every AST-bound structured case to COMPILED or PARTIAL.",
+      "status": "FALSIFIED"
+    },
+    {
+      "claim": "Current verification workloads justify a semantic-provenance DAG runtime.",
+      "evidence": "Only one of 704 input hashes repeats; structural reuse is 0.14 percent.",
+      "status": "FALSIFIED"
+    },
+    {
+      "claim": "Reviewer-originated blindness and clean-room parity are established.",
+      "evidence": "No external cases, keys, submissions, ratings, or reveal have been received.",
+      "status": "BLOCKED"
+    },
+    {
+      "claim": "The declared portability matrix is fully observed.",
+      "evidence": "Two cells are observed and thirteen remain blocked; the local OCI build lacks a running Docker daemon.",
+      "status": "BLOCKED"
+    }
+  ],
+  "profile": "bulla.golden-suite/0.2-experimental"
+}

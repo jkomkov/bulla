@@ -1,0 +1,384 @@
+{
+  "profile": "bulla.semantic-invention/0.1-draft",
+  "mode": "two-live-local-subprocess-tools",
+  "problem_hash": "sha256:108b36fd8c29c6783de367b8bc117d1c27565b2c2ace9c6fc12ed1991abcffbd",
+  "result_hash": "sha256:4dbb71d0b572ccd1a0a76edddb2705d2c9a708db31e092dc347398e2fcb0e02f",
+  "package_hash": "sha256:f213d489e76f6cbc35da5318f0e78fa051c29fc5b89a1b78f7b14547532bddc7",
+  "compilation_key": "sha256:81256c5a0e72a012bc5f0cd1ee0622b1c35d15667c79785a98c7b7c398970568",
+  "compilation_seconds": 0.0019597499922383577,
+  "standalone_verification": {
+    "ok": true,
+    "status": "COMPILED",
+    "problem_binding": true,
+    "package_gates": {
+      "gluing": "pass",
+      "conservativity": "pass",
+      "definability": "pass",
+      "preserved_refusals": "pass",
+      "minimality": "pass",
+      "receipt_binding": "pass",
+      "reasons": []
+    },
+    "certificate_valid": null,
+    "choice_analysis_valid": true,
+    "result_hash": "sha256:4dbb71d0b572ccd1a0a76edddb2705d2c9a708db31e092dc347398e2fcb0e02f"
+  },
+  "invention_receipt": {
+    "schema_version": "0.3",
+    "kind": "action_receipt",
+    "action": {
+      "type": "bulla.invent",
+      "subject": {
+        "problem_hash": "sha256:108b36fd8c29c6783de367b8bc117d1c27565b2c2ace9c6fc12ed1991abcffbd",
+        "result_hash": "sha256:4dbb71d0b572ccd1a0a76edddb2705d2c9a708db31e092dc347398e2fcb0e02f",
+        "outcome": "COMPILED",
+        "artifact_hash": "sha256:99df4372c48291f7bc530838c205f5a6b279286735a49dfbc6dcc32dab8a85de",
+        "package_hash": "sha256:f213d489e76f6cbc35da5318f0e78fa051c29fc5b89a1b78f7b14547532bddc7",
+        "certificate_hash": null,
+        "verifier_hash": "sha256:bfa12362b7de4e165dd3986b12b636200625cf38e8e60ca7ba2a872d06b728ff",
+        "synthesis_policy_hash": "sha256:4038f12e3b8ba5d2117e41c199b1e81e676c424815b665151f0b3d33af6b61e9"
+      }
+    },
+    "diagnostic_ref": {
+      "status": "reference",
+      "ref": "sha256:47c1326152b8eb9f380769da46f1a71279c693bc2095f09eadcc53c08c87637d"
+    },
+    "evidence_refs": [
+      {
+        "name": "seam_problem",
+        "hash": "sha256:108b36fd8c29c6783de367b8bc117d1c27565b2c2ace9c6fc12ed1991abcffbd",
+        "grounding": "self_asserted"
+      },
+      {
+        "name": "invention_artifact",
+        "hash": "sha256:99df4372c48291f7bc530838c205f5a6b279286735a49dfbc6dcc32dab8a85de",
+        "grounding": "execution_verified"
+      },
+      {
+        "name": "synthesis_result",
+        "hash": "sha256:4dbb71d0b572ccd1a0a76edddb2705d2c9a708db31e092dc347398e2fcb0e02f",
+        "grounding": "execution_verified"
+      },
+      {
+        "name": "gate_report",
+        "hash": "sha256:47c1326152b8eb9f380769da46f1a71279c693bc2095f09eadcc53c08c87637d",
+        "grounding": "execution_verified"
+      },
+      {
+        "name": "verifier",
+        "hash": "sha256:bfa12362b7de4e165dd3986b12b636200625cf38e8e60ca7ba2a872d06b728ff",
+        "grounding": "execution_verified"
+      },
+      {
+        "name": "synthesis_policy",
+        "hash": "sha256:4038f12e3b8ba5d2117e41c199b1e81e676c424815b665151f0b3d33af6b61e9",
+        "grounding": "self_asserted"
+      }
+    ],
+    "anchor_ref": {},
+    "mandate": {
+      "authority": {
+        "principal": "did:key:z6Mksf1x93hvb6rprQoNHyCZmXGsRmfJJrPcToCMkJiNNYzG",
+        "policy": "policy://delivery-acceptance@sha256:demo",
+        "delegation": []
+      },
+      "bounds": {
+        "scope": "delivery-acceptance seam compilation"
+      }
+    },
+    "remedy": {
+      "challenge_window": "P30D",
+      "forum": {
+        "log_endpoint": "https://witness.invalid",
+        "trusted_root_ref": "sha256:abababababababababababababababababababababababababababababababab"
+      },
+      "remedies": [
+        {
+          "rung": "recompute",
+          "verifier": "verify_invention.py",
+          "anchor": "sha256:4dbb71d0b572ccd1a0a76edddb2705d2c9a708db31e092dc347398e2fcb0e02f"
+        },
+        {
+          "rung": "escalate",
+          "verifier": "did:key:z6Mksf1x93hvb6rprQoNHyCZmXGsRmfJJrPcToCMkJiNNYzG",
+          "anchor": "policy://delivery-acceptance@sha256:demo"
+        }
+      ]
+    },
+    "retention": {},
+    "stake": null,
+    "conventions": [],
+    "signature": {
+      "type": "bulla/ed25519-2026",
+      "purpose": "content",
+      "issuer": "did:key:z6Mksf1x93hvb6rprQoNHyCZmXGsRmfJJrPcToCMkJiNNYzG",
+      "verificationMethod": "did:key:z6Mksf1x93hvb6rprQoNHyCZmXGsRmfJJrPcToCMkJiNNYzG",
+      "proofValue": "P8mHy5K8fAg9NBAck/SI9lLBnKYNHASwKy4N3b7t/ok1oIP1nlFLUgXET6pXrGbz6m45KZqXJOxbJwzOP65oBg=="
+    },
+    "authorization": {
+      "type": "bulla/ed25519-2026",
+      "purpose": "authorization",
+      "issuer": "did:key:z6Mksf1x93hvb6rprQoNHyCZmXGsRmfJJrPcToCMkJiNNYzG",
+      "verificationMethod": "did:key:z6Mksf1x93hvb6rprQoNHyCZmXGsRmfJJrPcToCMkJiNNYzG",
+      "proofValue": "qQE/7nO9k3AW05l00EvAPAh4VHPh0vvOJTTe23XsmeiyzKi0jHcpOLgkHKLn+EMxW+p6Uv91ajpnHb335Xh8Cw=="
+    },
+    "timestamp": "2026-07-18T12:00:00Z",
+    "producer": {
+      "demo": "semantic-control-plane"
+    },
+    "hashes": {
+      "content": "sha256:c7bbd9453804a08c55042fe704504f10508bdaf698201ff46d697ce7ab6b13ac",
+      "event": "sha256:d7716fd54725f0081341fcab449525655da6502e2b03d721879dbb19d24f5cd6",
+      "attestation": "sha256:845697a24282af73ba23290c6e9a64b39aa01a82403200a5fea80fc6f03e4783",
+      "log_leaf": "sha256:d8f9196acc16fbaa5a88efcc795e9d4d8d34903336be02e16183d1adac6026e8"
+    }
+  },
+  "executions": [
+    {
+      "request": {
+        "delivery_id": "d0",
+        "signed_acceptance": true
+      },
+      "shared_structure": {
+        "accepted_evidence": [
+          [
+            "d0"
+          ]
+        ]
+      },
+      "application": {
+        "profile": "bulla.semantic-invention/0.1-draft",
+        "status": "RELY",
+        "problem_hash": "sha256:108b36fd8c29c6783de367b8bc117d1c27565b2c2ace9c6fc12ed1991abcffbd",
+        "package_hash": "sha256:f213d489e76f6cbc35da5318f0e78fa051c29fc5b89a1b78f7b14547532bddc7",
+        "structure_hash": "sha256:ef2198eb837836fe275aab611113779bfe8f9567a8159f3d58190f9d17150a6b",
+        "target_arguments": [
+          "d0"
+        ],
+        "adapter_version": "delivery-tool/1",
+        "reasons": []
+      },
+      "downstream": {
+        "action": "release_claim",
+        "bound_application": "sha256:bb9653b2c1694b01af317c1637ed6117007204d03491cb80757e8ea851afdd77"
+      },
+      "application_receipt": {
+        "schema_version": "0.3",
+        "kind": "action_receipt",
+        "action": {
+          "type": "bulla.invent.apply",
+          "subject": {
+            "application_result_hash": "sha256:bb9653b2c1694b01af317c1637ed6117007204d03491cb80757e8ea851afdd77",
+            "problem_hash": "sha256:108b36fd8c29c6783de367b8bc117d1c27565b2c2ace9c6fc12ed1991abcffbd",
+            "package_hash": "sha256:f213d489e76f6cbc35da5318f0e78fa051c29fc5b89a1b78f7b14547532bddc7",
+            "structure_hash": "sha256:ef2198eb837836fe275aab611113779bfe8f9567a8159f3d58190f9d17150a6b",
+            "target_arguments": [
+              "d0"
+            ],
+            "adapter_version": "delivery-tool/1",
+            "decision": "RELY"
+          }
+        },
+        "diagnostic_ref": {
+          "status": "reference",
+          "ref": "sha256:bb9653b2c1694b01af317c1637ed6117007204d03491cb80757e8ea851afdd77"
+        },
+        "evidence_refs": [
+          {
+            "name": "compiled_package",
+            "hash": "sha256:f213d489e76f6cbc35da5318f0e78fa051c29fc5b89a1b78f7b14547532bddc7",
+            "grounding": "execution_verified"
+          },
+          {
+            "name": "adapter_structure",
+            "hash": "sha256:ef2198eb837836fe275aab611113779bfe8f9567a8159f3d58190f9d17150a6b",
+            "grounding": "execution_verified"
+          }
+        ],
+        "anchor_ref": {},
+        "mandate": {
+          "authority": {
+            "principal": "did:key:z6MkrTYC1i23CpgNa1sKuEL32C73E7sVeozzV6DSadGvZpNm",
+            "policy": "policy://claim-routing@sha256:demo",
+            "delegation": []
+          },
+          "bounds": {
+            "scope": "one application of the pinned delivery predicate"
+          }
+        },
+        "remedy": {},
+        "retention": {},
+        "stake": null,
+        "conventions": [],
+        "signature": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "content",
+          "issuer": "did:key:z6MkrTYC1i23CpgNa1sKuEL32C73E7sVeozzV6DSadGvZpNm",
+          "verificationMethod": "did:key:z6MkrTYC1i23CpgNa1sKuEL32C73E7sVeozzV6DSadGvZpNm",
+          "proofValue": "wYxcdGv4+VUmPNTF9L0HGBhv2X9SCAakt7kgQiDBkeMvDf3O6HO/lUL3ergNnygdN3LiivwqaoYubQlfH/NBDw=="
+        },
+        "authorization": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "authorization",
+          "issuer": "did:key:z6MkrTYC1i23CpgNa1sKuEL32C73E7sVeozzV6DSadGvZpNm",
+          "verificationMethod": "did:key:z6MkrTYC1i23CpgNa1sKuEL32C73E7sVeozzV6DSadGvZpNm",
+          "proofValue": "ueKw76iFerIS7sJnnF8pc2VYLAbiFl+IHTl3W12KOJGoAXb958vhHvyNCPzhpgzKKle1HhBoPwJQ3iVa5VVhBg=="
+        },
+        "timestamp": "2026-07-18T12:00:01Z",
+        "producer": {
+          "tool": "claim-router/1"
+        },
+        "hashes": {
+          "content": "sha256:e989122e3f366eb89aef5e978cb858330919212d33d28002d3923abe8cbfaf01",
+          "event": "sha256:ec087c40458bd02473e19fb53f4d4adebed4eb8dff34557ba989abff31f6c029",
+          "attestation": "sha256:906769ef4246d1146f2e15c4c01c434cad31116044881ce5a7a57c689156275b",
+          "log_leaf": "sha256:495cfa3b20645eb4c478582a23377646d66d57820cd2dcca521f3cb28147e1ba"
+        }
+      },
+      "receipt_replay": {
+        "ok": true,
+        "checks": {
+          "receipt_authentic": true,
+          "action_type": true,
+          "subject_exact": true,
+          "diagnostic_binding": true,
+          "evidence_binding": true
+        },
+        "application": {
+          "profile": "bulla.semantic-invention/0.1-draft",
+          "status": "RELY",
+          "problem_hash": "sha256:108b36fd8c29c6783de367b8bc117d1c27565b2c2ace9c6fc12ed1991abcffbd",
+          "package_hash": "sha256:f213d489e76f6cbc35da5318f0e78fa051c29fc5b89a1b78f7b14547532bddc7",
+          "structure_hash": "sha256:ef2198eb837836fe275aab611113779bfe8f9567a8159f3d58190f9d17150a6b",
+          "target_arguments": [
+            "d0"
+          ],
+          "adapter_version": "delivery-tool/1",
+          "reasons": []
+        }
+      },
+      "evaluation_seconds": 0.001462374988477677
+    },
+    {
+      "request": {
+        "delivery_id": "d1",
+        "signed_acceptance": false
+      },
+      "shared_structure": {
+        "accepted_evidence": []
+      },
+      "application": {
+        "profile": "bulla.semantic-invention/0.1-draft",
+        "status": "REFUSE",
+        "problem_hash": "sha256:108b36fd8c29c6783de367b8bc117d1c27565b2c2ace9c6fc12ed1991abcffbd",
+        "package_hash": "sha256:f213d489e76f6cbc35da5318f0e78fa051c29fc5b89a1b78f7b14547532bddc7",
+        "structure_hash": "sha256:8cbfda336f4b87311a9e1ad4e754053710eee80ba5d626b349529e0aec40a5aa",
+        "target_arguments": [
+          "d1"
+        ],
+        "adapter_version": "delivery-tool/1",
+        "reasons": []
+      },
+      "downstream": {
+        "action": "hold_claim",
+        "bound_application": "sha256:f32a835ebc374d49408b1bfcbc8056ed5f88d553fa07ddb667eb4d1eb00c51c4"
+      },
+      "application_receipt": {
+        "schema_version": "0.3",
+        "kind": "action_receipt",
+        "action": {
+          "type": "bulla.invent.apply",
+          "subject": {
+            "application_result_hash": "sha256:f32a835ebc374d49408b1bfcbc8056ed5f88d553fa07ddb667eb4d1eb00c51c4",
+            "problem_hash": "sha256:108b36fd8c29c6783de367b8bc117d1c27565b2c2ace9c6fc12ed1991abcffbd",
+            "package_hash": "sha256:f213d489e76f6cbc35da5318f0e78fa051c29fc5b89a1b78f7b14547532bddc7",
+            "structure_hash": "sha256:8cbfda336f4b87311a9e1ad4e754053710eee80ba5d626b349529e0aec40a5aa",
+            "target_arguments": [
+              "d1"
+            ],
+            "adapter_version": "delivery-tool/1",
+            "decision": "REFUSE"
+          }
+        },
+        "diagnostic_ref": {
+          "status": "reference",
+          "ref": "sha256:f32a835ebc374d49408b1bfcbc8056ed5f88d553fa07ddb667eb4d1eb00c51c4"
+        },
+        "evidence_refs": [
+          {
+            "name": "compiled_package",
+            "hash": "sha256:f213d489e76f6cbc35da5318f0e78fa051c29fc5b89a1b78f7b14547532bddc7",
+            "grounding": "execution_verified"
+          },
+          {
+            "name": "adapter_structure",
+            "hash": "sha256:8cbfda336f4b87311a9e1ad4e754053710eee80ba5d626b349529e0aec40a5aa",
+            "grounding": "execution_verified"
+          }
+        ],
+        "anchor_ref": {},
+        "mandate": {
+          "authority": {
+            "principal": "did:key:z6MkrTYC1i23CpgNa1sKuEL32C73E7sVeozzV6DSadGvZpNm",
+            "policy": "policy://claim-routing@sha256:demo",
+            "delegation": []
+          },
+          "bounds": {
+            "scope": "one application of the pinned delivery predicate"
+          }
+        },
+        "remedy": {},
+        "retention": {},
+        "stake": null,
+        "conventions": [],
+        "signature": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "content",
+          "issuer": "did:key:z6MkrTYC1i23CpgNa1sKuEL32C73E7sVeozzV6DSadGvZpNm",
+          "verificationMethod": "did:key:z6MkrTYC1i23CpgNa1sKuEL32C73E7sVeozzV6DSadGvZpNm",
+          "proofValue": "8mC8MQgvCjOZbPmUA0JxkwFHBDAB3Fs5BKVj2y/zomUtm7jANZsSvhyD7D4f+7fTpQ2NR9KBpW01iZZ+LKXEDw=="
+        },
+        "authorization": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "authorization",
+          "issuer": "did:key:z6MkrTYC1i23CpgNa1sKuEL32C73E7sVeozzV6DSadGvZpNm",
+          "verificationMethod": "did:key:z6MkrTYC1i23CpgNa1sKuEL32C73E7sVeozzV6DSadGvZpNm",
+          "proofValue": "Fszx3NCEJO88BQEs9zew+lAMsk2Dsw43XPVtNrdWk1xyWnq0nxA5KDjKan6zvT5NK5/IQ9d5iNYA9k5H/bn9DA=="
+        },
+        "timestamp": "2026-07-18T12:00:02Z",
+        "producer": {
+          "tool": "claim-router/1"
+        },
+        "hashes": {
+          "content": "sha256:7105eccdd7bcf0bdf93fb97649d031fa14eea739d18fea2f24576a842da0abcb",
+          "event": "sha256:f2ac23ead38b4b0a0df7401e9fbba7697aa4a4c86264ffb3890daff908283ac9",
+          "attestation": "sha256:6acab50e21cffaf6dd6ecf52555245f08d592f6037863dc77cf5eb1a0d85a20f",
+          "log_leaf": "sha256:d5da091cd7b3880c1a1f4cd9f457d4c99eb85a6f56479cdb992300ee6e9ab344"
+        }
+      },
+      "receipt_replay": {
+        "ok": true,
+        "checks": {
+          "receipt_authentic": true,
+          "action_type": true,
+          "subject_exact": true,
+          "diagnostic_binding": true,
+          "evidence_binding": true
+        },
+        "application": {
+          "profile": "bulla.semantic-invention/0.1-draft",
+          "status": "REFUSE",
+          "problem_hash": "sha256:108b36fd8c29c6783de367b8bc117d1c27565b2c2ace9c6fc12ed1991abcffbd",
+          "package_hash": "sha256:f213d489e76f6cbc35da5318f0e78fa051c29fc5b89a1b78f7b14547532bddc7",
+          "structure_hash": "sha256:8cbfda336f4b87311a9e1ad4e754053710eee80ba5d626b349529e0aec40a5aa",
+          "target_arguments": [
+            "d1"
+          ],
+          "adapter_version": "delivery-tool/1",
+          "reasons": []
+        }
+      },
+      "evaluation_seconds": 0.0015325419954024255
+    }
+  ]
+}

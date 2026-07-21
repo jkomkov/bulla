@@ -1,0 +1,76 @@
+{
+  "schema_version": "0.3",
+  "kind": "action_receipt",
+  "action": {
+    "type": "github.create_file",
+    "subject": {
+      "repo": "acme/site",
+      "path": "docs/policy.md"
+    }
+  },
+  "diagnostic_ref": {
+    "status": "reference",
+    "ref": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "evidence_refs": [],
+  "anchor_ref": {},
+  "mandate": {
+    "authority": {
+      "principal": "did:key:zATTACKER",
+      "policy": "policy://payments@sha256:aa",
+      "delegation": []
+    },
+    "bounds": {
+      "scope": "payments.charge amount<=100000000"
+    }
+  },
+  "remedy": {
+    "challenge_window": "P7D",
+    "forum": {
+      "log_endpoint": "https://log.example",
+      "trusted_root_ref": "ots:root"
+    },
+    "remedies": [
+      {
+        "rung": "recompute",
+        "verifier": "bulla receipt verify",
+        "anchor": "hashes.content"
+      },
+      {
+        "rung": "escalate",
+        "verifier": "maintainer review",
+        "anchor": "did:key:zSpecVector"
+      }
+    ]
+  },
+  "retention": {
+    "record": "operational",
+    "disclosure": "party"
+  },
+  "stake": null,
+  "conventions": [],
+  "signature": {
+    "type": "bulla/ed25519-2026",
+    "purpose": "content",
+    "issuer": "did:key:z6MkehRgf7yJbgaGfYsdoAsKdBPE3dj2CYhowQdcjqSJgvVd",
+    "verificationMethod": "did:key:z6MkehRgf7yJbgaGfYsdoAsKdBPE3dj2CYhowQdcjqSJgvVd",
+    "proofValue": "A++AI7HMEYE+i9bgdu8tunUmk6SUpXP2YYVnPKXFacpBje/4WGLqD7D272tsjWFT33DOj9nNqezuwsdWbeK6Aw=="
+  },
+  "authorization": {
+    "type": "bulla/ed25519-2026",
+    "purpose": "authorization",
+    "issuer": "did:key:z6Mkn4x1HvZkkoREXWaXdWF8FjRTPd9PFqDab3QpbRG7M3Nu",
+    "verificationMethod": "did:key:z6Mkn4x1HvZkkoREXWaXdWF8FjRTPd9PFqDab3QpbRG7M3Nu",
+    "proofValue": "XXznHjIuJrKw2aR9wh9BccW2/kwkGfCTg/r/Gb+UuYYVr87UPmMZ7is1fNwC9IqXMQLAEKPucAAc1TAR1y+PCA=="
+  },
+  "timestamp": "2026-07-13T00:00:00+00:00",
+  "producer": {
+    "bulla_version": "0.44.0"
+  },
+  "hashes": {
+    "content": "sha256:658de374af0b5a01e4edc603adc29f9848f3848abaac47b3de0fcf70a19cca40",
+    "event": "sha256:ce3d45e9914f472d2cb1dee83911aca93ad57e98415fe8406b15199bb9ab3e87",
+    "attestation": "sha256:d4e979b07b780a494c9370a60bda689a3eca029e4756d5a4a3dfd4c874ccb35d",
+    "log_leaf": "sha256:946d9f5a70b2418eb0f6ece6796b45b437c516453f12dcd81999dc4efc9944f9"
+  }
+}

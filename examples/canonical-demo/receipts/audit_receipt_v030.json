@@ -1,7 +1,7 @@
 {
   "canon_version": 2,
   "receipt_version": "0.1.0",
-  "kernel_version": "0.43.0",
+  "kernel_version": "0.44.0",
   "composition_hash": "0e6eb8884c8bc5bdffa61752daae9563f3fe2d267129e79c56760693996bf341",
   "diagnostic_hash": "d375f27065c20cda943644ce52d04507ee52e64fe5b407a8297f85f873fe958e",
   "policy_profile": {
@@ -19,7 +19,7 @@
   "bridges_required": 106,
   "unknown_dimensions": 21,
   "disposition": "refuse_pending_disclosure",
-  "timestamp": "2026-07-13T16:56:37.437083+00:00",
+  "timestamp": "2026-07-18T01:21:28.158183+00:00",
   "patches": [
     {
       "bulla_patch_version": "0.1.0",
@@ -1758,6 +1758,6 @@
       "severity": "mismatch"
     }
   ],
-  "receipt_hash": "dd42fd5bccaae01fd8cb91dd3509ed353a3037819538ca7ce772dff2139e1777",
+  "receipt_hash": "d6750c816b04a376deea9f87ef67d3107a026494e04d9750bae79ba1f1bd1f5b",
   "anchor_ref": null
 }

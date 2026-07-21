@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.1-experimental",
+  "language": "FRSL-1",
+  "problem_id": "delivery-acceptance-example",
+  "signature": {
+    "sorts": {"Delivery": ["d0", "d1"]},
+    "relations": [
+      {"name": "accepted_evidence", "sorts": ["Delivery"]},
+      {"name": "may_rely", "sorts": ["Delivery"]}
+    ]
+  },
+  "local_theories": [
+    {
+      "owner": "carrier",
+      "constraints": [
+        {
+          "op": "forall",
+          "var": "d",
+          "sort": "Delivery",
+          "body": {
+            "op": "iff",
+            "left": {"op": "atom", "relation": "may_rely", "args": [{"var": "d"}]},
+            "right": {"op": "atom", "relation": "accepted_evidence", "args": [{"var": "d"}]}
+          }
+        }
+      ]
+    }
+  ],
+  "overlap_maps": [],
+  "target_predicate": "may_rely",
+  "shared_vocabulary": ["accepted_evidence"],
+  "protected_signatures": {"carrier": ["accepted_evidence"]},
+  "requested_judgment": "rely_refuse_escalate",
+  "synthesis_policy": {
+    "reference_max_ground_atoms": 8,
+    "reference_max_models": 256,
+    "max_candidate_atoms": 8,
+    "max_minimal_alternatives": 16,
+    "exact_minimality": true,
+    "require_unique_minimum": true
+  },
+  "authority": {
+    "principal": "did:example:carrier",
+    "policy": "policy:delivery-acceptance:v1"
+  },
+  "scope": {"delivery_class": "synthetic-example"},
+  "expiry": "2027-07-17T00:00:00Z",
+  "evidence_requirements": ["signed-delivery-record"]
+}

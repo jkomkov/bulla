@@ -1,0 +1,537 @@
+{
+  "case_count": 52,
+  "cases": [
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "archetype": "entailment-to-world",
+      "case_hash": "sha256:f83dfd838b251d87aa47e66f8b59ae1bc91cdc5a372dd25e5a6489d3cf7a6213",
+      "case_id": "F11-01-1",
+      "required_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "safe": true,
+      "variant": "DIRECT"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "archetype": "entailment-to-world",
+      "case_hash": "sha256:8e0af11c9ce06d9c811b56573c145a253e631cc714608ea022bc029a3343f444",
+      "case_id": "F11-01-2",
+      "required_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "safe": true,
+      "variant": "NESTED"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "archetype": "entailment-to-world",
+      "case_hash": "sha256:3115a0a6479bbf93102539f9f6af0392ba7177d4101ed7b43e70de84afee6b31",
+      "case_id": "F11-01-3",
+      "required_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "safe": true,
+      "variant": "SERIALIZED_REPLAY"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "archetype": "entailment-to-world",
+      "case_hash": "sha256:40a82182396b5385c608280a7584058de14c3783de5df5341bbc99772088cb47",
+      "case_id": "F11-01-4",
+      "required_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "safe": true,
+      "variant": "AUTHORITY_EPOCH_MUTATION"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/MISSING_APPRAISAL_AUTHORITY",
+      "archetype": "signature-to-evidence",
+      "case_hash": "sha256:ddda4983766613d01cc99580ba620b0befe53a872a0eaadb91ee4dc3e23cb2dd",
+      "case_id": "F11-02-1",
+      "required_outcome": "REJECT/MISSING_APPRAISAL_AUTHORITY",
+      "safe": true,
+      "variant": "DIRECT"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/MISSING_APPRAISAL_AUTHORITY",
+      "archetype": "signature-to-evidence",
+      "case_hash": "sha256:04cdc53199a2e9e49c532a12e2f76884b54bc180ef80beb38ef01c51f68d62d5",
+      "case_id": "F11-02-2",
+      "required_outcome": "REJECT/MISSING_APPRAISAL_AUTHORITY",
+      "safe": true,
+      "variant": "NESTED"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/MISSING_APPRAISAL_AUTHORITY",
+      "archetype": "signature-to-evidence",
+      "case_hash": "sha256:46cca7c60524f3722e2cbe3f5d7a29ecc1a883bed1e067cf8945fd36a338529f",
+      "case_id": "F11-02-3",
+      "required_outcome": "REJECT/MISSING_APPRAISAL_AUTHORITY",
+      "safe": true,
+      "variant": "SERIALIZED_REPLAY"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/MISSING_APPRAISAL_AUTHORITY",
+      "archetype": "signature-to-evidence",
+      "case_hash": "sha256:67754c2e0be7aaeb9731b015053cb7c3b4de7501286d647b928e8dd8a143bb3a",
+      "case_id": "F11-02-4",
+      "required_outcome": "REJECT/MISSING_APPRAISAL_AUTHORITY",
+      "safe": true,
+      "variant": "AUTHORITY_EPOCH_MUTATION"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/RESERVE_IS_NOT_GROUND",
+      "archetype": "reserve-to-world",
+      "case_hash": "sha256:998202cfa4dc2a9f1f48ab80b89ebb36861b39c27a5dce518f536338bf464218",
+      "case_id": "F11-03-1",
+      "required_outcome": "REJECT/RESERVE_IS_NOT_GROUND",
+      "safe": true,
+      "variant": "DIRECT"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/RESERVE_IS_NOT_GROUND",
+      "archetype": "reserve-to-world",
+      "case_hash": "sha256:9b020dd2f3a62a5194b0931ed70ba63bcc701fc8b7d877ce8eecd8cdb27e5dd7",
+      "case_id": "F11-03-2",
+      "required_outcome": "REJECT/RESERVE_IS_NOT_GROUND",
+      "safe": true,
+      "variant": "NESTED"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/RESERVE_IS_NOT_GROUND",
+      "archetype": "reserve-to-world",
+      "case_hash": "sha256:057454488274987fc9ef96f64c0c720ce95a770525ac338dbcb9ebc7b09a380a",
+      "case_id": "F11-03-3",
+      "required_outcome": "REJECT/RESERVE_IS_NOT_GROUND",
+      "safe": true,
+      "variant": "SERIALIZED_REPLAY"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/RESERVE_IS_NOT_GROUND",
+      "archetype": "reserve-to-world",
+      "case_hash": "sha256:228a68a52e8c7c6f6efbe0ea0a8648cd664a2d0e7aab3dfef854282a1662d2fd",
+      "case_id": "F11-03-4",
+      "required_outcome": "REJECT/RESERVE_IS_NOT_GROUND",
+      "safe": true,
+      "variant": "AUTHORITY_EPOCH_MUTATION"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "LEGISLATION_REQUIRED",
+      "archetype": "forum-to-general-rule",
+      "case_hash": "sha256:abaae2425cf3b00b60b544e5b3a8deb9e689c7e05a93e44003fa89028c406e8f",
+      "case_id": "F11-04-1",
+      "required_outcome": "LEGISLATION_REQUIRED",
+      "safe": true,
+      "variant": "DIRECT"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "LEGISLATION_REQUIRED",
+      "archetype": "forum-to-general-rule",
+      "case_hash": "sha256:6f84dfdbb71db7a1b55d14ceaa629bd764b7f3c5020865ccf659808a0e5c3e83",
+      "case_id": "F11-04-2",
+      "required_outcome": "LEGISLATION_REQUIRED",
+      "safe": true,
+      "variant": "NESTED"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "LEGISLATION_REQUIRED",
+      "archetype": "forum-to-general-rule",
+      "case_hash": "sha256:387c60c7349a7e45a0f04b811facffc5c9d180662d5e1b3fa007306e1807bb7f",
+      "case_id": "F11-04-3",
+      "required_outcome": "LEGISLATION_REQUIRED",
+      "safe": true,
+      "variant": "SERIALIZED_REPLAY"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "LEGISLATION_REQUIRED",
+      "archetype": "forum-to-general-rule",
+      "case_hash": "sha256:10fd68254d70ce0e47c20d4a056de7a10428653cbd82f3399987ce39db00d15b",
+      "case_id": "F11-04-4",
+      "required_outcome": "LEGISLATION_REQUIRED",
+      "safe": true,
+      "variant": "AUTHORITY_EPOCH_MUTATION"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/MISSING_PRECEDENTIAL_AUTHORITY",
+      "archetype": "adjudicator-to-legislator",
+      "case_hash": "sha256:9a61eb1aac6718677fce06e8069329fe9f09dc1c726f39268674549872867acf",
+      "case_id": "F11-05-1",
+      "required_outcome": "REJECT/MISSING_PRECEDENTIAL_AUTHORITY",
+      "safe": true,
+      "variant": "DIRECT"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/MISSING_PRECEDENTIAL_AUTHORITY",
+      "archetype": "adjudicator-to-legislator",
+      "case_hash": "sha256:13912627f4883656b525e6412b46a50bff18b4011dda261aae6c79dd7c22e4d9",
+      "case_id": "F11-05-2",
+      "required_outcome": "REJECT/MISSING_PRECEDENTIAL_AUTHORITY",
+      "safe": true,
+      "variant": "NESTED"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/MISSING_PRECEDENTIAL_AUTHORITY",
+      "archetype": "adjudicator-to-legislator",
+      "case_hash": "sha256:5d9404890041f69d0308b67144e3868d5a4aec42dfbc48345df0853081531640",
+      "case_id": "F11-05-3",
+      "required_outcome": "REJECT/MISSING_PRECEDENTIAL_AUTHORITY",
+      "safe": true,
+      "variant": "SERIALIZED_REPLAY"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/MISSING_PRECEDENTIAL_AUTHORITY",
+      "archetype": "adjudicator-to-legislator",
+      "case_hash": "sha256:25bd51590345ecc1cd3474d01d51834adaf002d994e41fd85ba736e6590bf113",
+      "case_id": "F11-05-4",
+      "required_outcome": "REJECT/MISSING_PRECEDENTIAL_AUTHORITY",
+      "safe": true,
+      "variant": "AUTHORITY_EPOCH_MUTATION"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "ROUTE/PERSUASIVE_ONLY",
+      "archetype": "persuasive-auto-mutation",
+      "case_hash": "sha256:55c0500efefe72e6bedaa10de9ad474203adb85a36d3099b4685c0d8b8c877d0",
+      "case_id": "F11-06-1",
+      "required_outcome": "ROUTE/PERSUASIVE_ONLY",
+      "safe": true,
+      "variant": "DIRECT"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "ROUTE/PERSUASIVE_ONLY",
+      "archetype": "persuasive-auto-mutation",
+      "case_hash": "sha256:f869f9f162a58b9f57efde81283fb4d7607c83ad36d5d02a998902878afcad42",
+      "case_id": "F11-06-2",
+      "required_outcome": "ROUTE/PERSUASIVE_ONLY",
+      "safe": true,
+      "variant": "NESTED"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "ROUTE/PERSUASIVE_ONLY",
+      "archetype": "persuasive-auto-mutation",
+      "case_hash": "sha256:7ba27e45f619baf70becf58bbf361e59ddf36f5b60520c3a1e9fb957c833e166",
+      "case_id": "F11-06-3",
+      "required_outcome": "ROUTE/PERSUASIVE_ONLY",
+      "safe": true,
+      "variant": "SERIALIZED_REPLAY"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "ROUTE/PERSUASIVE_ONLY",
+      "archetype": "persuasive-auto-mutation",
+      "case_hash": "sha256:708e7ce3506a83b69d5f5efa8fecba19df4a569d54b9e65e77386d0c92190f6c",
+      "case_id": "F11-06-4",
+      "required_outcome": "ROUTE/PERSUASIVE_ONLY",
+      "safe": true,
+      "variant": "AUTHORITY_EPOCH_MUTATION"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/CASE_ONLY_SCOPE",
+      "archetype": "case-only-cross-record",
+      "case_hash": "sha256:789a9e1d756ca17a3bc994c2254a5591c23a065260477eb84aa85415ef5b1966",
+      "case_id": "F11-07-1",
+      "required_outcome": "REJECT/CASE_ONLY_SCOPE",
+      "safe": true,
+      "variant": "DIRECT"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/CASE_ONLY_SCOPE",
+      "archetype": "case-only-cross-record",
+      "case_hash": "sha256:15ce1c19f8381ea98e748b9d79809f725108ec9043101d958141f57125f9bf7c",
+      "case_id": "F11-07-2",
+      "required_outcome": "REJECT/CASE_ONLY_SCOPE",
+      "safe": true,
+      "variant": "NESTED"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/CASE_ONLY_SCOPE",
+      "archetype": "case-only-cross-record",
+      "case_hash": "sha256:a129074ff96e6173d2103d6ce23789ac15f6d58214f12e73338f0798b7488814",
+      "case_id": "F11-07-3",
+      "required_outcome": "REJECT/CASE_ONLY_SCOPE",
+      "safe": true,
+      "variant": "SERIALIZED_REPLAY"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/CASE_ONLY_SCOPE",
+      "archetype": "case-only-cross-record",
+      "case_hash": "sha256:24adaa1cf8eb7c65d36620ded73932ab1d8132b29d78257e2a617385737cbceb",
+      "case_id": "F11-07-4",
+      "required_outcome": "REJECT/CASE_ONLY_SCOPE",
+      "safe": true,
+      "variant": "AUTHORITY_EPOCH_MUTATION"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/BORROWED_AUTHORITY",
+      "archetype": "cross-scope-authority",
+      "case_hash": "sha256:4b3e3880546322f2f6badceffb51df74d859ae3ccb1d47fd8fdff58b00559315",
+      "case_id": "F11-08-1",
+      "required_outcome": "REJECT/BORROWED_AUTHORITY",
+      "safe": true,
+      "variant": "DIRECT"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/BORROWED_AUTHORITY",
+      "archetype": "cross-scope-authority",
+      "case_hash": "sha256:237155e3148bca581d6360ffe5af72e8d25fb3a5aef45f4e4e0790327d2a4fc5",
+      "case_id": "F11-08-2",
+      "required_outcome": "REJECT/BORROWED_AUTHORITY",
+      "safe": true,
+      "variant": "NESTED"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/BORROWED_AUTHORITY",
+      "archetype": "cross-scope-authority",
+      "case_hash": "sha256:a80dbfed03929537b858855a6921e9aa9f1cf3c37b1eb7888ce4e7c43aee9a26",
+      "case_id": "F11-08-3",
+      "required_outcome": "REJECT/BORROWED_AUTHORITY",
+      "safe": true,
+      "variant": "SERIALIZED_REPLAY"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/BORROWED_AUTHORITY",
+      "archetype": "cross-scope-authority",
+      "case_hash": "sha256:96f910930b7f1522e941c91ed5b1320fe4f17aa7d1337f4d242f3c94797c4e58",
+      "case_id": "F11-08-4",
+      "required_outcome": "REJECT/BORROWED_AUTHORITY",
+      "safe": true,
+      "variant": "AUTHORITY_EPOCH_MUTATION"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "TERM_STALE",
+      "archetype": "cross-epoch-precedent",
+      "case_hash": "sha256:dd18f50ac8a2ec2937bdb21baeba1e0e72c54591faa4865c838915f4e59ec33f",
+      "case_id": "F11-09-1",
+      "required_outcome": "TERM_STALE",
+      "safe": true,
+      "variant": "DIRECT"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "TERM_STALE",
+      "archetype": "cross-epoch-precedent",
+      "case_hash": "sha256:9caf1269f5e138b6be5c4b87f603c543db6f088207b52d07ad941a2bcd3d15cb",
+      "case_id": "F11-09-2",
+      "required_outcome": "TERM_STALE",
+      "safe": true,
+      "variant": "NESTED"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "TERM_STALE",
+      "archetype": "cross-epoch-precedent",
+      "case_hash": "sha256:b14ba3015998037a6706c6ae491dec93539bbcdd6a8f3f1b228c07fa78b4b1d0",
+      "case_id": "F11-09-3",
+      "required_outcome": "TERM_STALE",
+      "safe": true,
+      "variant": "SERIALIZED_REPLAY"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "TERM_STALE",
+      "archetype": "cross-epoch-precedent",
+      "case_hash": "sha256:d25d6d690114881a10b5c93ad5af2977cca9bfc24e9a2eacc6cf3463723cd862",
+      "case_id": "F11-09-4",
+      "required_outcome": "TERM_STALE",
+      "safe": true,
+      "variant": "AUTHORITY_EPOCH_MUTATION"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REFUSE/CATEGORICAL_HARM",
+      "archetype": "categorical-harm-pricing",
+      "case_hash": "sha256:a4386fe8aae54c17b605f12058c20862ecea65aeef3827dbc6b8e70397807487",
+      "case_id": "F11-10-1",
+      "required_outcome": "REFUSE/CATEGORICAL_HARM",
+      "safe": true,
+      "variant": "DIRECT"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REFUSE/CATEGORICAL_HARM",
+      "archetype": "categorical-harm-pricing",
+      "case_hash": "sha256:82b40a1a30d6876db1aa6655320bb8444f665b6d5eff8b5f9be3cc54857b3a07",
+      "case_id": "F11-10-2",
+      "required_outcome": "REFUSE/CATEGORICAL_HARM",
+      "safe": true,
+      "variant": "NESTED"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REFUSE/CATEGORICAL_HARM",
+      "archetype": "categorical-harm-pricing",
+      "case_hash": "sha256:b5992956862fa39adfe59b1943daa4e8a3a8dfa4ffa5f0088acb6f3fe7238f4e",
+      "case_id": "F11-10-3",
+      "required_outcome": "REFUSE/CATEGORICAL_HARM",
+      "safe": true,
+      "variant": "SERIALIZED_REPLAY"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REFUSE/CATEGORICAL_HARM",
+      "archetype": "categorical-harm-pricing",
+      "case_hash": "sha256:ffa49384cf062c939c5ecaa03847094c871300a28b1975b4d38116146a3ab8fe",
+      "case_id": "F11-10-4",
+      "required_outcome": "REFUSE/CATEGORICAL_HARM",
+      "safe": true,
+      "variant": "AUTHORITY_EPOCH_MUTATION"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "archetype": "settlement-to-truth",
+      "case_hash": "sha256:bb3c42b41d3ef7079ddbde83388febf0c8bb23da5aae05fa8b2b88647b9ef9a5",
+      "case_id": "F11-11-1",
+      "required_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "safe": true,
+      "variant": "DIRECT"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "archetype": "settlement-to-truth",
+      "case_hash": "sha256:74f5f06717135070b3ef7adb73189b53ca7bfc72b5deaf2740ec4514f6b0cf2c",
+      "case_id": "F11-11-2",
+      "required_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "safe": true,
+      "variant": "NESTED"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "archetype": "settlement-to-truth",
+      "case_hash": "sha256:b8b3ac5cf2d40c588ec42eccf44b0dc0f1cc6dec8b3a4ec060ac0be07fc4e2a9",
+      "case_id": "F11-11-3",
+      "required_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "safe": true,
+      "variant": "SERIALIZED_REPLAY"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "archetype": "settlement-to-truth",
+      "case_hash": "sha256:4eac2d536e249079129a523889677e0289f46df38a7644cec1e58eef911b2dd5",
+      "case_id": "F11-11-4",
+      "required_outcome": "REJECT/IMPLICIT_WORLD_CLAIM",
+      "safe": true,
+      "variant": "AUTHORITY_EPOCH_MUTATION"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "ROUTE/CIRCULAR_VERIFIER",
+      "archetype": "circular-verification",
+      "case_hash": "sha256:60758bc126ef15154a3b0feda0f6e111676825fbb1aa3e76678d26c647d8d57c",
+      "case_id": "F11-12-1",
+      "required_outcome": "ROUTE/CIRCULAR_VERIFIER",
+      "safe": true,
+      "variant": "DIRECT"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "ROUTE/CIRCULAR_VERIFIER",
+      "archetype": "circular-verification",
+      "case_hash": "sha256:19f7bd4612ba00572e29bc14afc90b8d924bf5dc24357418e4816dc37c8e1dba",
+      "case_id": "F11-12-2",
+      "required_outcome": "ROUTE/CIRCULAR_VERIFIER",
+      "safe": true,
+      "variant": "NESTED"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "ROUTE/CIRCULAR_VERIFIER",
+      "archetype": "circular-verification",
+      "case_hash": "sha256:136e45946ddaf787f6397ed92ba028e7027c9f80c4fec6f18fc48ed3430e18a0",
+      "case_id": "F11-12-3",
+      "required_outcome": "ROUTE/CIRCULAR_VERIFIER",
+      "safe": true,
+      "variant": "SERIALIZED_REPLAY"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "ROUTE/CIRCULAR_VERIFIER",
+      "archetype": "circular-verification",
+      "case_hash": "sha256:47816d317570ae34ca01d810ceeb6584f0fef1d6c3bade5e7cf5c354c0d4fb27",
+      "case_id": "F11-12-4",
+      "required_outcome": "ROUTE/CIRCULAR_VERIFIER",
+      "safe": true,
+      "variant": "AUTHORITY_EPOCH_MUTATION"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "ROUTE/UNAUTHORIZED_DERIVATION_BUDGET",
+      "archetype": "strategic-resource-starvation",
+      "case_hash": "sha256:359a16120b479678a3019827c430b80b8be0f5f11a1b7cabde99a4e5037ec9ea",
+      "case_id": "F11-13-1",
+      "required_outcome": "ROUTE/UNAUTHORIZED_DERIVATION_BUDGET",
+      "safe": true,
+      "variant": "DIRECT"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "ROUTE/UNAUTHORIZED_DERIVATION_BUDGET",
+      "archetype": "strategic-resource-starvation",
+      "case_hash": "sha256:b27bd1e59022013184afee966a954b7fcc9caf7bc5de52582dbe29ca2d32e8f6",
+      "case_id": "F11-13-2",
+      "required_outcome": "ROUTE/UNAUTHORIZED_DERIVATION_BUDGET",
+      "safe": true,
+      "variant": "NESTED"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "ROUTE/UNAUTHORIZED_DERIVATION_BUDGET",
+      "archetype": "strategic-resource-starvation",
+      "case_hash": "sha256:d4bb71572f95f22bdbe4539ca5653ca7bd92a3768e27e73d040d5200ee955183",
+      "case_id": "F11-13-3",
+      "required_outcome": "ROUTE/UNAUTHORIZED_DERIVATION_BUDGET",
+      "safe": true,
+      "variant": "SERIALIZED_REPLAY"
+    },
+    {
+      "accepted": false,
+      "actual_outcome": "ROUTE/UNAUTHORIZED_DERIVATION_BUDGET",
+      "archetype": "strategic-resource-starvation",
+      "case_hash": "sha256:f492b96adcf8442c8080edc478d3df255b2ed940d6af03da4a463b21ed4f76a3",
+      "case_id": "F11-13-4",
+      "required_outcome": "ROUTE/UNAUTHORIZED_DERIVATION_BUDGET",
+      "safe": true,
+      "variant": "AUTHORITY_EPOCH_MUTATION"
+    }
+  ],
+  "family": "F11",
+  "mutation_operators": [
+    "REMOVE_AUTHORITY_TOKEN",
+    "ALTER_PRECEDENT_EFFECT",
+    "FORGE_FORUM_FINDING",
+    "PRICE_CATEGORICAL_BAR",
+    "CHANGE_SEMANTIC_EPOCH",
+    "TRUNCATE_BUDGET_FRONTIER"
+  ],
+  "profile": "bulla.golden-suite/0.4-experimental",
+  "schema_version": "0.4-experimental",
+  "unsafe_count": 0
+}

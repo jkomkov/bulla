@@ -1,0 +1,10 @@
+{
+  "claim_boundary": "candidate-edges-not-proven-compositions; no-traffic-claim",
+  "direct_capture_disposition": "hash-only-scout; redistribution-not-established",
+  "direct_owners": 30,
+  "direct_redistributable_sources": 0,
+  "direct_sources": 35,
+  "found_cases": 120,
+  "label": "indirect-seed-corpus",
+  "seed_sources": 57
+}

@@ -1,0 +1,16 @@
+{
+  "build": {
+    "command": "lake build InterpolantEnvelope",
+    "result": "PASS",
+    "toolchain": "leanprover/lean4:v4.28.0"
+  },
+  "golden_v02_theorems": {
+    "literal_dropping_sound": [],
+    "sufficient_cube_cover_sound": [],
+    "truncated_regions_disjoint": [],
+    "truncation_preserves_safety": []
+  },
+  "profile": "bulla.golden-suite/0.2-experimental",
+  "sorry_count": 0,
+  "statement_boundary": "Abstract finite cube semantics only; Python enumeration, parsing, signatures, resource accounting, and benchmark generation are tested separately."
+}

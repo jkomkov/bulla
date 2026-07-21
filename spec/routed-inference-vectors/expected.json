@@ -1,0 +1,197 @@
+{
+  "01-honest-balanced.json": {
+    "accounting_depth": "ACCOUNTING_CONFORMS",
+    "answerability_coverage": "COVERED",
+    "binding_state": "RETAINED",
+    "fault_codes": [],
+    "outcome": "CONFORMS",
+    "process_grounding": "third_party_anchored",
+    "recourse_conveyance": "CONFORMS",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  },
+  "02-permitted-provider-selection.json": {
+    "accounting_depth": "ACCOUNTING_CONFORMS",
+    "answerability_coverage": "COVERED",
+    "binding_state": "RETAINED",
+    "fault_codes": [],
+    "outcome": "CONFORMS",
+    "process_grounding": "third_party_anchored",
+    "recourse_conveyance": "CONFORMS",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  },
+  "03-out-of-policy-delivery-substitution.json": {
+    "accounting_depth": "ACCOUNTING_CONFORMS",
+    "answerability_coverage": "COVERED",
+    "binding_state": "RETAINED",
+    "fault_codes": [
+      "DELIVERY_ROUTE_SUBSTITUTION",
+      "PROVIDER_NOT_PERMITTED"
+    ],
+    "outcome": "VIOLATES",
+    "process_grounding": "third_party_anchored",
+    "recourse_conveyance": "CONFORMS",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  },
+  "04-altered-term-commitment.json": {
+    "accounting_depth": "ACCOUNTING_CONFORMS",
+    "answerability_coverage": "BROKEN",
+    "binding_state": "RETAINED",
+    "fault_codes": [
+      "TERM_ROOT_CHANGED"
+    ],
+    "outcome": "VIOLATES",
+    "process_grounding": "third_party_anchored",
+    "recourse_conveyance": "CONFORMS",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  },
+  "05-partial-recourse-acceptance.json": {
+    "accounting_depth": "ACCOUNTING_CONFORMS",
+    "answerability_coverage": "BROKEN",
+    "binding_state": "RETAINED",
+    "fault_codes": [
+      "REMEDY_NOT_ACCEPTED",
+      "WITNESS_POLICY_NOT_ACCEPTED"
+    ],
+    "outcome": "VIOLATES",
+    "process_grounding": "third_party_anchored",
+    "recourse_conveyance": "VIOLATES",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  },
+  "06-unbalanced-ledger.json": {
+    "accounting_depth": "ACCOUNTING_VIOLATES",
+    "answerability_coverage": "COVERED",
+    "binding_state": "RETAINED",
+    "fault_codes": [
+      "BUDGET_LEDGER_UNBALANCED"
+    ],
+    "outcome": "VIOLATES",
+    "process_grounding": "third_party_anchored",
+    "recourse_conveyance": "CONFORMS",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  },
+  "07-downstream-charge-mismatch.json": {
+    "accounting_depth": "ACCOUNTING_VIOLATES",
+    "answerability_coverage": "COVERED",
+    "binding_state": "RETAINED",
+    "fault_codes": [
+      "DOWNSTREAM_CHARGE_MISMATCH"
+    ],
+    "outcome": "VIOLATES",
+    "process_grounding": "third_party_anchored",
+    "recourse_conveyance": "CONFORMS",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  },
+  "08-root-budget-overrun.json": {
+    "accounting_depth": "ACCOUNTING_VIOLATES",
+    "answerability_coverage": "COVERED",
+    "binding_state": "RETAINED",
+    "fault_codes": [
+      "BUDGET_CEILING_EXCEEDED"
+    ],
+    "outcome": "VIOLATES",
+    "process_grounding": "third_party_anchored",
+    "recourse_conveyance": "CONFORMS",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  },
+  "09-process-grounding-below-floor.json": {
+    "accounting_depth": "ACCOUNTING_CONFORMS",
+    "answerability_coverage": "COVERED",
+    "binding_state": "RETAINED",
+    "fault_codes": [
+      "PROCESS_GROUNDING_BELOW_FLOOR"
+    ],
+    "outcome": "VIOLATES",
+    "process_grounding": "self_asserted",
+    "recourse_conveyance": "CONFORMS",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  },
+  "10-delivery-and-witness-unavailable.json": {
+    "accounting_depth": "ACCOUNTING_CONFORMS",
+    "answerability_coverage": "COVERED",
+    "binding_state": "RETAINED",
+    "fault_codes": [
+      "DELIVERY_UNAVAILABLE",
+      "WITNESS_UNAVAILABLE"
+    ],
+    "outcome": "UNDETERMINED",
+    "process_grounding": null,
+    "recourse_conveyance": "CONFORMS",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  },
+  "11-conflicting-deliveries.json": {
+    "accounting_depth": "ACCOUNTING_CONFORMS",
+    "answerability_coverage": "BROKEN",
+    "binding_state": "RETAINED",
+    "fault_codes": [
+      "CONFLICTING_DELIVERIES"
+    ],
+    "outcome": "VIOLATES",
+    "process_grounding": "third_party_anchored",
+    "recourse_conveyance": "CONFORMS",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  },
+  "12-same-size-log-equivocation.json": {
+    "accounting_depth": "ACCOUNTING_CONFORMS",
+    "answerability_coverage": "COVERED",
+    "binding_state": "RETAINED",
+    "fault_codes": [
+      "LOG_EQUIVOCATION"
+    ],
+    "outcome": "VIOLATES",
+    "process_grounding": "third_party_anchored",
+    "recourse_conveyance": "CONFORMS",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  },
+  "13-severed-parent-occurrence.json": {
+    "accounting_depth": "ACCOUNTING_CONFORMS",
+    "answerability_coverage": "BROKEN",
+    "binding_state": "RETAINED",
+    "fault_codes": [
+      "ORPHANED_TRANSITION"
+    ],
+    "outcome": "VIOLATES",
+    "process_grounding": "third_party_anchored",
+    "recourse_conveyance": "CONFORMS",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  },
+  "14-attempted-discharge.json": {
+    "accounting_depth": "ACCOUNTING_CONFORMS",
+    "answerability_coverage": "BROKEN",
+    "binding_state": "RETAINED",
+    "fault_codes": [
+      "DISCHARGE_UNSUPPORTED"
+    ],
+    "outcome": "VIOLATES",
+    "process_grounding": "third_party_anchored",
+    "recourse_conveyance": "CONFORMS",
+    "recourse_reachability": "UNVERIFIED",
+    "settlement_depth": "SETTLEMENT_UNVERIFIED",
+    "verification_depth": "identity"
+  }
+}

@@ -1,6 +1,6 @@
 """Sprint 13/14 — canonical seed-set certificate regression.
 
-Re-generates `papers/composition-doctrine/sprint13_seed_certificates.json`
+Re-generates the current versioned seed-certificate fixture
 in-memory and asserts byte-identity with the committed fixture, modulo
 the inherently nondeterministic fields (`timestamp`, `bulla_version`,
 `certificate_hash`).
@@ -24,8 +24,8 @@ fix is to derive `algorithm_version` from `f`'s content / the Lean-spec hash. Se
 the canonicity ladder in `bulla/src/bulla/_canonical.py`.
 
 Re-generate the fixture (when intentional schema drift):
-    PYTHONPATH=bulla/src python3.11 -m bulla certify --seed-set --format json \
-        --output papers/composition-doctrine/sprint13_seed_certificates.json
+    python -m bulla certify --seed-set --format json \
+        --output calibration/fixtures/sprint13_seed_certificates-v044.json
 """
 
 from __future__ import annotations
@@ -36,15 +36,22 @@ from pathlib import Path
 
 import pytest
 
-REPO = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(REPO / "bulla" / "src"))
+BULLA_ROOT = Path(__file__).resolve().parents[1]
+REPO = BULLA_ROOT
+sys.path.insert(0, str(BULLA_ROOT / "src"))
 
 from bulla.cli import _seed_set_compositions  # noqa: E402
 from bulla.certificate import certify, to_dict  # noqa: E402
 
-CANONICAL_FIXTURE = (
-    REPO / "papers" / "composition-doctrine" / "sprint13_seed_certificates.json"
+CANONICAL_FIXTURE = BULLA_ROOT / "calibration/fixtures/sprint13_seed_certificates-v044.json"
+RETIRED_FIXTURE = (
+    BULLA_ROOT
+    / "calibration/fixtures/archive/epoch-pre-completeness/sprint13_seed_certificates.json"
 )
+FORMER_CANONICAL_FIXTURE = (
+    BULLA_ROOT / "calibration/fixtures/sprint13_seed_certificates.json"
+)
+LIFECYCLE_RECORD = BULLA_ROOT / "calibration/fixtures/sprint13-seed-lifecycle-v044.json"
 
 
 def _strip_nondeterministic(certs: list[dict]) -> list[dict]:
@@ -78,7 +85,9 @@ def _strip_nondeterministic(certs: list[dict]) -> list[dict]:
         c2.pop("certificate_hash", None)  # legacy v0 name; harmless
         c2.pop("attestation_hash", None)
         c2.pop("receipt_hash", None)
-        out.append(c2)
+        # Compare the wire representation. Producer helpers may retain tuples
+        # in memory, while JSON canonically materializes them as arrays.
+        out.append(json.loads(json.dumps(c2, sort_keys=True)))
     return out
 
 
@@ -104,16 +113,6 @@ def test_seed_set_canonical_output_matches_fixture():
     drift. So fixture failures localized to certs 1-2 are most likely
     manifest drift; failures on certs 3-9 indicate a code drift.
     """
-    if not CANONICAL_FIXTURE.exists():
-        # monorepo-only: the canonical fixture lives under papers/ (absent in the
-        # standalone package / public mirror). Skip cleanly there; in the monorepo
-        # the fixture is present, so this still runs and guards against drift.
-        pytest.skip(
-            f"canonical fixture {CANONICAL_FIXTURE} absent (standalone package / "
-            "public mirror); regenerate in the monorepo via "
-            "`bulla certify --seed-set --format json --output ...`"
-        )
-
     fixture = json.loads(CANONICAL_FIXTURE.read_text())
     pairs = _seed_set_compositions(REPO)
     current = [to_dict(certify(comp, source_path=src)) for comp, src in pairs]
@@ -140,6 +139,17 @@ def test_seed_set_canonical_output_matches_fixture():
             f"Cert {i} ({f_cert.get('name')}): content drifted from fixture. "
             f"If change is intentional, regenerate the fixture per the test docstring."
         )
+
+
+def test_retired_fixture_is_archived_and_not_canonical() -> None:
+    assert RETIRED_FIXTURE.is_file()
+    assert not FORMER_CANONICAL_FIXTURE.exists()
+    lifecycle = json.loads(LIFECYCLE_RECORD.read_text(encoding="utf-8"))
+    assert lifecycle["status"] == "SUPERSEDED_FOR_CURRENT_TOOLING"
+    assert lifecycle["archive"]["historical_results_remain_valid"] is True
+    assert lifecycle["replacement"]["path"].endswith(
+        "fixtures/sprint13_seed_certificates-v044.json"
+    )
 
 
 def test_seed_set_size_is_ten():

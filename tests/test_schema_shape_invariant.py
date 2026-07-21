@@ -37,9 +37,9 @@ from pathlib import Path
 
 import pytest
 
-REPO = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(REPO / "bulla" / "src"))
-sys.path.insert(0, str(REPO / "bulla" / "tests"))
+BULLA_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(BULLA_ROOT / "src"))
+sys.path.insert(0, str(BULLA_ROOT / "tests"))
 
 from bulla.coboundary import build_coboundary, matrix_rank
 from bulla.diagnostic import diagnose
@@ -127,7 +127,7 @@ def test_curated_yaml_compositions_have_projective_observables(yaml_dir):
     satisfy observable_schema ⊆ internal_state per tool. This is the
     structural property; rank non-negativity is the consequence."""
     from bulla.parser import load_composition
-    paths = sorted((REPO / "bulla" / yaml_dir).glob("*.yaml"))
+    paths = sorted((BULLA_ROOT / yaml_dir).glob("*.yaml"))
     assert paths, f"No YAML in bulla/{yaml_dir}"
     for p in paths:
         comp = load_composition(p)

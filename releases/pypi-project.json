@@ -1,0 +1,471 @@
+{
+  "_generated": "bulla/scripts/snapshot_pypi_releases.py",
+  "fetched_at": "2026-07-15T18:37:37.627145+00:00",
+  "source": "https://pypi.org/pypi/bulla/json",
+  "info": {
+    "name": "bulla",
+    "version": "0.43.0"
+  },
+  "releases": {
+    "0.15.0": [
+      {
+        "filename": "bulla-0.15.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/62/65/ab3fcbbca58c97131cff19da4fcd3c2877fef37464de2d123592bcfa01fd/bulla-0.15.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "dd5fa38d0d6e03a7473fc72395bc9687fdef414e2f973e1cd67d627241608f85"
+        },
+        "upload_time_iso_8601": "2026-04-03T16:05:23.764814Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.15.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/f9/fc/0a4c444a14ab5649f8a7eeb29b7a025488d663c41da577beb7365eee6dcc/bulla-0.15.0.tar.gz",
+        "digests": {
+          "sha256": "29c1e0caf7429d021b08b7aae168b968a0a1d5dae9acdf69eae82eab0f4101be"
+        },
+        "upload_time_iso_8601": "2026-04-03T16:05:24.861977Z",
+        "yanked": false
+      }
+    ],
+    "0.16.0": [
+      {
+        "filename": "bulla-0.16.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/a7/f3/0c961fee92532dd0fe7b27e8ac420cb5b2085a5122cc3001640508d0e7aa/bulla-0.16.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "252b70e364c1db51a12988e074423382769e666f7211207476353e9694c47775"
+        },
+        "upload_time_iso_8601": "2026-04-04T00:06:30.415871Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.16.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/56/c2/ca2c68b69dc92847f528e6b6def7aa2bfade772d1a18f5da3970be48b140/bulla-0.16.0.tar.gz",
+        "digests": {
+          "sha256": "509646953e23258fe0e2f29fce414dcd22c81751fa2fd8a13aad0a50fe23c33d"
+        },
+        "upload_time_iso_8601": "2026-04-04T00:06:31.936895Z",
+        "yanked": false
+      }
+    ],
+    "0.17.0": [
+      {
+        "filename": "bulla-0.17.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/67/4f/d85e8c7fc866fe358bd02582a1589a1fff5dee530cac1eb988dbca816259/bulla-0.17.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "a548f07cc60f16e96da5d03c365ddc369232262d83414f732b209a576431fd88"
+        },
+        "upload_time_iso_8601": "2026-04-04T02:20:50.173969Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.17.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/3d/04/5b0f2feb6faa13fb7ec063d5a867f0f81d6ccd67081bb49c0ebcba035cb4/bulla-0.17.0.tar.gz",
+        "digests": {
+          "sha256": "7a9da81184bd61dab0e746073c53024f7388de42171c86a949e012250416a14e"
+        },
+        "upload_time_iso_8601": "2026-04-04T02:20:51.690804Z",
+        "yanked": false
+      }
+    ],
+    "0.18.0": [
+      {
+        "filename": "bulla-0.18.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/16/7c/1cbb6280dd134a070c49dea3e6bc3fb0a620687e993a34487eca6a3e62af/bulla-0.18.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "86f82331715675b72a27c410ad640344f6683eb4fde570be09e46427c8ce8ac6"
+        },
+        "upload_time_iso_8601": "2026-04-04T03:16:33.989108Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.18.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/5b/13/445c5b8103e85b94ec56a7d9e19e414d074768318cdad277b3ca3cbecd78/bulla-0.18.0.tar.gz",
+        "digests": {
+          "sha256": "517812a733d98509d9c1dca1c478c6c9eef8ac0a4be014838f5a87a10d7eee3c"
+        },
+        "upload_time_iso_8601": "2026-04-04T03:16:35.410666Z",
+        "yanked": false
+      }
+    ],
+    "0.19.0": [
+      {
+        "filename": "bulla-0.19.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/73/bd/93e9806d844de9be28db1686057f4b3575a8bf190a37064b96b9386da3da/bulla-0.19.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "d9a8930fb8bff89831bdeb37086ea944a1d76488ae4abc592e090a0fe102cf0b"
+        },
+        "upload_time_iso_8601": "2026-04-04T04:13:32.176494Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.19.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/9f/02/5205e56f13bec3b96d9b928a76c968eba4bc673a142180f69e4178c708e2/bulla-0.19.0.tar.gz",
+        "digests": {
+          "sha256": "465350c98fc7cf2afedc7b7e5515e6d4724869153f187e9bb30ccfd69a22b66b"
+        },
+        "upload_time_iso_8601": "2026-04-04T04:13:33.556329Z",
+        "yanked": false
+      }
+    ],
+    "0.20.0": [
+      {
+        "filename": "bulla-0.20.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/c9/22/5abee5fc2aa9ca022f4034b36706a061c903b5914a63be8a83f4545fe005/bulla-0.20.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "23431e80fc4eedfc61de9c2f5fbcd6205c7095e8adbbc850301d4dec28ad7036"
+        },
+        "upload_time_iso_8601": "2026-04-04T05:00:46.066495Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.20.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/ba/6b/aa7ffc0ced2bb16cd04b9c65d77ab76696c1ebce219f8df5c299e3c0a8da/bulla-0.20.0.tar.gz",
+        "digests": {
+          "sha256": "7048d2b0203a87ed9008d5cfccecc3c4adbe8541b6927fca3e7a90b547382321"
+        },
+        "upload_time_iso_8601": "2026-04-04T05:00:47.512005Z",
+        "yanked": false
+      }
+    ],
+    "0.21.0": [
+      {
+        "filename": "bulla-0.21.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/61/f9/19ab37173281b2f79db64ff08bdb0b31ef71ba727b0ee971de914f69ad60/bulla-0.21.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "9703572460696dc1eafaf91b96315260af2181e6a67f8051281e4eaf35aad6a9"
+        },
+        "upload_time_iso_8601": "2026-04-04T05:49:34.080542Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.21.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/bb/9b/cfe2c05451d4bda2b9ec25640ef4a3f6104bf9faefb4624e7bf5bd3bb73c/bulla-0.21.0.tar.gz",
+        "digests": {
+          "sha256": "e0c51b47498bf7433dc1f5eca933d095da026e56a8a0e84468de5c88e11fc63a"
+        },
+        "upload_time_iso_8601": "2026-04-04T05:49:35.504229Z",
+        "yanked": false
+      }
+    ],
+    "0.22.0": [
+      {
+        "filename": "bulla-0.22.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/a1/51/8acfd3831eac9a4a3e94bc07718b45f9dcc33cfc250655ce35837244c02d/bulla-0.22.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "7f187b7a1e7bbb31e2fdb47346d51f844621ebc408008e78d80486ea58148d4d"
+        },
+        "upload_time_iso_8601": "2026-04-04T06:28:27.094393Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.22.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/44/2a/a7dc168b34b2b80996afb668eae82d5e2a41374e74ed201a684410e72a0b/bulla-0.22.0.tar.gz",
+        "digests": {
+          "sha256": "179110ea5afe8c89ac4d2a0940a0fa3d8969ee84a75a1180514cb4e5c6e62d7f"
+        },
+        "upload_time_iso_8601": "2026-04-04T06:28:28.672968Z",
+        "yanked": false
+      }
+    ],
+    "0.23.0": [
+      {
+        "filename": "bulla-0.23.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/67/aa/6e53c639216ed1e8ca21b5684c3d60c1b9125ad9e79947acc3327e5f0299/bulla-0.23.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "1b7a4b98559df98baa94dcd2e0a258ef666cfd99a59435c7e4ac548425e693d3"
+        },
+        "upload_time_iso_8601": "2026-04-04T07:12:44.332433Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.23.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/93/39/cd8e6c59eccf83d0d5126724ddc945973434bf682fdbd5b22ce044aaf7a1/bulla-0.23.0.tar.gz",
+        "digests": {
+          "sha256": "4cca6ee8eb5adeab7eccbcb1d183b08e51d9d7e5f0bbba28b2df45afe03de1ea"
+        },
+        "upload_time_iso_8601": "2026-04-04T07:12:45.943098Z",
+        "yanked": false
+      }
+    ],
+    "0.24.0": [
+      {
+        "filename": "bulla-0.24.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/11/d5/87bdfea17e95a1817e786972bd5805f8054dadfa9d46b454089bbd3d9df9/bulla-0.24.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "36d53df93ddd1e6f0033a68732cf601dac6e92b583c555abd16a9f20bd229afa"
+        },
+        "upload_time_iso_8601": "2026-04-04T15:44:33.150364Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.24.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/ff/89/89eee1c6345f53a6662c7ce06a4fa2ab1b482cf7cb3614f660028f675152/bulla-0.24.0.tar.gz",
+        "digests": {
+          "sha256": "7497acaf9d6107e161d7ad5c52e40b2a96dfd2bc3c27736c2f906ccfcac33e64"
+        },
+        "upload_time_iso_8601": "2026-04-04T15:44:34.727285Z",
+        "yanked": false
+      }
+    ],
+    "0.32.0": [
+      {
+        "filename": "bulla-0.32.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/5c/7b/04efd4d172230a8dd64e8e79f69892e89cde4a80ee6643f62be9a3d87697/bulla-0.32.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "14e1d27c99190dd6382c8a6f739a6fc842b8323f7938992af39a627acad2fe56"
+        },
+        "upload_time_iso_8601": "2026-04-06T04:43:49.338554Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.32.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/f6/bb/1617d6cffd96d8a3f057dafe011f26e6eba4d7a2bdcf03a1cf6e33c73841/bulla-0.32.0.tar.gz",
+        "digests": {
+          "sha256": "be7770fc9afdc286741a46fe82ef066773410e52fc2517f14add27bac84eac15"
+        },
+        "upload_time_iso_8601": "2026-04-06T04:43:51.278844Z",
+        "yanked": false
+      }
+    ],
+    "0.33.0": [
+      {
+        "filename": "bulla-0.33.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/d1/3c/3c7d15ae01470c987f35d300c9aa9122e0ee74742d5861e06d39b00968a2/bulla-0.33.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "8fe096bff4357c67cb878938d1af3ebc39c67ec0807874d63273232d92b2ded7"
+        },
+        "upload_time_iso_8601": "2026-04-06T06:56:51.033993Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.33.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/d3/a8/e24c681caab714b02a38648262165610cf417d7a37d21577be9466bfdc69/bulla-0.33.0.tar.gz",
+        "digests": {
+          "sha256": "279d226966a612a47a9b57ad73884a60efca04d19e0b767773b8bb93bf2abdf2"
+        },
+        "upload_time_iso_8601": "2026-04-06T06:56:52.610504Z",
+        "yanked": false
+      }
+    ],
+    "0.34.0": [
+      {
+        "filename": "bulla-0.34.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/66/d9/332819b59ae47e03bed4cbc45ce34241dbe36eb5be349b5d1fc159b51844/bulla-0.34.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "bcec89cb20894239c3f0dcf22b12471495da20c16d308b493c4a1f75a35df2da"
+        },
+        "upload_time_iso_8601": "2026-04-08T21:19:33.985012Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.34.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/ef/5b/9890df0f990a86885ece420f806a9a2493a39c0c0683908655dc04b0c33a/bulla-0.34.0.tar.gz",
+        "digests": {
+          "sha256": "e321c2179ed929326ad56edfac57924d5af917c35ae252c11cbbfcc42a171c61"
+        },
+        "upload_time_iso_8601": "2026-04-08T21:19:39.288459Z",
+        "yanked": false
+      }
+    ],
+    "0.35.0": [
+      {
+        "filename": "bulla-0.35.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/16/97/0f81e8030926a6fdd71cce7813cbb10d86a4549f5ee36104213cc8f465a7/bulla-0.35.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "c2f68dac17861687da72d33d02a6411ec601cbbaf935a27f16ca2ea2df3ee976"
+        },
+        "upload_time_iso_8601": "2026-04-14T22:42:14.431229Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.35.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/d0/8c/8d014b8894d8b933ea4c977403e7a412f8280e4bda861dd9993ef5a83ca0/bulla-0.35.0.tar.gz",
+        "digests": {
+          "sha256": "54293e7c9d2f5e933c1f19341e04ad9d9412071bec1c79c98565f6ffef831bfb"
+        },
+        "upload_time_iso_8601": "2026-04-14T22:42:16.885460Z",
+        "yanked": false
+      }
+    ],
+    "0.36.0": [
+      {
+        "filename": "bulla-0.36.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/f0/21/674c2c9939d8d05d02bf20e480c23ef7700ce28beb5bef53d1c7000e2fa1/bulla-0.36.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "89ffe7c5fe4cf9e5428de5dc4fd95b22338184ea0acdf1dec3240f83f78014f4"
+        },
+        "upload_time_iso_8601": "2026-05-01T20:14:27.734513Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.36.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/49/ef/f0fba2e2382e76132faca4df0dc6041518eecd57a152e11aff49807ff661/bulla-0.36.0.tar.gz",
+        "digests": {
+          "sha256": "d11bd682c4f0de8ed66081aa018ab720be959d2d69c1279d04470c94da2b6618"
+        },
+        "upload_time_iso_8601": "2026-05-01T20:14:32.824461Z",
+        "yanked": false
+      }
+    ],
+    "0.37.0": [
+      {
+        "filename": "bulla-0.37.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/22/de/c8d3ad1b367cebb08b3bf23587b6884989f7eef3f547ee401826976bc376/bulla-0.37.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "5870fbf176f3ed043f9ade8ac6659b48ec316889425344177b69441a1cd28550"
+        },
+        "upload_time_iso_8601": "2026-05-04T04:00:48.782486Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.37.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/e8/26/ba8d8d6942bf0c500fcda257ac700f64747d5590c22b0e73f95cbd418739/bulla-0.37.0.tar.gz",
+        "digests": {
+          "sha256": "fd0ab7c836e15064e4447f4620c734856a793819aea8975d6c9db893a167f997"
+        },
+        "upload_time_iso_8601": "2026-05-04T04:00:54.254828Z",
+        "yanked": false
+      }
+    ],
+    "0.40.0": [
+      {
+        "filename": "bulla-0.40.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/8e/66/17abde37c44a3303189b6cce8673e8e566a1e92a56be155a10a0e843fccf/bulla-0.40.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "46ee5a36bd6275e01025e3e6abbffc658ad678b0017f76c896cdf9c93d658da0"
+        },
+        "upload_time_iso_8601": "2026-07-03T23:26:35.288633Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.40.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/00/65/da9dfab3dbeb5f5ecf07fa0772afb8c1e874b3ac30f50c5da9bb6f7042f2/bulla-0.40.0.tar.gz",
+        "digests": {
+          "sha256": "5db2376db4904b9664134ac992c6926226f2139f67e30f4502a2150612664ee0"
+        },
+        "upload_time_iso_8601": "2026-07-03T23:26:43.164155Z",
+        "yanked": false
+      }
+    ],
+    "0.41.0": [
+      {
+        "filename": "bulla-0.41.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/a5/01/c5cf33fc8db7b3c733558ba3e40ee5e4c65b14042f0530a1ae7b2607631d/bulla-0.41.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "3a13a0189465511aa5de0fa4d3e46f9cf074d3b39e9a6608a06210c026e2d5c1"
+        },
+        "upload_time_iso_8601": "2026-07-05T16:14:04.852680Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.41.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/6b/3c/4fb1a572d7ed67242ad0890233f006dbf0bcf69734213b0e240837fdfbeb/bulla-0.41.0.tar.gz",
+        "digests": {
+          "sha256": "3c1f9ce3e95e1d5caa22a6c002abbcbb2999db7c0fd6b8c1d4019ce7a090ea18"
+        },
+        "upload_time_iso_8601": "2026-07-05T16:14:16.694755Z",
+        "yanked": false
+      }
+    ],
+    "0.42.0": [
+      {
+        "filename": "bulla-0.42.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/6b/e0/cb510dab9d2fc787be6064dc68c0db952f13c5efbf665562b6a65229e125/bulla-0.42.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "c6b79adf49084ccfae96ee0eb57ef57b0a72650276922ea7c8fe91c4b6759d51"
+        },
+        "upload_time_iso_8601": "2026-07-10T18:20:23.217476Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.42.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/3a/6e/e87e7455c925a06b548f261de7a66bccf63ff260357c8e9f4adf800fb42a/bulla-0.42.0.tar.gz",
+        "digests": {
+          "sha256": "a93b442d805cc167648a730d939c14104bb06b85e5a9e0383b3b7d69b9ada93e"
+        },
+        "upload_time_iso_8601": "2026-07-10T18:20:25.267184Z",
+        "yanked": false
+      }
+    ],
+    "0.43.0": [
+      {
+        "filename": "bulla-0.43.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/b7/47/fb9cd267332a3daa0f8b0ae0d6cf4dc8c5200737578b48a59323b915a11a/bulla-0.43.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "193647c26b70291e60f22079f4b015ad26139ba4e9b41f810b8c5b3d84398563"
+        },
+        "upload_time_iso_8601": "2026-07-14T15:34:37.994766Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.43.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/b5/d0/37d2ce48c63518672ff741b9493a9ee3be563ecc7150288396603b291748/bulla-0.43.0.tar.gz",
+        "digests": {
+          "sha256": "febf5fca03d089f8f9e26d5b63d5b128938237813f9176bc11c2f535ee669166"
+        },
+        "upload_time_iso_8601": "2026-07-14T15:34:39.907677Z",
+        "yanked": false
+      }
+    ],
+    "0.7.0": [
+      {
+        "filename": "bulla-0.7.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/e6/07/3fd1ae7af9f6da46f1830ec913af69612bddfab6c5f963c4a95d0a1bb585/bulla-0.7.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "59e360af8621fb44547d29f87f559494773bb7738c4845bde5983427d9cdd4bb"
+        },
+        "upload_time_iso_8601": "2026-03-31T19:55:12.877798Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.7.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/20/09/1fa9eab091ceaccf13966e01cfc9556af93041ab30c34084cf30619c0b85/bulla-0.7.0.tar.gz",
+        "digests": {
+          "sha256": "a4f7e4008ad224baf4a1862b4a8d9a50b74969b422f5d7e5358344e48576aad9"
+        },
+        "upload_time_iso_8601": "2026-03-31T19:55:14.605405Z",
+        "yanked": false
+      }
+    ],
+    "0.7.1": [
+      {
+        "filename": "bulla-0.7.1-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/54/90/29d56a0ea64b6d5890fc31e1c83cd68f428b1d9fb3dfa77efde768adf2ee/bulla-0.7.1-py3-none-any.whl",
+        "digests": {
+          "sha256": "46d2fd25a50cdf6ccf3d0a79448db1d7c0f4d0a151992e69a1f1cc867012fdad"
+        },
+        "upload_time_iso_8601": "2026-04-01T05:11:06.017441Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.7.1.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/4d/9e/9bd1963eac1b6687c843a5fb7b4faa03525bf1a118d0d3c3c5a9c66493d4/bulla-0.7.1.tar.gz",
+        "digests": {
+          "sha256": "3418fa9c32d9938d01d27d289dc5fc5f60ba990ce6d9a7396ea564fd158bec27"
+        },
+        "upload_time_iso_8601": "2026-04-01T05:11:07.109289Z",
+        "yanked": false
+      }
+    ],
+    "0.8.0": [
+      {
+        "filename": "bulla-0.8.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/e5/51/ccc9637e45dc9bf63330d09059e0cfbee577c77ed099121b824aa858660a/bulla-0.8.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "10e820a5f84495eae18d205441ed762cf7e2a0d249ee7af1a5da8ff468aa7cac"
+        },
+        "upload_time_iso_8601": "2026-04-01T06:38:48.697086Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.8.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/7a/28/ca4ab1faa264b02aee76ee433d7b89b4ba8ee7e2c26d47be7dccfcd5cbbd/bulla-0.8.0.tar.gz",
+        "digests": {
+          "sha256": "c2d1d3906508ac7a03f676b55e853e0a5ee3db8f0b4a34a5c5d8e8be8222c232"
+        },
+        "upload_time_iso_8601": "2026-04-01T06:38:49.812679Z",
+        "yanked": false
+      }
+    ]
+  }
+}

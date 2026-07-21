@@ -27,9 +27,9 @@ from pathlib import Path
 
 import pytest
 
-REPO = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(REPO / "bulla" / "src"))
-sys.path.insert(0, str(REPO / "bulla" / "tests"))
+BULLA_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(BULLA_ROOT / "src"))
+sys.path.insert(0, str(BULLA_ROOT / "tests"))
 
 from bulla.model import Composition, Edge, SemanticDimension, ToolSpec
 from bulla.parser import load_composition
@@ -88,7 +88,7 @@ def test_curated_yaml_dfd_chp_distribution():
     n_exact = 0
     failures: list[tuple[str, dict]] = []
     for d in ["compositions", "audit"]:
-        for p in sorted((REPO / "bulla" / d).glob("*.yaml")):
+        for p in sorted((BULLA_ROOT / d).glob("*.yaml")):
             try:
                 comp = load_composition(p)
             except Exception:

@@ -26,8 +26,8 @@ from pathlib import Path
 
 import pytest
 
-REPO = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(REPO / "bulla" / "src"))
+BULLA_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(BULLA_ROOT / "src"))
 
 from bulla.parser import load_composition
 from bulla.regime import (
@@ -44,9 +44,9 @@ def _bundled_yaml_paths() -> list[Path]:
     fixtures intentionally crafted to violate the invariant)."""
     paths: list[Path] = []
     for d in [
-        REPO / "bulla" / "compositions",
-        REPO / "bulla" / "audit",
-        REPO / "bulla" / "src" / "bulla" / "compositions",
+        BULLA_ROOT / "compositions",
+        BULLA_ROOT / "audit",
+        BULLA_ROOT / "src" / "bulla" / "compositions",
     ]:
         if d.exists():
             paths.extend(sorted(d.glob("*.yaml")))
@@ -83,7 +83,7 @@ def test_parser_already_enforces_schema_shape_invariant():
     the project's strongest regime defense has regressed.
     """
     from bulla.parser import CompositionError
-    path = REPO / "bulla" / "tests" / "fixtures" / "malformed_non_projective.yaml"
+    path = BULLA_ROOT / "tests" / "fixtures" / "malformed_non_projective.yaml"
     assert path.exists(), f"Negative fixture missing: {path}"
     with pytest.raises(CompositionError) as excinfo:
         load_composition(path)

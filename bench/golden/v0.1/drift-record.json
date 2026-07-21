@@ -1,0 +1,111 @@
+{
+  "calibration": {
+    "alpha": 0.05,
+    "crossings": 1,
+    "empirical_rate": 0.0001,
+    "null": {
+      "found-authority_scopes": {
+        "carrier": "opaque",
+        "conditional_mean_at_most": 0.05
+      },
+      "found-bounded_time": {
+        "carrier": "regenerated",
+        "conditional_mean_at_most": 0.05
+      },
+      "found-delivery_acceptance": {
+        "carrier": "ambient",
+        "conditional_mean_at_most": 0.05
+      },
+      "found-enums": {
+        "carrier": "opaque",
+        "conditional_mean_at_most": 0.05
+      },
+      "found-evidence_floors": {
+        "carrier": "regenerated",
+        "conditional_mean_at_most": 0.05
+      },
+      "found-integer_rounding": {
+        "carrier": "ambient",
+        "conditional_mean_at_most": 0.05
+      },
+      "found-intentionally_non_definable": {
+        "carrier": "opaque",
+        "conditional_mean_at_most": 0.05
+      },
+      "found-interval_boundaries": {
+        "carrier": "regenerated",
+        "conditional_mean_at_most": 0.05
+      },
+      "found-namespaces": {
+        "carrier": "ambient",
+        "conditional_mean_at_most": 0.05
+      },
+      "found-null_absent": {
+        "carrier": "opaque",
+        "conditional_mean_at_most": 0.05
+      },
+      "found-revocation_windows": {
+        "carrier": "regenerated",
+        "conditional_mean_at_most": 0.05
+      },
+      "found-units": {
+        "carrier": "ambient",
+        "conditional_mean_at_most": 0.05
+      }
+    },
+    "one_sided_95_percent_binomial_upper": 0.00047429765916538757,
+    "promotion_gate_at_most_0_06": true,
+    "schema_version": "0.1-experimental",
+    "seed": 20260718,
+    "steps": 200,
+    "streams": 10000
+  },
+  "localization": {
+    "alpha": 0.05,
+    "change_time": 50,
+    "conditional_monitoring_statement": "The sparse combined arm covers opaque transported tension plus regenerative-node innovation residuals. Agreement with full graph is empirical under this declared generator, not a global theorem.",
+    "drift_mean": 0.4,
+    "opaque_injection_delay_loss_fraction": -0.11428571428571428,
+    "opaque_injection_power_loss": 0.0,
+    "regenerated_value_boundary": "Opaque-only monitoring has no theorem-level claim for regenerated drift; any power loss is reported as a boundary result.",
+    "reject_operational_localization": false,
+    "reject_sparse_monitoring_sufficiency": false,
+    "results": {
+      "opaque": {
+        "full_graph_median_delay": 35.0,
+        "full_graph_power": 1.0,
+        "opaque_only_median_delay": 31.0,
+        "opaque_only_power": 1.0,
+        "regenerated_only_median_delay": -24,
+        "regenerated_only_power": 0.001,
+        "sparse_combined_median_delay": 33.0,
+        "sparse_combined_power": 1.0
+      },
+      "regenerated": {
+        "full_graph_median_delay": 35.0,
+        "full_graph_power": 1.0,
+        "opaque_only_median_delay": null,
+        "opaque_only_power": 0.0,
+        "regenerated_only_median_delay": 31.0,
+        "regenerated_only_power": 1.0,
+        "sparse_combined_median_delay": 33.0,
+        "sparse_combined_power": 1.0
+      }
+    },
+    "schema_version": "0.1-experimental",
+    "seed": 20260718,
+    "sparse_combined_losses": {
+      "opaque": {
+        "delay_loss_fraction": -0.05714285714285714,
+        "power_loss": 0.0
+      },
+      "regenerated": {
+        "delay_loss_fraction": -0.05714285714285714,
+        "power_loss": 0.0
+      }
+    },
+    "steps": 200,
+    "trials": 1000
+  },
+  "stream_claim_boundary": "synthetic-events-on-found-data-topology-shapes; no-production-traffic-claim"
+}

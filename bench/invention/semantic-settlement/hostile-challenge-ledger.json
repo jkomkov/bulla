@@ -1,0 +1,235 @@
+{
+  "schema_version": "0.1-semantic-settlement-hostile-challenges",
+  "frozen_at": "2026-07-18T00:00:00Z",
+  "scope": "internal hostile review; no external bounty payment",
+  "stake": null,
+  "challenge_market": "not-implemented",
+  "receipts": [
+    {
+      "challenge": {
+        "profile": "bulla.semantic-pilot/0.2-experimental",
+        "action": "bulla.pilot.challenge",
+        "subject": {
+          "finding_id": "authority-expansion",
+          "claim": "revision signed by operative rather than supersession authority",
+          "evidence_hash": "sha256:91b36c78af27dbaf580d50dd95c122d7fae8321783997e8d6bd4a6ae42e1da38"
+        },
+        "issuer": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+        "issued_at": "2026-07-18T00:00:00Z",
+        "artifact_hash": "sha256:f3b553c5d1a7cfc6dd57b24a7ca05e6039bc12a79d7a5e15e80ce7c2d511b7cd",
+        "proof": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "content",
+          "issuer": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+          "verificationMethod": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+          "proofValue": "Fq7CY48EjCJWk/4kaChl2xflpOVEYchsIEwHqYJ5W2JZjwB35S1jhD1dOlhCjr0dvooI7KveP47ONIstrs1rBw=="
+        }
+      },
+      "disposition": {
+        "profile": "bulla.semantic-pilot/0.2-experimental",
+        "action": "bulla.pilot.challenge.dispose",
+        "subject": {
+          "challenge_hash": "sha256:f3b553c5d1a7cfc6dd57b24a7ca05e6039bc12a79d7a5e15e80ce7c2d511b7cd",
+          "status": "ACCEPTED",
+          "reason": "guard rejected before mutation",
+          "bounty_reference": "bounty://internal/authority-expansion"
+        },
+        "issuer": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+        "issued_at": "2026-07-18T00:00:00Z",
+        "artifact_hash": "sha256:8524218351c1bb5efaefcd434eb2c2e691589ff29b5a790b1c2655beaf3a4266",
+        "proof": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "content",
+          "issuer": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+          "verificationMethod": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+          "proofValue": "6lhYB3kJgDxxHVbdvowteOmD6cN6/o+zJQkK7ebxNi6ia/S/fYHqQHZLzKS49klT421Y8r7ZiSk9iK0rrjbrDQ=="
+        }
+      },
+      "bounty_reference": "bounty://internal/authority-expansion",
+      "stake": null,
+      "challenge_market": "not-implemented",
+      "receipt_hash": "sha256:b77819541f292afa616730b915d5348ce35dce40c1e2bcc53f3d452ccfd43534"
+    },
+    {
+      "challenge": {
+        "profile": "bulla.semantic-pilot/0.2-experimental",
+        "action": "bulla.pilot.challenge",
+        "subject": {
+          "finding_id": "single-witness",
+          "claim": "revision carries one inclusion or two aliases",
+          "evidence_hash": "sha256:7ecad42015b8e7afa9d735a91207f5e6e3708509add6758feed4a00ec3c80d39"
+        },
+        "issuer": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+        "issued_at": "2026-07-18T00:00:00Z",
+        "artifact_hash": "sha256:907ca63eb2ade547a8bfb3a7a4c178a052a22fa0f5f1ab2bf63b48720a852e13",
+        "proof": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "content",
+          "issuer": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+          "verificationMethod": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+          "proofValue": "ZoG4B/8Mo4LUlK5SUrolVcizOqVLN1UW8d/EGwPOlqOfNdnWfDlc96wEIUzI0nWHRTQD2Lxig9FzgpMuE6eKDg=="
+        }
+      },
+      "disposition": {
+        "profile": "bulla.semantic-pilot/0.2-experimental",
+        "action": "bulla.pilot.challenge.dispose",
+        "subject": {
+          "challenge_hash": "sha256:907ca63eb2ade547a8bfb3a7a4c178a052a22fa0f5f1ab2bf63b48720a852e13",
+          "status": "ACCEPTED",
+          "reason": "guard requires two distinct configured operators",
+          "bounty_reference": "bounty://internal/single-witness"
+        },
+        "issuer": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+        "issued_at": "2026-07-18T00:00:00Z",
+        "artifact_hash": "sha256:a0e852b54942450f84fe22f85fed310c266a55804478f52a56b5b7e4b0350d36",
+        "proof": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "content",
+          "issuer": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+          "verificationMethod": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+          "proofValue": "+g6Y8eyRMSuZB9WD1uA9QSQSYtMc0mB1tS39y9I/rokbMa5bykEna6RCEEtUgzumARfm4q8wFp55FF08EPMDAA=="
+        }
+      },
+      "bounty_reference": "bounty://internal/single-witness",
+      "stake": null,
+      "challenge_market": "not-implemented",
+      "receipt_hash": "sha256:2c3afacbf45b87fbf8c58c4b670d9fe5d1e3a7a9f26e2b7f69534422cf585857"
+    },
+    {
+      "challenge": {
+        "profile": "bulla.semantic-pilot/0.2-experimental",
+        "action": "bulla.pilot.challenge",
+        "subject": {
+          "finding_id": "closure-laundering",
+          "claim": "OPEN_WORLD term attempts FINALIZE",
+          "evidence_hash": "sha256:27bb33d025dbc4f1c563726b8d648e062e94b7d88ebfc706dc3f085150c7e8c6"
+        },
+        "issuer": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+        "issued_at": "2026-07-18T00:00:00Z",
+        "artifact_hash": "sha256:f82f3b242fec94363dce10224a8eb8d63cf9ce241da84300bf86b9402ff6b213",
+        "proof": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "content",
+          "issuer": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+          "verificationMethod": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+          "proofValue": "pDeyuYbTSbWXueheitFMN39QD9GcxtrBbl+D2asFl+GuGS6NJhJus97sp3/Ifg8FwE7/PLl3u7Wh2czkxvr5DA=="
+        }
+      },
+      "disposition": {
+        "profile": "bulla.semantic-pilot/0.2-experimental",
+        "action": "bulla.pilot.challenge.dispose",
+        "subject": {
+          "challenge_hash": "sha256:f82f3b242fec94363dce10224a8eb8d63cf9ce241da84300bf86b9402ff6b213",
+          "status": "ACCEPTED",
+          "reason": "controller routed instead of finalizing",
+          "bounty_reference": "bounty://internal/closure-laundering"
+        },
+        "issuer": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+        "issued_at": "2026-07-18T00:00:00Z",
+        "artifact_hash": "sha256:1cc8d6c9daabc31b9b7e0baeb91207d511752c6aa47dfe3e604a277ba2fb9407",
+        "proof": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "content",
+          "issuer": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+          "verificationMethod": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+          "proofValue": "PWFzgm+zxSt4ztVSIkOikiMOsVkjm5OnMq5n9pBzJXRnHWfgf2mnmJVGtKNpVrJlXRP5wvaflLvFsQ+NlUQGAw=="
+        }
+      },
+      "bounty_reference": "bounty://internal/closure-laundering",
+      "stake": null,
+      "challenge_market": "not-implemented",
+      "receipt_hash": "sha256:4b5d4d68590abf34b7868e716b9a7210db5ca99a06a0ff7ace1218b090aea613"
+    },
+    {
+      "challenge": {
+        "profile": "bulla.semantic-pilot/0.2-experimental",
+        "action": "bulla.pilot.challenge",
+        "subject": {
+          "finding_id": "reserve-increase",
+          "claim": "same-epoch refinement increases required reserve",
+          "evidence_hash": "sha256:3b4de8babecf59c91a829ef9e3c611fe1315c448af3875ede4381929da1fc157"
+        },
+        "issuer": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+        "issued_at": "2026-07-18T00:00:00Z",
+        "artifact_hash": "sha256:252a38808436ea194a8c003d8a51409556d331c48bee0f89bf80d3c50c464963",
+        "proof": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "content",
+          "issuer": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+          "verificationMethod": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+          "proofValue": "AVjQ1XLyJoiB4SsQ9IHBwpr/1zZEsA216ykm9ExC7tFbpd8nTSoJIEnt58ZUsqPms43aU82yTQ6WFHTjckhuCw=="
+        }
+      },
+      "disposition": {
+        "profile": "bulla.semantic-pilot/0.2-experimental",
+        "action": "bulla.pilot.challenge.dispose",
+        "subject": {
+          "challenge_hash": "sha256:252a38808436ea194a8c003d8a51409556d331c48bee0f89bf80d3c50c464963",
+          "status": "ACCEPTED",
+          "reason": "release verifier rejected non-antitone transition",
+          "bounty_reference": "bounty://internal/reserve-increase"
+        },
+        "issuer": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+        "issued_at": "2026-07-18T00:00:00Z",
+        "artifact_hash": "sha256:200bfb713dd94dd83dca2690b5fe3454d740d557c9bfc5c2aa8894b754cbf134",
+        "proof": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "content",
+          "issuer": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+          "verificationMethod": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+          "proofValue": "kMgzWdUakU8bGRYuXu7FvENo+OIlCiJ8DKRL82uBJDAodz3zD3keuLFgJvU4upmR2JjkSdV2IugW9fMcn2x0BQ=="
+        }
+      },
+      "bounty_reference": "bounty://internal/reserve-increase",
+      "stake": null,
+      "challenge_market": "not-implemented",
+      "receipt_hash": "sha256:acd1482f78c39c8a5808e19c67c5878dec6ec3182ac6d1c1dbb100d0d532e2f3"
+    },
+    {
+      "challenge": {
+        "profile": "bulla.semantic-pilot/0.2-experimental",
+        "action": "bulla.pilot.challenge",
+        "subject": {
+          "finding_id": "analysis-leak",
+          "claim": "12-seam operational slice attempts efficacy analysis",
+          "evidence_hash": "sha256:784988b15f6b6dbcf19d4bc87426d675407f38223449aa486833a9f69dd9041a"
+        },
+        "issuer": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+        "issued_at": "2026-07-18T00:00:00Z",
+        "artifact_hash": "sha256:b438b902b5e4d3860bc27a225bf8e016b3a885a4c3215fe871a3ac98290661ea",
+        "proof": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "content",
+          "issuer": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+          "verificationMethod": "did:key:z6MkswHQD75SrjDApKBpaANqb8T5AVVS6Dr15navVPNNYPnG",
+          "proofValue": "sTBCqR3aS9Eg//JWMxnBK3yT0ef3a9MEcBsKwwxITDUm5m7UzE8fiVO7ygK27V1bS+58cXJdAkBGAWYnxnLIBg=="
+        }
+      },
+      "disposition": {
+        "profile": "bulla.semantic-pilot/0.2-experimental",
+        "action": "bulla.pilot.challenge.dispose",
+        "subject": {
+          "challenge_hash": "sha256:b438b902b5e4d3860bc27a225bf8e016b3a885a4c3215fe871a3ac98290661ea",
+          "status": "ACCEPTED",
+          "reason": "300-case gate remained refused",
+          "bounty_reference": "bounty://internal/analysis-leak"
+        },
+        "issuer": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+        "issued_at": "2026-07-18T00:00:00Z",
+        "artifact_hash": "sha256:81a9bdb22ee960e4c9482a700018f059f60433427e4fd216a01166410f831b80",
+        "proof": {
+          "type": "bulla/ed25519-2026",
+          "purpose": "content",
+          "issuer": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+          "verificationMethod": "did:key:z6Mkp2oYbYuszsnpD2ubuyMiXMiMTC4W5Nkm5AKQbczNWdxd",
+          "proofValue": "V6OA6rjnWbruauUWP33tfmqZvkBjeKLVdAi+9xoL5wHGLPxUdvEQbWvfOOERiETCkdr+hnCiZ0VGwfNMNerYCg=="
+        }
+      },
+      "bounty_reference": "bounty://internal/analysis-leak",
+      "stake": null,
+      "challenge_market": "not-implemented",
+      "receipt_hash": "sha256:c625849b81b3d86a2a77afae44a17cee7a697e2e378293d95d72dcd13f7d7bfc"
+    }
+  ],
+  "ledger_hash": "sha256:f0227a5e25bac5c010c40369b54e706d1ae9f9009ea38fac8398f1fe1d3711d2"
+}

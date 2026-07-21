@@ -1,0 +1,19 @@
+{
+  "archive_tag": "golden-gate-v0.2-captive-2026-07-19",
+  "candidate_commit": "367941d6ffe49170dfa09b50e34238c4978a31a9",
+  "candidate_freeze_binding_commit": "d8d103898f1f6bdfe46cda0c31c116c405fc7063",
+  "evidence_status": "INTERNALLY_VERIFIED_CAPTIVE",
+  "external_replay_status": "BLOCKED_MISSING_EXTERNAL_PARTICIPANTS",
+  "mainline_strategy": {
+    "golden_branch": "codex/bulla-golden-mainline",
+    "semantic_base_branch": "codex/bulla-semantic-mainline",
+    "stable_api_changed": false
+  },
+  "profile": "bulla.golden-suite/0.2-experimental",
+  "schema_version": "0.2-mainline-lineage",
+  "verification": {
+    "candidate_tree_comparison": "BYTE_IDENTICAL_FOR_BULLA_BENCH_GOLDEN_V0_1_AND_V0_2",
+    "comparison_command": "git diff --exit-code d8d103898f1f6bdfe46cda0c31c116c405fc7063 HEAD -- bulla/bench/golden/v0.1 bulla/bench/golden/v0.2",
+    "frozen_artifacts_rewritten": false
+  }
+}

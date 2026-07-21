@@ -71,8 +71,10 @@ class GatePolicy:
 DEFAULT_GATE_POLICY = GatePolicy()
 # The recourse gate proceeds on inclusion + independently-trusted root + authenticity, and
 # *reports* the fee without blocking on it (a disclosure signal, not a safety gate —
-# bulla/FALSIFICATIONS.md). ADVISORY is retained as an equivalent alias.
-ADVISORY_GATE_POLICY = GatePolicy(max_fee=None, require_certificate_for_fee=False)
+# bulla/FALSIFICATIONS.md). ADVISORY is a *literal alias* of DEFAULT (they were already
+# field-for-field identical) — kept only because "advisory" reads better than "default"
+# at the live-proxy call site; do not mistake the name for a different policy.
+ADVISORY_GATE_POLICY = DEFAULT_GATE_POLICY
 # Opt-in strict mode: refuse a PROCEED until an undisclosed convention is disclosed
 # (certified fee=0). This is a *disclosure* demand, not a failure prediction.
 STRICT_GATE_POLICY = GatePolicy(max_fee=0, require_certificate_for_fee=True)
@@ -97,7 +99,15 @@ class GateDecision:
     composition_bound: bool | None = None
     registry_root: str | None = None
     cure: dict | None = None
-    refusal_certificate: dict | None = None
+
+    def __bool__(self) -> bool:
+        # ``PROCEED`` vs ``REFUSE_PENDING_DISCLOSURE`` is not a truth value — a plain
+        # object is always truthy, so ``if decision:`` would proceed on a refusal.
+        # Read ``.proceed`` explicitly.
+        raise TypeError(
+            "The truth value of a GateDecision is ambiguous — read `.proceed` "
+            "(disposition == PROCEED), never `if decision:`."
+        )
 
     @property
     def proceed(self) -> bool:

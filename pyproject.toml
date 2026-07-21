@@ -9,18 +9,16 @@ name = "bulla"
 # source that could silently drift would be a provenance defect in a provenance
 # tool. publish.yml gates that this version equals the pushed tag.
 dynamic = ["version"]
-description = "Recomputable receipts for authorless agent action — authority, bounds, recourse — plus receipt-coverage against an anchor you didn't mint"
+description = "Portable, recomputable receipts for consequential agent actions: authority, bounds, evidence, reliance, and recourse"
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
 requires-python = ">=3.10"
 authors = [{ name = "John Komkov", email = "jk@gvt.ai" }]
 keywords = [
-    "agents", "agent-accountability", "action-receipt", "receipt", "recourse",
-    "coverage", "audit", "provenance", "rfc6962", "ai-act-article-12",
-    "mcp", "bulla", "langgraph", "crewai", "anthropic-mcp",
-    "cursor", "claude-desktop", "claude-code", "windsurf", "zed", "cline",
-    "coherence", "coherence-fee", "witness", "witness-receipt", "composition",
+    "agents", "agent-accountability", "action-receipt", "authorization",
+    "delegation", "reliance", "recourse", "coverage", "audit", "provenance",
+    "canonicalization", "rfc6962", "mcp", "bulla", "agent-governance",
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -45,7 +43,7 @@ dependencies = [
 
 [project.optional-dependencies]
 ots = ["opentimestamps-client>=0.7"]
-# Sign coherence attestations under an external agent identity (ed25519 / did:key).
+# Sign receipts under an external agent identity (ed25519 / did:key).
 # Bulla signs, never mints — see bulla.identity. One small, pure-Python dep.
 identity = ["PyNaCl>=1.5"]
 # COSE_Sign1 serialization of deeds as SCITT Signed Statements — see
@@ -90,11 +88,14 @@ all = ["bulla[ots,identity,scitt,discover,langgraph,crewai]"]
 bulla = "bulla.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/jkomkov/bulla"
-Documentation = "https://github.com/jkomkov/bulla/tree/main/docs"
+Homepage = "https://glyphstandard.com/bulla"
+Documentation = "https://glyphstandard.com/bulla/quickstart"
+Specification = "https://glyphstandard.com/spec"
+Status = "https://glyphstandard.com/status"
+Research = "https://www.resagentica.com/research"
+Source = "https://github.com/jkomkov/bulla"
 Issues = "https://github.com/jkomkov/bulla/issues"
 Changelog = "https://github.com/jkomkov/bulla/blob/main/CHANGELOG.md"
-Spec = "https://github.com/jkomkov/bulla/blob/main/WITNESS-CONTRACT.md"
 
 [tool.hatch.version]
 path = "src/bulla/__init__.py"

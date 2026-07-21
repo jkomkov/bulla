@@ -1,0 +1,17 @@
+{
+  "candidate_commit": null,
+  "case_commitment_root": null,
+  "ciphertext_hash": null,
+  "conflicts_and_prior_exposure": [],
+  "curator_commitments": [],
+  "decrypting_curator_ids": [],
+  "events": [],
+  "implementation_team_key_access": false,
+  "mode": "REVIEWER_ORIGINATED_BLIND",
+  "profile": "bulla.golden-suite/0.2-experimental",
+  "reveal_after_both_submissions": null,
+  "sops_key_groups": 3,
+  "status": "TEMPLATE_NOT_EVIDENCE",
+  "submission_receipt_hashes": [],
+  "threshold": 2
+}

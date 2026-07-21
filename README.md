@@ -1,551 +1,236 @@
-# bulla
+# Bulla
 
-**Recomputable receipts for authorless action.**
+**Portable, recomputable receipts for consequential agent actions.**
 
-A *bulla* was the clay envelope a Mesopotamian scribe sealed around a record so it survived the absence of the parties who made it. When an autonomous agent acts and then vanishes, the same problem returns: the act outlives its author and no one is left to answer for it. A bulla **ActionReceipt** is the record that survives — what was done, under whose **authority**, within what **bounds**, with a **recomputable verdict**, and how it is **contested** — and `bulla coverage` answers the question the receipts make askable: *how much of what your agents did left no receipt at all?*, measured against an anchor you did not mint (a git history, a transport log, an audit trail).
+Bulla creates portable, recomputable receipts for consequential agent actions.
+Each receipt records what happened, who authorized it, what bounds applied, what
+evidence is carried, what a relying party decided, and where challenge or remedy
+goes. Verification reports what is proven and what remains unresolved; it does
+not turn a signed record into worldly truth.
 
-**Zero heavy dependencies.** Only requires PyYAML. No numpy, no scipy, no LLM calls. Installs in under a second.
+A *bulla* was the clay envelope sealed around a record so it could survive the
+absence of the parties who made it. Bulla applies that discipline to agent
+actions: the action may finish in milliseconds, but its authority, evidence,
+limits, and challenge path remain available to the next system or institution.
 
-> **The coherence fee** — bulla's original diagnostic — is still here, now as one field a receipt can carry. On execution-derived labels it is a *disclosure/omission* signal (how much convention two tools leave undisclosed at their seam), **not** a mismatch-or-failure predictor; see [FALSIFICATIONS.md](FALSIFICATIONS.md). The receipt and its coverage are the load-bearing claims.
+- **Glyph** is the open ActionReceipt format and verification contract.
+- **Bulla** is the Apache-2.0 Python reference implementation.
+- **Res Agentica** is the research program behind the experimental semantic and
+  institutional profiles.
 
-> **Naming**: this repo is the reference implementation, and its wire format is specified independently in [`spec/`](spec/) — an ActionReceipt spec plus a zero-dependency conformance checker (`spec/vectors/independent_check.py`) a second implementer can run without this library. *Glyph* is the name for that open format ([glyphstandard.com](https://glyphstandard.com)); *SEAM* is the underlying theory ([paper](https://www.resagentica.com/papers/seam-paper.pdf)); the wider research program is [Res Agentica](https://www.resagentica.com).
+Core installation has no heavy numerical or model dependency. It requires
+Python 3.10+ and PyYAML.
 
-## Try it now
+## Create and verify one receipt
 
 ```bash
-pip install bulla
-```
+python -m pip install bulla
 
-### 30-second quickstart: mint a receipt, verify it, hand it to a stranger
-
-The trunk of bulla is the **receipt**: one consequential action, made
-accountable — and recomputable by anyone, from the
-[wire spec](spec/action-receipt-v0.2.md) alone:
-
-```bash
-# Mint a receipt for one action (sign it by adding --key after `bulla key gen`)
-bulla receipt create --type github.create_file \
-  --subject repo=acme/site --subject path=docs/x.md \
-  --evidence diff=sha256:1111...:self_asserted \
-  --forum-endpoint https://log.example --forum-root ots:root \
+bulla receipt create \
+  --type demo.write \
+  --subject path=/tmp/example.txt \
+  --principal did:web:example.invalid:agent \
+  --policy policy://demo-v1 \
+  --scope path=/tmp/example.txt \
+  --evidence diff=sha256:1111:self_asserted \
+  --forum-endpoint https://example.invalid/challenge \
+  --forum-root fixture:independently-pinned-root \
   --out receipt.json
 
-# Verify: four hashes, the recourse envelope (modality law), grounding,
-# convention conformance — honest about depth, never a lying boolean
-bulla receipt verify receipt.json
-
-# Omission detection: which anchored actions have NO receipt at all,
-# measured against an anchor you did not mint
-bulla coverage --anchor git --receipts releases/
+bulla receipt verify receipt.json --format json
 ```
 
-Receipts can carry **conventions** — rules two agents coin at their seam
-(units, quanta, formats), committed inside the content hash so they can be
-neither altered nor silently dropped. Executable conventions are recomputed by
-any verifier; semantic ones are hash-pinned with a named forum. See
-[spec §5](spec/action-receipt-v0.2.md).
+The verifier reports independent dimensions rather than collapsing them into a
+misleading Boolean:
 
-The stranger test is executable: `python spec/vectors/independent_check.py`
-reverifies every golden vector with the Python standard library and **zero
-bulla imports** — the spec, not this repo, is the contract.
-
-### The seam diagnostic: compose two compositions
-
-The original diagnostic layer — a human-readable report of exactly which
-fields to expose to make a composition safe (the **coherence fee** is a
-disclosure/omission signal a receipt can carry; see
-[FALSIFICATIONS.md](FALSIFICATIONS.md) for what it is *not*):
-
-```bash
-# From a checkout of the bulla repo:
-bulla compose examples/two-manifest-quickstart/example_fetch_memory_joint.yaml
+```text
+integrity            VERIFIED
+authenticity         UNVERIFIED
+authority            UNAUTHENTICATED
+scope                 NOT_APPLICABLE
+grounding             SELF_ASSERTED
+recourse              NAMED
+reachability          UNVERIFIED
+reliance_decision     NOT_COMPUTED
 ```
 
-Output:
+This output is pinned by a checked
+[CLI fixture](https://github.com/jkomkov/bulla/blob/main/docs/fixtures/unsigned-self-asserted-answerability.json).
+The exact values depend on the receipt. An unsigned example can have verified
+hash integrity while authenticity and authority remain unverified. A named
+forum can be present while its operational reachability remains unverified.
+Those distinctions are the point.
 
-```
-  Witness rank (fee): 2  ⚠ refuse_pending_disclosure
-
-  2 blind-spot dimensions forming 2 independent obstruction classes.
-
-  To make this composition safe, expose 4 fields:
-
-    1. tool `fetch`, field `encoding`
-       Action: add `encoding` to fetch.observable_schema
-       Bridges blind spot on edge: encoding_match
-    ...
-
-  Apply all bridges automatically:
-    bulla bridge ... --output ..._bridged.yaml
-```
-
-See [examples/two-manifest-quickstart/README.md](https://github.com/jkomkov/bulla/tree/main/examples/two-manifest-quickstart#readme)
-for the full walkthrough. `--format json` emits the same structured
-`WitnessReceipt` as `bulla witness`.
-
-### Sign it, log it, verify it — without trusting the operator
-
-A diagnosis you must take someone's word for is a score; a diagnosis anyone can
-re-derive is a **deed**. Every claim below is recomputable — run the commands,
-don't take the README's word:
-
-```bash
-bulla key gen                                  # local ed25519 identity (did:key)
-bulla certify examples/two-manifest-quickstart/example_fetch_memory_joint.yaml --sign
-bulla registry append <certificate.json>       # append-only log (RFC 6962 Merkle)
-bulla registry root                            # the root you anchor + gossip
-bulla registry prove <index>                   # inclusion proof for one deed
-bulla verify <certificate.json> --registry <url> --trusted-root <root>  # remote: pin the root
-bulla registry anchor                          # timestamp the whole log (OpenTimestamps)
-```
-
-The trust rule is strict by design: an inclusion proof only counts against a root
-you obtained **independently of the host** — your own log, a pinned root, or an
-OTS-anchored checkpoint. A remote registry's bare claim about itself is classified
-`host-asserted` and refused. What this buys: the record survives the operator
-(append-only, no deletion), can't be backdated past its anchor, and omission is
-caught because relying parties refuse the unlogged.
-
-### Recourse gate: PROCEED / REFUSE on a deed
-
-Where `bulla compose` *reports* the seam, the **recourse gate** *enforces* a decision on a
-counterparty's signed, logged coherence deed — **PROCEED**, or **REFUSE** with a curable
-refusal that names the cure. It gates on **type signals only**: authenticity + inclusion
-under a root you trust *independently of the host*; the coherence fee is *reported*, and
-gated on only when you opt in (`--require-fee N` — a disclosure demand, not an execution
-predictor). It does **not** verify delivery — a coherent liar passes; performance bonding
-is roadmap.
-
-```bash
-# From a checkout, after `pip install -e .`:
-examples/gate-quickstart.sh        # ~5s: PROCEED on a clean deed, REFUSE-with-cure on a seam
-```
-
-Then watch the gate catch a **lying host** (an equivocated registry root) and prevent a real
-`git` breach — where the *same* convention disclosure that clears the coherence fee is what
-fixes the execution:
-
-```bash
-python calibration/recourse_gate_closes_loop_git.py   # LOOP CLOSED
-```
-
-Point `bulla gate` at *your own* registry + composition (`bulla gate --help`); nothing is
-hardcoded.
-
-### Other entry points
-
-```bash
-# Audit your live MCP setup (Cursor, Claude Desktop, …)
-bulla audit
-
-# Explicit config path
-bulla audit ~/.cursor/mcp.json
-
-# CI gate: fail if any composition exceeds fee threshold
-bulla audit --max-fee 3 --format json
-
-# Deterministic audit from saved MCP manifests
-bulla audit --manifests examples/canonical-demo/manifests/
-```
-
-`bulla audit` auto-detects your MCP configuration when possible, scans servers, and prints a short **receipt**: **boundary fee** first (cross-server seams), then within-server blind spots, then copy-paste next steps (`--max-fee`, `--format json`). If no config is found, stderr suggests a **`bulla scan …`** command you can run with zero setup.
-
-## Bulla as MCP proxy — the safety co-pilot agents query
-
-`bulla audit` and `bulla compose` analyze YAML *before* deployment. The
-**live MCP proxy** sits between an agent and its MCP backends while
-it runs:
-
-```bash
-bulla proxy --inject-prompt          # print the agent system prompt
-bulla proxy --config servers.yaml    # spawn backends, listen on stdio
-```
-
-The proxy fronts N backend MCP servers as one logical server, namespaces
-their tools as `server__tool`, AND injects eight `bulla__*` meta-tools
-the agent itself calls — five advisory, three deed:
-
-| Meta-tool | What it returns |
-|---|---|
-| `bulla__fee` | Current witness rank (incremental, no recompute) |
-| `bulla__blind_spots` | Enumerated obstruction dimensions |
-| `bulla__bridge` | Repair advice classified `value` (apply now) vs `schema` (manifest edit required) |
-| `bulla__should_proceed` | Ternary verdict for a pending call: `safe` / `advise` / `refuse` |
-| `bulla__why` | Aristotle stamp + Lean theorem name backing the recommendation |
-| `bulla__deed_emit` | Sign + append the current composition's deed to the registry |
-| `bulla__deed_verify` | Demand a counterparty's deed is logged (inclusion-checked) |
-| `bulla__deed_lookup` | Deeds by composition hash (factual lookup) |
-
-The agent is the consumer. The system prompt at
-[`agents/system_prompt_v1.md`](agents/system_prompt_v1.md) tells it
-when and how to consult Bulla.
-
-**Why this is different**: every other MCP-aware tool monitors
-compositions for humans. The Bulla proxy is the participant the agent
-itself queries — and `bulla__why` returns an Aristotle run hash plus
-the Lean theorem (`disclosure_characterization`,
-`sheaf_realization_characterization_via_cohomology`) that backs the
-recommendation. No competitor can attach formally-verified provenance
-to safety claims without an analogous formalization arc.
-
-See [examples/live-mcp-proxy/README.md](https://github.com/jkomkov/bulla/tree/main/examples/live-mcp-proxy#readme)
-for the runnable demo, telemetry walkthrough, and trust-ladder model
-(`observe → advise → auto`). The MVP runs in OBSERVE mode only — it
-never modifies agent traffic.
-
-## The seam problem
-
-Two MCP servers. One uses absolute paths (`/tmp/src/main.py`), the other uses repository-relative paths (`src/main.py`). Schema validation passes. The path convention crosses the seam **undisclosed** — bulla surfaces that undisclosed convention from the schemas alone, before execution. (Whether it *causes* a wrong write is not something the fee predicts — see [the calibration note](#calibration-results) and [FALSIFICATIONS.md](FALSIFICATIONS.md).)
-
-**[See the canonical demo →](https://github.com/jkomkov/bulla/tree/main/examples/canonical-demo)** — frozen MCP manifests, real fee, walks through the bridge runtime.
-
-## Calibration results
-
-Tested across 10 real MCP servers (filesystem, github, notion, playwright, tavily, etc.) in 45 pairwise compositions. **Read this as disclosure-presence, not failure-probability.** Labels are **annotation-derived** (schema-vs-convention), *not* execution-derived; the column below is the annotated-mismatch **co-occurrence** rate on this labelled corpus — not a probability that a chain breaks at runtime:
-
-| Zone | Fee | Annotated-mismatch co-occurrence | Compositions |
-|------|-----|----------------------------------|--------------|
-| **Safe** | 0 | 0% | 15 compositions, all clean |
-| **Uncertain** | 1–3 | 0–33% | 12 compositions |
-| **Unsafe** | 4+ | ~100% | 18 compositions, all confirmed |
-
-A higher fee co-occurs with more conventions left undisclosed. It does **not** follow that a higher fee predicts an execution failure: on execution-derived labels the fee does not discriminate a breaking seam from a safe one (see [FALSIFICATIONS.md](FALSIFICATIONS.md)). The fee is computed from schemas alone — an omission measure, no execution required.
-
-See [calibration data](https://github.com/jkomkov/bulla/blob/main/calibration/data/tier3/report/state-of-agent-coherence.md) for the full report.
-
-## Python SDK
-
-<!-- bulla-doc-skip: illustrative — fs_tools / gh_tools are your servers' tools/list payloads -->
-```python
-from bulla import compose_multi
-
-result = compose_multi({
-    "filesystem": fs_tools,
-    "github": gh_tools,
-})
-
-print(result.diagnostic.coherence_fee)   # 30
-print(result.receipt.disposition.value)  # "refuse_pending_disclosure"
-print(result.decomposition.boundary_fee) # 1
-```
-
-`compose_multi()` returns a `ComposeResult` with the diagnostic, a tamper-evident `WitnessReceipt`, and a fee decomposition partitioned by server. For single-server diagnosis, use `compose()`.
-
-## Architecture
-
-Three layers, cleanly separated:
-
-| Layer | Concern | Module |
-|---|---|---|
-| **Measurement** | Composition → Diagnostic (fee, blind spots, bridges) | `diagnostic.py` |
-| **Binding** | Diagnostic → WitnessReceipt (content-addressable, tamper-evident) | `witness.py` |
-| **Judgment** | Policy → Disposition (proceed / refuse / bridge) | `witness.py` |
-
-The measurement layer has **zero imports** from the witness layer. Measurement does not know it is being witnessed.
-
-## Commands
-
-| Command | Purpose |
-|---|---|
-| `bulla audit` | Scan MCP config, diagnose cross-server coherence |
-| `bulla gauge` | Diagnose a single MCP server or manifest |
-| `bulla diagnose` | Full diagnostic from a composition YAML |
-| `bulla compose` | Prescriptive report (natural-language fix instructions) |
-| `bulla check` | CI gate with configurable thresholds |
-| `bulla scan` | Scan live MCP servers (zero config) |
-| `bulla witness` | Diagnose and emit WitnessReceipt as JSON |
-| `bulla bridge` | Auto-bridge and emit patched YAML |
-| `bulla translate` | Apply a typed runtime translator (`--dimension X --value V --to T`) |
-| `bulla serve` | MCP stdio server |
-| `bulla proxy` | Live MCP proxy — injects `bulla__*` meta-tools agents query at runtime |
-| `bulla replay` | Replay a session trace with flow-level structural diagnosis (renamed from `bulla proxy`) |
-| `bulla discover` | LLM-powered convention dimension discovery |
-| `bulla import langgraph` | Parse a LangGraph workflow into a Bulla manifest |
-| `bulla import crewai` | Parse a CrewAI crew/agent/task tree into a Bulla manifest |
-| `bulla certify-update` | Semantic SemVer verdict (`delta_r`, update kind, bridge lower bound) between old/new compositions |
-
-Output formats: `--format text` (default), `--format json`, `--format sarif`.
-
-### Runtime translation, Session API, framework adapters (new in 0.37.0)
-
-Three additions in 0.37.0. `bulla.translate` exposes typed runtime translators that produce a `WitnessReceipt` for every transformation. `bulla.Session` builds compositions tool-by-tool with rank-1 incremental updates. `bulla.LiveSession` extends Session with call tracing for MCP proxies. Native `bulla.langgraph` and `bulla.crewai` adapters round it out.
-
-#### `bulla.translate`
-
-Typed runtime value translation across conventions.
+The same stable boundary is available from Python:
 
 ```python
-from bulla import translate
+from bulla.action_receipt import build_action_receipt, verify_receipt
+from bulla.envelope import Authority, Bounds, Forum, Recourse, RecourseEnvelope, Remedy
 
-result = translate("currency_code", value="USD", to_convention="iso-4217-numeric")
-print(result.value)                          # "840"
-print(result.evidence.from_convention)       # "iso-4217"
-print(result.evidence.equivalence)           # "exact"
-print(result.receipt.disposition.value)      # "proceed"
-```
-
-Five canonical translators ship registered: `currency_code`, `country_code`, `language_code`, `temporal_format`, `fhir_resource_type`. Restricted-pack values raise `TranslationUnavailable` rather than leaking through. Register your own via `@bulla.bridges.register`. CLI: `bulla translate --dimension currency_code --value USD --to iso-4217-numeric`.
-
-#### `bulla.Session`
-
-Long-lived composition built tool by tool.
-
-```python
-from bulla import Session, ToolSpec, Edge, SemanticDimension
-
-s = Session()
-# Both tools carry a `path`, but each also carries a `path_root` convention it
-# does NOT expose at the seam (observable_schema omits it): filesystem speaks
-# absolute paths, github repo-relative, and neither advertises which.
-s.add_tool(ToolSpec("filesystem.read_file",
-                    internal_state=("path", "path_root"), observable_schema=("path",)))
-s.add_tool(ToolSpec("github.create_file",
-                    internal_state=("path", "path_root"), observable_schema=("path",)))
-s.add_edge(Edge("filesystem.read_file", "github.create_file",
-                (SemanticDimension("path_root", "path_root", "path_root"),)))
-print(s.fee)                # 1  — the hidden path_root convention the schemas can't see
-receipt = s.diagnose()      # full WitnessReceipt
-```
-
-Every `add_tool`, `translate(...)`, and `checkpoint()` extends a chained receipt history. Incremental updates use rank-1 Schur complements; a 10,000-seed property test pins bitwise equality with full-rebuild `witness_gram`.
-
-#### `bulla.LiveSession`
-
-Online MCP composition proxy.
-
-<!-- bulla-doc-skip: needs live MCP servers (fs_tools / gh_tools) -->
-```python
-from bulla import LiveSession
-
-live = LiveSession(name="checkout")
-live.add_server("filesystem", fs_tools)
-live.add_server("github", gh_tools)
-print(live.fee)             # equals compose_multi({fs, gh}).coherence_fee
-live.record_call("github.create_file", inputs={...})
-receipt = live.diagnose()
-```
-
-`add_server` returns `AddServerResult` with the per-server delta. `LiveSession.from_server_tools(...)` constructs from a single `dict[str, list[dict]]`.
-
-#### Native LangGraph and CrewAI adapters
-
-```bash
-pip install bulla[langgraph]    # or bulla[crewai], bulla[all]
-```
-
-<!-- bulla-doc-skip: needs the [langgraph]/[crewai] extras and a live graph/crew -->
-```python
-from bulla.langgraph import bind, BullaCallbackHandler
-from bulla.crewai     import bind as crew_bind, BullaCrewCallback
-
-# LangGraph: snapshot a compiled or uncompiled StateGraph
-session = bind(graph)
-print(session.fee)
-
-# CrewAI: walks crew.agents, crew.tasks, task.context, task.tools
-session = crew_bind(crew)
-```
-
-Both `bind()` calls return a `bulla.Session` with a deterministic `composition_hash`. Order-independence is property-tested over 50 seeded random graph constructions. `BullaCallbackHandler` and `BullaCrewCallback` record live tool invocations into the session's receipt chain. Static AST adapters (`bulla.frameworks.{langgraph,crewai}`) are unchanged for source-file scanning. See [`docs/FRAMEWORKS.md`](https://github.com/jkomkov/bulla/blob/main/docs/FRAMEWORKS.md).
-
-#### Awareness-gap demo
-
-A reproducible bundle at `examples/awareness-gap-demo/` walks the full failure → diagnose → translate → fix loop on canned filesystem + github manifests, no network or LLM required. `bulla scan` defaults to a prose narrative covering 39 dimension explanations, with a pairwise-vs-global block that fires only when every pair has fee=0 and the global has fee>0.
-
-### Standards ingestion (new in 0.36.0)
-
-Bulla ships **19 seed packs** covering the canonical commercial standards plus 5 restricted-source vocabularies as metadata-only references:
-
-| Tier | Packs | Notes |
-|---|---|---|
-| **A — fully open, inline** | `iso-4217`, `iso-8601`, `iso-3166`, `iso-639`, `iana-media-types`, `naics-2022` | Currencies, dates, countries, languages, MIME, industry codes |
-| **B — large open, registry-backed** | `ucum`, `fix-4.4`, `fix-5.0`, `gs1`, `un-edifact`, `fhir-r4`, `fhir-r5`, `icd-10-cm` | Units, FIX/SWIFT/FHIR/ICD-10/EDIFACT/GS1; `values_registry` points to authoritative source |
-| **Restricted (metadata-only)** | `who-icd-10`, `swift-mt-mx`, `hl7-v2`, `umls-mappings`, `iso-20022` | Pack ships dimension metadata only — licensed values stay behind the registry pointer; consumer obtains license to fetch |
-
-```bash
-# List + inspect packs
-bulla pack status src/bulla/packs/seed/iso-4217.yaml
-bulla pack verify src/bulla/packs/seed/ucum.yaml          # static inspection (no network)
-bulla pack lint   src/bulla/packs/seed/icd-10-cm.yaml     # advisory style hints
-bulla pack validate path/to/your/pack.yaml                # schema check
-```
-
-**Architectural extensions (Extensions A–E)** behind the standards-ingestion sprint:
-
-- **`license`** at pack level — `registry_license: open | research-only | restricted` describes the upstream registry, not the pack's own metadata (which is always openly authored).
-- **`values_registry`** at dimension level — pointer to an external content-addressed registry. Hash format: real `sha256:<64-hex>` or sentinel `placeholder:awaiting-ingest` / `placeholder:awaiting-license`. Literal `sha256:0...0` is rejected by the validator.
-- **`derives_from`** on `PackRef` — per-pack standard-version provenance recorded on every receipt's `active_packs`.
-- **Alias-form `known_values`** — items widen from `string` to `{ canonical, aliases, source_codes }`. Strictly additive; legacy packs unchanged. A field whose enum lists `"840"` (ISO-4217 numeric) classifies under the same dimension as `"USD"`.
-- **Passive `mappings:`** in regular packs — receipt-side translation tables (e.g. ICD-9 ↔ ICD-10 GEMs, FHIR R4 ↔ R5 resource-type renames). Value-blind: the coboundary uses dimension *names*, so mappings don't change H¹.
-
-End-to-end demos at `calibration/data/demos/`:
-- `cross_pack_receipt_billing.yaml` — clinical_emr → billing_system → payer_gateway crossing ISO 4217 + FHIR R4 + ICD-10-CM seams in a single signed receipt.
-- `restricted_pack_metadata_only.yaml` — composition referencing a license-gated pack issues a valid receipt without consumer-side credentials; `bulla pack verify` returns `status='placeholder'` until a real ingest is performed.
-
-Authoritative-source registry hashes are real SHA-256 from live fetches for **all 11 fetchable open packs** (UCUM, NAICS 2022, ISO 639, IANA Media Types, FHIR R4, FHIR R5, FIX 4.4, FIX 5.0, GS1, UN-EDIFACT, ICD-10-CM); the 5 restricted packs use `placeholder:awaiting-license` until a license-holder substitutes their own ingest; the 3 fully-inline packs (ISO 3166/4217/8601) carry no registry pointer. Real hashes also propagate onto `derives_from.source_hash` so receipts bind to the underlying-standard revision transitively. See `docs/STANDARDS-INGEST-SOURCES.md` and `docs/STANDARDS-PACK-MAINTENANCE.md` for the full ownership / drift-handling protocol.
-
-### Witness-geometry diagnostics (new in 0.35.0)
-
-Beyond the scalar coherence fee, Bulla can surface the full *witness geometry* of a composition: per-field leverage scores, concentration index (`N_eff`), coloops/loops, and the matroid-greedy minimum-cost disclosure basis. All quantities are exact rationals (`Fraction`), never floats.
-
-```bash
-# Show leverage, N_eff, coloops, and greedy basis on a composition
-bulla diagnose composition.yaml --witness
-
-# On a live MCP server or manifest (gauge is the prescriptive command)
-bulla gauge tools.json --leverage
-
-# Ask which hidden fields substitute for a target (effective resistance)
-bulla gauge tools.json --substitutes read_file path
-
-# Cost-weighted greedy: YAML maps "<tool>:<field>" → rational cost string
-bulla gauge tools.json --costs costs.yaml
-```
-
-JSON output adds a `witness_geometry` block only when the flag is set; default output remains byte-identical to 0.34.0. The mathematical backing is the Witness Gram rank identity and the Kron-reduction theorem, machine-checked in Lean 4. The broader research-program ledger documents 56 Aristotle-verified theorems across the witness-geometry chain (0 `sorry`). The PyPI package does not vendor Lean; it implements the measurement and receipt layers in Python.
-
-### Per-dimension decomposition & interaction score
-
-The scalar fee can be split across the semantic *dimensions* that carry it, so you can see *which* conventions are responsible and whether they interact:
-
-<!-- bulla-doc-skip: illustrative — continues from a `comp` built above -->
-```python
-from bulla.diagnostic import decompose_fee_by_dimension
-
-d = decompose_fee_by_dimension(comp)
-d.by_dimension      # {'amount_unit': 1, 'date_format': 1} — fee_d per dimension
-d.total_fee         # 2  — the composition's coherence fee
-d.residual          # 0  — interaction score: Σ fee_d − fee
-d.dfd_holds         # True — Disjoint Field Decomposition holds
-```
-
-The **interaction score** `residual = Σ fee_d − fee` is a structural diagnostic, not a failure predictor: `0` means the dimensions are *modular* (each `fee_d` is independently repairable); a positive value means two dimensions are coupled through a shared hidden field (`d.shared_columns` localizes which `(tool, field)` columns). This rests on the **Per-Dimension Additivity Theorem**: under Disjoint Field Decomposition (distinct dimensions touch disjoint columns), `Σ fee_d = fee` exactly — proven and verified on all 703 corpus compositions ([note](https://github.com/jkomkov/res-agentica/blob/main/papers/coherence-cliff/results/per_dimension_additivity_theorem.md)). The live MCP proxy surfaces the same breakdown: `bulla__blind_spots` returns `fee_by_dimension`, `interaction_score`, and `dimensions_modular` alongside the blind-spot list.
-
-## Quick start with `bulla gauge`
-
-```bash
-# Diagnose a live MCP server
-bulla gauge --mcp-server "python -m my_mcp_server"
-
-# Diagnose from a manifest JSON (tools/list response)
-bulla gauge tools.json
-
-# Save the inferred composition for hand-editing
-bulla gauge tools.json -o composition.yaml
-
-# CI gating: fail if coherence fee exceeds threshold
-bulla gauge tools.json --max-fee 0
-```
-
-## Python API
-
-```python
-from bulla import (
-    WitnessBasis, PolicyProfile,
-    diagnose, load_composition, witness,
-    verify_receipt_consistency, verify_receipt_integrity,
+receipt = build_action_receipt(
+    action={"type": "demo.write", "subject": {"path": "/tmp/example.txt"}},
+    diagnostic_ref={"status": "deferred"},
+    envelope=RecourseEnvelope(
+        authority=Authority(
+            principal="did:web:example.invalid:agent",
+            policy="policy://demo-v1",
+        ),
+        bounds=Bounds(scope="path=/tmp/example.txt"),
+        recourse=Recourse(
+            challenge_window="P30D",
+            forum=Forum(
+                log_endpoint="https://example.invalid/challenge",
+                trusted_root_ref="fixture:independently-pinned-root",
+            ),
+            remedies=(Remedy(
+                rung="recompute",
+                verifier="bulla receipt verify",
+                anchor="hashes.content",
+            ),),
+        ),
+    ),
+    evidence_refs=({
+        "name": "diff",
+        "hash": "sha256:1111",
+        "grounding": "self_asserted",
+    },),
+    timestamp="2026-07-20T00:00:00Z",
 )
 
-# Load and diagnose. `load_composition` also takes path="pipeline.yaml";
-# the inline text keeps this snippet self-contained.
-comp = load_composition(text="""
-name: pipeline
-tools:
-  parser: {internal_state: [amount, amount_unit], observable_schema: [amount]}
-  engine: {internal_state: [amount, amount_unit], observable_schema: [amount]}
-edges:
-  - {from: parser, to: engine, dimensions: [{name: amount_unit, from_field: amount_unit, to_field: amount_unit}]}
-""")
-diag = diagnose(comp)
-print(f"Fee: {diag.coherence_fee}, Blind spots: {len(diag.blind_spots)}")  # Fee: 1, Blind spots: 1
-
-# Witness with provenance
-basis = WitnessBasis(declared=1, inferred=0, unknown=0)
-policy = PolicyProfile(name="strict", max_unknown=2)
-receipt = witness(diag, comp, witness_basis=basis, policy_profile=policy)
-print(f"Disposition: {receipt.disposition.value}")
-
-# Verify
-ok, violations = verify_receipt_consistency(receipt, comp, diag)
-assert verify_receipt_integrity(receipt.to_dict())
+result = verify_receipt(receipt.to_dict())
+assert result.ok
+assert result.authority_authentic == "unauthenticated"
+assert result.effective_grounding == "self_asserted"
 ```
 
-### BullaGuard (high-level)
+The final assertions are deliberate: recomputable integrity did not upgrade an
+unsigned authority envelope or self-asserted evidence into stronger claims.
 
-<!-- bulla-doc-skip: from_mcp_server spawns a live server subprocess -->
-```python
-guard = BullaGuard.from_mcp_server("python my_server.py")
-guard.check(max_blind_spots=0)  # raises BullaCheckError on failure
-
-guard = BullaGuard.from_tools({
-    "parser": {"fields": ["amount", "currency"], "conventions": {"amount_unit": "dollars"}},
-    "engine": {"fields": ["amount"], "conventions": {"amount_unit": "cents"}},
-}, edges=[("parser", "engine")])
-```
-
-## MCP Server
-
-Bulla exposes a JSON-RPC 2.0 stdio server with two tools and one resource:
+The implementation-independent checker needs no Bulla import:
 
 ```bash
-bulla serve   # starts MCP stdio server
+python spec/vectors/independent_check.py
 ```
 
-- **`bulla.witness`** — composition YAML → WitnessReceipt (structured output)
-- **`bulla.bridge`** — composition YAML → patched YAML + receipt chain
-- **`bulla://taxonomy`** — convention pack taxonomy
+It recomputes the frozen ActionReceipt vectors from the normative specification
+and fails closed on structural tampering.
 
-## Convention Packs
+## What 0.44.0 contains
 
-Layered vocabulary for convention recognition. Later packs override earlier ones.
+| Surface | Maturity | Availability | What it establishes |
+|---|---|---|---|
+| ActionReceipt v0.2 | Stable and normative | PyPI 0.44.0 | Canonical action records, four hash preimages, evidence references, and recourse envelopes |
+| ActionReceipt v0.3 authority binding | Opt-in released draft | PyPI 0.44.0 | The content signer signed the exact authority, bounds, and recourse envelope |
+| Delegation and bounds conformance | Opt-in released draft | PyPI 0.44.0 | Separate chain, principal, policy, scope, time, revocation, and action-bounds dimensions |
+| Reliance receipts | Released implementation | PyPI 0.44.0 | A relying party records and recomputes its selected reliance policy and decision |
+| Release coverage | Released implementation | PyPI 0.44.0 | Published-package actions missing contemporaneous receipts relative to the PyPI anchor |
+| Routed inference | Experimental profile | Source and fixtures | Retention of declared bindings through one router and one provider; no live-provider claim |
+| Semantic invention and finality | Experimental research | Source/research only | Checked finite predicates, partial safe regions, typed abstention, and staged finality under declared closure |
+| Claim Flow and precedent | Experimental research | Source/research only | Typed appraisal, forum, precedent, applicability, and settlement transitions; no external legal-validity claim |
+| Independent witness plurality | Blocked | Not available | Local checkpoint mechanics exist; independently operated witnesses do not |
 
-```bash
-bulla diagnose --pack financial.yaml pipeline.yaml
-bulla scan --pack custom.yaml "python server.py"
+The canonical, generated status table is
+[What Exists Today](https://glyphstandard.com/status). It distinguishes released
+code, released drafts, experimental mechanisms, research results, and external
+gaps.
+
+## The answerability flow
+
+```text
+record  ->  verify  ->  rely  ->  retain  ->  challenge
 ```
 
-Ships with `base` (11 dimensions) and `financial` (4 domain-specific dimensions).
+1. **Record.** Capture the action, authority, bounds, evidence, and recourse.
+2. **Verify.** Recompute the canonical hashes and every supported verification
+   dimension from pinned inputs.
+3. **Rely.** Apply an explicit reliance policy and receipt the relying party's
+   own decision.
+4. **Retain.** Bind the record to an independently obtained root or other
+   declared persistence mechanism when occurrence coverage matters.
+5. **Challenge.** Preserve the forum, window, and remedy ladder needed to
+   contest or correct the action.
 
-## CI Integration
+Bulla's security foundation as four separate requirements is deliberate:
+authenticity, inclusion under a root obtained independently of the issuer,
+independently persistent witnessing where occurrence coverage is required, and
+an executable recourse path. A deployment must report which requirements it
+actually establishes; one does not stand in for another.
 
-```yaml
-# GitHub Actions with SARIF
-- run: pip install bulla
-- run: bulla check --format sarif compositions/ > bulla.sarif
-- uses: github/codeql-action/upload-sarif@v3
-  with:
-    sarif_file: bulla.sarif
-```
+The format is intentionally open. A second implementation can produce or verify
+the same receipt without importing this package.
 
-Semantic SemVer CI gate:
+## What verification does not prove
 
-```yaml
-- uses: jkomkov/bulla@v0.21.0
-  with:
-    mode: semver
-    old-path: compositions/pipeline_old.yaml
-    new-path: compositions/pipeline_new.yaml
-    fail-on-major: "true"
-```
+A valid receipt is evidence about a record and the checks actually performed.
+It does not by itself prove:
 
-## How it works
+- that the described event occurred in the world;
+- that carried evidence is truthful or complete;
+- that an authority policy is legally or institutionally sufficient;
+- that every relevant action received a receipt;
+- that a named forum or remedy is operationally reachable;
+- that a local registry is independently witnessed;
+- that an experimental finite model is complete in an open world.
 
-Bulla builds a coboundary operator from tool dimensions to edge dimensions for both the observable and full sheaves. The coherence fee is:
+Callers should read the named dimensions or use an authored reliance policy.
+`ReceiptVerification` and the other multidimensional verdict objects reject
+Boolean coercion so `if verify_receipt(...):` cannot silently accept an
+ambiguous result.
 
-```
-fee = rank(δ_full) − rank(δ_obs)
-```
+## Documentation
 
-Each unit of fee is an independent semantic dimension invisible to pairwise checks. Bridging increases rank(δ_obs) until it matches rank(δ_full). Rank computation uses exact arithmetic (`fractions.Fraction`) — no floating-point, no numpy.
+- [Five-minute quickstart](https://glyphstandard.com/bulla/quickstart)
+- [Bulla documentation](https://glyphstandard.com/bulla)
+- [ActionReceipt specification](https://glyphstandard.com/spec)
+- [What exists today](https://glyphstandard.com/status)
+- [Complete capability reference](https://github.com/jkomkov/bulla/blob/main/docs/CAPABILITIES.md)
+- [Experimental profiles](https://glyphstandard.com/bulla/experimental)
+- [Research program](https://www.resagentica.com/research)
+- [Changelog](https://github.com/jkomkov/bulla/blob/main/CHANGELOG.md)
+- [Security policy](https://github.com/jkomkov/bulla/security/policy)
 
-## Witness Contract
+## Legacy composition diagnostics
 
-Every receipt binds three hashes: **composition** (what was proposed), **diagnostic** (what was measured), **receipt** (what was witnessed). Receipts chain via `parent_receipt_hashes` for auditable repair flows.
+Bulla still includes its original tool-composition diagnostics, convention
+packs, bridges, translators, MCP scanner, and witness-geometry utilities. Their
+*coherence fee* is retained as a model-relative disclosure/omission measure: it
+counts convention dimensions hidden from a declared observable seam. Current
+execution-derived evidence does **not** support treating it as a mismatch,
+runtime-failure, or safety oracle, and the default enforcement path does not do
+so.
 
-See [WITNESS-CONTRACT.md](https://github.com/jkomkov/bulla/blob/main/WITNESS-CONTRACT.md) for the normative specification.
+Legacy theorem and run provenance can make a scoped disclosure recommendation
+recomputable; it does not turn that recommendation into a safety proof or an
+execution-failure prediction.
 
-## License
+See [Legacy composition diagnostics](https://github.com/jkomkov/bulla/blob/main/docs/LEGACY-COMPOSITION-DIAGNOSTICS.md)
+and [Falsifications](https://github.com/jkomkov/bulla/blob/main/FALSIFICATIONS.md)
+for the surviving scope and the claims that were withdrawn. SEAM remains part
+of the program's research lineage; it is not the product's current trust root.
 
-[Apache License 2.0](https://github.com/jkomkov/bulla/blob/main/LICENSE) — permissive, OSI-approved, with an explicit patent grant.
+## Research frontier
 
-Glyph is an **open standard** and *bulla* is its open reference implementation: both are Apache-2.0 from day one, because neutral infrastructure others recompute and reimplement cannot sit behind a single gatekeeper. Contributions are under the same license via a [DCO](https://developercertificate.org/) sign-off (`git commit -s`); see [CONTRIBUTING.md](https://github.com/jkomkov/bulla/blob/main/CONTRIBUTING.md).
+The repository also carries experimental profiles for semantic invention,
+partial RELY/REFUSE envelopes, Semantic Finality, correct abstention, typed
+Claim Flow, and reason-bearing precedent. They reuse ordinary ActionReceipts
+but are not stable package APIs and have only internal, model-relative evidence
+unless their status page says otherwise.
+
+The research-program ledger currently records 56 Aristotle-verified theorems
+with no `sorry` across its named formal abstractions. That is theorem-checking
+provenance, not independent validation or a proof of the Python implementation;
+the PyPI package does not vendor Lean.
+
+The public research records are:
+
+- [Interpolant Envelope](https://www.resagentica.com/research/interpolant-envelope)
+- [The Golden Gate](https://www.resagentica.com/research/golden-gate)
+- [No Free Precedent](https://www.resagentica.com/research/no-free-precedent)
+
+## License and security
+
+Bulla is licensed under the
+[Apache License 2.0](https://github.com/jkomkov/bulla/blob/main/LICENSE).
+Report vulnerabilities privately through
+[GitHub Security Advisories](https://github.com/jkomkov/bulla/security/advisories/new)
+or by following the [security policy](https://github.com/jkomkov/bulla/blob/main/SECURITY.md).

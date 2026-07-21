@@ -1,0 +1,14 @@
+{
+  "slot_id": "slot:acme-order-0008",
+  "ordering": "local-host",
+  "deadline": { "checkpoint_ref": "host_log_size", "value": 100 },
+  "evaluation_checkpoint": { "checkpoint_ref": "block_height", "value": 140 },
+  "events": [
+    { "type": "order", "slot_id": "slot:acme-order-0008", "seq": 10, "term_root": "sha256:888", "by": "buyer", "receipt_hash": "sha256:order-8", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "countersign", "slot_id": "slot:acme-order-0008", "seq": 12, "parent_seq": 10, "by": "seller", "receipt_hash": "sha256:countersign-8", "receipt_validated": true, "receipt_authority": "verified" }
+  ],
+  "non_membership_proof": { "verified": true, "slot_id": "slot:acme-order-0008", "checkpoint_ref": "block_height", "checkpoint": 140, "root_ref": "sha256:block-root", "proof": "sha256:proof" },
+  "expected_finding": "UNDETERMINED_CLOSURE",
+  "expected_faults": ["INCOMPARABLE_CHECKPOINTS"],
+  "note": "A log-size deadline and block-height observation are not numerically comparable."
+}

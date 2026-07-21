@@ -1,0 +1,21 @@
+{
+  "burden_coordinates": {},
+  "case_count": 0,
+  "confirmed_unsafe_acceptance": 0,
+  "confirmed_unsafe_refusal": 0,
+  "correct_typed_abstention": {
+    "CHOICE_REQUIRED": 0,
+    "ESCALATE": 0,
+    "INDETERMINATE": 0
+  },
+  "disputed_cases": [],
+  "external_complete": false,
+  "ordering": "lexicographic-no-composite-score",
+  "primary_rating_count": 0,
+  "profile": "bulla.golden-suite/0.2-experimental",
+  "safe_coverage": 0,
+  "schema_version": "0.2-experimental",
+  "unauthorized_governance_selection": 0,
+  "unsupported_acceptance_disagreement": 0,
+  "useful_evidence_requests": 0
+}

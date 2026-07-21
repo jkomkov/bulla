@@ -1,0 +1,221 @@
+{
+  "snapshot": {
+    "schema_version": "0.1-experimental",
+    "base_problem_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "effective_problem_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "result_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "package_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "package_mode": "partial",
+    "semantic_state_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "passport_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "manifest_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "authority_epoch": "sha256:280f814b3afc3a04c80f53caa5c658ea3a72ea37a70087bae6de328f354cf784",
+    "closure_warrant_hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+    "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+    "regions": {
+      "reachable": [
+        "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+      ],
+      "rely": [],
+      "refuse": [],
+      "ambiguous": [
+        "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+      ]
+    }
+  },
+  "closure_warrant": {
+    "schema_version": "0.1-experimental",
+    "status": "BOUNDED_EXACT",
+    "model_class": {
+      "name": "procurement-delivery-worlds",
+      "version": "1"
+    },
+    "generation_method": {
+      "kind": "exhaustive",
+      "source": "shadow-fixtures/1"
+    },
+    "exclusions": [
+      "carrier fraud outside declared evidence model",
+      "unobserved off-ledger custody"
+    ],
+    "domain_authority": {
+      "principal": "did:example:procurement-board",
+      "policy": "closure@1"
+    },
+    "adversarial_expansion_evidence": [
+      {
+        "kind": "seller-buyer-disagreement",
+        "hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    ],
+    "scope": {
+      "invoice": "INV-17",
+      "shipment": "SHIP-17"
+    }
+  },
+  "authority_regime_hash": "sha256:4b72112b9655b3966c79742a4a5ca582e886d08826f1f5cdfd51311241acce21",
+  "consequence_profile": {
+    "schema_version": "0.1-experimental",
+    "action_hash": "sha256:77f034f090bf02031460b8b1897fec9b9f6bf29ec10d1d0a96addb996286c067",
+    "currency": "USD",
+    "target_arguments": [
+      "SHIP-17"
+    ],
+    "consequence_classes": [
+      {
+        "class_id": "SELLER_DISPATCH",
+        "predicate": {
+          "op": "true"
+        },
+        "loss_microunits": 1000000
+      },
+      {
+        "class_id": "BUYER_CUSTODY",
+        "predicate": {
+          "op": "false"
+        },
+        "loss_microunits": 0
+      }
+    ],
+    "mutual_exclusivity": "author-declared; verifier checks represented outcomes",
+    "maximum_credible_loss_microunits": 1000000,
+    "settlement_target": {
+      "kind": "simulated-escrow",
+      "invoice": "INV-17"
+    },
+    "external_verifier": {
+      "id": "shadow-escrow/1",
+      "recompute": "local"
+    }
+  },
+  "represented_outcomes": [
+    "BUYER_CUSTODY",
+    "SELLER_DISPATCH"
+  ],
+  "policy": {
+    "permitted_closure_statuses": [
+      "BOUNDED_EXACT",
+      "FINITE_EXACT"
+    ],
+    "maximum_reserve_microunits": 1100000,
+    "finality_threshold": 1,
+    "permitted_observation_classes": [
+      "carrier_attestation"
+    ],
+    "required_authorities": [
+      "did:key:z6MkoTHHW32cMdBiyh6LWBSL4B7TmjRBvET33xvAErKiaWfv",
+      "did:key:z6Mkiq4a4VNRnPSU8UjiQoD5Z6xohYdAYmvUbLEc9r8Lto9f",
+      "did:key:z6MkuP97nu3stMJjuaX5zVhhHDycxWe39dy6pQufGcZWkCqx"
+    ],
+    "provisional_execution_allowed": true,
+    "provisional_action_types": [
+      "procurement.payment"
+    ],
+    "authored_resolution_order": [],
+    "burden_scalarization": "forbidden"
+  },
+  "certified_surface": "AMBIGUOUS",
+  "reserve": {
+    "action_hash": "sha256:77f034f090bf02031460b8b1897fec9b9f6bf29ec10d1d0a96addb996286c067",
+    "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+    "represented_outcomes": [
+      "BUYER_CUSTODY",
+      "SELLER_DISPATCH"
+    ],
+    "worst_case_loss_microunits": 1000000,
+    "model_risk_buffer_microunits": 100000,
+    "required_reserve_microunits": 1100000,
+    "currency": "USD",
+    "external_lock_reference": "shadow-escrow://INV-17",
+    "collectibility_evidence": [
+      {
+        "kind": "simulated-ledger-entry",
+        "hash": "sha256:cf21003c264231a866c8a1a20cb5392a947f0a309f409aa179e33fe9292fd2af"
+      }
+    ],
+    "expiry": "2026-07-20T00:00:00Z",
+    "closure_warrant_hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+    "operator": "max-declared-loss-plus-explicit-buffer"
+  },
+  "external_lock": {
+    "lock_reference": "shadow-escrow://INV-17",
+    "verifier": {
+      "id": "shadow-escrow/1"
+    },
+    "amount_microunits": 1100000,
+    "currency": "USD",
+    "status": "LOCKED",
+    "collectibility_evidence": [
+      {
+        "kind": "simulated-ledger-entry",
+        "hash": "sha256:cf21003c264231a866c8a1a20cb5392a947f0a309f409aa179e33fe9292fd2af"
+      }
+    ],
+    "simulated": true,
+    "claim_boundary": "protocol-mechanics-only; custody-and-collectibility-not-proven"
+  },
+  "evidence_plan_hashes": [
+    "sha256:88c43d4ebfd8aeee5d6596548a2f10c063df380b14aa1c3b3795eb90a5a66490"
+  ],
+  "evidence_classes": [
+    "carrier_attestation"
+  ],
+  "route_options": [
+    "forum://procurement-governance"
+  ],
+  "receipt_references": [],
+  "action_type": "procurement.payment",
+  "current_semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+  "expected_assessment_hash": "sha256:4359ed53cd19cbac9bf3a476930f61c9b5c27fdcd0fb9fc4c1539e11122f7c52",
+  "expected_assessment": {
+    "profile": "bulla.semantic-finality/0.1-experimental",
+    "status": "EXECUTE_PROVISIONALLY",
+    "cause": "VERIFIED_AMBIGUITY_RESERVE",
+    "available_alternatives": [
+      {
+        "kind": "provisional",
+        "reserve_microunits": 1100000
+      },
+      {
+        "kind": "evidence",
+        "plan_hash": "sha256:88c43d4ebfd8aeee5d6596548a2f10c063df380b14aa1c3b3795eb90a5a66490"
+      },
+      {
+        "kind": "route",
+        "route": "forum://procurement-governance"
+      }
+    ],
+    "reserve": {
+      "action_hash": "sha256:77f034f090bf02031460b8b1897fec9b9f6bf29ec10d1d0a96addb996286c067",
+      "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+      "represented_outcomes": [
+        "BUYER_CUSTODY",
+        "SELLER_DISPATCH"
+      ],
+      "worst_case_loss_microunits": 1000000,
+      "model_risk_buffer_microunits": 100000,
+      "required_reserve_microunits": 1100000,
+      "currency": "USD",
+      "external_lock_reference": "shadow-escrow://INV-17",
+      "collectibility_evidence": [
+        {
+          "kind": "simulated-ledger-entry",
+          "hash": "sha256:cf21003c264231a866c8a1a20cb5392a947f0a309f409aa179e33fe9292fd2af"
+        }
+      ],
+      "expiry": "2026-07-20T00:00:00Z",
+      "closure_warrant_hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+      "operator": "max-declared-loss-plus-explicit-buffer"
+    },
+    "evidence_plan_hashes": [
+      "sha256:88c43d4ebfd8aeee5d6596548a2f10c063df380b14aa1c3b3795eb90a5a66490"
+    ],
+    "authority_regime_hash": "sha256:4b72112b9655b3966c79742a4a5ca582e886d08826f1f5cdfd51311241acce21",
+    "closure_warrant_hash": "sha256:15f749ade88c45e9d6a2c573580646edf8d5251be062f4ae15119a0191f658df",
+    "snapshot_hash": "sha256:74d48fd6b758899aaf05a0fac27a1cf70c58222c0b4b553d966288c2875c2ae3",
+    "semantic_epoch": "sha256:a067f99770dd76ae69123cb7fe4a52d1d25a0551fd8bb440dc3090c44ba6bef4",
+    "policy_hash": "sha256:e37eb01eb43c20d81fd138bc63d1a2dd953ecea2ca4d1c275f8bc392f42be4ca",
+    "receipt_references": [],
+    "ambiguity_claim": "relative-to-model-class-and-warrant"
+  }
+}

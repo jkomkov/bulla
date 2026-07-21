@@ -1,0 +1,41 @@
+{
+  "action_scope": "semantic-boundary-stack-v0.3-merge-and-freeze",
+  "classification": "CAPTIVE_WITH_FOREIGN_SUBSTRATE",
+  "foreign_substrate": "GitHub hosted checks and merge transport",
+  "independence_boundary": "GitHub infrastructure supplied foreign execution substrate; it did not adjudicate semantic correctness and is not an independent witness.",
+  "precedent_created": false,
+  "profile": "bulla.claim-flow/0.4-experimental",
+  "reason": "No ADOPT_PRECEDENT act or precedential authority receipt exists in the merge corpus.",
+  "schema_version": "0.4-experimental",
+  "trace": [
+    {
+      "artifact": "CI-check-bundle",
+      "merge_commit": "6e04700931394443301a55a08d98971a54799407",
+      "node_hash": "sha256:18ac872cc12ca9ea1ef4632b6a2726045b1f9f9ea26f5910849946cc83e001a4",
+      "operation": "APPRAISE",
+      "pr": 171
+    },
+    {
+      "artifact": "maintainer-merge",
+      "merge_commit": "79c2f57ac8de9b0c22ccb4c83134d6d9bd698fa4",
+      "node_hash": "sha256:6a1beae2c9214434a4c057abde38bb01808f320084327e36454ae7b81438ffb7",
+      "operation": "FORUM_FINDING",
+      "pr": 172
+    },
+    {
+      "artifact": "maintainer-merge",
+      "merge_commit": "619efa975819b5171c8589aa15f35506bca345e3",
+      "node_hash": "sha256:cfd6fd1c29c257e1835f7fa182d5abdd140bef7be232cae88c0090f8446950d0",
+      "operation": "FORUM_FINDING",
+      "pr": 173
+    },
+    {
+      "artifact": "signed-freeze-receipt-and-tag",
+      "merge_commit": "ab5ab444b21238d3e083ada93f2243d12efc1041",
+      "node_hash": "sha256:60082224a8167f97b950caa25d7201b7929a5c09fe889ae682a522705521be47",
+      "operation": "SETTLE",
+      "pr": 174
+    }
+  ],
+  "trace_hash": "sha256:ee383ae6c3c79cddf5366cba0ba48f8f2557176956d64a36de2db70f919827f9"
+}

@@ -10,9 +10,9 @@ signature made by A fails.
 
 Other schemes (``did:web``, ``eip155``/ERC-8004, Entra, SPIFFE) are carried as
 opaque issuer URIs. Resolving them to a key is out of scope here; verification of
-those reports ``unresolved`` (advisory) unless a public key is supplied
-out-of-band, or the proof's ``verificationMethod`` is itself a ``did:key`` (which
-proves the VM key signed, not that the external issuer authorized it).
+those reports unauthenticated/unresolved unless a public key is supplied
+out-of-band. A proof's did:key ``verificationMethod`` can show which key made the
+signature, but never by itself binds that key to the external issuer.
 
 Crypto is ed25519 via PyNaCl, behind the optional ``bulla[identity]`` extra.
 Without the extra, signing raises a clear error; unsigned certificates keep their
@@ -24,10 +24,36 @@ from __future__ import annotations
 import base64
 from dataclasses import dataclass
 
+from bulla._canonical import canonical_json
+
 # Proof type tag. The signature is a detached ed25519 signature over the UTF-8
 # bytes of the certificate's `certificate_content_hash` (the "sha256:<hex>"
 # string), which already commits to the issuer and every meaningful field.
 PROOF_TYPE = "bulla/ed25519-2026"
+
+# ── domain separation (v0.3) ─────────────────────────────────────────────────
+#
+# A v0.2 proof signs the raw "sha256:…" digest string. Distinct digests already
+# prevent replay between the content and authorization proofs, but they do not
+# CATEGORICALLY separate proof purposes: a signature is only as bound to its role
+# as the bytes it commits to. v0.3 proofs therefore sign a canonical preimage that
+# carries the purpose IN THE SIGNED BYTES, so a proof minted for one purpose can
+# never be replayed for another, regardless of any digest coincidence.
+PROOF_CONTEXT = "bulla-proof"
+PROOF_SCHEMA = "0.3"
+PROOF_PURPOSES = frozenset(
+    {"content", "authorization", "delegation-grant", "witness-checkpoint"}
+)
+
+
+def domain_preimage(purpose: str, digest: str) -> bytes:
+    """The v0.3 signed bytes: canonical ``{context, schema, purpose, digest}``.
+    The purpose is inside the signature, not a mutable label beside it."""
+    if purpose not in PROOF_PURPOSES:
+        raise ValueError(f"unknown proof purpose {purpose!r}; expected one of {sorted(PROOF_PURPOSES)}")
+    return canonical_json(
+        {"context": PROOF_CONTEXT, "schema": PROOF_SCHEMA, "purpose": purpose, "digest": digest}
+    ).encode("utf-8")
 
 # multicodec varint prefix for ed25519-pub: code 0xED -> unsigned varint [0xed,0x01].
 _ED25519_MULTICODEC = b"\xed\x01"
@@ -152,13 +178,32 @@ class LocalEd25519Signer:
         return {"type": self.issuer_type, "id": self.issuer}
 
     def sign(self, content_hash: str) -> dict:
-        """Detached ed25519 signature over the content-hash. Returns a proof dict."""
+        """Detached ed25519 signature over the content-hash (v0.2 construction:
+        the signature covers the raw ``sha256:…`` string). Returns a proof dict."""
         _require_nacl()
         from nacl.signing import SigningKey
 
         sig = SigningKey(self.seed).sign(content_hash.encode("utf-8")).signature
         return {
             "type": PROOF_TYPE,
+            "issuer": self.issuer,
+            "verificationMethod": self.verification_method,
+            "proofValue": base64.b64encode(bytes(sig)).decode("ascii"),
+        }
+
+    def sign_domain(self, purpose: str, digest: str) -> dict:
+        """Detached ed25519 signature over the v0.3 domain-separated preimage
+        (``{context, schema, purpose, digest}``). The proof carries ``purpose`` as
+        a label, but its security comes from the purpose being in the signed
+        bytes: :func:`verify_proof_domain` rebuilds the preimage from the purpose
+        the caller expects, so a mislabelled or cross-purpose proof fails."""
+        _require_nacl()
+        from nacl.signing import SigningKey
+
+        sig = SigningKey(self.seed).sign(domain_preimage(purpose, digest)).signature
+        return {
+            "type": PROOF_TYPE,
+            "purpose": purpose,
             "issuer": self.issuer,
             "verificationMethod": self.verification_method,
             "proofValue": base64.b64encode(bytes(sig)).decode("ascii"),
@@ -200,18 +245,40 @@ class Authenticity:
     issuer: str
     detail: str = ""
 
+    def __bool__(self) -> bool:
+        # ``authentic`` is only meaningful alongside ``method`` — a valid signature
+        # under an unbound verification-method key is NOT issuer authenticity. A bare
+        # ``if verify_proof(...):`` would read a plain object as always-true and
+        # attribute a forgeable signature to the issuer. Force the caller to read
+        # ``.authentic`` (and consider ``.method``).
+        raise TypeError(
+            "The truth value of an Authenticity is ambiguous — read `.authentic` "
+            "(and check `.method`: a valid signature under an unbound key is not "
+            "issuer authenticity). Do not write `if verify_proof(...):`."
+        )
 
-def verify_proof(
-    content_hash: str, proof: dict, public_key: bytes | None = None
+
+def _authenticate(
+    signed_bytes: bytes, proof: dict, public_key: bytes | None
 ) -> Authenticity:
-    """Verify a detached ed25519 proof over ``content_hash``.
+    """Shared verification core over the exact ``signed_bytes``.
 
-    Key-selection order (the forgery-proof part): an explicitly supplied key wins;
-    otherwise a ``did:key`` *issuer* derives the key from the issuer itself
-    (forgery-proof); otherwise a ``did:key`` *verificationMethod* derives it
-    (weaker); otherwise the issuer scheme needs resolution we do not do here.
+    Key-selection order (the forgery-proof part): a self-certifying ``did:key``
+    issuer always derives its own key, and a supplied key may only confirm—not
+    override—that binding. For an external issuer, an explicitly supplied key
+    asserts the binding; otherwise a ``did:key`` verificationMethod proves only
+    that key signed, not that the external issuer authorized it. Used
+    by both the v0.2 raw-digest and v0.3 domain-separated verifiers so the
+    key-binding logic can never drift between them.
     """
     issuer = str(proof.get("issuer", ""))
+    if proof.get("type") != PROOF_TYPE:
+        return Authenticity(
+            False,
+            "unresolved",
+            issuer,
+            f"unsupported proof type {proof.get('type')!r}; expected {PROOF_TYPE!r}",
+        )
     vmethod = str(proof.get("verificationMethod", ""))
     sig_b64 = proof.get("proofValue")
     if not sig_b64:
@@ -219,13 +286,23 @@ def verify_proof(
 
     pubkey: bytes | None = None
     method = "unresolved"
-    if public_key is not None:
-        pubkey, method = public_key, "supplied-key"
-    elif issuer.startswith("did:key:"):
+    if issuer.startswith("did:key:"):
         try:
             pubkey, method = pubkey_from_did_key(issuer), "did:key"
         except ValueError:
             return Authenticity(False, "did:key", issuer, "malformed did:key issuer")
+        if vmethod != issuer:
+            return Authenticity(
+                False, "did:key", issuer,
+                "did:key proof verificationMethod must equal its self-certifying issuer",
+            )
+        if public_key is not None and public_key != pubkey:
+            return Authenticity(
+                False, "did:key", issuer,
+                "supplied key conflicts with the self-certifying did:key issuer",
+            )
+    elif public_key is not None:
+        pubkey, method = public_key, "supplied-key"
     elif vmethod.startswith("did:key:"):
         try:
             pubkey, method = pubkey_from_did_key(vmethod), "verification-method"
@@ -246,7 +323,7 @@ def verify_proof(
     from nacl.signing import VerifyKey
 
     try:
-        VerifyKey(pubkey).verify(content_hash.encode("utf-8"), base64.b64decode(sig_b64))
+        VerifyKey(pubkey).verify(signed_bytes, base64.b64decode(sig_b64, validate=True))
     except BadSignatureError:
         return Authenticity(False, method, issuer, "signature does not verify under the key")
     except Exception as exc:  # malformed key/sig
@@ -271,3 +348,45 @@ def verify_proof(
             "(resolve the issuer or supply its public key)",
         )
     return Authenticity(True, method, issuer)
+
+
+def verify_proof(
+    content_hash: str, proof: dict, public_key: bytes | None = None
+) -> Authenticity:
+    """v0.2: verify a detached ed25519 proof over the raw ``content_hash`` string."""
+    expected = {"type", "issuer", "verificationMethod", "proofValue"}
+    if not isinstance(proof, dict) or set(proof) != expected:
+        issuer = str(proof.get("issuer", "")) if isinstance(proof, dict) else ""
+        return Authenticity(
+            False, "unresolved", issuer,
+            f"v0.2 proof fields must be exactly {sorted(expected)}",
+        )
+    return _authenticate(content_hash.encode("utf-8"), proof, public_key)
+
+
+def verify_proof_domain(
+    purpose: str, digest: str, proof: dict, public_key: bytes | None = None
+) -> Authenticity:
+    """v0.3: verify a domain-separated proof. The preimage is rebuilt from the
+    ``purpose`` the CALLER expects, so a proof minted for a different purpose fails
+    by construction; the proof's own ``purpose`` label must also match (a clearer
+    early error than a bare signature failure)."""
+    expected = {"type", "purpose", "issuer", "verificationMethod", "proofValue"}
+    if not isinstance(proof, dict) or set(proof) != expected:
+        issuer = str(proof.get("issuer", "")) if isinstance(proof, dict) else ""
+        return Authenticity(
+            False, "unresolved", issuer,
+            f"v0.3 proof fields must be exactly {sorted(expected)}",
+        )
+    issuer = str(proof.get("issuer", ""))
+    label = proof.get("purpose")
+    if label != purpose:
+        return Authenticity(
+            False, "unresolved", issuer,
+            f"proof purpose {label!r} does not match the expected purpose {purpose!r}",
+        )
+    try:
+        signed = domain_preimage(purpose, digest)
+    except ValueError as exc:
+        return Authenticity(False, "unresolved", issuer, str(exc))
+    return _authenticate(signed, proof, public_key)

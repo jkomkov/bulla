@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "profile_id": "bulla.routed-inference/0.1-draft",
+  "implementer": {
+    "name": "",
+    "organization": "",
+    "contact": ""
+  },
+  "implementation": {
+    "independently_written": false,
+    "repository": "",
+    "commit": "",
+    "checker_sha256": ""
+  },
+  "environment": {
+    "language": "",
+    "runtime": "",
+    "operating_system": "",
+    "cryptographic_library": ""
+  },
+  "fixture_results": [],
+  "divergences": [],
+  "ambiguities": [],
+  "declaration": "I did not count execution of the supplied reference checker as an independent implementation.",
+  "completed_at": ""
+}

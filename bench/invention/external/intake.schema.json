@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bulla external seam pilot intake",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "engine_commit", "frsl_1_spec_sha256", "implementation_team_ids",
+    "author_ids", "adjudicator_ids", "target_n_per_domain", "domains", "instances"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.2-external-pilot"},
+    "engine_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "frsl_1_spec_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "implementation_team_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "author_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true, "minItems": 3},
+    "adjudicator_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true, "minItems": 3},
+    "target_n_per_domain": {"const": 100},
+    "domains": {"type": "array", "items": {"type": "string"}, "minItems": 3, "uniqueItems": true},
+    "instances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "domain", "stratum", "author_id", "problem_hash", "problem"],
+        "properties": {
+          "id": {"type": "string"},
+          "domain": {"type": "string"},
+          "stratum": {"enum": ["hidden_generative_contract", "natural_expert"]},
+          "author_id": {"type": "string"},
+          "problem_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+          "problem": {"type": "object"}
+        }
+      }
+    }
+  }
+}

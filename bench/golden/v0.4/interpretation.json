@@ -1,0 +1,25 @@
+{
+  "adjudication_origin": "MACHINE_PLANTED",
+  "author_origin": "TEAM_AUTHORED",
+  "bounded_report_sha256": "1d3a0278f1e59d5610a81d8936d17b6588d8f48604dd2ec03c36381a2227bdcf",
+  "cases_sha256": "4749b7649006f2c1fe1392adafd0640a48464f3cdaa65ee08c91a84a0a13735e",
+  "ci_observations": [
+    {
+      "conclusion": "SUCCESS",
+      "run_id": 29711046868
+    },
+    {
+      "conclusion": "SUCCESS",
+      "run_id": 29711046879
+    }
+  ],
+  "closure": "BOUNDED_EXACT",
+  "display": "Compounding observed — internal captive lineage benchmark.",
+  "historical_preregistered_threshold_name": "DEMONSTRATED_COMPOUNDING",
+  "manifest_sha256": "6d6b7405aa5267037f3c3b54d6c7c0f04389b5f35f7de7430f39641c43394357",
+  "observation": "COMPOUNDING_OBSERVED",
+  "profile": "bulla.claim-flow/0.4-experimental",
+  "record_type": "bulla.golden.interpretation/0.1",
+  "replay": "INTERNAL",
+  "subject_commit": "fed850738dd62664cda90cbf0a3fe643632dec10"
+}

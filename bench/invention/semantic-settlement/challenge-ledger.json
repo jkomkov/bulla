@@ -1,0 +1,8 @@
+{
+  "schema_version": "0.1-semantic-settlement-challenges",
+  "frozen_at": "2026-07-18T00:00:00Z",
+  "status": "awaiting_external_challenges",
+  "stake": null,
+  "challenge_market": "not-implemented",
+  "receipts": []
+}

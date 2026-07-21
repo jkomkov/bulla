@@ -1,0 +1,15 @@
+{
+  "slot_id": "slot:acme-order-0009",
+  "ordering": "local-host",
+  "deadline": { "checkpoint_ref": "host_log_size", "value": 100 },
+  "evaluation_checkpoint": { "checkpoint_ref": "host_log_size", "value": 140 },
+  "events": [
+    { "type": "order", "slot_id": "slot:acme-order-0009", "seq": 10, "term_root": "sha256:999", "by": "buyer", "receipt_hash": "sha256:order-9", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "countersign", "slot_id": "slot:acme-order-0009", "seq": 12, "parent_seq": 10, "by": "seller", "receipt_hash": "sha256:countersign-9", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "close", "slot_id": "slot:acme-order-0009", "close_type": "timeout", "seq": 20, "parent_seq": 12, "receipt_hash": "sha256:false-timeout-9", "receipt_validated": true, "receipt_authority": "verified", "countersigned_valid": true, "parent_chain_valid": true, "timeout_basis": { "verified": true, "slot_id": "slot:acme-order-0009", "checkpoint_ref": "host_log_size", "checkpoint": 20, "root_ref": "sha256:root-at-20" } },
+    { "type": "close", "slot_id": "slot:acme-order-0009", "close_type": "delivery", "seq": 60, "parent_seq": 12, "conforming": true, "receipt_hash": "sha256:delivery-9", "receipt_validated": true, "receipt_authority": "verified", "countersigned_valid": true, "parent_chain_valid": true }
+  ],
+  "expected_finding": "CLOSED_DELIVERY_CONFORMING",
+  "expected_faults": ["FALSE_TIMEOUT"],
+  "note": "A timeout before the deadline is slashable but cannot mask a later valid delivery."
+}

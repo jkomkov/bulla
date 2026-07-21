@@ -19,9 +19,9 @@ from pathlib import Path
 
 import pytest
 
-REPO = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(REPO / "bulla" / "src"))
-sys.path.insert(0, str(REPO / "bulla" / "tests"))
+BULLA_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(BULLA_ROOT / "src"))
+sys.path.insert(0, str(BULLA_ROOT / "tests"))
 
 from bulla.diagnostic import diagnose
 from bulla.model import Composition, Edge, SemanticDimension, ToolSpec
@@ -76,7 +76,7 @@ def test_cycle_family_all_hidden(k, m):
 def test_curated_yaml_compositions_well_formed(yaml_dir):
     """All YAML compositions in bulla/compositions and bulla/audit are
     well-formed for fee. This is the load-bearing real-MCP guarantee."""
-    paths = sorted((REPO / "bulla" / yaml_dir).glob("*.yaml"))
+    paths = sorted((BULLA_ROOT / yaml_dir).glob("*.yaml"))
     assert paths, f"No YAML compositions found in bulla/{yaml_dir}"
     n_well_formed = 0
     failures = []

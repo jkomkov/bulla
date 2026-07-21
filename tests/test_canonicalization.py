@@ -95,8 +95,13 @@ class TestDeedLayerUnchanged:
                 assert rep["canon"] == want["canon"], name
             else:
                 v = verify_receipt(doc)
-                assert v.ok == want["ok"], f"{name}: ok {v.ok} != {want['ok']}"
-                assert v.verified_to == want["verified_to"], name
+                # Signed vectors split the verdict: top-level `ok`/`verified_to`
+                # are the stdlib (digest) rung; `identity` holds bulla's full
+                # crypto verdict (bulla verifies signatures when identity is
+                # installed, so it reaches the identity rung here).
+                target = want.get("identity", want)
+                assert v.ok == target["ok"], f"{name}: ok {v.ok} != {target['ok']}"
+                assert v.verified_to == target["verified_to"], name
 
     def test_release_receipts_verify(self):
         for path in sorted((_REPO / "releases").glob("0.*.json")):

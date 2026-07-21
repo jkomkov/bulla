@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_commit": {"pattern": "^[0-9a-f]{40}$", "type": "string"},
+    "case_manifest_hash": {"pattern": "^sha256:[0-9a-f]{64}$", "type": "string"},
+    "results": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "case_id": {"minLength": 1, "type": "string"},
+          "cause": {"minLength": 1, "type": "string"},
+          "certificate_hash": {"pattern": "^sha256:[0-9a-f]{64}$", "type": ["string", "null"]},
+          "exit": {"enum": ["COMPILED", "PARTIAL", "ESCALATE", "CHOICE_REQUIRED", "INDETERMINATE", "INVALID_INPUT", "REFUSE", "TERM_STALE", "REQUEST_EVIDENCE", "ROUTE", "FINALIZE", "EXECUTE_PROVISIONALLY"]},
+          "protected_consequences_hash": {"pattern": "^sha256:[0-9a-f]{64}$", "type": "string"},
+          "reserve_microunits": {"minimum": 0, "type": ["integer", "null"]}
+        },
+        "required": ["case_id", "exit", "cause", "certificate_hash", "protected_consequences_hash", "reserve_microunits"],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "role": {"enum": ["bulla", "cleanroom"]},
+    "submitter_id": {"minLength": 1, "type": "string"}
+  },
+  "required": ["submitter_id", "role", "candidate_commit", "case_manifest_hash", "results"],
+  "type": "object"
+}

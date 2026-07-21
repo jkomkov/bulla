@@ -1,0 +1,2844 @@
+{
+  "oracles": {
+    "F1-0000": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0001": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0002": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0003": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0004": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0005": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0006": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0007": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0008": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0009": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0010": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0011": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0012": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0013": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0014": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0015": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0016": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0017": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0018": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0019": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0020": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0021": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0022": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0023": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0024": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0025": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0026": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0027": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0028": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0029": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0030": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0031": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0032": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0033": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0034": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0035": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0036": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0037": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0038": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0039": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0040": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0041": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0042": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0043": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0044": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0045": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0046": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0047": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0048": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0049": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0050": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0051": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0052": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0053": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0054": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0055": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0056": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0057": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0058": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0059": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0060": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0061": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0062": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0063": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0064": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0065": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0066": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0067": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0068": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0069": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0070": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0071": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0072": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0073": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0074": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0075": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0076": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0077": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0078": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0079": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0080": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0081": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0082": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0083": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0084": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0085": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0086": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0087": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0088": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0089": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0090": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0091": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0092": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0093": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0094": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0095": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0096": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0097": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0098": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0099": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0100": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0101": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0102": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0103": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0104": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0105": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0106": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0107": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0108": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0109": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0110": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0111": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0112": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0113": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0114": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0115": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0116": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0117": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0118": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0119": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0120": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0121": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0122": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0123": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0124": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0125": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0126": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0127": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0128": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0129": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0130": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0131": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0132": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0133": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0134": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0135": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0136": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0137": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0138": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0139": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0140": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0141": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0142": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0143": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0144": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0145": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0146": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0147": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0148": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0149": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0150": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0151": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0152": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0153": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0154": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0155": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0156": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0157": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0158": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0159": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0160": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0161": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0162": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0163": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0164": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0165": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0166": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0167": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0168": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0169": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0170": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0171": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0172": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0173": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0174": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0175": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0176": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0177": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0178": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0179": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0180": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0181": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0182": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0183": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0184": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0185": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0186": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0187": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0188": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0189": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0190": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0191": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0192": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0193": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0194": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0195": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0196": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0197": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0198": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0199": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0200": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0201": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0202": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0203": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F1-0204": {
+      "falsification_rule": "any unsafe acceptance blocks packet freeze",
+      "family": "F1",
+      "status": "PASS_REQUIRED"
+    },
+    "F2-0000": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0001": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0002": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0003": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0004": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0005": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0006": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0007": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0008": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0009": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0010": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0011": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0012": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0013": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0014": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0015": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0016": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0017": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0018": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0019": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0020": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0021": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0022": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0023": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0024": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0025": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0026": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0027": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0028": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0029": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0030": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0031": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0032": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0033": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0034": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0035": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0036": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0037": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0038": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0039": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0040": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0041": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0042": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0043": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0044": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0045": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0046": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0047": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0048": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0049": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0050": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0051": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0052": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0053": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0054": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0055": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0056": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0057": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0058": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0059": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0060": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0061": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0062": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0063": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0064": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0065": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0066": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0067": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0068": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0069": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0070": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0071": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0072": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0073": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0074": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0075": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0076": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0077": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0078": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0079": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0080": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0081": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0082": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0083": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0084": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0085": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0086": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0087": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0088": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0089": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0090": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0091": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0092": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0093": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0094": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F2-0095": {
+      "claim_boundary": "not-machine-truth",
+      "expected_protocol_exit": "ROUTE/ADJUDICATION_REQUIRED",
+      "status": "REFERENCE_WITHHELD"
+    },
+    "F3-0000": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0001": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0002": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0003": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0004": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0005": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0006": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0007": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0008": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0009": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0010": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0011": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0012": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0013": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0014": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0015": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0016": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0017": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0018": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0019": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0020": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0021": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0022": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0023": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0024": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0025": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0026": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0027": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0028": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0029": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0030": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0031": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0032": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0033": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0034": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0035": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0036": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0037": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F3-0038": {
+      "falsification_rule": "malformed structures must fail closed and canonical bytes must agree",
+      "family": "F3",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0000": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0001": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0002": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0003": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0004": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0005": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0006": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0007": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0008": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0009": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0010": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0011": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0012": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0013": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0014": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0015": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0016": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0017": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0018": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0019": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0020": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0021": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0022": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0023": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0024": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0025": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0026": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0027": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0028": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0029": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0030": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0031": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0032": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0033": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0034": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0035": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0036": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0037": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0038": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0039": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0040": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0041": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0042": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0043": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0044": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0045": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0046": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0047": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0048": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0049": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0050": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F4-0051": {
+      "falsification_rule": "any reserve or finality invariant violation blocks freeze",
+      "family": "F4",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0000": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0001": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0002": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0003": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0004": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0005": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0006": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0007": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0008": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0009": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0010": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0011": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0012": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0013": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0014": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0015": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0016": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0017": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0018": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F5-0019": {
+      "falsification_rule": "null crossing bound or undeclared carrier claim falsifies result",
+      "family": "F5",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0000": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0001": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0002": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0003": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0004": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0005": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0006": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0007": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0008": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0009": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0010": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0011": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0012": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0013": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0014": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0015": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0016": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0017": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0018": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0019": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0020": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0021": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0022": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0023": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0024": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0025": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0026": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0027": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0028": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0029": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0030": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0031": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0032": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0033": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0034": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0035": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0036": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0037": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0038": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0039": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0040": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0041": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0042": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0043": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0044": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0045": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0046": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0047": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0048": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0049": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0050": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F6-0051": {
+      "falsification_rule": "recoverable planted secret outside budget blocks freeze",
+      "family": "F6",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0000": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0001": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0002": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0003": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0004": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0005": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0006": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0007": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0008": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0009": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0010": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0011": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0012": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0013": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0014": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0015": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0016": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0017": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0018": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0019": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0020": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0021": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0022": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0023": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0024": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0025": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0026": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0027": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0028": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0029": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0030": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0031": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0032": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0033": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0034": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0035": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0036": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0037": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0038": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0039": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0040": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0041": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0042": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0043": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0044": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0045": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0046": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0047": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0048": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0049": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0050": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F7-0051": {
+      "falsification_rule": "normative choice without authority blocks freeze",
+      "family": "F7",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0000": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0001": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0002": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0003": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0004": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0005": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0006": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0007": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0008": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0009": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0010": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0011": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0012": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0013": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0014": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0015": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0016": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0017": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0018": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0019": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0020": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0021": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0022": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0023": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0024": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0025": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0026": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0027": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0028": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0029": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0030": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0031": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0032": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0033": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0034": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0035": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0036": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0037": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0038": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0039": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0040": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0041": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0042": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0043": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0044": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0045": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0046": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0047": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0048": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0049": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0050": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    },
+    "F8-0051": {
+      "falsification_rule": "same-epoch widening or un-staled closure change blocks freeze",
+      "family": "F8",
+      "status": "PASS_REQUIRED"
+    }
+  }
+}

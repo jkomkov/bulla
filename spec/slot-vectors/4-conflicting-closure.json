@@ -1,0 +1,15 @@
+{
+  "slot_id": "slot:acme-order-0004",
+  "ordering": "local-host",
+  "deadline": { "checkpoint_ref": "host_log_size", "value": 100 },
+  "evaluation_checkpoint": { "checkpoint_ref": "host_log_size", "value": 150 },
+  "events": [
+    { "type": "order", "slot_id": "slot:acme-order-0004", "seq": 10, "term_root": "sha256:ddd", "by": "buyer", "receipt_hash": "sha256:order-4", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "countersign", "slot_id": "slot:acme-order-0004", "seq": 12, "parent_seq": 10, "by": "seller", "receipt_hash": "sha256:countersign-4", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "close", "slot_id": "slot:acme-order-0004", "close_type": "delivery", "seq": 60, "parent_seq": 12, "conforming": true, "receipt_hash": "sha256:delivery-4", "receipt_validated": true, "receipt_authority": "verified", "countersigned_valid": true, "parent_chain_valid": true },
+    { "type": "close", "slot_id": "slot:acme-order-0004", "close_type": "refusal", "seq": 60, "parent_seq": 12, "by": "seller", "receipt_hash": "sha256:refusal-4", "receipt_validated": true, "receipt_authority": "verified", "countersigned_valid": true, "parent_chain_valid": true }
+  ],
+  "host_served_state": "equivocated",
+  "expected_finding": "EQUIVOCATED_CLOSURE",
+  "note": "Two valid closes at the SAME winning sequence position (60) with different close_type — the ordering authority cannot separate them, so together they are proof of equivocation, slashable like log equivocation (I6). No adjudicator needed for the finding."
+}

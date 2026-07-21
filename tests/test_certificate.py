@@ -180,6 +180,74 @@ def test_certificate_content_hash_excludes_display_field():
     )
 
 
+# ---- completeness verdict (F1: legibility over exact_disclosure_equivalence) ----
+
+def test_completeness_verdict_proven():
+    """Exact-regime + well-formed composition → 'proven', and it agrees with
+    the exact_disclosure_equivalence claim it derives from."""
+    cert = certify(_build_cycle(2, 4))
+    comp = cert.display["completeness"]
+    assert comp["verdict"] == "proven"
+    assert cert.claims["exact_disclosure_equivalence"].status == "certified"
+
+
+def test_completeness_verdict_lower_bound():
+    """Well-formed but not exact-conservative → 'lower_bound' (never 'proven')."""
+    cert = certify(_build_wf_pos_not_exact())
+    comp = cert.display["completeness"]
+    assert comp["verdict"] == "lower_bound"
+    assert cert.claims["exact_disclosure_equivalence"].status != "certified"
+
+
+def test_completeness_verdict_not_applicable():
+    """Ill-formed composition → 'not_applicable'."""
+    cert = certify(_build_ill_formed())
+    assert cert.display["completeness"]["verdict"] == "not_applicable"
+
+
+def test_completeness_verdict_never_exceeds_claim():
+    """THE TRUST INVARIANT: the verdict says 'proven' iff — and only iff — the
+    exact_disclosure_equivalence claim is certified. The display can never
+    claim completeness the signed claim does not license."""
+    for comp in (_build_cycle(2, 4), _build_wf_pos_not_exact(), _build_ill_formed()):
+        cert = certify(comp)
+        certified = cert.claims["exact_disclosure_equivalence"].status == "certified"
+        assert (cert.display["completeness"]["verdict"] == "proven") == certified
+
+
+def test_completeness_riders_always_present():
+    """Both scope riders — type-not-value and under-loaded-vocabulary — are
+    present on EVERY verdict, including the negative ones."""
+    for comp in (_build_cycle(2, 4), _build_wf_pos_not_exact(), _build_ill_formed()):
+        scope = certify(comp).display["completeness"]["scope"]
+        assert len(scope) == 2
+        assert any("does NOT certify that the composition delivers" in r for r in scope)
+        assert any("loaded" in r for r in scope)
+
+
+def test_completeness_verdict_excludes_from_hash():
+    """The completeness verdict lives in `display` — mutating it must NOT
+    change the certificate_content_hash (the deed is untouched)."""
+    from bulla.certificate import _compute_certificate_content_hash
+    cert = certify(_build_cycle(2, 4))
+    original_hash = cert.certificate_content_hash
+    forged = dict(cert.display)
+    forged["completeness"] = {"verdict": "proven", "interpretation": "MUTATED",
+                              "scope": ("edited",)}
+    cert2 = CompositionCertificate(
+        certificate_schema_version=cert.certificate_schema_version,
+        subject=cert.subject, method=cert.method, regime=cert.regime,
+        diagnostic=cert.diagnostic, claims=cert.claims, scope=cert.scope,
+        parent_certificate_hashes=cert.parent_certificate_hashes,
+        issuer=cert.issuer, signature=cert.signature, supersedes=cert.supersedes,
+        violations=cert.violations, display=forged,
+        timestamp=cert.timestamp, bulla_version=cert.bulla_version,
+        certificate_content_hash="",
+        attestation_hash=cert.attestation_hash, receipt_hash=cert.receipt_hash,
+    )
+    assert _compute_certificate_content_hash(cert2) == original_hash
+
+
 def test_certificate_content_hash_excludes_attestation_and_receipt_hashes():
     """The reserved slots `attestation_hash` and `receipt_hash` must be
     excluded from the content-hash preimage so future signing/operational

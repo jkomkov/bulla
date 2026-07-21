@@ -1,0 +1,55 @@
+{
+  "entries": [
+    {
+      "claim": "Golden Suite has independent attestation value",
+      "reason": "outsider replay excluded by sprint scope",
+      "status": "blocked"
+    },
+    {
+      "claim": "blind packet custody is complete",
+      "reason": "reviewer-controlled encryption key was not supplied",
+      "status": "blocked"
+    },
+    {
+      "claim": "direct public harvest is redistributable",
+      "reason": "35 direct cached schemas remain hash-only; redistribution not established",
+      "status": "blocked"
+    },
+    {
+      "claim": "found-data seams have objective semantic labels",
+      "reason": "120 cases correctly route to adjudication rather than laundering internal labels",
+      "status": "blocked"
+    },
+    {
+      "claim": "cross-platform reference and SMT parity is observed",
+      "reason": "12-job CI matrix is defined; this local run observed macOS reference only and lacked a Java runtime for SMTInterpol",
+      "status": "configured-not-observed"
+    },
+    {
+      "claim": "anytime scaling eliminates resource limits",
+      "reason": "12 of 45 synthesis limits remain INDETERMINATE at the AST bound",
+      "status": "falsified"
+    },
+    {
+      "claim": "anytime scaling materially improves the frozen exhaustion cohort",
+      "reason": "verified conversion share 0.826087",
+      "status": "demonstrated-improvement"
+    },
+    {
+      "claim": "economic reference schedules violate reserve/finality invariants",
+      "reason": "zero violations across 1000000 captive schedules",
+      "status": "falsified"
+    },
+    {
+      "claim": "open-world safety is established",
+      "reason": "closure results are relative to declared neighborhoods; outside changes stale the term",
+      "status": "blocked"
+    },
+    {
+      "claim": "production settlement or collectibility is established",
+      "reason": "shadow state machine only",
+      "status": "out-of-scope"
+    }
+  ],
+  "schema_version": "0.1"
+}

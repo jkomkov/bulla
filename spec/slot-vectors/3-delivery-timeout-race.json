@@ -1,0 +1,16 @@
+{
+  "slot_id": "slot:acme-order-0003",
+  "ordering": "local-host",
+  "deadline": { "checkpoint_ref": "host_log_size", "value": 100 },
+  "evaluation_checkpoint": { "checkpoint_ref": "host_log_size", "value": 150 },
+  "events": [
+    { "type": "order", "slot_id": "slot:acme-order-0003", "seq": 10, "term_root": "sha256:ccc", "by": "buyer", "receipt_hash": "sha256:order-3", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "countersign", "slot_id": "slot:acme-order-0003", "seq": 12, "parent_seq": 10, "by": "seller", "receipt_hash": "sha256:countersign-3", "receipt_validated": true, "receipt_authority": "verified" },
+    { "type": "close", "slot_id": "slot:acme-order-0003", "close_type": "delivery", "seq": 95, "parent_seq": 12, "conforming": true, "receipt_hash": "sha256:delivery-3", "receipt_validated": true, "receipt_authority": "verified", "countersigned_valid": true, "parent_chain_valid": true },
+    { "type": "close", "slot_id": "slot:acme-order-0003", "close_type": "timeout", "seq": 105, "parent_seq": 12, "by": "buyer", "receipt_hash": "sha256:timeout-3", "receipt_validated": true, "receipt_authority": "verified", "countersigned_valid": true, "parent_chain_valid": true, "timeout_basis": { "verified": true, "slot_id": "slot:acme-order-0003", "checkpoint_ref": "host_log_size", "checkpoint": 105, "root_ref": "sha256:root-at-105" } }
+  ],
+  "host_served_state": "closed",
+  "expected_finding": "CLOSED_DELIVERY_CONFORMING",
+  "expected_faults": ["SUPERSEDED_TIMEOUT"],
+  "note": "Race: a delivery sequenced at 95 (before the deadline 100) and a timeout asserted at 105 (after). Commitment-local ordering resolves by sequence — the delivery came first, so it wins; the later timeout is a superseded (false) closure, not a conflict."
+}
