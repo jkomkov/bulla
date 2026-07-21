@@ -75,7 +75,7 @@ interp-sae = [
     "torch>=2.4,<3.0",
     "huggingface-hub>=0.26",
     "scipy>=1.14",
-    "python-dotenv>=1.0",
+    "python-dotenv>=1.2.2",
     "sentence-transformers>=3.0",
     "modal>=0.65",
 ]
