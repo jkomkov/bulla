@@ -79,7 +79,7 @@ jobs:
           gh release upload "v${{ inputs.version }}" release-receipt/* --clobber
 
       - name: Upload receipt to the workflow record
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: release-receipt-${{ inputs.version }}
           path: release-receipt/
