@@ -115,18 +115,19 @@ python spec/vectors/independent_check.py
 It recomputes the frozen ActionReceipt vectors from the normative specification
 and fails closed on structural tampering.
 
-## What 0.44.0 contains
+## What 0.44.1 contains
 
 | Surface | Maturity | Availability | What it establishes |
 |---|---|---|---|
-| ActionReceipt v0.2 | Stable and normative | PyPI 0.44.0 | Canonical action records, four hash preimages, evidence references, and recourse envelopes |
-| ActionReceipt v0.3 authority binding | Opt-in released draft | PyPI 0.44.0 | The content signer signed the exact authority, bounds, and recourse envelope |
-| Delegation and bounds conformance | Opt-in released draft | PyPI 0.44.0 | Separate chain, principal, policy, scope, time, revocation, and action-bounds dimensions |
-| Reliance receipts | Released implementation | PyPI 0.44.0 | A relying party records and recomputes its selected reliance policy and decision |
-| Release coverage | Released implementation | PyPI 0.44.0 | Published-package actions missing contemporaneous receipts relative to the PyPI anchor |
+| ActionReceipt v0.2 | Stable and normative | PyPI 0.44.1 | Canonical action records, four hash preimages, evidence references, and recourse envelopes |
+| ActionReceipt v0.3 authority binding | Opt-in released draft | PyPI 0.44.1 | The content signer signed the exact authority, bounds, and recourse envelope |
+| Delegation and bounds conformance | Opt-in released draft | PyPI 0.44.1 | Separate chain, principal, policy, scope, time, revocation, and action-bounds dimensions |
+| Reliance receipts | Released implementation | PyPI 0.44.1 | A relying party records and recomputes its selected reliance policy and decision |
+| Release coverage | Released implementation | PyPI 0.44.1 | Published-package actions missing contemporaneous receipts relative to the PyPI anchor |
 | Routed inference | Experimental profile | Source and fixtures | Retention of declared bindings through one router and one provider; no live-provider claim |
-| Semantic invention and finality | Experimental research | Source/research only | Checked finite predicates, partial safe regions, typed abstention, and staged finality under declared closure |
-| Claim Flow and precedent | Experimental research | Source/research only | Typed appraisal, forum, precedent, applicability, and settlement transitions; no external legal-validity claim |
+| Semantic invention and finality | Experimental research | PyPI 0.44.1 under `bulla.experimental` | Checked finite predicates, partial safe regions, typed abstention, and staged finality under declared closure |
+| Claim Flow and precedent | Experimental research | Claim Flow v0.4 in PyPI 0.44.1; Generalization v0.5 source only | Typed appraisal, forum, precedent, applicability, and settlement transitions; no external legal-validity claim |
+| Golden qualification | Experimental methods | Finite checker core in PyPI 0.44.1; benchmark packets source/research | Typed abstention, mutation, portability, and custody methods; no external results |
 | Independent witness plurality | Blocked | Not available | Local checkpoint mechanics exist; independently operated witnesses do not |
 
 The canonical, generated status table is
