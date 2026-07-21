@@ -309,7 +309,7 @@ class TestCanonicalDemoV030:
             / "examples" / "canonical-demo" / "run_canonical_demo.py"
         )
         result = subprocess.run(
-            [sys.executable, str(demo_path)],
+            [sys.executable, str(demo_path), "--no-write"],
             capture_output=True,
             text=True,
             timeout=120,
