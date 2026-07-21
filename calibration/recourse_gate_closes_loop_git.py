@@ -45,6 +45,7 @@ exit code at every step — the fee only governs whether the gate lets git run.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 import tempfile
@@ -93,7 +94,16 @@ def _deed_rec(cert: dict) -> dict:
     }
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--out",
+        type=Path,
+        default=Path(REPO) / "bulla" / "calibration" / "results"
+        / "recourse_gate_closes_loop_git.json",
+        help="Artifact path (defaults to the checked-in calibration results directory).",
+    )
+    args = parser.parse_args(argv)
     seam = seam_composition()             # fee = 1 (path_root hidden)
     cured = disclosed_composition()       # fee = 0 (path_root disclosed)
     fee_before = diagnose(seam).coherence_fee
@@ -241,7 +251,7 @@ def main() -> int:
         ),
     }
 
-    results = Path(REPO) / "bulla" / "calibration" / "results" / "recourse_gate_closes_loop_git.json"
+    results = args.out
     results.parent.mkdir(parents=True, exist_ok=True)
     results.write_text(json.dumps(out, indent=2) + "\n")
 

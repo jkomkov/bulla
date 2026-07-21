@@ -253,7 +253,7 @@ def test_cure_loop_flips_refuse_to_proceed(tmp_path):
 
 # ── 12: end-to-end on REAL git (the demo as a test) ──────────────────
 
-def test_recourse_gate_closes_loop_git():
+def test_recourse_gate_closes_loop_git(tmp_path):
     """Run the execution-attributable demo: the gate prevents a real `git show` breach,
     and the cure that clears it is the one that makes git succeed. Labels are git exit
     codes. Skips only if the environment has no tracked files (INVALID CONTROL)."""
@@ -271,13 +271,18 @@ def test_recourse_gate_closes_loop_git():
         for part in (str(bulla_root / "src"), env.get("PYTHONPATH"))
         if part
     )
-    r = subprocess.run([sys.executable, str(demo)], capture_output=True, text=True, env=env)
+    artifact = tmp_path / "recourse_gate_closes_loop_git.json"
+    r = subprocess.run(
+        [sys.executable, str(demo), "--out", str(artifact)],
+        capture_output=True,
+        text=True,
+        env=env,
+    )
     if r.returncode == 2:
         pytest.skip(f"demo could not establish its control: {r.stdout.strip() or r.stderr.strip()}")
     assert r.returncode == 0, f"loop OPEN:\n{r.stdout}\n{r.stderr}"
 
-    art = json.loads((bulla_root / "calibration" / "results"
-                      / "recourse_gate_closes_loop_git.json").read_text())
+    art = json.loads(artifact.read_text())
     assert art["loop_closed"] is True
     assert art["fee_before"] == 1 and art["fee_after"] == 0
     assert art["acts"]["act0_no_gate"]["breach"] is True               # the loss is real
