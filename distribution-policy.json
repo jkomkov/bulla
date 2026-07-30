@@ -15,8 +15,8 @@
     },
     "sdist": {
       "algorithm": "sha256-sorted-posix-lines-v1",
-      "count": 1332,
-      "sha256": "0592420451b6786cf63e89a26ac4ca678d78a4792efc768c1eee0a64d1e307e3"
+      "count": 1333,
+      "sha256": "eeca0bc399dbb208edae7a867282d4ba08ce059971071190d83d5016f3817b8d"
     }
   },
   "generated_archive_bytes": {
@@ -40,6 +40,7 @@
     "bulla/wrap.py"
   ],
   "required_sdist_members": [
+    ".gitattributes",
     ".github/release-finalization-requirements.txt",
     ".github/workflows/audit-release-slots.yml",
     "distribution-policy.json",
