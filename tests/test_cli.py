@@ -669,9 +669,24 @@ class TestReceiptCreateCommand:
         assert "verified_to=attestation" in r.stdout
         assert "authority=verified" in r.stdout
 
-    def test_create_refuses_missing_forum(self, tmp_path):
-        r = _run("receipt", "create", "--type", "demo.echo", "--out", str(tmp_path / "x.json"))
-        assert r.returncode == 2  # argparse: forum endpoint+root are required (modality law)
+    def test_create_minimal_two_flags_verifies_to_digest(self, tmp_path):
+        # The ergonomic first receipt: --type + --subject only. Forum/policy default
+        # to present-but-unset placeholders, so it verifies to the digest rung.
+        out = tmp_path / "minimal.json"
+        r = _run("receipt", "create", "--type", "demo.write",
+                 "--subject", "path=/tmp/example.txt", "--out", str(out))
+        assert r.returncode == 0, r.stderr
+        v = _run("receipt", "verify", str(out))
+        assert v.returncode == 0
+        assert "verified_to=digest" in v.stdout
+        # the placeholder root is non-anchored, so it does NOT reach attestation
+        doc = json.loads(out.read_text())
+        assert doc["remedy"]["forum"]["trusted_root_ref"].startswith("unanchored:")
+
+    def test_create_explicit_forum_overrides_placeholder(self, tmp_path):
+        out = self._create(tmp_path)  # passes explicit forum-endpoint/root
+        doc = json.loads(out.read_text())
+        assert doc["remedy"]["forum"]["trusted_root_ref"] == "ots:root"
 
     def test_gate_help_does_not_promise_fee_gating_by_default(self):
         r = _run("gate", "--help")

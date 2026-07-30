@@ -1,0 +1,17 @@
+{
+  "anchor_id": "http-gateway-ingress",
+  "covered_ids": [
+    "http-decision-permit-001",
+    "http-decision-refuse-001"
+  ],
+  "denominator_sha256": "sha256:34103368f91855f8e84bd1dfa0d95c262375be13f860cbc995dbf4c994c58f68",
+  "invalid_receipts": [],
+  "minimum_verification_depth": "attestation",
+  "phantom_receipt_ids": [],
+  "phase": "decision",
+  "protocol": "http",
+  "receipted": 2,
+  "schema_version": 1,
+  "total": 2,
+  "uncovered_ids": []
+}

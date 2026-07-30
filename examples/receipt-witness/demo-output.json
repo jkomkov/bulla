@@ -1,0 +1,43 @@
+{
+  "profile": "bulla.receipt-witness/0.1-experimental",
+  "stages": [
+    {
+      "stage": "intake",
+      "cargo": [
+        "0.44.0",
+        "0.44.1"
+      ],
+      "verified_to": "attestation",
+      "received_at_alpha": "2026-07-22T05:12:49.756817Z",
+      "roots_agree": true,
+      "root": "sha256:42435fba0b8b06bdf5a7be895bfbb0cf774230b75b316256be35ca681e89b231"
+    },
+    {
+      "stage": "inclusion",
+      "attestation_hash": "sha256:f8df737ccfa2fbd791549fd2ebd24e7bb867a4685ea526b92571266a7a76be23",
+      "received_at": "2026-07-22T05:12:49.759002Z",
+      "proof_ok": true
+    },
+    {
+      "stage": "checkpoint-extension",
+      "from_size": 2,
+      "to_size": 3,
+      "extension_ok": true
+    },
+    {
+      "stage": "split-view-drill",
+      "same_size": 3,
+      "roots_differ": true,
+      "root_trust_label": "mismatch",
+      "root_trusted": false,
+      "forked_extension_ok": false,
+      "evidence": "same-size conflicting signed heads from one control domain"
+    }
+  ],
+  "boundary": {
+    "instances": 2,
+    "control_domains": 1,
+    "independent_witnesses": 0,
+    "statement": "Operational team-controlled witness pilot. Two instances, one control domain. Independent witness count remains zero."
+  }
+}

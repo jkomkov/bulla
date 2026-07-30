@@ -1,0 +1,23 @@
+{
+  "authorized_precedent_yield": 48,
+  "classification": "INTERNAL_CAPTIVE_CONTROL",
+  "decision_source": "DERIVED_FROM_BOUND_FIELDS_NOT_ORACLE_LABELS",
+  "design_cases": 96,
+  "effect_laundering_count": 0,
+  "efficacy_use_after_freeze": "PROHIBITED",
+  "external_adjudicators": 0,
+  "external_authors": 0,
+  "external_implementations": 0,
+  "external_witnesses": 0,
+  "f11_margins": 52,
+  "f12_cases": 72,
+  "holdout_cases": 48,
+  "matched_scramble_p99_yield": 0,
+  "matched_scrambles": 1000,
+  "profile": "bulla.golden-suite/0.5-experimental",
+  "schema_version": "0.5-experimental",
+  "scope_frontier_points": 96,
+  "scramble_disposition": "GENERATOR_ECHO_EXCLUDED",
+  "transfer_cases": 144,
+  "unjustified_apply_count": 0
+}

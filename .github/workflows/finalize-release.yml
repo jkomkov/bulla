@@ -1,6 +1,6 @@
-# Recovery only: verify and receipt an immutable PyPI release that was already
-# accepted. This workflow has no Trusted Publishing permission and no upload
-# step, so retrying it cannot republish a version.
+# Recovery-only default-branch finalizer for a release PyPI already accepted.
+# The release key is exposed only to the minimal signer in this workflow. The
+# candidate wheel is never installed or imported in the secret-bearing job.
 
 name: finalize published release
 
@@ -11,76 +11,400 @@ on:
         description: Existing PyPI version to verify and receipt
         required: true
         type: string
-      test_result:
-        description: Exact archived test result bound into the receipt
+      source_commit:
+        description: Immutable 40-hex commit attested by PyPI provenance
+        required: true
+        type: string
+      publish_run_id:
+        description: Successful publish workflow run holding the archived summary
         required: true
         type: string
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  finalize:
+  verify:
     runs-on: ubuntu-latest
-    environment: pypi
+    permissions:
+      actions: read
+      contents: read
+    env:
+      RELEASE_VERSION: ${{ inputs.version }}
+      SOURCE_COMMIT: ${{ inputs.source_commit }}
+      TRUSTED_SIGNER_SHA256: ddae23d815e7d8b55858d9d297c3728e47951fd82ee011a3e8e65967f262d511
+      PUBLISH_RUN_ID: ${{ inputs.publish_run_id }}
+      TRUSTED_WORKFLOW_REF: ${{ github.ref }}
+      TRUSTED_REPOSITORY: ${{ github.repository }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          ref: v${{ inputs.version }}
-
-      - uses: actions/setup-python@v5
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.11"
-
-      - name: Install verifier from the tagged source
-        run: |
-          python -m pip install --upgrade pip pypi-attestations
-          python -m pip install .[identity,ots]
-
-      - name: Verify tagged source version
-        run: |
-          python - <<'PY'
-          import bulla
-          expected = "${{ inputs.version }}"
-          if bulla.__version__ != expected:
-              raise SystemExit(f"tagged source is {bulla.__version__}, expected {expected}")
-          PY
-
-      - name: Recover exact immutable artifacts accepted by PyPI
-        run: python scripts/download_pypi_release.py --version "${{ inputs.version }}" --dist dist
-
-      - name: Verify artifacts and Trusted Publishing provenance
-        run: |
-          python scripts/verify_pypi_release.py \
-            --version "${{ inputs.version }}" \
-            --dist dist \
-            --repository jkomkov/bulla
-
-      - name: Mint signed post-publication release receipt
-        env:
-          BULLA_RELEASE_KEY: ${{ secrets.BULLA_RELEASE_KEY }}
-        run: |
-          mkdir -p release-receipt
-          test -n "$BULLA_RELEASE_KEY" || { echo "BULLA_RELEASE_KEY is required" >&2; exit 1; }
-          python scripts/mint_release_receipt.py \
-            --dist dist \
-            --out "release-receipt/${{ inputs.version }}.json" \
-            --ots \
-            --test-result "${{ inputs.test_result }}" \
-            --repository jkomkov/bulla
-          python -m bulla receipt verify "release-receipt/${{ inputs.version }}.json"
-
-      - name: Attach receipt to durable GitHub release
+      - name: Validate inputs and trusted workflow provenance
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release view "v${{ inputs.version }}" >/dev/null 2>&1 || \
-            gh release create "v${{ inputs.version }}" --title "v${{ inputs.version }}" --generate-notes
-          gh release upload "v${{ inputs.version }}" release-receipt/* --clobber
+          python - <<'PY'
+          import os
+          import re
 
-      - name: Upload receipt to the workflow record
-        uses: actions/upload-artifact@v4
+          if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", os.environ["RELEASE_VERSION"]):
+              raise SystemExit("version must be MAJOR.MINOR.PATCH")
+          if not re.fullmatch(r"[0-9a-f]{40}", os.environ["SOURCE_COMMIT"]):
+              raise SystemExit("source_commit must be a lowercase 40-hex SHA")
+          if not re.fullmatch(r"[1-9][0-9]{0,19}", os.environ["PUBLISH_RUN_ID"]):
+              raise SystemExit("publish_run_id must be a positive decimal run ID")
+          if (
+              os.environ["TRUSTED_WORKFLOW_REF"] != "refs/heads/main"
+              or os.environ["TRUSTED_REPOSITORY"] != "jkomkov/bulla"
+          ):
+              raise SystemExit("release finalizer must run from jkomkov/bulla main")
+          PY
+          gh api \
+            "repos/$GITHUB_REPOSITORY/actions/runs/$PUBLISH_RUN_ID" \
+            > "$RUNNER_TEMP/publish-run.json"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          run = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "publish-run.json").read_text()
+          )
+          expected = {
+              "name": "publish",
+              "event": "workflow_dispatch",
+              "head_branch": "main",
+              "head_sha": os.environ["SOURCE_COMMIT"],
+              "conclusion": "success",
+              "path": ".github/workflows/publish.yml",
+          }
+          mismatches = {
+              key: (run.get(key), value)
+              for key, value in expected.items()
+              if run.get(key) != value
+          }
+          if mismatches:
+              raise SystemExit(f"publish run does not match release: {mismatches}")
+          PY
+          git fetch --force --tags origin
+          test "$(git rev-list -n 1 "v$RELEASE_VERSION")" = "$SOURCE_COMMIT"
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/$GITHUB_REPOSITORY/releases/tags/v$RELEASE_VERSION" \
+            > "$RUNNER_TEMP/release.json"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          release = json.loads((root / "release.json").read_text())
+          if (
+              release.get("tag_name") != f"v{os.environ['RELEASE_VERSION']}"
+              or release.get("target_commitish") != os.environ["SOURCE_COMMIT"]
+              or release.get("draft") is not True
+          ):
+              raise SystemExit("draft release does not target the attested commit")
+          PY
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: release-receipt-${{ inputs.version }}
+          name: release-finalization-${{ inputs.source_commit }}
+          path: finalization
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.publish_run_id }}
+      - name: Install verification tools without signing authority
+        run: |
+          python -m pip install pypi-attestations
+          python -m pip install --require-hashes \
+            -r .github/release-finalization-requirements.txt
+      - name: Verify accepted artifacts, provenance, slot, and unsigned receipt
+        run: |
+          python scripts/verify_pypi_release.py \
+            --version "$RELEASE_VERSION" \
+            --dist finalization/release-candidate \
+            --repository jkomkov/bulla \
+            --expected-commit "$SOURCE_COMMIT"
+          python -I scripts/trusted_release_signer.py verify-slot \
+            --version "$RELEASE_VERSION" \
+            --source-commit "$SOURCE_COMMIT" \
+            --slot "finalization/release-slot/$RELEASE_VERSION.slot.json" \
+            --context releases/release-trust-context.json
+          python -m pip install --no-deps \
+            "finalization/release-candidate/bulla-$RELEASE_VERSION-py3-none-any.whl"
+          python -m bulla receipt verify \
+            "finalization/release-preimage/$RELEASE_VERSION.unsigned.json"
+      - name: Bind the source tree for the minimal signer
+        run: |
+          git cat-file -e "$SOURCE_COMMIT^{commit}"
+          tree="$(git rev-parse "$SOURCE_COMMIT^{tree}")"
+          git cat-file tree "$tree" > "$RUNNER_TEMP/source-tree.bin"
+          mkdir verification
+          python - <<'PY'
+          import hashlib
+          import os
+          from pathlib import Path
+
+          payload = (Path(os.environ["RUNNER_TEMP"]) / "source-tree.bin").read_bytes()
+          output = Path("verification/source-tree-sha256.txt")
+          output.write_text(f"sha256:{hashlib.sha256(payload).hexdigest()}\n")
+          PY
+          mv finalization/release-candidate verification/
+          mv finalization/release-slot verification/
+          mv finalization/release-preimage verification/
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: verified-finalization-${{ inputs.source_commit }}
+          path: verification/
+          if-no-files-found: error
+          retention-days: 90
+
+  sign:
+    needs: verify
+    runs-on: ubuntu-latest
+    environment: release-signing
+    permissions:
+      contents: write
+    env:
+      RELEASE_VERSION: ${{ inputs.version }}
+      SOURCE_COMMIT: ${{ inputs.source_commit }}
+      TRUSTED_SIGNER_SHA256: ddae23d815e7d8b55858d9d297c3728e47951fd82ee011a3e8e65967f262d511
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: verified-finalization-${{ inputs.source_commit }}
+          path: verification
+      - name: Install only hash-pinned signer dependencies
+        run: |
+          printf '%s  %s\n' "$TRUSTED_SIGNER_SHA256" \
+            scripts/trusted_release_signer.py | sha256sum --check --strict
+          python -m pip install --require-hashes \
+            -r .github/release-signing-requirements.txt
+      - name: Rebind tag and draft release immediately before signing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch --force --tags origin
+          test "$(git rev-list -n 1 "v$RELEASE_VERSION")" = "$SOURCE_COMMIT"
+          release_target="$(
+            gh api \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2026-03-10" \
+              "repos/$GITHUB_REPOSITORY/releases/tags/v$RELEASE_VERSION" \
+              --jq '.target_commitish'
+          )"
+          test "$release_target" = "$SOURCE_COMMIT"
+      - name: Verify immutable releases and protected SemVer tags
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_ADMIN_READ_TOKEN }}
+        run: |
+          test -n "$GH_TOKEN" || {
+            echo "RELEASE_ADMIN_READ_TOKEN is required" >&2
+            exit 1
+          }
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/$GITHUB_REPOSITORY/immutable-releases" \
+            > "$RUNNER_TEMP/immutable-releases.json"
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/$GITHUB_REPOSITORY/rulesets?targets=tag&per_page=100" \
+            > "$RUNNER_TEMP/tag-rulesets.json"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          expected = {
+              item["name"]
+              for item in json.loads(
+              Path("releases/release-repository-controls.json").read_text()
+              )["tag_rulesets"]
+          }
+          matches = [
+              item
+              for item in json.loads((root / "tag-rulesets.json").read_text())
+              if item.get("name") in expected
+          ]
+          if (
+              {item.get("name") for item in matches} != expected
+              or any(not isinstance(item.get("id"), int) for item in matches)
+          ):
+              raise SystemExit("required tag ruleset is absent or ambiguous")
+          (root / "tag-ruleset-ids.txt").write_text(
+              "".join(f"{item['id']}\n" for item in sorted(
+                  matches, key=lambda value: value["name"]
+              ))
+          )
+          PY
+          mkdir "$RUNNER_TEMP/tag-rulesets"
+          while IFS= read -r ruleset_id; do
+            gh api \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2026-03-10" \
+              "repos/$GITHUB_REPOSITORY/rulesets/$ruleset_id" \
+              > "$RUNNER_TEMP/tag-rulesets/$ruleset_id.json"
+          done < "$RUNNER_TEMP/tag-ruleset-ids.txt"
+          control_args=(
+            env -u GH_TOKEN python -I scripts/verify_release_repository_controls.py
+            --expected releases/release-repository-controls.json \
+            --immutable "$RUNNER_TEMP/immutable-releases.json"
+          )
+          for ruleset in "$RUNNER_TEMP"/tag-rulesets/*.json; do
+            control_args+=(--ruleset "$ruleset")
+          done
+          "${control_args[@]}"
+      - name: Retrieve an existing signed receipt for exact retry
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir existing-release-receipt
+          receipt_name="$RELEASE_VERSION.json"
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/$GITHUB_REPOSITORY/releases/tags/v$RELEASE_VERSION" \
+            > "$RUNNER_TEMP/release-assets.json"
+          RECEIPT_NAME="$receipt_name" python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          release = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "release-assets.json").read_text()
+          )
+          matches = [
+              asset
+              for asset in release.get("assets", [])
+              if asset.get("name") == os.environ["RECEIPT_NAME"]
+          ]
+          if len(matches) > 1:
+              raise SystemExit("release contains duplicate receipt asset names")
+          if matches:
+              Path("existing-release-receipt/present").touch()
+          PY
+          if test -f existing-release-receipt/present; then
+            gh release download "v$RELEASE_VERSION" \
+              --pattern "$receipt_name" \
+              --dir existing-release-receipt
+            test -f "existing-release-receipt/$receipt_name"
+          fi
+      - name: Sign the closed receipt preimage without importing candidate code
+        env:
+          BULLA_RELEASE_KEY: ${{ secrets.BULLA_RELEASE_KEY }}
+        run: |
+          test -n "$BULLA_RELEASE_KEY" || {
+            echo "BULLA_RELEASE_KEY is required" >&2
+            exit 1
+          }
+          source_tree_sha256="$(cat verification/source-tree-sha256.txt)"
+          signer_args=(
+            python -I scripts/trusted_release_signer.py sign-receipt
+            --version "$RELEASE_VERSION" \
+            --source-commit "$SOURCE_COMMIT" \
+            --source-tree-sha256 "$source_tree_sha256" \
+            --receipt "verification/release-preimage/$RELEASE_VERSION.unsigned.json" \
+            --witness "verification/release-preimage/$RELEASE_VERSION.unsigned.witness.json" \
+            --slot "verification/release-slot/$RELEASE_VERSION.slot.json" \
+            --summary "verification/release-candidate/pytest-summary.txt" \
+            --dist verification/release-candidate \
+            --context releases/release-trust-context.json \
+            --out "release-receipt/$RELEASE_VERSION.json"
+          )
+          if test -f "existing-release-receipt/$RELEASE_VERSION.json"; then
+            signer_args+=(
+              --existing "existing-release-receipt/$RELEASE_VERSION.json"
+            )
+          fi
+          "${signer_args[@]}"
+          cp \
+            "verification/release-preimage/$RELEASE_VERSION.unsigned.witness.json" \
+            "release-receipt/$RELEASE_VERSION.witness.json"
+      - name: Attach immutable receipt assets and publish the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch --force --tags origin
+          test "$(git rev-list -n 1 "v$RELEASE_VERSION")" = "$SOURCE_COMMIT"
+          release_target="$(
+            gh api \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2026-03-10" \
+              "repos/$GITHUB_REPOSITORY/releases/tags/v$RELEASE_VERSION" \
+              --jq '.target_commitish'
+          )"
+          test "$release_target" = "$SOURCE_COMMIT"
+          mkdir existing-assets
+          for asset in release-receipt/*; do
+            name="${asset##*/}"
+            if gh release download "v$RELEASE_VERSION" \
+              --pattern "$name" \
+              --dir existing-assets >/dev/null 2>&1; then
+              cmp --silent "$asset" "existing-assets/$name" || {
+                echo "::error::Existing release asset $name has different bytes."
+                exit 1
+              }
+            else
+              gh release upload "v$RELEASE_VERSION" "$asset"
+            fi
+          done
+          gh release edit "v$RELEASE_VERSION" --draft=false
+          git fetch --force --tags origin
+          test "$(git rev-list -n 1 "v$RELEASE_VERSION")" = "$SOURCE_COMMIT"
+          published_target="$(
+            gh api \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2026-03-10" \
+              "repos/$GITHUB_REPOSITORY/releases/tags/v$RELEASE_VERSION" \
+              --jq '.target_commitish'
+          )"
+          test "$published_target" = "$SOURCE_COMMIT"
+          gh release verify "v$RELEASE_VERSION"
+      - name: Confirm immutable release protection after publication
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_ADMIN_READ_TOKEN }}
+        run: |
+          test -n "$GH_TOKEN" || {
+            echo "RELEASE_ADMIN_READ_TOKEN is required" >&2
+            exit 1
+          }
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/$GITHUB_REPOSITORY/immutable-releases" \
+            > "$RUNNER_TEMP/immutable-releases-final.json"
+          test "$(
+            python -c \
+              'import json,sys; print(json.load(open(sys.argv[1]))["enabled"])' \
+              "$RUNNER_TEMP/immutable-releases-final.json"
+          )" = "True"
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/$GITHUB_REPOSITORY/releases/tags/v$RELEASE_VERSION" \
+            --jq '.immutable' |
+            grep -Fx true
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-receipt-${{ inputs.source_commit }}
           path: release-receipt/
           if-no-files-found: error
+          retention-days: 90

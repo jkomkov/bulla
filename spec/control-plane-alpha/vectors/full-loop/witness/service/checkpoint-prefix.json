@@ -1,0 +1,21 @@
+{
+  "anchor_evidence": null,
+  "checkpoint_hash": "sha256:4c4adcd627c90daad12e6c62e4bef3d65de0ad52283e051985781fb9f8657b56",
+  "issued_at": "2026-07-26T12:07:00Z",
+  "log_id": "deedlog://control-plane-alpha/service",
+  "operator": "did:key:z6MkrmtuAnLGsHSw1bKoYxpFp6FfikSzNzhY489HrQsD8wDS",
+  "ordering_domain": "sha256:8bd0a773f1e028b6d38c89ead3fd180ed799be3a27f7f8a86da34085065bde67",
+  "position": 3,
+  "previous_checkpoint_hash": null,
+  "profile": "bulla.witness-checkpoint/0.1-draft",
+  "proof": {
+    "issuer": "did:key:z6MkrmtuAnLGsHSw1bKoYxpFp6FfikSzNzhY489HrQsD8wDS",
+    "proofValue": "YyatJrDAiuWiV9BeO6QW7xHehpn7cVXl1olqGBjwflzlE6lknDZzD0svh7opieAAbm+DB8roHN0XB5ZflXEZBQ==",
+    "purpose": "witness-checkpoint",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkrmtuAnLGsHSw1bKoYxpFp6FfikSzNzhY489HrQsD8wDS"
+  },
+  "root": "sha256:6931a55d87df3be62e1780813a38348df8dad8b079e348ba82b83d1cfcec5ff5",
+  "schema_version": "0.1-draft",
+  "tree_size": 3
+}

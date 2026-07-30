@@ -1,0 +1,53 @@
+{
+  "accepted_issuers_by_role": {
+    "affected_party": [
+      "did:key:z6MkubDye2pidDrUkwPZkZj3ZUZYwhaSrdwF41ar8U6gd8zZ"
+    ],
+    "boundary": [
+      "did:key:z6MknTyGSvDsE5tQZF8KJ9RjCE9k8uEibktzsFJmKSHaSCTp"
+    ],
+    "correction_authority": [
+      "did:key:z6MktzHPJNNGkpiyFDkG2RBYYZuU8eYSHQJ2tSaADotVVztd"
+    ],
+    "evaluation_authority": [
+      "did:key:z6MkkVEw26bv2toTwmtaymZ1Vy3gFKVBMZxDefnoakFK3gMD"
+    ],
+    "gateway": [
+      "did:key:z6MkmeyUxxm4xPzBa4Q7uH72rVBrPzd4eyBxyKxp224jQERA"
+    ],
+    "incident_commander": [
+      "did:key:z6MkwcmXgLaWWhSvUDXCYhFvAqdj7BsW7B56diiHvuW4NFKe"
+    ],
+    "publisher": [
+      "did:key:z6MksgvGuAdhLXm1gd7DrPR533zCgk1azU2j3FUWm7UJwB4L"
+    ],
+    "reviewer": [
+      "did:key:z6MkhoEwiEW3CngXW8VxjviiiL9yZiaeHjNFG2o9FjyTx925"
+    ],
+    "target": [
+      "did:key:z6MkrqBrKSZ3SCdCa3HJz9j6fc7MMUVe6AFwr92Ys4X6ZNDx"
+    ],
+    "trajectory_monitor": [
+      "did:key:z6Mkrb5FBFyPiTdYvk1H2WWsRR8S3pu5UYEMbbyEjnbD2LWe"
+    ],
+    "witness": [
+      "did:key:z6MkiN1bMvJtjdfEKrx67nDcWADj335UgZxqLQKSBzYLz35g"
+    ]
+  },
+  "team_controlled_roles": [
+    "evaluation_authority",
+    "gateway",
+    "boundary",
+    "target",
+    "trajectory_monitor",
+    "incident_commander",
+    "affected_party",
+    "reviewer",
+    "publisher",
+    "correction_authority",
+    "witness"
+  ],
+  "trusted_witness_roots": [
+    "team-witness://http/checkpoint-001"
+  ]
+}

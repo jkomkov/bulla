@@ -1,0 +1,40 @@
+{
+  "as_of": "2026-07-29",
+  "authzen": {
+    "context_note": "The decision response context is permitted by Authorization API 1.0; keys inside it are specific to the Bulla profile.",
+    "document_sha256": "sha256:f0ee89cc4a688f9f409dc323c8342579d74c45dc776a6b04a622ba9738de82bc",
+    "official_url": "https://openid.net/specs/authorization-api-1_0.html",
+    "published": "2026-01-11",
+    "standard": "OpenID AuthZEN Authorization API",
+    "status": "FINAL",
+    "version": "1.0"
+  },
+  "deployment_gate": "PASSED",
+  "final_document_digest": "sha256:ef70b61f99b6d2e5e3b46863822eab08dff6a45bedc7a08914e0e5b133f40203",
+  "final_schema_url": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/271ecc9accafdd9b83a3c869fa67c22953b2af80/schema/2026-07-28/schema.json",
+  "official_draft_url": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/schema/draft/schema.json",
+  "pinned_snapshot_url": "https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/271ecc9accafdd9b83a3c869fa67c22953b2af80/schema/2026-07-28/schema.json",
+  "profile": "bulla.control-plane-alpha/0.1-experimental",
+  "promotion_condition": "The final MCP schema is pinned. Production remains blocked by the separate operational blocker ledger.",
+  "rc_comparison": {
+    "added_definitions": [
+      "SubscriptionsListenResultMetaObject",
+      "SubscriptionsListenResultResponse"
+    ],
+    "changed_definitions": [
+      "SubscriptionsListenResult"
+    ],
+    "implemented_subset_impact": "NO_CHANGE_SUBSCRIPTIONS_LISTEN_RESULT_ONLY",
+    "removed_definitions": [
+      "SubscriptionsListenResultMeta"
+    ],
+    "snapshot_commit": "71e306956a4959c9655e5036be215d41986596e6",
+    "snapshot_sha256": "sha256:9281c4890630e2d1e61792fa23b4084c4ea360cd58519610cd050545ab7b8708"
+  },
+  "schema_version": 1,
+  "snapshot_commit": "271ecc9accafdd9b83a3c869fa67c22953b2af80",
+  "snapshot_sha256": "sha256:ef70b61f99b6d2e5e3b46863822eab08dff6a45bedc7a08914e0e5b133f40203",
+  "source_status": "FINAL",
+  "standard": "Model Context Protocol",
+  "target_protocol_revision": "2026-07-28"
+}

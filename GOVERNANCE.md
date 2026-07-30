@@ -1,9 +1,9 @@
 # Governance
 
-Bulla is the Apache-2.0 reference implementation of the **Glyph** coherence-receipt
-standard. This document says who decides what, and how that is intended to open up
-as the project grows. It is deliberately small; it will grow with the community, not
-ahead of it.
+Bulla is the Apache-2.0 reference implementation of **Glyph**, the open ActionReceipt
+format and verification contract. This document says who decides what, and how that is
+intended to open up as the project grows. It is deliberately small; it will grow with
+the community, not ahead of it.
 
 ## Current model: single maintainer (BDFL), by necessity not preference
 

@@ -1,0 +1,81 @@
+{
+  "schema_version": "0.2",
+  "kind": "action_receipt",
+  "action": {
+    "type": "payments.charge",
+    "subject": {
+      "payment_id": "pay_demo_042",
+      "amount_minor": 12500,
+      "currency": "USD",
+      "merchant": "did:web:merchant.example"
+    }
+  },
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "evidence_refs": [
+    {
+      "name": "payment_intent",
+      "hash": "sha256:615aac68f79c9582ba8f3fce6f8bbc2e3b744bd517da2456fa5a4418d7b93a41",
+      "grounding": "self_asserted"
+    }
+  ],
+  "anchor_ref": {
+    "kind": "payment_intent",
+    "ref": "pi_demo_042"
+  },
+  "mandate": {
+    "deed_schema": "0.3",
+    "authority": {
+      "principal": "did:web:buyer.example#agent",
+      "policy": "policy://buyer/payments-v1",
+      "delegation": []
+    },
+    "bounds": {
+      "scope": {
+        "form": "jsonschema+quantum/1",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "payment_id": { "type": "string" },
+            "amount_minor": { "type": "integer", "minimum": 0, "maximum": 20000 },
+            "currency": { "type": "string", "const": "USD" },
+            "merchant": { "type": "string" }
+          },
+          "required": ["payment_id", "amount_minor", "currency", "merchant"],
+          "additionalProperties": false
+        },
+        "quantum": {
+          "amount_minor": { "unit": "USD_minor", "multipleOf": 1 }
+        }
+      }
+    }
+  },
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://merchant.example/challenges",
+      "trusted_root_ref": "did:web:merchant.example#disputes"
+    },
+    "remedies": [
+      { "rung": "recompute", "verifier": "glyph/action-receipt-v0.2", "anchor": "payment:pay_demo_042" },
+      { "rung": "revert", "verifier": "merchant dispute process", "anchor": "payment:pay_demo_042" },
+      { "rung": "escalate", "verifier": "cardholder forum", "anchor": "did:web:buyer.example#agent" }
+    ]
+  },
+  "retention": {
+    "record": "authority-permanent",
+    "disclosure": "party"
+  },
+  "stake": null,
+  "conventions": [],
+  "signature": null,
+  "timestamp": "2026-07-17T12:00:00Z",
+  "producer": { "name": "Bulla" },
+  "hashes": {
+    "content": "sha256:3c9bb3283f47acfd0acad316a7a028488858a792ffb90cc5b4f8286aad6cdbf0",
+    "event": "sha256:94da6e5ecb5a677ab9618d8dad014b02a35af90c10401d03f673a1abbadb4f04",
+    "attestation": "sha256:c056a2e9d34422195836b86aeba27e387b8a4d72a7b830823ace090073c1d2b1",
+    "log_leaf": "sha256:4064adba924a80dcc6f2e9949223d4ba119c1e671f69c6269efcb17a5b47e2c1"
+  }
+}

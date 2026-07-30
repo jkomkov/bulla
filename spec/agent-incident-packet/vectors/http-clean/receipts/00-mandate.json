@@ -1,0 +1,113 @@
+{
+  "action": {
+    "subject": {
+      "authorized_targets": [
+        "localhost://fixed-http-target"
+      ],
+      "budgets": {
+        "compute_units": 10,
+        "duration_seconds": 60,
+        "max_actions": 3
+      },
+      "harness_id": "localhost-http-pilot/1",
+      "issuer_role": "evaluation_authority",
+      "model_id": "synthetic-model/1",
+      "policy_digest": "sha256:8d5c4c903b9431dd851d1869d4bf0cd7cb91bc958efc372b7bf3845a7ae0b361",
+      "profile": "glyph.agent-incident-packet/0.1-draft",
+      "prohibitions": [
+        "arbitrary-network",
+        "credentials",
+        "offensive-payloads"
+      ],
+      "role_issuers": {
+        "affected_party": "did:key:z6MkubDye2pidDrUkwPZkZj3ZUZYwhaSrdwF41ar8U6gd8zZ",
+        "boundary": "did:key:z6MknTyGSvDsE5tQZF8KJ9RjCE9k8uEibktzsFJmKSHaSCTp",
+        "correction_authority": "did:key:z6MktzHPJNNGkpiyFDkG2RBYYZuU8eYSHQJ2tSaADotVVztd",
+        "evaluation_authority": "did:key:z6MkkVEw26bv2toTwmtaymZ1Vy3gFKVBMZxDefnoakFK3gMD",
+        "gateway": "did:key:z6MkmeyUxxm4xPzBa4Q7uH72rVBrPzd4eyBxyKxp224jQERA",
+        "incident_commander": "did:key:z6MkwcmXgLaWWhSvUDXCYhFvAqdj7BsW7B56diiHvuW4NFKe",
+        "publisher": "did:key:z6MksgvGuAdhLXm1gd7DrPR533zCgk1azU2j3FUWm7UJwB4L",
+        "reviewer": "did:key:z6MkhoEwiEW3CngXW8VxjviiiL9yZiaeHjNFG2o9FjyTx925",
+        "target": "did:key:z6MkrqBrKSZ3SCdCa3HJz9j6fc7MMUVe6AFwr92Ys4X6ZNDx",
+        "trajectory_monitor": "did:key:z6Mkrb5FBFyPiTdYvk1H2WWsRR8S3pu5UYEMbbyEjnbD2LWe",
+        "witness": "did:key:z6MkiN1bMvJtjdfEKrx67nDcWADj335UgZxqLQKSBzYLz35g"
+      },
+      "run_id": "run-http-synthetic-001",
+      "safeguards_id": "fixed-benign-boundary/1",
+      "valid_from": "2026-07-26T12:00:00Z",
+      "valid_until": "2026-07-26T12:02:00Z"
+    },
+    "type": "eval.run.authorize"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6MkkVEw26bv2toTwmtaymZ1Vy3gFKVBMZxDefnoakFK3gMD",
+    "proofValue": "ySM4J4rNWYcr9srM6IpBTqyjlMukRH0wAwQdwe1CTkcNmUbUnfVqg+W3wJf+zekFnr9J09ugQxZGvcM/b3hKDw==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkkVEw26bv2toTwmtaymZ1Vy3gFKVBMZxDefnoakFK3gMD"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-07-26T12:00:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "42b0d8b5-5a57-4b6f-b3a6-b8e50f14e611",
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:b6d41aa235873004a13438db948b55aae2df7f0b2a4abeb1813464db0ee3d453",
+    "content": "sha256:1d159871eb26d23299ec0069ab7c98e6de3e5e093ac81e5aca98a6cebc3fd08e",
+    "event": "sha256:407d2e40bee3cd9becb2986421c56009f9c97ff10da82fc712432394b123815a",
+    "log_leaf": "sha256:1fac7aa2c33d4a53705fa4c24e7b739937ae1c58d25b93a0b35ca87b3c36332e"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://agent-incident-packet/eval.run.authorize",
+      "principal": "did:key:z6MkkVEw26bv2toTwmtaymZ1Vy3gFKVBMZxDefnoakFK3gMD"
+    },
+    "bounds": {
+      "scope": "profile:glyph.agent-incident-packet/0.1-draft"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6MkkVEw26bv2toTwmtaymZ1Vy3gFKVBMZxDefnoakFK3gMD",
+    "proofValue": "Fon6mK3vtXKV1gSFaNG1rHs1unp7UucvcQNpzYb0dIFYiCnPvfPWlxXUaUdPrKvmYMqGKNfrUHpDAMR74PsjAw==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkkVEw26bv2toTwmtaymZ1Vy3gFKVBMZxDefnoakFK3gMD"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "http-clean"
+  },
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/experimental/incident-packet/challenge",
+      "trusted_root_ref": "sha256:abababababababababababababababababababababababababababababababab"
+    },
+    "remedies": [
+      {
+        "anchor": "forum:agent-incident-packet",
+        "rung": "challenge",
+        "verifier": "publish a signed incident.correct receipt"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "auditor",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6MkkVEw26bv2toTwmtaymZ1Vy3gFKVBMZxDefnoakFK3gMD",
+    "proofValue": "jWGRYnoBU+mEzoZKwdyguFYiQ+57erFVuqYjyJo6WychacOGGEuQFSVlutrs2qxtJZ8KpbYdp/QyLcDVnjl7BA==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkkVEw26bv2toTwmtaymZ1Vy3gFKVBMZxDefnoakFK3gMD"
+  },
+  "stake": null
+}

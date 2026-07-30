@@ -1,0 +1,20 @@
+{
+  "context": {
+    "arguments_hash": "sha256:6d84c37a8e5b7063138988a760f4774c4fc0f6d3756ef730c20228dcbb3e1b6a",
+    "audience": "synthetic-receiver",
+    "decision_id": "decision-refuse-001",
+    "pdp_id": "bulla-closed-authzen/1",
+    "policy_digest": "sha256:fe2a76d9dc104e3a4b97fd173e3670e05fd8b79123f5e7126d76e4331b8e810d",
+    "policy_hash": "sha256:fe2a76d9dc104e3a4b97fd173e3670e05fd8b79123f5e7126d76e4331b8e810d",
+    "policy_ref": "policy://bulla-control-plane-alpha/synthetic-authzen",
+    "profile": "bulla.control-plane-alpha/0.1-experimental",
+    "reason_code": "CONFIGURED_REFUSAL",
+    "request_hash": "sha256:d4d90b4b722e3b52fdc090be71e24adef531642008f79f1c74f4dec40760397b",
+    "request_id": "request-refuse-001",
+    "run_id": "run-mcp-control-alpha-001",
+    "sequence": 2,
+    "tool_name": "sandbox.append",
+    "valid_until": "2026-07-26T12:03:00Z"
+  },
+  "decision": false
+}

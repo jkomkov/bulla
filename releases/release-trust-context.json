@@ -1,0 +1,16 @@
+{
+  "issuers": [
+    {
+      "id": "release-issuer-2026-01",
+      "issuer": "did:key:z6Mksw5XAZtcqTQ8aCA9eRJCz47SrVxDnNWBjxHQhYcLU5HH",
+      "retired_after": null,
+      "revoked_from": null,
+      "status": "active",
+      "valid_from": "0.44.0"
+    }
+  ],
+  "expected_publisher": "github:jkomkov/bulla",
+  "package": "bulla",
+  "proof_type": "bulla/ed25519-2026",
+  "schema_version": "bulla.release-trust-context/0.2"
+}

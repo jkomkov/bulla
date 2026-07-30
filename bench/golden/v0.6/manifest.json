@@ -1,0 +1,9 @@
+{
+  "artifacts": {
+    "f13-cases.json": "sha256:36bcff22dd7739f22e2e0560d3eb5857bfecf3a529a5330866f62096a2c1d9da",
+    "report.json": "sha256:c85efad619ee989a86a7a8b712502f4e13d7b9df592304a3073a8b5c27c67287",
+    "state-model-report.json": "sha256:bc29003f4cac5e22d9077b027320108d11d62a4ea8c0aea504cd5182b620db10"
+  },
+  "classification": "INTERNAL_CAPTIVE_QUALIFICATION",
+  "profile": "bulla.golden-suite/0.6-experimental"
+}

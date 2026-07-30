@@ -1,0 +1,99 @@
+{
+  "action": {
+    "subject": {
+      "anchor_id": "mcp-gateway-ingress",
+      "decision": "REFUSE",
+      "decision_event_id": "mcp-decision-refuse-001",
+      "evidence_hash": "sha256:1a3146fc01edde95f2737dfce0d07d9fd630a271fb19aa69e4fba36acc353f15",
+      "issuer_role": "boundary",
+      "mandate_ref": "sha256:c8edd970a3c525236fb955948dc2415c7d85480d130fa6cec2813e1a572c3577",
+      "policy_digest": "sha256:3c7b845d6786d614bea8e50b8169a1946c310eef8fe292362d7a1e0a98fe16bd",
+      "profile": "glyph.agent-incident-packet/0.1-draft",
+      "protocol": "mcp",
+      "rationale_codes": [
+        "FIXED_OPERATION_NOT_ALLOWED"
+      ],
+      "request_hash": "sha256:bdbee260417dffd44f7b60b3f3bda330cc64c36e46d5b9cbe259589ccb444243",
+      "request_id": "mcp-request-refuse-001",
+      "run_id": "run-mcp-synthetic-001"
+    },
+    "type": "capability.decide"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6Mkh6dH2RPW4aScQFDuUPWvy3MqnMA2dGhCHy4opJTSQ7B2",
+    "proofValue": "fBMLjOCEtO8SEdYtHhW2YGTLF7RUt2RT+JFF5R8z8AMNamziO24qMtOjzj/oR46ebv3pU1STZ786AvxKe7m0Cw==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkh6dH2RPW4aScQFDuUPWvy3MqnMA2dGhCHy4opJTSQ7B2"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-07-26T12:02:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "998fdd4e-8c9e-46b2-be3b-99d3561a0db9",
+  "evidence_refs": [
+    {
+      "grounding": "self_asserted",
+      "hash": "sha256:1a3146fc01edde95f2737dfce0d07d9fd630a271fb19aa69e4fba36acc353f15",
+      "name": "gateway-ingress"
+    }
+  ],
+  "hashes": {
+    "attestation": "sha256:81d90872bb1b037cb42fcd4114b6982536f2c99e0049c588ebbf7f77684fcb11",
+    "content": "sha256:6c7f27d3d998d97aa22b7e12c85109e041a96849254e579a2584e02b2e5c90c6",
+    "event": "sha256:7a4d04fcdc9b0f93af29bfc49765b72002d48848b59a6d5a3786a4208d234100",
+    "log_leaf": "sha256:3ec5ad5737a770b53d7ab6ab256151ef6a4a3fcf4e96cf5238b45a4f0ebb8ca7"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://agent-incident-packet/capability.decide",
+      "principal": "did:key:z6Mkh6dH2RPW4aScQFDuUPWvy3MqnMA2dGhCHy4opJTSQ7B2"
+    },
+    "bounds": {
+      "scope": "profile:glyph.agent-incident-packet/0.1-draft"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6Mkh6dH2RPW4aScQFDuUPWvy3MqnMA2dGhCHy4opJTSQ7B2",
+    "proofValue": "3mM26e2OSgUF2kBXs5Fyl/KacX+L+GwA5eWakSO/lYWhw0XTYI0dz/H6yXohiTAglJF4gYm/K5RSCxcKzSIYAA==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkh6dH2RPW4aScQFDuUPWvy3MqnMA2dGhCHy4opJTSQ7B2"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "mcp-clean"
+  },
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/experimental/incident-packet/challenge",
+      "trusted_root_ref": "sha256:abababababababababababababababababababababababababababababababab"
+    },
+    "remedies": [
+      {
+        "anchor": "forum:agent-incident-packet",
+        "rung": "challenge",
+        "verifier": "publish a signed incident.correct receipt"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "auditor",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6Mkh6dH2RPW4aScQFDuUPWvy3MqnMA2dGhCHy4opJTSQ7B2",
+    "proofValue": "5UDayyB0O6yJMCWyx9HE0zKAbYAPAWinzbOMFTN06CEgHvVhIS8lvdJ4BlqsJrRzOoMeYT9GqURQ3UD7oLOGAQ==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkh6dH2RPW4aScQFDuUPWvy3MqnMA2dGhCHy4opJTSQ7B2"
+  },
+  "stake": null
+}

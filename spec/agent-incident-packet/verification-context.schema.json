@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schema/agent-incident-packet/0.1/verification-context.schema.json",
+  "title": "Agent Incident Packet out-of-band verification context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "accepted_issuers_by_role",
+    "trusted_witness_roots",
+    "team_controlled_roles"
+  ],
+  "properties": {
+    "accepted_issuers_by_role": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {"type": "string", "minLength": 1}
+      }
+    },
+    "trusted_witness_roots": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "team_controlled_roles": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "action": {
+    "subject": {
+      "claim_under_test": {
+        "digest": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+        "retrieved_at": "2026-07-22T09:00:00Z",
+        "uri": "https://example.invalid/claims/throughput-2026-07"
+      },
+      "environment": {
+        "cryptographic_library": "stdlib hashlib",
+        "language": "python",
+        "operating_system": "linux",
+        "runtime": "3.12"
+      },
+      "event_id": "rep-1",
+      "method": {
+        "checker_sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "commit": "0000000000000000000000000000000000000000",
+        "independently_written": true,
+        "repository": "https://example.invalid/reproducer/checker"
+      },
+      "result": {
+        "comparison": "exact",
+        "fixture_results": [
+          {
+            "agreed": true,
+            "name": "vector-01"
+          }
+        ],
+        "status": "reproduced"
+      }
+    },
+    "type": "reproduction.attempt"
+  },
+  "anchor_ref": {},
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:2c58669b563be1ab0f1dede44dbd343a38fe653d5d791e7d5db0a65747eba16c",
+    "content": "sha256:bb26230d6c698e00d0f8917f6c162e234d642192545e22cc85582d1383d61346",
+    "event": "sha256:228b1cc6d6631ab06841d2580defde2e72e70682afc89e22f661e9383780a366",
+    "log_leaf": "sha256:e948ef8346dbc69503073312a9c4851313782712852640ab6f0682d9ffa38acd"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://reproducer/publication-v1",
+      "principal": "did:web:reproducer.invalid#lab"
+    },
+    "bounds": {
+      "rollback_window": "P30D",
+      "scope": "reproduction of one published claim"
+    }
+  },
+  "producer": {},
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://example.invalid/challenge",
+      "trusted_root_ref": "fixture:independently-pinned-root"
+    },
+    "remedies": [
+      {
+        "anchor": "hashes.content",
+        "rung": "recompute",
+        "verifier": "bulla receipt verify"
+      },
+      {
+        "anchor": "remedy.forum.trusted_root_ref",
+        "rung": "challenge",
+        "verifier": "named forum"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "public",
+    "record": "authority-permanent"
+  },
+  "schema_version": "0.2",
+  "signature": null,
+  "stake": null,
+  "timestamp": "2026-07-24T00:00:00Z"
+}

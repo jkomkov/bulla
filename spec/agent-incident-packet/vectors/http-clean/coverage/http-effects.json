@@ -1,0 +1,18 @@
+{
+  "anchor_id": "http-target-effects",
+  "covered_ids": [
+    "http-effect-mediated-001"
+  ],
+  "denominator_sha256": "sha256:81d258b2ee8d2d458e5f9045e281446f9690a6f7d98625e1ff938e8462c033df",
+  "invalid_receipts": [],
+  "minimum_verification_depth": "attestation",
+  "phantom_receipt_ids": [],
+  "phase": "effect",
+  "protocol": "http",
+  "receipted": 1,
+  "schema_version": 1,
+  "total": 2,
+  "uncovered_ids": [
+    "http-effect-bypass-001"
+  ]
+}

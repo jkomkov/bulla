@@ -1,0 +1,106 @@
+{
+  "action": {
+    "subject": {
+      "anchor_id": "mcp-target-effects",
+      "decision_attestation": "sha256:ed74ad611cf22c098c0c13716dc26e01722ab511471b16ba3b542ff0bf3c65bf",
+      "effect_hash": "sha256:7c6e3ee59aacd9e327c6aa007d62ae96ee06add581a0ecd437e0f4a540ae0a45",
+      "evidence_hash": "sha256:2f55c9a133ff964c799d563da1859c321b26ceb37bfe89a6a8eb103c3927f578",
+      "evidence_refs": [
+        "sha256:2f55c9a133ff964c799d563da1859c321b26ceb37bfe89a6a8eb103c3927f578"
+      ],
+      "issuer_role": "boundary",
+      "mandate_ref": "sha256:ca27cbbc039f5e24b86ae7b08b8ed0ce982d019344cb4ea959b821fff276fd73",
+      "observation_class": "EFFECT_OBSERVED",
+      "observation_id": "effect-mediated-001",
+      "profile": "glyph.agent-incident-packet/0.1-draft",
+      "protocol": "mcp",
+      "request_id": "request-permit-001",
+      "run_id": "run-mcp-control-alpha-001",
+      "transport_status": "JSONRPC_RESULT_RECORDED"
+    },
+    "type": "capability.observe"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e",
+    "proofValue": "nTHdqAkLuOOd5lvpzwpY7DoOBs/1C6Y+g6URMtE1gxLINPuo9FRNGiDfQpOZGyHVdpN8p57y99yedzUtEc06Dg==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-07-26T12:03:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "ad56e1d2-8c93-42a4-82b5-3fe3de7fbf9a",
+  "evidence_refs": [
+    {
+      "grounding": "self_asserted",
+      "hash": "sha256:2f55c9a133ff964c799d563da1859c321b26ceb37bfe89a6a8eb103c3927f578",
+      "name": "exact-evidence"
+    }
+  ],
+  "hashes": {
+    "attestation": "sha256:d4640c045d478807d4c62d8d78ddeb593bebd598a580b44cec588b1cf7965ccc",
+    "content": "sha256:cdf31745b1c0107b67c02d83c383d6fdb6609a72eb39a9876005a159e4dfb4f0",
+    "event": "sha256:2c48a7e1a2a6906bcff991e31d5bc4a8b43285b43527a04fd08ece4fafe9c6b6",
+    "log_leaf": "sha256:5a99c529cb8bb4f1c80568a1908c5041c8a6665c94ac8a1fb6b4b4b48f277b10"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://bulla-control-plane-alpha/synthetic-authzen@sha256:fe2a76d9dc104e3a4b97fd173e3670e05fd8b79123f5e7126d76e4331b8e810d",
+      "principal": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e"
+    },
+    "bounds": {
+      "scope": "profile:glyph.agent-incident-packet/0.1-draft;action:capability.observe"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e",
+    "proofValue": "S/DsOGAKiBUVp8+lmXM4YuMlkE/90Q2KJ1OSXxianlK4LXOCvazrUelxUYhZnyCk1nm40dq4GQM56TRHO6z4Bg==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "full-loop",
+    "outer_profile": "bulla.control-plane-alpha/0.1-experimental"
+  },
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://github.com/jkomkov/res-agentica/issues",
+      "trusted_root_ref": "https://github.com/jkomkov/res-agentica"
+    },
+    "remedies": [
+      {
+        "anchor": "packet:packet-core.json",
+        "rung": "recompute",
+        "verifier": "verify the deterministic incident packet"
+      },
+      {
+        "anchor": "forum:control-plane-alpha",
+        "rung": "challenge",
+        "verifier": "publish a signed incident correction"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "auditor",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e",
+    "proofValue": "HmTCAUNXMvs46ShafzAAOMB/t/dTWmcxQom3AK6hpw2GydRuZ4JxXHiG6CWDxuwOvMXnWogMjLL0WD6Tv0BBCw==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e"
+  },
+  "stake": null
+}

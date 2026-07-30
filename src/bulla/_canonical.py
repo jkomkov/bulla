@@ -52,6 +52,69 @@ def legacy_json_v1(obj: Any) -> str:
     return json.dumps(obj, sort_keys=True)
 
 
+JCS_INT_PROFILE = "bulla-jcs-int/1"
+JCS_SAFE_INTEGER = (1 << 53) - 1
+
+
+class CanonicalizationError(ValueError):
+    """Raised when a value is outside Bulla's portable v0.4 JSON domain."""
+
+
+def _utf16_sort_key(value: str) -> bytes:
+    try:
+        # RFC 8785 orders object member names by UTF-16 code units.
+        return value.encode("utf-16-be")
+    except UnicodeEncodeError as exc:
+        raise CanonicalizationError("lone Unicode surrogates are not canonical JSON") from exc
+
+
+def canonical_jcs_int(obj: Any) -> str:
+    """Canonical JSON for ActionReceipt v0.4.
+
+    This is the RFC 8785 object/string ordering profile restricted to safe
+    integers.  The restriction removes the cross-language floating-point
+    formatting surface while retaining ordinary JSON interoperability.
+    """
+
+    def encode(value: Any) -> str:
+        if value is None:
+            return "null"
+        if value is True:
+            return "true"
+        if value is False:
+            return "false"
+        if isinstance(value, int):
+            if abs(value) > JCS_SAFE_INTEGER:
+                raise CanonicalizationError(
+                    f"integer {value} exceeds the portable safe range ±{JCS_SAFE_INTEGER}"
+                )
+            return str(value)
+        if isinstance(value, float):
+            raise CanonicalizationError(
+                "floating-point values are not permitted by bulla-jcs-int/1; "
+                "use integer quantum units or a decimal string"
+            )
+        if isinstance(value, str):
+            try:
+                value.encode("utf-8")
+            except UnicodeEncodeError as exc:
+                raise CanonicalizationError("lone Unicode surrogates are not canonical JSON") from exc
+            return json.dumps(value, ensure_ascii=False, allow_nan=False, separators=(",", ":"))
+        if isinstance(value, (list, tuple)):
+            return "[" + ",".join(encode(item) for item in value) + "]"
+        if isinstance(value, dict):
+            if not all(isinstance(key, str) for key in value):
+                raise CanonicalizationError("canonical JSON object keys must be strings")
+            keys = sorted(value, key=_utf16_sort_key)
+            return "{" + ",".join(f"{encode(key)}:{encode(value[key])}" for key in keys) + "}"
+        raise CanonicalizationError(
+            f"unsupported canonical JSON value {type(value).__name__}; "
+            "expected null, boolean, safe integer, string, array, or object"
+        )
+
+    return encode(obj)
+
+
 # ── ALGORITHM_VERSION — what a deed's ``f`` is pinned to ─────────────────────
 #
 # A deed is a *recomputable* certificate: ``deed = f(composition@h, algorithm@v)``.

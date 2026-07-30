@@ -39,6 +39,10 @@ Anything that lets a party subvert the guarantees the receipts claim:
   is not actually committed to (`bulla.ots`, OpenTimestamps).
 - **Determinism breaks** — inputs that make a content hash depend on wall-clock,
   environment, or iteration order (the recomputability property).
+- **Untrusted receipt ingestion bypass** — duplicate JSON members, malformed
+  Unicode, non-finite or nonportable numbers, unknown closed fields, or inputs
+  exceeding the documented byte/depth/node/string limits that reach expensive
+  verification or are silently accepted.
 - **Supply-chain integrity** of the published artifact (the release pipeline,
   attestations, Trusted Publishing).
 
@@ -52,7 +56,9 @@ Anything that lets a party subvert the guarantees the receipts claim:
 - Missing independent witness operators, forum reachability, production
   settlement custody, stake, or slashing. These are disclosed gaps, not shipped
   guarantees.
-- Denial of service from pathologically large inputs.
+- Workloads rejected at the documented public parse limits. A bypass of those
+  limits, disproportionate pre-limit resource use, or a crash on an otherwise
+  in-limit receipt remains in scope.
 
 ## Supported versions
 

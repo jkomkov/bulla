@@ -1,0 +1,26 @@
+{
+  "anchor_id": "http-target-effects",
+  "observations": [
+    {
+      "anchor_id": "http-target-effects",
+      "evidence_hash": "sha256:b4e5145d8985a13eab4ccd3bac3e94dc6bac5ea1b2bc6e342b79e90e24b9cf5a",
+      "observation_id": "http-effect-mediated-001",
+      "operation_ref": "sha256:70dd66589b92fde6b06637fc516a2e14c1e5216f8cf8c3eefe0b0efd783d0caf",
+      "phase": "effect",
+      "protocol": "http",
+      "run_id": "run-http-synthetic-001"
+    },
+    {
+      "anchor_id": "http-target-effects",
+      "evidence_hash": "sha256:5ffb0235958e867dca22b889b2666fa0556fe7935a20a2822050677f45d07980",
+      "observation_id": "http-effect-bypass-001",
+      "operation_ref": "sha256:90d215c6902d7e982f21d8ce2dea9ae0649f0e065beac550206add235bf9f493",
+      "phase": "effect",
+      "protocol": "http",
+      "run_id": "run-http-synthetic-001"
+    }
+  ],
+  "phase": "effect",
+  "protocol": "http",
+  "schema_version": 1
+}

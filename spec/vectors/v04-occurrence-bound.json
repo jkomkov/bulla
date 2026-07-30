@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.4",
+  "kind": "action_receipt",
+  "action": {
+    "type": "payments.charge",
+    "subject": {
+      "amount_micros": 12500000,
+      "currency": "USD"
+    }
+  },
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "evidence_refs": [
+    {
+      "name": "provider-request",
+      "hash": "sha256:cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+      "grounding": "counterparty_signed"
+    }
+  ],
+  "anchor_ref": {},
+  "mandate": {
+    "authority": {
+      "principal": "did:key:z6MkehRgf7yJbgaGfYsdoAsKdBPE3dj2CYhowQdcjqSJgvVd",
+      "policy": "policy://payments/v1",
+      "delegation": []
+    },
+    "bounds": {
+      "scope": "payments.charge:usd-micros"
+    }
+  },
+  "remedy": {
+    "challenge_window": "P7D",
+    "forum": {
+      "log_endpoint": "https://forum.example/cases",
+      "trusted_root_ref": "sha256:abababababababababababababababababababababababababababababababab"
+    },
+    "remedies": [
+      {
+        "rung": "challenge",
+        "verifier": "bulla experimental challenge replay",
+        "anchor": "forum:payments"
+      }
+    ]
+  },
+  "retention": {
+    "record": "operational",
+    "disclosure": "party"
+  },
+  "stake": null,
+  "conventions": [],
+  "signature": {
+    "type": "bulla/ed25519-2026",
+    "purpose": "content",
+    "issuer": "did:key:z6MkehRgf7yJbgaGfYsdoAsKdBPE3dj2CYhowQdcjqSJgvVd",
+    "verificationMethod": "did:key:z6MkehRgf7yJbgaGfYsdoAsKdBPE3dj2CYhowQdcjqSJgvVd",
+    "proofValue": "4rvoLsP16XL63wg8TF5sACggG4WQ/+poYrAMELkIeSzYUAwraP/iVp5+hs1USjumD4d5Rg05Q99AOTiXjX4xBA=="
+  },
+  "authorization": {
+    "type": "bulla/ed25519-2026",
+    "purpose": "authorization",
+    "issuer": "did:key:z6MkehRgf7yJbgaGfYsdoAsKdBPE3dj2CYhowQdcjqSJgvVd",
+    "verificationMethod": "did:key:z6MkehRgf7yJbgaGfYsdoAsKdBPE3dj2CYhowQdcjqSJgvVd",
+    "proofValue": "ZPNx4f/mpRQdLX3sn/hzsAzxSvDmc+3EorQ5C7tsi0cf48LH+zlWojTn1ILVQ+I254LnaMiD4S8MrKEnqVtTAw=="
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "event_id": "2f5fe4bd-386d-4d5a-96e8-47ca2c156f25",
+  "claimed_at": "2026-07-21T22:00:00Z",
+  "occurrence": {
+    "type": "bulla/ed25519-2026",
+    "purpose": "occurrence",
+    "issuer": "did:key:z6MkehRgf7yJbgaGfYsdoAsKdBPE3dj2CYhowQdcjqSJgvVd",
+    "verificationMethod": "did:key:z6MkehRgf7yJbgaGfYsdoAsKdBPE3dj2CYhowQdcjqSJgvVd",
+    "proofValue": "jRrKdFf08VKnUhN5Vxvh0LBxtQ4saxqoXAJ4UkieaXZ86MA0Zdtzr3turF5H4YS+hZqyCVVyG2eVFmEslBHlAw=="
+  },
+  "producer": {
+    "bulla_version": "0.44.1+source"
+  },
+  "hashes": {
+    "content": "sha256:5aa570ebc3290a2070d053978c9b389d5a9a91a452f566e9de344beb08fc4709",
+    "event": "sha256:8ed038110fd53fac14ea98177a63047b185417bce0fc7fee15d1b69aa1de424f",
+    "attestation": "sha256:895597b43bf0373753203be69cec35df1b25ae1456bcc31db49291c8c1dd0915",
+    "log_leaf": "sha256:545f81aaf011dc338161bcb0da26ca8ce3ad16e34736a4ce556f6e5bba750df8"
+  }
+}

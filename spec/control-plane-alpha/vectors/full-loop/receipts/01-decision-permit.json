@@ -1,0 +1,105 @@
+{
+  "action": {
+    "subject": {
+      "anchor_id": "mcp-boundary-ingress",
+      "decision": "PERMIT",
+      "decision_event_id": "decision-permit-001",
+      "evidence_hash": "sha256:8aa85354326b7f0b27b33e519ccc7e95b566392921c7c13e1cc45dc8b90016a7",
+      "issuer_role": "boundary",
+      "mandate_ref": "sha256:ca27cbbc039f5e24b86ae7b08b8ed0ce982d019344cb4ea959b821fff276fd73",
+      "policy_digest": "sha256:fe2a76d9dc104e3a4b97fd173e3670e05fd8b79123f5e7126d76e4331b8e810d",
+      "profile": "glyph.agent-incident-packet/0.1-draft",
+      "protocol": "mcp",
+      "rationale_codes": [
+        "FIXED_OPERATION_ALLOWED"
+      ],
+      "request_hash": "sha256:542626827cbbd1a8ede8165875d4b738873d3b2f31c1db42092273a07d8256d6",
+      "request_id": "request-permit-001",
+      "run_id": "run-mcp-control-alpha-001"
+    },
+    "type": "capability.decide"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e",
+    "proofValue": "e2AVd78ZvtyuzoH/s3TRatMpNx4jdSPQUPGR8MA81LzUW6cFO/x3m9iBuTak/md9HyVRTXYdfb48sNKGcrf8Cg==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-07-26T12:01:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "0952aa85-0112-45ce-9528-1254b820d350",
+  "evidence_refs": [
+    {
+      "grounding": "self_asserted",
+      "hash": "sha256:8aa85354326b7f0b27b33e519ccc7e95b566392921c7c13e1cc45dc8b90016a7",
+      "name": "exact-evidence"
+    }
+  ],
+  "hashes": {
+    "attestation": "sha256:ed74ad611cf22c098c0c13716dc26e01722ab511471b16ba3b542ff0bf3c65bf",
+    "content": "sha256:04fa42d92e7ee16462ded4cfb5d86d500587483174c82fb66db83cf16179198a",
+    "event": "sha256:272c7157ed03ef84a0c2e1958fd39c42221c770e597b09820444eeaaf3489354",
+    "log_leaf": "sha256:2af3e30aa656e437ae436445aa84909949df38a50507094829c0f186abdc004e"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://bulla-control-plane-alpha/synthetic-authzen@sha256:fe2a76d9dc104e3a4b97fd173e3670e05fd8b79123f5e7126d76e4331b8e810d",
+      "principal": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e"
+    },
+    "bounds": {
+      "scope": "profile:glyph.agent-incident-packet/0.1-draft;action:capability.decide"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e",
+    "proofValue": "7EV8Fy0Lc0Mb5o7EKA45Ke6BIWnn1h445UAbzS6qQvMjI616t4AfxN57Tf2gvYaYAlYIDKsqSbD6187aiAXBAw==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "full-loop",
+    "outer_profile": "bulla.control-plane-alpha/0.1-experimental"
+  },
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://github.com/jkomkov/res-agentica/issues",
+      "trusted_root_ref": "https://github.com/jkomkov/res-agentica"
+    },
+    "remedies": [
+      {
+        "anchor": "packet:packet-core.json",
+        "rung": "recompute",
+        "verifier": "verify the deterministic incident packet"
+      },
+      {
+        "anchor": "forum:control-plane-alpha",
+        "rung": "challenge",
+        "verifier": "publish a signed incident correction"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "auditor",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e",
+    "proofValue": "BEjhOby8b+3yVapTfpYLw+TiCok8BqbXqcBNJlZy2uqfyekw2F63+FYTIL1XmJPyR2CNlZKKK5UsprbRSwa6DQ==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e"
+  },
+  "stake": null
+}

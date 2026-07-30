@@ -1,0 +1,55 @@
+{
+  "deployment_gate": "PASSED",
+  "incident_packet_profile": "glyph.agent-incident-packet/0.1-draft",
+  "mcp_schema_snapshot_sha256": "sha256:ef70b61f99b6d2e5e3b46863822eab08dff6a45bedc7a08914e0e5b133f40203",
+  "packet_core_path": "packet-core.json",
+  "production_status": "BLOCKED_NO_REMOTE_MUTATION_AUTHORIZED",
+  "profile": "bulla.control-plane-alpha/0.1-experimental",
+  "publish_receipt_path": "publish-receipt.json",
+  "run_id": "run-mcp-control-alpha-001",
+  "run_state_path": "run-state.json",
+  "schema_version": 1,
+  "service_witness": {
+    "artifacts": [
+      {
+        "path": "witness/service/checkpoint-final.json",
+        "sha256": "sha256:8d0dfc371e1b99e4516c97e41a6e482a573b5d59dbb7a1b5f96d35f0fe6d2bd9"
+      },
+      {
+        "path": "witness/service/checkpoint-prefix.json",
+        "sha256": "sha256:cf069a4f9781565f482f0f5aa0dbb89e583aa60104b0863e9567904668618e75"
+      },
+      {
+        "path": "witness/service/consistency.json",
+        "sha256": "sha256:a301c4c26a1189d51a35318039180328bf6133031a5e173408e93c88f822670b"
+      },
+      {
+        "path": "witness/service/deeds.json",
+        "sha256": "sha256:802f36a48056dac1ccfc53f0c009a2d90c8b061b6cf93e132fb4758e441ead28"
+      },
+      {
+        "path": "witness/service/inclusion-permit.json",
+        "sha256": "sha256:78a826c8c5a2fa0c6cb98f805f05d5becb930d0010bf9f637919e5a6d657a07a"
+      },
+      {
+        "path": "witness/service/retained-index.json",
+        "sha256": "sha256:5bd940f9a55a92d685521196d229ed1c9d38d3873de4a2e7d24d84d98602ff7a"
+      },
+      {
+        "path": "witness/service/retained-receipts.json",
+        "sha256": "sha256:03b21be8bcd907ba46522f6e05550ec9809f8e682a7ba625184c8bdcb9cca2c7"
+      }
+    ],
+    "consistency_path": "witness/service/consistency.json",
+    "deeds_path": "witness/service/deeds.json",
+    "final_checkpoint_path": "witness/service/checkpoint-final.json",
+    "inclusion_path": "witness/service/inclusion-permit.json",
+    "log_id": "deedlog://control-plane-alpha/service",
+    "operator_role": "witness",
+    "prefix_checkpoint_path": "witness/service/checkpoint-prefix.json",
+    "retained_archive_path": "witness/service/retained-receipts.json",
+    "retained_index_path": "witness/service/retained-index.json"
+  },
+  "standards_pin_path": "standards-pin.json",
+  "vector_id": "full-loop"
+}

@@ -1,43 +1,182 @@
 # Trusted Publishing to PyPI — no long-lived package token.
 #
-# This workflow is inert in the res-agentica monorepo and active in the public
-# github.com/jkomkov/bulla mirror, where this directory becomes the repo root.
-# PyPI Trusted Publishing must name owner=jkomkov, repo=bulla,
-# workflow=publish.yml, environment=pypi.
-#
-# The 0.44 discipline is publish -> verify accepted artifacts and PEP 740
-# provenance -> mint a signed ActionReceipt -> attach it durably. An unsigned or
-# pre-publication artifact is never called a contemporaneous release receipt.
-# If any post-publication step fails, rerun finalize-release.yml. Never retry
-# the immutable PyPI upload or use twine/package credentials as a workaround.
+# Tests and builds run without publication or repository-write authority. The
+# reviewed wheel and sdist cross job boundaries as one exact artifact. The
+# PyPI job receives only OIDC authority and the two reviewed distributions.
+# Release signing is absent from this workflow. A manually approved
+# default-branch preparation run opens the slot before creating the tag. This
+# workflow runs only from that same default-branch commit and authenticates the
+# successful preparation run before any candidate code executes.
 
 name: publish
 
 on:
-  push:
-    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Exact package version prepared on main
+        required: true
+        type: string
+      source_commit:
+        description: Exact main commit prepared for release
+        required: true
+        type: string
+      prepare_run_id:
+        description: Successful prepare-release workflow run
+        required: true
+        type: string
 
 permissions:
   contents: read
 
 jobs:
-  release:
+  preflight:
+    name: authenticate default-branch preparation
     runs-on: ubuntu-latest
-    environment: pypi
     permissions:
-      id-token: write
-      contents: write
+      actions: read
+      contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - name: Bind publication to the successful preparation run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ inputs.version }}
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
+          PREPARE_RUN_ID: ${{ inputs.prepare_run_id }}
+          WORKFLOW_REF: ${{ github.ref }}
+          WORKFLOW_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import os
+          import re
 
-      - uses: actions/setup-python@v5
+          if (
+              os.environ["WORKFLOW_REF"] != "refs/heads/main"
+              or os.environ["SOURCE_COMMIT"] != os.environ["WORKFLOW_SHA"]
+              or not re.fullmatch(r"[0-9a-f]{40}", os.environ["SOURCE_COMMIT"])
+              or not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", os.environ["RELEASE_VERSION"])
+              or not re.fullmatch(r"[1-9][0-9]*", os.environ["PREPARE_RUN_ID"])
+          ):
+              raise SystemExit("publication is not bound to an exact main preparation")
+          PY
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+          test "$(git rev-parse origin/main)" = "$SOURCE_COMMIT"
+          test "$(
+            python -c \
+              'import pathlib,re; print(re.search(r"__version__ = \"([^\"]+)\"", pathlib.Path("src/bulla/__init__.py").read_text()).group(1))'
+          )" = "$RELEASE_VERSION"
+          for _ in 1 2 3 4 5 6 7 8 9 10 11 12; do
+            gh api \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2026-03-10" \
+              "repos/$GITHUB_REPOSITORY/actions/runs/$PREPARE_RUN_ID" \
+              > "$RUNNER_TEMP/prepare-run.json"
+            status="$(
+              python -c \
+                'import json,sys; print(json.load(open(sys.argv[1]))["status"])' \
+                "$RUNNER_TEMP/prepare-run.json"
+            )"
+            test "$status" = completed && break
+            sleep 5
+          done
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          run = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "prepare-run.json").read_text()
+          )
+          if (
+              run.get("path") != ".github/workflows/prepare-release.yml"
+              or run.get("event") != "workflow_dispatch"
+              or run.get("status") != "completed"
+              or run.get("conclusion") != "success"
+              or run.get("head_branch") != "main"
+              or run.get("head_sha") != os.environ["SOURCE_COMMIT"]
+              or (run.get("repository") or {}).get("full_name")
+              != os.environ["GITHUB_REPOSITORY"]
+          ):
+              raise SystemExit("prepare-release run does not authorize publication")
+          PY
+
+  compatibility:
+    name: release smoke · ${{ matrix.os }} · Python ${{ matrix.python }}
+    needs: preflight
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - {os: ubuntu-latest, python: "3.10"}
+          - {os: ubuntu-latest, python: "3.11"}
+          - {os: ubuntu-latest, python: "3.12"}
+          - {os: ubuntu-latest, python: "3.13"}
+          - {os: macos-latest, python: "3.12"}
+          - {os: windows-latest, python: "3.12"}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install candidate
+        run: python -m pip install ".[identity,ots,test]"
+      - name: Exercise the released receipt kernel
+        run: >-
+          python -m pytest -q
+          tests/test_action_receipt.py
+          tests/test_action_receipt_v04.py
+          tests/test_distribution_policy.py
+          tests/test_event_coverage.py
+          tests/test_golden_f13.py
+          tests/test_wrap.py
+
+  build:
+    name: build and verify exact candidate
+    needs: compatibility
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.11"
+
+      - name: Validate immutable release identity
+        env:
+          RELEASE_REF: v${{ inputs.version }}
+          RELEASE_FULL_REF: ${{ github.ref }}
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
+        run: |
+          python - <<'PY'
+          import os
+          import re
+
+          release_ref = os.environ["RELEASE_REF"]
+          if not re.fullmatch(r"v[0-9]+\.[0-9]+\.[0-9]+", release_ref):
+              raise SystemExit("release tag must be vMAJOR.MINOR.PATCH")
+          if os.environ["RELEASE_FULL_REF"] != "refs/heads/main":
+              raise SystemExit("release workflow must run from main")
+          PY
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+          test "$GITHUB_SHA" = "$SOURCE_COMMIT"
+          git fetch --force --tags origin
+          test "$(git rev-list -n 1 "$RELEASE_REF")" = "$SOURCE_COMMIT"
 
       - name: Run full test suite on the tagged commit
         run: |
           python -m pip install --upgrade pip
-          pip install -e .[identity,ots] pytest pytest-timeout
+          pip install -e ".[identity,ots]" pytest pytest-timeout
           python -m pytest tests/ -q --timeout=600 | tee "$RUNNER_TEMP/pytest-summary.txt"
 
       - name: Verify tests left the tagged source tree unchanged
@@ -49,60 +188,254 @@ jobs:
             exit 1
           fi
 
-      - name: Build sdist and wheel
+      - name: Build into a new empty candidate directory
         run: |
-          python -m pip install --upgrade build
-          python -m build
+          candidate="$RUNNER_TEMP/release-candidate"
+          mkdir "$candidate"
+          test -z "$(find "$candidate" -mindepth 1 -print -quit)"
+          python -m pip install "build==1.4.2"
+          python -m build --outdir "$candidate"
 
-      - name: Verify source, wheel, and sdist runtime parity
-        run: python scripts/verify_release_archive_parity.py --root . --dist dist
-
-      - name: Verify tag matches package version
+      - name: Verify the curated distribution boundary and all archive bytes
         run: |
-          TAG="${GITHUB_REF_NAME#v}"
-          PKG=$(ls dist/bulla-*.tar.gz | sed -E 's#.*/bulla-(.*)\.tar\.gz#\1#')
-          echo "tag=$TAG package=$PKG"
-          test "$TAG" = "$PKG"
+          python scripts/verify_distribution_policy.py \
+            --dist "$RUNNER_TEMP/release-candidate"
+          python scripts/verify_release_archive_parity.py \
+            --root . \
+            --dist "$RUNNER_TEMP/release-candidate"
 
-      - name: Publish to PyPI with Trusted Publishing attestations
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          attestations: true
-
-      - name: Verify PyPI accepted the exact artifacts and publisher identity
-        run: |
-          python -m pip install --upgrade pypi-attestations
-          python scripts/verify_pypi_release.py \
-            --version "${GITHUB_REF_NAME#v}" \
-            --dist dist \
-            --repository jkomkov/bulla
-
-      - name: Mint signed post-publication release receipt
+      - name: Verify exact candidate inventory
         env:
-          BULLA_RELEASE_KEY: ${{ secrets.BULLA_RELEASE_KEY }}
+          RELEASE_REF: v${{ inputs.version }}
         run: |
-          TESTS=$(tail -1 "$RUNNER_TEMP/pytest-summary.txt")
-          mkdir -p release-receipt
-          test -n "$BULLA_RELEASE_KEY" || { echo "BULLA_RELEASE_KEY is required" >&2; exit 1; }
-          python scripts/mint_release_receipt.py \
-            --dist dist \
-            --out "release-receipt/${GITHUB_REF_NAME#v}.json" \
-            --ots \
-            --test-result "$TESTS" \
-            --repository jkomkov/bulla
-          python -m bulla receipt verify "release-receipt/${GITHUB_REF_NAME#v}.json"
+          python - <<'PY'
+          import os
+          from pathlib import Path
 
-      - name: Attach receipt to durable GitHub release
+          version = os.environ["RELEASE_REF"].removeprefix("v")
+          directory = Path(os.environ["RUNNER_TEMP"]) / "release-candidate"
+          actual = {
+              path.name
+              for path in directory.iterdir()
+              if path.is_file() and not path.is_symlink()
+          }
+          expected = {
+              f"bulla-{version}-py3-none-any.whl",
+              f"bulla-{version}.tar.gz",
+          }
+          if actual != expected or len(list(directory.iterdir())) != 2:
+              raise SystemExit(
+                  f"candidate inventory mismatch: expected {sorted(expected)}, "
+                  f"got {sorted(actual)}"
+              )
+          PY
+
+      - name: Verify the isolated installed wheel
+        run: |
+          python -m venv "$RUNNER_TEMP/bulla-wheel"
+          "$RUNNER_TEMP/bulla-wheel/bin/python" -m pip install \
+            "$RUNNER_TEMP"/release-candidate/*.whl pytest pytest-timeout pynacl
+          "$RUNNER_TEMP/bulla-wheel/bin/python" -I - <<'PY'
+          import importlib.util
+          import bulla
+          import bulla.experimental
+
+          required = {
+              "verify_receipt", "event_coverage", "wrap_action",
+              "operational_envelope", "receipt_for",
+          }
+          missing = sorted(required - set(bulla.__all__))
+          if missing:
+              raise SystemExit(f"missing root exports: {missing}")
+          forbidden = (
+              "action_boundary", "answerability", "causal_model", "challenge",
+              "control_plane_alpha", "generalization", "incident_packet",
+              "incident_pilots", "receipt_witness",
+          )
+          for leaf in forbidden:
+              if importlib.util.find_spec(f"bulla.experimental.{leaf}") is not None:
+                  raise SystemExit(f"source-only module shipped: {leaf}")
+          PY
+          "$RUNNER_TEMP/bulla-wheel/bin/bulla" experimental --help > "$RUNNER_TEMP/experimental-help.txt"
+          if grep -E '(^|[[:space:]])(answerability|boundary|challenge)([[:space:]]|$)' \
+            "$RUNNER_TEMP/experimental-help.txt"; then
+            echo "source-only command appeared in installed CLI help" >&2
+            exit 1
+          fi
+          (
+            cd "$RUNNER_TEMP"
+            "$RUNNER_TEMP/bulla-wheel/bin/python" -I -m pytest -q \
+              "$GITHUB_WORKSPACE/tests/test_action_receipt.py" \
+              "$GITHUB_WORKSPACE/tests/test_action_receipt_v04.py" \
+              "$GITHUB_WORKSPACE/tests/test_distribution_policy.py" \
+              "$GITHUB_WORKSPACE/tests/test_event_coverage.py" \
+              "$GITHUB_WORKSPACE/tests/test_golden_f13.py" \
+              "$GITHUB_WORKSPACE/tests/test_wrap.py" \
+              --timeout=120
+          )
+
+      - name: Stage exact reviewed artifact
+        run: |
+          mkdir release-candidate
+          cp "$RUNNER_TEMP"/release-candidate/* release-candidate/
+          cp "$RUNNER_TEMP/pytest-summary.txt" release-candidate/
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: bulla-release-candidate-${{ github.sha }}
+          path: release-candidate/
+          if-no-files-found: error
+          retention-days: 7
+
+  verify-slot:
+    name: verify pre-existing signed slot
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+      - name: Install only hash-pinned verification dependencies
+        run: |
+          python -m pip install --require-hashes \
+            -r .github/release-signing-requirements.txt
+      - name: Retrieve the public immutable slot created before the tag
         env:
           GH_TOKEN: ${{ github.token }}
+          RELEASE_REF: v${{ inputs.version }}
         run: |
-          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || \
-            gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes
-          gh release upload "$GITHUB_REF_NAME" release-receipt/* --clobber
-
-      - name: Upload receipt to the workflow record
-        uses: actions/upload-artifact@v4
+          version="${RELEASE_REF#v}"
+          mkdir release-slot
+          for delay in 0 2 2 2 2; do
+            sleep "$delay"
+            if gh release download "release-slot-$RELEASE_REF" \
+              --pattern "$version.slot.json" \
+              --dir release-slot; then
+              break
+            fi
+          done
+          test -f "release-slot/$version.slot.json"
+          python -I scripts/trusted_release_signer.py verify-slot \
+            --version "$version" \
+            --source-commit "$GITHUB_SHA" \
+            --slot "release-slot/$version.slot.json" \
+            --context releases/release-trust-context.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: release-receipt
-          path: release-receipt/
+          name: bulla-release-slot-${{ github.sha }}
+          path: release-slot/
           if-no-files-found: error
+          retention-days: 90
+
+  publish:
+    name: publish exact reviewed candidate
+    needs: [build, verify-slot]
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: bulla-release-candidate-${{ github.sha }}
+          path: release-candidate
+      - name: Retain only the exact distributions
+        run: |
+          mkdir packages
+          cp release-candidate/*.whl release-candidate/*.tar.gz packages/
+          test "$(find packages -maxdepth 1 -type f | wc -l | tr -d ' ')" = "2"
+      - name: Publish to PyPI with Trusted Publishing attestations
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # release/v1
+        with:
+          attestations: true
+          packages-dir: packages
+
+  verify-pypi:
+    name: verify PyPI artifacts and provenance
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: bulla-release-candidate-${{ github.sha }}
+          path: release-candidate
+      - name: Verify exact accepted bytes, publisher, and provenance commit
+        env:
+          RELEASE_REF: v${{ inputs.version }}
+        run: |
+          python -m pip install pypi-attestations
+          python -m pip install --no-deps release-candidate/*.whl
+          python scripts/verify_pypi_release.py \
+            --version "${RELEASE_REF#v}" \
+            --dist release-candidate \
+            --repository jkomkov/bulla \
+            --expected-commit "$GITHUB_SHA"
+
+  prepare-finalization:
+    name: prepare externally verified unsigned receipt
+    needs: [build, verify-slot, verify-pypi]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: bulla-release-candidate-${{ github.sha }}
+          path: release-candidate
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: bulla-release-slot-${{ github.sha }}
+          path: release-slot
+      - name: Install the exact accepted wheel without signing authority
+        run: |
+          python -m pip install --require-hashes \
+            -r .github/release-finalization-requirements.txt
+          python -m pip install --no-deps release-candidate/*.whl
+      - name: Mint and verify the unsigned finalization preimage
+        env:
+          RELEASE_REF: v${{ inputs.version }}
+        run: |
+          version="${RELEASE_REF#v}"
+          test_result="$(tail -1 release-candidate/pytest-summary.txt)"
+          mkdir release-preimage
+          python scripts/mint_release_receipt.py \
+            --dist release-candidate \
+            --out "release-preimage/$version.unsigned.json" \
+            --test-result "$test_result" \
+            --repository jkomkov/bulla \
+            --slot "release-slot/$version.slot.json" \
+            --context releases/release-trust-context.json \
+            --allow-unsigned
+          python -m bulla receipt verify \
+            "release-preimage/$version.unsigned.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-finalization-${{ github.sha }}
+          path: |
+            release-candidate/
+            release-slot/
+            release-preimage/
+          if-no-files-found: error
+          retention-days: 90

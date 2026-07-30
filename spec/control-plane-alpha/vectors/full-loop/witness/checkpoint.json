@@ -1,0 +1,26 @@
+{
+  "anchored_before": null,
+  "checkpoint_hash": "sha256:29b53b59a421cbdb89ba436a9adee14242fdd8a0e821b8caa14e8ae811374088",
+  "included_attestation_hashes": [
+    "sha256:ca27cbbc039f5e24b86ae7b08b8ed0ce982d019344cb4ea959b821fff276fd73",
+    "sha256:ed74ad611cf22c098c0c13716dc26e01722ab511471b16ba3b542ff0bf3c65bf",
+    "sha256:a3927f1349c9ba4d79e931af50d4064b85c50a479f33c6d5eb06a2d30d3758ba",
+    "sha256:d4640c045d478807d4c62d8d78ddeb593bebd598a580b44cec588b1cf7965ccc",
+    "sha256:0ca772c56a6f15a79676e7fdaeaffe781e568507de917af7c98b8076f9bc8cff",
+    "sha256:b392932cd95a3e1d3ffceec999f59388eea960a3a837b6e4284bb51867b9daad",
+    "sha256:34038c4c23429097f8fc09a0a79c7656847004926097fed4ef09d2daae947c24",
+    "sha256:0241d41a3b456557f3d0f1a63199092578d4105d57bfb8a964c3b432a63ade1d"
+  ],
+  "proof": {
+    "issuer": "did:key:z6MkrmtuAnLGsHSw1bKoYxpFp6FfikSzNzhY489HrQsD8wDS",
+    "proofValue": "08QCmZ8/d80y93MhTUxiwFvY+IDGBqTopbXRPS+4WPrdxq355LDi3dx5YEeNFjMnMha/GrRXU63c4ANr4QgnDw==",
+    "purpose": "witness-checkpoint",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkrmtuAnLGsHSw1bKoYxpFp6FfikSzNzhY489HrQsD8wDS"
+  },
+  "received_at": "2026-07-26T12:07:00Z",
+  "root_ref": "witness://bulla-control-plane-alpha/public-alpha-v1",
+  "schema_version": 1,
+  "witness_id": "bulla-control-plane-alpha-witness",
+  "witnessed_at": "2026-07-26T12:08:00Z"
+}

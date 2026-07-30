@@ -1,0 +1,16 @@
+{
+  "artifacts": {
+    "f11-margins.json": "sha256:72591f7ca885b6ab74e6e7aa8cffacce3d3f8a630e000baccb84644f224c3d66",
+    "f12-effect-laundering.json": "sha256:2522c899df524a880daec6b1fff7d4770c5c5169af77a612d5ca32c2bf71d933",
+    "matched-scramble.json": "sha256:6ab4b63e30d47031e03b102c92c0995c60809f34c42d3ec360d31cf872ab45d0",
+    "report.json": "sha256:3ee2567c724566cd0f830a3c8248432ae7d952c24d287f7b5a943de5bdaa89ef",
+    "scope-frontier.json": "sha256:bf093b89def209a4bf0a2264361dce28912ec4a3f21f21bbf676544612a41859",
+    "transfer-cases.jsonl": "sha256:78add4b8cab90a2d16145117ababcd31bb44b7cfa9435e1706ed8043716d4e62"
+  },
+  "candidate_status": "PRE_EXTERNAL_FREEZE",
+  "classification": "INTERNAL_CAPTIVE_CONTROL",
+  "external_execution": "BLOCKED_BY_SPRINT_EXECUTION_CONTEXT",
+  "preserved_v04_manifest": "sha256:6d6b7405aa5267037f3c3b54d6c7c0f04389b5f35f7de7430f39641c43394357",
+  "profile": "bulla.golden-suite/0.5-experimental",
+  "schema_version": "0.5-experimental"
+}

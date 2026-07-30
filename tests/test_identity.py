@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import base64
+
 from bulla.identity import (
     LocalEd25519Signer,
     did_key_from_pubkey,
@@ -92,6 +94,26 @@ def test_noncanonical_base64_proof_value_fails_closed():
     proof["proofValue"] += "\n"
     res = verify_proof(_HASH, proof)
     assert res.authentic is False
+
+
+def test_noncanonical_base64_unused_pad_bits_fail_closed():
+    signer = LocalEd25519Signer.generate()
+    proof = dict(signer.sign(_HASH))
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+    canonical_index = alphabet.index(proof["proofValue"][-3])
+    assert canonical_index & 0x0F == 0
+    proof["proofValue"] = (
+        proof["proofValue"][:-3]
+        + alphabet[canonical_index + 1]
+        + proof["proofValue"][-2:]
+    )
+    assert base64.b64decode(proof["proofValue"], validate=True) == base64.b64decode(
+        signer.sign(_HASH)["proofValue"],
+        validate=True,
+    )
+    res = verify_proof(_HASH, proof)
+    assert res.authentic is False
+    assert "canonical base64" in res.detail
 
 
 def test_unknown_proof_type_fails_closed():

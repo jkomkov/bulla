@@ -1,0 +1,26 @@
+{
+  "anchor_id": "mcp-boundary-ingress",
+  "observations": [
+    {
+      "anchor_id": "mcp-boundary-ingress",
+      "evidence_hash": "sha256:8aa85354326b7f0b27b33e519ccc7e95b566392921c7c13e1cc45dc8b90016a7",
+      "observation_id": "decision-permit-001",
+      "operation_ref": "sha256:542626827cbbd1a8ede8165875d4b738873d3b2f31c1db42092273a07d8256d6",
+      "phase": "decision",
+      "protocol": "mcp",
+      "run_id": "run-mcp-control-alpha-001"
+    },
+    {
+      "anchor_id": "mcp-boundary-ingress",
+      "evidence_hash": "sha256:e61311f70d18700738c5e03d01ec3b10565a18c53155f58aa1a821ca48febfa6",
+      "observation_id": "decision-refuse-001",
+      "operation_ref": "sha256:d4d90b4b722e3b52fdc090be71e24adef531642008f79f1c74f4dec40760397b",
+      "phase": "decision",
+      "protocol": "mcp",
+      "run_id": "run-mcp-control-alpha-001"
+    }
+  ],
+  "phase": "decision",
+  "protocol": "mcp",
+  "schema_version": 1
+}

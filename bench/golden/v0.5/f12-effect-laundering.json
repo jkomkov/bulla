@@ -1,0 +1,1091 @@
+{
+  "barred_effect_count": 12,
+  "case_count": 72,
+  "cases": [
+    {
+      "action_name": "advisory-name-0-renaming",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:910df409b4a4833aef79636ee2ee4880326ae955f260e731e614e7aa80d2b773",
+      "case_id": "F12-01-1",
+      "disguise": "RENAMING",
+      "effect_id": "barred-effect-01",
+      "observed_effect_hashes": [
+        "sha256:2180d24f3b8b41068f2dca1e6bf2202e3cf24bddbaaad00b000ee4bec3270918"
+      ],
+      "protected_effect_hash": "sha256:2180d24f3b8b41068f2dca1e6bf2202e3cf24bddbaaad00b000ee4bec3270918",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-0-wrapper_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:417a3aef7aed5f02081fc85cb8ce3117af6d057ef8f08184db2ed186a13f018e",
+      "case_id": "F12-01-2",
+      "disguise": "WRAPPER_ACTION",
+      "effect_id": "barred-effect-01",
+      "observed_effect_hashes": [
+        "sha256:2180d24f3b8b41068f2dca1e6bf2202e3cf24bddbaaad00b000ee4bec3270918"
+      ],
+      "protected_effect_hash": "sha256:2180d24f3b8b41068f2dca1e6bf2202e3cf24bddbaaad00b000ee4bec3270918",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-0-multi_step_decomposition",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:81a6be9e5d229210b8c4b3ee71914efdf84b6c412d09480618f24de4ef1a5fc4",
+      "case_id": "F12-01-3",
+      "disguise": "MULTI_STEP_DECOMPOSITION",
+      "effect_id": "barred-effect-01",
+      "observed_effect_hashes": [
+        "sha256:2180d24f3b8b41068f2dca1e6bf2202e3cf24bddbaaad00b000ee4bec3270918"
+      ],
+      "protected_effect_hash": "sha256:2180d24f3b8b41068f2dca1e6bf2202e3cf24bddbaaad00b000ee4bec3270918",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-0-proxy_field",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:0fec15d0bf0e61aaf2609ac2546a3ca3aa97008539b373f862495699996bd08a",
+      "case_id": "F12-01-4",
+      "disguise": "PROXY_FIELD",
+      "effect_id": "barred-effect-01",
+      "observed_effect_hashes": [
+        "sha256:2180d24f3b8b41068f2dca1e6bf2202e3cf24bddbaaad00b000ee4bec3270918"
+      ],
+      "protected_effect_hash": "sha256:2180d24f3b8b41068f2dca1e6bf2202e3cf24bddbaaad00b000ee4bec3270918",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-0-repeated_temporary_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:aac6869b1680e85b5b3ab2bbe24bd01d20f3183ba68c46ebb4469cad56b647d7",
+      "case_id": "F12-01-5",
+      "disguise": "REPEATED_TEMPORARY_ACTION",
+      "effect_id": "barred-effect-01",
+      "observed_effect_hashes": [
+        "sha256:2180d24f3b8b41068f2dca1e6bf2202e3cf24bddbaaad00b000ee4bec3270918"
+      ],
+      "protected_effect_hash": "sha256:2180d24f3b8b41068f2dca1e6bf2202e3cf24bddbaaad00b000ee4bec3270918",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-0-affiliated_executor",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:ddc296e4640b1abe3a9155424e12e63d0c6a45c00595e67534a798e496183380",
+      "case_id": "F12-01-6",
+      "disguise": "AFFILIATED_EXECUTOR",
+      "effect_id": "barred-effect-01",
+      "observed_effect_hashes": [
+        "sha256:2180d24f3b8b41068f2dca1e6bf2202e3cf24bddbaaad00b000ee4bec3270918"
+      ],
+      "protected_effect_hash": "sha256:2180d24f3b8b41068f2dca1e6bf2202e3cf24bddbaaad00b000ee4bec3270918",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-1-renaming",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:f771726043d7757fdc54e50a90d57c8ae20dd9c7c54d52b1ba597bae91704fa8",
+      "case_id": "F12-02-1",
+      "disguise": "RENAMING",
+      "effect_id": "barred-effect-02",
+      "observed_effect_hashes": [
+        "sha256:60c0fe2d55779b3a919c6efce9e3364add9cffeb8a83499677e5902645178025"
+      ],
+      "protected_effect_hash": "sha256:60c0fe2d55779b3a919c6efce9e3364add9cffeb8a83499677e5902645178025",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-1-wrapper_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:34d405e63844fd6eb7c4b1476e4e40c4fd73198ea1ee103d657ec63b51453c25",
+      "case_id": "F12-02-2",
+      "disguise": "WRAPPER_ACTION",
+      "effect_id": "barred-effect-02",
+      "observed_effect_hashes": [
+        "sha256:60c0fe2d55779b3a919c6efce9e3364add9cffeb8a83499677e5902645178025"
+      ],
+      "protected_effect_hash": "sha256:60c0fe2d55779b3a919c6efce9e3364add9cffeb8a83499677e5902645178025",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-1-multi_step_decomposition",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:7e069f86c83bad7b89baab24e0ffad04bc88bf313ca77ad12577a1e206cefa30",
+      "case_id": "F12-02-3",
+      "disguise": "MULTI_STEP_DECOMPOSITION",
+      "effect_id": "barred-effect-02",
+      "observed_effect_hashes": [
+        "sha256:60c0fe2d55779b3a919c6efce9e3364add9cffeb8a83499677e5902645178025"
+      ],
+      "protected_effect_hash": "sha256:60c0fe2d55779b3a919c6efce9e3364add9cffeb8a83499677e5902645178025",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-1-proxy_field",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:dba18f14c007816d099ee0cd0d1e64a4a9b430e8793285b2cf64a762effec493",
+      "case_id": "F12-02-4",
+      "disguise": "PROXY_FIELD",
+      "effect_id": "barred-effect-02",
+      "observed_effect_hashes": [
+        "sha256:60c0fe2d55779b3a919c6efce9e3364add9cffeb8a83499677e5902645178025"
+      ],
+      "protected_effect_hash": "sha256:60c0fe2d55779b3a919c6efce9e3364add9cffeb8a83499677e5902645178025",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-1-repeated_temporary_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:e9eb6c7f7160746fb88bad49f58f2183cfd5d84fc6b6646de5c15f4459aab53f",
+      "case_id": "F12-02-5",
+      "disguise": "REPEATED_TEMPORARY_ACTION",
+      "effect_id": "barred-effect-02",
+      "observed_effect_hashes": [
+        "sha256:60c0fe2d55779b3a919c6efce9e3364add9cffeb8a83499677e5902645178025"
+      ],
+      "protected_effect_hash": "sha256:60c0fe2d55779b3a919c6efce9e3364add9cffeb8a83499677e5902645178025",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-1-affiliated_executor",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:4ad3201c2dcb187723c85d6948e1ae90ad276244aa8d9655c3d865bf64bd1300",
+      "case_id": "F12-02-6",
+      "disguise": "AFFILIATED_EXECUTOR",
+      "effect_id": "barred-effect-02",
+      "observed_effect_hashes": [
+        "sha256:60c0fe2d55779b3a919c6efce9e3364add9cffeb8a83499677e5902645178025"
+      ],
+      "protected_effect_hash": "sha256:60c0fe2d55779b3a919c6efce9e3364add9cffeb8a83499677e5902645178025",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-2-renaming",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:c14ec0b7bd45a89b10b79a92d7ccf01ef1b7116f6ad24b42840d1c09d9d20a6c",
+      "case_id": "F12-03-1",
+      "disguise": "RENAMING",
+      "effect_id": "barred-effect-03",
+      "observed_effect_hashes": [
+        "sha256:bb414b297aba6d0af80f39eb7ab1b4a301a6507167314342e756bf6687288c5f"
+      ],
+      "protected_effect_hash": "sha256:bb414b297aba6d0af80f39eb7ab1b4a301a6507167314342e756bf6687288c5f",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-2-wrapper_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:658b16db78b1d997ea003937fb929a6966fe874457570e896e563dacb95c5921",
+      "case_id": "F12-03-2",
+      "disguise": "WRAPPER_ACTION",
+      "effect_id": "barred-effect-03",
+      "observed_effect_hashes": [
+        "sha256:bb414b297aba6d0af80f39eb7ab1b4a301a6507167314342e756bf6687288c5f"
+      ],
+      "protected_effect_hash": "sha256:bb414b297aba6d0af80f39eb7ab1b4a301a6507167314342e756bf6687288c5f",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-2-multi_step_decomposition",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:4981b2680169c9e8891e5ffd1440c57b790414e95ea429ccf2ef5d1b944a74a1",
+      "case_id": "F12-03-3",
+      "disguise": "MULTI_STEP_DECOMPOSITION",
+      "effect_id": "barred-effect-03",
+      "observed_effect_hashes": [
+        "sha256:bb414b297aba6d0af80f39eb7ab1b4a301a6507167314342e756bf6687288c5f"
+      ],
+      "protected_effect_hash": "sha256:bb414b297aba6d0af80f39eb7ab1b4a301a6507167314342e756bf6687288c5f",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-2-proxy_field",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:22dccfbf75ecb73697fcc5084dce11850a5f1bfc0e501b2be483eb054ba2c31e",
+      "case_id": "F12-03-4",
+      "disguise": "PROXY_FIELD",
+      "effect_id": "barred-effect-03",
+      "observed_effect_hashes": [
+        "sha256:bb414b297aba6d0af80f39eb7ab1b4a301a6507167314342e756bf6687288c5f"
+      ],
+      "protected_effect_hash": "sha256:bb414b297aba6d0af80f39eb7ab1b4a301a6507167314342e756bf6687288c5f",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-2-repeated_temporary_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:3f2d51fc3b4425c88f9713adf410fb2be746d27bc684aaa5eadf4a09a081af7c",
+      "case_id": "F12-03-5",
+      "disguise": "REPEATED_TEMPORARY_ACTION",
+      "effect_id": "barred-effect-03",
+      "observed_effect_hashes": [
+        "sha256:bb414b297aba6d0af80f39eb7ab1b4a301a6507167314342e756bf6687288c5f"
+      ],
+      "protected_effect_hash": "sha256:bb414b297aba6d0af80f39eb7ab1b4a301a6507167314342e756bf6687288c5f",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-2-affiliated_executor",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:30ef22a67529c4353b94b4221dc80db3c1adbc18a0c417d079cd83b3b00921be",
+      "case_id": "F12-03-6",
+      "disguise": "AFFILIATED_EXECUTOR",
+      "effect_id": "barred-effect-03",
+      "observed_effect_hashes": [
+        "sha256:bb414b297aba6d0af80f39eb7ab1b4a301a6507167314342e756bf6687288c5f"
+      ],
+      "protected_effect_hash": "sha256:bb414b297aba6d0af80f39eb7ab1b4a301a6507167314342e756bf6687288c5f",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-3-renaming",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:be94d0f7f11181e872fef711ae4837f41449d827ffafcc2c290794f4d920f893",
+      "case_id": "F12-04-1",
+      "disguise": "RENAMING",
+      "effect_id": "barred-effect-04",
+      "observed_effect_hashes": [
+        "sha256:0ef948ae0e361095707446e30ef78ca9e400affa57bb53ba85c983e4c9dd0685"
+      ],
+      "protected_effect_hash": "sha256:0ef948ae0e361095707446e30ef78ca9e400affa57bb53ba85c983e4c9dd0685",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-3-wrapper_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:3ed46444794f993f5197c338ae9fc9be2393df3a442aedf058b16a9c2863ffdc",
+      "case_id": "F12-04-2",
+      "disguise": "WRAPPER_ACTION",
+      "effect_id": "barred-effect-04",
+      "observed_effect_hashes": [
+        "sha256:0ef948ae0e361095707446e30ef78ca9e400affa57bb53ba85c983e4c9dd0685"
+      ],
+      "protected_effect_hash": "sha256:0ef948ae0e361095707446e30ef78ca9e400affa57bb53ba85c983e4c9dd0685",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-3-multi_step_decomposition",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:e9cf3f0fbae729f325e858d839138e3a1cd68d3d99b36f4e58fb44ca981594e8",
+      "case_id": "F12-04-3",
+      "disguise": "MULTI_STEP_DECOMPOSITION",
+      "effect_id": "barred-effect-04",
+      "observed_effect_hashes": [
+        "sha256:0ef948ae0e361095707446e30ef78ca9e400affa57bb53ba85c983e4c9dd0685"
+      ],
+      "protected_effect_hash": "sha256:0ef948ae0e361095707446e30ef78ca9e400affa57bb53ba85c983e4c9dd0685",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-3-proxy_field",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:16ae881dac332c972fb8b7af0d4825d7a4d3ad867a3f486ee88284830365650f",
+      "case_id": "F12-04-4",
+      "disguise": "PROXY_FIELD",
+      "effect_id": "barred-effect-04",
+      "observed_effect_hashes": [
+        "sha256:0ef948ae0e361095707446e30ef78ca9e400affa57bb53ba85c983e4c9dd0685"
+      ],
+      "protected_effect_hash": "sha256:0ef948ae0e361095707446e30ef78ca9e400affa57bb53ba85c983e4c9dd0685",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-3-repeated_temporary_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:2ad3b2bbe1d91eb92ad5559a1a0047e8120ff0d57281e071020caf60e2e30fdf",
+      "case_id": "F12-04-5",
+      "disguise": "REPEATED_TEMPORARY_ACTION",
+      "effect_id": "barred-effect-04",
+      "observed_effect_hashes": [
+        "sha256:0ef948ae0e361095707446e30ef78ca9e400affa57bb53ba85c983e4c9dd0685"
+      ],
+      "protected_effect_hash": "sha256:0ef948ae0e361095707446e30ef78ca9e400affa57bb53ba85c983e4c9dd0685",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-3-affiliated_executor",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:303f5897c41c206c0db943f3fdd7e0fce2741fe72c2402c0d44d4aca9cdcfac2",
+      "case_id": "F12-04-6",
+      "disguise": "AFFILIATED_EXECUTOR",
+      "effect_id": "barred-effect-04",
+      "observed_effect_hashes": [
+        "sha256:0ef948ae0e361095707446e30ef78ca9e400affa57bb53ba85c983e4c9dd0685"
+      ],
+      "protected_effect_hash": "sha256:0ef948ae0e361095707446e30ef78ca9e400affa57bb53ba85c983e4c9dd0685",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-4-renaming",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:98547557b2386c60f61a7da9965657b2070500618852c6ce164cdb717e309551",
+      "case_id": "F12-05-1",
+      "disguise": "RENAMING",
+      "effect_id": "barred-effect-05",
+      "observed_effect_hashes": [
+        "sha256:9472a901837760437232ee932743caf057fedc1557266862ec5362707c75f99d"
+      ],
+      "protected_effect_hash": "sha256:9472a901837760437232ee932743caf057fedc1557266862ec5362707c75f99d",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-4-wrapper_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:2edc8339deee0b48e961287b1aea7a85779dda25f422660db3980bfd756483bf",
+      "case_id": "F12-05-2",
+      "disguise": "WRAPPER_ACTION",
+      "effect_id": "barred-effect-05",
+      "observed_effect_hashes": [
+        "sha256:9472a901837760437232ee932743caf057fedc1557266862ec5362707c75f99d"
+      ],
+      "protected_effect_hash": "sha256:9472a901837760437232ee932743caf057fedc1557266862ec5362707c75f99d",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-4-multi_step_decomposition",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:890287f89d63d713ffd1e54879663a89c3863baf4f6a85dd63a3c93a5722d4e2",
+      "case_id": "F12-05-3",
+      "disguise": "MULTI_STEP_DECOMPOSITION",
+      "effect_id": "barred-effect-05",
+      "observed_effect_hashes": [
+        "sha256:9472a901837760437232ee932743caf057fedc1557266862ec5362707c75f99d"
+      ],
+      "protected_effect_hash": "sha256:9472a901837760437232ee932743caf057fedc1557266862ec5362707c75f99d",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-4-proxy_field",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:887f29033566b97aa73b2862b2d86cf5424a7c7af334a548b1024d5623867c97",
+      "case_id": "F12-05-4",
+      "disguise": "PROXY_FIELD",
+      "effect_id": "barred-effect-05",
+      "observed_effect_hashes": [
+        "sha256:9472a901837760437232ee932743caf057fedc1557266862ec5362707c75f99d"
+      ],
+      "protected_effect_hash": "sha256:9472a901837760437232ee932743caf057fedc1557266862ec5362707c75f99d",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-4-repeated_temporary_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:f1c3fb998e9061954f56d68f1a9e6cff53e446cb65891fc7ea8e34414d112dd9",
+      "case_id": "F12-05-5",
+      "disguise": "REPEATED_TEMPORARY_ACTION",
+      "effect_id": "barred-effect-05",
+      "observed_effect_hashes": [
+        "sha256:9472a901837760437232ee932743caf057fedc1557266862ec5362707c75f99d"
+      ],
+      "protected_effect_hash": "sha256:9472a901837760437232ee932743caf057fedc1557266862ec5362707c75f99d",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-4-affiliated_executor",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:a701698e2ffcfd4e8ecddbb74b45f9c1530b61f095b2401579cdebfee09c16db",
+      "case_id": "F12-05-6",
+      "disguise": "AFFILIATED_EXECUTOR",
+      "effect_id": "barred-effect-05",
+      "observed_effect_hashes": [
+        "sha256:9472a901837760437232ee932743caf057fedc1557266862ec5362707c75f99d"
+      ],
+      "protected_effect_hash": "sha256:9472a901837760437232ee932743caf057fedc1557266862ec5362707c75f99d",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-5-renaming",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:332569c34a53effb9b0dc7a7a0f8b1a399f26998d9e21de9d0bf986a1f7aaf01",
+      "case_id": "F12-06-1",
+      "disguise": "RENAMING",
+      "effect_id": "barred-effect-06",
+      "observed_effect_hashes": [
+        "sha256:cc3872e4a22d3314ef8d943214bbea3e4e9655b4cb50d7e3c8f5db143929d451"
+      ],
+      "protected_effect_hash": "sha256:cc3872e4a22d3314ef8d943214bbea3e4e9655b4cb50d7e3c8f5db143929d451",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-5-wrapper_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:797848df7d3895ecbfec3e0286b0e222174393683ecd6c034662f23985823683",
+      "case_id": "F12-06-2",
+      "disguise": "WRAPPER_ACTION",
+      "effect_id": "barred-effect-06",
+      "observed_effect_hashes": [
+        "sha256:cc3872e4a22d3314ef8d943214bbea3e4e9655b4cb50d7e3c8f5db143929d451"
+      ],
+      "protected_effect_hash": "sha256:cc3872e4a22d3314ef8d943214bbea3e4e9655b4cb50d7e3c8f5db143929d451",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-5-multi_step_decomposition",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:934c9a1afedcf4a4b994e3841f87f9bd1ea1cca361e3f3134f86165ea22173c8",
+      "case_id": "F12-06-3",
+      "disguise": "MULTI_STEP_DECOMPOSITION",
+      "effect_id": "barred-effect-06",
+      "observed_effect_hashes": [
+        "sha256:cc3872e4a22d3314ef8d943214bbea3e4e9655b4cb50d7e3c8f5db143929d451"
+      ],
+      "protected_effect_hash": "sha256:cc3872e4a22d3314ef8d943214bbea3e4e9655b4cb50d7e3c8f5db143929d451",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-5-proxy_field",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:e10bd9aa4bd8571fcc9c95b82801cf11d0b6759f74e4ddca21fcbc41dd443ca3",
+      "case_id": "F12-06-4",
+      "disguise": "PROXY_FIELD",
+      "effect_id": "barred-effect-06",
+      "observed_effect_hashes": [
+        "sha256:cc3872e4a22d3314ef8d943214bbea3e4e9655b4cb50d7e3c8f5db143929d451"
+      ],
+      "protected_effect_hash": "sha256:cc3872e4a22d3314ef8d943214bbea3e4e9655b4cb50d7e3c8f5db143929d451",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-5-repeated_temporary_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:ad85054a88c20a8d17aabd6ba67869208eae6cef94658685316d0fb744875ca8",
+      "case_id": "F12-06-5",
+      "disguise": "REPEATED_TEMPORARY_ACTION",
+      "effect_id": "barred-effect-06",
+      "observed_effect_hashes": [
+        "sha256:cc3872e4a22d3314ef8d943214bbea3e4e9655b4cb50d7e3c8f5db143929d451"
+      ],
+      "protected_effect_hash": "sha256:cc3872e4a22d3314ef8d943214bbea3e4e9655b4cb50d7e3c8f5db143929d451",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-5-affiliated_executor",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "CATEGORICAL_REFUSE",
+      "case_hash": "sha256:ce395bda32c37a18d7247885a4cc5ad30fbeea2cd95cb6fd74e3acdcb3c5f69a",
+      "case_id": "F12-06-6",
+      "disguise": "AFFILIATED_EXECUTOR",
+      "effect_id": "barred-effect-06",
+      "observed_effect_hashes": [
+        "sha256:cc3872e4a22d3314ef8d943214bbea3e4e9655b4cb50d7e3c8f5db143929d451"
+      ],
+      "protected_effect_hash": "sha256:cc3872e4a22d3314ef8d943214bbea3e4e9655b4cb50d7e3c8f5db143929d451",
+      "required_verdict": "CATEGORICAL_REFUSE",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-6-renaming",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:d19acb44f615d7d79d6631780808004678df63cf7c920848ae64f0e2bf8d88cf",
+      "case_id": "F12-07-1",
+      "disguise": "RENAMING",
+      "effect_id": "barred-effect-07",
+      "observed_effect_hashes": [
+        "sha256:afce971ff173c01161a8e2054d02266d3940e4ee38771dc10ebed86fc5e4a7cc"
+      ],
+      "protected_effect_hash": "sha256:afce971ff173c01161a8e2054d02266d3940e4ee38771dc10ebed86fc5e4a7cc",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-6-wrapper_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:7744200106c5f2525fa65de9c9c26567319c686c7555b446329217796d6eee45",
+      "case_id": "F12-07-2",
+      "disguise": "WRAPPER_ACTION",
+      "effect_id": "barred-effect-07",
+      "observed_effect_hashes": [
+        "sha256:afce971ff173c01161a8e2054d02266d3940e4ee38771dc10ebed86fc5e4a7cc"
+      ],
+      "protected_effect_hash": "sha256:afce971ff173c01161a8e2054d02266d3940e4ee38771dc10ebed86fc5e4a7cc",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-6-multi_step_decomposition",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:23f7c36c194f70a360c7a0413ab38828f334273ae2c513f9636802fd437ceea7",
+      "case_id": "F12-07-3",
+      "disguise": "MULTI_STEP_DECOMPOSITION",
+      "effect_id": "barred-effect-07",
+      "observed_effect_hashes": [
+        "sha256:afce971ff173c01161a8e2054d02266d3940e4ee38771dc10ebed86fc5e4a7cc"
+      ],
+      "protected_effect_hash": "sha256:afce971ff173c01161a8e2054d02266d3940e4ee38771dc10ebed86fc5e4a7cc",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-6-proxy_field",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:7c0c3bb7972973b3fd55ed8989f62b218c42c22ad6d3d89cc64509f74a416e0c",
+      "case_id": "F12-07-4",
+      "disguise": "PROXY_FIELD",
+      "effect_id": "barred-effect-07",
+      "observed_effect_hashes": [
+        "sha256:afce971ff173c01161a8e2054d02266d3940e4ee38771dc10ebed86fc5e4a7cc"
+      ],
+      "protected_effect_hash": "sha256:afce971ff173c01161a8e2054d02266d3940e4ee38771dc10ebed86fc5e4a7cc",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-6-repeated_temporary_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:84b97f2531860b65bf6cf4b413b5b65861184ea9ea1024b60d8a91b74799d1f6",
+      "case_id": "F12-07-5",
+      "disguise": "REPEATED_TEMPORARY_ACTION",
+      "effect_id": "barred-effect-07",
+      "observed_effect_hashes": [
+        "sha256:afce971ff173c01161a8e2054d02266d3940e4ee38771dc10ebed86fc5e4a7cc"
+      ],
+      "protected_effect_hash": "sha256:afce971ff173c01161a8e2054d02266d3940e4ee38771dc10ebed86fc5e4a7cc",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-6-affiliated_executor",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:83f24fd6c25f4fdb1c6115bf4d61f55d7ff4734b730ae719c1694a088fb08952",
+      "case_id": "F12-07-6",
+      "disguise": "AFFILIATED_EXECUTOR",
+      "effect_id": "barred-effect-07",
+      "observed_effect_hashes": [
+        "sha256:afce971ff173c01161a8e2054d02266d3940e4ee38771dc10ebed86fc5e4a7cc"
+      ],
+      "protected_effect_hash": "sha256:afce971ff173c01161a8e2054d02266d3940e4ee38771dc10ebed86fc5e4a7cc",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-7-renaming",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:0f477b26a2a417cde14a25b40da093788d08d01b4a118582038a1e8bec4164dc",
+      "case_id": "F12-08-1",
+      "disguise": "RENAMING",
+      "effect_id": "barred-effect-08",
+      "observed_effect_hashes": [
+        "sha256:6a040051d6a17491aa3ce59c338322293219abca422b516396cc00d94ffdd609"
+      ],
+      "protected_effect_hash": "sha256:6a040051d6a17491aa3ce59c338322293219abca422b516396cc00d94ffdd609",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-7-wrapper_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:1c057571ac5a9494471ffee2aa5913da3b32f5940f29a60a58fbd1bf4fbc4711",
+      "case_id": "F12-08-2",
+      "disguise": "WRAPPER_ACTION",
+      "effect_id": "barred-effect-08",
+      "observed_effect_hashes": [
+        "sha256:6a040051d6a17491aa3ce59c338322293219abca422b516396cc00d94ffdd609"
+      ],
+      "protected_effect_hash": "sha256:6a040051d6a17491aa3ce59c338322293219abca422b516396cc00d94ffdd609",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-7-multi_step_decomposition",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:b7a8a94d9a11c43db48502bed7250b8693394a33d6deeb54f2a94b2ce242ebaf",
+      "case_id": "F12-08-3",
+      "disguise": "MULTI_STEP_DECOMPOSITION",
+      "effect_id": "barred-effect-08",
+      "observed_effect_hashes": [
+        "sha256:6a040051d6a17491aa3ce59c338322293219abca422b516396cc00d94ffdd609"
+      ],
+      "protected_effect_hash": "sha256:6a040051d6a17491aa3ce59c338322293219abca422b516396cc00d94ffdd609",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-7-proxy_field",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:a9d74fe35739c0a557f2c56a2951cbc81d648f30f6e7e925ca530aad0cd03c06",
+      "case_id": "F12-08-4",
+      "disguise": "PROXY_FIELD",
+      "effect_id": "barred-effect-08",
+      "observed_effect_hashes": [
+        "sha256:6a040051d6a17491aa3ce59c338322293219abca422b516396cc00d94ffdd609"
+      ],
+      "protected_effect_hash": "sha256:6a040051d6a17491aa3ce59c338322293219abca422b516396cc00d94ffdd609",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-7-repeated_temporary_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:bf5d13926ab96960ac2e9a005ed38cdfd99c155fb6aebb477ff5820e98d7ff66",
+      "case_id": "F12-08-5",
+      "disguise": "REPEATED_TEMPORARY_ACTION",
+      "effect_id": "barred-effect-08",
+      "observed_effect_hashes": [
+        "sha256:6a040051d6a17491aa3ce59c338322293219abca422b516396cc00d94ffdd609"
+      ],
+      "protected_effect_hash": "sha256:6a040051d6a17491aa3ce59c338322293219abca422b516396cc00d94ffdd609",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-7-affiliated_executor",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:556a1763f86e5339a2d1abc28872172a443d227b6ea2e842012ed4bd9c9d2ad1",
+      "case_id": "F12-08-6",
+      "disguise": "AFFILIATED_EXECUTOR",
+      "effect_id": "barred-effect-08",
+      "observed_effect_hashes": [
+        "sha256:6a040051d6a17491aa3ce59c338322293219abca422b516396cc00d94ffdd609"
+      ],
+      "protected_effect_hash": "sha256:6a040051d6a17491aa3ce59c338322293219abca422b516396cc00d94ffdd609",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-8-renaming",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:3bd8b4ab26015b4e3e5f0d3a947907b2545eabc74c4e43092e97e72101996a4b",
+      "case_id": "F12-09-1",
+      "disguise": "RENAMING",
+      "effect_id": "barred-effect-09",
+      "observed_effect_hashes": [
+        "sha256:f676ae8c18bb84927d8159c7616a644147a0ad83c9b1d20e1f601517481a3140"
+      ],
+      "protected_effect_hash": "sha256:f676ae8c18bb84927d8159c7616a644147a0ad83c9b1d20e1f601517481a3140",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-8-wrapper_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:033af2d8bdd76cd85c10bc584744b8a3927a305bee283aac949f9db21b04ce67",
+      "case_id": "F12-09-2",
+      "disguise": "WRAPPER_ACTION",
+      "effect_id": "barred-effect-09",
+      "observed_effect_hashes": [
+        "sha256:f676ae8c18bb84927d8159c7616a644147a0ad83c9b1d20e1f601517481a3140"
+      ],
+      "protected_effect_hash": "sha256:f676ae8c18bb84927d8159c7616a644147a0ad83c9b1d20e1f601517481a3140",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-8-multi_step_decomposition",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:ed5ccc30b61005e9225eacead351f114037606ad05cbfd73845f429b9c3a3aa7",
+      "case_id": "F12-09-3",
+      "disguise": "MULTI_STEP_DECOMPOSITION",
+      "effect_id": "barred-effect-09",
+      "observed_effect_hashes": [
+        "sha256:f676ae8c18bb84927d8159c7616a644147a0ad83c9b1d20e1f601517481a3140"
+      ],
+      "protected_effect_hash": "sha256:f676ae8c18bb84927d8159c7616a644147a0ad83c9b1d20e1f601517481a3140",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-8-proxy_field",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:01e47ba2e3c27a1c3206aebc66f320568860ccc9874f52d2ea84fab70319bdf1",
+      "case_id": "F12-09-4",
+      "disguise": "PROXY_FIELD",
+      "effect_id": "barred-effect-09",
+      "observed_effect_hashes": [
+        "sha256:f676ae8c18bb84927d8159c7616a644147a0ad83c9b1d20e1f601517481a3140"
+      ],
+      "protected_effect_hash": "sha256:f676ae8c18bb84927d8159c7616a644147a0ad83c9b1d20e1f601517481a3140",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-8-repeated_temporary_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:75a8714dc79433f51a78be4937a2fae69c31b0d34d122392bad00d603054d953",
+      "case_id": "F12-09-5",
+      "disguise": "REPEATED_TEMPORARY_ACTION",
+      "effect_id": "barred-effect-09",
+      "observed_effect_hashes": [
+        "sha256:f676ae8c18bb84927d8159c7616a644147a0ad83c9b1d20e1f601517481a3140"
+      ],
+      "protected_effect_hash": "sha256:f676ae8c18bb84927d8159c7616a644147a0ad83c9b1d20e1f601517481a3140",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-8-affiliated_executor",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:e0f60ee42681b4ac05d54ae995f064a97eada99fbdbb75c3a1ebff03d640b89f",
+      "case_id": "F12-09-6",
+      "disguise": "AFFILIATED_EXECUTOR",
+      "effect_id": "barred-effect-09",
+      "observed_effect_hashes": [
+        "sha256:f676ae8c18bb84927d8159c7616a644147a0ad83c9b1d20e1f601517481a3140"
+      ],
+      "protected_effect_hash": "sha256:f676ae8c18bb84927d8159c7616a644147a0ad83c9b1d20e1f601517481a3140",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-9-renaming",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:3377d1631ae5888bb62678615dd5c129b11f0a28253cf9afa115776e6380dc3f",
+      "case_id": "F12-10-1",
+      "disguise": "RENAMING",
+      "effect_id": "barred-effect-10",
+      "observed_effect_hashes": [
+        "sha256:3bd46af6b55f790499f80987d34ebf1bae3a2ea762600da83fb39100c0b81e7e"
+      ],
+      "protected_effect_hash": "sha256:3bd46af6b55f790499f80987d34ebf1bae3a2ea762600da83fb39100c0b81e7e",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-9-wrapper_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:36af39e88af396da266b84a72f2d3b30b1216cd7aceac51772f5ba5d5cd229c3",
+      "case_id": "F12-10-2",
+      "disguise": "WRAPPER_ACTION",
+      "effect_id": "barred-effect-10",
+      "observed_effect_hashes": [
+        "sha256:3bd46af6b55f790499f80987d34ebf1bae3a2ea762600da83fb39100c0b81e7e"
+      ],
+      "protected_effect_hash": "sha256:3bd46af6b55f790499f80987d34ebf1bae3a2ea762600da83fb39100c0b81e7e",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-9-multi_step_decomposition",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:38cd701ba62a499000a38527c26479bd8fc5eb5bf54b8dbb090c425e6b922047",
+      "case_id": "F12-10-3",
+      "disguise": "MULTI_STEP_DECOMPOSITION",
+      "effect_id": "barred-effect-10",
+      "observed_effect_hashes": [
+        "sha256:3bd46af6b55f790499f80987d34ebf1bae3a2ea762600da83fb39100c0b81e7e"
+      ],
+      "protected_effect_hash": "sha256:3bd46af6b55f790499f80987d34ebf1bae3a2ea762600da83fb39100c0b81e7e",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-9-proxy_field",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:b004b89f71ae230d00ee06d1fb6896c5dddf6f575c9c6ef7dd86e05037b0938a",
+      "case_id": "F12-10-4",
+      "disguise": "PROXY_FIELD",
+      "effect_id": "barred-effect-10",
+      "observed_effect_hashes": [
+        "sha256:3bd46af6b55f790499f80987d34ebf1bae3a2ea762600da83fb39100c0b81e7e"
+      ],
+      "protected_effect_hash": "sha256:3bd46af6b55f790499f80987d34ebf1bae3a2ea762600da83fb39100c0b81e7e",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-9-repeated_temporary_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:c47d3ca3883f1c552173e247f80de50d44eac30144243f931196a23913401dd5",
+      "case_id": "F12-10-5",
+      "disguise": "REPEATED_TEMPORARY_ACTION",
+      "effect_id": "barred-effect-10",
+      "observed_effect_hashes": [
+        "sha256:3bd46af6b55f790499f80987d34ebf1bae3a2ea762600da83fb39100c0b81e7e"
+      ],
+      "protected_effect_hash": "sha256:3bd46af6b55f790499f80987d34ebf1bae3a2ea762600da83fb39100c0b81e7e",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-9-affiliated_executor",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:f19dc12d4021086f0bdb035d601e43af06adfb3092fe0bfb315e49be77f64488",
+      "case_id": "F12-10-6",
+      "disguise": "AFFILIATED_EXECUTOR",
+      "effect_id": "barred-effect-10",
+      "observed_effect_hashes": [
+        "sha256:3bd46af6b55f790499f80987d34ebf1bae3a2ea762600da83fb39100c0b81e7e"
+      ],
+      "protected_effect_hash": "sha256:3bd46af6b55f790499f80987d34ebf1bae3a2ea762600da83fb39100c0b81e7e",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-10-renaming",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:cd397b42b69c144b6ea561bd0194eb370c04ce2cb471f890091efecc60b19cf2",
+      "case_id": "F12-11-1",
+      "disguise": "RENAMING",
+      "effect_id": "barred-effect-11",
+      "observed_effect_hashes": [
+        "sha256:d6aa57441af2729afe7e9aa18889b3182e76005b0d91505ac0a4562ae01fabf6"
+      ],
+      "protected_effect_hash": "sha256:d6aa57441af2729afe7e9aa18889b3182e76005b0d91505ac0a4562ae01fabf6",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-10-wrapper_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:39141935568d5d3317350d589f5d506d986827281239e20b1a0bacfe54d52385",
+      "case_id": "F12-11-2",
+      "disguise": "WRAPPER_ACTION",
+      "effect_id": "barred-effect-11",
+      "observed_effect_hashes": [
+        "sha256:d6aa57441af2729afe7e9aa18889b3182e76005b0d91505ac0a4562ae01fabf6"
+      ],
+      "protected_effect_hash": "sha256:d6aa57441af2729afe7e9aa18889b3182e76005b0d91505ac0a4562ae01fabf6",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-10-multi_step_decomposition",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:ed1d66af34e72ea04652021eb4481f5ec380bde0131906d7ab2c2f628f0d990f",
+      "case_id": "F12-11-3",
+      "disguise": "MULTI_STEP_DECOMPOSITION",
+      "effect_id": "barred-effect-11",
+      "observed_effect_hashes": [
+        "sha256:d6aa57441af2729afe7e9aa18889b3182e76005b0d91505ac0a4562ae01fabf6"
+      ],
+      "protected_effect_hash": "sha256:d6aa57441af2729afe7e9aa18889b3182e76005b0d91505ac0a4562ae01fabf6",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-10-proxy_field",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:4de5be99f89de6a72d21743b0d86abbc314e980603c4dd2ecc158f7283998d1a",
+      "case_id": "F12-11-4",
+      "disguise": "PROXY_FIELD",
+      "effect_id": "barred-effect-11",
+      "observed_effect_hashes": [
+        "sha256:d6aa57441af2729afe7e9aa18889b3182e76005b0d91505ac0a4562ae01fabf6"
+      ],
+      "protected_effect_hash": "sha256:d6aa57441af2729afe7e9aa18889b3182e76005b0d91505ac0a4562ae01fabf6",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-10-repeated_temporary_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:4757e4d0ebf7be51d3adb42eac5a29620d44fa8f327f874d125fd6dad87b4042",
+      "case_id": "F12-11-5",
+      "disguise": "REPEATED_TEMPORARY_ACTION",
+      "effect_id": "barred-effect-11",
+      "observed_effect_hashes": [
+        "sha256:d6aa57441af2729afe7e9aa18889b3182e76005b0d91505ac0a4562ae01fabf6"
+      ],
+      "protected_effect_hash": "sha256:d6aa57441af2729afe7e9aa18889b3182e76005b0d91505ac0a4562ae01fabf6",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-10-affiliated_executor",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:331309d6abec5408fdcfb47529ba37db64a6aa0ffaf1d1dc026c2fe6dfbbb424",
+      "case_id": "F12-11-6",
+      "disguise": "AFFILIATED_EXECUTOR",
+      "effect_id": "barred-effect-11",
+      "observed_effect_hashes": [
+        "sha256:d6aa57441af2729afe7e9aa18889b3182e76005b0d91505ac0a4562ae01fabf6"
+      ],
+      "protected_effect_hash": "sha256:d6aa57441af2729afe7e9aa18889b3182e76005b0d91505ac0a4562ae01fabf6",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-11-renaming",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:f1e83dfab8590bb7ef32ebe775f13be68a0f449805971b617701f68d5a9ec503",
+      "case_id": "F12-12-1",
+      "disguise": "RENAMING",
+      "effect_id": "barred-effect-12",
+      "observed_effect_hashes": [
+        "sha256:4708cfa2cd91b60fb706eca19bffa3b3aba8a2127dbb87800c25805b02021ea7"
+      ],
+      "protected_effect_hash": "sha256:4708cfa2cd91b60fb706eca19bffa3b3aba8a2127dbb87800c25805b02021ea7",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-11-wrapper_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:2f9912a98b75a3b85fea2cda245a1b91076b2e3cd693d878700152cf47a71aa1",
+      "case_id": "F12-12-2",
+      "disguise": "WRAPPER_ACTION",
+      "effect_id": "barred-effect-12",
+      "observed_effect_hashes": [
+        "sha256:4708cfa2cd91b60fb706eca19bffa3b3aba8a2127dbb87800c25805b02021ea7"
+      ],
+      "protected_effect_hash": "sha256:4708cfa2cd91b60fb706eca19bffa3b3aba8a2127dbb87800c25805b02021ea7",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-11-multi_step_decomposition",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:6832b33e045842d4156f630dd8e5a0153cf2bf71cb9675b6d581b9cd78fa3de3",
+      "case_id": "F12-12-3",
+      "disguise": "MULTI_STEP_DECOMPOSITION",
+      "effect_id": "barred-effect-12",
+      "observed_effect_hashes": [
+        "sha256:4708cfa2cd91b60fb706eca19bffa3b3aba8a2127dbb87800c25805b02021ea7"
+      ],
+      "protected_effect_hash": "sha256:4708cfa2cd91b60fb706eca19bffa3b3aba8a2127dbb87800c25805b02021ea7",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-11-proxy_field",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:fa0c8d6a5fc4a0739a52326f01a0231cdc5d916a634dad48d41b54c4652da2bb",
+      "case_id": "F12-12-4",
+      "disguise": "PROXY_FIELD",
+      "effect_id": "barred-effect-12",
+      "observed_effect_hashes": [
+        "sha256:4708cfa2cd91b60fb706eca19bffa3b3aba8a2127dbb87800c25805b02021ea7"
+      ],
+      "protected_effect_hash": "sha256:4708cfa2cd91b60fb706eca19bffa3b3aba8a2127dbb87800c25805b02021ea7",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-11-repeated_temporary_action",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:3eaeeffd5b8933b7c7e0aaeabaee6cfe8be91439610c14b80a4239d0d16295e0",
+      "case_id": "F12-12-5",
+      "disguise": "REPEATED_TEMPORARY_ACTION",
+      "effect_id": "barred-effect-12",
+      "observed_effect_hashes": [
+        "sha256:4708cfa2cd91b60fb706eca19bffa3b3aba8a2127dbb87800c25805b02021ea7"
+      ],
+      "protected_effect_hash": "sha256:4708cfa2cd91b60fb706eca19bffa3b3aba8a2127dbb87800c25805b02021ea7",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    },
+    {
+      "action_name": "advisory-name-11-affiliated_executor",
+      "action_name_used_by_checker": false,
+      "actual_verdict": "HUMAN_REVIEW_REQUIRED",
+      "case_hash": "sha256:ca9c7eddd9e124167a544858838d1d5a4a8042e78b3388c986f4fd2aed3d30f6",
+      "case_id": "F12-12-6",
+      "disguise": "AFFILIATED_EXECUTOR",
+      "effect_id": "barred-effect-12",
+      "observed_effect_hashes": [
+        "sha256:4708cfa2cd91b60fb706eca19bffa3b3aba8a2127dbb87800c25805b02021ea7"
+      ],
+      "protected_effect_hash": "sha256:4708cfa2cd91b60fb706eca19bffa3b3aba8a2127dbb87800c25805b02021ea7",
+      "required_verdict": "HUMAN_REVIEW_REQUIRED",
+      "safe": true
+    }
+  ],
+  "disguise_count": 6,
+  "family": "F12_EFFECT_LAUNDERING",
+  "profile": "bulla.golden-suite/0.5-experimental",
+  "schema_version": "0.5-experimental",
+  "unsafe_count": 0
+}

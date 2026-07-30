@@ -1,0 +1,250 @@
+# Manually approved default-branch ceremony. This workflow opens the signed
+# slot before it creates the immutable release tag. It never checks out or
+# imports the candidate package and never uploads package artifacts.
+
+name: prepare signed release slot
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to release (MAJOR.MINOR.PATCH)
+        required: true
+        type: string
+      source_commit:
+        description: Reviewed 40-hex commit to tag and publish
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    environment: release-signing
+    permissions:
+      actions: write
+      contents: read
+    env:
+      RELEASE_VERSION: ${{ inputs.version }}
+      SOURCE_COMMIT: ${{ inputs.source_commit }}
+      TRUSTED_SIGNER_SHA256: ddae23d815e7d8b55858d9d297c3728e47951fd82ee011a3e8e65967f262d511
+      TRUSTED_WORKFLOW_REF: ${{ github.ref }}
+      TRUSTED_REPOSITORY: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+      - name: Validate release identity without executing candidate code
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import os
+          import re
+
+          if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", os.environ["RELEASE_VERSION"]):
+              raise SystemExit("version must be MAJOR.MINOR.PATCH")
+          if not re.fullmatch(r"[0-9a-f]{40}", os.environ["SOURCE_COMMIT"]):
+              raise SystemExit("source_commit must be a lowercase 40-hex SHA")
+          if (
+              os.environ["TRUSTED_WORKFLOW_REF"] != "refs/heads/main"
+              or os.environ["TRUSTED_REPOSITORY"] != "jkomkov/bulla"
+          ):
+              raise SystemExit("release ceremony must run from jkomkov/bulla main")
+          PY
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$SOURCE_COMMIT" = "$GITHUB_SHA" || {
+            echo "::error::source_commit must be the exact reviewed main commit."
+            exit 1
+          }
+          git cat-file -e "$SOURCE_COMMIT^{commit}"
+          if git rev-parse "refs/tags/v$RELEASE_VERSION" >/dev/null 2>&1; then
+            echo "::error::Release tag already exists and cannot be reused."
+            exit 1
+          fi
+          if gh release view "v$RELEASE_VERSION" >/dev/null 2>&1; then
+            echo "::error::Release record already exists and cannot be replaced."
+            exit 1
+          fi
+          if git rev-parse "refs/tags/release-slot-v$RELEASE_VERSION" \
+            >/dev/null 2>&1; then
+            echo "::error::Public release-slot tag already exists."
+            exit 1
+          fi
+          if gh release view "release-slot-v$RELEASE_VERSION" \
+            >/dev/null 2>&1; then
+            echo "::error::Public release-slot record already exists."
+            exit 1
+          fi
+      - name: Verify immutable releases and protected SemVer tags
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_ADMIN_READ_TOKEN }}
+        run: |
+          test -n "$GH_TOKEN" || {
+            echo "RELEASE_ADMIN_READ_TOKEN is required" >&2
+            exit 1
+          }
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/$GITHUB_REPOSITORY/immutable-releases" \
+            > "$RUNNER_TEMP/immutable-releases.json"
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/$GITHUB_REPOSITORY/rulesets?targets=tag&per_page=100" \
+            > "$RUNNER_TEMP/tag-rulesets.json"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          expected = {
+              item["name"]
+              for item in json.loads(
+              Path("releases/release-repository-controls.json").read_text()
+              )["tag_rulesets"]
+          }
+          matches = [
+              item
+              for item in json.loads((root / "tag-rulesets.json").read_text())
+              if item.get("name") in expected
+          ]
+          if (
+              {item.get("name") for item in matches} != expected
+              or any(not isinstance(item.get("id"), int) for item in matches)
+          ):
+              raise SystemExit("required tag ruleset is absent or ambiguous")
+          (root / "tag-ruleset-ids.txt").write_text(
+              "".join(f"{item['id']}\n" for item in sorted(
+                  matches, key=lambda value: value["name"]
+              ))
+          )
+          PY
+          mkdir "$RUNNER_TEMP/tag-rulesets"
+          while IFS= read -r ruleset_id; do
+            gh api \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2026-03-10" \
+              "repos/$GITHUB_REPOSITORY/rulesets/$ruleset_id" \
+              > "$RUNNER_TEMP/tag-rulesets/$ruleset_id.json"
+          done < "$RUNNER_TEMP/tag-ruleset-ids.txt"
+          control_args=(
+            env -u GH_TOKEN python -I scripts/verify_release_repository_controls.py
+            --expected releases/release-repository-controls.json \
+            --immutable "$RUNNER_TEMP/immutable-releases.json"
+          )
+          for ruleset in "$RUNNER_TEMP"/tag-rulesets/*.json; do
+            control_args+=(--ruleset "$ruleset")
+          done
+          "${control_args[@]}"
+      - name: Derive the candidate tree commitment as data
+        run: |
+          tree="$(git rev-parse "$SOURCE_COMMIT^{tree}")"
+          git cat-file tree "$tree" > "$RUNNER_TEMP/source-tree.bin"
+          python - <<'PY' >> "$GITHUB_ENV"
+          import hashlib
+          import os
+          from pathlib import Path
+
+          payload = (Path(os.environ["RUNNER_TEMP"]) / "source-tree.bin").read_bytes()
+          print(f"SOURCE_TREE_SHA256=sha256:{hashlib.sha256(payload).hexdigest()}")
+          PY
+      - name: Install only hash-pinned signer dependencies
+        run: |
+          printf '%s  %s\n' "$TRUSTED_SIGNER_SHA256" \
+            scripts/trusted_release_signer.py | sha256sum --check --strict
+          python -m pip install --require-hashes \
+            -r .github/release-signing-requirements.txt
+      - name: Open signed slot with the default-branch signer
+        env:
+          BULLA_RELEASE_KEY: ${{ secrets.BULLA_RELEASE_KEY }}
+        run: |
+          test -n "$BULLA_RELEASE_KEY" || {
+            echo "BULLA_RELEASE_KEY is required" >&2
+            exit 1
+          }
+          python -I scripts/trusted_release_signer.py open-slot \
+            --version "$RELEASE_VERSION" \
+            --source-commit "$SOURCE_COMMIT" \
+            --source-tree-sha256 "$SOURCE_TREE_SHA256" \
+            --context releases/release-trust-context.json \
+            --out "release-slot/$RELEASE_VERSION.slot.json"
+      - name: Publish an immutable slot, then open the package draft
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_TAG_TOKEN }}
+        run: |
+          test -n "$GH_TOKEN" || {
+            echo "RELEASE_TAG_TOKEN is required" >&2
+            exit 1
+          }
+          slot_tag="release-slot-v$RELEASE_VERSION"
+          gh release create "$slot_tag" \
+            "release-slot/$RELEASE_VERSION.slot.json#Signed release slot" \
+            --target "$SOURCE_COMMIT" \
+            --prerelease \
+            --title "Release slot for v$RELEASE_VERSION" \
+            --notes "Public pre-publication commitment for Bulla v$RELEASE_VERSION."
+          mkdir verified-public-slot
+          gh release download "$slot_tag" \
+            --pattern "$RELEASE_VERSION.slot.json" \
+            --dir verified-public-slot
+          cmp --silent \
+            "release-slot/$RELEASE_VERSION.slot.json" \
+            "verified-public-slot/$RELEASE_VERSION.slot.json"
+          git fetch --force --tags origin
+          test "$(git rev-list -n 1 "$slot_tag")" = "$SOURCE_COMMIT"
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/$GITHUB_REPOSITORY/releases/tags/$slot_tag" \
+            > "$RUNNER_TEMP/public-slot-release.json"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          release = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "public-slot-release.json").read_text()
+          )
+          if (
+              release.get("tag_name")
+              != f"release-slot-v{os.environ['RELEASE_VERSION']}"
+              or release.get("target_commitish") != os.environ["SOURCE_COMMIT"]
+              or release.get("draft") is not False
+              or release.get("prerelease") is not True
+              or release.get("immutable") is not True
+          ):
+              raise SystemExit("public release-slot record differs")
+          PY
+          gh release verify "$slot_tag"
+          gh release create "v$RELEASE_VERSION" \
+            --target "$SOURCE_COMMIT" \
+            --draft \
+            --title "v$RELEASE_VERSION" \
+            --notes "Signed release slot opened; publication receipt pending."
+          gh release upload "v$RELEASE_VERSION" \
+            "release-slot/$RELEASE_VERSION.slot.json"
+      - name: Dispatch preparation-bound Trusted Publishing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run publish.yml \
+            --ref main \
+            -f version="$RELEASE_VERSION" \
+            -f source_commit="$SOURCE_COMMIT" \
+            -f prepare_run_id="$GITHUB_RUN_ID"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: bulla-release-slot-${{ inputs.source_commit }}
+          path: release-slot/
+          if-no-files-found: error
+          retention-days: 90

@@ -709,6 +709,25 @@ def main() -> int:
                     failures += 1
                     print(f"          expected {want_id}")
 
+    # The occurrence-binding boundary, demonstrated (action-receipt-v0.4-draft.md):
+    # the tampered-timestamp vector differs from signed-authorized ONLY in the
+    # claimed timestamp and the unsigned event hash. Attestation hash and log
+    # leaf are byte-identical, so both verify fully under v0.2/v0.3 rules. When
+    # a v0.4 verifier binds event_hash into the attestation preimage, this pin
+    # must flip to a rejection under that version.
+    base = json.loads((here / "signed-authorized.json").read_text())
+    swapped = json.loads((here / "tampered-timestamp.json").read_text())
+    gap_ok = (
+        base["timestamp"] != swapped["timestamp"]
+        and base["hashes"]["event"] != swapped["hashes"]["event"]
+        and base["hashes"]["attestation"] == swapped["hashes"]["attestation"]
+        and base["hashes"]["log_leaf"] == swapped["hashes"]["log_leaf"]
+    )
+    print(f"  {'✓' if gap_ok else '✗'} occurrence-binding boundary: claimed timestamp differs, "
+          f"event hash differs, attestation and log leaf identical (v0.2/v0.3 gap, v0.4 target)")
+    if not gap_ok:
+        failures += 1
+
     tail = f" ({identity_skipped} identity rung(s) skipped — no ed25519 lib)" if identity_skipped else ""
     print(f"\n{'OK' if not failures else 'FAIL'}: the spec reproduces "
           f"{len(expected) - failures}/{len(expected)} verdicts with zero bulla imports{tail}")

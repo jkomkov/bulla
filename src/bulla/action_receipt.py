@@ -73,7 +73,12 @@ import json
 from dataclasses import dataclass, field
 from typing import Any
 
-from bulla._canonical import canonical_json
+from bulla._canonical import (
+    JCS_INT_PROFILE,
+    CanonicalizationError,
+    canonical_jcs_int,
+    canonical_json,
+)
 from bulla.envelope import EnvelopeError, RecourseEnvelope
 from bulla.executable_form import (
     EXECUTABLE_FORM,
@@ -89,6 +94,7 @@ SCHEMA_VERSION = "0.2"
 # Builders continue to mint v0.2 unless callers use ``sign_action_receipt``,
 # which upgrades the receipt to this draft revision.
 AUTHORIZATION_SCHEMA_VERSION = "0.3"
+OCCURRENCE_SCHEMA_VERSION = "0.4"
 RECEIPT_KIND = "action_receipt"
 
 #: Evidence grounding classes (spec v0.2 §1), ordered LOWEST first for the
@@ -134,6 +140,11 @@ def _canon_hash(obj: Any) -> str:
     return _sha(canonical_json(obj).encode("utf-8"))
 
 
+def _v04_hash(obj: Any) -> str:
+    """Hash under the explicit portable v0.4 canonical data model."""
+    return _sha(canonical_jcs_int(obj).encode("utf-8"))
+
+
 def _leaf_hash(data: bytes) -> str:
     """RFC 6962 leaf hash ``H(0x00 ‖ data)`` — same bytes as
     ``bulla.registry.leaf_hash``, inlined so this stays a light leaf module."""
@@ -176,7 +187,13 @@ def _validate_executable_definition(defn: Any) -> None:
         raise ActionReceiptError(str(exc)) from exc
 
 
-def _validate_convention(c: Any) -> None:
+def _portable_definition_hash(definition: Any) -> str:
+    if isinstance(definition, str):
+        return _sha(definition.encode("utf-8"))
+    return _v04_hash(definition)
+
+
+def _validate_convention(c: Any, *, portable: bool = False) -> None:
     """Shape + pin validation for one convention entry. Raises on the first
     violation; a receipt carrying a malformed convention never constructs."""
     if not isinstance(c, dict):
@@ -204,7 +221,8 @@ def _validate_convention(c: Any) -> None:
                 "(a verifier recomputes conformance from the receipt alone)"
             )
         _validate_executable_definition(c["definition"])
-        if convention_definition_hash(c["definition"]) != dh:
+        hasher = _portable_definition_hash if portable else convention_definition_hash
+        if hasher(c["definition"]) != dh:
             raise ActionReceiptError(
                 f"convention {c['name']!r}: definition_hash does not match the in-line definition"
             )
@@ -230,7 +248,8 @@ def _validate_convention(c: Any) -> None:
                 raise ActionReceiptError(
                     f"convention {c['name']!r}: a semantic definition, when inlined, is an opaque string"
                 )
-            if convention_definition_hash(defn) != dh:
+            hasher = _portable_definition_hash if portable else convention_definition_hash
+            if hasher(defn) != dh:
                 raise ActionReceiptError(
                     f"convention {c['name']!r}: definition_hash does not match the in-line definition"
                 )
@@ -294,9 +313,31 @@ def _envelope_views(env: RecourseEnvelope) -> dict:
     return {"mandate": mandate, "remedy": remedy, "retention": retention}
 
 
-def _views_to_envelope(mandate: dict, remedy: dict, retention: dict) -> RecourseEnvelope:
+def _closed(value: Any, allowed: set[str], where: str) -> None:
+    if not isinstance(value, dict):
+        raise ActionReceiptError(f"{where} must be an object")
+    unknown = set(value) - allowed
+    if unknown:
+        raise ActionReceiptError(f"{where} has unknown fields {sorted(unknown)}")
+
+
+def _views_to_envelope(
+    mandate: dict, remedy: dict, retention: dict, *, strict: bool = False,
+) -> RecourseEnvelope:
     """Reconstruct (and thereby re-validate) the envelope from the receipt's
     named views. Any modality-law violation raises here."""
+    if strict:
+        _closed(mandate, {"deed_schema", "authority", "bounds"}, "mandate")
+        _closed(retention, {"record", "disclosure"}, "retention")
+        if mandate.get("authority") is not None:
+            _closed(mandate["authority"], {"principal", "policy", "delegation"}, "mandate.authority")
+        if mandate.get("bounds") is not None:
+            _closed(mandate["bounds"], {"scope", "expires", "rollback_window"}, "mandate.bounds")
+        if remedy:
+            _closed(remedy, {"challenge_window", "forum", "remedies"}, "remedy")
+            _closed(remedy.get("forum"), {"log_endpoint", "trusted_root_ref"}, "remedy.forum")
+            for index, item in enumerate(remedy.get("remedies", ())):
+                _closed(item, {"rung", "verifier", "anchor"}, f"remedy.remedies[{index}]")
     ed: dict = {
         "deed_schema": (mandate or {}).get("deed_schema")
         or RecourseEnvelope.__dataclass_fields__["deed_schema"].default
@@ -334,9 +375,18 @@ class ActionReceipt:
     timestamp: str = ""
     producer: dict = field(default_factory=dict)     # {"bulla_version": "…"} — provenance, not identity
     schema_version: str = SCHEMA_VERSION             # the version the PRODUCER spoke — in the preimage
+    # v0.4 occurrence identity.  These fields are absent from historical wire
+    # versions; keeping them as explicit fields rather than overloading
+    # ``timestamp`` prevents a verifier from silently changing old semantics.
+    event_id: str | None = None
+    claimed_at: str | None = None
+    occurrence: dict | None = None
+    canonicalization: str | None = None
 
     # ---- validation ----
     def __post_init__(self) -> None:
+        if not isinstance(self.envelope, RecourseEnvelope):
+            raise ActionReceiptError("envelope must be a RecourseEnvelope (mandate+remedy)")
         if not isinstance(self.action, dict) or not (self.action.get("type") or "").strip():
             raise ActionReceiptError("action.type is required (the open-vocabulary act, e.g. 'package.release')")
         st = (self.diagnostic_ref or {}).get("status")
@@ -347,9 +397,13 @@ class ActionReceipt:
             )
         if st == "reference" and not (self.diagnostic_ref.get("ref") or "").strip():
             raise ActionReceiptError("diagnostic_ref.status=='reference' requires a 'ref' (the recomputable verdict)")
-        if self.schema_version not in ("0.1", "0.2", AUTHORIZATION_SCHEMA_VERSION):
+        if self.schema_version not in (
+            "0.1", "0.2", AUTHORIZATION_SCHEMA_VERSION, OCCURRENCE_SCHEMA_VERSION,
+        ):
             raise ActionReceiptError(f"unknown schema_version {self.schema_version!r}")
-        is_v02 = self.schema_version in ("0.2", AUTHORIZATION_SCHEMA_VERSION)
+        is_v02 = self.schema_version in (
+            "0.2", AUTHORIZATION_SCHEMA_VERSION, OCCURRENCE_SCHEMA_VERSION,
+        )
         for e in self.evidence_refs:
             if not (e.get("name") or "").strip() or not (e.get("hash") or "").strip():
                 raise ActionReceiptError("every evidence_ref needs a name and a hash")
@@ -365,17 +419,52 @@ class ActionReceipt:
         if self.conventions and not is_v02:
             raise ActionReceiptError("conventions are a v0.2 field — bump schema_version")
         for c in self.conventions:
-            _validate_convention(c)
+            _validate_convention(c, portable=self.schema_version == OCCURRENCE_SCHEMA_VERSION)
         if self.stake is not None:
             raise ActionReceiptError("stake is RESERVED — collateral belongs in an external sidecar; must be None")
         if self.authorization is not None and not isinstance(self.authorization, dict):
             raise ActionReceiptError("authorization must be a detached proof dict (over authorization_hash) or None")
-        if self.authorization is not None and self.schema_version != AUTHORIZATION_SCHEMA_VERSION:
+        if self.authorization is not None and self.schema_version not in (
+            AUTHORIZATION_SCHEMA_VERSION, OCCURRENCE_SCHEMA_VERSION,
+        ):
             raise ActionReceiptError(
-                "authorization is a v0.3 field; v0.1/v0.2 receipts cannot silently change wire semantics"
+                "authorization is a v0.3+ field; v0.1/v0.2 receipts cannot silently change wire semantics"
             )
-        if not isinstance(self.envelope, RecourseEnvelope):
-            raise ActionReceiptError("envelope must be a RecourseEnvelope (mandate+remedy)")
+        if self.schema_version == OCCURRENCE_SCHEMA_VERSION:
+            import uuid
+            if self.timestamp:
+                raise ActionReceiptError("v0.4 uses claimed_at, not the historical timestamp field")
+            if self.canonicalization != JCS_INT_PROFILE:
+                raise ActionReceiptError(
+                    f"v0.4 canonicalization must be {JCS_INT_PROFILE!r}"
+                )
+            try:
+                parsed_event_id = uuid.UUID(str(self.event_id))
+            except (ValueError, AttributeError, TypeError) as exc:
+                raise ActionReceiptError("v0.4 event_id must be a canonical lowercase UUIDv4") from exc
+            if (
+                parsed_event_id.version != 4
+                or str(parsed_event_id) != self.event_id
+                or self.event_id != self.event_id.lower()
+            ):
+                raise ActionReceiptError("v0.4 event_id must be a canonical lowercase UUIDv4")
+            if not isinstance(self.claimed_at, str) or not self.claimed_at:
+                raise ActionReceiptError("v0.4 claimed_at is required")
+            if self.occurrence is not None and not isinstance(self.occurrence, dict):
+                raise ActionReceiptError("v0.4 occurrence must be a detached proof dict or None")
+            try:
+                # Validate every hashed field against the portable domain at construction.
+                canonical_jcs_int(self._content_preimage())
+                canonical_jcs_int(self.envelope.to_dict())
+            except CanonicalizationError as exc:
+                raise ActionReceiptError(str(exc)) from exc
+        elif any(
+            value is not None
+            for value in (self.event_id, self.claimed_at, self.occurrence, self.canonicalization)
+        ):
+            raise ActionReceiptError(
+                "event_id, claimed_at, occurrence, and canonicalization are v0.4 fields"
+            )
 
     # ---- the four hashes ----
     def _content_preimage(self) -> dict:
@@ -397,17 +486,27 @@ class ActionReceipt:
             "evidence_refs": [dict(e) for e in self.evidence_refs],
             "anchor_ref": self.anchor_ref,
         }
+        if self.schema_version == OCCURRENCE_SCHEMA_VERSION:
+            out["canonicalization"] = JCS_INT_PROFILE
         if self.conventions:
             out["conventions"] = [dict(c) for c in self.conventions]
         return out
 
     @property
     def content_hash(self) -> str:
+        if self.schema_version == OCCURRENCE_SCHEMA_VERSION:
+            return _v04_hash(self._content_preimage())
         return _canon_hash(self._content_preimage())
 
     @property
     def event_hash(self) -> str:
-        # the occurrence = the claim, at a time.
+        if self.schema_version == OCCURRENCE_SCHEMA_VERSION:
+            return _v04_hash({
+                "content_hash": self.content_hash,
+                "event_id": self.event_id,
+                "claimed_at": self.claimed_at,
+            })
+        # Historical occurrence identity: the claim at a producer-supplied time.
         return _canon_hash({"content_hash": self.content_hash, "timestamp": self.timestamp})
 
     @property
@@ -416,6 +515,8 @@ class ActionReceipt:
         authorization proof binds. Derived, not stored: a verifier recomputes it
         from the served mandate/remedy/retention views, so it cannot be lied
         about independently of the envelope it summarizes."""
+        if self.schema_version == OCCURRENCE_SCHEMA_VERSION:
+            return _v04_hash(self.envelope.to_dict())
         return _canon_hash(self.envelope.to_dict())
 
     @property
@@ -427,6 +528,8 @@ class ActionReceipt:
         verifying. Invariant to ``signature``/``authorization`` (both excluded
         from the content and envelope preimages), so it is stable to sign against
         before either proof exists."""
+        if self.schema_version == OCCURRENCE_SCHEMA_VERSION:
+            return _v04_hash({"event_hash": self.event_hash, "envelope_hash": self.envelope_hash})
         return _canon_hash({"content_hash": self.content_hash, "envelope_hash": self.envelope_hash})
 
     @property
@@ -436,6 +539,15 @@ class ActionReceipt:
         # v0.3 always includes the authorization slot (including null) so the
         # field cannot be stripped without changing the attestation hash.
         # v0.1/v0.2 retain their historical preimage byte-for-byte.
+        if self.schema_version == OCCURRENCE_SCHEMA_VERSION:
+            return _v04_hash({
+                "content_hash": self.content_hash,
+                "signature": self.signature,
+                "event_hash": self.event_hash,
+                "occurrence": self.occurrence,
+                "recourse_envelope": self.envelope.to_dict(),
+                "authorization": self.authorization,
+            })
         preimage: dict = {"content_hash": self.content_hash, "signature": self.signature}
         preimage["recourse_envelope"] = self.envelope.to_dict()
         if self.schema_version == AUTHORIZATION_SCHEMA_VERSION:
@@ -471,13 +583,18 @@ class ActionReceipt:
             "conventions": [dict(c) for c in self.conventions],
             "signature": self.signature,
         }
-        if self.schema_version == AUTHORIZATION_SCHEMA_VERSION:
+        if self.schema_version in (AUTHORIZATION_SCHEMA_VERSION, OCCURRENCE_SCHEMA_VERSION):
             out["authorization"] = self.authorization
-        out.update({
-            "timestamp": self.timestamp,
-            "producer": self.producer,
-            "hashes": self.hashes(),
-        })
+        if self.schema_version == OCCURRENCE_SCHEMA_VERSION:
+            out.update({
+                "canonicalization": self.canonicalization,
+                "event_id": self.event_id,
+                "claimed_at": self.claimed_at,
+                "occurrence": self.occurrence,
+            })
+        else:
+            out["timestamp"] = self.timestamp
+        out.update({"producer": self.producer, "hashes": self.hashes()})
         return out
 
     def to_json(self, *, indent: int = 2) -> str:
@@ -493,27 +610,68 @@ class ActionReceipt:
             raise ActionReceiptError("receipt must be a dict")
         if d.get("kind") != RECEIPT_KIND:
             raise ActionReceiptError(f"not an {RECEIPT_KIND} (kind={d.get('kind')!r})")
-        schema_version = d.get("schema_version") or SCHEMA_VERSION
-        if "authorization" in d and schema_version != AUTHORIZATION_SCHEMA_VERSION:
-            raise ActionReceiptError("authorization member is only valid in schema_version '0.3'")
-        if schema_version == AUTHORIZATION_SCHEMA_VERSION and "authorization" not in d:
-            raise ActionReceiptError("v0.3 receipt is missing its authorization member")
+        schema_version = d.get("schema_version")
+        if not schema_version:
+            raise ActionReceiptError("schema_version is required; verification never supplies a default")
+        if "authorization" in d and schema_version not in (
+            AUTHORIZATION_SCHEMA_VERSION, OCCURRENCE_SCHEMA_VERSION,
+        ):
+            raise ActionReceiptError(
+                "authorization member is only valid in schema_version '0.3' or '0.4'"
+            )
+        historical_base = {
+            "schema_version", "kind", "action", "diagnostic_ref", "evidence_refs",
+            "anchor_ref", "mandate", "remedy", "retention", "stake", "signature",
+            "timestamp", "producer", "hashes",
+        }
+        expected = set(historical_base)
+        if schema_version in ("0.2", AUTHORIZATION_SCHEMA_VERSION):
+            expected.add("conventions")
+        if schema_version == AUTHORIZATION_SCHEMA_VERSION:
+            expected.add("authorization")
+        if schema_version == OCCURRENCE_SCHEMA_VERSION:
+            expected = {
+                "schema_version", "canonicalization", "kind", "action", "diagnostic_ref",
+                "evidence_refs", "anchor_ref", "mandate", "remedy", "retention", "stake",
+                "conventions", "signature", "occurrence", "authorization", "event_id",
+                "claimed_at", "producer", "hashes",
+            }
+        missing, unknown = expected - set(d), set(d) - expected
+        if missing:
+            raise ActionReceiptError(f"receipt is missing required fields {sorted(missing)}")
+        if unknown:
+            raise ActionReceiptError(f"receipt has unknown fields {sorted(unknown)}")
+        strict_nested = schema_version in (AUTHORIZATION_SCHEMA_VERSION, OCCURRENCE_SCHEMA_VERSION)
+        if strict_nested:
+            _closed(d["diagnostic_ref"], {"status", "ref"}, "diagnostic_ref")
+            _closed(d["hashes"], {"content", "event", "attestation", "log_leaf"}, "hashes")
+            for index, item in enumerate(d["evidence_refs"]):
+                _closed(item, {"name", "hash", "grounding"}, f"evidence_refs[{index}]")
+            proof_fields = {"type", "purpose", "issuer", "verificationMethod", "proofValue"}
+            for name in ("signature", "authorization", "occurrence"):
+                proof = d.get(name)
+                if proof is not None:
+                    _closed(proof, proof_fields, name)
         env = _views_to_envelope(
-            d.get("mandate") or {}, d.get("remedy") or {}, d.get("retention") or {}
+            d["mandate"], d["remedy"], d["retention"], strict=strict_nested,
         )
         return cls(
-            action=d.get("action") or {},
-            diagnostic_ref=d.get("diagnostic_ref") or {},
+            action=d["action"],
+            diagnostic_ref=d["diagnostic_ref"],
             envelope=env,
-            anchor_ref=d.get("anchor_ref") or {},
-            evidence_refs=tuple(d.get("evidence_refs") or ()),
-            conventions=tuple(d.get("conventions") or ()),
-            signature=d.get("signature"),
+            anchor_ref=d["anchor_ref"],
+            evidence_refs=tuple(d["evidence_refs"]),
+            conventions=tuple(d.get("conventions", ())),
+            signature=d["signature"],
             authorization=d.get("authorization"),
-            stake=d.get("stake"),
-            timestamp=d.get("timestamp") or "",
-            producer=d.get("producer") or {},
+            stake=d["stake"],
+            timestamp=d.get("timestamp", ""),
+            producer=d["producer"],
             schema_version=schema_version,
+            event_id=d.get("event_id"),
+            claimed_at=d.get("claimed_at"),
+            occurrence=d.get("occurrence"),
+            canonicalization=d.get("canonicalization"),
         )
 
 
@@ -591,6 +749,73 @@ def sign_action_receipt(receipt: ActionReceipt, signer: Any) -> ActionReceipt:
     return dataclasses.replace(unsigned, signature=signature, authorization=authorization)
 
 
+def build_action_receipt_v04(
+    *,
+    action: dict,
+    diagnostic_ref: dict,
+    envelope: RecourseEnvelope,
+    event_id: str,
+    claimed_at: str,
+    anchor_ref: dict | None = None,
+    evidence_refs: tuple[dict, ...] | list[dict] = (),
+    conventions: tuple[dict, ...] | list[dict] = (),
+    producer: dict | None = None,
+) -> ActionReceipt:
+    """Build an unsigned, opt-in ActionReceipt v0.4.
+
+    The ordinary builder deliberately continues to mint v0.2.  Callers must
+    choose this constructor and then :func:`sign_action_receipt_v04`; there is
+    no implicit upgrade of a published wire format.
+    """
+    filled: list[dict] = []
+    for convention in conventions:
+        item = dict(convention)
+        if "definition_hash" not in item and "definition" in item:
+            # v0.4 pins structured definitions under its own portable canon.
+            definition = item["definition"]
+            item["definition_hash"] = _portable_definition_hash(definition)
+        filled.append(item)
+    return ActionReceipt(
+        action=dict(action),
+        diagnostic_ref=dict(diagnostic_ref),
+        envelope=envelope,
+        anchor_ref=dict(anchor_ref or {}),
+        evidence_refs=tuple(dict(item) for item in evidence_refs),
+        conventions=tuple(filled),
+        signature=None,
+        occurrence=None,
+        authorization=None,
+        timestamp="",
+        producer=dict(producer or {}),
+        schema_version=OCCURRENCE_SCHEMA_VERSION,
+        event_id=event_id,
+        claimed_at=claimed_at,
+        canonicalization=JCS_INT_PROFILE,
+    )
+
+
+def sign_action_receipt_v04(receipt: ActionReceipt, signer: Any) -> ActionReceipt:
+    """Authenticate v0.4 content, occurrence, and authority as separate facts."""
+    import dataclasses
+
+    if receipt.schema_version != OCCURRENCE_SCHEMA_VERSION:
+        raise ActionReceiptError("sign_action_receipt_v04 requires an ActionReceipt v0.4")
+    unsigned = dataclasses.replace(
+        receipt, signature=None, occurrence=None, authorization=None,
+    )
+    signature = signer.sign_domain("content", unsigned.content_hash, schema="0.4")
+    occurrence = signer.sign_domain("occurrence", unsigned.event_hash, schema="0.4")
+    authorization = signer.sign_domain(
+        "authorization", unsigned.authorization_hash, schema="0.4",
+    )
+    return dataclasses.replace(
+        unsigned,
+        signature=signature,
+        occurrence=occurrence,
+        authorization=authorization,
+    )
+
+
 # ── the two golden instances (same envelope, different action.type) ──────────
 #
 # These are NOT new types — a release IS a tool call (a side-effecting act), so
@@ -609,6 +834,8 @@ def build_release_receipt(
     envelope: RecourseEnvelope,
     tree_hash: str | None = None,
     test_result: str | None = None,
+    release_slot_hash: str | None = None,
+    release_signed_at: str | None = None,
     root_of_trust: dict | None = None,
     signature: dict | None = None,
     timestamp: str = "",
@@ -628,6 +855,10 @@ def build_release_receipt(
     }
     if test_result is not None:
         subject["test_result"] = test_result
+    if release_slot_hash is not None:
+        subject["release_slot_hash"] = release_slot_hash
+    if release_signed_at is not None:
+        subject["release_signed_at"] = release_signed_at
     # wheel/sdist/tree are held by systems the producer does not administer
     # (PyPI, the git remote) — third_party_anchored under the display rule.
     evidence: list[dict] = [
@@ -898,10 +1129,12 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
             authority_authentic=authority, bounds_conformance=bounds_conf, **dims,
         )
 
-    # ---- attestation rung: content authenticity AND authority authenticity ----
+    # ---- attestation rung: content, occurrence, and authority authenticity ----
     sig = receipt.signature
+    occurrence_proof = receipt.occurrence
     auth_proof = receipt.authorization
     is_v03 = receipt.schema_version == AUTHORIZATION_SCHEMA_VERSION
+    is_v04 = receipt.schema_version == OCCURRENCE_SCHEMA_VERSION
     env_dict = receipt.envelope.to_dict()
     # Almost every ActionReceipt carries a non-trivial envelope (the modality law
     # requires remedies), so an unsigned envelope is the common case to flag.
@@ -910,7 +1143,7 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
     )
     default_authority = "unauthenticated" if envelope_nontrivial else "not_applicable"
 
-    if not sig and not auth_proof:
+    if not sig and not occurrence_proof and not auth_proof:
         if envelope_nontrivial:
             reasons.append(
                 "authority unauthenticated — no issuer authorization proof binds this "
@@ -919,11 +1152,11 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
         reasons.append("unsigned receipt — verified to digest only (no signature to check)")
         return done(True, "digest", default_authority)
 
-    if auth_proof and not sig:
+    if (occurrence_proof or auth_proof) and not sig:
         checks["proof_pair"] = False
         reasons.append(
-            "authorization proof present without the required content signature — "
-            "refusing an incomplete full-depth proof pair"
+            "occurrence/authorization proof present without the required content signature — "
+            "refusing an incomplete full-depth proof set"
         )
         return done(False, "digest", "forged")
 
@@ -932,6 +1165,14 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
         reasons.append(
             "v0.3 authorization proof missing — refusing a downgrade from the "
             "full content+envelope proof pair"
+        )
+        return done(False, "digest", "unauthenticated")
+
+    if is_v04 and sig and (not occurrence_proof or not auth_proof):
+        checks["v04_proof_set"] = False
+        reasons.append(
+            "v0.4 requires content, occurrence, and authorization proofs together — "
+            "refusing an incomplete occurrence-bound proof set"
         )
         return done(False, "digest", "unauthenticated")
 
@@ -945,8 +1186,11 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
     def _vproof(purpose: str, digest: str, proof: dict):
         # v0.3 proofs are domain-separated (purpose in the signed bytes); v0.2
         # proofs sign the raw digest string. Dispatch on the receipt's own version.
-        if is_v03:
-            return verify_proof_domain(purpose, digest, proof, public_key=public_key)
+        if is_v03 or is_v04:
+            return verify_proof_domain(
+                purpose, digest, proof, public_key=public_key,
+                schema="0.4" if is_v04 else "0.3",
+            )
         return verify_proof(digest, proof, public_key=public_key)
 
     # content authenticity — the claim/verdict (over content_hash)
@@ -957,6 +1201,17 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
             reasons.append(
                 f"signature not authentic ({getattr(auth, 'method', '?')}: "
                 f"{getattr(auth, 'detail', None) or 'not authentic'})"
+            )
+            return done(False, "digest", default_authority)
+
+    if occurrence_proof:
+        occurrence_auth = _vproof("occurrence", receipt.event_hash, occurrence_proof)
+        checks["occurrence"] = bool(getattr(occurrence_auth, "authentic", False))
+        if not checks["occurrence"]:
+            reasons.append(
+                "occurrence not authentic — the occurrence proof does not bind this "
+                f"event_id/claimed_at ({getattr(occurrence_auth, 'method', '?')}: "
+                f"{getattr(occurrence_auth, 'detail', None) or 'not authentic'})"
             )
             return done(False, "digest", default_authority)
 
@@ -986,6 +1241,17 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
                 "different signing identities (possible signer-substitution attack)"
             )
             return done(False, "digest", "forged")
+        if is_v04:
+            occurrence_same_signer = all(
+                sig.get(k) == occurrence_proof.get(k) for k in signer_fields
+            )
+            checks["occurrence_same_signer"] = occurrence_same_signer
+            if not occurrence_same_signer:
+                reasons.append(
+                    "occurrence not authentic — content and occurrence proofs name "
+                    "different signing identities"
+                )
+                return done(False, "digest", "forged")
         authority_status = "verified"
     elif envelope_nontrivial:
         reasons.append(
@@ -999,7 +1265,7 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
     # verdict, exactly like grounding and convention conformance. See bulla.delegation.
     deleg = None
     env_authority = receipt.envelope.authority
-    if is_v03 and receipt.envelope.deed_schema == "0.3" and env_authority is not None:
+    if (is_v03 or is_v04) and receipt.envelope.deed_schema == "0.3" and env_authority is not None:
         from bulla.delegation import verify_delegation
         leaf_vm = (sig or {}).get("verificationMethod")
         env_bounds = receipt.envelope.bounds

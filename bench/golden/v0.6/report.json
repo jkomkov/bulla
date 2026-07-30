@@ -1,0 +1,10 @@
+{
+  "case_count": 96,
+  "cases_hash": "sha256:36bcff22dd7739f22e2e0560d3eb5857bfecf3a529a5330866f62096a2c1d9da",
+  "classification": "INTERNAL_CAPTIVE_QUALIFICATION",
+  "external_adjudicators": 0,
+  "external_authors": 0,
+  "family_count": 12,
+  "production_effects": 0,
+  "profile": "bulla.golden-suite/0.6-experimental"
+}

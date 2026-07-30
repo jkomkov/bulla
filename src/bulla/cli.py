@@ -23,6 +23,10 @@ from bulla.formatters import format_json, format_sarif, format_text
 from bulla.model import Composition
 from bulla.parser import CompositionError, load_composition
 from bulla.regime import format_regime_warning, validate_regime
+from bulla.wrap import (
+    PLACEHOLDER_FORUM_ENDPOINT as _WRAP_PLACEHOLDER_FORUM_ENDPOINT,
+    PLACEHOLDER_FORUM_ROOT as _WRAP_PLACEHOLDER_FORUM_ROOT,
+)
 
 
 # Sprint 11 Phase 2: centralized composition loader that surfaces regime
@@ -4478,7 +4482,8 @@ def _cmd_receipt_verify(args: argparse.Namespace) -> None:
     import base64
 
     try:
-        doc = json.loads(Path(args.receipt).read_text())
+        raw_receipt = Path(args.receipt).read_bytes()
+        doc = json.loads(raw_receipt)
     except (OSError, json.JSONDecodeError) as exc:
         print(f"✗ cannot read receipt: {exc}")
         sys.exit(2)
@@ -4492,6 +4497,15 @@ def _cmd_receipt_verify(args: argparse.Namespace) -> None:
     kind = doc.get("kind")
     if kind == "action_receipt":
         from bulla.action_receipt import verify_receipt
+        from bulla.receipt_parser import ReceiptParseError, parse_action_receipt_json
+
+        try:
+            # Preserve the byte boundary: duplicate members and resource-limit
+            # violations disappear after ordinary json.loads.
+            doc = parse_action_receipt_json(raw_receipt).to_dict()
+        except ReceiptParseError as exc:
+            print(f"✗ invalid ActionReceipt: {exc}")
+            sys.exit(2)
 
         res = verify_receipt(doc, public_key=pub)
         payload = {
@@ -5638,6 +5652,15 @@ def main() -> None:
             "mandate/remedy envelope (modality law enforced) + evidence grounding + "
             "coined conventions. Sign with --key; verify with `bulla receipt verify`."
         ),
+        epilog=(
+            "First receipt, two flags:\n"
+            "  bulla receipt create --type demo.write --subject path=/tmp/example.txt "
+            "--out receipt.json\n"
+            "  bulla receipt verify receipt.json\n"
+            "Forum and policy default to present-but-unset placeholders (digest rung); add "
+            "--forum-endpoint/--forum-root/--principal/--policy and --key to reach attestation."
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     p_receipt_create.add_argument(
         "--type", required=True, metavar="ACT",
@@ -5679,12 +5702,16 @@ def main() -> None:
     p_receipt_create.add_argument("--scope", default=None, help="bounds.scope for the act.")
     p_receipt_create.add_argument("--challenge-window", default="P7D", metavar="ISO8601-DURATION")
     p_receipt_create.add_argument(
-        "--forum-endpoint", required=True, metavar="URL",
-        help="Where a challenge is heard (remedy forum).",
+        "--forum-endpoint", default=_WRAP_PLACEHOLDER_FORUM_ENDPOINT, metavar="URL",
+        help="Where a challenge is heard (remedy forum). Defaults to a present-but-unset "
+             "placeholder so a first receipt verifies to the digest rung; set a real endpoint "
+             "for a witnessed forum.",
     )
     p_receipt_create.add_argument(
-        "--forum-root", required=True, metavar="REF",
-        help="The root reference YOU pin — never the host's served root (Pin-the-Root).",
+        "--forum-root", default=_WRAP_PLACEHOLDER_FORUM_ROOT, metavar="REF",
+        help="The root reference YOU pin — never the host's served root (Pin-the-Root). "
+             "Defaults to a non-anchored placeholder; set a real root to reach the "
+             "attestation rung.",
     )
     p_receipt_create.add_argument(
         "--remedy", action="append", metavar="RUNG:VERIFIER:ANCHOR",
@@ -6985,6 +7012,7 @@ def main() -> None:
     p_checkpoint_serve.add_argument("--host", default="127.0.0.1")
     p_checkpoint_serve.add_argument("--port", type=int, default=0)
     p_checkpoint_serve.set_defaults(func=_cmd_experimental_checkpoint_serve)
+
     p_experimental.set_defaults(func=_cmd_experimental)
 
     # ── showcase ────────────────────────────────────────────────────────

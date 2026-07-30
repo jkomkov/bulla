@@ -1,0 +1,86 @@
+{
+  "action": {
+    "subject": {
+      "correction_channel": "https://glyphstandard.com/experimental/incident-packet/corrections",
+      "correction_id": "mcp-correction-001",
+      "issuer_role": "correction_authority",
+      "profile": "glyph.agent-incident-packet/0.1-draft",
+      "reason": "The later reviewed statement supplies the coverage fact; the causal inference remains unresolved.",
+      "replacement_ref": "sha256:0294d77aced0072523ece9ca26c94e5431a72fbc55b03489780bb90b0a33970d",
+      "supersedes_kind": "statement",
+      "supersedes_ref": "sha256:601ce339be1d30ca47bc06b34098f62e7282f77810dfc352e774c75682cc880d"
+    },
+    "type": "incident.correct"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6MktL91LYYx5UtxGhKSr1fbrKsXSjGBNAtNCd8KWqArjpWN",
+    "proofValue": "TxIJN/jcBpyJy0PrwVMeoouBMSIXt7q9gydfRVjEBh8unAVD2AZcT2Kmm/DBUhG61MaEmFpx8RWY13C/OqxKAA==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MktL91LYYx5UtxGhKSr1fbrKsXSjGBNAtNCd8KWqArjpWN"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-07-26T12:11:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "53f91271-0dd3-4346-8e26-972716bc3639",
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:c0879a000103dfbfea72a46f5be886c5453f8f1fcbf982a3c068be3cb5cbdb8a",
+    "content": "sha256:46cbd6281d3e0fe7e3a69660771dc9ff8031e283480ecc294b2f7bf5d1e16c63",
+    "event": "sha256:489dfb3dc8b814c34da23d604f605a49fd2854e2fab86d55569ed8b8fc2ee432",
+    "log_leaf": "sha256:d412f2957dd1d8bc4ca32b6ea9d706e5afc7993602c7b3c9f6deb580deae6197"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://agent-incident-packet/incident.correct",
+      "principal": "did:key:z6MktL91LYYx5UtxGhKSr1fbrKsXSjGBNAtNCd8KWqArjpWN"
+    },
+    "bounds": {
+      "scope": "profile:glyph.agent-incident-packet/0.1-draft"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6MktL91LYYx5UtxGhKSr1fbrKsXSjGBNAtNCd8KWqArjpWN",
+    "proofValue": "Wd4sdSteuAd91fkynd8bLhZB+459qobWdalCcIylqIiBeI4y6jr8Ds/6O3A6xAsBJM2Z8O9Cd6s1H5XM+6XyDA==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MktL91LYYx5UtxGhKSr1fbrKsXSjGBNAtNCd8KWqArjpWN"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "mcp-clean"
+  },
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/experimental/incident-packet/challenge",
+      "trusted_root_ref": "sha256:abababababababababababababababababababababababababababababababab"
+    },
+    "remedies": [
+      {
+        "anchor": "forum:agent-incident-packet",
+        "rung": "challenge",
+        "verifier": "publish a signed incident.correct receipt"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "auditor",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6MktL91LYYx5UtxGhKSr1fbrKsXSjGBNAtNCd8KWqArjpWN",
+    "proofValue": "NK95qpnTwdbfaQgkL2KH4+VhhvnaiBGqKqiY9eGbxJ14CA0+k8xo6ehFafLO1lNhSCgUyKvM+INXCRE19aFUBg==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MktL91LYYx5UtxGhKSr1fbrKsXSjGBNAtNCd8KWqArjpWN"
+  },
+  "stake": null
+}

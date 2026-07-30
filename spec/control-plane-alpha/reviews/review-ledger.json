@@ -1,0 +1,727 @@
+{
+  "schema_version": 1,
+  "profile": "bulla.control-plane-alpha/0.1-experimental",
+  "review_scope": "internal_role_separated",
+  "external_evidence_increment": {
+    "authors": 0,
+    "adjudicators": 0,
+    "implementations": 0,
+    "witnesses": 0,
+    "replays": 0
+  },
+  "artifact_commits": {
+    "protocol": "e6d86d15264f71f57a36416d0910ce8e84500435",
+    "wire_kernel": "b6f8b9afdb5e730b8a3d0dcfea90c5abc3c52268",
+    "service": "26607f4b2011c7c49411bba28fc7df786dcce544",
+    "product_surface": "56e41f6267841534764977063411e68fc7028595",
+    "deployment_gates": "3b91d1e69397090504ef9f2afb2d12790efa8d2b",
+    "replay_claim_correction": "c634e9950052cd9da5ae681694e95e04db3d3693",
+    "deployment_evidence_correction": "71e79a3653428dd42371b09f33d8f97932180afc",
+    "deployment_candidate_isolation": "c09fed3cf738fc6faf494da1e983744a7d8bf2db",
+    "deployment_receipt_blocked": "9636a67a4f56409bf4e17ef06277b177a77c2b96",
+    "deployment_blocked_guard": "a2dcc3a5a0eba755f3824a0e9b1c538b398a3536",
+    "deployment_blocked_guard_extensions": "99dd56dbab25278929c60d6c81b28a99a80aeb3e",
+    "deployment_blocked_guard_declared_scope": "9dce32e18f78774098c2b50ba367f1fa3801c4c3",
+    "public_withdrawal_record": "dfad7533be2343a76d1a1aca794e8114ac835487",
+    "ci_portability_correction": "31386115b3478103af9046f38a0576621bfa1ec4",
+    "legacy_release_tombstone": "b273b96c7a941d117953498fb28d83c9930da975",
+    "audit_followup_correction": "09202f6989d2a131f5cae37b841c9e1a93945926",
+    "audit_followup_test_portability": "e00e3b7658946d4a5422eb27cdad7a35e55a91c7",
+    "audit_followup_test_windows_portability": "1a73efbdab9fba9f302dd1997a4d8f4a7c79c8ea"
+  },
+  "findings": [
+    {
+      "id": "CP-B1-VECTOR-01",
+      "pass": "B1",
+      "severity": "high",
+      "violated_invariant": "A clean checkout must contain both normative coverage reports used by the full-loop vector.",
+      "minimal_counterexample": "The generated decisions and effects coverage files existed locally but were excluded by a broad coverage ignore rule.",
+      "affected_claim": "The deterministic full-loop fixture can be verified from a clean checkout.",
+      "correction": "Added a narrow ignore exception for only the two normative coverage members and a clean-index regression.",
+      "regression_tests": [
+        "bulla/tests/test_control_plane_alpha_protocol.py::test_clean_index_collects_every_full_loop_member"
+      ],
+      "maker": "protocol lane",
+      "reviewer": "integration and evidence lane",
+      "artifact_commit": "e6d86d15264f71f57a36416d0910ce8e84500435",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B1-CLIENT-02",
+      "pass": "B1",
+      "severity": "high",
+      "violated_invariant": "Repository clients must bound headers, streamed bytes, elapsed time, and cancellation before parsing remote data.",
+      "minimal_counterexample": "A response could omit content-length and continue streaming past the declared client limit or stall after headers.",
+      "affected_claim": "The reproduction clients enforce the alpha resource limits before consuming artifacts.",
+      "correction": "Added one bounded fetch primitive with declared-length rejection, streaming ceilings, active deadlines, cancellation, and shaped errors.",
+      "regression_tests": [
+        "packages/bulla-control-plane-alpha/test/unit/bounded-fetch.test.ts",
+        "packages/bulla-control-plane-alpha/test/integration/repository-client-bounds.test.ts"
+      ],
+      "maker": "service lane",
+      "reviewer": "state and reliability lane",
+      "artifact_commit": "26607f4b2011c7c49411bba28fc7df786dcce544",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B1-AUTHZEN-03",
+      "pass": "B1",
+      "severity": "high",
+      "violated_invariant": "The two authorization slots must retain fixed scenario, decision, sequence, and reason semantics.",
+      "minimal_counterexample": "A structurally valid permit response could be placed in the refusal slot.",
+      "affected_claim": "The decision denominator contains one mediated permit and one pre-dispatch refusal.",
+      "correction": "Bound every AuthZEN request and response to its exact transaction slot and rejected swaps or a second permit.",
+      "regression_tests": [
+        "bulla/tests/test_control_plane_alpha_protocol.py::test_authzen_transaction_slots_reject_swaps_and_a_second_permit"
+      ],
+      "maker": "protocol lane",
+      "reviewer": "authorization consistency lane",
+      "artifact_commit": "e6d86d15264f71f57a36416d0910ce8e84500435",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B1-TRUST-04",
+      "pass": "B1",
+      "severity": "high",
+      "violated_invariant": "The external trust context must name one exact issuer per role and prevent cross-role key collisions.",
+      "minimal_counterexample": "A role accepted a second issuer, making role attribution ambiguous.",
+      "affected_claim": "Accepted authority comes only from the separately obtained pinned context.",
+      "correction": "Required singleton accepted issuers, six distinct role keys, and exact parity between the outer and incident contexts.",
+      "regression_tests": [
+        "bulla/tests/test_control_plane_alpha_protocol.py::test_rich_trust_context_requires_one_exact_issuer_per_role",
+        "bulla/tests/test_agent_incident_packet_adversarial.py::test_context_rejects_cross_role_issuer_collision"
+      ],
+      "maker": "protocol lane",
+      "reviewer": "cryptographic consistency lane",
+      "artifact_commit": "e6d86d15264f71f57a36416d0910ce8e84500435",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B1-AUTHORITY-05",
+      "pass": "B1",
+      "severity": "high",
+      "violated_invariant": "Incident-profile authority requires direct deed_schema 0.2 authority whose principal is the accepted signer and whose delegation is empty.",
+      "minimal_counterexample": "A coherently signed receipt named an unrelated authority principal.",
+      "affected_claim": "A verified incident-profile receipt authenticates the declared role authority.",
+      "correction": "Separated generic receipt signature validity from the incident profile's direct-authority acceptance rule in Python, Node, and browser verification.",
+      "regression_tests": [
+        "bulla/tests/test_agent_incident_packet_adversarial.py::test_signed_unrelated_authority_principal_fails_all_checkers",
+        "packages/bulla-control-plane-alpha/test/unit/browser-verifier.test.ts"
+      ],
+      "maker": "protocol and wire lanes",
+      "reviewer": "cross-runtime consistency lane",
+      "artifact_commit": "b6f8b9afdb5e730b8a3d0dcfea90c5abc3c52268",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B1-STATUS-06",
+      "pass": "B1",
+      "severity": "medium",
+      "violated_invariant": "Generated capability status must be checked in root CI from tracked lowercase sources.",
+      "minimal_counterexample": "The gate referenced a nonexistent uppercase paper path and did not run in root CI.",
+      "affected_claim": "Public maturity and evidence status are generated from current repository sources.",
+      "correction": "Corrected source routing, regenerated status artifacts, and added the status check to the alpha CI job.",
+      "regression_tests": [
+        "pnpm status:check",
+        "pnpm --dir glyph check:control-plane-alpha-evidence"
+      ],
+      "maker": "evidence lane",
+      "reviewer": "integration and copy lane",
+      "artifact_commit": "56e41f6267841534764977063411e68fc7028595",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B1-BROWSER-07",
+      "pass": "B1",
+      "severity": "medium",
+      "violated_invariant": "The browser result must bind every displayed state and event identifier to the closed run-summary response.",
+      "minimal_counterexample": "A changed or missing response field could leave the demonstration rendering a locally assumed state.",
+      "affected_claim": "The browser displays the hosted proof loop returned by the service.",
+      "correction": "Added a closed run-summary presentation contract with exact event and coverage bindings.",
+      "regression_tests": [
+        "glyph/scripts/test-control-plane-alpha.mjs"
+      ],
+      "maker": "product lane",
+      "reviewer": "evidence and accessibility lane",
+      "artifact_commit": "56e41f6267841534764977063411e68fc7028595",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B2-CRYPTO-01",
+      "pass": "B2",
+      "severity": "high",
+      "violated_invariant": "Every verifier must accept one canonical padded Base64 representation for an Ed25519 signature.",
+      "minimal_counterexample": "Whitespace or nonzero unused pad bits decoded to the same signature bytes in one verifier while Node rejected them; downstream attestation values could be recomputed without a signing key.",
+      "affected_claim": "Python, standalone Node, Worker, and browser agree on exact proof bytes.",
+      "correction": "Required canonical syntax, decode/re-encode equality, and a 64-byte signature in every proof verifier and canonical retained-archive encoding.",
+      "regression_tests": [
+        "bulla/tests/test_identity.py::test_noncanonical_base64_unused_pad_bits_fail_closed",
+        "bulla/tests/test_agent_incident_packet_adversarial.py::test_noncanonical_signature_pad_bits_fail_with_checker_parity",
+        "bulla/tests/test_control_plane_alpha_protocol.py::test_retained_receipt_archive_rejects_noncanonical_base64_pad_bits",
+        "packages/bulla-control-plane-alpha/test/unit/browser-verifier.test.ts"
+      ],
+      "maker": "protocol and wire lanes",
+      "reviewer": "cross-runtime consistency lane",
+      "artifact_commit": "b6f8b9afdb5e730b8a3d0dcfea90c5abc3c52268",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B2-JSON-02",
+      "pass": "B2",
+      "severity": "high",
+      "violated_invariant": "Every outer control-plane JSON document must reject duplicate members before semantic validation.",
+      "minimal_counterexample": "The outer Python verifier used last-member-wins parsing for a duplicated AuthZEN audience.",
+      "affected_claim": "The same exact AuthZEN bytes are mapped and verified across implementations.",
+      "correction": "Routed all outer fixture documents through the incident packet strict byte parser and its resource limits.",
+      "regression_tests": [
+        "bulla/tests/test_control_plane_alpha_protocol.py::test_duplicate_authzen_members_fail_before_mapping_semantics",
+        "packages/bulla-control-plane-alpha/test/unit/strict-json.test.ts"
+      ],
+      "maker": "protocol lane",
+      "reviewer": "cross-runtime consistency lane",
+      "artifact_commit": "e6d86d15264f71f57a36416d0910ce8e84500435",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B2-COPY-03",
+      "pass": "B2",
+      "severity": "medium",
+      "violated_invariant": "Public limitation copy must distinguish retained public artifacts from transient bearer handling.",
+      "minimal_counterexample": "The page stated that the alpha contained no credential even though creation and mutation use a one-time capability and bearer.",
+      "affected_claim": "The public data policy accurately describes credential handling.",
+      "correction": "Narrowed the claim to published packet and evidence artifacts and prohibited the retired whole-alpha wording.",
+      "regression_tests": [
+        "glyph/scripts/check-presentation.mjs"
+      ],
+      "maker": "product lane",
+      "reviewer": "copy and evidence lane",
+      "artifact_commit": "56e41f6267841534764977063411e68fc7028595",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B2-PARITY-04",
+      "pass": "B2",
+      "severity": "high",
+      "violated_invariant": "Browser receipt verification must close every nested field that Python and standalone Node treat as closed.",
+      "minimal_counterexample": "Unknown mandate, retention, diagnostic, or evidence members and malformed conventions could produce inconsistent structure verdicts.",
+      "affected_claim": "Browser verification agrees with the standalone receipt checkers.",
+      "correction": "Closed content, envelope, remedy, retention, delegation, diagnostic, evidence, stake, UUID, digest, and executable-convention structures and recomputed convention pins.",
+      "regression_tests": [
+        "packages/bulla-control-plane-alpha/test/unit/browser-verifier.test.ts"
+      ],
+      "maker": "wire lane",
+      "reviewer": "cross-runtime consistency lane",
+      "artifact_commit": "b6f8b9afdb5e730b8a3d0dcfea90c5abc3c52268",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B2-AUTHZ-05",
+      "pass": "B2",
+      "severity": "high",
+      "violated_invariant": "The signed mandate target must exactly equal the AuthZEN resource and the receiver dispatch target.",
+      "minimal_counterexample": "The mandate named mcp://synthetic-receiver/sandbox.append while AuthZEN and dispatch used mcp://synthetic-receiver/tools/sandbox.append.",
+      "affected_claim": "The permit authorizes the exact tool resource that executes.",
+      "correction": "Unified the canonical resource URI, bound dispatch to the sole mandate target, and regenerated deterministic vectors.",
+      "regression_tests": [
+        "bulla/tests/test_control_plane_alpha_protocol.py::test_authzen_mapping_is_closed_and_uses_exact_sandbox_scenarios",
+        "packages/bulla-control-plane-alpha/test/unit/denominator-adversarial.test.ts"
+      ],
+      "maker": "protocol and service lanes",
+      "reviewer": "authorization consistency lane",
+      "artifact_commit": "26607f4b2011c7c49411bba28fc7df786dcce544",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B2-STATE-06",
+      "pass": "B2",
+      "severity": "high",
+      "violated_invariant": "Every run-state pointer and transition evidence reference must resolve to the exact accepted receipt or artifact.",
+      "minimal_counterexample": "Empty effect paths, bogus checkpoint and handoff paths, and arbitrary SHA-shaped transition evidence still produced exit code 0.",
+      "affected_claim": "The finalized state machine is bound to the verified proof-loop artifacts.",
+      "correction": "Resolved exact action-type paths, denominator checkpoint attestations, handoff, and all five ordered transition evidence values.",
+      "regression_tests": [
+        "bulla/tests/test_control_plane_alpha_protocol.py::test_run_state_receipt_paths_must_resolve_to_exact_packet_receipts",
+        "bulla/tests/test_control_plane_alpha_protocol.py::test_run_state_transition_rejects_arbitrary_well_formed_evidence"
+      ],
+      "maker": "protocol lane",
+      "reviewer": "cross-runtime consistency lane",
+      "artifact_commit": "e6d86d15264f71f57a36416d0910ce8e84500435",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B2-WITNESS-07",
+      "pass": "B2",
+      "severity": "high",
+      "violated_invariant": "Signed service checkpoint roots must derive from the exact ordered retained deed sequence.",
+      "minimal_counterexample": "Authentically signed prefix and final roots over fabricated leaves, with valid consistency and permit inclusion, were accepted independently of deeds.json.",
+      "affected_claim": "Service witness inclusion and consistency cover the exact retained receipts.",
+      "correction": "Recomputed RFC 6962 prefix and final roots from every exact ordered deed before accepting checkpoint, inclusion, or retention conclusions.",
+      "regression_tests": [
+        "bulla/tests/test_control_plane_alpha_protocol.py::test_service_witness_rejects_signed_consistent_roots_for_fabricated_leaves"
+      ],
+      "maker": "protocol lane",
+      "reviewer": "cross-runtime consistency lane",
+      "artifact_commit": "e6d86d15264f71f57a36416d0910ce8e84500435",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B2-INIT-08",
+      "pass": "B2",
+      "severity": "high",
+      "violated_invariant": "Run initialization and later mutations must share one serialized Durable Object mutation order.",
+      "minimal_counterexample": "A slow second initialization could save an old snapshot after a request mutation committed and erase the later state.",
+      "affected_claim": "ControlPlaneRun owns serialized, transactional run state.",
+      "correction": "Placed initialization inside the same concurrency gate as every later mutation and added a forced interleaving hook.",
+      "regression_tests": [
+        "packages/bulla-control-plane-alpha/test/workers/public-service.test.ts — serializes initialization replay ahead of later run mutations"
+      ],
+      "maker": "service lane",
+      "reviewer": "state and reliability lane",
+      "artifact_commit": "26607f4b2011c7c49411bba28fc7df786dcce544",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B2-SMOKE-09",
+      "pass": "B2",
+      "severity": "medium",
+      "violated_invariant": "The live smoke client must validate file count, paths, member sizes, and aggregate size before its first packet-member request.",
+      "minimal_counterexample": "A sub-limit manifest document declared 3000 maximum-size members and caused thousands of requests and about 196 MiB of downloads.",
+      "affected_claim": "Repository reproduction clients enforce the 32-file and 2 MiB packet ceilings.",
+      "correction": "Added a closed manifest preflight shared by smoke and materialization before any member download.",
+      "regression_tests": [
+        "packages/bulla-control-plane-alpha/test/unit/packet-manifest.test.ts",
+        "packages/bulla-control-plane-alpha/test/integration/materializer-adversarial.test.ts"
+      ],
+      "maker": "deployment lane",
+      "reviewer": "state and reliability lane",
+      "artifact_commit": "3b91d1e69397090504ef9f2afb2d12790efa8d2b",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B2-BLOCKER-10",
+      "pass": "B2",
+      "severity": "medium",
+      "violated_invariant": "Every deployment surface must use one exact blocker vocabulary.",
+      "minimal_counterexample": "The workflow named a durable reconciler while service, status, and Wrangler named an external reconciler.",
+      "affected_claim": "The production gate has one machine-readable reason for each unresolved dependency.",
+      "correction": "Normalized the reconciler blocker and added cross-surface vocabulary checks.",
+      "regression_tests": [
+        "bulla/tests/test_control_plane_deployment_workflow.py::test_external_reconciler_and_key_lifecycle_terms_are_exact_across_surfaces"
+      ],
+      "maker": "deployment lane",
+      "reviewer": "state and reliability lane",
+      "artifact_commit": "3b91d1e69397090504ef9f2afb2d12790efa8d2b",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B2-LIFECYCLE-11",
+      "pass": "B2",
+      "severity": "medium",
+      "violated_invariant": "Key rotation and retirement require a versioned lifecycle and must not return an unusable replay bearer.",
+      "minimal_counterexample": "Rotating the capability-token secret made an exact POST /runs replay derive a new token that could not match the stored run authority.",
+      "affected_claim": "Run-creation replay and recovery remain safe across alpha key changes.",
+      "correction": "Bound allocations to a derivation version and token hash, failed replay closed after rotation without returning a replacement token, and added an explicit production lifecycle blocker.",
+      "regression_tests": [
+        "packages/bulla-control-plane-alpha/test/workers/public-service.test.ts — fails closed before returning an unusable creation token after capability-secret rotation",
+        "bulla/tests/test_control_plane_deployment_workflow.py::test_external_reconciler_and_key_lifecycle_terms_are_exact_across_surfaces"
+      ],
+      "maker": "deployment lane",
+      "reviewer": "state and reliability lane",
+      "artifact_commit": "3b91d1e69397090504ef9f2afb2d12790efa8d2b",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B3-COPY-12",
+      "pass": "B3",
+      "severity": "medium",
+      "violated_invariant": "The public replay contract must state that returning the same run bearer is conditional on an unchanged capability key.",
+      "minimal_counterexample": "The API table described fail-closed rotation while the Expected result section unconditionally stated that exact POST /runs replay returns the same bearer.",
+      "affected_claim": "A client can predict exact run-creation replay behavior.",
+      "correction": "Qualified the site, protocol profile, and package README with the unchanged-key condition and fail-closed rotation result, then froze the wording in the presentation gate.",
+      "regression_tests": [
+        "glyph/scripts/check-presentation.mjs",
+        "packages/bulla-control-plane-alpha/test/workers/public-service.test.ts — fails closed before returning an unusable creation token after capability-secret rotation"
+      ],
+      "maker": "integration lane",
+      "reviewer": "evidence and copy lane",
+      "artifact_commit": "c634e9950052cd9da5ae681694e95e04db3d3693",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B4-DEPLOY-13",
+      "pass": "B4",
+      "severity": "high",
+      "violated_invariant": "A deployed commit must not select any executable website.deploy generation path; checks inside event-selected YAML are not a security boundary.",
+      "minimal_counterexample": "Direct action literals in common runtime or configuration formats such as .vue and .properties remained outside the previous declared extension set, while a substring matcher rejected the unrelated literal notwebsite.deployment.",
+      "counterexample_history": [
+        "A manually supplied deployment identifier or redirecting lookalike URL could pass an existence probe while a CI-local build digest was described as deployed-output identity.",
+        "The deployed-commit caller passed GLYPH_DEPLOY_KEY and contents:write into event-controlled code, while a direct-HTTP-200 requirement overstated an SSO-protected URL-to-bytes relationship.",
+        "A digest-only candidate still executed verifier and minter code selected by the deployed commit.",
+        "Deleting the known workflow and script filenames did not prove that an alternate executable name or YAML spelling could not recreate the same path.",
+        "A workflow using on: [deployment_status] invoked an alternate glyph/scripts/site-proof.mjs. The first recursive guard neither recognized the flow-form trigger nor recursively inspected the indirectly invoked executable.",
+        "A root package command invoked packages/neutral.mjs, or a workflow invoked an .mts or composite-action implementation. These paths sat outside the next scanner scope and could reconstruct website.deploy generation.",
+        "Direct literals and ordinary builders under bulla/tools, glyph/data, a source directory named coverage, public TOML, and benchmark Cargo metadata exposed further allowlist gaps; split workflow fields and quoted publication authority exposed a correlation gap."
+      ],
+      "affected_claim": "No website.deploy candidate, deployment binding, or verification rung is produced by repository automation.",
+      "correction": "Retained the blocked capability state and narrowed the mechanized claim after repeated lexical-completeness failures. The guard enumerates tracked files with git, applies strict UTF-8 and size checks, scans declared common runtime and configuration formats, recursively scans the two repository script roots, parses package commands, and analyzes workflow and composite-action YAML. It rejects exact bounded action literals, common escape forms, direct action fields, ordinary join/concatenation and split workflow fields, named or ordinary signing-key constructions, literal local taint paths, and correlated publication authority. The behavioral ledger includes hostile and clean controls for the reviewed cases. The generated status still reports generation, public release, and attestation as BLOCKED_UNIMPLEMENTED and deployed-output binding as NOT_COMPUTED.",
+      "residual_limitations": [
+        "Unrecognized formats, same-file or cross-file dynamic construction outside the enumerated patterns, encoded or indirect construction, and excluded or external artifacts remain review-bound; the gate does not establish lexical completeness or absolute prevention.",
+        "Conservative matches remain for some preview subtypes, equality-then-throw deny logic, configuration denylists, and documentation URLs. These are precision debt rather than evidence of a generation path.",
+        "The strongest established repository facts are that the removed generation and publication automation is absent, the blocked status fields are exact, and no candidate, public release, attestation, or deployed-output binding is produced by the current tracked tree."
+      ],
+      "regression_tests": [
+        "glyph/scripts/check-deployment-receipt-blocked.mjs",
+        "glyph/scripts/test-deployment-receipt-blocked.mjs",
+        "glyph/scripts/check-presentation.mjs",
+        "pnpm status:check"
+      ],
+      "maker": "integration and evidence lane",
+      "reviewer": "Archimedes and Popper role-separated read-only passes found no in-scope ordinary bypass and approved closure under the recorded narrowed static scope",
+      "artifact_commit": "9dce32e18f78774098c2b50ba367f1fa3801c4c3",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B4-IMMUTABLE-14",
+      "pass": "B4",
+      "severity": "high",
+      "violated_invariant": "Workflow no-clobber behavior must not be presented as absolute host immutability or retention, and event-controlled code must not hold release-publication authority.",
+      "minimal_counterexample": "Aliased split action fields combined with quoted contents:write authority, or a release action whose producer lived outside the previous source roots, could evade the prior same-file publication correlation.",
+      "counterexample_history": [
+        "A commit-derived release asset was uploaded with --clobber, allowing later workflow runs to overwrite publication history.",
+        "Content-addressed, no-clobber behavior by one workflow could not establish host retention because the release remained isImmutable:false and administrator-controlled.",
+        "The first blocked-state gate did not recursively correlate workflow invocation with alternate publication scripts.",
+        "An indirectly invoked alternate executable could reconstruct website.deploy release publication while the first recursive guard checked an incomplete extension and directory set.",
+        "A package source with a non-legacy extension or a composite action could execute website.deploy release creation while the next recursive guard did not scan that publication surface."
+      ],
+      "affected_claim": "No public deployment-receipt publication, external retention, or host immutability is established by this sprint.",
+      "correction": "Within the declared tracked formats and patterns, the scanner rejects direct or ordinary website.deploy construction and correlates tainted sources or action roots with contents:write, secrets, GitHub release actions or commands, and clobber markers. Unrelated release workflows remain accepted because publication authority alone does not establish a website.deploy path. The gate does not establish host immutability, host retention, or completeness beyond its declared static boundary.",
+      "residual_limitations": [
+        "Unrecognized formats and dynamic, encoded, indirect, excluded, or external publication producers remain review-bound.",
+        "No host immutability or retention property is inferred from repository workflow absence."
+      ],
+      "regression_tests": [
+        "glyph/scripts/check-deployment-receipt-blocked.mjs",
+        "glyph/scripts/test-deployment-receipt-blocked.mjs",
+        "glyph/scripts/check-presentation.mjs"
+      ],
+      "maker": "integration and evidence lane",
+      "reviewer": "Archimedes and Popper role-separated read-only passes approved closure under the narrowed publication correlation and explicit no-immutability boundary",
+      "artifact_commit": "9dce32e18f78774098c2b50ba367f1fa3801c4c3",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B4-SIGNATURE-15",
+      "pass": "B4",
+      "severity": "high",
+      "violated_invariant": "An event-selected path must not mint either a signed or unsigned artifact that could be mistaken for trusted deployment evidence.",
+      "minimal_counterexample": "A signing-key reference or signer path could be reintroduced under an alternate executable filename that the first blocked-state gate did not inspect.",
+      "counterexample_history": [
+        "Status surfaces unconditionally described a signed receipt even though an absent optional key produced an unsigned digest-rung record.",
+        "Making the key optional still exposed it to code selected by the deployed commit whenever the key existed.",
+        "A digest-only candidate removed the signing secret but still executed attacker-selectable minter and verifier code from the deployed commit."
+      ],
+      "affected_claim": "No integrity or authenticity rung is claimed for website.deploy because no candidate is generated.",
+      "correction": "Within the declared tracked formats and patterns, the scanner and hostile fixtures reject exact or ordinary split-token website.deploy construction, named and ordinary Glyph deployment key references, signing operations, package indirection, and composite-action invocation. The absence of a generated candidate means no integrity or authenticity rung is claimed.",
+      "residual_limitations": [
+        "Unrecognized formats and dynamic, encoded, indirect, excluded, or externally supplied signing constructions remain review-bound."
+      ],
+      "regression_tests": [
+        "glyph/scripts/check-deployment-receipt-blocked.mjs",
+        "glyph/scripts/test-deployment-receipt-blocked.mjs",
+        "glyph/scripts/check-presentation.mjs",
+        "pnpm status:check"
+      ],
+      "maker": "integration and evidence lane",
+      "reviewer": "Archimedes and Popper role-separated read-only passes found no in-scope signing path and approved closure under the recorded narrowed static scope",
+      "artifact_commit": "9dce32e18f78774098c2b50ba367f1fa3801c4c3",
+      "status": "closed"
+    },
+    {
+      "id": "CP-B4-SOURCE-16",
+      "pass": "B4",
+      "severity": "medium",
+      "violated_invariant": "Public proof-sequence coverage ratios must derive from generated alpha evidence rather than hand-written literals.",
+      "minimal_counterexample": "The control-plane proof steps hard-coded decision coverage 2/2 and effect coverage 1/2 independently of alpha.expected_coverage.",
+      "affected_claim": "Displayed control-plane coverage values remain synchronized with generated evidence.",
+      "correction": "Constructed the proof-step ratios from alpha.expected_coverage and added a presentation gate that rejects the retired hard-coded sentence.",
+      "regression_tests": [
+        "glyph/scripts/check-presentation.mjs"
+      ],
+      "maker": "integration and evidence lane",
+      "reviewer": "copy and evidence lane correction confirmed by Archimedes and Popper role-separated final passes",
+      "artifact_commit": "71e79a3653428dd42371b09f33d8f97932180afc",
+      "status": "closed"
+    },
+    {
+      "id": "CP-C2-RELIABILITY-17",
+      "pass": "C2",
+      "severity": "medium",
+      "violated_invariant": "Security-boundary regression evidence must be deterministic under concurrent CI load and assert materializer invariants rather than scheduler-dependent producer pacing.",
+      "minimal_counterexample": "During the second collective pass under concurrent security-suite load, the chunked test producer emitted 221184 bytes before cancellation and violated its test-only emitted <131072 assertion even though the materializer rejected at 65536 bytes, closed the source, and created no output.",
+      "affected_claim": "The adversarial materializer suite provides deterministic CI evidence for rejection, source closure, and no output after an oversized remote member.",
+      "correction": "Replaced the timer-driven unbounded producer with exactly nine 8192-byte chunks. The regression now asserts a nonzero result, the 65536-byte ceiling error, source closure, and absence of materialized output without asserting scheduler-dependent peer emission.",
+      "regression_tests": [
+        "packages/bulla-control-plane-alpha/test/integration/materializer-adversarial.test.ts",
+        "20/20 isolated repetitions of the corrected oversized-member case",
+        "33 control-plane integration tests",
+        "57 Worker tests"
+      ],
+      "maker": "root integration lane",
+      "reviewer": "Popper same-reviewer recheck closed the finding after 20 isolated repetitions and concurrent TypeScript and Python security suites passed",
+      "artifact_commit": "9ab2be86340dbcfd02708aae1a7371d53590fd31",
+      "status": "closed"
+    },
+    {
+      "id": "CP-C3-DISCLOSURE-18",
+      "pass": "C3",
+      "severity": "medium",
+      "violated_invariant": "A material withdrawal caused by a false provenance inference and an unsound signing-authority boundary must appear on the public falsification surface, not only in an implementation-profile review ledger.",
+      "minimal_counterexample": "PR #215 summarized additive control-plane work and stated that no package or stable surface changed, but did not disclose that the branch removed the previously merged Glyph deployment-receipt automation. A reader who did not inspect CP-B4-DEPLOY-13 could not discover why the capability was withdrawn.",
+      "affected_claim": "The public project record discloses material negative results and the surviving scope of withdrawn capabilities.",
+      "correction": "Added a dated entry to bulla/FALSIFICATIONS.md that separates receipt integrity from deployed-output identity, records the CI-local digest and endpoint-binding defects, identifies the event-selected signing and publication authority path, states that no actual secret exfiltration is established, links the immutable correction history, and defines the requirements for any future replacement. Linked the Glyph status page directly to that record and added a regression test for its load-bearing statements. CP-C3-PUBLIC-23 separately closes the historical-release entry-point gap found during correction review.",
+      "residual_limitations": [
+        "The public record establishes an unsound isolation boundary; it does not establish that signing material was exfiltrated or misused.",
+        "The blocked-state scanner remains bounded to its declared tracked formats and ordinary constructions."
+      ],
+      "regression_tests": [
+        "bulla/tests/test_control_plane_deployment_workflow.py::test_withdrawn_glyph_deployment_receipt_has_a_public_correction_record",
+        "glyph/scripts/check-deployment-receipt-blocked.mjs",
+        "glyph/scripts/test-deployment-receipt-blocked.mjs",
+        "pnpm status:check",
+        "pnpm --dir glyph check"
+      ],
+      "maker": "root integration and evidence lane",
+      "reviewer": "user-supplied PR verification identified the disclosure gap; role-separated correction recheck recorded separately",
+      "artifact_commit": "dfad7533be2343a76d1a1aca794e8114ac835487",
+      "status": "closed"
+    },
+    {
+      "id": "CP-C3-COPY-19",
+      "pass": "C3",
+      "severity": "low",
+      "violated_invariant": "A repository command name and its documentation must describe the runtime boundary it actually supplies.",
+      "minimal_counterexample": "walkthrough:local required BULLA_ALPHA_BASE_URL and did not start a local Worker, so the name could be read as a self-contained local environment rather than a client restricted to an already-running loopback origin.",
+      "affected_claim": "The reproduction command states what it starts and what the operator must supply.",
+      "correction": "Renamed the command, script, and exported helper from local to loopback. The README now states that the command requires a Worker already listening on an explicit loopback URL and does not start that Worker.",
+      "regression_tests": [
+        "packages/bulla-control-plane-alpha/test/integration/repository-client-bounds.test.ts",
+        "packages/bulla-control-plane-alpha/test/workers/public-service.test.ts",
+        "packages/bulla-control-plane-alpha/test/integration/deployment-evidence.test.ts",
+        "bulla/tests/test_control_plane_deployment_receipt.py"
+      ],
+      "maker": "root integration and evidence lane",
+      "reviewer": "user-supplied PR verification identified the naming ambiguity; role-separated correction recheck recorded separately",
+      "artifact_commit": "dfad7533be2343a76d1a1aca794e8114ac835487",
+      "status": "closed"
+    },
+    {
+      "id": "CP-C3-CI-20",
+      "pass": "C3",
+      "severity": "medium",
+      "violated_invariant": "Every CI lane must install the dependencies required by the exact subprocesses its tests execute.",
+      "minimal_counterexample": "The Worker parity job ran the TypeScript deployment-evidence integration test, which invokes the Python Ed25519 minter, after installing only the pnpm workspace. The job failed with ModuleNotFoundError for nacl while the same suite passed locally through bulla/.venv.",
+      "affected_claim": "The Worker, Durable Object, MCP, and browser parity job can execute its declared signing and deployment-evidence integration test in a clean runner.",
+      "correction": "Added pinned setup-python to the Worker job and installed ./bulla[identity] before the private package test suite. The protocol and portability jobs retain their existing independent dependency installation.",
+      "regression_tests": [
+        "packages/bulla-control-plane-alpha/test/integration/deployment-evidence.test.ts",
+        "pnpm --dir packages/bulla-control-plane-alpha test:integration",
+        ".github/workflows/bulla-control-plane-alpha.yml — Worker parity job"
+      ],
+      "maker": "root CI correction lane",
+      "reviewer": "GitHub Actions failure log inspection and role-separated correction recheck recorded separately",
+      "artifact_commit": "31386115b3478103af9046f38a0576621bfa1ec4",
+      "status": "closed"
+    },
+    {
+      "id": "CP-C3-PORTABILITY-21",
+      "pass": "C3",
+      "severity": "medium",
+      "violated_invariant": "A source-review digest must identify repository blobs consistently across supported operating systems without accepting a modified worktree.",
+      "minimal_counterexample": "On windows-latest, Git checked text files out with CRLF bytes while git show returned the reviewed LF blob. The minter compared both byte forms directly and rejected six valid deployment-receipt tests as an unchanged-source failure.",
+      "affected_claim": "Signed deployment-receipt verification is portable across the declared macOS and Windows standalone lanes.",
+      "correction": "Hash the exact reviewed and deployed Git blobs and require both to match the mapping-review digest. Separately require git diff --quiet against the deployed commit for every reviewed path, preserving worktree tamper detection while respecting Git attribute normalization.",
+      "regression_tests": [
+        "bulla/tests/test_control_plane_deployment_receipt.py",
+        "standalone packet · windows-latest",
+        "standalone packet · macos-latest"
+      ],
+      "maker": "root CI correction lane",
+      "reviewer": "GitHub Actions Windows counterexample and role-separated correction recheck recorded separately",
+      "artifact_commit": "31386115b3478103af9046f38a0576621bfa1ec4",
+      "status": "closed"
+    },
+    {
+      "id": "CP-C3-LIGHTHOUSE-22",
+      "pass": "C3",
+      "severity": "low",
+      "violated_invariant": "The Lighthouse gate must score route behavior rather than assigning one-time browser and server initialization cost only to the first route.",
+      "minimal_counterexample": "The first CI route scored 69 for performance while the next four routes scored 97 to 99 and all accessibility, best-practices, SEO, and CLS results passed. A local rerun scored the same home route at 99.",
+      "affected_claim": "All five front-door routes meet the fixed Lighthouse thresholds under a comparable measurement state.",
+      "correction": "Run one discarded home-page Lighthouse warm-up before the scored loop. The scored routes, 90 performance threshold, 95 accessibility/best-practices/SEO thresholds, and 0.05 CLS ceiling remain unchanged.",
+      "regression_tests": [
+        "pnpm --dir glyph test:lighthouse",
+        "incident packet · Glyph browser and public surface"
+      ],
+      "maker": "root CI correction lane",
+      "reviewer": "GitHub Actions timing counterexample and role-separated correction recheck recorded separately",
+      "artifact_commit": "31386115b3478103af9046f38a0576621bfa1ec4",
+      "status": "closed"
+    },
+    {
+      "id": "CP-C3-PUBLIC-23",
+      "pass": "C3",
+      "severity": "medium",
+      "violated_invariant": "A withdrawn public evidence claim must be marked withdrawn at its original discovery surfaces while the original bytes remain available for audit.",
+      "minimal_counterexample": "GitHub still exposed 52 glyph-deploy releases whose titles and bodies described immutable deployment receipts. The latest retained asset described a local build digest as deployed-output identity and still verified to the digest rung, with no withdrawal pointer at the release entry point.",
+      "affected_claim": "A reader entering through any repository-operated legacy deployment-receipt release can discover the withdrawal before treating the retained artifact as current deployment evidence.",
+      "correction": "Published glyph.withdrawn-deployment-receipts/1 with all 52 observed release IDs, tags, original mutable-metadata hashes, asset names, byte lengths, and GitHub-provided SHA-256 digests. Annotated every exact release title and body as WITHDRAWN with immutable links to the falsification record and registry. A guarded reconciliation verified each original metadata hash before mutation and verified all recorded assets unchanged afterward. The public status page links the registry and the complete Glyph check validates its closed schema and inventory.",
+      "residual_limitations": [
+        "The retained receipt bytes necessarily preserve their historical internal wording. A detached copy viewed without its release metadata or the withdrawal registry does not carry an embedded tombstone.",
+        "GitHub release titles and bodies remain mutable host metadata. The committed registry preserves their original hashes and asset identities but does not make future host metadata immutable.",
+        "The offline registry gate validates the committed inventory. The 2026-07-27 remote reconciliation was an operator action and is not evidence of independent review or permanent host retention."
+      ],
+      "regression_tests": [
+        "glyph/scripts/check-withdrawn-deployment-receipts.mjs",
+        "pnpm --dir glyph check",
+        "guarded GitHub API reconciliation — 52 releases annotated and 52 asset identities unchanged",
+        "manual readback of glyph-deploy-6c669b1e1a76fdb3fa7701c5859b5e0395831895"
+      ],
+      "maker": "root integration and evidence lane",
+      "reviewer": "Popper identified the surviving public entry-point counterexample and performs the same-reviewer recheck",
+      "artifact_commit": "b273b96c7a941d117953498fb28d83c9930da975",
+      "status": "closed"
+    },
+    {
+      "id": "CP-C3-CI-24",
+      "pass": "C3",
+      "severity": "medium",
+      "violated_invariant": "The Cloudflare Worker test pool and its Vitest runtime must resolve one ABI-compatible dependency graph in a clean frozen workspace install.",
+      "minimal_counterexample": "After the Python identity dependency was installed, the clean Linux Worker job reached the Cloudflare pool but collected zero Worker tests. A workspace Vitest 4.0.18 graph supplied @vitest/pretty-format without createDOMElementFilter to the Vitest 4.1.10 pool.",
+      "affected_claim": "The required 57 Worker and Durable Object tests execute in the declared clean-runner CI lane.",
+      "correction": "Pinned the pnpm workspace to Vitest 4.1.10, regenerated the frozen lockfile without the 4.0.18 graph, and retained the package-level Cloudflare pool and Vitest 4.1 pins.",
+      "regression_tests": [
+        "pnpm install --frozen-lockfile --offline",
+        "pnpm --dir packages/bulla-control-plane-alpha check — 54 unit, 33 integration, and 57 Worker tests",
+        "pnpm --dir vol-i-similes build",
+        "Worker, Durable Objects, MCP, and browser parity"
+      ],
+      "maker": "root CI correction lane",
+      "reviewer": "Popper and Archimedes independently reproduced the clean-runner ABI failure; same-reviewer rechecks follow on the corrected commit",
+      "artifact_commit": "09202f6989d2a131f5cae37b841c9e1a93945926",
+      "status": "closed"
+    },
+    {
+      "id": "CP-C3-PORTABILITY-25",
+      "pass": "C3",
+      "severity": "medium",
+      "violated_invariant": "Every exact-byte packet member must survive checkout unchanged on every declared standalone-checker operating system.",
+      "minimal_counterexample": "On windows-latest, Git converted the control-plane packet JSON and JSONL fixtures to CRLF. The Python and Node standalone checkers then correctly reported packet, artifact, receipt, and timeline commitment failures.",
+      "affected_claim": "The deterministic control-plane packet verifies from an ordinary Windows checkout.",
+      "correction": "Disabled Git text conversion only for bulla/spec/control-plane-alpha/vectors/**, added .gitattributes to the alpha workflow trigger, and added a regression that enumerates every current vector member and requires the text attribute to be unset.",
+      "regression_tests": [
+        "bulla/tests/test_control_plane_deployment_workflow.py::test_control_plane_packet_vectors_disable_git_text_conversion",
+        "python3 -I bulla/spec/agent-incident-packet/verify_packet.py bulla/spec/control-plane-alpha/vectors/full-loop --context bulla/spec/control-plane-alpha/contexts/incident-context.json",
+        "node bulla/spec/agent-incident-packet/verify_packet.mjs bulla/spec/control-plane-alpha/vectors/full-loop --context bulla/spec/control-plane-alpha/contexts/incident-context.json",
+        "standalone packet · windows-latest",
+        "standalone packet · macos-latest"
+      ],
+      "maker": "root CI correction lane",
+      "reviewer": "Archimedes, Popper, and Kepler independently reproduced the exact-byte checkout failure; same-reviewer rechecks follow on the corrected commit",
+      "artifact_commit": "09202f6989d2a131f5cae37b841c9e1a93945926",
+      "status": "closed"
+    },
+    {
+      "id": "CP-C3-TEST-26",
+      "pass": "C3",
+      "severity": "low",
+      "violated_invariant": "The regression suite must prove that source-review blob portability does not remove modified-worktree rejection.",
+      "minimal_counterexample": "The corrected minter still checked git diff --quiet, but every test invoked it against clean reviewed files. A future edit could neutralize that result without failing a hostile regression.",
+      "affected_claim": "The mapping review accepts checkout normalization differences while rejecting an actual modification to a reviewed source file.",
+      "correction": "Preserve the exact bytes of a reviewed Worker source, modify that source, require predeployment to fail on the exact modified path, and restore the original bytes unconditionally. CP-C3-CI-28 and CP-C3-PORTABILITY-29 record the test-harness portability corrections.",
+      "regression_tests": [
+        "bulla/tests/test_control_plane_deployment_receipt.py::test_predeployment_gate_rejects_a_modified_reviewed_worktree"
+      ],
+      "maker": "root CI correction lane",
+      "reviewer": "Archimedes identified the missing hostile branch; same-reviewer recheck follows on the corrected commit",
+      "artifact_commit": "1a73efbdab9fba9f302dd1997a4d8f4a7c79c8ea",
+      "status": "closed"
+    },
+    {
+      "id": "CP-C3-PUBLIC-27",
+      "pass": "C3",
+      "severity": "medium",
+      "violated_invariant": "A record described as public must be readable without access to the private monorepo or its private release pages.",
+      "minimal_counterexample": "Unauthenticated requests to the linked immutable FALSIFICATIONS commit and every tombstoned release returned 404 because jkomkov/res-agentica is private. The status page called the inaccessible GitHub target a public withdrawal record.",
+      "affected_claim": "A general Glyph site reader can read the withdrawal explanation and distinguish public disclosure from access-controlled repository audit evidence.",
+      "correction": "Added /status/deployment-receipt-withdrawal as the first-party public explanation, changed /status to use that route, changed the machine registry to distinguish the public record from the immutable repository audit record, and labeled every repository link as requiring repository access. Updated all 52 release bodies with the public status and record URLs while preserving every asset unchanged. The production route remains a rollout gate until the exact reviewed site commit is merged and deployed.",
+      "residual_limitations": [
+        "The new public route is source-complete but returns 404 on production until the reviewed commit is merged and deployed. The existing public /status route remains available and reports BLOCKED_UNIMPLEMENTED and NOT_COMPUTED during that interval.",
+        "The repository release pages and retained assets are access-controlled. The public registry exposes their recorded identities and digests but cannot make the host objects publicly downloadable.",
+        "A detached historical receipt retains its original wording and has no embedded tombstone."
+      ],
+      "regression_tests": [
+        "glyph/scripts/check-presentation.mjs",
+        "glyph/scripts/check-withdrawn-deployment-receipts.mjs",
+        "pnpm --dir glyph check",
+        "pnpm --dir glyph build — /status/deployment-receipt-withdrawal",
+        "pnpm --dir glyph check:withdrawn-deployments:remote — 52 releases and unchanged assets"
+      ],
+      "maker": "root integration and evidence lane",
+      "reviewer": "Popper identified the unauthenticated-access counterexample; same-reviewer recheck follows on the corrected commit",
+      "artifact_commit": "09202f6989d2a131f5cae37b841c9e1a93945926",
+      "status": "corrected_pending_production_rollout"
+    },
+    {
+      "id": "CP-C3-CI-28",
+      "pass": "C3",
+      "severity": "medium",
+      "violated_invariant": "A hostile regression must execute in shallow GitHub checkouts instead of relying on object reachability that exists only in a full local repository.",
+      "minimal_counterexample": "The worktree-tamper regression created an unreferenced synthetic commit, cloned the shallow CI repository with --shared, and then tried to check out that unreferenced object in the child clone. The child could not resolve it, so all four protocol jobs and both standalone jobs failed during test setup rather than exercising tamper rejection.",
+      "affected_claim": "The hostile reviewed-source modification regression runs across Python 3.10–3.13, macOS, and Windows CI and reaches the intended security assertion.",
+      "correction": "The first correction materialized the synthetic review commit with git worktree add directly from the repository that created it, preserving the exact-path rejection without crossing a shallow clone object boundary. That passed shallow Linux and macOS but exposed the Windows cross-volume failure recorded in CP-C3-PORTABILITY-29.",
+      "regression_tests": [
+        "bulla/tests/test_control_plane_deployment_receipt.py::test_predeployment_gate_rejects_a_modified_reviewed_worktree",
+        "protocol · Python 3.10–3.13",
+        "standalone packet · macos-latest",
+        "standalone packet · windows-latest"
+      ],
+      "maker": "root CI correction lane",
+      "reviewer": "Kepler and Popper independently identified the shallow-object counterexample; same-reviewer rechecks follow on the corrected commit",
+      "artifact_commit": "e00e3b7658946d4a5422eb27cdad7a35e55a91c7",
+      "status": "closed"
+    },
+    {
+      "id": "CP-C3-PORTABILITY-29",
+      "pass": "C3",
+      "severity": "medium",
+      "violated_invariant": "A hostile regression in the standalone portability matrix must not depend on creating a Git worktree across runner volumes.",
+      "minimal_counterexample": "The attached-worktree correction passed the four Linux protocol jobs and macOS standalone job, but windows-latest attempted to add a worktree from D: into the pytest directory on C: and exited 128 before modifying a reviewed source.",
+      "affected_claim": "The hostile reviewed-source modification regression reaches the same security assertion on Windows, macOS, and Linux.",
+      "correction": "Remove all secondary checkout and worktree setup. Preserve the exact bytes of one reviewed source in the existing checkout, append the hostile modification, run the real predeployment gate, and restore the exact original bytes in a finally block. Pytest runs these files serially in every declared CI job.",
+      "regression_tests": [
+        "bulla/tests/test_control_plane_deployment_receipt.py::test_predeployment_gate_rejects_a_modified_reviewed_worktree",
+        "protocol · Python 3.10–3.13",
+        "standalone packet · macos-latest",
+        "standalone packet · windows-latest",
+        "post-test git diff --quiet for packages/bulla-control-plane-alpha/src/worker.ts"
+      ],
+      "maker": "root CI correction lane",
+      "reviewer": "GitHub Actions windows-latest supplied the cross-volume counterexample; same-reviewer rechecks follow on the corrected commit",
+      "artifact_commit": "1a73efbdab9fba9f302dd1997a4d8f4a7c79c8ea",
+      "status": "closed"
+    }
+  ],
+  "convergence_rule": {
+    "required_consecutive_clean_collective_passes": 2,
+    "reset_on": [
+      "schema change",
+      "trust change",
+      "verifier change",
+      "retention change",
+      "public claim change",
+      "new critical or high finding",
+      "new interoperability or privacy affecting medium finding"
+    ],
+    "waivers_permitted": false
+  }
+}

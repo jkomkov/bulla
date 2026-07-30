@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.44.2 — 2026-07-29
+
+**Receipt-kernel convergence.** This additive release publishes the strict
+ingestion and coverage work that accumulated after 0.44.1 while making the
+package boundary machine-checkable. ActionReceipt v0.2 remains normative and
+remains the default minting format.
+
+- Adds strict byte-oriented ActionReceipt ingestion with duplicate-member,
+  non-finite-number, closed-shape, and resource-limit rejection.
+- Publishes `verify_receipt`, `event_coverage`, `wrap_action`,
+  `operational_envelope`, and `receipt_for` as additive receipt-first helpers.
+- Publishes ActionReceipt v0.4 verification and opt-in creation as an
+  experimental released draft. Separate content, occurrence, and authorization
+  proofs bind a pre-dispatch UUID and actor-authenticated `claimed_at` under
+  `bulla-jcs-int/1`; the implementation does not establish worldly occurrence
+  or witnessed time.
+- Adds Golden F13 under the already experimental Golden surface: 96 captive
+  adversarial cases, finite one-intent and bounded two-intent exploration, and
+  a complete critical model-mutant gate for the declared model.
+- Adds a checked distribution policy. The action boundary, answerability,
+  executable challenge, generalization v0.5, receipt witness, Agent Incident
+  Packet, and hosted control-plane modules remain public source artifacts and
+  are excluded from the wheel and sdist.
+- Hardens release provenance and the composite GitHub Action. Package
+  publication carries no release-signing key; a default-branch ceremony opens
+  the signed slot before tagging and signs the verified post-publication
+  preimage without importing candidate code. The slot is published as a
+  separately immutable prerelease, monitored daily for overdue closure, and
+  bound to a versioned external issuer registry. Protected release and
+  release-slot tag creation is restricted to the maintainer identity; both tag
+  classes reject updates and deletion. PyPI publication additionally requires
+  an authenticated successful default-branch preparation run for the exact
+  commit. The audit reconciles protected slot tags with PyPI and verifies
+  actual release immutability, exact source-tree closure, and issuer lifecycle
+  state. Archive gates reject duplicate, unsafe, and noncanonical member names.
+
 ## 0.44.1 — 2026-07-20
 
 **Public truth copy correction.** This metadata-only patch corrects the PyPI

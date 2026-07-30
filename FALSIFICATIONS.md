@@ -5,7 +5,78 @@ take on trust. A tool that asks to be trusted about verification owes the same
 standard to its own claims. So this page ships the negative results — including the
 ones that retired a framing bulla used to lead with.
 
-## The one that matters: the coherence fee is not an execution-failure predictor
+## Withdrawn: Glyph website deployment receipt automation (2026-07-27)
+
+**Status:** withdrawn. Receipt generation, public release, and attestation are
+`BLOCKED_UNIMPLEMENTED`. Binding to deployed output is `NOT_COMPUTED`.
+
+Glyph previously contained merged automation that could mint a
+`website.deploy` ActionReceipt after a GitHub/Vercel deployment-status event.
+The receipt could pass its own digest or signature checks. Those checks did not
+establish the central deployment claim.
+
+### What failed
+
+- The original receipt recorded the digest of a CI-local rebuild as
+  `build_digest`. It did not hash the bytes deployed by Vercel or the bytes
+  served at the reported URL.
+- An HTTP response or SSO redirect established endpoint behavior only. It did
+  not bind the reported URL to the commit or to the locally rebuilt bytes.
+- Signed and publishing revisions supplied `GLYPH_DEPLOY_KEY` and
+  `contents: write` authority to a reusable workflow selected from the deployed,
+  event-named commit. That created a path for event-selected code to access the
+  signing capability and release authority. The repository record does **not**
+  establish that the secret was exfiltrated; it establishes that the isolation
+  boundary was unsound.
+- Later revisions authenticated the GitHub deployment metadata, removed the
+  direct-response overclaim, removed signing material and publication authority,
+  and labeled the candidate digest-only. One defect remained: the deployed
+  commit still selected the verifier and minter that interpreted the event.
+
+Receipt integrity was therefore compatible with a false inference: an intact
+receipt could prove what the selected workflow recorded without proving the
+identity of the deployed or served artifact.
+
+### Resolution
+
+The event-triggered generator, signer, publisher, and current public receipt
+claim were removed. Current repository gates reject the reviewed direct and ordinary
+constructions that could restore that path. Those static gates do not prove
+absolute absence across encoded, indirect, external, or unrecognized
+constructions.
+
+A future deployment receipt requires a trusted release path that is not
+selected by the deployed commit, a provider- or artifact-derived deployed-byte
+manifest, exact served-output reconciliation, isolated signing authority, and
+non-clobbering retained evidence. Until those mechanisms exist, no
+`website.deploy` candidate or verification rung is produced.
+
+### Historical repository artifacts
+
+The GitHub release assets produced before withdrawal remain byte-for-byte
+unchanged as historical evidence. They are not current deployment evidence.
+Each release title and body is marked `WITHDRAWN` and links to this record.
+The repository and its release pages are access-controlled; they are not the
+public disclosure surface. The corresponding public correction is
+[`glyphstandard.com/status/deployment-receipt-withdrawal`](https://glyphstandard.com/status/deployment-receipt-withdrawal).
+[`withdrawn-deployment-receipts.json`](https://glyphstandard.com/status/withdrawn-deployment-receipts.json)
+enumerates every matching release observed on 2026-07-27, its original mutable
+metadata hashes, and the retained asset digest. The registry classifies the
+asset policy as `PRESERVED_UNMODIFIED_AS_HISTORICAL_EVIDENCE`.
+
+The complete counterexample history, correction, tests, and residual limits are
+recorded under
+[`CP-B4-DEPLOY-13`](spec/control-plane-alpha/reviews/review-ledger.json).
+The blocked-state guard is
+[`glyph/scripts/check-deployment-receipt-blocked.mjs`](https://github.com/jkomkov/res-agentica/blob/main/glyph/scripts/check-deployment-receipt-blocked.mjs).
+The audit trail is the
+[unattended workflow](https://github.com/jkomkov/res-agentica/commit/41aa4e5eb69b87929550d622cf7f667d6df49408),
+[deployment-evidence correction](https://github.com/jkomkov/res-agentica/commit/71e79a3653428dd42371b09f33d8f97932180afc),
+[digest-only isolation](https://github.com/jkomkov/res-agentica/commit/c09fed3cf738fc6faf494da1e983744a7d8bf2db),
+and
+[withdrawal in commit `9636a67a`](https://github.com/jkomkov/res-agentica/commit/9636a67a4f56409bf4e17ef06277b177a77c2b96).
+
+## Withdrawn: the coherence fee as an execution-failure predictor
 
 For a while, bulla was described as if the **coherence fee** caught real breakage that
 schema validation misses ("schema validation: 0 problems, bulla: 22", "catches this
