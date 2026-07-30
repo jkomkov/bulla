@@ -740,11 +740,34 @@ def test_packet_reader_regular_files_request_binary_mode(
 
 
 def test_incident_packet_checkout_attributes_preserve_exact_bytes() -> None:
-    repository = ROOT.parent
-    prefixes = (
-        "bulla/spec/agent-incident-packet",
-        "glyph/public/examples/agent-incident-packet",
-    )
+    if (ROOT.parent / "glyph").is_dir():
+        repository = ROOT.parent
+        prefixes = (
+            "bulla/spec/agent-incident-packet",
+            "glyph/public/examples/agent-incident-packet",
+        )
+        representative_members = {
+            "bulla/spec/agent-incident-packet/vectors/http-clean/packet-core.json",
+            "bulla/spec/agent-incident-packet/vectors/http-clean/receipts/00-mandate.json",
+            "bulla/spec/agent-incident-packet/vectors/http-clean/coverage/http-decisions.json",
+            "bulla/spec/agent-incident-packet/vectors/http-clean/traces/http-released.jsonl",
+            "bulla/spec/agent-incident-packet/vectors/http-clean/redactions/http-trace.json",
+            "bulla/spec/agent-incident-packet/vectors/http-clean/witness/http-checkpoint.json",
+            "glyph/public/examples/agent-incident-packet/http/packet-core.json",
+            "glyph/public/examples/agent-incident-packet/contexts/http.json",
+            "glyph/public/examples/agent-incident-packet/reports/http.json",
+        }
+    else:
+        repository = ROOT
+        prefixes = ("spec/agent-incident-packet",)
+        representative_members = {
+            "spec/agent-incident-packet/vectors/http-clean/packet-core.json",
+            "spec/agent-incident-packet/vectors/http-clean/receipts/00-mandate.json",
+            "spec/agent-incident-packet/vectors/http-clean/coverage/http-decisions.json",
+            "spec/agent-incident-packet/vectors/http-clean/traces/http-released.jsonl",
+            "spec/agent-incident-packet/vectors/http-clean/redactions/http-trace.json",
+            "spec/agent-incident-packet/vectors/http-clean/witness/http-checkpoint.json",
+        }
     tracked = subprocess.run(
         ["git", "-C", str(repository), "ls-files", "--", *prefixes],
         check=True,
@@ -753,17 +776,6 @@ def test_incident_packet_checkout_attributes_preserve_exact_bytes() -> None:
     ).stdout.splitlines()
     assert tracked
 
-    representative_members = {
-        "bulla/spec/agent-incident-packet/vectors/http-clean/packet-core.json",
-        "bulla/spec/agent-incident-packet/vectors/http-clean/receipts/00-mandate.json",
-        "bulla/spec/agent-incident-packet/vectors/http-clean/coverage/http-decisions.json",
-        "bulla/spec/agent-incident-packet/vectors/http-clean/traces/http-released.jsonl",
-        "bulla/spec/agent-incident-packet/vectors/http-clean/redactions/http-trace.json",
-        "bulla/spec/agent-incident-packet/vectors/http-clean/witness/http-checkpoint.json",
-        "glyph/public/examples/agent-incident-packet/http/packet-core.json",
-        "glyph/public/examples/agent-incident-packet/contexts/http.json",
-        "glyph/public/examples/agent-incident-packet/reports/http.json",
-    }
     assert representative_members <= set(tracked)
 
     result = subprocess.run(

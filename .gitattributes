@@ -1,0 +1,4 @@
+# Incident packet fixtures are exact-byte trees: Git performs no text conversion.
+# Generators own canonical LF for textual JSON/JSONL; arbitrary opaque bytes remain intact.
+spec/agent-incident-packet/** -text
+spec/control-plane-alpha/vectors/** -text
