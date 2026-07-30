@@ -244,3 +244,13 @@ def test_semantic_finality_cli_matches_frozen_blind_vector():
     payload = json.loads(assessed.stdout)
     assert payload["status"] == "EXECUTE_PROVISIONALLY"
     assert payload["cause"] == "VERIFIED_AMBIGUITY_RESERVE"
+
+
+def test_source_only_commands_are_absent_from_packaged_cli():
+    help_result = _run("experimental", "--help")
+    assert help_result.returncode == 0, help_result.stdout + help_result.stderr
+    for command in ("boundary", "challenge", "answerability"):
+        assert command not in help_result.stdout
+        result = _run("experimental", command)
+        assert result.returncode == 2
+        assert "invalid choice" in result.stderr

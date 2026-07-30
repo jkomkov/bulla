@@ -1,0 +1,331 @@
+{
+  "artifacts": [
+    {
+      "access_condition": "public",
+      "artifact_id": "denominator-decisions",
+      "byte_length": 920,
+      "disclosure_state": "released",
+      "media_type": "application/json",
+      "path": "indexes/mcp-gateway-ingress.json",
+      "retention": "P90D",
+      "role": "denominator",
+      "sha256": "sha256:18b02611c8565b0085de43c91b1b7abffea6a46a54df4946fe9aa62c65a87ea7",
+      "withheld_ref": null
+    },
+    {
+      "access_condition": "public",
+      "artifact_id": "denominator-effects",
+      "byte_length": 909,
+      "disclosure_state": "released",
+      "media_type": "application/json",
+      "path": "indexes/mcp-target-effects.json",
+      "retention": "P90D",
+      "role": "denominator",
+      "sha256": "sha256:1a565fe251f33d9806d663d1247a81332d5e6a01d51bcd5d3e18851fc3ec08c6",
+      "withheld_ref": null
+    },
+    {
+      "access_condition": "public",
+      "artifact_id": "coverage-decisions",
+      "byte_length": 449,
+      "disclosure_state": "released",
+      "media_type": "application/json",
+      "path": "coverage/mcp-decisions.json",
+      "retention": "P90D",
+      "role": "coverage",
+      "sha256": "sha256:cec277507108d5b4d52dbd82c927cfcb3b6c2a4732d5d6c9c3e88c3cfd37c607",
+      "withheld_ref": null
+    },
+    {
+      "access_condition": "public",
+      "artifact_id": "coverage-effects",
+      "byte_length": 446,
+      "disclosure_state": "released",
+      "media_type": "application/json",
+      "path": "coverage/mcp-effects.json",
+      "retention": "P90D",
+      "role": "coverage",
+      "sha256": "sha256:501369e34a2eae0937458ca5defb10f80c984a3dbc0b6ab4f01dd4ee046bb329",
+      "withheld_ref": null
+    },
+    {
+      "access_condition": "public",
+      "artifact_id": "trace-released",
+      "byte_length": 106,
+      "disclosure_state": "released",
+      "media_type": "application/x-ndjson",
+      "path": "traces/mcp-released.jsonl",
+      "retention": "P90D",
+      "role": "trace",
+      "sha256": "sha256:6c8fd51f561b3c762703013b3b128be49321acc81670834eb9d4a50dceb19b0b",
+      "withheld_ref": null
+    },
+    {
+      "access_condition": "incident-reviewers",
+      "artifact_id": "trace-source-controlled",
+      "byte_length": 112,
+      "disclosure_state": "controlled",
+      "media_type": "application/x-ndjson",
+      "path": null,
+      "retention": "P90D",
+      "role": "trace",
+      "sha256": "sha256:a11e03d705727cb82a76644fa4a5e9165479dfb734920b8d010aaaddfee9cd84",
+      "withheld_ref": "controlled://mcp/trace-source"
+    },
+    {
+      "access_condition": "public",
+      "artifact_id": "redaction-record",
+      "byte_length": 431,
+      "disclosure_state": "released",
+      "media_type": "application/json",
+      "path": "redactions/mcp-trace.json",
+      "retention": "P90D",
+      "role": "redaction",
+      "sha256": "sha256:b6be642838288188f26d70f148d62cb4c32e4b4553942d90a511b9d66f30a397",
+      "withheld_ref": null
+    },
+    {
+      "access_condition": "public",
+      "artifact_id": "witness-checkpoint",
+      "byte_length": 1668,
+      "disclosure_state": "released",
+      "media_type": "application/json",
+      "path": "witness/mcp-checkpoint.json",
+      "retention": "P90D",
+      "role": "witness",
+      "sha256": "sha256:51d4b1e4ff2300efc0cff67f4a1e5cba2b5ba430b2b546c095d979b519310c9a",
+      "withheld_ref": null
+    }
+  ],
+  "classification": "synthetic-public",
+  "corrections": [
+    {
+      "attestation_hash": "sha256:c0879a000103dfbfea72a46f5be886c5453f8f1fcbf982a3c068be3cb5cbdb8a",
+      "receipt_path": "receipts/11-correction.json"
+    }
+  ],
+  "coverage": [
+    {
+      "anchor_id": "mcp-gateway-ingress",
+      "artifact_id": "coverage-decisions",
+      "minimum_verification_depth": "attestation",
+      "phase": "decision",
+      "protocol": "mcp"
+    },
+    {
+      "anchor_id": "mcp-target-effects",
+      "artifact_id": "coverage-effects",
+      "minimum_verification_depth": "attestation",
+      "phase": "effect",
+      "protocol": "mcp"
+    }
+  ],
+  "denominators": [
+    {
+      "anchor_id": "mcp-gateway-ingress",
+      "artifact_id": "denominator-decisions",
+      "checkpoint_attestation": "sha256:4ca6290b3fe37f941c56bcabd46f75453fd68921aee0fd213a2e58320b2f33ad",
+      "phase": "decision",
+      "protocol": "mcp",
+      "provenance": "PATH_SEPARATE_TEAM_CONTROLLED"
+    },
+    {
+      "anchor_id": "mcp-target-effects",
+      "artifact_id": "denominator-effects",
+      "checkpoint_attestation": "sha256:24bb94b0bb1350b47b253f42ed317f6723e4fec831b4398d09419a3f333a98bc",
+      "phase": "effect",
+      "protocol": "mcp",
+      "provenance": "PATH_SEPARATE_TEAM_CONTROLLED"
+    }
+  ],
+  "incident_id": "incident-mcp-synthetic-001",
+  "packet_id": "packet-mcp-synthetic-001",
+  "profile": "glyph.agent-incident-packet/0.1-draft",
+  "redactions": [
+    {
+      "record_artifact_id": "redaction-record",
+      "redaction_id": "redact-001",
+      "released_artifact_id": "trace-released",
+      "reviewer_statement_ref": "sha256:c06fa1b1510c9965760d35bb3e5d7c6b6947232e7f4b6dd54a40a55eaae0d9ea",
+      "rules_hash": "sha256:4be8d2cff8b625471bdc893cdc0c375a4b6d1f76a1cb5a549f624730538ed4bf",
+      "source_artifact_id": "trace-source-controlled",
+      "tool": "fixture-redactor",
+      "tool_version": "1"
+    }
+  ],
+  "revision": 1,
+  "roles": [
+    {
+      "issuer": "did:key:z6MkwPnFNKCV9Bxfk4nh6KCBiCo1tFhpSxzfagMoA8ZRxKUJ",
+      "role": "evaluation_authority"
+    },
+    {
+      "issuer": "did:key:z6MkpwFJuEeQ16GpHqFLgcswLRSsKB4yUSBfjkPsE8aH2ui8",
+      "role": "gateway"
+    },
+    {
+      "issuer": "did:key:z6Mkh6dH2RPW4aScQFDuUPWvy3MqnMA2dGhCHy4opJTSQ7B2",
+      "role": "boundary"
+    },
+    {
+      "issuer": "did:key:z6MkowvpLZETNemahSCp1TyDPgrR8GUEivbGU5jYvQ8YjazT",
+      "role": "target"
+    },
+    {
+      "issuer": "did:key:z6MksJUyYHpf4U2oA1uQ58oiu8cewPGdG8corJT6sGcRC5dA",
+      "role": "trajectory_monitor"
+    },
+    {
+      "issuer": "did:key:z6MktjaDX6Yps2G1KtqSPVaDdrkkdgYnUS3GhVnK4uMpJAcG",
+      "role": "incident_commander"
+    },
+    {
+      "issuer": "did:key:z6MkuSxY7f7aJ9hsfatELRY6Hkc9sU71WnVow5WZnTLvxDzW",
+      "role": "affected_party"
+    },
+    {
+      "issuer": "did:key:z6MkmANSD1FjiNhkwAKPcm7nA3nmhXvPGsRPKP9CvzzQZgcD",
+      "role": "reviewer"
+    },
+    {
+      "issuer": "did:key:z6Mkp8jRSDKPGZqyVmu6s3ZEsxSMMUFqtt7CS44SkU6j9iTP",
+      "role": "publisher"
+    },
+    {
+      "issuer": "did:key:z6MktL91LYYx5UtxGhKSr1fbrKsXSjGBNAtNCd8KWqArjpWN",
+      "role": "correction_authority"
+    },
+    {
+      "issuer": "did:key:z6MkfDh2MFKQv7hE12ncqH2CSeLTCtA2A3qYELDcfw2haHoN",
+      "role": "witness"
+    }
+  ],
+  "statements": [
+    {
+      "attestation_hash": "sha256:4ca6290b3fe37f941c56bcabd46f75453fd68921aee0fd213a2e58320b2f33ad",
+      "receipt_path": "receipts/05-denominator-decision-checkpoint.json"
+    },
+    {
+      "attestation_hash": "sha256:24bb94b0bb1350b47b253f42ed317f6723e4fec831b4398d09419a3f333a98bc",
+      "receipt_path": "receipts/06-denominator-effect-checkpoint.json"
+    },
+    {
+      "attestation_hash": "sha256:0294d77aced0072523ece9ca26c94e5431a72fbc55b03489780bb90b0a33970d",
+      "receipt_path": "receipts/07-statement-observed.json"
+    },
+    {
+      "attestation_hash": "sha256:601ce339be1d30ca47bc06b34098f62e7282f77810dfc352e774c75682cc880d",
+      "receipt_path": "receipts/08-statement-unresolved.json"
+    },
+    {
+      "attestation_hash": "sha256:c06fa1b1510c9965760d35bb3e5d7c6b6947232e7f4b6dd54a40a55eaae0d9ea",
+      "receipt_path": "receipts/09-statement-redaction-review.json"
+    }
+  ],
+  "supersedes_core_hash": null,
+  "timeline": [
+    {
+      "action_type": "eval.run.authorize",
+      "attestation_hash": "sha256:c8edd970a3c525236fb955948dc2415c7d85480d130fa6cec2813e1a572c3577",
+      "byte_length": 4490,
+      "receipt_path": "receipts/00-mandate.json",
+      "sequence": 1,
+      "sha256": "sha256:fe48b0a74a5eaaebddc52b71d3f83b79091106cdeeddae56f7d4090a9fffd054"
+    },
+    {
+      "action_type": "capability.decide",
+      "attestation_hash": "sha256:afa376aaf2ebd1958573e2b4aecdcfb56181eaddcb17cb74c5c9d92e3e2c39f6",
+      "byte_length": 3716,
+      "receipt_path": "receipts/01-decision-permit.json",
+      "sequence": 2,
+      "sha256": "sha256:a2bd5345e3b14ade45f7eb189bcd9197de167db210e2c7ff9bf403139bbc89a5"
+    },
+    {
+      "action_type": "capability.decide",
+      "attestation_hash": "sha256:81d90872bb1b037cb42fcd4114b6982536f2c99e0049c588ebbf7f77684fcb11",
+      "byte_length": 3720,
+      "receipt_path": "receipts/02-decision-refuse.json",
+      "sequence": 3,
+      "sha256": "sha256:5b7f2dbfd3a04d2442a291e0f9a60a29002938291b4a2ef56a3539e22bcfbbfd"
+    },
+    {
+      "action_type": "capability.observe",
+      "attestation_hash": "sha256:fcf7fac0439fa576a44a5a04dcc61a0cac86a1a8e0f41dcc2f184856242d7cef",
+      "byte_length": 3848,
+      "receipt_path": "receipts/03-observation-mediated.json",
+      "sequence": 4,
+      "sha256": "sha256:8685432602e02880b5d75e9b48168f06b10862be30b4dbc5b94d8ad10f7d6b86"
+    },
+    {
+      "action_type": "trajectory.decide",
+      "attestation_hash": "sha256:06f500d0c4dbbcb917c8a09a1213736c3177df6a4d1215e651d8ac8c02c2d55a",
+      "byte_length": 3585,
+      "receipt_path": "receipts/04-trajectory.json",
+      "sequence": 5,
+      "sha256": "sha256:c4a5e4c2117b29586f9645de4ac07afab6ef9a5d75d5de59781087ced4c60290"
+    },
+    {
+      "action_type": "incident.statement",
+      "attestation_hash": "sha256:4ca6290b3fe37f941c56bcabd46f75453fd68921aee0fd213a2e58320b2f33ad",
+      "byte_length": 3407,
+      "receipt_path": "receipts/05-denominator-decision-checkpoint.json",
+      "sequence": 6,
+      "sha256": "sha256:9e62ef28fed9bac945353a2edb22d42b067a07395b0161e3be83c2f050c54188"
+    },
+    {
+      "action_type": "incident.statement",
+      "attestation_hash": "sha256:24bb94b0bb1350b47b253f42ed317f6723e4fec831b4398d09419a3f333a98bc",
+      "byte_length": 3400,
+      "receipt_path": "receipts/06-denominator-effect-checkpoint.json",
+      "sequence": 7,
+      "sha256": "sha256:3b402ec8fbd9c02c28a084c9393566e43a1ded0dbe522ed04bfbc45dcbdde3cc"
+    },
+    {
+      "action_type": "incident.statement",
+      "attestation_hash": "sha256:0294d77aced0072523ece9ca26c94e5431a72fbc55b03489780bb90b0a33970d",
+      "byte_length": 3234,
+      "receipt_path": "receipts/07-statement-observed.json",
+      "sequence": 8,
+      "sha256": "sha256:5c3bdcf8cec8929b254d4565122033542b474c45f70cd4e4fb914cec9fb36b04"
+    },
+    {
+      "action_type": "incident.statement",
+      "attestation_hash": "sha256:601ce339be1d30ca47bc06b34098f62e7282f77810dfc352e774c75682cc880d",
+      "byte_length": 3234,
+      "receipt_path": "receipts/08-statement-unresolved.json",
+      "sequence": 9,
+      "sha256": "sha256:643cf9741f3dd499b669ccb4d00c14827144920275bcf0fa1a74ca7fe195639f"
+    },
+    {
+      "action_type": "incident.statement",
+      "attestation_hash": "sha256:c06fa1b1510c9965760d35bb3e5d7c6b6947232e7f4b6dd54a40a55eaae0d9ea",
+      "byte_length": 3381,
+      "receipt_path": "receipts/09-statement-redaction-review.json",
+      "sequence": 10,
+      "sha256": "sha256:9084c840253b883cf3a6e54679172a4bdabe8190039689535d19a90bce1811b1"
+    },
+    {
+      "action_type": "incident.handoff",
+      "attestation_hash": "sha256:acf5c1b81d829e7b82167f4d861f73b6d41ac60a6f27e141f740661d3326425f",
+      "byte_length": 4981,
+      "receipt_path": "receipts/10-handoff.json",
+      "sequence": 11,
+      "sha256": "sha256:cbc2809b2b512cf267a10b9cac544da12e894078864d80572c26c211c1e301a4"
+    },
+    {
+      "action_type": "incident.correct",
+      "attestation_hash": "sha256:c0879a000103dfbfea72a46f5be886c5453f8f1fcbf982a3c068be3cb5cbdb8a",
+      "byte_length": 3356,
+      "receipt_path": "receipts/11-correction.json",
+      "sequence": 12,
+      "sha256": "sha256:d1b4b175499bd9968e99896430dca22793d51ff1cf7ad32c17588323aaa5cd64"
+    }
+  ],
+  "witnesses": [
+    {
+      "artifact_id": "witness-checkpoint",
+      "root_ref": "team-witness://mcp/checkpoint-001",
+      "witness_id": "mcp-team-witness-001"
+    }
+  ]
+}

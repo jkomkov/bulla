@@ -1,0 +1,10 @@
+{
+  "disclosure_safety": "NOT_COMPUTED",
+  "redaction_id": "redact-001",
+  "released_sha256": "sha256:6c8fd51f561b3c762703013b3b128be49321acc81670834eb9d4a50dceb19b0b",
+  "rules_hash": "sha256:4be8d2cff8b625471bdc893cdc0c375a4b6d1f76a1cb5a549f624730538ed4bf",
+  "schema_version": 1,
+  "source_sha256": "sha256:a11e03d705727cb82a76644fa4a5e9165479dfb734920b8d010aaaddfee9cd84",
+  "tool": "fixture-redactor",
+  "tool_version": "1"
+}

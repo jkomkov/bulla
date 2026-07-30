@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schema/agent-incident-packet/0.1/observation.schema.json",
+  "title": "Agent Incident Packet observation projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "anchor_id",
+    "observation_id",
+    "run_id",
+    "protocol",
+    "operation_ref",
+    "phase",
+    "evidence_hash"
+  ],
+  "properties": {
+    "anchor_id": {"type": "string", "minLength": 1},
+    "observation_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "protocol": {"enum": ["http", "mcp"]},
+    "operation_ref": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "phase": {"enum": ["decision", "effect"]},
+    "evidence_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

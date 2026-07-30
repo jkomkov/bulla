@@ -1,0 +1,50 @@
+{
+  "profile": "bulla.control-plane-alpha/0.1-experimental",
+  "vectors": {
+    "full-loop": {
+      "packet_core_sha256": "sha256:745a3179b1e5bc3f8b4f4171e6ae4f479adaadf53788a48a4b663a28d5328ddf",
+      "result": {
+        "authzen_mapping": "VERIFIED",
+        "decision_coverage": {
+          "covered": 2,
+          "covered_ids": [
+            "decision-permit-001",
+            "decision-refuse-001"
+          ],
+          "total": 2,
+          "uncovered_ids": []
+        },
+        "deployment_gate": "PASSED",
+        "effect_coverage": {
+          "covered": 1,
+          "covered_ids": [
+            "effect-mediated-001"
+          ],
+          "total": 2,
+          "uncovered_ids": [
+            "effect-bypass-001"
+          ]
+        },
+        "errors": [],
+        "exit_code": 0,
+        "incident_packet_integrity": "VERIFIED",
+        "issuer_authenticity": "VERIFIED",
+        "profile": "bulla.control-plane-alpha/0.1-experimental",
+        "reliance": "NOT_COMPUTED",
+        "retained_receipts": "VERIFIED",
+        "run_id": "run-mcp-control-alpha-001",
+        "run_status": "FINALIZED",
+        "service_witness_consistency": "VERIFIED",
+        "service_witness_inclusion": "VERIFIED",
+        "standards_status": "RC_DRAFT_PINNED_FINAL_UNPUBLISHED",
+        "vector_id": "full-loop",
+        "warnings": [
+          "MCP 2026-07-28 final is not published; production promotion is blocked.",
+          "One direct-bypass effect remains uncovered by an accepted receipt."
+        ],
+        "witness_inclusion": "VERIFIED",
+        "witness_root_trust": "TRUSTED"
+      }
+    }
+  }
+}

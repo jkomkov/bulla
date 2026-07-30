@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.5-experimental",
+  "profile": "bulla.claim-flow/0.5-experimental",
+  "candidate_state": "FROZEN_POST_RELEASE_CANDIDATE",
+  "classification": "BLOCKED",
+  "blocker": "REAL_PARTICIPANTS_NOT_YET_BOUND",
+  "candidate_commit": "9c7108576df79899f31f495aa5101a0c20d1dc92",
+  "substitution_policy": "NO_INTERNAL_OR_SYNTHETIC_SUBSTITUTES",
+  "roles": {
+    "foreign_curators": {"required": 4, "bound": 0, "submitted": 0},
+    "applicability_adjudicators": {"required": 2, "bound": 0, "primary_ratings": 0},
+    "independent_boundary_implementers": {"required": 1, "bound": 0, "submissions": 0},
+    "shadow_integrators": {"required": 1, "bound": 0, "actions_receipted": 0},
+    "privacy_authority_reviewers": {"required": 1, "bound": 0, "challenge_receipts": 0}
+  },
+  "frozen_inputs": true,
+  "foreign_cases_accepted": false,
+  "claims_permitted": [
+    "POST_RELEASE_CANDIDATE_FROZEN",
+    "FOREIGN_INTAKE_PERMITTED",
+    "RECRUITMENT_PACKET_PREPARED",
+    "EXTERNAL_EXECUTION_BLOCKED"
+  ],
+  "claims_prohibited": [
+    "FOREIGN_SIGNAL_PRESENT",
+    "INDEPENDENT_PARITY",
+    "SHADOW_INTEGRATION_OBSERVED",
+    "EXTERNAL_VALIDATION"
+  ]
+}

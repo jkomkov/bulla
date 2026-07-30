@@ -1,0 +1,17 @@
+{
+  "anchor_id": "mcp-gateway-ingress",
+  "covered_ids": [
+    "mcp-decision-permit-001",
+    "mcp-decision-refuse-001"
+  ],
+  "denominator_sha256": "sha256:18b02611c8565b0085de43c91b1b7abffea6a46a54df4946fe9aa62c65a87ea7",
+  "invalid_receipts": [],
+  "minimum_verification_depth": "attestation",
+  "phantom_receipt_ids": [],
+  "phase": "decision",
+  "protocol": "mcp",
+  "receipted": 2,
+  "schema_version": 1,
+  "total": 2,
+  "uncovered_ids": []
+}

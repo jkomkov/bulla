@@ -1,0 +1,885 @@
+{
+  "frontiers": [
+    {
+      "completeness": "EXACT",
+      "lineage": "units",
+      "maximal_safe_masks": [
+        2,
+        5
+      ],
+      "selection": "CHOICE_REQUIRED"
+    },
+    {
+      "completeness": "EXACT",
+      "lineage": "bounded-time",
+      "maximal_safe_masks": [
+        2,
+        5
+      ],
+      "selection": "CHOICE_REQUIRED"
+    },
+    {
+      "completeness": "EXACT",
+      "lineage": "intervals",
+      "maximal_safe_masks": [
+        2,
+        5
+      ],
+      "selection": "CHOICE_REQUIRED"
+    },
+    {
+      "completeness": "EXACT",
+      "lineage": "enums",
+      "maximal_safe_masks": [
+        2,
+        5
+      ],
+      "selection": "CHOICE_REQUIRED"
+    },
+    {
+      "completeness": "EXACT",
+      "lineage": "null-absent",
+      "maximal_safe_masks": [
+        2,
+        5
+      ],
+      "selection": "CHOICE_REQUIRED"
+    },
+    {
+      "completeness": "EXACT",
+      "lineage": "namespaces",
+      "maximal_safe_masks": [
+        2,
+        5
+      ],
+      "selection": "CHOICE_REQUIRED"
+    },
+    {
+      "completeness": "EXACT",
+      "lineage": "integer-rounding",
+      "maximal_safe_masks": [
+        2,
+        5
+      ],
+      "selection": "CHOICE_REQUIRED"
+    },
+    {
+      "completeness": "EXACT",
+      "lineage": "delivery",
+      "maximal_safe_masks": [
+        2,
+        5
+      ],
+      "selection": "CHOICE_REQUIRED"
+    },
+    {
+      "completeness": "EXACT",
+      "lineage": "evidence-floors",
+      "maximal_safe_masks": [
+        2,
+        5
+      ],
+      "selection": "CHOICE_REQUIRED"
+    },
+    {
+      "completeness": "EXACT",
+      "lineage": "revocation-windows",
+      "maximal_safe_masks": [
+        2,
+        5
+      ],
+      "selection": "CHOICE_REQUIRED"
+    },
+    {
+      "completeness": "EXACT",
+      "lineage": "authority-scopes",
+      "maximal_safe_masks": [
+        2,
+        5
+      ],
+      "selection": "CHOICE_REQUIRED"
+    },
+    {
+      "completeness": "EXACT",
+      "lineage": "closure-warrants",
+      "maximal_safe_masks": [
+        2,
+        5
+      ],
+      "selection": "CHOICE_REQUIRED"
+    }
+  ],
+  "point_count": 96,
+  "points": [
+    {
+      "lineage": "units",
+      "mask": 0,
+      "point_hash": "sha256:9238ba9786d72fa4e97616b3dc38a447f1da143fc6bb597b56b7a6085baaf036",
+      "represented_yield": 0,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "units",
+      "mask": 1,
+      "point_hash": "sha256:deb3c68053415812f23f8089a02ac2ba015144be7f32f9ea5cb48b68997145c0",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "units",
+      "mask": 2,
+      "point_hash": "sha256:397ae94e94a5813ed04fca55d785e639da930b84dbb0c07215f76095405b42c7",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "units",
+      "mask": 3,
+      "point_hash": "sha256:d34ae31b09a7a73839de73562971be5b1eb92962a5370d2343761014aaf96982",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:eaa63a3e25d8cd9305d157a13fc3c541d8c807b5ca7ff8a7a836a0d0b680b323"
+    },
+    {
+      "lineage": "units",
+      "mask": 4,
+      "point_hash": "sha256:a54e9b58556de69f401cb3019e721f94419ecf0c93937aedaaba8bc66413e546",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "units",
+      "mask": 5,
+      "point_hash": "sha256:c5985bc1902686c46b7d123db18b3c55d9988907220fa7e06829b40d216daa33",
+      "represented_yield": 2,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "units",
+      "mask": 6,
+      "point_hash": "sha256:1b4fa64551c5aebb3640db675b2ca6605369f174e6221963c293e48e685f8089",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:f0f5669c27e8dd01a8dd03a135ab8aca1e7004d392f5c731e2deae14e271760c"
+    },
+    {
+      "lineage": "units",
+      "mask": 7,
+      "point_hash": "sha256:5c8d07028b2cdb5aa7dccc94fd5d2f4f4ce07aec39653c21d0949cab3b38fbee",
+      "represented_yield": 3,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:eaa63a3e25d8cd9305d157a13fc3c541d8c807b5ca7ff8a7a836a0d0b680b323"
+    },
+    {
+      "lineage": "bounded-time",
+      "mask": 0,
+      "point_hash": "sha256:1b347a8bf5f3caa9c4badc5e09b70355a99daebb59721738bb8ce696e0aa1656",
+      "represented_yield": 0,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "bounded-time",
+      "mask": 1,
+      "point_hash": "sha256:236571e1b0548d1dd5257ecdef57fecbb484dbea4790a9d126160fb5db197f3d",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "bounded-time",
+      "mask": 2,
+      "point_hash": "sha256:18b65915c090589b714f1748d776daa2acef8e411d9e191169632901d9528099",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "bounded-time",
+      "mask": 3,
+      "point_hash": "sha256:8b7ab5d5be49a7c6a21138eeee47e3719c4824985efc379beae4d29fa1c951f0",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:b9d66bf392a25e59f88c8ebc7369e1bcd2ca1777d0cbf7c7b55422e677899262"
+    },
+    {
+      "lineage": "bounded-time",
+      "mask": 4,
+      "point_hash": "sha256:db659adf0a95da900716beac034f26b00e2c607556b130b330e8447412cc8446",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "bounded-time",
+      "mask": 5,
+      "point_hash": "sha256:14396413f1df6212ea3640c0a7719486774d6525481a37ce1d7ce1cd8dc74c8f",
+      "represented_yield": 2,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "bounded-time",
+      "mask": 6,
+      "point_hash": "sha256:e8e74264a9c6095dba5fbd0c89c13706079ba44f01d748641352f858206d3638",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:7fec09a9f91f54828f25485f859287510f8a25f550234e25207ffba2fe9ee593"
+    },
+    {
+      "lineage": "bounded-time",
+      "mask": 7,
+      "point_hash": "sha256:6913b048d433620906c77e7791de12af080bea6495ec1ba5ec1d397ddbd0773d",
+      "represented_yield": 3,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:b9d66bf392a25e59f88c8ebc7369e1bcd2ca1777d0cbf7c7b55422e677899262"
+    },
+    {
+      "lineage": "intervals",
+      "mask": 0,
+      "point_hash": "sha256:80b82ccfda5f505776ab7a77eef305f1ec59aef30ab83a5793d3f9bb8b546697",
+      "represented_yield": 0,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "intervals",
+      "mask": 1,
+      "point_hash": "sha256:d85f9b1db97267cf6bff28fa8d5e9b443d12f5d8dd82ce5913ad5e24b161e9ed",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "intervals",
+      "mask": 2,
+      "point_hash": "sha256:fe91e4ab355fcf03dbf76c85f3e1056505b5fb74738116224e867fa99d0ad95f",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "intervals",
+      "mask": 3,
+      "point_hash": "sha256:b914b95f8c4868645b3c7984add94bef2230796e3e8702b0a23a5ad80a7f15d5",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:b2eddd8536857cad7ab65d7642edca1805430a276268310e7c1a06c3cb810ebc"
+    },
+    {
+      "lineage": "intervals",
+      "mask": 4,
+      "point_hash": "sha256:57a94c98d1c1e1288c96700c0298f0be083fbd5fb5693efc2ddf338d70b208c6",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "intervals",
+      "mask": 5,
+      "point_hash": "sha256:cccacbb70179764e2c5cf49fb3fff2746d4bae9b68afe9123d148e88c983f1c3",
+      "represented_yield": 2,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "intervals",
+      "mask": 6,
+      "point_hash": "sha256:05458dc6f07b739be970294d352a417ba75bcbeb9030968257247e66b7321e22",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:50632744c533940484be520a449d5fbb32efb6a5329cb62121280cae074688e7"
+    },
+    {
+      "lineage": "intervals",
+      "mask": 7,
+      "point_hash": "sha256:46233a27962b0732e812ef5349dd2da2084fd2eaa5c93cafb0655e8dbe2c0fd0",
+      "represented_yield": 3,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:b2eddd8536857cad7ab65d7642edca1805430a276268310e7c1a06c3cb810ebc"
+    },
+    {
+      "lineage": "enums",
+      "mask": 0,
+      "point_hash": "sha256:54e8488db745723de0981814bef2294cc641ddd07271356ca21de5cbe94e7596",
+      "represented_yield": 0,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "enums",
+      "mask": 1,
+      "point_hash": "sha256:5c3d3666baca8f77f70c40840bb333e826a804cf39330674d8f0600f7aa2fd2d",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "enums",
+      "mask": 2,
+      "point_hash": "sha256:5bc77bc14edf67cc05bd35f1b69dd1113afa60bed842889eec99766fc5d587dd",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "enums",
+      "mask": 3,
+      "point_hash": "sha256:49da278b6576b04fb125dfb1e6d8551ae097731104de17bb17863a74a43a44ad",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:cbd4cc5a661d128cff6ccc4603338b8f605da36b898ef8b291dc0e8194c287fb"
+    },
+    {
+      "lineage": "enums",
+      "mask": 4,
+      "point_hash": "sha256:29de7cb238cfccfd17bb3417ac715fd6e4a741dc110314a288fe5f411d940750",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "enums",
+      "mask": 5,
+      "point_hash": "sha256:cd369348493b55c6e49292174107450d8018b8372e26dc1ab318c6a0a4a04024",
+      "represented_yield": 2,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "enums",
+      "mask": 6,
+      "point_hash": "sha256:6740351d7a62118e701c58dd281eaea2dcb7f442c1c3286dfb81871a3050fad6",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:27b874d5d2a436f82d32a43d7445d1ba0d02577e08b7febff1c22bf3f8385140"
+    },
+    {
+      "lineage": "enums",
+      "mask": 7,
+      "point_hash": "sha256:cc23a0145e5d9fbaef93245248de2bbf5a31de7a77ca04a1c882e2f5bbc03387",
+      "represented_yield": 3,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:cbd4cc5a661d128cff6ccc4603338b8f605da36b898ef8b291dc0e8194c287fb"
+    },
+    {
+      "lineage": "null-absent",
+      "mask": 0,
+      "point_hash": "sha256:74b5a7c3d05b6efd8d41c68331bb7d3752dfff7d8ee8552b0dda53ff5170a8da",
+      "represented_yield": 0,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "null-absent",
+      "mask": 1,
+      "point_hash": "sha256:3aa714ca60b75b188fbc445cd23a2bf057831f42a0e6c79fb80b6cface156e37",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "null-absent",
+      "mask": 2,
+      "point_hash": "sha256:3cce9038a27deea2a55b944df97ceb34b845de78c45d49ace720f3fb58121254",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "null-absent",
+      "mask": 3,
+      "point_hash": "sha256:ae8bcb83eac3b17bb9f65ba70e29fd802ac84e32c1d5f4b2c68e2650ac67ccfb",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:076be693accd56da9e3ef34de56f7b49facfb86c9b8822277dbc5846bf77e391"
+    },
+    {
+      "lineage": "null-absent",
+      "mask": 4,
+      "point_hash": "sha256:1081a159742dbf2941aaff51d2142d4212a20d7a1c6328db1d83ef874b647536",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "null-absent",
+      "mask": 5,
+      "point_hash": "sha256:4ece77031b1465220fca2b9a8e58c0a172c8fce4aa4f10d158d81ae180c49887",
+      "represented_yield": 2,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "null-absent",
+      "mask": 6,
+      "point_hash": "sha256:ba92ba2c830d499a093cad65c3eabe7a614733c66129fb063241058638111739",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:49a892b0635e54fb007784888f95ff86271977055803c899756caa6e68b76a82"
+    },
+    {
+      "lineage": "null-absent",
+      "mask": 7,
+      "point_hash": "sha256:e3141c9118cc78a758a18233637317ae27c6a03d31e8708958542964e1922da0",
+      "represented_yield": 3,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:076be693accd56da9e3ef34de56f7b49facfb86c9b8822277dbc5846bf77e391"
+    },
+    {
+      "lineage": "namespaces",
+      "mask": 0,
+      "point_hash": "sha256:f66b5229b3f0616877c41c4e10de5fe7cbed61e935170e2b9bc26b2008717998",
+      "represented_yield": 0,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "namespaces",
+      "mask": 1,
+      "point_hash": "sha256:f6c2192c008051ab37f4133e01ff0e27fde07c4e984570889fe972bc17f954aa",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "namespaces",
+      "mask": 2,
+      "point_hash": "sha256:f4f3324658a84d196a94cdf4520e5448870d41c5ac4b5d67b6d078f1472ab991",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "namespaces",
+      "mask": 3,
+      "point_hash": "sha256:a374a6a79d8cfee14dd07bbd82a2d1ca54a4a307bc325e811b8b2ecc78461243",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:c059311e2a8840d417d42819b8c2e3f3b02c71c4e5131ca51d53dd02a67ec3c0"
+    },
+    {
+      "lineage": "namespaces",
+      "mask": 4,
+      "point_hash": "sha256:9911cf6f96a7084e7900ea7448c1c4e4092e22ae1b947ab765a3f56962fbfa27",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "namespaces",
+      "mask": 5,
+      "point_hash": "sha256:b1d6ac8b93a1834e69f7de9e4abefbc09bc3a4d0b401bb6f5ea0000406a6c946",
+      "represented_yield": 2,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "namespaces",
+      "mask": 6,
+      "point_hash": "sha256:58518a8ddd3cc36ed9ea5002e35fef9a80babe43e33ca51c2b61b6ad91dbe3b6",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:ec81a5fcd6be8f460bf44bd109b58659a4e5a3925e241a81e6b542191d7615a3"
+    },
+    {
+      "lineage": "namespaces",
+      "mask": 7,
+      "point_hash": "sha256:7f38164cc8bddf78a891af96e34af44cdc5a5b2a2be5333f90f65deba3f5c525",
+      "represented_yield": 3,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:c059311e2a8840d417d42819b8c2e3f3b02c71c4e5131ca51d53dd02a67ec3c0"
+    },
+    {
+      "lineage": "integer-rounding",
+      "mask": 0,
+      "point_hash": "sha256:69358330a0a365945035fba1a7077932077eacc0a956ae9c8d24c63870f8e557",
+      "represented_yield": 0,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "integer-rounding",
+      "mask": 1,
+      "point_hash": "sha256:4dae4e6a575c503dc5075a70851abc46f09aebddee7bca5dd8c7972f31e9079f",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "integer-rounding",
+      "mask": 2,
+      "point_hash": "sha256:0f1cee94cebc147e5c134a497b940abe58aebe4102b6c877fadb96bc8f3e5d77",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "integer-rounding",
+      "mask": 3,
+      "point_hash": "sha256:d587a5cb406f680e39d94b1d3b4ee2c6a469b2bee213433ebac62dae0ecf6f80",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:31b743c473b167f99d500403a804164e6791a15b6d9c812741a023fc33d2691b"
+    },
+    {
+      "lineage": "integer-rounding",
+      "mask": 4,
+      "point_hash": "sha256:5ee4b8fa16325403caef8828ffbf7c84e25eaa64de40c37ebb8c1e37197fa909",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "integer-rounding",
+      "mask": 5,
+      "point_hash": "sha256:69eb3daa7faca0b620c1de90448bdc19a284f6c8f92445654513877c9b88f67a",
+      "represented_yield": 2,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "integer-rounding",
+      "mask": 6,
+      "point_hash": "sha256:57b23b9969dc7e77c3defe2531d522a70bba6ce5ef23f149a99f756dabe1fff9",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:c520266e46c90ed3ad332e1fe96b15eed21288958d378c46cab88002ad7717c9"
+    },
+    {
+      "lineage": "integer-rounding",
+      "mask": 7,
+      "point_hash": "sha256:7ab139247ffc1c370ad633d478460fc0076e30a4acdf651279be2d7b3ef53545",
+      "represented_yield": 3,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:31b743c473b167f99d500403a804164e6791a15b6d9c812741a023fc33d2691b"
+    },
+    {
+      "lineage": "delivery",
+      "mask": 0,
+      "point_hash": "sha256:df5cba4b3ce690aa31ae901e2ed97c6c939fc8edfbf7a3af016f1dd0b92d61a1",
+      "represented_yield": 0,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "delivery",
+      "mask": 1,
+      "point_hash": "sha256:60537cb3b5d06d2365a6cd40a00cd2fe1161389ed616e60770ebe6949b384377",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "delivery",
+      "mask": 2,
+      "point_hash": "sha256:1ed91fbaa637a3eb3d35ea77c08cdd6019ce65e22dfb30c892fdde191f71d000",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "delivery",
+      "mask": 3,
+      "point_hash": "sha256:eb8331524dc6270bd4080abf780b3b325c0b19d52d110b87f3573d48cdae1f76",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:6f1928bc2066b586a593cb36feadf91fee3a9a8c115a30c93e08d18d97bb7b83"
+    },
+    {
+      "lineage": "delivery",
+      "mask": 4,
+      "point_hash": "sha256:cb93b804395cfe2f8231cf23edd5f3d5bee506ba41d21f3c00ef6ada0d4ebe96",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "delivery",
+      "mask": 5,
+      "point_hash": "sha256:ccc27dcc97d81e734375f952442870ffab174171da662fc1e4b3c32d01f0b6f0",
+      "represented_yield": 2,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "delivery",
+      "mask": 6,
+      "point_hash": "sha256:b1c78da4ddd3d33a8d4cf4a0a8edafd2b1770c0ead563e4d30eba24de1be8a83",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:1dad578fb41c89c95e89c2314aa4b1aef9e6c455c754228240b78778877d4338"
+    },
+    {
+      "lineage": "delivery",
+      "mask": 7,
+      "point_hash": "sha256:94929f2865bcd60d74726a1742f4bf408ecf2e1c61b91c5786d555a3ff6f6e0d",
+      "represented_yield": 3,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:6f1928bc2066b586a593cb36feadf91fee3a9a8c115a30c93e08d18d97bb7b83"
+    },
+    {
+      "lineage": "evidence-floors",
+      "mask": 0,
+      "point_hash": "sha256:23f3016dee060391528bce4daa5e130b00e247b4f4a56236cee7781fd6fec48d",
+      "represented_yield": 0,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "evidence-floors",
+      "mask": 1,
+      "point_hash": "sha256:fedb5d1b4dc35e47663daece95ec40134c2555e3386249d7204fe3e3c56f28ce",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "evidence-floors",
+      "mask": 2,
+      "point_hash": "sha256:7070ff2b8ca9d8be58d7dfc4bdcde074d996d03badd27effcd03ac91214556f0",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "evidence-floors",
+      "mask": 3,
+      "point_hash": "sha256:2a7191dabef4c145ca5189b9ce21f74bb26cd9438823da971982edfff21bd293",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:ccb74b4b09ec5c45dfcccbf101c3bbce71769498b19939b43e38bb54413f7fa2"
+    },
+    {
+      "lineage": "evidence-floors",
+      "mask": 4,
+      "point_hash": "sha256:ecd6f4f3d4cd8830fde48e78519d7662a396cc23a911e53ee705ec65e57f6ee0",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "evidence-floors",
+      "mask": 5,
+      "point_hash": "sha256:218ec63e881108be6c084043d23ba5e5e19ec8f9d66ffc11024ca9a48b5c70d1",
+      "represented_yield": 2,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "evidence-floors",
+      "mask": 6,
+      "point_hash": "sha256:bc117b4d56b9f25e18978f9cdf22502d4f93e53e813fc2a98e127da56716b23d",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:00ef42192901bc173dd82ce281aeaeef7c00ae505bb755430331f0ec3456ce29"
+    },
+    {
+      "lineage": "evidence-floors",
+      "mask": 7,
+      "point_hash": "sha256:aa402d2e73254a969ef3e39f91fda6181aa85e57589e99496e33b604b1b1ee86",
+      "represented_yield": 3,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:ccb74b4b09ec5c45dfcccbf101c3bbce71769498b19939b43e38bb54413f7fa2"
+    },
+    {
+      "lineage": "revocation-windows",
+      "mask": 0,
+      "point_hash": "sha256:5b9a41d22ffe2e73719cd3a6c9a43b4848dc831bb90fd27e90c84ef0c41a0d23",
+      "represented_yield": 0,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "revocation-windows",
+      "mask": 1,
+      "point_hash": "sha256:1cfe5650e6d0de91bf01ec4a7a1da9721c4c7f0c550b7dd336b1650dda07662a",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "revocation-windows",
+      "mask": 2,
+      "point_hash": "sha256:ea1120ddac35650ae1b7a7bf5bfdd2b8098f0967f4f722995152cfc7e65c709f",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "revocation-windows",
+      "mask": 3,
+      "point_hash": "sha256:6cf5413d727be6992cd2cdd5dd95f6b4ba6af2e1be1005b487eb593a04b1cd6d",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:34db7d9501b273fdf2e4e408f9ec00d77e9e164bd0ae79ac283994a70143c72c"
+    },
+    {
+      "lineage": "revocation-windows",
+      "mask": 4,
+      "point_hash": "sha256:ab04945ee1af0a556ca7b5d3fd1521c0624d9c779b8114bed0ed4717d90b09a8",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "revocation-windows",
+      "mask": 5,
+      "point_hash": "sha256:88c0ca1d91a74bc46625e6a8e10ebceacdac7260ac6e9723962c1df956067c5e",
+      "represented_yield": 2,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "revocation-windows",
+      "mask": 6,
+      "point_hash": "sha256:f258145369fb1d87b0f23253a16824951ec53bab3786faee5a21c80f34c94c12",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:75cfb631b91b695f40b9d76207b049f08ced4a16390f470002884dcc853ca9c8"
+    },
+    {
+      "lineage": "revocation-windows",
+      "mask": 7,
+      "point_hash": "sha256:18a6dacf0c4c97d1c9c6bcbb9716c3246e2554a9b0219dd969382715887524a6",
+      "represented_yield": 3,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:34db7d9501b273fdf2e4e408f9ec00d77e9e164bd0ae79ac283994a70143c72c"
+    },
+    {
+      "lineage": "authority-scopes",
+      "mask": 0,
+      "point_hash": "sha256:63c7790af49b40a07a2eb229047308cb868ea5017987f5481f6c2bb196c5b496",
+      "represented_yield": 0,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "authority-scopes",
+      "mask": 1,
+      "point_hash": "sha256:acfe9e729065c4537cf6e5bd58057e1a41daeccca166c051f2a21d4159f49076",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "authority-scopes",
+      "mask": 2,
+      "point_hash": "sha256:e54a20e6a60b084040fdf3e6bca7c2b4b67dfffa7c6151eb9be691281b740bfe",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "authority-scopes",
+      "mask": 3,
+      "point_hash": "sha256:3e069e947678919918820e060810e6d92c16b9d15dc72a8ceed0f35bc6a1649e",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:b91b9d729bf35ed1c431941b8b2c1c1971c39315ed993c57cb62a34c2ad87c70"
+    },
+    {
+      "lineage": "authority-scopes",
+      "mask": 4,
+      "point_hash": "sha256:5ea326a186a351940d56ce8035e2f5f0c8cf955e2158e4c2f9bc2700e6f9b99c",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "authority-scopes",
+      "mask": 5,
+      "point_hash": "sha256:a8bb162cb0a91e15af575fc21afbfd5b2ffcc67d4298ebfc817457dd649c092a",
+      "represented_yield": 2,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "authority-scopes",
+      "mask": 6,
+      "point_hash": "sha256:b0f6b004be037c55f5a58ca2e292d895dfac9fde45d7bc311e82b6afe3012502",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:a102ba9dbcf3eee689aaabd0d9bd406b74062988601ae84fd58eb04dd4da77b9"
+    },
+    {
+      "lineage": "authority-scopes",
+      "mask": 7,
+      "point_hash": "sha256:475f34ecfbcb340b36115700eeb012b90cbe63df13fa37190b6af0a9d24e3a0b",
+      "represented_yield": 3,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:b91b9d729bf35ed1c431941b8b2c1c1971c39315ed993c57cb62a34c2ad87c70"
+    },
+    {
+      "lineage": "closure-warrants",
+      "mask": 0,
+      "point_hash": "sha256:7851efd3a018bbe1662e88325ac76d942a19e2072d63a40642b3ce1ecd45dcae",
+      "represented_yield": 0,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "closure-warrants",
+      "mask": 1,
+      "point_hash": "sha256:de97e2b130484abc33585edc5498964ddb1377103360bb15bbe267d9d52d12c3",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "closure-warrants",
+      "mask": 2,
+      "point_hash": "sha256:1ef39f3db980a2e27f11334864a0a52f0231ff7c62637c0662cb2d26198a64bf",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "closure-warrants",
+      "mask": 3,
+      "point_hash": "sha256:a51f608f8f098ad6ef80dde1caed4cf7f12ec855e3247c487e021275b2f020e3",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:1fdda4291e15bedc8e82a1222e2e2e53119c494829841b19cb3219d2004182a9"
+    },
+    {
+      "lineage": "closure-warrants",
+      "mask": 4,
+      "point_hash": "sha256:8dd79c62d6be2216047320b5507dd27880ff124786d98e6e89c3bd5e42fa61d6",
+      "represented_yield": 1,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "closure-warrants",
+      "mask": 5,
+      "point_hash": "sha256:3ef682ce4686af158dca5d8863989d61302ea9ee72312673a6d4a6b25df0f00d",
+      "represented_yield": 2,
+      "safe": true,
+      "unsafe_witness_hash": null
+    },
+    {
+      "lineage": "closure-warrants",
+      "mask": 6,
+      "point_hash": "sha256:8c99daeec60291ecc2495e8ae94757f53f2fbd5d2f37c0a2c2e3834733c75a53",
+      "represented_yield": 2,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:a5ff4bd48531cc752050727bd2cadc1a0f4292aaaf6153558c6baa8cb57cfd33"
+    },
+    {
+      "lineage": "closure-warrants",
+      "mask": 7,
+      "point_hash": "sha256:c461601c9e41b651865fb75e09ededbc5c541b3dc2091d78cfdd1241d7a06c00",
+      "represented_yield": 3,
+      "safe": false,
+      "unsafe_witness_hash": "sha256:1fdda4291e15bedc8e82a1222e2e2e53119c494829841b19cb3219d2004182a9"
+    }
+  ],
+  "profile": "bulla.golden-suite/0.5-experimental",
+  "schema_version": "0.5-experimental"
+}

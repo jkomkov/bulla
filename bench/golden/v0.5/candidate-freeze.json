@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.5-experimental",
+  "profile": "bulla.claim-flow/0.5-experimental",
+  "classification": "INTERNAL_CAPTIVE_CONTROL",
+  "candidate_commit": "9c7108576df79899f31f495aa5101a0c20d1dc92",
+  "lineage_commits": {
+    "v04_interpretation_merge": "293f6e7f3cd1bbd32ef2c05ec458c34fe905c3dd",
+    "monorepo_core_v0441_final": "a87c10b94e2465d51f235cf685ea83062d5b94b1",
+    "standalone_core_v0441_release": "0ecebd809fdd13f6a7797dca5ab14042225e4ac7"
+  },
+  "bindings": {
+    "golden_v04_manifest_sha256": "6d6b7405aa5267037f3c3b54d6c7c0f04389b5f35f7de7430f39641c43394357",
+    "golden_v05_manifest_sha256": "eb3fffcb199a8307005a4d89c09608146ad329a488fcc5cdd952113da6c2de8d",
+    "golden_v05_verifier_sha256": "585a2c1c8c1ee72ff4a839c1007578d0ffb73824dc295532b4eb032f7537e62a",
+    "generalization_lean_sha256": "bc359e47e9cbabba6e5ff8d8cff7f06aaaab84dfc2d239b586a6155e0f29f3f8",
+    "axiom_audit_sha256": "f0d340a95a1226b8e37fafc907e5de714477387b4a9cc0d7867448a66ce720ad",
+    "generalization_spec_sha256": "7b18ea8d42c8d11bedd53f92b07e1cb661b2dd35d1f341a7cc8961e79b1b9fa6",
+    "status_registry_sha256": "524b20dd3b1c979076d2089d533b75342adba48679a3f3a8a8f958ae2e812690",
+    "qa_report_sha256": "327b3ff91d43d9d06ea51d7044ee003ee00983cc0f0061bb896897968cbed85c",
+    "pypi_wheel_sha256": "8195b4f7e710591a062efab9f294b05c71d48f312151da942268f6be669d0ef3",
+    "pypi_sdist_sha256": "0fa4debb1a575f22cd5f3a547c2a89305919aaffe01f47863c7fd63ca87ef139",
+    "release_receipt_sha256": "655367d66a840482cfed7d5fb6637ebc2d8474f2c674148ddebfce2d42b5e499"
+  },
+  "qa": {
+    "bulla": "12794_PASSED_34_SKIPPED_69_DESELECTED",
+    "lean": "BUILT_SORRY_FREE_AXIOMS_AUDITED",
+    "glyph_build": "PASSED",
+    "res_agentica_build": "PASSED",
+    "golden_zero_import": "PASSED"
+  },
+  "mainline_state": "CORE_0_44_1_MERGED_V05_CANDIDATE_FROZEN",
+  "pypi_state": "PUBLISHED_0_44_1_TRUSTED_PUBLISHING_VERIFIED",
+  "external_state": "BLOCKED_NO_REAL_PARTICIPANTS_BOUND",
+  "foreign_case_intake_permitted": true,
+  "candidate_change_policy": "SECURITY_REPRODUCIBILITY_RELEASE_DEFECTS_ONLY"
+}

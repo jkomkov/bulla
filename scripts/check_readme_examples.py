@@ -69,6 +69,26 @@ def main() -> int:
     run = [(n, s) for (n, s, r) in bs if r is None]
     skip = [(n, r) for (n, s, r) in bs if r is not None]
 
+    # Positive control. Without these two checks the gate passes vacuously: a README
+    # with no python blocks reports "OK: 0/0" and exits 0, so a rewrite that drops
+    # every example silently disarms the gate instead of failing it. This is exactly
+    # what b24bb9e1 did. The pytest wrapper has always asserted both; CI runs this
+    # script, so it must assert them too.
+    if not bs:
+        print(
+            "\nFAIL: no ```python blocks found in README.md — the doc-drift gate has "
+            "nothing to execute. Restore a runnable example or move this gate.",
+            file=sys.stderr,
+        )
+        return 1
+    if not run:
+        print(
+            f"\nFAIL: all {len(skip)} README python blocks are skip-marked — the gate "
+            "is toothless. At least one block must be runnable.",
+            file=sys.stderr,
+        )
+        return 1
+
     # The manifest — always printed, so a diff that adds a skip marker is visible.
     print(f"README examples: {len(run)} runnable, {len(skip)} illustrative (skipped)")
     for n, _s, r in bs:

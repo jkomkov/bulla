@@ -1,0 +1,99 @@
+{
+  "action": {
+    "subject": {
+      "component_hashes": {
+        "artifacts": "sha256:4fd6af17c8fc890c3769c4303de186d0811768b86231762032d5ed7e9502265a",
+        "corrections": "sha256:b05e4aa16fd25285a0df05a19e92c805cd3dc2bf0080a825d98094b80414089d",
+        "coverage": "sha256:1eed829edfe93d654000dd3115b20b8089fa9f4c6e6cf4147d103f3041548f76",
+        "denominators": "sha256:f9b5d927d97c81ff37182ecfda18d240dbca7a107952b07aab90e6a24b3166d6",
+        "redactions": "sha256:05db5f8261a9d494267bbec3650487f0464bee41f4fb36275d04c1b860866113",
+        "roles": "sha256:a9a0532e698df5b2ac0ee32c6edf2629c63590ff0d7328e41c83b04967dce384",
+        "statements": "sha256:8882107e8c5712ce5e705659092733aa870877d4fb7745abb253b4d4c7ddd62c",
+        "timeline": "sha256:80bef4705e16a20c9eea74c0af8ed494acd72d5dafa2ecb12bd0018cef883fde",
+        "witnesses": "sha256:df268745c4d3e08b5dceffe0e50724f3228ea9351610434cf067bbfd369d7b81"
+      },
+      "issuer_role": "publisher",
+      "packet_core_hash": "sha256:6ae511054aba07c324545bffd04ffac2d090faaa5e32f687eb7b9d23d03d3d0c",
+      "packet_id": "packet-http-synthetic-001",
+      "profile": "glyph.agent-incident-packet/0.1-draft"
+    },
+    "type": "incident.packet.publish"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6MksgvGuAdhLXm1gd7DrPR533zCgk1azU2j3FUWm7UJwB4L",
+    "proofValue": "t1G7gvrXXU/jLlHyCh+NAt0VTQu4suh+qnzGKUIxLZ83C94BNw4w5ayDz0W9MKpwhbJVdF1v8ekORIPIj3WBDQ==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MksgvGuAdhLXm1gd7DrPR533zCgk1azU2j3FUWm7UJwB4L"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-07-26T12:14:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "59020968-14c9-4649-80de-5676cf5d6fdf",
+  "evidence_refs": [
+    {
+      "grounding": "execution_verified",
+      "hash": "sha256:6ae511054aba07c324545bffd04ffac2d090faaa5e32f687eb7b9d23d03d3d0c",
+      "name": "recomputation:packet-core"
+    }
+  ],
+  "hashes": {
+    "attestation": "sha256:0f71f80eb441f377683ba6613043cf39e2845ae08ee5a9128dc3d79384c65f42",
+    "content": "sha256:bacf467dc39db497a355b098bcc6cc3a966542a19570b6fee59100b693b3f976",
+    "event": "sha256:d30fececddcf0dc830e853625bed6afcee415fed68515c1ad6f8ba493b69ae2a",
+    "log_leaf": "sha256:6bf48a3879889b880c39777469ccaf7c469ad452477c0a038bcc1940c914c707"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://agent-incident-packet/incident.packet.publish",
+      "principal": "did:key:z6MksgvGuAdhLXm1gd7DrPR533zCgk1azU2j3FUWm7UJwB4L"
+    },
+    "bounds": {
+      "scope": "profile:glyph.agent-incident-packet/0.1-draft"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6MksgvGuAdhLXm1gd7DrPR533zCgk1azU2j3FUWm7UJwB4L",
+    "proofValue": "jW5AhccvEh/NC/msjm0IIG1d8cfkQn0N6RL6UvjPNY8kF+x8JUURwmb3Iu/vRlXNVqiYxXc6033Z9lwjSKyzCQ==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MksgvGuAdhLXm1gd7DrPR533zCgk1azU2j3FUWm7UJwB4L"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "http-clean"
+  },
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/experimental/incident-packet/challenge",
+      "trusted_root_ref": "sha256:abababababababababababababababababababababababababababababababab"
+    },
+    "remedies": [
+      {
+        "anchor": "forum:agent-incident-packet",
+        "rung": "challenge",
+        "verifier": "publish a signed incident.correct receipt"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "auditor",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6MksgvGuAdhLXm1gd7DrPR533zCgk1azU2j3FUWm7UJwB4L",
+    "proofValue": "NopTjjVKTbUGGtSJLj4e7+qi8lAjxTxGQL+0EXFSmcs7pfOcohX3Wn9l111c78yP9li5RWj0z0iQTcSK6r8sAQ==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MksgvGuAdhLXm1gd7DrPR533zCgk1azU2j3FUWm7UJwB4L"
+  },
+  "stake": null
+}

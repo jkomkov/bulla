@@ -1,5 +1,25 @@
 # Bulla Protocol Note
 
+> **Historical (Sprints 25-35, v0.34-v0.35). Superseded in its evidentiary claims.**
+>
+> This note describes the legacy composition-diagnostic layer as it stood before the
+> July 2026 execution-labelled evaluation. Two of its claims did not survive that
+> evaluation and are withdrawn here:
+>
+> - that a schema incompatibility means "the composition will fail at runtime";
+> - that a nonzero contradiction score is a safety signal rather than a disclosure
+>   policy.
+>
+> `FALSIFICATIONS.md` and `docs/LEGACY-COMPOSITION-DIAGNOSTICS.md` control over this
+> document wherever they disagree. The surviving claim is that the fee is an exact
+> disclosure deficit over a pinned composition and a declared observable model —
+> `fee = rank(delta_full) - rank(delta_observable)` — and nothing about execution.
+> The `dim H^1` framing in §1 is retained as written for the historical record; current
+> material states the fee in rank-difference form and does not lead with cohomology.
+>
+> None of this is Bulla's current trust model. For that, see `README.md`, `spec/`, and
+> `docs/WHAT-EXISTS-TODAY.md`.
+
 A concise technical summary of the Bulla witness protocol (Sprints 25-35).
 
 ## 1. The Fee Theorem
@@ -53,9 +73,9 @@ Contradictions are first-class protocol objects: frozen dataclasses, hashable, s
 
 ### Structural Contradictions (v0.34.0)
 
-Convention contradictions detect conflicting *values* for the same dimension. Structural contradictions detect *schema incompatibilities* between visible fields: same-named fields with different types, enum domains, formats, or ranges. These are a different failure class — the caller CAN see both fields, but the schemas are incompatible and the composition will fail at runtime.
+Convention contradictions detect conflicting *values* for the same dimension. Structural contradictions detect *schema incompatibilities* between visible fields: same-named fields with different types, enum domains, formats, or ranges. These are a different disclosure class: the caller CAN see both fields, and the declared schemas are incompatible. Execution-derived labels did not support reading that incompatibility as a prediction that the composition fails at runtime; see `FALSIFICATIONS.md`.
 
-`SchemaContradiction` records each finding: `field_a`, `field_b`, `tool_a`, `tool_b`, `mismatch_type`, `severity`, `details`. The `contradiction_score` (sum of severities, rounded) is sealed into the receipt when > 0. Any nonzero score triggers `PROCEED_WITH_CAUTION`; the `max_structural_contradictions` policy threshold controls escalation to `refuse_pending_disclosure`.
+`SchemaContradiction` records each finding: `field_a`, `field_b`, `tool_a`, `tool_b`, `mismatch_type`, `severity`, `details`. The `contradiction_score` (sum of severities, rounded) is sealed into the receipt when > 0. In this legacy layer a nonzero score raised `PROCEED_WITH_CAUTION`, and the `max_structural_contradictions` threshold controlled escalation to `refuse_pending_disclosure`. Both are explicit disclosure policies, not safety rules, and the current default gate does not block on fee.
 
 ## 4. Session Proxy and Epistemic Receipt (v0.35.0)
 
@@ -71,6 +91,12 @@ The epistemic receipt is local to a call cluster and NOT part of the sealed `Wit
 ## 5. Worked Example
 
 Two MCP servers: filesystem (14 tools, absolute local paths) and GitHub (26 tools, repo-relative paths). Composed into a single agent.
+
+The fee figure below is relative to the convention pack and release in force when this
+example was recorded. `examples/canonical-demo/README.md` records the same server pair
+under v0.30.0 and reports a coherence fee of 53, with the same boundary fee, obligation,
+discovery rounds, and contradiction. The scenario is identical; the dimension set is not.
+Neither figure is a stable property of the servers.
 
 ```
 Coherence fee:           30

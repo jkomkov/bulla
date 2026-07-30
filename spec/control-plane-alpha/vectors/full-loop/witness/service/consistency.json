@@ -1,0 +1,12 @@
+{
+  "new_root": "sha256:3822c5f42c2d33fe33fad18a1d217851f316780b9cd3f658f7101c56ac46791e",
+  "new_size": 8,
+  "old_root": "sha256:6931a55d87df3be62e1780813a38348df8dad8b079e348ba82b83d1cfcec5ff5",
+  "old_size": 3,
+  "proof": [
+    "sha256:584d3794afe8423891ed41606985cf33c3aa94b02d9e36d6e04f0a872a6b1dc6",
+    "sha256:4a3847210e84796039daae8b587e83beb81d9f4fcfcd97e65d7e98d205ba43a3",
+    "sha256:66f8e5d498dc717cf3128d71aff1361aa6b4c66f84a1ac60cfb38d55a775b923",
+    "sha256:e76df77bc8b10c0a3e6a431dfe5ee4b8d5143507ff8fcf5226b7541ecbdbe64b"
+  ]
+}

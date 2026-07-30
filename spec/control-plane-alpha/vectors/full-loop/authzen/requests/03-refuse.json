@@ -1,0 +1,25 @@
+{
+  "action": {
+    "name": "tools/call"
+  },
+  "context": {
+    "arguments_hash": "sha256:6d84c37a8e5b7063138988a760f4774c4fc0f6d3756ef730c20228dcbb3e1b6a",
+    "audience": "synthetic-receiver",
+    "pdp_id": "bulla-closed-authzen/1",
+    "policy_digest": "sha256:fe2a76d9dc104e3a4b97fd173e3670e05fd8b79123f5e7126d76e4331b8e810d",
+    "profile": "bulla.control-plane-alpha/0.1-experimental",
+    "request_id": "request-refuse-001",
+    "run_id": "run-mcp-control-alpha-001",
+    "tool_name": "sandbox.append",
+    "valid_from": "2026-07-26T12:02:00Z",
+    "valid_until": "2026-07-26T12:03:00Z"
+  },
+  "resource": {
+    "id": "mcp://synthetic-receiver/tools/sandbox.append",
+    "type": "mcp-tool"
+  },
+  "subject": {
+    "id": "agent:synthetic-alpha",
+    "type": "principal"
+  }
+}

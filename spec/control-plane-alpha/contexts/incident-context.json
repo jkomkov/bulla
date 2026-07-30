@@ -1,0 +1,33 @@
+{
+  "accepted_issuers_by_role": {
+    "boundary": [
+      "did:key:z6MkvayRQ9QvYjpVJHD9f2eCPgUDbSV4F5XwVrNuaKk7Tx2e"
+    ],
+    "evaluation_authority": [
+      "did:key:z6MkmMgrj2njzzX1ifXRZWE78dbucMnZ1YeAScgZfkEfLU7N"
+    ],
+    "incident_commander": [
+      "did:key:z6Mko8nutXmjSSdnXMABmtdkaN5b3fKChEUxXGike5p376BY"
+    ],
+    "publisher": [
+      "did:key:z6MkrjnzygzQEk1qtHzKYbqQ1kUGy1gYiTtHCGYV8WARGMGY"
+    ],
+    "target": [
+      "did:key:z6MkmJv35BkxZvqrvLQeFWKuKQJCRQhZwaSabs7YWMofgi8N"
+    ],
+    "witness": [
+      "did:key:z6MkrmtuAnLGsHSw1bKoYxpFp6FfikSzNzhY489HrQsD8wDS"
+    ]
+  },
+  "team_controlled_roles": [
+    "evaluation_authority",
+    "boundary",
+    "target",
+    "incident_commander",
+    "publisher",
+    "witness"
+  ],
+  "trusted_witness_roots": [
+    "witness://bulla-control-plane-alpha/public-alpha-v1"
+  ]
+}

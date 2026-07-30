@@ -76,6 +76,6 @@ def test_first_level_copy_preserves_current_product_boundary() -> None:
     assert "coherence fee as an execution" not in combined.lower()
     assert "authorless action" not in combined.lower()
     assert "independently validated" not in combined.lower()
-    assert readme.index("Portable, recomputable receipts") < readme.index(
-        "Legacy composition diagnostics"
-    )
+    assert readme.index(
+        "Bulla adds portable, independently verifiable receipts"
+    ) < readme.index("Legacy composition diagnostics")

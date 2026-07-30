@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schema/agent-incident-packet/0.1/witness-checkpoint.schema.json",
+  "title": "Agent Incident Packet witness checkpoint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "witness_id",
+    "root_ref",
+    "received_at",
+    "witnessed_at",
+    "anchored_before",
+    "included_attestation_hashes",
+    "checkpoint_hash",
+    "proof"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "witness_id": {"type": "string", "minLength": 1},
+    "root_ref": {"type": "string", "minLength": 1},
+    "received_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "witnessed_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "anchored_before": {"type": "null"},
+    "included_attestation_hashes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      }
+    },
+    "checkpoint_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "purpose",
+        "issuer",
+        "verificationMethod",
+        "proofValue"
+      ],
+      "properties": {
+        "type": {"const": "bulla/ed25519-2026"},
+        "purpose": {"const": "witness-checkpoint"},
+        "issuer": {"type": "string", "minLength": 1},
+        "verificationMethod": {"type": "string", "minLength": 1},
+        "proofValue": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

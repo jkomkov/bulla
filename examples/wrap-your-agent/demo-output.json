@@ -1,0 +1,223 @@
+{
+  "coverage": {
+    "accepted_issuers": null,
+    "anchor": "agent-harness-log",
+    "coverage": 1.0,
+    "covered": [
+      "fs.read:0",
+      "http.get:1",
+      "fs.write:2"
+    ],
+    "invalid_receipts": [],
+    "minimum_verification_depth": "digest",
+    "phantom_receipt_ids": [],
+    "receipted": 3,
+    "schema_version": 1,
+    "total_anchored": 3,
+    "unreceipted": [],
+    "unreceipted_delta": []
+  },
+  "observed_actions": [
+    {
+      "id": "fs.read:0",
+      "kind": "fs.read"
+    },
+    {
+      "id": "http.get:1",
+      "kind": "http.get"
+    },
+    {
+      "id": "fs.write:2",
+      "kind": "fs.write"
+    }
+  ],
+  "receipts": [
+    {
+      "action": {
+        "outcome": {
+          "status": "ok"
+        },
+        "subject": {
+          "event_id": "fs.read:0",
+          "path": "/etc/config.yaml"
+        },
+        "type": "fs.read"
+      },
+      "anchor_ref": {},
+      "conventions": [],
+      "diagnostic_ref": {
+        "ref": "self",
+        "status": "reference"
+      },
+      "evidence_refs": [],
+      "hashes": {
+        "attestation": "sha256:f6cd2fa83d54c59df2ead1b64150677305dee9c3a67eec8e4d723718ca4eca05",
+        "content": "sha256:91332ddd08db4e992abea52a701df438c107c95a3b1991d9a5e7e1cd30cd53a9",
+        "event": "sha256:6197f4e73dd72d5eb59e3745bd1e68b061e0befc92124889883c3e008a77d478",
+        "log_leaf": "sha256:4251e7f9cb76ac1d1c3f04b07e1a1e4e7833e29ade8dfd33b1dcb0b0870a998b"
+      },
+      "kind": "action_receipt",
+      "mandate": {
+        "authority": {
+          "delegation": [],
+          "policy": "policy://unstated",
+          "principal": "did:web:example#agent"
+        },
+        "bounds": {
+          "rollback_window": "P7D",
+          "scope": "unstated"
+        }
+      },
+      "producer": {
+        "outcome": "ok"
+      },
+      "remedy": {
+        "challenge_window": "P7D",
+        "forum": {
+          "log_endpoint": "local://recourse-unset",
+          "trusted_root_ref": "unanchored:set-a-real-trusted-root"
+        },
+        "remedies": [
+          {
+            "anchor": "the receipt",
+            "rung": "recompute",
+            "verifier": "bulla receipt verify"
+          }
+        ]
+      },
+      "retention": {
+        "disclosure": "party",
+        "record": "operational"
+      },
+      "schema_version": "0.2",
+      "signature": null,
+      "stake": null,
+      "timestamp": ""
+    },
+    {
+      "action": {
+        "outcome": {
+          "status": "ok"
+        },
+        "subject": {
+          "event_id": "http.get:1",
+          "url": "https://api.example/data"
+        },
+        "type": "http.get"
+      },
+      "anchor_ref": {},
+      "conventions": [],
+      "diagnostic_ref": {
+        "ref": "self",
+        "status": "reference"
+      },
+      "evidence_refs": [],
+      "hashes": {
+        "attestation": "sha256:d310cb409812740bb874aa2a3e19954a0a3afd7d7fd7429ce6b6e3d4db02c40b",
+        "content": "sha256:d7cd6b4f117c03469fa2cdd156af8349b64b696dcf8ac4b1eaf5a69b6b93210a",
+        "event": "sha256:277fc91940fe16b266c64451db0b7ff56306ba004eaac4dbb8a882bafd403c91",
+        "log_leaf": "sha256:2018de1aba35ededae4c22195547bb51b3b20f6b88da6bef1b15f508068ef01a"
+      },
+      "kind": "action_receipt",
+      "mandate": {
+        "authority": {
+          "delegation": [],
+          "policy": "policy://unstated",
+          "principal": "did:web:example#agent"
+        },
+        "bounds": {
+          "rollback_window": "P7D",
+          "scope": "unstated"
+        }
+      },
+      "producer": {
+        "outcome": "ok"
+      },
+      "remedy": {
+        "challenge_window": "P7D",
+        "forum": {
+          "log_endpoint": "local://recourse-unset",
+          "trusted_root_ref": "unanchored:set-a-real-trusted-root"
+        },
+        "remedies": [
+          {
+            "anchor": "the receipt",
+            "rung": "recompute",
+            "verifier": "bulla receipt verify"
+          }
+        ]
+      },
+      "retention": {
+        "disclosure": "party",
+        "record": "operational"
+      },
+      "schema_version": "0.2",
+      "signature": null,
+      "stake": null,
+      "timestamp": ""
+    },
+    {
+      "action": {
+        "outcome": {
+          "status": "ok"
+        },
+        "subject": {
+          "content": "ok",
+          "event_id": "fs.write:2",
+          "path": "/tmp/out.txt"
+        },
+        "type": "fs.write"
+      },
+      "anchor_ref": {},
+      "conventions": [],
+      "diagnostic_ref": {
+        "ref": "self",
+        "status": "reference"
+      },
+      "evidence_refs": [],
+      "hashes": {
+        "attestation": "sha256:f609b7bfe724aaa40eede809679310482f75bbb3314c6ddccb90ad64602b81dd",
+        "content": "sha256:2e86eb2b094bbd54cf69dafcd9fe16a4d511e52f255f80a6ccbb0d8b1bc9b0d8",
+        "event": "sha256:cf6e35176f2e6cdeee9bce77140cc71829201867570a3f4ca04be8779ecd0985",
+        "log_leaf": "sha256:e068a701f83d5ee9939041dd1a13a0dad30873005c719b6283b05d6a0215781f"
+      },
+      "kind": "action_receipt",
+      "mandate": {
+        "authority": {
+          "delegation": [],
+          "policy": "policy://unstated",
+          "principal": "did:web:example#agent"
+        },
+        "bounds": {
+          "rollback_window": "P7D",
+          "scope": "unstated"
+        }
+      },
+      "producer": {
+        "outcome": "ok"
+      },
+      "remedy": {
+        "challenge_window": "P7D",
+        "forum": {
+          "log_endpoint": "local://recourse-unset",
+          "trusted_root_ref": "unanchored:set-a-real-trusted-root"
+        },
+        "remedies": [
+          {
+            "anchor": "the receipt",
+            "rung": "recompute",
+            "verifier": "bulla receipt verify"
+          }
+        ]
+      },
+      "retention": {
+        "disclosure": "party",
+        "record": "operational"
+      },
+      "schema_version": "0.2",
+      "signature": null,
+      "stake": null,
+      "timestamp": ""
+    }
+  ]
+}

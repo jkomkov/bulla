@@ -1,0 +1,26 @@
+{
+  "anchor_id": "mcp-target-effects",
+  "observations": [
+    {
+      "anchor_id": "mcp-target-effects",
+      "evidence_hash": "sha256:2f55c9a133ff964c799d563da1859c321b26ceb37bfe89a6a8eb103c3927f578",
+      "observation_id": "effect-mediated-001",
+      "operation_ref": "sha256:7c6e3ee59aacd9e327c6aa007d62ae96ee06add581a0ecd437e0f4a540ae0a45",
+      "phase": "effect",
+      "protocol": "mcp",
+      "run_id": "run-mcp-control-alpha-001"
+    },
+    {
+      "anchor_id": "mcp-target-effects",
+      "evidence_hash": "sha256:2799b2d15a724c106675462c8c3f72c129b46e6e44ce4647f6e8ede482589ebe",
+      "observation_id": "effect-bypass-001",
+      "operation_ref": "sha256:8f2610553d6a4a561e820eb43ad6c00535fb7047c41adcf2bc8ec538d2be4c62",
+      "phase": "effect",
+      "protocol": "mcp",
+      "run_id": "run-mcp-control-alpha-001"
+    }
+  ],
+  "phase": "effect",
+  "protocol": "mcp",
+  "schema_version": 1
+}

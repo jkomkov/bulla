@@ -1,0 +1,105 @@
+{
+  "action": {
+    "subject": {
+      "component_hashes": {
+        "artifacts": "sha256:7158cdf7ce792e3ffc1f71982f5d753f939327df509cd598b960d1e80c5f072a",
+        "corrections": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "coverage": "sha256:0beb5f052e18c75005fd63e66d8c6c42541c34fbcab281eb0b9b26691807eda3",
+        "denominators": "sha256:1d21934cdd0e899c00b839d84f40ed55780a4c07ddcb1c7b7d547455fee9db3f",
+        "redactions": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "roles": "sha256:897cc888209408f7de49ec0fd781e7a4737fc33ac87456cca16995482329c94d",
+        "statements": "sha256:082c38c778ca062d0d70aad32131bf47b8a9b8170763bf0c06e74501b24b3265",
+        "timeline": "sha256:8a0bae7b1db12339b598f8da7d022cc6374c0d7e7ccd7de7c338eb91dd421cff",
+        "witnesses": "sha256:2d84aac9530597f0bf86130aed3355450bdac9556053266f1e607a75d935c00b"
+      },
+      "issuer_role": "publisher",
+      "packet_core_hash": "sha256:745a3179b1e5bc3f8b4f4171e6ae4f479adaadf53788a48a4b663a28d5328ddf",
+      "packet_id": "packet-mcp-control-alpha-001",
+      "profile": "glyph.agent-incident-packet/0.1-draft"
+    },
+    "type": "incident.packet.publish"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6MkrjnzygzQEk1qtHzKYbqQ1kUGy1gYiTtHCGYV8WARGMGY",
+    "proofValue": "NUYQqvp39Kj6dn5GCwcIDSvnTk5ebBsFZ/HRBcbsppdFyXgXGGASy8FZbrp6QF0nfZ7IfE7URnGdAFjHNj/bBg==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkrjnzygzQEk1qtHzKYbqQ1kUGy1gYiTtHCGYV8WARGMGY"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-07-26T12:09:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "7d3c058b-4283-4c23-85a5-eb59227d75ee",
+  "evidence_refs": [
+    {
+      "grounding": "execution_verified",
+      "hash": "sha256:745a3179b1e5bc3f8b4f4171e6ae4f479adaadf53788a48a4b663a28d5328ddf",
+      "name": "recomputation:packet-core"
+    }
+  ],
+  "hashes": {
+    "attestation": "sha256:d30c787a1c6973931ddef8bce6824f9e2308c9ce462ffca6a56e5dc8ecaaccbb",
+    "content": "sha256:62e0da30e6702eeb6c0ef433ad2c3c122306bafb4cf1c27237682917e8368407",
+    "event": "sha256:1e534efc4230eed034bad0525b82109362e97590febe0b795a53456817c6877f",
+    "log_leaf": "sha256:3061d0273e2fe92bf48eb46dac9eb45d7b70aef5dfa25992a1068ec353c7fad8"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://bulla-control-plane-alpha/synthetic-authzen@sha256:fe2a76d9dc104e3a4b97fd173e3670e05fd8b79123f5e7126d76e4331b8e810d",
+      "principal": "did:key:z6MkrjnzygzQEk1qtHzKYbqQ1kUGy1gYiTtHCGYV8WARGMGY"
+    },
+    "bounds": {
+      "scope": "profile:glyph.agent-incident-packet/0.1-draft;action:incident.packet.publish"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6MkrjnzygzQEk1qtHzKYbqQ1kUGy1gYiTtHCGYV8WARGMGY",
+    "proofValue": "KMDMD9QQigZGp0IQm1VRgFcyyMkWoWiDM2fkVpanrTMcxVE+aYgQ6dJUp1iAVDTIWb8UcADp6pOVaDFUhhfBAA==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkrjnzygzQEk1qtHzKYbqQ1kUGy1gYiTtHCGYV8WARGMGY"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "full-loop",
+    "outer_profile": "bulla.control-plane-alpha/0.1-experimental"
+  },
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://github.com/jkomkov/res-agentica/issues",
+      "trusted_root_ref": "https://github.com/jkomkov/res-agentica"
+    },
+    "remedies": [
+      {
+        "anchor": "packet:packet-core.json",
+        "rung": "recompute",
+        "verifier": "verify the deterministic incident packet"
+      },
+      {
+        "anchor": "forum:control-plane-alpha",
+        "rung": "challenge",
+        "verifier": "publish a signed incident correction"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "auditor",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6MkrjnzygzQEk1qtHzKYbqQ1kUGy1gYiTtHCGYV8WARGMGY",
+    "proofValue": "4DvhThdr/uYvNVIOUpDR+hAWdKyIPwfK4szMTOEQdZ9G3AIVAApMVXAeMzv4RzvzfkbOKNGmhAFlZQ6muKfwCA==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkrjnzygzQEk1qtHzKYbqQ1kUGy1gYiTtHCGYV8WARGMGY"
+  },
+  "stake": null
+}

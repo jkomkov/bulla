@@ -1,10 +1,10 @@
 {
   "_generated": "bulla/scripts/snapshot_pypi_releases.py",
-  "fetched_at": "2026-07-15T18:37:37.627145+00:00",
+  "fetched_at": "2026-07-21T04:57:27.517618+00:00",
   "source": "https://pypi.org/pypi/bulla/json",
   "info": {
     "name": "bulla",
-    "version": "0.43.0"
+    "version": "0.44.1"
   },
   "releases": {
     "0.15.0": [
@@ -404,6 +404,46 @@
           "sha256": "febf5fca03d089f8f9e26d5b63d5b128938237813f9176bc11c2f535ee669166"
         },
         "upload_time_iso_8601": "2026-07-14T15:34:39.907677Z",
+        "yanked": false
+      }
+    ],
+    "0.44.0": [
+      {
+        "filename": "bulla-0.44.0-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/56/0b/fde4062d829d950e08309d43b1b6e148d2ccc9b7ff71cd33f91ce6717941/bulla-0.44.0-py3-none-any.whl",
+        "digests": {
+          "sha256": "b601975823bd2c4e91e5a499aa83b264fc00e7b490998ed7ac802d385add8e55"
+        },
+        "upload_time_iso_8601": "2026-07-21T04:02:05.710331Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.44.0.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/d7/50/d029cc7fde3d32643617eca3ae340e322cb52451ce21cb5aca38509a28ae/bulla-0.44.0.tar.gz",
+        "digests": {
+          "sha256": "8a21e6e3bde56f9891681373235ded1e4015291243fecb5be04b12f2866e7d4f"
+        },
+        "upload_time_iso_8601": "2026-07-21T04:02:07.269705Z",
+        "yanked": false
+      }
+    ],
+    "0.44.1": [
+      {
+        "filename": "bulla-0.44.1-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/dd/42/b4cac408fb0539ba83dece5a54e5cdeec6de56059177bcee32493794ef42/bulla-0.44.1-py3-none-any.whl",
+        "digests": {
+          "sha256": "8195b4f7e710591a062efab9f294b05c71d48f312151da942268f6be669d0ef3"
+        },
+        "upload_time_iso_8601": "2026-07-21T04:55:34.108052Z",
+        "yanked": false
+      },
+      {
+        "filename": "bulla-0.44.1.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/47/2d/f7404ddd049a85c866b1c4826e965c1cb4325cd0a3c887c665490cb6a9cf/bulla-0.44.1.tar.gz",
+        "digests": {
+          "sha256": "0fa4debb1a575f22cd5f3a547c2a89305919aaffe01f47863c7fd63ca87ef139"
+        },
+        "upload_time_iso_8601": "2026-07-21T04:55:35.973282Z",
         "yanked": false
       }
     ],

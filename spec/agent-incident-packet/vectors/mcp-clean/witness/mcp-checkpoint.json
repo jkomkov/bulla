@@ -1,0 +1,30 @@
+{
+  "anchored_before": null,
+  "checkpoint_hash": "sha256:4ceb50ac678a584036139b12e58718dba18edc112db9d2963746707156668786",
+  "included_attestation_hashes": [
+    "sha256:c8edd970a3c525236fb955948dc2415c7d85480d130fa6cec2813e1a572c3577",
+    "sha256:afa376aaf2ebd1958573e2b4aecdcfb56181eaddcb17cb74c5c9d92e3e2c39f6",
+    "sha256:81d90872bb1b037cb42fcd4114b6982536f2c99e0049c588ebbf7f77684fcb11",
+    "sha256:fcf7fac0439fa576a44a5a04dcc61a0cac86a1a8e0f41dcc2f184856242d7cef",
+    "sha256:06f500d0c4dbbcb917c8a09a1213736c3177df6a4d1215e651d8ac8c02c2d55a",
+    "sha256:4ca6290b3fe37f941c56bcabd46f75453fd68921aee0fd213a2e58320b2f33ad",
+    "sha256:24bb94b0bb1350b47b253f42ed317f6723e4fec831b4398d09419a3f333a98bc",
+    "sha256:0294d77aced0072523ece9ca26c94e5431a72fbc55b03489780bb90b0a33970d",
+    "sha256:601ce339be1d30ca47bc06b34098f62e7282f77810dfc352e774c75682cc880d",
+    "sha256:c06fa1b1510c9965760d35bb3e5d7c6b6947232e7f4b6dd54a40a55eaae0d9ea",
+    "sha256:acf5c1b81d829e7b82167f4d861f73b6d41ac60a6f27e141f740661d3326425f",
+    "sha256:c0879a000103dfbfea72a46f5be886c5453f8f1fcbf982a3c068be3cb5cbdb8a"
+  ],
+  "proof": {
+    "issuer": "did:key:z6MkfDh2MFKQv7hE12ncqH2CSeLTCtA2A3qYELDcfw2haHoN",
+    "proofValue": "iQgfWrNyqBgDizn1xTWqP0e1LM2N3AVZok5QSaZII7D5JpOm6TmFaOm6twO0efOM+tJNEShzIS7TG+VjuArzCg==",
+    "purpose": "witness-checkpoint",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkfDh2MFKQv7hE12ncqH2CSeLTCtA2A3qYELDcfw2haHoN"
+  },
+  "received_at": "2026-07-26T12:12:00Z",
+  "root_ref": "team-witness://mcp/checkpoint-001",
+  "schema_version": 1,
+  "witness_id": "mcp-team-witness-001",
+  "witnessed_at": "2026-07-26T12:13:00Z"
+}

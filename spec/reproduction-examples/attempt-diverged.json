@@ -1,0 +1,94 @@
+{
+  "action": {
+    "subject": {
+      "claim_under_test": {
+        "digest": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+        "retrieved_at": "2026-07-22T09:00:00Z",
+        "uri": "https://example.invalid/claims/throughput-2026-07"
+      },
+      "environment": {
+        "cryptographic_library": "stdlib hashlib",
+        "language": "python",
+        "operating_system": "linux",
+        "runtime": "3.12"
+      },
+      "event_id": "rep-2",
+      "method": {
+        "checker_sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "commit": "0000000000000000000000000000000000000000",
+        "independently_written": true,
+        "repository": "https://example.invalid/reproducer/checker"
+      },
+      "result": {
+        "comparison": "exact",
+        "divergences": [
+          {
+            "expected": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "name": "vector-01",
+            "observed": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "fixture_results": [
+          {
+            "agreed": false,
+            "name": "vector-01"
+          }
+        ],
+        "status": "diverged"
+      }
+    },
+    "type": "reproduction.attempt"
+  },
+  "anchor_ref": {},
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:1b48ab36585612712346f32b7f221ca713da6ebc8e05f955e5025ca609d037cb",
+    "content": "sha256:3e662bb46ea02910c6dd45bc374a3f2d8c08008f1eac9750386e1d0bdd7a91fe",
+    "event": "sha256:57626947d653a3c0a6cf4496689b642b8a95ab85dd1ce9d4877b1b0fa3387fb0",
+    "log_leaf": "sha256:1e8a6c78665129eff100d2b093875ec21b12848d336507dc9add59df05a05048"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://reproducer/publication-v1",
+      "principal": "did:web:reproducer.invalid#lab"
+    },
+    "bounds": {
+      "rollback_window": "P30D",
+      "scope": "reproduction of one published claim"
+    }
+  },
+  "producer": {},
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://example.invalid/challenge",
+      "trusted_root_ref": "fixture:independently-pinned-root"
+    },
+    "remedies": [
+      {
+        "anchor": "hashes.content",
+        "rung": "recompute",
+        "verifier": "bulla receipt verify"
+      },
+      {
+        "anchor": "remedy.forum.trusted_root_ref",
+        "rung": "challenge",
+        "verifier": "named forum"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "public",
+    "record": "authority-permanent"
+  },
+  "schema_version": "0.2",
+  "signature": null,
+  "stake": null,
+  "timestamp": "2026-07-24T00:00:00Z"
+}

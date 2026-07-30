@@ -1,0 +1,331 @@
+{
+  "artifacts": [
+    {
+      "access_condition": "public",
+      "artifact_id": "denominator-decisions",
+      "byte_length": 930,
+      "disclosure_state": "released",
+      "media_type": "application/json",
+      "path": "indexes/http-gateway-ingress.json",
+      "retention": "P90D",
+      "role": "denominator",
+      "sha256": "sha256:34103368f91855f8e84bd1dfa0d95c262375be13f860cbc995dbf4c994c58f68",
+      "withheld_ref": null
+    },
+    {
+      "access_condition": "public",
+      "artifact_id": "denominator-effects",
+      "byte_length": 919,
+      "disclosure_state": "released",
+      "media_type": "application/json",
+      "path": "indexes/http-target-effects.json",
+      "retention": "P90D",
+      "role": "denominator",
+      "sha256": "sha256:81d258b2ee8d2d458e5f9045e281446f9690a6f7d98625e1ff938e8462c033df",
+      "withheld_ref": null
+    },
+    {
+      "access_condition": "public",
+      "artifact_id": "coverage-decisions",
+      "byte_length": 453,
+      "disclosure_state": "released",
+      "media_type": "application/json",
+      "path": "coverage/http-decisions.json",
+      "retention": "P90D",
+      "role": "coverage",
+      "sha256": "sha256:0e8800ca7afb27f3ea178f6f42ddf0851d3d583824d2a33fa6729ce4cef05d7a",
+      "withheld_ref": null
+    },
+    {
+      "access_condition": "public",
+      "artifact_id": "coverage-effects",
+      "byte_length": 450,
+      "disclosure_state": "released",
+      "media_type": "application/json",
+      "path": "coverage/http-effects.json",
+      "retention": "P90D",
+      "role": "coverage",
+      "sha256": "sha256:c40499347d190aefa2ca2eb815b624f6d18679d248d03ce691a3717b6fece66f",
+      "withheld_ref": null
+    },
+    {
+      "access_condition": "public",
+      "artifact_id": "trace-released",
+      "byte_length": 107,
+      "disclosure_state": "released",
+      "media_type": "application/x-ndjson",
+      "path": "traces/http-released.jsonl",
+      "retention": "P90D",
+      "role": "trace",
+      "sha256": "sha256:383604ca24c82fddce3cff676625080fa81bf54613148e828ae187748021f527",
+      "withheld_ref": null
+    },
+    {
+      "access_condition": "incident-reviewers",
+      "artifact_id": "trace-source-controlled",
+      "byte_length": 113,
+      "disclosure_state": "controlled",
+      "media_type": "application/x-ndjson",
+      "path": null,
+      "retention": "P90D",
+      "role": "trace",
+      "sha256": "sha256:b11095337caccb4b597272afafa35ce84fb76c9f7c8937f7bc2941cc72d5994e",
+      "withheld_ref": "controlled://http/trace-source"
+    },
+    {
+      "access_condition": "public",
+      "artifact_id": "redaction-record",
+      "byte_length": 431,
+      "disclosure_state": "released",
+      "media_type": "application/json",
+      "path": "redactions/http-trace.json",
+      "retention": "P90D",
+      "role": "redaction",
+      "sha256": "sha256:afee186c88cc3b5732a33a41719cfaf566ce3787ff8a3f3d957652104c466574",
+      "withheld_ref": null
+    },
+    {
+      "access_condition": "public",
+      "artifact_id": "witness-checkpoint",
+      "byte_length": 1670,
+      "disclosure_state": "released",
+      "media_type": "application/json",
+      "path": "witness/http-checkpoint.json",
+      "retention": "P90D",
+      "role": "witness",
+      "sha256": "sha256:2da85689a86ffee2096aad5148d5aa6b96f138d72ebf328d4f8e9cb90d47c974",
+      "withheld_ref": null
+    }
+  ],
+  "classification": "synthetic-public",
+  "corrections": [
+    {
+      "attestation_hash": "sha256:c6c232ed1e62f411ad8af337cad48ef2bbb4811c49ec3e35f78cc1809ee062f7",
+      "receipt_path": "receipts/11-correction.json"
+    }
+  ],
+  "coverage": [
+    {
+      "anchor_id": "http-gateway-ingress",
+      "artifact_id": "coverage-decisions",
+      "minimum_verification_depth": "attestation",
+      "phase": "decision",
+      "protocol": "http"
+    },
+    {
+      "anchor_id": "http-target-effects",
+      "artifact_id": "coverage-effects",
+      "minimum_verification_depth": "attestation",
+      "phase": "effect",
+      "protocol": "http"
+    }
+  ],
+  "denominators": [
+    {
+      "anchor_id": "http-gateway-ingress",
+      "artifact_id": "denominator-decisions",
+      "checkpoint_attestation": "sha256:ccd490750310698fbd4124675a805148c1e1ace49b172fd5666478cbf29fdcf9",
+      "phase": "decision",
+      "protocol": "http",
+      "provenance": "PATH_SEPARATE_TEAM_CONTROLLED"
+    },
+    {
+      "anchor_id": "http-target-effects",
+      "artifact_id": "denominator-effects",
+      "checkpoint_attestation": "sha256:03940df5ae74096a4e32c829c07b9132e44483037e311367c9129de7edb22704",
+      "phase": "effect",
+      "protocol": "http",
+      "provenance": "PATH_SEPARATE_TEAM_CONTROLLED"
+    }
+  ],
+  "incident_id": "incident-http-synthetic-001",
+  "packet_id": "packet-http-synthetic-001",
+  "profile": "glyph.agent-incident-packet/0.1-draft",
+  "redactions": [
+    {
+      "record_artifact_id": "redaction-record",
+      "redaction_id": "redact-001",
+      "released_artifact_id": "trace-released",
+      "reviewer_statement_ref": "sha256:e63ba214cff82e5ab30ce847f81773104283fe0b37ce27b2b72b5e4988b569be",
+      "rules_hash": "sha256:4be8d2cff8b625471bdc893cdc0c375a4b6d1f76a1cb5a549f624730538ed4bf",
+      "source_artifact_id": "trace-source-controlled",
+      "tool": "fixture-redactor",
+      "tool_version": "1"
+    }
+  ],
+  "revision": 1,
+  "roles": [
+    {
+      "issuer": "did:key:z6MkkVEw26bv2toTwmtaymZ1Vy3gFKVBMZxDefnoakFK3gMD",
+      "role": "evaluation_authority"
+    },
+    {
+      "issuer": "did:key:z6MkmeyUxxm4xPzBa4Q7uH72rVBrPzd4eyBxyKxp224jQERA",
+      "role": "gateway"
+    },
+    {
+      "issuer": "did:key:z6MknTyGSvDsE5tQZF8KJ9RjCE9k8uEibktzsFJmKSHaSCTp",
+      "role": "boundary"
+    },
+    {
+      "issuer": "did:key:z6MkrqBrKSZ3SCdCa3HJz9j6fc7MMUVe6AFwr92Ys4X6ZNDx",
+      "role": "target"
+    },
+    {
+      "issuer": "did:key:z6Mkrb5FBFyPiTdYvk1H2WWsRR8S3pu5UYEMbbyEjnbD2LWe",
+      "role": "trajectory_monitor"
+    },
+    {
+      "issuer": "did:key:z6MkwcmXgLaWWhSvUDXCYhFvAqdj7BsW7B56diiHvuW4NFKe",
+      "role": "incident_commander"
+    },
+    {
+      "issuer": "did:key:z6MkubDye2pidDrUkwPZkZj3ZUZYwhaSrdwF41ar8U6gd8zZ",
+      "role": "affected_party"
+    },
+    {
+      "issuer": "did:key:z6MkhoEwiEW3CngXW8VxjviiiL9yZiaeHjNFG2o9FjyTx925",
+      "role": "reviewer"
+    },
+    {
+      "issuer": "did:key:z6MksgvGuAdhLXm1gd7DrPR533zCgk1azU2j3FUWm7UJwB4L",
+      "role": "publisher"
+    },
+    {
+      "issuer": "did:key:z6MktzHPJNNGkpiyFDkG2RBYYZuU8eYSHQJ2tSaADotVVztd",
+      "role": "correction_authority"
+    },
+    {
+      "issuer": "did:key:z6MkiN1bMvJtjdfEKrx67nDcWADj335UgZxqLQKSBzYLz35g",
+      "role": "witness"
+    }
+  ],
+  "statements": [
+    {
+      "attestation_hash": "sha256:ccd490750310698fbd4124675a805148c1e1ace49b172fd5666478cbf29fdcf9",
+      "receipt_path": "receipts/05-denominator-decision-checkpoint.json"
+    },
+    {
+      "attestation_hash": "sha256:03940df5ae74096a4e32c829c07b9132e44483037e311367c9129de7edb22704",
+      "receipt_path": "receipts/06-denominator-effect-checkpoint.json"
+    },
+    {
+      "attestation_hash": "sha256:4984d3e33d025e4e3b31231a3117809f208e003407121d2f468e0a6b66579f29",
+      "receipt_path": "receipts/07-statement-observed.json"
+    },
+    {
+      "attestation_hash": "sha256:14c5c1fd2f276828b3310e213697bf4b5c32e92b2dabfc3068cdedd8ba84caa9",
+      "receipt_path": "receipts/08-statement-unresolved.json"
+    },
+    {
+      "attestation_hash": "sha256:e63ba214cff82e5ab30ce847f81773104283fe0b37ce27b2b72b5e4988b569be",
+      "receipt_path": "receipts/09-statement-redaction-review.json"
+    }
+  ],
+  "supersedes_core_hash": null,
+  "timeline": [
+    {
+      "action_type": "eval.run.authorize",
+      "attestation_hash": "sha256:b6d41aa235873004a13438db948b55aae2df7f0b2a4abeb1813464db0ee3d453",
+      "byte_length": 4494,
+      "receipt_path": "receipts/00-mandate.json",
+      "sequence": 1,
+      "sha256": "sha256:9afe7c21203213d330166bc5346c74fb948e420a9c0d73e23b82626b0c841b06"
+    },
+    {
+      "action_type": "capability.decide",
+      "attestation_hash": "sha256:cf089250a18650656a91b5b9a4801f4117e87a8a418f0de2fcd86c4adc722365",
+      "byte_length": 3721,
+      "receipt_path": "receipts/01-decision-permit.json",
+      "sequence": 2,
+      "sha256": "sha256:2d9ae02e57b79ff6f7dbed3d024c2c701a50128b3abb5987e6ee4bb7011f6216"
+    },
+    {
+      "action_type": "capability.decide",
+      "attestation_hash": "sha256:fef492c2f315c0e1ca35b5a5344dc377b817da9478acbcdd62a7d6d27d27850c",
+      "byte_length": 3725,
+      "receipt_path": "receipts/02-decision-refuse.json",
+      "sequence": 3,
+      "sha256": "sha256:2e6bf7dcc09e92996441c22624c663efac07e9b38d61f7d2dc58600479a2b811"
+    },
+    {
+      "action_type": "capability.observe",
+      "attestation_hash": "sha256:d8bc8422fc50ad0bf0a2cdb5f3a36195b41729a88962baf333053ada335f9571",
+      "byte_length": 3838,
+      "receipt_path": "receipts/03-observation-mediated.json",
+      "sequence": 4,
+      "sha256": "sha256:592ff20c98bcbaade3df2c9977ded5bb6a774f7082a4d06176fe23afc0f6f37c"
+    },
+    {
+      "action_type": "trajectory.decide",
+      "attestation_hash": "sha256:11b254d617dfdcdcaa9750b905ad06f526b09abecff934154549e0ba063376ce",
+      "byte_length": 3587,
+      "receipt_path": "receipts/04-trajectory.json",
+      "sequence": 5,
+      "sha256": "sha256:cb1b0749475b09ab5e56d9f9a930e4bcec52aaf38ad4822405eb02903dfc007a"
+    },
+    {
+      "action_type": "incident.statement",
+      "attestation_hash": "sha256:ccd490750310698fbd4124675a805148c1e1ace49b172fd5666478cbf29fdcf9",
+      "byte_length": 3411,
+      "receipt_path": "receipts/05-denominator-decision-checkpoint.json",
+      "sequence": 6,
+      "sha256": "sha256:e60eb30cdefa1077e4bb199fbd87a2df1a74f124a9d1547b3d03168142f5474e"
+    },
+    {
+      "action_type": "incident.statement",
+      "attestation_hash": "sha256:03940df5ae74096a4e32c829c07b9132e44483037e311367c9129de7edb22704",
+      "byte_length": 3405,
+      "receipt_path": "receipts/06-denominator-effect-checkpoint.json",
+      "sequence": 7,
+      "sha256": "sha256:82c021d8204c3afec839ba9193f11d91fd12f136709b035793fa276fdef35a49"
+    },
+    {
+      "action_type": "incident.statement",
+      "attestation_hash": "sha256:4984d3e33d025e4e3b31231a3117809f208e003407121d2f468e0a6b66579f29",
+      "byte_length": 3237,
+      "receipt_path": "receipts/07-statement-observed.json",
+      "sequence": 8,
+      "sha256": "sha256:2cc18aaee3dfd91307cf022390141a53068ca0cf974e3fcf13897ece9bb3233b"
+    },
+    {
+      "action_type": "incident.statement",
+      "attestation_hash": "sha256:14c5c1fd2f276828b3310e213697bf4b5c32e92b2dabfc3068cdedd8ba84caa9",
+      "byte_length": 3237,
+      "receipt_path": "receipts/08-statement-unresolved.json",
+      "sequence": 9,
+      "sha256": "sha256:97f2d529668f8c1bc81ae516cc19bc95df88e5ca5bfc0563d9ad5eeb0c153a28"
+    },
+    {
+      "action_type": "incident.statement",
+      "attestation_hash": "sha256:e63ba214cff82e5ab30ce847f81773104283fe0b37ce27b2b72b5e4988b569be",
+      "byte_length": 3384,
+      "receipt_path": "receipts/09-statement-redaction-review.json",
+      "sequence": 10,
+      "sha256": "sha256:c7fe9ee092e079db763db6a157d01da10d993ab7878307da9c2505986eb81f2e"
+    },
+    {
+      "action_type": "incident.handoff",
+      "attestation_hash": "sha256:c99245feccbcb3818afa01f1112ad280bc1952a54c8a69cc8343cee7a1796926",
+      "byte_length": 4983,
+      "receipt_path": "receipts/10-handoff.json",
+      "sequence": 11,
+      "sha256": "sha256:e5d581f65e6a3211a68408b37e0c2bbff1c8649f34a861c467af81f3e8e54e65"
+    },
+    {
+      "action_type": "incident.correct",
+      "attestation_hash": "sha256:c6c232ed1e62f411ad8af337cad48ef2bbb4811c49ec3e35f78cc1809ee062f7",
+      "byte_length": 3358,
+      "receipt_path": "receipts/11-correction.json",
+      "sequence": 12,
+      "sha256": "sha256:d4aac531efe81a98fedd3d16d22b32044f38dded6b1945f62ede40e876362e4e"
+    }
+  ],
+  "witnesses": [
+    {
+      "artifact_id": "witness-checkpoint",
+      "root_ref": "team-witness://http/checkpoint-001",
+      "witness_id": "http-team-witness-001"
+    }
+  ]
+}

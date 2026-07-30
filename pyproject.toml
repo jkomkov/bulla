@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling==1.31.0"]
 build-backend = "hatchling.build"
 
 [project]
@@ -42,6 +42,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+# The contributor path. PULL_REQUEST_TEMPLATE.md instructs `pip install -e ".[test]"`
+# as its first checklist item; without this extra that command errors and the first
+# thing a new contributor is told to run fails.
+test = ["pytest>=7.0"]
 ots = ["opentimestamps-client>=0.7"]
 # Sign receipts under an external agent identity (ed25519 / did:key).
 # Bulla signs, never mints — see bulla.identity. One small, pure-Python dep.
@@ -100,6 +104,46 @@ Changelog = "https://github.com/jkomkov/bulla/blob/main/CHANGELOG.md"
 [tool.hatch.version]
 path = "src/bulla/__init__.py"
 
+[tool.hatch.build]
+# These profiles remain inspectable in the public source repository, but they
+# are not installable package surfaces. Keep this list synchronized with
+# distribution-policy.json and verify it against both archives before release.
+exclude = [
+    "/examples/agent-fleet-blind-spot",
+    "/examples/agent-incident-packet",
+    "/examples/eval-incident-replay",
+    "/examples/receipt-witness",
+    "/scripts/mint_control_plane_deployment_receipt.py",
+    "/scripts/verify_golden_v05.py",
+    "/spec/agent-incident-packet",
+    "/spec/control-plane-alpha",
+    "/spec/generalization-constitution-v0.5-experimental.md",
+    "/src/bulla/experimental/action_boundary.py",
+    "/src/bulla/experimental/answerability.py",
+    "/src/bulla/experimental/causal_model.py",
+    "/src/bulla/experimental/challenge.py",
+    "/src/bulla/experimental/control_plane_alpha.py",
+    "/src/bulla/experimental/generalization.py",
+    "/src/bulla/experimental/incident_packet.py",
+    "/src/bulla/experimental/incident_pilots.py",
+    "/src/bulla/experimental/receipt_witness.py",
+    "/tests/test_action_boundary.py",
+    "/tests/test_agent_fleet_blind_spot_example.py",
+    "/tests/test_agent_incident_packet.py",
+    "/tests/test_agent_incident_packet_adversarial.py",
+    "/tests/test_agent_incident_pilots.py",
+    "/tests/test_causal_model.py",
+    "/tests/test_control_plane_alpha_protocol.py",
+    "/tests/test_control_plane_deployment_receipt.py",
+    "/tests/test_control_plane_deployment_workflow.py",
+    "/tests/test_eval_incident_replay.py",
+    "/tests/test_executable_challenge.py",
+    "/tests/test_generalization_v05.py",
+    "/tests/test_golden_v05.py",
+    "/tests/test_query_answerability.py",
+    "/tests/test_receipt_witness.py",
+]
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/bulla"]
 
@@ -107,6 +151,7 @@ packages = ["src/bulla"]
 "src/bulla/agents/system_prompt_v1.md" = "bulla/agents/system_prompt_v1.md"
 "src/bulla/data/showcase/filesystem.json" = "bulla/data/showcase/filesystem.json"
 "src/bulla/data/showcase/github.json" = "bulla/data/showcase/github.json"
+"distribution-policy.json" = "bulla/data/distribution-policy.json"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

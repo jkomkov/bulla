@@ -1,0 +1,26 @@
+{
+  "anchor_id": "mcp-gateway-ingress",
+  "observations": [
+    {
+      "anchor_id": "mcp-gateway-ingress",
+      "evidence_hash": "sha256:06fef089dde24cc4205b7a717da6bb906ad02c57dda62bedd67ad9256666d6c8",
+      "observation_id": "mcp-decision-permit-001",
+      "operation_ref": "sha256:b050fda981294f88792c8fced7ad9df780214727edcb7d7d0e115b2b89ec8dda",
+      "phase": "decision",
+      "protocol": "mcp",
+      "run_id": "run-mcp-synthetic-001"
+    },
+    {
+      "anchor_id": "mcp-gateway-ingress",
+      "evidence_hash": "sha256:1a3146fc01edde95f2737dfce0d07d9fd630a271fb19aa69e4fba36acc353f15",
+      "observation_id": "mcp-decision-refuse-001",
+      "operation_ref": "sha256:bdbee260417dffd44f7b60b3f3bda330cc64c36e46d5b9cbe259589ccb444243",
+      "phase": "decision",
+      "protocol": "mcp",
+      "run_id": "run-mcp-synthetic-001"
+    }
+  ],
+  "phase": "decision",
+  "protocol": "mcp",
+  "schema_version": 1
+}

@@ -1,0 +1,59 @@
+{
+  "decision_checkpoint_path": "receipts/04-denominator-decision-checkpoint.json",
+  "effect_checkpoint_path": "receipts/05-denominator-effect-checkpoint.json",
+  "effect_receipt_paths": [
+    "receipts/03-observation-mediated.json"
+  ],
+  "errors": [],
+  "gap_statement_path": "receipts/06-effect-coverage-gap-unresolved.json",
+  "handoff_receipt_path": "receipts/07-handoff.json",
+  "mandate_receipt_path": "receipts/00-mandate.json",
+  "profile": "bulla.control-plane-alpha/0.1-experimental",
+  "run_id": "run-mcp-control-alpha-001",
+  "schema_version": 1,
+  "status": "FINALIZED",
+  "transactions": [
+    {
+      "decision_id": "decision-permit-001",
+      "decision_path": "authzen/decisions/02-permit.json",
+      "decision_receipt_path": "receipts/01-decision-permit.json",
+      "request_id": "request-permit-001",
+      "request_path": "authzen/requests/01-permit.json"
+    },
+    {
+      "decision_id": "decision-refuse-001",
+      "decision_path": "authzen/decisions/04-refuse.json",
+      "decision_receipt_path": "receipts/02-decision-refuse.json",
+      "request_id": "request-refuse-001",
+      "request_path": "authzen/requests/03-refuse.json"
+    }
+  ],
+  "transitions": [
+    {
+      "evidence_ref": "sha256:ef70b61f99b6d2e5e3b46863822eab08dff6a45bedc7a08914e0e5b133f40203",
+      "sequence": 1,
+      "state": "CREATED"
+    },
+    {
+      "evidence_ref": "sha256:ca27cbbc039f5e24b86ae7b08b8ed0ce982d019344cb4ea959b821fff276fd73",
+      "sequence": 2,
+      "state": "AUTHORIZED"
+    },
+    {
+      "evidence_ref": "sha256:d4640c045d478807d4c62d8d78ddeb593bebd598a580b44cec588b1cf7965ccc",
+      "sequence": 3,
+      "state": "MEDIATED_EFFECT_RECORDED"
+    },
+    {
+      "evidence_ref": "sha256:0b1d1d42a1983c5d66938b0da8911accc4a0a4917c954924390e83c2a3526f91",
+      "sequence": 4,
+      "state": "BYPASS_RECORDED"
+    },
+    {
+      "evidence_ref": "sha256:69d4e7de6f162a9146c4ed71d96895abcf9658260b07f289b8a2023a21a41876",
+      "sequence": 5,
+      "state": "FINALIZED"
+    }
+  ],
+  "vector_id": "full-loop"
+}

@@ -42,17 +42,28 @@ PROOF_TYPE = "bulla/ed25519-2026"
 PROOF_CONTEXT = "bulla-proof"
 PROOF_SCHEMA = "0.3"
 PROOF_PURPOSES = frozenset(
-    {"content", "authorization", "delegation-grant", "witness-checkpoint"}
+    {
+        "content",
+        "occurrence",
+        "authorization",
+        "delegation-grant",
+        "witness-checkpoint",
+        "release-slot",
+    }
 )
 
 
-def domain_preimage(purpose: str, digest: str) -> bytes:
-    """The v0.3 signed bytes: canonical ``{context, schema, purpose, digest}``.
+def domain_preimage(purpose: str, digest: str, *, schema: str = PROOF_SCHEMA) -> bytes:
+    """The domain-separated signed bytes.
+
+    ``schema`` defaults to ``0.3`` so every shipped v0.3 proof retains its
+    exact bytes.  ActionReceipt v0.4 passes ``schema="0.4"`` explicitly.
+    The preimage is canonical ``{context, schema, purpose, digest}``.
     The purpose is inside the signature, not a mutable label beside it."""
     if purpose not in PROOF_PURPOSES:
         raise ValueError(f"unknown proof purpose {purpose!r}; expected one of {sorted(PROOF_PURPOSES)}")
     return canonical_json(
-        {"context": PROOF_CONTEXT, "schema": PROOF_SCHEMA, "purpose": purpose, "digest": digest}
+        {"context": PROOF_CONTEXT, "schema": schema, "purpose": purpose, "digest": digest}
     ).encode("utf-8")
 
 # multicodec varint prefix for ed25519-pub: code 0xED -> unsigned varint [0xed,0x01].
@@ -191,7 +202,7 @@ class LocalEd25519Signer:
             "proofValue": base64.b64encode(bytes(sig)).decode("ascii"),
         }
 
-    def sign_domain(self, purpose: str, digest: str) -> dict:
+    def sign_domain(self, purpose: str, digest: str, *, schema: str = PROOF_SCHEMA) -> dict:
         """Detached ed25519 signature over the v0.3 domain-separated preimage
         (``{context, schema, purpose, digest}``). The proof carries ``purpose`` as
         a label, but its security comes from the purpose being in the signed
@@ -200,7 +211,7 @@ class LocalEd25519Signer:
         _require_nacl()
         from nacl.signing import SigningKey
 
-        sig = SigningKey(self.seed).sign(domain_preimage(purpose, digest)).signature
+        sig = SigningKey(self.seed).sign(domain_preimage(purpose, digest, schema=schema)).signature
         return {
             "type": PROOF_TYPE,
             "purpose": purpose,
@@ -323,7 +334,18 @@ def _authenticate(
     from nacl.signing import VerifyKey
 
     try:
-        VerifyKey(pubkey).verify(signed_bytes, base64.b64decode(sig_b64, validate=True))
+        signature = base64.b64decode(sig_b64, validate=True)
+        if (
+            len(signature) != 64
+            or base64.b64encode(signature).decode("ascii") != sig_b64
+        ):
+            return Authenticity(
+                False,
+                method,
+                issuer,
+                "proofValue is not canonical base64 for an Ed25519 signature",
+            )
+        VerifyKey(pubkey).verify(signed_bytes, signature)
     except BadSignatureError:
         return Authenticity(False, method, issuer, "signature does not verify under the key")
     except Exception as exc:  # malformed key/sig
@@ -365,7 +387,8 @@ def verify_proof(
 
 
 def verify_proof_domain(
-    purpose: str, digest: str, proof: dict, public_key: bytes | None = None
+    purpose: str, digest: str, proof: dict, public_key: bytes | None = None,
+    *, schema: str = PROOF_SCHEMA,
 ) -> Authenticity:
     """v0.3: verify a domain-separated proof. The preimage is rebuilt from the
     ``purpose`` the CALLER expects, so a proof minted for a different purpose fails
@@ -386,7 +409,7 @@ def verify_proof_domain(
             f"proof purpose {label!r} does not match the expected purpose {purpose!r}",
         )
     try:
-        signed = domain_preimage(purpose, digest)
+        signed = domain_preimage(purpose, digest, schema=schema)
     except ValueError as exc:
         return Authenticity(False, "unresolved", issuer, str(exc))
     return _authenticate(signed, proof, public_key)

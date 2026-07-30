@@ -1,0 +1,108 @@
+{
+  "schema_version": "0.2",
+  "kind": "action_receipt",
+  "action": {
+    "type": "package.release",
+    "subject": {
+      "package": "bulla",
+      "version": "0.44.1",
+      "git_commit": "0ecebd809fdd13f6a7797dca5ab14042225e4ac7",
+      "git_tag": "v0.44.1",
+      "test_result": "12753 passed, 42 skipped, 6 deselected, 1 warning in 399.65s (0:06:39)"
+    }
+  },
+  "diagnostic_ref": {
+    "status": "reference",
+    "ref": "sha256:4da3bc04066ba998c4d36b3391f846dbfa69096f8e4c3e5001e1d5e41a47035a"
+  },
+  "evidence_refs": [
+    {
+      "name": "wheel",
+      "hash": "sha256:8195b4f7e710591a062efab9f294b05c71d48f312151da942268f6be669d0ef3",
+      "grounding": "third_party_anchored"
+    },
+    {
+      "name": "sdist",
+      "hash": "sha256:0fa4debb1a575f22cd5f3a547c2a89305919aaffe01f47863c7fd63ca87ef139",
+      "grounding": "third_party_anchored"
+    },
+    {
+      "name": "tree",
+      "hash": "sha256:907be654f66a237ca1dd87638a135e71760bcc803c2360a1eab855291f03e7ba",
+      "grounding": "third_party_anchored"
+    }
+  ],
+  "anchor_ref": {
+    "kind": "pypi",
+    "ref": "bulla 0.44.1",
+    "root_of_trust": {
+      "scheme": "sigstore-pep740",
+      "publisher": "github:jkomkov/bulla",
+      "integrity_api": [
+        "https://pypi.org/integrity/bulla/0.44.1/bulla-0.44.1-py3-none-any.whl/provenance",
+        "https://pypi.org/integrity/bulla/0.44.1/bulla-0.44.1.tar.gz/provenance"
+      ]
+    }
+  },
+  "mandate": {
+    "authority": {
+      "principal": "github:jkomkov",
+      "policy": "policy://bulla/release",
+      "delegation": [
+        "pypi:project:bulla"
+      ]
+    },
+    "bounds": {
+      "scope": "pypi:bulla version:0.44.1"
+    }
+  },
+  "remedy": {
+    "challenge_window": "P90D",
+    "forum": {
+      "log_endpoint": "https://pypi.org/project/bulla/",
+      "trusted_root_ref": "rekor:sigstore-pep740"
+    },
+    "remedies": [
+      {
+        "rung": "recompute",
+        "verifier": "pip download + sha256 vs PyPI",
+        "anchor": "pypi:bulla==0.44.1"
+      },
+      {
+        "rung": "revert",
+        "verifier": "pypi yank",
+        "anchor": "pypi:bulla==0.44.1"
+      },
+      {
+        "rung": "escalate",
+        "verifier": "maintainer review",
+        "anchor": "github:jkomkov"
+      }
+    ]
+  },
+  "retention": {
+    "record": "authority-permanent",
+    "disclosure": "public"
+  },
+  "stake": null,
+  "conventions": [],
+  "signature": {
+    "type": "bulla/ed25519-2026",
+    "issuer": "did:key:z6Mksw5XAZtcqTQ8aCA9eRJCz47SrVxDnNWBjxHQhYcLU5HH",
+    "verificationMethod": "did:key:z6Mksw5XAZtcqTQ8aCA9eRJCz47SrVxDnNWBjxHQhYcLU5HH",
+    "proofValue": "aLsXsWwoP9Qtc87mlrfoJKvg6Srhc8VzyYoAsI7eRTzIbI4TDrb+IPW7pQwfRgH//0JZ0RKG6vRpWxsnUXGZDQ=="
+  },
+  "timestamp": "2026-07-21T04:55:44.363348+00:00",
+  "producer": {
+    "bulla_version": "0.44.1",
+    "minted": "post-publication",
+    "workflow": "publish",
+    "pypi_project": "bulla"
+  },
+  "hashes": {
+    "content": "sha256:ab9857ab47ae3a746234d9528e39e5f69f9c6c30ec33790edbc9bc12af20c36e",
+    "event": "sha256:73e38ce4cff37dbdf6dbdab57e8e19d82427c75a5efc4b0e25603c3031553f96",
+    "attestation": "sha256:f8df737ccfa2fbd791549fd2ebd24e7bb867a4685ea526b92571266a7a76be23",
+    "log_leaf": "sha256:8322a5cf1681102eb0741b400dd99e456d33bfc999b0e727a513a752beaafe5e"
+  }
+}

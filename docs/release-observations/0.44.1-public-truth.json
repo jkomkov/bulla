@@ -1,0 +1,202 @@
+{
+  "schema_version": "0.2",
+  "observation_kind": "BULLA_PUBLIC_TRUTH_RELEASE",
+  "observed_at": "2026-07-21T05:59:59Z",
+  "classification": "INTERNALLY_VERIFIED_CAPTIVE_EXTERNAL_EXECUTION_BLOCKED",
+  "release": {
+    "version": "0.44.1",
+    "standalone_repository": "jkomkov/bulla",
+    "standalone_main_commit": "0ecebd809fdd13f6a7797dca5ab14042225e4ac7",
+    "tag": "v0.44.1",
+    "tag_peeled_commit": "0ecebd809fdd13f6a7797dca5ab14042225e4ac7",
+    "trusted_publishing_run": 29802230531,
+    "pypi_summary": "Portable, recomputable receipts for consequential agent actions: authority, bounds, evidence, reliance, and recourse",
+    "pypi_artifacts": [
+      {
+        "filename": "bulla-0.44.1-py3-none-any.whl",
+        "sha256": "8195b4f7e710591a062efab9f294b05c71d48f312151da942268f6be669d0ef3"
+      },
+      {
+        "filename": "bulla-0.44.1.tar.gz",
+        "sha256": "0fa4debb1a575f22cd5f3a547c2a89305919aaffe01f47863c7fd63ca87ef139"
+      }
+    ],
+    "release_assets": [
+      {
+        "filename": "0.44.1.json",
+        "sha256": "655367d66a840482cfed7d5fb6637ebc2d8474f2c674148ddebfce2d42b5e499"
+      },
+      {
+        "filename": "0.44.1.json.ots",
+        "sha256": "199f7cff7a20c0b710fc18abcb53b4cd164b8e7b05c2fb516600c24f5d6923d2"
+      },
+      {
+        "filename": "0.44.1.witness.json",
+        "sha256": "ed1b437bb0e4c09e80524e590eb95c2a3bad5e2cd6a10dc7bd4b45495ff246a2"
+      }
+    ]
+  },
+  "monorepo": {
+    "public_surface_merge": "69d1f0ea7fbc8efda22352480a4c5bee95a376ea",
+    "production_hotfix_merge": "592f0693ce08304a0cde2b9845f196f6af2616f4",
+    "candidate_freeze": "bulla/bench/golden/v0.5/candidate-freeze.json",
+    "candidate_freeze_sha256": "ad6d1e52c9414af78e2a747712fb8e205ccc9e4ae6ec5e59c3a53edf74727bb7",
+    "technical_spine_sha256": "6edfc55b92c99cdfcedbb5628bd4891d5ddfc13385863d31376f58cd00a6b188"
+  },
+  "deployments": {
+    "glyph": {
+      "github_deployment_id": 5533448463,
+      "environment": "Production – glyph-standard",
+      "commit": "592f0693ce08304a0cde2b9845f196f6af2616f4",
+      "deployment_url": "https://glyph-standard-5gp43l3ll-john-komkovs-projects.vercel.app",
+      "production_url": "https://glyphstandard.com",
+      "state": "SUCCESS",
+      "receipt_release": "glyph-deploy-592f0693ce08304a0cde2b9845f196f6af2616f4",
+      "receipt_sha256": "96682e2e48e686cc2e65b80f2a98fdc0e9fb89102698e42674660e9b345a63bb",
+      "receipt_verified_to": "digest",
+      "receipt_authority": "unauthenticated",
+      "receipt_limitation": "The hosted receipt job executed zero steps because of runner allocation. The local fallback is unsigned and is not an attestation."
+    },
+    "res_agentica": {
+      "github_deployment_id": 5533461603,
+      "environment": "Production – res-agentica-app",
+      "commit": "592f0693ce08304a0cde2b9845f196f6af2616f4",
+      "deployment_url": "https://res-agentica-5v6hloxya-john-komkovs-projects.vercel.app",
+      "production_url": "https://www.resagentica.com",
+      "state": "SUCCESS",
+      "observation": "Route responses, rendered titles, soft-404 exclusion, expected markers, and response-body hashes were observed from the public production domain."
+    }
+  },
+  "production_routes": [
+    {
+      "url": "https://glyphstandard.com/",
+      "status": 200,
+      "title": "Glyph — Receipts for agents",
+      "body_sha256": "80da70882ec503ee19ce967a26f99489eb6c56647b8131078c4034776b3c3560",
+      "soft_404": false
+    },
+    {
+      "url": "https://glyphstandard.com/status",
+      "status": 200,
+      "title": "What Exists Today — Glyph",
+      "body_sha256": "fa2adec74c8992d23d1cfc0f79629e05e05627f959f25875b40eb394b3731f15",
+      "soft_404": false
+    },
+    {
+      "url": "https://glyphstandard.com/participate",
+      "status": 200,
+      "title": "Participate — Glyph",
+      "body_sha256": "805419540ee17a094673ddbe7833e11b0abe60fb25739d012fb428aec906c564",
+      "soft_404": false
+    },
+    {
+      "url": "https://glyphstandard.com/review",
+      "status": 200,
+      "title": "Review Bulla — Glyph",
+      "body_sha256": "324d10f49778b19b4078ff6187cc090a497d94213fcecf972669540ad0c900e3",
+      "soft_404": false
+    },
+    {
+      "url": "https://glyphstandard.com/bulla",
+      "status": 200,
+      "title": "Build with ActionReceipts — Glyph",
+      "body_sha256": "1eddc013c8c41e0562dbe217e0a39db06acb28cc04fecff84f54630d0dc17804",
+      "soft_404": false
+    },
+    {
+      "url": "https://glyphstandard.com/bulla/quickstart",
+      "status": 200,
+      "title": "Create your first ActionReceipt — Glyph",
+      "body_sha256": "3db956218bd6c15366ae73c4e3113dbf7a68e3d2de8fffc41af39b6cf17b99ee",
+      "soft_404": false
+    },
+    {
+      "url": "https://glyphstandard.com/bulla/experimental",
+      "status": 200,
+      "title": "Experimental Bulla profiles — Glyph",
+      "body_sha256": "bddfa9ca67d1c7a6161235f9f7d830765c3a2868e8b3d2291f1f8c5be8b79bbc",
+      "soft_404": false
+    },
+    {
+      "url": "https://glyphstandard.com/bulla/experimental/semantic-invention",
+      "status": 200,
+      "title": "Semantic invention — Bulla experimental — Glyph",
+      "body_sha256": "08b8500c6d72bea24ccfbdcdc728ef8011166bab66565450c3e071620a287e93",
+      "soft_404": false
+    },
+    {
+      "url": "https://glyphstandard.com/bulla/experimental/semantic-finality",
+      "status": 200,
+      "title": "Semantic Finality — Bulla experimental — Glyph",
+      "body_sha256": "6331ca3c511fd51c502e9bec2348e58bf976416c9152206e797f7466d4f541d7",
+      "soft_404": false
+    },
+    {
+      "url": "https://glyphstandard.com/bulla/experimental/claim-flow",
+      "status": 200,
+      "title": "Claim Flow — Bulla experimental — Glyph",
+      "body_sha256": "4d1415d4420b7e1f85371a2ec8af6fef1062a5b03ce8dad6ecc817ad9e944acf",
+      "soft_404": false
+    },
+    {
+      "url": "https://glyphstandard.com/bulla/experimental/golden-gate",
+      "status": 200,
+      "title": "Golden Gate — Bulla experimental — Glyph",
+      "body_sha256": "c4e0b8b1c7e4d49b0e6b3d57cc4de0591a5873e2d2f1a03d92ce4c0d8000c6fa",
+      "soft_404": false
+    },
+    {
+      "url": "https://www.resagentica.com/status",
+      "status": 200,
+      "title": "What Exists Today — Res Agentica | Res Agentica",
+      "body_sha256": "b691963aa0b0c0385ddd2c27fd8c88246d5dddd063d7f79ec41b2809ec83fad2",
+      "soft_404": false
+    },
+    {
+      "url": "https://www.resagentica.com/research/golden-gate",
+      "status": 200,
+      "title": "The Golden Gate — Research | Res Agentica",
+      "body_sha256": "9693281e5d2506fd983bba707d31ac4459b3da2244f955e15941d584340124ca",
+      "soft_404": false
+    },
+    {
+      "url": "https://www.resagentica.com/research/interpolant-envelope",
+      "status": 200,
+      "title": "Interpolant Envelope — Research | Res Agentica",
+      "body_sha256": "d85e6f6c6aa1e166920bdf12276e74c92fd47ee1346a5a82f38a33ea7710d52c",
+      "soft_404": false
+    },
+    {
+      "url": "https://www.resagentica.com/research/no-free-precedent",
+      "status": 200,
+      "title": "No Free Precedent — Research | Res Agentica",
+      "body_sha256": "4ba07266a5261f1e56fddce88bee7ffdee22baf2e479b51ec1e3908d52e58f6c",
+      "soft_404": false
+    },
+    {
+      "url": "https://www.resagentica.com/research/omnibus",
+      "status": 200,
+      "title": "Research Reader & Editions | Res Agentica",
+      "body_sha256": "afc70e39b15bf4527e0981944ff06b88a8cb4bb8f94c87e42dd11456a3ea6f1f",
+      "soft_404": false
+    }
+  ],
+  "qa": {
+    "bulla": "12794_PASSED_34_SKIPPED_69_DESELECTED",
+    "lean": "11_JOBS_BUILT_SORRY_FREE_AXIOMS_AUDITED",
+    "glyph": "CLAIM_COPY_STATUS_LINK_VECTOR_VERIFIER_AND_30_ROUTE_BUILD_PASSED",
+    "res_agentica": "RESEARCH_STATUS_AND_RELEASE_CHECKS_PASSED_231_ROUTE_BUILD_PASSED",
+    "live_route_walk": "16_OF_16_HTTP_200_EXPECTED_MARKER_PRESENT_NO_SOFT_404",
+    "github_hosted_runner_condition": "JOBS_FAILED_WITH_ZERO_EXECUTED_STEPS",
+    "technical_spine": "BYTE_IDENTICAL_NOT_ACCEDED"
+  },
+  "external_evidence": {
+    "state": "BLOCKED_NO_REAL_PARTICIPANTS_BOUND",
+    "foreign_authors": 0,
+    "external_adjudicators": 0,
+    "independent_implementations": 0,
+    "external_witnesses": 0,
+    "synthetic_substitution": false
+  },
+  "claim_boundary": "This record establishes publication and internal reproducibility only. It does not establish independent validation, generalized semantic compounding, open-world safety, production settlement, institutional efficacy, or actuary endorsement."
+}

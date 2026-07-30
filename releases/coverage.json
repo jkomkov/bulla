@@ -1,14 +1,32 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-15T18:37:37.627145+00:00",
+  "generated_at": "2026-07-21T04:57:27.517618+00:00",
   "anchor": "pypi",
   "project": "bulla",
   "source": "https://pypi.org/pypi/bulla/json",
-  "total_anchored": 23,
-  "receipted": 2,
-  "coverage": 0.087,
+  "total_anchored": 25,
+  "receipted": 4,
+  "coverage": 0.16,
+  "release_receipt_required_since": "0.44.0",
+  "metrics": {
+    "forward_contemporaneous_since_epoch": {
+      "receipted": 2,
+      "total": 2,
+      "coverage": 1.0
+    },
+    "all_time_contemporaneous": {
+      "receipted": 2,
+      "total": 25,
+      "coverage": 0.08
+    },
+    "all_time_receipt_availability": {
+      "receipted": 4,
+      "total": 25,
+      "coverage": 0.16
+    }
+  },
   "status_counts": {
-    "contemporaneous": 0,
+    "contemporaneous": 2,
     "reconstructed": 2,
     "missing": 21,
     "invalid": 0
@@ -182,6 +200,26 @@
       "status": "missing",
       "receipt": null,
       "artifacts": []
+    },
+    {
+      "version": "0.44.0",
+      "status": "contemporaneous",
+      "receipt": "0.44.0.json",
+      "verified_to": "attestation",
+      "artifacts": [
+        "bulla-0.44.0-py3-none-any.whl",
+        "bulla-0.44.0.tar.gz"
+      ]
+    },
+    {
+      "version": "0.44.1",
+      "status": "contemporaneous",
+      "receipt": "0.44.1.json",
+      "verified_to": "attestation",
+      "artifacts": [
+        "bulla-0.44.1-py3-none-any.whl",
+        "bulla-0.44.1.tar.gz"
+      ]
     }
   ],
   "candidates": [

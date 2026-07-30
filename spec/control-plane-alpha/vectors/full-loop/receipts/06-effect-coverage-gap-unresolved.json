@@ -1,0 +1,100 @@
+{
+  "action": {
+    "subject": {
+      "claim": "EFFECT_RECEIPT_GAP_CAUSE_UNRESOLVED",
+      "epistemic_status": "observed",
+      "evidence_refs": [
+        "sha256:0e81945270aa7069f99098d88f35900b7daca1d310c40ac59e515390571e4262"
+      ],
+      "incident_id": "incident-mcp-control-alpha-001",
+      "issuer_role": "incident_commander",
+      "profile": "glyph.agent-incident-packet/0.1-draft",
+      "statement_id": "effect-coverage-gap-unresolved",
+      "topic": "effect-coverage"
+    },
+    "type": "incident.statement"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6Mko8nutXmjSSdnXMABmtdkaN5b3fKChEUxXGike5p376BY",
+    "proofValue": "RmB0XulZIefyCUuxLTMZ+f7FxX7pakxPqsz5SLVXHCVU7sR/h4SWU+Lgo9NdZeyjV9yGKO86OdYTBkZ3EpkqDw==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mko8nutXmjSSdnXMABmtdkaN5b3fKChEUxXGike5p376BY"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-07-26T12:06:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "8cfeb144-1b5f-4fd1-8329-ebdff6b729f6",
+  "evidence_refs": [
+    {
+      "grounding": "execution_verified",
+      "hash": "sha256:0e81945270aa7069f99098d88f35900b7daca1d310c40ac59e515390571e4262",
+      "name": "recomputation:effect-coverage-report"
+    }
+  ],
+  "hashes": {
+    "attestation": "sha256:34038c4c23429097f8fc09a0a79c7656847004926097fed4ef09d2daae947c24",
+    "content": "sha256:8a9acad39cc94addbc859a19d37a35f77917005eb76e735693059ef00433d42d",
+    "event": "sha256:a5cc3f20e745322731d9e4b6054aa98745008935b0dac5ac8ec5a4ddd3ab701c",
+    "log_leaf": "sha256:972134733e46920efe52a99f71cf069e4cd380e603ddbfa40a7ef76293073c06"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://bulla-control-plane-alpha/synthetic-authzen@sha256:fe2a76d9dc104e3a4b97fd173e3670e05fd8b79123f5e7126d76e4331b8e810d",
+      "principal": "did:key:z6Mko8nutXmjSSdnXMABmtdkaN5b3fKChEUxXGike5p376BY"
+    },
+    "bounds": {
+      "scope": "profile:glyph.agent-incident-packet/0.1-draft;action:incident.statement"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6Mko8nutXmjSSdnXMABmtdkaN5b3fKChEUxXGike5p376BY",
+    "proofValue": "eLeEBT5z0bxnnvXSC3N9zmf0AGubWNpcrFe66K9hFOeQkm97IhEIOqISLeo1Sj3nv91URLAWfnfVJqC55GXzAg==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mko8nutXmjSSdnXMABmtdkaN5b3fKChEUxXGike5p376BY"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "full-loop",
+    "outer_profile": "bulla.control-plane-alpha/0.1-experimental"
+  },
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://github.com/jkomkov/res-agentica/issues",
+      "trusted_root_ref": "https://github.com/jkomkov/res-agentica"
+    },
+    "remedies": [
+      {
+        "anchor": "packet:packet-core.json",
+        "rung": "recompute",
+        "verifier": "verify the deterministic incident packet"
+      },
+      {
+        "anchor": "forum:control-plane-alpha",
+        "rung": "challenge",
+        "verifier": "publish a signed incident correction"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "auditor",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6Mko8nutXmjSSdnXMABmtdkaN5b3fKChEUxXGike5p376BY",
+    "proofValue": "EJwM7D8LKOI+dL2cTVgr4ER6Nq7Kga3AputDihjDsTlkHoXBg6bMBzxv+IuWoDqvySsg9QHFZsM5XnL3bQDLBA==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mko8nutXmjSSdnXMABmtdkaN5b3fKChEUxXGike5p376BY"
+  },
+  "stake": null
+}

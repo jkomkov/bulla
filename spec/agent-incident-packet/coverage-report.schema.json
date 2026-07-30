@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schema/agent-incident-packet/0.1/coverage-report.schema.json",
+  "title": "Agent Incident Packet coverage report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "anchor_id",
+    "phase",
+    "protocol",
+    "denominator_sha256",
+    "minimum_verification_depth",
+    "total",
+    "receipted",
+    "covered_ids",
+    "uncovered_ids",
+    "phantom_receipt_ids",
+    "invalid_receipts"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "anchor_id": {"type": "string", "minLength": 1},
+    "phase": {"enum": ["decision", "effect"]},
+    "protocol": {"enum": ["http", "mcp"]},
+    "denominator_sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "minimum_verification_depth": {"const": "attestation"},
+    "total": {"type": "integer", "minimum": 0},
+    "receipted": {"type": "integer", "minimum": 0},
+    "covered_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "uncovered_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "phantom_receipt_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "invalid_receipts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source", "reason"],
+        "properties": {
+          "source": {"type": "string", "minLength": 1},
+          "reason": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

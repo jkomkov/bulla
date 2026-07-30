@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schema/agent-incident-packet/0.1/packet-core.schema.json",
+  "title": "Glyph Agent Incident Packet core",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "packet_id",
+    "incident_id",
+    "revision",
+    "classification",
+    "supersedes_core_hash",
+    "roles",
+    "timeline",
+    "artifacts",
+    "denominators",
+    "coverage",
+    "redactions",
+    "statements",
+    "witnesses",
+    "corrections"
+  ],
+  "properties": {
+    "profile": {"const": "glyph.agent-incident-packet/0.1-draft"},
+    "packet_id": {"type": "string", "minLength": 1},
+    "incident_id": {"type": "string", "minLength": 1},
+    "revision": {"type": "integer", "minimum": 1},
+    "classification": {"type": "string", "minLength": 1},
+    "supersedes_core_hash": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/hash"}
+      ]
+    },
+    "roles": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/role"}
+    },
+    "timeline": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/timeline"}
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/artifact"}
+    },
+    "denominators": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/denominator"}
+    },
+    "coverage": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/coverage"}
+    },
+    "redactions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/redaction"}
+    },
+    "statements": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/receiptReference"}
+    },
+    "witnesses": {
+      "type": "array",
+      "maxItems": 1,
+      "items": {"$ref": "#/$defs/witness"}
+    },
+    "corrections": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/receiptReference"}
+    }
+  },
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+    },
+    "role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "issuer"],
+      "properties": {
+        "role": {"type": "string", "minLength": 1},
+        "issuer": {"type": "string", "minLength": 1}
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "receipt_path",
+        "byte_length",
+        "sha256",
+        "attestation_hash",
+        "action_type"
+      ],
+      "properties": {
+        "sequence": {"type": "integer", "minimum": 1},
+        "receipt_path": {"$ref": "#/$defs/relativePath"},
+        "byte_length": {"type": "integer", "minimum": 0},
+        "sha256": {"$ref": "#/$defs/hash"},
+        "attestation_hash": {"$ref": "#/$defs/hash"},
+        "action_type": {
+          "enum": [
+            "eval.run.authorize",
+            "capability.decide",
+            "capability.observe",
+            "trajectory.decide",
+            "incident.statement",
+            "incident.handoff",
+            "incident.correct"
+          ]
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "path",
+        "withheld_ref",
+        "role",
+        "media_type",
+        "byte_length",
+        "sha256",
+        "disclosure_state",
+        "retention",
+        "access_condition"
+      ],
+      "properties": {
+        "artifact_id": {"type": "string", "minLength": 1},
+        "path": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "#/$defs/relativePath"}
+          ]
+        },
+        "withheld_ref": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "string", "minLength": 1}
+          ]
+        },
+        "role": {"type": "string", "minLength": 1},
+        "media_type": {"type": "string", "minLength": 1},
+        "byte_length": {"type": "integer", "minimum": 0},
+        "sha256": {"$ref": "#/$defs/hash"},
+        "disclosure_state": {
+          "enum": ["released", "controlled", "withheld"]
+        },
+        "retention": {"type": "string", "minLength": 1},
+        "access_condition": {"type": "string", "minLength": 1}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"disclosure_state": {"const": "released"}}
+          },
+          "then": {
+            "properties": {
+              "path": {"$ref": "#/$defs/relativePath"},
+              "withheld_ref": {"type": "null"}
+            }
+          },
+          "else": {
+            "properties": {
+              "path": {"type": "null"},
+              "withheld_ref": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      ]
+    },
+    "denominator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "anchor_id",
+        "phase",
+        "protocol",
+        "artifact_id",
+        "provenance",
+        "checkpoint_attestation"
+      ],
+      "properties": {
+        "anchor_id": {"type": "string", "minLength": 1},
+        "phase": {"enum": ["decision", "effect"]},
+        "protocol": {"enum": ["http", "mcp"]},
+        "artifact_id": {"type": "string", "minLength": 1},
+        "provenance": {
+          "enum": [
+            "PATH_SEPARATE_TEAM_CONTROLLED",
+            "SEPARATELY_CONTROLLED",
+            "UNKNOWN"
+          ]
+        },
+        "checkpoint_attestation": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "anchor_id",
+        "phase",
+        "protocol",
+        "artifact_id",
+        "minimum_verification_depth"
+      ],
+      "properties": {
+        "anchor_id": {"type": "string", "minLength": 1},
+        "phase": {"enum": ["decision", "effect"]},
+        "protocol": {"enum": ["http", "mcp"]},
+        "artifact_id": {"type": "string", "minLength": 1},
+        "minimum_verification_depth": {"const": "attestation"}
+      }
+    },
+    "redaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "redaction_id",
+        "record_artifact_id",
+        "source_artifact_id",
+        "released_artifact_id",
+        "tool",
+        "tool_version",
+        "rules_hash",
+        "reviewer_statement_ref"
+      ],
+      "properties": {
+        "redaction_id": {"type": "string", "minLength": 1},
+        "record_artifact_id": {"type": "string", "minLength": 1},
+        "source_artifact_id": {"type": "string", "minLength": 1},
+        "released_artifact_id": {"type": "string", "minLength": 1},
+        "tool": {"type": "string", "minLength": 1},
+        "tool_version": {"type": "string", "minLength": 1},
+        "rules_hash": {"$ref": "#/$defs/hash"},
+        "reviewer_statement_ref": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "receiptReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receipt_path", "attestation_hash"],
+      "properties": {
+        "receipt_path": {"$ref": "#/$defs/relativePath"},
+        "attestation_hash": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "witness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["witness_id", "artifact_id", "root_ref"],
+      "properties": {
+        "witness_id": {"type": "string", "minLength": 1},
+        "artifact_id": {"type": "string", "minLength": 1},
+        "root_ref": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

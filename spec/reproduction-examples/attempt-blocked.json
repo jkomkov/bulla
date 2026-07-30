@@ -1,0 +1,87 @@
+{
+  "action": {
+    "subject": {
+      "claim_under_test": {
+        "digest": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+        "retrieved_at": "2026-07-22T09:00:00Z",
+        "uri": "https://example.invalid/claims/throughput-2026-07"
+      },
+      "environment": {
+        "cryptographic_library": "stdlib hashlib",
+        "language": "python",
+        "operating_system": "linux",
+        "runtime": "3.12"
+      },
+      "event_id": "rep-3",
+      "method": {
+        "checker_sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "commit": "0000000000000000000000000000000000000000",
+        "independently_written": true,
+        "repository": "https://example.invalid/reproducer/checker"
+      },
+      "result": {
+        "block": {
+          "requested": "the pinned evaluation harness and its input corpus",
+          "requested_at": "2026-07-18T12:00:00Z",
+          "requested_from": "did:web:publisher.invalid#disclosure",
+          "response": "denied",
+          "response_at": "2026-07-19T15:30:00Z"
+        },
+        "status": "blocked"
+      }
+    },
+    "type": "reproduction.attempt"
+  },
+  "anchor_ref": {},
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:4920c13af680fb3937a2cea539addcb028ea1c9a781056640ede6c2c2a96282d",
+    "content": "sha256:00a7948b6e49bf2dff2e0821fccc03500751e93444cdb1241cf84753256d06cb",
+    "event": "sha256:bc4f6170cf9c3ca3ffa290a3b19131642aa598bf40b90e0c20ec91f0116a8169",
+    "log_leaf": "sha256:9f08e0fdc5614cc8a5a1adbccee26f297bb1e549424f385970847392863a070e"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://reproducer/publication-v1",
+      "principal": "did:web:reproducer.invalid#lab"
+    },
+    "bounds": {
+      "rollback_window": "P30D",
+      "scope": "reproduction of one published claim"
+    }
+  },
+  "producer": {},
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://example.invalid/challenge",
+      "trusted_root_ref": "fixture:independently-pinned-root"
+    },
+    "remedies": [
+      {
+        "anchor": "hashes.content",
+        "rung": "recompute",
+        "verifier": "bulla receipt verify"
+      },
+      {
+        "anchor": "remedy.forum.trusted_root_ref",
+        "rung": "challenge",
+        "verifier": "named forum"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "public",
+    "record": "authority-permanent"
+  },
+  "schema_version": "0.2",
+  "signature": null,
+  "stake": null,
+  "timestamp": "2026-07-24T00:00:00Z"
+}

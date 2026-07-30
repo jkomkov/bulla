@@ -1,0 +1,42 @@
+{
+  "immutable_releases": true,
+  "schema_version": "bulla.release-repository-controls/0.2",
+  "slot_enforcement_epoch": "0.44.2",
+  "tag_rulesets": [
+    {
+      "bypass_actors": [],
+      "enforcement": "active",
+      "exclude": [],
+      "include": [
+        "refs/tags/release-slot-v*",
+        "refs/tags/v*"
+      ],
+      "name": "immutable-bulla-release-tags",
+      "required_rules": [
+        "deletion",
+        "update"
+      ],
+      "target": "tag"
+    },
+    {
+      "bypass_actors": [
+        {
+          "actor_id": 4755091,
+          "actor_type": "User",
+          "bypass_mode": "always"
+        }
+      ],
+      "enforcement": "active",
+      "exclude": [],
+      "include": [
+        "refs/tags/release-slot-v*",
+        "refs/tags/v*"
+      ],
+      "name": "maintainer-bulla-release-tag-creation",
+      "required_rules": [
+        "creation"
+      ],
+      "target": "tag"
+    }
+  ]
+}

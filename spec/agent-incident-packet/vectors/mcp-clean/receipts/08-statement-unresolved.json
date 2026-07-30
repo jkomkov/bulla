@@ -1,0 +1,88 @@
+{
+  "action": {
+    "subject": {
+      "claim": "The cause of the unreceipted target-side effect remains unresolved.",
+      "epistemic_status": "unresolved",
+      "evidence_refs": [
+        "sha256:d92f6b66d42dae40185637fc22283775de1c0d3376ccaedb049675a525ea1e30"
+      ],
+      "incident_id": "incident-mcp-synthetic-001",
+      "issuer_role": "affected_party",
+      "profile": "glyph.agent-incident-packet/0.1-draft",
+      "statement_id": "mcp-statement-unresolved",
+      "topic": "effect-coverage"
+    },
+    "type": "incident.statement"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6MkuSxY7f7aJ9hsfatELRY6Hkc9sU71WnVow5WZnTLvxDzW",
+    "proofValue": "yPzoxrJLNfQwyclji238rfR/lnKMZd5mHy3pLSr7sEWWoxuzjsANqpYuzikoiZtWvCm3msgxfwsDdji3qHnLBg==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkuSxY7f7aJ9hsfatELRY6Hkc9sU71WnVow5WZnTLvxDzW"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-07-26T12:08:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "0355b417-748c-42a0-91bf-01830f5346e2",
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:601ce339be1d30ca47bc06b34098f62e7282f77810dfc352e774c75682cc880d",
+    "content": "sha256:a289f77fef4583fd2b884af2309f8652fc70ac99ebe92456a3a7d25623432c81",
+    "event": "sha256:96b17a16ca2f1e5cafee2078a68786643829ea92078ef16006cd8d584e8bddf5",
+    "log_leaf": "sha256:89b3bf071624056c11c00d396a344d319aca8d9da569947f8b78c85efc913657"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://agent-incident-packet/incident.statement",
+      "principal": "did:key:z6MkuSxY7f7aJ9hsfatELRY6Hkc9sU71WnVow5WZnTLvxDzW"
+    },
+    "bounds": {
+      "scope": "profile:glyph.agent-incident-packet/0.1-draft"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6MkuSxY7f7aJ9hsfatELRY6Hkc9sU71WnVow5WZnTLvxDzW",
+    "proofValue": "v1OC0epCsgmUSrAy7NqslMe4OomWqAECIFWp+f19kK10kBni5IEoGPErZ2P3u4zlMmDZnKg3raZJygBp1VHNBA==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkuSxY7f7aJ9hsfatELRY6Hkc9sU71WnVow5WZnTLvxDzW"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "mcp-clean"
+  },
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/experimental/incident-packet/challenge",
+      "trusted_root_ref": "sha256:abababababababababababababababababababababababababababababababab"
+    },
+    "remedies": [
+      {
+        "anchor": "forum:agent-incident-packet",
+        "rung": "challenge",
+        "verifier": "publish a signed incident.correct receipt"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "auditor",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6MkuSxY7f7aJ9hsfatELRY6Hkc9sU71WnVow5WZnTLvxDzW",
+    "proofValue": "db/qkYh+Hqv9+0K/twt0kJvwdAaYSi2bqjw00TMMt2jajp05iCIekRxsjcxI+SdrVvdTSOObaA9515Gh9ruKCA==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkuSxY7f7aJ9hsfatELRY6Hkc9sU71WnVow5WZnTLvxDzW"
+  },
+  "stake": null
+}

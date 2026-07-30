@@ -2,66 +2,76 @@
 
 **Portable, recomputable receipts for consequential agent actions.**
 
-Bulla creates portable, recomputable receipts for consequential agent actions.
-Each receipt records what happened, who authorized it, what bounds applied, what
-evidence is carried, what a relying party decided, and where challenge or remedy
-goes. Verification reports what is proven and what remains unresolved; it does
-not turn a signed record into worldly truth.
-
-A *bulla* was the clay envelope sealed around a record so it could survive the
-absence of the parties who made it. Bulla applies that discipline to agent
-actions: the action may finish in milliseconds, but its authority, evidence,
-limits, and challenge path remain available to the next system or institution.
+Bulla adds portable, independently verifiable receipts to consequential agent
+actions. Bulla is the Python reference implementation of the Glyph
+ActionReceipt standard.
 
 - **Glyph** is the open ActionReceipt format and verification contract.
 - **Bulla** is the Apache-2.0 Python reference implementation.
-- **Res Agentica** is the research program behind the experimental semantic and
-  institutional profiles.
+- **Res Agentica** develops the research and experimental profiles.
 
-Core installation has no heavy numerical or model dependency. It requires
-Python 3.10+ and PyYAML.
+An ActionReceipt records the action, authority, bounds, evidence, and recourse.
+Verification reports integrity, authenticity, authority, bounds, evidence
+grounding, inclusion, recourse, and reliance as separate dimensions. Core
+receipt creation and digest verification require Python 3.10+ and no hosted
+service.
 
-## Create and verify one receipt
+## Verify the canonical payment
 
 ```bash
 python -m pip install bulla
 
-bulla receipt create \
-  --type demo.write \
-  --subject path=/tmp/example.txt \
-  --principal did:web:example.invalid:agent \
-  --policy policy://demo-v1 \
-  --scope path=/tmp/example.txt \
-  --evidence diff=sha256:1111:self_asserted \
-  --forum-endpoint https://example.invalid/challenge \
-  --forum-root fixture:independently-pinned-root \
-  --out receipt.json
-
-bulla receipt verify receipt.json --format json
+curl -fsSLo payment-authorization-v0.2.json \
+  https://glyphstandard.com/examples/payment-authorization-v0.2.json
+bulla receipt verify payment-authorization-v0.2.json --format json
 ```
 
-The verifier reports independent dimensions rather than collapsing them into a
-misleading Boolean:
+The same receipt ships in the repository at `spec/vectors/payment-authorization.json`,
+so the check runs offline from a clone.
+
+The canonical receipt records a USD 125.00 charge under a structured USD 200.00
+maximum. The checked result is:
 
 ```text
 integrity            VERIFIED
 authenticity         UNVERIFIED
 authority            UNAUTHENTICATED
-scope                 NOT_APPLICABLE
+scope                 CONFORMS
 grounding             SELF_ASSERTED
 recourse              NAMED
 reachability          UNVERIFIED
 reliance_decision     NOT_COMPUTED
 ```
 
-This output is pinned by a checked
-[CLI fixture](https://github.com/jkomkov/bulla/blob/main/docs/fixtures/unsigned-self-asserted-answerability.json).
-The exact values depend on the receipt. An unsigned example can have verified
-hash integrity while authenticity and authority remain unverified. A named
-forum can be present while its operational reachability remains unverified.
-Those distinctions are the point.
+The unsigned receipt reaches the digest verification rung. Digest integrity
+does not authenticate the authority, strengthen self-asserted evidence, or
+compute a reliance decision.
 
-The same stable boundary is available from Python:
+These verdicts are pinned in `spec/vectors/expected.json`, which the
+implementation-independent checker recomputes without importing Bulla. The block
+above is not a transcript someone typed; it is checked against that file in CI.
+
+Change `amount_minor` from `12500` to `12501` without recomputing the hashes,
+then run the same command. The verifier returns nonzero, reports a content hash
+mismatch, and suppresses content-dependent conclusions.
+
+## Create a receipt
+
+```bash
+bulla receipt create \
+  --type demo.write \
+  --subject path=/tmp/example.txt \
+  --forum-endpoint https://example.invalid/challenge \
+  --forum-root fixture:independently-pinned-root \
+  --out receipt.json
+bulla receipt verify receipt.json --format json
+```
+
+## The Python API
+
+Building a receipt directly shows what the CLI is filling in: the authority that
+acted, the bounds it acted under, the evidence carried and how it is grounded, and
+where a challenge goes.
 
 ```python
 from bulla.action_receipt import build_action_receipt, verify_receipt
@@ -103,31 +113,36 @@ assert result.authority_authentic == "unauthenticated"
 assert result.effective_grounding == "self_asserted"
 ```
 
-The final assertions are deliberate: recomputable integrity did not upgrade an
-unsigned authority envelope or self-asserted evidence into stronger claims.
+The three assertions are the point. The receipt verifies, and it still reports that
+nobody authenticated the authority and that the evidence is the actor's own word.
+Verification separates what was established from what was merely recorded.
 
-The implementation-independent checker needs no Bulla import:
+Every fenced `python` block in this file is executed in CI by
+`scripts/check_readme_examples.py`, which fails if a block raises and also fails if
+the blocks disappear.
+
+The [verification-first quickstart](https://glyphstandard.com/bulla/quickstart)
+provides the checked output, browser verifier, and integration paths. The
+implementation-independent checker reproduces the normative vector corpus without
+importing Bulla:
 
 ```bash
 python spec/vectors/independent_check.py
 ```
 
-It recomputes the frozen ActionReceipt vectors from the normative specification
-and fails closed on structural tampering.
-
-## What 0.44.1 contains
+## What 0.44.2 contains
 
 | Surface | Maturity | Availability | What it establishes |
 |---|---|---|---|
-| ActionReceipt v0.2 | Stable and normative | PyPI 0.44.1 | Canonical action records, four hash preimages, evidence references, and recourse envelopes |
-| ActionReceipt v0.3 authority binding | Opt-in released draft | PyPI 0.44.1 | The content signer signed the exact authority, bounds, and recourse envelope |
-| Delegation and bounds conformance | Opt-in released draft | PyPI 0.44.1 | Separate chain, principal, policy, scope, time, revocation, and action-bounds dimensions |
-| Reliance receipts | Released implementation | PyPI 0.44.1 | A relying party records and recomputes its selected reliance policy and decision |
-| Release coverage | Released implementation | PyPI 0.44.1 | Published-package actions missing contemporaneous receipts relative to the PyPI anchor |
+| ActionReceipt v0.2 | Stable and normative | PyPI 0.44.2; default creation format | Canonical action records, four hash preimages, evidence references, and recourse envelopes |
+| Strict byte ingestion | Released implementation | PyPI 0.44.2 | Duplicate members, non-finite values, malformed Unicode, unknown closed fields, and declared resource-limit violations fail before verification |
+| Receipt verification and event coverage | Released implementation | PyPI 0.44.2 | Verification dimensions remain separate; coverage reports missing and phantom receipts against a supplied independent action denominator |
+| Action-boundary helpers | Released implementation | PyPI 0.44.2 | `wrap_action`, `operational_envelope`, and `receipt_for` add receipts at selected Python action boundaries |
+| ActionReceipt v0.3 and v0.4 | Opt-in released drafts | PyPI 0.44.2 | v0.3 binds authority; v0.4 adds occurrence, mandate, action-type, parent, and timeline commitments without changing the v0.2 default |
+| Delegation, bounds, and reliance | Released implementation | PyPI 0.44.2 | Authority-chain checks and relying-party decisions remain explicit, recomputable dimensions |
 | Routed inference | Experimental profile | Source and fixtures | Retention of declared bindings through one router and one provider; no live-provider claim |
-| Semantic invention and finality | Experimental research | PyPI 0.44.1 under `bulla.experimental` | Checked finite predicates, partial safe regions, typed abstention, and staged finality under declared closure |
-| Claim Flow and precedent | Experimental research | Claim Flow v0.4 in PyPI 0.44.1; Generalization v0.5 source only | Typed appraisal, forum, precedent, applicability, and settlement transitions; no external legal-validity claim |
-| Golden qualification | Experimental methods | Finite checker core in PyPI 0.44.1; benchmark packets source/research | Typed abstention, mutation, portability, and custody methods; no external results |
+| Existing experimental modules and Golden F13 | Released experimental code | PyPI 0.44.2 under `bulla.experimental` | Finite research checkers remain available without promotion to stable package interfaces |
+| Incident, control-plane, witnessing, challenge, answerability, and generalization profiles | Experimental source | GitHub source only; excluded from wheel and sdist | Repository-local experiments remain inspectable without becoming installed package or CLI surfaces |
 | Independent witness plurality | Blocked | Not available | Local checkpoint mechanics exist; independently operated witnesses do not |
 
 The canonical, generated status table is

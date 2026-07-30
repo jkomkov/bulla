@@ -73,6 +73,13 @@
     "ok": false,
     "verified_to": "none"
   },
+  "payment-authorization.json": {
+    "bounds_conformance": "conforms",
+    "effective_grounding": "self_asserted",
+    "kind": "action_receipt",
+    "ok": true,
+    "verified_to": "digest"
+  },
   "reliance-rely.json": {
     "bounds_conformance": "not_applicable",
     "identity": {
@@ -130,6 +137,18 @@
     "kind": "action_receipt",
     "ok": false,
     "verified_to": "none"
+  },
+  "tampered-timestamp.json": {
+    "bounds_conformance": "not_applicable",
+    "identity": {
+      "authority_authentic": "verified",
+      "ok": true,
+      "signature_authentic": true,
+      "verified_to": "attestation"
+    },
+    "kind": "action_receipt",
+    "ok": true,
+    "verified_to": "digest"
   },
   "valid-release.json": {
     "kind": "action_receipt",

@@ -1,0 +1,99 @@
+{
+  "action": {
+    "subject": {
+      "component_hashes": {
+        "artifacts": "sha256:5af0a65f0356eaca30755c8591afa26849c3892d97769864b829bb5312d32ef2",
+        "corrections": "sha256:a1f464605189146d424cb427abda0af04a917753109164e1c9aadd2121946048",
+        "coverage": "sha256:6f287351f3eed073964958782254ec0edd30835474e3142e7d2bb2a82b14566e",
+        "denominators": "sha256:830c406de68a3cc2eb5d23fed4ce6427fa518e7429b6f24fd390edf13d67770b",
+        "redactions": "sha256:9c987ac3d746364071741c92596602184e36e5cbc01525711a683c779b443923",
+        "roles": "sha256:a1d77749d0b56e0b3498ab02f1909aed690d965a7aa8eddca6f838e9d041edbb",
+        "statements": "sha256:e25ec0989f1b23bcce6fa8a43f89917727e2da214ef1f75e66f52db87fd0829b",
+        "timeline": "sha256:4ebbdb376e92c090c3f0eb3b5e6ab64024eed8f7532eb464f20f780563accd4c",
+        "witnesses": "sha256:f6c153e0941925df85670f742b60ef8ad1a54f942a9714d731b3420868311986"
+      },
+      "issuer_role": "publisher",
+      "packet_core_hash": "sha256:4209c7b11605c1ec35153e43ef7998070e08a762c3ae4d8cd69147f83fea5ad9",
+      "packet_id": "packet-mcp-synthetic-001",
+      "profile": "glyph.agent-incident-packet/0.1-draft"
+    },
+    "type": "incident.packet.publish"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6Mkp8jRSDKPGZqyVmu6s3ZEsxSMMUFqtt7CS44SkU6j9iTP",
+    "proofValue": "Ll208eTDGdI7lfyRIrVSMKdyU7olmz1LS16zv+2PUPLuvHqzn0gtpvL7r58feW2GjKei1fOIcrCgw8VRWEFbAQ==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkp8jRSDKPGZqyVmu6s3ZEsxSMMUFqtt7CS44SkU6j9iTP"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-07-26T12:14:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "0ee3f61e-550b-4072-b616-b933a1199b70",
+  "evidence_refs": [
+    {
+      "grounding": "execution_verified",
+      "hash": "sha256:4209c7b11605c1ec35153e43ef7998070e08a762c3ae4d8cd69147f83fea5ad9",
+      "name": "recomputation:packet-core"
+    }
+  ],
+  "hashes": {
+    "attestation": "sha256:2a1a987f54eeb7b0330dda9a220c499c2a6eb944e793e4092092f0e06daf02c0",
+    "content": "sha256:4a9953b265b654c05d8b70492a5f8827093dc03258aa3fb0bae801616c6c9382",
+    "event": "sha256:ba7a0f45a7e5957138924eabfe66cd0f2252c684862ccfd9093aef953e08f378",
+    "log_leaf": "sha256:43e124f610960191159d7aa88cb7ec38f64dd010e4a8b504fbdaf8534788e476"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://agent-incident-packet/incident.packet.publish",
+      "principal": "did:key:z6Mkp8jRSDKPGZqyVmu6s3ZEsxSMMUFqtt7CS44SkU6j9iTP"
+    },
+    "bounds": {
+      "scope": "profile:glyph.agent-incident-packet/0.1-draft"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6Mkp8jRSDKPGZqyVmu6s3ZEsxSMMUFqtt7CS44SkU6j9iTP",
+    "proofValue": "TROQW86taj4rKeH1bKX6nwduFvXpi8UhZ+iWxA0o87IELNg8ou8IFQcbc1ElijcDOLb/fUolYYKfS5ioWVCnBA==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkp8jRSDKPGZqyVmu6s3ZEsxSMMUFqtt7CS44SkU6j9iTP"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "mcp-clean"
+  },
+  "remedy": {
+    "challenge_window": "P30D",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/experimental/incident-packet/challenge",
+      "trusted_root_ref": "sha256:abababababababababababababababababababababababababababababababab"
+    },
+    "remedies": [
+      {
+        "anchor": "forum:agent-incident-packet",
+        "rung": "challenge",
+        "verifier": "publish a signed incident.correct receipt"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "auditor",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6Mkp8jRSDKPGZqyVmu6s3ZEsxSMMUFqtt7CS44SkU6j9iTP",
+    "proofValue": "UNjOs31QvJks+hZmv8hb0X7/SkU0UiH53flr47MKFH4/e7wccCCaoMQAUTuXvMvfSR9qqtEcArKH33N9ccdTCg==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkp8jRSDKPGZqyVmu6s3ZEsxSMMUFqtt7CS44SkU6j9iTP"
+  },
+  "stake": null
+}

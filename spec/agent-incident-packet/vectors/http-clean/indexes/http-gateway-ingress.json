@@ -1,0 +1,26 @@
+{
+  "anchor_id": "http-gateway-ingress",
+  "observations": [
+    {
+      "anchor_id": "http-gateway-ingress",
+      "evidence_hash": "sha256:d691aee0d9cff11e8b493dce285d1d27e8728283c8c07195a40078de01651edc",
+      "observation_id": "http-decision-permit-001",
+      "operation_ref": "sha256:ce07a86b6eb3f67e21e8a40d019a069c60ae14e0c7374d5748c9e9cc32e79a14",
+      "phase": "decision",
+      "protocol": "http",
+      "run_id": "run-http-synthetic-001"
+    },
+    {
+      "anchor_id": "http-gateway-ingress",
+      "evidence_hash": "sha256:9fe9dff2ed4655619fe489d1b764c8313d3a9a07131910301b8b774fb65c3c0e",
+      "observation_id": "http-decision-refuse-001",
+      "operation_ref": "sha256:e63da128d6a3bc63c122929ff8c919cc9e0747ab060a74ce9ef6f16e0eb1cc82",
+      "phase": "decision",
+      "protocol": "http",
+      "run_id": "run-http-synthetic-001"
+    }
+  ],
+  "phase": "decision",
+  "protocol": "http",
+  "schema_version": 1
+}

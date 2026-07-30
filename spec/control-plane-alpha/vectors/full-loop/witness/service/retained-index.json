@@ -1,0 +1,54 @@
+{
+  "profile": "bulla.control-plane-alpha/0.1-experimental",
+  "records": [
+    {
+      "archive_sequence": 1,
+      "byte_length": 4424,
+      "sha256": "sha256:b5d8b45683a83351d297da679c12a3cb04be12d2400749ab607207cbc4fcdcd5",
+      "source_path": "receipts/00-mandate.json"
+    },
+    {
+      "archive_sequence": 2,
+      "byte_length": 3977,
+      "sha256": "sha256:3be42593190723354289822d07ee9c529b46f04748b236b36d39fc0eccbdfa78",
+      "source_path": "receipts/01-decision-permit.json"
+    },
+    {
+      "archive_sequence": 3,
+      "byte_length": 3972,
+      "sha256": "sha256:39b5ef076b32a4de41ab6c0db66772bcfb8cff9b4851787446d5266f305df4e2",
+      "source_path": "receipts/02-decision-refuse.json"
+    },
+    {
+      "archive_sequence": 4,
+      "byte_length": 4097,
+      "sha256": "sha256:c35e7a4cabf2208d680f1070e28881b4b9e7693d458ab8fa85a8613909a11d94",
+      "source_path": "receipts/03-observation-mediated.json"
+    },
+    {
+      "archive_sequence": 5,
+      "byte_length": 3664,
+      "sha256": "sha256:fe25874f480e2b86515d508ede090f7a641f2c3cb42237addcbb312d3b2c2e55",
+      "source_path": "receipts/04-denominator-decision-checkpoint.json"
+    },
+    {
+      "archive_sequence": 6,
+      "byte_length": 3656,
+      "sha256": "sha256:df8829e6a6d2ddebc11e0e72dd6fff2e41782b8b800989e97222b05dd2150223",
+      "source_path": "receipts/05-denominator-effect-checkpoint.json"
+    },
+    {
+      "archive_sequence": 7,
+      "byte_length": 3677,
+      "sha256": "sha256:8f43be0298179511b70a401e7b54da078205ccef52f405d3c9f33e5560370af4",
+      "source_path": "receipts/06-effect-coverage-gap-unresolved.json"
+    },
+    {
+      "archive_sequence": 8,
+      "byte_length": 4797,
+      "sha256": "sha256:fe655e786828ed577800c1c9338d1c7717bc88cd3e30e3e42440764cc725507f",
+      "source_path": "receipts/07-handoff.json"
+    }
+  ],
+  "schema_version": 1
+}

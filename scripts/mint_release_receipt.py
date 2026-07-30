@@ -113,6 +113,34 @@ def _release_gate_witness(out_sidecar: Path) -> dict:
     return {"status": "reference", "ref": "sha256:" + receipt.to_dict()["receipt_hash"]}
 
 
+def _verified_release_slot(
+    slot_path: Path,
+    context_path: Path,
+    *,
+    version: str,
+    source_commit: str,
+) -> dict:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from check_release_slots import issuer_record_for_version  # noqa: E402
+    from release_slot import verify_slot  # noqa: E402
+
+    slot_doc = json.loads(slot_path.read_text())
+    context = json.loads(context_path.read_text())
+    issuer_record = issuer_record_for_version(context, version)
+    slot_ok, slot_reason = verify_slot(slot_doc, issuer_record=issuer_record)
+    if not slot_ok:
+        raise RuntimeError(f"release slot failed verification: {slot_reason}")
+    if slot_doc["version"] != version:
+        raise RuntimeError(
+            f"release slot is for {slot_doc['version']}, not {version}"
+        )
+    if slot_doc.get("source_commit") != source_commit:
+        raise RuntimeError(
+            "release slot source commit does not match the checked-out receipt source"
+        )
+    return slot_doc
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--dist", type=Path, default=_REPO / "dist", help="Directory holding the built wheel + sdist.")
@@ -123,6 +151,13 @@ def main() -> int:
     ap.add_argument("--test-result", default=None, help="e.g. '12549 passed' — the suite result on this exact commit.")
     ap.add_argument("--project", default="bulla", help="PyPI project name.")
     ap.add_argument("--repository", default="jkomkov/bulla", help="Expected GitHub Trusted Publisher owner/repo.")
+    ap.add_argument("--slot", type=Path, default=None,
+                    help="Pre-publication release slot to close (scripts/open_release_slot.py output).")
+    ap.add_argument(
+        "--context",
+        type=Path,
+        help="External release trust context; required with --slot.",
+    )
     args = ap.parse_args()
 
     wheels = sorted(args.dist.glob(f"bulla-{__version__}-*.whl"))
@@ -194,8 +229,37 @@ def main() -> int:
         "workflow": os.environ.get("GITHUB_WORKFLOW", "local"),
         "pypi_project": args.project,
     }
+    release_slot_hash = None
     if signer is None:
         producer["note"] = "UNSIGNED — no release key configured at mint time (stated, not hidden)"
+
+    if args.slot is not None:
+        if args.context is None:
+            print("Error: --context is required with --slot", file=sys.stderr)
+            return 2
+        try:
+            slot_doc = _verified_release_slot(
+                args.slot,
+                args.context,
+                version=__version__,
+                source_commit=commit,
+            )
+        except (OSError, ValueError, RuntimeError) as exc:
+            print(f"Error: {exc}", file=sys.stderr)
+            return 1
+        producer["slot_ref"] = {
+            "slot_hash": slot_doc["slot_hash"],
+            "opened_at": slot_doc["opened_at"],
+            "close_deadline": slot_doc["close_deadline"],
+        }
+        release_slot_hash = slot_doc["slot_hash"]
+        now_ts = datetime.now(timezone.utc)
+        deadline_ts = datetime.fromisoformat(
+            slot_doc["close_deadline"].replace("Z", "+00:00")
+        )
+        if now_ts > deadline_ts:
+            # State the late closure; never hide it.
+            producer["slot_ref"]["closed_late"] = True
 
     kwargs = dict(
         package="bulla",
@@ -206,6 +270,7 @@ def main() -> int:
         sdist_sha256="sha256:" + accepted[1]["digests"]["sha256"],
         tree_hash=tree_hash,
         test_result=args.test_result,
+        release_slot_hash=release_slot_hash,
         diagnostic_ref=diagnostic_ref,
         envelope=_release_envelope(__version__),
         root_of_trust={

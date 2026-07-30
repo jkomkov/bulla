@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "package": "bulla",
+  "release": "0.44.2",
+  "normative_action_receipt": "0.2",
+  "released_experimental_action_receipts": [
+    "0.3",
+    "0.4"
+  ],
+  "archive_member_sets": {
+    "wheel": {
+      "algorithm": "sha256-sorted-posix-lines-v1",
+      "count": 187,
+      "sha256": "cc74b3ffb03f5c1605d69d6a15d24d867d5a0311d8d2462d1b5bafec43139cfd"
+    },
+    "sdist": {
+      "algorithm": "sha256-sorted-posix-lines-v1",
+      "count": 1333,
+      "sha256": "eeca0bc399dbb208edae7a867282d4ba08ce059971071190d83d5016f3817b8d"
+    }
+  },
+  "generated_archive_bytes": {
+    "metadata_sha256": "818b376c456e713d598fc31252432e1a78e654ad072584c080ccff4fd1e93a23"
+  },
+  "required_root_exports": [
+    "event_coverage",
+    "operational_envelope",
+    "receipt_for",
+    "verify_receipt",
+    "wrap_action"
+  ],
+  "required_wheel_members": [
+    "bulla/__init__.py",
+    "bulla/action_receipt.py",
+    "bulla/coverage.py",
+    "bulla/data/distribution-policy.json",
+    "bulla/experimental/__init__.py",
+    "bulla/experimental/f13.py",
+    "bulla/receipt_parser.py",
+    "bulla/wrap.py"
+  ],
+  "required_sdist_members": [
+    ".gitattributes",
+    ".github/release-finalization-requirements.txt",
+    ".github/workflows/audit-release-slots.yml",
+    "distribution-policy.json",
+    "examples/wrap-your-agent/run_demo.py",
+    "releases/release-repository-controls.json",
+    "releases/release-trust-context.json",
+    "scripts/verify_release_repository_controls.py",
+    "spec/action-receipt-v0.2.md",
+    "spec/action-receipt-v0.4-draft.md",
+    "spec/vectors/payment-authorization.json",
+    "src/bulla/action_receipt.py",
+    "src/bulla/coverage.py",
+    "src/bulla/experimental/f13.py",
+    "src/bulla/receipt_parser.py",
+    "src/bulla/wrap.py"
+  ],
+  "source_only_modules": [
+    "bulla.experimental.action_boundary",
+    "bulla.experimental.answerability",
+    "bulla.experimental.causal_model",
+    "bulla.experimental.challenge",
+    "bulla.experimental.control_plane_alpha",
+    "bulla.experimental.generalization",
+    "bulla.experimental.incident_packet",
+    "bulla.experimental.incident_pilots",
+    "bulla.experimental.receipt_witness"
+  ],
+  "forbidden_cli_subcommands": [
+    "answerability",
+    "boundary",
+    "challenge"
+  ],
+  "standalone_test_exclusions": {
+    "tests/test_control_plane_alpha_protocol.py": "requires the monorepo Git index and control-plane fixture tree",
+    "tests/test_control_plane_deployment_receipt.py": "requires Glyph control-plane evidence outside the Bulla subtree",
+    "tests/test_control_plane_deployment_workflow.py": "requires root workflows and the Worker package outside the Bulla subtree",
+    "tests/test_query_answerability.py": "requires monorepo paper fixtures and source-only CLI commands"
+  },
+  "forbidden_sdist_prefixes": [
+    "examples/agent-fleet-blind-spot/",
+    "examples/agent-incident-packet/",
+    "examples/eval-incident-replay/",
+    "examples/receipt-witness/",
+    "scripts/mint_control_plane_deployment_receipt.py",
+    "scripts/verify_golden_v05.py",
+    "spec/agent-incident-packet/",
+    "spec/control-plane-alpha/",
+    "spec/generalization-constitution-v0.5-experimental.md",
+    "src/bulla/experimental/action_boundary.py",
+    "src/bulla/experimental/answerability.py",
+    "src/bulla/experimental/causal_model.py",
+    "src/bulla/experimental/challenge.py",
+    "src/bulla/experimental/control_plane_alpha.py",
+    "src/bulla/experimental/generalization.py",
+    "src/bulla/experimental/incident_packet.py",
+    "src/bulla/experimental/incident_pilots.py",
+    "src/bulla/experimental/receipt_witness.py",
+    "tests/test_action_boundary.py",
+    "tests/test_agent_fleet_blind_spot_example.py",
+    "tests/test_agent_incident_packet.py",
+    "tests/test_agent_incident_packet_adversarial.py",
+    "tests/test_agent_incident_pilots.py",
+    "tests/test_causal_model.py",
+    "tests/test_control_plane_alpha_protocol.py",
+    "tests/test_control_plane_deployment_receipt.py",
+    "tests/test_control_plane_deployment_workflow.py",
+    "tests/test_eval_incident_replay.py",
+    "tests/test_executable_challenge.py",
+    "tests/test_generalization_v05.py",
+    "tests/test_golden_v05.py",
+    "tests/test_query_answerability.py",
+    "tests/test_receipt_witness.py"
+  ]
+}

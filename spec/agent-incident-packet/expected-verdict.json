@@ -1,0 +1,203 @@
+{
+  "profile": "glyph.agent-incident-packet/0.1-draft",
+  "vectors": {
+    "http-clean": {
+      "packet_core_sha256": "sha256:6ae511054aba07c324545bffd04ffac2d090faaa5e32f687eb7b9d23d03d3d0c",
+      "result": {
+        "artifact_integrity": "VERIFIED",
+        "authority_binding": "VERIFIED",
+        "correction_status": "PRESENT",
+        "coverage": [
+          {
+            "anchor_id": "http-gateway-ingress",
+            "covered_ids": [
+              "http-decision-permit-001",
+              "http-decision-refuse-001"
+            ],
+            "invalid_receipts": [],
+            "phantom_receipt_ids": [],
+            "phase": "decision",
+            "protocol": "http",
+            "provenance": "PATH_SEPARATE_TEAM_CONTROLLED",
+            "reasons": [],
+            "receipted": 2,
+            "status": "COMPUTED",
+            "total": 2,
+            "uncovered_ids": []
+          },
+          {
+            "anchor_id": "http-target-effects",
+            "covered_ids": [
+              "http-effect-mediated-001"
+            ],
+            "invalid_receipts": [],
+            "phantom_receipt_ids": [],
+            "phase": "effect",
+            "protocol": "http",
+            "provenance": "PATH_SEPARATE_TEAM_CONTROLLED",
+            "reasons": [],
+            "receipted": 1,
+            "status": "COMPUTED",
+            "total": 2,
+            "uncovered_ids": [
+              "http-effect-bypass-001"
+            ]
+          }
+        ],
+        "coverage_status": "COMPUTED",
+        "denominator_provenance": "PATH_SEPARATE_TEAM_CONTROLLED",
+        "disclosure_safety": "NOT_COMPUTED",
+        "errors": [],
+        "exit_code": 0,
+        "issuer_authenticity": "VERIFIED",
+        "lineage_integrity": "VERIFIED",
+        "occurrence_binding": "VERIFIED",
+        "packet_integrity": "VERIFIED",
+        "party_conflicts": [
+          "effect-coverage"
+        ],
+        "profile": "glyph.agent-incident-packet/0.1-draft",
+        "receipt_integrity": "VERIFIED",
+        "redaction_binding": "VERIFIED",
+        "reliance": "NOT_COMPUTED",
+        "signature_status": "VERIFIED",
+        "suppressed_conclusions": [],
+        "temporal_evidence": {
+          "anchored_before": [],
+          "claimed_at": [
+            "2026-07-26T12:00:00Z",
+            "2026-07-26T12:01:00Z",
+            "2026-07-26T12:02:00Z",
+            "2026-07-26T12:03:00Z",
+            "2026-07-26T12:04:00Z",
+            "2026-07-26T12:05:00Z",
+            "2026-07-26T12:06:00Z",
+            "2026-07-26T12:07:00Z",
+            "2026-07-26T12:08:00Z",
+            "2026-07-26T12:09:00Z",
+            "2026-07-26T12:10:00Z",
+            "2026-07-26T12:11:00Z",
+            "2026-07-26T12:14:00Z"
+          ],
+          "received_at": [
+            "2026-07-26T12:12:00Z"
+          ],
+          "witnessed_at": [
+            "2026-07-26T12:13:00Z"
+          ]
+        },
+        "timeline_integrity": "VERIFIED",
+        "trace_integrity": "VERIFIED",
+        "unavailable_artifacts": [
+          "trace-source-controlled"
+        ],
+        "warnings": [
+          "one or more denominator observations have no accepted covering receipt",
+          "denominator checkpoints authenticate what the path-separated observer reported; they do not establish completeness or organizational independence",
+          "conflicting party statements are preserved without adjudication"
+        ],
+        "witness_inclusion": "VERIFIED",
+        "witness_root_trust": "TRUSTED"
+      }
+    },
+    "mcp-clean": {
+      "packet_core_sha256": "sha256:4209c7b11605c1ec35153e43ef7998070e08a762c3ae4d8cd69147f83fea5ad9",
+      "result": {
+        "artifact_integrity": "VERIFIED",
+        "authority_binding": "VERIFIED",
+        "correction_status": "PRESENT",
+        "coverage": [
+          {
+            "anchor_id": "mcp-gateway-ingress",
+            "covered_ids": [
+              "mcp-decision-permit-001",
+              "mcp-decision-refuse-001"
+            ],
+            "invalid_receipts": [],
+            "phantom_receipt_ids": [],
+            "phase": "decision",
+            "protocol": "mcp",
+            "provenance": "PATH_SEPARATE_TEAM_CONTROLLED",
+            "reasons": [],
+            "receipted": 2,
+            "status": "COMPUTED",
+            "total": 2,
+            "uncovered_ids": []
+          },
+          {
+            "anchor_id": "mcp-target-effects",
+            "covered_ids": [
+              "mcp-effect-mediated-001"
+            ],
+            "invalid_receipts": [],
+            "phantom_receipt_ids": [],
+            "phase": "effect",
+            "protocol": "mcp",
+            "provenance": "PATH_SEPARATE_TEAM_CONTROLLED",
+            "reasons": [],
+            "receipted": 1,
+            "status": "COMPUTED",
+            "total": 2,
+            "uncovered_ids": [
+              "mcp-effect-bypass-001"
+            ]
+          }
+        ],
+        "coverage_status": "COMPUTED",
+        "denominator_provenance": "PATH_SEPARATE_TEAM_CONTROLLED",
+        "disclosure_safety": "NOT_COMPUTED",
+        "errors": [],
+        "exit_code": 0,
+        "issuer_authenticity": "VERIFIED",
+        "lineage_integrity": "VERIFIED",
+        "occurrence_binding": "VERIFIED",
+        "packet_integrity": "VERIFIED",
+        "party_conflicts": [
+          "effect-coverage"
+        ],
+        "profile": "glyph.agent-incident-packet/0.1-draft",
+        "receipt_integrity": "VERIFIED",
+        "redaction_binding": "VERIFIED",
+        "reliance": "NOT_COMPUTED",
+        "signature_status": "VERIFIED",
+        "suppressed_conclusions": [],
+        "temporal_evidence": {
+          "anchored_before": [],
+          "claimed_at": [
+            "2026-07-26T12:00:00Z",
+            "2026-07-26T12:01:00Z",
+            "2026-07-26T12:02:00Z",
+            "2026-07-26T12:03:00Z",
+            "2026-07-26T12:04:00Z",
+            "2026-07-26T12:05:00Z",
+            "2026-07-26T12:06:00Z",
+            "2026-07-26T12:07:00Z",
+            "2026-07-26T12:08:00Z",
+            "2026-07-26T12:09:00Z",
+            "2026-07-26T12:10:00Z",
+            "2026-07-26T12:11:00Z",
+            "2026-07-26T12:14:00Z"
+          ],
+          "received_at": [
+            "2026-07-26T12:12:00Z"
+          ],
+          "witnessed_at": [
+            "2026-07-26T12:13:00Z"
+          ]
+        },
+        "timeline_integrity": "VERIFIED",
+        "trace_integrity": "VERIFIED",
+        "unavailable_artifacts": [
+          "trace-source-controlled"
+        ],
+        "warnings": [
+          "one or more denominator observations have no accepted covering receipt",
+          "denominator checkpoints authenticate what the path-separated observer reported; they do not establish completeness or organizational independence",
+          "conflicting party statements are preserved without adjudication"
+        ],
+        "witness_inclusion": "VERIFIED",
+        "witness_root_trust": "TRUSTED"
+      }
+    }
+  }
+}

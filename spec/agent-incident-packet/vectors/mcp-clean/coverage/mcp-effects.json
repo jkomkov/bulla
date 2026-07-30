@@ -1,0 +1,18 @@
+{
+  "anchor_id": "mcp-target-effects",
+  "covered_ids": [
+    "mcp-effect-mediated-001"
+  ],
+  "denominator_sha256": "sha256:1a565fe251f33d9806d663d1247a81332d5e6a01d51bcd5d3e18851fc3ec08c6",
+  "invalid_receipts": [],
+  "minimum_verification_depth": "attestation",
+  "phantom_receipt_ids": [],
+  "phase": "effect",
+  "protocol": "mcp",
+  "receipted": 1,
+  "schema_version": 1,
+  "total": 2,
+  "uncovered_ids": [
+    "mcp-effect-bypass-001"
+  ]
+}

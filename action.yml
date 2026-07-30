@@ -104,51 +104,87 @@ runs:
   using: "composite"
   steps:
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
       with:
         python-version: ${{ inputs.python-version }}
 
     - name: Install bulla
       shell: bash
+      env:
+        BULLA_VERSION: ${{ inputs.version }}
       run: |
-        if [ -n "${{ inputs.version }}" ]; then
-          pip install "bulla==${{ inputs.version }}"
+        if [ -n "$BULLA_VERSION" ]; then
+          if ! [[ "$BULLA_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::version must be MAJOR.MINOR.PATCH"
+            exit 2
+          fi
+          python -m pip install "bulla==$BULLA_VERSION"
         else
-          pip install bulla
+          python -m pip install bulla
         fi
 
     - name: Run bulla
       id: run
       shell: bash
+      env:
+        INPUT_MODE: ${{ inputs.mode }}
+        INPUT_PATH: ${{ inputs.path }}
+        INPUT_MANIFESTS_DIR: ${{ inputs.manifests-dir }}
+        INPUT_MCP_CONFIG: ${{ inputs.mcp-config }}
+        INPUT_OLD_PATH: ${{ inputs.old-path }}
+        INPUT_NEW_PATH: ${{ inputs.new-path }}
+        INPUT_FAIL_ON_MAJOR: ${{ inputs.fail-on-major }}
+        INPUT_FAIL_ON_MINOR: ${{ inputs.fail-on-minor }}
+        INPUT_MAX_DELTA_R: ${{ inputs.max-delta-r }}
+        INPUT_MAX_FEE: ${{ inputs.max-fee }}
+        INPUT_MAX_BLIND_SPOTS: ${{ inputs.max-blind-spots }}
+        INPUT_MAX_UNBRIDGED: ${{ inputs.max-unbridged }}
       run: |
         SARIF_FILE="bulla-results.sarif"
         echo "sarif_file=${SARIF_FILE}" >> "$GITHUB_OUTPUT"
 
-        MODE="${{ inputs.mode }}"
+        MODE="$INPUT_MODE"
+        if [[ "$MODE" != "check" && "$MODE" != "audit" && "$MODE" != "semver" ]]; then
+          echo "::error::mode must be check, audit, or semver"
+          exit 2
+        fi
+        for numeric_name in INPUT_MAX_FEE INPUT_MAX_BLIND_SPOTS INPUT_MAX_UNBRIDGED; do
+          numeric_value="${!numeric_name}"
+          if [ -n "$numeric_value" ] && ! [[ "$numeric_value" =~ ^[0-9]+$ ]]; then
+            echo "::error::${numeric_name#INPUT_} must be a non-negative integer"
+            exit 2
+          fi
+        done
+        for boolean_name in INPUT_FAIL_ON_MAJOR INPUT_FAIL_ON_MINOR; do
+          boolean_value="${!boolean_name}"
+          if [[ "$boolean_value" != "true" && "$boolean_value" != "false" ]]; then
+            echo "::error::${boolean_name#INPUT_} must be true or false"
+            exit 2
+          fi
+        done
         EXIT_CODE=0
 
         if [ "$MODE" = "audit" ]; then
-          # Build audit command
-          AUDIT_CMD="bulla audit"
+          AUDIT_CMD=(bulla audit)
 
-          if [ -n "${{ inputs.manifests-dir }}" ]; then
-            AUDIT_CMD="$AUDIT_CMD --manifests ${{ inputs.manifests-dir }}"
-          elif [ -n "${{ inputs.mcp-config }}" ]; then
-            AUDIT_CMD="$AUDIT_CMD ${{ inputs.mcp-config }}"
-          else
-            echo "::error::audit mode requires either manifests-dir or mcp-config input"
-            exit 1
+          if [ -n "$INPUT_MANIFESTS_DIR" ]; then
+            AUDIT_TARGET=(--manifests "$INPUT_MANIFESTS_DIR")
+          fi
+          if [ -n "$INPUT_MAX_FEE" ]; then
+            AUDIT_CMD+=(--max-fee "$INPUT_MAX_FEE")
+          fi
+          if [ -n "$INPUT_MAX_BLIND_SPOTS" ]; then
+            AUDIT_CMD+=(--max-blind-spots "$INPUT_MAX_BLIND_SPOTS")
+          fi
+          if [ -z "$INPUT_MANIFESTS_DIR" ]; then
+            if [ -z "$INPUT_MCP_CONFIG" ]; then
+              echo "::error::audit mode requires either manifests-dir or mcp-config input"
+              exit 1
+            fi
+            AUDIT_TARGET=(-- "$INPUT_MCP_CONFIG")
           fi
 
-          if [ -n "${{ inputs.max-fee }}" ]; then
-            AUDIT_CMD="$AUDIT_CMD --max-fee ${{ inputs.max-fee }}"
-          fi
-          if [ -n "${{ inputs.max-blind-spots }}" ]; then
-            AUDIT_CMD="$AUDIT_CMD --max-blind-spots ${{ inputs.max-blind-spots }}"
-          fi
-
-          # Run JSON output for structured data
-          JSON_OUT=$(eval "$AUDIT_CMD --format json" 2>/dev/null) || true
+          JSON_OUT=$("${AUDIT_CMD[@]}" --format json "${AUDIT_TARGET[@]}" 2>/dev/null) || true
           if [ -n "$JSON_OUT" ]; then
             FEE=$(echo "$JSON_OUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('coherence_fee',0))")
             BFEE=$(echo "$JSON_OUT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('cross_server_decomposition',{}).get('boundary_fee',0))")
@@ -156,15 +192,14 @@ runs:
             echo "boundary_fee=${BFEE}" >> "$GITHUB_OUTPUT"
           fi
 
-          # Run SARIF output
-          eval "$AUDIT_CMD --format sarif" > "${SARIF_FILE}" 2>/dev/null || EXIT_CODE=$?
+          "${AUDIT_CMD[@]}" --format sarif "${AUDIT_TARGET[@]}" > "$SARIF_FILE" 2>/dev/null || EXIT_CODE=$?
 
         elif [ "$MODE" = "semver" ]; then
-          if [ -z "${{ inputs.old-path }}" ] || [ -z "${{ inputs.new-path }}" ]; then
+          if [ -z "$INPUT_OLD_PATH" ] || [ -z "$INPUT_NEW_PATH" ]; then
             echo "::error::semver mode requires both old-path and new-path inputs"
             exit 1
           fi
-          JSON_OUT=$(bulla certify-update "${{ inputs.old-path }}" "${{ inputs.new-path }}" --format json) || EXIT_CODE=$?
+          JSON_OUT=$(bulla certify-update --format json -- "$INPUT_OLD_PATH" "$INPUT_NEW_PATH") || EXIT_CODE=$?
           if [ -n "$JSON_OUT" ]; then
             DR=$(echo "$JSON_OUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('delta_r',0))")
             UK=$(echo "$JSON_OUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('update_kind','semantic-patch'))")
@@ -180,14 +215,14 @@ runs:
             echo "minimum_bridge_delta=${MBD}" >> "$GITHUB_OUTPUT"
 
             POLICY_ERRORS=()
-            if [ "${{ inputs.fail-on-major }}" = "true" ] && [ "$UK" = "semantic-major" ]; then
+            if [ "$INPUT_FAIL_ON_MAJOR" = "true" ] && [ "$UK" = "semantic-major" ]; then
               POLICY_ERRORS+=("Policy violation: semantic-major update blocked by fail-on-major=true")
             fi
-            if [ "${{ inputs.fail-on-minor }}" = "true" ] && { [ "$UK" = "semantic-minor" ] || [ "$UK" = "semantic-major" ]; }; then
+            if [ "$INPUT_FAIL_ON_MINOR" = "true" ] && { [ "$UK" = "semantic-minor" ] || [ "$UK" = "semantic-major" ]; }; then
               POLICY_ERRORS+=("Policy violation: semantic-minor/major update blocked by fail-on-minor=true")
             fi
-            if [ -n "${{ inputs.max-delta-r }}" ]; then
-              MAX_DR="${{ inputs.max-delta-r }}"
+            if [ -n "$INPUT_MAX_DELTA_R" ]; then
+              MAX_DR="$INPUT_MAX_DELTA_R"
               if ! [[ "$MAX_DR" =~ ^-?[0-9]+$ ]]; then
                 echo "::error::max-delta-r must be an integer, got '$MAX_DR'"
                 EXIT_CODE=1
@@ -212,17 +247,16 @@ runs:
           python3 -c "import json,sys;sarif_file,level,uk,dr,cp=sys.argv[1:6];payload={'\$schema':'https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json','version':'2.1.0','runs':[{'tool':{'driver':{'name':'bulla','version':'semver'}},'results':[{'ruleId':f'semantic-semver-{uk}','level':level,'message':{'text':f'Semantic update classified as {uk} (delta_r={dr}, coherence_preserving={cp}).'}}]}]};open(sarif_file,'w').write(json.dumps(payload))" "$SARIF_FILE" "$LEVEL" "${UK:-semantic-patch}" "${DR:-0}" "${CP:-true}"
 
         else
-          # Check mode (backward compatible)
-          CHECK_CMD="bulla check"
-          if [ -n "${{ inputs.max-blind-spots }}" ]; then
-            CHECK_CMD="$CHECK_CMD --max-blind-spots ${{ inputs.max-blind-spots }}"
+          CHECK_CMD=(bulla check)
+          if [ -n "$INPUT_MAX_BLIND_SPOTS" ]; then
+            CHECK_CMD+=(--max-blind-spots "$INPUT_MAX_BLIND_SPOTS")
           else
-            CHECK_CMD="$CHECK_CMD --max-blind-spots 0"
+            CHECK_CMD+=(--max-blind-spots 0)
           fi
-          CHECK_CMD="$CHECK_CMD --max-unbridged ${{ inputs.max-unbridged }}"
-          CHECK_CMD="$CHECK_CMD --format sarif ${{ inputs.path }}"
+          CHECK_CMD+=(--max-unbridged "$INPUT_MAX_UNBRIDGED")
+          CHECK_CMD+=(--format sarif -- "$INPUT_PATH")
 
-          eval "$CHECK_CMD" > "${SARIF_FILE}" 2>/dev/null || EXIT_CODE=$?
+          "${CHECK_CMD[@]}" > "$SARIF_FILE" 2>/dev/null || EXIT_CODE=$?
         fi
 
         if [ "$EXIT_CODE" -eq 0 ]; then
@@ -235,7 +269,7 @@ runs:
 
     - name: Upload SARIF to GitHub Code Scanning
       if: always() && inputs.upload-sarif == 'true'
-      uses: github/codeql-action/upload-sarif@v3
+      uses: github/codeql-action/upload-sarif@4187e74d05793876e9989daffde9c3e66b4acd07 # v3
       with:
         sarif_file: bulla-results.sarif
       continue-on-error: true

@@ -1,0 +1,369 @@
+{
+  "$defs": {
+    "authzenDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "additionalProperties": false,
+          "properties": {
+            "decision_id": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "policy_hash": {
+              "$ref": "#/$defs/sha256"
+            },
+            "policy_digest": {
+              "$ref": "#/$defs/sha256"
+            },
+            "policy_ref": {
+              "const": "policy://bulla-control-plane-alpha/synthetic-authzen"
+            },
+            "profile": {
+              "const": "bulla.control-plane-alpha/0.1-experimental"
+            },
+            "reason_code": {
+              "enum": [
+                "FIXED_OPERATION_ALLOWED",
+                "CONFIGURED_REFUSAL"
+              ]
+            },
+            "request_hash": {
+              "$ref": "#/$defs/sha256"
+            },
+            "request_id": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "run_id": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sequence": {
+              "maximum": 2,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "pdp_id": {
+              "const": "bulla-closed-authzen/1"
+            },
+            "audience": {
+              "const": "synthetic-receiver"
+            },
+            "tool_name": {
+              "const": "sandbox.append"
+            },
+            "arguments_hash": {
+              "$ref": "#/$defs/sha256"
+            },
+            "valid_until": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "profile",
+            "run_id",
+            "request_id",
+            "decision_id",
+            "request_hash",
+            "sequence",
+            "reason_code",
+            "policy_ref",
+            "policy_hash",
+            "policy_digest",
+            "pdp_id",
+            "audience",
+            "tool_name",
+            "arguments_hash",
+            "valid_until"
+          ],
+          "type": "object"
+        },
+        "decision": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "decision",
+        "context"
+      ],
+      "type": "object"
+    },
+    "authzenRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "const": "tools/call"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        },
+        "context": {
+          "additionalProperties": false,
+          "properties": {
+            "arguments_hash": {
+              "$ref": "#/$defs/sha256"
+            },
+            "policy_digest": {
+              "$ref": "#/$defs/sha256"
+            },
+            "profile": {
+              "const": "bulla.control-plane-alpha/0.1-experimental"
+            },
+            "request_id": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "run_id": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "tool_name": {
+              "const": "sandbox.append"
+            },
+            "audience": {
+              "const": "synthetic-receiver"
+            },
+            "pdp_id": {
+              "const": "bulla-closed-authzen/1"
+            },
+            "valid_from": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "valid_until": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "profile",
+            "run_id",
+            "request_id",
+            "tool_name",
+            "arguments_hash",
+            "audience",
+            "pdp_id",
+            "policy_digest",
+            "valid_from",
+            "valid_until"
+          ],
+          "type": "object"
+        },
+        "resource": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "enum": [
+                "mcp://synthetic-receiver/tools/sandbox.append"
+              ]
+            },
+            "type": {
+              "const": "mcp-tool"
+            }
+          },
+          "required": [
+            "type",
+            "id"
+          ],
+          "type": "object"
+        },
+        "subject": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "agent:synthetic-alpha"
+            },
+            "type": {
+              "const": "principal"
+            }
+          },
+          "required": [
+            "type",
+            "id"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "subject",
+        "action",
+        "resource",
+        "context"
+      ],
+      "type": "object"
+    },
+    "issuerList": {
+      "items": {
+        "pattern": "^did:key:",
+        "type": "string"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "roleIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "issuer": {
+          "pattern": "^did:key:",
+          "type": "string"
+        },
+        "public_key_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "verification_method": {
+          "pattern": "^did:key:",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issuer",
+        "verification_method",
+        "public_key_sha256"
+      ],
+      "type": "object"
+    },
+    "sha256": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "trustContext": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_issuers_by_role": {
+          "additionalProperties": false,
+          "properties": {
+            "boundary": {
+              "$ref": "#/$defs/issuerList"
+            },
+            "evaluation_authority": {
+              "$ref": "#/$defs/issuerList"
+            },
+            "incident_commander": {
+              "$ref": "#/$defs/issuerList"
+            },
+            "publisher": {
+              "$ref": "#/$defs/issuerList"
+            },
+            "target": {
+              "$ref": "#/$defs/issuerList"
+            },
+            "witness": {
+              "$ref": "#/$defs/issuerList"
+            }
+          },
+          "required": [
+            "evaluation_authority",
+            "boundary",
+            "target",
+            "witness",
+            "incident_commander",
+            "publisher"
+          ],
+          "type": "object"
+        },
+        "profile": {
+          "const": "bulla.control-plane-alpha/0.1-experimental"
+        },
+        "role_identities": {
+          "additionalProperties": false,
+          "properties": {
+            "boundary": {
+              "$ref": "#/$defs/roleIdentity"
+            },
+            "evaluation_authority": {
+              "$ref": "#/$defs/roleIdentity"
+            },
+            "incident_commander": {
+              "$ref": "#/$defs/roleIdentity"
+            },
+            "publisher": {
+              "$ref": "#/$defs/roleIdentity"
+            },
+            "target": {
+              "$ref": "#/$defs/roleIdentity"
+            },
+            "witness": {
+              "$ref": "#/$defs/roleIdentity"
+            }
+          },
+          "required": [
+            "evaluation_authority",
+            "boundary",
+            "target",
+            "witness",
+            "incident_commander",
+            "publisher"
+          ],
+          "type": "object"
+        },
+        "team_controlled_roles": {
+          "items": {
+            "enum": [
+              "evaluation_authority",
+              "boundary",
+              "target",
+              "witness",
+              "incident_commander",
+              "publisher"
+            ]
+          },
+          "maxItems": 6,
+          "minItems": 6,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "trusted_policy_hashes": {
+          "items": {
+            "$ref": "#/$defs/sha256"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "trusted_witness_roots": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "profile",
+        "accepted_issuers_by_role",
+        "role_identities",
+        "trusted_policy_hashes",
+        "trusted_witness_roots",
+        "team_controlled_roles"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://bulla.dev/spec/control-plane-alpha/0.1-experimental/schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Closed AuthZEN mappings and external six-role trust context.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/authzenRequest"
+    },
+    {
+      "$ref": "#/$defs/authzenDecision"
+    },
+    {
+      "$ref": "#/$defs/trustContext"
+    }
+  ],
+  "title": "Bulla control-plane alpha closed shapes"
+}

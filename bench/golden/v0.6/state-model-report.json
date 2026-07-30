@@ -1,0 +1,71 @@
+{
+  "challenge_authority": {
+    "accepted_decisive_transitions": 3,
+    "authority_assignments": 4,
+    "rejected_decisive_transitions": 3,
+    "violations": []
+  },
+  "classification": "INTERNAL_CAPTIVE_MODEL",
+  "mutation_campaign": {
+    "critical_kill_rate": 1.0,
+    "killed": 8,
+    "mutants": 8,
+    "witnesses": {
+      "allow_target_mutation": [
+        "CHALLENGED_TARGET_MUTATED"
+      ],
+      "remove_authority_check": [
+        "UNAUTHORIZED_TRANSITION"
+      ],
+      "remove_dispatch_commit": [
+        "EXTERNAL_EFFECT_WITHOUT_DISPATCH_COMMITMENT"
+      ],
+      "remove_durable_precommit": [
+        "EXTERNAL_EFFECT_WITHOUT_DURABLE_INTENT"
+      ],
+      "remove_epoch_check": [
+        "CROSS_EPOCH_TRANSITION"
+      ],
+      "remove_idempotency_guard": [
+        "DUPLICATE_EXTERNAL_EFFECT"
+      ],
+      "remove_parent_hash_check": [
+        "BROKEN_PARENT_HASH"
+      ],
+      "remove_record_append": [
+        "STATE_WITHOUT_APPEND_ONLY_RECORD"
+      ]
+    }
+  },
+  "one_intent": {
+    "accepted_transitions": 16,
+    "reachable_state_names": [
+      "ABSENT",
+      "CANCELLED",
+      "CONFLICT",
+      "DISPATCHING",
+      "EXPIRED",
+      "FAILED",
+      "PREPARED",
+      "ROUTED",
+      "SUCCEEDED",
+      "UNKNOWN"
+    ],
+    "reachable_states": 17,
+    "terminal_states": [
+      "CANCELLED",
+      "CONFLICT",
+      "EXPIRED",
+      "ROUTED"
+    ],
+    "verified_idempotency": true,
+    "violations": {}
+  },
+  "profile": "bulla.causal-answerability/0.1-experimental",
+  "two_intent": {
+    "accepted_transitions": 544,
+    "reachable_states": 289,
+    "shared_adapter": "VERIFIED_IDEMPOTENCY",
+    "violations": {}
+  }
+}

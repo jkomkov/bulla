@@ -612,5 +612,7 @@ _RELEASES = Path(__file__).resolve().parents[1] / "releases"
     ids=lambda p: p.name,
 )
 def test_corpus_receipt_verifies(path):
-    v = verify_receipt(json.loads(path.read_text()))
-    assert v.ok and v.verified_to == "digest"  # unsigned reconstructions, honestly
+    receipt = json.loads(path.read_text())
+    v = verify_receipt(receipt)
+    expected_depth = "attestation" if receipt.get("signature") is not None else "digest"
+    assert v.ok and v.verified_to == expected_depth

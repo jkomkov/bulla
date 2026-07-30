@@ -209,7 +209,16 @@ def _signed_dicts() -> tuple[dict, dict, dict]:
         "authorization", ActionReceipt.from_dict(resigned).authorization_hash
     )
     resigned["hashes"] = ActionReceipt.from_dict(resigned).hashes()
-    return signed, forged, resigned
+
+    # The occurrence-binding gap, pinned as a vector (spec/action-receipt-v0.4-draft.md):
+    # swap the claimed timestamp and recompute ONLY the unsigned event hash. The
+    # content signature, authorization proof, attestation hash, and log leaf are
+    # all untouched — under v0.2/v0.3 rules this verifies fully, which is exactly
+    # the boundary v0.4 closes by binding event_hash into the attestation preimage.
+    timeswapped = copy.deepcopy(signed)
+    timeswapped["timestamp"] = "2027-01-01T00:00:00Z"
+    timeswapped["hashes"] = ActionReceipt.from_dict(timeswapped).hashes()
+    return signed, forged, resigned, timeswapped
 
 
 def _delegation_dict() -> dict:
@@ -377,12 +386,14 @@ def main() -> int:
     # hashes), and `identity` is the optional ed25519 rung. Both signed vectors
     # are structurally valid at the digest rung — the forgery is caught ONLY by
     # the signature rung, which is the depth lesson made concrete.
-    signed, forged, resigned = _signed_dicts()
+    signed, forged, resigned, timeswapped = _signed_dicts()
     delegated = _delegation_dict()
     for name, doc, is_deleg in (
         ("signed-authorized.json", signed, False),
         ("tampered-authority.json", forged, False),
         ("tampered-authority-resigned.json", resigned, False),
+        # Verifies fully under v0.2/v0.3 — the demonstrated occurrence-binding gap.
+        ("tampered-timestamp.json", timeswapped, False),
         ("delegated-receipt.json", delegated, True),
         # Structured-scope pair: the missing half of authorization. The over-scope
         # act still verifies (ok=True) — bounds_conformance=violates is surfaced.
