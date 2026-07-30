@@ -17,6 +17,70 @@ class DistributionError(RuntimeError):
     """The built archive does not match the declared distribution policy."""
 
 
+STANDALONE_TEST_EXCLUSIONS = {
+    "tests/test_control_plane_alpha_protocol.py": (
+        "requires the monorepo Git index and control-plane fixture tree"
+    ),
+    "tests/test_control_plane_deployment_receipt.py": (
+        "requires Glyph control-plane evidence outside the Bulla subtree"
+    ),
+    "tests/test_control_plane_deployment_workflow.py": (
+        "requires root workflows and the Worker package outside the Bulla subtree"
+    ),
+    "tests/test_query_answerability.py": (
+        "requires monorepo paper fixtures and source-only CLI commands"
+    ),
+}
+
+
+def _load_policy(policy_path: Path) -> dict[str, object]:
+    policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    if policy.get("schema_version") != 1 or policy.get("package") != "bulla":
+        raise DistributionError("unsupported distribution policy")
+    return policy
+
+
+def _discover_pytest_paths(root: Path) -> list[str]:
+    tests_root = root / "tests"
+    discovered = {
+        path.relative_to(root).as_posix()
+        for pattern in ("test_*.py", "*_test.py")
+        for path in tests_root.rglob(pattern)
+        if path.is_file()
+    }
+    return sorted(discovered)
+
+
+def standalone_test_paths(policy_path: Path, root: Path) -> list[str]:
+    """Return tests that can run from the standalone repository checkout."""
+
+    policy = _load_policy(policy_path)
+    exclusions = policy.get("standalone_test_exclusions")
+    if exclusions != STANDALONE_TEST_EXCLUSIONS:
+        raise DistributionError(
+            "distribution policy must retain the exact standalone test exclusions"
+        )
+
+    excluded_tests = sorted(STANDALONE_TEST_EXCLUSIONS)
+    missing = sorted(
+        path for path in excluded_tests if not (root / path).is_file()
+    )
+    if missing:
+        raise DistributionError(
+            "declared standalone test exclusions are missing: " + ", ".join(missing)
+        )
+
+    tests = _discover_pytest_paths(root)
+    selected = [
+        test
+        for test in tests
+        if test not in excluded_tests
+    ]
+    if not selected:
+        raise DistributionError("distribution policy selects no standalone tests")
+    return selected
+
+
 def _safe_member(name: str) -> str:
     components = name.split("/")
     path = PurePosixPath(name)
@@ -118,9 +182,7 @@ def _require_exact_member_set(
 
 
 def verify(policy_path: Path, dist: Path) -> dict[str, object]:
-    policy = json.loads(policy_path.read_text(encoding="utf-8"))
-    if policy.get("schema_version") != 1 or policy.get("package") != "bulla":
-        raise DistributionError("unsupported distribution policy")
+    policy = _load_policy(policy_path)
     release = policy.get("release")
     if not isinstance(release, str) or not re.fullmatch(r"\d+\.\d+\.\d+", release):
         raise DistributionError("distribution policy has an invalid release")
@@ -176,8 +238,17 @@ def main() -> int:
         "--policy", type=Path, default=Path("distribution-policy.json")
     )
     parser.add_argument("--dist", type=Path, default=Path("dist"))
+    parser.add_argument(
+        "--print-standalone-tests",
+        action="store_true",
+        help="print the tests included in the standalone distribution surface",
+    )
     args = parser.parse_args()
     try:
+        if args.print_standalone_tests:
+            for test in standalone_test_paths(args.policy, args.policy.parent):
+                print(test)
+            return 0
         result = verify(args.policy, args.dist)
     except (DistributionError, OSError, json.JSONDecodeError, tarfile.TarError) as error:
         print(f"distribution-policy: {error}")

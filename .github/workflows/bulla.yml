@@ -89,8 +89,14 @@ jobs:
           pip install -e ".[ots,identity]"
           pip install pytest
 
-      - name: Run tests
-        run: python -m pytest tests/ -v
+      - name: Run standalone repository tests
+        shell: bash
+        run: |
+          python scripts/verify_distribution_policy.py --print-standalone-tests \
+            > "$RUNNER_TEMP/standalone-tests.txt"
+          mapfile -t standalone_tests < "$RUNNER_TEMP/standalone-tests.txt"
+          test "${#standalone_tests[@]}" -gt 0
+          python -m pytest "${standalone_tests[@]}" -v
 
       - name: Check release slots for omission
         run: >-

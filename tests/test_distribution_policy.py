@@ -25,6 +25,21 @@ assert SPEC is not None and SPEC.loader is not None
 DISTRIBUTION_GATE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(DISTRIBUTION_GATE)
 
+EXPECTED_STANDALONE_TEST_EXCLUSIONS = {
+    "tests/test_control_plane_alpha_protocol.py": (
+        "requires the monorepo Git index and control-plane fixture tree"
+    ),
+    "tests/test_control_plane_deployment_receipt.py": (
+        "requires Glyph control-plane evidence outside the Bulla subtree"
+    ),
+    "tests/test_control_plane_deployment_workflow.py": (
+        "requires root workflows and the Worker package outside the Bulla subtree"
+    ),
+    "tests/test_query_answerability.py": (
+        "requires monorepo paper fixtures and source-only CLI commands"
+    ),
+}
+
 
 def test_distribution_policy_matches_version_and_public_exports() -> None:
     assert POLICY["release"] == bulla.__version__ == "0.44.2"
@@ -57,6 +72,59 @@ def test_packaged_cli_does_not_register_source_only_commands() -> None:
     cli = (ROOT / "src/bulla/cli.py").read_text(encoding="utf-8")
     for command in POLICY["forbidden_cli_subcommands"]:
         assert f'experimental_sub.add_parser(\n        "{command}"' not in cli
+
+
+def test_standalone_test_selection_follows_the_distribution_policy() -> None:
+    assert (
+        POLICY["standalone_test_exclusions"]
+        == EXPECTED_STANDALONE_TEST_EXCLUSIONS
+    )
+    selected = set(
+        DISTRIBUTION_GATE.standalone_test_paths(
+            ROOT / "distribution-policy.json", ROOT
+        )
+    )
+    excluded = set(EXPECTED_STANDALONE_TEST_EXCLUSIONS)
+    discovered = set(DISTRIBUTION_GATE._discover_pytest_paths(ROOT))
+
+    assert selected == discovered - excluded
+    assert excluded.isdisjoint(selected)
+    assert "tests/test_action_receipt.py" in selected
+    assert "tests/test_action_boundary.py" in selected
+    assert "tests/test_agent_incident_packet.py" in selected
+    assert "tests/test_distribution_policy.py" in selected
+    assert "tests/test_query_answerability.py" not in selected
+    assert "tests/test_control_plane_deployment_workflow.py" not in selected
+
+
+def test_standalone_selection_uses_both_default_pytest_name_patterns(
+    tmp_path: Path,
+) -> None:
+    tests = tmp_path / "tests"
+    tests.mkdir()
+    (tests / "test_prefix.py").write_text("", encoding="utf-8")
+    (tests / "suffix_test.py").write_text("", encoding="utf-8")
+    (tests / "helper.py").write_text("", encoding="utf-8")
+
+    assert DISTRIBUTION_GATE._discover_pytest_paths(tmp_path) == [
+        "tests/suffix_test.py",
+        "tests/test_prefix.py",
+    ]
+
+
+def test_standalone_selection_rejects_an_extra_exclusion(tmp_path: Path) -> None:
+    policy = dict(POLICY)
+    exclusions = dict(EXPECTED_STANDALONE_TEST_EXCLUSIONS)
+    exclusions["tests/test_distribution_policy.py"] = "disable the policy gate"
+    policy["standalone_test_exclusions"] = exclusions
+    policy_path = tmp_path / "distribution-policy.json"
+    policy_path.write_text(json.dumps(policy), encoding="utf-8")
+
+    with pytest.raises(
+        DISTRIBUTION_GATE.DistributionError,
+        match="must retain the exact standalone test exclusions",
+    ):
+        DISTRIBUTION_GATE.standalone_test_paths(policy_path, ROOT)
 
 
 def test_exact_member_commitment_rejects_an_undeclared_archive_member() -> None:

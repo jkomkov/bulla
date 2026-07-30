@@ -73,6 +73,12 @@
     "boundary",
     "challenge"
   ],
+  "standalone_test_exclusions": {
+    "tests/test_control_plane_alpha_protocol.py": "requires the monorepo Git index and control-plane fixture tree",
+    "tests/test_control_plane_deployment_receipt.py": "requires Glyph control-plane evidence outside the Bulla subtree",
+    "tests/test_control_plane_deployment_workflow.py": "requires root workflows and the Worker package outside the Bulla subtree",
+    "tests/test_query_answerability.py": "requires monorepo paper fixtures and source-only CLI commands"
+  },
   "forbidden_sdist_prefixes": [
     "examples/agent-fleet-blind-spot/",
     "examples/agent-incident-packet/",
