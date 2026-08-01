@@ -518,7 +518,7 @@ def test_real_unsigned_mint_path_runs_with_v02_slot_and_context(
         "_git_tree_sha256",
         lambda: slot["source_tree_sha256"],
     )
-    monkeypatch.setenv("GITHUB_REF_NAME", "v0.44.4")
+    monkeypatch.setenv("GITHUB_REF_NAME", "main")
     monkeypatch.setenv("GITHUB_WORKFLOW", "publish")
     out = tmp_path / "0.44.4.unsigned.json"
     monkeypatch.setattr(
@@ -532,6 +532,8 @@ def test_real_unsigned_mint_path_runs_with_v02_slot_and_context(
             str(out),
             "--test-result",
             "199 passed",
+            "--git-tag",
+            "v0.44.4",
             "--repository",
             "jkomkov/bulla",
             "--slot",
@@ -545,3 +547,29 @@ def test_real_unsigned_mint_path_runs_with_v02_slot_and_context(
     document = json.loads(out.read_text())
     assert document["action"]["subject"]["release_slot_hash"] == slot["slot_hash"]
     assert document["evidence_refs"][2]["hash"] == slot["source_tree_sha256"]
+
+
+def test_explicit_release_tag_must_resolve_to_source_commit(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    expected = "a" * 40
+
+    monkeypatch.setattr(mint_release_receipt, "_git", lambda *args: "")
+    with pytest.raises(RuntimeError, match="does not resolve"):
+        mint_release_receipt._verified_release_tag(
+            "v0.44.4", version="0.44.4", commit=expected
+        )
+
+    monkeypatch.setattr(mint_release_receipt, "_git", lambda *args: "b" * 40)
+    with pytest.raises(RuntimeError, match="not a{40}"):
+        mint_release_receipt._verified_release_tag(
+            "v0.44.4", version="0.44.4", commit=expected
+        )
+
+    monkeypatch.setattr(mint_release_receipt, "_git", lambda *args: expected)
+    assert (
+        mint_release_receipt._verified_release_tag(
+            "v0.44.4", version="0.44.4", commit=expected
+        )
+        == "v0.44.4"
+    )

@@ -75,6 +75,20 @@ def _git_tree_sha256() -> str | None:
     return "sha256:" + hashlib.sha256(result.stdout).hexdigest()
 
 
+def _verified_release_tag(tag: str, *, version: str, commit: str) -> str:
+    expected = f"v{version}"
+    if tag != expected:
+        raise RuntimeError(f"release tag must be {expected}, got {tag!r}")
+    tag_commit = _git("rev-list", "-n", "1", tag)
+    if not tag_commit:
+        raise RuntimeError(f"release tag {tag} does not resolve")
+    if tag_commit != commit:
+        raise RuntimeError(
+            f"release tag {tag} resolves to {tag_commit}, not {commit}"
+        )
+    return tag
+
+
 def _release_envelope(version: str) -> RecourseEnvelope:
     return RecourseEnvelope(
         authority=Authority(
@@ -151,6 +165,11 @@ def main() -> int:
     ap.add_argument("--test-result", default=None, help="e.g. '12549 passed' — the suite result on this exact commit.")
     ap.add_argument("--project", default="bulla", help="PyPI project name.")
     ap.add_argument("--repository", default="jkomkov/bulla", help="Expected GitHub Trusted Publisher owner/repo.")
+    ap.add_argument(
+        "--git-tag",
+        default=None,
+        help="Exact release tag (defaults to GITHUB_REF_NAME or the checked-out tag).",
+    )
     ap.add_argument("--slot", type=Path, default=None,
                     help="Pre-publication release slot to close (scripts/open_release_slot.py output).")
     ap.add_argument(
@@ -201,7 +220,17 @@ def main() -> int:
         return 1
 
     commit = _git("rev-parse", "HEAD")
-    tag = os.environ.get("GITHUB_REF_NAME") or _git("describe", "--exact-match", "--tags") or ""
+    tag = (
+        args.git_tag
+        or os.environ.get("GITHUB_REF_NAME")
+        or _git("describe", "--exact-match", "--tags")
+        or ""
+    )
+    try:
+        tag = _verified_release_tag(tag, version=__version__, commit=commit)
+    except RuntimeError as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        return 2
     tree_hash = _git_tree_sha256()
 
     out = args.out or (_REPO / "releases" / f"{__version__}.json")
