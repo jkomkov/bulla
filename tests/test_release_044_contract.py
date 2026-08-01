@@ -140,8 +140,9 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert "rulesets?targets=tag" in workflow
     assert "RELEASE_ADMIN_READ_TOKEN" in sign_job
     assert "environment: release-signing" in sign_job
-    assert 'releases/tags/v$RELEASE_VERSION' not in verify_job
-    assert 'releases/tags/v$RELEASE_VERSION' in sign_job
+    assert 'releases?per_page=100' not in verify_job
+    assert 'releases?per_page=100' in sign_job
+    assert "if len(matches) != 1" in sign_job
     assert 'release.get("tag_name")' in sign_job
     assert 'release.get("target_commitish")' in sign_job
     assert 'release.get("draft") is not True' in sign_job
