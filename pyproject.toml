@@ -9,7 +9,7 @@ name = "bulla"
 # source that could silently drift would be a provenance defect in a provenance
 # tool. publish.yml gates that this version equals the pushed tag.
 dynamic = ["version"]
-description = "Portable, recomputable receipts for consequential agent actions: authority, bounds, evidence, reliance, and recourse"
+description = "Create, verify, and reconcile portable receipts for consequential agent actions"
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
@@ -109,16 +109,21 @@ path = "src/bulla/__init__.py"
 # are not installable package surfaces. Keep this list synchronized with
 # distribution-policy.json and verify it against both archives before release.
 exclude = [
+    "/clean-room",
     "/examples/agent-fleet-blind-spot",
     "/examples/agent-incident-packet",
+    "/examples/assurance-linker",
     "/examples/eval-incident-replay",
     "/examples/receipt-witness",
     "/scripts/mint_control_plane_deployment_receipt.py",
     "/scripts/verify_golden_v05.py",
     "/spec/agent-incident-packet",
+    "/spec/assurance-linker",
     "/spec/control-plane-alpha",
     "/spec/generalization-constitution-v0.5-experimental.md",
     "/src/bulla/experimental/action_boundary.py",
+    "/src/bulla/experimental/assurance_bitcoin.py",
+    "/src/bulla/experimental/assurance_linker.py",
     "/src/bulla/experimental/answerability.py",
     "/src/bulla/experimental/causal_model.py",
     "/src/bulla/experimental/challenge.py",
@@ -128,6 +133,12 @@ exclude = [
     "/src/bulla/experimental/incident_pilots.py",
     "/src/bulla/experimental/receipt_witness.py",
     "/tests/test_action_boundary.py",
+    "/tests/test_assurance_linker.py",
+    "/tests/test_assurance_stranger_doorway.py",
+    "/tests/test_assurance_stranger_doorway_r3.py",
+    "/tests/test_assurance_stranger_doorway_r4.py",
+    "/tests/test_assurance_stranger_doorway_r5.py",
+    "/tests/test_assurance_stranger_gate.py",
     "/tests/test_agent_fleet_blind_spot_example.py",
     "/tests/test_agent_incident_packet.py",
     "/tests/test_agent_incident_packet_adversarial.py",

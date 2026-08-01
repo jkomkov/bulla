@@ -2,3 +2,4 @@
 # Generators own canonical LF for textual JSON/JSONL; arbitrary opaque bytes remain intact.
 spec/agent-incident-packet/** -text
 spec/control-plane-alpha/vectors/** -text
+bench/golden/v0.6/*.json -text
