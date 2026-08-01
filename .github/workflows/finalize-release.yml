@@ -213,6 +213,12 @@ jobs:
               or release.get("draft") is not True
           ):
               raise SystemExit("draft release does not target the attested commit")
+          release_id = release.get("id")
+          if not isinstance(release_id, int):
+              raise SystemExit("draft release has no integer release ID")
+          (Path(os.environ["RUNNER_TEMP"]) / "release-id.txt").write_text(
+              f"{release_id}\n"
+          )
           PY
       - name: Verify immutable releases and protected SemVer tags
         env:
@@ -279,23 +285,30 @@ jobs:
           "${control_args[@]}"
       - name: Retrieve an existing signed receipt for exact retry
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.RELEASE_ADMIN_READ_TOKEN }}
         run: |
+          test -n "$GH_TOKEN" || {
+            echo "RELEASE_ADMIN_READ_TOKEN is required" >&2
+            exit 1
+          }
           mkdir existing-release-receipt
           receipt_name="$RELEASE_VERSION.json"
-          gh api \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2026-03-10" \
-            "repos/$GITHUB_REPOSITORY/releases/tags/v$RELEASE_VERSION" \
-            > "$RUNNER_TEMP/release-assets.json"
           RECEIPT_NAME="$receipt_name" python - <<'PY'
           import json
           import os
           from pathlib import Path
 
-          release = json.loads(
-              (Path(os.environ["RUNNER_TEMP"]) / "release-assets.json").read_text()
+          releases = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "releases.json").read_text()
           )
+          releases = [
+              release
+              for release in releases
+              if release.get("tag_name") == f"v{os.environ['RELEASE_VERSION']}"
+          ]
+          if len(releases) != 1:
+              raise SystemExit("expected exactly one release for receipt retry")
+          release = releases[0]
           matches = [
               asset
               for asset in release.get("assets", [])
@@ -304,13 +317,19 @@ jobs:
           if len(matches) > 1:
               raise SystemExit("release contains duplicate receipt asset names")
           if matches:
-              Path("existing-release-receipt/present").touch()
+              asset_id = matches[0].get("id")
+              if not isinstance(asset_id, int):
+                  raise SystemExit("existing receipt asset has no integer ID")
+              Path("existing-release-receipt/asset-id.txt").write_text(
+                  f"{asset_id}\n"
+              )
           PY
-          if test -f existing-release-receipt/present; then
-            gh release download "v$RELEASE_VERSION" \
-              --pattern "$receipt_name" \
-              --dir existing-release-receipt
-            test -f "existing-release-receipt/$receipt_name"
+          if test -f existing-release-receipt/asset-id.txt; then
+            asset_id="$(cat existing-release-receipt/asset-id.txt)"
+            gh api \
+              -H "Accept: application/octet-stream" \
+              "repos/$GITHUB_REPOSITORY/releases/assets/$asset_id" \
+              > "existing-release-receipt/$receipt_name"
           fi
       - name: Sign the closed receipt preimage without importing candidate code
         env:
@@ -345,43 +364,106 @@ jobs:
             "release-receipt/$RELEASE_VERSION.witness.json"
       - name: Attach immutable receipt assets and publish the GitHub release
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.RELEASE_TAG_TOKEN }}
         run: |
+          test -n "$GH_TOKEN" || {
+            echo "RELEASE_TAG_TOKEN is required" >&2
+            exit 1
+          }
           git fetch --force --tags origin
           test "$(git rev-list -n 1 "v$RELEASE_VERSION")" = "$SOURCE_COMMIT"
-          release_target="$(
-            gh api \
-              -H "Accept: application/vnd.github+json" \
-              -H "X-GitHub-Api-Version: 2026-03-10" \
-              "repos/$GITHUB_REPOSITORY/releases/tags/v$RELEASE_VERSION" \
-              --jq '.target_commitish'
-          )"
-          test "$release_target" = "$SOURCE_COMMIT"
+          release_id="$(cat "$RUNNER_TEMP/release-id.txt")"
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            "repos/$GITHUB_REPOSITORY/releases/$release_id" \
+            > "$RUNNER_TEMP/attach-release.json"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          release = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "attach-release.json").read_text()
+          )
+          if (
+              release.get("tag_name") != f"v{os.environ['RELEASE_VERSION']}"
+              or release.get("target_commitish") != os.environ["SOURCE_COMMIT"]
+              or release.get("draft") is not True
+          ):
+              raise SystemExit("draft release changed before asset attachment")
+          PY
           mkdir existing-assets
           for asset in release-receipt/*; do
             name="${asset##*/}"
-            if gh release download "v$RELEASE_VERSION" \
-              --pattern "$name" \
-              --dir existing-assets >/dev/null 2>&1; then
+            gh api \
+              -H "Accept: application/vnd.github+json" \
+              "repos/$GITHUB_REPOSITORY/releases/$release_id/assets?per_page=100" \
+              > "$RUNNER_TEMP/current-assets.json"
+            ASSET_NAME="$name" python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          assets = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "current-assets.json").read_text()
+          )
+          matches = [
+              asset for asset in assets if asset.get("name") == os.environ["ASSET_NAME"]
+          ]
+          if len(matches) > 1:
+              raise SystemExit("release contains duplicate asset names")
+          output = Path(os.environ["RUNNER_TEMP"]) / "current-asset-id.txt"
+          output.unlink(missing_ok=True)
+          if matches:
+              asset_id = matches[0].get("id")
+              if not isinstance(asset_id, int):
+                  raise SystemExit("existing release asset has no integer ID")
+              output.write_text(f"{asset_id}\n")
+          PY
+            if test -f "$RUNNER_TEMP/current-asset-id.txt"; then
+              asset_id="$(cat "$RUNNER_TEMP/current-asset-id.txt")"
+              gh api \
+                -H "Accept: application/octet-stream" \
+                "repos/$GITHUB_REPOSITORY/releases/assets/$asset_id" \
+                > "existing-assets/$name"
               cmp --silent "$asset" "existing-assets/$name" || {
                 echo "::error::Existing release asset $name has different bytes."
                 exit 1
               }
             else
-              gh release upload "v$RELEASE_VERSION" "$asset"
+              gh api \
+                --method POST \
+                -H "Content-Type: application/octet-stream" \
+                --input "$asset" \
+                "https://uploads.github.com/repos/$GITHUB_REPOSITORY/releases/$release_id/assets?name=$name" \
+                > /dev/null
             fi
           done
-          gh release edit "v$RELEASE_VERSION" --draft=false
+          gh api \
+            --method PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -f tag_name="v$RELEASE_VERSION" \
+            -f target_commitish="$SOURCE_COMMIT" \
+            -F draft=false \
+            "repos/$GITHUB_REPOSITORY/releases/$release_id" \
+            > "$RUNNER_TEMP/published-release.json"
           git fetch --force --tags origin
           test "$(git rev-list -n 1 "v$RELEASE_VERSION")" = "$SOURCE_COMMIT"
-          published_target="$(
-            gh api \
-              -H "Accept: application/vnd.github+json" \
-              -H "X-GitHub-Api-Version: 2026-03-10" \
-              "repos/$GITHUB_REPOSITORY/releases/tags/v$RELEASE_VERSION" \
-              --jq '.target_commitish'
-          )"
-          test "$published_target" = "$SOURCE_COMMIT"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          release = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "published-release.json").read_text()
+          )
+          if (
+              release.get("tag_name") != f"v{os.environ['RELEASE_VERSION']}"
+              or release.get("target_commitish") != os.environ["SOURCE_COMMIT"]
+              or release.get("draft") is not False
+          ):
+              raise SystemExit("published release does not match the signed receipt")
+          PY
           gh release verify "v$RELEASE_VERSION"
       - name: Confirm immutable release protection after publication
         env:
