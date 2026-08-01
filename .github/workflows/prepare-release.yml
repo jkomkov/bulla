@@ -178,7 +178,7 @@ jobs:
             --source-tree-sha256 "$SOURCE_TREE_SHA256" \
             --context releases/release-trust-context.json \
             --out "release-slot/$RELEASE_VERSION.slot.json"
-      - name: Publish an immutable slot, then open the package draft
+      - name: Publish the immutable slot, tag the commit, then open the package draft
         env:
           GH_TOKEN: ${{ secrets.RELEASE_TAG_TOKEN }}
         run: |
@@ -226,6 +226,14 @@ jobs:
               raise SystemExit("public release-slot record differs")
           PY
           gh release verify "$slot_tag"
+          gh auth setup-git
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "v$RELEASE_VERSION" "$SOURCE_COMMIT" \
+            -m "Bulla v$RELEASE_VERSION"
+          git push origin "refs/tags/v$RELEASE_VERSION"
+          git fetch --force --tags origin
+          test "$(git rev-list -n 1 "v$RELEASE_VERSION")" = "$SOURCE_COMMIT"
           gh release create "v$RELEASE_VERSION" \
             --target "$SOURCE_COMMIT" \
             --draft \
