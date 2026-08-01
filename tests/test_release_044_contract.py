@@ -151,7 +151,14 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert "existing-release-receipt" in sign_job
     assert "--context releases/release-trust-context.json" in sign_job
     assert "--clobber" not in workflow
-    assert "gh release edit \"v$RELEASE_VERSION\" --draft=false" in workflow
+    assert 'repos/$GITHUB_REPOSITORY/releases/assets/$asset_id' in sign_job
+    assert "https://uploads.github.com/repos/$GITHUB_REPOSITORY/releases/$release_id/assets?name=$name" in sign_job
+    assert "--hostname uploads.github.com" not in sign_job
+    assert "GH_TOKEN: ${{ secrets.RELEASE_TAG_TOKEN }}" in sign_job
+    assert '-f tag_name="v$RELEASE_VERSION"' in sign_job
+    assert '-f target_commitish="$SOURCE_COMMIT"' in sign_job
+    assert "-F draft=false" in sign_job
+    assert "gh release edit \"v$RELEASE_VERSION\" --draft=false" not in workflow
     assert "pypa/gh-action-pypi-publish" not in workflow
     assert "twine upload" not in workflow
     assert "id-token: write" not in workflow
