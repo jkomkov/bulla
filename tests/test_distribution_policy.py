@@ -42,7 +42,7 @@ EXPECTED_STANDALONE_TEST_EXCLUSIONS = {
 
 
 def test_distribution_policy_matches_version_and_public_exports() -> None:
-    assert POLICY["release"] == bulla.__version__ == "0.44.3"
+    assert POLICY["release"] == bulla.__version__ == "0.44.4"
     assert POLICY["normative_action_receipt"] == "0.2"
     assert set(POLICY["required_root_exports"]) <= set(bulla.__all__)
 
@@ -148,25 +148,25 @@ def test_exact_member_commitment_rejects_an_undeclared_archive_member() -> None:
 def test_sdist_rejects_symlinks_and_duplicate_members(tmp_path: Path) -> None:
     symlink_archive = tmp_path / "symlink.tar.gz"
     with tarfile.open(symlink_archive, "w:gz") as archive:
-        member = tarfile.TarInfo("bulla-0.44.3/src/bulla/undeclared.py")
+        member = tarfile.TarInfo("bulla-0.44.4/src/bulla/undeclared.py")
         member.type = tarfile.SYMTYPE
         member.linkname = "/tmp/undeclared.py"
         archive.addfile(member)
     with pytest.raises(
         DISTRIBUTION_GATE.DistributionError, match="non-regular member"
     ):
-        DISTRIBUTION_GATE._sdist_members(symlink_archive, "0.44.3")
+        DISTRIBUTION_GATE._sdist_members(symlink_archive, "0.44.4")
 
     duplicate_archive = tmp_path / "duplicate.tar.gz"
     with tarfile.open(duplicate_archive, "w:gz") as archive:
         for payload in (b"first", b"second"):
-            member = tarfile.TarInfo("bulla-0.44.3/src/bulla/repeated.py")
+            member = tarfile.TarInfo("bulla-0.44.4/src/bulla/repeated.py")
             member.size = len(payload)
             archive.addfile(member, io.BytesIO(payload))
     with pytest.raises(
         DISTRIBUTION_GATE.DistributionError, match="duplicate member"
     ):
-        DISTRIBUTION_GATE._sdist_members(duplicate_archive, "0.44.3")
+        DISTRIBUTION_GATE._sdist_members(duplicate_archive, "0.44.4")
 
 
 def test_wheel_rejects_duplicate_members(tmp_path: Path) -> None:
@@ -211,10 +211,10 @@ def test_sdist_rejects_noncanonical_member_aliases(
     archive_path = tmp_path / "noncanonical.tar.gz"
     payload = b"payload"
     with tarfile.open(archive_path, "w:gz") as archive:
-        info = tarfile.TarInfo(f"bulla-0.44.3/{member}")
+        info = tarfile.TarInfo(f"bulla-0.44.4/{member}")
         info.size = len(payload)
         archive.addfile(info, io.BytesIO(payload))
     with pytest.raises(
         DISTRIBUTION_GATE.DistributionError, match="unsafe archive member"
     ):
-        DISTRIBUTION_GATE._sdist_members(archive_path, "0.44.3")
+        DISTRIBUTION_GATE._sdist_members(archive_path, "0.44.4")

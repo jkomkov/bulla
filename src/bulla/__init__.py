@@ -14,7 +14,7 @@ signal — how much convention two tools leave undisclosed at their seam —
 not an execution-failure predictor. See FALSIFICATIONS.md.
 """
 
-__version__ = "0.44.3"
+__version__ = "0.44.4"
 
 from bulla.model import (
     BlindSpot,

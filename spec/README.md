@@ -70,7 +70,7 @@ number:
 
 | Axis | Files | What the number tracks |
 |---|---|---|
-| **Wire format** | `action-receipt-v0.N.md` | The receipt shape and canonicalization. `0.1` superseded, **`0.2` normative**, `0.3` opt-in released draft, `0.4` opt-in experimental draft included in Bulla 0.44.3 that does *not* supersede `0.2`. |
+| **Wire format** | `action-receipt-v0.N.md` | The receipt shape and canonicalization. `0.1` superseded, **`0.2` normative**, `0.3` opt-in released draft, `0.4` opt-in experimental draft included in Bulla 0.44.4 that does *not* supersede `0.2`. |
 | **Workflow profiles** | `routed-inference-`, `reproduction-`, `eval-receipt-profile-` | A workflow recorded *over* the wire format. Each is independently at `0.1`. A profile may reference wire hashes; it may not change the receipt shape. |
 | **Experimental research profiles** | `*-experimental.md` | Captive research. Each declares a namespaced identifier on its third line — `bulla.semantic-finality/0.1-experimental`, `bulla.semantic-boundary/0.3-experimental`, `bulla.claim-flow/0.4-experimental`, and `bulla.claim-flow/0.5-experimental` (the Generalization Constitution continues the claim-flow family rather than opening a new one). Cite that identifier, never the bare version. |
 | **Commitment slot** | `commitment-slot-` | A separate draft mechanism and its recourse algebra, both at `0.1`. |

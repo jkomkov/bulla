@@ -36,16 +36,17 @@ def _workflow_job(workflow: str, name: str) -> str:
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.44.3"
+    assert bulla.__version__ == "0.44.4"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    assert "## 0.44.3 — 2026-07-29" in changelog
+    assert "## 0.44.4 — 2026-08-01" in changelog
+    assert "## 0.44.3 — 2026-08-01 (unpublished)" in changelog
     assert "## 0.44.2 — 2026-07-29 (unpublished)" in changelog
     assert "## 0.44.1 — 2026-07-20" in changelog
     v04 = (ROOT / "spec/action-receipt-v0.4-draft.md").read_text(encoding="utf-8")
     spec_index = (ROOT / "spec/README.md").read_text(encoding="utf-8")
-    assert "opt-in experimental draft included in Bulla 0.44.3" in v04
-    assert "opt-in experimental draft included in Bulla 0.44.3" in spec_index
-    assert "PyPI 0.44.3" not in (ROOT / "README.md").read_text(encoding="utf-8")
+    assert "opt-in experimental draft included in Bulla 0.44.4" in v04
+    assert "opt-in experimental draft included in Bulla 0.44.4" in spec_index
+    assert "PyPI 0.44.4" not in (ROOT / "README.md").read_text(encoding="utf-8")
     assert "release candidate" not in (ROOT / "README.md").read_text(encoding="utf-8")
     assert "v0.4 reference implementation and vectors are source-only" not in v04
     assert "## 0.44.0 — 2026-07-19" in changelog
@@ -97,6 +98,17 @@ def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
     ) >= 2
     assert 'gh release download "release-slot-$RELEASE_REF"' in workflow
     assert 'git rev-list -n 1 "$RELEASE_REF"' in workflow
+    prepare = (ROOT / ".github" / "workflows" / "prepare-release.yml").read_text(encoding="utf-8")
+    assert "persist-credentials: false" in prepare
+    assert "gh auth setup-git" in prepare
+    assert 'git tag -a "v$RELEASE_VERSION" "$SOURCE_COMMIT"' in prepare
+    assert 'git push origin "refs/tags/v$RELEASE_VERSION"' in prepare
+    assert (
+        prepare.index('gh release verify "$slot_tag"')
+        < prepare.index("gh auth setup-git")
+        < prepare.index('git tag -a "v$RELEASE_VERSION"')
+        < prepare.index('git push origin "refs/tags/v$RELEASE_VERSION"')
+    )
 
 
 def test_release_finalizer_recovers_without_republishing() -> None:

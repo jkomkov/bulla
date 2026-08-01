@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.44.3 — 2026-07-29
+## 0.44.4 — 2026-08-01
 
 **Receipt-kernel convergence.** This additive release publishes the strict
 ingestion and coverage work that accumulated after 0.44.1 while making the
@@ -42,12 +42,21 @@ remains the default minting format.
   a runnable receipt-coverage comparison, and explicit limitations. Detailed
   legacy and research inventories remain in repository documentation.
 
+## 0.44.3 — 2026-08-01 (unpublished)
+
+The signed release slot and draft release were opened, but publication stopped
+before build or PyPI upload because the preparation workflow did not create the
+release tag required by the isolated build and finalization jobs. The immutable
+slot and unpublished draft remain historical evidence of the failed attempt.
+Version 0.44.3 was not published or reused. Version 0.44.4 adds the missing
+protected-tag creation after the signed slot and before candidate execution.
+
 ## 0.44.2 — 2026-07-29 (unpublished)
 
 The signed release slot was opened, but publication stopped before build or
 PyPI upload because the Windows release smoke test exposed platform-dependent
 Golden F13 fixture bytes. The immutable slot remains public evidence of the
-failed attempt. Version 0.44.2 was not published or reused; 0.44.3 contains the
+failed attempt. Version 0.44.2 was not published or reused; 0.44.4 contains the
 corrected candidate.
 
 ## 0.44.1 — 2026-07-20
