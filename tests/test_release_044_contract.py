@@ -145,6 +145,7 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert 'release.get("tag_name")' in sign_job
     assert 'release.get("target_commitish")' in sign_job
     assert 'release.get("draft") is not True' in sign_job
+    assert "GH_TOKEN: ${{ secrets.RELEASE_ADMIN_READ_TOKEN }}" in sign_job
     assert "--existing" in sign_job
     assert "existing-release-receipt" in sign_job
     assert "--context releases/release-trust-context.json" in sign_job

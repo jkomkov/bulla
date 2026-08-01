@@ -178,8 +178,12 @@ jobs:
             -r .github/release-signing-requirements.txt
       - name: Rebind tag and draft release immediately before signing
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.RELEASE_ADMIN_READ_TOKEN }}
         run: |
+          test -n "$GH_TOKEN" || {
+            echo "RELEASE_ADMIN_READ_TOKEN is required" >&2
+            exit 1
+          }
           git fetch --force --tags origin
           test "$(git rev-list -n 1 "v$RELEASE_VERSION")" = "$SOURCE_COMMIT"
           gh api \
