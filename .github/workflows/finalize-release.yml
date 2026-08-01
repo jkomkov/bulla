@@ -94,25 +94,6 @@ jobs:
           PY
           git fetch --force --tags origin
           test "$(git rev-list -n 1 "v$RELEASE_VERSION")" = "$SOURCE_COMMIT"
-          gh api \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2026-03-10" \
-            "repos/$GITHUB_REPOSITORY/releases/tags/v$RELEASE_VERSION" \
-            > "$RUNNER_TEMP/release.json"
-          python - <<'PY'
-          import json
-          import os
-          from pathlib import Path
-
-          root = Path(os.environ["RUNNER_TEMP"])
-          release = json.loads((root / "release.json").read_text())
-          if (
-              release.get("tag_name") != f"v{os.environ['RELEASE_VERSION']}"
-              or release.get("target_commitish") != os.environ["SOURCE_COMMIT"]
-              or release.get("draft") is not True
-          ):
-              raise SystemExit("draft release does not target the attested commit")
-          PY
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: release-finalization-${{ inputs.source_commit }}
@@ -201,14 +182,26 @@ jobs:
         run: |
           git fetch --force --tags origin
           test "$(git rev-list -n 1 "v$RELEASE_VERSION")" = "$SOURCE_COMMIT"
-          release_target="$(
-            gh api \
-              -H "Accept: application/vnd.github+json" \
-              -H "X-GitHub-Api-Version: 2026-03-10" \
-              "repos/$GITHUB_REPOSITORY/releases/tags/v$RELEASE_VERSION" \
-              --jq '.target_commitish'
-          )"
-          test "$release_target" = "$SOURCE_COMMIT"
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/$GITHUB_REPOSITORY/releases/tags/v$RELEASE_VERSION" \
+            > "$RUNNER_TEMP/release.json"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          release = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "release.json").read_text()
+          )
+          if (
+              release.get("tag_name") != f"v{os.environ['RELEASE_VERSION']}"
+              or release.get("target_commitish") != os.environ["SOURCE_COMMIT"]
+              or release.get("draft") is not True
+          ):
+              raise SystemExit("draft release does not target the attested commit")
+          PY
       - name: Verify immutable releases and protected SemVer tags
         env:
           GH_TOKEN: ${{ secrets.RELEASE_ADMIN_READ_TOKEN }}
