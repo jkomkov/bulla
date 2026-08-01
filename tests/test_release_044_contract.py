@@ -127,6 +127,7 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert "release-finalization-${{ github.sha }}" not in workflow
     assert "verified-finalization-${{ inputs.source_commit }}" in workflow
     sign_job = _workflow_job(workflow, "sign")
+    verify_job = _workflow_job(workflow, "verify")
     assert "python -m pip install --no-deps" not in sign_job
     assert "TRUSTED_SIGNER_SHA256:" in sign_job
     assert "refs/heads/main" in workflow
@@ -139,6 +140,11 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert "rulesets?targets=tag" in workflow
     assert "RELEASE_ADMIN_READ_TOKEN" in sign_job
     assert "environment: release-signing" in sign_job
+    assert 'releases/tags/v$RELEASE_VERSION' not in verify_job
+    assert 'releases/tags/v$RELEASE_VERSION' in sign_job
+    assert 'release.get("tag_name")' in sign_job
+    assert 'release.get("target_commitish")' in sign_job
+    assert 'release.get("draft") is not True' in sign_job
     assert "--existing" in sign_job
     assert "existing-release-receipt" in sign_job
     assert "--context releases/release-trust-context.json" in sign_job
