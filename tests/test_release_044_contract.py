@@ -92,6 +92,9 @@ def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
     assert "--slot \"release-slot/$version.slot.json\"" in workflow
     assert "--context releases/release-trust-context.json" in workflow
     assert "mint_release_receipt.py" in workflow
+    assert '--git-tag "$RELEASE_REF"' in workflow
+    prepare_finalization = _workflow_job(workflow, "prepare-finalization")
+    assert "fetch-depth: 0" in prepare_finalization
     assert "release-finalization-requirements.txt" in workflow
     assert workflow.count(
         "python -m pip install --require-hashes"
@@ -121,6 +124,17 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert "environment: release-signing" in workflow
     assert "--expected-commit \"$SOURCE_COMMIT\"" in workflow
     assert "release-preimage/$RELEASE_VERSION.unsigned.json" in workflow
+    assert "bulla.release-preimage-recovery/0.1" in workflow
+    assert '"old": "main"' in workflow
+    assert '"new": expected_tag' in workflow
+    assert "archived preimage hashes do not recompute" in workflow
+    assert "archived preimage is not the allowed historical repair" in workflow
+    assert "342e66ce4dd67f3b080e982dc0e7d2b5580afb3bece490bcf7c9cdaa47107d74" in workflow
+    assert '"30711907118"' in workflow
+    assert "publish-run-preimage" in workflow
+    assert "$RELEASE_VERSION.publish-run.unsigned.json" in workflow
+    assert "$RELEASE_VERSION.recovered.unsigned.json" in workflow
+    assert "$RELEASE_VERSION.preimage-recovery.json" in workflow
     assert "source_commit:" in workflow
     assert "publish_run_id:" in workflow
     assert "test_result:" not in workflow

@@ -106,7 +106,7 @@ jobs:
           python -m pip install pypi-attestations
           python -m pip install --require-hashes \
             -r .github/release-finalization-requirements.txt
-      - name: Verify accepted artifacts, provenance, slot, and unsigned receipt
+      - name: Verify accepted artifacts, provenance, and slot
         run: |
           python scripts/verify_pypi_release.py \
             --version "$RELEASE_VERSION" \
@@ -120,8 +120,133 @@ jobs:
             --context releases/release-trust-context.json
           python -m pip install --no-deps \
             "finalization/release-candidate/bulla-$RELEASE_VERSION-py3-none-any.whl"
+      - name: Repair the archived workflow-dispatch tag preimage
+        run: |
+          printf '%s  %s\n' "$TRUSTED_SIGNER_SHA256" \
+            scripts/trusted_release_signer.py | sha256sum --check --strict
+          mkdir "$RUNNER_TEMP/recovered-preimage"
+          PYTHONPATH=scripts python - <<'PY'
+          import copy
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          from trusted_release_signer import (
+              RECEIPT_FIELDS,
+              digest_json,
+              envelope_from_views,
+              leaf_hash,
+              read_json,
+              require_keys,
+          )
+
+          root = Path("finalization")
+          version = os.environ["RELEASE_VERSION"]
+          source_commit = os.environ["SOURCE_COMMIT"]
+          original_path = root / "release-preimage" / f"{version}.unsigned.json"
+          witness_path = root / "release-preimage" / f"{version}.unsigned.witness.json"
+          summary = (root / "release-candidate" / "pytest-summary.txt").read_text().splitlines()[-1]
+          slot = read_json(root / "release-slot" / f"{version}.slot.json")
+          original = read_json(original_path)
+          require_keys(original, RECEIPT_FIELDS, "archived release preimage")
+          original_sha256 = hashlib.sha256(original_path.read_bytes()).hexdigest()
+
+          observed_tag = (original.get("action") or {}).get("subject", {}).get("git_tag")
+          expected_subject = {
+              "package": "bulla",
+              "version": version,
+              "git_commit": source_commit,
+              "git_tag": observed_tag,
+              "test_result": summary,
+              "release_slot_hash": slot["slot_hash"],
+          }
+          if original.get("action") != {
+              "type": "package.release",
+              "subject": expected_subject,
+          } or original.get("signature") is not None:
+              raise SystemExit("archived preimage does not match the one allowed recovery")
+
+          def receipt_hashes(receipt):
+              content = digest_json({
+                  "schema_version": "0.2",
+                  "kind": "action_receipt",
+                  "action": receipt["action"],
+                  "diagnostic_ref": receipt["diagnostic_ref"],
+                  "evidence_refs": receipt["evidence_refs"],
+                  "anchor_ref": receipt["anchor_ref"],
+              })
+              event = digest_json({
+                  "content_hash": content,
+                  "timestamp": receipt["timestamp"],
+              })
+              attestation = digest_json({
+                  "content_hash": content,
+                  "signature": None,
+                  "recourse_envelope": envelope_from_views(receipt),
+              })
+              return {
+                  "content": content,
+                  "event": event,
+                  "attestation": attestation,
+                  "log_leaf": leaf_hash(attestation),
+              }
+
+          if original.get("hashes") != receipt_hashes(original):
+              raise SystemExit("archived preimage hashes do not recompute")
+
+          repaired = copy.deepcopy(original)
+          expected_tag = f"v{version}"
+          repaired_historical_tag = False
+          if observed_tag == "main":
+              allowed_repair = (
+                  "0.44.4",
+                  "c4b478f2f1947d56376e54470169a61a4315a4d0",
+                  "30711907118",
+                  "342e66ce4dd67f3b080e982dc0e7d2b5580afb3bece490bcf7c9cdaa47107d74",
+              )
+              observed_repair = (
+                  version,
+                  source_commit,
+                  os.environ["PUBLISH_RUN_ID"],
+                  original_sha256,
+              )
+              if observed_repair != allowed_repair:
+                  raise SystemExit("archived preimage is not the allowed historical repair")
+              repaired["action"]["subject"]["git_tag"] = expected_tag
+              repaired["hashes"] = receipt_hashes(repaired)
+              repaired_historical_tag = True
+          elif observed_tag != expected_tag:
+              raise SystemExit("archived preimage has an unsupported release tag")
+
+          recovered = Path(os.environ["RUNNER_TEMP"]) / "recovered-preimage"
+          repaired_path = recovered / f"{version}.unsigned.json"
+          repaired_path.write_text(
+              json.dumps(repaired, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          witness_out = recovered / f"{version}.unsigned.witness.json"
+          witness_out.write_bytes(witness_path.read_bytes())
+          if repaired_historical_tag:
+              correction = {
+                  "profile": "bulla.release-preimage-recovery/0.1",
+                  "version": version,
+                  "source_commit": source_commit,
+                  "publish_run_id": os.environ["PUBLISH_RUN_ID"],
+                  "field": "/action/subject/git_tag",
+                  "old": "main",
+                  "new": expected_tag,
+                  "original_sha256": original_sha256,
+                  "repaired_sha256": hashlib.sha256(repaired_path.read_bytes()).hexdigest(),
+                  "witness_sha256": hashlib.sha256(witness_out.read_bytes()).hexdigest(),
+              }
+              (Path(os.environ["RUNNER_TEMP"]) / "preimage-recovery.json").write_text(
+                  json.dumps(correction, indent=2, sort_keys=True) + "\n",
+                  encoding="utf-8",
+              )
+          PY
           python -m bulla receipt verify \
-            "finalization/release-preimage/$RELEASE_VERSION.unsigned.json"
+            "$RUNNER_TEMP/recovered-preimage/$RELEASE_VERSION.unsigned.json"
       - name: Bind the source tree for the minimal signer
         run: |
           git cat-file -e "$SOURCE_COMMIT^{commit}"
@@ -139,7 +264,11 @@ jobs:
           PY
           mv finalization/release-candidate verification/
           mv finalization/release-slot verification/
-          mv finalization/release-preimage verification/
+          mv finalization/release-preimage verification/publish-run-preimage
+          mv "$RUNNER_TEMP/recovered-preimage" verification/release-preimage
+          if test -f "$RUNNER_TEMP/preimage-recovery.json"; then
+            mv "$RUNNER_TEMP/preimage-recovery.json" verification/
+          fi
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: verified-finalization-${{ inputs.source_commit }}
@@ -362,6 +491,17 @@ jobs:
           cp \
             "verification/release-preimage/$RELEASE_VERSION.unsigned.witness.json" \
             "release-receipt/$RELEASE_VERSION.witness.json"
+          if test -f verification/preimage-recovery.json; then
+            cp \
+              "verification/publish-run-preimage/$RELEASE_VERSION.unsigned.json" \
+              "release-receipt/$RELEASE_VERSION.publish-run.unsigned.json"
+            cp \
+              "verification/release-preimage/$RELEASE_VERSION.unsigned.json" \
+              "release-receipt/$RELEASE_VERSION.recovered.unsigned.json"
+            cp \
+              verification/preimage-recovery.json \
+              "release-receipt/$RELEASE_VERSION.preimage-recovery.json"
+          fi
       - name: Attach immutable receipt assets and publish the GitHub release
         env:
           GH_TOKEN: ${{ secrets.RELEASE_TAG_TOKEN }}
