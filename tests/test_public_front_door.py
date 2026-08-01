@@ -76,6 +76,24 @@ def test_first_level_copy_preserves_current_product_boundary() -> None:
     assert "coherence fee as an execution" not in combined.lower()
     assert "authorless action" not in combined.lower()
     assert "independently validated" not in combined.lower()
-    assert readme.index(
-        "Bulla adds portable, independently verifiable receipts"
-    ) < readme.index("Legacy composition diagnostics")
+    assert (
+        "Glyph defines a portable receipt for consequential agent actions. "
+        "Bulla is the\nPython reference implementation."
+    ) in readme
+    assert "Receipt verification detects changes" in readme
+    assert "Coverage reports actions" in readme
+    assert "Legacy composition diagnostics" not in readme
+    assert "Research frontier" not in readme
+    assert "A bulla was the clay envelope" not in readme
+    assert (
+        'description = "Create, verify, and reconcile portable receipts for '
+        'consequential agent actions"'
+    ) in metadata
+
+
+def test_readme_coverage_example_matches_the_public_api() -> None:
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    assert 'receipt_for("network.egress", {"event_id": "action-001"})' in readme
+    assert 'assert complete["coverage"] == 1.0' in readme
+    assert 'assert with_gap["coverage"] == 0.5' in readme
+    assert 'assert with_gap["unreceipted_delta"] == ["action-002"]' in readme

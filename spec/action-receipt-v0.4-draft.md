@@ -1,6 +1,6 @@
 # ActionReceipt v0.4 — occurrence-bound draft
 
-**Status:** opt-in released experimental draft in Bulla 0.44.2, 2026-07-29. It
+**Status:** opt-in experimental draft included in Bulla 0.44.3, 2026-07-29. It
 does not supersede the normative v0.2 wire or the opt-in v0.3
 authority-binding draft. Default Bulla minting remains v0.2. Historical
 v0.1/v0.2/v0.3 bytes and preimages remain unchanged.
@@ -100,7 +100,7 @@ No verifier or UI may collapse these into one generic time verdict.
   the referenced root; it does not prove worldly performance.
 - Authority, occurrence, witnessing, and chronology remain distinct verdicts.
 - The v0.4 reference implementation and vectors ship as an opt-in experimental
-  draft in Bulla 0.44.2 after Python and browser parity checks. Publication
+  draft in Bulla 0.44.3 after Python and browser parity checks. Publication
   does not make v0.4 normative or the default minting format. Normative
   promotion requires a separate protocol decision and evidence beyond this
   release.

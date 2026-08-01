@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package": "bulla",
-  "release": "0.44.2",
+  "release": "0.44.3",
   "normative_action_receipt": "0.2",
   "released_experimental_action_receipts": [
     "0.3",
@@ -11,7 +11,7 @@
     "wheel": {
       "algorithm": "sha256-sorted-posix-lines-v1",
       "count": 187,
-      "sha256": "cc74b3ffb03f5c1605d69d6a15d24d867d5a0311d8d2462d1b5bafec43139cfd"
+      "sha256": "267136b98f8d54ec46d10b8aaab055f3b418bc59ca7fddc668f6b7a1ce434ce0"
     },
     "sdist": {
       "algorithm": "sha256-sorted-posix-lines-v1",
@@ -20,7 +20,7 @@
     }
   },
   "generated_archive_bytes": {
-    "metadata_sha256": "818b376c456e713d598fc31252432e1a78e654ad072584c080ccff4fd1e93a23"
+    "metadata_sha256": "c7a969c6c3780343a8474c3e9c96db70a1cb15cf8a0bb0e7b2ea8d0c2b751491"
   },
   "required_root_exports": [
     "event_coverage",
@@ -59,6 +59,8 @@
   ],
   "source_only_modules": [
     "bulla.experimental.action_boundary",
+    "bulla.experimental.assurance_bitcoin",
+    "bulla.experimental.assurance_linker",
     "bulla.experimental.answerability",
     "bulla.experimental.causal_model",
     "bulla.experimental.challenge",
@@ -80,6 +82,8 @@
     "tests/test_query_answerability.py": "requires monorepo paper fixtures and source-only CLI commands"
   },
   "forbidden_sdist_prefixes": [
+    "clean-room/",
+    "examples/assurance-linker/",
     "examples/agent-fleet-blind-spot/",
     "examples/agent-incident-packet/",
     "examples/eval-incident-replay/",
@@ -87,9 +91,12 @@
     "scripts/mint_control_plane_deployment_receipt.py",
     "scripts/verify_golden_v05.py",
     "spec/agent-incident-packet/",
+    "spec/assurance-linker/",
     "spec/control-plane-alpha/",
     "spec/generalization-constitution-v0.5-experimental.md",
     "src/bulla/experimental/action_boundary.py",
+    "src/bulla/experimental/assurance_bitcoin.py",
+    "src/bulla/experimental/assurance_linker.py",
     "src/bulla/experimental/answerability.py",
     "src/bulla/experimental/causal_model.py",
     "src/bulla/experimental/challenge.py",
@@ -99,6 +106,12 @@
     "src/bulla/experimental/incident_pilots.py",
     "src/bulla/experimental/receipt_witness.py",
     "tests/test_action_boundary.py",
+    "tests/test_assurance_linker.py",
+    "tests/test_assurance_stranger_doorway.py",
+    "tests/test_assurance_stranger_doorway_r3.py",
+    "tests/test_assurance_stranger_doorway_r4.py",
+    "tests/test_assurance_stranger_doorway_r5.py",
+    "tests/test_assurance_stranger_gate.py",
     "tests/test_agent_fleet_blind_spot_example.py",
     "tests/test_agent_incident_packet.py",
     "tests/test_agent_incident_packet_adversarial.py",

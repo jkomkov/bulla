@@ -36,14 +36,17 @@ def _workflow_job(workflow: str, name: str) -> str:
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.44.2"
+    assert bulla.__version__ == "0.44.3"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    assert "## 0.44.2 — 2026-07-29" in changelog
+    assert "## 0.44.3 — 2026-07-29" in changelog
+    assert "## 0.44.2 — 2026-07-29 (unpublished)" in changelog
     assert "## 0.44.1 — 2026-07-20" in changelog
     v04 = (ROOT / "spec/action-receipt-v0.4-draft.md").read_text(encoding="utf-8")
     spec_index = (ROOT / "spec/README.md").read_text(encoding="utf-8")
-    assert "opt-in released experimental draft in Bulla 0.44.2" in v04
-    assert "opt-in released experimental draft in Bulla 0.44.2" in spec_index
+    assert "opt-in experimental draft included in Bulla 0.44.3" in v04
+    assert "opt-in experimental draft included in Bulla 0.44.3" in spec_index
+    assert "PyPI 0.44.3" not in (ROOT / "README.md").read_text(encoding="utf-8")
+    assert "release candidate" not in (ROOT / "README.md").read_text(encoding="utf-8")
     assert "v0.4 reference implementation and vectors are source-only" not in v04
     assert "## 0.44.0 — 2026-07-19" in changelog
     spec = (ROOT / "spec/README.md").read_text(encoding="utf-8")

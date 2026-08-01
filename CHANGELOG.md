@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.44.2 — 2026-07-29
+## 0.44.3 — 2026-07-29
 
 **Receipt-kernel convergence.** This additive release publishes the strict
 ingestion and coverage work that accumulated after 0.44.1 while making the
@@ -35,6 +35,20 @@ remains the default minting format.
   commit. The audit reconciles protected slot tags with PyPI and verifies
   actual release immutability, exact source-tree closure, and issuer lifecycle
   state. Archive gates reject duplicate, unsafe, and noncanonical member names.
+- Makes Golden F13 generation byte-stable across Linux, macOS, and Windows.
+  The generator writes canonical UTF-8/LF bytes and Git preserves the frozen
+  JSON artifacts without checkout conversion.
+- Replaces the package and PyPI front door with verification-first examples,
+  a runnable receipt-coverage comparison, and explicit limitations. Detailed
+  legacy and research inventories remain in repository documentation.
+
+## 0.44.2 — 2026-07-29 (unpublished)
+
+The signed release slot was opened, but publication stopped before build or
+PyPI upload because the Windows release smoke test exposed platform-dependent
+Golden F13 fixture bytes. The immutable slot remains public evidence of the
+failed attempt. Version 0.44.2 was not published or reused; 0.44.3 contains the
+corrected candidate.
 
 ## 0.44.1 — 2026-07-20
 

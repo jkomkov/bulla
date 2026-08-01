@@ -71,6 +71,11 @@ def digest(value) -> str:
     return "sha256:" + hashlib.sha256(canonical(value)).hexdigest()
 
 
+def write_json(path: Path, value) -> None:
+    payload = json.dumps(value, indent=2, sort_keys=True) + "\n"
+    path.write_bytes(payload.encode("utf-8"))
+
+
 def expected(family: str, attack: str) -> str:
     # Deliberately mirrored in the zero-import packet generator, while the
     # runtime checker derives exits independently in experimental.f13.
@@ -106,7 +111,7 @@ def main() -> None:
             case["case_hash"] = digest(case)
             cases.append(case)
     cases_path = ROOT / "f13-cases.json"
-    cases_path.write_text(json.dumps({"cases": cases}, indent=2, sort_keys=True) + "\n")
+    write_json(cases_path, {"cases": cases})
     report = {
         "profile": PROFILE,
         "classification": "INTERNAL_CAPTIVE_QUALIFICATION",
@@ -118,12 +123,10 @@ def main() -> None:
         "cases_hash": "sha256:" + hashlib.sha256(cases_path.read_bytes()).hexdigest(),
     }
     report_path = ROOT / "report.json"
-    report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    write_json(report_path, report)
     from bulla.experimental.causal_model import qualification_report
     state_report_path = ROOT / "state-model-report.json"
-    state_report_path.write_text(
-        json.dumps(qualification_report(), indent=2, sort_keys=True) + "\n"
-    )
+    write_json(state_report_path, qualification_report())
     manifest = {
         "profile": PROFILE,
         "classification": report["classification"],
@@ -133,7 +136,7 @@ def main() -> None:
             "state-model-report.json": "sha256:" + hashlib.sha256(state_report_path.read_bytes()).hexdigest(),
         },
     }
-    (ROOT / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+    write_json(ROOT / "manifest.json", manifest)
 
 
 if __name__ == "__main__":

@@ -451,7 +451,7 @@ def test_real_unsigned_mint_path_runs_with_v02_slot_and_context(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     signer = LocalEd25519Signer.generate()
-    slot = _slot(signer, version="0.44.2")
+    slot = _slot(signer, version="0.44.3")
     slot_path = tmp_path / "slot.json"
     slot_path.write_text(json.dumps(slot))
     context_path = tmp_path / "context.json"
@@ -477,8 +477,8 @@ def test_real_unsigned_mint_path_runs_with_v02_slot_and_context(
     )
     dist = tmp_path / "dist"
     dist.mkdir()
-    wheel = dist / "bulla-0.44.2-py3-none-any.whl"
-    sdist = dist / "bulla-0.44.2.tar.gz"
+    wheel = dist / "bulla-0.44.3-py3-none-any.whl"
+    sdist = dist / "bulla-0.44.3.tar.gz"
     wheel.write_bytes(b"reviewed wheel")
     sdist.write_bytes(b"reviewed sdist")
     records = [
@@ -491,7 +491,7 @@ def test_real_unsigned_mint_path_runs_with_v02_slot_and_context(
     monkeypatch.setattr(
         mint_release_receipt,
         "fetch_pypi_project",
-        lambda project: {"releases": {"0.44.2": records}},
+        lambda project: {"releases": {"0.44.3": records}},
     )
     monkeypatch.setattr(
         mint_release_receipt,
@@ -518,9 +518,9 @@ def test_real_unsigned_mint_path_runs_with_v02_slot_and_context(
         "_git_tree_sha256",
         lambda: slot["source_tree_sha256"],
     )
-    monkeypatch.setenv("GITHUB_REF_NAME", "v0.44.2")
+    monkeypatch.setenv("GITHUB_REF_NAME", "v0.44.3")
     monkeypatch.setenv("GITHUB_WORKFLOW", "publish")
-    out = tmp_path / "0.44.2.unsigned.json"
+    out = tmp_path / "0.44.3.unsigned.json"
     monkeypatch.setattr(
         sys,
         "argv",
