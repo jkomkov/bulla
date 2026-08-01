@@ -189,16 +189,24 @@ jobs:
           gh api \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2026-03-10" \
-            "repos/$GITHUB_REPOSITORY/releases/tags/v$RELEASE_VERSION" \
-            > "$RUNNER_TEMP/release.json"
+            "repos/$GITHUB_REPOSITORY/releases?per_page=100" \
+            > "$RUNNER_TEMP/releases.json"
           python - <<'PY'
           import json
           import os
           from pathlib import Path
 
-          release = json.loads(
-              (Path(os.environ["RUNNER_TEMP"]) / "release.json").read_text()
+          releases = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "releases.json").read_text()
           )
+          matches = [
+              release
+              for release in releases
+              if release.get("tag_name") == f"v{os.environ['RELEASE_VERSION']}"
+          ]
+          if len(matches) != 1:
+              raise SystemExit("expected exactly one draft release for the version")
+          release = matches[0]
           if (
               release.get("tag_name") != f"v{os.environ['RELEASE_VERSION']}"
               or release.get("target_commitish") != os.environ["SOURCE_COMMIT"]
