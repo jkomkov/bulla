@@ -12,11 +12,12 @@ receipt. These checks answer different questions and remain separate.
 
 A *bulla* was the clay envelope sealed around a record so it could survive the
 absence of the parties who made it. Bulla applies that discipline to agent
-actions: the action may finish in milliseconds, but its authority, evidence,
-limits, and challenge path remain available to the next system or institution.
+actions: the action may finish in milliseconds, but a retained receipt keeps
+its declared authority, evidence, limits, and challenge path available to the
+next system or institution.
 
-The receipt is addressed to the customer, auditor, dispute forum, or underwriter
-who arrives after the agent and its runtime are gone.
+The format is intended for the customer, auditor, dispute forum, or underwriter
+who arrives after the agent and its runtime are gone and applies its own checks.
 
 ## Install
 
