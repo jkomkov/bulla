@@ -10,6 +10,14 @@ Receipt verification detects changes in the records supplied to the verifier.
 Coverage reports actions in a supplied action record that have no matching
 receipt. These checks answer different questions and remain separate.
 
+A *bulla* was the clay envelope sealed around a record so it could survive the
+absence of the parties who made it. Bulla applies that discipline to agent
+actions: the action may finish in milliseconds, but its authority, evidence,
+limits, and challenge path remain available to the next system or institution.
+
+The receipt is addressed to the customer, auditor, dispute forum, or underwriter
+who arrives after the agent and its runtime are gone.
+
 ## Install
 
 Bulla supports Python 3.10 and later. Core receipt creation and digest
