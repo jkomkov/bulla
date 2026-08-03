@@ -53,14 +53,15 @@ candidate commit and recorded in the release run.
 - [ ] The Glyph candidate contains the same kit and detached digest, labels the
       payment fixture as constructed, and does not present a global verified
       status.
-- [ ] The published-CLI evidence snapshot has been refreshed for Bulla 0.45.0
-      before any Glyph deployment.
 
 After every box is complete, obtain a separate written instruction containing
-this exact authorization:
+this exact authorization block, replacing the placeholder with the final green
+public-mirror `main` commit:
 
 ```text
 APPROVE BULLA 0.45.0 PUBLICATION
+source_commit: <40-lowercase-hex>
+kit_sha256: 4ea268d7e1d7b99a30a3db5a4acfb240fcdb0d906391dda1f1a2fb9e4a3bc51b
 ```
 
 Without that instruction, do not trigger trusted publishing, create or push a
@@ -76,13 +77,26 @@ release tag, finalize a GitHub release, or upload an asset.
    source distribution, and verification-kit digest.
 4. Attach the receipt, kit, and detached digest to the immutable GitHub release
    and verify byte equality with PyPI and the candidate.
-5. Update Glyph's published-package evidence to the accepted Bulla 0.45.0
+5. Refresh Glyph's published-CLI evidence to the accepted Bulla 0.45.0
    artifacts and rerun its copy, claims, browser, accessibility, crawler, and
-   presentation gates.
-6. Obtain a second written instruction containing this exact authorization:
+   presentation gates. Then freeze a canonical UTF-8
+   `bulla.glyph-deployment-evidence/0.1` JSON record containing the Bulla
+   version and source commit; wheel and source-distribution filenames,
+   SHA-256 digests, and PyPI provenance-object digests; kit digest; signed
+   release-receipt digest; GitHub release-asset digest; Glyph candidate commit
+   and asset digest; and the exact check-run identifiers. Record the SHA-256 of
+   those JSON bytes without rewriting the record.
+6. Obtain a second written instruction containing this exact authorization
+   block, replacing every placeholder with values from the frozen evidence
+   record:
 
    ```text
    APPROVE GLYPH VERIFICATION-KIT DEPLOYMENT
+   bulla_version: 0.45.0
+   source_commit: <40-lowercase-hex>
+   kit_sha256: 4ea268d7e1d7b99a30a3db5a4acfb240fcdb0d906391dda1f1a2fb9e4a3bc51b
+   deployment_evidence_sha256: <64-lowercase-hex>
+   glyph_commit: <40-lowercase-hex>
    ```
 
 7. Only then may the matching Glyph release be deployed.
@@ -96,3 +110,6 @@ handled by a yank or correction record and a new package version; deletion,
 replacement, or reuse of `0.45.0` is not an in-place repair path. The second
 Glyph authorization must therefore bind the accepted PyPI bytes and
 provenance that exist only after the first authorization has executed.
+Any change to either authorization block, its named commit, or its evidence
+record requires a new written authorization; approval is not transferable to
+corrected assets or another release.

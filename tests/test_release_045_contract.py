@@ -64,12 +64,23 @@ def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
     assert "The exact green `main` commit is recorded as the sole `source_commit`" in contract
     assert "PyPI publication consumes the version." in contract
     assert "APPROVE BULLA 0.45.0 PUBLICATION" in contract
+    assert "source_commit: <40-lowercase-hex>" in contract
+    assert contract.count(
+        "kit_sha256: 4ea268d7e1d7b99a30a3db5a4acfb240fcdb0d906391dda1f1a2fb9e4a3bc51b"
+    ) == 2
+    assert "bulla.glyph-deployment-evidence/0.1" in contract
+    assert "deployment_evidence_sha256: <64-lowercase-hex>" in contract
+    assert "glyph_commit: <40-lowercase-hex>" in contract
     assert contract.index("APPROVE BULLA 0.45.0 PUBLICATION") < contract.index(
         "APPROVE GLYPH VERIFICATION-KIT DEPLOYMENT"
+    )
+    assert contract.index("published-CLI evidence") > contract.index(
+        "APPROVE BULLA 0.45.0 PUBLICATION"
     )
     assert contract.index("Verify PyPI's accepted wheel") < contract.index(
         "APPROVE GLYPH VERIFICATION-KIT DEPLOYMENT"
     )
+    assert "approval is not transferable to\ncorrected assets or another release" in contract
 
 
 def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
