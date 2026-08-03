@@ -782,7 +782,7 @@ def main() -> int:
         extra = "".join(
             f" {k}={got.get(k)}" for k in ("canon", "effective_grounding") if k in want
         )
-        print(f"  {'✓' if agree else '✗'} {name:28s} independent: ok={got['ok']} "
+        print(f"  {'PASS' if agree else 'FAIL'} {name:28s} independent: ok={got['ok']} "
               f"verified_to={got['verified_to']}{extra}  (expected ok={want['ok']})")
         if want.get("conventions") and agree:
             for cname, status in got["conventions"].items():
@@ -790,19 +790,19 @@ def main() -> int:
         if not agree:
             failures += 1
             for why in got["reasons"]:
-                print(f"        · {why}")
+                print(f"        - {why}")
 
         # optional identity rung — only for vectors that carry a signature expectation
         if "identity" in want:
             idr = verify_identity_rung(r)
             if not idr.get("available"):
                 identity_skipped += 1
-                print("        identity rung: SKIPPED (no ed25519 library) — "
+                print("        identity rung: SKIPPED (no ed25519 library); "
                       "stdlib structure verified; signature depth not reached")
             else:
                 want_id = want["identity"]
                 id_agree = all(idr.get(k) == want_id[k] for k in want_id)
-                print(f"        {'✓' if id_agree else '✗'} identity rung: ok={idr['ok']} "
+                print(f"        {'PASS' if id_agree else 'FAIL'} identity rung: ok={idr['ok']} "
                       f"verified_to={idr['verified_to']} signature={idr['signature_authentic']} "
                       f"authority={idr['authority_authentic']}")
                 if not id_agree:
@@ -823,12 +823,12 @@ def main() -> int:
         and base["hashes"]["attestation"] == swapped["hashes"]["attestation"]
         and base["hashes"]["log_leaf"] == swapped["hashes"]["log_leaf"]
     )
-    print(f"  {'✓' if gap_ok else '✗'} occurrence-binding boundary: claimed timestamp differs, "
+    print(f"  {'PASS' if gap_ok else 'FAIL'} occurrence-binding boundary: claimed timestamp differs, "
           f"event hash differs, attestation and log leaf identical (v0.2/v0.3 gap, v0.4 target)")
     if not gap_ok:
         failures += 1
 
-    tail = f" ({identity_skipped} identity rung(s) skipped — no ed25519 lib)" if identity_skipped else ""
+    tail = f" ({identity_skipped} identity rung(s) skipped; no ed25519 lib)" if identity_skipped else ""
     print(f"\n{'OK' if not failures else 'FAIL'}: the spec reproduces "
           f"{len(expected) - failures}/{len(expected)} verdicts with zero bulla imports{tail}")
     return 1 if failures else 0

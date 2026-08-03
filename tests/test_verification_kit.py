@@ -86,6 +86,14 @@ def test_two_clean_builds_are_byte_identical(tmp_path: Path) -> None:
     assert first_digest == second_digest == hashlib.sha256(first.read_bytes()).hexdigest()
 
 
+def test_kit_text_inputs_are_normalized_to_utf8_lf(tmp_path: Path) -> None:
+    source = tmp_path / "portable.txt"
+    source.write_bytes(b"first\r\nsecond\rthird\n")
+    assert BUILDER._regular_file_bytes(source, "portable.txt") == (
+        b"first\nsecond\nthird\n"
+    )
+
+
 def test_archive_contract_and_manifest_are_exact() -> None:
     digest = BUILDER.validate_archive(PACKAGED)
     assert digest == verification_kit_sha256()
@@ -213,6 +221,20 @@ def test_standalone_checker_runs_without_bulla_or_network_imports(tmp_path: Path
     assert "whether funds moved" in result.stdout
     assert "No issuer connection was used" in result.stdout
     assert "ok=True" not in result.stdout
+
+
+def test_independent_checker_stdout_is_ascii_portable() -> None:
+    result = subprocess.run(
+        [sys.executable, "-I", str(CHECKER_PATH)],
+        cwd=ROOT,
+        capture_output=True,
+        timeout=30,
+    )
+    assert result.stdout.isascii()
+    assert result.stderr.isascii()
+    output = result.stdout.decode("ascii") + result.stderr.decode("ascii")
+    assert result.returncode == 0, output
+    assert "PASS" in output
 
 
 def test_package_export_is_exact_and_refuses_replacement(tmp_path: Path) -> None:

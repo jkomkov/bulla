@@ -73,7 +73,7 @@ bulla receipt kit --out action-receipt-v0.2-verification-kit.zip
 Expected archive digest:
 
 ```text
-sha256:4ea268d7e1d7b99a30a3db5a4acfb240fcdb0d906391dda1f1a2fb9e4a3bc51b
+sha256:2ec524f78885c122fd9e6301c85d757e94cf0c468278d11f1414b19a3a3c313c
 ```
 
 After extracting the archive, run `python3 verify.py`. The checker imports no

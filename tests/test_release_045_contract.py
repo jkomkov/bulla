@@ -36,9 +36,11 @@ def _workflow_job(workflow: str, name: str) -> str:
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.45.0"
+    assert bulla.__version__ == "0.45.1"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    assert "## 0.45.0 — 2026-08-03" in changelog
+    assert "## 0.45.1 — 2026-08-03" in changelog
+    assert "## 0.45.0 — 2026-08-03 (not published)" in changelog
+    assert "The 0.45.0 candidate was not\nuploaded to PyPI." in changelog
     assert "package version and the ActionReceipt format version are separate clocks" in changelog
     assert "## 0.44.4 — 2026-08-01" in changelog
     assert "## 0.44.3 — 2026-08-01 (unpublished)" in changelog
@@ -58,7 +60,7 @@ def test_release_version_and_status_language_are_synchronized() -> None:
 
 
 def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
-    contract = (ROOT / "docs/RELEASE-0.45.0.md").read_text(encoding="utf-8")
+    contract = (ROOT / "docs/RELEASE-0.45.1.md").read_text(encoding="utf-8")
     assert "package version and the receipt\nformat version are separate clocks" in contract
     assert "A PR head, synthetic merge commit, pre-rebase commit, or" in contract
     assert "The exact green `main` commit is recorded as the sole `source_commit`" in contract
@@ -72,6 +74,14 @@ def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
     assert contract.index("Verify PyPI's accepted wheel") < contract.index(
         "Deploy the matching Glyph surface"
     )
+
+
+def test_failed_release_authorization_is_sealed_and_consumed() -> None:
+    failed = (ROOT / "docs/RELEASE-0.45.0.md").read_text(encoding="utf-8")
+    assert "authorization was consumed by\nprepublication run `30828126733`" in failed
+    assert "does not authorize\npublication, finalization, or deployment" in failed
+    assert "That instruction authorizes integration, Bulla 0.45.0 publication" not in failed
+    assert "This retained record is not an active release authorization." in failed
 
 
 def test_release_workflow_is_publish_then_verify_then_receipt() -> None:

@@ -5,8 +5,8 @@ The default-branch release workflow uses ``trusted_release_signer.py``. This
 wrapper remains for maintainers running the same slot contract manually and
 requires the external versioned issuer registry.
 
-    python scripts/open_release_slot.py --version 0.45.0 \
-        --out release-slot/0.45.0.slot.json --key ~/.bulla/release-key.json
+    python scripts/open_release_slot.py --version 0.45.1 \
+        --out release-slot/0.45.1.slot.json --key ~/.bulla/release-key.json
 """
 
 from __future__ import annotations
