@@ -790,14 +790,14 @@ def main() -> int:
         if not agree:
             failures += 1
             for why in got["reasons"]:
-                print(f"        · {why}")
+                print(f"        - {why}")
 
         # optional identity rung — only for vectors that carry a signature expectation
         if "identity" in want:
             idr = verify_identity_rung(r)
             if not idr.get("available"):
                 identity_skipped += 1
-                print("        identity rung: SKIPPED (no ed25519 library) — "
+                print("        identity rung: SKIPPED (no ed25519 library); "
                       "stdlib structure verified; signature depth not reached")
             else:
                 want_id = want["identity"]
@@ -828,7 +828,7 @@ def main() -> int:
     if not gap_ok:
         failures += 1
 
-    tail = f" ({identity_skipped} identity rung(s) skipped — no ed25519 lib)" if identity_skipped else ""
+    tail = f" ({identity_skipped} identity rung(s) skipped; no ed25519 lib)" if identity_skipped else ""
     print(f"\n{'OK' if not failures else 'FAIL'}: the spec reproduces "
           f"{len(expected) - failures}/{len(expected)} verdicts with zero bulla imports{tail}")
     return 1 if failures else 0

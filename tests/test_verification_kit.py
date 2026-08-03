@@ -7,7 +7,6 @@ import copy
 import hashlib
 import importlib.util
 import json
-import os
 from pathlib import Path
 import stat
 import subprocess
@@ -224,17 +223,16 @@ def test_standalone_checker_runs_without_bulla_or_network_imports(tmp_path: Path
     assert "ok=True" not in result.stdout
 
 
-def test_independent_checker_runs_with_windows_default_console_encoding() -> None:
-    environment = dict(os.environ)
-    environment["PYTHONIOENCODING"] = "cp1252"
+def test_independent_checker_stdout_is_ascii_portable() -> None:
     result = subprocess.run(
         [sys.executable, "-I", str(CHECKER_PATH)],
         cwd=ROOT,
         capture_output=True,
         timeout=30,
-        env=environment,
     )
-    output = result.stdout.decode("cp1252") + result.stderr.decode("cp1252")
+    assert result.stdout.isascii()
+    assert result.stderr.isascii()
+    output = result.stdout.decode("ascii") + result.stderr.decode("ascii")
     assert result.returncode == 0, output
     assert "PASS" in output
 

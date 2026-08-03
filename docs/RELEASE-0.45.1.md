@@ -17,7 +17,7 @@ format version are separate clocks: `0.45.1` identifies the tooling release;
 `v0.2` identifies the unchanged normative format. The expected kit SHA-256 is:
 
 ```text
-49039dc54c4a99172113209a81e8d93f0bddde5269ac20f701170210154da8f3
+2ec524f78885c122fd9e6301c85d757e94cf0c468278d11f1414b19a3a3c313c
 ```
 
 The 0.45.0 prepublication workflow stopped at its Windows smoke gate before

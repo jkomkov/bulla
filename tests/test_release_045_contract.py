@@ -76,6 +76,14 @@ def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
     )
 
 
+def test_failed_release_authorization_is_sealed_and_consumed() -> None:
+    failed = (ROOT / "docs/RELEASE-0.45.0.md").read_text(encoding="utf-8")
+    assert "authorization was consumed by\nprepublication run `30828126733`" in failed
+    assert "does not authorize\npublication, finalization, or deployment" in failed
+    assert "That instruction authorizes integration, Bulla 0.45.0 publication" not in failed
+    assert "This retained record is not an active release authorization." in failed
+
+
 def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
     workflow = (ROOT / ".github/workflows/publish.yml").read_text(encoding="utf-8")
     assert "\n  workflow_dispatch:\n" in workflow

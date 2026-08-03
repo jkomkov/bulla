@@ -3,13 +3,14 @@
 Status: sealed prepublication failure. PyPI did not receive this version.
 
 Repository-owner instruction recorded 2026-08-03: `ship the product stack`.
-That instruction authorizes integration, Bulla 0.45.0 publication, GitHub
-release finalization, and deployment of the matching Glyph product surface
-after their technical gates pass. The Windows release smoke gate found
-non-portable archive input line endings and console output before upload, so
-the workflow aborted. The immutable slot and tag are retained; neither is
-reused. It does not authorize Claim Closure 002,
-outreach, or stronger evidence labels.
+That instruction authorized this candidate. The authorization was consumed by
+prepublication run `30828126733` and is no longer active. It does not authorize
+publication, finalization, or deployment of the retained 0.45.0 draft, slot, or
+tag. The Windows release smoke gate found non-portable archive input line
+endings and console output before upload, so the workflow aborted. The
+immutable slot and tag are retained; neither is reused. The original
+instruction did not authorize Claim Closure 002, outreach, or stronger
+evidence labels.
 
 ## Candidate invariant
 
@@ -62,9 +63,9 @@ candidate commit and recorded in the release run.
       payment fixture as constructed, and does not present a global verified
       status.
 
-External review is not a publication or deployment prerequisite. External
+External review was not a publication or deployment prerequisite. External
 evidence changes evidence labels; it does not decide whether tested product
-code may ship. The owner instruction above is the release authorization.
+code may ship. This retained record is not an active release authorization.
 
 ## Publication order
 
