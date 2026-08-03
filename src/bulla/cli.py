@@ -4350,10 +4350,23 @@ def _cmd_receipt(args: argparse.Namespace) -> None:
     if not getattr(args, "receipt_command", None):
         print("usage: bulla receipt create --type <act> [--subject k=v ...] --forum-endpoint URL --forum-root REF")
         print("       bulla receipt verify <file.json>")
+        print("       bulla receipt kit --out action-receipt-v0.2-verification-kit.zip")
         print("  create: mint an ActionReceipt for one consequential action (sign with --key).")
         print("  verify: recompute the hashes, the recourse envelope (modality law), the")
         print("          signature, convention conformance — honest about depth.")
         sys.exit(2)
+
+
+def _cmd_receipt_kit(args: argparse.Namespace) -> None:
+    """Export the exact verification-kit bytes embedded in the package."""
+    from bulla.verification_kit import export_verification_kit
+
+    try:
+        out, digest = export_verification_kit(args.out)
+    except OSError as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        sys.exit(2)
+    print(f"sha256:{digest}  {out}")
 
 
 def _parse_kv_value(raw: str):
@@ -5745,6 +5758,21 @@ def main() -> None:
     )
     p_receipt_verify.add_argument("--format", choices=["text", "json"], default="text")
     p_receipt_verify.set_defaults(func=_cmd_receipt_verify)
+    p_receipt_kit = receipt_sub.add_parser(
+        "kit",
+        help=(
+            "Export the immutable ActionReceipt v0.2 specification, vectors, "
+            "and zero-dependency checker embedded in this package"
+        ),
+    )
+    p_receipt_kit.add_argument(
+        "--out",
+        type=Path,
+        default=Path("action-receipt-v0.2-verification-kit.zip"),
+        metavar="FILE",
+        help="Write the embedded kit here (default: action-receipt-v0.2-verification-kit.zip)",
+    )
+    p_receipt_kit.set_defaults(func=_cmd_receipt_kit)
     p_receipt_equivocation = receipt_sub.add_parser(
         "check-equivocation",
         help=(

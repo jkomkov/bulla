@@ -1,4 +1,4 @@
-"""Release-boundary gates for the Bulla 0.44 release line."""
+"""Release-boundary gates for the Bulla 0.45 release line."""
 
 from __future__ import annotations
 
@@ -36,8 +36,10 @@ def _workflow_job(workflow: str, name: str) -> str:
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.44.4"
+    assert bulla.__version__ == "0.45.0"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    assert "## 0.45.0 — 2026-08-03" in changelog
+    assert "package version and the ActionReceipt format version are separate clocks" in changelog
     assert "## 0.44.4 — 2026-08-01" in changelog
     assert "## 0.44.3 — 2026-08-01 (unpublished)" in changelog
     assert "## 0.44.2 — 2026-07-29 (unpublished)" in changelog
@@ -53,6 +55,23 @@ def test_release_version_and_status_language_are_synchronized() -> None:
     spec = (ROOT / "spec/README.md").read_text(encoding="utf-8")
     assert "**Normative version:** `0.2`" in spec
     assert "**Opt-in released draft:** `0.3`" in spec
+
+
+def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
+    contract = (ROOT / "docs/RELEASE-0.45.0.md").read_text(encoding="utf-8")
+    assert "package version and the receipt\nformat version are separate clocks" in contract
+    assert "A PR head, synthetic merge commit, pre-rebase commit, or" in contract
+    assert "The exact green `main` commit is recorded as the sole `source_commit`" in contract
+    assert "PyPI publication consumes the version." in contract
+    assert "Repository-owner instruction recorded 2026-08-03: `ship the product stack`." in contract
+    assert "External review is not a publication or deployment prerequisite." in contract
+    assert "It does not authorize Claim Closure 002,\noutreach" in contract
+    assert "APPROVE BULLA" not in contract
+    assert "APPROVE GLYPH" not in contract
+    assert "deployment_evidence_sha256" not in contract
+    assert contract.index("Verify PyPI's accepted wheel") < contract.index(
+        "Deploy the matching Glyph surface"
+    )
 
 
 def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
@@ -76,6 +95,8 @@ def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
     assert "needs: [build, verify-slot, verify-pypi]" in workflow
     assert "Build into a new empty candidate directory" in workflow
     assert "Verify exact candidate inventory" in workflow
+    assert "action-receipt-v0.2-verification-kit.zip" in workflow
+    assert "bulla receipt kit" in workflow
     assert "packages-dir: packages" in workflow
     assert workflow.count("id-token: write") == 1
     assert workflow.count("persist-credentials: false") >= 4
@@ -121,6 +142,7 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert "verify_pypi_release.py" in workflow
     assert "release-finalization-requirements.txt" in workflow
     assert "trusted_release_signer.py sign-receipt" in workflow
+    assert "verification/release-candidate/action-receipt-v0.2-verification-kit.zip" in workflow
     assert "environment: release-signing" in workflow
     assert "--expected-commit \"$SOURCE_COMMIT\"" in workflow
     assert "release-preimage/$RELEASE_VERSION.unsigned.json" in workflow
@@ -149,6 +171,7 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert 'git rev-list -n 1 "v$RELEASE_VERSION"' in workflow
     assert "immutable-releases" in workflow
     assert 'gh release verify "v$RELEASE_VERSION"' in workflow
+    assert 'gh release verify-asset "v$RELEASE_VERSION" "$asset"' in workflow
     assert "--jq '.immutable'" in workflow
     assert "release-repository-controls.json" in workflow
     assert "rulesets?targets=tag" in workflow

@@ -136,6 +136,7 @@ jobs:
           tests/test_distribution_policy.py
           tests/test_event_coverage.py
           tests/test_golden_f13.py
+          tests/test_verification_kit.py
           tests/test_wrap.py
 
   build:
@@ -267,6 +268,12 @@ jobs:
             echo "source-only command appeared in installed CLI help" >&2
             exit 1
           fi
+          source "$RUNNER_TEMP/bulla-wheel/bin/activate"
+          bulla receipt kit \
+            --out "$RUNNER_TEMP/action-receipt-v0.2-verification-kit.zip"
+          cmp --silent \
+            "$RUNNER_TEMP/action-receipt-v0.2-verification-kit.zip" \
+            src/bulla/data/action-receipt-v0.2-verification-kit.zip
           (
             cd "$RUNNER_TEMP"
             "$RUNNER_TEMP/bulla-wheel/bin/python" -I -m pytest -q \
@@ -275,6 +282,7 @@ jobs:
               "$GITHUB_WORKSPACE/tests/test_distribution_policy.py" \
               "$GITHUB_WORKSPACE/tests/test_event_coverage.py" \
               "$GITHUB_WORKSPACE/tests/test_golden_f13.py" \
+              "$GITHUB_WORKSPACE/tests/test_verification_kit.py" \
               "$GITHUB_WORKSPACE/tests/test_wrap.py" \
               --timeout=120
           )
@@ -283,6 +291,13 @@ jobs:
         run: |
           mkdir release-candidate
           cp "$RUNNER_TEMP"/release-candidate/* release-candidate/
+          cp src/bulla/data/action-receipt-v0.2-verification-kit.zip \
+            release-candidate/
+          cp src/bulla/data/action-receipt-v0.2-verification-kit.zip.sha256 \
+            release-candidate/
+          cmp --silent \
+            src/bulla/data/action-receipt-v0.2-verification-kit.zip \
+            release-candidate/action-receipt-v0.2-verification-kit.zip
           cp "$RUNNER_TEMP/pytest-summary.txt" release-candidate/
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:

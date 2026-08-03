@@ -23,17 +23,17 @@ CANON_VERSION 2 plus legacy WitnessReceipt verification. When PyNaCl is present,
 an optional identity rung verifies the v0.3 signatures; otherwise it reports the
 skipped depth. The checker never imports `bulla`.
 
-For a clean-directory test, build the release bundle and unpack it anywhere:
+For a clean-directory test, build the verification kit and unpack it anywhere:
 
 ```sh
 python3 build_release_bundle.py
 mkdir /tmp/action-receipt-v0.2-check
 cd /tmp/action-receipt-v0.2-check
-unzip /path/to/bulla/spec/dist/action-receipt-v0.2.zip
-python3 action-receipt-v0.2/vectors/independent_check.py
+unzip /path/to/bulla/spec/dist/action-receipt-v0.2-verification-kit.zip
+python3 verify.py
 ```
 
-## Bundle contents
+## Verification-kit contents
 
 - [`action-receipt-v0.2.md`](action-receipt-v0.2.md) — normative wire,
   canonicalization, hashing, modality, and compatibility rules.
@@ -49,6 +49,10 @@ python3 action-receipt-v0.2/vectors/independent_check.py
 - [`vectors/independent_check.py`](vectors/independent_check.py) — zero-dependency
   digest-rung verifier.
 - [`COMPATIBILITY.md`](COMPATIBILITY.md) — producer and legacy-verifier rules.
+- [`build_release_bundle.py`](build_release_bundle.py) — deterministic kit
+  builder with fixed archive metadata, a canonical content manifest, and
+  hostile-member validation. The installed package exports the same bytes with
+  `bulla receipt kit`.
 - [`routed-inference-profile-v0.1-draft.md`](routed-inference-profile-v0.1-draft.md)
   — provider-neutral, single-router/single-provider answerability profile with
   fourteen standalone adversarial traces and a finite violation taxonomy in

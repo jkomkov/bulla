@@ -32,7 +32,7 @@ jobs:
     env:
       RELEASE_VERSION: ${{ inputs.version }}
       SOURCE_COMMIT: ${{ inputs.source_commit }}
-      TRUSTED_SIGNER_SHA256: ddae23d815e7d8b55858d9d297c3728e47951fd82ee011a3e8e65967f262d511
+      TRUSTED_SIGNER_SHA256: 5477082c209a641c99d58594a262dee23d76d4c4ccbb0803e19a7907d0e7357c
       PUBLISH_RUN_ID: ${{ inputs.publish_run_id }}
       TRUSTED_WORKFLOW_REF: ${{ github.ref }}
       TRUSTED_REPOSITORY: ${{ github.repository }}
@@ -285,7 +285,7 @@ jobs:
     env:
       RELEASE_VERSION: ${{ inputs.version }}
       SOURCE_COMMIT: ${{ inputs.source_commit }}
-      TRUSTED_SIGNER_SHA256: ddae23d815e7d8b55858d9d297c3728e47951fd82ee011a3e8e65967f262d511
+      TRUSTED_SIGNER_SHA256: 5477082c209a641c99d58594a262dee23d76d4c4ccbb0803e19a7907d0e7357c
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -491,6 +491,15 @@ jobs:
           cp \
             "verification/release-preimage/$RELEASE_VERSION.unsigned.witness.json" \
             "release-receipt/$RELEASE_VERSION.witness.json"
+          if test -f \
+            verification/release-candidate/action-receipt-v0.2-verification-kit.zip; then
+            cp \
+              verification/release-candidate/action-receipt-v0.2-verification-kit.zip \
+              release-receipt/
+            cp \
+              verification/release-candidate/action-receipt-v0.2-verification-kit.zip.sha256 \
+              release-receipt/
+          fi
           if test -f verification/preimage-recovery.json; then
             cp \
               "verification/publish-run-preimage/$RELEASE_VERSION.unsigned.json" \
@@ -605,6 +614,9 @@ jobs:
               raise SystemExit("published release does not match the signed receipt")
           PY
           gh release verify "v$RELEASE_VERSION"
+          for asset in release-receipt/*; do
+            gh release verify-asset "v$RELEASE_VERSION" "$asset"
+          done
       - name: Confirm immutable release protection after publication
         env:
           GH_TOKEN: ${{ secrets.RELEASE_ADMIN_READ_TOKEN }}

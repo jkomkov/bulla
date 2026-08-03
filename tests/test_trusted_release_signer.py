@@ -1,9 +1,14 @@
 from __future__ import annotations
 
+import io
+import dataclasses
 import importlib.util
 import json
+import stat
+import tarfile
 from datetime import timedelta
 from pathlib import Path
+from zipfile import ZIP_STORED, ZipFile, ZipInfo
 
 import pytest
 
@@ -58,6 +63,13 @@ def _key(monkeypatch: pytest.MonkeyPatch) -> LocalEd25519Signer:
     return signer
 
 
+def _regular_zip_member(path: str) -> ZipInfo:
+    member = ZipInfo(path)
+    member.create_system = 3
+    member.external_attr = (stat.S_IFREG | 0o644) << 16
+    return member
+
+
 def _envelope(version: str) -> RecourseEnvelope:
     return RecourseEnvelope(
         authority=Authority(
@@ -97,7 +109,7 @@ def _envelope(version: str) -> RecourseEnvelope:
 
 def _fixture(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str, Path | str]:
     signer = _key(monkeypatch)
-    version = "0.44.2"
+    version = "0.45.0"
     commit = "a" * 40
     tree = "sha256:" + "b" * 64
     context = tmp_path / "release-trust-context.json"
@@ -123,9 +135,24 @@ def _fixture(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str, Path 
     candidate.mkdir()
     wheel = candidate / f"bulla-{version}-py3-none-any.whl"
     sdist = candidate / f"bulla-{version}.tar.gz"
+    verification_kit = candidate / "action-receipt-v0.2-verification-kit.zip"
+    verification_kit_checksum = candidate / (verification_kit.name + ".sha256")
     summary = candidate / "pytest-summary.txt"
-    wheel.write_bytes(b"reviewed wheel")
-    sdist.write_bytes(b"reviewed sdist")
+    verification_kit.write_bytes(b"reviewed verification kit")
+    wheel_member = "bulla/data/action-receipt-v0.2-verification-kit.zip"
+    with ZipFile(wheel, "w", compression=ZIP_STORED) as archive:
+        archive.writestr(_regular_zip_member(wheel_member), verification_kit.read_bytes())
+    sdist_member = (
+        f"bulla-{version}/src/bulla/data/action-receipt-v0.2-verification-kit.zip"
+    )
+    with tarfile.open(sdist, "w:gz") as archive:
+        info = tarfile.TarInfo(sdist_member)
+        info.size = verification_kit.stat().st_size
+        archive.addfile(info, io.BytesIO(verification_kit.read_bytes()))
+    verification_kit_checksum.write_text(
+        f"{SIGNER.digest_file(verification_kit).removeprefix('sha256:')}  "
+        f"{verification_kit.name}\n"
+    )
     summary.write_text("106 passed in 3.00s\n")
     witness = tmp_path / "witness.json"
     witness_document = {
@@ -205,6 +232,18 @@ def _fixture(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str, Path 
         timestamp="2026-07-29T12:00:00+00:00",
         producer=producer,
     )
+    receipt = dataclasses.replace(
+        receipt,
+        evidence_refs=(
+            *receipt.evidence_refs[:2],
+            {
+                "name": "verification-kit",
+                "hash": SIGNER.digest_file(verification_kit),
+                "grounding": "third_party_anchored",
+            },
+            *receipt.evidence_refs[2:],
+        ),
+    )
     unsigned = tmp_path / "unsigned.json"
     unsigned.write_text(receipt.to_json() + "\n")
     return {
@@ -224,6 +263,72 @@ def test_minimal_signer_never_imports_candidate_package() -> None:
     source = SCRIPT.read_text(encoding="utf-8")
     assert "import bulla" not in source
     assert "from bulla" not in source
+
+
+def test_minimal_signer_rejects_package_kit_mismatch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fixture = _fixture(tmp_path, monkeypatch)
+    candidate = fixture["candidate"]
+    assert isinstance(candidate, Path)
+    version = fixture["version"]
+    assert isinstance(version, str)
+    kit = candidate / "action-receipt-v0.2-verification-kit.zip"
+    mismatched_wheel = tmp_path / "mismatched.whl"
+    with ZipFile(mismatched_wheel, "w", compression=ZIP_STORED) as archive:
+        archive.writestr(
+            _regular_zip_member("bulla/data/action-receipt-v0.2-verification-kit.zip"),
+            b"different kit bytes",
+        )
+    with pytest.raises(SIGNER.ReleaseSigningError, match="wheel verification-kit bytes differ"):
+        SIGNER.verify_embedded_verification_kit(
+            mismatched_wheel,
+            candidate / f"bulla-{version}.tar.gz",
+            version,
+            kit,
+        )
+
+    mismatched_sdist = tmp_path / "mismatched.tar.gz"
+    member = f"bulla-{version}/src/bulla/data/action-receipt-v0.2-verification-kit.zip"
+    payload = b"different kit bytes"
+    with tarfile.open(mismatched_sdist, "w:gz") as archive:
+        info = tarfile.TarInfo(member)
+        info.size = len(payload)
+        archive.addfile(info, io.BytesIO(payload))
+    with pytest.raises(SIGNER.ReleaseSigningError, match="sdist verification-kit bytes differ"):
+        SIGNER.verify_embedded_verification_kit(
+            candidate / f"bulla-{version}-py3-none-any.whl",
+            mismatched_sdist,
+            version,
+            kit,
+        )
+
+
+def test_minimal_signer_rejects_symlink_mode_wheel_member(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fixture = _fixture(tmp_path, monkeypatch)
+    candidate = fixture["candidate"]
+    assert isinstance(candidate, Path)
+    version = fixture["version"]
+    assert isinstance(version, str)
+    kit = candidate / "action-receipt-v0.2-verification-kit.zip"
+    symlink_wheel = tmp_path / "symlink.whl"
+    member = ZipInfo("bulla/data/action-receipt-v0.2-verification-kit.zip")
+    member.create_system = 3
+    member.external_attr = (stat.S_IFLNK | 0o777) << 16
+    with ZipFile(symlink_wheel, "w", compression=ZIP_STORED) as archive:
+        archive.writestr(member, kit.read_bytes())
+    with pytest.raises(
+        SIGNER.ReleaseSigningError,
+        match="wheel must contain exactly one regular verification-kit member",
+    ):
+        SIGNER.verify_embedded_verification_kit(
+            symlink_wheel,
+            candidate / f"bulla-{version}.tar.gz",
+            version,
+            kit,
+        )
 
 
 def test_release_witness_contract_matches_the_actual_gate() -> None:
@@ -291,6 +396,26 @@ def test_minimal_signer_binds_slot_summary_and_artifacts(
         )()
     )
     assert replay.read_bytes() == output.read_bytes()
+
+    checksum = fixture["candidate"] / "action-receipt-v0.2-verification-kit.zip.sha256"
+    checksum_bytes = checksum.read_bytes()
+    checksum.write_text("0" * 64 + "  action-receipt-v0.2-verification-kit.zip\n")
+    with pytest.raises(SIGNER.ReleaseSigningError, match="checksum differs"):
+        SIGNER.sign_receipt(
+            type(
+                "Args",
+                (),
+                {
+                    **fixture,
+                    "receipt": fixture["unsigned"],
+                    "dist": fixture["candidate"],
+                    "out": tmp_path / "wrong-checksum.json",
+                    "source_commit": fixture["commit"],
+                    "source_tree_sha256": fixture["tree"],
+                },
+            )()
+        )
+    checksum.write_bytes(checksum_bytes)
 
     tampered = json.loads(output.read_text())
     tampered["action"]["subject"]["release_signed_at"] = (

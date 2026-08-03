@@ -74,7 +74,10 @@
     "verified_to": "none"
   },
   "payment-authorization.json": {
-    "bounds_conformance": "conforms",
+    "bounds_conformance": "not_applicable",
+    "conventions": {
+      "payment-within-declared-limit": "conforms"
+    },
     "effective_grounding": "self_asserted",
     "kind": "action_receipt",
     "ok": true,

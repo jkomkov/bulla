@@ -16,9 +16,12 @@ import json
 import os
 import re
 import shutil
+import stat
+import tarfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
+from zipfile import BadZipFile, ZipFile
 
 from nacl.exceptions import BadSignatureError
 from nacl.signing import SigningKey, VerifyKey
@@ -30,6 +33,8 @@ PROOF_TYPE = "bulla/ed25519-2026"
 SHA256 = re.compile(r"^sha256:[0-9a-f]{64}$")
 COMMIT = re.compile(r"^[0-9a-f]{40}$")
 VERSION = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
+VERIFICATION_KIT_NAME = "action-receipt-v0.2-verification-kit.zip"
+MAX_VERIFICATION_KIT_BYTES = 16 * 1024 * 1024
 BASE58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 SLOT_FIELDS = {
     "schema_version",
@@ -532,6 +537,7 @@ def expected_release_contract(
     summary: str,
     wheel: Path,
     sdist: Path,
+    verification_kit: Path | None,
     witness: Path,
     tree_sha256: str,
 ) -> None:
@@ -591,12 +597,22 @@ def expected_release_contract(
             "hash": digest_file(sdist),
             "grounding": "third_party_anchored",
         },
+    ]
+    if verification_kit is not None:
+        expected_evidence.append(
+            {
+                "name": "verification-kit",
+                "hash": digest_file(verification_kit),
+                "grounding": "third_party_anchored",
+            }
+        )
+    expected_evidence.append(
         {
             "name": "tree",
             "hash": tree_sha256,
             "grounding": "third_party_anchored",
-        },
-    ]
+        }
+    )
     if receipt["evidence_refs"] != expected_evidence:
         raise ReleaseSigningError("release evidence does not bind exact artifacts and tree")
     expected_integrity = [
@@ -812,6 +828,56 @@ def verify_existing_signed_receipt(
         )
 
 
+def verify_embedded_verification_kit(
+    wheel: Path,
+    sdist: Path,
+    version: str,
+    verification_kit: Path,
+) -> None:
+    try:
+        expected = verification_kit.read_bytes()
+    except OSError as exc:
+        raise ReleaseSigningError("verification kit is unreadable") from exc
+    if len(expected) > MAX_VERIFICATION_KIT_BYTES:
+        raise ReleaseSigningError("verification kit exceeds the signer size limit")
+
+    wheel_member = f"bulla/data/{VERIFICATION_KIT_NAME}"
+    try:
+        with ZipFile(wheel) as archive:
+            matches = [info for info in archive.infolist() if info.filename == wheel_member]
+            if len(matches) != 1 or not stat.S_ISREG(matches[0].external_attr >> 16):
+                raise ReleaseSigningError(
+                    "wheel must contain exactly one regular verification-kit member"
+                )
+            if matches[0].file_size > MAX_VERIFICATION_KIT_BYTES:
+                raise ReleaseSigningError("wheel verification-kit member exceeds the size limit")
+            wheel_kit = archive.read(matches[0])
+    except (BadZipFile, OSError, RuntimeError) as exc:
+        raise ReleaseSigningError("wheel verification-kit member is unreadable") from exc
+
+    sdist_member = f"bulla-{version}/src/bulla/data/{VERIFICATION_KIT_NAME}"
+    try:
+        with tarfile.open(sdist, mode="r:gz") as archive:
+            matches = [member for member in archive.getmembers() if member.name == sdist_member]
+            if len(matches) != 1 or not matches[0].isfile():
+                raise ReleaseSigningError(
+                    "sdist must contain exactly one regular verification-kit member"
+                )
+            if matches[0].size > MAX_VERIFICATION_KIT_BYTES:
+                raise ReleaseSigningError("sdist verification-kit member exceeds the size limit")
+            extracted = archive.extractfile(matches[0])
+            if extracted is None:
+                raise ReleaseSigningError("sdist verification-kit member is unreadable")
+            sdist_kit = extracted.read(MAX_VERIFICATION_KIT_BYTES + 1)
+    except (tarfile.TarError, OSError) as exc:
+        raise ReleaseSigningError("sdist verification-kit member is unreadable") from exc
+
+    if wheel_kit != expected:
+        raise ReleaseSigningError("wheel verification-kit bytes differ from the candidate kit")
+    if sdist_kit != expected:
+        raise ReleaseSigningError("sdist verification-kit bytes differ from the candidate kit")
+
+
 def sign_receipt(args: argparse.Namespace) -> None:
     if not VERSION.fullmatch(args.version) or not COMMIT.fullmatch(args.source_commit):
         raise ReleaseSigningError("release version or source commit is malformed")
@@ -836,13 +902,51 @@ def sign_receipt(args: argparse.Namespace) -> None:
     summary = summary_lines[-1]
     wheel = args.dist / f"bulla-{args.version}-py3-none-any.whl"
     sdist = args.dist / f"bulla-{args.version}.tar.gz"
+    kit_required = tuple(int(part) for part in args.version.split(".")) >= (0, 44, 5)
+    verification_kit = (
+        args.dist / "action-receipt-v0.2-verification-kit.zip"
+        if kit_required
+        else None
+    )
+    verification_kit_checksum = (
+        args.dist / "action-receipt-v0.2-verification-kit.zip.sha256"
+        if kit_required
+        else None
+    )
+    expected_inventory = [wheel.name, sdist.name, args.summary.name]
+    if verification_kit is not None:
+        expected_inventory.extend(
+            [verification_kit.name, verification_kit_checksum.name]
+        )
     if (
         not wheel.is_file()
         or not sdist.is_file()
+        or (verification_kit is not None and not verification_kit.is_file())
+        or (
+            verification_kit_checksum is not None
+            and not verification_kit_checksum.is_file()
+        )
         or sorted(path.name for path in args.dist.iterdir() if path.is_file())
-        != sorted([wheel.name, sdist.name, args.summary.name])
+        != sorted(expected_inventory)
     ):
         raise ReleaseSigningError("release candidate inventory differs")
+    if verification_kit is not None and verification_kit_checksum is not None:
+        expected_checksum = (
+            f"{digest_file(verification_kit).removeprefix('sha256:')}  "
+            f"{verification_kit.name}\n"
+        )
+        try:
+            observed_checksum = verification_kit_checksum.read_text(encoding="ascii")
+        except (OSError, UnicodeError) as exc:
+            raise ReleaseSigningError("verification-kit checksum is unreadable") from exc
+        if observed_checksum != expected_checksum:
+            raise ReleaseSigningError("verification-kit checksum differs")
+        verify_embedded_verification_kit(
+            wheel,
+            sdist,
+            args.version,
+            verification_kit,
+        )
     receipt = read_json(args.receipt, 1_048_576)
     expected_release_contract(
         receipt,
@@ -852,6 +956,7 @@ def sign_receipt(args: argparse.Namespace) -> None:
         summary=summary,
         wheel=wheel,
         sdist=sdist,
+        verification_kit=verification_kit,
         witness=args.witness,
         tree_sha256=args.source_tree_sha256,
     )

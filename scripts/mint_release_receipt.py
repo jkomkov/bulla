@@ -26,6 +26,7 @@ on disk match PyPI's accepted digests and expose Integrity API provenance:
 from __future__ import annotations
 
 import argparse
+import dataclasses
 import hashlib
 import json
 import os
@@ -33,6 +34,8 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+import tarfile
+from zipfile import ZipFile
 
 from bulla import __version__
 from bulla.action_receipt import build_release_receipt, verify_receipt
@@ -50,6 +53,27 @@ _GATE_COMPOSITION = _REPO / "examples" / "two-manifest-quickstart" / "example_fe
 
 def _sha256_file(p: Path) -> str:
     return "sha256:" + hashlib.sha256(p.read_bytes()).hexdigest()
+
+
+def _bind_verification_kit(receipt, verification_kit_sha256: str):
+    """Bind the shipped kit as release evidence without changing the format."""
+    evidence = list(receipt.evidence_refs)
+    tree_index = next(
+        (index for index, item in enumerate(evidence) if item.get("name") == "tree"),
+        len(evidence),
+    )
+    evidence.insert(
+        tree_index,
+        {
+            "name": "verification-kit",
+            "hash": verification_kit_sha256,
+            "grounding": "third_party_anchored",
+        },
+    )
+    return dataclasses.replace(
+        receipt,
+        evidence_refs=tuple(evidence),
+    )
 
 
 def _git(*args: str) -> str:
@@ -181,9 +205,32 @@ def main() -> int:
 
     wheels = sorted(args.dist.glob(f"bulla-{__version__}-*.whl"))
     sdists = sorted(args.dist.glob(f"bulla-{__version__}.tar.gz"))
-    if not wheels or not sdists:
-        print(f"Error: dist/ lacks bulla-{__version__} wheel+sdist (build first; version must match __version__).",
+    verification_kit = args.dist / "action-receipt-v0.2-verification-kit.zip"
+    if not wheels or not sdists or not verification_kit.is_file():
+        print(f"Error: dist/ lacks bulla-{__version__} wheel, sdist, or verification kit (build first; version must match __version__).",
               file=sys.stderr)
+        return 2
+
+    kit_bytes = verification_kit.read_bytes()
+    wheel_member = "bulla/data/action-receipt-v0.2-verification-kit.zip"
+    sdist_member = (
+        f"bulla-{__version__}/src/bulla/data/"
+        "action-receipt-v0.2-verification-kit.zip"
+    )
+    try:
+        with ZipFile(wheels[0]) as wheel_archive:
+            wheel_kit = wheel_archive.read(wheel_member)
+        with tarfile.open(sdists[0], "r:gz") as sdist_archive:
+            member = sdist_archive.getmember(sdist_member)
+            stream = sdist_archive.extractfile(member)
+            if stream is None:
+                raise KeyError(sdist_member)
+            sdist_kit = stream.read()
+    except (KeyError, OSError, tarfile.TarError) as exc:
+        print(f"Error: package archives do not carry the verification kit: {exc}", file=sys.stderr)
+        return 2
+    if wheel_kit != kit_bytes or sdist_kit != kit_bytes:
+        print("Error: wheel, sdist, and standalone verification-kit bytes differ", file=sys.stderr)
         return 2
 
     try:
@@ -313,9 +360,12 @@ def main() -> int:
         timestamp=datetime.now(timezone.utc).isoformat(),
         producer=producer,
     )
-    receipt = build_release_receipt(**kwargs)
+    receipt = _bind_verification_kit(
+        build_release_receipt(**kwargs),
+        "sha256:" + hashlib.sha256(kit_bytes).hexdigest(),
+    )
     if signer is not None:
-        receipt = build_release_receipt(**kwargs, signature=signer.sign(receipt.content_hash))
+        receipt = dataclasses.replace(receipt, signature=signer.sign(receipt.content_hash))
 
     out.write_text(receipt.to_json() + "\n", encoding="utf-8")
     v = verify_receipt(receipt.to_dict())

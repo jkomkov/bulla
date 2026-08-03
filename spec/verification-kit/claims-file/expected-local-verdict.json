@@ -1,0 +1,16 @@
+{
+  "fixture": "CONSTRUCTED",
+  "local_checks": {
+    "authority": "UNAUTHENTICATED",
+    "declared_bounds": "CONFORMS",
+    "evidence_grounding": "SELF_ASSERTED",
+    "record_integrity": "VERIFIED",
+    "reliance": "NOT_COMPUTED"
+  },
+  "not_established_by_this_check": [
+    "whether funds moved",
+    "whether the named principal had live authority",
+    "whether the dispute forum remains reachable"
+  ],
+  "receipt": "receipt.json"
+}
