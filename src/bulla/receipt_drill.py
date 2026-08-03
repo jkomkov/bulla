@@ -6,6 +6,7 @@ import base64
 import copy
 import hashlib
 import json
+import math
 from pathlib import Path
 import subprocess
 import sys
@@ -27,6 +28,62 @@ MAX_DIGEST_BYTES = 4_096
 
 class ReceiptDrillError(ValueError):
     """The drill could not safely or consistently complete."""
+
+
+def parse_receipt_structure(raw: bytes) -> dict:
+    """Parse the drill's v0.2 shape while leaving hash agreement dimensional.
+
+    The stable receipt parser treats a hash mismatch as an ingestion failure.
+    A drill must instead retain a well-shaped tampered receipt long enough to
+    report ``record_integrity=FAILED``. The historical parser stays unchanged;
+    this narrower boundary reuses its closed-shape and resource-limit helpers.
+    """
+
+    from bulla.action_receipt import ActionReceipt, ActionReceiptError
+    from bulla.receipt_parser import (
+        ReceiptParseError,
+        ReceiptParseLimits,
+        _enforce_limits,
+        _reject_constant,
+        _unique_object,
+        _validate_closed_members,
+    )
+
+    limits = ReceiptParseLimits()
+    if len(raw) > limits.max_bytes:
+        raise ReceiptParseError(f"receipt exceeds {limits.max_bytes} bytes")
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ReceiptParseError("receipt is not valid UTF-8") from exc
+    try:
+        document = json.loads(
+            text,
+            object_pairs_hook=_unique_object,
+            parse_constant=_reject_constant,
+        )
+    except ReceiptParseError:
+        raise
+    except (json.JSONDecodeError, RecursionError) as exc:
+        raise ReceiptParseError(f"invalid receipt JSON: {exc}") from exc
+    if not isinstance(document, dict):
+        raise ReceiptParseError("receipt root must be an object")
+    _enforce_limits(document, limits)
+    stack = [document]
+    while stack:
+        current = stack.pop()
+        if isinstance(current, dict):
+            stack.extend(current.values())
+        elif isinstance(current, list):
+            stack.extend(current)
+        elif isinstance(current, float) and not math.isfinite(current):
+            raise ReceiptParseError("non-finite JSON numbers are not permitted")
+    _validate_closed_members(document)
+    try:
+        ActionReceipt.from_dict(document)
+    except (ActionReceiptError, AttributeError, KeyError, TypeError, ValueError) as exc:
+        raise ReceiptParseError(str(exc)) from exc
+    return document
 
 
 def _read_bounded(path: Path, limit: int, label: str) -> bytes:

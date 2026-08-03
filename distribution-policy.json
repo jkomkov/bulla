@@ -20,7 +20,7 @@
     }
   },
   "generated_archive_bytes": {
-    "metadata_sha256": "f4167159e94d31f4bc57bacded8779770d5a8dac25bcea8fb87e55712e837a91"
+    "metadata_sha256": "407c3f69c1c96eb5f650460940ea0e536b41dc190fd9b97cc6d1d8270c24a34d"
   },
   "required_root_exports": [
     "event_coverage",

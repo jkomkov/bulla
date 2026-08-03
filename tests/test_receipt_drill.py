@@ -152,6 +152,31 @@ def test_cli_rejects_duplicate_member_as_malformed(tmp_path: Path) -> None:
     assert "duplicate JSON member" in completed.stderr
 
 
+@pytest.mark.parametrize("raw_number", ["NaN", "1e309"])
+def test_cli_rejects_non_finite_numbers_as_malformed(
+    tmp_path: Path,
+    raw_number: str,
+) -> None:
+    raw = PAYMENT.read_text(encoding="utf-8").replace("12500", raw_number, 1)
+    receipt = tmp_path / "non-finite.json"
+    receipt.write_text(raw, encoding="utf-8")
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "from bulla.cli import main; main()",
+            "receipt",
+            "drill",
+            str(receipt),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 2
+    assert "non-finite JSON number" in completed.stderr
+
+
 def test_standalone_receipt_mode_uses_no_bulla_import(tmp_path: Path) -> None:
     kit = tmp_path / "kit"
     from bulla.verification_kit import extract_verification_kit

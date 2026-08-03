@@ -42,17 +42,18 @@ def main() -> int:
     # package initializer cannot run first.
     _install_network_guard()
     try:
-        from bulla.receipt_drill import load_public_key, package_report
-        from bulla.receipt_parser import (
-            ReceiptParseError,
-            parse_action_receipt_structure_json,
+        from bulla.receipt_drill import (
+            load_public_key,
+            package_report,
+            parse_receipt_structure,
         )
+        from bulla.receipt_parser import ReceiptParseError
 
         with args.receipt.open("rb") as stream:
             raw = stream.read(1_048_577)
         if len(raw) > 1_048_576:
             raise ReceiptParseError("receipt exceeds 1048576 bytes")
-        receipt = parse_action_receipt_structure_json(raw)
+        receipt = parse_receipt_structure(raw)
         if receipt.get("schema_version") != "0.2":
             raise ReceiptParseError(
                 "receipt drill supports normative ActionReceipt v0.2 only"
