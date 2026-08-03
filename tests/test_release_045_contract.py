@@ -1,4 +1,4 @@
-"""Release-boundary gates for the Bulla 0.44 release line."""
+"""Release-boundary gates for the Bulla 0.45 release line."""
 
 from __future__ import annotations
 
@@ -36,9 +36,10 @@ def _workflow_job(workflow: str, name: str) -> str:
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.44.5"
+    assert bulla.__version__ == "0.45.0"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    assert "## 0.44.5 — 2026-08-02 (release candidate)" in changelog
+    assert "## 0.45.0 — 2026-08-02 (release candidate)" in changelog
+    assert "package version and the ActionReceipt format version are separate clocks" in changelog
     assert "## 0.44.4 — 2026-08-01" in changelog
     assert "## 0.44.3 — 2026-08-01 (unpublished)" in changelog
     assert "## 0.44.2 — 2026-07-29 (unpublished)" in changelog
@@ -54,6 +55,21 @@ def test_release_version_and_status_language_are_synchronized() -> None:
     spec = (ROOT / "spec/README.md").read_text(encoding="utf-8")
     assert "**Normative version:** `0.2`" in spec
     assert "**Opt-in released draft:** `0.3`" in spec
+
+
+def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
+    contract = (ROOT / "docs/RELEASE-0.45.0.md").read_text(encoding="utf-8")
+    assert "package version and the receipt\nformat version are separate clocks" in contract
+    assert "A PR head, synthetic merge commit, pre-rebase commit, or" in contract
+    assert "The exact green `main` commit is recorded as the sole `source_commit`" in contract
+    assert "PyPI publication consumes the version." in contract
+    assert "APPROVE BULLA 0.45.0 PUBLICATION" in contract
+    assert contract.index("APPROVE BULLA 0.45.0 PUBLICATION") < contract.index(
+        "APPROVE GLYPH VERIFICATION-KIT DEPLOYMENT"
+    )
+    assert contract.index("Verify PyPI's accepted wheel") < contract.index(
+        "APPROVE GLYPH VERIFICATION-KIT DEPLOYMENT"
+    )
 
 
 def test_release_workflow_is_publish_then_verify_then_receipt() -> None:

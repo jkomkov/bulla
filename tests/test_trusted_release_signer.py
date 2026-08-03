@@ -109,7 +109,7 @@ def _envelope(version: str) -> RecourseEnvelope:
 
 def _fixture(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str, Path | str]:
     signer = _key(monkeypatch)
-    version = "0.44.5"
+    version = "0.45.0"
     commit = "a" * 40
     tree = "sha256:" + "b" * 64
     context = tmp_path / "release-trust-context.json"

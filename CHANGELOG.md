@@ -1,10 +1,13 @@
 # Changelog
 
-## 0.44.5 — 2026-08-02 (release candidate)
+## 0.45.0 — 2026-08-02 (release candidate)
 
-**Verification after the issuer is gone.** This patch leaves ActionReceipt
-v0.2 unchanged and packages its existing specification and checker as one
-deterministic verification kit.
+**Verification after the issuer is gone.** This tooling release leaves the
+normative ActionReceipt v0.2 format unchanged and packages its existing
+specification and checker as one deterministic verification kit. Bulla's
+package version and the ActionReceipt format version are separate clocks:
+`0.45.0` identifies the new package and CLI capability; `v0.2` continues to
+identify the unchanged normative receipt format.
 
 - Adds `bulla receipt kit` to export the exact kit bytes embedded in the wheel
   and source distribution.

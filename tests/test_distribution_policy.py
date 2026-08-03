@@ -42,7 +42,7 @@ EXPECTED_STANDALONE_TEST_EXCLUSIONS = {
 
 
 def test_distribution_policy_matches_version_and_public_exports() -> None:
-    assert POLICY["release"] == bulla.__version__ == "0.44.5"
+    assert POLICY["release"] == bulla.__version__ == "0.45.0"
     assert POLICY["normative_action_receipt"] == "0.2"
     assert set(POLICY["required_root_exports"]) <= set(bulla.__all__)
 
