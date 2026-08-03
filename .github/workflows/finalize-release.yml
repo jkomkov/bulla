@@ -37,7 +37,7 @@ jobs:
       TRUSTED_WORKFLOW_REF: ${{ github.ref }}
       TRUSTED_REPOSITORY: ${{ github.repository }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -287,7 +287,7 @@ jobs:
       SOURCE_COMMIT: ${{ inputs.source_commit }}
       TRUSTED_SIGNER_SHA256: 5477082c209a641c99d58594a262dee23d76d4c4ccbb0803e19a7907d0e7357c
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
