@@ -324,10 +324,12 @@ def run_receipt_drill(
     # Validate key bytes before passing the same path to both isolated checkers.
     load_public_key(key_path)
 
+    embedded_payload = verification_kit_bytes()
+    embedded_digest = hashlib.sha256(embedded_payload).hexdigest()
     if kit_path is None:
-        payload = verification_kit_bytes()
+        payload = embedded_payload
         kit_source = "EMBEDDED_DISTRIBUTION"
-        supplied_digest = hashlib.sha256(payload).hexdigest()
+        supplied_digest = embedded_digest
     else:
         try:
             payload = _read_bounded(
@@ -341,6 +343,11 @@ def run_receipt_drill(
     if actual_digest != supplied_digest:
         raise ReceiptDrillError(
             f"verification kit digest mismatch: computed {actual_digest}, expected {supplied_digest}"
+        )
+    if actual_digest != embedded_digest:
+        raise ReceiptDrillError(
+            "caller-supplied kit is not authenticated by the installed Bulla "
+            "distribution; the detached digest establishes byte identity only"
         )
 
     package_code, package, package_error = _run_bulla_checker(
@@ -411,6 +418,7 @@ def run_receipt_drill(
         {
             "kit_sha256": actual_digest,
             "kit_digest_source": kit_source,
+            "kit_execution_trust": "INSTALLED_DISTRIBUTION_MATCH",
             "checker_agreement": "MATCH",
             "tamper_control": "REJECTED",
         }

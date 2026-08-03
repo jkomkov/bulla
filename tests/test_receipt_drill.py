@@ -4,9 +4,13 @@ from __future__ import annotations
 
 import json
 import dataclasses
+import hashlib
+import io
 from pathlib import Path
+import stat
 import subprocess
 import sys
+from zipfile import ZIP_STORED, ZipFile, ZipInfo
 
 import pytest
 
@@ -60,15 +64,50 @@ def test_supplied_kit_requires_and_matches_detached_digest(tmp_path: Path) -> No
     digest = tmp_path / f"{ARCHIVE_NAME}.sha256"
     payload = verification_kit_bytes()
     kit.write_bytes(payload)
-    import hashlib
-
     digest.write_text(f"{hashlib.sha256(payload).hexdigest()}  {ARCHIVE_NAME}\n", encoding="ascii")
     report, code = run_receipt_drill(PAYMENT, kit_path=kit, kit_digest_path=digest)
     assert code == 0
     assert report["verifier"]["kit_digest_source"] == "CALLER_SUPPLIED_DIGEST"
+    assert report["verifier"]["kit_execution_trust"] == "INSTALLED_DISTRIBUTION_MATCH"
 
     digest.write_text(f"{'0' * 64}  {ARCHIVE_NAME}\n", encoding="ascii")
     with pytest.raises(ReceiptDrillError, match="digest mismatch"):
+        run_receipt_drill(PAYMENT, kit_path=kit, kit_digest_path=digest)
+
+
+def test_caller_digest_cannot_authorize_a_foreign_kit(tmp_path: Path) -> None:
+    with ZipFile(io.BytesIO(verification_kit_bytes()), "r") as source:
+        members = {info.filename: source.read(info) for info in source.infolist()}
+    members["README.md"] += b"\nForeign retained copy.\n"
+    manifest = json.loads(members["MANIFEST.json"])
+    for row in manifest["members"]:
+        if row["path"] == "README.md":
+            row["bytes"] = len(members["README.md"])
+            row["sha256"] = hashlib.sha256(members["README.md"]).hexdigest()
+    members["MANIFEST.json"] = json.dumps(
+        manifest, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    members["MANIFEST.sha256"] = (
+        f"{hashlib.sha256(members['MANIFEST.json']).hexdigest()}  MANIFEST.json\n"
+    ).encode("ascii")
+
+    stream = io.BytesIO()
+    with ZipFile(stream, "w", compression=ZIP_STORED) as archive:
+        for name, value in sorted(members.items()):
+            info = ZipInfo(name, (1980, 1, 1, 0, 0, 0))
+            info.compress_type = ZIP_STORED
+            info.create_system = 3
+            info.external_attr = (stat.S_IFREG | 0o644) << 16
+            archive.writestr(info, value)
+    payload = stream.getvalue()
+    kit = tmp_path / ARCHIVE_NAME
+    digest = tmp_path / f"{ARCHIVE_NAME}.sha256"
+    kit.write_bytes(payload)
+    digest.write_text(
+        f"{hashlib.sha256(payload).hexdigest()}  {ARCHIVE_NAME}\n", encoding="ascii"
+    )
+
+    with pytest.raises(ReceiptDrillError, match="detached digest establishes byte identity only"):
         run_receipt_drill(PAYMENT, kit_path=kit, kit_digest_path=digest)
 
 

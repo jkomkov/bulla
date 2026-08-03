@@ -25,6 +25,9 @@ The wheel, source distribution, GitHub release asset, and Glyph download are
 publisher-operated mirrors. Byte equality demonstrates reproducibility, not
 independent custody. The caller-provided detached digest is trust input; the
 signed release receipt binds publisher identity after PyPI publication.
+Before executing a caller-supplied kit, the drill also requires exact equality
+with the kit retained inside the installed Bulla distribution. A sidecar that
+arrives with an unfamiliar archive cannot authorize its checker.
 
 The public release lineage records that 0.45.0 was not published and that the
 immutable 0.45.1 GitHub body retained provisional wording. Neither historical

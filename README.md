@@ -101,6 +101,11 @@ another record and dimensions that cannot be decided from the supplied
 material. It does not establish event occurrence, live authority, recourse
 reachability, receipt coverage, or a reliance decision.
 
+When `--kit` is used, the detached digest checks the supplied bytes and Bulla
+also requires those bytes to match the kit retained inside the installed
+distribution before it executes the standalone checker. The sidecar alone does
+not establish publisher identity or authorize unfamiliar code.
+
 ## Create one receipt
 
 ```bash
