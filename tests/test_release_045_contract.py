@@ -38,7 +38,7 @@ def _workflow_job(workflow: str, name: str) -> str:
 def test_release_version_and_status_language_are_synchronized() -> None:
     assert bulla.__version__ == "0.45.0"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    assert "## 0.45.0 — 2026-08-02 (release candidate)" in changelog
+    assert "## 0.45.0 — 2026-08-03" in changelog
     assert "package version and the ActionReceipt format version are separate clocks" in changelog
     assert "## 0.44.4 — 2026-08-01" in changelog
     assert "## 0.44.3 — 2026-08-01 (unpublished)" in changelog
@@ -63,24 +63,15 @@ def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
     assert "A PR head, synthetic merge commit, pre-rebase commit, or" in contract
     assert "The exact green `main` commit is recorded as the sole `source_commit`" in contract
     assert "PyPI publication consumes the version." in contract
-    assert "APPROVE BULLA 0.45.0 PUBLICATION" in contract
-    assert "source_commit: <40-lowercase-hex>" in contract
-    assert contract.count(
-        "kit_sha256: 4ea268d7e1d7b99a30a3db5a4acfb240fcdb0d906391dda1f1a2fb9e4a3bc51b"
-    ) == 2
-    assert "bulla.glyph-deployment-evidence/0.1" in contract
-    assert "deployment_evidence_sha256: <64-lowercase-hex>" in contract
-    assert "glyph_commit: <40-lowercase-hex>" in contract
-    assert contract.index("APPROVE BULLA 0.45.0 PUBLICATION") < contract.index(
-        "APPROVE GLYPH VERIFICATION-KIT DEPLOYMENT"
-    )
-    assert contract.index("published-CLI evidence") > contract.index(
-        "APPROVE BULLA 0.45.0 PUBLICATION"
-    )
+    assert "Repository-owner instruction recorded 2026-08-03: `ship the product stack`." in contract
+    assert "External review is not a publication or deployment prerequisite." in contract
+    assert "It does not authorize Claim Closure 002,\noutreach" in contract
+    assert "APPROVE BULLA" not in contract
+    assert "APPROVE GLYPH" not in contract
+    assert "deployment_evidence_sha256" not in contract
     assert contract.index("Verify PyPI's accepted wheel") < contract.index(
-        "APPROVE GLYPH VERIFICATION-KIT DEPLOYMENT"
+        "Deploy the matching Glyph surface"
     )
-    assert "approval is not transferable to\ncorrected assets or another release" in contract
 
 
 def test_release_workflow_is_publish_then_verify_then_receipt() -> None:

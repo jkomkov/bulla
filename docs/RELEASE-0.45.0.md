@@ -1,7 +1,12 @@
 # Bulla 0.45.0 publication contract
 
-Status: release candidate. Merging a candidate branch does not authorize a
-package publication, GitHub release, or Glyph deployment.
+Status: authorized coordinated product release.
+
+Repository-owner instruction recorded 2026-08-03: `ship the product stack`.
+That instruction authorizes integration, Bulla 0.45.0 publication, GitHub
+release finalization, and deployment of the matching Glyph product surface
+after their technical gates pass. It does not authorize Claim Closure 002,
+outreach, or stronger evidence labels.
 
 ## Candidate invariant
 
@@ -54,18 +59,9 @@ candidate commit and recorded in the release run.
       payment fixture as constructed, and does not present a global verified
       status.
 
-After every box is complete, obtain a separate written instruction containing
-this exact authorization block, replacing the placeholder with the final green
-public-mirror `main` commit:
-
-```text
-APPROVE BULLA 0.45.0 PUBLICATION
-source_commit: <40-lowercase-hex>
-kit_sha256: 4ea268d7e1d7b99a30a3db5a4acfb240fcdb0d906391dda1f1a2fb9e4a3bc51b
-```
-
-Without that instruction, do not trigger trusted publishing, create or push a
-release tag, finalize a GitHub release, or upload an asset.
+External review is not a publication or deployment prerequisite. External
+evidence changes evidence labels; it does not decide whether tested product
+code may ship. The owner instruction above is the release authorization.
 
 ## Publication order
 
@@ -79,27 +75,11 @@ release tag, finalize a GitHub release, or upload an asset.
    and verify byte equality with PyPI and the candidate.
 5. Refresh Glyph's published-CLI evidence to the accepted Bulla 0.45.0
    artifacts and rerun its copy, claims, browser, accessibility, crawler, and
-   presentation gates. Then freeze a canonical UTF-8
-   `bulla.glyph-deployment-evidence/0.1` JSON record containing the Bulla
-   version and source commit; wheel and source-distribution filenames,
-   SHA-256 digests, and PyPI provenance-object digests; kit digest; signed
-   release-receipt digest; GitHub release-asset digest; Glyph candidate commit
-   and asset digest; and the exact check-run identifiers. Record the SHA-256 of
-   those JSON bytes without rewriting the record.
-6. Obtain a second written instruction containing this exact authorization
-   block, replacing every placeholder with values from the frozen evidence
-   record:
-
-   ```text
-   APPROVE GLYPH VERIFICATION-KIT DEPLOYMENT
-   bulla_version: 0.45.0
-   source_commit: <40-lowercase-hex>
-   kit_sha256: 4ea268d7e1d7b99a30a3db5a4acfb240fcdb0d906391dda1f1a2fb9e4a3bc51b
-   deployment_evidence_sha256: <64-lowercase-hex>
-   glyph_commit: <40-lowercase-hex>
-   ```
-
-7. Only then may the matching Glyph release be deployed.
+   presentation gates.
+6. Record the accepted wheel, source-distribution, kit, signed release-receipt,
+   GitHub release-asset, and Glyph asset digests in the release run.
+7. Deploy the matching Glyph surface and verify the production downloads and
+   retained-receipt interaction.
 
 Any digest, signer, candidate-commit, or publisher-identity mismatch aborts the
 sequence. Do not replace an asset in place or reuse a release tag. A local
@@ -107,9 +87,4 @@ candidate, tag, or unsigned receipt is not publication evidence.
 
 PyPI publication consumes the version. A defect discovered after upload is
 handled by a yank or correction record and a new package version; deletion,
-replacement, or reuse of `0.45.0` is not an in-place repair path. The second
-Glyph authorization must therefore bind the accepted PyPI bytes and
-provenance that exist only after the first authorization has executed.
-Any change to either authorization block, its named commit, or its evidence
-record requires a new written authorization; approval is not transferable to
-corrected assets or another release.
+replacement, or reuse of `0.45.0` is not an in-place repair path.

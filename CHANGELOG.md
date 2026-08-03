@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.45.0 — 2026-08-02 (release candidate)
+## 0.45.0 — 2026-08-03
 
 **Verification after the issuer is gone.** This tooling release leaves the
 normative ActionReceipt v0.2 format unchanged and packages its existing
