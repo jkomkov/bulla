@@ -782,7 +782,7 @@ def main() -> int:
         extra = "".join(
             f" {k}={got.get(k)}" for k in ("canon", "effective_grounding") if k in want
         )
-        print(f"  {'✓' if agree else '✗'} {name:28s} independent: ok={got['ok']} "
+        print(f"  {'PASS' if agree else 'FAIL'} {name:28s} independent: ok={got['ok']} "
               f"verified_to={got['verified_to']}{extra}  (expected ok={want['ok']})")
         if want.get("conventions") and agree:
             for cname, status in got["conventions"].items():
@@ -802,7 +802,7 @@ def main() -> int:
             else:
                 want_id = want["identity"]
                 id_agree = all(idr.get(k) == want_id[k] for k in want_id)
-                print(f"        {'✓' if id_agree else '✗'} identity rung: ok={idr['ok']} "
+                print(f"        {'PASS' if id_agree else 'FAIL'} identity rung: ok={idr['ok']} "
                       f"verified_to={idr['verified_to']} signature={idr['signature_authentic']} "
                       f"authority={idr['authority_authentic']}")
                 if not id_agree:
@@ -823,7 +823,7 @@ def main() -> int:
         and base["hashes"]["attestation"] == swapped["hashes"]["attestation"]
         and base["hashes"]["log_leaf"] == swapped["hashes"]["log_leaf"]
     )
-    print(f"  {'✓' if gap_ok else '✗'} occurrence-binding boundary: claimed timestamp differs, "
+    print(f"  {'PASS' if gap_ok else 'FAIL'} occurrence-binding boundary: claimed timestamp differs, "
           f"event hash differs, attestation and log leaf identical (v0.2/v0.3 gap, v0.4 target)")
     if not gap_ok:
         failures += 1

@@ -1,14 +1,11 @@
-# Bulla 0.45.0 publication contract
+# Bulla 0.45.1 publication contract
 
-Status: sealed prepublication failure. PyPI did not receive this version.
+Status: authorized coordinated product release.
 
 Repository-owner instruction recorded 2026-08-03: `ship the product stack`.
-That instruction authorizes integration, Bulla 0.45.0 publication, GitHub
+That instruction authorizes integration, Bulla 0.45.1 publication, GitHub
 release finalization, and deployment of the matching Glyph product surface
-after their technical gates pass. The Windows release smoke gate found
-non-portable archive input line endings and console output before upload, so
-the workflow aborted. The immutable slot and tag are retained; neither is
-reused. It does not authorize Claim Closure 002,
+after their technical gates pass. It does not authorize Claim Closure 002,
 outreach, or stronger evidence labels.
 
 ## Candidate invariant
@@ -16,12 +13,17 @@ outreach, or stronger evidence labels.
 The release adds the public `bulla receipt kit` package and CLI capability. It
 ships `action-receipt-v0.2-verification-kit.zip` without changing the
 normative ActionReceipt v0.2 format. Bulla's package version and the receipt
-format version are separate clocks: `0.45.0` identifies the tooling release;
+format version are separate clocks: `0.45.1` identifies the tooling release;
 `v0.2` identifies the unchanged normative format. The expected kit SHA-256 is:
 
 ```text
-4ea268d7e1d7b99a30a3db5a4acfb240fcdb0d906391dda1f1a2fb9e4a3bc51b
+49039dc54c4a99172113209a81e8d93f0bddde5269ac20f701170210154da8f3
 ```
+
+The 0.45.0 prepublication workflow stopped at its Windows smoke gate before
+build or upload. Its immutable slot and tag remain as the correction record.
+Version 0.45.1 normalizes every kit text input to UTF-8 with LF line endings
+and uses ASCII output in the standalone checker.
 
 The wheel, source distribution, GitHub release asset, and Glyph download are
 publisher-operated mirrors. Their byte equality does not make any mirror an
@@ -33,15 +35,11 @@ or signed release receipt authenticates the archive.
 Do not request publication until every box below is backed by the exact
 candidate commit and recorded in the release run.
 
-- [ ] The monorepo release-candidate PR and public Bulla mirror PR have passed
-      their required R3 reviews with no open material finding.
-- [ ] The public mirror is byte-equivalent to the intended `bulla/` subtree,
-      apart from declared standalone-repository differences.
-- [ ] Pull-request checks pass after the public release-candidate PR targets
-      `main`; checks on an earlier stacked base do not substitute.
-- [ ] After the public release-candidate PR is integrated, Python 3.10 through
-      3.13 and Linux/macOS package checks pass on the exact resulting `main`
-      commit. A PR head, synthetic merge commit, pre-rebase commit, or
+- [ ] The portability correction has passed R3 artifact and verifier-semantics
+      review with no open material finding.
+- [ ] Pull-request checks pass on Python 3.10 through 3.13.
+- [ ] After integration, Linux, macOS, and Windows release smoke checks pass on
+      the exact resulting public `main` commit. A PR head, synthetic merge commit, pre-rebase commit, or
       pre-retarget commit is not the release source commit.
 - [ ] The exact green `main` commit is recorded as the sole `source_commit`
       accepted by release preparation, tagging, publication, provenance
@@ -51,8 +49,7 @@ candidate commit and recorded in the release run.
 - [ ] Hostile archive tests reject missing, changed, extra, duplicated,
       traversing, symlinked, and case-colliding members.
 - [ ] The zero-dependency checker runs with Bulla imports and network access
-      unavailable, and agrees with the browser verifier on every shipped
-      vector.
+      unavailable under UTF-8 and Windows default console encodings.
 - [ ] The wheel and source distribution embed the exact kit bytes, and an
       isolated installed `bulla receipt kit` exports those bytes unchanged.
 - [ ] The release preimage binds the exact wheel, source-distribution, and kit
@@ -76,7 +73,7 @@ code may ship. The owner instruction above is the release authorization.
    source distribution, and verification-kit digest.
 4. Attach the receipt, kit, and detached digest to the immutable GitHub release
    and verify byte equality with PyPI and the candidate.
-5. Refresh Glyph's published-CLI evidence to the accepted Bulla 0.45.0
+5. Refresh Glyph's published-CLI evidence to the accepted Bulla 0.45.1
    artifacts and rerun its copy, claims, browser, accessibility, crawler, and
    presentation gates.
 6. Record the accepted wheel, source-distribution, kit, signed release-receipt,
@@ -90,4 +87,4 @@ candidate, tag, or unsigned receipt is not publication evidence.
 
 PyPI publication consumes the version. A defect discovered after upload is
 handled by a yank or correction record and a new package version; deletion,
-replacement, or reuse of `0.45.0` is not an in-place repair path.
+replacement, or reuse of `0.45.1` is not an in-place repair path.

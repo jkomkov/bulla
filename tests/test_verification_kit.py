@@ -7,6 +7,7 @@ import copy
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
 import stat
 import subprocess
@@ -84,6 +85,14 @@ def test_two_clean_builds_are_byte_identical(tmp_path: Path) -> None:
     _, second_digest = BUILDER.build(second)
     assert first.read_bytes() == second.read_bytes() == PACKAGED.read_bytes()
     assert first_digest == second_digest == hashlib.sha256(first.read_bytes()).hexdigest()
+
+
+def test_kit_text_inputs_are_normalized_to_utf8_lf(tmp_path: Path) -> None:
+    source = tmp_path / "portable.txt"
+    source.write_bytes(b"first\r\nsecond\rthird\n")
+    assert BUILDER._regular_file_bytes(source, "portable.txt") == (
+        b"first\nsecond\nthird\n"
+    )
 
 
 def test_archive_contract_and_manifest_are_exact() -> None:
@@ -213,6 +222,21 @@ def test_standalone_checker_runs_without_bulla_or_network_imports(tmp_path: Path
     assert "whether funds moved" in result.stdout
     assert "No issuer connection was used" in result.stdout
     assert "ok=True" not in result.stdout
+
+
+def test_independent_checker_runs_with_windows_default_console_encoding() -> None:
+    environment = dict(os.environ)
+    environment["PYTHONIOENCODING"] = "cp1252"
+    result = subprocess.run(
+        [sys.executable, "-I", str(CHECKER_PATH)],
+        cwd=ROOT,
+        capture_output=True,
+        timeout=30,
+        env=environment,
+    )
+    output = result.stdout.decode("cp1252") + result.stderr.decode("cp1252")
+    assert result.returncode == 0, output
+    assert "PASS" in output
 
 
 def test_package_export_is_exact_and_refuses_replacement(tmp_path: Path) -> None:

@@ -1,12 +1,25 @@
 # Changelog
 
-## 0.45.0 — 2026-08-03
+## 0.45.1 — 2026-08-03
+
+**Portable verification kit release.** This release contains the 0.45.0
+candidate capability with two corrections found by the prepublication Windows
+gate: kit source text is normalized to UTF-8 with LF line endings, and the
+zero-dependency checker uses ASCII status markers. The 0.45.0 candidate was not
+uploaded to PyPI.
+
+- Preserves the normative ActionReceipt v0.2 format unchanged.
+- Makes clean kit builds byte-identical across Linux, macOS, and Windows source
+  checkouts.
+- Runs the standalone checker under Windows' default console encoding.
+
+## 0.45.0 — 2026-08-03 (not published)
 
 **Verification after the issuer is gone.** This tooling release leaves the
 normative ActionReceipt v0.2 format unchanged and packages its existing
 specification and checker as one deterministic verification kit. Bulla's
 package version and the ActionReceipt format version are separate clocks:
-`0.45.0` identifies the new package and CLI capability; `v0.2` continues to
+`0.45.x` identifies the new package and CLI capability; `v0.2` continues to
 identify the unchanged normative receipt format.
 
 - Adds `bulla receipt kit` to export the exact kit bytes embedded in the wheel

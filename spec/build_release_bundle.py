@@ -144,7 +144,11 @@ def _regular_file_bytes(source: Path, name: str) -> bytes:
         raise KitBuildError(f"missing kit input: {name}") from exc
     if not stat.S_ISREG(mode):
         raise KitBuildError(f"non-regular kit input: {name}")
-    return source.read_bytes()
+    try:
+        text = source.read_bytes().decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise KitBuildError(f"kit text input is not UTF-8: {name}") from exc
+    return text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
 
 
 def _expected_bytes() -> bytes:
