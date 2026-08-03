@@ -40,6 +40,100 @@ from pathlib import Path
 
 _RUNGS = {"recompute", "challenge", "cure", "revert", "slash", "escalate"}
 _GROUNDING = ("self_asserted", "counterparty_signed", "third_party_anchored", "execution_verified")
+_HASH_REF = re.compile(r"^sha256:[0-9a-f]{64}$")
+_V02_FIELDS = {
+    "schema_version", "kind", "action", "diagnostic_ref", "evidence_refs",
+    "anchor_ref", "mandate", "remedy", "retention", "stake", "conventions",
+    "signature", "timestamp", "producer", "hashes",
+}
+
+
+def _v02_shape_reasons(r: dict) -> list[str]:
+    """Enforce the closed normative v0.2 JSON shape without jsonschema."""
+    reasons: list[str] = []
+    unknown = sorted(set(r) - _V02_FIELDS)
+    missing = sorted(_V02_FIELDS - set(r))
+    if unknown:
+        reasons.append(f"v0.2 receipt has unknown top-level fields {unknown}")
+    if missing:
+        reasons.append(f"v0.2 receipt is missing required fields {missing}")
+    if r.get("kind") != "action_receipt":
+        reasons.append("v0.2 kind must be 'action_receipt'")
+
+    action = r.get("action")
+    if not isinstance(action, dict):
+        reasons.append("action must be an object")
+    else:
+        if not isinstance(action.get("type"), str) or not action.get("type"):
+            reasons.append("action.type must be a non-empty string")
+        if not isinstance(action.get("subject"), dict):
+            reasons.append("action.subject must be an object")
+
+    diagnostic = r.get("diagnostic_ref")
+    if not isinstance(diagnostic, dict):
+        reasons.append("diagnostic_ref must be an object")
+    else:
+        extra = sorted(set(diagnostic) - {"status", "ref"})
+        if extra:
+            reasons.append(f"diagnostic_ref has unknown fields {extra}")
+        if "ref" in diagnostic and not _HASH_REF.fullmatch(str(diagnostic["ref"])):
+            reasons.append("diagnostic_ref.ref must be a sha256 reference")
+
+    evidence = r.get("evidence_refs")
+    if not isinstance(evidence, list):
+        reasons.append("evidence_refs must be an array")
+    else:
+        for index, item in enumerate(evidence):
+            if not isinstance(item, dict):
+                reasons.append(f"evidence_refs[{index}] must be an object")
+                continue
+            if set(item) != {"name", "hash", "grounding"}:
+                reasons.append(f"evidence_refs[{index}] has a non-normative shape")
+            if not isinstance(item.get("name"), str) or not item.get("name"):
+                reasons.append(f"evidence_refs[{index}].name must be non-empty")
+            if not _HASH_REF.fullmatch(str(item.get("hash", ""))):
+                reasons.append(f"evidence_refs[{index}].hash must be a sha256 reference")
+
+    for name in ("anchor_ref", "mandate", "remedy", "retention", "producer"):
+        if not isinstance(r.get(name), dict):
+            reasons.append(f"{name} must be an object")
+    if r.get("stake") is not None:
+        reasons.append("v0.2 stake is reserved and must be null")
+    if r.get("signature") is not None and not isinstance(r.get("signature"), dict):
+        reasons.append("signature must be an object or null")
+    if not isinstance(r.get("timestamp"), str) or not r.get("timestamp"):
+        reasons.append("timestamp must be a non-empty string")
+
+    mandate = r.get("mandate") if isinstance(r.get("mandate"), dict) else {}
+    if mandate.get("deed_schema", "0.2") != "0.2":
+        reasons.append("a v0.2 receipt must reconstruct deed_schema '0.2'")
+    scope = ((mandate.get("bounds") or {}) if isinstance(mandate.get("bounds"), dict) else {}).get("scope")
+    if isinstance(scope, dict):
+        reasons.append("structured bounds.scope requires the v0.3 deed envelope")
+
+    conventions = r.get("conventions")
+    if not isinstance(conventions, list):
+        reasons.append("conventions must be an array")
+    else:
+        for index, convention in enumerate(conventions):
+            if not isinstance(convention, dict):
+                reasons.append(f"conventions[{index}] must be an object")
+                continue
+            allowed = {"name", "scope", "kind", "definition", "definition_hash", "forum"}
+            required = {"name", "scope", "kind", "definition_hash"}
+            if set(convention) - allowed or required - set(convention):
+                reasons.append(f"conventions[{index}] has a non-normative shape")
+
+    hashes = r.get("hashes")
+    if not isinstance(hashes, dict):
+        reasons.append("hashes must be an object")
+    elif set(hashes) != {"content", "event", "attestation", "log_leaf"}:
+        reasons.append("hashes has a non-normative shape")
+    else:
+        for name, value in hashes.items():
+            if not _HASH_REF.fullmatch(str(value)):
+                reasons.append(f"hashes.{name} must be a sha256 reference")
+    return reasons
 
 
 def _canon(x) -> str:
@@ -322,6 +416,10 @@ def _effective_grounding(r: dict) -> str | None:
 
 def verify_action_receipt(r: dict) -> dict:
     """Verify to the digest rung. Returns {ok, verified_to, reasons, conventions, effective_grounding}."""
+    if not isinstance(r, dict):
+        return {"ok": False, "verified_to": "none", "reasons": ["receipt must be an object"],
+                "conventions": {}, "effective_grounding": None,
+                "bounds_conformance": "not_applicable"}
     reasons: list[str] = []
     dr = r.get("diagnostic_ref") or {}
     st = dr.get("status")
@@ -332,6 +430,8 @@ def verify_action_receipt(r: dict) -> dict:
     schema_version = r.get("schema_version")
     if schema_version not in ("0.1", "0.2", "0.3"):
         reasons.append(f"unknown schema_version {schema_version!r}")
+    if schema_version == "0.2":
+        reasons += _v02_shape_reasons(r)
     if schema_version in ("0.2", "0.3"):
         for e in r.get("evidence_refs") or []:
             if e.get("grounding") not in _GROUNDING:

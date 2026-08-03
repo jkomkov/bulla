@@ -30,22 +30,23 @@ python -m pip install bulla
 
 ## Verify one receipt
 
-Download the canonical payment receipt and verify it locally:
+Download the constructed canonical payment receipt and verify it locally:
 
 ```bash
-curl -fsSLo payment-authorization-v0.2.json \
+curl -fsSLo constructed-payment-authorization-v0.2.json \
   https://glyphstandard.com/examples/payment-authorization-v0.2.json
-bulla receipt verify payment-authorization-v0.2.json --format json
+bulla receipt verify constructed-payment-authorization-v0.2.json --format json
 ```
 
-The receipt records a USD 125.00 charge under a structured USD 200.00 maximum.
+The constructed receipt records a USD 125.00 charge, declares a USD 200.00
+limit, and carries an executable convention that recomputes conformance.
 The checked result is:
 
 ```text
 integrity            VERIFIED
 authenticity         UNVERIFIED
 authority            UNAUTHENTICATED
-scope                 CONFORMS
+declared_bounds       CONFORMS
 grounding             SELF_ASSERTED
 recourse              NAMED
 reachability          UNVERIFIED
@@ -59,6 +60,26 @@ The same receipt is available offline at
 Change `amount_minor` from `12500` to `12501` without recomputing the hashes.
 The verifier returns nonzero, reports a content-hash mismatch, and suppresses
 content-dependent conclusions.
+
+## Retain the verification kit
+
+The package carries the v0.2 specification, constructed vectors, expected
+dimensional verdicts, and a zero-dependency checker as one immutable archive:
+
+```bash
+bulla receipt kit --out action-receipt-v0.2-verification-kit.zip
+```
+
+Expected archive digest:
+
+```text
+sha256:4ea268d7e1d7b99a30a3db5a4acfb240fcdb0d906391dda1f1a2fb9e4a3bc51b
+```
+
+After extracting the archive, run `python3 verify.py`. The checker imports no
+Bulla code and makes no network request. The manifest checks the retained
+contents; authenticate the archive itself with the detached digest or the
+signed release receipt.
 
 ## Create one receipt
 

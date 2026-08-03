@@ -25,30 +25,13 @@
     "ref": "pi_demo_042"
   },
   "mandate": {
-    "deed_schema": "0.3",
     "authority": {
       "principal": "did:web:buyer.example#agent",
       "policy": "policy://buyer/payments-v1",
       "delegation": []
     },
     "bounds": {
-      "scope": {
-        "form": "jsonschema+quantum/1",
-        "schema": {
-          "type": "object",
-          "properties": {
-            "payment_id": { "type": "string" },
-            "amount_minor": { "type": "integer", "minimum": 0, "maximum": 20000 },
-            "currency": { "type": "string", "const": "USD" },
-            "merchant": { "type": "string" }
-          },
-          "required": ["payment_id", "amount_minor", "currency", "merchant"],
-          "additionalProperties": false
-        },
-        "quantum": {
-          "amount_minor": { "unit": "USD_minor", "multipleOf": 1 }
-        }
-      }
+      "scope": "payments.charge amount_minor must be no greater than 20000 and currency must be USD"
     }
   },
   "remedy": {
@@ -68,14 +51,38 @@
     "disclosure": "party"
   },
   "stake": null,
-  "conventions": [],
+  "conventions": [
+    {
+      "name": "payment-within-declared-limit",
+      "scope": "seam:buyer.example->payments.charge",
+      "kind": "executable",
+      "definition": {
+        "form": "jsonschema+quantum/1",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "payment_id": { "type": "string" },
+            "amount_minor": { "type": "integer", "minimum": 0, "maximum": 20000 },
+            "currency": { "type": "string", "const": "USD" },
+            "merchant": { "type": "string" }
+          },
+          "required": ["payment_id", "amount_minor", "currency", "merchant"],
+          "additionalProperties": false
+        },
+        "quantum": {
+          "amount_minor": { "unit": "USD_minor", "multipleOf": 1 }
+        }
+      },
+      "definition_hash": "sha256:a0d8674147e6709893245c67947163a807142ba6fb55d2c19fae24b057d64a77"
+    }
+  ],
   "signature": null,
   "timestamp": "2026-07-17T12:00:00Z",
   "producer": { "name": "Bulla" },
   "hashes": {
-    "content": "sha256:3c9bb3283f47acfd0acad316a7a028488858a792ffb90cc5b4f8286aad6cdbf0",
-    "event": "sha256:94da6e5ecb5a677ab9618d8dad014b02a35af90c10401d03f673a1abbadb4f04",
-    "attestation": "sha256:c056a2e9d34422195836b86aeba27e387b8a4d72a7b830823ace090073c1d2b1",
-    "log_leaf": "sha256:4064adba924a80dcc6f2e9949223d4ba119c1e671f69c6269efcb17a5b47e2c1"
+    "content": "sha256:a231fc5f9a34a3bdad63cc1fd48b8146d8dc924d3dd90d708d2fd3eac0729972",
+    "event": "sha256:8bac496e588540aa787013da8273adf48f258611f45fd82cec202ff127f591ee",
+    "attestation": "sha256:13fbf96cc66615606e1ed722e62501d1ca7a3375b7b21a45f89b919490b4ae02",
+    "log_leaf": "sha256:87422d0d2a69e1321293e06b8857af8c76d31da1b6bd1ab2c41dd783b41422d6"
   }
 }

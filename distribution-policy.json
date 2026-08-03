@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package": "bulla",
-  "release": "0.44.4",
+  "release": "0.44.5",
   "normative_action_receipt": "0.2",
   "released_experimental_action_receipts": [
     "0.3",
@@ -10,17 +10,17 @@
   "archive_member_sets": {
     "wheel": {
       "algorithm": "sha256-sorted-posix-lines-v1",
-      "count": 187,
-      "sha256": "60b927e1005dcd8515283890fa3b9f0ad6ee1059275bec49677fc52995f9364f"
+      "count": 190,
+      "sha256": "5af5df0ed1f3c93d3c62b965d76b869ac1c605335f6d2607cb66424d658e7e31"
     },
     "sdist": {
       "algorithm": "sha256-sorted-posix-lines-v1",
-      "count": 1333,
-      "sha256": "eeca0bc399dbb208edae7a867282d4ba08ce059971071190d83d5016f3817b8d"
+      "count": 1342,
+      "sha256": "676a408050a1556fc6ed35b9fea093490dd472433639dfbe04195752e7f15df8"
     }
   },
   "generated_archive_bytes": {
-    "metadata_sha256": "539a6b4be6b2a2cbbe8356805cdba43d851138f245badcce52b8d4e5af575d7c"
+    "metadata_sha256": "52863d4202792966e2f424a10a79e161304b786e900cdd3713c37b5186e1a275"
   },
   "required_root_exports": [
     "event_coverage",
@@ -34,9 +34,12 @@
     "bulla/action_receipt.py",
     "bulla/coverage.py",
     "bulla/data/distribution-policy.json",
+    "bulla/data/action-receipt-v0.2-verification-kit.zip",
+    "bulla/data/action-receipt-v0.2-verification-kit.zip.sha256",
     "bulla/experimental/__init__.py",
     "bulla/experimental/f13.py",
     "bulla/receipt_parser.py",
+    "bulla/verification_kit.py",
     "bulla/wrap.py"
   ],
   "required_sdist_members": [
@@ -44,17 +47,23 @@
     ".github/release-finalization-requirements.txt",
     ".github/workflows/audit-release-slots.yml",
     "distribution-policy.json",
+    "docs/RELEASE-0.44.5.md",
     "examples/wrap-your-agent/run_demo.py",
     "releases/release-repository-controls.json",
     "releases/release-trust-context.json",
     "scripts/verify_release_repository_controls.py",
     "spec/action-receipt-v0.2.md",
     "spec/action-receipt-v0.4-draft.md",
+    "spec/build_release_bundle.py",
+    "spec/verification-kit/verify.py",
     "spec/vectors/payment-authorization.json",
     "src/bulla/action_receipt.py",
     "src/bulla/coverage.py",
     "src/bulla/experimental/f13.py",
     "src/bulla/receipt_parser.py",
+    "src/bulla/verification_kit.py",
+    "src/bulla/data/action-receipt-v0.2-verification-kit.zip",
+    "src/bulla/data/action-receipt-v0.2-verification-kit.zip.sha256",
     "src/bulla/wrap.py"
   ],
   "source_only_modules": [

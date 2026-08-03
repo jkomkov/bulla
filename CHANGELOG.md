@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.44.5 — 2026-08-02 (release candidate)
+
+**Verification after the issuer is gone.** This patch leaves ActionReceipt
+v0.2 unchanged and packages its existing specification and checker as one
+deterministic verification kit.
+
+- Adds `bulla receipt kit` to export the exact kit bytes embedded in the wheel
+  and source distribution.
+- Includes the normative v0.2 specification, checklists, constructed payment
+  claims file, dimensional expected verdicts, and zero-dependency checker.
+- Adds a canonical content manifest, detached archive digest, hostile archive
+  validation, and byte-equality checks across package and release mirrors.
+- Binds the verification-kit digest in the signed package release receipt and
+  attaches the same bytes to the immutable GitHub release.
+- Keeps event occurrence, live authority, recourse reachability, and coverage
+  completeness outside the claims made by local receipt verification.
+
 ## 0.44.4 — 2026-08-01
 
 **Receipt-kernel convergence.** This additive release publishes the strict

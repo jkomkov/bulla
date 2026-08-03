@@ -29,7 +29,7 @@ jobs:
     env:
       RELEASE_VERSION: ${{ inputs.version }}
       SOURCE_COMMIT: ${{ inputs.source_commit }}
-      TRUSTED_SIGNER_SHA256: ddae23d815e7d8b55858d9d297c3728e47951fd82ee011a3e8e65967f262d511
+      TRUSTED_SIGNER_SHA256: 5477082c209a641c99d58594a262dee23d76d4c4ccbb0803e19a7907d0e7357c
       TRUSTED_WORKFLOW_REF: ${{ github.ref }}
       TRUSTED_REPOSITORY: ${{ github.repository }}
     steps:

@@ -36,8 +36,9 @@ def _workflow_job(workflow: str, name: str) -> str:
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.44.4"
+    assert bulla.__version__ == "0.44.5"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    assert "## 0.44.5 — 2026-08-02 (release candidate)" in changelog
     assert "## 0.44.4 — 2026-08-01" in changelog
     assert "## 0.44.3 — 2026-08-01 (unpublished)" in changelog
     assert "## 0.44.2 — 2026-07-29 (unpublished)" in changelog
@@ -76,6 +77,8 @@ def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
     assert "needs: [build, verify-slot, verify-pypi]" in workflow
     assert "Build into a new empty candidate directory" in workflow
     assert "Verify exact candidate inventory" in workflow
+    assert "action-receipt-v0.2-verification-kit.zip" in workflow
+    assert "bulla receipt kit" in workflow
     assert "packages-dir: packages" in workflow
     assert workflow.count("id-token: write") == 1
     assert workflow.count("persist-credentials: false") >= 4
@@ -121,6 +124,7 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert "verify_pypi_release.py" in workflow
     assert "release-finalization-requirements.txt" in workflow
     assert "trusted_release_signer.py sign-receipt" in workflow
+    assert "verification/release-candidate/action-receipt-v0.2-verification-kit.zip" in workflow
     assert "environment: release-signing" in workflow
     assert "--expected-commit \"$SOURCE_COMMIT\"" in workflow
     assert "release-preimage/$RELEASE_VERSION.unsigned.json" in workflow
@@ -149,6 +153,7 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert 'git rev-list -n 1 "v$RELEASE_VERSION"' in workflow
     assert "immutable-releases" in workflow
     assert 'gh release verify "v$RELEASE_VERSION"' in workflow
+    assert 'gh release verify-asset "v$RELEASE_VERSION" "$asset"' in workflow
     assert "--jq '.immutable'" in workflow
     assert "release-repository-controls.json" in workflow
     assert "rulesets?targets=tag" in workflow

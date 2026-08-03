@@ -7,11 +7,14 @@ import hashlib
 import json
 import subprocess
 import sys
+import tarfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from zipfile import ZIP_STORED, ZipFile
 
 import pytest
 
+from bulla import __version__
 from bulla.action_receipt import build_release_receipt
 from bulla.coverage import ENFORCEMENT_EPOCH
 from bulla.envelope import (
@@ -451,7 +454,8 @@ def test_real_unsigned_mint_path_runs_with_v02_slot_and_context(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     signer = LocalEd25519Signer.generate()
-    slot = _slot(signer, version="0.44.4")
+    version = __version__
+    slot = _slot(signer, version=version)
     slot_path = tmp_path / "slot.json"
     slot_path.write_text(json.dumps(slot))
     context_path = tmp_path / "context.json"
@@ -477,10 +481,24 @@ def test_real_unsigned_mint_path_runs_with_v02_slot_and_context(
     )
     dist = tmp_path / "dist"
     dist.mkdir()
-    wheel = dist / "bulla-0.44.4-py3-none-any.whl"
-    sdist = dist / "bulla-0.44.4.tar.gz"
-    wheel.write_bytes(b"reviewed wheel")
-    sdist.write_bytes(b"reviewed sdist")
+    wheel = dist / f"bulla-{version}-py3-none-any.whl"
+    sdist = dist / f"bulla-{version}.tar.gz"
+    verification_kit = dist / "action-receipt-v0.2-verification-kit.zip"
+    verification_kit.write_bytes(
+        (Path(__file__).resolve().parents[1] / "src" / "bulla" / "data" / verification_kit.name).read_bytes()
+    )
+    with ZipFile(wheel, "w", compression=ZIP_STORED) as archive:
+        archive.writestr(
+            "bulla/data/action-receipt-v0.2-verification-kit.zip",
+            verification_kit.read_bytes(),
+        )
+    with tarfile.open(sdist, "w:gz") as archive:
+        member = tarfile.TarInfo(
+            f"bulla-{version}/src/bulla/data/action-receipt-v0.2-verification-kit.zip"
+        )
+        member.size = verification_kit.stat().st_size
+        with verification_kit.open("rb") as stream:
+            archive.addfile(member, stream)
     records = [
         {
             "filename": path.name,
@@ -491,7 +509,7 @@ def test_real_unsigned_mint_path_runs_with_v02_slot_and_context(
     monkeypatch.setattr(
         mint_release_receipt,
         "fetch_pypi_project",
-        lambda project: {"releases": {"0.44.4": records}},
+        lambda project: {"releases": {version: records}},
     )
     monkeypatch.setattr(
         mint_release_receipt,
@@ -520,7 +538,7 @@ def test_real_unsigned_mint_path_runs_with_v02_slot_and_context(
     )
     monkeypatch.setenv("GITHUB_REF_NAME", "main")
     monkeypatch.setenv("GITHUB_WORKFLOW", "publish")
-    out = tmp_path / "0.44.4.unsigned.json"
+    out = tmp_path / f"{version}.unsigned.json"
     monkeypatch.setattr(
         sys,
         "argv",
@@ -533,7 +551,7 @@ def test_real_unsigned_mint_path_runs_with_v02_slot_and_context(
             "--test-result",
             "199 passed",
             "--git-tag",
-            "v0.44.4",
+            f"v{version}",
             "--repository",
             "jkomkov/bulla",
             "--slot",
@@ -546,7 +564,8 @@ def test_real_unsigned_mint_path_runs_with_v02_slot_and_context(
     assert mint_release_receipt.main() == 0
     document = json.loads(out.read_text())
     assert document["action"]["subject"]["release_slot_hash"] == slot["slot_hash"]
-    assert document["evidence_refs"][2]["hash"] == slot["source_tree_sha256"]
+    assert document["evidence_refs"][2]["name"] == "verification-kit"
+    assert document["evidence_refs"][3]["hash"] == slot["source_tree_sha256"]
 
 
 def test_explicit_release_tag_must_resolve_to_source_commit(
