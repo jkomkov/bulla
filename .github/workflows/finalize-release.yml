@@ -511,6 +511,62 @@ jobs:
               verification/preimage-recovery.json \
               "release-receipt/$RELEASE_VERSION.preimage-recovery.json"
           fi
+      - name: Render complete release notes before immutable publication
+        run: |
+          VERSION="$RELEASE_VERSION" python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          version = os.environ["VERSION"]
+          receipt = Path("release-receipt") / f"{version}.json"
+          witness = Path("release-receipt") / f"{version}.witness.json"
+          kit = Path("release-receipt/action-receipt-v0.2-verification-kit.zip")
+          detached = Path(str(kit) + ".sha256")
+          required = (receipt, witness, kit, detached)
+          missing = [path.name for path in required if not path.is_file()]
+          if missing:
+              raise SystemExit(f"release-note assets are missing: {missing}")
+          kit_digest = hashlib.sha256(kit.read_bytes()).hexdigest()
+          claimed = detached.read_text(encoding="ascii").split()[0]
+          if claimed != kit_digest:
+              raise SystemExit("release-note kit digest differs from detached digest")
+          notes = "\n".join([
+              f"# Bulla {version}",
+              "",
+              f"Published package: https://pypi.org/project/bulla/{version}/",
+              "",
+              "The immutable release assets include the signed ActionReceipt, its witness,",
+              "the ActionReceipt v0.2 verification kit, and the detached kit digest.",
+              "",
+              f"Verification-kit SHA-256: `{kit_digest}`",
+              "",
+              "Release evidence:",
+              "",
+              f"- `{version}.json`",
+              f"- `{version}.witness.json`",
+              "- `action-receipt-v0.2-verification-kit.zip`",
+              "- `action-receipt-v0.2-verification-kit.zip.sha256`",
+              "",
+              "Version history and unpublished slots are recorded in",
+              f"[`docs/RELEASE-LINEAGE.md`](https://github.com/jkomkov/bulla/blob/v{version}/docs/RELEASE-LINEAGE.md).",
+              "",
+          ])
+          lowered = notes.lower()
+          if "publication receipt pending" in lowered or "signed release slot opened" in lowered:
+              raise SystemExit("final release notes retain provisional language")
+          root = Path(os.environ["RUNNER_TEMP"])
+          (root / "release-notes.md").write_text(notes, encoding="utf-8")
+          (root / "release-body.json").write_text(
+              json.dumps({"body": notes}),
+              encoding="utf-8",
+          )
+          (root / "publish-release.json").write_text(
+              json.dumps({"draft": False}),
+              encoding="utf-8",
+          )
+          PY
       - name: Attach immutable receipt assets and publish the GitHub release
         env:
           GH_TOKEN: ${{ secrets.RELEASE_TAG_TOKEN }}
@@ -591,9 +647,29 @@ jobs:
           gh api \
             --method PATCH \
             -H "Accept: application/vnd.github+json" \
-            -f tag_name="v$RELEASE_VERSION" \
-            -f target_commitish="$SOURCE_COMMIT" \
-            -F draft=false \
+            --input "$RUNNER_TEMP/release-body.json" \
+            "repos/$GITHUB_REPOSITORY/releases/$release_id" \
+            > "$RUNNER_TEMP/described-release.json"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"])
+          release = json.loads((root / "described-release.json").read_text())
+          if (
+              release.get("tag_name") != f"v{os.environ['RELEASE_VERSION']}"
+              or release.get("target_commitish") != os.environ["SOURCE_COMMIT"]
+              or release.get("draft") is not True
+              or release.get("body") != (root / "release-notes.md").read_text()
+              or "pending" in release.get("body", "").lower()
+          ):
+              raise SystemExit("complete release body was not set on the draft")
+          PY
+          gh api \
+            --method PATCH \
+            -H "Accept: application/vnd.github+json" \
+            --input "$RUNNER_TEMP/publish-release.json" \
             "repos/$GITHUB_REPOSITORY/releases/$release_id" \
             > "$RUNNER_TEMP/published-release.json"
           git fetch --force --tags origin
@@ -610,6 +686,9 @@ jobs:
               release.get("tag_name") != f"v{os.environ['RELEASE_VERSION']}"
               or release.get("target_commitish") != os.environ["SOURCE_COMMIT"]
               or release.get("draft") is not False
+              or release.get("body")
+              != (Path(os.environ["RUNNER_TEMP"]) / "release-notes.md").read_text()
+              or "pending" in release.get("body", "").lower()
           ):
               raise SystemExit("published release does not match the signed receipt")
           PY

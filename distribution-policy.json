@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package": "bulla",
-  "release": "0.45.1",
+  "release": "0.46.0",
   "normative_action_receipt": "0.2",
   "released_experimental_action_receipts": [
     "0.3",
@@ -10,17 +10,17 @@
   "archive_member_sets": {
     "wheel": {
       "algorithm": "sha256-sorted-posix-lines-v1",
-      "count": 190,
-      "sha256": "41188748f137b5e3fba065bb9ee735eb543e71824c43a0dd68ec5620315c970e"
+      "count": 193,
+      "sha256": "a5304f4e70655f3efabed23fa33b7bdb594127c623e3388854d68aaec3941294"
     },
     "sdist": {
       "algorithm": "sha256-sorted-posix-lines-v1",
-      "count": 1343,
-      "sha256": "912d7a408292725952099b79b63d910ecd54eedcf035776b56bb3120908f6325"
+      "count": 1349,
+      "sha256": "cd81419d7c35a06f14e88d92e0ca8a976354edf9fc984e4489ec84c4ada7e7ca"
     }
   },
   "generated_archive_bytes": {
-    "metadata_sha256": "24c02802f5e15ab95f30bf29026e67732af815f5b80d53ccd37975d92aa511d2"
+    "metadata_sha256": "f4167159e94d31f4bc57bacded8779770d5a8dac25bcea8fb87e55712e837a91"
   },
   "required_root_exports": [
     "event_coverage",
@@ -31,6 +31,8 @@
   ],
   "required_wheel_members": [
     "bulla/__init__.py",
+    "bulla/_receipt_drill_worker.py",
+    "bulla/_receipt_drill_standalone_worker.py",
     "bulla/action_receipt.py",
     "bulla/coverage.py",
     "bulla/data/distribution-policy.json",
@@ -38,6 +40,7 @@
     "bulla/data/action-receipt-v0.2-verification-kit.zip.sha256",
     "bulla/experimental/__init__.py",
     "bulla/experimental/f13.py",
+    "bulla/receipt_drill.py",
     "bulla/receipt_parser.py",
     "bulla/verification_kit.py",
     "bulla/wrap.py"
@@ -47,7 +50,8 @@
     ".github/release-finalization-requirements.txt",
     ".github/workflows/audit-release-slots.yml",
     "distribution-policy.json",
-    "docs/RELEASE-0.45.1.md",
+    "docs/RELEASE-0.46.0.md",
+    "docs/RELEASE-LINEAGE.md",
     "examples/wrap-your-agent/run_demo.py",
     "releases/release-repository-controls.json",
     "releases/release-trust-context.json",
@@ -58,8 +62,11 @@
     "spec/verification-kit/verify.py",
     "spec/vectors/payment-authorization.json",
     "src/bulla/action_receipt.py",
+    "src/bulla/_receipt_drill_worker.py",
+    "src/bulla/_receipt_drill_standalone_worker.py",
     "src/bulla/coverage.py",
     "src/bulla/experimental/f13.py",
+    "src/bulla/receipt_drill.py",
     "src/bulla/receipt_parser.py",
     "src/bulla/verification_kit.py",
     "src/bulla/data/action-receipt-v0.2-verification-kit.zip",

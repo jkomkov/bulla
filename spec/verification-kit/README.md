@@ -14,6 +14,19 @@ The command checks every extracted payload against `MANIFEST.json`, checks the
 manifest digest, and reproduces the included receipt verdicts without importing
 Bulla or making a network request.
 
+Verify a retained ActionReceipt v0.2 supplied by the relying party:
+
+```sh
+python3 verify.py receipt receipt.json
+```
+
+Add `--format json` for the machine-readable dimensional report. Add
+`--key PUBLIC_KEY.json` only when a non-`did:key` issuer requires a retained
+public key. Receipt mode installs a Python audit hook before loading the
+checker and denies network and subprocess operations. The report separates
+checks reproduced from retained bytes from claims that still need another
+record.
+
 The canonical payment is constructed. The checker establishes record integrity,
 recomputes the receipt-carried USD 200 limit convention, and reports stated
 evidence grounding. It does not establish that funds moved, that the named

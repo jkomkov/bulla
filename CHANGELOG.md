@@ -1,12 +1,34 @@
 # Changelog
 
+## 0.46.0 — 2026-08-03
+
+**Terminal verifier rehearsal.** This release adds a stable, bounded way to
+rerun supported ActionReceipt v0.2 checks after the issuing systems are
+unavailable. The normative receipt format remains unchanged.
+
+- Adds `bulla receipt drill`, which denies network access, runs the installed
+  verifier and the retained zero-dependency checker, and fails distinctly when
+  they disagree.
+- Extends the standalone kit checker with `verify.py receipt RECEIPT.json` for
+  caller-supplied normative v0.2 receipts while preserving its no-argument
+  self-test.
+- Reports each claim as `RECHECKABLE`, `EXTERNAL_EVIDENCE_REQUIRED`, or
+  `UNDETERMINED`; it does not collapse integrity, authority, event occurrence,
+  recourse, coverage, or reliance into one verdict.
+- Adds strict raw-input and safe-archive gates, a deterministic tamper control,
+  and release checks for complete non-placeholder GitHub notes.
+- Preserves the 0.45.0/0.45.1 release history in
+  [`docs/RELEASE-LINEAGE.md`](docs/RELEASE-LINEAGE.md).
+
 ## 0.45.1 — 2026-08-03
 
 **Portable verification kit release.** This release contains the 0.45.0
 candidate capability with two corrections found by the prepublication Windows
 gate: kit source text is normalized to UTF-8 with LF line endings, and the
 zero-dependency checker uses ASCII status markers. The 0.45.0 candidate was not
-uploaded to PyPI.
+uploaded to PyPI. The immutable GitHub release body retained its preparation
+placeholder; the final assets and correction are documented in
+[`docs/RELEASE-LINEAGE.md`](docs/RELEASE-LINEAGE.md).
 
 - Preserves the normative ActionReceipt v0.2 format unchanged.
 - Makes clean kit builds byte-identical across Linux, macOS, and Windows source

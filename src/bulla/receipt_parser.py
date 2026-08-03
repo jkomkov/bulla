@@ -8,6 +8,7 @@ the one byte boundary for the CLI, witnesses, and action dispatcher.
 from __future__ import annotations
 
 import json
+import math
 from dataclasses import dataclass
 from typing import Any
 
@@ -68,6 +69,8 @@ def _enforce_limits(value: Any, limits: ReceiptParseLimits) -> None:
                 stack.append((item, depth + 1))
         elif isinstance(current, list):
             stack.extend((item, depth + 1) for item in current)
+        elif isinstance(current, float) and not math.isfinite(current):
+            raise ReceiptParseError("non-finite JSON numbers are not permitted")
 
 
 def _exact_keys(value: Any, expected: set[str], label: str) -> None:
@@ -197,11 +200,17 @@ def _validate_proof(value: Any, label: str) -> None:
     )
 
 
-def parse_action_receipt_json(
+def parse_action_receipt_structure_json(
     raw: bytes | bytearray | memoryview | str,
     limits: ReceiptParseLimits = ReceiptParseLimits(),
-) -> ActionReceipt:
-    """Parse and validate one ActionReceipt from its exact served JSON bytes."""
+) -> dict[str, Any]:
+    """Parse one receipt's byte boundary and typed shape without checking hashes.
+
+    This is the narrow entry point for tools that must report an integrity
+    failure as a dimensional result instead of treating tampering as malformed
+    input. Call :func:`parse_action_receipt_json` when hash agreement is itself
+    an ingestion precondition.
+    """
 
     if isinstance(raw, str):
         try:
@@ -235,9 +244,20 @@ def parse_action_receipt_json(
     _enforce_limits(document, limits)
     _validate_closed_members(document)
     try:
-        receipt = ActionReceipt.from_dict(document)
-    except ActionReceiptError as exc:
+        ActionReceipt.from_dict(document)
+    except (ActionReceiptError, AttributeError, KeyError, TypeError, ValueError) as exc:
         raise ReceiptParseError(str(exc)) from exc
+    return document
+
+
+def parse_action_receipt_json(
+    raw: bytes | bytearray | memoryview | str,
+    limits: ReceiptParseLimits = ReceiptParseLimits(),
+) -> ActionReceipt:
+    """Parse and validate one ActionReceipt from its exact served JSON bytes."""
+
+    document = parse_action_receipt_structure_json(raw, limits)
+    receipt = ActionReceipt.from_dict(document)
     recomputed = receipt.hashes()
     if document.get("hashes") != recomputed:
         mismatches = sorted(
