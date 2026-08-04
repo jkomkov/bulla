@@ -20,10 +20,11 @@
     }
   },
   "generated_archive_bytes": {
-    "metadata_sha256": "45a4d8365d10aad8716bdb5e84cfef5fa0ed45f75a3b961a95b095db463ac101"
+    "metadata_sha256": "0aa69dbe901b4c179bb67b0f7806868f2c530e44195f6c00ba201737f99328e6"
   },
   "required_root_exports": [
     "event_coverage",
+    "observed_record_sha256",
     "operational_envelope",
     "receipt_for",
     "verify_receipt",
