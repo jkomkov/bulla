@@ -31,7 +31,7 @@ import json
 from pathlib import Path
 
 from bulla.action_receipt import verify_receipt
-from bulla.coverage import event_coverage
+from bulla.coverage import event_coverage, observed_record_sha256
 from bulla.identity import LocalEd25519Signer
 from bulla.wrap import wrap_action
 
@@ -60,6 +60,17 @@ def _digest(obj: object) -> str:
     return "sha256:" + hashlib.sha256(
         json.dumps(obj, sort_keys=True, separators=(",", ":")).encode()
     ).hexdigest()
+
+
+def _flow_record(event_id: str, destination: str, route: str) -> dict:
+    record = {
+        "id": event_id,
+        "kind": "network.egress",
+        "destination": destination,
+        "route": route,
+    }
+    record["record_sha256"] = observed_record_sha256(record)
+    return record
 
 
 def emit_mandate() -> dict:
@@ -91,6 +102,7 @@ def gateway_decision(event_id: str, destination: str, mandate_ref: str) -> tuple
         "decision": decision,
         "mandate_ref": mandate_ref,
     }
+    flow_record = _flow_record(event_id, destination, "gateway")
     with wrap_action(
         "capability.decide", subject,
         principal=ROLES["gateway"].issuer,
@@ -100,6 +112,11 @@ def gateway_decision(event_id: str, destination: str, mandate_ref: str) -> tuple
         signer=ROLES["gateway"],
     ) as act:
         act.add_evidence("gateway_flow_record", _digest(subject), "self_asserted")
+        act.add_evidence(
+            "coverage_denominator_record",
+            flow_record["record_sha256"],
+            "self_asserted",
+        )
     return decision, act.receipt
 
 
@@ -216,9 +233,9 @@ def run() -> dict:
 
     # --- Path 3: independent denominator detects the unreceipted bypass ---
     observed = [
-        {"id": permitted_id, "kind": "network.egress"},
-        {"id": refused_id, "kind": "network.egress"},
-        {"id": bypass_id, "kind": "network.egress", "digest": _digest({"path": "proxy-bypass"})},
+        _flow_record(permitted_id, "internal-package-cache", "gateway"),
+        _flow_record(refused_id, "third-party-production", "gateway"),
+        _flow_record(bypass_id, "third-party-production", "proxy-bypass"),
     ]
     coverage = event_coverage(
         observed,

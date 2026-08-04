@@ -248,7 +248,7 @@ jobs:
           import bulla.experimental
 
           required = {
-              "verify_receipt", "event_coverage", "wrap_action",
+              "verify_receipt", "event_coverage", "observed_record_sha256", "wrap_action",
               "operational_envelope", "receipt_for",
           }
           missing = sorted(required - set(bulla.__all__))

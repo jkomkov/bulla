@@ -17,7 +17,7 @@
       "anchor_ref": {},
       "authorization": {
         "issuer": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6",
-        "proofValue": "aDOHjSGs5aOcQ+iTgqEb8jJGhhHJsWEZUa5hFDXw4UpoKC2AQ5+WyOCzngzQdv96CFbTMd4SWXsBpSvOIbL5Ag==",
+        "proofValue": "QjrAvTWKwlFqmK3I4ahW0Fx8KKXBSUuqgy0pXD3rf4+Z0YLEk7hfpasWhK4osX5oK5Ec+GzMcUnf7aTqi5WjAA==",
         "purpose": "authorization",
         "type": "bulla/ed25519-2026",
         "verificationMethod": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6"
@@ -31,13 +31,18 @@
           "grounding": "self_asserted",
           "hash": "sha256:69b83127d64a50cc1afa68a250c75e1d9405399db511cbd87f3fe960950835e8",
           "name": "gateway_flow_record"
+        },
+        {
+          "grounding": "self_asserted",
+          "hash": "sha256:e7a500be2543ffb1143e50e3f6840fb027fd24836dbc35cbcd5979d68a6bbfe6",
+          "name": "coverage_denominator_record"
         }
       ],
       "hashes": {
-        "attestation": "sha256:3e9492d53393803cc55990c1e3093e1bd9c1983a29c8c83a40ae4005792bd2c5",
-        "content": "sha256:30b93dfc3e6c4cb46065b7670bee49649443f99a2c2d48079645fea6ab342a8c",
-        "event": "sha256:0a604957f7efe9e39a3e62df216b369935c579d2c5a344c5a5c7b057e53dba9f",
-        "log_leaf": "sha256:dc69f4524e71166361ba51c35c5913b4e516431b14324e95d57719c7226e2599"
+        "attestation": "sha256:a204e117e21617fdf0e529eb8b0e3a3e16e6306453319ce0397ea87a239e6032",
+        "content": "sha256:50c2179fa0261d0dd27d0a558844f52656ea46a4e05d1f9ce268f842418a8027",
+        "event": "sha256:cb59bc79dd9197cc6bc9a1930328db5fb4096ba2c8a1ab4eae04fc5036888aeb",
+        "log_leaf": "sha256:a1ae6a9ffb50e5245b22ba2c2d8541c164f4465126eefe0aefdefee64acc1d92"
       },
       "kind": "action_receipt",
       "mandate": {
@@ -75,7 +80,7 @@
       "schema_version": "0.3",
       "signature": {
         "issuer": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6",
-        "proofValue": "Dfl+vNo06nO72k7xUdu48kFmnrajbJYYtkCHXOUzzmSeLQqDLvN2uvuJ/ogLF3ZZ5Dypu3YcguaDdJFkACIHDg==",
+        "proofValue": "Js3zMG4SevLWSwMYh6GBunAyScroWyQCQLZietuf2dnWuncIy9eI7a8zcg49Szv7eoi0vAYuIw56Rwbq7ghJAQ==",
         "purpose": "content",
         "type": "bulla/ed25519-2026",
         "verificationMethod": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6"
@@ -100,7 +105,7 @@
       "anchor_ref": {},
       "authorization": {
         "issuer": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6",
-        "proofValue": "IQgynUtkm3+dxlWDvlz2Nb21mGmbHvjZnvafP6NlQFnZYb+jya1J/0XHhg07FrtcRA/4YSUxksQwqmSAwaZECA==",
+        "proofValue": "4L+F0gbL/AVrUeWaYv+TksqeeG2vr5v6pMaQ6vg9b9W0lfHsMQE8fJNVnvJcr/YED/v2736BERs1NVgCeTNtCg==",
         "purpose": "authorization",
         "type": "bulla/ed25519-2026",
         "verificationMethod": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6"
@@ -114,13 +119,18 @@
           "grounding": "self_asserted",
           "hash": "sha256:0c2cf6318c356f143696709aa22009eb46a92c63c6bfb25928426cc48a289034",
           "name": "gateway_flow_record"
+        },
+        {
+          "grounding": "self_asserted",
+          "hash": "sha256:35f5f60f7cb1ce479db575efa072eb722db2650d98ce5903a86269478c0421a9",
+          "name": "coverage_denominator_record"
         }
       ],
       "hashes": {
-        "attestation": "sha256:a99e232d19bf5dd7b026416db92d4e1670b085d3589268be10386708fed6158c",
-        "content": "sha256:9ef1e890ebb8921931abd38465e524f0d74a7e04e7d614e41cf640e1d760f34c",
-        "event": "sha256:7d2278cbc0688a60a17c180b21a110f18beb6d370b0b34b1b72af33b665db4ff",
-        "log_leaf": "sha256:38dc73893d4152ac15d5f382a4ad8d5bdbf5fd72a5eb35e5963a2bf2c696e323"
+        "attestation": "sha256:dcf18665fb610e69844a29811f45447b8c3890ef6a57239877cae9c3106d89fa",
+        "content": "sha256:93c57527c7c754975503eaa2ee6eaacc46f86071f97bcb3656aa1a1ca1f3c27e",
+        "event": "sha256:e6fcbc76ce6e62352dafb393b8531224f2c4b6d6f1d3c454b6200ffcfa78c401",
+        "log_leaf": "sha256:92789203d36c1f47e7de9a642c45e074e4a22dbd390306c18b282494b8c27fcf"
       },
       "kind": "action_receipt",
       "mandate": {
@@ -158,7 +168,7 @@
       "schema_version": "0.3",
       "signature": {
         "issuer": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6",
-        "proofValue": "hVB6HJTVa4IV+XGhDnBcAGV4LhP0BuYT3UI8ml3XYAbKCuykIZgvjfrrAqnxAlVLIf51+TT18PtRyYU4xktbBw==",
+        "proofValue": "a5h+/QnFmMRF8YDtiGjWfNn4ZAYtzyDAC0tZyBGpOejFjECAY3UbFNXBYlQfst8acfMS5id8zvZP4GAkWaGaBg==",
         "purpose": "content",
         "type": "bulla/ed25519-2026",
         "verificationMethod": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6"
@@ -173,6 +183,12 @@
       "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6"
     ],
     "anchor": "network-flow-log",
+    "binding_mismatches": [],
+    "binding_modes": {
+      "evt-0001-internal-cache-fetch": "record_sha256",
+      "evt-0002-public-internet-egress": "record_sha256",
+      "evt-0003-proxy-bypass-egress": "record_sha256"
+    },
     "coverage": 0.6667,
     "covered": [
       "evt-0001-internal-cache-fetch",
@@ -186,9 +202,11 @@
     "total_anchored": 3,
     "unreceipted": [
       {
-        "digest": "sha256:536c4e824590ba6adaae26f0a37bdda6e3a3805ea1c959c73e88e3f5050e9e08",
+        "destination": "third-party-production",
         "id": "evt-0003-proxy-bypass-egress",
-        "kind": "network.egress"
+        "kind": "network.egress",
+        "record_sha256": "sha256:cd1b451c779389b3b8fffb9731288fc7b394cadb8c91a07c8d18de198efb17e2",
+        "route": "proxy-bypass"
       }
     ],
     "unreceipted_delta": [
@@ -203,7 +221,7 @@
       },
       "subject": {
         "challenge_channel": "forum://incident-dispute",
-        "coverage_digest": "sha256:a18708d749370e52935f9d7cbc760188df5372dd6589e8cbbd15386a925558be",
+        "coverage_digest": "sha256:a4b83e8fd729b7848253de60a92782213cf98078aac7e5783bd5bd90ea9a137a",
         "findings": {
           "counterparty_confirmed": [],
           "inferred": [
@@ -224,7 +242,7 @@
         },
         "parent_refs": {
           "mandate": "sha256:5a53bf2e8b9ae03bcd4e689208101f52ff14013c9a88fb280cb9f3024d968c87",
-          "trajectory": "sha256:5c6d335fd87c2a8e838392662eb02c23530efa50085013c3a67c339dc109b13a"
+          "trajectory": "sha256:ddee2404fe665da8f9aadd3ba67489a967e4e53c4c129b3aa6ccc5b104dfd7ff"
         },
         "profile": "bulla.cyber-eval/0.2-draft",
         "sensitive_artifacts": [
@@ -242,18 +260,18 @@
         ],
         "timeline_attestation_hashes": [
           "sha256:5a53bf2e8b9ae03bcd4e689208101f52ff14013c9a88fb280cb9f3024d968c87",
-          "sha256:3e9492d53393803cc55990c1e3093e1bd9c1983a29c8c83a40ae4005792bd2c5",
-          "sha256:a99e232d19bf5dd7b026416db92d4e1670b085d3589268be10386708fed6158c",
-          "sha256:5c6d335fd87c2a8e838392662eb02c23530efa50085013c3a67c339dc109b13a"
+          "sha256:a204e117e21617fdf0e529eb8b0e3a3e16e6306453319ce0397ea87a239e6032",
+          "sha256:dcf18665fb610e69844a29811f45447b8c3890ef6a57239877cae9c3106d89fa",
+          "sha256:ddee2404fe665da8f9aadd3ba67489a967e4e53c4c129b3aa6ccc5b104dfd7ff"
         ],
-        "timeline_digest": "sha256:c2462c6ffb54049124faf432cdff47ef49f325296c63c1835464e52f4c3795a0"
+        "timeline_digest": "sha256:9d4a6ec31331262cd4902c55772fe720e07c6c4086b6f10e8649f536ffaaf3ec"
       },
       "type": "incident.handoff"
     },
     "anchor_ref": {},
     "authorization": {
       "issuer": "did:key:z6MkoSX8KCLddAZxpC8SCRCtsDckXU3xsKXZLnRViCyt9PSY",
-      "proofValue": "fzNfCTLgUHzwWQ0nlb47LW1EOOIJfLnlBOV2OJl3Uc+dgRbXdbsJXKVm/lQp83KTKIfQ3Ih1q4MQD6zFAVyDBQ==",
+      "proofValue": "wiCPYQ/P1HdxtcyHUinrND1HCpiTFgeeW80175w0TVtUOan1bBHvCrCIAGsB/3eoixMKygQSRGFW57nOzw76Dw==",
       "purpose": "authorization",
       "type": "bulla/ed25519-2026",
       "verificationMethod": "did:key:z6MkoSX8KCLddAZxpC8SCRCtsDckXU3xsKXZLnRViCyt9PSY"
@@ -264,10 +282,10 @@
     },
     "evidence_refs": [],
     "hashes": {
-      "attestation": "sha256:9328aa9d5ac8faf654094c0a2708c4377eeae49677ce0170660e77070da45e14",
-      "content": "sha256:9d41458937974c062301556a2ae99ecfde1e9bf923c85e96c8e62efb81e3aa7c",
-      "event": "sha256:56336d3d1ef60bcf35020803d9560af223a514dbe19e5ce4453e8d24948810f6",
-      "log_leaf": "sha256:c9246ee467a73a17ba886ce27a6f3e454cd56b8c376e9209cd58d7f1855fa1de"
+      "attestation": "sha256:15b479a2e026073d2e2b97321fb09beff4027e2365716f2fb67a4e5206987ed2",
+      "content": "sha256:67de76fc5944c1d2628da5ca42b4b6a74ad3eb3b78f68e932ca233fd3b821c4e",
+      "event": "sha256:ec162e065d9be42b69d0ba823efbba0b11050b01d7f80f2d59a74c17c58a908c",
+      "log_leaf": "sha256:9ebf3b6b18536bfcb38817fe45efb1495735ebf646ee309d6cefab6be31df891"
     },
     "kind": "action_receipt",
     "mandate": {
@@ -305,7 +323,7 @@
     "schema_version": "0.3",
     "signature": {
       "issuer": "did:key:z6MkoSX8KCLddAZxpC8SCRCtsDckXU3xsKXZLnRViCyt9PSY",
-      "proofValue": "tE1+QUEX1abMO5CQAtdxRB0fm5Wd8/occIX0I+WQNm0/ysVTu1YYcdullZ3X4Biccf5X5SE+zCZcra7634xSCg==",
+      "proofValue": "VsYO4/bcNgRVub3Txggvdpvgx0oRrO/EflPWYO1LeLkb7MMCHTG5SrkAuS2rYYKhwx3S36Z/QQfykmqkK0uwCw==",
       "purpose": "content",
       "type": "bulla/ed25519-2026",
       "verificationMethod": "did:key:z6MkoSX8KCLddAZxpC8SCRCtsDckXU3xsKXZLnRViCyt9PSY"
@@ -402,20 +420,28 @@
   },
   "observed_events": [
     {
+      "destination": "internal-package-cache",
       "id": "evt-0001-internal-cache-fetch",
-      "kind": "network.egress"
+      "kind": "network.egress",
+      "record_sha256": "sha256:e7a500be2543ffb1143e50e3f6840fb027fd24836dbc35cbcd5979d68a6bbfe6",
+      "route": "gateway"
     },
     {
+      "destination": "third-party-production",
       "id": "evt-0002-public-internet-egress",
-      "kind": "network.egress"
+      "kind": "network.egress",
+      "record_sha256": "sha256:35f5f60f7cb1ce479db575efa072eb722db2650d98ce5903a86269478c0421a9",
+      "route": "gateway"
     },
     {
-      "digest": "sha256:536c4e824590ba6adaae26f0a37bdda6e3a3805ea1c959c73e88e3f5050e9e08",
+      "destination": "third-party-production",
       "id": "evt-0003-proxy-bypass-egress",
-      "kind": "network.egress"
+      "kind": "network.egress",
+      "record_sha256": "sha256:cd1b451c779389b3b8fffb9731288fc7b394cadb8c91a07c8d18de198efb17e2",
+      "route": "proxy-bypass"
     }
   ],
-  "observed_events_digest": "sha256:024bc4ae159ace7beec89bfb8e30698b7a7c7d00677be6d9f8c7d1a0dfa8e0d7",
+  "observed_events_digest": "sha256:a0ceac175c0d8d5b17e79ee0be5e71ddd404c862a5ce6e0b03c642579e824075",
   "profile": "bulla.cyber-eval/0.2-draft",
   "signer_topology": {
     "affected-service": "did:key:z6MkptoUwCHkzEFLBmbCZ9N7D5WSvrcayUNJJsR6XQqbt9tY",
@@ -435,8 +461,8 @@
       },
       "subject": {
         "considered_attestation_hashes": [
-          "sha256:3e9492d53393803cc55990c1e3093e1bd9c1983a29c8c83a40ae4005792bd2c5",
-          "sha256:a99e232d19bf5dd7b026416db92d4e1670b085d3589268be10386708fed6158c"
+          "sha256:a204e117e21617fdf0e529eb8b0e3a3e16e6306453319ce0397ea87a239e6032",
+          "sha256:dcf18665fb610e69844a29811f45447b8c3890ef6a57239877cae9c3106d89fa"
         ],
         "freeze_actions": [
           "revoke-credentials",
@@ -454,7 +480,7 @@
     "anchor_ref": {},
     "authorization": {
       "issuer": "did:key:z6MkmCqjNbwJbx1RDfyqvpWAEp92HbV8K45RU6zuFfDXw4PZ",
-      "proofValue": "UwO17oDlUcgzh/MkHQQPZHH+nAfctkpryRi/cuEE9AU879eE2JaCClHjq8a7I3DdqxeQHJOXW2CNNHEMiGdsAQ==",
+      "proofValue": "2ExxU/ZQtMu71dK9n633nrdzgXfs45FPAFkVyWQiRfWdbBdhG37Do2DU/bwq549+uuY1HybLqoxiwapoPd9PDg==",
       "purpose": "authorization",
       "type": "bulla/ed25519-2026",
       "verificationMethod": "did:key:z6MkmCqjNbwJbx1RDfyqvpWAEp92HbV8K45RU6zuFfDXw4PZ"
@@ -465,10 +491,10 @@
     },
     "evidence_refs": [],
     "hashes": {
-      "attestation": "sha256:5c6d335fd87c2a8e838392662eb02c23530efa50085013c3a67c339dc109b13a",
-      "content": "sha256:ee5f860c8967dc52c9ed08887babde0060fb47f59008fc4aa5db0e89c9b6605c",
-      "event": "sha256:e218e27dabd9e45c0f90fc09dcdc345d1417d196eccc2fe3e5309b16e366511d",
-      "log_leaf": "sha256:fa491e415afda3d8e5ed0ed7c488e00af57450bdb52950802261a0dadfbc8421"
+      "attestation": "sha256:ddee2404fe665da8f9aadd3ba67489a967e4e53c4c129b3aa6ccc5b104dfd7ff",
+      "content": "sha256:5bb80911b3febd029d730f482a6b4cbb59f5b8f8478277fee2133359035586a6",
+      "event": "sha256:852eefb1b18cac84db1ce585a829428b51e52d67b38e9038cdad81ddb3ec6b25",
+      "log_leaf": "sha256:2a56405c745db8d84964650e331bce65da596cf144acc241d9ee74e89fbb8a36"
     },
     "kind": "action_receipt",
     "mandate": {
@@ -506,7 +532,7 @@
     "schema_version": "0.3",
     "signature": {
       "issuer": "did:key:z6MkmCqjNbwJbx1RDfyqvpWAEp92HbV8K45RU6zuFfDXw4PZ",
-      "proofValue": "7+l7qRZXarsZ+tORWGKfSUc+7ymb7tcsQA94JD8a3ZFmz6cfwhDQNAZCuTplzjBQQvToE/tWi/DJuRdNXXUQDg==",
+      "proofValue": "Sy+KHsJKZW9cVsCddNFt7ydTMzqWVAyF6wRND115g4W3GMQL6un0CQb/NVXx7hlU922y8L/pDowHd4GBMYWUDA==",
       "purpose": "content",
       "type": "bulla/ed25519-2026",
       "verificationMethod": "did:key:z6MkmCqjNbwJbx1RDfyqvpWAEp92HbV8K45RU6zuFfDXw4PZ"

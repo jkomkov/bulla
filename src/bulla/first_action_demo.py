@@ -17,7 +17,7 @@ import tempfile
 from typing import Any
 
 from bulla.action_receipt import verify_receipt
-from bulla.coverage import event_coverage
+from bulla.coverage import event_coverage, observed_record_sha256
 from bulla.receipt_drill import ReceiptDrillError, run_receipt_drill
 from bulla.wrap import wrap_action
 
@@ -116,13 +116,15 @@ def _payment_convention() -> dict:
 
 
 def _receiver_record(event_id: str, amount_minor: int) -> dict:
-    return {
+    record = {
         "id": event_id,
         "kind": "payments.charge",
         "amount_minor": amount_minor,
         "currency": "USD",
         "receiver": "constructed-local-receiver",
     }
+    record["record_sha256"] = observed_record_sha256(record)
+    return record
 
 
 def _strip_generated_at(report: dict) -> dict:
@@ -202,8 +204,7 @@ def run_first_action_demo(output: Path | None = None) -> tuple[Path, dict]:
         # The receiver record is the separate coverage denominator.  In this
         # constructed scenario the local call is the action being wrapped.
         observed.append(primary)
-        receiver_payload = _json_bytes(primary)
-        receiver_digest = "sha256:" + _sha256(receiver_payload)
+        receiver_digest = primary["record_sha256"]
         action.add_evidence("constructed_receiver_record", receiver_digest, "self_asserted")
         action.set_result(receiver_digest)
     if scope.receipt is None:

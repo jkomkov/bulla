@@ -2,6 +2,12 @@
   "coverage": {
     "accepted_issuers": null,
     "anchor": "agent-harness-log",
+    "binding_mismatches": [],
+    "binding_modes": {
+      "fs.read:0": "record_sha256",
+      "fs.write:2": "record_sha256",
+      "http.get:1": "record_sha256"
+    },
     "coverage": 1.0,
     "covered": [
       "fs.read:0",
@@ -20,15 +26,18 @@
   "observed_actions": [
     {
       "id": "fs.read:0",
-      "kind": "fs.read"
+      "kind": "fs.read",
+      "record_sha256": "sha256:d570a1d5770d68becf617c7592b092c8e87e90163ab97e0f0c4a05af08be5aa2"
     },
     {
       "id": "http.get:1",
-      "kind": "http.get"
+      "kind": "http.get",
+      "record_sha256": "sha256:fe0b45ad134754bc9ec432a47b70edab0a3c405107af4892c50aa8a65a5caf5a"
     },
     {
       "id": "fs.write:2",
-      "kind": "fs.write"
+      "kind": "fs.write",
+      "record_sha256": "sha256:4052352e79681b989cfeec452c41ad0549ce7a080cd1db5ec3e6c9b36a608663"
     }
   ],
   "receipts": [
@@ -48,12 +57,18 @@
       "diagnostic_ref": {
         "status": "not_applicable"
       },
-      "evidence_refs": [],
+      "evidence_refs": [
+        {
+          "grounding": "self_asserted",
+          "hash": "sha256:d570a1d5770d68becf617c7592b092c8e87e90163ab97e0f0c4a05af08be5aa2",
+          "name": "harness_action_record"
+        }
+      ],
       "hashes": {
-        "attestation": "sha256:a0122689a99a77608631551f879dfc94ddfeeb7f38c1635557ffc76a71a1956a",
-        "content": "sha256:b12bea5d8fceef5c89a1e73f22dd3b43c63622fea2b0ebbdcce77ec5cc04b797",
-        "event": "sha256:88f39cf093c3c113686c97d60a1f5352713d5644e51f2516fe0597b4c2cd89a5",
-        "log_leaf": "sha256:eb4171f61f5df4d38c6167b1f9f0547ba93bf7bead9fd9f72c54533e30295c47"
+        "attestation": "sha256:b8eeb9fb3d6c9225cd688f86b3b90eeaa89d36d4ce33eb5a7640956f359a0ae5",
+        "content": "sha256:7377aa2e2a0adeb455ae7afb82fcd009155ab58a8f7b8544d6b4edf5fbcf549e",
+        "event": "sha256:85e6e37ed606a468b8bd36124f492d5d9c5f01012bb5d5005bd8abb0de8568d1",
+        "log_leaf": "sha256:1ba7767c5ab7626b36a4fc824b3473a2ce3fefe992909906f5eb3abc96d3686d"
       },
       "kind": "action_receipt",
       "mandate": {
@@ -109,12 +124,18 @@
       "diagnostic_ref": {
         "status": "not_applicable"
       },
-      "evidence_refs": [],
+      "evidence_refs": [
+        {
+          "grounding": "self_asserted",
+          "hash": "sha256:fe0b45ad134754bc9ec432a47b70edab0a3c405107af4892c50aa8a65a5caf5a",
+          "name": "harness_action_record"
+        }
+      ],
       "hashes": {
-        "attestation": "sha256:30426100c1cd18d158c3ca3b54b8d593e3f2af34379229781e15d5da92c61f41",
-        "content": "sha256:6c25740bb13d174e52532ec330857d46c6d1bebc3b0dbe0fb37bc3a12661e7c6",
-        "event": "sha256:8faf7773cd25b9893b103c62f4643b5ba8a29257534cfa023e1feee2157679ad",
-        "log_leaf": "sha256:5a28596aa7191db22eadc31cbe23fce620bc5d1dbde449458abb1f2741234c8f"
+        "attestation": "sha256:79f707865fc8e0386060cef096977ac2f41fc525aa90369808c1cbec1c195a53",
+        "content": "sha256:47d14e3ae53c9fd84b6126e623a45f2961a0f8496da226671603bf6d7bd12dd5",
+        "event": "sha256:73dd15d89d878c48c190166fca32ba07c57c22cc48fe7907b0dd15ba9c8064c7",
+        "log_leaf": "sha256:ade40cdd3ea3c5ece9d137411885416545d90a3296105ee1aa2405a790eeff97"
       },
       "kind": "action_receipt",
       "mandate": {
@@ -171,12 +192,18 @@
       "diagnostic_ref": {
         "status": "not_applicable"
       },
-      "evidence_refs": [],
+      "evidence_refs": [
+        {
+          "grounding": "self_asserted",
+          "hash": "sha256:4052352e79681b989cfeec452c41ad0549ce7a080cd1db5ec3e6c9b36a608663",
+          "name": "harness_action_record"
+        }
+      ],
       "hashes": {
-        "attestation": "sha256:7dbcedc5a1fcff105512d9136872599d3b5e76d1c35b7822831592758a643c39",
-        "content": "sha256:ee6356e1b965aab6ca1dd153dd3321418c64888945a7f518fe4e6916ba666b93",
-        "event": "sha256:a634ca3a82736e78b61e210d291834860cea1b66a867d91b2fdfb0493937a8ed",
-        "log_leaf": "sha256:988d5a20fafffb82224b986b0a8677422ef4755d1e8435166488185014d86add"
+        "attestation": "sha256:1d7b132a2d77b568053ec5193ce9df58bcf2ce5d553fc0a37d6f87af3dec2f19",
+        "content": "sha256:5ef8c22e480304057d8e649609d6107f41f6209f8dba7d327f1fd1ed8e3fac37",
+        "event": "sha256:7cccabf74a9be5cf3f854f59e872fe6bfafb5805c6d557ede224694524f4862e",
+        "log_leaf": "sha256:086ec8cdccfa0ada02783f8537815ae208e5abc6609ccdb861dd170b44b31c86"
       },
       "kind": "action_receipt",
       "mandate": {

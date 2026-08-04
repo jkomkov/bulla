@@ -37,10 +37,10 @@ def _report(event_id: str) -> dict:
 def test_selective_publication_is_detected() -> None:
     """Four attempts, three published reports: the fourth is named."""
     register = [
-        {"id": "rep-1", "claim": "throughput"},
-        {"id": "rep-2", "claim": "latency"},
-        {"id": "rep-3", "claim": "accuracy"},
-        {"id": "rep-4", "claim": "cost"},
+        {"id": "rep-1"},
+        {"id": "rep-2"},
+        {"id": "rep-3"},
+        {"id": "rep-4"},
     ]
     published = [_report("rep-1"), _report("rep-2"), _report("rep-3")]
 

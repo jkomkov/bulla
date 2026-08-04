@@ -29,7 +29,9 @@ def test_every_receipt_verifies_and_the_payment_is_still_missing() -> None:
     cov = output["coverage"]
     assert cov["coverage"] == 0.75
     assert cov["unreceipted_delta"] == ["payments.charge:3"]
-    assert cov["unreceipted"] == [{"id": "payments.charge:3", "kind": "payments.charge"}]
+    assert cov["unreceipted"][0]["id"] == "payments.charge:3"
+    assert cov["unreceipted"][0]["kind"] == "payments.charge"
+    assert cov["unreceipted"][0]["record_sha256"].startswith("sha256:")
     assert cov["phantom_receipt_ids"] == []
     assert cov["invalid_receipts"] == []
 

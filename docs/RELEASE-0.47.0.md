@@ -54,10 +54,11 @@ code may ship. The owner instruction above is the release authorization.
 
 ## Publication order
 
-1. Merge the public Bulla and monorepo integration commits after their gates
-   pass. The exact green public `main` commit is the sole `source_commit`; a PR
-   head, synthetic merge commit, pre-rebase commit, or pre-retarget commit is
-   not the release source commit.
+1. Merge only the public Bulla commit after its gates pass. Keep the monorepo
+   integration PR unmerged while its published-package evidence still names
+   0.46.0. The exact green public `main` commit is the sole `source_commit`; a
+   PR head, synthetic merge commit, pre-rebase commit, or pre-retarget commit
+   is not the release source commit.
 2. Run trusted publication for that exact Bulla commit. If PyPI has already
    consumed 0.47.0, record the failed slot and continue with 0.47.1.
 3. Verify PyPI's accepted wheel, source distribution, and publisher attestations.
@@ -65,8 +66,9 @@ code may ship. The owner instruction above is the release authorization.
    source distribution, and verification-kit digest.
 5. Generate and set the complete GitHub release body before changing the draft
    to published, then verify every immutable asset.
-6. Refresh Glyph's published-artifact evidence, deploy the matching surface,
-   and rerun the production stranger journey.
+6. Refresh Glyph's published-package and artifact evidence from the accepted
+   release, rerun its gates, then merge and deploy the matching monorepo
+   surface. Rerun the production stranger journey after deployment.
 
 PyPI publication consumes the version. If PyPI accepts a defective release,
 do not delete or replace it. Record the defect and publish a correction version.

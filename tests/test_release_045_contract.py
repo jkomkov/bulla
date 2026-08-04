@@ -64,7 +64,7 @@ def test_release_version_and_status_language_are_synchronized() -> None:
 def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
     contract = (ROOT / "docs/RELEASE-0.47.0.md").read_text(encoding="utf-8")
     assert "package version and the\nreceipt format version are separate clocks" in contract
-    assert "a PR\n   head, synthetic merge commit, pre-rebase commit, or" in contract
+    assert "PR head, synthetic merge commit, pre-rebase commit, or" in " ".join(contract.split())
     assert "The exact green public `main` commit is the sole `source_commit`" in contract
     assert "PyPI publication consumes the version." in contract
     assert "Repository-owner instruction recorded 2026-08-04: implement the First" in contract
@@ -74,7 +74,7 @@ def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
     assert "APPROVE GLYPH" not in contract
     assert "deployment_evidence_sha256" not in contract
     assert contract.index("Verify PyPI's accepted wheel") < contract.index(
-        "Refresh Glyph's published-artifact evidence"
+        "Refresh Glyph's published-package and artifact evidence"
     )
 
 

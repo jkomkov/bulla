@@ -165,7 +165,9 @@ authenticate the authority or compute a reliance decision.
 ## Check coverage
 
 `event_coverage` compares valid receipts with an action record supplied outside
-the receipt set:
+the receipt set. For an exact retained-record match, add `record_sha256` using
+`observed_record_sha256`; the receipt must carry the same digest in its result
+or evidence references. Without that field, coverage is action-id correlation:
 
 ```python
 from bulla.action_receipt import verify_receipt

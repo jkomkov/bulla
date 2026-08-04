@@ -25,6 +25,7 @@ list beside it.  Consumers should render the instrument, not a vanity number.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -480,8 +481,9 @@ def coverage_headline(reports: list[dict]) -> str:
 # unmatched set — not the validity of the receipts that exist — is the
 # high-severity finding.
 #
-# The reconciliation keys on the observed action id verbatim (no SemVer
-# normalization), so opaque ids reconcile correctly and in stable order.
+# The reconciliation always keys on the observed action id verbatim. An
+# optional canonical record digest strengthens that correlation into an exact
+# retained-record binding; both modes remain explicit in the returned rows.
 
 _RECEIPT_ACTION_ID_PATHS = (
     ("action", "subject", "event_id"),
@@ -492,6 +494,50 @@ _EVENT_COVERAGE_DEPTHS = {"digest": 1, "attestation": 2}
 _EVENT_RECEIPT_LIMITS = ReceiptParseLimits()
 _EVENT_RECEIPT_MAX_FILES = 512
 _EVENT_RECEIPT_MAX_TOTAL_BYTES = 16_777_216
+
+
+def observed_record_sha256(record: dict) -> str:
+    """Digest an observed action record without its self-describing digest.
+
+    ``record_sha256`` is optional for compatibility. When it is present,
+    event coverage validates it and requires a content-bound receipt result or
+    evidence reference to carry the same digest. This prevents an action id
+    from clearing a receipt whose retained action facts differ.
+    """
+    if not isinstance(record, dict):
+        raise ValueError("observed action record must be an object")
+    preimage = {key: value for key, value in record.items() if key != "record_sha256"}
+    try:
+        payload = json.dumps(
+            preimage,
+            sort_keys=True,
+            separators=(",", ":"),
+            allow_nan=False,
+        ).encode("utf-8")
+    except (TypeError, ValueError) as exc:
+        raise ValueError(f"observed action record is not canonical JSON: {exc}") from exc
+    return "sha256:" + hashlib.sha256(payload).hexdigest()
+
+
+def _receipt_record_digests(doc: dict) -> set[str]:
+    """Return content-bound result and evidence digests from one receipt."""
+    digests: set[str] = set()
+    action = doc.get("action")
+    if isinstance(action, dict):
+        outcome = action.get("outcome")
+        if isinstance(outcome, dict):
+            result_hash = outcome.get("result_hash")
+            if isinstance(result_hash, str) and result_hash:
+                digests.add(result_hash)
+    evidence_refs = doc.get("evidence_refs")
+    if isinstance(evidence_refs, list):
+        for evidence in evidence_refs:
+            if not isinstance(evidence, dict):
+                continue
+            digest = evidence.get("hash")
+            if isinstance(digest, str) and digest:
+                digests.add(digest)
+    return digests
 
 
 def _read_regular_receipt(path: Path) -> bytes:
@@ -554,8 +600,11 @@ def event_coverage(
     """Reconcile an independent record of observed consequential actions against
     emitted receipts.
 
-    ``observed`` is a list of action records, each with a stable ``id`` (and
-    optionally ``kind`` / ``digest``). ``receipts`` is a directory of receipt
+    ``observed`` is a list of action records, each with a stable ``id``. An
+    optional ``record_sha256`` is the Bulla canonical-JSON digest of every
+    other field in that observed record. When supplied, the receipt must carry
+    that exact digest in its content-bound result or evidence references; an id
+    match alone cannot cover the action. ``receipts`` is a directory of receipt
     JSON, or a list of receipt dicts. Returns the ``coverage_report`` schema
     keyed on observed ids, plus:
 
@@ -602,6 +651,19 @@ def event_coverage(
             raise ValueError(f"observed[{index}].id must be a non-empty string")
         if action_id in seen:
             raise ValueError(f"duplicate observed action id: {action_id!r}")
+        record_digest = record.get("record_sha256")
+        if record_digest is None and set(record) != {"id"}:
+            raise ValueError(
+                f"observed[{index}] carries action facts without record_sha256"
+            )
+        if record_digest is not None:
+            if (
+                not isinstance(record_digest, str)
+                or record_digest != observed_record_sha256(record)
+            ):
+                raise ValueError(
+                    f"observed[{index}].record_sha256 does not match the observed record"
+                )
         seen.add(action_id)
         observed_ids.append(action_id)
         by_id[action_id] = record
@@ -647,6 +709,7 @@ def event_coverage(
         ]
 
     attested: set[str] = set()
+    receipts_by_id: dict[str, list[tuple[str, set[str]]]] = {}
     for source, raw_doc in receipt_inputs:
         if not isinstance(raw_doc, dict):
             invalid_receipts.append(
@@ -695,9 +758,34 @@ def event_coverage(
             )
             continue
         attested |= ids
+        action_id = next(iter(ids))
+        receipts_by_id.setdefault(action_id, []).append(
+            (source, _receipt_record_digests(raw_doc))
+        )
 
-    covered = [aid for aid in observed_ids if aid in attested]
-    missing = [aid for aid in observed_ids if aid not in attested]
+    binding_mismatches: list[dict] = []
+    covered: list[str] = []
+    for action_id in observed_ids:
+        candidates = receipts_by_id.get(action_id, [])
+        record_digest = by_id[action_id].get("record_sha256")
+        if candidates and (
+            record_digest is None
+            or any(record_digest in digests for _, digests in candidates)
+        ):
+            covered.append(action_id)
+            continue
+        if candidates and isinstance(record_digest, str):
+            binding_mismatches.append(
+                {
+                    "id": action_id,
+                    "observed_record_sha256": record_digest,
+                    "receipt_sources": sorted(source for source, _ in candidates),
+                    "retained_receipt_digests": sorted(
+                        {digest for _, digests in candidates for digest in digests}
+                    ),
+                }
+            )
+    missing = [aid for aid in observed_ids if aid not in covered]
     total = len(observed_ids)
     return {
         "schema_version": 1,
@@ -710,6 +798,15 @@ def event_coverage(
         "covered": covered,
         "unreceipted": [by_id[aid] for aid in missing],
         "phantom_receipt_ids": sorted(attested - set(observed_ids)),
+        "binding_modes": {
+            action_id: (
+                "record_sha256"
+                if isinstance(by_id[action_id].get("record_sha256"), str)
+                else "action_id"
+            )
+            for action_id in observed_ids
+        },
+        "binding_mismatches": binding_mismatches,
         "minimum_verification_depth": minimum_verification_depth,
         "accepted_issuers": (
             sorted(accepted_issuers) if accepted_issuers is not None else None
