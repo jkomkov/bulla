@@ -16,7 +16,7 @@ Bulla supports Python 3.10 and later. Core receipt creation and digest
 verification require no hosted service.
 
 ```bash
-python -m pip install "bulla==0.47.0"
+python -m pip install "bulla==0.47.1"
 bulla demo
 ```
 

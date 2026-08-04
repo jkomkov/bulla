@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package": "bulla",
-  "release": "0.47.0",
+  "release": "0.47.1",
   "normative_action_receipt": "0.2",
   "released_experimental_action_receipts": [
     "0.3",
@@ -11,16 +11,16 @@
     "wheel": {
       "algorithm": "sha256-sorted-posix-lines-v1",
       "count": 194,
-      "sha256": "0034a725fe4a88c1e424934668218b21bae4541deafb005a604eda49106ca889"
+      "sha256": "dc4600b973b850f6144e2be890d2569b6e4f23f886b70e43ba2cde0813448449"
     },
     "sdist": {
       "algorithm": "sha256-sorted-posix-lines-v1",
       "count": 1352,
-      "sha256": "de400591d6e27bac3a0f89d57aa6457d85141d68e798884c27e72d56a498dfc0"
+      "sha256": "fa1ca26bfc838a9e91b6d5e6e45cad1c07724d4e4d01725c6a500c8e4a5efd32"
     }
   },
   "generated_archive_bytes": {
-    "metadata_sha256": "0aa69dbe901b4c179bb67b0f7806868f2c530e44195f6c00ba201737f99328e6"
+    "metadata_sha256": "06a2291d82f108e5b1e5d834e8bb72055a66d83c65a2fa84f44b927dcd5ac273"
   },
   "required_root_exports": [
     "event_coverage",
@@ -52,7 +52,7 @@
     ".github/release-finalization-requirements.txt",
     ".github/workflows/audit-release-slots.yml",
     "distribution-policy.json",
-    "docs/RELEASE-0.47.0.md",
+    "docs/RELEASE-0.47.1.md",
     "docs/RELEASE-LINEAGE.md",
     "examples/wrap-your-agent/run_demo.py",
     "releases/release-repository-controls.json",
