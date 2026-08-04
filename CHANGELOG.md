@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.47.0 — 2026-08-04
+
+**First action to missing action.** This release composes the published receipt
+primitives into one stable product demonstration. The normative ActionReceipt
+v0.2 format and retained verification kit remain unchanged.
+
+- Adds `bulla demo`, which runs a constructed local payment action through
+  `wrap_action`, retains its receipt, verifies it, rejects an altered copy,
+  reconciles a second unreceipted action, and runs the offline drill.
+- Writes inspectable deterministic artifacts without overwriting an existing
+  output path and reports coverage as `1/1` before the bypass and `1/2` after
+  it, naming `pay_demo_043` as the unreceipted action.
+- Corrects the wrapper defaults to emit a non-empty timestamp and an explicit
+  `not_applicable` diagnostic binding, and adds optional convention and fixed-
+  timestamp inputs. Default automatically emitted v0.2 receipts now satisfy
+  the retained checker without exposing the wire format to the application.
+- Reorders the CLI and package front doors around receipt creation and keeps
+  event occurrence, authority authenticity, denominator completeness, and
+  reliance outside the demonstration's claims.
+
 ## 0.46.0 — 2026-08-03
 
 **Terminal verifier rehearsal.** This release adds a stable, bounded way to

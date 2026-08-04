@@ -31,12 +31,13 @@ import json
 from pathlib import Path
 
 from bulla.action_receipt import verify_receipt
-from bulla.coverage import event_coverage
+from bulla.coverage import event_coverage, observed_record_sha256
 from bulla.identity import LocalEd25519Signer
 from bulla.wrap import wrap_action
 
 _HERE = Path(__file__).resolve().parent
 _OUT = _HERE / "demo-output.json"
+_FIXTURE_TIMESTAMP = "2026-07-21T00:00:00Z"
 
 # Deterministic role keys. No single party controls all of them; the evaluated
 # agent controls NONE of the capability-receipt keys.
@@ -61,12 +62,25 @@ def _digest(obj: object) -> str:
     ).hexdigest()
 
 
+def _flow_record(event_id: str, destination: str, route: str) -> dict:
+    record = {
+        "id": event_id,
+        "kind": "network.egress",
+        "destination": destination,
+        "route": route,
+    }
+    record["record_sha256"] = observed_record_sha256(record)
+    return record
+
+
 def emit_mandate() -> dict:
     """eval.run.authorize — signed by the evaluation authority."""
     with wrap_action(
         "eval.run.authorize", MANDATE,
         principal=ROLES["eval-authority"].issuer,
         policy="policy://cyber-eval@sha256:aa",
+        diagnostic_ref={"status": "not_applicable"},
+        timestamp=_FIXTURE_TIMESTAMP,
         signer=ROLES["eval-authority"],
     ) as act:
         pass
@@ -88,13 +102,21 @@ def gateway_decision(event_id: str, destination: str, mandate_ref: str) -> tuple
         "decision": decision,
         "mandate_ref": mandate_ref,
     }
+    flow_record = _flow_record(event_id, destination, "gateway")
     with wrap_action(
         "capability.decide", subject,
         principal=ROLES["gateway"].issuer,
         policy="policy://egress-gateway@sha256:bb",
+        diagnostic_ref={"status": "not_applicable"},
+        timestamp=_FIXTURE_TIMESTAMP,
         signer=ROLES["gateway"],
     ) as act:
         act.add_evidence("gateway_flow_record", _digest(subject), "self_asserted")
+        act.add_evidence(
+            "coverage_denominator_record",
+            flow_record["record_sha256"],
+            "self_asserted",
+        )
     return decision, act.receipt
 
 
@@ -128,6 +150,8 @@ def trajectory_decide(lineage: list[dict], mandate_ref: str) -> dict:
         "trajectory.decide", subject,
         principal=ROLES["trajectory-monitor"].issuer,
         policy="policy://trajectory-monitor@sha256:cc",
+        diagnostic_ref={"status": "not_applicable"},
+        timestamp=_FIXTURE_TIMESTAMP,
         signer=ROLES["trajectory-monitor"],
     ) as act:
         pass
@@ -179,6 +203,8 @@ def incident_handoff(mandate_ref: str, timeline: list[dict], coverage: dict) -> 
         "incident.handoff", subject,
         principal=ROLES["incident-commander"].issuer,
         policy="policy://incident-response@sha256:dd",
+        diagnostic_ref={"status": "not_applicable"},
+        timestamp=_FIXTURE_TIMESTAMP,
         signer=ROLES["incident-commander"],
     ) as act:
         pass
@@ -207,9 +233,9 @@ def run() -> dict:
 
     # --- Path 3: independent denominator detects the unreceipted bypass ---
     observed = [
-        {"id": permitted_id, "kind": "network.egress"},
-        {"id": refused_id, "kind": "network.egress"},
-        {"id": bypass_id, "kind": "network.egress", "digest": _digest({"path": "proxy-bypass"})},
+        _flow_record(permitted_id, "internal-package-cache", "gateway"),
+        _flow_record(refused_id, "third-party-production", "gateway"),
+        _flow_record(bypass_id, "third-party-production", "proxy-bypass"),
     ]
     coverage = event_coverage(
         observed,

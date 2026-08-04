@@ -14,7 +14,7 @@ signal — how much convention two tools leave undisclosed at their seam —
 not an execution-failure predictor. See FALSIFICATIONS.md.
 """
 
-__version__ = "0.46.0"
+__version__ = "0.47.0"
 
 from bulla.model import (
     BlindSpot,
@@ -88,7 +88,7 @@ from bulla.update import (
 )
 from bulla.parser import load_composition
 from bulla.wrap import wrap_action, operational_envelope, receipt_for
-from bulla.coverage import event_coverage
+from bulla.coverage import event_coverage, observed_record_sha256
 from bulla.action_receipt import (
     ActionReceipt,
     build_action_receipt,
@@ -227,6 +227,7 @@ __all__ = [
     "operational_envelope",
     "receipt_for",
     "event_coverage",
+    "observed_record_sha256",
     "ReceiptRef",
     "RelianceError",
     "ReliancePolicy",

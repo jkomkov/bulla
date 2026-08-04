@@ -16,7 +16,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from bulla import event_coverage, verify_receipt, wrap_action
+from bulla import event_coverage, observed_record_sha256, verify_receipt, wrap_action
 
 _OUT = Path(__file__).resolve().parent / "demo-output.json"
 
@@ -32,10 +32,19 @@ def tool(action_type: str):
     def decorate(fn):
         def inner(**subject):
             event_id = f"{action_type}:{len(_observed)}"
-            _observed.append({"id": event_id, "kind": action_type})
+            record = {"id": event_id, "kind": action_type}
+            record["record_sha256"] = observed_record_sha256(record)
+            _observed.append(record)
             scope = wrap_action(
                 action_type, {"event_id": event_id, **subject},
                 principal="did:web:example#agent",
+                diagnostic_ref={"status": "not_applicable"},
+                evidence_refs=[{
+                    "name": "harness_action_record",
+                    "hash": record["record_sha256"],
+                    "grounding": "self_asserted",
+                }],
+                timestamp="2026-08-04T00:00:00Z",
             )
             with scope:
                 result = fn(**subject)

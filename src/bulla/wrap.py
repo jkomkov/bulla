@@ -31,6 +31,7 @@ import copy
 import functools
 import re
 from contextlib import ContextDecorator
+from datetime import datetime, timezone
 from typing import Any, Callable
 
 from bulla.action_receipt import build_action_receipt, sign_action_receipt, verify_receipt
@@ -120,17 +121,32 @@ class wrap_action(ContextDecorator):  # noqa: N801 — used as a verb, not a cla
         diagnostic_ref: dict | None = None,
         anchor_ref: dict | None = None,
         evidence_refs: tuple[dict, ...] | list[dict] = (),
+        conventions: tuple[dict, ...] | list[dict] = (),
+        timestamp: str | None = None,
         signer: Any | None = None,
         producer: dict | None = None,
     ) -> None:
+        """Configure one action boundary.
+
+        ``conventions`` and ``timestamp`` are passed into the emitted receipt;
+        they do not alter the wrapped action.  Supplying them lets an
+        application bind an executable convention without assembling the
+        ActionReceipt wire object itself.
+        """
         self.action_type = action_type
         self.subject = dict(subject or {})
         self._envelope = envelope or operational_envelope(
             principal=principal, policy=policy, scope=scope
         )
-        self.diagnostic_ref = diagnostic_ref or {"status": "reference", "ref": "self"}
+        self.diagnostic_ref = (
+            diagnostic_ref
+            if diagnostic_ref is not None
+            else {"status": "not_applicable"}
+        )
         self.anchor_ref = anchor_ref
         self._base_evidence = list(evidence_refs)
+        self._base_conventions = list(conventions)
+        self.timestamp = timestamp
         self.signer = signer
         self._base_producer = dict(producer or {})
         # per-scope mutable state (reset in __enter__)
@@ -223,6 +239,8 @@ class wrap_action(ContextDecorator):  # noqa: N801 — used as a verb, not a cla
             envelope=self._envelope,
             anchor_ref=self.anchor_ref,
             evidence_refs=tuple(self._base_evidence + self.evidence),
+            conventions=tuple(self._base_conventions),
+            timestamp=self.timestamp or datetime.now(timezone.utc).isoformat(),
             producer=producer,
         )
         if self.signer is not None:

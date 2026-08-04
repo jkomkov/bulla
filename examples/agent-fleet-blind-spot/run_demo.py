@@ -10,7 +10,7 @@ every receipt verifies, and the payment is still missing. Verifying the
 receipts that exist cannot surface it; only the reconciliation can.
 
 This fixture drives the site's blind-spot walkthrough. Its output is
-deterministic (unsigned receipts, no timestamps), so the committed
+deterministic (unsigned receipts with a fixed constructed timestamp), so the committed
 ``demo-output.json`` is byte-reproducible:
 
     PYTHONPATH=src python examples/agent-fleet-blind-spot/run_demo.py
@@ -21,7 +21,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from bulla import event_coverage, verify_receipt, wrap_action
+from bulla import event_coverage, observed_record_sha256, verify_receipt, wrap_action
 
 _OUT = Path(__file__).resolve().parent / "demo-output.json"
 
@@ -31,20 +31,29 @@ _observed: list[dict] = []
 _receipts: list[dict] = []
 
 
-def _dispatch(action_type: str) -> str:
+def _dispatch(action_type: str) -> tuple[str, dict]:
     event_id = f"{action_type}:{len(_observed)}"
-    _observed.append({"id": event_id, "kind": action_type})
-    return event_id
+    record = {"id": event_id, "kind": action_type}
+    record["record_sha256"] = observed_record_sha256(record)
+    _observed.append(record)
+    return event_id, record
 
 
 def tool(action_type: str):
     """Decorate a tool so each call emits a receipt and is recorded for coverage."""
     def decorate(fn):
         def inner(**subject):
-            event_id = _dispatch(action_type)
+            event_id, record = _dispatch(action_type)
             scope = wrap_action(
                 action_type, {"event_id": event_id, **subject},
                 principal="did:web:example#agent",
+                diagnostic_ref={"status": "not_applicable"},
+                evidence_refs=[{
+                    "name": "harness_action_record",
+                    "hash": record["record_sha256"],
+                    "grounding": "self_asserted",
+                }],
+                timestamp="2026-08-04T00:00:00Z",
             )
             with scope:
                 result = fn(**subject)

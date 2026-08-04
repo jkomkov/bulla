@@ -8,7 +8,11 @@ from pathlib import Path
 
 import pytest
 
-from bulla.coverage import event_coverage, receipt_attested_action_ids
+from bulla.coverage import (
+    event_coverage,
+    observed_record_sha256,
+    receipt_attested_action_ids,
+)
 from bulla.wrap import receipt_for
 
 
@@ -17,7 +21,7 @@ def _receipt(action_id: str) -> dict:
 
 
 def test_all_covered() -> None:
-    observed = [{"id": "act-1", "kind": "egress"}, {"id": "act-2", "kind": "egress"}]
+    observed = [{"id": "act-1"}, {"id": "act-2"}]
     receipts = [_receipt("act-1"), _receipt("act-2")]
     report = event_coverage(observed, receipts)
     assert report["coverage"] == 1.0
@@ -28,16 +32,15 @@ def test_all_covered() -> None:
 
 def test_injected_unreceipted_action_is_flagged() -> None:
     observed = [
-        {"id": "act-1", "kind": "egress"},
-        {"id": "act-bypass", "kind": "egress", "digest": "sha256:deadbeef"},
-        {"id": "act-3", "kind": "credential.use"},
+        {"id": "act-1"},
+        {"id": "act-bypass"},
+        {"id": "act-3"},
     ]
     # The bypass emitted no receipt.
     receipts = [_receipt("act-1"), _receipt("act-3")]
     report = event_coverage(observed, receipts)
     assert report["unreceipted_delta"] == ["act-bypass"]
     assert report["unreceipted"][0]["id"] == "act-bypass"
-    assert report["unreceipted"][0]["digest"] == "sha256:deadbeef"
     assert report["receipted"] == 2
     assert report["coverage"] == round(2 / 3, 4)
 
@@ -245,3 +248,60 @@ def test_conflicting_bound_ids_do_not_cover_multiple_actions() -> None:
     report = event_coverage([{"id": "act-1"}, {"id": "act-2"}], [receipt])
     assert report["coverage"] == 0.0
     assert "exactly one" in report["invalid_receipts"][0]["reason"]
+
+
+def _digest_bound_pair() -> tuple[dict, dict]:
+    observed = {
+        "id": "act-1",
+        "kind": "network.egress",
+        "destination": "example.test",
+        "receiver": "constructed-gateway",
+    }
+    observed["record_sha256"] = observed_record_sha256(observed)
+    receipt = receipt_for(
+        "network.egress",
+        {"event_id": "act-1"},
+        evidence_refs=[{
+            "name": "observed_action_record",
+            "hash": observed["record_sha256"],
+            "grounding": "self_asserted",
+        }],
+    )
+    return observed, receipt
+
+
+def test_record_digest_binds_receipt_to_observed_action_facts() -> None:
+    observed, receipt = _digest_bound_pair()
+    report = event_coverage([observed], [receipt])
+    assert report["coverage"] == 1.0
+    assert report["binding_mismatches"] == []
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("destination", "different.test"),
+        ("kind", "credential.use"),
+        ("receiver", "different-gateway"),
+    ],
+)
+def test_changed_observed_facts_cannot_clear_by_reused_id(field: str, value: str) -> None:
+    observed, receipt = _digest_bound_pair()
+    observed[field] = value
+
+    with pytest.raises(ValueError, match="record_sha256 does not match"):
+        event_coverage([observed], [receipt])
+
+    observed["record_sha256"] = observed_record_sha256(observed)
+    report = event_coverage([observed], [receipt])
+    assert report["coverage"] == 0.0
+    assert report["unreceipted_delta"] == ["act-1"]
+    assert report["binding_mismatches"][0]["id"] == "act-1"
+
+
+def test_fact_bearing_observed_record_requires_digest_binding() -> None:
+    with pytest.raises(ValueError, match="action facts without record_sha256"):
+        event_coverage(
+            [{"id": "act-1", "amount_minor": 12500}],
+            [_receipt("act-1")],
+        )

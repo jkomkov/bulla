@@ -9,7 +9,7 @@
           "decision": "PERMIT",
           "event_id": "evt-0001-internal-cache-fetch",
           "kind": "network.egress",
-          "mandate_ref": "sha256:99040705bd6f54d51bcead535d77d0a60f18847e1dfbf914e0608fea77539389",
+          "mandate_ref": "sha256:5a53bf2e8b9ae03bcd4e689208101f52ff14013c9a88fb280cb9f3024d968c87",
           "requested_destination": "internal-package-cache"
         },
         "type": "capability.decide"
@@ -17,28 +17,32 @@
       "anchor_ref": {},
       "authorization": {
         "issuer": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6",
-        "proofValue": "aUjLCbpwDDMdCesYcFZOpWzWq0R9Zqc0EHbtaXxW6JdXQ6vH1SYa9YAkUFUEMyFk3IZQNuS41ffyoH2uESNyBg==",
+        "proofValue": "QjrAvTWKwlFqmK3I4ahW0Fx8KKXBSUuqgy0pXD3rf4+Z0YLEk7hfpasWhK4osX5oK5Ec+GzMcUnf7aTqi5WjAA==",
         "purpose": "authorization",
         "type": "bulla/ed25519-2026",
         "verificationMethod": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6"
       },
       "conventions": [],
       "diagnostic_ref": {
-        "ref": "self",
-        "status": "reference"
+        "status": "not_applicable"
       },
       "evidence_refs": [
         {
           "grounding": "self_asserted",
-          "hash": "sha256:d011970cc91a8b14d953fb201d19a6f10aefd3c995757d9be8d6be73f0bf1414",
+          "hash": "sha256:69b83127d64a50cc1afa68a250c75e1d9405399db511cbd87f3fe960950835e8",
           "name": "gateway_flow_record"
+        },
+        {
+          "grounding": "self_asserted",
+          "hash": "sha256:e7a500be2543ffb1143e50e3f6840fb027fd24836dbc35cbcd5979d68a6bbfe6",
+          "name": "coverage_denominator_record"
         }
       ],
       "hashes": {
-        "attestation": "sha256:3259d14dcdc7a4f698c987e440c601a87c8d48d4c15a5ca51a173f99cac683ad",
-        "content": "sha256:26c5e2436ae221b31d8d20f54a3437b545e04f3cfe3f234aaf183de24bbeb405",
-        "event": "sha256:8ef74775b76dec2b0674653adb023de1535f13669a49e52f1373e7f7a7078c4d",
-        "log_leaf": "sha256:cc46587fbb47ed10e2e13e9c5fadecd5c45e348994a0c40267af864a31960b20"
+        "attestation": "sha256:a204e117e21617fdf0e529eb8b0e3a3e16e6306453319ce0397ea87a239e6032",
+        "content": "sha256:50c2179fa0261d0dd27d0a558844f52656ea46a4e05d1f9ce268f842418a8027",
+        "event": "sha256:cb59bc79dd9197cc6bc9a1930328db5fb4096ba2c8a1ab4eae04fc5036888aeb",
+        "log_leaf": "sha256:a1ae6a9ffb50e5245b22ba2c2d8541c164f4465126eefe0aefdefee64acc1d92"
       },
       "kind": "action_receipt",
       "mandate": {
@@ -76,13 +80,13 @@
       "schema_version": "0.3",
       "signature": {
         "issuer": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6",
-        "proofValue": "jTcdej0ji54r5T5Zy1xn3r7eij80jaFZ8i4nox7KOKgvFJpMjmgc8CP/CHLJNTjrGGLGXIHQin8d0FOvr7UnDQ==",
+        "proofValue": "Js3zMG4SevLWSwMYh6GBunAyScroWyQCQLZietuf2dnWuncIy9eI7a8zcg49Szv7eoi0vAYuIw56Rwbq7ghJAQ==",
         "purpose": "content",
         "type": "bulla/ed25519-2026",
         "verificationMethod": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6"
       },
       "stake": null,
-      "timestamp": ""
+      "timestamp": "2026-07-21T00:00:00Z"
     },
     {
       "action": {
@@ -93,7 +97,7 @@
           "decision": "REFUSE",
           "event_id": "evt-0002-public-internet-egress",
           "kind": "network.egress",
-          "mandate_ref": "sha256:99040705bd6f54d51bcead535d77d0a60f18847e1dfbf914e0608fea77539389",
+          "mandate_ref": "sha256:5a53bf2e8b9ae03bcd4e689208101f52ff14013c9a88fb280cb9f3024d968c87",
           "requested_destination": "third-party-production"
         },
         "type": "capability.decide"
@@ -101,28 +105,32 @@
       "anchor_ref": {},
       "authorization": {
         "issuer": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6",
-        "proofValue": "gi9EI2ISLbnHQTJgt0vI5j2rQZHnEkhebyxcFuKMBxBZ1ZsbAaKxwxKs1SjZYV6KAK1dScemT7YvAUSECUTmAg==",
+        "proofValue": "4L+F0gbL/AVrUeWaYv+TksqeeG2vr5v6pMaQ6vg9b9W0lfHsMQE8fJNVnvJcr/YED/v2736BERs1NVgCeTNtCg==",
         "purpose": "authorization",
         "type": "bulla/ed25519-2026",
         "verificationMethod": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6"
       },
       "conventions": [],
       "diagnostic_ref": {
-        "ref": "self",
-        "status": "reference"
+        "status": "not_applicable"
       },
       "evidence_refs": [
         {
           "grounding": "self_asserted",
-          "hash": "sha256:f7d95dd26be0de3260b4f6f0633b01a5750aed7480bef0d50f06690f070ac1a3",
+          "hash": "sha256:0c2cf6318c356f143696709aa22009eb46a92c63c6bfb25928426cc48a289034",
           "name": "gateway_flow_record"
+        },
+        {
+          "grounding": "self_asserted",
+          "hash": "sha256:35f5f60f7cb1ce479db575efa072eb722db2650d98ce5903a86269478c0421a9",
+          "name": "coverage_denominator_record"
         }
       ],
       "hashes": {
-        "attestation": "sha256:07274522b39ca1d3857103021c6515275f4e5c0a2db255c65acd55a0bb27ecb0",
-        "content": "sha256:3fdf68d7e823dc440a90a6c2cb41ac3863ef79cbbdbf8f404f74d53148af66e7",
-        "event": "sha256:8aa98b2670f7182cca807932939351f8245bb1108e34dc201966802c2ce8011b",
-        "log_leaf": "sha256:b10f9bd7bbcdf3af4519d2e9b822ddfc591d1bc749f7cab3077440a128c830a0"
+        "attestation": "sha256:dcf18665fb610e69844a29811f45447b8c3890ef6a57239877cae9c3106d89fa",
+        "content": "sha256:93c57527c7c754975503eaa2ee6eaacc46f86071f97bcb3656aa1a1ca1f3c27e",
+        "event": "sha256:e6fcbc76ce6e62352dafb393b8531224f2c4b6d6f1d3c454b6200ffcfa78c401",
+        "log_leaf": "sha256:92789203d36c1f47e7de9a642c45e074e4a22dbd390306c18b282494b8c27fcf"
       },
       "kind": "action_receipt",
       "mandate": {
@@ -160,13 +168,13 @@
       "schema_version": "0.3",
       "signature": {
         "issuer": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6",
-        "proofValue": "/CAaa4UB/GQUGle8IYjSqj2r7/hQLBJmLdtaf3NGKXiRAjceyFPT8iKjqG6SGCzEt6/hmQ9zZfYc94YDCVvJDQ==",
+        "proofValue": "a5h+/QnFmMRF8YDtiGjWfNn4ZAYtzyDAC0tZyBGpOejFjECAY3UbFNXBYlQfst8acfMS5id8zvZP4GAkWaGaBg==",
         "purpose": "content",
         "type": "bulla/ed25519-2026",
         "verificationMethod": "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6"
       },
       "stake": null,
-      "timestamp": ""
+      "timestamp": "2026-07-21T00:00:00Z"
     }
   ],
   "classification": "conceptual defensive reconstruction \u2014 synthetic, no real exploit/credential/org record",
@@ -175,6 +183,12 @@
       "did:key:z6MksTB9T2w7csRLks1L1up4CcwrwpJ4z6wb7j3KBR71eCx6"
     ],
     "anchor": "network-flow-log",
+    "binding_mismatches": [],
+    "binding_modes": {
+      "evt-0001-internal-cache-fetch": "record_sha256",
+      "evt-0002-public-internet-egress": "record_sha256",
+      "evt-0003-proxy-bypass-egress": "record_sha256"
+    },
     "coverage": 0.6667,
     "covered": [
       "evt-0001-internal-cache-fetch",
@@ -188,9 +202,11 @@
     "total_anchored": 3,
     "unreceipted": [
       {
-        "digest": "sha256:536c4e824590ba6adaae26f0a37bdda6e3a3805ea1c959c73e88e3f5050e9e08",
+        "destination": "third-party-production",
         "id": "evt-0003-proxy-bypass-egress",
-        "kind": "network.egress"
+        "kind": "network.egress",
+        "record_sha256": "sha256:cd1b451c779389b3b8fffb9731288fc7b394cadb8c91a07c8d18de198efb17e2",
+        "route": "proxy-bypass"
       }
     ],
     "unreceipted_delta": [
@@ -205,7 +221,7 @@
       },
       "subject": {
         "challenge_channel": "forum://incident-dispute",
-        "coverage_digest": "sha256:a18708d749370e52935f9d7cbc760188df5372dd6589e8cbbd15386a925558be",
+        "coverage_digest": "sha256:a4b83e8fd729b7848253de60a92782213cf98078aac7e5783bd5bd90ea9a137a",
         "findings": {
           "counterparty_confirmed": [],
           "inferred": [
@@ -219,14 +235,14 @@
             "whether the bypassed path reached any protected resource"
           ]
         },
-        "mandate_ref": "sha256:99040705bd6f54d51bcead535d77d0a60f18847e1dfbf914e0608fea77539389",
+        "mandate_ref": "sha256:5a53bf2e8b9ae03bcd4e689208101f52ff14013c9a88fb280cb9f3024d968c87",
         "notification": {
           "channel": "incident://handoff",
           "to": "affected-service"
         },
         "parent_refs": {
-          "mandate": "sha256:99040705bd6f54d51bcead535d77d0a60f18847e1dfbf914e0608fea77539389",
-          "trajectory": "sha256:e5ff509ea09b57cc32d0a1281da1a93da7469ade7351f03de342df157bc7f67c"
+          "mandate": "sha256:5a53bf2e8b9ae03bcd4e689208101f52ff14013c9a88fb280cb9f3024d968c87",
+          "trajectory": "sha256:ddee2404fe665da8f9aadd3ba67489a967e4e53c4c129b3aa6ccc5b104dfd7ff"
         },
         "profile": "bulla.cyber-eval/0.2-draft",
         "sensitive_artifacts": [
@@ -243,34 +259,33 @@
           "trajectory.decide"
         ],
         "timeline_attestation_hashes": [
-          "sha256:99040705bd6f54d51bcead535d77d0a60f18847e1dfbf914e0608fea77539389",
-          "sha256:3259d14dcdc7a4f698c987e440c601a87c8d48d4c15a5ca51a173f99cac683ad",
-          "sha256:07274522b39ca1d3857103021c6515275f4e5c0a2db255c65acd55a0bb27ecb0",
-          "sha256:e5ff509ea09b57cc32d0a1281da1a93da7469ade7351f03de342df157bc7f67c"
+          "sha256:5a53bf2e8b9ae03bcd4e689208101f52ff14013c9a88fb280cb9f3024d968c87",
+          "sha256:a204e117e21617fdf0e529eb8b0e3a3e16e6306453319ce0397ea87a239e6032",
+          "sha256:dcf18665fb610e69844a29811f45447b8c3890ef6a57239877cae9c3106d89fa",
+          "sha256:ddee2404fe665da8f9aadd3ba67489a967e4e53c4c129b3aa6ccc5b104dfd7ff"
         ],
-        "timeline_digest": "sha256:b4ecc63045449c278b28ce574e4c25f62006072749f97f6464e8e0e79e20f731"
+        "timeline_digest": "sha256:9d4a6ec31331262cd4902c55772fe720e07c6c4086b6f10e8649f536ffaaf3ec"
       },
       "type": "incident.handoff"
     },
     "anchor_ref": {},
     "authorization": {
       "issuer": "did:key:z6MkoSX8KCLddAZxpC8SCRCtsDckXU3xsKXZLnRViCyt9PSY",
-      "proofValue": "Qr2+3p0CbcMCSF05fyjBFuLPV4yiroxNwHTPPSA5UzOPXpNi5X1M3hKllPNCZd7HhycWQ25uYI8sIpRzxjnOCw==",
+      "proofValue": "wiCPYQ/P1HdxtcyHUinrND1HCpiTFgeeW80175w0TVtUOan1bBHvCrCIAGsB/3eoixMKygQSRGFW57nOzw76Dw==",
       "purpose": "authorization",
       "type": "bulla/ed25519-2026",
       "verificationMethod": "did:key:z6MkoSX8KCLddAZxpC8SCRCtsDckXU3xsKXZLnRViCyt9PSY"
     },
     "conventions": [],
     "diagnostic_ref": {
-      "ref": "self",
-      "status": "reference"
+      "status": "not_applicable"
     },
     "evidence_refs": [],
     "hashes": {
-      "attestation": "sha256:ef7b8f692d8ff8a53b8cf256b4bba270afc9072010caf29568dfd7efc09d516d",
-      "content": "sha256:78ca6d3e773a7cd68797dc0152290934ec431f4081afb989f7313bbc5906d43f",
-      "event": "sha256:3873cba3a2652079a6736a3d58befba6c03ff50f4b0c2da90fb55e7078ba5e99",
-      "log_leaf": "sha256:be2b5b8604eb2a86930c2c1d86ab43ca592466b12d66aa1caf160fb6cc4ff3ff"
+      "attestation": "sha256:15b479a2e026073d2e2b97321fb09beff4027e2365716f2fb67a4e5206987ed2",
+      "content": "sha256:67de76fc5944c1d2628da5ca42b4b6a74ad3eb3b78f68e932ca233fd3b821c4e",
+      "event": "sha256:ec162e065d9be42b69d0ba823efbba0b11050b01d7f80f2d59a74c17c58a908c",
+      "log_leaf": "sha256:9ebf3b6b18536bfcb38817fe45efb1495735ebf646ee309d6cefab6be31df891"
     },
     "kind": "action_receipt",
     "mandate": {
@@ -308,13 +323,13 @@
     "schema_version": "0.3",
     "signature": {
       "issuer": "did:key:z6MkoSX8KCLddAZxpC8SCRCtsDckXU3xsKXZLnRViCyt9PSY",
-      "proofValue": "j+hH3aH3WqzN8D5WYGXUm4dKAGw3shIKDlPbGtGIWqR1soH1B/DeXovgiMiSw2j02toM/Llj4MGNe6L1atQABA==",
+      "proofValue": "VsYO4/bcNgRVub3Txggvdpvgx0oRrO/EflPWYO1LeLkb7MMCHTG5SrkAuS2rYYKhwx3S36Z/QQfykmqkK0uwCw==",
       "purpose": "content",
       "type": "bulla/ed25519-2026",
       "verificationMethod": "did:key:z6MkoSX8KCLddAZxpC8SCRCtsDckXU3xsKXZLnRViCyt9PSY"
     },
     "stake": null,
-    "timestamp": ""
+    "timestamp": "2026-07-21T00:00:00Z"
   },
   "mandate": {
     "action": {
@@ -343,22 +358,21 @@
     "anchor_ref": {},
     "authorization": {
       "issuer": "did:key:z6MkrTqijtURVyghce6MspdTsuZbtkQ7FrBotXqwVqHnCY2L",
-      "proofValue": "7stZrzi2XF4UYNPcpgKPcfk4U6tCGymey8c7Y6x/JJjV49EOcXreL+Dm1kmrRPV53EsGPO5ymg7qPOVyFo2IDQ==",
+      "proofValue": "+1gKTV37XWiY/dGLrP+5WnJE3KVty0skcMjVAvKpxSP4CnCa3ZXBBDIMuY+m/HKvb45uVTPllZOqhX9p2MgICA==",
       "purpose": "authorization",
       "type": "bulla/ed25519-2026",
       "verificationMethod": "did:key:z6MkrTqijtURVyghce6MspdTsuZbtkQ7FrBotXqwVqHnCY2L"
     },
     "conventions": [],
     "diagnostic_ref": {
-      "ref": "self",
-      "status": "reference"
+      "status": "not_applicable"
     },
     "evidence_refs": [],
     "hashes": {
-      "attestation": "sha256:99040705bd6f54d51bcead535d77d0a60f18847e1dfbf914e0608fea77539389",
-      "content": "sha256:e9c124cf030e0d1c0e169aa4374fdf6825ac2a3974a14fffb09b7e6b34ea5a7c",
-      "event": "sha256:448b2a0d0a1a1f915601df9ff5bf83109ed9718d6ac51e3576b51c10b68a5d90",
-      "log_leaf": "sha256:ae6627ee55f44b5229cdc5026a49f8383a5d1cc30ec43053d087b36d88cb283f"
+      "attestation": "sha256:5a53bf2e8b9ae03bcd4e689208101f52ff14013c9a88fb280cb9f3024d968c87",
+      "content": "sha256:411eff8fedcae43ead0a49500b5ab736622f2b147c83bca233f6cddba3510e66",
+      "event": "sha256:942fb45cf70ce0765a1342ba7933a1f6563cd59fbe83ad233c1be44622d83055",
+      "log_leaf": "sha256:ed59e60d5aaf8752906f1a400b03d4610e35b0c2fba0d8e823eef7003b476581"
     },
     "kind": "action_receipt",
     "mandate": {
@@ -396,30 +410,38 @@
     "schema_version": "0.3",
     "signature": {
       "issuer": "did:key:z6MkrTqijtURVyghce6MspdTsuZbtkQ7FrBotXqwVqHnCY2L",
-      "proofValue": "ghAqIOcS0x885groOV2geL/+L9NrnvIjFViwxuChEbEm1xQwK+ZhWsUyX7Bfb527ea3tY6RPJkmFBhYYNpHsCQ==",
+      "proofValue": "ko8eA4P+UXNspK/nfgxkYb3nCnI7XfkcnXTTXRJiGAcMnGYLXykzJZp/KYasH913lI5v9kBhezpmFimsGYbjAg==",
       "purpose": "content",
       "type": "bulla/ed25519-2026",
       "verificationMethod": "did:key:z6MkrTqijtURVyghce6MspdTsuZbtkQ7FrBotXqwVqHnCY2L"
     },
     "stake": null,
-    "timestamp": ""
+    "timestamp": "2026-07-21T00:00:00Z"
   },
   "observed_events": [
     {
+      "destination": "internal-package-cache",
       "id": "evt-0001-internal-cache-fetch",
-      "kind": "network.egress"
+      "kind": "network.egress",
+      "record_sha256": "sha256:e7a500be2543ffb1143e50e3f6840fb027fd24836dbc35cbcd5979d68a6bbfe6",
+      "route": "gateway"
     },
     {
+      "destination": "third-party-production",
       "id": "evt-0002-public-internet-egress",
-      "kind": "network.egress"
+      "kind": "network.egress",
+      "record_sha256": "sha256:35f5f60f7cb1ce479db575efa072eb722db2650d98ce5903a86269478c0421a9",
+      "route": "gateway"
     },
     {
-      "digest": "sha256:536c4e824590ba6adaae26f0a37bdda6e3a3805ea1c959c73e88e3f5050e9e08",
+      "destination": "third-party-production",
       "id": "evt-0003-proxy-bypass-egress",
-      "kind": "network.egress"
+      "kind": "network.egress",
+      "record_sha256": "sha256:cd1b451c779389b3b8fffb9731288fc7b394cadb8c91a07c8d18de198efb17e2",
+      "route": "proxy-bypass"
     }
   ],
-  "observed_events_digest": "sha256:024bc4ae159ace7beec89bfb8e30698b7a7c7d00677be6d9f8c7d1a0dfa8e0d7",
+  "observed_events_digest": "sha256:a0ceac175c0d8d5b17e79ee0be5e71ddd404c862a5ce6e0b03c642579e824075",
   "profile": "bulla.cyber-eval/0.2-draft",
   "signer_topology": {
     "affected-service": "did:key:z6MkptoUwCHkzEFLBmbCZ9N7D5WSvrcayUNJJsR6XQqbt9tY",
@@ -439,8 +461,8 @@
       },
       "subject": {
         "considered_attestation_hashes": [
-          "sha256:3259d14dcdc7a4f698c987e440c601a87c8d48d4c15a5ca51a173f99cac683ad",
-          "sha256:07274522b39ca1d3857103021c6515275f4e5c0a2db255c65acd55a0bb27ecb0"
+          "sha256:a204e117e21617fdf0e529eb8b0e3a3e16e6306453319ce0397ea87a239e6032",
+          "sha256:dcf18665fb610e69844a29811f45447b8c3890ef6a57239877cae9c3106d89fa"
         ],
         "freeze_actions": [
           "revoke-credentials",
@@ -449,7 +471,7 @@
           "pin-log-roots",
           "page-responder"
         ],
-        "mandate_ref": "sha256:99040705bd6f54d51bcead535d77d0a60f18847e1dfbf914e0608fea77539389",
+        "mandate_ref": "sha256:5a53bf2e8b9ae03bcd4e689208101f52ff14013c9a88fb280cb9f3024d968c87",
         "rationale": "out-of-mandate egress attempt observed; freeze the run",
         "state": "REFUSE_AND_FREEZE"
       },
@@ -458,22 +480,21 @@
     "anchor_ref": {},
     "authorization": {
       "issuer": "did:key:z6MkmCqjNbwJbx1RDfyqvpWAEp92HbV8K45RU6zuFfDXw4PZ",
-      "proofValue": "46TU0uISrKF61dtYsiHWMTlRS9lEvQgaeG8RjfdDG3p/oDzpSy8e9v5zqvCdJaEOCDFmB0RvFj5sPCQ4CGXgCw==",
+      "proofValue": "2ExxU/ZQtMu71dK9n633nrdzgXfs45FPAFkVyWQiRfWdbBdhG37Do2DU/bwq549+uuY1HybLqoxiwapoPd9PDg==",
       "purpose": "authorization",
       "type": "bulla/ed25519-2026",
       "verificationMethod": "did:key:z6MkmCqjNbwJbx1RDfyqvpWAEp92HbV8K45RU6zuFfDXw4PZ"
     },
     "conventions": [],
     "diagnostic_ref": {
-      "ref": "self",
-      "status": "reference"
+      "status": "not_applicable"
     },
     "evidence_refs": [],
     "hashes": {
-      "attestation": "sha256:e5ff509ea09b57cc32d0a1281da1a93da7469ade7351f03de342df157bc7f67c",
-      "content": "sha256:3e8d19972571c71d5ed99e99e86002f2dcae7c7d6daa21b80c0a35f4d7612417",
-      "event": "sha256:2da0483380d60cb9aa1ed43fa0e724750468da361798ef85a48c65464d5d5f5a",
-      "log_leaf": "sha256:e7e85ab615f8a99d72cf982b1c908de41bedd6a54bd113a9588b34e4b85236b9"
+      "attestation": "sha256:ddee2404fe665da8f9aadd3ba67489a967e4e53c4c129b3aa6ccc5b104dfd7ff",
+      "content": "sha256:5bb80911b3febd029d730f482a6b4cbb59f5b8f8478277fee2133359035586a6",
+      "event": "sha256:852eefb1b18cac84db1ce585a829428b51e52d67b38e9038cdad81ddb3ec6b25",
+      "log_leaf": "sha256:2a56405c745db8d84964650e331bce65da596cf144acc241d9ee74e89fbb8a36"
     },
     "kind": "action_receipt",
     "mandate": {
@@ -511,12 +532,12 @@
     "schema_version": "0.3",
     "signature": {
       "issuer": "did:key:z6MkmCqjNbwJbx1RDfyqvpWAEp92HbV8K45RU6zuFfDXw4PZ",
-      "proofValue": "m9XTz/a6sooWzNg8a/ToxNTYyuyF+pgtkpeVhB3HsAqgQv6qTCaTjTPWZ/TraRpW0zuHFbFNDCGE+2AnaHVLBA==",
+      "proofValue": "Sy+KHsJKZW9cVsCddNFt7ydTMzqWVAyF6wRND115g4W3GMQL6un0CQb/NVXx7hlU922y8L/pDowHd4GBMYWUDA==",
       "purpose": "content",
       "type": "bulla/ed25519-2026",
       "verificationMethod": "did:key:z6MkmCqjNbwJbx1RDfyqvpWAEp92HbV8K45RU6zuFfDXw4PZ"
     },
     "stake": null,
-    "timestamp": ""
+    "timestamp": "2026-07-21T00:00:00Z"
   }
 }

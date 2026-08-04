@@ -2,6 +2,13 @@
   "coverage": {
     "accepted_issuers": null,
     "anchor": "agent-harness-log",
+    "binding_mismatches": [],
+    "binding_modes": {
+      "fs.read:0": "record_sha256",
+      "fs.write:2": "record_sha256",
+      "http.get:1": "record_sha256",
+      "payments.charge:3": "record_sha256"
+    },
     "coverage": 0.75,
     "covered": [
       "fs.read:0",
@@ -17,7 +24,8 @@
     "unreceipted": [
       {
         "id": "payments.charge:3",
-        "kind": "payments.charge"
+        "kind": "payments.charge",
+        "record_sha256": "sha256:82c21f3d64d33dced7426f21e8382ccda6344e143a62b2f1390a082a016e3952"
       }
     ],
     "unreceipted_delta": [
@@ -27,19 +35,23 @@
   "observed_actions": [
     {
       "id": "fs.read:0",
-      "kind": "fs.read"
+      "kind": "fs.read",
+      "record_sha256": "sha256:d570a1d5770d68becf617c7592b092c8e87e90163ab97e0f0c4a05af08be5aa2"
     },
     {
       "id": "http.get:1",
-      "kind": "http.get"
+      "kind": "http.get",
+      "record_sha256": "sha256:fe0b45ad134754bc9ec432a47b70edab0a3c405107af4892c50aa8a65a5caf5a"
     },
     {
       "id": "fs.write:2",
-      "kind": "fs.write"
+      "kind": "fs.write",
+      "record_sha256": "sha256:4052352e79681b989cfeec452c41ad0549ce7a080cd1db5ec3e6c9b36a608663"
     },
     {
       "id": "payments.charge:3",
-      "kind": "payments.charge"
+      "kind": "payments.charge",
+      "record_sha256": "sha256:82c21f3d64d33dced7426f21e8382ccda6344e143a62b2f1390a082a016e3952"
     }
   ],
   "receipts": [
@@ -57,15 +69,20 @@
       "anchor_ref": {},
       "conventions": [],
       "diagnostic_ref": {
-        "ref": "self",
-        "status": "reference"
+        "status": "not_applicable"
       },
-      "evidence_refs": [],
+      "evidence_refs": [
+        {
+          "grounding": "self_asserted",
+          "hash": "sha256:d570a1d5770d68becf617c7592b092c8e87e90163ab97e0f0c4a05af08be5aa2",
+          "name": "harness_action_record"
+        }
+      ],
       "hashes": {
-        "attestation": "sha256:f6cd2fa83d54c59df2ead1b64150677305dee9c3a67eec8e4d723718ca4eca05",
-        "content": "sha256:91332ddd08db4e992abea52a701df438c107c95a3b1991d9a5e7e1cd30cd53a9",
-        "event": "sha256:6197f4e73dd72d5eb59e3745bd1e68b061e0befc92124889883c3e008a77d478",
-        "log_leaf": "sha256:4251e7f9cb76ac1d1c3f04b07e1a1e4e7833e29ade8dfd33b1dcb0b0870a998b"
+        "attestation": "sha256:b8eeb9fb3d6c9225cd688f86b3b90eeaa89d36d4ce33eb5a7640956f359a0ae5",
+        "content": "sha256:7377aa2e2a0adeb455ae7afb82fcd009155ab58a8f7b8544d6b4edf5fbcf549e",
+        "event": "sha256:85e6e37ed606a468b8bd36124f492d5d9c5f01012bb5d5005bd8abb0de8568d1",
+        "log_leaf": "sha256:1ba7767c5ab7626b36a4fc824b3473a2ce3fefe992909906f5eb3abc96d3686d"
       },
       "kind": "action_receipt",
       "mandate": {
@@ -103,7 +120,7 @@
       "schema_version": "0.2",
       "signature": null,
       "stake": null,
-      "timestamp": ""
+      "timestamp": "2026-08-04T00:00:00Z"
     },
     {
       "action": {
@@ -119,15 +136,20 @@
       "anchor_ref": {},
       "conventions": [],
       "diagnostic_ref": {
-        "ref": "self",
-        "status": "reference"
+        "status": "not_applicable"
       },
-      "evidence_refs": [],
+      "evidence_refs": [
+        {
+          "grounding": "self_asserted",
+          "hash": "sha256:fe0b45ad134754bc9ec432a47b70edab0a3c405107af4892c50aa8a65a5caf5a",
+          "name": "harness_action_record"
+        }
+      ],
       "hashes": {
-        "attestation": "sha256:d310cb409812740bb874aa2a3e19954a0a3afd7d7fd7429ce6b6e3d4db02c40b",
-        "content": "sha256:d7cd6b4f117c03469fa2cdd156af8349b64b696dcf8ac4b1eaf5a69b6b93210a",
-        "event": "sha256:277fc91940fe16b266c64451db0b7ff56306ba004eaac4dbb8a882bafd403c91",
-        "log_leaf": "sha256:2018de1aba35ededae4c22195547bb51b3b20f6b88da6bef1b15f508068ef01a"
+        "attestation": "sha256:79f707865fc8e0386060cef096977ac2f41fc525aa90369808c1cbec1c195a53",
+        "content": "sha256:47d14e3ae53c9fd84b6126e623a45f2961a0f8496da226671603bf6d7bd12dd5",
+        "event": "sha256:73dd15d89d878c48c190166fca32ba07c57c22cc48fe7907b0dd15ba9c8064c7",
+        "log_leaf": "sha256:ade40cdd3ea3c5ece9d137411885416545d90a3296105ee1aa2405a790eeff97"
       },
       "kind": "action_receipt",
       "mandate": {
@@ -165,7 +187,7 @@
       "schema_version": "0.2",
       "signature": null,
       "stake": null,
-      "timestamp": ""
+      "timestamp": "2026-08-04T00:00:00Z"
     },
     {
       "action": {
@@ -182,15 +204,20 @@
       "anchor_ref": {},
       "conventions": [],
       "diagnostic_ref": {
-        "ref": "self",
-        "status": "reference"
+        "status": "not_applicable"
       },
-      "evidence_refs": [],
+      "evidence_refs": [
+        {
+          "grounding": "self_asserted",
+          "hash": "sha256:4052352e79681b989cfeec452c41ad0549ce7a080cd1db5ec3e6c9b36a608663",
+          "name": "harness_action_record"
+        }
+      ],
       "hashes": {
-        "attestation": "sha256:6afe7a4f2dca198828f206b71b2a2a9b42e51fc1f470442ddf2eba0dd98faa09",
-        "content": "sha256:ba8de2271c5cc14a3aae384f8a5666a8106da24aa4481ae720e4f85723dac383",
-        "event": "sha256:6b2101a45f3d1fac364c92260e5ff0d8d7eaab61dedb99d5e69937437a989e56",
-        "log_leaf": "sha256:361c59dda1e024e748dd6c72bc214af0b143c85534318fe773565b08884becc4"
+        "attestation": "sha256:b7cb38973f8ea77082607261201fd1cdc8095f9ae66ec8389244f2fad196b9a1",
+        "content": "sha256:8e11b516e5c2d7ccb2ea26b4d909b414c328c78f79c1c52b011514a116afc46c",
+        "event": "sha256:fccba0f097525ed843cce1c3ea5ac3667205ee33b203ec4190ddbac9921473f2",
+        "log_leaf": "sha256:fe213a00cf1017c32c1ea29755d122b8965aceff545e3093d993fc55e0c6ff54"
       },
       "kind": "action_receipt",
       "mandate": {
@@ -228,7 +255,7 @@
       "schema_version": "0.2",
       "signature": null,
       "stake": null,
-      "timestamp": ""
+      "timestamp": "2026-08-04T00:00:00Z"
     }
   ]
 }
