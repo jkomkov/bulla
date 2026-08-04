@@ -207,6 +207,9 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert "Render complete release notes before immutable publication" in sign_job
     assert '"body": notes' in sign_job
     assert '"draft": False' in sign_job
+    assert sign_job.count('"tag_name": f"v{version}"') == 2
+    assert sign_job.count('"target_commitish": os.environ["SOURCE_COMMIT"]') == 2
+    assert sign_job.count('"name": f"v{version}"') == 2
     assert 'Verification-kit SHA-256: `{kit_digest}`' in sign_job
     assert "Published package: https://pypi.org/project/bulla/{version}/" in sign_job
     assert "docs/RELEASE-LINEAGE.md" in sign_job

@@ -559,11 +559,21 @@ jobs:
           root = Path(os.environ["RUNNER_TEMP"])
           (root / "release-notes.md").write_text(notes, encoding="utf-8")
           (root / "release-body.json").write_text(
-              json.dumps({"body": notes}),
+              json.dumps({
+                  "tag_name": f"v{version}",
+                  "target_commitish": os.environ["SOURCE_COMMIT"],
+                  "name": f"v{version}",
+                  "body": notes,
+              }),
               encoding="utf-8",
           )
           (root / "publish-release.json").write_text(
-              json.dumps({"draft": False}),
+              json.dumps({
+                  "tag_name": f"v{version}",
+                  "target_commitish": os.environ["SOURCE_COMMIT"],
+                  "name": f"v{version}",
+                  "draft": False,
+              }),
               encoding="utf-8",
           )
           PY
