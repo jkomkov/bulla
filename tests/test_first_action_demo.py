@@ -132,6 +132,9 @@ def test_cli_refuses_existing_output_with_exit_2(tmp_path: Path) -> None:
 def test_bare_cli_leads_with_receipts() -> None:
     result = _run_cli()
     assert result.returncode == 0
+    # Windows runners use a cp1252 console unless UTF-8 is explicitly enabled.
+    # Bare help is a first-contact path and must not crash before rendering.
+    result.stdout.encode("cp1252")
     lines = result.stdout.splitlines()
     assert "receipts for consequential agent actions" in lines[0]
-    assert lines.index("  bulla demo                     # action → receipt → alteration → omission") < lines.index("Composition diagnostics:")
+    assert lines.index("  bulla demo                     # action -> receipt -> alteration -> omission") < lines.index("Composition diagnostics:")

@@ -36,9 +36,10 @@ def _workflow_job(workflow: str, name: str) -> str:
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.47.0"
+    assert bulla.__version__ == "0.47.1"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    assert "## 0.47.0 — 2026-08-04" in changelog
+    assert "## 0.47.1 — 2026-08-04" in changelog
+    assert "## 0.47.0 — 2026-08-04 (not published)" in changelog
     assert "## 0.46.0 — 2026-08-03" in changelog
     assert "## 0.45.1 — 2026-08-03" in changelog
     assert "## 0.45.0 — 2026-08-03 (not published)" in changelog
@@ -62,7 +63,7 @@ def test_release_version_and_status_language_are_synchronized() -> None:
 
 
 def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
-    contract = (ROOT / "docs/RELEASE-0.47.0.md").read_text(encoding="utf-8")
+    contract = (ROOT / "docs/RELEASE-0.47.1.md").read_text(encoding="utf-8")
     assert "package version and the\nreceipt format version are separate clocks" in contract
     assert "PR head, synthetic merge commit, pre-rebase commit, or" in " ".join(contract.split())
     assert "The exact green public `main` commit is the sole `source_commit`" in contract

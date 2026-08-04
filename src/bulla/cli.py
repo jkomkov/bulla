@@ -7147,7 +7147,7 @@ def main() -> None:
     if not args.command:
         print(f"bulla {__version__} — receipts for consequential agent actions\n")
         print("Receipts:")
-        print("  bulla demo                     # action → receipt → alteration → omission")
+        print("  bulla demo                     # action -> receipt -> alteration -> omission")
         print("  bulla receipt create --type demo.write --subject path=/tmp/out --out receipt.json")
         print("  bulla receipt verify receipt.json")
         print("  bulla receipt drill receipt.json")

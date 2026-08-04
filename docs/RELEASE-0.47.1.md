@@ -1,9 +1,11 @@
-# Bulla 0.47.0 publication contract
+# Bulla 0.47.1 publication contract
 
 Status: authorized coordinated product release.
 
 Repository-owner instruction recorded 2026-08-04: implement the First Action
-Sprint. That instruction authorizes one gated Bulla 0.47.0 publication, GitHub
+Sprint. The 0.47.0 candidate was not uploaded to PyPI after its Windows gate
+found a console-encoding defect. The same instruction authorizes the planned
+correction release: one gated Bulla 0.47.1 publication, GitHub
 release finalization, and deployment of the matching Glyph surface after the
 technical and review gates below pass. It does not authorize
 Claim Closure 002, outreach, inference clearing, a hosted register, settlement,
@@ -14,8 +16,9 @@ or stronger evidence labels.
 The release adds the stable `bulla demo` command by composing `wrap_action`,
 ActionReceipt verification, `event_coverage`, and `receipt drill`. It does not
 change the receipt schema. Bulla's package version and the
-receipt format version are separate clocks: `0.47.0` identifies the tooling
-release; `v0.2` identifies the unchanged normative format.
+receipt format version are separate clocks: `0.47.1` identifies the tooling
+release; `v0.2` identifies the unchanged normative format. The immutable
+0.47.0 slot and tag remain the failed-candidate record and are not reused.
 
 The demonstration is constructed. Its receiver record is the declared coverage
 denominator and does not establish that a payment network moved funds. The
@@ -59,8 +62,8 @@ code may ship. The owner instruction above is the release authorization.
    0.46.0. The exact green public `main` commit is the sole `source_commit`; a
    PR head, synthetic merge commit, pre-rebase commit, or pre-retarget commit
    is not the release source commit.
-2. Run trusted publication for that exact Bulla commit. If PyPI has already
-   consumed 0.47.0, record the failed slot and continue with 0.47.1.
+2. Run trusted publication for that exact Bulla commit as 0.47.1. The 0.47.0
+   GitHub slot is already recorded as failed and PyPI never accepted it.
 3. Verify PyPI's accepted wheel, source distribution, and publisher attestations.
 4. Mint the signed post-publication ActionReceipt binding the accepted wheel,
    source distribution, and verification-kit digest.
