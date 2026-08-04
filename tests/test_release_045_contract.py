@@ -1,4 +1,4 @@
-"""Release-boundary gates for the Bulla 0.45 release line."""
+"""Release-boundary gates for the current Bulla release line."""
 
 from __future__ import annotations
 
@@ -36,8 +36,9 @@ def _workflow_job(workflow: str, name: str) -> str:
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.45.1"
+    assert bulla.__version__ == "0.46.0"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    assert "## 0.46.0 — 2026-08-03" in changelog
     assert "## 0.45.1 — 2026-08-03" in changelog
     assert "## 0.45.0 — 2026-08-03 (not published)" in changelog
     assert "The 0.45.0 candidate was not\nuploaded to PyPI." in changelog
@@ -60,19 +61,19 @@ def test_release_version_and_status_language_are_synchronized() -> None:
 
 
 def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
-    contract = (ROOT / "docs/RELEASE-0.45.1.md").read_text(encoding="utf-8")
-    assert "package version and the receipt\nformat version are separate clocks" in contract
-    assert "A PR head, synthetic merge commit, pre-rebase commit, or" in contract
-    assert "The exact green `main` commit is recorded as the sole `source_commit`" in contract
+    contract = (ROOT / "docs/RELEASE-0.46.0.md").read_text(encoding="utf-8")
+    assert "package version and the\nreceipt format version are separate clocks" in contract
+    assert "a PR\n   head, synthetic merge commit, pre-rebase commit, or" in contract
+    assert "The exact green public `main` commit is the sole `source_commit`" in contract
     assert "PyPI publication consumes the version." in contract
-    assert "Repository-owner instruction recorded 2026-08-03: `ship the product stack`." in contract
+    assert "Repository-owner instruction recorded 2026-08-03: implement the Terminal" in contract
     assert "External review is not a publication or deployment prerequisite." in contract
-    assert "It does not authorize Claim Closure 002,\noutreach" in contract
+    assert "It does not authorize\nClaim Closure 002, outreach" in contract
     assert "APPROVE BULLA" not in contract
     assert "APPROVE GLYPH" not in contract
     assert "deployment_evidence_sha256" not in contract
     assert contract.index("Verify PyPI's accepted wheel") < contract.index(
-        "Deploy the matching Glyph surface"
+        "Refresh Glyph's published-artifact evidence"
     )
 
 
@@ -202,10 +203,20 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert "https://uploads.github.com/repos/$GITHUB_REPOSITORY/releases/$release_id/assets?name=$name" in sign_job
     assert "--hostname uploads.github.com" not in sign_job
     assert "GH_TOKEN: ${{ secrets.RELEASE_TAG_TOKEN }}" in sign_job
-    assert '-f tag_name="v$RELEASE_VERSION"' in sign_job
-    assert '-f target_commitish="$SOURCE_COMMIT"' in sign_job
-    assert "-F draft=false" in sign_job
     assert "gh release edit \"v$RELEASE_VERSION\" --draft=false" not in workflow
+    assert "Render complete release notes before immutable publication" in sign_job
+    assert '"body": notes' in sign_job
+    assert '"draft": False' in sign_job
+    assert 'Verification-kit SHA-256: `{kit_digest}`' in sign_job
+    assert "Published package: https://pypi.org/project/bulla/{version}/" in sign_job
+    assert "docs/RELEASE-LINEAGE.md" in sign_job
+    assert 'or "pending" in release.get("body", "").lower()' in sign_job
+    assert '--input "$RUNNER_TEMP/release-body.json"' in sign_job
+    assert '--input "$RUNNER_TEMP/publish-release.json"' in sign_job
+    assert sign_job.index('--input "$RUNNER_TEMP/release-body.json"') < sign_job.index(
+        '--input "$RUNNER_TEMP/publish-release.json"'
+    )
+    assert 'release.get("draft") is not True' in sign_job
     assert "pypa/gh-action-pypi-publish" not in workflow
     assert "twine upload" not in workflow
     assert "id-token: write" not in workflow

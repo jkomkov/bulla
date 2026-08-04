@@ -4350,6 +4350,7 @@ def _cmd_receipt(args: argparse.Namespace) -> None:
     if not getattr(args, "receipt_command", None):
         print("usage: bulla receipt create --type <act> [--subject k=v ...] --forum-endpoint URL --forum-root REF")
         print("       bulla receipt verify <file.json>")
+        print("       bulla receipt drill <file.json> [--format text|json]")
         print("       bulla receipt kit --out action-receipt-v0.2-verification-kit.zip")
         print("  create: mint an ActionReceipt for one consequential action (sign with --key).")
         print("  verify: recompute the hashes, the recourse envelope (modality law), the")
@@ -4367,6 +4368,27 @@ def _cmd_receipt_kit(args: argparse.Namespace) -> None:
         print(f"Error: {exc}", file=sys.stderr)
         sys.exit(2)
     print(f"sha256:{digest}  {out}")
+
+
+def _cmd_receipt_drill(args: argparse.Namespace) -> None:
+    """Rehearse v0.2 receipt verification from retained bytes only."""
+    from bulla.receipt_drill import ReceiptDrillError, print_receipt_drill, run_receipt_drill
+
+    try:
+        report, exit_code = run_receipt_drill(
+            args.receipt,
+            key_path=args.key,
+            kit_path=args.kit,
+            kit_digest_path=args.kit_digest,
+        )
+    except ReceiptDrillError as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        sys.exit(3 if "verifier disagreement" in str(exc) else 2)
+    if args.format == "json":
+        print(json.dumps(report, indent=2))
+    else:
+        print_receipt_drill(report)
+    sys.exit(exit_code)
 
 
 def _parse_kv_value(raw: str):
@@ -5758,6 +5780,28 @@ def main() -> None:
     )
     p_receipt_verify.add_argument("--format", choices=["text", "json"], default="text")
     p_receipt_verify.set_defaults(func=_cmd_receipt_verify)
+    p_receipt_drill = receipt_sub.add_parser(
+        "drill",
+        help=(
+            "Rehearse ActionReceipt v0.2 verification with network access denied; "
+            "separate locally recheckable claims from external evidence requirements"
+        ),
+    )
+    p_receipt_drill.add_argument("receipt", type=Path, help="ActionReceipt v0.2 JSON file")
+    p_receipt_drill.add_argument(
+        "--key", type=Path, default=None, metavar="PUBLIC_KEY.json",
+        help="Retained public key for a non-did:key issuer",
+    )
+    p_receipt_drill.add_argument(
+        "--kit", type=Path, default=None, metavar="KIT.zip",
+        help="Use this retained verification kit instead of the embedded kit",
+    )
+    p_receipt_drill.add_argument(
+        "--kit-digest", type=Path, default=None, metavar="KIT.zip.sha256",
+        help="Caller-retained detached digest; required with --kit",
+    )
+    p_receipt_drill.add_argument("--format", choices=("text", "json"), default="text")
+    p_receipt_drill.set_defaults(func=_cmd_receipt_drill)
     p_receipt_kit = receipt_sub.add_parser(
         "kit",
         help=(

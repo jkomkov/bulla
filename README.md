@@ -73,13 +73,38 @@ bulla receipt kit --out action-receipt-v0.2-verification-kit.zip
 Expected archive digest:
 
 ```text
-sha256:2ec524f78885c122fd9e6301c85d757e94cf0c468278d11f1414b19a3a3c313c
+sha256:8f2cdd16bcbd1a1121f49545b6a6512872b188221ca30ec054dfd6b2fb2142ab
 ```
 
-After extracting the archive, run `python3 verify.py`. The checker imports no
-Bulla code and makes no network request. The manifest checks the retained
-contents; authenticate the archive itself with the detached digest or the
-signed release receipt.
+After extracting the archive, run `python3 verify.py` to check the kit itself,
+or run its zero-dependency checker against a retained v0.2 receipt:
+
+```bash
+python3 verify.py receipt RECEIPT.json --format text
+```
+
+The checker imports no Bulla code and makes no network request. The manifest
+checks the retained contents; authenticate the archive itself with the detached
+digest or the signed release receipt.
+
+## Rehearse verification without dependencies
+
+`bulla receipt drill` checks one normative v0.2 receipt with Bulla and with the
+retained standalone checker while network access is denied:
+
+```bash
+bulla receipt drill RECEIPT.json --format text
+```
+
+The report separates facts recomputed from retained bytes from claims that need
+another record and dimensions that cannot be decided from the supplied
+material. It does not establish event occurrence, live authority, recourse
+reachability, receipt coverage, or a reliance decision.
+
+When `--kit` is used, the detached digest checks the supplied bytes and Bulla
+also requires those bytes to match the kit retained inside the installed
+distribution before it executes the standalone checker. The sidecar alone does
+not establish publisher identity or authorize unfamiliar code.
 
 ## Create one receipt
 
@@ -157,6 +182,7 @@ inspect the named dimensions or apply an explicit reliance policy.
 - [Complete capability reference](https://github.com/jkomkov/bulla/blob/main/docs/CAPABILITIES.md)
 - [Source-only experimental research](https://glyphstandard.com/bulla/experimental)
 - [Changelog](https://github.com/jkomkov/bulla/blob/main/CHANGELOG.md)
+- [Release lineage](https://github.com/jkomkov/bulla/blob/main/docs/RELEASE-LINEAGE.md)
 - [Security policy](https://github.com/jkomkov/bulla/security/policy)
 
 ## License and security

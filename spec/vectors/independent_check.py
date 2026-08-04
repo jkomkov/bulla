@@ -660,7 +660,7 @@ def _verify_delegation(r: dict, verify_domain) -> dict:
             "revocation_status": "unresolved"}
 
 
-def verify_identity_rung(r: dict) -> dict:
+def verify_identity_rung(r: dict, public_key: bytes | None = None) -> dict:
     """Verify the content signature and the authorization proof (v0.3:
     domain-separated; v0.2: over the raw digest) with an ed25519 library, and —
     for v0.3 structured delegation — reproduce the six delegation dimensions.
@@ -700,6 +700,11 @@ def verify_identity_rung(r: dict) -> dict:
         if signer != issuer or verification_method != signer:
             return False
         pk = _ed25519_pubkey_from_did_key(signer)
+        # A caller-supplied leaf key may resolve a non-did:key issuer. It is
+        # never used for delegation grants: those pass ``expect_signer`` and
+        # must remain self-certifying from the named grantor.
+        if pk is None and expect_signer is None:
+            pk = public_key
         if pk is None:
             return "unresolved"  # non-did:key issuer — key resolution out of scope
         signed = _domain_preimage(purpose, digest) if v03 else digest.encode("utf-8")
