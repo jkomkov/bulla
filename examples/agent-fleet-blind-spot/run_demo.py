@@ -10,7 +10,7 @@ every receipt verifies, and the payment is still missing. Verifying the
 receipts that exist cannot surface it; only the reconciliation can.
 
 This fixture drives the site's blind-spot walkthrough. Its output is
-deterministic (unsigned receipts, no timestamps), so the committed
+deterministic (unsigned receipts with a fixed constructed timestamp), so the committed
 ``demo-output.json`` is byte-reproducible:
 
     PYTHONPATH=src python examples/agent-fleet-blind-spot/run_demo.py
@@ -45,6 +45,8 @@ def tool(action_type: str):
             scope = wrap_action(
                 action_type, {"event_id": event_id, **subject},
                 principal="did:web:example#agent",
+                diagnostic_ref={"status": "not_applicable"},
+                timestamp="2026-08-04T00:00:00Z",
             )
             with scope:
                 result = fn(**subject)

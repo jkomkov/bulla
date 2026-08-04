@@ -135,6 +135,7 @@ jobs:
           tests/test_action_receipt_v04.py
           tests/test_distribution_policy.py
           tests/test_event_coverage.py
+          tests/test_first_action_demo.py
           tests/test_golden_f13.py
           tests/test_verification_kit.py
           tests/test_wrap.py

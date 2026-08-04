@@ -37,6 +37,7 @@ from bulla.wrap import wrap_action
 
 _HERE = Path(__file__).resolve().parent
 _OUT = _HERE / "demo-output.json"
+_FIXTURE_TIMESTAMP = "2026-07-21T00:00:00Z"
 
 # Deterministic role keys. No single party controls all of them; the evaluated
 # agent controls NONE of the capability-receipt keys.
@@ -67,6 +68,8 @@ def emit_mandate() -> dict:
         "eval.run.authorize", MANDATE,
         principal=ROLES["eval-authority"].issuer,
         policy="policy://cyber-eval@sha256:aa",
+        diagnostic_ref={"status": "not_applicable"},
+        timestamp=_FIXTURE_TIMESTAMP,
         signer=ROLES["eval-authority"],
     ) as act:
         pass
@@ -92,6 +95,8 @@ def gateway_decision(event_id: str, destination: str, mandate_ref: str) -> tuple
         "capability.decide", subject,
         principal=ROLES["gateway"].issuer,
         policy="policy://egress-gateway@sha256:bb",
+        diagnostic_ref={"status": "not_applicable"},
+        timestamp=_FIXTURE_TIMESTAMP,
         signer=ROLES["gateway"],
     ) as act:
         act.add_evidence("gateway_flow_record", _digest(subject), "self_asserted")
@@ -128,6 +133,8 @@ def trajectory_decide(lineage: list[dict], mandate_ref: str) -> dict:
         "trajectory.decide", subject,
         principal=ROLES["trajectory-monitor"].issuer,
         policy="policy://trajectory-monitor@sha256:cc",
+        diagnostic_ref={"status": "not_applicable"},
+        timestamp=_FIXTURE_TIMESTAMP,
         signer=ROLES["trajectory-monitor"],
     ) as act:
         pass
@@ -179,6 +186,8 @@ def incident_handoff(mandate_ref: str, timeline: list[dict], coverage: dict) -> 
         "incident.handoff", subject,
         principal=ROLES["incident-commander"].issuer,
         policy="policy://incident-response@sha256:dd",
+        diagnostic_ref={"status": "not_applicable"},
+        timestamp=_FIXTURE_TIMESTAMP,
         signer=ROLES["incident-commander"],
     ) as act:
         pass

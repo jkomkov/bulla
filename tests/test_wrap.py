@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import json
 from copy import deepcopy
+from pathlib import Path
 
 import pytest
 
 from bulla.action_receipt import verify_receipt
+from bulla.receipt_drill import run_receipt_drill
 from bulla.wrap import operational_envelope, receipt_for, wrap_action
 
 
@@ -30,6 +33,48 @@ def test_one_call_convenience() -> None:
                           principal="did:web:acme#agent")
     assert verify_receipt(receipt).ok
     assert receipt["mandate"]["authority"]["principal"] == "did:web:acme#agent"
+
+
+def test_default_wrapper_is_normative_v02_and_kit_compatible(tmp_path: Path) -> None:
+    receipt = receipt_for("tool.call", {"tool": "github.create_file"})
+    assert receipt["schema_version"] == "0.2"
+    assert receipt["diagnostic_ref"] == {"status": "not_applicable"}
+    assert receipt["timestamp"]
+
+    retained = tmp_path / "receipt.json"
+    retained.write_text(json.dumps(receipt, sort_keys=True), encoding="utf-8")
+    report, exit_code = run_receipt_drill(retained)
+    assert exit_code == 0
+    assert report["verifier"]["checker_agreement"] == "MATCH"
+
+
+def test_wrapper_carries_v02_convention_and_timestamp() -> None:
+    convention = {
+        "name": "amount-limit",
+        "scope": "seam:demo->payments.charge",
+        "kind": "executable",
+        "definition": {
+            "form": "jsonschema+quantum/1",
+            "schema": {
+                "type": "object",
+                "properties": {"amount_minor": {"type": "integer", "maximum": 20000}},
+                "required": ["amount_minor"],
+                "additionalProperties": False,
+            },
+            "quantum": {},
+        },
+    }
+    receipt = receipt_for(
+        "payments.charge",
+        {"amount_minor": 12500},
+        diagnostic_ref={"status": "not_applicable"},
+        conventions=(convention,),
+        timestamp="2026-08-04T00:00:00Z",
+    )
+    verdict = verify_receipt(receipt)
+    assert verdict.ok
+    assert verdict.conventions == {"amount-limit": "conforms"}
+    assert receipt["timestamp"] == "2026-08-04T00:00:00Z"
 
 
 def test_decorator_emits_receipt_per_call() -> None:

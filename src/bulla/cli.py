@@ -4358,6 +4358,32 @@ def _cmd_receipt(args: argparse.Namespace) -> None:
         sys.exit(2)
 
 
+def _cmd_demo(args: argparse.Namespace) -> None:
+    """Run the complete constructed action-to-receipt product loop."""
+    from bulla.first_action_demo import (
+        FirstActionDemoError,
+        print_first_action_demo,
+        run_first_action_demo,
+    )
+
+    try:
+        root, report = run_first_action_demo(args.out)
+    except FirstActionDemoError as exc:
+        message = str(exc)
+        print(f"Error: {message}", file=sys.stderr)
+        unsafe_input = (
+            "--out" in message
+            or "artifact" in message
+            or "cannot create" in message
+            or "cannot write" in message
+        )
+        sys.exit(2 if unsafe_input else 3)
+    if args.format == "json":
+        print(json.dumps({"output_directory": str(root.resolve()), **report}, indent=2))
+    else:
+        print_first_action_demo(root, report)
+
+
 def _cmd_receipt_kit(args: argparse.Namespace) -> None:
     """Export the exact verification-kit bytes embedded in the package."""
     from bulla.verification_kit import export_verification_kit
@@ -5494,6 +5520,24 @@ def main() -> None:
     )
 
     subparsers = parser.add_subparsers(dest="command")
+
+    # ── demo ──────────────────────────────────────────────────────────
+    p_demo = subparsers.add_parser(
+        "demo",
+        help=(
+            "Run a constructed action, emit its receipt, detect alteration, "
+            "reconcile an unreceipted action, and rehearse offline verification"
+        ),
+    )
+    p_demo.add_argument(
+        "--out",
+        type=Path,
+        default=None,
+        metavar="DIR",
+        help="Retain artifacts in a new directory (default: a preserved private temporary directory)",
+    )
+    p_demo.add_argument("--format", choices=("text", "json"), default="text")
+    p_demo.set_defaults(func=_cmd_demo)
 
     # ── diagnose ──────────────────────────────────────────────────────
     p_diag = subparsers.add_parser(
@@ -7101,8 +7145,14 @@ def main() -> None:
     args = parser.parse_args()
 
     if not args.command:
-        print(f"bulla {__version__} — witness kernel for agentic compositions\n")
-        print("Quick start:")
+        print(f"bulla {__version__} — receipts for consequential agent actions\n")
+        print("Receipts:")
+        print("  bulla demo                     # action → receipt → alteration → omission")
+        print("  bulla receipt create --type demo.write --subject path=/tmp/out --out receipt.json")
+        print("  bulla receipt verify receipt.json")
+        print("  bulla receipt drill receipt.json")
+        print("  bulla coverage --anchor pypi --receipts releases/")
+        print("\nComposition diagnostics:")
         print("  bulla audit                    # audit all MCP servers in your config")
         print("  bulla audit --discover         # audit with LLM convention discovery")
         print("  bulla audit --discover --receipt r.json  # audit + discovery + receipt")

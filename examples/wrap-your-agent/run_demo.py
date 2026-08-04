@@ -36,6 +36,8 @@ def tool(action_type: str):
             scope = wrap_action(
                 action_type, {"event_id": event_id, **subject},
                 principal="did:web:example#agent",
+                diagnostic_ref={"status": "not_applicable"},
+                timestamp="2026-08-04T00:00:00Z",
             )
             with scope:
                 result = fn(**subject)

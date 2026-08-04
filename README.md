@@ -10,6 +10,56 @@ Receipt verification detects changes in the records supplied to the verifier.
 Coverage reports actions in a supplied action record that have no matching
 receipt. These checks answer different questions and remain separate.
 
+## Install
+
+Bulla supports Python 3.10 and later. Core receipt creation and digest
+verification require no hosted service.
+
+```bash
+python -m pip install "bulla==0.47.0"
+bulla demo
+```
+
+## Run one action
+
+`bulla demo` runs one fixed local action through Bulla, emits its receipt
+automatically, and retains every artifact in a new directory. It then changes a
+copy of the receipt, sends a second action around the receipting boundary, and
+compares the receipt set with the constructed receiver record.
+
+```text
+FIRST ACTION DEMO · CONSTRUCTED LOCAL SCENARIO
+
+ACTION
+recorded action       payments.charge
+amount                USD 125.00
+declared limit        USD 200.00
+
+ALTERATION CONTROL
+record integrity      FAILED
+original receipt      UNCHANGED
+
+OMISSION CONTROL
+coverage before       1/1
+coverage after        1/2
+unreceipted action    pay_demo_043
+original integrity    VERIFIED
+```
+
+The receipt caught alteration. The receiver's action record caught omission.
+The receiver is constructed, and neither record establishes that funds moved.
+The final stage runs Bulla and the retained standalone checker with network
+access denied.
+
+Use `bulla demo --out DIR` to choose a new output directory, or
+`bulla demo --format json` for the versioned CLI report. Bulla refuses to
+replace an existing path.
+
+In application code, `wrap_action` emits the JSON record. Applications do not
+hand-author the wire format.
+
+## Why retain the receipt
+
 A *bulla* was the clay envelope sealed around a record so it could survive the
 absence of the parties who made it. Bulla applies that discipline to agent
 actions: the action may finish in milliseconds, but a retained receipt keeps
@@ -18,15 +68,6 @@ next system or institution.
 
 The format is intended for the customer, auditor, dispute forum, or underwriter
 who arrives after the agent and its runtime are gone and applies its own checks.
-
-## Install
-
-Bulla supports Python 3.10 and later. Core receipt creation and digest
-verification require no hosted service.
-
-```bash
-python -m pip install bulla
-```
 
 ## Verify one receipt
 

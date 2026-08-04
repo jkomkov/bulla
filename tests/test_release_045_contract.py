@@ -36,8 +36,9 @@ def _workflow_job(workflow: str, name: str) -> str:
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.46.0"
+    assert bulla.__version__ == "0.47.0"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    assert "## 0.47.0 — 2026-08-04" in changelog
     assert "## 0.46.0 — 2026-08-03" in changelog
     assert "## 0.45.1 — 2026-08-03" in changelog
     assert "## 0.45.0 — 2026-08-03 (not published)" in changelog
@@ -61,12 +62,12 @@ def test_release_version_and_status_language_are_synchronized() -> None:
 
 
 def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
-    contract = (ROOT / "docs/RELEASE-0.46.0.md").read_text(encoding="utf-8")
+    contract = (ROOT / "docs/RELEASE-0.47.0.md").read_text(encoding="utf-8")
     assert "package version and the\nreceipt format version are separate clocks" in contract
     assert "a PR\n   head, synthetic merge commit, pre-rebase commit, or" in contract
     assert "The exact green public `main` commit is the sole `source_commit`" in contract
     assert "PyPI publication consumes the version." in contract
-    assert "Repository-owner instruction recorded 2026-08-03: implement the Terminal" in contract
+    assert "Repository-owner instruction recorded 2026-08-04: implement the First" in contract
     assert "External review is not a publication or deployment prerequisite." in contract
     assert "It does not authorize\nClaim Closure 002, outreach" in contract
     assert "APPROVE BULLA" not in contract
@@ -87,6 +88,7 @@ def test_failed_release_authorization_is_sealed_and_consumed() -> None:
 
 def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
     workflow = (ROOT / ".github/workflows/publish.yml").read_text(encoding="utf-8")
+    assert "tests/test_first_action_demo.py" in workflow
     assert "\n  workflow_dispatch:\n" in workflow
     assert "\n  push:\n" not in workflow
     assert "authenticate default-branch preparation" in workflow
