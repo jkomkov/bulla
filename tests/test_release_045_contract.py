@@ -183,6 +183,11 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert "immutable-releases" in workflow
     assert 'gh release verify "v$RELEASE_VERSION"' in workflow
     assert 'gh release verify-asset "v$RELEASE_VERSION" "$asset"' in workflow
+    assert "verify_with_retry()" in sign_job
+    assert "for attempt in {1..12}" in sign_job
+    assert 'sleep 5' in sign_job
+    assert 'verify_with_retry gh release verify "v$RELEASE_VERSION"' in sign_job
+    assert 'verify_with_retry gh release verify-asset "v$RELEASE_VERSION" "$asset"' in sign_job
     assert "--jq '.immutable'" in workflow
     assert "release-repository-controls.json" in workflow
     assert "rulesets?targets=tag" in workflow

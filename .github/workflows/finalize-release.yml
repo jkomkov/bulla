@@ -702,9 +702,21 @@ jobs:
           ):
               raise SystemExit("published release does not match the signed receipt")
           PY
-          gh release verify "v$RELEASE_VERSION"
+          verify_with_retry() {
+            local attempt
+            for attempt in {1..12}; do
+              if "$@"; then
+                return 0
+              fi
+              if test "$attempt" -eq 12; then
+                return 1
+              fi
+              sleep 5
+            done
+          }
+          verify_with_retry gh release verify "v$RELEASE_VERSION"
           for asset in release-receipt/*; do
-            gh release verify-asset "v$RELEASE_VERSION" "$asset"
+            verify_with_retry gh release verify-asset "v$RELEASE_VERSION" "$asset"
           done
       - name: Confirm immutable release protection after publication
         env:
