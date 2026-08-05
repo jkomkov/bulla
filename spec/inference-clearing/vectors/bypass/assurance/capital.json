@@ -1,0 +1,11 @@
+{
+  "allocated_amount": 200000,
+  "binding_id": "fixture-lock-bypass-001",
+  "external_encumbrance": "NOT_COMPUTED",
+  "locked_amount": 200000,
+  "profile": "bulla.inference-capital-allocation/0.1-experimental",
+  "rail_adapter": "fixture-escrow/1",
+  "rail_evidence_hash": "sha256:15a9669639da9dfba2a1c3dc51f0ab3254d7812f7786acde178b70ca9562d229",
+  "transaction_id": "inference-bypass-001",
+  "unit": "sat"
+}

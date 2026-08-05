@@ -1,0 +1,12 @@
+{
+  "anchor_id": "receiver-effect-log-001",
+  "denominator_ids": [
+    "effect-mediated-001"
+  ],
+  "profile": "bulla.inference-receiver-coverage/0.1-experimental",
+  "provenance": "PATH_SEPARATE_TEAM_CONTROLLED",
+  "receipted_ids": [
+    "effect-mediated-001"
+  ],
+  "transaction_id": "inference-recheckable-001"
+}

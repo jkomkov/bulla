@@ -1,0 +1,15 @@
+{
+  "profile": "bulla.inference-clearing-formal-map/0.1-experimental",
+  "theorems": {
+    "InferenceClearing.relation_soundness": ["recheckable"],
+    "InferenceClearing.historical_execution_non_amplification": ["signed-variant:guarantee"],
+    "InferenceClearing.evidence_removal_monotonicity": ["opaque", "signed-hostile:model-manifest-substitution"],
+    "InferenceClearing.coverage_sensitivity": ["bypass"],
+    "InferenceClearing.authorization_requires_eligibility": ["recheckable", "signed-hostile:authorization-while-ineligible"],
+    "InferenceClearing.execution_requires_authorization": ["signed-hostile:execution-without-authorization"]
+  },
+  "limitations": [
+    "The finite model does not prove parser correctness.",
+    "The finite model does not prove model quality, historical provider execution, denominator completeness, collectibility, or worldly truth."
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "profile": "bulla.inference-clearing-comprehension/0.1",
+  "state": "FROZEN_PENDING_GATE_OPEN",
+  "purpose": "Test whether unfamiliar readers preserve the distinctions made by the recheckable-inference demonstration.",
+  "participant_slots": [
+    {"id": "developer-1", "role": "DEVELOPER", "terminal_reproduction": true},
+    {"id": "developer-2", "role": "DEVELOPER", "terminal_reproduction": false},
+    {"id": "developer-3", "role": "DEVELOPER", "terminal_reproduction": false},
+    {"id": "decision-maker-1", "role": "TECHNICAL_DECISION_MAKER", "terminal_reproduction": false},
+    {"id": "decision-maker-2", "role": "TECHNICAL_DECISION_MAKER", "terminal_reproduction": false}
+  ],
+  "exclusions": [
+    "prior Bulla participant",
+    "prior Glyph participant",
+    "prior Res Agentica participant",
+    "reviewer of the implementation pull request",
+    "contributor to the inference-clearing implementation"
+  ],
+  "gate_open_record": {
+    "profile": "bulla.inference-clearing-comprehension-gate-open/0.1",
+    "required_bindings": [
+      "protocol_sha256",
+      "preview_commit",
+      "immutable_preview_url",
+      "route",
+      "reproduction_command_sha256",
+      "reproduction_kit_sha256",
+      "preview_artifact_path",
+      "preview_artifact_sha256"
+    ],
+    "must_be_frozen_before_contact": true
+  },
+  "facilitator": {
+    "opening": "Please use the page and terminal instructions as presented. I can help only with navigation or accessibility.",
+    "permitted_assistance": ["navigation", "accessibility"],
+    "prohibited_assistance": ["semantic coaching", "paraphrasing a distinction", "correcting an answer before submission"],
+    "first_response_rule": "Preserve each first complete answer verbatim before scoring. Silence, ambiguity, and partially incorrect answers fail the item.",
+    "correction_rule": "A later correction appends to the record and cannot replace the first response."
+  },
+  "questions": [
+    {"id": "role_handoff", "prompt": "Describe what the buyer, provider, receiver, and local verifier each contribute.", "pass_condition": "Keeps the four roles distinct: buyer supplies terms and policy, provider supplies an answer and evidence, receiver records delivery effects, and verifier evaluates retained records under the supplied context."},
+    {"id": "relation_reproduction", "prompt": "What did the local verifier reproduce?", "pass_condition": "Identifies the retained model's input-to-output relation without claiming historical execution or answer truth."},
+    {"id": "historical_provider_execution", "prompt": "What does the result establish about what the provider historically ran?", "pass_condition": "States that historical provider execution is not established."},
+    {"id": "answer_correctness", "prompt": "Does the result establish that the returned answer is correct or true?", "pass_condition": "States that answer correctness or truth is not established."},
+    {"id": "buyer_policy_eligibility", "prompt": "Who sets the evidence threshold, and what does eligibility mean here?", "pass_condition": "Identifies the supplied buyer policy as the threshold and eligibility as policy-relative."},
+    {"id": "settlement_stages", "prompt": "Distinguish payment eligibility, settlement authorization, and the workflow-local settlement attempt.", "pass_condition": "Keeps all three stages separate and reports the canonical states without inferring a later stage."},
+    {"id": "funds_movement", "prompt": "What can the demonstration establish about actual funds movement?", "pass_condition": "Reports actual funds movement as NOT_ESTABLISHED."},
+    {"id": "integrity_and_coverage", "prompt": "Why did receipt integrity not expose the unmatched receiver action, and what did?", "pass_condition": "Explains that receipt integrity checks supplied receipts while reconciliation against the supplied receiver record exposes the unmatched action."},
+    {"id": "receiver_record_completeness", "prompt": "Does complete coverage establish that the receiver record contains every real action?", "pass_condition": "States that receiver-record completeness is not established."}
+  ],
+  "acceptance": {
+    "browser_story_without_help": {"minimum_passes": 4, "of": 5},
+    "role_handoff": {"minimum_passes": 4, "of": 5},
+    "all_eight_distinctions": {"minimum_passes": 4, "of": 5},
+    "avoid_answer_correctness_claim": {"minimum_passes": 5, "of": 5},
+    "funds_movement_not_established": {"minimum_passes": 5, "of": 5},
+    "terminal_reproduction": {"required_slot": "developer-1", "maximum_seconds": 180}
+  },
+  "evidence_retention": [
+    "pseudonymous participant record",
+    "eligibility and exclusion attestation",
+    "first verbatim responses",
+    "first-response SHA-256 commitments",
+    "assistance record",
+    "rubric result",
+    "limitations",
+    "appended corrections"
+  ],
+  "failure_and_retest": {
+    "first_failure_status": "NOT_ESTABLISHED",
+    "first_failure_keeps_pull_request_draft": true,
+    "maximum_copy_or_interaction_corrections": 1,
+    "retest_participants": 3,
+    "retest_scope": "FAILED_DIMENSIONS_ONLY",
+    "fresh_eligible_readers_required": true,
+    "preserve_all_attempts": true,
+    "second_failure_action": "STOP"
+  }
+}

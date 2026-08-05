@@ -1,0 +1,72 @@
+[
+  {
+    "attestation": "sha256:8d2ad7bc0a20b4fddda5e8547a2e30cb60cff74f1664c74e50e3ca3afb987b48",
+    "index": 0,
+    "leaf": "sha256:ecdd62912d62c309941fcc329d359c68e1fce79ac6720b85e59f4a7870a3321e",
+    "proof": [
+      "sha256:8f9d6da1da80f685108b14af35da91d92adba5b8398aafaf1c3d88b50e0a0604",
+      "sha256:5fc07f1d70c27c7a1f7470c904fb0574c923ab6ac14fe756156b2b38aec46955",
+      "sha256:119a4a0ecbe7d412541d34065884b7d0402741f81730a50b04ed7efc176068ff"
+    ],
+    "root": "sha256:aabaae0facea674b22f965f4faeba512a9005a0aec659d6d9745b4f8815ce6b3",
+    "tree_size": 6
+  },
+  {
+    "attestation": "sha256:5cd039ec0da60e2c2407f03d35c9f5321591437167cfaabf5330c1571fda5596",
+    "index": 1,
+    "leaf": "sha256:8f9d6da1da80f685108b14af35da91d92adba5b8398aafaf1c3d88b50e0a0604",
+    "proof": [
+      "sha256:ecdd62912d62c309941fcc329d359c68e1fce79ac6720b85e59f4a7870a3321e",
+      "sha256:5fc07f1d70c27c7a1f7470c904fb0574c923ab6ac14fe756156b2b38aec46955",
+      "sha256:119a4a0ecbe7d412541d34065884b7d0402741f81730a50b04ed7efc176068ff"
+    ],
+    "root": "sha256:aabaae0facea674b22f965f4faeba512a9005a0aec659d6d9745b4f8815ce6b3",
+    "tree_size": 6
+  },
+  {
+    "attestation": "sha256:9af0f7c455e1aee582543aecf5eda13824fbb92f3076bb2b6d47db6b1a71fa13",
+    "index": 2,
+    "leaf": "sha256:9bceb093fb9984278e004b9b65b4127975214fa4f473ec503639aaaf25f35ce4",
+    "proof": [
+      "sha256:54d173a04caaeded2a0e84472888f5aced23974972bde2b10151396836d9a36e",
+      "sha256:fb9cea4d5c161fef4284076a85eb619f8b0588582d6abaad2013520a1ba78746",
+      "sha256:119a4a0ecbe7d412541d34065884b7d0402741f81730a50b04ed7efc176068ff"
+    ],
+    "root": "sha256:aabaae0facea674b22f965f4faeba512a9005a0aec659d6d9745b4f8815ce6b3",
+    "tree_size": 6
+  },
+  {
+    "attestation": "sha256:f814bb144112dddc65aa4bb6250ffd2db30a2640041e5353c864bbb61bbc27c7",
+    "index": 3,
+    "leaf": "sha256:54d173a04caaeded2a0e84472888f5aced23974972bde2b10151396836d9a36e",
+    "proof": [
+      "sha256:9bceb093fb9984278e004b9b65b4127975214fa4f473ec503639aaaf25f35ce4",
+      "sha256:fb9cea4d5c161fef4284076a85eb619f8b0588582d6abaad2013520a1ba78746",
+      "sha256:119a4a0ecbe7d412541d34065884b7d0402741f81730a50b04ed7efc176068ff"
+    ],
+    "root": "sha256:aabaae0facea674b22f965f4faeba512a9005a0aec659d6d9745b4f8815ce6b3",
+    "tree_size": 6
+  },
+  {
+    "attestation": "sha256:d5581a1472b410177691e626135716a1ac4031f46a718315135a897ef69b8e33",
+    "index": 4,
+    "leaf": "sha256:6ae32b34a4c7b871c71ec45ebebe358bebb41500255e134922fcbc499c9f3f50",
+    "proof": [
+      "sha256:c46f601f034cc685acd2ee47d12d5464a08c95ae0249d5dce7d9e6d8b38a7087",
+      "sha256:1ee378fca1dd1be2f94b4cb7fdf7f08665e0abdbbec402766dea62dd2174e6c7"
+    ],
+    "root": "sha256:aabaae0facea674b22f965f4faeba512a9005a0aec659d6d9745b4f8815ce6b3",
+    "tree_size": 6
+  },
+  {
+    "attestation": "sha256:7bfdd391998b9983548ea99d959122d240370a844382e7759cceedde3d07490a",
+    "index": 5,
+    "leaf": "sha256:c46f601f034cc685acd2ee47d12d5464a08c95ae0249d5dce7d9e6d8b38a7087",
+    "proof": [
+      "sha256:6ae32b34a4c7b871c71ec45ebebe358bebb41500255e134922fcbc499c9f3f50",
+      "sha256:1ee378fca1dd1be2f94b4cb7fdf7f08665e0abdbbec402766dea62dd2174e6c7"
+    ],
+    "root": "sha256:aabaae0facea674b22f965f4faeba512a9005a0aec659d6d9745b4f8815ce6b3",
+    "tree_size": 6
+  }
+]

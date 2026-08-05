@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schema/bulla-inference-clearing-comprehension-context-0.1.json",
+  "title": "Externally supplied comprehension verification context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile", "accepted_coordinator"],
+  "properties": {
+    "profile": {"const": "bulla.inference-clearing-comprehension-context/0.1"},
+    "accepted_coordinator": {"pattern": "^did:key:z", "type": "string"}
+  }
+}

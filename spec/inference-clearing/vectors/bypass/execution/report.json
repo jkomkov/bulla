@@ -1,0 +1,35 @@
+{
+  "adapter": "bulla.int8-mlp-recompute/1",
+  "input": [
+    12,
+    -4,
+    7,
+    3,
+    -8,
+    5,
+    2,
+    9
+  ],
+  "input_hash": "sha256:34573c8f271e128dff1456e2e8bfe9eb0f1d8c3b447b7eeaaab3b1d7d4114e89",
+  "model_available": true,
+  "model_hash": "sha256:7137307cb9cff5b31bb866c463325f435d7ada8052a85ed8255c193483d23845",
+  "model_id": "bulla-fixed-int-model-001",
+  "output": "BACKUP",
+  "output_hash": "sha256:d5bff25f1372e12f9d306aa5aaa94136469c1bc5178641cd52baa9cc2e60bdc7",
+  "profile": "bulla.inference-execution-evidence/0.1-experimental",
+  "provider_process_claim": "self_asserted",
+  "trace": {
+    "hidden": [
+      37,
+      15,
+      0
+    ],
+    "output": "BACKUP",
+    "scores": [
+      7,
+      94
+    ],
+    "selected_index": 1
+  },
+  "trace_hash": "sha256:f0ff07ff945d65bd61d17b7f1013ebe2e99edbb9c1c0209ec8bebefe0093ca36"
+}
