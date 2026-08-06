@@ -447,6 +447,7 @@ def test_generator_and_kit_are_deterministic(tmp_path: Path) -> None:
     with tarfile.open(archive, "r:") as kit:
         names = kit.getnames()
         assert not any("hostile-vectors" in name or "hostile-contexts" in name for name in names)
+        assert "inference-clearing-kit/site-projection.json" not in names
         kit.extractall(tmp_path / "extracted", filter="data")
     extracted = tmp_path / "extracted" / "inference-clearing-kit"
     python = subprocess.run(
@@ -465,6 +466,30 @@ def test_generator_and_kit_are_deterministic(tmp_path: Path) -> None:
     )
     assert python.returncode == node.returncode == 0
     assert json.loads(python.stdout) == json.loads(node.stdout)
+
+
+def test_public_source_correspondence_tracks_only_declared_git_inputs() -> None:
+    correspondence = SPEC / "public-source-correspondence.json"
+    if not correspondence.exists():
+        pytest.skip("standalone public-source correspondence is not present")
+    record = json.loads(correspondence.read_text(encoding="utf-8"))
+    members = record["members"]
+    compact = json.dumps(members, sort_keys=True, separators=(",", ":")).encode()
+    assert record["member_set_sha256"] == "sha256:" + hashlib.sha256(compact).hexdigest()
+
+    member_paths = [item["path"] for item in members]
+    local_paths = [item["path"] for item in record["repository_local_files"]]
+    assert len(member_paths) == len(set(member_paths))
+    assert not set(member_paths) & set(local_paths)
+    assert not any("/.lake/" in name for name in member_paths)
+
+    for item in members:
+        raw = (ROOT / item["path"]).read_bytes()
+        assert item["byte_length"] == len(raw)
+        assert item["sha256"] == "sha256:" + hashlib.sha256(raw).hexdigest()
+    for item in record["repository_local_files"]:
+        raw = (ROOT / item["path"]).read_bytes()
+        assert item["mirror_sha256"] == "sha256:" + hashlib.sha256(raw).hexdigest()
 
 
 def test_exact_published_commands_run_in_a_clean_environment(tmp_path: Path) -> None:

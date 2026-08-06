@@ -121,14 +121,17 @@ def _call_role(role: str, scenario: str, prior: str | None, facts: dict[str, Any
     )
     envelope: dict[str, Any] | None = None
     last_error: Exception | None = None
-    for _ in range(100):
+    startup_deadline = time.monotonic() + 10
+    while time.monotonic() < startup_deadline:
         try:
             with urllib.request.urlopen(request, timeout=2) as opened:  # noqa: S310 - fixed loopback
                 envelope = json.loads(opened.read().decode("utf-8"))
             break
         except Exception as exc:
             last_error = exc
-            time.sleep(0.02)
+            if process.poll() is not None:
+                break
+            time.sleep(0.025)
     stdout, stderr = process.communicate(timeout=10)
     if process.returncode != 0 or envelope is None:
         raise RuntimeError(f"role {role} failed: {last_error}; stdout={stdout!r}; stderr={stderr!r}")

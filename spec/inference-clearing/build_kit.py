@@ -21,7 +21,6 @@ STATIC = (
     "verification-context.schema.json",
     "hostile-cases.json",
     "expected-verdict.json",
-    "site-projection.json",
     "check.py",
     "check.mjs",
     "compare_reports.py",

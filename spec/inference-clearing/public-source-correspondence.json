@@ -1,9 +1,10 @@
 {
   "limitations": [
     "The mirror commit is established by the public pull request, not self-declared by this record.",
+    "The repository-local projection generator and projection are recorded separately because the monorepo pins the public source commit while the public repository supports checkout-local execution; neither file is a reproduction-kit member.",
     "The profile remains source-only and is excluded from wheel, sdist, stable exports, and installed CLI."
   ],
-  "member_set_sha256": "sha256:f367b923c1f265fba1578ebdbaab38ab724aa39491103534b6b799464c3fd77f",
+  "member_set_sha256": "sha256:c3b78c4d6777aca71ec140043662e0dc14a1ea08d360115eea4b18ac86d7d3c8",
   "members": [
     {
       "byte_length": 19642,
@@ -16,9 +17,9 @@
       "sha256": "sha256:27917d37f3ea225f7dd354f1fc2be4e9457f395ed5b26fabfb51eb2dede0bc38"
     },
     {
-      "byte_length": 15005,
+      "byte_length": 15138,
       "path": "examples/inference-clearing/run_demo.py",
-      "sha256": "sha256:378fbd16dc111a2a3047564b7b3bd09fa19b17adefa2dc7965ea40928c0aadcc"
+      "sha256": "sha256:37d58802136f86db06caa5251daba1d5d1485874a362715a1553af00a59e8faa"
     },
     {
       "byte_length": 1155,
@@ -41,9 +42,9 @@
       "sha256": "sha256:3b1151fdf1c76e4f5ce949584d29c5de45f2178fc93052779a6ac61f788a8183"
     },
     {
-      "byte_length": 3909,
+      "byte_length": 3881,
       "path": "spec/inference-clearing/build_kit.py",
-      "sha256": "sha256:1ea34afdf60e318f5775eda164e2e2b707b0208b29561938f651b514fc675d38"
+      "sha256": "sha256:30189282f7483b593e1ec5a16a04e564f18e70ce93a66f89472a1be5912df10a"
     },
     {
       "byte_length": 52388,
@@ -126,46 +127,6 @@
       "sha256": "sha256:e882c66188d11496d906cd96256d3b223bfeb38281ad7d3b102180a84eff5b2f"
     },
     {
-      "byte_length": 1250,
-      "path": "spec/inference-clearing/formal/.lake/build/ir/InferenceClearing.c",
-      "sha256": "sha256:3302b970fe3e0471ae3c983e4c224e59db580b9c25523ca9e4c3dcdc2854ff9d"
-    },
-    {
-      "byte_length": 16,
-      "path": "spec/inference-clearing/formal/.lake/build/ir/InferenceClearing.c.hash",
-      "sha256": "sha256:701fc0b35787ff59312736028171bd7f9864aff64467de3392de9af8de6c2b79"
-    },
-    {
-      "byte_length": 149,
-      "path": "spec/inference-clearing/formal/.lake/build/ir/InferenceClearing.setup.json",
-      "sha256": "sha256:db2f5f43e964df866ce5fd00ab1cbaf426b41055885a9658fceb46447610e8cd"
-    },
-    {
-      "byte_length": 7629,
-      "path": "spec/inference-clearing/formal/.lake/build/lib/lean/InferenceClearing.ilean",
-      "sha256": "sha256:cd3fc9f7c04080319d96816677a49dd582aad82a295c176e6ab16d7ffcc40faa"
-    },
-    {
-      "byte_length": 16,
-      "path": "spec/inference-clearing/formal/.lake/build/lib/lean/InferenceClearing.ilean.hash",
-      "sha256": "sha256:96cf617d441c568ee1cc81970e6e3f6d9bda5521f9032e2850b3e46a13245843"
-    },
-    {
-      "byte_length": 126928,
-      "path": "spec/inference-clearing/formal/.lake/build/lib/lean/InferenceClearing.olean",
-      "sha256": "sha256:c16692ccc6b7bee4f7f24eb4d9c8876ebc050699b6c63e536cf44e8dc93fed8b"
-    },
-    {
-      "byte_length": 16,
-      "path": "spec/inference-clearing/formal/.lake/build/lib/lean/InferenceClearing.olean.hash",
-      "sha256": "sha256:1a6fc97b8a63d672a75f6852eb55f840624b3bea1c4a921c0ad23b906c73ad6d"
-    },
-    {
-      "byte_length": 1945,
-      "path": "spec/inference-clearing/formal/.lake/build/lib/lean/InferenceClearing.trace",
-      "sha256": "sha256:b95599ed7f248a73708bf507df44d8a0ee1adb2db68b62ad56b6a84856375d52"
-    },
-    {
       "byte_length": 2314,
       "path": "spec/inference-clearing/formal/InferenceClearing.lean",
       "sha256": "sha256:061bc955d34712e90916c7c4f9f9f48a16aca207e097e085659db0ffed3883ac"
@@ -191,11 +152,6 @@
       "sha256": "sha256:d8fa57e6ac5386eaf275adf53f732c7494091792449634995daa5704997babf6"
     },
     {
-      "byte_length": 35331,
-      "path": "spec/inference-clearing/generate.py",
-      "sha256": "sha256:fb97f55bc0dd2f198323115efc93d203420133c2be102ce10922f258251c4706"
-    },
-    {
       "byte_length": 6242,
       "path": "spec/inference-clearing/hostile-cases.json",
       "sha256": "sha256:13df9f48fe434fd5586d342fd50868171cf3cf21448838d22486a5d58474b890"
@@ -203,7 +159,7 @@
     {
       "byte_length": 106,
       "path": "spec/inference-clearing/inference-clearing-reproduction-kit.tar.sha256",
-      "sha256": "sha256:293c363071c8c09d67d162591bbaccc2f7b18d24c74120b519f13bcc8c1c1866"
+      "sha256": "sha256:e2d3b9d65834ac93f5c4e71f4966f567520525b8b786b917ebc5b11d65908078"
     },
     {
       "byte_length": 2438,
@@ -219,11 +175,6 @@
       "byte_length": 28946,
       "path": "spec/inference-clearing/score_comprehension_gate.py",
       "sha256": "sha256:d12c952cdc97a84c2ab5e3b69be2882e0baf6f89e239c219f2bbc41b58a63cb1"
-    },
-    {
-      "byte_length": 3533,
-      "path": "spec/inference-clearing/site-projection.json",
-      "sha256": "sha256:024f45b06c955a7d78ca4bc22d35b21e66dbab721b38afc1277eee4e2f213238"
     },
     {
       "byte_length": 411,
@@ -546,9 +497,9 @@
       "sha256": "sha256:c77fd75ed9f04dc43e05ee0c88d468f4239e8c4a5996a4153da15022f0091358"
     },
     {
-      "byte_length": 31293,
+      "byte_length": 32585,
       "path": "tests/test_inference_clearing.py",
-      "sha256": "sha256:80334c105538d55df4b0e4243076656004a32e012df670dfad6b374c2c661ee8"
+      "sha256": "sha256:6edf60c2eb7cdb14188aa6f04dd3ebee0cf994812676bcf213012533d82180fb"
     }
   ],
   "mirror_branch": "codex/recheckable-inference-calibration",
@@ -558,7 +509,21 @@
     "pyproject.toml"
   ],
   "profile": "bulla.inference-clearing-public-source-correspondence/0.1-experimental",
-  "scope": "inference-clearing source, specification, examples, and tests",
-  "source_commit": "fe14beca60e0bf7f9b34db6e7b70c52afa9ba4d0",
+  "repository_local_files": [
+    {
+      "mirror_sha256": "sha256:fb97f55bc0dd2f198323115efc93d203420133c2be102ce10922f258251c4706",
+      "path": "spec/inference-clearing/generate.py",
+      "rationale": "public-repository generator emits checkout-local reproduction commands",
+      "source_sha256": "sha256:2e648b64ade8003457e385102c5ab91cb7aec125d4999a7b348723338b924c48"
+    },
+    {
+      "mirror_sha256": "sha256:024f45b06c955a7d78ca4bc22d35b21e66dbab721b38afc1277eee4e2f213238",
+      "path": "spec/inference-clearing/site-projection.json",
+      "rationale": "public-repository projection omits Glyph-only public-source presentation metadata",
+      "source_sha256": "sha256:d571389db1f40508c6f96d0ef0843b26378f764e7be02a3db5c71fd246210178"
+    }
+  ],
+  "scope": "shared inference-clearing source, specification, examples, and tests, with repository-local projection files declared separately",
+  "source_commit": "921e33d7d99cd02b440ff8f16dc66e5cc6a75a25",
   "source_repository": "jkomkov/res-agentica"
 }
