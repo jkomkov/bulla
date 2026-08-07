@@ -514,16 +514,16 @@
       "mirror_sha256": "sha256:fb97f55bc0dd2f198323115efc93d203420133c2be102ce10922f258251c4706",
       "path": "spec/inference-clearing/generate.py",
       "rationale": "public-repository generator emits checkout-local reproduction commands",
-      "source_sha256": "sha256:2e648b64ade8003457e385102c5ab91cb7aec125d4999a7b348723338b924c48"
+      "source_sha256": "sha256:7607ff069fcf6ae9ed55aa71ea31ad505a548c054ac1bbe10f4dba3b874887b9"
     },
     {
       "mirror_sha256": "sha256:024f45b06c955a7d78ca4bc22d35b21e66dbab721b38afc1277eee4e2f213238",
       "path": "spec/inference-clearing/site-projection.json",
       "rationale": "public-repository projection omits Glyph-only public-source presentation metadata",
-      "source_sha256": "sha256:d571389db1f40508c6f96d0ef0843b26378f764e7be02a3db5c71fd246210178"
+      "source_sha256": "sha256:ddd9d2add22b99c30cc025eef80341613c8f8c74c727d4f99011911de5da1570"
     }
   ],
   "scope": "shared inference-clearing source, specification, examples, and tests, with repository-local projection files declared separately",
-  "source_commit": "921e33d7d99cd02b440ff8f16dc66e5cc6a75a25",
+  "source_commit": "86fb40b48163c6144ea14629e0421f97bbd0459a",
   "source_repository": "jkomkov/res-agentica"
 }
