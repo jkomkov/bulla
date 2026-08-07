@@ -1,0 +1,534 @@
+{
+  "limitations": [
+    "The mirror commit is established by the public pull request, not self-declared by this record.",
+    "The repository-local projection generator and projection are recorded separately because the monorepo pins the public source commit while the public repository supports checkout-local execution; neither file is a reproduction-kit member.",
+    "The profile remains source-only and is excluded from wheel, sdist, stable exports, and installed CLI."
+  ],
+  "member_set_sha256": "sha256:b70f32fcec42f7c0c69cb10c8be47094f5dbcb911e7252c5eeffd05f9086e9a2",
+  "members": [
+    {
+      "byte_length": 19642,
+      "path": "examples/inference-clearing/closed_task.py",
+      "sha256": "sha256:5616258b21dd3362bbb2740069a84cbe1c56bf00dbe3deaf56ec7a1d1de2145a"
+    },
+    {
+      "byte_length": 16234,
+      "path": "examples/inference-clearing/role_server.py",
+      "sha256": "sha256:27917d37f3ea225f7dd354f1fc2be4e9457f395ed5b26fabfb51eb2dede0bc38"
+    },
+    {
+      "byte_length": 15138,
+      "path": "examples/inference-clearing/run_demo.py",
+      "sha256": "sha256:37d58802136f86db06caa5251daba1d5d1485874a362715a1553af00a59e8faa"
+    },
+    {
+      "byte_length": 2684,
+      "path": "spec/inference-clearing/COMPREHENSION-GATE.md",
+      "sha256": "sha256:3e3dc693a72cfcd886e387802a06847852edbc457a1c54485d061c930d48f3e6"
+    },
+    {
+      "byte_length": 4593,
+      "path": "spec/inference-clearing/PROFILE.md",
+      "sha256": "sha256:8828c7174ff77229a340c957ccc034315d88c680b5cfdacaf650a6ec5583412e"
+    },
+    {
+      "byte_length": 1234,
+      "path": "spec/inference-clearing/REPRODUCE.md",
+      "sha256": "sha256:fc637068f01c6c04afecfc88c68d0251f759e28340420a5a8eeac00916cb6e64"
+    },
+    {
+      "byte_length": 3732,
+      "path": "spec/inference-clearing/THREAT-MODEL.md",
+      "sha256": "sha256:3b1151fdf1c76e4f5ce949584d29c5de45f2178fc93052779a6ac61f788a8183"
+    },
+    {
+      "byte_length": 3881,
+      "path": "spec/inference-clearing/build_kit.py",
+      "sha256": "sha256:30189282f7483b593e1ec5a16a04e564f18e70ce93a66f89472a1be5912df10a"
+    },
+    {
+      "byte_length": 52388,
+      "path": "spec/inference-clearing/check.mjs",
+      "sha256": "sha256:73f8b5fbcc61bd5aa6df030b9c897e187a5ece443537dcd6c7f104f7e62ea3bd"
+    },
+    {
+      "byte_length": 2591,
+      "path": "spec/inference-clearing/check.py",
+      "sha256": "sha256:2e7e461d0940e764d93d376bc1b1a8b0960886309639f8773240c0fa7c421291"
+    },
+    {
+      "byte_length": 5664,
+      "path": "spec/inference-clearing/check_comprehension_protocol.py",
+      "sha256": "sha256:142166862e6bd67613a10de3bb5b0bc989f829a15be5a6589cfa53950b55269e"
+    },
+    {
+      "byte_length": 3322,
+      "path": "spec/inference-clearing/clearing-core.schema.json",
+      "sha256": "sha256:d6fcfff0dbc414e52b70219e712b15128b091195d5ab6f11b6fcb7a2ecac61c7"
+    },
+    {
+      "byte_length": 828,
+      "path": "spec/inference-clearing/compare_reports.py",
+      "sha256": "sha256:c8a54fe68b60aa34fd6b1efb2bf892f8e6a62ddcedc65c8752cbb2bfb03e6a31"
+    },
+    {
+      "byte_length": 2544,
+      "path": "spec/inference-clearing/comprehension-attempt-manifest.schema.json",
+      "sha256": "sha256:8eb149071d3106cf6b574302d9fed361317f8cb0fca520ba773c4fe6a5fec601"
+    },
+    {
+      "byte_length": 513,
+      "path": "spec/inference-clearing/comprehension-context.schema.json",
+      "sha256": "sha256:c9b2b1052744c59ef1233b1e9744ea40a973bc6ce7308e2dd59d1ac806e48531"
+    },
+    {
+      "byte_length": 1999,
+      "path": "spec/inference-clearing/comprehension-gate-open.schema.json",
+      "sha256": "sha256:ef51a9af5dc33379b24b3a2192058644df5a1a464aeacd6124ac7ec83915d432"
+    },
+    {
+      "byte_length": 5444,
+      "path": "spec/inference-clearing/comprehension-protocol.json",
+      "sha256": "sha256:76d56fef78851ece6ec0de4a940857589e490a7844a230a3200f2742b26f4f3e"
+    },
+    {
+      "byte_length": 94,
+      "path": "spec/inference-clearing/comprehension-protocol.json.sha256",
+      "sha256": "sha256:5f1f837456fa71a08f077f706683155180cf14906a56bbf2b33e9c7cdfc74b13"
+    },
+    {
+      "byte_length": 5538,
+      "path": "spec/inference-clearing/comprehension-response.schema.json",
+      "sha256": "sha256:48b3b73e41497f0f259bd85e4a529664475f62e08e5d4381b75334043874bf60"
+    },
+    {
+      "byte_length": 2659,
+      "path": "spec/inference-clearing/comprehension-result.schema.json",
+      "sha256": "sha256:e6052d5d0fd76d225c8a6a2318b54f2de8e9962bf6ef2f3c082146cafa8802e7"
+    },
+    {
+      "byte_length": 1878,
+      "path": "spec/inference-clearing/contexts/bypass.json",
+      "sha256": "sha256:1bb2850e2012c2a4a0992e5dd063706b78a54b97397b7695891c98285b445320"
+    },
+    {
+      "byte_length": 1878,
+      "path": "spec/inference-clearing/contexts/opaque.json",
+      "sha256": "sha256:1416ed77d480b05fe5e1333f545d7acb0d84644ee8c54731fd3cb19aac042d02"
+    },
+    {
+      "byte_length": 1878,
+      "path": "spec/inference-clearing/contexts/recheckable.json",
+      "sha256": "sha256:961aae05235b259bf7b62c07bf16e4f9a93892f6660e5bd97371f75c2c659b3f"
+    },
+    {
+      "byte_length": 5842,
+      "path": "spec/inference-clearing/expected-verdict.json",
+      "sha256": "sha256:e882c66188d11496d906cd96256d3b223bfeb38281ad7d3b102180a84eff5b2f"
+    },
+    {
+      "byte_length": 2314,
+      "path": "spec/inference-clearing/formal/InferenceClearing.lean",
+      "sha256": "sha256:061bc955d34712e90916c7c4f9f9f48a16aca207e097e085659db0ffed3883ac"
+    },
+    {
+      "byte_length": 123,
+      "path": "spec/inference-clearing/formal/lake-manifest.json",
+      "sha256": "sha256:97d5e4a714d19cf685125a960a41b92154258743b440f5a3311226543e73f0f8"
+    },
+    {
+      "byte_length": 125,
+      "path": "spec/inference-clearing/formal/lakefile.toml",
+      "sha256": "sha256:c4ce3a6f5578a51c117c4b6d7fcd90291fab048a63cdda85183e5637fbe4a85c"
+    },
+    {
+      "byte_length": 25,
+      "path": "spec/inference-clearing/formal/lean-toolchain",
+      "sha256": "sha256:db7bb24b756d745bbde83fe92718b51bd3625dae3701ba0f598d0eedcd3f3028"
+    },
+    {
+      "byte_length": 881,
+      "path": "spec/inference-clearing/formal-fixture-map.json",
+      "sha256": "sha256:d8fa57e6ac5386eaf275adf53f732c7494091792449634995daa5704997babf6"
+    },
+    {
+      "byte_length": 6242,
+      "path": "spec/inference-clearing/hostile-cases.json",
+      "sha256": "sha256:13df9f48fe434fd5586d342fd50868171cf3cf21448838d22486a5d58474b890"
+    },
+    {
+      "byte_length": 106,
+      "path": "spec/inference-clearing/inference-clearing-reproduction-kit.tar.sha256",
+      "sha256": "sha256:e2d3b9d65834ac93f5c4e71f4966f567520525b8b786b917ebc5b11d65908078"
+    },
+    {
+      "byte_length": 1139,
+      "path": "spec/inference-clearing/promotion-policy.json",
+      "sha256": "sha256:a388457b9a4476e860da0c791e40bd5143e12b9ef0ece2a68f148fe700f82073"
+    },
+    {
+      "byte_length": 2438,
+      "path": "spec/inference-clearing/reviews/PRODUCT.md",
+      "sha256": "sha256:d45904ded1830c69a2c43421fbe27131147626b93deffc61a0539073362743a0"
+    },
+    {
+      "byte_length": 3430,
+      "path": "spec/inference-clearing/reviews/PROTOCOL.md",
+      "sha256": "sha256:7d7516fcf6e938e98b392ac5a84260b0067b63bff887a38133c88e3c096fa432"
+    },
+    {
+      "byte_length": 27746,
+      "path": "spec/inference-clearing/score_comprehension_gate.py",
+      "sha256": "sha256:ee08bda826297cb29dee83c69eb364b64a2441e8aeee4c789961703719b6e1db"
+    },
+    {
+      "byte_length": 411,
+      "path": "spec/inference-clearing/vectors/bypass/assurance/capital.json",
+      "sha256": "sha256:d19fdcc6105f7aa38fb711de25afb283db1ce9601f3a6b24b739eb599345076b"
+    },
+    {
+      "byte_length": 7507,
+      "path": "spec/inference-clearing/vectors/bypass/clearing-core.json",
+      "sha256": "sha256:86654e5e10f8215bdfea0698f1cb719e5e685d53da762ec55085c433ee445cf8"
+    },
+    {
+      "byte_length": 573,
+      "path": "spec/inference-clearing/vectors/bypass/execution/model.json",
+      "sha256": "sha256:e677c5a4e990be17feafd24d2d55e2bf0a963187ada1bde6aa7eb19180a453b4"
+    },
+    {
+      "byte_length": 7,
+      "path": "spec/inference-clearing/vectors/bypass/execution/output.bin",
+      "sha256": "sha256:d5bff25f1372e12f9d306aa5aaa94136469c1bc5178641cd52baa9cc2e60bdc7"
+    },
+    {
+      "byte_length": 850,
+      "path": "spec/inference-clearing/vectors/bypass/execution/report.json",
+      "sha256": "sha256:3b5cff54e1e4107583d91f1dd3c025fc6495145062954d3e77857c2bbf462831"
+    },
+    {
+      "byte_length": 3813,
+      "path": "spec/inference-clearing/vectors/bypass/publish-receipt.json",
+      "sha256": "sha256:528cd4d9d4cb019cd719f2bdf61b7ca6d0d1d1030f9e12d10b3aed4be118a4b4"
+    },
+    {
+      "byte_length": 3347,
+      "path": "spec/inference-clearing/vectors/bypass/receipts/01-order.json",
+      "sha256": "sha256:e27c6975ab54e4317a941fd358c93725db3adcfc12ecfa77c9ed1e8006d7c5c7"
+    },
+    {
+      "byte_length": 3438,
+      "path": "spec/inference-clearing/vectors/bypass/receipts/02-route.json",
+      "sha256": "sha256:2c7a9aa798ae1d0cd09c8f5936422f8534bb5d5677141788157121254fa971e4"
+    },
+    {
+      "byte_length": 3662,
+      "path": "spec/inference-clearing/vectors/bypass/receipts/03-accept.json",
+      "sha256": "sha256:69d4cad247bdf404df7d3f8f0c6ae6c52a04f5543e79da8c8ac8d1148defc037"
+    },
+    {
+      "byte_length": 3597,
+      "path": "spec/inference-clearing/vectors/bypass/receipts/04-delivery.json",
+      "sha256": "sha256:4f930110855979791e0d41ccb762a95cfa7f2c01c10fabf182907f70653f6632"
+    },
+    {
+      "byte_length": 3523,
+      "path": "spec/inference-clearing/vectors/bypass/receipts/05-capital-bind.json",
+      "sha256": "sha256:b47e47e52f7aa5f0dacc7ffc8fa5c0389e85dc06c14b6c5a00aafe0e56bd7dfd"
+    },
+    {
+      "byte_length": 3631,
+      "path": "spec/inference-clearing/vectors/bypass/receipts/06-coverage-checkpoint.json",
+      "sha256": "sha256:7d2930d7c4b872637ae32c42a675da42f54016b6bd0b2b5afc325b8b43b55670"
+    },
+    {
+      "byte_length": 4069,
+      "path": "spec/inference-clearing/vectors/bypass/receipts/07-rely.json",
+      "sha256": "sha256:ef15549d41e16c9e9822ea4b7c17c230eceaca870e51005a26fd01294217f4dc"
+    },
+    {
+      "byte_length": 336,
+      "path": "spec/inference-clearing/vectors/bypass/receiver/coverage.json",
+      "sha256": "sha256:e70852b798d791dfada50741c0203a270c2bf3594e3fa8a7a2e207cb3c786265"
+    },
+    {
+      "byte_length": 200,
+      "path": "spec/inference-clearing/vectors/bypass/settlement/rail-evidence.json",
+      "sha256": "sha256:4514906b1dae0d5b64d233dcb9b1f2ca136548178e358873f7462bd79149c50f"
+    },
+    {
+      "byte_length": 367,
+      "path": "spec/inference-clearing/vectors/bypass/settlement/report.json",
+      "sha256": "sha256:45ec69067286eac54e5f5779b86c0d47f2a6990aa962ac01f9427bee316ac03b"
+    },
+    {
+      "byte_length": 1159,
+      "path": "spec/inference-clearing/vectors/bypass/terms/term-document.json",
+      "sha256": "sha256:096dd4111b0d94c46b4116542486a96b5d424e6d63bfaf72c373c710dbad50b3"
+    },
+    {
+      "byte_length": 974,
+      "path": "spec/inference-clearing/vectors/bypass/witness/decision-checkpoint.json",
+      "sha256": "sha256:9c0c6096ab8fae3eeeb34d345bd7bcfc0d1c734061022b5417d89a15cfc878a5"
+    },
+    {
+      "byte_length": 3297,
+      "path": "spec/inference-clearing/vectors/bypass/witness/decision-inclusions.json",
+      "sha256": "sha256:772bae7b913e38614197bfaea36f1c48ec62b720233727db4a96485b8c3423e2"
+    },
+    {
+      "byte_length": 1043,
+      "path": "spec/inference-clearing/vectors/bypass/witness/final-checkpoint.json",
+      "sha256": "sha256:b22babcae160011cff3806e6a0844a10cf7190b2e32f5596c40e756d01fc5fd8"
+    },
+    {
+      "byte_length": 3954,
+      "path": "spec/inference-clearing/vectors/bypass/witness/final-inclusions.json",
+      "sha256": "sha256:8032e50df71882b9f8978a3d0e7a5e61839a73306160f7750729b8bf74755f9a"
+    },
+    {
+      "byte_length": 411,
+      "path": "spec/inference-clearing/vectors/opaque/assurance/capital.json",
+      "sha256": "sha256:8d85dad280fe8e42e6161bcf7a322362685b140851f20f3348ab28b1dcde81ab"
+    },
+    {
+      "byte_length": 7294,
+      "path": "spec/inference-clearing/vectors/opaque/clearing-core.json",
+      "sha256": "sha256:9f37f3cc409a5620750f38fadf425c7254f3617852d54ca189c3d6204091ede3"
+    },
+    {
+      "byte_length": 7,
+      "path": "spec/inference-clearing/vectors/opaque/execution/output.bin",
+      "sha256": "sha256:d5bff25f1372e12f9d306aa5aaa94136469c1bc5178641cd52baa9cc2e60bdc7"
+    },
+    {
+      "byte_length": 754,
+      "path": "spec/inference-clearing/vectors/opaque/execution/report.json",
+      "sha256": "sha256:f1b2ede63b34efac9baf7bb53bba183dec33d53fa017e9c5298a111c5d2541ba"
+    },
+    {
+      "byte_length": 3813,
+      "path": "spec/inference-clearing/vectors/opaque/publish-receipt.json",
+      "sha256": "sha256:2d54578c3cf96c0525373c4eb499fabb74d3315a760c1affec02379d8c46a914"
+    },
+    {
+      "byte_length": 3347,
+      "path": "spec/inference-clearing/vectors/opaque/receipts/01-order.json",
+      "sha256": "sha256:7146277452cf4ff1a3ac470d24ddc38cf9dd89e808e2a8500d569010a811c3fe"
+    },
+    {
+      "byte_length": 3432,
+      "path": "spec/inference-clearing/vectors/opaque/receipts/02-route.json",
+      "sha256": "sha256:ac9a8c0d03011c01df0d05181e5c5cc48a63003233ee9105931c41728ed4d2e7"
+    },
+    {
+      "byte_length": 3662,
+      "path": "spec/inference-clearing/vectors/opaque/receipts/03-accept.json",
+      "sha256": "sha256:ed38090c49fc31852dbb51b50dce677c4ff3ed75d01302b411f407358c5f87d2"
+    },
+    {
+      "byte_length": 3597,
+      "path": "spec/inference-clearing/vectors/opaque/receipts/04-delivery.json",
+      "sha256": "sha256:2a4d3ab0dbf0e767100c1da4413a66ab1d125c2fbc911e8920c4cd0afb033ef5"
+    },
+    {
+      "byte_length": 3523,
+      "path": "spec/inference-clearing/vectors/opaque/receipts/05-capital-bind.json",
+      "sha256": "sha256:0e6175e707422941f61c15f757e207d8284c042447b8041ce35ce020b948d8d8"
+    },
+    {
+      "byte_length": 3631,
+      "path": "spec/inference-clearing/vectors/opaque/receipts/06-coverage-checkpoint.json",
+      "sha256": "sha256:528a69c19e23b1fe6d7f4480b2244662f2b95659c458666731e0f5a30ee33568"
+    },
+    {
+      "byte_length": 4133,
+      "path": "spec/inference-clearing/vectors/opaque/receipts/07-rely.json",
+      "sha256": "sha256:5ecf2e4e7c9df29231e44aeacbcd4661abcadc0d99cd0396ca314c17e6cdf5cf"
+    },
+    {
+      "byte_length": 311,
+      "path": "spec/inference-clearing/vectors/opaque/receiver/coverage.json",
+      "sha256": "sha256:a25f8af00186b42bad41cbf798b7bcdad26c777f2dfc7bdc50fd8fadc837e2c3"
+    },
+    {
+      "byte_length": 200,
+      "path": "spec/inference-clearing/vectors/opaque/settlement/rail-evidence.json",
+      "sha256": "sha256:1928f9f752b04a1d6c6b9e387de00b5e60210ba917f94af073899eafc8680872"
+    },
+    {
+      "byte_length": 367,
+      "path": "spec/inference-clearing/vectors/opaque/settlement/report.json",
+      "sha256": "sha256:b6f3c5641ca1196abab7c12c95cd60351dc080ba88b5bec8256ca6a48b183602"
+    },
+    {
+      "byte_length": 1159,
+      "path": "spec/inference-clearing/vectors/opaque/terms/term-document.json",
+      "sha256": "sha256:bf55eb85da04696d70d560291b7a9033c3ee2bae54de168a26c859578a61af45"
+    },
+    {
+      "byte_length": 974,
+      "path": "spec/inference-clearing/vectors/opaque/witness/decision-checkpoint.json",
+      "sha256": "sha256:a613398dbe99c43ff1827b479f34d03a45cdc525cdb2a29513e60f3535062d62"
+    },
+    {
+      "byte_length": 3297,
+      "path": "spec/inference-clearing/vectors/opaque/witness/decision-inclusions.json",
+      "sha256": "sha256:fd1afad4b5300f381b1392115107156770e70bd1527ea465c7b958f1f296435a"
+    },
+    {
+      "byte_length": 1043,
+      "path": "spec/inference-clearing/vectors/opaque/witness/final-checkpoint.json",
+      "sha256": "sha256:10e70258cb2739aa40fa75cf92af81ba289073f012f6528bfb0c4da8344f2697"
+    },
+    {
+      "byte_length": 3954,
+      "path": "spec/inference-clearing/vectors/opaque/witness/final-inclusions.json",
+      "sha256": "sha256:02f7b1320250c13a2f498efb65732228351db6b2a030cb36ea7ffce450a975c6"
+    },
+    {
+      "byte_length": 421,
+      "path": "spec/inference-clearing/vectors/recheckable/assurance/capital.json",
+      "sha256": "sha256:138fa3509d4f22093d35802923c27882dcb733ca20a8ee9b5a98c20b1b05c8b7"
+    },
+    {
+      "byte_length": 7512,
+      "path": "spec/inference-clearing/vectors/recheckable/clearing-core.json",
+      "sha256": "sha256:7fee19ba8a2c9122f880f3f7e05feb83e1f984e12880958795a15bdfe83f7b7e"
+    },
+    {
+      "byte_length": 573,
+      "path": "spec/inference-clearing/vectors/recheckable/execution/model.json",
+      "sha256": "sha256:e677c5a4e990be17feafd24d2d55e2bf0a963187ada1bde6aa7eb19180a453b4"
+    },
+    {
+      "byte_length": 7,
+      "path": "spec/inference-clearing/vectors/recheckable/execution/output.bin",
+      "sha256": "sha256:d5bff25f1372e12f9d306aa5aaa94136469c1bc5178641cd52baa9cc2e60bdc7"
+    },
+    {
+      "byte_length": 850,
+      "path": "spec/inference-clearing/vectors/recheckable/execution/report.json",
+      "sha256": "sha256:3b5cff54e1e4107583d91f1dd3c025fc6495145062954d3e77857c2bbf462831"
+    },
+    {
+      "byte_length": 3823,
+      "path": "spec/inference-clearing/vectors/recheckable/publish-receipt.json",
+      "sha256": "sha256:e8a65e30fb400d9322e9aa0517061198a344735a50e05489ca589935bda33305"
+    },
+    {
+      "byte_length": 3357,
+      "path": "spec/inference-clearing/vectors/recheckable/receipts/01-order.json",
+      "sha256": "sha256:78b7179dd2d56ae87582364e719bc4eda9a3072084bf73130c241b4e39470d12"
+    },
+    {
+      "byte_length": 3448,
+      "path": "spec/inference-clearing/vectors/recheckable/receipts/02-route.json",
+      "sha256": "sha256:fbe04015f4efff48243fbf1da3f0223947c6009258814b9b0c20737031ff3960"
+    },
+    {
+      "byte_length": 3672,
+      "path": "spec/inference-clearing/vectors/recheckable/receipts/03-accept.json",
+      "sha256": "sha256:e145e3796e81b69c82b7a0f6f80c1f9f05d2e5a7c6ce11acb415b3dc85ccf36d"
+    },
+    {
+      "byte_length": 3607,
+      "path": "spec/inference-clearing/vectors/recheckable/receipts/04-delivery.json",
+      "sha256": "sha256:a9f6c7e98ab794147d911fd858044e4876e971e1364e81a33e75a2c894898392"
+    },
+    {
+      "byte_length": 3533,
+      "path": "spec/inference-clearing/vectors/recheckable/receipts/05-capital-bind.json",
+      "sha256": "sha256:7a926ec8c3365ac44f846cf2cf0ac0d6978df56449294118465b00f92af64b03"
+    },
+    {
+      "byte_length": 3641,
+      "path": "spec/inference-clearing/vectors/recheckable/receipts/06-coverage-checkpoint.json",
+      "sha256": "sha256:5d822d92faffc7898a8b1f78dce656bf5a26fd91ec79cade9297e4a9fbc502d1"
+    },
+    {
+      "byte_length": 4016,
+      "path": "spec/inference-clearing/vectors/recheckable/receipts/07-rely.json",
+      "sha256": "sha256:268f4bbe6cf1c217efd97bda2a67c5b08f26062f8fe6c204aef5cb05da6d6f68"
+    },
+    {
+      "byte_length": 316,
+      "path": "spec/inference-clearing/vectors/recheckable/receiver/coverage.json",
+      "sha256": "sha256:01a8dcf216ebfd9946125f021b17be02a91942d70d7f617cec3ee189ca7dde5c"
+    },
+    {
+      "byte_length": 205,
+      "path": "spec/inference-clearing/vectors/recheckable/settlement/rail-evidence.json",
+      "sha256": "sha256:d89597dcdf1acada8f814cd5a2f6e50e58c06c4577f6e546606529988b42c38e"
+    },
+    {
+      "byte_length": 372,
+      "path": "spec/inference-clearing/vectors/recheckable/settlement/report.json",
+      "sha256": "sha256:d97e664c4c71b0f0a45aa621acf1706ac9fd63a3d91afecdb54f4c6c9aea6c89"
+    },
+    {
+      "byte_length": 1164,
+      "path": "spec/inference-clearing/vectors/recheckable/terms/term-document.json",
+      "sha256": "sha256:dffe49772c7a362a4ac8323cd0e88f1a79f12ea9c06c089c6f7fb3ec4c96fa67"
+    },
+    {
+      "byte_length": 979,
+      "path": "spec/inference-clearing/vectors/recheckable/witness/decision-checkpoint.json",
+      "sha256": "sha256:85bd469eb53f135f75107637c5c5b4c5fba76393199e2ebc60e63be7ffd9b316"
+    },
+    {
+      "byte_length": 3297,
+      "path": "spec/inference-clearing/vectors/recheckable/witness/decision-inclusions.json",
+      "sha256": "sha256:a831c7a94b3f729b146b8ca6e141f03e8b4bdb1c7a0d8f90a3e2e583c1f37de5"
+    },
+    {
+      "byte_length": 1048,
+      "path": "spec/inference-clearing/vectors/recheckable/witness/final-checkpoint.json",
+      "sha256": "sha256:5f83607f1cb987a24df60a4d27537ad25ae571fd5ff45a30ca4d694a2a1b3588"
+    },
+    {
+      "byte_length": 3954,
+      "path": "spec/inference-clearing/vectors/recheckable/witness/final-inclusions.json",
+      "sha256": "sha256:07159e975864a73f792e1fbca24df4ba9dca54b4fbf9c028f98d85b46ed1ff40"
+    },
+    {
+      "byte_length": 2850,
+      "path": "spec/inference-clearing/verification-context.schema.json",
+      "sha256": "sha256:ede08482de9914f6eb02d0ff1c75eaef1205d5ebe5f882f1cd7d384124dac56b"
+    },
+    {
+      "byte_length": 76102,
+      "path": "src/bulla/experimental/inference_clearing.py",
+      "sha256": "sha256:c77fd75ed9f04dc43e05ee0c88d468f4239e8c4a5996a4153da15022f0091358"
+    },
+    {
+      "byte_length": 33629,
+      "path": "tests/test_inference_clearing.py",
+      "sha256": "sha256:306c1dca0793f1abf3120254a23b26e3f4ed7ac1a6f703614edcbf752d5ca68d"
+    }
+  ],
+  "mirror_branch": "codex/recheckable-inference-calibration",
+  "mirror_repository": "jkomkov/bulla",
+  "package_boundary_files": [
+    "distribution-policy.json",
+    "pyproject.toml"
+  ],
+  "profile": "bulla.inference-clearing-public-source-correspondence/0.1-experimental",
+  "repository_local_files": [
+    {
+      "mirror_sha256": "sha256:fb97f55bc0dd2f198323115efc93d203420133c2be102ce10922f258251c4706",
+      "path": "spec/inference-clearing/generate.py",
+      "rationale": "public-repository generator emits checkout-local reproduction commands",
+      "source_sha256": "sha256:7607ff069fcf6ae9ed55aa71ea31ad505a548c054ac1bbe10f4dba3b874887b9"
+    },
+    {
+      "mirror_sha256": "sha256:024f45b06c955a7d78ca4bc22d35b21e66dbab721b38afc1277eee4e2f213238",
+      "path": "spec/inference-clearing/site-projection.json",
+      "rationale": "public-repository projection omits Glyph-only public-source presentation metadata",
+      "source_sha256": "sha256:ddd9d2add22b99c30cc025eef80341613c8f8c74c727d4f99011911de5da1570"
+    }
+  ],
+  "scope": "shared inference-clearing source, specification, examples, and tests, with repository-local projection files declared separately",
+  "source_commit": "f3bf7a8b263df0ff10eadc189e36d6c296a74000",
+  "source_repository": "jkomkov/res-agentica"
+}

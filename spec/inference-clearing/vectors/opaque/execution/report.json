@@ -1,0 +1,25 @@
+{
+  "adapter": "provider-assertion/1",
+  "input": [
+    12,
+    -4,
+    7,
+    3,
+    -8,
+    5,
+    2,
+    9
+  ],
+  "input_hash": "sha256:34573c8f271e128dff1456e2e8bfe9eb0f1d8c3b447b7eeaaab3b1d7d4114e89",
+  "model_available": false,
+  "model_hash": "sha256:bd78b7341078c8ca4649f64d5d16a3843e2212c09b2ef9548409a9daee53e8b2",
+  "model_id": "opaque-model-unavailable",
+  "output": "BACKUP",
+  "output_hash": "sha256:d5bff25f1372e12f9d306aa5aaa94136469c1bc5178641cd52baa9cc2e60bdc7",
+  "profile": "bulla.inference-execution-evidence/0.1-experimental",
+  "provider_process_claim": "self_asserted",
+  "trace": {
+    "provider_statement": "fixed output returned"
+  },
+  "trace_hash": "sha256:03b7d55fdd25da74c2ab7fa2a1c404483cca64c6de487d876db28829ef54b262"
+}

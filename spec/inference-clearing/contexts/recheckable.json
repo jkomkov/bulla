@@ -1,0 +1,65 @@
+{
+  "accepted_evidence_requirements": {
+    "model_binding": "TERM_BOUND",
+    "output_binding": "VERIFIED",
+    "provider_execution_occurrence": "NOT_REQUIRED",
+    "relation_reproduction": "REPRODUCED"
+  },
+  "accepted_execution_adapters": [
+    "bulla.int8-mlp-recompute/1",
+    "provider-assertion/1"
+  ],
+  "accepted_issuers_by_role": {
+    "buyer": [
+      "did:key:z6Mkn88doHo3kuYVR2bWYpyN9pchLcv84zmQXqvMwQER4n7A"
+    ],
+    "guarantor": [
+      "did:key:z6MkwSA9zFts3AiU2eh7yYkZRdhj2Sc7hFsBu1PoTtW1KaiE"
+    ],
+    "provider": [
+      "did:key:z6Mkit1vRUZTdAJPHmZWgLQJaH9GKpSW9Hq9vK3H15kdxwPZ",
+      "did:key:z6MkpSp7vFWdLmeRZo387Yrx8oN99BZZsMsTHt2m4ts9W8K6"
+    ],
+    "publisher": [
+      "did:key:z6Mkopo6bkx95aEH1hJAfn7VL2V3jSEzspUFQ1Q1AyLCVihT"
+    ],
+    "rail_observer": [
+      "did:key:z6Mkt3WhcTGbye1XeXB2SqAcqtKPAM7XMFqyA5PKvCm2FCUs"
+    ],
+    "receiver": [
+      "did:key:z6MkfXgBCMUWz9sn3rmExpXgVsKaESNjE8DGwpDfhKfXAJzH"
+    ],
+    "relier": [
+      "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr"
+    ],
+    "router": [
+      "did:key:z6MkwYBWPba3ZWZ7rGhiyN71VjH27kQGsHhqHeK2ErSvJ2Qn"
+    ],
+    "settlement_authority": [
+      "did:key:z6Mkksmuc11jNHwQzX5Bnhi9vbZBvUA9jjkAGbDWmvwGcqGo"
+    ],
+    "witness": [
+      "did:key:z6Mkt7ugjK7pupimB2noBDxFeHYn8EwCvGqrzXBp4nV6M4GW"
+    ]
+  },
+  "accepted_policy_hash": "sha256:a3e3af1b21803d94a45133eec01dc4e529a8eddd2371aacab427cb497381ce3a",
+  "accepted_rail_adapters": [
+    "fixture-escrow/1"
+  ],
+  "team_controlled_roles": [
+    "buyer",
+    "guarantor",
+    "provider",
+    "publisher",
+    "rail_observer",
+    "receiver",
+    "relier",
+    "router",
+    "settlement_authority",
+    "witness"
+  ],
+  "trusted_witness_roots": [
+    "sha256:8e73a124f7a911fb4f21c817a15fb3ce6f2b288ee286ce1539038309452d885a",
+    "sha256:d0ce429f33069298b4472b98e16e7f7a3af6510bd30400d5b1393c213ed7b530"
+  ]
+}

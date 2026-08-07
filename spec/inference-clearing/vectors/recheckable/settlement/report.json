@@ -1,0 +1,11 @@
+{
+  "amount": 125000,
+  "authorization_ref": null,
+  "profile": "bulla.inference-settlement-report/0.1-experimental",
+  "rail_adapter": "fixture-escrow/1",
+  "rail_evidence_hash": "sha256:0cc2ada406d0841ed0e7a5d5cbe9d00e5d65deae5f64825e362b5d41bb756cc5",
+  "status": "NOT_ATTEMPTED",
+  "synthetic": true,
+  "transaction_id": "inference-recheckable-001",
+  "unit": "sat"
+}

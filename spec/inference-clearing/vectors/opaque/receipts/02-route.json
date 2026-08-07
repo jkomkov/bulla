@@ -1,0 +1,88 @@
+{
+  "action": {
+    "subject": {
+      "comparison_group": "sha256:5ce5a6921e010535e3f7cf09998b0b11b299ee5d91e53400168500ee6d2075e9",
+      "issuer_role": "router",
+      "parent_ref": {
+        "attestation": "sha256:b1b155a720cfc3398c404cb4c3605003930aea42f3dd3c1bb21c1f9ca6b5427e",
+        "event": "sha256:4834c36188dd5f290e9bdc608683b0ba4f7ea561b86d790df890256a55b609f1"
+      },
+      "profile": "bulla.inference-clearing/0.1-experimental",
+      "provider_kind": "OPAQUE",
+      "term_root": "sha256:7a24fe9f88322fc89941801cfec180acea907d3e24a14e9f5648096da7c6a72e",
+      "transaction_id": "inference-opaque-001"
+    },
+    "type": "inference.route"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6MkwYBWPba3ZWZ7rGhiyN71VjH27kQGsHhqHeK2ErSvJ2Qn",
+    "proofValue": "z9ohLezcdyN/XVRf8HSOCfA9/5Fcuxojx/E/UH0Aso8y8Yp9ur/PirJh4pGMrFtwj89OJf8nqLcN3UsM943+BQ==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkwYBWPba3ZWZ7rGhiyN71VjH27kQGsHhqHeK2ErSvJ2Qn"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-08-04T12:02:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "58c52a03-5e74-480c-aef0-b32ab0054ea9",
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:86a49826b23e773feab98a38aee79e2a7e64e0366fd4564d659372c5d8c5f1f1",
+    "content": "sha256:5823e55f2c4a6d3c37d67efa7284b8b4cd80c97ca344fc2602a96409980c6dcd",
+    "event": "sha256:c7a9ac5eccfbedcc740f12a63aec9bfa2911cb1b54b7310a33debc1e6dca99e0",
+    "log_leaf": "sha256:e9c3e17fb95fcad87f3b56ce3573ffb532542f2473f11d573f9e03b913e422fe"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "sha256:a3e3af1b21803d94a45133eec01dc4e529a8eddd2371aacab427cb497381ce3a",
+      "principal": "did:key:z6MkwYBWPba3ZWZ7rGhiyN71VjH27kQGsHhqHeK2ErSvJ2Qn"
+    },
+    "bounds": {
+      "scope": "profile:bulla.inference-clearing/0.1-experimental;action:inference.route"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6MkwYBWPba3ZWZ7rGhiyN71VjH27kQGsHhqHeK2ErSvJ2Qn",
+    "proofValue": "uZsWG1Vrw/je+2ZAh+e3kItVx0c+3HJg+OFZRXWJ9/sN1jh1hW1Pj77khE6qIdCCuliSV/m/F/lwTxH3o7zjBg==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkwYBWPba3ZWZ7rGhiyN71VjH27kQGsHhqHeK2ErSvJ2Qn"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "opaque"
+  },
+  "remedy": {
+    "challenge_window": "checkpoint:inference-clearing-challenge-001",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/bulla/experimental/inference-clearing/reference",
+      "trusted_root_ref": "sha256:c29b7d29922c1006e1bc55b990ef24c3be20cecfb6f18ff8f2dd05e7f761fea5"
+    },
+    "remedies": [
+      {
+        "anchor": "forum:inference-clearing-alpha",
+        "rung": "challenge",
+        "verifier": "verify retained clearing bundle"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "public",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6MkwYBWPba3ZWZ7rGhiyN71VjH27kQGsHhqHeK2ErSvJ2Qn",
+    "proofValue": "IZ1vf7GpmSzL1O/mIVM13hf1AV1i0FnO/D2liKedaTgOCd09Rp0wP7KOcHzxWSDFpjAAXdVYFBrM4ECUMC+HDA==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkwYBWPba3ZWZ7rGhiyN71VjH27kQGsHhqHeK2ErSvJ2Qn"
+  },
+  "stake": null
+}

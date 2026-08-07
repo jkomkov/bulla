@@ -1,0 +1,38 @@
+{
+  "profile": "bulla.inference-clearing-mutation-registry/0.1-experimental",
+  "cases": [
+    {"id": "H01", "invariant": "content integrity", "mutation": "model, input, output, trace, or receipt byte substitution", "expected": "REJECT"},
+    {"id": "H02", "invariant": "pre-accepted model binding", "mutation": "coherent post-hoc model produces the same BACKUP bytes", "fixture": "signed-post-hoc-equivalent-model", "semantic_mutation": "post-hoc-equivalent-model", "expected": "REJECT"},
+    {"id": "H03", "invariant": "input-to-term binding after attacker republication", "mutation": "signed input differs from accepted terms", "fixture": "signed-input-mismatch", "semantic_mutation": "input-mismatch", "expected": "REJECT"},
+    {"id": "H04", "invariant": "model-to-report binding after attacker republication", "mutation": "signed model bytes differ from execution report", "fixture": "signed-model-mismatch", "semantic_mutation": "model-mismatch", "expected": "REJECT"},
+    {"id": "H05", "invariant": "exact lineage", "mutation": "cross-order or cross-provider receipt replay", "expected": "REJECT"},
+    {"id": "H06", "invariant": "claim non-amplification", "mutation": "provider process claim presented as relation reproduction", "expected": "REJECT"},
+    {"id": "H07", "invariant": "historical execution non-amplification", "mutation": "relation reproduction presented as provider execution occurrence", "expected": "REJECT"},
+    {"id": "H08", "invariant": "historical execution non-amplification", "mutation": "witness, guarantee, or collateral attempts to upgrade historical execution", "expected": "REJECT"},
+    {"id": "H09", "invariant": "coverage checkpoint binding", "mutation": "publisher shortens the receiver denominator", "fixture": "signed-coverage-unbound", "semantic_mutation": "coverage-unbound", "expected": "REJECT"},
+    {"id": "H10", "invariant": "coverage sensitivity", "mutation": "direct receiver effect has no matching receipt", "expected": "INELIGIBLE"},
+    {"id": "H11", "invariant": "coverage set integrity", "mutation": "missing, duplicate, fabricated, reordered, or phantom denominator entry", "expected": "REJECT"},
+    {"id": "H12", "invariant": "capital receipt binding", "mutation": "publisher changes allocation after rail-observer receipt", "fixture": "signed-capital-unbound", "semantic_mutation": "capital-unbound", "expected": "REJECT"},
+    {"id": "H13", "invariant": "eligibility and authorization ordering", "mutation": "authorization while payment is ineligible", "expected": "INVALID_AUTHORIZATION"},
+    {"id": "H14", "invariant": "authorization and execution ordering", "mutation": "settlement execution without authorization", "expected": "INVALID_EXECUTION"},
+    {"id": "H15", "invariant": "settlement report binding", "mutation": "publisher changes settlement after rail-observer receipt", "fixture": "signed-settlement-unbound", "semantic_mutation": "settlement-unbound", "expected": "REJECT"},
+    {"id": "H16", "invariant": "direct signer-bound authority", "mutation": "attacker signs a mandate naming another principal", "fixture": "signed-wrong-authority", "semantic_mutation": "wrong-authority", "expected": "REJECT"},
+    {"id": "H17", "invariant": "safe-integer relation", "mutation": "intermediate multiplication exceeds the exact integer range", "fixture": "signed-unsafe-arithmetic", "semantic_mutation": "unsafe-arithmetic", "expected": "MALFORMED"},
+    {"id": "H18", "invariant": "closed deterministic model type", "mutation": "model weight is a JSON string accepted by coercion", "fixture": "signed-model-string-coercion", "semantic_mutation": "model-string-coercion", "expected": "MALFORMED"},
+    {"id": "H19", "invariant": "specific witness inclusion", "mutation": "inclusion carries a tree size different from the signed checkpoint", "fixture": "signed-inclusion-size-mismatch", "semantic_mutation": "inclusion-size-mismatch", "expected": "REJECT"},
+    {"id": "H20", "invariant": "comparison-group conservation", "mutation": "accepted receipt changes the comparison group", "fixture": "signed-comparison-mismatch", "semantic_mutation": "comparison-mismatch", "expected": "REJECT"},
+    {"id": "H21", "invariant": "order-to-term conservation", "mutation": "buyer order changes the input commitment", "fixture": "signed-order-term-mismatch", "semantic_mutation": "order-term-mismatch", "expected": "REJECT"},
+    {"id": "H22", "invariant": "receiver-anchor conservation", "mutation": "delivery receipt names another receiver anchor", "fixture": "signed-delivery-anchor-mismatch", "semantic_mutation": "delivery-anchor-mismatch", "expected": "REJECT"},
+    {"id": "H23", "invariant": "external trust context", "mutation": "bundle-carried issuer or witness root attempts to authenticate itself", "expected": "SUPPRESS"},
+    {"id": "H24", "invariant": "offline verification", "mutation": "all provider processes terminate before final check", "expected": "SAME_REPORT"},
+    {"id": "H25", "invariant": "witness proof identity", "mutation": "publisher key signs an unchanged witness checkpoint body", "fixture": "signed-witness-proof-substitution", "semantic_mutation": "witness-proof-substitution", "expected": "REJECT"},
+    {"id": "H26", "invariant": "provider claim attribution", "mutation": "publisher changes the provider process claim without a new provider receipt", "fixture": "signed-provider-claim-substitution", "semantic_mutation": "provider-claim-substitution", "expected": "REJECT"},
+    {"id": "H27", "invariant": "closed model artifact contract", "mutation": "recomputation adapter omits execution/model.json", "fixture": "signed-missing-required-model", "semantic_mutation": "missing-required-model", "expected": "MALFORMED"},
+    {"id": "H28", "invariant": "closed JSON artifact shape", "mutation": "settlement report is an array rather than an object", "fixture": "signed-malformed-settlement-object", "semantic_mutation": "malformed-settlement-object", "expected": "MALFORMED"}
+  ],
+  "limitations": [
+    "The registry tests the closed synthetic profile, not open-world inference services.",
+    "An uncovered event does not establish why it was uncovered.",
+    "No mutation can establish historical provider execution or answer truth."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "capital_requirement": {
+    "amount": 200000,
+    "unit": "sat"
+  },
+  "comparison_group": "sha256:5ce5a6921e010535e3f7cf09998b0b11b299ee5d91e53400168500ee6d2075e9",
+  "coverage_anchor": "receiver-effect-log-001",
+  "expected_model_hash": "sha256:7137307cb9cff5b31bb866c463325f435d7ada8052a85ed8255c193483d23845",
+  "input_hash": "sha256:34573c8f271e128dff1456e2e8bfe9eb0f1d8c3b447b7eeaaab3b1d7d4114e89",
+  "output_schema": {
+    "type": "enum",
+    "values": [
+      "PRIMARY",
+      "BACKUP"
+    ]
+  },
+  "policy_hash": "sha256:a3e3af1b21803d94a45133eec01dc4e529a8eddd2371aacab427cb497381ce3a",
+  "price": {
+    "amount": 125000,
+    "unit": "sat"
+  },
+  "profile": "bulla.inference-clearing/0.1-experimental",
+  "recourse": {
+    "challenge_window": "checkpoint:inference-clearing-challenge-001",
+    "forum": "forum:inference-clearing-alpha"
+  },
+  "required_evidence": {
+    "model_binding": "TERM_BOUND",
+    "output_binding": "VERIFIED",
+    "provider_execution_occurrence": "NOT_REQUIRED",
+    "relation_reproduction": "REPRODUCED"
+  },
+  "transaction_id": "inference-bypass-001",
+  "witness_policy": "accepted-signed-checkpoint-and-inclusion"
+}

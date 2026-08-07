@@ -1,0 +1,6 @@
+name = "InferenceClearing"
+version = "0.1.0"
+defaultTargets = ["InferenceClearing"]
+
+[[lean_lib]]
+name = "InferenceClearing"

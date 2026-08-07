@@ -1,0 +1,21 @@
+{
+  "anchor_evidence": null,
+  "checkpoint_hash": "sha256:e750a07460c49ea2cc40b21f680782b274b193e4adec5bb0fbf3c9c3abe1d88e",
+  "issued_at": "2026-08-04T12:10:00Z",
+  "log_id": "inference-clearing:bypass",
+  "operator": "did:key:z6Mkt7ugjK7pupimB2noBDxFeHYn8EwCvGqrzXBp4nV6M4GW",
+  "ordering_domain": "sha256:70ad2f5b7d6051fd6a252505594e2aa0f87565d8581808c8a13fcacdfc60e36b",
+  "position": 7,
+  "previous_checkpoint_hash": "sha256:2a3ddda0bfbec32227509b8b36010ddff020b89768cbfe1bb8bb88b649b1b2f1",
+  "profile": "bulla.witness-checkpoint/0.1-draft",
+  "proof": {
+    "issuer": "did:key:z6Mkt7ugjK7pupimB2noBDxFeHYn8EwCvGqrzXBp4nV6M4GW",
+    "proofValue": "RdpNTv+OWcSnTwrfEcHB/gBkdBPHkVDEWDNb9sWi8cIuDS2Slk1WvGPd19pPoy/YUvJoAUXgQmwko+rEWBCwAg==",
+    "purpose": "witness-checkpoint",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkt7ugjK7pupimB2noBDxFeHYn8EwCvGqrzXBp4nV6M4GW"
+  },
+  "root": "sha256:545e51bd62bbe27d5e88f16002437defdf1f9d44778f6a21524f6c35057e85ba",
+  "schema_version": "0.1-draft",
+  "tree_size": 7
+}

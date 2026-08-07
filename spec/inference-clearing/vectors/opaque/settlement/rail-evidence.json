@@ -1,0 +1,8 @@
+{
+  "binding_id": "fixture-lock-opaque-001",
+  "locked_amount": 200000,
+  "profile": "bulla.fixture-escrow-evidence/1",
+  "reported_execution": "NOT_ATTEMPTED",
+  "synthetic": true,
+  "unit": "sat"
+}

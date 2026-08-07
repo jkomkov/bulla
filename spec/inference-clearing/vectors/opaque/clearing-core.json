@@ -1,0 +1,182 @@
+{
+  "artifacts": [
+    {
+      "byte_length": 411,
+      "media_type": "application/json",
+      "path": "assurance/capital.json",
+      "sha256": "sha256:8d85dad280fe8e42e6161bcf7a322362685b140851f20f3348ab28b1dcde81ab"
+    },
+    {
+      "byte_length": 7,
+      "media_type": "application/octet-stream",
+      "path": "execution/output.bin",
+      "sha256": "sha256:d5bff25f1372e12f9d306aa5aaa94136469c1bc5178641cd52baa9cc2e60bdc7"
+    },
+    {
+      "byte_length": 754,
+      "media_type": "application/json",
+      "path": "execution/report.json",
+      "sha256": "sha256:f1b2ede63b34efac9baf7bb53bba183dec33d53fa017e9c5298a111c5d2541ba"
+    },
+    {
+      "byte_length": 3347,
+      "media_type": "application/json",
+      "path": "receipts/01-order.json",
+      "sha256": "sha256:7146277452cf4ff1a3ac470d24ddc38cf9dd89e808e2a8500d569010a811c3fe"
+    },
+    {
+      "byte_length": 3432,
+      "media_type": "application/json",
+      "path": "receipts/02-route.json",
+      "sha256": "sha256:ac9a8c0d03011c01df0d05181e5c5cc48a63003233ee9105931c41728ed4d2e7"
+    },
+    {
+      "byte_length": 3662,
+      "media_type": "application/json",
+      "path": "receipts/03-accept.json",
+      "sha256": "sha256:ed38090c49fc31852dbb51b50dce677c4ff3ed75d01302b411f407358c5f87d2"
+    },
+    {
+      "byte_length": 3597,
+      "media_type": "application/json",
+      "path": "receipts/04-delivery.json",
+      "sha256": "sha256:2a4d3ab0dbf0e767100c1da4413a66ab1d125c2fbc911e8920c4cd0afb033ef5"
+    },
+    {
+      "byte_length": 3523,
+      "media_type": "application/json",
+      "path": "receipts/05-capital-bind.json",
+      "sha256": "sha256:0e6175e707422941f61c15f757e207d8284c042447b8041ce35ce020b948d8d8"
+    },
+    {
+      "byte_length": 3631,
+      "media_type": "application/json",
+      "path": "receipts/06-coverage-checkpoint.json",
+      "sha256": "sha256:528a69c19e23b1fe6d7f4480b2244662f2b95659c458666731e0f5a30ee33568"
+    },
+    {
+      "byte_length": 4133,
+      "media_type": "application/json",
+      "path": "receipts/07-rely.json",
+      "sha256": "sha256:5ecf2e4e7c9df29231e44aeacbcd4661abcadc0d99cd0396ca314c17e6cdf5cf"
+    },
+    {
+      "byte_length": 311,
+      "media_type": "application/json",
+      "path": "receiver/coverage.json",
+      "sha256": "sha256:a25f8af00186b42bad41cbf798b7bcdad26c777f2dfc7bdc50fd8fadc837e2c3"
+    },
+    {
+      "byte_length": 200,
+      "media_type": "application/json",
+      "path": "settlement/rail-evidence.json",
+      "sha256": "sha256:1928f9f752b04a1d6c6b9e387de00b5e60210ba917f94af073899eafc8680872"
+    },
+    {
+      "byte_length": 367,
+      "media_type": "application/json",
+      "path": "settlement/report.json",
+      "sha256": "sha256:b6f3c5641ca1196abab7c12c95cd60351dc080ba88b5bec8256ca6a48b183602"
+    },
+    {
+      "byte_length": 1159,
+      "media_type": "application/json",
+      "path": "terms/term-document.json",
+      "sha256": "sha256:bf55eb85da04696d70d560291b7a9033c3ee2bae54de168a26c859578a61af45"
+    },
+    {
+      "byte_length": 974,
+      "media_type": "application/json",
+      "path": "witness/decision-checkpoint.json",
+      "sha256": "sha256:a613398dbe99c43ff1827b479f34d03a45cdc525cdb2a29513e60f3535062d62"
+    },
+    {
+      "byte_length": 3297,
+      "media_type": "application/json",
+      "path": "witness/decision-inclusions.json",
+      "sha256": "sha256:fd1afad4b5300f381b1392115107156770e70bd1527ea465c7b958f1f296435a"
+    },
+    {
+      "byte_length": 1043,
+      "media_type": "application/json",
+      "path": "witness/final-checkpoint.json",
+      "sha256": "sha256:10e70258cb2739aa40fa75cf92af81ba289073f012f6528bfb0c4da8344f2697"
+    },
+    {
+      "byte_length": 3954,
+      "media_type": "application/json",
+      "path": "witness/final-inclusions.json",
+      "sha256": "sha256:02f7b1320250c13a2f498efb65732228351db6b2a030cb36ea7ffce450a975c6"
+    }
+  ],
+  "comparison_group": "sha256:5ce5a6921e010535e3f7cf09998b0b11b299ee5d91e53400168500ee6d2075e9",
+  "ordered_receipts": [
+    {
+      "action_type": "inference.order",
+      "attestation": "sha256:b1b155a720cfc3398c404cb4c3605003930aea42f3dd3c1bb21c1f9ca6b5427e",
+      "event": "sha256:4834c36188dd5f290e9bdc608683b0ba4f7ea561b86d790df890256a55b609f1",
+      "path": "receipts/01-order.json",
+      "role": "buyer"
+    },
+    {
+      "action_type": "inference.route",
+      "attestation": "sha256:86a49826b23e773feab98a38aee79e2a7e64e0366fd4564d659372c5d8c5f1f1",
+      "event": "sha256:c7a9ac5eccfbedcc740f12a63aec9bfa2911cb1b54b7310a33debc1e6dca99e0",
+      "path": "receipts/02-route.json",
+      "role": "router"
+    },
+    {
+      "action_type": "inference.accept",
+      "attestation": "sha256:c62e1fd6c58833e741d9748f3210dd83de0fc3e46f99a275455850c593362cdc",
+      "event": "sha256:744dcf845b33709c6c52836f51b5248ee44a0166616cb46c439197c35f72f4d9",
+      "path": "receipts/03-accept.json",
+      "role": "provider"
+    },
+    {
+      "action_type": "inference.delivery",
+      "attestation": "sha256:6cca10f12f8ca811569667d3464f99ce8496a7654ac822ef02f42cda6147f45b",
+      "event": "sha256:24453e26efde63abb0e6d7558ea30b80094b183bbc8b1abfcccab0f9dbb7289f",
+      "path": "receipts/04-delivery.json",
+      "role": "receiver"
+    },
+    {
+      "action_type": "assurance.collateral.bind",
+      "attestation": "sha256:2e404f3126ef5b05f869c6110fd8f6ea394ba87bc0af4c4b687490d1414cfcb0",
+      "event": "sha256:295b4eaae9b62b0c560bfc8340464fb7e9b0bb12ce22387304f084b6888c5e42",
+      "path": "receipts/05-capital-bind.json",
+      "role": "rail_observer"
+    },
+    {
+      "action_type": "inference.coverage.checkpoint",
+      "attestation": "sha256:0f897e9207417e45d05cb506e25cc0f3c548b679c1f5f4c703fa2c75c67d362d",
+      "event": "sha256:2a3e371470982ea79a033334d755beef0a32e5d7844fef140a78b86f73bce0f2",
+      "path": "receipts/06-coverage-checkpoint.json",
+      "role": "receiver"
+    },
+    {
+      "action_type": "bulla.rely",
+      "attestation": "sha256:be94ebe05f8dad9739193ad7ed1d5c760815498e5c8eb127aa50e9fe03639804",
+      "event": "sha256:7c2102baee0414625807432235ebdcd01d38c1b238015547e1a40ec8d51f24ee",
+      "path": "receipts/07-rely.json",
+      "role": "relier"
+    }
+  ],
+  "profile": "bulla.inference-clearing/0.1-experimental",
+  "provider_kind": "OPAQUE",
+  "revision": 1,
+  "role_issuers": {
+    "buyer": "did:key:z6Mkn88doHo3kuYVR2bWYpyN9pchLcv84zmQXqvMwQER4n7A",
+    "guarantor": "did:key:z6MkwSA9zFts3AiU2eh7yYkZRdhj2Sc7hFsBu1PoTtW1KaiE",
+    "provider_opaque": "did:key:z6MkpSp7vFWdLmeRZo387Yrx8oN99BZZsMsTHt2m4ts9W8K6",
+    "provider_reproducible": "did:key:z6Mkit1vRUZTdAJPHmZWgLQJaH9GKpSW9Hq9vK3H15kdxwPZ",
+    "publisher": "did:key:z6Mkopo6bkx95aEH1hJAfn7VL2V3jSEzspUFQ1Q1AyLCVihT",
+    "rail_observer": "did:key:z6Mkt3WhcTGbye1XeXB2SqAcqtKPAM7XMFqyA5PKvCm2FCUs",
+    "receiver": "did:key:z6MkfXgBCMUWz9sn3rmExpXgVsKaESNjE8DGwpDfhKfXAJzH",
+    "relier": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr",
+    "router": "did:key:z6MkwYBWPba3ZWZ7rGhiyN71VjH27kQGsHhqHeK2ErSvJ2Qn",
+    "settlement_authority": "did:key:z6Mkksmuc11jNHwQzX5Bnhi9vbZBvUA9jjkAGbDWmvwGcqGo",
+    "witness": "did:key:z6Mkt7ugjK7pupimB2noBDxFeHYn8EwCvGqrzXBp4nV6M4GW"
+  },
+  "term_root": "sha256:7a24fe9f88322fc89941801cfec180acea907d3e24a14e9f5648096da7c6a72e",
+  "transaction_id": "inference-opaque-001"
+}

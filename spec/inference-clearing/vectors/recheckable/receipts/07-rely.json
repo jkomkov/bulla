@@ -1,0 +1,97 @@
+{
+  "action": {
+    "subject": {
+      "comparison_group": "sha256:5ce5a6921e010535e3f7cf09998b0b11b299ee5d91e53400168500ee6d2075e9",
+      "coverage_hash": "sha256:0fc10bde3d2547595cdd3e02c127b648e844aa2f6bfe77ca6dbeed58829bee27",
+      "coverage_ref": {
+        "attestation": "sha256:57aa65b32d069c08594a650143039e00f84c496a1f95777b789faa7265b54947",
+        "event": "sha256:b7f9288d4732773845728dba47eb9ca64f093fe2ed11806157e4ef233bbe424d"
+      },
+      "decision": "RELY",
+      "issuer_role": "relier",
+      "named_consequence": "RELEASE_PAYMENT",
+      "parent_ref": {
+        "attestation": "sha256:57aa65b32d069c08594a650143039e00f84c496a1f95777b789faa7265b54947",
+        "event": "sha256:b7f9288d4732773845728dba47eb9ca64f093fe2ed11806157e4ef233bbe424d"
+      },
+      "policy_hash": "sha256:a3e3af1b21803d94a45133eec01dc4e529a8eddd2371aacab427cb497381ce3a",
+      "profile": "bulla.inference-clearing/0.1-experimental",
+      "term_root": "sha256:f58a396319d8bc6b52a20b29741c9f14802169b05e95e078cc7fdcbacf64983f",
+      "transaction_id": "inference-recheckable-001",
+      "unmet_requirements": [],
+      "witness_root": "sha256:d0ce429f33069298b4472b98e16e7f7a3af6510bd30400d5b1393c213ed7b530"
+    },
+    "type": "bulla.rely"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr",
+    "proofValue": "Ygx8F5ERxVYjVh8tX8E39Hw3cCBCU9Gtpt38vhOvffx5MsIjUl5CTDR3IzojZT9YbH2gYPdTeSUrWHDHbrRKBQ==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-08-04T12:07:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "d3349ae2-6034-48fd-b590-f42f698048f7",
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:0589ed5367b0e4a3c4bf2cc8fef5b29a564844cefc4fe277882ca6ec46d2af29",
+    "content": "sha256:3932a9187413c3ce8dc4a78334f8c52bb1adcb201dce51888ae772287469a4c8",
+    "event": "sha256:5673e93ec614446cee3719dd1defdef10fbee9a992f577d203c70cacb8c191c0",
+    "log_leaf": "sha256:980ecd04e2fc72d7e6202dc85b2a41009ee96d6fd1459d7c3df27eb4da8d6f77"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "sha256:a3e3af1b21803d94a45133eec01dc4e529a8eddd2371aacab427cb497381ce3a",
+      "principal": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr"
+    },
+    "bounds": {
+      "scope": "profile:bulla.inference-clearing/0.1-experimental;action:bulla.rely"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr",
+    "proofValue": "BnMGddXQL5h0wXiKquCqqYgmelOX5GkuVliH6NQx+IPTLrGN1ErRSx0Y4hEHqbACe0ruOANjus1WdMKgOr2yDA==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "recheckable"
+  },
+  "remedy": {
+    "challenge_window": "checkpoint:inference-clearing-challenge-001",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/bulla/experimental/inference-clearing/reference",
+      "trusted_root_ref": "sha256:c29b7d29922c1006e1bc55b990ef24c3be20cecfb6f18ff8f2dd05e7f761fea5"
+    },
+    "remedies": [
+      {
+        "anchor": "forum:inference-clearing-alpha",
+        "rung": "challenge",
+        "verifier": "verify retained clearing bundle"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "public",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr",
+    "proofValue": "5pD6NACM9bsF0sb82Q71ox9pl3iCxLjPTwbnQAT4XdrQsrGCLLznj4ECnrlV/nYqxmysAk0I/oV2wOrkIkTsCg==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr"
+  },
+  "stake": null
+}

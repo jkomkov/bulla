@@ -1,0 +1,99 @@
+{
+  "action": {
+    "subject": {
+      "comparison_group": "sha256:5ce5a6921e010535e3f7cf09998b0b11b299ee5d91e53400168500ee6d2075e9",
+      "coverage_hash": "sha256:2e9149b8d4d4acbf3c8672ef6590db94e7838648a8b939cceb1281a605f5ee0b",
+      "coverage_ref": {
+        "attestation": "sha256:7bfdd391998b9983548ea99d959122d240370a844382e7759cceedde3d07490a",
+        "event": "sha256:116a600dad01c24cc932735e0c0c8e344ad13a88e3f3d9cc7167764c93b9562a"
+      },
+      "decision": "REFUSE",
+      "issuer_role": "relier",
+      "named_consequence": "RELEASE_PAYMENT",
+      "parent_ref": {
+        "attestation": "sha256:7bfdd391998b9983548ea99d959122d240370a844382e7759cceedde3d07490a",
+        "event": "sha256:116a600dad01c24cc932735e0c0c8e344ad13a88e3f3d9cc7167764c93b9562a"
+      },
+      "policy_hash": "sha256:a3e3af1b21803d94a45133eec01dc4e529a8eddd2371aacab427cb497381ce3a",
+      "profile": "bulla.inference-clearing/0.1-experimental",
+      "term_root": "sha256:7adf4c4ba8d7aaa032e34ad942a9e5f1721da1fe5a4580783e29645ab1f52e9c",
+      "transaction_id": "inference-bypass-001",
+      "unmet_requirements": [
+        "required receiver coverage was not complete"
+      ],
+      "witness_root": "sha256:aabaae0facea674b22f965f4faeba512a9005a0aec659d6d9745b4f8815ce6b3"
+    },
+    "type": "bulla.rely"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr",
+    "proofValue": "MZt92tcmoqZxPhnY9rymI60kRvpqZnHWi03cjPnGDBbIjVhiKS6MRVL+C4KAfWOC8+0w/vuBXS7jzBawtxzKDQ==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-08-04T12:07:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "9bb9a00c-4793-45f5-9b01-8f1354922c85",
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:a7f97c387fe4895eaa331a5ca9a54f1a1f7d572c9827c698af516f0fe7ac2a3e",
+    "content": "sha256:4ffb8ef60f5c7390946644186caa5bfb1db9cb8531346cfb59ef6a4a31b045c6",
+    "event": "sha256:c23fb981a353d0d83ca067b308570e56d3e29a9fc988a4715d5838a48b0ff75d",
+    "log_leaf": "sha256:efe6448cf5e84af6b07b9156d521cc85a7a0ea0e263f414f020caa61a2aa5e4e"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "sha256:a3e3af1b21803d94a45133eec01dc4e529a8eddd2371aacab427cb497381ce3a",
+      "principal": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr"
+    },
+    "bounds": {
+      "scope": "profile:bulla.inference-clearing/0.1-experimental;action:bulla.rely"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr",
+    "proofValue": "D7EEMgwHWlGzCeU7GaKdk7Q+SynTcwiyiudHGOiigH1pLydwBKpCPD9bDx/bjahCM6tVTqrvRzN6womIJn4PBQ==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "bypass"
+  },
+  "remedy": {
+    "challenge_window": "checkpoint:inference-clearing-challenge-001",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/bulla/experimental/inference-clearing/reference",
+      "trusted_root_ref": "sha256:c29b7d29922c1006e1bc55b990ef24c3be20cecfb6f18ff8f2dd05e7f761fea5"
+    },
+    "remedies": [
+      {
+        "anchor": "forum:inference-clearing-alpha",
+        "rung": "challenge",
+        "verifier": "verify retained clearing bundle"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "public",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr",
+    "proofValue": "5P/smCdXAepHQV224IhAAuDAo4MV1ggRaEAaSHJEfOCFn9P1vDQH7HyyPdBHNyEguYSi8rM8TSfrNgmu8e0WAQ==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkimyBSNofYPyvMjmdWRNzMSsruqqcFuMN9p1kwhhrE1hr"
+  },
+  "stake": null
+}

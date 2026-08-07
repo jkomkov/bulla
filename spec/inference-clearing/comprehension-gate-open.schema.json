@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schema/bulla-inference-clearing-comprehension-gate-open-0.2.json",
+  "title": "Retained inference evidence comprehension gate opening",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile", "content", "proof"],
+  "properties": {
+    "profile": {"const": "bulla.inference-clearing-comprehension-gate-open/0.2"},
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protocol_sha256", "preview_commit", "immutable_preview_url", "route", "reproduction_command_sha256", "reproduction_kit_sha256", "preview_artifact_path", "preview_artifact_sha256", "preview_artifact_byte_length", "preview_content_type"],
+      "properties": {
+        "protocol_sha256": {"$ref": "#/$defs/hash"},
+        "preview_commit": {"pattern": "^[0-9a-f]{40}$", "type": "string"},
+        "immutable_preview_url": {"pattern": "^https://", "type": "string"},
+        "route": {"const": "/bulla/experimental/inference-clearing"},
+        "reproduction_command_sha256": {"$ref": "#/$defs/hash"},
+        "reproduction_kit_sha256": {"$ref": "#/$defs/hash"},
+        "preview_artifact_path": {"const": "preview-page.html"},
+        "preview_artifact_sha256": {"$ref": "#/$defs/hash"},
+        "preview_artifact_byte_length": {"minimum": 1, "type": "integer"},
+        "preview_content_type": {"const": "text/html"}
+      }
+    },
+    "proof": {"$ref": "#/$defs/proof"}
+  },
+  "$defs": {
+    "hash": {"pattern": "^sha256:[0-9a-f]{64}$", "type": "string"},
+    "proof": {"type": "object", "additionalProperties": false, "required": ["type", "purpose", "issuer", "verificationMethod", "proofValue"], "properties": {"type": {"const": "bulla/ed25519-2026"}, "purpose": {"const": "content"}, "issuer": {"pattern": "^did:key:z", "type": "string"}, "verificationMethod": {"pattern": "^did:key:z", "type": "string"}, "proofValue": {"minLength": 1, "type": "string"}}}
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "bypass": {
+    "coverage": "1/2 · UNCOVERED",
+    "funds_movement": "NOT_ESTABLISHED",
+    "payment": "INELIGIBLE",
+    "receipt_integrity": "VERIFIED",
+    "receipted_effects": 1,
+    "receiver_effects": 2,
+    "reliance": "REFUSE",
+    "settlement_attempt": "NOT_ATTEMPTED",
+    "settlement_authorization": "NOT_ISSUED",
+    "settlement_execution": "NOT_ATTEMPTED",
+    "uncovered_effects": [
+      "effect-bypass-001"
+    ]
+  },
+  "limitations": {
+    "collectibility": "NOT_COMPUTED",
+    "custody": "NOT_COMPUTED",
+    "denominator_completeness": "NOT_ESTABLISHED",
+    "external_reproduction": "BLOCKED",
+    "human_comprehension": "BLOCKED",
+    "provider_execution_occurrence": "NOT_ESTABLISHED",
+    "worldly_truth": "NOT_COMPUTED"
+  },
+  "maturity": "experimental · SOURCE_ONLY · synthetic-public · team-operated · A0/J0/I0/W0 · r0",
+  "profile": "bulla.inference-clearing/0.1-experimental",
+  "promise": {
+    "input": [
+      12,
+      -4,
+      7,
+      3,
+      -8,
+      5,
+      2,
+      9
+    ],
+    "output": "BACKUP",
+    "output_schema": [
+      "PRIMARY",
+      "BACKUP"
+    ],
+    "price": {
+      "amount": 125000,
+      "unit": "sat"
+    },
+    "required_allocation": {
+      "amount": 200000,
+      "unit": "sat"
+    },
+    "required_relation_evidence": {
+      "model_binding": "TERM_BOUND",
+      "output_binding": "VERIFIED",
+      "provider_execution_occurrence": "NOT_REQUIRED",
+      "relation_reproduction": "REPRODUCED"
+    }
+  },
+  "provider_substitution": {
+    "same_buyer_policy": true,
+    "same_term_template": true,
+    "separate_transaction_instances": true,
+    "verifier": "PROJECT_AUTHORED_LOCAL"
+  },
+  "providers": {
+    "opaque": {
+      "funds_movement": "NOT_ESTABLISHED",
+      "historical_execution": "NOT_ESTABLISHED",
+      "output": "BACKUP",
+      "payment": "INELIGIBLE",
+      "receipt_integrity": "VERIFIED",
+      "relation_rerun": "UNAVAILABLE",
+      "reliance": "REFUSE",
+      "retained_model": "UNAVAILABLE",
+      "settlement_attempt": "NOT_ATTEMPTED",
+      "settlement_authorization": "NOT_ISSUED",
+      "settlement_execution": "NOT_ATTEMPTED",
+      "transaction_id": "inference-opaque-001"
+    },
+    "recheckable": {
+      "funds_movement": "NOT_ESTABLISHED",
+      "historical_execution": "NOT_ESTABLISHED",
+      "output": "BACKUP",
+      "payment": "ELIGIBLE",
+      "receipt_integrity": "VERIFIED",
+      "relation_rerun": "REPRODUCED",
+      "reliance": "RELY",
+      "retained_model": "TERM_BOUND",
+      "settlement_attempt": "NOT_ATTEMPTED",
+      "settlement_authorization": "NOT_ISSUED",
+      "settlement_execution": "NOT_ATTEMPTED",
+      "transaction_id": "inference-recheckable-001"
+    }
+  },
+  "reproduction": {
+    "commands": [
+      "VENV_DIR=\"$(mktemp -d)\"",
+      "RUN_DIR=\"$(mktemp -d)\"",
+      "python3 -m venv \"$VENV_DIR\"",
+      "\"$VENV_DIR/bin/python\" -m pip install './bulla[identity]'",
+      "PYTHONPATH=bulla/src \"$VENV_DIR/bin/python\" bulla/examples/inference-clearing/run_demo.py --story --out \"$RUN_DIR\"",
+      "\"$VENV_DIR/bin/python\" -I bulla/spec/inference-clearing/check.py \"$RUN_DIR/recheckable\" --context \"$RUN_DIR/contexts/recheckable.json\" > \"$RUN_DIR/python-report.json\"",
+      "node bulla/spec/inference-clearing/check.mjs \"$RUN_DIR/recheckable\" --context \"$RUN_DIR/contexts/recheckable.json\" > \"$RUN_DIR/node-report.json\"",
+      "\"$VENV_DIR/bin/python\" bulla/spec/inference-clearing/compare_reports.py \"$RUN_DIR/python-report.json\" \"$RUN_DIR/node-report.json\""
+    ]
+  }
+}

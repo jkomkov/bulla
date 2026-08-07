@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schemas/inference-clearing/verification-context-0.1.json",
+  "title": "Bulla inference-clearing external verification context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "accepted_issuers_by_role", "accepted_execution_adapters", "accepted_rail_adapters",
+    "accepted_policy_hash", "accepted_evidence_requirements", "trusted_witness_roots", "team_controlled_roles"
+  ],
+  "properties": {
+    "accepted_issuers_by_role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "buyer", "router", "provider", "receiver", "witness", "relier",
+        "settlement_authority", "rail_observer", "guarantor", "publisher"
+      ],
+      "properties": {
+        "buyer": {"$ref": "#/$defs/issuerList"},
+        "router": {"$ref": "#/$defs/issuerList"},
+        "provider": {"$ref": "#/$defs/issuerList"},
+        "receiver": {"$ref": "#/$defs/issuerList"},
+        "witness": {"$ref": "#/$defs/issuerList"},
+        "relier": {"$ref": "#/$defs/issuerList"},
+        "settlement_authority": {"$ref": "#/$defs/issuerList"},
+        "rail_observer": {"$ref": "#/$defs/issuerList"},
+        "guarantor": {"$ref": "#/$defs/issuerList"},
+        "publisher": {"$ref": "#/$defs/issuerList"}
+      }
+    },
+    "accepted_execution_adapters": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "accepted_rail_adapters": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "accepted_policy_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "accepted_evidence_requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "output_binding", "model_binding", "relation_reproduction",
+        "provider_execution_occurrence"
+      ],
+      "properties": {
+        "output_binding": {"const": "VERIFIED"},
+        "model_binding": {"const": "TERM_BOUND"},
+        "relation_reproduction": {"const": "REPRODUCED"},
+        "provider_execution_occurrence": {"const": "NOT_REQUIRED"}
+      }
+    },
+    "trusted_witness_roots": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+    },
+    "team_controlled_roles": {
+      "type": "array", "uniqueItems": true,
+      "items": {
+        "enum": [
+          "buyer", "router", "provider", "receiver", "witness", "relier",
+          "settlement_authority", "rail_observer", "guarantor", "publisher"
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "issuerList": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}
