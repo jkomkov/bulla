@@ -524,6 +524,6 @@
     }
   ],
   "scope": "shared inference-clearing source, specification, examples, and tests, with repository-local projection files declared separately",
-  "source_commit": "86fb40b48163c6144ea14629e0421f97bbd0459a",
+  "source_commit": "f3bf7a8b263df0ff10eadc189e36d6c296a74000",
   "source_repository": "jkomkov/res-agentica"
 }
