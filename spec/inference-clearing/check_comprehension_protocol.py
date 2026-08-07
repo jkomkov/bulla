@@ -12,22 +12,21 @@ HERE = Path(__file__).resolve().parent
 PROTOCOL = HERE / "comprehension-protocol.json"
 DIGEST = HERE / "comprehension-protocol.json.sha256"
 QUESTIONS = {
-    "role_handoff",
+    "same_output",
+    "retained_evidence",
+    "provider_contact",
     "relation_reproduction",
     "historical_provider_execution",
     "answer_correctness",
-    "buyer_policy_eligibility",
-    "settlement_stages",
-    "funds_movement",
-    "integrity_and_coverage",
-    "receiver_record_completeness",
+    "buyer_policy_decision",
+    "integrity_coverage_completeness",
 }
 
 
 def main() -> int:
     raw = PROTOCOL.read_bytes()
     value = json.loads(raw)
-    if value["profile"] != "bulla.inference-clearing-comprehension/0.1":
+    if value["profile"] != "bulla.inference-clearing-comprehension/0.2":
         raise SystemExit("wrong comprehension protocol profile")
     if value["state"] != "FROZEN_PENDING_GATE_OPEN":
         raise SystemExit("the committed protocol cannot claim a human result")
@@ -41,9 +40,24 @@ def main() -> int:
     if [slot["id"] for slot in slots if slot["terminal_reproduction"]] != ["developer-1"]:
         raise SystemExit("developer-1 must be the sole terminal-reproduction slot")
     if {item["id"] for item in value["questions"]} != QUESTIONS:
-        raise SystemExit("the protocol must freeze the role handoff and all eight distinctions")
+        raise SystemExit("the protocol must freeze all eight first-contact distinctions")
+    if value["lineage"] != {
+        "supersedes": "bulla.inference-clearing-comprehension/0.1",
+        "superseded_sha256": "sha256:fe99b7c151b43632af68d81877f252f6cf33214b0dd39c2ecce5dc58d0a3e11a",
+        "reason": "Version 0.1 was frozen but never opened or used. Version 0.2 tests the corrected causal surface and removes first-contact requirements that belong in the technical reference.",
+    }:
+        raise SystemExit("the unused v0.1 protocol lineage is not preserved")
     if value["facilitator"]["permitted_assistance"] != ["navigation", "accessibility"]:
         raise SystemExit("semantic assistance cannot be permitted")
+    if value["acceptance"]["browser_interactions"] != {
+        "required_outcomes": ["provider_exit_recheck", "receipt_boundary_challenge"],
+        "minimum_complete_both": 4,
+        "of": 5,
+        "semantic_assistance_permitted": False,
+    }:
+        raise SystemExit("both browser interactions must be separately observed without semantic assistance")
+    if value["failure"]["in_protocol_retest"] is not False:
+        raise SystemExit("the official gate must remain single-shot")
     expected = hashlib.sha256(raw).hexdigest() + "  comprehension-protocol.json\n"
     if not DIGEST.exists() or DIGEST.read_text(encoding="ascii") != expected:
         raise SystemExit("comprehension protocol digest drifted")

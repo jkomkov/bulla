@@ -4,7 +4,7 @@
     "The repository-local projection generator and projection are recorded separately because the monorepo pins the public source commit while the public repository supports checkout-local execution; neither file is a reproduction-kit member.",
     "The profile remains source-only and is excluded from wheel, sdist, stable exports, and installed CLI."
   ],
-  "member_set_sha256": "sha256:c3b78c4d6777aca71ec140043662e0dc14a1ea08d360115eea4b18ac86d7d3c8",
+  "member_set_sha256": "sha256:ac76c95f8c8f11f84c34fd7f63f46b9519244572767442fd152cfb48b7ff920b",
   "members": [
     {
       "byte_length": 19642,
@@ -22,9 +22,9 @@
       "sha256": "sha256:37d58802136f86db06caa5251daba1d5d1485874a362715a1553af00a59e8faa"
     },
     {
-      "byte_length": 1155,
+      "byte_length": 1760,
       "path": "spec/inference-clearing/COMPREHENSION-GATE.md",
-      "sha256": "sha256:1f8412eaf8f0692f3264ebccbdae87cf455284238edcd2e96d7649da8c3f0a82"
+      "sha256": "sha256:7368ddb74db5c21f708915375aac337e68219aec8fb4d766ad68bc0999baab41"
     },
     {
       "byte_length": 4593,
@@ -57,9 +57,9 @@
       "sha256": "sha256:2e7e461d0940e764d93d376bc1b1a8b0960886309639f8773240c0fa7c421291"
     },
     {
-      "byte_length": 3062,
+      "byte_length": 3998,
       "path": "spec/inference-clearing/check_comprehension_protocol.py",
-      "sha256": "sha256:9ac882614d4bf9cd90a72767c659ba5685984b10612b5d9e6e6b1603b4d5f528"
+      "sha256": "sha256:1319940e2525e81cc2cf7e55beee6e1d02dea2e04a45fef4fea1155017058e7d"
     },
     {
       "byte_length": 3322,
@@ -72,39 +72,39 @@
       "sha256": "sha256:c8a54fe68b60aa34fd6b1efb2bf892f8e6a62ddcedc65c8752cbb2bfb03e6a31"
     },
     {
-      "byte_length": 2620,
+      "byte_length": 2544,
       "path": "spec/inference-clearing/comprehension-attempt-manifest.schema.json",
-      "sha256": "sha256:5e3d6f5b4bab79b1a6aa5d5305f2f6afeca7e455f2fbee489b97aa660f6fe712"
+      "sha256": "sha256:8eb149071d3106cf6b574302d9fed361317f8cb0fca520ba773c4fe6a5fec601"
     },
     {
       "byte_length": 513,
       "path": "spec/inference-clearing/comprehension-context.schema.json",
-      "sha256": "sha256:20950ef91f22e1c2b04110c62c95eef0bd07beeede845f536ddb7db8ce551771"
+      "sha256": "sha256:c9b2b1052744c59ef1233b1e9744ea40a973bc6ce7308e2dd59d1ac806e48531"
     },
     {
-      "byte_length": 1993,
+      "byte_length": 1999,
       "path": "spec/inference-clearing/comprehension-gate-open.schema.json",
-      "sha256": "sha256:26d1537fb2d72094d46860cbe638a608da5602b77eb36d5112f1a1a78ba27708"
+      "sha256": "sha256:ef51a9af5dc33379b24b3a2192058644df5a1a464aeacd6124ac7ec83915d432"
     },
     {
-      "byte_length": 5224,
+      "byte_length": 5444,
       "path": "spec/inference-clearing/comprehension-protocol.json",
-      "sha256": "sha256:fe99b7c151b43632af68d81877f252f6cf33214b0dd39c2ecce5dc58d0a3e11a"
+      "sha256": "sha256:76d56fef78851ece6ec0de4a940857589e490a7844a230a3200f2742b26f4f3e"
     },
     {
       "byte_length": 94,
       "path": "spec/inference-clearing/comprehension-protocol.json.sha256",
-      "sha256": "sha256:bcbcaf9632ed38726fac29a242e1897a083924f590d51592c737d25982eb335c"
+      "sha256": "sha256:5f1f837456fa71a08f077f706683155180cf14906a56bbf2b33e9c7cdfc74b13"
     },
     {
-      "byte_length": 5456,
+      "byte_length": 5538,
       "path": "spec/inference-clearing/comprehension-response.schema.json",
-      "sha256": "sha256:81dd77934158be87a4d11446f301632173083442aec988c7763216fe2783e3d6"
+      "sha256": "sha256:48b3b73e41497f0f259bd85e4a529664475f62e08e5d4381b75334043874bf60"
     },
     {
-      "byte_length": 2649,
+      "byte_length": 2659,
       "path": "spec/inference-clearing/comprehension-result.schema.json",
-      "sha256": "sha256:4bae36f981d40f9ddbb2afd91af02ea9d96c3f25585c5beb35f5c9dd6ebc4cf7"
+      "sha256": "sha256:e6052d5d0fd76d225c8a6a2318b54f2de8e9962bf6ef2f3c082146cafa8802e7"
     },
     {
       "byte_length": 1878,
@@ -172,9 +172,9 @@
       "sha256": "sha256:48884281a0079b481cf332275508cb8804278acdbf7d69362422d7064255acba"
     },
     {
-      "byte_length": 28946,
+      "byte_length": 27746,
       "path": "spec/inference-clearing/score_comprehension_gate.py",
-      "sha256": "sha256:d12c952cdc97a84c2ab5e3b69be2882e0baf6f89e239c219f2bbc41b58a63cb1"
+      "sha256": "sha256:ee08bda826297cb29dee83c69eb364b64a2441e8aeee4c789961703719b6e1db"
     },
     {
       "byte_length": 411,
@@ -497,9 +497,9 @@
       "sha256": "sha256:c77fd75ed9f04dc43e05ee0c88d468f4239e8c4a5996a4153da15022f0091358"
     },
     {
-      "byte_length": 32585,
+      "byte_length": 33629,
       "path": "tests/test_inference_clearing.py",
-      "sha256": "sha256:6edf60c2eb7cdb14188aa6f04dd3ebee0cf994812676bcf213012533d82180fb"
+      "sha256": "sha256:306c1dca0793f1abf3120254a23b26e3f4ed7ac1a6f703614edcbf752d5ca68d"
     }
   ],
   "mirror_branch": "codex/recheckable-inference-calibration",

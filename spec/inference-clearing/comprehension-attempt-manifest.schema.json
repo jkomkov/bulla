@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://glyphstandard.com/schema/bulla-inference-clearing-comprehension-attempt-manifest-0.1.json",
+  "$id": "https://glyphstandard.com/schema/bulla-inference-clearing-comprehension-attempt-manifest-0.2.json",
   "title": "Authenticated comprehension attempt manifest",
   "type": "object",
   "additionalProperties": false,
   "required": ["profile", "content", "proof"],
   "properties": {
-    "profile": {"const": "bulla.inference-clearing-comprehension-attempt-manifest/0.1"},
+    "profile": {"const": "bulla.inference-clearing-comprehension-attempt-manifest/0.2"},
     "content": {
       "type": "object",
       "additionalProperties": false,
@@ -16,30 +16,31 @@
         "attempts": {
           "type": "array",
           "minItems": 1,
-          "maxItems": 2,
+          "maxItems": 1,
           "items": {
             "type": "object",
             "additionalProperties": false,
             "required": ["attempt_id", "scope", "dimensions", "response_refs"],
             "properties": {
               "attempt_id": {"minLength": 1, "type": "string"},
-              "scope": {"enum": ["ALL_DIMENSIONS", "FAILED_DIMENSIONS_ONLY"]},
+              "scope": {"const": "ALL_DIMENSIONS"},
               "dimensions": {
                 "type": "array",
-                "minItems": 1,
+                "minItems": 6,
+                "maxItems": 6,
                 "uniqueItems": true,
-                "items": {"enum": ["browser_story_without_help", "role_handoff", "all_eight_distinctions", "answer_correctness", "funds_movement", "terminal_reproduction"]}
+                "items": {"enum": ["browser_interactions", "all_eight_distinctions", "historical_execution", "answer_correctness", "provider_contact", "terminal_reproduction"]}
               },
               "response_refs": {
                 "type": "array",
-                "minItems": 3,
+                "minItems": 5,
                 "maxItems": 5,
                 "items": {
                   "type": "object",
                   "additionalProperties": false,
                   "required": ["path", "sha256"],
                   "properties": {
-                    "path": {"pattern": "^responses/[a-zA-Z0-9._-]+/[a-zA-Z0-9._-]+\\.json$", "type": "string"},
+                    "path": {"pattern": "^responses/attempt-1/reader-[0-9]{2}\\.json$", "type": "string"},
                     "sha256": {"$ref": "#/$defs/hash"}
                   }
                 }
@@ -53,17 +54,6 @@
   },
   "$defs": {
     "hash": {"pattern": "^sha256:[0-9a-f]{64}$", "type": "string"},
-    "proof": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["type", "purpose", "issuer", "verificationMethod", "proofValue"],
-      "properties": {
-        "type": {"const": "bulla/ed25519-2026"},
-        "purpose": {"const": "content"},
-        "issuer": {"pattern": "^did:key:z", "type": "string"},
-        "verificationMethod": {"pattern": "^did:key:z", "type": "string"},
-        "proofValue": {"minLength": 1, "type": "string"}
-      }
-    }
+    "proof": {"type": "object", "additionalProperties": false, "required": ["type", "purpose", "issuer", "verificationMethod", "proofValue"], "properties": {"type": {"const": "bulla/ed25519-2026"}, "purpose": {"const": "content"}, "issuer": {"pattern": "^did:key:z", "type": "string"}, "verificationMethod": {"pattern": "^did:key:z", "type": "string"}, "proofValue": {"minLength": 1, "type": "string"}}}
   }
 }

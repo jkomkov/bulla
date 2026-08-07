@@ -1,7 +1,12 @@
 {
-  "profile": "bulla.inference-clearing-comprehension/0.1",
+  "profile": "bulla.inference-clearing-comprehension/0.2",
   "state": "FROZEN_PENDING_GATE_OPEN",
-  "purpose": "Test whether unfamiliar readers preserve the distinctions made by the recheckable-inference demonstration.",
+  "lineage": {
+    "supersedes": "bulla.inference-clearing-comprehension/0.1",
+    "superseded_sha256": "sha256:fe99b7c151b43632af68d81877f252f6cf33214b0dd39c2ecce5dc58d0a3e11a",
+    "reason": "Version 0.1 was frozen but never opened or used. Version 0.2 tests the corrected causal surface and removes first-contact requirements that belong in the technical reference."
+  },
+  "purpose": "Test whether unfamiliar readers preserve the distinctions made by the retained-inference-evidence demonstration.",
   "participant_slots": [
     {"id": "developer-1", "role": "DEVELOPER", "terminal_reproduction": true},
     {"id": "developer-2", "role": "DEVELOPER", "terminal_reproduction": false},
@@ -17,7 +22,7 @@
     "contributor to the inference-clearing implementation"
   ],
   "gate_open_record": {
-    "profile": "bulla.inference-clearing-comprehension-gate-open/0.1",
+    "profile": "bulla.inference-clearing-comprehension-gate-open/0.2",
     "required_bindings": [
       "protocol_sha256",
       "preview_commit",
@@ -38,22 +43,26 @@
     "correction_rule": "A later correction appends to the record and cannot replace the first response."
   },
   "questions": [
-    {"id": "role_handoff", "prompt": "Describe what the buyer, provider, receiver, and local verifier each contribute.", "pass_condition": "Keeps the four roles distinct: buyer supplies terms and policy, provider supplies an answer and evidence, receiver records delivery effects, and verifier evaluates retained records under the supplied context."},
-    {"id": "relation_reproduction", "prompt": "What did the local verifier reproduce?", "pass_condition": "Identifies the retained model's input-to-output relation without claiming historical execution or answer truth."},
-    {"id": "historical_provider_execution", "prompt": "What does the result establish about what the provider historically ran?", "pass_condition": "States that historical provider execution is not established."},
-    {"id": "answer_correctness", "prompt": "Does the result establish that the returned answer is correct or true?", "pass_condition": "States that answer correctness or truth is not established."},
-    {"id": "buyer_policy_eligibility", "prompt": "Who sets the evidence threshold, and what does eligibility mean here?", "pass_condition": "Identifies the supplied buyer policy as the threshold and eligibility as policy-relative."},
-    {"id": "settlement_stages", "prompt": "Distinguish payment eligibility, settlement authorization, and the workflow-local settlement attempt.", "pass_condition": "Keeps all three stages separate and reports the canonical states without inferring a later stage."},
-    {"id": "funds_movement", "prompt": "What can the demonstration establish about actual funds movement?", "pass_condition": "Reports actual funds movement as NOT_ESTABLISHED."},
-    {"id": "integrity_and_coverage", "prompt": "Why did receipt integrity not expose the unmatched receiver action, and what did?", "pass_condition": "Explains that receipt integrity checks supplied receipts while reconciliation against the supplied receiver record exposes the unmatched action."},
-    {"id": "receiver_record_completeness", "prompt": "Does complete coverage establish that the receiver record contains every real action?", "pass_condition": "States that receiver-record completeness is not established."}
+    {"id": "same_output", "prompt": "What was identical between the two provider transactions?", "pass_condition": "States that both providers returned the same BACKUP bytes without saying their evidence was equivalent."},
+    {"id": "retained_evidence", "prompt": "What retained evidence differed between the transactions?", "pass_condition": "Distinguishes the unavailable opaque model from the retained model and input used by the recheckable transaction."},
+    {"id": "provider_contact", "prompt": "Did the local recheck contact either provider?", "pass_condition": "States that it made zero provider calls and used retained records plus separately supplied buyer context."},
+    {"id": "relation_reproduction", "prompt": "What input-to-output relation did the local verifier reproduce?", "pass_condition": "Identifies that the retained, term-bound model maps the retained input to the returned BACKUP bytes."},
+    {"id": "historical_provider_execution", "prompt": "What remains unknown about what the provider historically ran?", "pass_condition": "States that historical provider execution is not established."},
+    {"id": "answer_correctness", "prompt": "Does the result establish that BACKUP is correct or true?", "pass_condition": "States that answer correctness or truth is not established."},
+    {"id": "buyer_policy_decision", "prompt": "Who sets the acceptance rule, and what do RELY and REFUSE mean here?", "pass_condition": "Identifies the supplied buyer policy as the threshold and both decisions as policy-relative evidence decisions."},
+    {"id": "integrity_coverage_completeness", "prompt": "Why can receipt integrity remain verified while receiver coverage falls to 1/2, and does that establish receiver-record completeness?", "pass_condition": "Explains that integrity checks supplied receipts, reconciliation exposes the unmatched effect in the supplied receiver record, and the record's real-world completeness remains unestablished."}
   ],
   "acceptance": {
-    "browser_story_without_help": {"minimum_passes": 4, "of": 5},
-    "role_handoff": {"minimum_passes": 4, "of": 5},
+    "browser_interactions": {
+      "required_outcomes": ["provider_exit_recheck", "receipt_boundary_challenge"],
+      "minimum_complete_both": 4,
+      "of": 5,
+      "semantic_assistance_permitted": false
+    },
     "all_eight_distinctions": {"minimum_passes": 4, "of": 5},
-    "avoid_answer_correctness_claim": {"minimum_passes": 5, "of": 5},
-    "funds_movement_not_established": {"minimum_passes": 5, "of": 5},
+    "historical_execution_boundary": {"minimum_passes": 5, "of": 5},
+    "answer_correctness_boundary": {"minimum_passes": 5, "of": 5},
+    "zero_provider_calls": {"minimum_passes": 5, "of": 5},
     "terminal_reproduction": {"required_slot": "developer-1", "maximum_seconds": 180}
   },
   "evidence_retention": [
@@ -61,19 +70,17 @@
     "eligibility and exclusion attestation",
     "first verbatim responses",
     "first-response SHA-256 commitments",
+    "separate browser-interaction outcomes",
     "assistance record",
     "rubric result",
     "limitations",
     "appended corrections"
   ],
-  "failure_and_retest": {
-    "first_failure_status": "NOT_ESTABLISHED",
-    "first_failure_keeps_pull_request_draft": true,
-    "maximum_copy_or_interaction_corrections": 1,
-    "retest_participants": 3,
-    "retest_scope": "FAILED_DIMENSIONS_ONLY",
-    "fresh_eligible_readers_required": true,
-    "preserve_all_attempts": true,
-    "second_failure_action": "STOP"
+  "failure": {
+    "status": "NOT_ESTABLISHED",
+    "keeps_pull_request_draft": true,
+    "in_protocol_retest": false,
+    "corrected_candidate_requires": "new gate opening and five fresh eligible readers",
+    "preserve_attempt": true
   }
 }

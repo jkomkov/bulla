@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://glyphstandard.com/schema/bulla-inference-clearing-comprehension-gate-open-0.1.json",
-  "title": "Recheckable inference comprehension gate opening",
+  "$id": "https://glyphstandard.com/schema/bulla-inference-clearing-comprehension-gate-open-0.2.json",
+  "title": "Retained inference evidence comprehension gate opening",
   "type": "object",
   "additionalProperties": false,
   "required": ["profile", "content", "proof"],
   "properties": {
-    "profile": {"const": "bulla.inference-clearing-comprehension-gate-open/0.1"},
+    "profile": {"const": "bulla.inference-clearing-comprehension-gate-open/0.2"},
     "content": {
       "type": "object",
       "additionalProperties": false,

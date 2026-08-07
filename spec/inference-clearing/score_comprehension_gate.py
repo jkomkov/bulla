@@ -24,23 +24,22 @@ from bulla.identity import verify_proof_domain  # noqa: E402
 
 
 HASH_PREFIX = "sha256:"
-SEMANTIC_QUESTIONS = {
+ALL_QUESTIONS = {
+    "same_output",
+    "retained_evidence",
+    "provider_contact",
     "relation_reproduction",
     "historical_provider_execution",
     "answer_correctness",
-    "buyer_policy_eligibility",
-    "settlement_stages",
-    "funds_movement",
-    "integrity_and_coverage",
-    "receiver_record_completeness",
+    "buyer_policy_decision",
+    "integrity_coverage_completeness",
 }
-ALL_QUESTIONS = {"role_handoff", *SEMANTIC_QUESTIONS}
 ACCEPTANCE_DIMENSIONS = {
-    "browser_story_without_help",
-    "role_handoff",
+    "browser_interactions",
     "all_eight_distinctions",
+    "historical_execution",
     "answer_correctness",
-    "funds_movement",
+    "provider_contact",
     "terminal_reproduction",
 }
 INITIAL_SLOTS = {
@@ -280,7 +279,7 @@ def _load_context(path: Path, evidence: Path) -> str:
     _, value = _strict_json(path, maximum=16_384)
     _validate_document(value, "comprehension-context.schema.json", "context")
     context = _object(value, {"profile", "accepted_coordinator"}, "context")
-    if context["profile"] != "bulla.inference-clearing-comprehension-context/0.1":
+    if context["profile"] != "bulla.inference-clearing-comprehension-context/0.2":
         raise GateError("wrong comprehension context profile")
     coordinator = context["accepted_coordinator"]
     if not isinstance(coordinator, str) or not coordinator.startswith("did:key:z"):
@@ -305,7 +304,7 @@ def _load_gate(evidence: Path, coordinator: str) -> tuple[dict[str, Any], str]:
     raw, value = _strict_json(_safe_path(evidence, "gate-open.json"))
     _validate_document(value, "comprehension-gate-open.schema.json", "gate opening")
     gate = _object(value, {"profile", "content", "proof"}, "gate opening")
-    if gate["profile"] != "bulla.inference-clearing-comprehension-gate-open/0.1":
+    if gate["profile"] != "bulla.inference-clearing-comprehension-gate-open/0.2":
         raise GateError("wrong gate-opening profile")
     fields = {
         "protocol_sha256", "preview_commit", "immutable_preview_url", "route",
@@ -355,11 +354,11 @@ def _load_response(
         {"profile", "content", "reader_proof", "coordinator_proof"},
         "response",
     )
-    if response["profile"] != "bulla.inference-clearing-comprehension-response/0.1":
+    if response["profile"] != "bulla.inference-clearing-comprehension-response/0.2":
         raise GateError("wrong response profile")
     fields = {
         "attempt_id", "participant_id", "reader_key", "slot", "participant_role",
-        "eligibility", "gate_open_sha256", "browser_story_without_help",
+        "eligibility", "gate_open_sha256", "browser_interactions",
         "first_responses", "first_response_hashes", "rubric", "assistance",
         "terminal_reproduction", "corrections", "limitations",
     }
@@ -418,8 +417,13 @@ def _load_response(
             raise GateError("completed terminal reproduction needs a duration")
     elif terminal["duration_seconds"] is not None:
         raise GateError("an uncompleted terminal run cannot claim a duration")
-    if not isinstance(content["browser_story_without_help"], bool):
-        raise GateError("browser story outcome must be Boolean")
+    browser_interactions = _object(
+        content["browser_interactions"],
+        {"provider_exit_recheck", "receipt_boundary_challenge"},
+        "browser interactions",
+    )
+    if any(value not in {"COMPLETED", "FAILED"} for value in browser_interactions.values()):
+        raise GateError("browser interaction outcomes must be COMPLETED or FAILED")
     return content, _sha(raw)
 
 
@@ -430,31 +434,35 @@ def _measures(responses: list[dict[str, Any]]) -> dict[str, Any]:
     )
     return {
         "participants": len(responses),
-        "browser_story_passes": sum(item["browser_story_without_help"] for item in responses),
-        "role_handoff_passes": sum(item["rubric"]["role_handoff"] == "PASS" for item in responses),
-        "all_distinctions_passes": sum(
-            all(item["rubric"][question] == "PASS" for question in SEMANTIC_QUESTIONS)
+        "browser_interaction_passes": sum(
+            all(status == "COMPLETED" for status in item["browser_interactions"].values())
             for item in responses
         ),
+        "all_distinctions_passes": sum(
+            all(item["rubric"][question] == "PASS" for question in ALL_QUESTIONS)
+            for item in responses
+        ),
+        "historical_execution_boundary_passes": sum(item["rubric"]["historical_provider_execution"] == "PASS" for item in responses),
         "answer_correctness_boundary_passes": sum(item["rubric"]["answer_correctness"] == "PASS" for item in responses),
-        "funds_movement_boundary_passes": sum(item["rubric"]["funds_movement"] == "PASS" for item in responses),
+        "provider_contact_passes": sum(item["rubric"]["provider_contact"] == "PASS" for item in responses),
         "terminal_reproduction_seconds": terminal,
     }
 
 
 def _failed_dimensions(measures: dict[str, Any], denominator: int) -> set[str]:
-    threshold = 4 if denominator == 5 else 2
+    if denominator != 5:
+        raise GateError("the single-shot gate requires five readers")
     failures: set[str] = set()
-    if measures["browser_story_passes"] < threshold:
-        failures.add("browser_story_without_help")
-    if measures["role_handoff_passes"] < threshold:
-        failures.add("role_handoff")
-    if measures["all_distinctions_passes"] < threshold:
+    if measures["browser_interaction_passes"] < 4:
+        failures.add("browser_interactions")
+    if measures["all_distinctions_passes"] < 4:
         failures.add("all_eight_distinctions")
+    if measures["historical_execution_boundary_passes"] < denominator:
+        failures.add("historical_execution")
     if measures["answer_correctness_boundary_passes"] < denominator:
         failures.add("answer_correctness")
-    if measures["funds_movement_boundary_passes"] < denominator:
-        failures.add("funds_movement")
+    if measures["provider_contact_passes"] < denominator:
+        failures.add("provider_contact")
     terminal = measures["terminal_reproduction_seconds"]
     if terminal is None or terminal > 180:
         failures.add("terminal_reproduction")
@@ -471,22 +479,21 @@ def score(evidence: Path, context_path: Path) -> dict[str, Any]:
         "attempt manifest",
     )
     manifest = _object(manifest_value, {"profile", "content", "proof"}, "attempt manifest")
-    if manifest["profile"] != "bulla.inference-clearing-comprehension-attempt-manifest/0.1":
+    if manifest["profile"] != "bulla.inference-clearing-comprehension-attempt-manifest/0.2":
         raise GateError("wrong attempt-manifest profile")
     manifest_content = _object(manifest["content"], {"gate_open_sha256", "attempts"}, "attempt manifest content")
     _proof(manifest["proof"], _content_digest(manifest_content), coordinator, "attempt-manifest proof")
     if manifest_content["gate_open_sha256"] != gate_digest:
         raise GateError("attempt manifest is bound to the wrong gate opening")
     attempts = manifest_content["attempts"]
-    if not isinstance(attempts, list) or len(attempts) not in {1, 2}:
-        raise GateError("attempt manifest must contain one or two attempts")
+    if not isinstance(attempts, list) or len(attempts) != 1:
+        raise GateError("attempt manifest must contain exactly one attempt")
 
     participant_ids: set[str] = set()
     reader_keys: set[str] = set()
     identity_commitments: set[str] = set()
     attempt_history: list[dict[str, Any]] = []
     all_evidence: list[str] = []
-    previous_failures: set[str] | None = None
     final_measures: dict[str, Any] | None = None
 
     for index, attempt_value in enumerate(attempts):
@@ -499,13 +506,11 @@ def score(evidence: Path, context_path: Path) -> dict[str, Any]:
         refs = attempt["response_refs"]
         if not isinstance(dimensions, list) or set(dimensions) - ACCEPTANCE_DIMENSIONS or len(dimensions) != len(set(dimensions)):
             raise GateError("attempt dimensions are invalid")
-        expected_dimensions = ACCEPTANCE_DIMENSIONS if index == 0 else previous_failures
-        if set(dimensions) != expected_dimensions:
+        if set(dimensions) != ACCEPTANCE_DIMENSIONS:
             raise GateError("attempt scope does not equal the required dimensions")
-        expected_scope = "ALL_DIMENSIONS" if index == 0 else "FAILED_DIMENSIONS_ONLY"
-        if scope != expected_scope:
+        if scope != "ALL_DIMENSIONS":
             raise GateError("attempt scope is out of order")
-        expected_count = 5 if index == 0 else 3
+        expected_count = 5
         if not isinstance(refs, list) or len(refs) != expected_count:
             raise GateError("attempt contains the wrong response count")
         responses: list[dict[str, Any]] = []
@@ -536,29 +541,17 @@ def score(evidence: Path, context_path: Path) -> dict[str, Any]:
             slots.add(slot)
             responses.append(content)
             evidence_hashes.append(evidence_hash)
-        if index == 0:
-            if slots != set(INITIAL_SLOTS):
-                raise GateError("first attempt does not fill the frozen five slots")
-            for response in responses:
-                if response["participant_role"] != INITIAL_SLOTS[response["slot"]]:
-                    raise GateError("participant role does not match the frozen slot")
-                terminal = response["terminal_reproduction"]
-                if response["slot"] == "developer-1":
-                    if not terminal["required"] or terminal["status"] != "COMPLETED" or terminal["duration_seconds"] > 180:
-                        raise GateError("developer-1 did not complete the terminal path in time")
-                elif terminal != {"required": False, "status": "NOT_REQUIRED", "duration_seconds": None}:
-                    raise GateError("only developer-1 may be the initial terminal slot")
-        else:
-            if slots != {"retest-1", "retest-2", "retest-3"}:
-                raise GateError("retest does not fill the three fresh slots")
-            terminal_required = "terminal_reproduction" in dimensions
-            for response in responses:
-                terminal = response["terminal_reproduction"]
-                if response["slot"] == "retest-1" and terminal_required:
-                    if not terminal["required"] or terminal["status"] != "COMPLETED" or terminal["duration_seconds"] > 180:
-                        raise GateError("retest terminal path did not complete in time")
-                elif terminal != {"required": False, "status": "NOT_REQUIRED", "duration_seconds": None}:
-                    raise GateError("unexpected terminal reproduction in retest")
+        if slots != set(INITIAL_SLOTS):
+            raise GateError("attempt does not fill the frozen five slots")
+        for response in responses:
+            if response["participant_role"] != INITIAL_SLOTS[response["slot"]]:
+                raise GateError("participant role does not match the frozen slot")
+            terminal = response["terminal_reproduction"]
+            if response["slot"] == "developer-1":
+                if not terminal["required"] or terminal["status"] != "COMPLETED" or terminal["duration_seconds"] > 180:
+                    raise GateError("developer-1 did not complete the terminal path in time")
+            elif terminal != {"required": False, "status": "NOT_REQUIRED", "duration_seconds": None}:
+                raise GateError("only developer-1 may be the terminal slot")
         measures = _measures(responses)
         failures = _failed_dimensions(measures, expected_count) & set(dimensions)
         status = "ESTABLISHED" if not failures else "NOT_ESTABLISHED"
@@ -571,18 +564,11 @@ def score(evidence: Path, context_path: Path) -> dict[str, Any]:
         })
         all_evidence.extend(evidence_hashes)
         final_measures = measures
-        previous_failures = failures
-        if index == 0 and status == "ESTABLISHED" and len(attempts) != 1:
-            raise GateError("a passing first attempt cannot be followed by a retest")
-        if index == 0 and status == "NOT_ESTABLISHED" and len(attempts) == 2:
-            continue
-        if index == 0 and status == "NOT_ESTABLISHED" and len(attempts) == 1:
-            break
 
     assert final_measures is not None
     final_status = attempt_history[-1]["status"]
     result = {
-        "profile": "bulla.inference-clearing-comprehension-result/0.1",
+        "profile": "bulla.inference-clearing-comprehension-result/0.2",
         "status": final_status,
         "protocol_sha256": _sha((HERE / "comprehension-protocol.json").read_bytes()),
         "gate_open_sha256": gate_digest,

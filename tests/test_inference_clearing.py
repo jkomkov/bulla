@@ -78,7 +78,7 @@ def _comprehension_evidence(tmp_path: Path):
     coordinator = LocalEd25519Signer(hashlib.sha256(b"comprehension-coordinator").digest())
     context = tmp_path / "context.json"
     _write_json(context, {
-        "profile": "bulla.inference-clearing-comprehension-context/0.1",
+        "profile": "bulla.inference-clearing-comprehension-context/0.2",
         "accepted_coordinator": coordinator.issuer,
     })
     preview = b"<!doctype html><title>Same answer. Different evidence.</title>\n"
@@ -97,7 +97,7 @@ def _comprehension_evidence(tmp_path: Path):
         "preview_content_type": "text/html",
     }
     gate = {
-        "profile": "bulla.inference-clearing-comprehension-gate-open/0.1",
+        "profile": "bulla.inference-clearing-comprehension-gate-open/0.2",
         "content": gate_content,
         "proof": coordinator.sign_domain("content", scorer._content_digest(gate_content)),
     }
@@ -129,7 +129,10 @@ def _comprehension_evidence(tmp_path: Path):
                 "no_implementation_involvement": True,
             },
             "gate_open_sha256": gate_hash,
-            "browser_story_without_help": True,
+            "browser_interactions": {
+                "provider_exit_recheck": "COMPLETED",
+                "receipt_boundary_challenge": "COMPLETED",
+            },
             "first_responses": answers,
             "first_response_hashes": {question: scorer._sha(text.encode()) for question, text in answers.items()},
             "rubric": {question: "PASS" for question in questions},
@@ -140,7 +143,7 @@ def _comprehension_evidence(tmp_path: Path):
         }
         digest = scorer._content_digest(content)
         response = {
-            "profile": "bulla.inference-clearing-comprehension-response/0.1",
+            "profile": "bulla.inference-clearing-comprehension-response/0.2",
             "content": content,
             "reader_proof": reader.sign_domain("content", digest),
             "coordinator_proof": coordinator.sign_domain("content", digest),
@@ -158,7 +161,7 @@ def _comprehension_evidence(tmp_path: Path):
         }],
     }
     manifest = {
-        "profile": "bulla.inference-clearing-comprehension-attempt-manifest/0.1",
+        "profile": "bulla.inference-clearing-comprehension-attempt-manifest/0.2",
         "content": manifest_content,
         "proof": coordinator.sign_domain("content", scorer._content_digest(manifest_content)),
     }
@@ -589,7 +592,9 @@ def test_comprehension_protocol_is_frozen_without_fake_human_evidence() -> None:
     protocol = json.loads((SPEC / "comprehension-protocol.json").read_text())
     assert protocol["state"] == "FROZEN_PENDING_GATE_OPEN"
     assert len(protocol["participant_slots"]) == 5
-    assert len(protocol["questions"]) == 9
+    assert len(protocol["questions"]) == 8
+    assert protocol["lineage"]["supersedes"] == "bulla.inference-clearing-comprehension/0.1"
+    assert protocol["failure"]["in_protocol_retest"] is False
     assert not (SPEC / "comprehension-gate-open.json").exists()
     assert not (SPEC / "comprehension-result.json").exists()
 
@@ -601,13 +606,27 @@ def test_authenticated_comprehension_scorer_derives_established(tmp_path: Path) 
     assert len(result["participant_evidence"]) == 5
     assert result["measures"] == {
         "participants": 5,
-        "browser_story_passes": 5,
-        "role_handoff_passes": 5,
+        "browser_interaction_passes": 5,
         "all_distinctions_passes": 5,
+        "historical_execution_boundary_passes": 5,
         "answer_correctness_boundary_passes": 5,
-        "funds_movement_boundary_passes": 5,
+        "provider_contact_passes": 5,
         "terminal_reproduction_seconds": 42.5,
     }
+
+
+def test_comprehension_scorer_requires_both_browser_interactions(tmp_path: Path) -> None:
+    scorer, evidence, context = _comprehension_evidence(tmp_path)
+    for reader in (1, 2):
+        response_path = evidence / "responses" / "attempt-1" / f"reader-{reader:02d}.json"
+        response = json.loads(response_path.read_text())
+        response["content"]["browser_interactions"]["receipt_boundary_challenge"] = "FAILED"
+        _write_json(response_path, response)
+    _resign_comprehension_evidence(scorer, evidence)
+    result = scorer.score(evidence, context)
+    assert result["status"] == "NOT_ESTABLISHED"
+    assert result["measures"]["browser_interaction_passes"] == 3
+    assert result["attempt_history"][0]["status"] == "NOT_ESTABLISHED"
 
 
 def test_comprehension_scorer_publishes_atomically(tmp_path: Path) -> None:
@@ -682,7 +701,7 @@ def test_comprehension_scorer_rejects_manufactured_evidence(tmp_path: Path, atta
         response_path = evidence / "responses" / "attempt-1" / "reader-01.json"
         response = json.loads(response_path.read_text())
         if attack == "response-hash-substitution":
-            response["content"]["first_response_hashes"]["funds_movement"] = "sha256:" + "0" * 64
+            response["content"]["first_response_hashes"]["provider_contact"] = "sha256:" + "0" * 64
         else:
             response["content"]["terminal_reproduction"] = {
                 "required": False,
@@ -714,7 +733,7 @@ def test_comprehension_scorer_rejects_manufactured_evidence(tmp_path: Path, atta
     elif attack == "packet-carried-context":
         context = evidence / "context.json"
         _write_json(context, {
-            "profile": "bulla.inference-clearing-comprehension-context/0.1",
+            "profile": "bulla.inference-clearing-comprehension-context/0.2",
             "accepted_coordinator": "did:key:zpacket-carried",
         })
     with pytest.raises((scorer.GateError, OSError, KeyError, TypeError)):
