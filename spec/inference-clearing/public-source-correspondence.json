@@ -4,7 +4,7 @@
     "The repository-local projection generator and projection are recorded separately because the monorepo pins the public source commit while the public repository supports checkout-local execution; neither file is a reproduction-kit member.",
     "The profile remains source-only and is excluded from wheel, sdist, stable exports, and installed CLI."
   ],
-  "member_set_sha256": "sha256:ac76c95f8c8f11f84c34fd7f63f46b9519244572767442fd152cfb48b7ff920b",
+  "member_set_sha256": "sha256:b70f32fcec42f7c0c69cb10c8be47094f5dbcb911e7252c5eeffd05f9086e9a2",
   "members": [
     {
       "byte_length": 19642,
@@ -22,9 +22,9 @@
       "sha256": "sha256:37d58802136f86db06caa5251daba1d5d1485874a362715a1553af00a59e8faa"
     },
     {
-      "byte_length": 1760,
+      "byte_length": 2684,
       "path": "spec/inference-clearing/COMPREHENSION-GATE.md",
-      "sha256": "sha256:7368ddb74db5c21f708915375aac337e68219aec8fb4d766ad68bc0999baab41"
+      "sha256": "sha256:3e3dc693a72cfcd886e387802a06847852edbc457a1c54485d061c930d48f3e6"
     },
     {
       "byte_length": 4593,
@@ -57,9 +57,9 @@
       "sha256": "sha256:2e7e461d0940e764d93d376bc1b1a8b0960886309639f8773240c0fa7c421291"
     },
     {
-      "byte_length": 3998,
+      "byte_length": 5664,
       "path": "spec/inference-clearing/check_comprehension_protocol.py",
-      "sha256": "sha256:1319940e2525e81cc2cf7e55beee6e1d02dea2e04a45fef4fea1155017058e7d"
+      "sha256": "sha256:142166862e6bd67613a10de3bb5b0bc989f829a15be5a6589cfa53950b55269e"
     },
     {
       "byte_length": 3322,
@@ -162,14 +162,19 @@
       "sha256": "sha256:e2d3b9d65834ac93f5c4e71f4966f567520525b8b786b917ebc5b11d65908078"
     },
     {
+      "byte_length": 1139,
+      "path": "spec/inference-clearing/promotion-policy.json",
+      "sha256": "sha256:a388457b9a4476e860da0c791e40bd5143e12b9ef0ece2a68f148fe700f82073"
+    },
+    {
       "byte_length": 2438,
       "path": "spec/inference-clearing/reviews/PRODUCT.md",
       "sha256": "sha256:d45904ded1830c69a2c43421fbe27131147626b93deffc61a0539073362743a0"
     },
     {
-      "byte_length": 2557,
+      "byte_length": 3430,
       "path": "spec/inference-clearing/reviews/PROTOCOL.md",
-      "sha256": "sha256:48884281a0079b481cf332275508cb8804278acdbf7d69362422d7064255acba"
+      "sha256": "sha256:7d7516fcf6e938e98b392ac5a84260b0067b63bff887a38133c88e3c096fa432"
     },
     {
       "byte_length": 27746,
