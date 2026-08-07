@@ -20,9 +20,25 @@ challenge as separate outcomes. The browser-interaction requirement passes for
 a reader only when both are completed without semantic assistance.
 
 The official gate is single-shot. A failing attempt records
-`NOT_ESTABLISHED` and keeps the pull requests draft. A corrected candidate
-requires a new gate opening and five fresh eligible readers; it cannot reuse
-the failed candidate's evidence.
+`NOT_ESTABLISHED`. The frozen protocol retains its original
+`keeps_pull_request_draft` consequence. The separately versioned and
+content-bound `promotion-policy.json` formally supersedes only that repository
+governance consequence: the human gate controls homepage promotion,
+category-level messaging, and any claim that unfamiliar readers understand the
+system. It does not block a source-only profile or an explicitly experimental
+route that has passed the repository's R3 review and validation requirements.
+The policy does not alter the frozen protocol, authenticated scoring rules, or
+result of any attempt. A corrected candidate requires a new gate opening and
+five fresh eligible readers; it cannot reuse the failed candidate's evidence.
+
+After the scored responses are committed, a facilitator may ask two unscored
+product-research questions:
+
+1. What remains unchanged when the provider is replaced?
+2. What does Bulla contribute beyond rerunning the retained model?
+
+These answers are qualitative notes. They do not enter the authenticated
+score, change the gate result, or establish comprehension.
 
 This directory intentionally contains no gate opening, participant response,
 or result record yet. Their absence means the human gate remains `BLOCKED`.

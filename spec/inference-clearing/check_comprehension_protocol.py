@@ -11,6 +11,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 PROTOCOL = HERE / "comprehension-protocol.json"
 DIGEST = HERE / "comprehension-protocol.json.sha256"
+PROMOTION_POLICY = HERE / "promotion-policy.json"
 QUESTIONS = {
     "same_output",
     "retained_evidence",
@@ -58,6 +59,8 @@ def main() -> int:
         raise SystemExit("both browser interactions must be separately observed without semantic assistance")
     if value["failure"]["in_protocol_retest"] is not False:
         raise SystemExit("the official gate must remain single-shot")
+    if value["failure"]["keeps_pull_request_draft"] is not True:
+        raise SystemExit("the frozen protocol's original governance consequence drifted")
     expected = hashlib.sha256(raw).hexdigest() + "  comprehension-protocol.json\n"
     if not DIGEST.exists() or DIGEST.read_text(encoding="ascii") != expected:
         raise SystemExit("comprehension protocol digest drifted")
@@ -76,6 +79,37 @@ def main() -> int:
     scorer = HERE / "score_comprehension_gate.py"
     if not scorer.is_file():
         raise SystemExit("authenticated comprehension scorer is missing")
+    policy = json.loads(PROMOTION_POLICY.read_bytes())
+    if policy != {
+        "profile": "bulla.inference-clearing-promotion-policy/0.1",
+        "effective_date": "2026-08-07",
+        "bound_comprehension_protocol": {
+            "profile": value["profile"],
+            "sha256": "sha256:" + hashlib.sha256(raw).hexdigest(),
+        },
+        "supersedes": {
+            "document": "comprehension-protocol.json",
+            "pointer": "/failure/keeps_pull_request_draft",
+            "prior_value": True,
+            "scope": "REPOSITORY_PROMOTION_GOVERNANCE_ONLY",
+        },
+        "requirements": {
+            "source_only_profile_merge": "R3_AND_MAPPED_VALIDATION",
+            "experimental_route_merge": "R3_AND_MAPPED_VALIDATION",
+            "homepage_promotion": "HUMAN_COMPREHENSION_ESTABLISHED",
+            "category_level_messaging": "HUMAN_COMPREHENSION_ESTABLISHED",
+            "claim_of_unfamiliar_reader_comprehension": "HUMAN_COMPREHENSION_ESTABLISHED",
+        },
+        "human_comprehension_state": "BLOCKED",
+        "does_not_change": [
+            "the content-addressed comprehension protocol",
+            "the authenticated scoring rules",
+            "the result of any comprehension attempt",
+            "the inference-clearing profile or verifier",
+            "the external-reproduction gate",
+        ],
+    }:
+        raise SystemExit("promotion policy is not bound to the frozen protocol and current governance")
     print(f"comprehension protocol matches sha256:{hashlib.sha256(raw).hexdigest()}")
     return 0
 
