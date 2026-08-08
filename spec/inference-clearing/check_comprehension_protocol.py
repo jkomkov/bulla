@@ -81,8 +81,12 @@ def main() -> int:
         raise SystemExit("authenticated comprehension scorer is missing")
     policy = json.loads(PROMOTION_POLICY.read_bytes())
     if policy != {
-        "profile": "bulla.inference-clearing-promotion-policy/0.1",
-        "effective_date": "2026-08-07",
+        "profile": "bulla.inference-clearing-promotion-policy/0.2",
+        "effective_date": "2026-08-08",
+        "lineage": {
+            "supersedes": "bulla.inference-clearing-promotion-policy/0.1",
+            "reason": "Separate product-surface promotion, comprehension evidence, and experimental maturity requirements.",
+        },
         "bound_comprehension_protocol": {
             "profile": value["profile"],
             "sha256": "sha256:" + hashlib.sha256(raw).hexdigest(),
@@ -96,17 +100,18 @@ def main() -> int:
         "requirements": {
             "source_only_profile_merge": "R3_AND_MAPPED_VALIDATION",
             "experimental_route_merge": "R3_AND_MAPPED_VALIDATION",
-            "homepage_promotion": "HUMAN_COMPREHENSION_ESTABLISHED",
-            "category_level_messaging": "HUMAN_COMPREHENSION_ESTABLISHED",
+            "homepage_feature": "HUMAN_COMPREHENSION_ESTABLISHED_AND_EXTERNAL_REPLAYS_AT_LEAST_1",
+            "category_level_messaging": "HUMAN_COMPREHENSION_ESTABLISHED_AND_EXTERNAL_REPLAYS_AT_LEAST_1",
             "claim_of_unfamiliar_reader_comprehension": "HUMAN_COMPREHENSION_ESTABLISHED",
+            "experimental_to_stable_maturity": "FOREIGN_CHECKER_AND_SEPARATELY_CONTROLLED_PROVIDER_OR_RECEIVER",
         },
-        "human_comprehension_state": "BLOCKED",
         "does_not_change": [
             "the content-addressed comprehension protocol",
             "the authenticated scoring rules",
             "the result of any comprehension attempt",
             "the inference-clearing profile or verifier",
-            "the external-reproduction gate",
+            "the experimental-to-stable maturity gate",
+            "the evidence-contract definition of an external replay",
         ],
     }:
         raise SystemExit("promotion policy is not bound to the frozen protocol and current governance")
