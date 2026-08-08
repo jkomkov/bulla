@@ -4,7 +4,7 @@
     "The repository-local projection generator and projection are recorded separately because the monorepo pins the public source commit while the public repository supports checkout-local execution; neither file is a reproduction-kit member.",
     "The profile remains source-only and is excluded from wheel, sdist, stable exports, and installed CLI."
   ],
-  "member_set_sha256": "sha256:b70f32fcec42f7c0c69cb10c8be47094f5dbcb911e7252c5eeffd05f9086e9a2",
+  "member_set_sha256": "sha256:9098e746a3938a1ac3b99c4d78a55f402edbc803b78cf98f45bf02bb6f8dc250",
   "members": [
     {
       "byte_length": 19642,
@@ -22,9 +22,9 @@
       "sha256": "sha256:37d58802136f86db06caa5251daba1d5d1485874a362715a1553af00a59e8faa"
     },
     {
-      "byte_length": 2684,
+      "byte_length": 2984,
       "path": "spec/inference-clearing/COMPREHENSION-GATE.md",
-      "sha256": "sha256:3e3dc693a72cfcd886e387802a06847852edbc457a1c54485d061c930d48f3e6"
+      "sha256": "sha256:9a1fd49284e976a812787d441101b555957570fedfe7a4ae64a76c156e0faa04"
     },
     {
       "byte_length": 4593,
@@ -57,9 +57,9 @@
       "sha256": "sha256:2e7e461d0940e764d93d376bc1b1a8b0960886309639f8773240c0fa7c421291"
     },
     {
-      "byte_length": 5664,
+      "byte_length": 6103,
       "path": "spec/inference-clearing/check_comprehension_protocol.py",
-      "sha256": "sha256:142166862e6bd67613a10de3bb5b0bc989f829a15be5a6589cfa53950b55269e"
+      "sha256": "sha256:49641d34c460b65f8fcba41b2aa14a084c81fa65d1dfc08c47a4471668d58335"
     },
     {
       "byte_length": 3322,
@@ -162,9 +162,9 @@
       "sha256": "sha256:e2d3b9d65834ac93f5c4e71f4966f567520525b8b786b917ebc5b11d65908078"
     },
     {
-      "byte_length": 1139,
+      "byte_length": 1539,
       "path": "spec/inference-clearing/promotion-policy.json",
-      "sha256": "sha256:a388457b9a4476e860da0c791e40bd5143e12b9ef0ece2a68f148fe700f82073"
+      "sha256": "sha256:2071c826a48c0316fc680322534dd239dad29beef338d47e84b85dfdbe0ddd9c"
     },
     {
       "byte_length": 2438,

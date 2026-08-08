@@ -27,6 +27,10 @@ governance consequence: the human gate controls homepage promotion,
 category-level messaging, and any claim that unfamiliar readers understand the
 system. It does not block a source-only profile or an explicitly experimental
 route that has passed the repository's R3 review and validation requirements.
+For a homepage feature or category-level message, the current promotion policy
+also requires at least one qualifying external replay. Human comprehension is
+necessary for that surface promotion but is not sufficient by itself. The
+experimental-to-stable maturity gate remains separate and unchanged.
 The policy does not alter the frozen protocol, authenticated scoring rules, or
 result of any attempt. A corrected candidate requires a new gate opening and
 five fresh eligible readers; it cannot reuse the failed candidate's evidence.
