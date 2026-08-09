@@ -69,6 +69,7 @@ def test_readme_answerability_fixture_matches_real_cli(tmp_path: Path) -> None:
 
 def test_first_level_copy_preserves_current_product_boundary() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_flat = " ".join(readme.split())
     metadata = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
     combined = readme + "\n" + metadata
     assert "SEAM is the underlying theory" not in combined
@@ -77,17 +78,17 @@ def test_first_level_copy_preserves_current_product_boundary() -> None:
     assert "authorless action" not in combined.lower()
     assert "independently validated" not in combined.lower()
     assert (
-        "Glyph defines a portable receipt for consequential agent actions. "
-        "Bulla is the\nPython reference implementation."
+        "An ActionReceipt is a standard file that records one agent transaction for the\n"
+        "counterparty to keep. Bulla is the open-source Python toolkit that creates and\n"
+        "checks that file. Glyph Standard publishes the format and public test suite."
     ) in readme
-    assert "Receipt verification detects changes" in readme
-    assert "Coverage reports actions" in readme
+    assert "The altered file fails its integrity check" in readme
+    assert "The supplied action log contains one action with no matching receipt" in readme_flat
     assert "Legacy composition diagnostics" not in readme
     assert "Research frontier" not in readme
     assert "A bulla was the clay envelope" not in readme
     assert (
-        'description = "Create, verify, and reconcile portable receipts for '
-        'consequential agent actions"'
+        'description = "Create and check standard transaction records for agent actions"'
     ) in metadata
 
 
