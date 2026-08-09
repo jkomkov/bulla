@@ -9,7 +9,7 @@ name = "bulla"
 # source that could silently drift would be a provenance defect in a provenance
 # tool. publish.yml gates that this version equals the pushed tag.
 dynamic = ["version"]
-description = "Create, verify, and reconcile portable receipts for consequential agent actions"
+description = "Create and check standard transaction records for agent actions"
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]

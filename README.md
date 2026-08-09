@@ -1,31 +1,28 @@
 # Bulla
 
-**Create, verify, and reconcile portable receipts for consequential agent actions.**
+**Create and check transaction records for agent actions.**
 
-Glyph defines a portable receipt for consequential agent actions. Bulla is the
-Python reference implementation. It creates and verifies ActionReceipts locally
-and computes coverage against a separately supplied action record.
+An ActionReceipt is a standard file that records one agent transaction for the
+counterparty to keep. Bulla is the open-source Python toolkit that creates and
+checks that file. Glyph Standard publishes the format and public test suite.
 
-Receipt verification detects changes in the records supplied to the verifier.
-Coverage reports actions in a supplied action record that have no matching
-receipt. These checks answer different questions and remain separate.
+The application creates the receipt where an action is accepted or completed:
+an API gateway, tool router, payment handler, or agent runtime. The model does
+not need to know about Bulla or write JSON.
 
-## Install
+## Install and run one transaction
 
-Bulla supports Python 3.10 and later. Core receipt creation and digest
-verification require no hosted service.
+Bulla supports Python 3.10 and later. Receipt creation and file-integrity checks
+run locally and require no hosted Bulla service.
 
 ```bash
 python -m pip install "bulla==0.47.1"
 bulla demo
 ```
 
-## Run one action
-
-`bulla demo` runs one fixed local action through Bulla, emits its receipt
-automatically, and retains every artifact in a new directory. It then changes a
-copy of the receipt, sends a second action around the receipting boundary, and
-compares the receipt set with the constructed receiver record.
+The fixed demo creates a receipt for one constructed USD 125 payment, checks the
+saved file, rejects an altered copy, and compares the receipt set with a
+separately supplied receiver log containing one additional action.
 
 ```text
 FIRST ACTION DEMO · CONSTRUCTED LOCAL SCENARIO
@@ -46,32 +43,64 @@ unreceipted action    pay_demo_043
 original integrity    VERIFIED
 ```
 
-The receipt caught alteration. The receiver's action record caught omission.
-The receiver is constructed, and neither record establishes that funds moved.
-The final stage runs Bulla and the retained standalone checker with network
-access denied.
+The altered file fails its integrity check. The separate receiver log exposes
+an action with no matching receipt. Neither result establishes that funds moved
+or that the receiver log contains every action.
 
-Use `bulla demo --out DIR` to choose a new output directory, or
-`bulla demo --format json` for the versioned CLI report. Bulla refuses to
-replace an existing path.
+Use `bulla demo --out DIR` to choose a fresh output directory or `bulla demo
+--format json` for the versioned machine report. Bulla refuses to replace an
+existing path.
 
-In application code, `wrap_action` emits the JSON record. Applications do not
-hand-author the wire format.
+## Why not use the provider's logs?
 
-## Why retain the receipt
+Provider logs are useful, and Bulla does not replace them. They usually describe
+an activity stream inside the provider's system, use a provider-specific schema,
+and remain under the provider's custody.
 
-A *bulla* was the clay envelope sealed around a record so it could survive the
-absence of the parties who made it. Bulla applies that discipline to agent
-actions: the action may finish in milliseconds, but a retained receipt keeps
-its declared authority, evidence, limits, and challenge path available to the
-next system or institution.
+An ActionReceipt has a different job: hand the counterparty one portable record
+for one transaction. If a provider exports the relevant event, binds it to the
+buyer's request and accepted terms, authenticates it, and lets the buyer retain
+it, that export can become evidence for an ActionReceipt. The standard format
+means a buyer does not need a different log integration for every provider.
 
-The format is intended for the customer, auditor, dispute forum, or underwriter
-who arrives after the agent and its runtime are gone and applies its own checks.
+| | Provider log | ActionReceipt |
+|---|---|---|
+| Primary use | Operate and debug the provider | Hand one transaction to the counterparty |
+| Custody | Usually controlled by the provider | Retained by each receiving party |
+| Format | Provider-specific | Open and versioned |
+| Scope | System activity stream | One action or transaction |
+| Verification | Whatever the provider exposes | Local checks defined by the format |
+| Completeness | Not assumed | Not assumed |
+
+Buyers, gateways, and marketplaces can require receipt support before routing
+work or accepting a delivery. A provider that supports the format can qualify
+for those workflows and use the same agreed transaction file for acceptance,
+audit, and disputes. This repository does not claim that receipts improve
+payment speed, insurance pricing, or reputation.
+
+## Add Bulla where the application acts
+
+`wrap_action` creates the JSON file around the application call:
+
+```python
+from bulla import wrap_action
+
+with wrap_action(
+    "payments.charge",
+    {"event_id": "pay-1", "amount_minor": 12500},
+) as action:
+    action.set_result("sha256:" + "0" * 64)
+
+receipt = action.receipt
+```
+
+The receipt can record the action claim, declared authority and limits, supplied
+evidence references, and challenge path. The exact fields are defined by the
+[ActionReceipt standard](https://glyphstandard.com/spec).
 
 ## Verify one receipt
 
-Download the constructed canonical payment receipt and verify it locally:
+Download the constructed payment receipt and check it locally:
 
 ```bash
 curl -fsSLo constructed-payment-authorization-v0.2.json \
@@ -79,14 +108,13 @@ curl -fsSLo constructed-payment-authorization-v0.2.json \
 bulla receipt verify constructed-payment-authorization-v0.2.json --format json
 ```
 
-The constructed receipt records a USD 125.00 charge, declares a USD 200.00
-limit, and carries an executable convention that recomputes conformance.
-The checked result is:
+The receipt records a USD 125.00 charge, declares a USD 200.00 limit, and carries
+an executable rule for checking the limit. The dimensional report includes:
 
 ```text
-integrity            VERIFIED
-authenticity         UNVERIFIED
-authority            UNAUTHENTICATED
+integrity             VERIFIED
+authenticity          UNVERIFIED
+authority             UNAUTHENTICATED
 declared_bounds       CONFORMS
 grounding             SELF_ASSERTED
 recourse              NAMED
@@ -94,80 +122,16 @@ reachability          UNVERIFIED
 reliance_decision     NOT_COMPUTED
 ```
 
-The same receipt is available offline at
-`spec/vectors/payment-authorization.json`. Its expected result is pinned in
-`spec/vectors/expected.json` and recomputed in CI.
+These are separate results, not one global safety or truth verdict. The same
+receipt is available at `spec/vectors/payment-authorization.json`; its expected
+result is pinned in `spec/vectors/expected.json` and recomputed in CI.
 
-Change `amount_minor` from `12500` to `12501` without recomputing the hashes.
-The verifier returns nonzero, reports a content-hash mismatch, and suppresses
-content-dependent conclusions.
+## Check receipt coverage
 
-## Retain the verification kit
-
-The package carries the v0.2 specification, constructed vectors, expected
-dimensional verdicts, and a zero-dependency checker as one immutable archive:
-
-```bash
-bulla receipt kit --out action-receipt-v0.2-verification-kit.zip
-```
-
-Expected archive digest:
-
-```text
-sha256:8f2cdd16bcbd1a1121f49545b6a6512872b188221ca30ec054dfd6b2fb2142ab
-```
-
-After extracting the archive, run `python3 verify.py` to check the kit itself,
-or run its zero-dependency checker against a retained v0.2 receipt:
-
-```bash
-python3 verify.py receipt RECEIPT.json --format text
-```
-
-The checker imports no Bulla code and makes no network request. The manifest
-checks the retained contents; authenticate the archive itself with the detached
-digest or the signed release receipt.
-
-## Rehearse verification without dependencies
-
-`bulla receipt drill` checks one normative v0.2 receipt with Bulla and with the
-retained standalone checker while network access is denied:
-
-```bash
-bulla receipt drill RECEIPT.json --format text
-```
-
-The report separates facts recomputed from retained bytes from claims that need
-another record and dimensions that cannot be decided from the supplied
-material. It does not establish event occurrence, live authority, recourse
-reachability, receipt coverage, or a reliance decision.
-
-When `--kit` is used, the detached digest checks the supplied bytes and Bulla
-also requires those bytes to match the kit retained inside the installed
-distribution before it executes the standalone checker. The sidecar alone does
-not establish publisher identity or authorize unfamiliar code.
-
-## Create one receipt
-
-```bash
-bulla receipt create \
-  --type demo.write \
-  --subject path=/tmp/example.txt \
-  --forum-endpoint https://example.invalid/challenge \
-  --forum-root fixture:independently-pinned-root \
-  --out receipt.json
-bulla receipt verify receipt.json --format json
-```
-
-The unsigned result reaches the digest verification rung. It does not
-authenticate the authority or compute a reliance decision.
-
-## Check coverage
-
-`event_coverage` compares valid receipts with an action record supplied outside
-the receipt set. For an exact retained-record match, add `record_sha256` using
-`observed_record_sha256`; the receipt must carry the same digest in its result
-or evidence references. Without that field, coverage is action-id correlation:
+`event_coverage` compares valid receipts with an action log supplied outside the
+receipt set. For an exact saved-record match, add `record_sha256` using
+`observed_record_sha256`; the receipt must carry the same digest in its result or
+evidence references. Without that field, coverage is action-ID correlation.
 
 ```python
 from bulla.action_receipt import verify_receipt
@@ -189,36 +153,73 @@ assert with_gap["coverage"] == 0.5
 assert with_gap["unreceipted_delta"] == ["action-002"]
 ```
 
-Receipt integrity remains unchanged in the second comparison. The supplied
-action record contains one action with no matching receipt.
+Receipt integrity is unchanged in the second comparison. The supplied action log
+contains one action with no matching receipt. Bulla does not establish that the
+log itself is complete.
+
+## Keep the verification kit
+
+The package carries the v0.2 specification, constructed examples, expected
+dimensional reports, and a zero-dependency checker as one immutable archive:
+
+```bash
+bulla receipt kit --out action-receipt-v0.2-verification-kit.zip
+```
+
+Expected archive digest:
+
+```text
+sha256:8f2cdd16bcbd1a1121f49545b6a6512872b188221ca30ec054dfd6b2fb2142ab
+```
+
+After extracting the archive, run `python3 verify.py` to check the kit or run
+its standalone checker against a saved v0.2 receipt:
+
+```bash
+python3 verify.py receipt RECEIPT.json --format text
+```
+
+The checker imports no Bulla code and makes no network request. The manifest
+checks the archive contents. Authenticate the archive itself with the detached
+digest or signed release receipt.
+
+`bulla receipt drill` runs both the installed Bulla checker and the retained
+standalone checker while network access is denied:
+
+```bash
+bulla receipt drill RECEIPT.json --format text
+```
 
 ## Where Bulla fits
 
-- **Payments:** record authorization, amount bounds, evidence, and recourse.
-- **Permissions and writes:** bind a consequential operation to its principal
-  and policy.
-- **Gateways and provider handoffs:** retain the action and authority references
-  that crossed the boundary.
+- **Payments:** record the request, authorization, amount limits, supplied
+  evidence, and dispute path.
+- **Permissions and writes:** bind an operation to its stated principal and
+  policy.
+- **Gateways and provider handoffs:** retain the request and terms that crossed
+  an organizational boundary.
 
-ActionReceipt v0.2 remains the normative and default format. ActionReceipt v0.4
-is available as an opt-in experimental draft. Source-only research profiles
-remain inspectable on GitHub but are excluded from the installed package unless
-the distribution policy explicitly lists them as released.
+ActionReceipt v0.2 remains the normative default. ActionReceipt v0.4 is an
+opt-in experimental draft. Source-only research profiles remain inspectable on
+GitHub but are excluded from the installed package unless the distribution
+policy explicitly releases them.
 
 ## Limits
 
-- Receipt integrity does not establish the truth of every recorded field.
-- Coverage is relative to the supplied action record.
-- Bulla does not establish that the supplied action record is complete.
+- File integrity does not establish that the reported action occurred or that
+  every recorded field is true.
+- A signature authenticates an accepted key; it does not create authority.
+- Coverage is relative to the supplied action log.
+- Bulla does not establish that the supplied action log is complete.
 - Unsigned receipts remain unauthenticated.
 - Reliance remains `NOT_COMPUTED` unless a reliance policy is supplied.
 
-Multidimensional verification results reject Boolean coercion. Callers must
-inspect the named dimensions or apply an explicit reliance policy.
+Multidimensional reports reject Boolean coercion. Callers inspect the named
+dimensions or apply an explicit reliance policy.
 
 ## Documentation
 
-- [Verification-first quickstart](https://glyphstandard.com/bulla/quickstart)
+- [Quickstart](https://glyphstandard.com/bulla/quickstart)
 - [Bulla documentation](https://glyphstandard.com/bulla)
 - [ActionReceipt standard](https://glyphstandard.com/spec)
 - [Status and evidence](https://glyphstandard.com/status)
