@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schemas/bulla.acceptance-report-0.1.json",
+  "title": "Bulla Acceptance Report 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile", "transaction_id", "contract_hash", "record_integrity", "term_binding",
+    "provider_acceptance", "sender_authority", "receiver_authority", "receiver_observation",
+    "receiver_coverage", "correction_state", "requirements", "decision",
+    "conditional_evidence_requests", "conditional_closure_sets", "closure_minimality",
+    "consequence", "consequence_eligibility", "authorization", "execution",
+    "worldly_truth", "historical_execution", "denominator_completeness", "limitations", "errors"
+  ],
+  "properties": {
+    "profile": {"const": "bulla.acceptance-report/0.1-experimental"},
+    "transaction_id": {"type": "string", "minLength": 1},
+    "contract_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "record_integrity": {"type": "string"},
+    "term_binding": {"type": "string"},
+    "provider_acceptance": {"type": "string"},
+    "sender_authority": {"type": "string"},
+    "receiver_authority": {"type": "string"},
+    "receiver_observation": {"type": "string"},
+    "receiver_coverage": {"type": "string"},
+    "correction_state": {"type": "string"},
+    "requirements": {"type": "array", "items": {"type": "object"}},
+    "decision": {"enum": ["PROCEED", "HOLD_FOR_EVIDENCE", "REFUSE", "ESCALATE", "NOT_COMPUTED"]},
+    "conditional_evidence_requests": {"type": "array", "items": {"type": "object"}},
+    "conditional_closure_sets": {"type": "array", "items": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}},
+    "closure_minimality": {"enum": ["INCLUSION_MINIMAL_WITHIN_DECLARED_CATALOG", "NOT_APPLICABLE", "NOT_COMPUTED"]},
+    "consequence": {"const": "release.promote"},
+    "consequence_eligibility": {"enum": ["ELIGIBLE", "INELIGIBLE", "CHALLENGE_REQUIRED", "NOT_COMPUTED"]},
+    "authorization": {"const": "NOT_ISSUED"},
+    "execution": {"const": "NOT_ATTEMPTED"},
+    "worldly_truth": {"const": "NOT_COMPUTED"},
+    "historical_execution": {"const": "NOT_ESTABLISHED"},
+    "denominator_completeness": {"const": "NOT_ESTABLISHED"},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "errors": {"type": "array", "items": {"type": "string"}}
+  }
+}

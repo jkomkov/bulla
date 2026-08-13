@@ -1,0 +1,96 @@
+{
+  "action": {
+    "subject": {
+      "adapter": "bulla.correction-state/0.1",
+      "authority_epoch": 1,
+      "build_hash": "sha256:6d297af58f5ea06e0bf41306222b41721fc901278d528c61f2a60cba84358724",
+      "contract_hash": "sha256:502d45909fc5f7da23a8996782b302d01aa6b10142d93051815d291fece4d2f4",
+      "environment": "staging",
+      "issuer_role": "release_authority",
+      "parent_ref": {
+        "attestation": "sha256:520cb83105183a6a6683a27a4c66b70dd96df194c06034bb670a0534b493554a",
+        "event": "sha256:6b4b49c23e938727d35c7db5d8d7d3917a44cc39085d442b1f97dfda4249916c"
+      },
+      "profile": "bulla.acceptance-contract/0.1-experimental",
+      "result": {
+        "correction_state": "CURRENT",
+        "evaluated_contract_hash": "sha256:502d45909fc5f7da23a8996782b302d01aa6b10142d93051815d291fece4d2f4"
+      },
+      "semantic_epoch": 1,
+      "term_root": "sha256:28b47d35a759eec4c71cfa52e4f0b89f5d6b7912010e4a2d8338c9e0b3cb1d26",
+      "transaction_id": "release-acceptance-alpha-001"
+    },
+    "type": "release.correction.checkpoint"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6MkpWv3qgLjnFBYbt9KKduFJnQviALAg6inMG6NaA2mEHNx",
+    "proofValue": "E5cfJ/zqUiGrvxwLqrT9qWIKF8YqfK+vEbcRT+EgVhirEEBmCI+lUt5Wm8z6iCjsxd8PI3ev/BI02IhxooVFCg==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkpWv3qgLjnFBYbt9KKduFJnQviALAg6inMG6NaA2mEHNx"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-08-13T12:06:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "0677beea-afa1-4269-a143-8d7a1f855b3f",
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:4d41aa39e3238df1e167bd7ef91682fb505127ccd8a704b0b7828116ab5bbcc2",
+    "content": "sha256:eae085b369780c3901d0d6d635a88492f3257e109ca46dc2305fcae60e591bcc",
+    "event": "sha256:f4d5095c7fa5d05b971078e0cee4174395c98049599361576921d57b7faaf208",
+    "log_leaf": "sha256:ac3cd16233ba67ad3ac28cca738ff79c2d34c18b4a52018170d11b13302f6720"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "sha256:502d45909fc5f7da23a8996782b302d01aa6b10142d93051815d291fece4d2f4",
+      "principal": "did:key:z6MkpWv3qgLjnFBYbt9KKduFJnQviALAg6inMG6NaA2mEHNx"
+    },
+    "bounds": {
+      "scope": "profile:bulla.acceptance-contract/0.1-experimental;action:release.correction.checkpoint"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6MkpWv3qgLjnFBYbt9KKduFJnQviALAg6inMG6NaA2mEHNx",
+    "proofValue": "NK5wsYV48eSDaDcQ0if2oTbXchY8mZSznEz1Zo8abmdb+OrTWntTOfNU+cDx0FGNS4ZJO/+juoGbdsSjqClcAg==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkpWv3qgLjnFBYbt9KKduFJnQviALAg6inMG6NaA2mEHNx"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "acceptance-contract-alpha"
+  },
+  "remedy": {
+    "challenge_window": "checkpoint:release-policy-alpha-001",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/bulla/experimental/acceptance-contract",
+      "trusted_root_ref": "sha256:bb6f3a250eccb18d8e16f9465a8ddaf3878587fd2549ddd002c50a9c4c2086e7"
+    },
+    "remedies": [
+      {
+        "anchor": "challenge:release-policy-alpha-001",
+        "rung": "challenge",
+        "verifier": "reevaluate the retained transaction under the accepted contract"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "public",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6MkpWv3qgLjnFBYbt9KKduFJnQviALAg6inMG6NaA2mEHNx",
+    "proofValue": "wqpZESgnjKNgbL5lvZp3gEQQ93NJJUdxFECR6z9qJwywP09SnD2dT5ShTlriys9mtlaeqcqgylc0+T9N3HcFBA==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkpWv3qgLjnFBYbt9KKduFJnQviALAg6inMG6NaA2mEHNx"
+  },
+  "stake": null
+}

@@ -1,0 +1,117 @@
+{
+  "authorization": "NOT_ISSUED",
+  "closure_minimality": "NOT_APPLICABLE",
+  "conditional_closure_sets": [],
+  "conditional_evidence_requests": [],
+  "consequence": "release.promote",
+  "consequence_eligibility": "INELIGIBLE",
+  "contract_hash": "sha256:502d45909fc5f7da23a8996782b302d01aa6b10142d93051815d291fece4d2f4",
+  "correction_state": "CURRENT",
+  "decision": "REFUSE",
+  "denominator_completeness": "NOT_ESTABLISHED",
+  "errors": [],
+  "execution": "NOT_ATTEMPTED",
+  "historical_execution": "NOT_ESTABLISHED",
+  "limitations": [
+    "A conditional evidence request does not establish that the requested artifact exists or will satisfy the policy.",
+    "The supplied receiver record does not establish denominator completeness.",
+    "Eligibility is not authorization or execution.",
+    "The retained records do not establish that a deployment occurred."
+  ],
+  "profile": "bulla.acceptance-report/0.1-experimental",
+  "provider_acceptance": "VERIFIED",
+  "receiver_authority": "VERIFIED",
+  "receiver_coverage": "COVERED",
+  "receiver_observation": "VERIFIED",
+  "record_integrity": "VERIFIED",
+  "requirements": [
+    {
+      "accepted_values": [
+        "REQUESTED"
+      ],
+      "evidence_request_id": null,
+      "observed_value": "REQUESTED",
+      "reasons": [],
+      "requirement_id": "buyer-request",
+      "route": "PROCEED",
+      "source_path": "records/01-request.json",
+      "status": "SATISFIED"
+    },
+    {
+      "accepted_values": [
+        "ACCEPTED"
+      ],
+      "evidence_request_id": null,
+      "observed_value": "ACCEPTED",
+      "reasons": [],
+      "requirement_id": "provider-acceptance",
+      "route": "PROCEED",
+      "source_path": "records/02-accept.json",
+      "status": "SATISFIED"
+    },
+    {
+      "accepted_values": [
+        "STAGING_READY"
+      ],
+      "evidence_request_id": null,
+      "observed_value": "STAGING_READY",
+      "reasons": [],
+      "requirement_id": "staging-ready-claim",
+      "route": "PROCEED",
+      "source_path": "records/03-staging-ready.json",
+      "status": "SATISFIED"
+    },
+    {
+      "accepted_values": [
+        "OBSERVED"
+      ],
+      "evidence_request_id": null,
+      "observed_value": "OBSERVED",
+      "reasons": [],
+      "requirement_id": "receiver-observation",
+      "route": "PROCEED",
+      "source_path": "reports/receiver-observation.json",
+      "status": "SATISFIED"
+    },
+    {
+      "accepted_values": [
+        "COVERED"
+      ],
+      "evidence_request_id": null,
+      "observed_value": "COVERED",
+      "reasons": [],
+      "requirement_id": "receiver-coverage",
+      "route": "PROCEED",
+      "source_path": "reports/receiver-coverage.json",
+      "status": "SATISFIED"
+    },
+    {
+      "accepted_values": [
+        "CURRENT"
+      ],
+      "evidence_request_id": null,
+      "observed_value": "CURRENT",
+      "reasons": [],
+      "requirement_id": "correction-current",
+      "route": "PROCEED",
+      "source_path": "reports/correction-state.json",
+      "status": "SATISFIED"
+    },
+    {
+      "accepted_values": [
+        "PASS"
+      ],
+      "evidence_request_id": null,
+      "observed_value": "FAIL",
+      "reasons": [],
+      "requirement_id": "rollback-test",
+      "route": "REFUSE",
+      "source_path": "evidence/rollback-test.json",
+      "status": "NEGATIVE"
+    }
+  ],
+  "sender_authority": "VERIFIED",
+  "term_binding": "VERIFIED",
+  "transaction_id": "release-acceptance-alpha-001",
+  "worldly_truth": "NOT_COMPUTED"
+}

@@ -1,0 +1,36 @@
+{
+  "accepted_adapters": [
+    "bulla.action-receipt-v0.4",
+    "bulla.correction-state/0.1",
+    "bulla.receiver-coverage/0.1",
+    "bulla.receiver-observation/0.1",
+    "bulla.rollback-test/0.1"
+  ],
+  "accepted_contract_hash": "sha256:502d45909fc5f7da23a8996782b302d01aa6b10142d93051815d291fece4d2f4",
+  "accepted_issuers_by_role": {
+    "deploy_agent": [
+      "did:key:z6MkkGY3rfZGaqDdChPDN5HCw1bxqkBxJSfat8YyEjkcy913"
+    ],
+    "publisher": [
+      "did:key:z6MkfW7AhBW4CA45XRwTc8FiCm31cvXbt9Q2NMbqcfDHEUkd"
+    ],
+    "release_authority": [
+      "did:key:z6MkpWv3qgLjnFBYbt9KKduFJnQviALAg6inMG6NaA2mEHNx"
+    ],
+    "release_buyer": [
+      "did:key:z6MkhJhkMpC2tfctcoBFmCNSzcFaCJWdysSvb4mzm5uuFk3J"
+    ],
+    "rollback_test_runner": [
+      "did:key:z6MkvMJ8CnE7oAh2CjUsccVNg5BNfdVBAMbFDpS7kydT6WQR"
+    ],
+    "staging_controller": [
+      "did:key:z6MkgHo1BFmhzBUfEvswVX3rNZLzh8rYnimLGPLaJwUi74iR"
+    ]
+  },
+  "accepted_policy_authorities": [
+    "did:key:z6MkpWv3qgLjnFBYbt9KKduFJnQviALAg6inMG6NaA2mEHNx"
+  ],
+  "authority_epoch": 1,
+  "profile": "bulla.acceptance-context/0.1-experimental",
+  "semantic_epoch": 1
+}
