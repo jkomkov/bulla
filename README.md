@@ -1,10 +1,15 @@
 # Bulla
 
-**Create and check transaction records for agent actions.**
+**Receipts for agents.**
 
-An ActionReceipt is a standard file that records one agent transaction for the
-counterparty to keep. Bulla is the open-source Python toolkit that creates and
-checks that file. Glyph Standard publishes the format and public test suite.
+An ActionReceipt is a portable transaction record the counterparty can keep.
+Bulla is the open-source Python toolkit that creates and checks those records
+locally. Glyph Standard publishes the format and public test suite.
+
+When one agent asks another to deploy code, buy compute, or move money, the
+provider can report that it succeeded. The receiving application still decides
+what evidence and authority it requires before it acts. The receipt keeps the
+transaction stable while that policy is evaluated.
 
 The application creates the receipt where an action is accepted or completed:
 an API gateway, tool router, payment handler, or agent runtime. The model does
@@ -77,6 +82,17 @@ work or accepting a delivery. A provider that supports the format can qualify
 for those workflows and use the same agreed transaction file for acceptance,
 audit, and disputes. This repository does not claim that receipts improve
 payment speed, insurance pricing, or reputation.
+
+## The receipt is not the decision
+
+An ActionReceipt preserves the request, accepted permissions and limits,
+reported result, and supplied evidence. It does not make the next decision.
+The customer, auditor, marketplace, or downstream agent applies its own policy
+to the retained record.
+
+An eligible consequence is still separate from authority to execute it. A
+receipt does not establish that the reported event occurred or that the
+receiver's action log contains every relevant event.
 
 ## Add Bulla where the application acts
 
@@ -189,6 +205,27 @@ standalone checker while network access is denied:
 ```bash
 bulla receipt drill RECEIPT.json --format text
 ```
+
+## Experimental: evaluate one receiving policy
+
+The source-only [Acceptance Contract
+alpha](spec/acceptance-contract/PROFILE.md) demonstrates an agent-to-agent
+deployment handoff. A deploy agent reports that staging is ready; the receiving
+release policy also requires a rollback-test record for the exact build and
+contract. Missing evidence produces a conditional request, `PASS` permits
+eligibility, and `FAIL` refuses it. Even the eligible result leaves
+authorization unissued and execution unattempted.
+
+```bash
+PYTHONPATH=src python3 examples/acceptance-contract/run_demo.py \
+  --story --out /tmp/bulla-acceptance
+python3 -I spec/acceptance-contract/check.py \
+  /tmp/bulla-acceptance/missing \
+  --context /tmp/bulla-acceptance/context.json \
+  --format story
+```
+
+This profile is inspectable in source and excluded from the installed package.
 
 ## Where Bulla fits
 

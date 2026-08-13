@@ -1,0 +1,64 @@
+{
+  "artifacts": [
+    {
+      "byte_length": 6292,
+      "media_type": "application/json",
+      "path": "contract.json",
+      "sha256": "sha256:29f0f786dba3c5da5559b39d471133e6081a3e2352f6ba78fcbb5bb211d7a84f"
+    },
+    {
+      "byte_length": 3906,
+      "media_type": "application/json",
+      "path": "evidence/rollback-test.json",
+      "sha256": "sha256:6f5c59ae1a631bc94346efcec506daa337e01906af99d8254e76134317c8075f"
+    },
+    {
+      "byte_length": 3756,
+      "media_type": "application/json",
+      "path": "records/01-request.json",
+      "sha256": "sha256:5380d7a7f814bf54c8cd10253a3cb55ba446dedcd34b8426bc2990c159c5a94e"
+    },
+    {
+      "byte_length": 3755,
+      "media_type": "application/json",
+      "path": "records/02-accept.json",
+      "sha256": "sha256:f3b62ee745a157a5c6f9e571859eb902021522ed24c19083b2a2220928a87d10"
+    },
+    {
+      "byte_length": 3759,
+      "media_type": "application/json",
+      "path": "records/03-staging-ready.json",
+      "sha256": "sha256:ef93e48b7acec64b0d4dacab2e6c96fc0f88d5b76e7cba7376cd534a09a980d3"
+    },
+    {
+      "byte_length": 3887,
+      "media_type": "application/json",
+      "path": "reports/correction-state.json",
+      "sha256": "sha256:0d6ed5452a18e83eeb030c626be26a888779c245fbca03f94c02bcd8f12c6927"
+    },
+    {
+      "byte_length": 4027,
+      "media_type": "application/json",
+      "path": "reports/receiver-coverage.json",
+      "sha256": "sha256:fa12b21b7d19a46b8458651df23830313c80fe41bc5603f4d430e3c9837a3acc"
+    },
+    {
+      "byte_length": 3875,
+      "media_type": "application/json",
+      "path": "reports/receiver-observation.json",
+      "sha256": "sha256:bef3fcf5012fab175c5093db433e77d667f0b9aa4087b48853ca7c68cd322122"
+    }
+  ],
+  "contract_hash": "sha256:502d45909fc5f7da23a8996782b302d01aa6b10142d93051815d291fece4d2f4",
+  "profile": "bulla.acceptance-core/0.1-experimental",
+  "roles": {
+    "deploy_agent": "did:key:z6MkkGY3rfZGaqDdChPDN5HCw1bxqkBxJSfat8YyEjkcy913",
+    "publisher": "did:key:z6MkfW7AhBW4CA45XRwTc8FiCm31cvXbt9Q2NMbqcfDHEUkd",
+    "release_authority": "did:key:z6MkpWv3qgLjnFBYbt9KKduFJnQviALAg6inMG6NaA2mEHNx",
+    "release_buyer": "did:key:z6MkhJhkMpC2tfctcoBFmCNSzcFaCJWdysSvb4mzm5uuFk3J",
+    "rollback_test_runner": "did:key:z6MkvMJ8CnE7oAh2CjUsccVNg5BNfdVBAMbFDpS7kydT6WQR",
+    "staging_controller": "did:key:z6MkgHo1BFmhzBUfEvswVX3rNZLzh8rYnimLGPLaJwUi74iR"
+  },
+  "term_root": "sha256:28b47d35a759eec4c71cfa52e4f0b89f5d6b7912010e4a2d8338c9e0b3cb1d26",
+  "transaction_id": "release-acceptance-alpha-001"
+}

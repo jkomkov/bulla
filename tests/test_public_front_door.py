@@ -78,9 +78,9 @@ def test_first_level_copy_preserves_current_product_boundary() -> None:
     assert "authorless action" not in combined.lower()
     assert "independently validated" not in combined.lower()
     assert (
-        "An ActionReceipt is a standard file that records one agent transaction for the\n"
-        "counterparty to keep. Bulla is the open-source Python toolkit that creates and\n"
-        "checks that file. Glyph Standard publishes the format and public test suite."
+        "An ActionReceipt is a portable transaction record the counterparty can keep.\n"
+        "Bulla is the open-source Python toolkit that creates and checks those records\n"
+        "locally. Glyph Standard publishes the format and public test suite."
     ) in readme
     assert "The altered file fails its integrity check" in readme
     assert "The supplied action log contains one action with no matching receipt" in readme_flat

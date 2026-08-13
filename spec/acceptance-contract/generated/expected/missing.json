@@ -1,0 +1,145 @@
+{
+  "authorization": "NOT_ISSUED",
+  "closure_minimality": "INCLUSION_MINIMAL_WITHIN_DECLARED_CATALOG",
+  "conditional_closure_sets": [
+    [
+      "rollback-test-001"
+    ]
+  ],
+  "conditional_evidence_requests": [
+    {
+      "accepted_adapter": "bulla.rollback-test/0.1",
+      "accepted_values": [
+        "PASS"
+      ],
+      "artifact_class": "rollback-test-record",
+      "challenge_path": "challenge:release-policy-alpha-001",
+      "conditional_statement": "If a newly supplied and verified artifact is bound to this transaction, contract, build, environment, and accepted rollback-test authority, and its rollback_status is PASS, this requirement will be satisfied.",
+      "profile": "bulla.acceptance-evidence-request/0.1-experimental",
+      "request_id": "rollback-test-001",
+      "required_bindings": {
+        "build_hash": "sha256:6d297af58f5ea06e0bf41306222b41721fc901278d528c61f2a60cba84358724",
+        "contract_id": "release-policy-alpha-001",
+        "contract_revision": 1,
+        "environment": "staging",
+        "issuer_role": "rollback_test_runner",
+        "term_root": "sha256:28b47d35a759eec4c71cfa52e4f0b89f5d6b7912010e4a2d8338c9e0b3cb1d26",
+        "transaction_id": "release-acceptance-alpha-001"
+      },
+      "requirement_id": "rollback-test"
+    }
+  ],
+  "consequence": "release.promote",
+  "consequence_eligibility": "INELIGIBLE",
+  "contract_hash": "sha256:502d45909fc5f7da23a8996782b302d01aa6b10142d93051815d291fece4d2f4",
+  "correction_state": "CURRENT",
+  "decision": "HOLD_FOR_EVIDENCE",
+  "denominator_completeness": "NOT_ESTABLISHED",
+  "errors": [],
+  "execution": "NOT_ATTEMPTED",
+  "historical_execution": "NOT_ESTABLISHED",
+  "limitations": [
+    "A conditional evidence request does not establish that the requested artifact exists or will satisfy the policy.",
+    "The supplied receiver record does not establish denominator completeness.",
+    "Eligibility is not authorization or execution.",
+    "The retained records do not establish that a deployment occurred."
+  ],
+  "profile": "bulla.acceptance-report/0.1-experimental",
+  "provider_acceptance": "VERIFIED",
+  "receiver_authority": "VERIFIED",
+  "receiver_coverage": "COVERED",
+  "receiver_observation": "VERIFIED",
+  "record_integrity": "VERIFIED",
+  "requirements": [
+    {
+      "accepted_values": [
+        "REQUESTED"
+      ],
+      "evidence_request_id": null,
+      "observed_value": "REQUESTED",
+      "reasons": [],
+      "requirement_id": "buyer-request",
+      "route": "PROCEED",
+      "source_path": "records/01-request.json",
+      "status": "SATISFIED"
+    },
+    {
+      "accepted_values": [
+        "ACCEPTED"
+      ],
+      "evidence_request_id": null,
+      "observed_value": "ACCEPTED",
+      "reasons": [],
+      "requirement_id": "provider-acceptance",
+      "route": "PROCEED",
+      "source_path": "records/02-accept.json",
+      "status": "SATISFIED"
+    },
+    {
+      "accepted_values": [
+        "STAGING_READY"
+      ],
+      "evidence_request_id": null,
+      "observed_value": "STAGING_READY",
+      "reasons": [],
+      "requirement_id": "staging-ready-claim",
+      "route": "PROCEED",
+      "source_path": "records/03-staging-ready.json",
+      "status": "SATISFIED"
+    },
+    {
+      "accepted_values": [
+        "OBSERVED"
+      ],
+      "evidence_request_id": null,
+      "observed_value": "OBSERVED",
+      "reasons": [],
+      "requirement_id": "receiver-observation",
+      "route": "PROCEED",
+      "source_path": "reports/receiver-observation.json",
+      "status": "SATISFIED"
+    },
+    {
+      "accepted_values": [
+        "COVERED"
+      ],
+      "evidence_request_id": null,
+      "observed_value": "COVERED",
+      "reasons": [],
+      "requirement_id": "receiver-coverage",
+      "route": "PROCEED",
+      "source_path": "reports/receiver-coverage.json",
+      "status": "SATISFIED"
+    },
+    {
+      "accepted_values": [
+        "CURRENT"
+      ],
+      "evidence_request_id": null,
+      "observed_value": "CURRENT",
+      "reasons": [],
+      "requirement_id": "correction-current",
+      "route": "PROCEED",
+      "source_path": "reports/correction-state.json",
+      "status": "SATISFIED"
+    },
+    {
+      "accepted_values": [
+        "PASS"
+      ],
+      "evidence_request_id": "rollback-test-001",
+      "observed_value": "UNAVAILABLE",
+      "reasons": [
+        "The required artifact is absent from the retained bundle."
+      ],
+      "requirement_id": "rollback-test",
+      "route": "HOLD_FOR_EVIDENCE",
+      "source_path": "evidence/rollback-test.json",
+      "status": "UNAVAILABLE"
+    }
+  ],
+  "sender_authority": "VERIFIED",
+  "term_binding": "VERIFIED",
+  "transaction_id": "release-acceptance-alpha-001",
+  "worldly_truth": "NOT_COMPUTED"
+}

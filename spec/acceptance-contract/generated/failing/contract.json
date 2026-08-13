@@ -1,0 +1,191 @@
+{
+  "authority_epoch": 1,
+  "authorization_policy": {
+    "eligible_state": "NOT_ISSUED"
+  },
+  "challenge_policy": {
+    "path": "challenge:release-policy-alpha-001",
+    "semantic_route": "ESCALATE"
+  },
+  "contemplated_consequence": {
+    "action_type": "release.promote",
+    "authority_ref": "did:key:z6MkpWv3qgLjnFBYbt9KKduFJnQviALAg6inMG6NaA2mEHNx",
+    "subject_hash": "sha256:c078d9d30b68edfe6bee9ac08bcab4c4d62cf7855704547c85ed30056032ce73"
+  },
+  "contract_id": "release-policy-alpha-001",
+  "correction_policy": {
+    "new_revision_required": true,
+    "required_state": "CURRENT"
+  },
+  "evidence_requests": [
+    {
+      "accepted_adapter": "bulla.rollback-test/0.1",
+      "accepted_values": [
+        "PASS"
+      ],
+      "artifact_class": "rollback-test-record",
+      "challenge_path": "challenge:release-policy-alpha-001",
+      "conditional_statement": "If a newly supplied and verified artifact is bound to this transaction, contract, build, environment, and accepted rollback-test authority, and its rollback_status is PASS, this requirement will be satisfied.",
+      "profile": "bulla.acceptance-evidence-request/0.1-experimental",
+      "request_id": "rollback-test-001",
+      "required_bindings": {
+        "build_hash": "sha256:6d297af58f5ea06e0bf41306222b41721fc901278d528c61f2a60cba84358724",
+        "contract_id": "release-policy-alpha-001",
+        "contract_revision": 1,
+        "environment": "staging",
+        "issuer_role": "rollback_test_runner",
+        "term_root": "sha256:28b47d35a759eec4c71cfa52e4f0b89f5d6b7912010e4a2d8338c9e0b3cb1d26",
+        "transaction_id": "release-acceptance-alpha-001"
+      },
+      "requirement_id": "rollback-test"
+    }
+  ],
+  "execution_policy": {
+    "eligible_state": "NOT_ATTEMPTED"
+  },
+  "policy_authority_ref": "did:key:z6MkpWv3qgLjnFBYbt9KKduFJnQviALAg6inMG6NaA2mEHNx",
+  "profile": "bulla.acceptance-contract/0.1-experimental",
+  "receiver_coverage_requirement": {
+    "accepted_status": "COVERED",
+    "anchor_id": "staging-controller:release-acceptance-alpha-001",
+    "required": true
+  },
+  "requirements": [
+    {
+      "absence_route": "REFUSE",
+      "accepted_values": [
+        "REQUESTED"
+      ],
+      "adapter": "bulla.action-receipt-v0.4",
+      "ambiguity_route": "ESCALATE",
+      "evidence_request_id": null,
+      "negative_route": "REFUSE",
+      "negative_values": [
+        "CANCELLED"
+      ],
+      "requirement_id": "buyer-request",
+      "result_field": "request_status",
+      "source_action": "release.stage.request",
+      "source_path": "records/01-request.json",
+      "source_role": "release_buyer"
+    },
+    {
+      "absence_route": "REFUSE",
+      "accepted_values": [
+        "ACCEPTED"
+      ],
+      "adapter": "bulla.action-receipt-v0.4",
+      "ambiguity_route": "ESCALATE",
+      "evidence_request_id": null,
+      "negative_route": "REFUSE",
+      "negative_values": [
+        "DECLINED"
+      ],
+      "requirement_id": "provider-acceptance",
+      "result_field": "acceptance_status",
+      "source_action": "release.stage.accept",
+      "source_path": "records/02-accept.json",
+      "source_role": "deploy_agent"
+    },
+    {
+      "absence_route": "REFUSE",
+      "accepted_values": [
+        "STAGING_READY"
+      ],
+      "adapter": "bulla.action-receipt-v0.4",
+      "ambiguity_route": "ESCALATE",
+      "evidence_request_id": null,
+      "negative_route": "REFUSE",
+      "negative_values": [
+        "STAGING_FAILED"
+      ],
+      "requirement_id": "staging-ready-claim",
+      "result_field": "deployment_claim",
+      "source_action": "release.stage.report",
+      "source_path": "records/03-staging-ready.json",
+      "source_role": "deploy_agent"
+    },
+    {
+      "absence_route": "ESCALATE",
+      "accepted_values": [
+        "OBSERVED"
+      ],
+      "adapter": "bulla.receiver-observation/0.1",
+      "ambiguity_route": "ESCALATE",
+      "evidence_request_id": null,
+      "negative_route": "REFUSE",
+      "negative_values": [
+        "MISMATCH"
+      ],
+      "requirement_id": "receiver-observation",
+      "result_field": "observation_status",
+      "source_action": "release.stage.observe",
+      "source_path": "reports/receiver-observation.json",
+      "source_role": "staging_controller"
+    },
+    {
+      "absence_route": "ESCALATE",
+      "accepted_values": [
+        "COVERED"
+      ],
+      "adapter": "bulla.receiver-coverage/0.1",
+      "ambiguity_route": "ESCALATE",
+      "evidence_request_id": null,
+      "negative_route": "REFUSE",
+      "negative_values": [
+        "UNCOVERED"
+      ],
+      "requirement_id": "receiver-coverage",
+      "result_field": "coverage_status",
+      "source_action": "release.coverage.checkpoint",
+      "source_path": "reports/receiver-coverage.json",
+      "source_role": "staging_controller"
+    },
+    {
+      "absence_route": "ESCALATE",
+      "accepted_values": [
+        "CURRENT"
+      ],
+      "adapter": "bulla.correction-state/0.1",
+      "ambiguity_route": "ESCALATE",
+      "evidence_request_id": null,
+      "negative_route": "REFUSE",
+      "negative_values": [
+        "STALE"
+      ],
+      "requirement_id": "correction-current",
+      "result_field": "correction_state",
+      "source_action": "release.correction.checkpoint",
+      "source_path": "reports/correction-state.json",
+      "source_role": "release_authority"
+    },
+    {
+      "absence_route": "HOLD_FOR_EVIDENCE",
+      "accepted_values": [
+        "PASS"
+      ],
+      "adapter": "bulla.rollback-test/0.1",
+      "ambiguity_route": "ESCALATE",
+      "evidence_request_id": "rollback-test-001",
+      "negative_route": "REFUSE",
+      "negative_values": [
+        "FAIL"
+      ],
+      "requirement_id": "rollback-test",
+      "result_field": "rollback_status",
+      "source_action": "release.rollback.report",
+      "source_path": "evidence/rollback-test.json",
+      "source_role": "rollback_test_runner"
+    }
+  ],
+  "revision": 1,
+  "semantic_epoch": 1,
+  "term_root": "sha256:28b47d35a759eec4c71cfa52e4f0b89f5d6b7912010e4a2d8338c9e0b3cb1d26",
+  "terms": {
+    "build_hash": "sha256:6d297af58f5ea06e0bf41306222b41721fc901278d528c61f2a60cba84358724",
+    "claim": "STAGING_READY",
+    "consequence": "release.promote",
+    "environment": "staging"
+  },
+  "transaction_id": "release-acceptance-alpha-001"
+}

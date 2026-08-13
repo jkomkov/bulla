@@ -1,0 +1,103 @@
+{
+  "action": {
+    "subject": {
+      "adapter": "bulla.receiver-coverage/0.1",
+      "authority_epoch": 1,
+      "build_hash": "sha256:6d297af58f5ea06e0bf41306222b41721fc901278d528c61f2a60cba84358724",
+      "contract_hash": "sha256:502d45909fc5f7da23a8996782b302d01aa6b10142d93051815d291fece4d2f4",
+      "environment": "staging",
+      "issuer_role": "staging_controller",
+      "parent_ref": {
+        "attestation": "sha256:7d82a83a82d0ee5b53922847e7bd247de541fbe16d3cf0ac0f453ed704352269",
+        "event": "sha256:103b93ebafd000b713ff78b21217633d45f1257f1be40ed2e6b68e4965a3c0f3"
+      },
+      "profile": "bulla.acceptance-contract/0.1-experimental",
+      "result": {
+        "anchor_id": "staging-controller:release-acceptance-alpha-001",
+        "coverage_status": "COVERED",
+        "observed_effect_ids": [
+          "stage-build-001"
+        ],
+        "receipted_effect_ids": [
+          "stage-build-001"
+        ],
+        "unmatched_effect_ids": []
+      },
+      "semantic_epoch": 1,
+      "term_root": "sha256:28b47d35a759eec4c71cfa52e4f0b89f5d6b7912010e4a2d8338c9e0b3cb1d26",
+      "transaction_id": "release-acceptance-alpha-001"
+    },
+    "type": "release.coverage.checkpoint"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6MkgHo1BFmhzBUfEvswVX3rNZLzh8rYnimLGPLaJwUi74iR",
+    "proofValue": "GiaMDoMXhJGbfD1ob7ipUhzh6d//9uqrGOhSsJBuvEn00DZXiV5JO6Gn18auz2EeBnxOqUCLxijA/Y9CUOQ+DQ==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkgHo1BFmhzBUfEvswVX3rNZLzh8rYnimLGPLaJwUi74iR"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-08-13T12:05:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "5293b477-a898-48e3-a045-5a50f4e40106",
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:520cb83105183a6a6683a27a4c66b70dd96df194c06034bb670a0534b493554a",
+    "content": "sha256:0fd6d29f1df6567d759cc3d9b93efb19b33aa49ed5e25d44edc4fb53275539b3",
+    "event": "sha256:6b4b49c23e938727d35c7db5d8d7d3917a44cc39085d442b1f97dfda4249916c",
+    "log_leaf": "sha256:84adb11a46d4e026ae70f2c0b6daf4d4c18242ba266e171fb1acb928999de70b"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "sha256:502d45909fc5f7da23a8996782b302d01aa6b10142d93051815d291fece4d2f4",
+      "principal": "did:key:z6MkgHo1BFmhzBUfEvswVX3rNZLzh8rYnimLGPLaJwUi74iR"
+    },
+    "bounds": {
+      "scope": "profile:bulla.acceptance-contract/0.1-experimental;action:release.coverage.checkpoint"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6MkgHo1BFmhzBUfEvswVX3rNZLzh8rYnimLGPLaJwUi74iR",
+    "proofValue": "GmFggsupB4LWt917m1K6BvaOE5b4nXlGjbW5u0fbgH3NcbLhg57OKZbE38RxAQ1ylPZDakw+D3f9YfJ4w0gTAw==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkgHo1BFmhzBUfEvswVX3rNZLzh8rYnimLGPLaJwUi74iR"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "acceptance-contract-alpha"
+  },
+  "remedy": {
+    "challenge_window": "checkpoint:release-policy-alpha-001",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/bulla/experimental/acceptance-contract",
+      "trusted_root_ref": "sha256:bb6f3a250eccb18d8e16f9465a8ddaf3878587fd2549ddd002c50a9c4c2086e7"
+    },
+    "remedies": [
+      {
+        "anchor": "challenge:release-policy-alpha-001",
+        "rung": "challenge",
+        "verifier": "reevaluate the retained transaction under the accepted contract"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "public",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6MkgHo1BFmhzBUfEvswVX3rNZLzh8rYnimLGPLaJwUi74iR",
+    "proofValue": "lsoILjDakihQ3Te+nINBe1ymRg7LdXbVsReWRNo0I84ImE3WSlGB+DKMRaIr42QPIqWeTuf12iNP2Imb2hoVAQ==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkgHo1BFmhzBUfEvswVX3rNZLzh8rYnimLGPLaJwUi74iR"
+  },
+  "stake": null
+}

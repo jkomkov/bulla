@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schemas/bulla.acceptance-context-0.1.json",
+  "title": "Bulla Acceptance Context 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "accepted_issuers_by_role",
+    "accepted_contract_hash",
+    "accepted_policy_authorities",
+    "accepted_adapters",
+    "authority_epoch",
+    "semantic_epoch"
+  ],
+  "properties": {
+    "profile": {"const": "bulla.acceptance-context/0.1-experimental"},
+    "accepted_issuers_by_role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deploy_agent", "publisher", "release_authority", "release_buyer", "rollback_test_runner", "staging_controller"],
+      "properties": {
+        "deploy_agent": {"$ref": "#/$defs/nonemptyStrings"},
+        "publisher": {"$ref": "#/$defs/nonemptyStrings"},
+        "release_authority": {"$ref": "#/$defs/nonemptyStrings"},
+        "release_buyer": {"$ref": "#/$defs/nonemptyStrings"},
+        "rollback_test_runner": {"$ref": "#/$defs/nonemptyStrings"},
+        "staging_controller": {"$ref": "#/$defs/nonemptyStrings"}
+      }
+    },
+    "accepted_contract_hash": {"$ref": "#/$defs/hash"},
+    "accepted_policy_authorities": {"$ref": "#/$defs/nonemptyStrings"},
+    "accepted_adapters": {"$ref": "#/$defs/nonemptyStrings"},
+    "authority_epoch": {"$ref": "#/$defs/safeInteger"},
+    "semantic_epoch": {"$ref": "#/$defs/safeInteger"}
+  },
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "safeInteger": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "nonemptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}
