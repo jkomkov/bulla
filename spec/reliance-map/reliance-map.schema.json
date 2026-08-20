@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schema/bulla-reliance-map-0.1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile", "graph_id", "nodes", "edges"],
+  "properties": {
+    "profile": {"const": "bulla.reliance-map/0.1-experimental"},
+    "graph_id": {"type": "string", "minLength": 1, "maxLength": 4096},
+    "nodes": {
+      "type": "array", "minItems": 1, "maxItems": 16384,
+      "items": {"$ref": "#/$defs/node"}
+    },
+    "edges": {
+      "type": "array", "maxItems": 65536,
+      "items": {"$ref": "#/$defs/edge"}
+    }
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "nodeId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$"},
+    "node": {
+      "type": "object", "additionalProperties": false,
+      "required": ["node_id", "kind", "artifact_digest", "ancestry_complete"],
+      "properties": {
+        "node_id": {"$ref": "#/$defs/nodeId"},
+        "kind": {"enum": ["HANDOFF", "CAPABILITY", "EVIDENCE", "RELIANCE", "ACTION"]},
+        "artifact_digest": {"$ref": "#/$defs/digest"},
+        "ancestry_complete": {"type": "boolean"}
+      }
+    },
+    "edge": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source", "target", "relation"],
+      "properties": {
+        "source": {"$ref": "#/$defs/nodeId"},
+        "target": {"$ref": "#/$defs/nodeId"},
+        "relation": {"enum": ["SUPPORTS", "DERIVES", "INFORMS"]}
+      }
+    }
+  }
+}

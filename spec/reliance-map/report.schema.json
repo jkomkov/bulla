@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schema/bulla-reliance-map-report-0.1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile", "graph_id", "graph_digest", "graph_acceptance", "ledger_digest", "summary", "results", "limitations", "report_digest"],
+  "properties": {
+    "profile": {"const": "bulla.reliance-map-report/0.1-experimental"},
+    "graph_id": {"type": "string", "minLength": 1},
+    "graph_digest": {"$ref": "#/$defs/digest"},
+    "graph_acceptance": {"const": "ACCEPTED"},
+    "ledger_digest": {"$ref": "#/$defs/digest"},
+    "summary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["declared_decisions", "graph_nodes", "graph_edges", "affected", "not_affected", "undetermined"],
+      "properties": {
+        "declared_decisions": {"$ref": "#/$defs/safeInteger"},
+        "graph_nodes": {"$ref": "#/$defs/safeInteger"},
+        "graph_edges": {"$ref": "#/$defs/safeInteger"},
+        "affected": {"$ref": "#/$defs/safeInteger"},
+        "not_affected": {"$ref": "#/$defs/safeInteger"},
+        "undetermined": {"$ref": "#/$defs/safeInteger"}
+      }
+    },
+    "results": {"type": "array", "items": {"$ref": "#/$defs/result"}},
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "report_digest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "safeInteger": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "result": {
+      "type": "object", "additionalProperties": false,
+      "required": ["node_id", "node_kind", "artifact_digest", "status", "paths", "conditional_action"],
+      "properties": {
+        "node_id": {"type": "string", "minLength": 1},
+        "node_kind": {"enum": ["RELIANCE", "ACTION"]},
+        "artifact_digest": {"$ref": "#/$defs/digest"},
+        "status": {"enum": ["AFFECTED", "NOT_AFFECTED", "UNDETERMINED"]},
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["correction", "nodes"],
+            "properties": {
+              "correction": {"$ref": "#/$defs/digest"},
+              "nodes": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+            }
+          }
+        },
+        "conditional_action": {"oneOf": [{"enum": ["RECHECK_REQUIRED", "NO_AUTOMATIC_CLEARANCE"]}, {"type": "null"}]}
+      }
+    }
+  }
+}

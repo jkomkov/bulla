@@ -1,0 +1,32 @@
+{
+  "corrected_source": "source-00",
+  "graph_digest": "sha256:b370e270e501cce5013e3bede417be0bb1e16f58f7fd8f28052213eb1107cda1",
+  "graph_id": "reliance-map:first-contact-10000",
+  "ledger_digest": "sha256:a87b9fa9c0df4357f2a0b12f24214666b6befe49ff81c8d4e3630f4cff1b221e",
+  "profile": "glyph.reliance-map-facts/0.1",
+  "report_digest": "sha256:2abe53c0571d5fb3d07f75867587876b4302b975b0c5e20785ca1d6dd6a16fbe",
+  "selected_decision": "decision-09996",
+  "selected_path": [
+    "source-00",
+    "decision-00000",
+    "decision-00004",
+    "decision-00012",
+    "decision-00032",
+    "decision-00072",
+    "decision-00152",
+    "decision-00308",
+    "decision-00620",
+    "decision-01244",
+    "decision-02496",
+    "decision-04996",
+    "decision-09996"
+  ],
+  "summary": {
+    "affected": 2500,
+    "declared_decisions": 10000,
+    "graph_edges": 10000,
+    "graph_nodes": 10004,
+    "not_affected": 5000,
+    "undetermined": 2500
+  }
+}

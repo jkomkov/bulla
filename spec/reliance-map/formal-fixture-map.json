@@ -1,0 +1,30 @@
+{
+  "profile": "bulla.reliance-map-formal-fixture-map/0.1",
+  "mappings": [
+    {
+      "theorem": "InterpolantEnvelope.RelianceMap.declared_path_is_affected",
+      "fixture": "generated/expected-report.json",
+      "guard": "Every result with a path is AFFECTED and RECHECK_REQUIRED."
+    },
+    {
+      "theorem": "InterpolantEnvelope.RelianceMap.incomplete_ancestry_never_clears",
+      "fixture": "generated/expected-report.json",
+      "guard": "Lane 2 is UNDETERMINED and never NOT_AFFECTED."
+    },
+    {
+      "theorem": "InterpolantEnvelope.RelianceMap.complete_unrelated_branch_is_not_affected",
+      "fixture": "generated/expected-report.json",
+      "guard": "Complete unrelated lanes remain NOT_AFFECTED."
+    },
+    {
+      "theorem": "InterpolantEnvelope.RelianceMap.recall_is_not_rollback",
+      "fixture": "generated/expected-report.json",
+      "guard": "The report contains conditional recheck only and no rollback or consequence authorization field."
+    },
+    {
+      "theorem": "InterpolantEnvelope.RelianceMap.changed_graph_digest_is_not_accepted",
+      "fixture": "generated/context.json",
+      "guard": "The externally accepted graph digest must equal the recomputed graph digest."
+    }
+  ]
+}

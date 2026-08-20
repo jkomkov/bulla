@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schema/bulla-reliance-map-context-0.1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile", "authority_epoch", "accepted_graph_digests", "correction_authorities", "policy_hash"],
+  "properties": {
+    "profile": {"const": "bulla.reliance-map-context/0.1-experimental"},
+    "authority_epoch": {"type": "integer", "minimum": 0, "maximum": 9007199254740991},
+    "accepted_graph_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/digest"}},
+    "correction_authorities": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "policy_hash": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {"digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}}
+}
