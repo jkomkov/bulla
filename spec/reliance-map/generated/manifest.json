@@ -1,0 +1,41 @@
+{
+  "artifacts": {
+    "context.json": {
+      "byte_length": 390,
+      "sha256": "sha256:a496a90fb4a98aa17731866026f81ad472b13f7ab0b61211674cba2a7e7b0ec9"
+    },
+    "correction-ledger.json": {
+      "byte_length": 3850,
+      "sha256": "sha256:e70b5d2588286ed2d088fb9554434188a560aee2cd38e9e320ecf4897bc051ca"
+    },
+    "expected-report.json": {
+      "byte_length": 2841475,
+      "sha256": "sha256:8ada0f871189df2cfe6a0b54c7899eccc67507befff9dd3a6b61f1456201df40"
+    },
+    "facts.json": {
+      "byte_length": 939,
+      "sha256": "sha256:1152997da9db539e04800e7baca5a8170f7ae78a0ccdb63fed0e073d9ef86297"
+    },
+    "graph.json": {
+      "byte_length": 2390737,
+      "sha256": "sha256:42aa60795ba601d544dea8817c0ae9f8ba2dd30dfde816133063fea5f90d1155"
+    },
+    "projection.json": {
+      "byte_length": 539202,
+      "sha256": "sha256:1c6b69c2fd4e2411a7e86c7c49f6dd0970033a227bfc6622b6d113730609f71a"
+    }
+  },
+  "presentation_artifacts": {
+    "projection.json": "sha256:1c6b69c2fd4e2411a7e86c7c49f6dd0970033a227bfc6622b6d113730609f71a"
+  },
+  "presentation_root": "sha256:d14a1ec269df0288c797b77150e764ff4ce7f154f94349d07dba58f4e2e7a3ec",
+  "profile": "bulla.reliance-map-manifest/0.1-experimental",
+  "semantic_artifacts": {
+    "context.json": "sha256:a496a90fb4a98aa17731866026f81ad472b13f7ab0b61211674cba2a7e7b0ec9",
+    "correction-ledger.json": "sha256:e70b5d2588286ed2d088fb9554434188a560aee2cd38e9e320ecf4897bc051ca",
+    "expected-report.json": "sha256:8ada0f871189df2cfe6a0b54c7899eccc67507befff9dd3a6b61f1456201df40",
+    "facts.json": "sha256:1152997da9db539e04800e7baca5a8170f7ae78a0ccdb63fed0e073d9ef86297",
+    "graph.json": "sha256:42aa60795ba601d544dea8817c0ae9f8ba2dd30dfde816133063fea5f90d1155"
+  },
+  "semantic_root": "sha256:afb5e1a90f17d0c1b07042fbc42b77db29b5918562d3c18a17af110bd2329f3c"
+}

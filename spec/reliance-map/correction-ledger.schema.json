@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://glyphstandard.com/schema/bulla-reliance-correction-ledger-0.1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile", "corrections"],
+  "properties": {
+    "profile": {"const": "bulla.reliance-correction-ledger/0.1-experimental"},
+    "corrections": {
+      "type": "array", "maxItems": 16,
+      "items": {
+        "allOf": [
+          {"$ref": "https://glyphstandard.com/spec/action-receipt-v0.4.schema.json"},
+          {
+            "properties": {
+              "action": {
+                "type": "object", "additionalProperties": false,
+                "required": ["type", "subject"],
+                "properties": {
+                  "type": {"const": "reliance.correct"},
+                  "subject": {
+                    "type": "object", "additionalProperties": false,
+                    "required": ["profile", "sequence", "previous_correction", "target_digest", "replacement_digest", "reason_digest", "authority_epoch"],
+                    "properties": {
+                      "profile": {"const": "bulla.reliance-map/0.1-experimental"},
+                      "sequence": {"$ref": "#/$defs/safeInteger"},
+                      "previous_correction": {"oneOf": [{"$ref": "#/$defs/digest"}, {"type": "null"}]},
+                      "target_digest": {"$ref": "#/$defs/digest"},
+                      "replacement_digest": {"$ref": "#/$defs/digest"},
+                      "reason_digest": {"$ref": "#/$defs/digest"},
+                      "authority_epoch": {"$ref": "#/$defs/safeInteger"}
+                    }
+                  }
+                }
+              },
+              "anchor_ref": {
+                "type": "object", "additionalProperties": false,
+                "required": ["relation", "graph_digest"],
+                "properties": {
+                  "relation": {"const": "reliance_map"},
+                  "graph_digest": {"$ref": "#/$defs/digest"}
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "safeInteger": {"type": "integer", "minimum": 0, "maximum": 9007199254740991}
+  }
+}

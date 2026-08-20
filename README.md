@@ -227,6 +227,36 @@ python3 -I spec/acceptance-contract/check.py \
 
 This profile is inspectable in source and excluded from the installed package.
 
+## Experimental: trace a correction through declared reliance
+
+The source-only [Reliance Map profile](spec/reliance-map/PROFILE.md) starts
+from an accepted declared graph. When an authenticated correction notice
+targets one source digest, the verifier identifies the exact descendants that
+require rechecking. Complete branches with no declared path are reported
+separately; incomplete lineage remains unresolved.
+
+The constructed corpus contains 10,000 declared decisions: 2,500 require
+rechecking, 5,000 have no declared path under the accepted graph, and 2,500
+remain unresolved because their lineage is incomplete. Python and standalone
+Node produce the same report.
+
+```bash
+PYTHONPATH=src python3 spec/reliance-map/check.py \
+  spec/reliance-map/generated/graph.json \
+  --ledger spec/reliance-map/generated/correction-ledger.json \
+  --context spec/reliance-map/generated/context.json
+
+node spec/reliance-map/check.mjs \
+  spec/reliance-map/generated/graph.json \
+  --ledger spec/reliance-map/generated/correction-ledger.json \
+  --context spec/reliance-map/generated/context.json
+```
+
+The map does not capture dependencies automatically, establish that a
+correction is true, reverse an action, or authorize a consequence. The profile
+and its Handoff Admission parsing dependency are excluded from the installed
+package.
+
 ## Where Bulla fits
 
 - **Payments:** record the request, authorization, amount limits, supplied

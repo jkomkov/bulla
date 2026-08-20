@@ -1,0 +1,11 @@
+{
+  "accepted_graph_digests": [
+    "sha256:b370e270e501cce5013e3bede417be0bb1e16f58f7fd8f28052213eb1107cda1"
+  ],
+  "authority_epoch": 7,
+  "correction_authorities": [
+    "did:key:z6Mkgo1i9kyHLcnoenbrpzFMpLdD7ixW2Z1vzcwKrB3t8eFh"
+  ],
+  "policy_hash": "sha256:1f8bd9920912b8882f5a70a1fe9484f13463df5845d7aea50d33e060a2cd38ed",
+  "profile": "bulla.reliance-map-context/0.1-experimental"
+}
