@@ -1,15 +1,16 @@
 # Bulla
 
-**Receipts for agents.**
+**Receipts for Agents.**
 
-An ActionReceipt is a portable transaction record the counterparty can keep.
+An ActionReceipt is a portable transaction record the receiving party can keep.
 Bulla is the open-source Python toolkit that creates and checks those records
 locally. Glyph Standard publishes the format and public test suite.
 
 When one agent asks another to deploy code, buy compute, or move money, the
-provider can report that it succeeded. The receiving application still decides
-what evidence and authority it requires before it acts. The receipt keeps the
-transaction stable while that policy is evaluated.
+provider can report that it succeeded. An ActionReceipt retains the request,
+accepted permissions and limits, reported result, supplied evidence, and
+challenge path. The receiving application applies its own policy before it
+acts.
 
 The application creates the receipt where an action is accepted or completed:
 an API gateway, tool router, payment handler, or agent runtime. The model does
@@ -27,7 +28,7 @@ bulla demo
 
 The fixed demo creates a receipt for one constructed USD 125 payment, checks the
 saved file, rejects an altered copy, and compares the receipt set with a
-separately supplied receiver log containing one additional action.
+separately supplied receiver record containing one additional action.
 
 ```text
 FIRST ACTION DEMO · CONSTRUCTED LOCAL SCENARIO
@@ -48,29 +49,29 @@ unreceipted action    pay_demo_043
 original integrity    VERIFIED
 ```
 
-The altered file fails its integrity check. The separate receiver log exposes
+The altered file fails its integrity check. The separate receiver record exposes
 an action with no matching receipt. Neither result establishes that funds moved
-or that the receiver log contains every action.
+or that the receiver record contains every action.
 
 Use `bulla demo --out DIR` to choose a fresh output directory or `bulla demo
 --format json` for the versioned machine report. Bulla refuses to replace an
 existing path.
 
-## Why not use the provider's logs?
+## Provider logs and receiver records
 
 Provider logs are useful, and Bulla does not replace them. They usually describe
 an activity stream inside the provider's system, use a provider-specific schema,
 and remain under the provider's custody.
 
-An ActionReceipt has a different job: hand the counterparty one portable record
-for one transaction. If a provider exports the relevant event, binds it to the
+An ActionReceipt has a different job: hand the receiving party one portable
+record for one transaction. If a provider exports the relevant event, binds it to the
 buyer's request and accepted terms, authenticates it, and lets the buyer retain
 it, that export can become evidence for an ActionReceipt. The standard format
 means a buyer does not need a different log integration for every provider.
 
 | | Provider log | ActionReceipt |
 |---|---|---|
-| Primary use | Operate and debug the provider | Hand one transaction to the counterparty |
+| Primary use | Operate and debug the provider | Hand one transaction to the receiving party |
 | Custody | Usually controlled by the provider | Retained by each receiving party |
 | Format | Provider-specific | Open and versioned |
 | Scope | System activity stream | One action or transaction |
@@ -92,7 +93,7 @@ to the retained record.
 
 An eligible consequence is still separate from authority to execute it. A
 receipt does not establish that the reported event occurred or that the
-receiver's action log contains every relevant event.
+receiver record contains every relevant event.
 
 ## Add Bulla where the application acts
 
@@ -144,8 +145,8 @@ result is pinned in `spec/vectors/expected.json` and recomputed in CI.
 
 ## Check receipt coverage
 
-`event_coverage` compares valid receipts with an action log supplied outside the
-receipt set. For an exact saved-record match, add `record_sha256` using
+`event_coverage` compares valid receipts with a receiver record supplied outside
+the receipt set. For an exact saved-record match, add `record_sha256` using
 `observed_record_sha256`; the receipt must carry the same digest in its result or
 evidence references. Without that field, coverage is action-ID correlation.
 
@@ -169,9 +170,9 @@ assert with_gap["coverage"] == 0.5
 assert with_gap["unreceipted_delta"] == ["action-002"]
 ```
 
-Receipt integrity is unchanged in the second comparison. The supplied action log
-contains one action with no matching receipt. Bulla does not establish that the
-log itself is complete.
+Receipt integrity is unchanged in the second comparison. The supplied receiver
+record contains one action with no matching receipt. Bulla does not establish
+that the record itself is complete.
 
 ## Keep the verification kit
 
@@ -205,6 +206,13 @@ standalone checker while network access is denied:
 ```bash
 bulla receipt drill RECEIPT.json --format text
 ```
+
+## Published package and source profiles
+
+Bulla 0.47.1 ships ActionReceipt creation and verification, explicit reliance
+policy, and coverage reconciliation. The next two examples are experimental
+repository-source profiles. They do not add installed commands or stable Python
+exports.
 
 ## Experimental: evaluate one receiving policy
 
@@ -276,8 +284,8 @@ policy explicitly releases them.
 - File integrity does not establish that the reported action occurred or that
   every recorded field is true.
 - A signature authenticates an accepted key; it does not create authority.
-- Coverage is relative to the supplied action log.
-- Bulla does not establish that the supplied action log is complete.
+- Coverage is relative to the supplied receiver record.
+- Bulla does not establish that the supplied receiver record is complete.
 - Unsigned receipts remain unauthenticated.
 - Reliance remains `NOT_COMPUTED` unless a reliance policy is supplied.
 
@@ -289,7 +297,9 @@ dimensions or apply an explicit reliance policy.
 - [Quickstart](https://glyphstandard.com/bulla/quickstart)
 - [Bulla documentation](https://glyphstandard.com/bulla)
 - [ActionReceipt standard](https://glyphstandard.com/spec)
-- [Status and evidence](https://glyphstandard.com/status)
+- [Buyer requirements](https://glyphstandard.com/buyers)
+- [Ecosystem map](https://glyphstandard.com/bulla/ecosystem)
+- [Status and evidence](https://glyphstandard.com/evidence)
 - [Complete capability reference](https://github.com/jkomkov/bulla/blob/main/docs/CAPABILITIES.md)
 - [Source-only experimental research](https://glyphstandard.com/bulla/experimental)
 - [Changelog](https://github.com/jkomkov/bulla/blob/main/CHANGELOG.md)
@@ -297,6 +307,10 @@ dimensions or apply an explicit reliance policy.
 - [Security policy](https://github.com/jkomkov/bulla/security/policy)
 
 ## License and security
+
+Bulla is the developer toolkit. ActionReceipt is the open format implemented by
+Bulla. Glyph Standard, Inc. maintains the specification; Res Agentica contains
+the broader research program.
 
 Bulla is licensed under the
 [Apache License 2.0](https://github.com/jkomkov/bulla/blob/main/LICENSE).
