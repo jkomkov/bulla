@@ -1,0 +1,86 @@
+{
+  "artifact_manifest": [
+    {
+      "byte_length": 1130,
+      "media_type": "application/json",
+      "path": "evidence/head-a.json",
+      "sha256": "sha256:7d657ee3b456b2d4e86e3b5d02ee1740398449771f0ea7e130f92d8b152ab88f"
+    },
+    {
+      "byte_length": 1130,
+      "media_type": "application/json",
+      "path": "evidence/head-b.json",
+      "sha256": "sha256:614383ec554dabf621f2629db01ee3e17b96b786bdef87e3827eeb57a87c7736"
+    }
+  ],
+  "covenant": {
+    "authority_epoch": "witness-epoch-2026-08",
+    "beneficiary": "fixture:buyer",
+    "capital": {
+      "binding_id": "witness-bond-001",
+      "binding_mode": "DEDICATED",
+      "rail_adapter": "test-ledger/1",
+      "required_allocation": 20000,
+      "unit": "USD_CENTS"
+    },
+    "challenge_checkpoint": {
+      "domain": "accepted-checkpoint-height",
+      "value": 5
+    },
+    "checkpoint_profile": "bulla.witness-checkpoint/0.1-draft",
+    "correction_path": "append a signed covenant correction under a later authority epoch",
+    "covenant_hash": "sha256:f45645e91c063000e8120effa3af63b8238f459c22aab26bdb6bf29d5fb067f5",
+    "covered_duty": "sign no different roots for one log, epoch, and tree size",
+    "destination": "test-ledger:buyer-remedy",
+    "fault_predicate": "bulla.same-size-log-equivocation/1",
+    "key_identifier": "did:key:z6MkmgQjRMF5aXJi9xfocBKrPTMw4kC77yoiNrGcjJWBnrgG",
+    "log_id": "answerability-network:receipt-history",
+    "maximum_remedy": 12500,
+    "operator": "did:key:z6MkmgQjRMF5aXJi9xfocBKrPTMw4kC77yoiNrGcjJWBnrgG",
+    "settlement_authority": "did:key:z6Mkn7yRnuAryUV1XXTgsgngkpC8avoEawpeLLWci63VuDec"
+  },
+  "covenant_id": "witness-covenant-001",
+  "profile": "bulla.witness-covenant/0.1-experimental",
+  "receipt_manifest": [
+    {
+      "action_type": "assurance.promise.accept",
+      "attestation": "sha256:b2a662644df7e2e812df763955c77a659ecc2c3e6eeffd68dfab7b6d99fbade1",
+      "byte_length": 3056,
+      "event": "sha256:af06bb8917062f43e8f851543a2efc746d4b2f21b7a1c13929d3819f53777916",
+      "media_type": "application/json",
+      "path": "receipts/01-witness_operator.json",
+      "role": "witness_operator",
+      "sha256": "sha256:84d47087f44de5495c0d65e610d2c3557ef2304f51d479ef4b72c44a27caa7e7"
+    },
+    {
+      "action_type": "assurance.collateral.bind",
+      "attestation": "sha256:01a0af9e8b3afa93a0788c14ec4e15d5469d84567523b70dfbdf59b7b3da056e",
+      "byte_length": 3536,
+      "event": "sha256:fb8d6c17f1063488669e87372352eafab4df2507313de4a63f3e2adc1bf96d23",
+      "media_type": "application/json",
+      "path": "receipts/02-rail_observer.json",
+      "role": "rail_observer",
+      "sha256": "sha256:66d988ab113d2ed3f7a95cabc1863cbbd3ea6605330736d307b95ba46ca33f90"
+    },
+    {
+      "action_type": "assurance.challenge.state",
+      "attestation": "sha256:b73e8eeca236c97d41cb01e732f53a9768151982c1040004093946584d9e5b34",
+      "byte_length": 3418,
+      "event": "sha256:a6aa79c175fbb0263164e9a346574bea3186886db0bd3c803d4b75f6a1894987",
+      "media_type": "application/json",
+      "path": "receipts/03-challenge_authority.json",
+      "role": "challenge_authority",
+      "sha256": "sha256:83f115b33006b766df6c31fb32936fa0ccb84682d50c3ed0d7ed2f4daa25cbd0"
+    }
+  ],
+  "revision": 1,
+  "role_issuers": {
+    "challenge_authority": "did:key:z6Mkqc3NoHiAzQ1gHMZXNcRg97tE2EKAb6kCcFoK1Sx4J2VW",
+    "provider": "did:key:z6MksdFq8x43ECfbMMYBuD2ndSoc8yUezqzjBspRC8JsShnB",
+    "rail_observer": "did:key:z6MkwRf47P7JRpHHENgQns5n1o5tuwQMSpDjqKafU2aN5Sjp",
+    "settlement_authority": "did:key:z6Mkn7yRnuAryUV1XXTgsgngkpC8avoEawpeLLWci63VuDec",
+    "settlement_observer": "did:key:z6MknNNHq3EoQmKShgCkqbr21UKs9eTSJBu5Ugcz7xBDHECN",
+    "witness_operator": "did:key:z6MkmgQjRMF5aXJi9xfocBKrPTMw4kC77yoiNrGcjJWBnrgG"
+  },
+  "scenario": "fork-open"
+}

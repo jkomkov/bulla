@@ -1,0 +1,13 @@
+{
+  "profile": "bulla.answerability-network-benchmark/0.1-experimental",
+  "measured_at": "2026-08-21",
+  "command": "node bulla/spec/answerability-network/check.mjs bulla/spec/answerability-network/vectors/fork-authorized --context bulla/spec/answerability-network/contexts/fork-authorized.json",
+  "environment": {
+    "os": "macOS arm64",
+    "runtime": "Node.js 22-compatible workspace runtime",
+    "corpus": "10,000 synthetic declared decisions"
+  },
+  "wall_seconds": [0.32, 0.29, 0.26, 0.26, 0.25],
+  "median_wall_seconds": 0.26,
+  "claim_boundary": "One local measurement over the frozen synthetic corpus; not a universal performance claim."
+}

@@ -1,0 +1,91 @@
+{
+  "action": {
+    "subject": {
+      "challenge_checkpoint": {
+        "domain": "accepted-checkpoint-height",
+        "value": 5
+      },
+      "challenge_state": "EXPIRED",
+      "covenant_hash": "sha256:f45645e91c063000e8120effa3af63b8238f459c22aab26bdb6bf29d5fb067f5",
+      "covenant_id": "witness-covenant-001",
+      "finding_class": "SAME_SIZE_LOG_EQUIVOCATION",
+      "finding_ref": "sha256:b23fa8685724fa10f2b15ed454d59824f1430d1cd7e1d1a33dc1c88abffb5fed",
+      "issuer_role": "challenge_authority",
+      "observed_checkpoint": 5,
+      "prior_challenge_ref": "sha256:728edc5c4cd54fc520044a9bf5838b3bd2ca5060fabff6bd17ba1f61609c0edf",
+      "profile": "bulla.witness-covenant/0.1-experimental"
+    },
+    "type": "assurance.challenge.state"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6Mkqc3NoHiAzQ1gHMZXNcRg97tE2EKAb6kCcFoK1Sx4J2VW",
+    "proofValue": "FO4u9hgc4ptMM7TOIG9d5ENid0obHxPgmaX3EVfl7KQGWncAhcSBdJK5DYieIm0u/JqM8y2sjKtRPAY1jFPaAQ==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkqc3NoHiAzQ1gHMZXNcRg97tE2EKAb6kCcFoK1Sx4J2VW"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-08-21T12:03:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "3f8a2a9e-e149-4716-af6b-c66fbe59377b",
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:7966bdb00c48cfa03016d15db292e0369366cf1f2922acafefe561bd2082b9a3",
+    "content": "sha256:ea7937889fb775876f91be11007ef1a59229e0a06e6c2d868943679362a7c2c4",
+    "event": "sha256:0a14bb33a12eb85dfbd6b4415fb22a768fd4de71d4ecdd579d3f8dfaefdbf166",
+    "log_leaf": "sha256:2571a86d5eeaaeff64410018095fb5eed53826e8cd503e07b30f98ecfb6455e7"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://witness-covenant/assurance.challenge.state",
+      "principal": "did:key:z6Mkqc3NoHiAzQ1gHMZXNcRg97tE2EKAb6kCcFoK1Sx4J2VW"
+    },
+    "bounds": {
+      "scope": "profile:bulla.witness-covenant/0.1-experimental"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6Mkqc3NoHiAzQ1gHMZXNcRg97tE2EKAb6kCcFoK1Sx4J2VW",
+    "proofValue": "1GV2pRhU0SsC58Qf6ZHNOfEBx7tP7YwX59jlK1N0nfE0xmF0LZk3YVT89qRt/lYkDifKzqTp+3R0oXdWU3gUAQ==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkqc3NoHiAzQ1gHMZXNcRg97tE2EKAb6kCcFoK1Sx4J2VW"
+  },
+  "producer": {
+    "bulla_version": "source",
+    "fixture": "witness-covenant-v0.1"
+  },
+  "remedy": {
+    "challenge_window": "checkpoint:witness-covenant-5",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/bulla/answerable-computing",
+      "trusted_root_ref": "sha256:da1419fd390257586cf05c3f0204131897f6f240145df908f6a2cffca581b069"
+    },
+    "remedies": [
+      {
+        "anchor": "forum:witness-covenant",
+        "rung": "challenge",
+        "verifier": "verify the covenant dossier under separately supplied trust roots"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "public",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6Mkqc3NoHiAzQ1gHMZXNcRg97tE2EKAb6kCcFoK1Sx4J2VW",
+    "proofValue": "NvRU3yJpgjA8h3WQD96IjyshFbGBmwTwrnYvaG53aqGjvcgHw/GnxN3TFY5lzXFeOlj7EBSPm6tRpYc7roNkBA==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkqc3NoHiAzQ1gHMZXNcRg97tE2EKAb6kCcFoK1Sx4J2VW"
+  },
+  "stake": null
+}

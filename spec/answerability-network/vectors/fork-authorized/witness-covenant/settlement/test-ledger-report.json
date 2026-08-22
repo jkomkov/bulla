@@ -1,0 +1,11 @@
+{
+  "actual_funds": false,
+  "amount": 12500,
+  "authorization_attestation": "sha256:ac64e7d600c7cba68193db1bffdc897ba9ea5dd693656a8f228d7c7c6b43c255",
+  "covenant_hash": "sha256:f45645e91c063000e8120effa3af63b8238f459c22aab26bdb6bf29d5fb067f5",
+  "destination": "test-ledger:buyer-remedy",
+  "profile": "bulla.test-ledger/1",
+  "status": "ATTEMPT_REPORTED",
+  "synthetic": true,
+  "unit": "USD_CENTS"
+}

@@ -1,0 +1,6 @@
+name = "interpolant-envelope"
+version = "0.1.0"
+defaultTargets = ["InterpolantEnvelope"]
+
+[[lean_lib]]
+name = "InterpolantEnvelope"

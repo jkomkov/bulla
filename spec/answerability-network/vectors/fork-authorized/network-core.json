@@ -1,0 +1,141 @@
+{
+  "artifact_manifest": [
+    {
+      "byte_length": 3423,
+      "media_type": "application/json",
+      "path": "procurement/promise.json",
+      "sha256": "sha256:e10dfd880f3151c93c41cb7ff6f6e356779e7ae15c008fdba2019f8cb22b72b8"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "procurement/provider-a-delivery-assertion.json",
+      "sha256": "sha256:a3d544a8342480a37107b3b9f1625992f171742ec1992e11c107d2f1147ab6ff"
+    },
+    {
+      "byte_length": 35,
+      "media_type": "application/octet-stream",
+      "path": "procurement/provider-a-delivery.bin",
+      "sha256": "sha256:57320e94c7670afda62ca39aa76bf96ddfe646a5b960bd750d7e90da24ef7de3"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "procurement/provider-a-evidence.json",
+      "sha256": "sha256:33e3b9539799b9574c0f9d16c3bb25f5d4db7e82eb8a32c6253ead93b0b921fa"
+    },
+    {
+      "byte_length": 3645,
+      "media_type": "application/json",
+      "path": "procurement/provider-a.json",
+      "sha256": "sha256:ce559fe4a81687a4eec99f33c6e04bab31e23e46af87091059ef3c3acb3e1c95"
+    },
+    {
+      "byte_length": 3289,
+      "media_type": "application/json",
+      "path": "procurement/provider-b.json",
+      "sha256": "sha256:11dc7277c1e34cbd83211f3c55313676255f51690ea9d7d453ae57cf2b5f3d56"
+    },
+    {
+      "byte_length": 3218,
+      "media_type": "application/json",
+      "path": "procurement/selection.json",
+      "sha256": "sha256:163cec1e2d2cff6984105c102fcda170ce81e48050e7b4121015d7487772b76f"
+    },
+    {
+      "byte_length": 3863,
+      "media_type": "application/json",
+      "path": "reliance/correction-ledger.json",
+      "sha256": "sha256:606ca17fec71dc330637871335d5551ae674fabe579af7c24e7db813fc0ad941"
+    },
+    {
+      "byte_length": 2390750,
+      "media_type": "application/json",
+      "path": "reliance/graph.json",
+      "sha256": "sha256:71c7c8039e5a7a1c6d16618913fe7166ca4f80a40194fd813861937d5211b505"
+    },
+    {
+      "byte_length": 6211,
+      "media_type": "application/json",
+      "path": "witness-covenant/covenant-core.json",
+      "sha256": "sha256:cce7361428cded84488765180b8e9ae6e055f02e50053402f5f538670f146247"
+    },
+    {
+      "byte_length": 1130,
+      "media_type": "application/json",
+      "path": "witness-covenant/evidence/external-receipt-checkpoint.json",
+      "sha256": "sha256:8074b6dfbceacd044c1eadb1efc012a172604ec0261ae63e4f9ddf7a5aed4bc6"
+    },
+    {
+      "byte_length": 390,
+      "media_type": "application/json",
+      "path": "witness-covenant/evidence/external-receipt-consistency.json",
+      "sha256": "sha256:388c2a8260c20db335e67c16ec2ffd766a8463fc9523080bb02fe0ce7ef66940"
+    },
+    {
+      "byte_length": 472,
+      "media_type": "application/json",
+      "path": "witness-covenant/evidence/external-receipt-inclusion.json",
+      "sha256": "sha256:38e07229234ea2c889e3c87a923c3c1088845310b8e809634e22718c9c89e87a"
+    },
+    {
+      "byte_length": 1199,
+      "media_type": "application/json",
+      "path": "witness-covenant/evidence/head-a.json",
+      "sha256": "sha256:e482ab5716f1e17d3d80714031c306ddb87716732f4db4ca3735e8689f7093a5"
+    },
+    {
+      "byte_length": 1199,
+      "media_type": "application/json",
+      "path": "witness-covenant/evidence/head-b.json",
+      "sha256": "sha256:154b58b9d19a01e836e236943ca8ea17cd63184d308ce0dc8a5402b1fe7c5808"
+    },
+    {
+      "byte_length": 3056,
+      "media_type": "application/json",
+      "path": "witness-covenant/receipts/01-witness_operator.json",
+      "sha256": "sha256:84d47087f44de5495c0d65e610d2c3557ef2304f51d479ef4b72c44a27caa7e7"
+    },
+    {
+      "byte_length": 3536,
+      "media_type": "application/json",
+      "path": "witness-covenant/receipts/02-rail_observer.json",
+      "sha256": "sha256:66d988ab113d2ed3f7a95cabc1863cbbd3ea6605330736d307b95ba46ca33f90"
+    },
+    {
+      "byte_length": 3418,
+      "media_type": "application/json",
+      "path": "witness-covenant/receipts/03-challenge_authority.json",
+      "sha256": "sha256:73f1744612066483ad15a215922b4699be015579e99477be452cd2d720d29dba"
+    },
+    {
+      "byte_length": 3490,
+      "media_type": "application/json",
+      "path": "witness-covenant/receipts/04-challenge_authority.json",
+      "sha256": "sha256:719febf671e651f24ab146d6a9d77dcd53ae896a66a2965ff13fc51c02f1d16a"
+    },
+    {
+      "byte_length": 3754,
+      "media_type": "application/json",
+      "path": "witness-covenant/receipts/05-settlement_authority.json",
+      "sha256": "sha256:2b455cf2d9563b7fd2f2da594d85dae3772f9e6efae4a64c0f101b34e5e8bf30"
+    },
+    {
+      "byte_length": 3484,
+      "media_type": "application/json",
+      "path": "witness-covenant/receipts/06-settlement_observer.json",
+      "sha256": "sha256:b1346bda7b1de6a40752ba9a4eec64a89446cded5526cc2d5a1e7b9b0b97c61e"
+    },
+    {
+      "byte_length": 404,
+      "media_type": "application/json",
+      "path": "witness-covenant/settlement/test-ledger-report.json",
+      "sha256": "sha256:5b8b1878538767379cd738ccf8d94d668c27441083777808115ffdd030662b7e"
+    }
+  ],
+  "network_id": "answerability-network:one-job-one-fork-10000",
+  "profile": "bulla.answerability-network/0.1-experimental",
+  "revision": 1,
+  "stage": "fork-authorized",
+  "transaction_id": "inference-job-001"
+}

@@ -2,15 +2,16 @@
 
 **Receipts for Agents.**
 
-An ActionReceipt is a portable transaction record the receiving party can keep.
-Bulla is the open-source Python toolkit that creates and checks those records
-locally. Glyph Standard publishes the format and public test suite.
+Bulla creates portable ActionReceipts for consequential agent transactions. A
+receiving system can verify the record locally, apply its own `ReliancePolicy`,
+and reconcile the receipt set against its own event records.
 
-When one agent asks another to deploy code, buy compute, or move money, the
-provider can report that it succeeded. An ActionReceipt retains the request,
-accepted permissions and limits, reported result, supplied evidence, and
-challenge path. The receiving application applies its own policy before it
-acts.
+Answerable-computing profiles for inference procurement, witnessed history,
+consequence rules, and correction networks live in repository source. They are
+not part of the installed package.
+
+Glyph Standard publishes the ActionReceipt format, Bulla, and the public test
+suite.
 
 The application creates the receipt where an action is accepted or completed:
 an API gateway, tool router, payment handler, or agent runtime. The model does
@@ -210,7 +211,7 @@ bulla receipt drill RECEIPT.json --format text
 ## Published package and source profiles
 
 Bulla 0.47.1 ships ActionReceipt creation and verification, explicit reliance
-policy, and coverage reconciliation. The next two examples are experimental
+policy, and coverage reconciliation. The following examples are experimental
 repository-source profiles. They do not add installed commands or stable Python
 exports.
 
@@ -265,6 +266,50 @@ correction is true, reverse an action, or authorize a consequence. The profile
 and its Handoff Admission parsing dependency are excluded from the installed
 package.
 
+## Experimental: bind recourse to witness equivocation
+
+The source-only [Witness Covenant profile](spec/witness-covenant/PROFILE.md)
+binds a dedicated test-ledger allocation to one objective fault: two authentic,
+same-size checkpoints for the same log and epoch carry different roots. The
+verifier keeps checkpoint authenticity, equivocation, challenge state, capital,
+eligibility, authorization, and an attempted ledger event separate.
+
+A bond changes recourse only. It does not make a receipt true, make the witness
+independent, establish custody or collection, or upgrade a provider claim.
+
+```bash
+PYTHONPATH=src python3 spec/witness-covenant/check.py \
+  spec/witness-covenant/vectors/fork-closed \
+  --context spec/witness-covenant/contexts/fork-closed.json
+
+node spec/witness-covenant/check.mjs \
+  spec/witness-covenant/vectors/fork-closed \
+  --context spec/witness-covenant/contexts/fork-closed.json
+```
+
+## Experimental: verify an answerability network
+
+The source-only [Answerability Network
+profile](spec/answerability-network/PROFILE.md) composes a constructed inference
+procurement, ActionReceipt, witnessed checkpoint, covenant, and 10,000-decision
+declared reliance graph. When the verifier receives two authentic incompatible
+checkpoint views, it identifies 2,500 declared descendants for recheck, leaves
+5,000 complete unrelated decisions unaffected under the accepted graph, and
+keeps 2,500 incomplete branches unresolved.
+
+Only the witness covenant's bounded remedy can become eligible. Provider claims
+and unrelated branches do not inherit the witness fault.
+
+```bash
+PYTHONPATH=src python3 spec/answerability-network/check.py \
+  spec/answerability-network/vectors/fork-closed \
+  --context spec/answerability-network/contexts/fork-closed.json
+
+node spec/answerability-network/check.mjs \
+  spec/answerability-network/vectors/fork-closed \
+  --context spec/answerability-network/contexts/fork-closed.json
+```
+
 ## Where Bulla fits
 
 - **Payments:** record the request, authorization, amount limits, supplied
@@ -299,6 +344,7 @@ dimensions or apply an explicit reliance policy.
 - [ActionReceipt standard](https://glyphstandard.com/spec)
 - [Buyer requirements](https://glyphstandard.com/buyers)
 - [Ecosystem map](https://glyphstandard.com/bulla/ecosystem)
+- [Answerable Computing](https://glyphstandard.com/bulla/answerable-computing)
 - [Status and evidence](https://glyphstandard.com/evidence)
 - [Complete capability reference](https://github.com/jkomkov/bulla/blob/main/docs/CAPABILITIES.md)
 - [Source-only experimental research](https://glyphstandard.com/bulla/experimental)

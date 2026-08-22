@@ -1,0 +1,59 @@
+{
+  "actual_funds": "NOT_ESTABLISHED",
+  "buyer_policy": "SELECTED_PROVIDER_A",
+  "byte_equality": "PROVIDER_DIGESTS_MATCH_SUPPLIED_BYTES",
+  "challenge": "EXPIRED",
+  "errors": [],
+  "exit_code": 0,
+  "history_consistency": "EQUIVOCATION_ESTABLISHED",
+  "history_extension": "VERIFIED",
+  "model_identity_control": "NOT_RUN",
+  "network_integrity": "VERIFIED",
+  "procurement": "VERIFIED",
+  "profile": "bulla.answerability-network-report/0.1-experimental",
+  "receipt_inclusion": "VERIFIED",
+  "reliance": {
+    "graph_digest": "sha256:79a659b9b4a7f5ee1b177ca87cefe0115b65e3ca45ca5eaa6832d46b9780563f",
+    "report_digest": "sha256:92bb60cdc8523cca087fd4c1011808f517afecb70110fcad0f61bf5ab016cb5e",
+    "selected_checkpoint": "sha256:dc419dded6c3f62b533ac31b7e35104901403adedde62a326866ab160312bd60",
+    "selected_path": [
+      "receipt:provider-a",
+      "source-00",
+      "decision-00000",
+      "decision-00004",
+      "decision-00012",
+      "decision-00032",
+      "decision-00072",
+      "decision-00152",
+      "decision-00308",
+      "decision-00620",
+      "decision-01244",
+      "decision-02492",
+      "decision-04992",
+      "decision-09996"
+    ],
+    "selected_receipt_attestation": "sha256:47dcf0c594c2bdf3594f76e0fe8efec57469a5e69fb87da7cee8e7b6f882d06c",
+    "selected_status": "AFFECTED",
+    "summary": {
+      "affected": 2500,
+      "declared_decisions": 10000,
+      "graph_edges": 10000,
+      "graph_nodes": 10004,
+      "not_affected": 5000,
+      "undetermined": 2500
+    }
+  },
+  "report_digest": "sha256:6c3e7b15446422661f35c766581463c321cb6d0f1acb09df105ecb0ebcef1d05",
+  "same_size_equivocation": "ESTABLISHED",
+  "selected_provider": "provider-a",
+  "selected_receipt": "VERIFIED",
+  "settlement_authorization": "NOT_ISSUED",
+  "stage": "fork-closed",
+  "substantive_truth": "NOT_ESTABLISHED",
+  "test_ledger_attempt": "NOT_REPORTED",
+  "warnings": [
+    "the remaining 9,999 decisions are synthetic declarations, not transactions",
+    "a witness fork triggers recheck and bounded recourse; it does not make the provider result false"
+  ],
+  "witness_remedy": "ELIGIBLE"
+}

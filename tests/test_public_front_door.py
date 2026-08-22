@@ -78,12 +78,12 @@ def test_first_level_copy_preserves_current_product_boundary() -> None:
     assert "authorless action" not in combined.lower()
     assert "independently validated" not in combined.lower()
     assert "**Receipts for Agents.**" in readme
-    assert (
-        "An ActionReceipt is a portable transaction record the receiving party can keep."
-        in readme
-    )
-    assert "Bulla is the open-source Python toolkit" in readme
-    assert "Glyph Standard publishes the format and public test suite." in readme
+    assert "Bulla creates portable ActionReceipts" in readme
+    assert "receiving system can verify the record locally" in readme_flat
+    assert "apply its own `ReliancePolicy`" in readme_flat
+    assert "reconcile the receipt set against its own event records" in readme_flat
+    assert "They are not part of the installed package." in readme_flat
+    assert "Glyph Standard publishes the ActionReceipt format, Bulla" in readme_flat
     assert "The altered file fails its integrity check" in readme
     assert (
         "The supplied receiver record contains one action with no matching receipt"
@@ -95,8 +95,10 @@ def test_first_level_copy_preserves_current_product_boundary() -> None:
     assert "Research frontier" not in readme
     assert "A bulla was the clay envelope" not in readme
     assert (
-        'description = "Create and check standard transaction records for agent actions"'
+        'description = "Portable ActionReceipts and receiver-side verification for '
+        'consequential agent transactions"'
     ) in metadata
+    assert 'Publisher = "https://glyphstandard.com/about"' in metadata
 
 
 def test_readme_coverage_example_matches_the_public_api() -> None:

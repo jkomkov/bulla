@@ -1,0 +1,24 @@
+{
+  "anchor_evidence": {
+    "authority_epoch": "witness-epoch-2026-08",
+    "covenant_hash": "sha256:f45645e91c063000e8120effa3af63b8238f459c22aab26bdb6bf29d5fb067f5"
+  },
+  "checkpoint_hash": "sha256:2ea265992c2de47f16fa226d8b828da819152c2882340c85221b9a5424237245",
+  "issued_at": "2026-08-21T12:10:01Z",
+  "log_id": "answerability-network:receipt-history",
+  "operator": "did:key:z6MkmgQjRMF5aXJi9xfocBKrPTMw4kC77yoiNrGcjJWBnrgG",
+  "ordering_domain": "sha256:7bf58b3e1fdf2fdb0e51d4eb46a2373a82064ab0f57e118e7ed475932c6e26f2",
+  "position": 4,
+  "previous_checkpoint_hash": null,
+  "profile": "bulla.witness-checkpoint/0.1-draft",
+  "proof": {
+    "issuer": "did:key:z6MkmgQjRMF5aXJi9xfocBKrPTMw4kC77yoiNrGcjJWBnrgG",
+    "proofValue": "yj7HbCAEAYF309DfGrhfJaiKHQBJhDMaBUKS83gBmM0RKlLxRMCyjgfvIXr0LC9McUmL6/ckWOjum3MrgLKEAA==",
+    "purpose": "witness-checkpoint",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MkmgQjRMF5aXJi9xfocBKrPTMw4kC77yoiNrGcjJWBnrgG"
+  },
+  "root": "sha256:6fae4a78e09afd4b9d16eb3112c2ed17ab9cc0ba21321a15bd4844f62a83729c",
+  "schema_version": "0.1-draft",
+  "tree_size": 4
+}

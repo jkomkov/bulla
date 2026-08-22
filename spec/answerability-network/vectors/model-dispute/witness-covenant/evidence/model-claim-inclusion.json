@@ -1,0 +1,11 @@
+{
+  "attestation": "sha256:307da0af1a5b25725ec72386ff181911977d489d76efd5a0c6b1377635f7a060",
+  "index": 0,
+  "leaf": "sha256:bbf67b6e686acb0fc2c9f269d9c150dca4f1f5df41566afef84f857b56907ee2",
+  "proof": [
+    "sha256:2ddfb6d04f89bac6dc6c58ea3b7cb85fe7f34717ed3e54df5ce5a0cfdfebf102",
+    "sha256:41442c2d638910e0005e6a0e85910fb961be05532075ebba86fce613b435518f"
+  ],
+  "root": "sha256:7fc47eec1740bed452d990c7d506fd03e6fda07ffe5080f6f8cdc9839fff9280",
+  "tree_size": 4
+}
