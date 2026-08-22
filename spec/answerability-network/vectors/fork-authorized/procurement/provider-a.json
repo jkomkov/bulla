@@ -1,0 +1,96 @@
+{
+  "action": {
+    "subject": {
+      "artifact_digest": "sha256:57320e94c7670afda62ca39aa76bf96ddfe646a5b960bd750d7e90da24ef7de3",
+      "evidence_class": "SUPPLIED_BYTE_PREIMAGE",
+      "evidence_digest": "sha256:33e3b9539799b9574c0f9d16c3bb25f5d4db7e82eb8a32c6253ead93b0b921fa",
+      "model_identity": "SELF_ASSERTED",
+      "profile": "bulla.answerability-network/0.1-experimental",
+      "provider_id": "provider-a",
+      "transaction_id": "inference-job-001"
+    },
+    "type": "inference.delivery"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6Mkw2mq9BSjMonj51Q7RnDqk9WsUu7d7LkfZd8fQd5f3qAv",
+    "proofValue": "GkoQy1MBRBxSrT8oLrlXLsHndDsa4ao8iBPvxKNj3gi2Ffr2mO5ByphK5R3RhJB7zH6EnB5JGp62/QQugQGOCw==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkw2mq9BSjMonj51Q7RnDqk9WsUu7d7LkfZd8fQd5f3qAv"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-08-21T14:02:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "f2e0ae92-9f7c-456d-9121-a873c738613c",
+  "evidence_refs": [
+    {
+      "grounding": "self_asserted",
+      "hash": "sha256:a3d544a8342480a37107b3b9f1625992f171742ec1992e11c107d2f1147ab6ff",
+      "name": "delivery_report"
+    },
+    {
+      "grounding": "execution_verified",
+      "hash": "sha256:57320e94c7670afda62ca39aa76bf96ddfe646a5b960bd750d7e90da24ef7de3",
+      "name": "delivered_bytes"
+    }
+  ],
+  "hashes": {
+    "attestation": "sha256:47dcf0c594c2bdf3594f76e0fe8efec57469a5e69fb87da7cee8e7b6f882d06c",
+    "content": "sha256:2f8f61e8e38277534ad9a9b24865d52265088d2a30daeefe3e61068b9f0ad9fd",
+    "event": "sha256:73227caa9df4f37772c04a56497e5a58af81741451fc8eab32661e474595e106",
+    "log_leaf": "sha256:10e964ed080c9b36b706650f55989bf329ec9515811d379c062b65b2fbb007f4"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://answerability-network/inference.delivery",
+      "principal": "did:key:z6Mkw2mq9BSjMonj51Q7RnDqk9WsUu7d7LkfZd8fQd5f3qAv"
+    },
+    "bounds": {
+      "scope": "profile:bulla.answerability-network/0.1-experimental;transaction:inference-job-001"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6Mkw2mq9BSjMonj51Q7RnDqk9WsUu7d7LkfZd8fQd5f3qAv",
+    "proofValue": "bzuXuKB+Zx7t0EC5ZsMHb0NepLxewzFXladOvmByHXJG16i68fwm5cV9/7LQvZ3NVcHRvw9XF/k2kY9SlpcODQ==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkw2mq9BSjMonj51Q7RnDqk9WsUu7d7LkfZd8fQd5f3qAv"
+  },
+  "producer": {
+    "fixture": "one-job-one-fork",
+    "profile": "bulla.answerability-network/0.1-experimental"
+  },
+  "remedy": {
+    "challenge_window": "checkpoint:answerability-network-5",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/bulla/answerable-computing",
+      "trusted_root_ref": "sha256:1cfe37fa51afd492a4c5a55eed081cbfd23ab3c8a9eba2e8f8eb62197eab142d"
+    },
+    "remedies": [
+      {
+        "anchor": "forum:answerability-network",
+        "rung": "challenge",
+        "verifier": "verify the retained network under supplied context"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "public",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6Mkw2mq9BSjMonj51Q7RnDqk9WsUu7d7LkfZd8fQd5f3qAv",
+    "proofValue": "LCn2oIa53UjqThpN3LRA4yzz46cLwJ8h1OZ05ollX9S+tdxCaVQN/Hntwit5bO53RPZXjYyZE1XpazNS1+cuDQ==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkw2mq9BSjMonj51Q7RnDqk9WsUu7d7LkfZd8fQd5f3qAv"
+  },
+  "stake": null
+}

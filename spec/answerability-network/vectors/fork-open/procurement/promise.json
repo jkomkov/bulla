@@ -1,0 +1,88 @@
+{
+  "action": {
+    "subject": {
+      "accepted_evidence_classes": [
+        "SUPPLIED_BYTE_PREIMAGE"
+      ],
+      "expected_artifact_digest": "sha256:57320e94c7670afda62ca39aa76bf96ddfe646a5b960bd750d7e90da24ef7de3",
+      "price": 12500,
+      "profile": "bulla.answerability-network/0.1-experimental",
+      "task_digest": "sha256:7f345516c404c8bc5143ae7d88de620a088fb115442a752dd17efffee3e59d18",
+      "transaction_id": "inference-job-001",
+      "unit": "USD_CENTS",
+      "witness_covenant_hash": "sha256:f45645e91c063000e8120effa3af63b8238f459c22aab26bdb6bf29d5fb067f5"
+    },
+    "type": "inference.promise.accept"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6MknmdRcuwPKeRLkoXBQHKVTAsrrpntVNcLczXwydiHoUiX",
+    "proofValue": "++LCtD9Hnthuu6AsHomq5LLalLvS6lrh1NIRQEOQOXGJNlOY9s0tvc14nXbwdE+ZEfrVnPBhk5zBDHY33ox0Cw==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MknmdRcuwPKeRLkoXBQHKVTAsrrpntVNcLczXwydiHoUiX"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-08-21T14:01:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "7981f242-cb13-4f14-9feb-711db9b05b8d",
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:e801cf46007f379a65440068a81ef03d76acbfa945feb537592ff159afb81f59",
+    "content": "sha256:314bad8d158e26cf7ed3103ec43dcc5e38a441a0f043d585614f5335ebe92982",
+    "event": "sha256:f24c0b7505af5fb5071a0bda343b6e90bfeafb984444af8769c2dd487b7c09ce",
+    "log_leaf": "sha256:29e623920393690eb52f073d0bd605fdf9447d566f7f5ad5297e46890fe9af08"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://answerability-network/inference.promise.accept",
+      "principal": "did:key:z6MknmdRcuwPKeRLkoXBQHKVTAsrrpntVNcLczXwydiHoUiX"
+    },
+    "bounds": {
+      "scope": "profile:bulla.answerability-network/0.1-experimental;transaction:inference-job-001"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6MknmdRcuwPKeRLkoXBQHKVTAsrrpntVNcLczXwydiHoUiX",
+    "proofValue": "HVl0gV6lKgegxX4fYaZllLTjx5dTR8eDAxo1e6VqWFmyrV0JIZ3w7MyITdbFRu26YClO8AlWh9ypFyyzWzJPAQ==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MknmdRcuwPKeRLkoXBQHKVTAsrrpntVNcLczXwydiHoUiX"
+  },
+  "producer": {
+    "fixture": "one-job-one-fork",
+    "profile": "bulla.answerability-network/0.1-experimental"
+  },
+  "remedy": {
+    "challenge_window": "checkpoint:answerability-network-5",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/bulla/answerable-computing",
+      "trusted_root_ref": "sha256:1cfe37fa51afd492a4c5a55eed081cbfd23ab3c8a9eba2e8f8eb62197eab142d"
+    },
+    "remedies": [
+      {
+        "anchor": "forum:answerability-network",
+        "rung": "challenge",
+        "verifier": "verify the retained network under supplied context"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "public",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6MknmdRcuwPKeRLkoXBQHKVTAsrrpntVNcLczXwydiHoUiX",
+    "proofValue": "T4LUqQ7JA/9zrGoLI1InTPksvkMWM4ilbooii+fsL9+411ip5H1Xow1fcE4tGiplPKoO9gS+Aj2Cfjpi9xkfCA==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6MknmdRcuwPKeRLkoXBQHKVTAsrrpntVNcLczXwydiHoUiX"
+  },
+  "stake": null
+}

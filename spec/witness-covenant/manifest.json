@@ -1,0 +1,320 @@
+{
+  "entries": [
+    {
+      "byte_length": 1431,
+      "path": "contexts/consistent.json",
+      "sha256": "sha256:9dbc57755e311ba96b0178d75d28a6ffa52c9069586f428a19bd4ef6bd741448"
+    },
+    {
+      "byte_length": 1431,
+      "path": "contexts/fork-authorized.json",
+      "sha256": "sha256:9dbc57755e311ba96b0178d75d28a6ffa52c9069586f428a19bd4ef6bd741448"
+    },
+    {
+      "byte_length": 1431,
+      "path": "contexts/fork-closed-no-bond.json",
+      "sha256": "sha256:9dbc57755e311ba96b0178d75d28a6ffa52c9069586f428a19bd4ef6bd741448"
+    },
+    {
+      "byte_length": 1431,
+      "path": "contexts/fork-closed.json",
+      "sha256": "sha256:9dbc57755e311ba96b0178d75d28a6ffa52c9069586f428a19bd4ef6bd741448"
+    },
+    {
+      "byte_length": 1431,
+      "path": "contexts/fork-open.json",
+      "sha256": "sha256:9dbc57755e311ba96b0178d75d28a6ffa52c9069586f428a19bd4ef6bd741448"
+    },
+    {
+      "byte_length": 1431,
+      "path": "contexts/model-dispute.json",
+      "sha256": "sha256:9dbc57755e311ba96b0178d75d28a6ffa52c9069586f428a19bd4ef6bd741448"
+    },
+    {
+      "byte_length": 3295,
+      "path": "vectors/consistent/covenant-core.json",
+      "sha256": "sha256:55e8d55725951abf45f7ab1eeacf852a592051aa012b1fb3ab232d3a46788741"
+    },
+    {
+      "byte_length": 1130,
+      "path": "vectors/consistent/evidence/head-a.json",
+      "sha256": "sha256:7d657ee3b456b2d4e86e3b5d02ee1740398449771f0ea7e130f92d8b152ab88f"
+    },
+    {
+      "byte_length": 1130,
+      "path": "vectors/consistent/evidence/head-b.json",
+      "sha256": "sha256:07cb3b73cd787b8f1370d6ffda93cbe617a8e8a1580c4f3bddecd4b02ee79dd1"
+    },
+    {
+      "byte_length": 3056,
+      "path": "vectors/consistent/receipts/01-witness_operator.json",
+      "sha256": "sha256:84d47087f44de5495c0d65e610d2c3557ef2304f51d479ef4b72c44a27caa7e7"
+    },
+    {
+      "byte_length": 3536,
+      "path": "vectors/consistent/receipts/02-rail_observer.json",
+      "sha256": "sha256:66d988ab113d2ed3f7a95cabc1863cbbd3ea6605330736d307b95ba46ca33f90"
+    },
+    {
+      "byte_length": 5526,
+      "path": "vectors/fork-authorized/covenant-core.json",
+      "sha256": "sha256:830146ef2a3578e4396b7ee392347932cb726f49d972118b8c012cc4b402c8cc"
+    },
+    {
+      "byte_length": 1130,
+      "path": "vectors/fork-authorized/evidence/head-a.json",
+      "sha256": "sha256:7d657ee3b456b2d4e86e3b5d02ee1740398449771f0ea7e130f92d8b152ab88f"
+    },
+    {
+      "byte_length": 1130,
+      "path": "vectors/fork-authorized/evidence/head-b.json",
+      "sha256": "sha256:614383ec554dabf621f2629db01ee3e17b96b786bdef87e3827eeb57a87c7736"
+    },
+    {
+      "byte_length": 3056,
+      "path": "vectors/fork-authorized/receipts/01-witness_operator.json",
+      "sha256": "sha256:84d47087f44de5495c0d65e610d2c3557ef2304f51d479ef4b72c44a27caa7e7"
+    },
+    {
+      "byte_length": 3536,
+      "path": "vectors/fork-authorized/receipts/02-rail_observer.json",
+      "sha256": "sha256:66d988ab113d2ed3f7a95cabc1863cbbd3ea6605330736d307b95ba46ca33f90"
+    },
+    {
+      "byte_length": 3418,
+      "path": "vectors/fork-authorized/receipts/03-challenge_authority.json",
+      "sha256": "sha256:83f115b33006b766df6c31fb32936fa0ccb84682d50c3ed0d7ed2f4daa25cbd0"
+    },
+    {
+      "byte_length": 3490,
+      "path": "vectors/fork-authorized/receipts/04-challenge_authority.json",
+      "sha256": "sha256:9a9aefe05ec9a779966fc44b28c25af33fb1eef07034e430b0d67c6079f8e444"
+    },
+    {
+      "byte_length": 3754,
+      "path": "vectors/fork-authorized/receipts/05-settlement_authority.json",
+      "sha256": "sha256:dbd2ec612015673acd3923da37deb94a7be9f6743f381943514193aa1847f274"
+    },
+    {
+      "byte_length": 3484,
+      "path": "vectors/fork-authorized/receipts/06-settlement_observer.json",
+      "sha256": "sha256:7d3287f15ffaa3987970cec8d013a6b8c3b79e5a3402f2744ced79c5ec69fab4"
+    },
+    {
+      "byte_length": 404,
+      "path": "vectors/fork-authorized/settlement/test-ledger-report.json",
+      "sha256": "sha256:3ea66975365901ec273a95ebe53583da3788a578cdb24574076a2fb0dc7938f8"
+    },
+    {
+      "byte_length": 4290,
+      "path": "vectors/fork-closed/covenant-core.json",
+      "sha256": "sha256:44ba4318418f529adf8bf894b22a2f932583d12426093b9a3655e7c05231052a"
+    },
+    {
+      "byte_length": 1130,
+      "path": "vectors/fork-closed/evidence/head-a.json",
+      "sha256": "sha256:7d657ee3b456b2d4e86e3b5d02ee1740398449771f0ea7e130f92d8b152ab88f"
+    },
+    {
+      "byte_length": 1130,
+      "path": "vectors/fork-closed/evidence/head-b.json",
+      "sha256": "sha256:614383ec554dabf621f2629db01ee3e17b96b786bdef87e3827eeb57a87c7736"
+    },
+    {
+      "byte_length": 3056,
+      "path": "vectors/fork-closed/receipts/01-witness_operator.json",
+      "sha256": "sha256:84d47087f44de5495c0d65e610d2c3557ef2304f51d479ef4b72c44a27caa7e7"
+    },
+    {
+      "byte_length": 3536,
+      "path": "vectors/fork-closed/receipts/02-rail_observer.json",
+      "sha256": "sha256:66d988ab113d2ed3f7a95cabc1863cbbd3ea6605330736d307b95ba46ca33f90"
+    },
+    {
+      "byte_length": 3418,
+      "path": "vectors/fork-closed/receipts/03-challenge_authority.json",
+      "sha256": "sha256:83f115b33006b766df6c31fb32936fa0ccb84682d50c3ed0d7ed2f4daa25cbd0"
+    },
+    {
+      "byte_length": 3490,
+      "path": "vectors/fork-closed/receipts/04-challenge_authority.json",
+      "sha256": "sha256:9a9aefe05ec9a779966fc44b28c25af33fb1eef07034e430b0d67c6079f8e444"
+    },
+    {
+      "byte_length": 3813,
+      "path": "vectors/fork-closed-no-bond/covenant-core.json",
+      "sha256": "sha256:ca443137f593ca6a876fde74ba64624b13d08cf6922e409553dc9fa18a0215df"
+    },
+    {
+      "byte_length": 1130,
+      "path": "vectors/fork-closed-no-bond/evidence/head-a.json",
+      "sha256": "sha256:7d657ee3b456b2d4e86e3b5d02ee1740398449771f0ea7e130f92d8b152ab88f"
+    },
+    {
+      "byte_length": 1130,
+      "path": "vectors/fork-closed-no-bond/evidence/head-b.json",
+      "sha256": "sha256:614383ec554dabf621f2629db01ee3e17b96b786bdef87e3827eeb57a87c7736"
+    },
+    {
+      "byte_length": 3056,
+      "path": "vectors/fork-closed-no-bond/receipts/01-witness_operator.json",
+      "sha256": "sha256:84d47087f44de5495c0d65e610d2c3557ef2304f51d479ef4b72c44a27caa7e7"
+    },
+    {
+      "byte_length": 3418,
+      "path": "vectors/fork-closed-no-bond/receipts/02-challenge_authority.json",
+      "sha256": "sha256:3902c222470c80b5e8030e988c7e52b35d70022e808b1eabb4156a50bd5a96d6"
+    },
+    {
+      "byte_length": 3490,
+      "path": "vectors/fork-closed-no-bond/receipts/03-challenge_authority.json",
+      "sha256": "sha256:b4cc53d8d69c98069c5ab0aba6e773bd4f85b67224121cf9f48190c521ed9163"
+    },
+    {
+      "byte_length": 3791,
+      "path": "vectors/fork-open/covenant-core.json",
+      "sha256": "sha256:a52c2fd637a0f3f7fddc19e8e971acdf9d458d0090e46f84f7ea3717c447f93b"
+    },
+    {
+      "byte_length": 1130,
+      "path": "vectors/fork-open/evidence/head-a.json",
+      "sha256": "sha256:7d657ee3b456b2d4e86e3b5d02ee1740398449771f0ea7e130f92d8b152ab88f"
+    },
+    {
+      "byte_length": 1130,
+      "path": "vectors/fork-open/evidence/head-b.json",
+      "sha256": "sha256:614383ec554dabf621f2629db01ee3e17b96b786bdef87e3827eeb57a87c7736"
+    },
+    {
+      "byte_length": 3056,
+      "path": "vectors/fork-open/receipts/01-witness_operator.json",
+      "sha256": "sha256:84d47087f44de5495c0d65e610d2c3557ef2304f51d479ef4b72c44a27caa7e7"
+    },
+    {
+      "byte_length": 3536,
+      "path": "vectors/fork-open/receipts/02-rail_observer.json",
+      "sha256": "sha256:66d988ab113d2ed3f7a95cabc1863cbbd3ea6605330736d307b95ba46ca33f90"
+    },
+    {
+      "byte_length": 3418,
+      "path": "vectors/fork-open/receipts/03-challenge_authority.json",
+      "sha256": "sha256:83f115b33006b766df6c31fb32936fa0ccb84682d50c3ed0d7ed2f4daa25cbd0"
+    },
+    {
+      "byte_length": 4485,
+      "path": "vectors/model-dispute/covenant-core.json",
+      "sha256": "sha256:fd7f5b1eb1972cc90cf0dc7e1694749d1aee968c7f19bd7aa64154df88058d04"
+    },
+    {
+      "byte_length": 1130,
+      "path": "vectors/model-dispute/evidence/head-a.json",
+      "sha256": "sha256:f5cb5a25dac86ce715f9ce67dcc14ed57d9e519616fe27effd8b4aeb012676fc"
+    },
+    {
+      "byte_length": 1130,
+      "path": "vectors/model-dispute/evidence/head-b.json",
+      "sha256": "sha256:dee0a22f7f5b7b25fdb2e5f42d763d9e10f86c2cc1d222ebacc55ebebe48ead4"
+    },
+    {
+      "byte_length": 472,
+      "path": "vectors/model-dispute/evidence/model-claim-inclusion.json",
+      "sha256": "sha256:d1ad3ed15cc3e8cd5ff2e89fd79b6434368714b752c64ef6045db792ec232ee7"
+    },
+    {
+      "byte_length": 3056,
+      "path": "vectors/model-dispute/receipts/01-witness_operator.json",
+      "sha256": "sha256:84d47087f44de5495c0d65e610d2c3557ef2304f51d479ef4b72c44a27caa7e7"
+    },
+    {
+      "byte_length": 3536,
+      "path": "vectors/model-dispute/receipts/02-rail_observer.json",
+      "sha256": "sha256:66d988ab113d2ed3f7a95cabc1863cbbd3ea6605330736d307b95ba46ca33f90"
+    },
+    {
+      "byte_length": 3231,
+      "path": "vectors/model-dispute/receipts/03-provider.json",
+      "sha256": "sha256:e747ef8cd45aa15aaf1aa79230cc7740e357d8fbcab623df72d87f9f2e1145ce"
+    },
+    {
+      "byte_length": 3409,
+      "path": "vectors/model-dispute/receipts/04-challenge_authority.json",
+      "sha256": "sha256:a687fd207aa911f9f15b2c1a3f25e6eb684f4639ae42d4044bacc48a6b4f5017"
+    },
+    {
+      "byte_length": 1305,
+      "path": "reports/consistent.json",
+      "sha256": "sha256:24f1b0c7c46fbb736b05277742dba3d2700a5c70d2b4681778d094253766425e"
+    },
+    {
+      "byte_length": 1222,
+      "path": "reports/fork-authorized.json",
+      "sha256": "sha256:ff1d441c308a5fdd4bdd0dc0887fef5448f6d799fc880adbc1e623c0108dfa77"
+    },
+    {
+      "byte_length": 1282,
+      "path": "reports/fork-closed-no-bond.json",
+      "sha256": "sha256:371ed3ed3251cbaaf4456146e0f865ca4d62802d53398236954c396fbf86772e"
+    },
+    {
+      "byte_length": 1258,
+      "path": "reports/fork-closed.json",
+      "sha256": "sha256:ed3c376ce8e098f329ae318253c607296c344af8feebd550d766413eeca5c360"
+    },
+    {
+      "byte_length": 1295,
+      "path": "reports/fork-open.json",
+      "sha256": "sha256:96bf769fbeaab6b9090921acb2057d2e41320498e7eceb3576f8857ac0d0a9ea"
+    },
+    {
+      "byte_length": 1314,
+      "path": "reports/model-dispute.json",
+      "sha256": "sha256:d44adb464cea11523c550795798bc0780d9333c852664bc277884755bee2c1dc"
+    }
+  ],
+  "generated_root": "sha256:dc39d099b0e72e3daf37f63285f96c033329467d42d740498b54e554263a90d7",
+  "profile": "bulla.witness-covenant/0.1-experimental",
+  "source_entries": [
+    {
+      "byte_length": 2310,
+      "media_type": "application/json",
+      "path": "PROFILE.md",
+      "sha256": "sha256:516bf3d3b0d38c750de12f1e921c124ce6e37fef75162f5d0ae5c745ffbd505c"
+    },
+    {
+      "byte_length": 1327,
+      "media_type": "application/json",
+      "path": "PREREGISTRATION.md",
+      "sha256": "sha256:4e54e8f48f73b3b9133f27ecba75398b497b5bc6d3d74da2d49122e9ccae7fbb"
+    },
+    {
+      "byte_length": 996,
+      "media_type": "application/json",
+      "path": "CORRECTION-001.md",
+      "sha256": "sha256:55afeb94000492f798856069d1155116119828cdbc42f7b9be686b27668b6cf4"
+    },
+    {
+      "byte_length": 2596,
+      "media_type": "application/json",
+      "path": "THREAT-MODEL.md",
+      "sha256": "sha256:7caed5ae08694191466fb0d545928d7a9f92bf7b6f655abc9e6142134dfd0fd2"
+    },
+    {
+      "byte_length": 927,
+      "media_type": "application/json",
+      "path": "DESIGN-BASIS.md",
+      "sha256": "sha256:3f6c3980a5e840c35815854eedb9b5cd9a5e3039abef0175c511fa458458b20c"
+    },
+    {
+      "byte_length": 3751,
+      "media_type": "application/json",
+      "path": "WIRE-FORMAT.md",
+      "sha256": "sha256:d00ec0245f46e7ae4d84712c86f4e6e0a42f554ee082940fc74855fb84d82407"
+    },
+    {
+      "byte_length": 2397,
+      "media_type": "application/json",
+      "path": "formal-fixture-map.json",
+      "sha256": "sha256:3eb4da2fd52bde8148e02715bef85e9f429b97a484aa02bf49d7d331571ce008"
+    }
+  ]
+}

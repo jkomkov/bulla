@@ -1,0 +1,54 @@
+{
+  "formal_source": "papers/interpolant-envelope/lean/InterpolantEnvelope/AssuranceLinker.lean",
+  "profile": "bulla.witness-covenant/0.1-experimental",
+  "mappings": [
+    {
+      "conclusions": {"same_size_equivocation": "NOT_ESTABLISHED", "witness_remedy": "INELIGIBLE"},
+      "fixture": "consistent",
+      "premises": {"history_consistency": "CONSISTENT_AT_COMPARED_SIZE"},
+      "theorem": "consistent_history_equivocation_exclusion"
+    },
+    {
+      "conclusions": {"witness_remedy": "CHALLENGE_REQUIRED"},
+      "fixture": "fork-open",
+      "premises": {"challenge": "OPEN", "same_size_equivocation": "ESTABLISHED"},
+      "theorem": "witness_open_challenge_blocks_remedy"
+    },
+    {
+      "conclusions": {"witness_remedy": "ELIGIBLE"},
+      "fixture": "fork-closed",
+      "premises": {"capital_allocation": "ADEQUATE_DEDICATED", "challenge": "EXPIRED", "same_size_equivocation": "ESTABLISHED"},
+      "theorem": "witness_remedy_eligibility_soundness"
+    },
+    {
+      "conclusions": {"witness_remedy": "INELIGIBLE"},
+      "fixture": "fork-closed-no-bond",
+      "premises": {"capital_allocation": "INADEQUATE", "same_size_equivocation": "ESTABLISHED"},
+      "theorem": "missing_witness_bond_blocks_remedy"
+    },
+    {
+      "conclusions": {"capital_allocation": "ADEQUATE_DEDICATED", "challenge": "EXPIRED", "same_size_equivocation": "ESTABLISHED", "witness_remedy": "ELIGIBLE"},
+      "fixture": "fork-authorized",
+      "premises": {"settlement_authorization": "VERIFIED"},
+      "theorem": "witness_remedy_soundness"
+    },
+    {
+      "conclusions": {"actual_funds": "NOT_ESTABLISHED", "collectibility": "NOT_COMPUTED"},
+      "fixture": "fork-authorized",
+      "premises": {"test_ledger_attempt": "REPORTED"},
+      "theorem": "attempt_report_separation"
+    },
+    {
+      "conclusions": {"settlement_authorization": "NOT_ISSUED", "witness_remedy": "CHALLENGE_REQUIRED"},
+      "fixture": "model-dispute",
+      "premises": {"claim_inclusion": "VERIFIED", "same_size_equivocation": "NOT_ESTABLISHED"},
+      "theorem": "model_identity_cannot_auto_witness_remedy"
+    },
+    {
+      "conclusions": {"same_size_equivocation": "NOT_COMPUTED", "witness_remedy": "NOT_COMPUTED"},
+      "hostile_test": "test_single_view_cannot_establish_fault",
+      "premises": {"joint_observation": "NOT_COMPUTED"},
+      "theorem": "one_view_cannot_establish_equivocation"
+    }
+  ]
+}

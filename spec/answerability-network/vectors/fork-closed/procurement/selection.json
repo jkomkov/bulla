@@ -1,0 +1,83 @@
+{
+  "action": {
+    "subject": {
+      "policy_digest": "sha256:d8abcc478739047ca2c3ef91167871dc3624533ce40cdeaf525b51437ee47658",
+      "profile": "bulla.answerability-network/0.1-experimental",
+      "selected_attestation": "sha256:47dcf0c594c2bdf3594f76e0fe8efec57469a5e69fb87da7cee8e7b6f882d06c",
+      "selected_provider": "provider-a",
+      "transaction_id": "inference-job-001"
+    },
+    "type": "inference.selection"
+  },
+  "anchor_ref": {},
+  "authorization": {
+    "issuer": "did:key:z6Mkj71sCA3FypfeauBq8opy4trERZw2sAMxssPKcAXpx5bA",
+    "proofValue": "dzb2T6FWBRySxvUApuEyMq7v+ZtPz9eWBkdBxBcHEYA5Q/TqKVegiazL7Cz2/RCu692omq9VSSAa0GekDirbDw==",
+    "purpose": "authorization",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkj71sCA3FypfeauBq8opy4trERZw2sAMxssPKcAXpx5bA"
+  },
+  "canonicalization": "bulla-jcs-int/1",
+  "claimed_at": "2026-08-21T14:04:00Z",
+  "conventions": [],
+  "diagnostic_ref": {
+    "status": "not_applicable"
+  },
+  "event_id": "7d3fde42-f26c-4097-b97f-cf9265937316",
+  "evidence_refs": [],
+  "hashes": {
+    "attestation": "sha256:5f23dcf59ceac17bb6f813ccd884979a9467f5cf01ab9812def942a35be8b1e8",
+    "content": "sha256:84ce140046eb6308646ec1f3f0cf9452a0e87aeddd939b06d583e7d1946dc358",
+    "event": "sha256:543154015c0390aad78d675ad91c953889a34a73b2d7cfce580af03a4b0c7af6",
+    "log_leaf": "sha256:5f258adf4ff0a656eb98136a53d6425dc35ead4906ac328136cae870d16e416f"
+  },
+  "kind": "action_receipt",
+  "mandate": {
+    "authority": {
+      "delegation": [],
+      "policy": "policy://answerability-network/inference.selection",
+      "principal": "did:key:z6Mkj71sCA3FypfeauBq8opy4trERZw2sAMxssPKcAXpx5bA"
+    },
+    "bounds": {
+      "scope": "profile:bulla.answerability-network/0.1-experimental;transaction:inference-job-001"
+    }
+  },
+  "occurrence": {
+    "issuer": "did:key:z6Mkj71sCA3FypfeauBq8opy4trERZw2sAMxssPKcAXpx5bA",
+    "proofValue": "IX2vmtYd/OkDmyFTUNO23aDJC6wHBLGnsfGw8K3pA4NsjFC3RN0PvbFK+br5y6pfaNLlMKqC5TUJe5SryFSECw==",
+    "purpose": "occurrence",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkj71sCA3FypfeauBq8opy4trERZw2sAMxssPKcAXpx5bA"
+  },
+  "producer": {
+    "fixture": "one-job-one-fork",
+    "profile": "bulla.answerability-network/0.1-experimental"
+  },
+  "remedy": {
+    "challenge_window": "checkpoint:answerability-network-5",
+    "forum": {
+      "log_endpoint": "https://glyphstandard.com/bulla/answerable-computing",
+      "trusted_root_ref": "sha256:1cfe37fa51afd492a4c5a55eed081cbfd23ab3c8a9eba2e8f8eb62197eab142d"
+    },
+    "remedies": [
+      {
+        "anchor": "forum:answerability-network",
+        "rung": "challenge",
+        "verifier": "verify the retained network under supplied context"
+      }
+    ]
+  },
+  "retention": {
+    "disclosure": "public",
+    "record": "operational"
+  },
+  "schema_version": "0.4",
+  "signature": {
+    "issuer": "did:key:z6Mkj71sCA3FypfeauBq8opy4trERZw2sAMxssPKcAXpx5bA",
+    "proofValue": "B5vTAUiFBakVDB4CtMuTtSdiqy95fbCCq0hHQP/PHO7+vLtk9C9hqrdX7KQi/r6ZmkounK8X8l4dpJMB/PG6Bg==",
+    "purpose": "content",
+    "type": "bulla/ed25519-2026",
+    "verificationMethod": "did:key:z6Mkj71sCA3FypfeauBq8opy4trERZw2sAMxssPKcAXpx5bA"
+  },
+  "stake": null
+}

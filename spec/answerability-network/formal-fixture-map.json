@@ -1,0 +1,10 @@
+{
+  "profile": "bulla.answerability-network-formal-map/0.1-experimental",
+  "entries": [
+    {"fixture": "fork-open", "theorem": "declared_path_from_witness_fault_requires_recheck", "report_assertions": {"same_size_equivocation": "ESTABLISHED", "reliance.selected_status": "AFFECTED"}},
+    {"fixture": "fork-open", "theorem": "incomplete_lineage_cannot_clear", "report_assertions": {"reliance.summary.undetermined": 2500}},
+    {"fixture": "fork-open", "theorem": "complete_unrelated_branch_remains_unaffected", "report_assertions": {"reliance.summary.not_affected": 5000}},
+    {"fixture": "model-dispute", "theorem": "model_identity_cannot_auto_witness_remedy", "report_assertions": {"model_identity_control": "CHALLENGE_REQUIRED", "settlement_authorization": "NOT_ISSUED"}},
+    {"fixture": "fork-authorized", "theorem": "attempt_report_separation", "report_assertions": {"test_ledger_attempt": "REPORTED", "actual_funds": "NOT_ESTABLISHED"}}
+  ]
+}

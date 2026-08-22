@@ -1,0 +1,42 @@
+{
+  "accepted_authority_grants": [
+    "sha256:13d437608c19d0715b86454c4992c3d60208fb1fc4599fd2e216bc931f96b6e2"
+  ],
+  "accepted_capital_checkpoint": "sha256:694ac52d3a95409d8b59ccc29eb753971205120107f52837be308de9a77138f3",
+  "accepted_covenant_hash": "sha256:f45645e91c063000e8120effa3af63b8238f459c22aab26bdb6bf29d5fb067f5",
+  "accepted_issuers_by_role": {
+    "challenge_authority": [
+      "did:key:z6Mkqc3NoHiAzQ1gHMZXNcRg97tE2EKAb6kCcFoK1Sx4J2VW"
+    ],
+    "provider": [
+      "did:key:z6MksdFq8x43ECfbMMYBuD2ndSoc8yUezqzjBspRC8JsShnB"
+    ],
+    "rail_observer": [
+      "did:key:z6MkwRf47P7JRpHHENgQns5n1o5tuwQMSpDjqKafU2aN5Sjp"
+    ],
+    "settlement_authority": [
+      "did:key:z6Mkn7yRnuAryUV1XXTgsgngkpC8avoEawpeLLWci63VuDec"
+    ],
+    "settlement_observer": [
+      "did:key:z6MknNNHq3EoQmKShgCkqbr21UKs9eTSJBu5Ugcz7xBDHECN"
+    ],
+    "witness_operator": [
+      "did:key:z6MkmgQjRMF5aXJi9xfocBKrPTMw4kC77yoiNrGcjJWBnrgG"
+    ]
+  },
+  "accepted_log": "answerability-network:receipt-history",
+  "accepted_operator": "did:key:z6MkmgQjRMF5aXJi9xfocBKrPTMw4kC77yoiNrGcjJWBnrgG",
+  "accepted_rail_adapters": [
+    "test-ledger/1"
+  ],
+  "authority_epoch": "witness-epoch-2026-08",
+  "controlled_roles": [
+    "challenge_authority",
+    "provider",
+    "rail_observer",
+    "settlement_authority",
+    "settlement_observer",
+    "witness_operator"
+  ],
+  "profile": "bulla.witness-covenant-context/0.1-experimental"
+}

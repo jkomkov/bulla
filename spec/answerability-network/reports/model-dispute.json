@@ -1,0 +1,29 @@
+{
+  "actual_funds": "NOT_ESTABLISHED",
+  "buyer_policy": "SELECTED_PROVIDER_A",
+  "byte_equality": "PROVIDER_DIGESTS_MATCH_SUPPLIED_BYTES",
+  "challenge": "CHALLENGE_REQUIRED",
+  "errors": [],
+  "exit_code": 0,
+  "history_consistency": "CONSISTENT_AT_COMPARED_SIZE",
+  "history_extension": "NOT_PRESENTED",
+  "model_identity_control": "CHALLENGE_REQUIRED",
+  "network_integrity": "VERIFIED",
+  "procurement": "VERIFIED",
+  "profile": "bulla.answerability-network-report/0.1-experimental",
+  "receipt_inclusion": "NOT_PRESENTED",
+  "reliance": null,
+  "report_digest": "sha256:3744891fe6654c89e902acf96d4f96dc4b4e086c4c623f7c71e93f88ef35d450",
+  "same_size_equivocation": "NOT_ESTABLISHED",
+  "selected_provider": "provider-a",
+  "selected_receipt": "VERIFIED",
+  "settlement_authorization": "NOT_ISSUED",
+  "stage": "model-dispute",
+  "substantive_truth": "NOT_ESTABLISHED",
+  "test_ledger_attempt": "NOT_REPORTED",
+  "warnings": [
+    "the remaining 9,999 decisions are synthetic declarations, not transactions",
+    "a witness fork triggers recheck and bounded recourse; it does not make the provider result false"
+  ],
+  "witness_remedy": "CHALLENGE_REQUIRED"
+}

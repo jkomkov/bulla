@@ -1,0 +1,7 @@
+{
+  "artifact_digest": "sha256:57320e94c7670afda62ca39aa76bf96ddfe646a5b960bd750d7e90da24ef7de3",
+  "artifact_path": "procurement/provider-a-delivery.bin",
+  "profile": "bulla.fixed-sha256-delivery/1",
+  "provider_id": "provider-a",
+  "transaction_id": "inference-job-001"
+}

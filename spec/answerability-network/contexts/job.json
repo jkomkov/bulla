@@ -1,0 +1,14 @@
+{
+  "accepted_core_hash": "sha256:4997b3b2403d158fd2ca1f8449768962fcb6ac82596d023dd44ca8408135f9c2",
+  "accepted_evidence_verifier": "bulla.fixed-sha256-delivery/1",
+  "accepted_issuers": {
+    "buyer": "did:key:z6MknmdRcuwPKeRLkoXBQHKVTAsrrpntVNcLczXwydiHoUiX",
+    "buyer-selection": "did:key:z6Mkj71sCA3FypfeauBq8opy4trERZw2sAMxssPKcAXpx5bA",
+    "provider-a": "did:key:z6Mkw2mq9BSjMonj51Q7RnDqk9WsUu7d7LkfZd8fQd5f3qAv",
+    "provider-b": "did:key:z6Mkvy9TMfP6jNEFdcNYcLdcXmj3QWdkwNC9BT5Tsz6abgzD"
+  },
+  "accepted_witness_covenant_hash": "sha256:f45645e91c063000e8120effa3af63b8238f459c22aab26bdb6bf29d5fb067f5",
+  "profile": "bulla.answerability-network-context/0.1-experimental",
+  "reliance_context": null,
+  "witness_context": null
+}

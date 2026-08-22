@@ -1,0 +1,93 @@
+{
+  "corrections": [
+    {
+      "action": {
+        "subject": {
+          "authority_epoch": 7,
+          "previous_correction": null,
+          "profile": "bulla.reliance-map/0.1-experimental",
+          "reason_digest": "sha256:eae5dedfc5d3e7f8cb78b3db0d85bbe2911472b4781fe1be210301ab5b806fd9",
+          "replacement_digest": "sha256:f18b29dc4507e478dc520610f0b04ec727a099161bdf83c9e656780cfa6eb3ca",
+          "sequence": 0,
+          "target_digest": "sha256:dc419dded6c3f62b533ac31b7e35104901403adedde62a326866ab160312bd60"
+        },
+        "type": "reliance.correct"
+      },
+      "anchor_ref": {
+        "graph_digest": "sha256:79a659b9b4a7f5ee1b177ca87cefe0115b65e3ca45ca5eaa6832d46b9780563f",
+        "relation": "reliance_map"
+      },
+      "authorization": {
+        "issuer": "did:key:z6Mkgo1i9kyHLcnoenbrpzFMpLdD7ixW2Z1vzcwKrB3t8eFh",
+        "proofValue": "5roxJgjRLC3f0LyustftlKI6/ddwfs6UPlSODshqGMdQR+9xc3fN1rzU5XSAXiqQjK3nmmT8yQGZ6YH6UJyRBg==",
+        "purpose": "authorization",
+        "type": "bulla/ed25519-2026",
+        "verificationMethod": "did:key:z6Mkgo1i9kyHLcnoenbrpzFMpLdD7ixW2Z1vzcwKrB3t8eFh"
+      },
+      "canonicalization": "bulla-jcs-int/1",
+      "claimed_at": "2026-08-21T15:00:00Z",
+      "conventions": [],
+      "diagnostic_ref": {
+        "status": "not_applicable"
+      },
+      "event_id": "7880191f-9f54-435d-9e0c-a0683dc99e40",
+      "evidence_refs": [],
+      "hashes": {
+        "attestation": "sha256:f215ab0a7223eda672b2ab9425f74dc1885277fd3358688bb306c5a99dce705b",
+        "content": "sha256:6c4678f20d7724e2f1fac46e829d5cee20dc38861ca94f486f2444e870643d56",
+        "event": "sha256:93b7b101a8a4e39e8f28668f46fc6d7cb72dfa11f35e9c2ced717632d97008ce",
+        "log_leaf": "sha256:a51f4661e9ba78b8a035e2e647705c2315698911fe52c018e185cb102c39c484"
+      },
+      "kind": "action_receipt",
+      "mandate": {
+        "authority": {
+          "delegation": [],
+          "policy": "sha256:1f8bd9920912b8882f5a70a1fe9484f13463df5845d7aea50d33e060a2cd38ed",
+          "principal": "did:key:z6Mkgo1i9kyHLcnoenbrpzFMpLdD7ixW2Z1vzcwKrB3t8eFh"
+        },
+        "bounds": {
+          "scope": "profile:bulla.reliance-map/0.1-experimental;action:reliance.correct"
+        }
+      },
+      "occurrence": {
+        "issuer": "did:key:z6Mkgo1i9kyHLcnoenbrpzFMpLdD7ixW2Z1vzcwKrB3t8eFh",
+        "proofValue": "gJcgaOB4xmFieqicroe8jKFP+VNHu2d2bI9JxUpH1IvQ6KYaxWkmhfJFVP68OZLtVAYDjsV3AoY0K8NAivQIAg==",
+        "purpose": "occurrence",
+        "type": "bulla/ed25519-2026",
+        "verificationMethod": "did:key:z6Mkgo1i9kyHLcnoenbrpzFMpLdD7ixW2Z1vzcwKrB3t8eFh"
+      },
+      "producer": {
+        "fixture": "answerability-network-recall",
+        "profile": "bulla.reliance-map/0.1-experimental"
+      },
+      "remedy": {
+        "challenge_window": "checkpoint:reliance-map-correction",
+        "forum": {
+          "log_endpoint": "https://glyphstandard.com/evidence#reliance-map",
+          "trusted_root_ref": "sha256:b83790451636f8a0c49863e1456d87bf8095f90e6daf312e50a649572365a505"
+        },
+        "remedies": [
+          {
+            "anchor": "forum:reliance-map",
+            "rung": "challenge",
+            "verifier": "recompute exact declared descendants"
+          }
+        ]
+      },
+      "retention": {
+        "disclosure": "public",
+        "record": "authority-permanent"
+      },
+      "schema_version": "0.4",
+      "signature": {
+        "issuer": "did:key:z6Mkgo1i9kyHLcnoenbrpzFMpLdD7ixW2Z1vzcwKrB3t8eFh",
+        "proofValue": "mzSYW+HOby86ctgBdPFRMrVseCiLq7y+t5lXOwPfMO91397hrUhvmZhd6gqy9Eqh3mauW35eWR74uqMav7qpDQ==",
+        "purpose": "content",
+        "type": "bulla/ed25519-2026",
+        "verificationMethod": "did:key:z6Mkgo1i9kyHLcnoenbrpzFMpLdD7ixW2Z1vzcwKrB3t8eFh"
+      },
+      "stake": null
+    }
+  ],
+  "profile": "bulla.reliance-correction-ledger/0.1-experimental"
+}

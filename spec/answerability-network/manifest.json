@@ -1,0 +1,785 @@
+{
+  "presentation_entries": [
+    {
+      "byte_length": 449213,
+      "media_type": "application/json",
+      "path": "projections/fork-authorized.json",
+      "sha256": "sha256:35663beb790d3c1eb28df6ef5cf730fcb644271066f2ab6ae4b7cbec6eeb240b"
+    },
+    {
+      "byte_length": 449213,
+      "media_type": "application/json",
+      "path": "projections/fork-closed.json",
+      "sha256": "sha256:35663beb790d3c1eb28df6ef5cf730fcb644271066f2ab6ae4b7cbec6eeb240b"
+    },
+    {
+      "byte_length": 449213,
+      "media_type": "application/json",
+      "path": "projections/fork-open.json",
+      "sha256": "sha256:35663beb790d3c1eb28df6ef5cf730fcb644271066f2ab6ae4b7cbec6eeb240b"
+    },
+    {
+      "byte_length": 3,
+      "media_type": "application/json",
+      "path": "projections/job.json",
+      "sha256": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "byte_length": 3,
+      "media_type": "application/json",
+      "path": "projections/model-dispute.json",
+      "sha256": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "byte_length": 3,
+      "media_type": "application/json",
+      "path": "projections/published.json",
+      "sha256": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    }
+  ],
+  "presentation_root": "sha256:0ec2281f0fe66499c3aa7448ea1444125de52d500db12a714736697ce92c6392",
+  "profile": "bulla.answerability-network-manifest/0.1-experimental",
+  "semantic_entries": [
+    {
+      "byte_length": 2655,
+      "media_type": "application/json",
+      "path": "contexts/fork-authorized.json",
+      "sha256": "sha256:293e399b62b00700fd0769978fcbe244dc6c8f2ca6c1478d2fddfd54ffc0d268"
+    },
+    {
+      "byte_length": 2655,
+      "media_type": "application/json",
+      "path": "contexts/fork-closed.json",
+      "sha256": "sha256:22493f1111857466aad7a2a634cf0950b78260a6111c9912ac3431b2122db8f1"
+    },
+    {
+      "byte_length": 2655,
+      "media_type": "application/json",
+      "path": "contexts/fork-open.json",
+      "sha256": "sha256:e0aa72740ffc89b59af8c13c79651a6a982238ba4db59d830bcec8dfab47a881"
+    },
+    {
+      "byte_length": 742,
+      "media_type": "application/json",
+      "path": "contexts/job.json",
+      "sha256": "sha256:798b98b2668a6c72891ac2d7235a318e620eebbff843fe8cf2889e8ca7ef64ad"
+    },
+    {
+      "byte_length": 2250,
+      "media_type": "application/json",
+      "path": "contexts/model-dispute.json",
+      "sha256": "sha256:4c0b54f18a1c866c2f2510e20bf554874b526d225995975ae91475366de63551"
+    },
+    {
+      "byte_length": 2250,
+      "media_type": "application/json",
+      "path": "contexts/published.json",
+      "sha256": "sha256:2d7dcc3119b99ce795aabb9eee81593235289bc8f026925545dcc18c5798c527"
+    },
+    {
+      "byte_length": 5300,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/network-core.json",
+      "sha256": "sha256:4a4b27bc487c930cbd8a48fa525bdf130d88b457ba8d74ad83828fc6cb9ccf02"
+    },
+    {
+      "byte_length": 3423,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/procurement/promise.json",
+      "sha256": "sha256:e10dfd880f3151c93c41cb7ff6f6e356779e7ae15c008fdba2019f8cb22b72b8"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/procurement/provider-a-delivery-assertion.json",
+      "sha256": "sha256:a3d544a8342480a37107b3b9f1625992f171742ec1992e11c107d2f1147ab6ff"
+    },
+    {
+      "byte_length": 35,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/procurement/provider-a-delivery.bin",
+      "sha256": "sha256:57320e94c7670afda62ca39aa76bf96ddfe646a5b960bd750d7e90da24ef7de3"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/procurement/provider-a-evidence.json",
+      "sha256": "sha256:33e3b9539799b9574c0f9d16c3bb25f5d4db7e82eb8a32c6253ead93b0b921fa"
+    },
+    {
+      "byte_length": 3645,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/procurement/provider-a.json",
+      "sha256": "sha256:ce559fe4a81687a4eec99f33c6e04bab31e23e46af87091059ef3c3acb3e1c95"
+    },
+    {
+      "byte_length": 3289,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/procurement/provider-b.json",
+      "sha256": "sha256:11dc7277c1e34cbd83211f3c55313676255f51690ea9d7d453ae57cf2b5f3d56"
+    },
+    {
+      "byte_length": 3218,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/procurement/selection.json",
+      "sha256": "sha256:163cec1e2d2cff6984105c102fcda170ce81e48050e7b4121015d7487772b76f"
+    },
+    {
+      "byte_length": 3863,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/reliance/correction-ledger.json",
+      "sha256": "sha256:606ca17fec71dc330637871335d5551ae674fabe579af7c24e7db813fc0ad941"
+    },
+    {
+      "byte_length": 2390750,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/reliance/graph.json",
+      "sha256": "sha256:71c7c8039e5a7a1c6d16618913fe7166ca4f80a40194fd813861937d5211b505"
+    },
+    {
+      "byte_length": 6211,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/witness-covenant/covenant-core.json",
+      "sha256": "sha256:cce7361428cded84488765180b8e9ae6e055f02e50053402f5f538670f146247"
+    },
+    {
+      "byte_length": 1130,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/witness-covenant/evidence/external-receipt-checkpoint.json",
+      "sha256": "sha256:8074b6dfbceacd044c1eadb1efc012a172604ec0261ae63e4f9ddf7a5aed4bc6"
+    },
+    {
+      "byte_length": 390,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/witness-covenant/evidence/external-receipt-consistency.json",
+      "sha256": "sha256:388c2a8260c20db335e67c16ec2ffd766a8463fc9523080bb02fe0ce7ef66940"
+    },
+    {
+      "byte_length": 472,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/witness-covenant/evidence/external-receipt-inclusion.json",
+      "sha256": "sha256:38e07229234ea2c889e3c87a923c3c1088845310b8e809634e22718c9c89e87a"
+    },
+    {
+      "byte_length": 1199,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/witness-covenant/evidence/head-a.json",
+      "sha256": "sha256:e482ab5716f1e17d3d80714031c306ddb87716732f4db4ca3735e8689f7093a5"
+    },
+    {
+      "byte_length": 1199,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/witness-covenant/evidence/head-b.json",
+      "sha256": "sha256:154b58b9d19a01e836e236943ca8ea17cd63184d308ce0dc8a5402b1fe7c5808"
+    },
+    {
+      "byte_length": 3056,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/witness-covenant/receipts/01-witness_operator.json",
+      "sha256": "sha256:84d47087f44de5495c0d65e610d2c3557ef2304f51d479ef4b72c44a27caa7e7"
+    },
+    {
+      "byte_length": 3536,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/witness-covenant/receipts/02-rail_observer.json",
+      "sha256": "sha256:66d988ab113d2ed3f7a95cabc1863cbbd3ea6605330736d307b95ba46ca33f90"
+    },
+    {
+      "byte_length": 3418,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/witness-covenant/receipts/03-challenge_authority.json",
+      "sha256": "sha256:73f1744612066483ad15a215922b4699be015579e99477be452cd2d720d29dba"
+    },
+    {
+      "byte_length": 3490,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/witness-covenant/receipts/04-challenge_authority.json",
+      "sha256": "sha256:719febf671e651f24ab146d6a9d77dcd53ae896a66a2965ff13fc51c02f1d16a"
+    },
+    {
+      "byte_length": 3754,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/witness-covenant/receipts/05-settlement_authority.json",
+      "sha256": "sha256:2b455cf2d9563b7fd2f2da594d85dae3772f9e6efae4a64c0f101b34e5e8bf30"
+    },
+    {
+      "byte_length": 3484,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/witness-covenant/receipts/06-settlement_observer.json",
+      "sha256": "sha256:b1346bda7b1de6a40752ba9a4eec64a89446cded5526cc2d5a1e7b9b0b97c61e"
+    },
+    {
+      "byte_length": 404,
+      "media_type": "application/json",
+      "path": "vectors/fork-authorized/witness-covenant/settlement/test-ledger-report.json",
+      "sha256": "sha256:5b8b1878538767379cd738ccf8d94d668c27441083777808115ffdd030662b7e"
+    },
+    {
+      "byte_length": 4575,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/network-core.json",
+      "sha256": "sha256:33a9e901d7131029bc0e88d7a498b653b305cba12efb720cafacee6d33db66ed"
+    },
+    {
+      "byte_length": 3423,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/procurement/promise.json",
+      "sha256": "sha256:e10dfd880f3151c93c41cb7ff6f6e356779e7ae15c008fdba2019f8cb22b72b8"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/procurement/provider-a-delivery-assertion.json",
+      "sha256": "sha256:a3d544a8342480a37107b3b9f1625992f171742ec1992e11c107d2f1147ab6ff"
+    },
+    {
+      "byte_length": 35,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/procurement/provider-a-delivery.bin",
+      "sha256": "sha256:57320e94c7670afda62ca39aa76bf96ddfe646a5b960bd750d7e90da24ef7de3"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/procurement/provider-a-evidence.json",
+      "sha256": "sha256:33e3b9539799b9574c0f9d16c3bb25f5d4db7e82eb8a32c6253ead93b0b921fa"
+    },
+    {
+      "byte_length": 3645,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/procurement/provider-a.json",
+      "sha256": "sha256:ce559fe4a81687a4eec99f33c6e04bab31e23e46af87091059ef3c3acb3e1c95"
+    },
+    {
+      "byte_length": 3289,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/procurement/provider-b.json",
+      "sha256": "sha256:11dc7277c1e34cbd83211f3c55313676255f51690ea9d7d453ae57cf2b5f3d56"
+    },
+    {
+      "byte_length": 3218,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/procurement/selection.json",
+      "sha256": "sha256:163cec1e2d2cff6984105c102fcda170ce81e48050e7b4121015d7487772b76f"
+    },
+    {
+      "byte_length": 3863,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/reliance/correction-ledger.json",
+      "sha256": "sha256:606ca17fec71dc330637871335d5551ae674fabe579af7c24e7db813fc0ad941"
+    },
+    {
+      "byte_length": 2390750,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/reliance/graph.json",
+      "sha256": "sha256:71c7c8039e5a7a1c6d16618913fe7166ca4f80a40194fd813861937d5211b505"
+    },
+    {
+      "byte_length": 4975,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/witness-covenant/covenant-core.json",
+      "sha256": "sha256:99eba051b4383eb0a6b448fb9c334dd030a7ba37a9fafabdaba324ee63094efd"
+    },
+    {
+      "byte_length": 1130,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/witness-covenant/evidence/external-receipt-checkpoint.json",
+      "sha256": "sha256:8074b6dfbceacd044c1eadb1efc012a172604ec0261ae63e4f9ddf7a5aed4bc6"
+    },
+    {
+      "byte_length": 390,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/witness-covenant/evidence/external-receipt-consistency.json",
+      "sha256": "sha256:388c2a8260c20db335e67c16ec2ffd766a8463fc9523080bb02fe0ce7ef66940"
+    },
+    {
+      "byte_length": 472,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/witness-covenant/evidence/external-receipt-inclusion.json",
+      "sha256": "sha256:38e07229234ea2c889e3c87a923c3c1088845310b8e809634e22718c9c89e87a"
+    },
+    {
+      "byte_length": 1199,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/witness-covenant/evidence/head-a.json",
+      "sha256": "sha256:e482ab5716f1e17d3d80714031c306ddb87716732f4db4ca3735e8689f7093a5"
+    },
+    {
+      "byte_length": 1199,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/witness-covenant/evidence/head-b.json",
+      "sha256": "sha256:154b58b9d19a01e836e236943ca8ea17cd63184d308ce0dc8a5402b1fe7c5808"
+    },
+    {
+      "byte_length": 3056,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/witness-covenant/receipts/01-witness_operator.json",
+      "sha256": "sha256:84d47087f44de5495c0d65e610d2c3557ef2304f51d479ef4b72c44a27caa7e7"
+    },
+    {
+      "byte_length": 3536,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/witness-covenant/receipts/02-rail_observer.json",
+      "sha256": "sha256:66d988ab113d2ed3f7a95cabc1863cbbd3ea6605330736d307b95ba46ca33f90"
+    },
+    {
+      "byte_length": 3418,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/witness-covenant/receipts/03-challenge_authority.json",
+      "sha256": "sha256:73f1744612066483ad15a215922b4699be015579e99477be452cd2d720d29dba"
+    },
+    {
+      "byte_length": 3490,
+      "media_type": "application/json",
+      "path": "vectors/fork-closed/witness-covenant/receipts/04-challenge_authority.json",
+      "sha256": "sha256:719febf671e651f24ab146d6a9d77dcd53ae896a66a2965ff13fc51c02f1d16a"
+    },
+    {
+      "byte_length": 4332,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/network-core.json",
+      "sha256": "sha256:d0d97389f44884e31a3aebe771678c2a654ba761cb07ac417a7febeaf460b4ee"
+    },
+    {
+      "byte_length": 3423,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/procurement/promise.json",
+      "sha256": "sha256:e10dfd880f3151c93c41cb7ff6f6e356779e7ae15c008fdba2019f8cb22b72b8"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/procurement/provider-a-delivery-assertion.json",
+      "sha256": "sha256:a3d544a8342480a37107b3b9f1625992f171742ec1992e11c107d2f1147ab6ff"
+    },
+    {
+      "byte_length": 35,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/procurement/provider-a-delivery.bin",
+      "sha256": "sha256:57320e94c7670afda62ca39aa76bf96ddfe646a5b960bd750d7e90da24ef7de3"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/procurement/provider-a-evidence.json",
+      "sha256": "sha256:33e3b9539799b9574c0f9d16c3bb25f5d4db7e82eb8a32c6253ead93b0b921fa"
+    },
+    {
+      "byte_length": 3645,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/procurement/provider-a.json",
+      "sha256": "sha256:ce559fe4a81687a4eec99f33c6e04bab31e23e46af87091059ef3c3acb3e1c95"
+    },
+    {
+      "byte_length": 3289,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/procurement/provider-b.json",
+      "sha256": "sha256:11dc7277c1e34cbd83211f3c55313676255f51690ea9d7d453ae57cf2b5f3d56"
+    },
+    {
+      "byte_length": 3218,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/procurement/selection.json",
+      "sha256": "sha256:163cec1e2d2cff6984105c102fcda170ce81e48050e7b4121015d7487772b76f"
+    },
+    {
+      "byte_length": 3863,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/reliance/correction-ledger.json",
+      "sha256": "sha256:606ca17fec71dc330637871335d5551ae674fabe579af7c24e7db813fc0ad941"
+    },
+    {
+      "byte_length": 2390750,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/reliance/graph.json",
+      "sha256": "sha256:71c7c8039e5a7a1c6d16618913fe7166ca4f80a40194fd813861937d5211b505"
+    },
+    {
+      "byte_length": 4476,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/witness-covenant/covenant-core.json",
+      "sha256": "sha256:b085cdee7db592a95238de17e707f5784b098244945402051a80c36f3762afff"
+    },
+    {
+      "byte_length": 1130,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/witness-covenant/evidence/external-receipt-checkpoint.json",
+      "sha256": "sha256:8074b6dfbceacd044c1eadb1efc012a172604ec0261ae63e4f9ddf7a5aed4bc6"
+    },
+    {
+      "byte_length": 390,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/witness-covenant/evidence/external-receipt-consistency.json",
+      "sha256": "sha256:388c2a8260c20db335e67c16ec2ffd766a8463fc9523080bb02fe0ce7ef66940"
+    },
+    {
+      "byte_length": 472,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/witness-covenant/evidence/external-receipt-inclusion.json",
+      "sha256": "sha256:38e07229234ea2c889e3c87a923c3c1088845310b8e809634e22718c9c89e87a"
+    },
+    {
+      "byte_length": 1199,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/witness-covenant/evidence/head-a.json",
+      "sha256": "sha256:e482ab5716f1e17d3d80714031c306ddb87716732f4db4ca3735e8689f7093a5"
+    },
+    {
+      "byte_length": 1199,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/witness-covenant/evidence/head-b.json",
+      "sha256": "sha256:154b58b9d19a01e836e236943ca8ea17cd63184d308ce0dc8a5402b1fe7c5808"
+    },
+    {
+      "byte_length": 3056,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/witness-covenant/receipts/01-witness_operator.json",
+      "sha256": "sha256:84d47087f44de5495c0d65e610d2c3557ef2304f51d479ef4b72c44a27caa7e7"
+    },
+    {
+      "byte_length": 3536,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/witness-covenant/receipts/02-rail_observer.json",
+      "sha256": "sha256:66d988ab113d2ed3f7a95cabc1863cbbd3ea6605330736d307b95ba46ca33f90"
+    },
+    {
+      "byte_length": 3418,
+      "media_type": "application/json",
+      "path": "vectors/fork-open/witness-covenant/receipts/03-challenge_authority.json",
+      "sha256": "sha256:73f1744612066483ad15a215922b4699be015579e99477be452cd2d720d29dba"
+    },
+    {
+      "byte_length": 1774,
+      "media_type": "application/json",
+      "path": "vectors/job/network-core.json",
+      "sha256": "sha256:3592add4501f6baad210600a900ce93864e8abfd9f2fa869ebf8a6ce6bf5ff7d"
+    },
+    {
+      "byte_length": 3423,
+      "media_type": "application/json",
+      "path": "vectors/job/procurement/promise.json",
+      "sha256": "sha256:e10dfd880f3151c93c41cb7ff6f6e356779e7ae15c008fdba2019f8cb22b72b8"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "vectors/job/procurement/provider-a-delivery-assertion.json",
+      "sha256": "sha256:a3d544a8342480a37107b3b9f1625992f171742ec1992e11c107d2f1147ab6ff"
+    },
+    {
+      "byte_length": 35,
+      "media_type": "application/json",
+      "path": "vectors/job/procurement/provider-a-delivery.bin",
+      "sha256": "sha256:57320e94c7670afda62ca39aa76bf96ddfe646a5b960bd750d7e90da24ef7de3"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "vectors/job/procurement/provider-a-evidence.json",
+      "sha256": "sha256:33e3b9539799b9574c0f9d16c3bb25f5d4db7e82eb8a32c6253ead93b0b921fa"
+    },
+    {
+      "byte_length": 3645,
+      "media_type": "application/json",
+      "path": "vectors/job/procurement/provider-a.json",
+      "sha256": "sha256:ce559fe4a81687a4eec99f33c6e04bab31e23e46af87091059ef3c3acb3e1c95"
+    },
+    {
+      "byte_length": 3289,
+      "media_type": "application/json",
+      "path": "vectors/job/procurement/provider-b.json",
+      "sha256": "sha256:11dc7277c1e34cbd83211f3c55313676255f51690ea9d7d453ae57cf2b5f3d56"
+    },
+    {
+      "byte_length": 3218,
+      "media_type": "application/json",
+      "path": "vectors/job/procurement/selection.json",
+      "sha256": "sha256:163cec1e2d2cff6984105c102fcda170ce81e48050e7b4121015d7487772b76f"
+    },
+    {
+      "byte_length": 3640,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/network-core.json",
+      "sha256": "sha256:1ec73878b9b74313c680116707d90c655d6afcf7dbcdd2694b5bf2937e2c800b"
+    },
+    {
+      "byte_length": 3423,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/procurement/promise.json",
+      "sha256": "sha256:e10dfd880f3151c93c41cb7ff6f6e356779e7ae15c008fdba2019f8cb22b72b8"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/procurement/provider-a-delivery-assertion.json",
+      "sha256": "sha256:a3d544a8342480a37107b3b9f1625992f171742ec1992e11c107d2f1147ab6ff"
+    },
+    {
+      "byte_length": 35,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/procurement/provider-a-delivery.bin",
+      "sha256": "sha256:57320e94c7670afda62ca39aa76bf96ddfe646a5b960bd750d7e90da24ef7de3"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/procurement/provider-a-evidence.json",
+      "sha256": "sha256:33e3b9539799b9574c0f9d16c3bb25f5d4db7e82eb8a32c6253ead93b0b921fa"
+    },
+    {
+      "byte_length": 3645,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/procurement/provider-a.json",
+      "sha256": "sha256:ce559fe4a81687a4eec99f33c6e04bab31e23e46af87091059ef3c3acb3e1c95"
+    },
+    {
+      "byte_length": 3289,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/procurement/provider-b.json",
+      "sha256": "sha256:11dc7277c1e34cbd83211f3c55313676255f51690ea9d7d453ae57cf2b5f3d56"
+    },
+    {
+      "byte_length": 3218,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/procurement/selection.json",
+      "sha256": "sha256:163cec1e2d2cff6984105c102fcda170ce81e48050e7b4121015d7487772b76f"
+    },
+    {
+      "byte_length": 4485,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/witness-covenant/covenant-core.json",
+      "sha256": "sha256:fd7f5b1eb1972cc90cf0dc7e1694749d1aee968c7f19bd7aa64154df88058d04"
+    },
+    {
+      "byte_length": 1130,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/witness-covenant/evidence/head-a.json",
+      "sha256": "sha256:f5cb5a25dac86ce715f9ce67dcc14ed57d9e519616fe27effd8b4aeb012676fc"
+    },
+    {
+      "byte_length": 1130,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/witness-covenant/evidence/head-b.json",
+      "sha256": "sha256:dee0a22f7f5b7b25fdb2e5f42d763d9e10f86c2cc1d222ebacc55ebebe48ead4"
+    },
+    {
+      "byte_length": 472,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/witness-covenant/evidence/model-claim-inclusion.json",
+      "sha256": "sha256:d1ad3ed15cc3e8cd5ff2e89fd79b6434368714b752c64ef6045db792ec232ee7"
+    },
+    {
+      "byte_length": 3056,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/witness-covenant/receipts/01-witness_operator.json",
+      "sha256": "sha256:84d47087f44de5495c0d65e610d2c3557ef2304f51d479ef4b72c44a27caa7e7"
+    },
+    {
+      "byte_length": 3536,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/witness-covenant/receipts/02-rail_observer.json",
+      "sha256": "sha256:66d988ab113d2ed3f7a95cabc1863cbbd3ea6605330736d307b95ba46ca33f90"
+    },
+    {
+      "byte_length": 3231,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/witness-covenant/receipts/03-provider.json",
+      "sha256": "sha256:e747ef8cd45aa15aaf1aa79230cc7740e357d8fbcab623df72d87f9f2e1145ce"
+    },
+    {
+      "byte_length": 3409,
+      "media_type": "application/json",
+      "path": "vectors/model-dispute/witness-covenant/receipts/04-challenge_authority.json",
+      "sha256": "sha256:a687fd207aa911f9f15b2c1a3f25e6eb684f4639ae42d4044bacc48a6b4f5017"
+    },
+    {
+      "byte_length": 3662,
+      "media_type": "application/json",
+      "path": "vectors/published/network-core.json",
+      "sha256": "sha256:38fe57c827aacaddcce929dda2d03786cd2d39daf21493c5b86225fa0933125d"
+    },
+    {
+      "byte_length": 3423,
+      "media_type": "application/json",
+      "path": "vectors/published/procurement/promise.json",
+      "sha256": "sha256:e10dfd880f3151c93c41cb7ff6f6e356779e7ae15c008fdba2019f8cb22b72b8"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "vectors/published/procurement/provider-a-delivery-assertion.json",
+      "sha256": "sha256:a3d544a8342480a37107b3b9f1625992f171742ec1992e11c107d2f1147ab6ff"
+    },
+    {
+      "byte_length": 35,
+      "media_type": "application/json",
+      "path": "vectors/published/procurement/provider-a-delivery.bin",
+      "sha256": "sha256:57320e94c7670afda62ca39aa76bf96ddfe646a5b960bd750d7e90da24ef7de3"
+    },
+    {
+      "byte_length": 275,
+      "media_type": "application/json",
+      "path": "vectors/published/procurement/provider-a-evidence.json",
+      "sha256": "sha256:33e3b9539799b9574c0f9d16c3bb25f5d4db7e82eb8a32c6253ead93b0b921fa"
+    },
+    {
+      "byte_length": 3645,
+      "media_type": "application/json",
+      "path": "vectors/published/procurement/provider-a.json",
+      "sha256": "sha256:ce559fe4a81687a4eec99f33c6e04bab31e23e46af87091059ef3c3acb3e1c95"
+    },
+    {
+      "byte_length": 3289,
+      "media_type": "application/json",
+      "path": "vectors/published/procurement/provider-b.json",
+      "sha256": "sha256:11dc7277c1e34cbd83211f3c55313676255f51690ea9d7d453ae57cf2b5f3d56"
+    },
+    {
+      "byte_length": 3218,
+      "media_type": "application/json",
+      "path": "vectors/published/procurement/selection.json",
+      "sha256": "sha256:163cec1e2d2cff6984105c102fcda170ce81e48050e7b4121015d7487772b76f"
+    },
+    {
+      "byte_length": 3980,
+      "media_type": "application/json",
+      "path": "vectors/published/witness-covenant/covenant-core.json",
+      "sha256": "sha256:77446cb71aeb0dc534e2a8965b2b174abdc6464998c67d861c31b42dda51770c"
+    },
+    {
+      "byte_length": 1130,
+      "media_type": "application/json",
+      "path": "vectors/published/witness-covenant/evidence/external-receipt-checkpoint.json",
+      "sha256": "sha256:8074b6dfbceacd044c1eadb1efc012a172604ec0261ae63e4f9ddf7a5aed4bc6"
+    },
+    {
+      "byte_length": 390,
+      "media_type": "application/json",
+      "path": "vectors/published/witness-covenant/evidence/external-receipt-consistency.json",
+      "sha256": "sha256:388c2a8260c20db335e67c16ec2ffd766a8463fc9523080bb02fe0ce7ef66940"
+    },
+    {
+      "byte_length": 472,
+      "media_type": "application/json",
+      "path": "vectors/published/witness-covenant/evidence/external-receipt-inclusion.json",
+      "sha256": "sha256:38e07229234ea2c889e3c87a923c3c1088845310b8e809634e22718c9c89e87a"
+    },
+    {
+      "byte_length": 1199,
+      "media_type": "application/json",
+      "path": "vectors/published/witness-covenant/evidence/head-a.json",
+      "sha256": "sha256:e482ab5716f1e17d3d80714031c306ddb87716732f4db4ca3735e8689f7093a5"
+    },
+    {
+      "byte_length": 1199,
+      "media_type": "application/json",
+      "path": "vectors/published/witness-covenant/evidence/head-b.json",
+      "sha256": "sha256:6b9b6e258d808a724cf4bde0bf81a387fbde97e7b8ee8bc045f2bf1f8795eb79"
+    },
+    {
+      "byte_length": 3056,
+      "media_type": "application/json",
+      "path": "vectors/published/witness-covenant/receipts/01-witness_operator.json",
+      "sha256": "sha256:84d47087f44de5495c0d65e610d2c3557ef2304f51d479ef4b72c44a27caa7e7"
+    },
+    {
+      "byte_length": 3536,
+      "media_type": "application/json",
+      "path": "vectors/published/witness-covenant/receipts/02-rail_observer.json",
+      "sha256": "sha256:66d988ab113d2ed3f7a95cabc1863cbbd3ea6605330736d307b95ba46ca33f90"
+    },
+    {
+      "byte_length": 2109,
+      "media_type": "application/json",
+      "path": "reports/fork-authorized.json",
+      "sha256": "sha256:e2275e02c9c4292b58c3c12fb25b540c4ff470492517f8f1a88815c730a77d3d"
+    },
+    {
+      "byte_length": 2111,
+      "media_type": "application/json",
+      "path": "reports/fork-closed.json",
+      "sha256": "sha256:c82d9bbc131e61351fdcb1dafe411c34bd8ed07c9320e19f4040ff6c15332e31"
+    },
+    {
+      "byte_length": 2116,
+      "media_type": "application/json",
+      "path": "reports/fork-open.json",
+      "sha256": "sha256:2a280852a714f28b4b597c4717b2c1d6580499428c11248c5136aab1931a8d35"
+    },
+    {
+      "byte_length": 1122,
+      "media_type": "application/json",
+      "path": "reports/job.json",
+      "sha256": "sha256:56e1a3fbeeba5e92b3bc68535b2228117ebcb3de8787e2df92c96d2c88332c69"
+    },
+    {
+      "byte_length": 1165,
+      "media_type": "application/json",
+      "path": "reports/model-dispute.json",
+      "sha256": "sha256:e1d9f07262945a89de4a113d39f13d3d6154739fc3f5a8e2c694c429a061aec0"
+    },
+    {
+      "byte_length": 1128,
+      "media_type": "application/json",
+      "path": "reports/published.json",
+      "sha256": "sha256:9b05dcca4ecee5f8067af37563c71c3b768ea1393ae854024ca6301514f55b7a"
+    }
+  ],
+  "semantic_root": "sha256:eb230a717dfaaa973b788f6cbd2e28d546bddc9d0e96370a0b56ebeed3821d27",
+  "source_entries": [
+    {
+      "byte_length": 3987,
+      "media_type": "application/json",
+      "path": "PROFILE.md",
+      "sha256": "sha256:ece86b1c9cc6d244485724d244b0606c6602a9ad7a1c22d705f2fa23c151ff87"
+    },
+    {
+      "byte_length": 4722,
+      "media_type": "application/json",
+      "path": "WIRE-FORMAT.md",
+      "sha256": "sha256:7a0e90db883d37b71416eb0adfd5848a91ca594a379df0ae143600bd31720d11"
+    },
+    {
+      "byte_length": 1095,
+      "media_type": "application/json",
+      "path": "PREREGISTRATION.md",
+      "sha256": "sha256:4640d69324794fd57954b9094a7c55ae5a17a2e255fa6e66e20dcd662a83f847"
+    },
+    {
+      "byte_length": 1078,
+      "media_type": "application/json",
+      "path": "THREAT-MODEL.md",
+      "sha256": "sha256:4767fe66b442745555e55eabf48488fd4290987b00ba428583ae8536db5a0392"
+    },
+    {
+      "byte_length": 953,
+      "media_type": "application/json",
+      "path": "formal-fixture-map.json",
+      "sha256": "sha256:f64de84701f6b8b72536c7b4ddd664fcd3a55ab8183ac46c3722f8febe279346"
+    },
+    {
+      "byte_length": 653,
+      "media_type": "application/json",
+      "path": "benchmark.json",
+      "sha256": "sha256:75837221efd3c1ff7f3bf2ada15e261c85a10e415f473eeb24aec3ffa45872e6"
+    },
+    {
+      "byte_length": 593,
+      "media_type": "application/json",
+      "path": "check.py",
+      "sha256": "sha256:e581cf474d30bc6d4a3cb2cf1e7d44fc0fada41f28eb330d833c8c0ec839db46"
+    },
+    {
+      "byte_length": 1558,
+      "media_type": "application/json",
+      "path": "check.mjs",
+      "sha256": "sha256:80d030cea6f1785bdfcc0efb11093d759dc0393c5912a30200cc1dc198644d1f"
+    },
+    {
+      "byte_length": 19410,
+      "media_type": "application/json",
+      "path": "kernel.mjs",
+      "sha256": "sha256:ae47016dd4c2900e9efb8c8774997a4670323dfe86c536437da9ae6ec06a5ac1"
+    }
+  ]
+}

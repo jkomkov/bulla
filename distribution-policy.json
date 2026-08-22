@@ -82,6 +82,7 @@
     "bulla.experimental.assurance_bitcoin",
     "bulla.experimental.assurance_linker",
     "bulla.experimental.answerability",
+    "bulla.experimental.answerability_network",
     "bulla.experimental.causal_model",
     "bulla.experimental.challenge",
     "bulla.experimental.control_plane_alpha",
@@ -91,7 +92,8 @@
     "bulla.experimental.incident_pilots",
     "bulla.experimental.inference_clearing",
     "bulla.experimental.reliance_map",
-    "bulla.experimental.receipt_witness"
+    "bulla.experimental.receipt_witness",
+    "bulla.experimental.witness_covenant"
   ],
   "forbidden_cli_subcommands": [
     "answerability",
@@ -113,20 +115,24 @@
     "examples/eval-incident-replay/",
     "examples/inference-clearing/",
     "examples/receipt-witness/",
+    "papers/interpolant-envelope/lean/",
     "scripts/mint_control_plane_deployment_receipt.py",
     "scripts/verify_golden_v05.py",
     "spec/agent-incident-packet/",
+    "spec/answerability-network/",
     "spec/acceptance-contract/",
     "spec/assurance-linker/",
     "spec/control-plane-alpha/",
     "spec/inference-clearing/",
     "spec/reliance-map/",
+    "spec/witness-covenant/",
     "spec/generalization-constitution-v0.5-experimental.md",
     "src/bulla/experimental/action_boundary.py",
     "src/bulla/experimental/acceptance_contract.py",
     "src/bulla/experimental/assurance_bitcoin.py",
     "src/bulla/experimental/assurance_linker.py",
     "src/bulla/experimental/answerability.py",
+    "src/bulla/experimental/answerability_network.py",
     "src/bulla/experimental/causal_model.py",
     "src/bulla/experimental/challenge.py",
     "src/bulla/experimental/control_plane_alpha.py",
@@ -137,7 +143,9 @@
     "src/bulla/experimental/inference_clearing.py",
     "src/bulla/experimental/reliance_map.py",
     "src/bulla/experimental/receipt_witness.py",
+    "src/bulla/experimental/witness_covenant.py",
     "tests/test_action_boundary.py",
+    "tests/test_answerability_network.py",
     "tests/test_acceptance_contract.py",
     "tests/test_assurance_linker.py",
     "tests/test_assurance_stranger_doorway.py",
@@ -160,6 +168,7 @@
     "tests/test_golden_v05.py",
     "tests/test_query_answerability.py",
     "tests/test_reliance_map.py",
-    "tests/test_receipt_witness.py"
+    "tests/test_receipt_witness.py",
+    "tests/test_witness_covenant.py"
   ]
 }

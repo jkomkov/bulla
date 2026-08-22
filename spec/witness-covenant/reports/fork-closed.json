@@ -1,0 +1,37 @@
+{
+  "actual_funds": "NOT_ESTABLISHED",
+  "capital_allocation": "ADEQUATE_DEDICATED",
+  "capital_lock": "REPORTED_UNSPENT",
+  "challenge": "EXPIRED",
+  "checkpoint_authenticity": "VERIFIED",
+  "claim_inclusion": "NOT_APPLICABLE",
+  "collectibility": "NOT_COMPUTED",
+  "covenant_binding": "VERIFIED",
+  "custody": "NOT_COMPUTED",
+  "deterrence": "NOT_COMPUTED",
+  "dossier_integrity": "VERIFIED",
+  "errors": [],
+  "exit_code": 0,
+  "history_consistency": "EQUIVOCATION_ESTABLISHED",
+  "issuer_role_status": "VERIFIED",
+  "joint_observation": "VERIFIED",
+  "occurrence": "NOT_ESTABLISHED",
+  "profile": "bulla.witness-covenant/0.1-experimental",
+  "receipt_integrity": "VERIFIED",
+  "same_size_equivocation": "ESTABLISHED",
+  "scenario": "fork-closed",
+  "settlement_authorization": "NOT_ISSUED",
+  "signature_status": "VERIFIED",
+  "substantive_truth": "NOT_ESTABLISHED",
+  "suppressed_conclusions": [
+    "settlement authorization"
+  ],
+  "test_ledger_attempt": "NOT_REPORTED",
+  "warnings": [
+    "bond amount is an authored term, not a risk estimate",
+    "checkpoint signatures establish operator statements, not worldly truth"
+  ],
+  "witness_control": "PROJECT_OPERATED",
+  "witness_remedy": "ELIGIBLE",
+  "witness_trust": "SUPPLIED_CONTEXT_ACCEPTED"
+}
