@@ -82,8 +82,9 @@ def test_first_level_copy_preserves_current_product_boundary() -> None:
     assert "receiving system can verify the record locally" in readme_flat
     assert "apply its own `ReliancePolicy`" in readme_flat
     assert "reconcile the receipt set against its own event records" in readme_flat
+    assert "Build with Bulla. Require ActionReceipts." in readme_flat
     assert "They are not part of the installed package." in readme_flat
-    assert "Glyph Standard publishes the ActionReceipt format, Bulla" in readme_flat
+    assert "Glyph Standard publishes and stewards the Bulla protocol family" in readme_flat
     assert "The altered file fails its integrity check" in readme
     assert (
         "The supplied receiver record contains one action with no matching receipt"

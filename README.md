@@ -6,12 +6,14 @@ Bulla creates portable ActionReceipts for consequential agent transactions. A
 receiving system can verify the record locally, apply its own `ReliancePolicy`,
 and reconcile the receipt set against its own event records.
 
+**Build with Bulla. Require ActionReceipts.**
+
 Answerable-computing profiles for inference procurement, witnessed history,
 consequence rules, and correction networks live in repository source. They are
 not part of the installed package.
 
-Glyph Standard publishes the ActionReceipt format, Bulla, and the public test
-suite.
+Glyph Standard publishes and stewards the Bulla protocol family, the
+ActionReceipt format, and the public test suite.
 
 The application creates the receipt where an action is accepted or completed:
 an API gateway, tool router, payment handler, or agent runtime. The model does
