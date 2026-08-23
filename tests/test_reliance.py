@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import pytest
 
+from bulla.action_receipt import ReceiptVerification
 from bulla.reliance import (
     EVIDENCE_STRICT_RELIANCE_POLICY,
     ESCALATE,
@@ -27,7 +28,8 @@ from bulla.reliance import (
 # BY CONSTRUCTION today (no checkpoint; transport unbuilt).
 _GOOD = dict(
     ok=True, verified_to="attestation", authority_authentic="verified",
-    effective_grounding=None, conventions={}, chain_integrity="verified",
+    effective_grounding=None, grounding_verification="unverified",
+    conventions={}, chain_integrity="verified",
     principal_binding="verified", policy_binding="verified", scope_binding="verified",
     temporal_status="unresolved", revocation_status="unresolved", bounds_conformance="conforms",
 )
@@ -38,6 +40,12 @@ _PRAGMATIC_HASH_0471 = "sha256:2549faa0f297c8e43d9462a28b464cd2e0813e986b58555d9
 
 def test_pragmatic_relies_on_a_good_receipt():
     assert decide(_GOOD, PRAGMATIC_RELIANCE_POLICY).outcome == RELY
+
+
+def test_released_policies_accept_legacy_view_without_optional_grounding_status():
+    legacy = dict(_GOOD)
+    legacy.pop("grounding_verification")
+    assert decide(legacy, PRAGMATIC_RELIANCE_POLICY).outcome == RELY
 
 
 def test_strict_escalates_on_unresolved_not_refuses():
@@ -122,9 +130,20 @@ def test_existing_policy_definitions_and_hashes_remain_byte_identical():
 
 @pytest.mark.parametrize("grounding", ["third_party_anchored", "execution_verified"])
 def test_evidence_strict_accepts_grounding_at_or_above_floor(grounding):
-    view = dict(
-        _GOOD,
+    view = ReceiptVerification(
+        ok=True,
+        verified_to="attestation",
+        checks={},
+        reasons=(),
         effective_grounding=grounding,
+        grounding_verification="verified",
+        conventions={},
+        authority_authentic="verified",
+        chain_integrity="verified",
+        principal_binding="verified",
+        policy_binding="verified",
+        scope_binding="verified",
+        bounds_conformance="conforms",
         temporal_status="within_window",
         revocation_status="not_revoked",
     )
@@ -146,13 +165,29 @@ def test_evidence_strict_refuses_missing_or_weaker_grounding(grounding):
         "actual": grounding,
         "accepted": ">= third_party_anchored",
         "routing": REFUSE,
-    },)
+    }, {
+        "dimension": "grounding_verification",
+        "actual": "unverified",
+        "accepted": "verified under receiver-supplied context",
+        "routing": REFUSE,
+    })
 
 
 def test_evidence_strict_does_not_override_other_strict_requirements():
-    view = dict(
-        _GOOD,
+    view = ReceiptVerification(
+        ok=True,
+        verified_to="attestation",
+        checks={},
+        reasons=(),
         effective_grounding="execution_verified",
+        grounding_verification="verified",
+        conventions={},
+        authority_authentic="verified",
+        chain_integrity="verified",
+        principal_binding="verified",
+        policy_binding="verified",
+        scope_binding="verified",
+        bounds_conformance="conforms",
         temporal_status="unresolved",
         revocation_status="unresolved",
     )
@@ -161,6 +196,24 @@ def test_evidence_strict_does_not_override_other_strict_requirements():
     assert {item["dimension"] for item in decision.unmet} == {
         "temporal_status", "revocation_status",
     }
+
+
+def test_evidence_strict_refuses_high_packet_label_in_legacy_serialized_view():
+    view = dict(
+        _GOOD,
+        effective_grounding="execution_verified",
+        temporal_status="within_window",
+        revocation_status="not_revoked",
+    )
+    view.pop("grounding_verification")
+    decision = decide(view, EVIDENCE_STRICT_RELIANCE_POLICY)
+    assert decision.outcome == REFUSE
+    assert decision.unmet == ({
+        "dimension": "grounding_verification",
+        "actual": "unverified",
+        "accepted": "verified under receiver-supplied context",
+        "routing": REFUSE,
+    },)
 
 
 def test_policy_hash_is_stable_and_pinnable():

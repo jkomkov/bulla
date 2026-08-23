@@ -14,18 +14,26 @@ under a declared policy. Two claims are load-bearing:
 from __future__ import annotations
 
 import copy
+from dataclasses import replace
 
 import pytest
 
-from bulla.action_receipt import build_tool_call_receipt, sign_action_receipt, verify_receipt
+from bulla.action_receipt import (
+    ActionReceipt,
+    build_tool_call_receipt,
+    sign_action_receipt,
+    verify_receipt,
+)
 from bulla.delegation import DelegationGrant, hash_ref, sign_grant
 from bulla.envelope import Authority, Bounds, Forum, Recourse, RecourseEnvelope, Remedy
 from bulla.reliance import (
+    EVIDENCE_STRICT_RELIANCE_POLICY,
     PRAGMATIC_RELIANCE_POLICY,
     RELIANCE_ACTION_TYPE,
     ReceiptRef,
     STRICT_RELIANCE_POLICY,
     build_reliance_receipt,
+    decide,
     verify_reliance,
 )
 
@@ -78,6 +86,29 @@ def _reliance(relied_on, policy):
     return sign_action_receipt(rr, relier).to_dict()
 
 
+def _execution_grounded_relied_on():
+    signer = _key(3)
+    parsed = build_tool_call_receipt(
+        tool="inference.run",
+        call_subject={"task": "exact-artifact"},
+        diagnostic_ref={"status": "reference", "ref": "sha256:g"},
+        envelope=_relier_env(signer),
+    )
+    evidence_hash = "sha256:" + "a" * 64
+    unsigned = replace(
+        parsed,
+        schema_version="0.2",
+        evidence_refs=({
+            "name": "receiver-recomputation",
+            "hash": evidence_hash,
+            "grounding": "execution_verified",
+        },),
+        signature=None,
+        authorization=None,
+    )
+    return sign_action_receipt(unsigned, signer).to_dict(), evidence_hash
+
+
 def test_reliance_receipt_is_an_ordinary_action_receipt():
     """THE type claim: no new object — it verifies under the existing verifier."""
     rr = _reliance(_relied_on(), PRAGMATIC_RELIANCE_POLICY)
@@ -98,6 +129,75 @@ def test_reliance_verdict_recomputes():
     assert rep.checks["receipt_authentic"] is True
     with pytest.raises(TypeError, match="ambiguous"):
         bool(rep)
+
+
+def test_evidence_strict_reliance_binds_and_replays_external_grounding_context():
+    relied_on, evidence_hash = _execution_grounded_relied_on()
+    context = {evidence_hash: "execution_verified"}
+    relier = _key(7)
+    decision = decide(
+        verify_receipt(
+            relied_on,
+            verified_evidence_grounding=context,
+        ),
+        EVIDENCE_STRICT_RELIANCE_POLICY,
+    )
+    assert decision.outcome == "rely"
+    unsigned = build_reliance_receipt(
+        relied_on=relied_on,
+        policy=EVIDENCE_STRICT_RELIANCE_POLICY,
+        envelope=_relier_env(relier),
+        decision=decision,
+        verified_evidence_grounding=context,
+        timestamp="2026-08-23T00:00:00+00:00",
+    )
+    reliance = sign_action_receipt(unsigned, relier).to_dict()
+    assert reliance["action"]["subject"]["grounding_context"].startswith("sha256:")
+
+    replay = verify_reliance(
+        reliance,
+        relied_on,
+        EVIDENCE_STRICT_RELIANCE_POLICY,
+        verified_evidence_grounding=context,
+    )
+    assert replay.ok
+    assert replay.claimed == replay.recomputed == "rely"
+    assert replay.checks["grounding_context_matches"]
+
+    omitted = verify_reliance(
+        reliance,
+        relied_on,
+        EVIDENCE_STRICT_RELIANCE_POLICY,
+    )
+    assert not omitted.ok
+    assert omitted.recomputed == "refuse"
+    assert not omitted.checks["grounding_context_matches"]
+
+    wrong = verify_reliance(
+        reliance,
+        relied_on,
+        EVIDENCE_STRICT_RELIANCE_POLICY,
+        verified_evidence_grounding={evidence_hash: "third_party_anchored"},
+    )
+    assert not wrong.ok
+    assert wrong.recomputed == "refuse"
+    assert not wrong.checks["grounding_context_matches"]
+
+
+def test_serialized_grounding_status_cannot_upgrade_packet_to_rely():
+    relied_on, evidence_hash = _execution_grounded_relied_on()
+    verification = verify_receipt(relied_on)
+    serialized = verification.to_dict()
+    serialized["grounding_verification"] = "verified"
+    serialized["effective_grounding"] = "execution_verified"
+    serialized["temporal_status"] = "within_window"
+    serialized["revocation_status"] = "not_revoked"
+    decision = decide(
+        serialized,
+        EVIDENCE_STRICT_RELIANCE_POLICY,
+    )
+    assert decision.outcome == "refuse"
+    assert any(u["dimension"] == "grounding_verification" for u in decision.unmet)
 
 
 def test_reliance_binds_event_and_attestation_reference():

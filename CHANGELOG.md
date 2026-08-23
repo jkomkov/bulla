@@ -6,11 +6,15 @@
 evidence floor without changing the ActionReceipt wire formats or the canonical
 definitions of the existing strict and pragmatic policies.
 
-- Adds `ReliancePolicy.min_effective_grounding`; weaker or missing grounding returns
-  `REFUSE` when a caller selects a floor.
+- Adds `ReliancePolicy.min_effective_grounding`; weaker, missing, or
+  receiver-unverified grounding returns `REFUSE` when a caller selects a floor.
 - Publishes `reliance.evidence-strict.v1`, which requires
-  `third_party_anchored` or `execution_verified` grounding in addition to the existing
-  strict verification, authority, scope, bounds, temporal, and revocation checks.
+  `third_party_anchored` or `execution_verified` grounding accepted for the exact
+  evidence digest by receiver-supplied context, in addition to the existing strict
+  verification, authority, scope, bounds, temporal, and revocation checks.
+- Hash-binds that external context into any context-backed `bulla.rely` receipt and
+  requires the same separately supplied context for replay verification; a serialized
+  verification view cannot promote its own grounding status.
 - Preserves the exact serialized definitions and hashes of `reliance.strict.v1` and
   `reliance.pragmatic.v1`.
 - Keeps evidence grounding separate from occurrence, worldly truth, organizational

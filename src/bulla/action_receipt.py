@@ -71,7 +71,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Mapping
 
 from bulla._canonical import (
     JCS_INT_PROFILE,
@@ -107,6 +107,12 @@ GROUNDING_CLASSES = (
     "counterparty_signed",
     "third_party_anchored",
     "execution_verified",
+)
+
+GROUNDING_VERIFICATION_STATUSES = (
+    "not_applicable",
+    "unverified",
+    "verified",
 )
 
 #: Convention kinds (spec v0.2 §5). The discriminator IS the decidability
@@ -979,6 +985,14 @@ class ReceiptVerification:
     #: the act was WITHIN S (predicate recompute). "not_applicable" for a prose scope;
     #: "not_checkable" when a structured scope has no ``action.subject`` to evaluate.
     bounds_conformance: str = "not_applicable"    # conforms|violates|not_checkable|not_applicable
+    #: Additive and deliberately last for positional compatibility. Whether
+    #: every carried evidence digest/class pair was accepted by the receiver
+    #: through ``verify_receipt(..., verified_evidence_grounding=...)``. The
+    #: receipt's own grounding labels never set this to ``verified``. This
+    #: authenticates only the receiver's supplied grounding context; it does
+    #: not establish occurrence, worldly truth, organizational independence,
+    #: custody, settlement, or downstream effect.
+    grounding_verification: str = "unverified"
 
     def __bool__(self) -> bool:
         # A ReceiptVerification has NO single truth value, and the most natural
@@ -1005,6 +1019,7 @@ class ReceiptVerification:
             "verified_to": self.verified_to,
             "authority_authentic": self.authority_authentic,
             "effective_grounding": self.effective_grounding,
+            "grounding_verification": self.grounding_verification,
             "conventions": dict(self.conventions),
             "chain_integrity": self.chain_integrity,
             "principal_binding": self.principal_binding,
@@ -1027,7 +1042,12 @@ class ReceiptVerification:
         return s
 
 
-def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerification:
+def verify_receipt(
+    d: dict,
+    *,
+    public_key: bytes | None = None,
+    verified_evidence_grounding: Mapping[str, str] | None = None,
+) -> ReceiptVerification:
     """Verify an ActionReceipt dict. Fails closed and reports how far it got:
 
       digest         — hashes recompute, envelope re-validates (modality law),
@@ -1041,7 +1061,12 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
                        follow-up. Reported, never faked.
 
     Alongside the rung it reports (never folds in): ``effective_grounding``
-    (the minimum class over carried evidence — the display rule); per
+    (the minimum issuer-declared class over carried evidence — the display
+    rule) and ``grounding_verification``. The latter becomes ``verified`` only
+    when every exact evidence digest/class pair is present in the receiver's
+    separately supplied ``verified_evidence_grounding`` mapping. The caller is
+    responsible for constructing that mapping from its own anchor validation or
+    deterministic recomputation; packet-carried labels never populate it. Per
     convention, a recomputed ``conforms`` / ``violates`` / ``pinned`` status;
     and ``authority_authentic`` — whether the mandate/remedy envelope is the one
     the issuer signed. Content authenticity (``checks['signature']``) and
@@ -1075,6 +1100,41 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
 
     # ---- surfaced verdicts (about the ACT, not the record's integrity) ----
     grounding = effective_grounding(receipt.evidence_refs)
+    grounding_verification = "not_applicable"
+    if receipt.evidence_refs:
+        grounding_verification = "unverified"
+        if verified_evidence_grounding is None:
+            reasons.append(
+                "evidence grounding unverified — no receiver-supplied grounding "
+                "context accepts the carried digest/class pairs"
+            )
+        elif not isinstance(verified_evidence_grounding, Mapping):
+            reasons.append(
+                "evidence grounding unverified — receiver grounding context must "
+                "map evidence digests to grounding classes"
+            )
+        elif any(
+            not isinstance(key, str)
+            or not isinstance(value, str)
+            or value not in GROUNDING_CLASSES
+            for key, value in verified_evidence_grounding.items()
+        ):
+            reasons.append(
+                "evidence grounding unverified — receiver grounding context is malformed"
+            )
+        elif all(
+            evidence.get("grounding") in GROUNDING_CLASSES
+            and
+            verified_evidence_grounding.get(evidence["hash"])
+            == evidence.get("grounding")
+            for evidence in receipt.evidence_refs
+        ):
+            grounding_verification = "verified"
+        else:
+            reasons.append(
+                "evidence grounding unverified — the receiver context does not accept "
+                "every carried digest/class pair"
+            )
     if grounding == "self_asserted":
         reasons.append(
             "effective grounding: self_asserted — every necessary anchor is the "
@@ -1126,6 +1186,7 @@ def verify_receipt(d: dict, *, public_key: bytes | None = None) -> ReceiptVerifi
         return ReceiptVerification(
             ok, rung, checks, tuple(reasons),
             conventions=conv_status, effective_grounding=grounding,
+            grounding_verification=grounding_verification,
             authority_authentic=authority, bounds_conformance=bounds_conf, **dims,
         )
 

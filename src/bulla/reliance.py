@@ -29,7 +29,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import re
-from typing import Any
+from typing import Any, Mapping
 
 from bulla.executable_form import definition_hash
 
@@ -104,6 +104,10 @@ _CONVENTION_VALUES = frozenset({"conforms", "violates", "pinned"})
 _VIEW_KEYS = frozenset({
     "ok", "verified_to", "authority_authentic", "effective_grounding", "conventions",
     *_DIMENSIONS,
+})
+_OPTIONAL_VIEW_KEYS = frozenset({"grounding_verification"})
+_GROUNDING_VERIFICATION_VALUES = frozenset({
+    "not_applicable", "unverified", "verified",
 })
 _HASH_RE = re.compile(r"sha256:[0-9a-f]{64}\Z")
 _POLICY_NAME_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}\Z")
@@ -211,9 +215,11 @@ PRAGMATIC_RELIANCE_POLICY = ReliancePolicy(
     revocation_status=("not_revoked", "unresolved", "not_applicable"),
 )
 
-#: Strict receiver policy plus an evidence-grounding floor. Grounding describes the
-#: supplied support; it does not establish occurrence, worldly truth, organizational
-#: independence, custody, settlement, or downstream effect.
+#: Strict receiver policy plus a receiver-verified evidence-grounding floor. The
+#: receipt's grounding labels cannot satisfy this policy by themselves: every exact
+#: evidence digest/class pair must also be accepted through the receiver's external
+#: grounding context. Neither fact establishes occurrence, worldly truth,
+#: organizational independence, custody, settlement, or downstream effect.
 EVIDENCE_STRICT_RELIANCE_POLICY = ReliancePolicy(
     name="reliance.evidence-strict.v1",
     min_effective_grounding="third_party_anchored",
@@ -250,7 +256,11 @@ class RelianceDecision:
 def _view_of(verification: Any) -> dict:
     """Accept either a ``ReceiptVerification`` (via its ``to_dict``) or an already-
     serialized view dict. Never uses the object in boolean context (it would raise)."""
-    if isinstance(verification, dict):
+    from bulla.action_receipt import ReceiptVerification
+
+    trusted_verification = isinstance(verification, ReceiptVerification)
+    serialized = isinstance(verification, dict)
+    if serialized:
         view = verification
     else:
         try:
@@ -262,7 +272,7 @@ def _view_of(verification: Any) -> dict:
     if not isinstance(view, dict):
         raise RelianceError("verification view must serialize to an object")
     missing = _VIEW_KEYS - set(view)
-    extra = set(view) - _VIEW_KEYS
+    extra = set(view) - _VIEW_KEYS - _OPTIONAL_VIEW_KEYS
     if missing:
         raise RelianceError(
             f"verification view is incomplete; missing dimensions {sorted(missing)}"
@@ -271,6 +281,15 @@ def _view_of(verification: Any) -> dict:
         raise RelianceError(
             f"verification view contains unknown dimensions {sorted(extra)}"
         )
+    view = dict(view)
+    view.setdefault("grounding_verification", "unverified")
+    # A serialized view is a portable report, not the receiver's external
+    # grounding context. Never let packet-carried JSON promote this status.
+    # Context-backed verification remains available through the typed
+    # ReceiptVerification returned by verify_receipt, and portable reliance
+    # binds the external context separately below.
+    if not trusted_verification and view["grounding_verification"] == "verified":
+        view["grounding_verification"] = "unverified"
     if not isinstance(view["ok"], bool):
         raise RelianceError("verification view ok must be boolean")
     if not isinstance(view["verified_to"], str) or view["verified_to"] not in _RUNGS:
@@ -280,6 +299,15 @@ def _view_of(verification: Any) -> dict:
         not isinstance(grounding, str) or grounding not in _GROUNDING_VALUES
     ):
         raise RelianceError(f"verification view has unknown grounding {grounding!r}")
+    grounding_verification = view["grounding_verification"]
+    if (
+        not isinstance(grounding_verification, str)
+        or grounding_verification not in _GROUNDING_VERIFICATION_VALUES
+    ):
+        raise RelianceError(
+            "verification view has unknown grounding verification "
+            f"{grounding_verification!r}"
+        )
     conventions = view["conventions"]
     if not isinstance(conventions, dict):
         raise RelianceError("verification view conventions must be an object")
@@ -342,15 +370,21 @@ def decide(verification: Any, policy: ReliancePolicy) -> RelianceDecision:
         unmet.append({"dimension": "verified_to", "actual": view["verified_to"],
                       "accepted": f">= {floor}", "routing": REFUSE})
     grounding_floor = policy.min_effective_grounding
-    if grounding_floor is not None and _grounding_below_floor(
-        view["effective_grounding"], grounding_floor
-    ):
-        unmet.append({
-            "dimension": "effective_grounding",
-            "actual": view["effective_grounding"],
-            "accepted": f">= {grounding_floor}",
-            "routing": REFUSE,
-        })
+    if grounding_floor is not None:
+        if _grounding_below_floor(view["effective_grounding"], grounding_floor):
+            unmet.append({
+                "dimension": "effective_grounding",
+                "actual": view["effective_grounding"],
+                "accepted": f">= {grounding_floor}",
+                "routing": REFUSE,
+            })
+        if view["grounding_verification"] != "verified":
+            unmet.append({
+                "dimension": "grounding_verification",
+                "actual": view["grounding_verification"],
+                "accepted": "verified under receiver-supplied context",
+                "routing": REFUSE,
+            })
 
     for dim in _DIMENSIONS:
         accepted = getattr(policy, dim)
@@ -456,13 +490,21 @@ class RelianceVerification:
         }
 
 
-def _verdict_pin(relied_ref: ReceiptRef, policy_ref: str, outcome: str) -> str:
+def _verdict_pin(
+    relied_ref: ReceiptRef,
+    policy_ref: str,
+    outcome: str,
+    grounding_context: str | None = None,
+) -> str:
     """The recomputable reliance verdict, pinned — ``diagnostic_ref.ref`` points at
     this. A third party recomputes the verdict and compares; the pin makes the claim
     explicit and content-addressed."""
-    return definition_hash({
+    payload = {
         "relied_on": relied_ref.to_dict(), "policy": policy_ref, "decision": outcome,
-    })
+    }
+    if grounding_context is not None:
+        payload["grounding_context"] = grounding_context
+    return definition_hash(payload)
 
 
 def _relied_grounding(relied_on: dict) -> str:
@@ -472,6 +514,35 @@ def _relied_grounding(relied_on: dict) -> str:
     return "counterparty_signed" if relied_on.get("signature") else "self_asserted"
 
 
+def _grounding_context_ref(
+    verified_evidence_grounding: Mapping[str, str] | None,
+) -> str | None:
+    """Hash the receiver's exact external grounding context.
+
+    The context remains a verifier input; only its digest enters a reliance
+    receipt. Packet-carried data therefore cannot substitute a new context.
+    """
+    if verified_evidence_grounding is None:
+        return None
+    if not isinstance(verified_evidence_grounding, Mapping):
+        raise RelianceError(
+            "verified_evidence_grounding must map evidence digests to grounding classes"
+        )
+    normalized = dict(verified_evidence_grounding)
+    if any(
+        not isinstance(key, str)
+        or not key
+        or not isinstance(value, str)
+        or value not in _GROUNDING_VALUES
+        for key, value in normalized.items()
+    ):
+        raise RelianceError("verified_evidence_grounding contains a malformed entry")
+    return definition_hash({
+        "profile": "bulla.evidence-grounding-context/1",
+        "accepted_evidence": normalized,
+    })
+
+
 def build_reliance_receipt(
     *,
     relied_on: dict,
@@ -479,17 +550,24 @@ def build_reliance_receipt(
     envelope,
     decision: RelianceDecision | None = None,
     public_key: bytes | None = None,
+    verified_evidence_grounding: Mapping[str, str] | None = None,
     timestamp: str = "",
     producer: dict | None = None,
 ):
     """Build a ``bulla.rely`` ActionReceipt recording this relying party's decision
     about ``relied_on`` under ``policy``. If ``decision`` is not supplied it is computed
-    here via ``decide(verify_receipt(relied_on), policy)``. Sign the result with the
-    RELIER's own signer (``sign_action_receipt``) so the reliance is itself answerable."""
+    here via ``decide(verify_receipt(relied_on), policy)``. When supplied, the exact
+    ``verified_evidence_grounding`` context is hash-bound into the subject and verdict
+    pin; it is not copied into the packet. Sign the result with the RELIER's own signer
+    (``sign_action_receipt``) so the reliance is itself answerable."""
     from bulla.action_receipt import build_action_receipt, verify_receipt
 
     relied_ref = ReceiptRef.from_receipt(relied_on)
-    recomputed = decide(verify_receipt(relied_on, public_key=public_key), policy)
+    recomputed = decide(verify_receipt(
+        relied_on,
+        public_key=public_key,
+        verified_evidence_grounding=verified_evidence_grounding,
+    ), policy)
     if decision is None:
         decision = recomputed
     elif decision != recomputed:
@@ -498,9 +576,14 @@ def build_reliance_receipt(
     subject = {
         "relied_on": relied_ref.to_dict(), "policy": policy_ref, "decision": decision.outcome,
     }
+    grounding_context_ref = _grounding_context_ref(verified_evidence_grounding)
+    if grounding_context_ref is not None:
+        subject["grounding_context"] = grounding_context_ref
     return build_action_receipt(
         action={"type": RELIANCE_ACTION_TYPE, "subject": subject},
-        diagnostic_ref={"status": "reference", "ref": _verdict_pin(relied_ref, policy_ref, decision.outcome)},
+        diagnostic_ref={"status": "reference", "ref": _verdict_pin(
+            relied_ref, policy_ref, decision.outcome, grounding_context_ref,
+        )},
         envelope=envelope,
         evidence_refs=({"name": "relied_on", "hash": relied_ref.attestation,
                         "grounding": _relied_grounding(relied_on)},),
@@ -509,13 +592,22 @@ def build_reliance_receipt(
     )
 
 
-def verify_reliance(reliance: dict, relied_on: dict, policy: ReliancePolicy,
-                    *, public_key: bytes | None = None) -> RelianceVerification:
+def verify_reliance(
+    reliance: dict,
+    relied_on: dict,
+    policy: ReliancePolicy,
+    *,
+    public_key: bytes | None = None,
+    verified_evidence_grounding: Mapping[str, str] | None = None,
+) -> RelianceVerification:
     """Authenticate a ``bulla.rely`` receipt and recompute its declared decision.
 
     ``ok`` is true only when the relier's own receipt reaches the attestation rung with
-    a verified envelope and every linkage/decision check passes. The relied-on receipt
-    may itself fail verification — recording REFUSE is still a meaningful reliance act.
+    a verified envelope and every linkage/decision check passes. A context-backed
+    decision requires the verifier to supply the same external
+    ``verified_evidence_grounding`` mapping whose hash the receipt binds. The relied-on
+    receipt may itself fail verification — recording REFUSE is still a meaningful
+    reliance act.
     """
     from bulla.action_receipt import verify_receipt
 
@@ -544,7 +636,11 @@ def verify_reliance(reliance: dict, relied_on: dict, policy: ReliancePolicy,
     policy_ref = f"{policy.name}@{policy.policy_hash}"
     recomputed: RelianceDecision | None = None
     try:
-        recomputed = decide(verify_receipt(relied_on_doc, public_key=public_key), policy)
+        recomputed = decide(verify_receipt(
+            relied_on_doc,
+            public_key=public_key,
+            verified_evidence_grounding=verified_evidence_grounding,
+        ), policy)
     except RelianceError as exc:
         reasons.append(str(exc))
 
@@ -560,13 +656,23 @@ def verify_reliance(reliance: dict, relied_on: dict, policy: ReliancePolicy,
         and receipt_verification.authority_authentic == "verified"
     )
 
+    expected_grounding_context = _grounding_context_ref(verified_evidence_grounding)
+    expected_subject_keys = {"relied_on", "policy", "decision"}
+    if expected_grounding_context is not None:
+        expected_subject_keys.add("grounding_context")
+
     checks = {
         "receipt_authentic": self_authentic,
         "action_type": action.get("type") == RELIANCE_ACTION_TYPE,
-        "subject_shape": set(subject) == {"relied_on", "policy", "decision"},
+        "subject_shape": set(subject) == expected_subject_keys,
         "decision_value": claimed in (RELY, REFUSE, ESCALATE),
         "relied_on_matches": claimed_ref is not None and claimed_ref == expected_ref,
         "policy_matches": subject.get("policy") == policy_ref,
+        "grounding_context_matches": (
+            subject.get("grounding_context") == expected_grounding_context
+            if expected_grounding_context is not None
+            else "grounding_context" not in subject
+        ),
         "decision_recomputes": recomputed is not None and claimed == recomputed.outcome,
         "evidence_binding": (
             expected_ref is not None
@@ -578,7 +684,12 @@ def verify_reliance(reliance: dict, relied_on: dict, policy: ReliancePolicy,
             expected_ref is not None
             and recomputed is not None
             and (diagnostic.get("ref")
-                 == _verdict_pin(expected_ref, policy_ref, recomputed.outcome))
+                 == _verdict_pin(
+                     expected_ref,
+                     policy_ref,
+                     recomputed.outcome,
+                     expected_grounding_context,
+                 ))
         ),
     }
     for name, passed in checks.items():

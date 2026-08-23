@@ -21,9 +21,13 @@ green, and preserve the existing release ceremony. External review is not a publ
 - The new optional field is omitted when unset.
 - Source-only profiles remain outside the wheel and sdist.
 
-Grounding is a supplied evidence classification. It does not establish occurrence,
-worldly truth, organizational independence, custody, settlement, or downstream
-effect.
+Grounding is a supplied evidence classification. A receipt-carried label cannot
+satisfy the new policy without receiver-supplied context accepting the exact
+evidence digest/class pair. That context records the receiver's validation input;
+it remains external to the provider packet. Context-backed `bulla.rely` receipts bind
+its exact hash and require the same separately supplied context to replay. This does
+not establish occurrence, worldly truth, organizational independence, custody,
+settlement, or downstream effect.
 
 ## Publication sequence
 
