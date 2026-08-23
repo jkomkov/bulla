@@ -4,7 +4,7 @@
     "The repository-local projection generator and projection are recorded separately because the monorepo pins the public source commit while the public repository supports checkout-local execution; neither file is a reproduction-kit member.",
     "The profile remains source-only and is excluded from wheel, sdist, stable exports, and installed CLI."
   ],
-  "member_set_sha256": "sha256:9098e746a3938a1ac3b99c4d78a55f402edbc803b78cf98f45bf02bb6f8dc250",
+  "member_set_sha256": "sha256:fcb9340dcddd6596de5787b28d80469e2a187fd135bdfa95159dd08853de47ea",
   "members": [
     {
       "byte_length": 19642,
@@ -159,7 +159,7 @@
     {
       "byte_length": 106,
       "path": "spec/inference-clearing/inference-clearing-reproduction-kit.tar.sha256",
-      "sha256": "sha256:e2d3b9d65834ac93f5c4e71f4966f567520525b8b786b917ebc5b11d65908078"
+      "sha256": "sha256:d886f4cf2e045f01578c79b12cc6ff8616156e658a938807c9b6f19512b64588"
     },
     {
       "byte_length": 1539,
