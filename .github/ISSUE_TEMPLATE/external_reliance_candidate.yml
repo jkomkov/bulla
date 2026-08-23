@@ -1,0 +1,55 @@
+name: External reliance candidate
+description: Submit one public receiver-policy and boundary packet for Glyph Standard's D evidence ledger.
+title: "[External reliance candidate] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is a public evidence intake. Submit only records and relationship disclosures that may remain public permanently. A candidate is `NOT_COUNTED` until Glyph Standard's dedicated intake authority signs a qualification event and ledger head and the resulting pull request merges.
+  - type: input
+    id: package_url
+    attributes:
+      label: Public packet URL
+      description: Exact public HTTPS URL ending in `/package.json`. Every declared member must be available from the same directory and origin.
+      placeholder: https://example.org/bulla-reliance-packet/package.json
+    validations:
+      required: true
+  - type: input
+    id: package_root
+    attributes:
+      label: Candidate package root
+      description: SHA-256 of the exact `package.json` bytes, formatted as `sha256:<64 lowercase hex>`.
+      placeholder: sha256:…
+    validations:
+      required: true
+  - type: input
+    id: receiver_organization
+    attributes:
+      label: Receiver organization
+      description: Organization responsible for the receiver-signed policy and boundary receipts.
+    validations:
+      required: true
+  - type: input
+    id: boundary
+    attributes:
+      label: Consequential boundary
+      description: PAY, DEPLOY, GRANT_CONTROL, HANDOFF, or OTHER, plus the exact public boundary reference.
+    validations:
+      required: true
+  - type: textarea
+    id: disclosure
+    attributes:
+      label: Control and relationship disclosure
+      description: Identify provider/receiver control domains and any relationship with Glyph Standard.
+    validations:
+      required: true
+  - type: checkboxes
+    id: public_consent
+    attributes:
+      label: Publication consent
+      options:
+        - label: I confirm that this packet and all evidence it references are public and may be retained in repository history.
+          required: true
+        - label: I understand that a passing checker result is only `VALID_CANDIDATE · NOT_COUNTED` and does not establish qualification, organizational independence, provider truth, or a downstream effect.
+          required: true
