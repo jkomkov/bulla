@@ -179,8 +179,9 @@ that the record itself is complete.
 
 `ReliancePolicy` turns a complete verification view into `RELY`, `REFUSE`, or
 `ESCALATE`. Bulla publishes strict and pragmatic policies, plus an
-evidence-strict policy that also requires third-party-anchored or
-execution-verified grounding.
+evidence-strict policy that requires both a third-party-anchored or
+execution-verified label and the receiver's acceptance of the exact evidence
+digest/class pair through separately supplied grounding context.
 
 ```python
 from bulla import (
@@ -200,9 +201,16 @@ assert {item["dimension"] for item in decision.unmet} >= {
 ```
 
 The application chooses the policy and decides what downstream action follows.
-A grounding class describes the supplied evidence; it does not establish
-occurrence, worldly truth, organizational independence, custody, settlement,
-or downstream effect.
+Receipt-carried grounding labels do not satisfy the evidence-strict policy by
+themselves. After validating an anchor or recomputing evidence, a receiver may
+pass its resulting `verified_evidence_grounding` mapping to `verify_receipt`.
+That external context is a receiver input, not a fact the packet may supply.
+When the receiver records the result as a `bulla.rely` receipt, Bulla binds the
+exact context hash into the signed subject; replay verification requires the
+same context as a separate input. A serialized verification view cannot promote
+its own grounding status.
+Even then, a grounding class does not establish occurrence, worldly truth,
+organizational independence, custody, settlement, or downstream effect.
 
 ## Keep the verification kit
 

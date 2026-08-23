@@ -561,6 +561,40 @@ def test_effective_grounding_is_min_over_evidence():
     assert any("attested testimony" in x for x in v.reasons)
 
 
+def test_packet_grounding_label_cannot_satisfy_evidence_strict_without_receiver_context():
+    """A valid issuer signature authenticates the label, not the evidence behind it."""
+    from bulla.action_receipt import sign_action_receipt
+    from bulla.identity import LocalEd25519Signer
+    from bulla.reliance import EVIDENCE_STRICT_RELIANCE_POLICY, REFUSE, RELY, decide
+
+    signer = LocalEd25519Signer.generate()
+    evidence_hash = "sha256:" + "0" * 64
+    receipt = sign_action_receipt(
+        _receipt(evidence_refs=({
+            "name": "unavailable-recomputation",
+            "hash": evidence_hash,
+            "grounding": "execution_verified",
+        },)),
+        signer,
+    )
+
+    packet_only = verify_receipt(receipt.to_dict(), public_key=signer.public_key)
+    assert packet_only.ok
+    assert packet_only.effective_grounding == "execution_verified"
+    assert packet_only.grounding_verification == "unverified"
+    decision = decide(packet_only, EVIDENCE_STRICT_RELIANCE_POLICY)
+    assert decision.outcome == REFUSE
+    assert any(u["dimension"] == "grounding_verification" for u in decision.unmet)
+
+    receiver_accepted = verify_receipt(
+        receipt.to_dict(),
+        public_key=signer.public_key,
+        verified_evidence_grounding={evidence_hash: "execution_verified"},
+    )
+    assert receiver_accepted.grounding_verification == "verified"
+    assert decide(receiver_accepted, EVIDENCE_STRICT_RELIANCE_POLICY).outcome == RELY
+
+
 def test_v02_requires_grounding_on_evidence():
     with pytest.raises(ActionReceiptError, match="grounding"):
         _receipt(evidence_refs=({"name": "diff", "hash": "sha256:11"},))
@@ -574,6 +608,20 @@ def test_v01_receipts_still_verify_without_grounding():
     assert d["schema_version"] == "0.1"
     v = verify_receipt(d)
     assert v.ok and v.effective_grounding is None
+
+
+def test_v01_evidence_without_grounding_stays_unverified_under_supplied_context():
+    """The additive context must not crash or upgrade a valid historical v0.1 ref."""
+    vectors = Path(__file__).resolve().parents[1] / "spec" / "vectors"
+    d = json.loads((vectors / "valid-release.json").read_text())
+    d["evidence_refs"] = [{"name": "legacy", "hash": "sha256:11"}]
+    d.pop("conventions", None)
+    receipt = ActionReceipt.from_dict(d)
+    d["hashes"] = receipt.hashes()
+    v = verify_receipt(d, verified_evidence_grounding={})
+    assert v.ok
+    assert v.effective_grounding is None
+    assert v.grounding_verification == "unverified"
 
 
 def test_witness_receipt_carries_conventions():
