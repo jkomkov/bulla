@@ -1,7 +1,8 @@
 name: External reliance candidate
 description: Submit one public receiver-policy and boundary packet for Glyph Standard's D evidence ledger.
 title: "[External reliance candidate] "
-labels: []
+labels:
+  - external-reliance-candidate
 body:
   - type: markdown
     attributes:
