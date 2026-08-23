@@ -14,7 +14,7 @@ signal — how much convention two tools leave undisclosed at their seam —
 not an execution-failure predictor. See FALSIFICATIONS.md.
 """
 
-__version__ = "0.47.1"
+__version__ = "0.48.0"
 
 from bulla.model import (
     BlindSpot,
@@ -105,6 +105,7 @@ from bulla.delegation import (
     verify_delegation,
 )
 from bulla.reliance import (
+    EVIDENCE_STRICT_RELIANCE_POLICY,
     PRAGMATIC_RELIANCE_POLICY,
     STRICT_RELIANCE_POLICY,
     ReceiptRef,
@@ -233,6 +234,7 @@ __all__ = [
     "ReliancePolicy",
     "RelianceDecision",
     "RelianceVerification",
+    "EVIDENCE_STRICT_RELIANCE_POLICY",
     "STRICT_RELIANCE_POLICY",
     "PRAGMATIC_RELIANCE_POLICY",
     "build_reliance_receipt",

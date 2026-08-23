@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package": "bulla",
-  "release": "0.47.1",
+  "release": "0.48.0",
   "normative_action_receipt": "0.2",
   "released_experimental_action_receipts": [
     "0.3",
@@ -11,18 +11,19 @@
     "wheel": {
       "algorithm": "sha256-sorted-posix-lines-v1",
       "count": 194,
-      "sha256": "dc4600b973b850f6144e2be890d2569b6e4f23f886b70e43ba2cde0813448449"
+      "sha256": "f7355540275925cfe15aef39938e56909f6fe66d9775679641b64601110d66b3"
     },
     "sdist": {
       "algorithm": "sha256-sorted-posix-lines-v1",
-      "count": 1352,
-      "sha256": "fa1ca26bfc838a9e91b6d5e6e45cad1c07724d4e4d01725c6a500c8e4a5efd32"
+      "count": 1353,
+      "sha256": "b6117e32b7443f53d1f26b8d6ea9f8ff64aa36f94d848a2a45d1bbeab07e5ebf"
     }
   },
   "generated_archive_bytes": {
-    "metadata_sha256": "06a2291d82f108e5b1e5d834e8bb72055a66d83c65a2fa84f44b927dcd5ac273"
+    "metadata_sha256": "ae71b5ae4b04a77c549b461421bf5ab06346c39a254b4e84f9cb31e616c4616b"
   },
   "required_root_exports": [
+    "EVIDENCE_STRICT_RELIANCE_POLICY",
     "event_coverage",
     "observed_record_sha256",
     "operational_envelope",
@@ -52,7 +53,7 @@
     ".github/release-finalization-requirements.txt",
     ".github/workflows/audit-release-slots.yml",
     "distribution-policy.json",
-    "docs/RELEASE-0.47.1.md",
+    "docs/RELEASE-0.48.0.md",
     "docs/RELEASE-LINEAGE.md",
     "examples/wrap-your-agent/run_demo.py",
     "releases/release-repository-controls.json",

@@ -317,7 +317,7 @@ def test_no_stable_export_or_cli_surface() -> None:
     assert "acceptance-contract" not in cli.stdout
 
 
-def test_version_remains_0471() -> None:
+def test_version_matches_current_release() -> None:
     import bulla
 
-    assert bulla.__version__ == "0.47.1"
+    assert bulla.__version__ == "0.48.0"

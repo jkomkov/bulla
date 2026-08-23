@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.48.0 — 2026-08-23
+
+**Grounding-aware receiver policy.** This release adds one optional receiver-side
+evidence floor without changing the ActionReceipt wire formats or the canonical
+definitions of the existing strict and pragmatic policies.
+
+- Adds `ReliancePolicy.min_effective_grounding`; weaker or missing grounding returns
+  `REFUSE` when a caller selects a floor.
+- Publishes `reliance.evidence-strict.v1`, which requires
+  `third_party_anchored` or `execution_verified` grounding in addition to the existing
+  strict verification, authority, scope, bounds, temporal, and revocation checks.
+- Preserves the exact serialized definitions and hashes of `reliance.strict.v1` and
+  `reliance.pragmatic.v1`.
+- Keeps evidence grounding separate from occurrence, worldly truth, organizational
+  independence, custody, settlement, and downstream effects.
+
 ## 0.47.1 — 2026-08-04
 
 **First action to missing action.** This release contains the 0.47.0 candidate
