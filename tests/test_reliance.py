@@ -12,6 +12,7 @@ from __future__ import annotations
 import pytest
 
 from bulla.reliance import (
+    EVIDENCE_STRICT_RELIANCE_POLICY,
     ESCALATE,
     PRAGMATIC_RELIANCE_POLICY,
     REFUSE,
@@ -30,6 +31,9 @@ _GOOD = dict(
     principal_binding="verified", policy_binding="verified", scope_binding="verified",
     temporal_status="unresolved", revocation_status="unresolved", bounds_conformance="conforms",
 )
+
+_STRICT_HASH_0471 = "sha256:a05fc64115edc0676b4bd0092c0cadf94400abf6cbb7d32520944bdefdc5ee0b"
+_PRAGMATIC_HASH_0471 = "sha256:2549faa0f297c8e43d9462a28b464cd2e0813e986b58555d9b29572351fc0b88"
 
 
 def test_pragmatic_relies_on_a_good_receipt():
@@ -109,6 +113,56 @@ def test_accepting_unresolved_revocation_is_expressible_and_recorded():
     assert PRAGMATIC_RELIANCE_POLICY.policy_hash != STRICT_RELIANCE_POLICY.policy_hash
 
 
+def test_existing_policy_definitions_and_hashes_remain_byte_identical():
+    assert "min_effective_grounding" not in STRICT_RELIANCE_POLICY.to_dict()
+    assert "min_effective_grounding" not in PRAGMATIC_RELIANCE_POLICY.to_dict()
+    assert STRICT_RELIANCE_POLICY.policy_hash == _STRICT_HASH_0471
+    assert PRAGMATIC_RELIANCE_POLICY.policy_hash == _PRAGMATIC_HASH_0471
+
+
+@pytest.mark.parametrize("grounding", ["third_party_anchored", "execution_verified"])
+def test_evidence_strict_accepts_grounding_at_or_above_floor(grounding):
+    view = dict(
+        _GOOD,
+        effective_grounding=grounding,
+        temporal_status="within_window",
+        revocation_status="not_revoked",
+    )
+    assert decide(view, EVIDENCE_STRICT_RELIANCE_POLICY).outcome == RELY
+
+
+@pytest.mark.parametrize("grounding", [None, "self_asserted", "counterparty_signed"])
+def test_evidence_strict_refuses_missing_or_weaker_grounding(grounding):
+    view = dict(
+        _GOOD,
+        effective_grounding=grounding,
+        temporal_status="within_window",
+        revocation_status="not_revoked",
+    )
+    decision = decide(view, EVIDENCE_STRICT_RELIANCE_POLICY)
+    assert decision.outcome == REFUSE
+    assert decision.unmet == ({
+        "dimension": "effective_grounding",
+        "actual": grounding,
+        "accepted": ">= third_party_anchored",
+        "routing": REFUSE,
+    },)
+
+
+def test_evidence_strict_does_not_override_other_strict_requirements():
+    view = dict(
+        _GOOD,
+        effective_grounding="execution_verified",
+        temporal_status="unresolved",
+        revocation_status="unresolved",
+    )
+    decision = decide(view, EVIDENCE_STRICT_RELIANCE_POLICY)
+    assert decision.outcome == ESCALATE
+    assert {item["dimension"] for item in decision.unmet} == {
+        "temporal_status", "revocation_status",
+    }
+
+
 def test_policy_hash_is_stable_and_pinnable():
     p = ReliancePolicy(name="payments.v1", bounds_conformance=("conforms",))
     assert p.policy_hash == p.policy_hash            # deterministic
@@ -124,6 +178,7 @@ def test_policy_hash_is_stable_and_pinnable():
         {"name": ""},
         {"name": "line\nbreak"},
         {"name": "bad-rung", "min_verified_to": "maybe"},
+        {"name": "bad-grounding-floor", "min_effective_grounding": "plausible"},
         {"name": "empty-values", "scope_binding": ()},
         {"name": "unknown-value", "scope_binding": ("verified", "invented")},
         {"name": "non-string-value", "scope_binding": ("verified", 1)},

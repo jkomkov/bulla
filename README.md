@@ -23,7 +23,7 @@ Bulla supports Python 3.10 and later. Receipt creation and file-integrity checks
 run locally and require no hosted Bulla service.
 
 ```bash
-python -m pip install "bulla==0.47.1"
+python -m pip install "bulla==0.48.0"
 bulla demo
 ```
 
@@ -175,6 +175,35 @@ Receipt integrity is unchanged in the second comparison. The supplied receiver
 record contains one action with no matching receipt. Bulla does not establish
 that the record itself is complete.
 
+## Apply a receiver policy
+
+`ReliancePolicy` turns a complete verification view into `RELY`, `REFUSE`, or
+`ESCALATE`. Bulla publishes strict and pragmatic policies, plus an
+evidence-strict policy that also requires third-party-anchored or
+execution-verified grounding.
+
+```python
+from bulla import (
+    EVIDENCE_STRICT_RELIANCE_POLICY,
+    decide,
+    receipt_for,
+    verify_receipt,
+)
+
+receipt = receipt_for("network.egress", {"event_id": "action-001"})
+verification = verify_receipt(receipt)
+decision = decide(verification, EVIDENCE_STRICT_RELIANCE_POLICY)
+assert decision.outcome == "refuse"
+assert {item["dimension"] for item in decision.unmet} >= {
+    "verified_to", "effective_grounding"
+}
+```
+
+The application chooses the policy and decides what downstream action follows.
+A grounding class describes the supplied evidence; it does not establish
+occurrence, worldly truth, organizational independence, custody, settlement,
+or downstream effect.
+
 ## Keep the verification kit
 
 The package carries the v0.2 specification, constructed examples, expected
@@ -210,7 +239,7 @@ bulla receipt drill RECEIPT.json --format text
 
 ## Published package and source profiles
 
-Bulla 0.47.1 ships ActionReceipt creation and verification, explicit reliance
+Bulla 0.48.0 ships ActionReceipt creation and verification, explicit reliance
 policy, and coverage reconciliation. The following examples are experimental
 repository-source profiles. They do not add installed commands or stable Python
 exports.

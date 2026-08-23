@@ -96,9 +96,10 @@ _DIMENSION_VALUES: dict[str, frozenset[str]] = {
     }),
 }
 
-_GROUNDING_VALUES = frozenset({
+_GROUNDING_ORDER = (
     "self_asserted", "counterparty_signed", "third_party_anchored", "execution_verified",
-})
+)
+_GROUNDING_VALUES = frozenset(_GROUNDING_ORDER)
 _CONVENTION_VALUES = frozenset({"conforms", "violates", "pinned"})
 _VIEW_KEYS = frozenset({
     "ok", "verified_to", "authority_authentic", "effective_grounding", "conventions",
@@ -132,6 +133,9 @@ class ReliancePolicy:
     bounds_conformance: tuple[str, ...] | None = ("conforms", "not_applicable")
     temporal_status: tuple[str, ...] | None = ("within_window", "not_applicable")
     revocation_status: tuple[str, ...] | None = ("not_revoked", "not_applicable")
+    # Additive and deliberately last: existing positional call sites retain their
+    # argument order. None is omitted from the canonical definition.
+    min_effective_grounding: str | None = None
 
     def __post_init__(self) -> None:
         if not isinstance(self.name, str) or _POLICY_NAME_RE.fullmatch(self.name) is None:
@@ -141,6 +145,14 @@ class ReliancePolicy:
         if self.min_verified_to not in _RUNGS:
             raise RelianceError(
                 f"min_verified_to must be one of {_RUNGS}, got {self.min_verified_to!r}"
+            )
+        if (
+            self.min_effective_grounding is not None
+            and self.min_effective_grounding not in _GROUNDING_VALUES
+        ):
+            raise RelianceError(
+                "min_effective_grounding must be None or one of "
+                f"{_GROUNDING_ORDER}, got {self.min_effective_grounding!r}"
             )
         if not isinstance(self.require_ok, bool) or not isinstance(
             self.require_conventions_conform, bool
@@ -169,6 +181,9 @@ class ReliancePolicy:
             "min_verified_to": self.min_verified_to,
             "require_conventions_conform": self.require_conventions_conform,
         }
+        # Preserve the canonical definitions and hashes of the released v1 policies.
+        if self.min_effective_grounding is not None:
+            out["min_effective_grounding"] = self.min_effective_grounding
         for dim in _DIMENSIONS:
             v = getattr(self, dim)
             out[dim] = list(v) if v is not None else None
@@ -194,6 +209,14 @@ PRAGMATIC_RELIANCE_POLICY = ReliancePolicy(
     name="reliance.pragmatic.v1",
     temporal_status=("within_window", "unresolved", "not_applicable"),
     revocation_status=("not_revoked", "unresolved", "not_applicable"),
+)
+
+#: Strict receiver policy plus an evidence-grounding floor. Grounding describes the
+#: supplied support; it does not establish occurrence, worldly truth, organizational
+#: independence, custody, settlement, or downstream effect.
+EVIDENCE_STRICT_RELIANCE_POLICY = ReliancePolicy(
+    name="reliance.evidence-strict.v1",
+    min_effective_grounding="third_party_anchored",
 )
 
 
@@ -280,6 +303,12 @@ def _rung_below_floor(actual: str, floor: str) -> bool:
     return a < f
 
 
+def _grounding_below_floor(actual: str | None, floor: str) -> bool:
+    if actual is None:
+        return True
+    return _GROUNDING_ORDER.index(actual) < _GROUNDING_ORDER.index(floor)
+
+
 def decide(verification: Any, policy: ReliancePolicy) -> RelianceDecision:
     """Decide whether to rely on a verified receipt under a declared policy. Pure and
     crypto-free — a relying party (or any auditor) recomputes it from the verification
@@ -312,6 +341,16 @@ def decide(verification: Any, policy: ReliancePolicy) -> RelianceDecision:
     if _rung_below_floor(view["verified_to"], floor):
         unmet.append({"dimension": "verified_to", "actual": view["verified_to"],
                       "accepted": f">= {floor}", "routing": REFUSE})
+    grounding_floor = policy.min_effective_grounding
+    if grounding_floor is not None and _grounding_below_floor(
+        view["effective_grounding"], grounding_floor
+    ):
+        unmet.append({
+            "dimension": "effective_grounding",
+            "actual": view["effective_grounding"],
+            "accepted": f">= {grounding_floor}",
+            "routing": REFUSE,
+        })
 
     for dim in _DIMENSIONS:
         accepted = getattr(policy, dim)
