@@ -1,0 +1,44 @@
+name: Independent witness candidate
+description: Submit one public, closed receipt-witness candidate for W review.
+title: "Independent witness candidate: "
+labels: [independent-witness-candidate]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every submitted field and every candidate member is public. Do not include customer records, personal data, secrets, credentials, or material you lack authority to publish. A valid candidate remains `NOT_COUNTED` until repository review and a merged `QUALIFY` event.
+  - type: input
+    id: candidate_url
+    attributes:
+      label: Public candidate package URL
+      description: Exact HTTPS URL ending in `/package.json` for the 15-member candidate.
+      placeholder: https://operator.example/evidence/witness-candidate/package.json
+    validations:
+      required: true
+  - type: input
+    id: endpoint
+    attributes:
+      label: Public witness endpoint
+      description: HTTPS base URL declared in the operator manifest.
+      placeholder: https://witness.operator.example
+    validations:
+      required: true
+  - type: input
+    id: control_domain
+    attributes:
+      label: Organizational control domain
+      description: Domain representing the legal and operational control reviewed for W deduplication.
+      placeholder: operator.example
+    validations:
+      required: true
+  - type: checkboxes
+    id: public_acknowledgement
+    attributes:
+      label: Public evidence acknowledgement
+      options:
+        - label: I confirm that the candidate, policies, control disclosure, exact release receipts, proofs, checkpoints, and this issue may be retained and published.
+          required: true
+        - label: I understand that signatures do not prove organizational independence and that a passing candidate is not automatically counted.
+          required: true
+        - label: I generated and control the submitted witness key; Glyph did not supply or operate it.
+          required: true
