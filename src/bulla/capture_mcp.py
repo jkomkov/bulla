@@ -511,6 +511,8 @@ class CaptureSession:
         return self.output / "payloads"
 
     def _prepare_directory(self) -> None:
+        if self.output.is_symlink():
+            raise CaptureError(f"capture output must not be a symlink: {self.output}")
         if self.output.exists():
             if not self.output.is_dir():
                 raise CaptureError(f"capture output is not a directory: {self.output}")

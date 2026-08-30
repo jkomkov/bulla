@@ -200,6 +200,44 @@ def test_one_call_forwards_bytes_and_leaves_unsigned_v04_receipt(tmp_path: Path)
     assert verification.authority_authentic == "not_applicable"
 
 
+@pytest.mark.skipif(os.name != "posix", reason="POSIX symlink boundary")
+def test_out_symlink_is_rejected_before_backend_spawn_or_payload_retention(
+    tmp_path: Path,
+):
+    server = _write_server(tmp_path)
+    redirected = tmp_path / "redirected"
+    redirected.mkdir()
+    output = tmp_path / "capture"
+    output.symlink_to(redirected, target_is_directory=True)
+    backend_log = tmp_path / "backend-input.bin"
+    secret = "must-not-cross-output-symlink"
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "bulla",
+            "capture",
+            "mcp",
+            "--out",
+            str(output),
+            "--retain-payloads",
+            "--",
+            sys.executable,
+            str(server),
+        ],
+        input=_request(secret=secret),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        env=_cli_env(backend_log),
+        timeout=20,
+    )
+
+    assert result.returncode == 2
+    assert b"capture output must not be a symlink" in result.stderr
+    assert list(redirected.iterdir()) == []
+    assert not backend_log.exists()
+
+
 @pytest.mark.parametrize(
     ("mode", "expected_kind"),
     (("tool_error", "result"), ("json_error", "error")),
