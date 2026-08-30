@@ -23,9 +23,32 @@ Bulla supports Python 3.10 and later. Receipt creation and file-integrity checks
 run locally and require no hosted Bulla service.
 
 ```bash
-python -m pip install "bulla==0.48.0"
+python -m pip install "bulla==0.49.0"
 bulla demo
 ```
+
+## Capture one existing MCP call
+
+Wrap an ordinary stdio MCP server without changing that server or the client
+handshake:
+
+```bash
+bulla capture mcp --session-root ./bulla-calls -- SERVER COMMAND...
+bulla capture check ./bulla-calls --show-receipts
+bulla receipt verify /absolute/path/to/receipt.json
+```
+
+The wrapper forwards newline-delimited MCP traffic byte-for-byte. Each complete
+client-originated `tools/call` and matching response leaves an ActionReceipt
+v0.4 containing minimal call metadata and commitments to the exact forwarded
+request and response frames. Payload bytes are not retained unless
+`--retain-payloads` is explicitly selected.
+
+An unsigned receipt reaches the digest-verification rung. `--key FILE`
+authenticates only the local observer's statement; it does not authenticate the
+MCP server, prove that a tool executed, or establish that its result is correct.
+The capture directory is implementation-local and is checked with
+`bulla capture check`, not treated as a portable protocol object.
 
 The fixed demo creates a receipt for one constructed USD 125 payment, checks the
 saved file, rejects an altered copy, and compares the receipt set with a

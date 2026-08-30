@@ -4358,6 +4358,88 @@ def _cmd_receipt(args: argparse.Namespace) -> None:
         sys.exit(2)
 
 
+def _cmd_capture(args: argparse.Namespace) -> None:
+    """Bare ``bulla capture`` points at the two deliberately local commands."""
+    print(
+        "usage: bulla capture mcp (--out DIR | --session-root ROOT) "
+        "[--retain-payloads] [--key FILE] -- COMMAND...\n"
+        "       bulla capture check DIR [--show-receipts]\n\n"
+        "Wrap one stdio MCP server without changing its messages. Complete tools/call\n"
+        "exchanges leave ordinary ActionReceipt v0.4 files; the surrounding capture\n"
+        "directory is implementation-local.",
+        file=sys.stderr,
+    )
+    sys.exit(2)
+
+
+def _cmd_capture_mcp(args: argparse.Namespace) -> None:
+    from bulla.capture_mcp import CaptureError, allocate_capture_session, run_mcp_capture
+
+    command = list(args.server_command or [])
+    if command and command[0] == "--":
+        command = command[1:]
+    if not command:
+        print("Error: capture mcp requires a server command after --", file=sys.stderr)
+        sys.exit(2)
+    signer = _load_signer_or_exit(args.key, None) if args.key else None
+    if args.retain_payloads:
+        print(
+            "WARNING: --retain-payloads stores exact MCP requests and responses. "
+            "They may contain prompts, credentials, customer data, code, or tool results.",
+            file=sys.stderr,
+        )
+    try:
+        output = (
+            allocate_capture_session(args.session_root)
+            if args.session_root is not None
+            else args.out
+        )
+        status = run_mcp_capture(
+            output=output,
+            command=command,
+            retain_payloads=args.retain_payloads,
+            signer=signer,
+        )
+    except (CaptureError, OSError) as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        sys.exit(2)
+    sys.exit(status)
+
+
+def _cmd_capture_check(args: argparse.Namespace) -> None:
+    from bulla.capture_mcp import (
+        CaptureDirectoryError,
+        CaptureRootCheckResult,
+        check_capture_path,
+    )
+
+    try:
+        result = check_capture_path(args.directory)
+    except CaptureDirectoryError as exc:
+        print(f"✗ unusable capture directory: {exc}")
+        sys.exit(2)
+    mark = "✓" if result.ok else "✗"
+    if isinstance(result, CaptureRootCheckResult):
+        print(
+            f"{mark} capture root  sessions={result.sessions} empty={result.empty} "
+            f"complete={result.complete} incomplete={result.incomplete} "
+            f"uncheckable={result.uncheckable} receipts={result.receipts} "
+            f"payload_sessions={result.retained_payload_sessions}"
+        )
+    else:
+        print(
+            f"{mark} capture  complete={result.complete} incomplete={result.incomplete} "
+            f"uncheckable={result.uncheckable} receipts={result.receipts} "
+            f"payloads={'retained' if result.retained_payloads else 'commitments-only'}"
+        )
+    for reason in result.reasons:
+        print(f"    · {reason}")
+    if args.show_receipts:
+        for path in result.receipt_paths:
+            print(path)
+    sys.exit(0 if result.ok else 1)
+
+
 def _cmd_demo(args: argparse.Namespace) -> None:
     """Run the complete constructed action-to-receipt product loop."""
     from bulla.first_action_demo import (
@@ -5714,6 +5796,62 @@ def main() -> None:
     )
     p_verify.add_argument("--format", choices=["text", "json"], default="text")
     p_verify.set_defaults(func=_cmd_verify)
+
+    # ── capture ───────────────────────────────────────────────────────
+    p_capture = subparsers.add_parser(
+        "capture",
+        help=(
+            "Observe one existing stdio MCP server transparently and leave "
+            "ordinary ActionReceipt v0.4 records for complete tools/call exchanges"
+        ),
+    )
+    capture_sub = p_capture.add_subparsers(dest="capture_command")
+    p_capture_mcp = capture_sub.add_parser(
+        "mcp",
+        help=(
+            "Wrap one stdio MCP command byte-for-byte. The wrapper does not "
+            "initialize, rename, gate, or inject tools."
+        ),
+    )
+    capture_destination = p_capture_mcp.add_mutually_exclusive_group(required=True)
+    capture_destination.add_argument(
+        "--out", type=Path, metavar="DIR",
+        help="New or empty private directory for local receipts and coverage state",
+    )
+    capture_destination.add_argument(
+        "--session-root", type=Path, metavar="ROOT",
+        help="Reusable private root that creates one distinct session per launch",
+    )
+    p_capture_mcp.add_argument(
+        "--retain-payloads", action="store_true",
+        help=(
+            "Opt in to exact local request/response sidecars. May retain secrets, "
+            "prompts, customer data, code, and tool results."
+        ),
+    )
+    p_capture_mcp.add_argument(
+        "--key", type=Path, default=None, metavar="FILE",
+        help=(
+            "Sign the local observer statement with an existing ed25519 key. "
+            "This does not authenticate the MCP server."
+        ),
+    )
+    p_capture_mcp.add_argument(
+        "server_command", nargs=argparse.REMAINDER, metavar="COMMAND",
+        help="Backend command and arguments, introduced by --",
+    )
+    p_capture_mcp.set_defaults(func=_cmd_capture_mcp)
+    p_capture_check = capture_sub.add_parser(
+        "check",
+        help="Check the current implementation-local capture directory",
+    )
+    p_capture_check.add_argument("directory", type=Path, metavar="DIR")
+    p_capture_check.add_argument(
+        "--show-receipts", action="store_true",
+        help="Print absolute local receipt paths without creating an index",
+    )
+    p_capture_check.set_defaults(func=_cmd_capture_check)
+    p_capture.set_defaults(func=_cmd_capture)
 
     # ── receipt ───────────────────────────────────────────────────────
     p_receipt = subparsers.add_parser(
@@ -7148,6 +7286,8 @@ def main() -> None:
         print(f"bulla {__version__} — receipts for consequential agent actions\n")
         print("Receipts:")
         print("  bulla demo                     # action -> receipt -> alteration -> omission")
+        print("  bulla capture mcp --session-root calls -- SERVER ...  # restart-safe receipts")
+        print("  bulla capture check calls      # local capture integrity and coverage")
         print("  bulla receipt create --type demo.write --subject path=/tmp/out --out receipt.json")
         print("  bulla receipt verify receipt.json")
         print("  bulla receipt drill receipt.json")

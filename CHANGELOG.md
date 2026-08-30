@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.49.0 — 2026-08-30 (release candidate)
+
+**One call, one receipt.** This candidate adds a transparent local wrapper for
+existing stdio MCP servers without changing ActionReceipt semantics or the MCP
+server interface.
+
+- Adds `bulla capture mcp --session-root ROOT -- COMMAND...` for restart-safe,
+  byte-preserving observation of complete `tools/call` request/response pairs.
+- Adds `bulla capture check ROOT` for fail-closed local coverage, inventory,
+  commitment, and permission checks across repeated server lifecycles.
+- Retains commitments and minimal metadata by default. Exact request/response
+  payload sidecars require the explicit `--retain-payloads` option.
+- Uses the existing opt-in ActionReceipt v0.4 implementation. An optional
+  signature authenticates only the local observer's statement; it does not
+  authenticate the MCP server, prove execution, or establish result correctness.
+- Preserves ActionReceipt schemas, canonicalization, verification, reliance,
+  and the stable v0.2 verification kit unchanged.
+
 ## 0.48.0 — 2026-08-23
 
 **Grounding-aware receiver policy.** This release adds one optional receiver-side
