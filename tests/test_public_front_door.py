@@ -89,7 +89,8 @@ def test_first_level_copy_preserves_current_product_boundary() -> None:
         "The supplied receiver record contains one action with no matching receipt"
         in readme_flat
     )
-    assert "Bulla 0.48.0 ships ActionReceipt creation and verification" in readme_flat
+    assert "Bulla 0.49.0 ships ActionReceipt creation and verification" in readme_flat
+    assert "local Doorstep MCP capture commands described above" in readme_flat
     assert "They do not add installed commands or stable Python exports." in readme_flat
     assert "Legacy composition diagnostics" not in readme
     assert "Research frontier" not in readme

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package": "bulla",
-  "release": "0.48.0",
+  "release": "0.49.0",
   "normative_action_receipt": "0.2",
   "released_experimental_action_receipts": [
     "0.3",
@@ -10,17 +10,17 @@
   "archive_member_sets": {
     "wheel": {
       "algorithm": "sha256-sorted-posix-lines-v1",
-      "count": 194,
-      "sha256": "f7355540275925cfe15aef39938e56909f6fe66d9775679641b64601110d66b3"
+      "count": 195,
+      "sha256": "fcabd0f165ca7dcbd61e0691f21668470bd7dacac283de68132be5a47aca0f7c"
     },
     "sdist": {
       "algorithm": "sha256-sorted-posix-lines-v1",
-      "count": 1353,
-      "sha256": "b6117e32b7443f53d1f26b8d6ea9f8ff64aa36f94d848a2a45d1bbeab07e5ebf"
+      "count": 1358,
+      "sha256": "c69fb40a12173ed71668fbcb1c95eb7f2458cf972c51e3780fb14d5c2664d575"
     }
   },
   "generated_archive_bytes": {
-    "metadata_sha256": "1141ed5b577b444164642cfba3a8f97e56f083902766357ee1d6f6d88512c248"
+    "metadata_sha256": "9ab1940b681c6f85a11542ea77a9da65e35b992abe520f17d036c9726edb533f"
   },
   "required_root_exports": [
     "EVIDENCE_STRICT_RELIANCE_POLICY",
@@ -36,6 +36,7 @@
     "bulla/_receipt_drill_worker.py",
     "bulla/_receipt_drill_standalone_worker.py",
     "bulla/action_receipt.py",
+    "bulla/capture_mcp.py",
     "bulla/coverage.py",
     "bulla/data/distribution-policy.json",
     "bulla/data/action-receipt-v0.2-verification-kit.zip",
@@ -53,7 +54,7 @@
     ".github/release-finalization-requirements.txt",
     ".github/workflows/audit-release-slots.yml",
     "distribution-policy.json",
-    "docs/RELEASE-0.48.0.md",
+    "docs/RELEASE-0.49.0.md",
     "docs/RELEASE-LINEAGE.md",
     "examples/wrap-your-agent/run_demo.py",
     "releases/release-repository-controls.json",
@@ -65,6 +66,7 @@
     "spec/verification-kit/verify.py",
     "spec/vectors/payment-authorization.json",
     "src/bulla/action_receipt.py",
+    "src/bulla/capture_mcp.py",
     "src/bulla/_receipt_drill_worker.py",
     "src/bulla/_receipt_drill_standalone_worker.py",
     "src/bulla/coverage.py",
@@ -75,7 +77,8 @@
     "src/bulla/verification_kit.py",
     "src/bulla/data/action-receipt-v0.2-verification-kit.zip",
     "src/bulla/data/action-receipt-v0.2-verification-kit.zip.sha256",
-    "src/bulla/wrap.py"
+    "src/bulla/wrap.py",
+    "tests/test_capture_mcp.py"
   ],
   "source_only_modules": [
     "bulla.experimental.action_boundary",
