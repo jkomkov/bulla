@@ -4416,9 +4416,9 @@ def _cmd_capture_check(args: argparse.Namespace) -> None:
     try:
         result = check_capture_path(args.directory)
     except CaptureDirectoryError as exc:
-        print(f"✗ unusable capture directory: {exc}")
+        print(f"FAIL unusable capture directory: {exc}")
         sys.exit(2)
-    mark = "✓" if result.ok else "✗"
+    mark = "OK" if result.ok else "FAIL"
     if isinstance(result, CaptureRootCheckResult):
         print(
             f"{mark} capture root  sessions={result.sessions} empty={result.empty} "

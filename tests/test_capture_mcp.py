@@ -501,6 +501,25 @@ def test_cli_check_exit_codes(tmp_path: Path):
     assert unusable.returncode == 2
 
 
+def test_cli_check_output_is_windows_console_safe(tmp_path: Path):
+    result, output, _ = _run_cli(tmp_path, _request())
+    assert result.returncode == 0
+    env = _cli_env()
+    env["PYTHONIOENCODING"] = "cp1252"
+    command = [sys.executable, "-m", "bulla", "capture", "check", str(output)]
+    checked = subprocess.run(command, capture_output=True, env=env, timeout=10)
+    assert checked.returncode == 0
+    assert checked.stdout.startswith(b"OK capture")
+    unusable = subprocess.run(
+        command[:-1] + [str(tmp_path / "absent")],
+        capture_output=True,
+        env=env,
+        timeout=10,
+    )
+    assert unusable.returncode == 2
+    assert unusable.stdout.startswith(b"FAIL unusable capture directory:")
+
+
 def test_nonempty_output_refuses_before_backend_spawn(tmp_path: Path):
     server = _write_server(tmp_path)
     output = tmp_path / "capture"
