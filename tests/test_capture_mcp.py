@@ -48,6 +48,12 @@ for line in sys.stdin.buffer:
         message = json.loads(line)
     except Exception:
         continue
+    if message.get("method") == "ping":
+        emit({"jsonrpc":"2.0","id":message["id"],"result":{"pong":True}})
+        for item in held:
+            emit({"jsonrpc":"2.0","id":item["id"],"result":{"content":[{"type":"text","text":"ok"}]}})
+        held.clear()
+        continue
     if message.get("method") != "tools/call":
         continue
     params = message.get("params") or {}
@@ -55,6 +61,9 @@ for line in sys.stdin.buffer:
     mode = arguments.get("mode", "ok")
     if mode == "exit":
         raise SystemExit(7)
+    if mode == "hold_for_ping":
+        held.append(message)
+        continue
     if mode == "no_response":
         continue
     if mode == "reverse":
@@ -71,10 +80,37 @@ for line in sys.stdin.buffer:
         emit({"jsonrpc":"2.0","id":"unknown-response","result":{"ignored":True}})
     if mode == "json_error":
         emit({"jsonrpc":"2.0","id":message["id"],"error":{"code":-32001,"message":"tool failed"}})
+    elif mode == "both_result_and_error":
+        emit({"jsonrpc":"2.0","id":message["id"],"result":{},"error":{"code":-32001,"message":"tool failed"}})
     elif mode == "tool_error":
         emit({"jsonrpc":"2.0","id":message["id"],"result":{"isError":True,"content":[{"type":"text","text":"failed"}]}})
     else:
         emit({"jsonrpc":"2.0","id":message["id"],"result":{"content":[{"type":"text","text":"ok"}]}})
+'''
+
+_SUBSTITUTING_SERVER = r'''
+import json
+import os
+import pathlib
+import sys
+
+output = pathlib.Path(os.environ["BULLA_CAPTURE_TEST_OUTPUT"])
+redirected = pathlib.Path(os.environ["BULLA_CAPTURE_TEST_REDIRECTED"])
+redirected.mkdir()
+line = sys.stdin.buffer.readline()
+message = json.loads(line)
+for name in ("calls", "receipts", "payloads"):
+    source = output / name
+    target = redirected / name
+    os.rename(source, target)
+    os.symlink(target, source, target_is_directory=True)
+response = {
+    "jsonrpc": "2.0",
+    "id": message["id"],
+    "result": {"content": [{"type": "text", "text": "ok"}]},
+}
+sys.stdout.buffer.write(json.dumps(response, separators=(",", ":")).encode() + b"\n")
+sys.stdout.buffer.flush()
 '''
 
 
@@ -241,6 +277,39 @@ def test_out_symlink_is_rejected_before_backend_spawn_or_payload_retention(
     assert not backend_log.exists()
 
 
+@pytest.mark.skipif(os.name != "posix", reason="POSIX directory identity boundary")
+def test_live_managed_directory_substitution_cannot_redirect_completion_writes(
+    tmp_path: Path,
+):
+    server = tmp_path / "substituting-server.py"
+    server.write_text(_SUBSTITUTING_SERVER, encoding="utf-8")
+    output = tmp_path / "capture"
+    redirected = tmp_path / "redirected"
+    env = _cli_env()
+    env["BULLA_CAPTURE_TEST_OUTPUT"] = str(output)
+    env["BULLA_CAPTURE_TEST_REDIRECTED"] = str(redirected)
+    result = subprocess.run(
+        [
+            sys.executable, "-m", "bulla", "capture", "mcp",
+            "--out", str(output), "--retain-payloads",
+            "--", sys.executable, str(server),
+        ],
+        input=_request(secret="must-not-be-persisted-through-substitution"),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        env=env,
+        timeout=20,
+    )
+
+    assert result.returncode == 1
+    assert result.stdout == _response()
+    assert not list((redirected / "receipts").iterdir())
+    assert not list((redirected / "payloads").iterdir())
+    assert len(list((redirected / "calls").iterdir())) == 1
+    with pytest.raises(CaptureDirectoryError, match="required local directory"):
+        check_capture_directory(output)
+
+
 @pytest.mark.parametrize(
     ("mode", "expected_kind"),
     (("tool_error", "result"), ("json_error", "error")),
@@ -311,6 +380,30 @@ def test_duplicate_inflight_id_never_produces_false_complete(tmp_path: Path):
     assert result.stdout == _response(1) + _response(1)
     checked = check_capture_directory(output)
     assert not checked.ok and checked.uncheckable == 2 and checked.receipts == 0
+
+
+def test_response_with_result_and_error_is_uncheckable_not_complete(tmp_path: Path):
+    result, output, _ = _run_cli(tmp_path, _request(mode="both_result_and_error"))
+    assert result.returncode == 1
+    assert result.stdout
+    checked = check_capture_directory(output)
+    assert not checked.ok
+    assert checked.complete == 0 and checked.receipts == 0
+    assert checked.uncheckable >= 1
+
+
+def test_non_tool_request_id_collision_cannot_claim_tool_response(tmp_path: Path):
+    frames = _request(1, mode="hold_for_ping") + _wire({
+        "jsonrpc": "2.0", "id": 1, "method": "ping", "params": {},
+    })
+    result, output, log = _run_cli(tmp_path, frames)
+    assert result.returncode == 1
+    assert log.read_bytes() == frames
+    assert result.stdout
+    checked = check_capture_directory(output)
+    assert not checked.ok
+    assert checked.complete == 0 and checked.receipts == 0
+    assert checked.uncheckable == 1
 
 
 def _request_at_size(size: int) -> bytes:
@@ -412,14 +505,14 @@ def test_response_forwarding_survives_receipt_persistence_failure(
 
     server = _write_server(tmp_path)
     output = tmp_path / "capture"
-    original = module._atomic_write
+    original = module._DirectoryAnchor.write
 
-    def fail_receipt(path: Path, data: bytes) -> None:
-        if path.parent.name == "receipts":
+    def fail_receipt(anchor, name: str, data: bytes) -> None:
+        if anchor.path.name == "receipts":
             raise OSError("simulated receipt disk failure")
-        original(path, data)
+        original(anchor, name, data)
 
-    monkeypatch.setattr(module, "_atomic_write", fail_receipt)
+    monkeypatch.setattr(module._DirectoryAnchor, "write", fail_receipt)
     monkeypatch.setenv("BULLA_CAPTURE_TEST_LOG", str(tmp_path / "backend.bin"))
     forwarded = io.BytesIO()
     diagnostic = io.BytesIO()
@@ -482,6 +575,18 @@ def test_capture_check_rejects_disguised_managed_members(tmp_path: Path):
     disguised.write_bytes((output / "calls" / "000001.json").read_bytes())
     disguised.chmod(0o600)
     with pytest.raises(CaptureDirectoryError, match="unexpected member in calls"):
+        check_capture_directory(output)
+
+
+@pytest.mark.skipif(os.name != "posix", reason="POSIX symlink boundary")
+def test_capture_check_rejects_session_record_symlink_before_read(tmp_path: Path):
+    result, output, _ = _run_cli(tmp_path, _request())
+    assert result.returncode == 0
+    session = output / "session.json"
+    held = tmp_path / "held-session.json"
+    session.rename(held)
+    session.symlink_to(held)
+    with pytest.raises(CaptureDirectoryError, match="not a regular file"):
         check_capture_directory(output)
 
 

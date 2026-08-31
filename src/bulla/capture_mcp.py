@@ -18,6 +18,7 @@ import hashlib
 import json
 import os
 import re
+import stat
 import subprocess
 import sys
 import threading
@@ -110,6 +111,8 @@ def _atomic_write(path: Path, data: bytes) -> None:
         with os.fdopen(fd, "wb", closefd=True) as stream:
             stream.write(data)
             stream.flush()
+            if os.name == "posix":
+                os.fchmod(stream.fileno(), 0o600)
             os.fsync(stream.fileno())
         if os.name == "posix":
             temp.chmod(0o600)
@@ -121,6 +124,88 @@ def _atomic_write(path: Path, data: bytes) -> None:
         except OSError:
             pass
         raise
+
+
+def _atomic_write_at(directory_fd: int, name: str, data: bytes) -> None:
+    """Atomically write one filename relative to an already-open directory."""
+    if not name or Path(name).name != name or name in {".", ".."}:
+        raise OSError(f"invalid managed capture filename: {name!r}")
+    temp = f".{name}.tmp-{uuid.uuid4().hex}"
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
+    flags |= getattr(os, "O_NOFOLLOW", 0)
+    fd = os.open(temp, flags, 0o600, dir_fd=directory_fd)
+    try:
+        with os.fdopen(fd, "wb", closefd=True) as stream:
+            stream.write(data)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(
+            temp,
+            name,
+            src_dir_fd=directory_fd,
+            dst_dir_fd=directory_fd,
+        )
+        os.fsync(directory_fd)
+    except BaseException:
+        try:
+            os.unlink(temp, dir_fd=directory_fd)
+        except OSError:
+            pass
+        raise
+
+
+@dataclass
+class _DirectoryAnchor:
+    """Stable identity and write handle for one private managed directory."""
+
+    path: Path
+    device: int
+    inode: int
+    fd: int | None
+
+    @classmethod
+    def open(cls, path: Path) -> "_DirectoryAnchor":
+        if path.is_symlink() or not path.is_dir():
+            raise OSError(f"managed capture directory is not a directory: {path}")
+        before = os.stat(path, follow_symlinks=False)
+        fd: int | None = None
+        if os.name == "posix":
+            flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0)
+            flags |= getattr(os, "O_NOFOLLOW", 0)
+            fd = os.open(path, flags)
+            opened = os.fstat(fd)
+            if (opened.st_dev, opened.st_ino) != (before.st_dev, before.st_ino):
+                os.close(fd)
+                raise OSError(f"managed capture directory changed while opening: {path}")
+        return cls(path=path, device=before.st_dev, inode=before.st_ino, fd=fd)
+
+    def verify(self) -> None:
+        try:
+            current = os.stat(self.path, follow_symlinks=False)
+        except OSError as exc:
+            raise OSError(f"managed capture directory is unavailable: {self.path}") from exc
+        if (
+            not stat.S_ISDIR(current.st_mode)
+            or (current.st_dev, current.st_ino) != (self.device, self.inode)
+        ):
+            raise OSError(f"managed capture directory identity changed: {self.path}")
+        if self.fd is not None:
+            opened = os.fstat(self.fd)
+            if (opened.st_dev, opened.st_ino) != (self.device, self.inode):
+                raise OSError(f"managed capture directory handle changed: {self.path}")
+
+    def write(self, name: str, data: bytes) -> None:
+        self.verify()
+        if self.fd is None:
+            _atomic_write(self.path / name, data)
+        else:
+            _atomic_write_at(self.fd, name, data)
+        self.verify()
+
+    def close(self) -> None:
+        if self.fd is not None:
+            os.close(self.fd)
+            self.fd = None
 
 
 def _capture_root_marker() -> dict[str, Any]:
@@ -483,6 +568,7 @@ class CaptureSession:
         self.uuid_factory = uuid_factory or uuid.uuid4
         self.lock = threading.RLock()
         self.pending: dict[tuple[str, str], _ObservedCall] = {}
+        self.inflight_requests: dict[tuple[str, str], str] = {}
         self.ambiguous_ids: set[tuple[str, str]] = set()
         self.calls: list[_ObservedCall] = []
         self.call_sequence = 0
@@ -492,7 +578,20 @@ class CaptureSession:
         self.finished = False
         self.backend_exit_code: int | None = None
         self._prepare_directory()
-        self._write_session()
+        self._anchors: dict[str, _DirectoryAnchor] = {}
+        try:
+            self._anchors = {
+                "root": _DirectoryAnchor.open(self.output),
+                "calls": _DirectoryAnchor.open(self.calls_dir),
+                "gaps": _DirectoryAnchor.open(self.gaps_dir),
+                "receipts": _DirectoryAnchor.open(self.receipts_dir),
+            }
+            if self.retain_payloads:
+                self._anchors["payloads"] = _DirectoryAnchor.open(self.payloads_dir)
+            self._write_session()
+        except BaseException:
+            self._close_anchors()
+            raise
 
     @property
     def receipts_dir(self) -> Path:
@@ -553,7 +652,16 @@ class CaptureSession:
         )
 
     def _write_session(self) -> None:
-        _atomic_write(self.output / "session.json", _json_bytes(self._session_record()) + b"\n")
+        self._anchors["root"].write(
+            "session.json", _json_bytes(self._session_record()) + b"\n"
+        )
+
+    def _close_anchors(self) -> None:
+        for anchor in self._anchors.values():
+            try:
+                anchor.close()
+            except OSError:
+                pass
 
     def _capture_failure(self, message: str) -> None:
         self.capture_failed = True
@@ -561,7 +669,9 @@ class CaptureSession:
 
     def _persist_call(self, call: _ObservedCall) -> bool:
         try:
-            _atomic_write(call.path, _json_bytes(call.record()) + b"\n")
+            self._anchors["calls"].write(
+                call.path.name, _json_bytes(call.record()) + b"\n"
+            )
             call.persisted = True
             return True
         except OSError as exc:
@@ -585,8 +695,8 @@ class CaptureSession:
                 "gap_record_sha256",
             )
             try:
-                _atomic_write(
-                    self.gaps_dir / f"{self.gap_sequence:06d}.json",
+                self._anchors["gaps"].write(
+                    f"{self.gap_sequence:06d}.json",
                     _json_bytes(record) + b"\n",
                 )
             except OSError as exc:
@@ -598,9 +708,25 @@ class CaptureSession:
         except Exception:
             self.record_gap("client_to_server", "MALFORMED_FRAME", _sha256(frame), len(frame) - 1)
             return
-        if message.get("method") != "tools/call":
+        method = message.get("method")
+        if not isinstance(method, str):
             return
         key = _id_key(message.get("id"))
+        if method != "tools/call":
+            if key is None:
+                return
+            with self.lock:
+                if key in self.inflight_requests or key in self.ambiguous_ids:
+                    previous = self.pending.pop(key, None)
+                    if previous is not None:
+                        previous.coverage = "UNCHECKABLE"
+                        previous.diagnostic_reason = "DUPLICATE_IN_FLIGHT_ID"
+                        self._persist_call(previous)
+                    self.inflight_requests.pop(key, None)
+                    self.ambiguous_ids.add(key)
+                else:
+                    self.inflight_requests[key] = method
+            return
         params = message.get("params")
         name = params.get("name") if isinstance(params, dict) else None
         if key is None or not isinstance(name, str) or not name:
@@ -620,7 +746,7 @@ class CaptureSession:
             if not self._persist_call(call):
                 call.diagnostic_reason = "PERSISTENCE_FAILED"
                 return
-            if key in self.pending or key in self.ambiguous_ids:
+            if key in self.inflight_requests or key in self.ambiguous_ids:
                 previous = self.pending.pop(key, None)
                 if previous is not None:
                     previous.coverage = "UNCHECKABLE"
@@ -629,9 +755,11 @@ class CaptureSession:
                 call.coverage = "UNCHECKABLE"
                 call.diagnostic_reason = "DUPLICATE_IN_FLIGHT_ID"
                 self._persist_call(call)
+                self.inflight_requests.pop(key, None)
                 self.ambiguous_ids.add(key)
                 return
             self.pending[key] = call
+            self.inflight_requests[key] = method
 
     def observe_server(self, frame: bytes) -> None:
         try:
@@ -639,17 +767,42 @@ class CaptureSession:
         except Exception:
             self.record_gap("server_to_client", "MALFORMED_FRAME", _sha256(frame), len(frame) - 1)
             return
-        if "method" in message or not ({"result", "error"} & set(message)):
+        if "method" in message:
             return
         key = _id_key(message.get("id"))
-        if key is None:
+        result_members = {member for member in ("result", "error") if member in message}
+        valid_members = (
+            {"jsonrpc", "id", next(iter(result_members))}
+            if len(result_members) == 1
+            else set()
+        )
+        if key is None or len(result_members) != 1 or set(message) != valid_members:
+            self.record_gap(
+                "server_to_client", "MALFORMED_FRAME", _sha256(frame), len(frame) - 1,
+            )
+            if key is not None:
+                with self.lock:
+                    call = self.pending.pop(key, None)
+                    self.inflight_requests.pop(key, None)
+                    self.ambiguous_ids.add(key)
+                    if call is not None:
+                        call.coverage = "UNCHECKABLE"
+                        call.diagnostic_reason = "MALFORMED_FRAME"
+                        self._persist_call(call)
             return
         with self.lock:
             if key in self.ambiguous_ids:
                 return
+            method = self.inflight_requests.pop(key, None)
             call = self.pending.pop(key, None)
             if call is None:
                 return  # a response to a non-tools/call request is ordinary traffic
+            if method != "tools/call":
+                call.coverage = "UNCHECKABLE"
+                call.diagnostic_reason = "DUPLICATE_IN_FLIGHT_ID"
+                self._persist_call(call)
+                self.ambiguous_ids.add(key)
+                return
             response_kind = "error" if "error" in message else "result"
             self._complete_call(call, frame, response_kind)
 
@@ -700,16 +853,16 @@ class CaptureSession:
         receipt_name = f"{call.sequence:06d}-{event_id}.json"
         try:
             if self.retain_payloads:
-                _atomic_write(
-                    self.payloads_dir / f"{call.sequence:06d}-request.bin",
+                self._anchors["payloads"].write(
+                    f"{call.sequence:06d}-request.bin",
                     call.request_frame,
                 )
-                _atomic_write(
-                    self.payloads_dir / f"{call.sequence:06d}-response.bin",
+                self._anchors["payloads"].write(
+                    f"{call.sequence:06d}-response.bin",
                     response_frame,
                 )
-            _atomic_write(
-                self.receipts_dir / receipt_name,
+            self._anchors["receipts"].write(
+                receipt_name,
                 receipt.to_json().encode("utf-8") + b"\n",
             )
         except OSError as exc:
@@ -738,11 +891,14 @@ class CaptureSession:
                     call.diagnostic_reason = reason
                     self._persist_call(call)
             self.pending.clear()
+            self.inflight_requests.clear()
             self.finished = True
             try:
                 self._write_session()
             except OSError as exc:
                 self._capture_failure(f"could not finalize capture session: {exc}")
+            finally:
+                self._close_anchors()
 
     @property
     def has_coverage_gap(self) -> bool:
@@ -897,6 +1053,8 @@ def run_mcp_capture(
 
 
 def _load_local_json(path: Path) -> dict[str, Any]:
+    if path.is_symlink() or not path.is_file():
+        raise CaptureDirectoryError(f"local record is not a regular file: {path}")
     try:
         value = _decode_strict_json(path.read_bytes())
     except Exception as exc:
@@ -987,9 +1145,6 @@ def check_capture_directory(output: Path) -> CaptureCheckResult:
         raise CaptureDirectoryError(
             f"capture root inventory mismatch; unexpected={unexpected}, missing={missing}"
         )
-    if session_path.is_symlink() or not session_path.is_file():
-        raise CaptureDirectoryError("session record is not a regular file")
-
     reasons: list[str] = []
     if not session["finished"]:
         reasons.append("capture session was not finalized")
