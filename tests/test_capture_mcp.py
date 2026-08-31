@@ -385,7 +385,10 @@ def test_duplicate_inflight_id_never_produces_false_complete(tmp_path: Path):
 def test_response_with_result_and_error_is_uncheckable_not_complete(tmp_path: Path):
     result, output, _ = _run_cli(tmp_path, _request(mode="both_result_and_error"))
     assert result.returncode == 1
-    assert result.stdout
+    assert result.stdout == _wire({
+        "jsonrpc": "2.0", "id": 1, "result": {},
+        "error": {"code": -32001, "message": "tool failed"},
+    })
     checked = check_capture_directory(output)
     assert not checked.ok
     assert checked.complete == 0 and checked.receipts == 0
@@ -399,7 +402,10 @@ def test_non_tool_request_id_collision_cannot_claim_tool_response(tmp_path: Path
     result, output, log = _run_cli(tmp_path, frames)
     assert result.returncode == 1
     assert log.read_bytes() == frames
-    assert result.stdout
+    assert result.stdout == (
+        _wire({"jsonrpc": "2.0", "id": 1, "result": {"pong": True}})
+        + _response(1)
+    )
     checked = check_capture_directory(output)
     assert not checked.ok
     assert checked.complete == 0 and checked.receipts == 0
