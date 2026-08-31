@@ -109,9 +109,12 @@ def _write_server(tmp_path: Path) -> Path:
 
 
 def _cli_env(log: Path | None = None) -> dict[str, str]:
-    root = Path(__file__).resolve().parents[1]
     env = dict(os.environ)
-    env["PYTHONPATH"] = str(root / "src")
+    if env.get("BULLA_CAPTURE_TEST_INSTALLED") == "1":
+        env.pop("PYTHONPATH", None)
+    else:
+        root = Path(__file__).resolve().parents[1]
+        env["PYTHONPATH"] = str(root / "src")
     if log is not None:
         env["BULLA_CAPTURE_TEST_LOG"] = str(log)
     return env

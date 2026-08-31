@@ -1,4 +1,4 @@
-# Bulla 0.49.0 local release-candidate contract
+# Bulla 0.49.0 publication contract
 
 ## Scope
 
@@ -25,9 +25,17 @@ occurrence, or result correctness.
 - Incomplete and uncheckable calls never produce an ordinary ActionReceipt.
 - Session and root identifiers never enter portable receipt semantics.
 
-## Candidate status
+## Publication sequence
 
-This document authorizes local preparation only. The candidate is not a PyPI
-release, GitHub release, deployment, MCP extension, server-authentication claim,
-or adoption result. Publication requires a separately authorized exact-green
-public default-branch release ceremony. PyPI publication consumes the version.
+1. Merge the reviewed public Bulla pull request.
+2. Run the signed default-branch preparation workflow for the exact green `main`
+   commit. The exact green public `main` commit is the sole `source_commit`; a PR
+   head, synthetic merge commit, pre-rebase commit, or local build is insufficient.
+3. Publish through the trusted PyPI workflow. PyPI publication consumes the version.
+4. Verify PyPI's accepted wheel, sdist, provenance, installed Doorstep commands,
+   archive membership, and unchanged ActionReceipt v0.2 verification kit against
+   the reviewed candidate.
+
+This record does not authorize a separate MCP extension, server-authentication
+claim, deployment, adoption claim, unrelated release, external-counter increment,
+or settlement activity.

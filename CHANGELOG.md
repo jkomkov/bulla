@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.49.0 — 2026-08-30 (release candidate)
+## 0.49.0 — 2026-08-31
 
-**One call, one receipt.** This candidate adds a transparent local wrapper for
+**One call, one receipt.** This release adds a transparent local wrapper for
 existing stdio MCP servers without changing ActionReceipt semantics or the MCP
 server interface.
 

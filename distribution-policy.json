@@ -20,7 +20,7 @@
     }
   },
   "generated_archive_bytes": {
-    "metadata_sha256": "66d91a2ffdfa9fdc9f06dfa9cc76acd6cc9d98878cbbfe52e0f64a93ffbe3b0b"
+    "metadata_sha256": "9ab1940b681c6f85a11542ea77a9da65e35b992abe520f17d036c9726edb533f"
   },
   "required_root_exports": [
     "EVIDENCE_STRICT_RELIANCE_POLICY",

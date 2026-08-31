@@ -38,7 +38,7 @@ def _workflow_job(workflow: str, name: str) -> str:
 def test_release_version_and_status_language_are_synchronized() -> None:
     assert bulla.__version__ == "0.49.0"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    assert "## 0.49.0 — 2026-08-30 (release candidate)" in changelog
+    assert "## 0.49.0 — 2026-08-31" in changelog
     assert "## 0.48.0 — 2026-08-23" in changelog
     assert "## 0.47.1 — 2026-08-04" in changelog
     assert "## 0.47.0 — 2026-08-04 (not published)" in changelog
@@ -67,11 +67,13 @@ def test_release_version_and_status_language_are_synchronized() -> None:
 def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
     contract = (ROOT / "docs/RELEASE-0.49.0.md").read_text(encoding="utf-8")
     assert "Package and receipt-format versions remain separate clocks" in " ".join(contract.split())
-    assert "local preparation only" in contract
-    assert "not a PyPI\nrelease" in contract
+    assert "The exact green public `main` commit is the sole `source_commit`" in contract
+    assert "PR head, synthetic merge commit, pre-rebase commit, or" in " ".join(contract.split())
     assert "PyPI publication consumes the version." in contract
+    assert "installed Doorstep commands" in contract
     assert "authenticates\nonly the local observer's statement" in contract
     assert "does not prove execution" in contract
+    assert "does not authorize a separate MCP extension" in contract
     assert "APPROVE BULLA" not in contract
     assert "APPROVE GLYPH" not in contract
     assert "deployment_evidence_sha256" not in contract
@@ -107,6 +109,7 @@ def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
     assert "needs: [build, verify-slot, verify-pypi]" in workflow
     assert "Build into a new empty candidate directory" in workflow
     assert "Verify exact candidate inventory" in workflow
+    assert workflow.count("tests/test_capture_mcp.py") == 2
     assert "action-receipt-v0.2-verification-kit.zip" in workflow
     assert "bulla receipt kit" in workflow
     assert "packages-dir: packages" in workflow

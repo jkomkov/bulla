@@ -270,10 +270,10 @@ bulla receipt drill RECEIPT.json --format text
 
 ## Published package and source profiles
 
-Bulla 0.48.0 ships ActionReceipt creation and verification, explicit reliance
-policy, and coverage reconciliation. The following examples are experimental
-repository-source profiles. They do not add installed commands or stable Python
-exports.
+Bulla 0.49.0 ships ActionReceipt creation and verification, explicit reliance
+policy, coverage reconciliation, and the local Doorstep MCP capture commands
+described above. The following examples are experimental repository-source
+profiles. They do not add installed commands or stable Python exports.
 
 ## Experimental: evaluate one receiving policy
 

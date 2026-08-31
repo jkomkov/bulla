@@ -133,6 +133,7 @@ jobs:
           python -m pytest -q
           tests/test_action_receipt.py
           tests/test_action_receipt_v04.py
+          tests/test_capture_mcp.py
           tests/test_distribution_policy.py
           tests/test_event_coverage.py
           tests/test_first_action_demo.py
@@ -277,9 +278,11 @@ jobs:
             src/bulla/data/action-receipt-v0.2-verification-kit.zip
           (
             cd "$RUNNER_TEMP"
+            BULLA_CAPTURE_TEST_INSTALLED=1 \
             "$RUNNER_TEMP/bulla-wheel/bin/python" -I -m pytest -q \
               "$GITHUB_WORKSPACE/tests/test_action_receipt.py" \
               "$GITHUB_WORKSPACE/tests/test_action_receipt_v04.py" \
+              "$GITHUB_WORKSPACE/tests/test_capture_mcp.py" \
               "$GITHUB_WORKSPACE/tests/test_distribution_policy.py" \
               "$GITHUB_WORKSPACE/tests/test_event_coverage.py" \
               "$GITHUB_WORKSPACE/tests/test_golden_f13.py" \
