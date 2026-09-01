@@ -706,6 +706,52 @@ def test_concurrent_empty_root_reservations_are_distinct_and_leave_no_orphans(
     assert set(path.name for path in root.iterdir()) == {"root.json", "sessions"}
 
 
+def test_windows_root_initialization_uses_one_exclusive_claim(tmp_path: Path):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "windows-concurrent-root"
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        list(
+            executor.map(
+                lambda _: module._initialize_capture_root_windows(root), range(8)
+            )
+        )
+
+    assert module._validate_capture_root_layout(root) == root / "sessions"
+    assert not module._windows_root_claim_path(root).exists()
+    assert set(path.name for path in tmp_path.iterdir()) == {root.name}
+
+
+def test_windows_stranded_root_claim_times_out_without_stealing(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "windows-stranded-root"
+    claim = module._windows_root_claim_path(root)
+    claim.write_bytes(b"other-initializer\n")
+    clock = [0.0]
+    sleeps: list[float] = []
+
+    def monotonic() -> float:
+        return clock[0]
+
+    def sleep(seconds: float) -> None:
+        sleeps.append(seconds)
+        clock[0] += seconds
+
+    monkeypatch.setattr(module.time, "monotonic", monotonic)
+    monkeypatch.setattr(module.time, "sleep", sleep)
+
+    with pytest.raises(CaptureError, match="unresolved for 5 seconds"):
+        module._initialize_capture_root_windows(root)
+
+    assert sleeps and set(sleeps) == {0.025}
+    assert clock[0] >= 5.0
+    assert claim.read_bytes() == b"other-initializer\n"
+    assert not root.exists()
+
+
 def test_stale_initializer_snapshot_revalidates_concurrent_published_session(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ):
@@ -942,7 +988,9 @@ def test_root_cli_aggregate_and_show_receipts_are_local_and_absolute(tmp_path: P
     assert checked.returncode == 0
     assert b"sessions=1" in checked.stdout and b"complete=1" in checked.stdout
     receipt_lines = [
-        Path(line) for line in checked.stdout.decode().splitlines() if line.startswith("/")
+        path
+        for line in checked.stdout.decode().splitlines()
+        if (path := Path(line)).is_absolute()
     ]
     assert len(receipt_lines) == 1
     assert receipt_lines[0].is_absolute() and receipt_lines[0].is_file()

@@ -49,6 +49,9 @@ _COVERAGE = {"COMPLETE", "INCOMPLETE", "UNCHECKABLE"}
 _CAPTURE_ROOT_MARKER = "root.json"
 _CAPTURE_ROOT_KIND = "bulla.mcp-capture-session-root.local"
 _CAPTURE_ROOT_LAYOUT = 1
+_WINDOWS_ROOT_CLAIM_SUFFIX = ".init.claim"
+_WINDOWS_ROOT_CLAIM_WAIT_SECONDS = 5.0
+_WINDOWS_ROOT_CLAIM_POLL_SECONDS = 0.025
 _SESSION_NAME = re.compile(
     r"session-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
 )
@@ -316,7 +319,8 @@ def _finish_empty_capture_root(root: Path) -> None:
     _commit_existing_root_marker(root)
 
 
-def _initialize_capture_root(root: Path) -> None:
+def _initialize_capture_root_unclaimed(root: Path) -> None:
+    """Initialize one root after the caller has serialized publication."""
     if root.exists() or root.is_symlink():
         if root.is_symlink() or not root.is_dir():
             _validate_capture_root_layout(root)
@@ -348,6 +352,82 @@ def _initialize_capture_root(root: Path) -> None:
     except BaseException:
         _discard_unpublished_root(temp)
         raise
+
+
+def _windows_root_claim_path(root: Path) -> Path:
+    return root.parent / f".{root.name}{_WINDOWS_ROOT_CLAIM_SUFFIX}"
+
+
+def _release_windows_root_claim(claim: Path, token: bytes) -> None:
+    """Release only the claim whose exact token this process created."""
+    try:
+        if claim.read_bytes() == token:
+            claim.unlink()
+    except OSError:
+        # A surviving claim is deliberately fail-closed.  Never unlink a claim
+        # that cannot be proven to be this process's own claim.
+        pass
+
+
+def _initialize_capture_root_windows(root: Path) -> None:
+    """Serialize first publication on Windows with a bounded exclusive claim."""
+    if root.exists() or root.is_symlink():
+        try:
+            _validate_capture_root_layout(root)
+            return
+        except CaptureDirectoryError:
+            pass
+
+    parent = root.parent
+    if parent.is_symlink() or not parent.is_dir():
+        raise CaptureError(f"capture session root parent does not exist: {parent}")
+
+    claim = _windows_root_claim_path(root)
+    token = (uuid.uuid4().hex + "\n").encode("ascii")
+    deadline = time.monotonic() + _WINDOWS_ROOT_CLAIM_WAIT_SECONDS
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_BINARY", 0)
+
+    while True:
+        try:
+            fd = os.open(claim, flags, 0o600)
+        except FileExistsError:
+            try:
+                _validate_capture_root_layout(root)
+                return
+            except CaptureDirectoryError:
+                if time.monotonic() >= deadline:
+                    raise CaptureError(
+                        "capture session root initialization claim remained "
+                        f"unresolved for {_WINDOWS_ROOT_CLAIM_WAIT_SECONDS:g} seconds"
+                    )
+                time.sleep(_WINDOWS_ROOT_CLAIM_POLL_SECONDS)
+                continue
+        except OSError as exc:
+            raise CaptureError(
+                f"could not claim capture session root initialization: {claim}"
+            ) from exc
+
+        try:
+            with os.fdopen(fd, "wb", closefd=True) as stream:
+                stream.write(token)
+                stream.flush()
+                os.fsync(stream.fileno())
+        except BaseException:
+            _release_windows_root_claim(claim, token)
+            raise
+
+        try:
+            _initialize_capture_root_unclaimed(root)
+        finally:
+            _release_windows_root_claim(claim, token)
+        return
+
+
+def _initialize_capture_root(root: Path) -> None:
+    if os.name == "nt":
+        _initialize_capture_root_windows(root)
+    else:
+        _initialize_capture_root_unclaimed(root)
 
 
 def allocate_capture_session(root: Path) -> Path:
