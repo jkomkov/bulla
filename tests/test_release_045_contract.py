@@ -36,9 +36,10 @@ def _workflow_job(workflow: str, name: str) -> str:
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.49.0"
+    assert bulla.__version__ == "0.49.1"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    assert "## 0.49.0 — 2026-08-31" in changelog
+    assert "## 0.49.1 — 2026-08-31" in changelog
+    assert "## 0.49.0 — 2026-08-31 (not published)" in changelog
     assert "## 0.48.0 — 2026-08-23" in changelog
     assert "## 0.47.1 — 2026-08-04" in changelog
     assert "## 0.47.0 — 2026-08-04 (not published)" in changelog
@@ -65,7 +66,7 @@ def test_release_version_and_status_language_are_synchronized() -> None:
 
 
 def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
-    contract = (ROOT / "docs/RELEASE-0.49.0.md").read_text(encoding="utf-8")
+    contract = (ROOT / "docs/RELEASE-0.49.1.md").read_text(encoding="utf-8")
     assert "Package and receipt-format versions remain separate clocks" in " ".join(contract.split())
     assert "The exact green public `main` commit is the sole `source_commit`" in contract
     assert "PR head, synthetic merge commit, pre-rebase commit, or" in " ".join(contract.split())
@@ -77,6 +78,11 @@ def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
     assert "APPROVE BULLA" not in contract
     assert "APPROVE GLYPH" not in contract
     assert "deployment_evidence_sha256" not in contract
+    assert "failed 0.49.0 tag and draft release" in " ".join(contract.split())
+    assert "0.49.0 was not published to PyPI" in contract
+    lineage = (ROOT / "docs/RELEASE-LINEAGE.md").read_text(encoding="utf-8")
+    assert "| 0.49.0 | not published |" in lineage
+    assert "| 0.49.1 | candidate; not published |" in lineage
 
 
 def test_failed_release_authorization_is_sealed_and_consumed() -> None:

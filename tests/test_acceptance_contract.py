@@ -320,4 +320,4 @@ def test_no_stable_export_or_cli_surface() -> None:
 def test_version_matches_current_release() -> None:
     import bulla
 
-    assert bulla.__version__ == "0.49.0"
+    assert bulla.__version__ == "0.49.1"

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package": "bulla",
-  "release": "0.49.0",
+  "release": "0.49.1",
   "normative_action_receipt": "0.2",
   "released_experimental_action_receipts": [
     "0.3",
@@ -11,16 +11,16 @@
     "wheel": {
       "algorithm": "sha256-sorted-posix-lines-v1",
       "count": 195,
-      "sha256": "fcabd0f165ca7dcbd61e0691f21668470bd7dacac283de68132be5a47aca0f7c"
+      "sha256": "01c44a5788cf0c5b8f9cfea24ce6a6d0df3be9b8bb45a31fef24d00aa918eeec"
     },
     "sdist": {
       "algorithm": "sha256-sorted-posix-lines-v1",
-      "count": 1358,
-      "sha256": "c69fb40a12173ed71668fbcb1c95eb7f2458cf972c51e3780fb14d5c2664d575"
+      "count": 1359,
+      "sha256": "9c2bfc1c65ad42ade328a40e5e7c7347df210074611e005d0d98ee82430e9ffc"
     }
   },
   "generated_archive_bytes": {
-    "metadata_sha256": "9ab1940b681c6f85a11542ea77a9da65e35b992abe520f17d036c9726edb533f"
+    "metadata_sha256": "89cc504a7db1b571b0239c9e15a51a2b115313421e4a853f83292e1200b03062"
   },
   "required_root_exports": [
     "EVIDENCE_STRICT_RELIANCE_POLICY",
@@ -55,6 +55,7 @@
     ".github/workflows/audit-release-slots.yml",
     "distribution-policy.json",
     "docs/RELEASE-0.49.0.md",
+    "docs/RELEASE-0.49.1.md",
     "docs/RELEASE-LINEAGE.md",
     "examples/wrap-your-agent/run_demo.py",
     "releases/release-repository-controls.json",

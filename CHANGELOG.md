@@ -1,6 +1,25 @@
 # Changelog
 
-## 0.49.0 — 2026-08-31
+## 0.49.1 — 2026-08-31
+
+**Doorstep Windows correction.** This patch release preserves the 0.49.0
+Doorstep capability and ActionReceipt behavior while closing two release-gate
+portability defects.
+
+- Serializes first capture-root publication on Windows with an exclusive local
+  claim. Contenders wait at most five seconds in 25 ms intervals, accept a
+  completed valid root only after the claim disappears, and fail closed without
+  stealing a stranded claim even if its root appears complete.
+- Makes the installed `capture check --show-receipts` regression recognize
+  absolute paths through `Path(line).is_absolute()` on every supported platform.
+- Preserves the ASCII-only capture status boundary that remains safe under a
+  CP1252 Windows console.
+- Retains the failed 0.49.0 tag and draft release as immutable correction
+  evidence; 0.49.0 was not published to PyPI and its version is not reused.
+- Preserves ActionReceipt schemas, bytes, canonicalization, verification,
+  reliance behavior, and the stable v0.2 verification kit unchanged.
+
+## 0.49.0 — 2026-08-31 (not published)
 
 **One call, one receipt.** This release adds a transparent local wrapper for
 existing stdio MCP servers without changing ActionReceipt semantics or the MCP
