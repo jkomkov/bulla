@@ -239,7 +239,14 @@ def _windows_directory_handle_api():
 
 def _open_windows_directory_handle(path: Path) -> int:
     ctypes, create_file, _, _, _ = _windows_directory_handle_api()
-    file_read_attributes = 0x0080
+    desired_access = (
+        0x00000001  # FILE_LIST_DIRECTORY
+        | 0x00000002  # FILE_ADD_FILE
+        | 0x00000004  # FILE_ADD_SUBDIRECTORY
+        | 0x00000020  # FILE_TRAVERSE
+        | 0x00000080  # FILE_READ_ATTRIBUTES
+        | 0x00100000  # SYNCHRONIZE
+    )
     file_share_read = 0x00000001
     file_share_write = 0x00000002
     open_existing = 3
@@ -247,7 +254,7 @@ def _open_windows_directory_handle(path: Path) -> int:
     file_flag_open_reparse_point = 0x00200000
     handle = create_file(
         str(path),
-        file_read_attributes,
+        desired_access,
         file_share_read | file_share_write,
         None,
         open_existing,
@@ -333,9 +340,11 @@ def _release_native_windows_root_claim(handle: int, claim: Path) -> None:
     ctypes, wintypes, _, _, _, set_information = _native_windows_claim_api()
 
     class FileDispositionInformation(ctypes.Structure):
-        _fields_ = (("delete_file", wintypes.BOOL),)
+        _fields_ = (("delete_file", getattr(wintypes, "BOOLEAN", ctypes.c_ubyte)),)
 
     disposition = FileDispositionInformation(1)
+    if ctypes.sizeof(disposition) != 1:
+        raise CaptureError("Windows claim disposition ABI is not one byte")
     if not set_information(
         handle,
         4,  # FILE_INFO_BY_HANDLE_CLASS.FileDispositionInfo
@@ -409,6 +418,123 @@ def _acquire_native_windows_root_claim(claim: Path, token: bytes) -> int:
     return value
 
 
+def _observe_created_windows_directory(path: Path) -> None:
+    """Test seam invoked only while the exact newly created handle is held."""
+
+
+def _create_windows_directory_handle(parent_handle: int, name: str, path: Path) -> int:
+    """Atomically create one directory and return its identity-bound NT handle."""
+    if os.name != "nt":
+        raise OSError("Windows atomic directory creation is unavailable")
+    if not name or Path(name).name != name or name in {".", ".."}:
+        raise OSError(f"invalid managed capture directory name: {name!r}")
+    import ctypes
+    from ctypes import wintypes
+
+    class UnicodeString(ctypes.Structure):
+        _fields_ = (
+            ("length", wintypes.USHORT),
+            ("maximum_length", wintypes.USHORT),
+            ("buffer", wintypes.LPWSTR),
+        )
+
+    class ObjectAttributes(ctypes.Structure):
+        _fields_ = (
+            ("length", wintypes.ULONG),
+            ("root_directory", wintypes.HANDLE),
+            ("object_name", ctypes.POINTER(UnicodeString)),
+            ("attributes", wintypes.ULONG),
+            ("security_descriptor", wintypes.LPVOID),
+            ("security_quality_of_service", wintypes.LPVOID),
+        )
+
+    class IoStatusBlock(ctypes.Structure):
+        _fields_ = (
+            ("status_or_pointer", wintypes.LPVOID),
+            ("information", ctypes.c_size_t),
+        )
+
+    ntdll = ctypes.WinDLL("ntdll", use_last_error=True)
+    nt_create_file = ntdll.NtCreateFile
+    nt_create_file.argtypes = (
+        ctypes.POINTER(wintypes.HANDLE),
+        wintypes.ULONG,
+        ctypes.POINTER(ObjectAttributes),
+        ctypes.POINTER(IoStatusBlock),
+        wintypes.LPVOID,
+        wintypes.ULONG,
+        wintypes.ULONG,
+        wintypes.ULONG,
+        wintypes.ULONG,
+        wintypes.LPVOID,
+        wintypes.ULONG,
+    )
+    nt_create_file.restype = wintypes.LONG
+    rtl_status_to_error = ntdll.RtlNtStatusToDosError
+    rtl_status_to_error.argtypes = (wintypes.LONG,)
+    rtl_status_to_error.restype = wintypes.ULONG
+
+    name_buffer = ctypes.create_unicode_buffer(name)
+    encoded_length = len(name.encode("utf-16-le"))
+    object_name = UnicodeString(
+        encoded_length,
+        encoded_length + 2,
+        ctypes.cast(name_buffer, wintypes.LPWSTR),
+    )
+    attributes = ObjectAttributes(
+        ctypes.sizeof(ObjectAttributes),
+        parent_handle,
+        ctypes.pointer(object_name),
+        0x00000040,  # OBJ_CASE_INSENSITIVE
+        None,
+        None,
+    )
+    io_status = IoStatusBlock()
+    handle = wintypes.HANDLE()
+    desired_access = (
+        0x00000001  # FILE_LIST_DIRECTORY
+        | 0x00000002  # FILE_ADD_FILE
+        | 0x00000004  # FILE_ADD_SUBDIRECTORY
+        | 0x00000020  # FILE_TRAVERSE
+        | 0x00000080  # FILE_READ_ATTRIBUTES
+        | 0x00100000  # SYNCHRONIZE
+    )
+    status = nt_create_file(
+        ctypes.byref(handle),
+        desired_access,
+        ctypes.byref(attributes),
+        ctypes.byref(io_status),
+        None,
+        0x00000010,  # FILE_ATTRIBUTE_DIRECTORY
+        0x00000001 | 0x00000002,  # share read/write, never delete
+        2,  # FILE_CREATE
+        (
+            0x00000001  # FILE_DIRECTORY_FILE
+            | 0x00000020  # FILE_SYNCHRONOUS_IO_NONALERT
+            | 0x00004000  # FILE_OPEN_FOR_BACKUP_INTENT
+            | 0x00200000  # FILE_OPEN_REPARSE_POINT
+        ),
+        None,
+        0,
+    )
+    if status < 0:
+        error = int(rtl_status_to_error(status))
+        if error in (32, 80, 183):
+            raise FileExistsError(error, f"managed directory already exists: {path}")
+        raise OSError(error, f"could not atomically create managed directory: {path}")
+    value = ctypes.cast(handle, ctypes.c_void_p).value
+    if value is None:
+        raise OSError(f"atomic directory creation returned no handle: {path}")
+    try:
+        _verify_windows_directory_handle(value, path)
+        _observe_created_windows_directory(path)
+        _verify_windows_directory_handle(value, path)
+    except BaseException:
+        _close_windows_handle(value)
+        raise
+    return value
+
+
 @dataclass
 class _DirectoryAnchor:
     """Stable identity and write handle for one private managed directory."""
@@ -418,6 +544,41 @@ class _DirectoryAnchor:
     inode: int
     fd: int | None
     windows_handle: int | None
+
+    @classmethod
+    def create(cls, parent: "_DirectoryAnchor", name: str) -> "_DirectoryAnchor":
+        path = parent.path / name
+        parent.verify()
+        if os.name == "nt":
+            if parent.windows_handle is None:
+                raise OSError(f"managed parent lacks a Windows handle: {parent.path}")
+            handle = _create_windows_directory_handle(
+                parent.windows_handle, name, path
+            )
+            try:
+                metadata = _no_follow_metadata(path)
+                if (
+                    _is_symlink_or_windows_reparse_point(metadata)
+                    or not stat.S_ISDIR(metadata.st_mode)
+                ):
+                    raise OSError(
+                        f"atomically created managed directory is invalid: {path}"
+                    )
+            except BaseException:
+                _close_windows_handle(handle)
+                raise
+            parent.verify()
+            return cls(
+                path=path,
+                device=metadata.st_dev,
+                inode=metadata.st_ino,
+                fd=None,
+                windows_handle=handle,
+            )
+        _mkdir_private(path)
+        created = cls.open(path)
+        parent.verify()
+        return created
 
     @classmethod
     def open(cls, path: Path) -> "_DirectoryAnchor":
@@ -732,23 +893,34 @@ def _windows_root_claim_present(claim: Path) -> bool:
     return error not in (2, 3)  # ERROR_FILE_NOT_FOUND, ERROR_PATH_NOT_FOUND
 
 
-def _windows_root_is_published(root: Path, claim: Path) -> bool:
-    """Accept a completed root only when no initializer still owns the claim."""
+def _windows_root_is_published(
+    root: Path,
+    claim: Path,
+    parent_anchor: _DirectoryAnchor,
+) -> bool:
+    """Validate one published root while its parent/root/sessions are anchored."""
     if _windows_root_claim_present(claim):
         return False
+    root_anchor: _DirectoryAnchor | None = None
+    sessions_anchor: _DirectoryAnchor | None = None
     try:
+        parent_anchor.verify()
+        root_anchor = _DirectoryAnchor.open(root)
+        sessions_anchor = _DirectoryAnchor.open(root / "sessions")
         _validate_capture_root_layout(root)
-    except CaptureDirectoryError:
+        return not _windows_root_claim_present(claim)
+    except (CaptureDirectoryError, OSError):
         return False
-    return not _windows_root_claim_present(claim)
+    finally:
+        if sessions_anchor is not None:
+            sessions_anchor.close()
+        if root_anchor is not None:
+            root_anchor.close()
 
 
 def _initialize_capture_root_windows(root: Path) -> None:
     """Serialize first publication on Windows with a bounded exclusive claim."""
     claim = _windows_root_claim_path(root)
-    if _windows_root_is_published(root, claim):
-        return
-
     parent = root.parent
     if not _is_managed_directory(parent):
         raise CaptureError(f"capture session root parent does not exist: {parent}")
@@ -760,19 +932,23 @@ def _initialize_capture_root_windows(root: Path) -> None:
             f"could not anchor capture session root parent: {parent}"
         ) from exc
     try:
-        _initialize_capture_root_windows_anchored(root, claim)
+        _initialize_capture_root_windows_anchored(root, claim, parent_anchor)
     finally:
         parent_anchor.close()
 
 
-def _initialize_capture_root_windows_anchored(root: Path, claim: Path) -> None:
+def _initialize_capture_root_windows_anchored(
+    root: Path,
+    claim: Path,
+    parent_anchor: _DirectoryAnchor,
+) -> None:
     """Initialize below a no-delete parent-directory handle on Windows."""
 
     token = (uuid.uuid4().hex + "\n").encode("ascii")
     deadline = time.monotonic() + _WINDOWS_ROOT_CLAIM_WAIT_SECONDS
 
     while True:
-        if _windows_root_is_published(root, claim):
+        if _windows_root_is_published(root, claim, parent_anchor):
             return
         try:
             native_handle = _acquire_windows_root_claim(claim, token)
@@ -790,10 +966,57 @@ def _initialize_capture_root_windows_anchored(root: Path, claim: Path) -> None:
             ) from exc
 
         try:
-            _initialize_capture_root_unclaimed(root)
+            _initialize_capture_root_windows_layout(root, parent_anchor)
         finally:
             _release_acquired_windows_root_claim(claim, token, native_handle)
         return
+
+
+def _initialize_capture_root_windows_layout(
+    root: Path,
+    parent_anchor: _DirectoryAnchor,
+) -> None:
+    """Create or finish a root with every directory identity held before use."""
+    root_anchor: _DirectoryAnchor | None = None
+    sessions_anchor: _DirectoryAnchor | None = None
+    try:
+        try:
+            root_anchor = _DirectoryAnchor.create(parent_anchor, root.name)
+            members: set[str] = set()
+        except FileExistsError:
+            root_anchor = _DirectoryAnchor.open(root)
+            members = {member.name for member in root.iterdir()}
+
+        expected = {_CAPTURE_ROOT_MARKER, "sessions"}
+        if members == expected:
+            sessions_anchor = _DirectoryAnchor.open(root / "sessions")
+            _validate_capture_root_layout(root)
+            return
+        if members not in (set(), {"sessions"}):
+            raise CaptureDirectoryError(
+                "capture session root is not empty or recognized"
+            )
+
+        if "sessions" in members:
+            sessions_anchor = _DirectoryAnchor.open(root / "sessions")
+            if any(sessions_anchor.path.iterdir()):
+                raise CaptureDirectoryError(
+                    "capture session root initialization is malformed"
+                )
+        else:
+            sessions_anchor = _DirectoryAnchor.create(root_anchor, "sessions")
+        root_anchor.verify()
+        sessions_anchor.verify()
+        _atomic_write(
+            root / _CAPTURE_ROOT_MARKER,
+            _json_bytes(_capture_root_marker()) + b"\n",
+        )
+        _validate_capture_root_layout(root)
+    finally:
+        if sessions_anchor is not None:
+            sessions_anchor.close()
+        if root_anchor is not None:
+            root_anchor.close()
 
 
 def _initialize_capture_root(root: Path) -> None:
@@ -1032,10 +1255,11 @@ class CaptureSession:
         self.backend_exit_code: int | None = None
         self._anchors: dict[str, _DirectoryAnchor] = {}
         try:
-            if (
+            managed_session = (
                 self.output.parent.name == "sessions"
                 and _SESSION_NAME.fullmatch(self.output.name) is not None
-            ):
+            )
+            if managed_session:
                 capture_root = self.output.parent.parent
                 self._anchors["capture_root"] = _DirectoryAnchor.open(capture_root)
                 _validate_capture_root_layout(capture_root)
@@ -1043,20 +1267,16 @@ class CaptureSession:
                     self.output.parent
                 )
                 _validate_capture_root_layout(capture_root)
+                parent_anchor = self._anchors["sessions_root"]
             else:
                 self._anchors["output_parent"] = _DirectoryAnchor.open(
                     self.output.parent
                 )
-            self._prepare_directory()
-            for name, path in (
-                ("root", self.output),
-                ("calls", self.calls_dir),
-                ("gaps", self.gaps_dir),
-                ("receipts", self.receipts_dir),
-            ):
-                self._anchors[name] = _DirectoryAnchor.open(path)
-            if self.retain_payloads:
-                self._anchors["payloads"] = _DirectoryAnchor.open(self.payloads_dir)
+                parent_anchor = self._anchors["output_parent"]
+            self._prepare_directory(
+                parent_anchor,
+                require_absent=managed_session,
+            )
             self._write_session()
         except BaseException:
             self._close_anchors()
@@ -1078,38 +1298,37 @@ class CaptureSession:
     def payloads_dir(self) -> Path:
         return self.output / "payloads"
 
-    def _prepare_directory(self) -> None:
-        if not _is_managed_directory(self.output.parent):
-            raise CaptureError(
-                f"capture output parent is not a local directory: {self.output.parent}"
-            )
-        if self.output.is_symlink():
-            raise CaptureError(f"capture output must not be a symlink: {self.output}")
-        if self.output.exists() or self.output.is_symlink():
-            if not _is_managed_directory(self.output):
-                raise CaptureError(f"capture output is not a directory: {self.output}")
-            if any(self.output.iterdir()):
-                raise CaptureError(f"capture output must be absent or empty: {self.output}")
-            if os.name == "posix":
-                self.output.chmod(0o700)
-        else:
-            try:
-                self.output.mkdir(mode=0o700, parents=False)
-            except FileNotFoundError as exc:
+    def _prepare_directory(
+        self,
+        parent_anchor: _DirectoryAnchor,
+        *,
+        require_absent: bool,
+    ) -> None:
+        try:
+            output_anchor = _DirectoryAnchor.create(parent_anchor, self.output.name)
+        except FileExistsError:
+            if require_absent:
                 raise CaptureError(
-                    f"capture output parent does not exist: {self.output.parent}"
-                ) from exc
+                    f"allocated capture session already exists: {self.output}"
+                )
+            if self.output.is_symlink():
+                raise CaptureError(f"capture output must not be a symlink: {self.output}")
+            output_anchor = _DirectoryAnchor.open(self.output)
+            if any(self.output.iterdir()):
+                output_anchor.close()
+                raise CaptureError(
+                    f"capture output must be absent or empty: {self.output}"
+                )
             if os.name == "posix":
                 self.output.chmod(0o700)
-            _fsync_dir(self.output.parent)
-        if not _is_managed_directory(self.output):
-            raise CaptureError(
-                f"capture output became a link or reparse point: {self.output}"
-            )
-        for path in (self.receipts_dir, self.calls_dir, self.gaps_dir):
-            _mkdir_private(path)
+        self._anchors["root"] = output_anchor
+        output_anchor.verify()
+        for name in ("receipts", "calls", "gaps"):
+            self._anchors[name] = _DirectoryAnchor.create(output_anchor, name)
         if self.retain_payloads:
-            _mkdir_private(self.payloads_dir)
+            self._anchors["payloads"] = _DirectoryAnchor.create(
+                output_anchor, "payloads"
+            )
 
     def _session_record(self) -> dict[str, Any]:
         return _addressed(

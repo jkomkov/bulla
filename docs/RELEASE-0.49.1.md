@@ -25,7 +25,11 @@ Every managed root, `sessions` member, individual session, and capture parent
 is inspected with no-follow metadata and rejected when Windows marks it as a
 reparse point. Native Windows directory handles deny delete sharing and remain
 open during initialization and across capture writes so a junction or rename
-cannot substitute a validated managed directory.
+cannot substitute a validated managed directory. The parent is anchored before
+even an already-published root can be accepted. Each new root, `sessions`
+member, individual session, output, and managed child is atomically created by
+relative name with its identity handle already open; that child is anchored
+before another child, local record write, or backend launch can occur.
 
 The installed receipt-listing regression recognizes absolute paths with the
 host platform's `Path.is_absolute()` rule rather than a POSIX-only leading

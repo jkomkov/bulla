@@ -330,6 +330,100 @@ def test_windows_junction_parent_is_rejected_before_target_changes(
     assert sentinel.read_bytes() == b"unchanged-target-bytes\x00\xff"
 
 
+@pytest.mark.skipif(os.name != "nt", reason="Windows atomic directory handles")
+@pytest.mark.parametrize("created_member", ("output", "sessions", "session"))
+def test_windows_new_directory_cannot_be_substituted_before_its_anchor(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    created_member: str,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / f"atomic-{created_member}-root"
+    output = tmp_path / "atomic-one-shot-output"
+    if created_member == "session":
+        module._initialize_capture_root_windows(root)
+        output = module.allocate_capture_session(root)
+    target = {
+        "output": output,
+        "sessions": root / "sessions",
+        "session": output,
+    }[created_member]
+    attacker = tmp_path / f"{created_member}-attacker"
+    attacker.mkdir()
+    sentinel = attacker / "sentinel.bin"
+    sentinel.write_bytes(b"attacker-directory-unchanged\x00\xff")
+    stolen = tmp_path / f"{created_member}-stolen"
+    observed: list[Path] = []
+
+    def attempt_substitution(path: Path) -> None:
+        if path != target:
+            return
+        observed.append(path)
+        with pytest.raises(OSError):
+            path.rename(stolen)
+
+    monkeypatch.setattr(
+        module, "_observe_created_windows_directory", attempt_substitution
+    )
+
+    if created_member == "sessions":
+        module._initialize_capture_root_windows(root)
+    else:
+        session = module.CaptureSession(output, ["backend-must-not-start"])
+        session.finish(0)
+
+    assert observed == [target]
+    assert target.is_dir() and not stolen.exists()
+    assert {path.name for path in attacker.iterdir()} == {sentinel.name}
+    assert sentinel.read_bytes() == b"attacker-directory-unchanged\x00\xff"
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows published-root junction boundary")
+def test_windows_published_root_below_junction_parent_is_not_accepted(
+    tmp_path: Path,
+):
+    import bulla.capture_mcp as module
+
+    redirected_parent = tmp_path / "published-root-target"
+    redirected_parent.mkdir()
+    published_root = redirected_parent / "published"
+    module._initialize_capture_root_windows(published_root)
+    before = {
+        path.relative_to(redirected_parent).as_posix(): (
+            "dir" if path.is_dir() else path.read_bytes()
+        )
+        for path in redirected_parent.rglob("*")
+    }
+    junction = tmp_path / "published-root-junction"
+    created = subprocess.run(
+        [
+            "cmd.exe",
+            "/d",
+            "/c",
+            "mklink",
+            "/J",
+            str(junction),
+            str(redirected_parent),
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        timeout=10,
+    )
+    assert created.returncode == 0, created.stderr
+
+    with pytest.raises(CaptureError, match="parent does not exist"):
+        module._initialize_capture_root_windows(junction / published_root.name)
+
+    after = {
+        path.relative_to(redirected_parent).as_posix(): (
+            "dir" if path.is_dir() else path.read_bytes()
+        )
+        for path in redirected_parent.rglob("*")
+    }
+    assert after == before
+
+
 @pytest.mark.skipif(os.name != "posix", reason="POSIX directory identity boundary")
 def test_live_managed_directory_substitution_cannot_redirect_completion_writes(
     tmp_path: Path,

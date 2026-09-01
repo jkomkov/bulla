@@ -14,7 +14,9 @@ portability defects.
   reacquire the name without a false winner failure.
 - Rejects Windows junctions and other reparse points at managed capture roots,
   session directories, and parents, with no-delete native directory handles
-  preserving their identities across capture writes.
+  preserving their identities across capture writes. New managed directories
+  are created atomically with their identity handle; parent/root/`sessions`
+  handles precede published-root acceptance and every child creation.
 - Makes the installed `capture check --show-receipts` regression recognize
   absolute paths through `Path(line).is_absolute()` on every supported platform.
 - Preserves the ASCII-only capture status boundary that remains safe under a
