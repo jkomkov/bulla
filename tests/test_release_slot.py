@@ -74,6 +74,10 @@ def _slot(signer: LocalEd25519Signer, *, version: str = "0.99.0", opened_at: str
         version=version,
         source_commit="0" * 40,
         source_tree_sha256="sha256:" + "1" * 64,
+        preflight_run_id=123456,
+        preflight_manifest_sha256="sha256:" + "5" * 64,
+        preflight_wheel_sha256="sha256:" + "2" * 64,
+        preflight_sdist_sha256="sha256:" + "3" * 64,
         signer=signer,
         issuer_record=issuer_record,
         opened_at=opened_at,
@@ -148,7 +152,8 @@ def test_slot_builds_and_verifies() -> None:
         slot, issuer_record=_issuer_record(slot, signer)
     )
     assert ok, reason
-    assert slot["schema_version"] == "release-slot/0.2"
+    assert slot["schema_version"] == "release-slot/0.3"
+    assert slot["preflight_run_id"] == 123456
     assert slot["release_issuer_id"] == "release-issuer-test"
     assert slot["release_issuer_record_hash"].startswith("sha256:")
     without_context, reason = release_slot.verify_slot(slot)

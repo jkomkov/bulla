@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package": "bulla",
-  "release": "0.49.1",
+  "release": "0.49.2",
   "normative_action_receipt": "0.2",
   "released_experimental_action_receipts": [
     "0.3",
@@ -11,16 +11,16 @@
     "wheel": {
       "algorithm": "sha256-sorted-posix-lines-v1",
       "count": 195,
-      "sha256": "01c44a5788cf0c5b8f9cfea24ce6a6d0df3be9b8bb45a31fef24d00aa918eeec"
+      "sha256": "72406296b0395d42b4875fbef80aba5a0485174ca1630870726b8b56631f9cce"
     },
     "sdist": {
       "algorithm": "sha256-sorted-posix-lines-v1",
-      "count": 1359,
-      "sha256": "9c2bfc1c65ad42ade328a40e5e7c7347df210074611e005d0d98ee82430e9ffc"
+      "count": 1365,
+      "sha256": "0fe76fc0153295004bb8263b0173e8fb70014e43b8b6f97abd970103170e0ef4"
     }
   },
   "generated_archive_bytes": {
-    "metadata_sha256": "89cc504a7db1b571b0239c9e15a51a2b115313421e4a853f83292e1200b03062"
+    "metadata_sha256": "164c9924c34311dc64e24d1257fc4eb7782c05d0d1b9916f5fdb22a0067b804b"
   },
   "required_root_exports": [
     "EVIDENCE_STRICT_RELIANCE_POLICY",
@@ -53,14 +53,17 @@
     ".gitattributes",
     ".github/release-finalization-requirements.txt",
     ".github/workflows/audit-release-slots.yml",
+    ".github/workflows/release-preflight.yml",
     "distribution-policy.json",
     "docs/RELEASE-0.49.0.md",
     "docs/RELEASE-0.49.1.md",
+    "docs/RELEASE-0.49.2.md",
     "docs/RELEASE-LINEAGE.md",
     "examples/wrap-your-agent/run_demo.py",
     "releases/release-repository-controls.json",
     "releases/release-trust-context.json",
     "scripts/verify_release_repository_controls.py",
+    "scripts/release_preflight_manifest.py",
     "spec/action-receipt-v0.2.md",
     "spec/action-receipt-v0.4-draft.md",
     "spec/build_release_bundle.py",
@@ -79,7 +82,8 @@
     "src/bulla/data/action-receipt-v0.2-verification-kit.zip",
     "src/bulla/data/action-receipt-v0.2-verification-kit.zip.sha256",
     "src/bulla/wrap.py",
-    "tests/test_capture_mcp.py"
+    "tests/test_capture_mcp.py",
+    "tests/test_release_preflight_manifest.py"
   ],
   "source_only_modules": [
     "bulla.experimental.action_boundary",

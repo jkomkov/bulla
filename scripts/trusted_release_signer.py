@@ -27,7 +27,8 @@ from nacl.exceptions import BadSignatureError
 from nacl.signing import SigningKey, VerifyKey
 
 
-SLOT_SCHEMA = "release-slot/0.2"
+SLOT_SCHEMA = "release-slot/0.3"
+HISTORICAL_SLOT_SCHEMA = "release-slot/0.2"
 SLOT_KIND = "bulla.release-slot"
 PROOF_TYPE = "bulla/ed25519-2026"
 SHA256 = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -36,7 +37,7 @@ VERSION = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
 VERIFICATION_KIT_NAME = "action-receipt-v0.2-verification-kit.zip"
 MAX_VERIFICATION_KIT_BYTES = 16 * 1024 * 1024
 BASE58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
-SLOT_FIELDS = {
+HISTORICAL_SLOT_FIELDS = {
     "schema_version",
     "kind",
     "package",
@@ -51,6 +52,29 @@ SLOT_FIELDS = {
     "close_deadline",
     "slot_hash",
     "proof",
+}
+SLOT_FIELDS = HISTORICAL_SLOT_FIELDS | {
+    "preflight_run_id",
+    "preflight_manifest_sha256",
+    "preflight_wheel_sha256",
+    "preflight_sdist_sha256",
+}
+PREFLIGHT_SCHEMA = "bulla.release-preflight/0.1"
+PREFLIGHT_FIELDS = {
+    "artifacts",
+    "builds",
+    "compatibility_matrix",
+    "preflight_run_id",
+    "repository",
+    "schema",
+    "source_commit",
+    "source_date_epoch",
+    "source_materialization",
+    "source_tree_sha256",
+    "tests",
+    "version",
+    "workflow_path",
+    "workflow_ref",
 }
 RECEIPT_FIELDS = {
     "schema_version",
@@ -425,6 +449,111 @@ def release_issuer(path: Path, version: str) -> dict[str, Any]:
     }
 
 
+def preflight_binding(
+    manifest_path: Path,
+    *,
+    version: str,
+    source_commit: str,
+    source_tree_sha256: str,
+) -> dict[str, Any]:
+    """Derive the signed custody join from one closed preflight artifact."""
+    if not manifest_path.is_file() or manifest_path.is_symlink():
+        raise ReleaseSigningError("release preflight manifest is not one regular file")
+    manifest = read_json(manifest_path, 64 * 1024)
+    require_keys(manifest, PREFLIGHT_FIELDS, "release preflight manifest")
+    run_id = manifest.get("preflight_run_id")
+    if (
+        manifest.get("schema") != PREFLIGHT_SCHEMA
+        or manifest.get("repository") != "jkomkov/bulla"
+        or manifest.get("workflow_path")
+        != ".github/workflows/release-preflight.yml"
+        or manifest.get("workflow_ref") != "refs/heads/main"
+        or manifest.get("version") != version
+        or manifest.get("source_commit") != source_commit
+        or manifest.get("source_tree_sha256") != source_tree_sha256
+        or isinstance(run_id, bool)
+        or not isinstance(run_id, int)
+        or run_id <= 0
+    ):
+        raise ReleaseSigningError("release preflight identity does not match")
+    artifacts = manifest.get("artifacts")
+    if not isinstance(artifacts, dict):
+        raise ReleaseSigningError("release preflight artifact records are missing")
+    result: dict[str, Any] = {
+        "preflight_run_id": run_id,
+        "preflight_manifest_sha256": digest_file(manifest_path),
+    }
+    for kind, name in (
+        ("wheel", f"bulla-{version}-py3-none-any.whl"),
+        ("sdist", f"bulla-{version}.tar.gz"),
+    ):
+        record = artifacts.get(name)
+        path = manifest_path.parent / name
+        if (
+            not isinstance(record, dict)
+            or set(record) != {"sha256", "size"}
+            or not isinstance(record.get("sha256"), str)
+            or re.fullmatch(r"[0-9a-f]{64}", record["sha256"]) is None
+            or isinstance(record.get("size"), bool)
+            or not isinstance(record.get("size"), int)
+            or record["size"] <= 0
+            or not path.is_file()
+            or path.is_symlink()
+            or path.stat().st_size != record["size"]
+            or digest_file(path) != f"sha256:{record['sha256']}"
+        ):
+            raise ReleaseSigningError(
+                f"release preflight {kind} differs from its manifest"
+            )
+        result[f"preflight_{kind}_sha256"] = f"sha256:{record['sha256']}"
+    return result
+
+
+def verify_signing_candidate_against_preflight(
+    manifest_path: Path,
+    *,
+    dist: Path,
+    summary: Path,
+    version: str,
+) -> None:
+    """Cross-bind every exact-five signer input to the signed manifest."""
+    manifest = read_json(manifest_path, 64 * 1024)
+    artifacts = manifest.get("artifacts")
+    if not isinstance(artifacts, dict):
+        raise ReleaseSigningError("release preflight artifact records are missing")
+    expected_summary = dist / "pytest-summary.txt"
+    if summary.name != expected_summary.name or summary.parent.resolve() != dist.resolve():
+        raise ReleaseSigningError(
+            "release summary is outside the exact signing candidate"
+        )
+    names = (
+        f"bulla-{version}-py3-none-any.whl",
+        f"bulla-{version}.tar.gz",
+        "pytest-summary.txt",
+        VERIFICATION_KIT_NAME,
+        f"{VERIFICATION_KIT_NAME}.sha256",
+    )
+    for name in names:
+        record = artifacts.get(name)
+        path = dist / name
+        if (
+            not isinstance(record, dict)
+            or set(record) != {"sha256", "size"}
+            or not isinstance(record.get("sha256"), str)
+            or re.fullmatch(r"[0-9a-f]{64}", record["sha256"]) is None
+            or isinstance(record.get("size"), bool)
+            or not isinstance(record.get("size"), int)
+            or record["size"] <= 0
+            or not path.is_file()
+            or path.is_symlink()
+            or path.stat().st_size != record["size"]
+            or digest_file(path) != f"sha256:{record['sha256']}"
+        ):
+            raise ReleaseSigningError(
+                f"release signing candidate differs from signed preflight: {name}"
+            )
+
+
 def build_slot(args: argparse.Namespace) -> None:
     if not VERSION.fullmatch(args.version) or not COMMIT.fullmatch(args.source_commit):
         raise ReleaseSigningError("slot version or source commit is malformed")
@@ -438,8 +567,22 @@ def build_slot(args: argparse.Namespace) -> None:
             "release signing key is not the accepted release issuer"
         )
     opened = datetime.now(timezone.utc)
+    current = _version_tuple(args.version, "slot version") >= (0, 49, 2)
+    manifest_path = getattr(args, "preflight_manifest", None)
+    if current and manifest_path is None:
+        raise ReleaseSigningError("current release slot requires a preflight manifest")
+    binding = (
+        preflight_binding(
+            manifest_path,
+            version=args.version,
+            source_commit=args.source_commit,
+            source_tree_sha256=args.source_tree_sha256,
+        )
+        if manifest_path is not None
+        else {}
+    )
     unsigned = {
-        "schema_version": SLOT_SCHEMA,
+        "schema_version": SLOT_SCHEMA if current else HISTORICAL_SLOT_SCHEMA,
         "kind": SLOT_KIND,
         "package": "bulla",
         "version": args.version,
@@ -453,6 +596,7 @@ def build_slot(args: argparse.Namespace) -> None:
         "close_deadline": (opened + timedelta(hours=24))
         .isoformat()
         .replace("+00:00", "Z"),
+        **binding,
     }
     slot_hash = digest_json(unsigned)
     document = {
@@ -468,7 +612,14 @@ def build_slot(args: argparse.Namespace) -> None:
     if args.out.exists():
         raise ReleaseSigningError(f"refusing to replace {args.out}")
     args.out.write_text(json.dumps(document, indent=2, sort_keys=True) + "\n")
-    verify_slot(document, args.version, args.source_commit, issuer_record)
+    verify_slot(
+        document,
+        args.version,
+        args.source_commit,
+        issuer_record,
+        source_tree_sha256=args.source_tree_sha256,
+        preflight_manifest=manifest_path,
+    )
 
 
 def verify_slot(
@@ -476,10 +627,17 @@ def verify_slot(
     version: str,
     source_commit: str,
     issuer_record: dict[str, Any],
+    *,
+    source_tree_sha256: str | None = None,
+    preflight_manifest: Path | None = None,
 ) -> dict[str, Any]:
-    require_keys(slot, SLOT_FIELDS, "release slot")
+    schema = slot.get("schema_version")
+    fields = SLOT_FIELDS if schema == SLOT_SCHEMA else HISTORICAL_SLOT_FIELDS
+    require_keys(slot, fields, "release slot")
+    if _version_tuple(version, "release version") >= (0, 49, 2) and schema != SLOT_SCHEMA:
+        raise ReleaseSigningError("current release requires a release-slot/0.3 record")
     if (
-        slot["schema_version"] != SLOT_SCHEMA
+        schema not in {SLOT_SCHEMA, HISTORICAL_SLOT_SCHEMA}
         or slot["kind"] != SLOT_KIND
         or slot["package"] != "bulla"
         or slot["version"] != version
@@ -492,11 +650,26 @@ def verify_slot(
         or not SHA256.fullmatch(str(slot["slot_hash"]))
     ):
         raise ReleaseSigningError("release slot identity does not match")
+    if source_tree_sha256 is not None and slot["source_tree_sha256"] != source_tree_sha256:
+        raise ReleaseSigningError("release slot source tree differs from the expected tree")
+    if schema == SLOT_SCHEMA:
+        if preflight_manifest is None:
+            raise ReleaseSigningError("current release slot requires preflight evidence")
+        expected_binding = preflight_binding(
+            preflight_manifest,
+            version=version,
+            source_commit=source_commit,
+            source_tree_sha256=slot["source_tree_sha256"],
+        )
+        if any(slot.get(key) != value for key, value in expected_binding.items()):
+            raise ReleaseSigningError(
+                "release slot differs from the selected preflight evidence"
+            )
     opened = parse_time(slot["opened_at"], "opened_at")
     deadline = parse_time(slot["close_deadline"], "close_deadline")
     if deadline - opened != timedelta(hours=24):
         raise ReleaseSigningError("release slot deadline is not exactly 24 hours")
-    unsigned = {key: slot[key] for key in SLOT_FIELDS - {"slot_hash", "proof"}}
+    unsigned = {key: slot[key] for key in fields - {"slot_hash", "proof"}}
     if digest_json(unsigned) != slot["slot_hash"]:
         raise ReleaseSigningError("release slot hash does not match")
     verify_proof(
@@ -884,16 +1057,18 @@ def sign_receipt(args: argparse.Namespace) -> None:
     if not SHA256.fullmatch(args.source_tree_sha256):
         raise ReleaseSigningError("source tree digest is malformed")
     issuer_record = release_issuer(args.context, args.version)
+    current = _version_tuple(args.version, "release version") >= (0, 49, 2)
+    manifest_path = getattr(args, "preflight_manifest", None)
+    if current and manifest_path is None:
+        raise ReleaseSigningError("current release requires preflight evidence")
     slot = verify_slot(
         read_json(args.slot),
         args.version,
         args.source_commit,
         issuer_record,
+        source_tree_sha256=args.source_tree_sha256,
+        preflight_manifest=manifest_path if current else None,
     )
-    if slot["source_tree_sha256"] != args.source_tree_sha256:
-        raise ReleaseSigningError(
-            "source tree digest differs from the signed release slot"
-        )
     summary_lines = [
         line for line in args.summary.read_text(encoding="utf-8").splitlines() if line
     ]
@@ -930,6 +1105,20 @@ def sign_receipt(args: argparse.Namespace) -> None:
         != sorted(expected_inventory)
     ):
         raise ReleaseSigningError("release candidate inventory differs")
+    if current:
+        verify_signing_candidate_against_preflight(
+            manifest_path,
+            dist=args.dist,
+            summary=args.summary,
+            version=args.version,
+        )
+        if (
+            digest_file(wheel) != slot["preflight_wheel_sha256"]
+            or digest_file(sdist) != slot["preflight_sdist_sha256"]
+        ):
+            raise ReleaseSigningError(
+                "release distributions differ from the signed slot"
+            )
     if verification_kit is not None and verification_kit_checksum is not None:
         expected_checksum = (
             f"{digest_file(verification_kit).removeprefix('sha256:')}  "
@@ -1005,11 +1194,14 @@ def main() -> int:
     slot.add_argument("--version", required=True)
     slot.add_argument("--source-commit", required=True)
     slot.add_argument("--source-tree-sha256", required=True)
+    slot.add_argument("--preflight-manifest", type=Path)
     slot.add_argument("--context", type=Path, required=True)
     slot.add_argument("--out", type=Path, required=True)
     verify = commands.add_parser("verify-slot")
     verify.add_argument("--version", required=True)
     verify.add_argument("--source-commit", required=True)
+    verify.add_argument("--source-tree-sha256", required=True)
+    verify.add_argument("--preflight-manifest", type=Path)
     verify.add_argument("--slot", type=Path, required=True)
     verify.add_argument("--context", type=Path, required=True)
     receipt = commands.add_parser("sign-receipt")
@@ -1021,6 +1213,7 @@ def main() -> int:
     receipt.add_argument("--slot", type=Path, required=True)
     receipt.add_argument("--summary", type=Path, required=True)
     receipt.add_argument("--dist", type=Path, required=True)
+    receipt.add_argument("--preflight-manifest", type=Path)
     receipt.add_argument("--context", type=Path, required=True)
     receipt.add_argument("--existing", type=Path)
     receipt.add_argument("--out", type=Path, required=True)
@@ -1034,6 +1227,8 @@ def main() -> int:
                 args.version,
                 args.source_commit,
                 release_issuer(args.context, args.version),
+                source_tree_sha256=args.source_tree_sha256,
+                preflight_manifest=args.preflight_manifest,
             )
         else:
             sign_receipt(args)

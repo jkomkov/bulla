@@ -70,6 +70,56 @@ def _regular_zip_member(path: str) -> ZipInfo:
     return member
 
 
+def _preflight_candidate(
+    root: Path,
+    *,
+    version: str,
+    commit: str,
+    tree: str,
+    run_id: int,
+    marker: bytes,
+) -> Path:
+    root.mkdir()
+    wheel = root / f"bulla-{version}-py3-none-any.whl"
+    sdist = root / f"bulla-{version}.tar.gz"
+    wheel.write_bytes(b"wheel-" + marker)
+    sdist.write_bytes(b"sdist-" + marker)
+    kit = root / "action-receipt-v0.2-verification-kit.zip"
+    kit.write_bytes(b"kit-" + marker)
+    checksum = root / f"{kit.name}.sha256"
+    checksum.write_text(
+        f"{SIGNER.digest_file(kit).removeprefix('sha256:')}  {kit.name}\n"
+    )
+    summary = root / "pytest-summary.txt"
+    summary.write_bytes(b"summary-" + marker + b"\n")
+    artifacts = {
+        path.name: {
+            "sha256": SIGNER.digest_file(path).removeprefix("sha256:"),
+            "size": path.stat().st_size,
+        }
+        for path in (wheel, sdist, kit, checksum, summary)
+    }
+    manifest = {
+        "artifacts": artifacts,
+        "builds": {},
+        "compatibility_matrix": [],
+        "preflight_run_id": run_id,
+        "repository": "jkomkov/bulla",
+        "schema": "bulla.release-preflight/0.1",
+        "source_commit": commit,
+        "source_date_epoch": 1,
+        "source_materialization": {},
+        "source_tree_sha256": tree,
+        "tests": {},
+        "version": version,
+        "workflow_path": ".github/workflows/release-preflight.yml",
+        "workflow_ref": "refs/heads/main",
+    }
+    manifest_path = root / "release-preflight-manifest.json"
+    manifest_path.write_text(json.dumps(manifest, sort_keys=True) + "\n")
+    return manifest_path
+
+
 def _envelope(version: str) -> RecourseEnvelope:
     return RecourseEnvelope(
         authority=Authority(
@@ -263,6 +313,247 @@ def test_minimal_signer_never_imports_candidate_package() -> None:
     source = SCRIPT.read_text(encoding="utf-8")
     assert "import bulla" not in source
     assert "from bulla" not in source
+
+
+def test_signed_slot_binds_one_exact_preflight_and_rejects_mix_and_match(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    signer = _key(monkeypatch)
+    version = "0.49.2"
+    commit = "a" * 40
+    tree = "sha256:" + "b" * 64
+    context = tmp_path / "context.json"
+    context.write_text(json.dumps(_context(signer)) + "\n")
+    preflight_a = _preflight_candidate(
+        tmp_path / "preflight-a",
+        version=version,
+        commit=commit,
+        tree=tree,
+        run_id=101,
+        marker=b"a",
+    )
+    preflight_b = _preflight_candidate(
+        tmp_path / "preflight-b",
+        version=version,
+        commit=commit,
+        tree=tree,
+        run_id=202,
+        marker=b"b",
+    )
+    slot_path = tmp_path / "slot.json"
+    SIGNER.build_slot(
+        type(
+            "Args",
+            (),
+            {
+                "version": version,
+                "source_commit": commit,
+                "source_tree_sha256": tree,
+                "preflight_manifest": preflight_a,
+                "context": context,
+                "out": slot_path,
+            },
+        )()
+    )
+    slot = SIGNER.read_json(slot_path)
+    issuer = SIGNER.release_issuer(context, version)
+    assert slot["schema_version"] == "release-slot/0.3"
+    assert slot["preflight_run_id"] == 101
+    SIGNER.verify_slot(
+        slot,
+        version,
+        commit,
+        issuer,
+        source_tree_sha256=tree,
+        preflight_manifest=preflight_a,
+    )
+    with pytest.raises(
+        SIGNER.ReleaseSigningError,
+        match="selected preflight evidence",
+    ):
+        SIGNER.verify_slot(
+            slot,
+            version,
+            commit,
+            issuer,
+            source_tree_sha256=tree,
+            preflight_manifest=preflight_b,
+        )
+
+    signing_b = tmp_path / "signing-b"
+    signing_b.mkdir()
+    for name in (
+        f"bulla-{version}-py3-none-any.whl",
+        f"bulla-{version}.tar.gz",
+        "action-receipt-v0.2-verification-kit.zip",
+        "action-receipt-v0.2-verification-kit.zip.sha256",
+        "pytest-summary.txt",
+    ):
+        (signing_b / name).write_bytes((preflight_b.parent / name).read_bytes())
+    summary = signing_b / "pytest-summary.txt"
+    with pytest.raises(
+        SIGNER.ReleaseSigningError,
+        match=r"signed preflight: bulla-0\.49\.2-py3-none-any\.whl",
+    ):
+        SIGNER.sign_receipt(
+            type(
+                "Args",
+                (),
+                {
+                    "version": version,
+                    "source_commit": commit,
+                    "source_tree_sha256": tree,
+                    "preflight_manifest": preflight_a,
+                    "context": context,
+                    "slot": slot_path,
+                    "dist": signing_b,
+                    "summary": summary,
+                    "receipt": tmp_path / "unreached-receipt.json",
+                    "witness": tmp_path / "unreached-witness.json",
+                    "out": tmp_path / "unreached-output.json",
+                    "existing": None,
+                },
+            )()
+        )
+
+    for name in (
+        f"bulla-{version}-py3-none-any.whl",
+        f"bulla-{version}.tar.gz",
+    ):
+        (signing_b / name).write_bytes((preflight_a.parent / name).read_bytes())
+    coherent_preimage = tmp_path / "coherent-forged-preimage.json"
+    coherent_preimage.write_text(
+        json.dumps(
+            {
+                "action": {
+                    "type": "package.release",
+                    "subject": {"test_result": summary.read_text().strip()},
+                }
+            }
+        )
+        + "\n"
+    )
+    with pytest.raises(
+        SIGNER.ReleaseSigningError,
+        match="signed preflight: pytest-summary.txt",
+    ):
+        SIGNER.sign_receipt(
+            type(
+                "Args",
+                (),
+                {
+                    "version": version,
+                    "source_commit": commit,
+                    "source_tree_sha256": tree,
+                    "preflight_manifest": preflight_a,
+                    "context": context,
+                    "slot": slot_path,
+                    "dist": signing_b,
+                    "summary": summary,
+                    "receipt": coherent_preimage,
+                    "witness": tmp_path / "unreached-witness.json",
+                    "out": tmp_path / "unreached-summary-output.json",
+                    "existing": None,
+                },
+            )()
+        )
+
+    summary.write_bytes((preflight_a.parent / summary.name).read_bytes())
+    with pytest.raises(
+        SIGNER.ReleaseSigningError,
+        match="signed preflight: action-receipt-v0.2-verification-kit.zip",
+    ):
+        SIGNER.sign_receipt(
+            type(
+                "Args",
+                (),
+                {
+                    "version": version,
+                    "source_commit": commit,
+                    "source_tree_sha256": tree,
+                    "preflight_manifest": preflight_a,
+                    "context": context,
+                    "slot": slot_path,
+                    "dist": signing_b,
+                    "summary": summary,
+                    "receipt": tmp_path / "unreached-receipt.json",
+                    "witness": tmp_path / "unreached-witness.json",
+                    "out": tmp_path / "unreached-kit-output.json",
+                    "existing": None,
+                },
+            )()
+        )
+
+    kit_name = "action-receipt-v0.2-verification-kit.zip"
+    (signing_b / kit_name).write_bytes((preflight_a.parent / kit_name).read_bytes())
+    with pytest.raises(
+        SIGNER.ReleaseSigningError,
+        match=r"signed preflight: action-receipt-v0\.2-verification-kit\.zip\.sha256",
+    ):
+        SIGNER.sign_receipt(
+            type(
+                "Args",
+                (),
+                {
+                    "version": version,
+                    "source_commit": commit,
+                    "source_tree_sha256": tree,
+                    "preflight_manifest": preflight_a,
+                    "context": context,
+                    "slot": slot_path,
+                    "dist": signing_b,
+                    "summary": summary,
+                    "receipt": tmp_path / "unreached-receipt.json",
+                    "witness": tmp_path / "unreached-witness.json",
+                    "out": tmp_path / "unreached-checksum-output.json",
+                    "existing": None,
+                },
+            )()
+        )
+
+
+def test_verify_slot_rejects_coherent_resigned_wrong_source_tree(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    signer = _key(monkeypatch)
+    version = "0.49.2"
+    commit = "a" * 40
+    expected_tree = "sha256:" + "b" * 64
+    wrong_tree = "sha256:" + "c" * 64
+    context = tmp_path / "context.json"
+    context.write_text(json.dumps(_context(signer)) + "\n")
+    preflight = _preflight_candidate(
+        tmp_path / "preflight",
+        version=version,
+        commit=commit,
+        tree=wrong_tree,
+        run_id=303,
+        marker=b"wrong-tree",
+    )
+    slot_path = tmp_path / "wrong-tree.slot.json"
+    SIGNER.build_slot(
+        type(
+            "Args",
+            (),
+            {
+                "version": version,
+                "source_commit": commit,
+                "source_tree_sha256": wrong_tree,
+                "preflight_manifest": preflight,
+                "context": context,
+                "out": slot_path,
+            },
+        )()
+    )
+    with pytest.raises(SIGNER.ReleaseSigningError, match="expected tree"):
+        SIGNER.verify_slot(
+            SIGNER.read_json(slot_path),
+            version,
+            commit,
+            SIGNER.release_issuer(context, version),
+            source_tree_sha256=expected_tree,
+            preflight_manifest=preflight,
+        )
 
 
 def test_minimal_signer_rejects_package_kit_mismatch(
@@ -484,7 +775,7 @@ def test_minimal_signer_binds_slot_summary_and_artifacts(
     fixture["summary"].write_text("106 passed in 3.00s\n")  # type: ignore[union-attr]
     with pytest.raises(
         SIGNER.ReleaseSigningError,
-        match="source tree digest differs from the signed release slot",
+        match="release slot source tree differs from the expected tree",
     ):
         SIGNER.sign_receipt(
             type(
