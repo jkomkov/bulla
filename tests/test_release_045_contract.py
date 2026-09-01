@@ -127,6 +127,7 @@ def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
     assert "python -m build" not in workflow
     assert "python -m pytest" not in workflow
     assert preflight.count("python -m build --outdir") == 2
+    assert preflight.count("--policy reference-checkout/distribution-policy.json") == 2
     assert preflight.count("tests/test_capture_mcp.py") == 3
     assert "test_session_root_survives_two_unchanged_server_lifecycles" in preflight
     assert "release_preflight_manifest.py write" in preflight

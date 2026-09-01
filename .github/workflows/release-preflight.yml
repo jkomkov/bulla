@@ -229,8 +229,12 @@ jobs:
           cmp --silent \
             "$build_a/bulla-$RELEASE_VERSION.tar.gz" \
             "$build_b/bulla-$RELEASE_VERSION.tar.gz"
-          python reference-checkout/scripts/verify_distribution_policy.py --dist "$build_a"
-          python reference-checkout/scripts/verify_distribution_policy.py --dist "$build_b"
+          python reference-checkout/scripts/verify_distribution_policy.py \
+            --policy reference-checkout/distribution-policy.json \
+            --dist "$build_a"
+          python reference-checkout/scripts/verify_distribution_policy.py \
+            --policy reference-checkout/distribution-policy.json \
+            --dist "$build_b"
           python reference-checkout/scripts/verify_release_archive_parity.py \
             --root "$RUNNER_TEMP/source-reference" --dist "$build_a"
           python reference-checkout/scripts/verify_release_archive_parity.py \
