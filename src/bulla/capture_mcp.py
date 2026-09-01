@@ -369,39 +369,44 @@ def _release_windows_root_claim(claim: Path, token: bytes) -> None:
         pass
 
 
+def _windows_root_is_published(root: Path, claim: Path) -> bool:
+    """Accept a completed root only when no initializer still owns the claim."""
+    if claim.exists() or claim.is_symlink():
+        return False
+    try:
+        _validate_capture_root_layout(root)
+    except CaptureDirectoryError:
+        return False
+    return not claim.exists() and not claim.is_symlink()
+
+
 def _initialize_capture_root_windows(root: Path) -> None:
     """Serialize first publication on Windows with a bounded exclusive claim."""
-    if root.exists() or root.is_symlink():
-        try:
-            _validate_capture_root_layout(root)
-            return
-        except CaptureDirectoryError:
-            pass
+    claim = _windows_root_claim_path(root)
+    if _windows_root_is_published(root, claim):
+        return
 
     parent = root.parent
     if parent.is_symlink() or not parent.is_dir():
         raise CaptureError(f"capture session root parent does not exist: {parent}")
 
-    claim = _windows_root_claim_path(root)
     token = (uuid.uuid4().hex + "\n").encode("ascii")
     deadline = time.monotonic() + _WINDOWS_ROOT_CLAIM_WAIT_SECONDS
     flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_BINARY", 0)
 
     while True:
+        if _windows_root_is_published(root, claim):
+            return
         try:
             fd = os.open(claim, flags, 0o600)
         except FileExistsError:
-            try:
-                _validate_capture_root_layout(root)
-                return
-            except CaptureDirectoryError:
-                if time.monotonic() >= deadline:
-                    raise CaptureError(
-                        "capture session root initialization claim remained "
-                        f"unresolved for {_WINDOWS_ROOT_CLAIM_WAIT_SECONDS:g} seconds"
-                    )
-                time.sleep(_WINDOWS_ROOT_CLAIM_POLL_SECONDS)
-                continue
+            if time.monotonic() >= deadline:
+                raise CaptureError(
+                    "capture session root initialization claim remained "
+                    f"unresolved for {_WINDOWS_ROOT_CLAIM_WAIT_SECONDS:g} seconds"
+                )
+            time.sleep(_WINDOWS_ROOT_CLAIM_POLL_SECONDS)
+            continue
         except OSError as exc:
             raise CaptureError(
                 f"could not claim capture session root initialization: {claim}"

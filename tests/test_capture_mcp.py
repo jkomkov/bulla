@@ -7,6 +7,7 @@ import json
 import os
 import subprocess
 import sys
+import threading
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -722,6 +723,53 @@ def test_windows_root_initialization_uses_one_exclusive_claim(tmp_path: Path):
     assert set(path.name for path in tmp_path.iterdir()) == {root.name}
 
 
+def test_windows_loser_waits_for_winner_to_release_completed_root_claim(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "windows-paused-winner-root"
+    release_entered = threading.Event()
+    allow_release = threading.Event()
+    release_lock = threading.Lock()
+    pause_next_release = [True]
+    original_release = module._release_windows_root_claim
+    original_sleep = module.time.sleep
+    loser_waiting = threading.Event()
+
+    def paused_release(claim: Path, token: bytes) -> None:
+        with release_lock:
+            pause = pause_next_release[0]
+            pause_next_release[0] = False
+        if pause:
+            release_entered.set()
+            assert allow_release.wait(timeout=5)
+        original_release(claim, token)
+
+    def observed_sleep(seconds: float) -> None:
+        loser_waiting.set()
+        original_sleep(seconds)
+
+    monkeypatch.setattr(module, "_release_windows_root_claim", paused_release)
+    monkeypatch.setattr(module.time, "sleep", observed_sleep)
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        winner = executor.submit(module._initialize_capture_root_windows, root)
+        assert release_entered.wait(timeout=5)
+        assert module._validate_capture_root_layout(root) == root / "sessions"
+        assert module._windows_root_claim_path(root).exists()
+        loser = executor.submit(module._initialize_capture_root_windows, root)
+        try:
+            assert loser_waiting.wait(timeout=5)
+            assert not loser.done()
+        finally:
+            allow_release.set()
+        winner.result(timeout=5)
+        loser.result(timeout=5)
+
+    assert not module._windows_root_claim_path(root).exists()
+    assert module._validate_capture_root_layout(root) == root / "sessions"
+
+
 def test_windows_stranded_root_claim_times_out_without_stealing(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ):
@@ -750,6 +798,34 @@ def test_windows_stranded_root_claim_times_out_without_stealing(
     assert clock[0] >= 5.0
     assert claim.read_bytes() == b"other-initializer\n"
     assert not root.exists()
+
+
+def test_windows_complete_root_with_stranded_claim_still_times_out(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "windows-complete-but-claimed-root"
+    module._initialize_capture_root_unclaimed(root)
+    claim = module._windows_root_claim_path(root)
+    claim.write_bytes(b"stranded-after-publication\n")
+    clock = [0.0]
+
+    def monotonic() -> float:
+        return clock[0]
+
+    def sleep(seconds: float) -> None:
+        assert seconds == 0.025
+        clock[0] += seconds
+
+    monkeypatch.setattr(module.time, "monotonic", monotonic)
+    monkeypatch.setattr(module.time, "sleep", sleep)
+
+    with pytest.raises(CaptureError, match="unresolved for 5 seconds"):
+        module._initialize_capture_root_windows(root)
+
+    assert module._validate_capture_root_layout(root) == root / "sessions"
+    assert claim.read_bytes() == b"stranded-after-publication\n"
 
 
 def test_stale_initializer_snapshot_revalidates_concurrent_published_session(
