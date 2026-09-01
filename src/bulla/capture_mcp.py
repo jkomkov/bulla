@@ -359,14 +359,40 @@ def _windows_root_claim_path(root: Path) -> Path:
 
 
 def _release_windows_root_claim(claim: Path, token: bytes) -> None:
-    """Release only the claim whose exact token this process created."""
+    """Remove this initializer's exact claim and prove that it is absent."""
     try:
-        if claim.read_bytes() == token:
-            claim.unlink()
-    except OSError:
-        # A surviving claim is deliberately fail-closed.  Never unlink a claim
-        # that cannot be proven to be this process's own claim.
-        pass
+        actual = claim.read_bytes()
+    except FileNotFoundError:
+        return
+    except OSError as exc:
+        raise CaptureError(
+            f"could not verify owned capture session root initialization claim: {claim}"
+        ) from exc
+    if actual != token:
+        raise CaptureError(
+            "capture session root initialization claim ownership changed; "
+            f"refusing to remove it: {claim}"
+        )
+    try:
+        claim.unlink()
+    except FileNotFoundError:
+        return
+    except OSError as exc:
+        raise CaptureError(
+            f"could not remove owned capture session root initialization claim: {claim}"
+        ) from exc
+    try:
+        claim.lstat()
+    except FileNotFoundError:
+        return
+    except OSError as exc:
+        raise CaptureError(
+            "could not prove removal of owned capture session root "
+            f"initialization claim: {claim}"
+        ) from exc
+    raise CaptureError(
+        f"owned capture session root initialization claim remained after removal: {claim}"
+    )
 
 
 def _windows_root_is_published(root: Path, claim: Path) -> bool:

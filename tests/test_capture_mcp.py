@@ -828,6 +828,47 @@ def test_windows_complete_root_with_stranded_claim_still_times_out(
     assert claim.read_bytes() == b"stranded-after-publication\n"
 
 
+def test_windows_owned_claim_unlink_failure_never_reports_a_session(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "windows-owned-claim-unlink-failure"
+    claim = module._windows_root_claim_path(root)
+    original_unlink = Path.unlink
+
+    def denied_unlink(path: Path, *args, **kwargs) -> None:
+        if path == claim:
+            raise PermissionError("injected claim removal failure")
+        original_unlink(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "unlink", denied_unlink)
+    monkeypatch.setattr(
+        module, "_initialize_capture_root", module._initialize_capture_root_windows
+    )
+
+    with pytest.raises(CaptureError, match="could not remove owned"):
+        module.allocate_capture_session(root)
+
+    assert claim.is_file()
+    assert module._validate_capture_root_layout(root) == root / "sessions"
+    assert list((root / "sessions").iterdir()) == []
+
+
+def test_windows_release_never_steals_changed_claim(
+    tmp_path: Path,
+):
+    import bulla.capture_mcp as module
+
+    claim = tmp_path / ".changed.init.claim"
+    claim.write_bytes(b"replacement-owner\n")
+
+    with pytest.raises(CaptureError, match="ownership changed"):
+        module._release_windows_root_claim(claim, b"original-owner\n")
+
+    assert claim.read_bytes() == b"replacement-owner\n"
+
+
 def test_stale_initializer_snapshot_revalidates_concurrent_published_session(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ):
