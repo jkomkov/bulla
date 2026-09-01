@@ -1,0 +1,309 @@
+# Evidence is produced before any release slot, tag, draft, or package identity.
+# This workflow has no repository-write, release-signing, or PyPI authority.
+
+name: release preflight
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to verify without minting release identity
+        required: true
+        type: string
+      source_commit:
+        description: Exact public main commit to verify
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-preflight-${{ inputs.source_commit }}
+  cancel-in-progress: false
+
+jobs:
+  exact-main:
+    name: authenticate read-only exact main
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      RELEASE_VERSION: ${{ inputs.version }}
+      SOURCE_COMMIT: ${{ inputs.source_commit }}
+      WORKFLOW_REF: ${{ github.ref }}
+      WORKFLOW_SHA: ${{ github.sha }}
+      WORKFLOW_REPOSITORY: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - name: Bind preflight to the exact public main source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import os
+          import re
+
+          if (
+              os.environ["WORKFLOW_REF"] != "refs/heads/main"
+              or os.environ["WORKFLOW_REPOSITORY"] != "jkomkov/bulla"
+              or os.environ["SOURCE_COMMIT"] != os.environ["WORKFLOW_SHA"]
+              or not re.fullmatch(r"[0-9a-f]{40}", os.environ["SOURCE_COMMIT"])
+              or not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", os.environ["RELEASE_VERSION"])
+          ):
+              raise SystemExit("preflight is not bound to one exact public main commit")
+          PY
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+          git fetch --force origin main
+          test "$(git rev-parse refs/remotes/origin/main)" = "$SOURCE_COMMIT"
+          test "$(
+            python -c \
+              'import pathlib,re; print(re.search(r"__version__ = \"([^\"]+)\"", pathlib.Path("src/bulla/__init__.py").read_text()).group(1))'
+          )" = "$RELEASE_VERSION"
+          git fetch --force --tags origin
+          if git rev-parse "refs/tags/v$RELEASE_VERSION" >/dev/null 2>&1; then
+            echo "::error::Release tag already exists and cannot be reused."
+            exit 1
+          fi
+          if git rev-parse "refs/tags/release-slot-v$RELEASE_VERSION" \
+            >/dev/null 2>&1; then
+            echo "::error::Public release-slot tag already exists."
+            exit 1
+          fi
+          if gh release view "v$RELEASE_VERSION" >/dev/null 2>&1; then
+            echo "::error::Release record already exists and cannot be replaced."
+            exit 1
+          fi
+          if gh release view "release-slot-v$RELEASE_VERSION" >/dev/null 2>&1; then
+            echo "::error::Public release-slot record already exists."
+            exit 1
+          fi
+
+  compatibility:
+    name: preflight smoke · ${{ matrix.os }} · Python ${{ matrix.python }}
+    needs: exact-main
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - {os: ubuntu-latest, python: "3.10"}
+          - {os: ubuntu-latest, python: "3.11"}
+          - {os: ubuntu-latest, python: "3.12"}
+          - {os: ubuntu-latest, python: "3.13"}
+          - {os: macos-latest, python: "3.12"}
+          - {os: windows-latest, python: "3.12"}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          ref: ${{ inputs.source_commit }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install exact candidate
+        run: python -m pip install ".[identity,ots,test]" pytest-timeout
+      - name: Exercise the released receipt and Doorstep boundaries
+        run: >-
+          python -m pytest -q
+          tests/test_action_receipt.py
+          tests/test_action_receipt_v04.py
+          tests/test_capture_mcp.py
+          tests/test_distribution_policy.py
+          tests/test_event_coverage.py
+          tests/test_first_action_demo.py
+          tests/test_golden_f13.py
+          tests/test_release_045_contract.py
+          tests/test_release_preflight_manifest.py
+          tests/test_verification_kit.py
+          tests/test_version_single_source.py
+          tests/test_wrap.py
+          --timeout=120
+
+  evidence:
+    name: freeze exact reproducible candidate evidence
+    needs: compatibility
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      RELEASE_VERSION: ${{ inputs.version }}
+      SOURCE_COMMIT: ${{ inputs.source_commit }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ inputs.source_commit }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+      - name: Reconfirm exact main identity and derive deterministic source values
+        run: |
+          test "$GITHUB_SHA" = "$SOURCE_COMMIT"
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+          git fetch --force origin main
+          test "$(git rev-parse refs/remotes/origin/main)" = "$SOURCE_COMMIT"
+          tree="$(git rev-parse "$SOURCE_COMMIT^{tree}")"
+          git cat-file tree "$tree" > "$RUNNER_TEMP/source-tree.bin"
+          echo "SOURCE_DATE_EPOCH=$(git show -s --format=%ct "$SOURCE_COMMIT")" \
+            >> "$GITHUB_ENV"
+          python - <<'PY' >> "$GITHUB_ENV"
+          import hashlib
+          import os
+          from pathlib import Path
+
+          payload = (Path(os.environ["RUNNER_TEMP"]) / "source-tree.bin").read_bytes()
+          print(f"SOURCE_TREE_SHA256=sha256:{hashlib.sha256(payload).hexdigest()}")
+          PY
+      - name: Run the complete standalone release suite
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[identity,ots]" pytest pytest-timeout
+          python scripts/verify_distribution_policy.py --print-standalone-tests \
+            > "$RUNNER_TEMP/standalone-tests.txt"
+          mapfile -t standalone_tests < "$RUNNER_TEMP/standalone-tests.txt"
+          test "${#standalone_tests[@]}" -gt 0
+          python -m pytest "${standalone_tests[@]}" -q --timeout=600 \
+            | tee "$RUNNER_TEMP/pytest-summary.txt"
+      - name: Verify tests did not alter the exact source
+        run: |
+          dirty="$(git status --porcelain=v1 --untracked-files=all)"
+          if [ -n "$dirty" ]; then
+            printf '%s\n' "$dirty"
+            echo "::error::Tests changed exact preflight source."
+            exit 1
+          fi
+      - name: Build the candidate twice from the same deterministic source
+        run: |
+          python -m pip install "build==1.4.2"
+          build_a="$RUNNER_TEMP/build-a"
+          build_b="$RUNNER_TEMP/build-b"
+          mkdir "$build_a" "$build_b"
+          test -z "$(find "$build_a" -mindepth 1 -print -quit)"
+          test -z "$(find "$build_b" -mindepth 1 -print -quit)"
+          python -m build --outdir "$build_a"
+          python -m build --outdir "$build_b"
+          cmp --silent \
+            "$build_a/bulla-$RELEASE_VERSION-py3-none-any.whl" \
+            "$build_b/bulla-$RELEASE_VERSION-py3-none-any.whl"
+          cmp --silent \
+            "$build_a/bulla-$RELEASE_VERSION.tar.gz" \
+            "$build_b/bulla-$RELEASE_VERSION.tar.gz"
+          python scripts/verify_distribution_policy.py --dist "$build_a"
+          python scripts/verify_distribution_policy.py --dist "$build_b"
+          python scripts/verify_release_archive_parity.py --root . --dist "$build_a"
+          python scripts/verify_release_archive_parity.py --root . --dist "$build_b"
+          mkdir "$RUNNER_TEMP/release-preflight"
+          cp "$build_a"/* "$RUNNER_TEMP/release-preflight/"
+      - name: Verify the isolated installed wheel and retained kit
+        run: |
+          python -m venv "$RUNNER_TEMP/bulla-wheel"
+          "$RUNNER_TEMP/bulla-wheel/bin/python" -m pip install \
+            "$RUNNER_TEMP"/build-a/*.whl pytest pytest-timeout pynacl
+          "$RUNNER_TEMP/bulla-wheel/bin/python" -I - <<'PY'
+          import importlib.metadata
+          import importlib.util
+          import bulla
+          import bulla.experimental
+
+          if importlib.metadata.version("bulla") != bulla.__version__:
+              raise SystemExit("installed metadata and package versions differ")
+          required = {
+              "verify_receipt", "event_coverage", "observed_record_sha256", "wrap_action",
+              "operational_envelope", "receipt_for",
+          }
+          missing = sorted(required - set(bulla.__all__))
+          if missing:
+              raise SystemExit(f"missing root exports: {missing}")
+          forbidden = (
+              "action_boundary", "answerability", "causal_model", "challenge",
+              "control_plane_alpha", "generalization", "incident_packet",
+              "incident_pilots", "receipt_witness",
+          )
+          for leaf in forbidden:
+              if importlib.util.find_spec(f"bulla.experimental.{leaf}") is not None:
+                  raise SystemExit(f"source-only module shipped: {leaf}")
+          PY
+          "$RUNNER_TEMP/bulla-wheel/bin/bulla" --help > "$RUNNER_TEMP/bulla-help.txt"
+          "$RUNNER_TEMP/bulla-wheel/bin/bulla" capture --help \
+            > "$RUNNER_TEMP/capture-help.txt"
+          "$RUNNER_TEMP/bulla-wheel/bin/bulla" capture mcp --help \
+            > "$RUNNER_TEMP/capture-mcp-help.txt"
+          "$RUNNER_TEMP/bulla-wheel/bin/bulla" capture check --help \
+            > "$RUNNER_TEMP/capture-check-help.txt"
+          "$RUNNER_TEMP/bulla-wheel/bin/bulla" experimental --help \
+            > "$RUNNER_TEMP/experimental-help.txt"
+          if grep -E '(^|[[:space:]])(answerability|boundary|challenge)([[:space:]]|$)' \
+            "$RUNNER_TEMP/experimental-help.txt"; then
+            echo "source-only command appeared in installed CLI help" >&2
+            exit 1
+          fi
+          "$RUNNER_TEMP/bulla-wheel/bin/bulla" receipt kit \
+            --out "$RUNNER_TEMP/installed-kit.zip"
+          cmp --silent \
+            "$RUNNER_TEMP/installed-kit.zip" \
+            src/bulla/data/action-receipt-v0.2-verification-kit.zip
+          cp src/bulla/data/action-receipt-v0.2-verification-kit.zip \
+            "$RUNNER_TEMP/release-preflight/"
+          cp src/bulla/data/action-receipt-v0.2-verification-kit.zip.sha256 \
+            "$RUNNER_TEMP/release-preflight/"
+          (
+            cd "$RUNNER_TEMP"
+            BULLA_CAPTURE_TEST_INSTALLED=1 \
+            "$RUNNER_TEMP/bulla-wheel/bin/python" -I -m pytest -q \
+              "$GITHUB_WORKSPACE/tests/test_action_receipt.py" \
+              "$GITHUB_WORKSPACE/tests/test_action_receipt_v04.py" \
+              "$GITHUB_WORKSPACE/tests/test_capture_mcp.py" \
+              "$GITHUB_WORKSPACE/tests/test_distribution_policy.py" \
+              "$GITHUB_WORKSPACE/tests/test_event_coverage.py" \
+              "$GITHUB_WORKSPACE/tests/test_golden_f13.py" \
+              "$GITHUB_WORKSPACE/tests/test_release_045_contract.py" \
+              "$GITHUB_WORKSPACE/tests/test_release_preflight_manifest.py" \
+              "$GITHUB_WORKSPACE/tests/test_verification_kit.py" \
+              "$GITHUB_WORKSPACE/tests/test_version_single_source.py" \
+              "$GITHUB_WORKSPACE/tests/test_wrap.py" \
+              --timeout=120 \
+              | tee "$RUNNER_TEMP/installed-summary.txt"
+            BULLA_CAPTURE_TEST_INSTALLED=1 \
+            "$RUNNER_TEMP/bulla-wheel/bin/python" -I -m pytest -q \
+              "$GITHUB_WORKSPACE/tests/test_capture_mcp.py::test_session_root_survives_two_unchanged_server_lifecycles" \
+              --timeout=120 \
+              | tee "$RUNNER_TEMP/lifecycle-summary.txt"
+          )
+      - name: Freeze the exact preflight manifest
+        run: |
+          cp "$RUNNER_TEMP/pytest-summary.txt" \
+            "$RUNNER_TEMP/release-preflight/pytest-summary.txt"
+          cp "$RUNNER_TEMP/installed-summary.txt" \
+            "$RUNNER_TEMP/release-preflight/installed-summary.txt"
+          cp "$RUNNER_TEMP/lifecycle-summary.txt" \
+            "$RUNNER_TEMP/release-preflight/lifecycle-summary.txt"
+          python -I scripts/release_preflight_manifest.py write \
+            --artifacts "$RUNNER_TEMP/release-preflight" \
+            --build-a "$RUNNER_TEMP/build-a" \
+            --build-b "$RUNNER_TEMP/build-b" \
+            --out "$RUNNER_TEMP/release-preflight/release-preflight-manifest.json" \
+            --version "$RELEASE_VERSION" \
+            --source-commit "$SOURCE_COMMIT" \
+            --source-tree-sha256 "$SOURCE_TREE_SHA256" \
+            --source-date-epoch "$SOURCE_DATE_EPOCH" \
+            --run-id "$GITHUB_RUN_ID"
+          python -I scripts/release_preflight_manifest.py verify \
+            --artifacts "$RUNNER_TEMP/release-preflight" \
+            --manifest "$RUNNER_TEMP/release-preflight/release-preflight-manifest.json" \
+            --version "$RELEASE_VERSION" \
+            --source-commit "$SOURCE_COMMIT" \
+            --source-tree-sha256 "$SOURCE_TREE_SHA256" \
+            --source-date-epoch "$SOURCE_DATE_EPOCH" \
+            --run-id "$GITHUB_RUN_ID"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: bulla-release-preflight-${{ inputs.source_commit }}
+          path: ${{ runner.temp }}/release-preflight/
+          if-no-files-found: error
+          retention-days: 90

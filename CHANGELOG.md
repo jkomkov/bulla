@@ -1,6 +1,33 @@
 # Changelog
 
-## 0.49.1 — 2026-08-31
+## 0.49.2 — 2026-08-31
+
+**Evidence before identity.** This patch release preserves the Doorstep runtime
+and ActionReceipt behavior while correcting the external-release sequence that
+stopped the 0.49.1 candidate before PyPI publication.
+
+- Adds a read-only exact-`main` preflight that runs the six-platform Python
+  compatibility matrix, the complete standalone suite, two byte-identical
+  reproducible builds, archive parity, isolated installed-wheel checks, and two
+  unchanged capture-server lifecycles before any release slot, tag, or draft is
+  created.
+- Freezes the exact version, source commit, source-tree digest, build epoch,
+  compatibility matrix, both build records, test summaries, artifact sizes, and
+  SHA-256 digests into one strict preflight manifest.
+- Requires the signed preparation workflow to authenticate the successful exact
+  preflight run and verify its complete frozen artifact before minting release
+  identity. Publication re-verifies and stages those exact bytes; it never
+  rebuilds the candidate after the slot and tag exist.
+- Corrects the Windows claim-release scheduling regression to pause the shared
+  `_release_acquired_windows_root_claim` boundary, so native HANDLE release and
+  the platform-neutral fallback exercise the same loser-waits-for-release rule.
+  The installed capture runtime is byte-identical to the 0.49.1 candidate.
+- Retains the failed 0.49.0 and 0.49.1 slots, tags, and drafts as immutable
+  correction evidence. Neither version was published to PyPI or reused.
+- Preserves ActionReceipt schemas, bytes, canonicalization, verification,
+  reliance behavior, and the stable v0.2 verification kit unchanged.
+
+## 0.49.1 — 2026-08-31 (not published)
 
 **Doorstep Windows correction.** This patch release preserves the 0.49.0
 Doorstep capability and ActionReceipt behavior while closing two release-gate
@@ -25,6 +52,12 @@ portability defects.
   evidence; 0.49.0 was not published to PyPI and its version is not reused.
 - Preserves ActionReceipt schemas, bytes, canonicalization, verification,
   reliance behavior, and the stable v0.2 verification kit unchanged.
+
+The prepublication Windows gate showed that its deterministic release
+regression paused only the portable pathname helper, while native Windows used
+the identity-bound HANDLE release path. PyPI publication did not run. The
+public slot, tag, and draft remain immutable correction evidence; 0.49.1 is not
+reused.
 
 ## 0.49.0 — 2026-08-31 (not published)
 

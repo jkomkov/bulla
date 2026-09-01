@@ -879,24 +879,28 @@ def test_windows_loser_waits_for_winner_to_release_completed_root_claim(
     allow_release = threading.Event()
     release_lock = threading.Lock()
     pause_next_release = [True]
-    original_release = module._release_windows_root_claim
+    original_release = module._release_acquired_windows_root_claim
     original_sleep = module.time.sleep
     loser_waiting = threading.Event()
 
-    def paused_release(claim: Path, token: bytes) -> None:
+    def paused_release(
+        claim: Path, token: bytes, native_handle: int | None,
+    ) -> None:
         with release_lock:
             pause = pause_next_release[0]
             pause_next_release[0] = False
         if pause:
             release_entered.set()
             assert allow_release.wait(timeout=5)
-        original_release(claim, token)
+        original_release(claim, token, native_handle)
 
     def observed_sleep(seconds: float) -> None:
         loser_waiting.set()
         original_sleep(seconds)
 
-    monkeypatch.setattr(module, "_release_windows_root_claim", paused_release)
+    monkeypatch.setattr(
+        module, "_release_acquired_windows_root_claim", paused_release
+    )
     monkeypatch.setattr(module.time, "sleep", observed_sleep)
     with ThreadPoolExecutor(max_workers=2) as executor:
         winner = executor.submit(module._initialize_capture_root_windows, root)

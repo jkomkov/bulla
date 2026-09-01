@@ -2,10 +2,16 @@
 
 ## Scope
 
-Bulla 0.49.1 is a bounded portability correction to the Doorstep MCP capture
+Bulla 0.49.1 was a bounded portability correction to the Doorstep MCP capture
 commands introduced by the 0.49.0 candidate. The failed 0.49.0 tag and draft
 release remain immutable correction evidence and are not reused or promoted.
 0.49.0 was not published to PyPI.
+
+0.49.1 was not published to PyPI. Its Windows prepublication gate found that
+the deterministic claim-release regression paused the portable pathname helper,
+while native Windows used the identity-bound HANDLE release path. Its public
+slot, tag, and draft remain immutable correction evidence and are not reused or
+promoted. The correction proceeds as 0.49.2.
 
 On Windows, first publication of a capture session root uses one adjacent,
 exclusive local initialization claim. A contender waits at most five seconds,

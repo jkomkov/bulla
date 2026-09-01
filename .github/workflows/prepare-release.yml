@@ -1,6 +1,7 @@
-# Manually approved default-branch ceremony. This workflow opens the signed
-# slot before it creates the immutable release tag. It never checks out or
-# imports the candidate package and never uploads package artifacts.
+# Manually approved default-branch ceremony. A separate read-only exact-main
+# preflight must finish successfully before this workflow opens the signed slot
+# or creates any release tag. This workflow never imports the candidate package
+# and never uploads package artifacts.
 
 name: prepare signed release slot
 
@@ -13,6 +14,10 @@ on:
         type: string
       source_commit:
         description: Reviewed 40-hex commit to tag and publish
+        required: true
+        type: string
+      preflight_run_id:
+        description: Successful exact-main release-preflight workflow run
         required: true
         type: string
 
@@ -29,6 +34,7 @@ jobs:
     env:
       RELEASE_VERSION: ${{ inputs.version }}
       SOURCE_COMMIT: ${{ inputs.source_commit }}
+      PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
       TRUSTED_SIGNER_SHA256: 5477082c209a641c99d58594a262dee23d76d4c4ccbb0803e19a7907d0e7357c
       TRUSTED_WORKFLOW_REF: ${{ github.ref }}
       TRUSTED_REPOSITORY: ${{ github.repository }}
@@ -53,6 +59,8 @@ jobs:
               raise SystemExit("version must be MAJOR.MINOR.PATCH")
           if not re.fullmatch(r"[0-9a-f]{40}", os.environ["SOURCE_COMMIT"]):
               raise SystemExit("source_commit must be a lowercase 40-hex SHA")
+          if not re.fullmatch(r"[1-9][0-9]*", os.environ["PREFLIGHT_RUN_ID"]):
+              raise SystemExit("preflight_run_id must be a positive decimal run ID")
           if (
               os.environ["TRUSTED_WORKFLOW_REF"] != "refs/heads/main"
               or os.environ["TRUSTED_REPOSITORY"] != "jkomkov/bulla"
@@ -83,6 +91,35 @@ jobs:
             echo "::error::Public release-slot record already exists."
             exit 1
           fi
+      - name: Authenticate the successful exact-main preflight
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "repos/$GITHUB_REPOSITORY/actions/runs/$PREFLIGHT_RUN_ID" \
+            > "$RUNNER_TEMP/preflight-run.json"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          run = json.loads(
+              (Path(os.environ["RUNNER_TEMP"]) / "preflight-run.json").read_text()
+          )
+          if (
+              run.get("path") != ".github/workflows/release-preflight.yml"
+              or run.get("event") != "workflow_dispatch"
+              or run.get("status") != "completed"
+              or run.get("conclusion") != "success"
+              or run.get("head_branch") != "main"
+              or run.get("head_sha") != os.environ["SOURCE_COMMIT"]
+              or (run.get("repository") or {}).get("full_name")
+              != os.environ["GITHUB_REPOSITORY"]
+          ):
+              raise SystemExit("release preflight does not authorize identity creation")
+          PY
       - name: Verify immutable releases and protected SemVer tags
         env:
           GH_TOKEN: ${{ secrets.RELEASE_ADMIN_READ_TOKEN }}
@@ -150,6 +187,8 @@ jobs:
         run: |
           tree="$(git rev-parse "$SOURCE_COMMIT^{tree}")"
           git cat-file tree "$tree" > "$RUNNER_TEMP/source-tree.bin"
+          echo "SOURCE_DATE_EPOCH=$(git show -s --format=%ct "$SOURCE_COMMIT")" \
+            >> "$GITHUB_ENV"
           python - <<'PY' >> "$GITHUB_ENV"
           import hashlib
           import os
@@ -158,6 +197,22 @@ jobs:
           payload = (Path(os.environ["RUNNER_TEMP"]) / "source-tree.bin").read_bytes()
           print(f"SOURCE_TREE_SHA256=sha256:{hashlib.sha256(payload).hexdigest()}")
           PY
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: bulla-release-preflight-${{ inputs.source_commit }}
+          path: ${{ runner.temp }}/release-preflight
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.preflight_run_id }}
+      - name: Verify frozen preflight evidence before minting release identity
+        run: |
+          python -I scripts/release_preflight_manifest.py verify \
+            --artifacts "$RUNNER_TEMP/release-preflight" \
+            --manifest "$RUNNER_TEMP/release-preflight/release-preflight-manifest.json" \
+            --version "$RELEASE_VERSION" \
+            --source-commit "$SOURCE_COMMIT" \
+            --source-tree-sha256 "$SOURCE_TREE_SHA256" \
+            --source-date-epoch "$SOURCE_DATE_EPOCH" \
+            --run-id "$PREFLIGHT_RUN_ID"
       - name: Install only hash-pinned signer dependencies
         run: |
           printf '%s  %s\n' "$TRUSTED_SIGNER_SHA256" \
@@ -249,6 +304,7 @@ jobs:
             --ref main \
             -f version="$RELEASE_VERSION" \
             -f source_commit="$SOURCE_COMMIT" \
+            -f preflight_run_id="$PREFLIGHT_RUN_ID" \
             -f prepare_run_id="$GITHUB_RUN_ID"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:

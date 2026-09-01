@@ -36,9 +36,10 @@ def _workflow_job(workflow: str, name: str) -> str:
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.49.1"
+    assert bulla.__version__ == "0.49.2"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-    assert "## 0.49.1 — 2026-08-31" in changelog
+    assert "## 0.49.2 — 2026-08-31" in changelog
+    assert "## 0.49.1 — 2026-08-31 (not published)" in changelog
     assert "## 0.49.0 — 2026-08-31 (not published)" in changelog
     assert "## 0.48.0 — 2026-08-23" in changelog
     assert "## 0.47.1 — 2026-08-04" in changelog
@@ -66,7 +67,7 @@ def test_release_version_and_status_language_are_synchronized() -> None:
 
 
 def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
-    contract = (ROOT / "docs/RELEASE-0.49.1.md").read_text(encoding="utf-8")
+    contract = (ROOT / "docs/RELEASE-0.49.2.md").read_text(encoding="utf-8")
     assert "Package and receipt-format versions remain separate clocks" in " ".join(contract.split())
     assert "The exact green public `main` commit is the sole `source_commit`" in contract
     assert "PR head, synthetic merge commit, pre-rebase commit, or" in " ".join(contract.split())
@@ -78,11 +79,12 @@ def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
     assert "APPROVE BULLA" not in contract
     assert "APPROVE GLYPH" not in contract
     assert "deployment_evidence_sha256" not in contract
-    assert "failed 0.49.0 tag and draft release" in " ".join(contract.split())
-    assert "0.49.0 was not published to PyPI" in contract
+    assert "failed 0.49.0 and 0.49.1 public slots" in " ".join(contract.split())
+    assert "Neither version was published to PyPI" in contract
     lineage = (ROOT / "docs/RELEASE-LINEAGE.md").read_text(encoding="utf-8")
     assert "| 0.49.0 | not published |" in lineage
-    assert "| 0.49.1 | candidate; not published |" in lineage
+    assert "| 0.49.1 | not published |" in lineage
+    assert "| 0.49.2 | candidate; not published |" in lineage
 
 
 def test_failed_release_authorization_is_sealed_and_consumed() -> None:
@@ -94,35 +96,48 @@ def test_failed_release_authorization_is_sealed_and_consumed() -> None:
 
 
 def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
+    preflight = (ROOT / ".github/workflows/release-preflight.yml").read_text(
+        encoding="utf-8"
+    )
     workflow = (ROOT / ".github/workflows/publish.yml").read_text(encoding="utf-8")
-    assert "tests/test_first_action_demo.py" in workflow
+    prepare = (ROOT / ".github/workflows/prepare-release.yml").read_text(
+        encoding="utf-8"
+    )
+    assert "tests/test_first_action_demo.py" in preflight
     assert "\n  workflow_dispatch:\n" in workflow
     assert "\n  push:\n" not in workflow
-    assert "authenticate default-branch preparation" in workflow
+    assert "authenticate preflight and default-branch preparation" in workflow
+    assert "preflight_run_id:" in workflow
     assert "prepare_run_id:" in workflow
+    assert "actions/runs/$PREFLIGHT_RUN_ID" in workflow
     assert "actions/runs/$PREPARE_RUN_ID" in workflow
-    assert 'run.get("path") != ".github/workflows/prepare-release.yml"' in workflow
+    assert '"preflight-run.json": ".github/workflows/release-preflight.yml"' in workflow
+    assert '"prepare-run.json": ".github/workflows/prepare-release.yml"' in workflow
     assert 'run.get("conclusion") != "success"' in workflow
     assert 'run.get("head_branch") != "main"' in workflow
     assert 'os.environ["WORKFLOW_REF"] != "refs/heads/main"' in workflow
-    assert "build:\n" in workflow
+    assert "stage-candidate:\n" in workflow
     assert "verify-slot:\n" in workflow
     assert "publish:\n" in workflow
     assert "verify-pypi:\n" in workflow
     assert "prepare-finalization:\n" in workflow
-    assert "needs: [build, verify-slot]" in workflow
+    assert "needs: [stage-candidate, verify-slot]" in workflow
     assert "needs: publish" in workflow
-    assert "needs: [build, verify-slot, verify-pypi]" in workflow
-    assert "Build into a new empty candidate directory" in workflow
-    assert "Verify exact candidate inventory" in workflow
-    assert workflow.count("tests/test_capture_mcp.py") == 2
-    assert "action-receipt-v0.2-verification-kit.zip" in workflow
-    assert "bulla receipt kit" in workflow
+    assert "needs: [stage-candidate, verify-slot, verify-pypi]" in workflow
+    assert "python -m build" not in workflow
+    assert "python -m pytest" not in workflow
+    assert preflight.count("python -m build --outdir") == 2
+    assert preflight.count("tests/test_capture_mcp.py") == 3
+    assert "test_session_root_survives_two_unchanged_server_lifecycles" in preflight
+    assert "release_preflight_manifest.py write" in preflight
+    assert "release_preflight_manifest.py verify" in preflight
+    assert "action-receipt-v0.2-verification-kit.zip" in preflight
+    assert " receipt kit" in preflight
     assert "packages-dir: packages" in workflow
     assert workflow.count("id-token: write") == 1
     assert workflow.count("persist-credentials: false") >= 4
-    assert "git status --porcelain=v1 --untracked-files=all" in workflow
-    assert 'tee "$RUNNER_TEMP/pytest-summary.txt"' in workflow
+    assert "git status --porcelain=v1 --untracked-files=all" in preflight
+    assert 'tee "$RUNNER_TEMP/pytest-summary.txt"' in preflight
     assert "tail -1 release-candidate/pytest-summary.txt" in workflow
     assert "tee pytest-summary.txt" not in workflow
     assert "BULLA_RELEASE_KEY" not in workflow
@@ -143,7 +158,17 @@ def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
     ) >= 2
     assert 'gh release download "release-slot-$RELEASE_REF"' in workflow
     assert 'git rev-list -n 1 "$RELEASE_REF"' in workflow
-    prepare = (ROOT / ".github" / "workflows" / "prepare-release.yml").read_text(encoding="utf-8")
+    assert "release_preflight_manifest.py verify" in workflow
+    assert "Recheck frozen distribution hashes without candidate execution" in workflow
+    assert "release_preflight_manifest.py verify" in prepare
+    assert prepare.index("release_preflight_manifest.py verify") < prepare.index(
+        "trusted_release_signer.py open-slot"
+    )
+    assert "contents: write" not in preflight
+    assert "id-token: write" not in preflight
+    assert "BULLA_RELEASE_KEY" not in preflight
+    assert 'git tag -a "v$RELEASE_VERSION"' not in preflight
+    assert 'gh release create "v$RELEASE_VERSION"' not in preflight
     assert "persist-credentials: false" in prepare
     assert "gh auth setup-git" in prepare
     assert 'git tag -a "v$RELEASE_VERSION" "$SOURCE_COMMIT"' in prepare
@@ -250,12 +275,13 @@ def test_default_branch_slot_ceremony_precedes_tag_creation() -> None:
     workflow = (ROOT / ".github/workflows/prepare-release.yml").read_text(
         encoding="utf-8"
     )
+    evidence = workflow.index("release_preflight_manifest.py verify")
     sign = workflow.index("trusted_release_signer.py open-slot")
     create = workflow.index('gh release create "v$RELEASE_VERSION"')
     upload = workflow.index('gh release upload "v$RELEASE_VERSION"')
     public_slot = workflow.index('gh release create "$slot_tag"')
     dispatch = workflow.index("gh workflow run publish.yml")
-    assert sign < public_slot < create < upload < dispatch
+    assert evidence < sign < public_slot < create < upload < dispatch
     assert "BULLA_RELEASE_KEY" in workflow
     assert "environment: release-signing" in workflow
     assert "python -m pip install --require-hashes" in workflow
@@ -270,6 +296,8 @@ def test_default_branch_slot_ceremony_precedes_tag_creation() -> None:
     assert "contents: read" in workflow
     assert 'gh release verify "$slot_tag"' in workflow
     assert "--ref main" in workflow
+    assert 'preflight_run_id:' in workflow
+    assert '-f preflight_run_id="$PREFLIGHT_RUN_ID"' in workflow
     assert '-f prepare_run_id="$GITHUB_RUN_ID"' in workflow
     assert "--clobber" not in workflow
 
