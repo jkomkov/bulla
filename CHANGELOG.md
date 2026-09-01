@@ -7,9 +7,14 @@ Doorstep capability and ActionReceipt behavior while closing two release-gate
 portability defects.
 
 - Serializes first capture-root publication on Windows with an exclusive local
-  claim. Contenders wait at most five seconds in 25 ms intervals, accept a
-  completed valid root only after the claim disappears, and fail closed without
-  stealing a stranded claim even if its root appears complete.
+  claim held through one no-sharing native handle. Contenders wait at most five
+  seconds in 25 ms intervals, accept a completed valid root only after the claim
+  disappears, and fail closed without stealing a stranded claim even if its root
+  appears complete. Identity-bound delete-pending close lets a later initializer
+  reacquire the name without a false winner failure.
+- Rejects Windows junctions and other reparse points at managed capture roots,
+  session directories, and parents, with no-delete native directory handles
+  preserving their identities across capture writes.
 - Makes the installed `capture check --show-receipts` regression recognize
   absolute paths through `Path(line).is_absolute()` on every supported platform.
 - Preserves the ASCII-only capture status boundary that remains safe under a

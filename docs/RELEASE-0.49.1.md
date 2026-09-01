@@ -13,9 +13,19 @@ polling every 25 milliseconds. It accepts a valid root only after the claim has
 disappeared and the completed root validates exactly. A claim that remains for
 the full window fails closed even when the root already appears complete; a
 contender never removes, replaces, or steals another initializer's claim. The
-owner reports successful initialization only after removing its exact claim and
-proving the claim absent; an unreadable, changed, unremovable, or surviving
-claim instead raises an initialization error.
+owner reports successful initialization only after removing its exact-token
+claim. On Windows the claimant holds one no-sharing native handle from
+`CREATE_NEW` through initialization, marks that same handle delete-pending, and
+then closes it. No pathname read/unlink decision can delete a different claim.
+A failed delete-pending transition or close raises an initialization error and
+never reports success; after a successful close a later initializer may acquire
+the deterministic name without being mistaken for the prior owner.
+
+Every managed root, `sessions` member, individual session, and capture parent
+is inspected with no-follow metadata and rejected when Windows marks it as a
+reparse point. Native Windows directory handles deny delete sharing and remain
+open during initialization and across capture writes so a junction or rename
+cannot substitute a validated managed directory.
 
 The installed receipt-listing regression recognizes absolute paths with the
 host platform's `Path.is_absolute()` rule rather than a POSIX-only leading
