@@ -32,7 +32,7 @@ jobs:
     env:
       RELEASE_VERSION: ${{ inputs.version }}
       SOURCE_COMMIT: ${{ inputs.source_commit }}
-      TRUSTED_SIGNER_SHA256: 5477082c209a641c99d58594a262dee23d76d4c4ccbb0803e19a7907d0e7357c
+      TRUSTED_SIGNER_SHA256: 4c695f73fb015f82566524b37483b1990be5af07e33038f6232ac63feef40fa6
       PUBLISH_RUN_ID: ${{ inputs.publish_run_id }}
       TRUSTED_WORKFLOW_REF: ${{ github.ref }}
       TRUSTED_REPOSITORY: ${{ github.repository }}
@@ -101,6 +101,14 @@ jobs:
           github-token: ${{ github.token }}
           repository: ${{ github.repository }}
           run-id: ${{ inputs.publish_run_id }}
+      - name: Select the versioned finalization candidate layout
+        run: |
+          signing_candidate="finalization/release-signing-candidate"
+          if ! test -d "$signing_candidate"; then
+            signing_candidate="finalization/release-candidate"
+          fi
+          test -d "$signing_candidate"
+          echo "SIGNING_CANDIDATE=$signing_candidate" >> "$GITHUB_ENV"
       - name: Install verification tools without signing authority
         run: |
           python -m pip install pypi-attestations
@@ -110,16 +118,69 @@ jobs:
         run: |
           python scripts/verify_pypi_release.py \
             --version "$RELEASE_VERSION" \
-            --dist finalization/release-candidate \
+            --dist "$SIGNING_CANDIDATE" \
             --repository jkomkov/bulla \
             --expected-commit "$SOURCE_COMMIT"
-          python -I scripts/trusted_release_signer.py verify-slot \
+          tree="$(git rev-parse "$SOURCE_COMMIT^{tree}")"
+          git cat-file tree "$tree" > "$RUNNER_TEMP/verify-source-tree.bin"
+          source_tree_sha256="$(python - <<'PY'
+          import hashlib
+          import os
+          from pathlib import Path
+
+          payload = (
+              Path(os.environ["RUNNER_TEMP"]) / "verify-source-tree.bin"
+          ).read_bytes()
+          print(f"sha256:{hashlib.sha256(payload).hexdigest()}")
+          PY
+          )"
+          slot_args=(
+            python -I scripts/trusted_release_signer.py verify-slot \
             --version "$RELEASE_VERSION" \
             --source-commit "$SOURCE_COMMIT" \
+            --source-tree-sha256 "$source_tree_sha256" \
             --slot "finalization/release-slot/$RELEASE_VERSION.slot.json" \
             --context releases/release-trust-context.json
+          )
+          if test -f \
+            finalization/release-candidate/release-preflight-manifest.json; then
+            slot_args+=(
+              --preflight-manifest \
+              finalization/release-candidate/release-preflight-manifest.json
+            )
+          fi
+          "${slot_args[@]}"
+          if test -f \
+            finalization/release-candidate/release-preflight-manifest.json; then
+            preflight_run_id="$(python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          version = os.environ["RELEASE_VERSION"]
+          slot = json.loads(
+              (Path("finalization/release-slot") / f"{version}.slot.json")
+              .read_text(encoding="utf-8")
+          )
+          run_id = slot.get("preflight_run_id")
+          if isinstance(run_id, bool) or not isinstance(run_id, int) or run_id <= 0:
+              raise SystemExit("verified release slot has no preflight run ID")
+          print(run_id)
+          PY
+            )"
+            source_date_epoch="$(git show -s --format=%ct "$SOURCE_COMMIT")"
+            python -I scripts/release_preflight_manifest.py verify \
+              --artifacts finalization/release-candidate \
+              --manifest \
+                finalization/release-candidate/release-preflight-manifest.json \
+              --version "$RELEASE_VERSION" \
+              --source-commit "$SOURCE_COMMIT" \
+              --source-tree-sha256 "$source_tree_sha256" \
+              --source-date-epoch "$source_date_epoch" \
+              --run-id "$preflight_run_id"
+          fi
           python -m pip install --no-deps \
-            "finalization/release-candidate/bulla-$RELEASE_VERSION-py3-none-any.whl"
+            "$SIGNING_CANDIDATE/bulla-$RELEASE_VERSION-py3-none-any.whl"
       - name: Repair the archived workflow-dispatch tag preimage
         run: |
           printf '%s  %s\n' "$TRUSTED_SIGNER_SHA256" \
@@ -146,7 +207,9 @@ jobs:
           source_commit = os.environ["SOURCE_COMMIT"]
           original_path = root / "release-preimage" / f"{version}.unsigned.json"
           witness_path = root / "release-preimage" / f"{version}.unsigned.witness.json"
-          summary = (root / "release-candidate" / "pytest-summary.txt").read_text().splitlines()[-1]
+          summary = (
+              Path(os.environ["SIGNING_CANDIDATE"]) / "pytest-summary.txt"
+          ).read_text().splitlines()[-1]
           slot = read_json(root / "release-slot" / f"{version}.slot.json")
           original = read_json(original_path)
           require_keys(original, RECEIPT_FIELDS, "archived release preimage")
@@ -263,6 +326,9 @@ jobs:
           output.write_text(f"sha256:{hashlib.sha256(payload).hexdigest()}\n")
           PY
           mv finalization/release-candidate verification/
+          if test -d finalization/release-signing-candidate; then
+            mv finalization/release-signing-candidate verification/
+          fi
           mv finalization/release-slot verification/
           mv finalization/release-preimage verification/publish-run-preimage
           mv "$RUNNER_TEMP/recovered-preimage" verification/release-preimage
@@ -285,7 +351,7 @@ jobs:
     env:
       RELEASE_VERSION: ${{ inputs.version }}
       SOURCE_COMMIT: ${{ inputs.source_commit }}
-      TRUSTED_SIGNER_SHA256: 5477082c209a641c99d58594a262dee23d76d4c4ccbb0803e19a7907d0e7357c
+      TRUSTED_SIGNER_SHA256: 4c695f73fb015f82566524b37483b1990be5af07e33038f6232ac63feef40fa6
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -460,6 +526,67 @@ jobs:
               "repos/$GITHUB_REPOSITORY/releases/assets/$asset_id" \
               > "existing-release-receipt/$receipt_name"
           fi
+      - name: Reverify frozen evidence immediately before key exposure
+        run: |
+          tree="$(git rev-parse "$SOURCE_COMMIT^{tree}")"
+          git cat-file tree "$tree" > "$RUNNER_TEMP/sign-source-tree.bin"
+          source_tree_sha256="$(python - <<'PY'
+          import hashlib
+          import os
+          from pathlib import Path
+
+          payload = (
+              Path(os.environ["RUNNER_TEMP"]) / "sign-source-tree.bin"
+          ).read_bytes()
+          print(f"sha256:{hashlib.sha256(payload).hexdigest()}")
+          PY
+          )"
+          test "$source_tree_sha256" = "$(cat verification/source-tree-sha256.txt)"
+          slot_args=(
+            python -I scripts/trusted_release_signer.py verify-slot \
+            --version "$RELEASE_VERSION" \
+            --source-commit "$SOURCE_COMMIT" \
+            --source-tree-sha256 "$source_tree_sha256" \
+            --slot "verification/release-slot/$RELEASE_VERSION.slot.json" \
+            --context releases/release-trust-context.json
+          )
+          if test -f \
+            verification/release-candidate/release-preflight-manifest.json; then
+            slot_args+=(
+              --preflight-manifest \
+              verification/release-candidate/release-preflight-manifest.json
+            )
+          fi
+          "${slot_args[@]}"
+          if test -f \
+            verification/release-candidate/release-preflight-manifest.json; then
+            preflight_run_id="$(python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          version = os.environ["RELEASE_VERSION"]
+          slot = json.loads(
+              (Path("verification/release-slot") / f"{version}.slot.json")
+              .read_text(encoding="utf-8")
+          )
+          run_id = slot.get("preflight_run_id")
+          if isinstance(run_id, bool) or not isinstance(run_id, int) or run_id <= 0:
+              raise SystemExit("verified release slot has no preflight run ID")
+          print(run_id)
+          PY
+            )"
+            source_date_epoch="$(git show -s --format=%ct "$SOURCE_COMMIT")"
+            python -I scripts/release_preflight_manifest.py verify \
+              --artifacts verification/release-candidate \
+              --manifest \
+                verification/release-candidate/release-preflight-manifest.json \
+              --version "$RELEASE_VERSION" \
+              --source-commit "$SOURCE_COMMIT" \
+              --source-tree-sha256 "$source_tree_sha256" \
+              --source-date-epoch "$source_date_epoch" \
+              --run-id "$preflight_run_id"
+          fi
       - name: Sign the closed receipt preimage without importing candidate code
         env:
           BULLA_RELEASE_KEY: ${{ secrets.BULLA_RELEASE_KEY }}
@@ -469,6 +596,10 @@ jobs:
             exit 1
           }
           source_tree_sha256="$(cat verification/source-tree-sha256.txt)"
+          signing_candidate="verification/release-signing-candidate"
+          if ! test -d "$signing_candidate"; then
+            signing_candidate="verification/release-candidate"
+          fi
           signer_args=(
             python -I scripts/trusted_release_signer.py sign-receipt
             --version "$RELEASE_VERSION" \
@@ -477,11 +608,18 @@ jobs:
             --receipt "verification/release-preimage/$RELEASE_VERSION.unsigned.json" \
             --witness "verification/release-preimage/$RELEASE_VERSION.unsigned.witness.json" \
             --slot "verification/release-slot/$RELEASE_VERSION.slot.json" \
-            --summary "verification/release-candidate/pytest-summary.txt" \
-            --dist verification/release-candidate \
+            --summary "$signing_candidate/pytest-summary.txt" \
+            --dist "$signing_candidate" \
             --context releases/release-trust-context.json \
             --out "release-receipt/$RELEASE_VERSION.json"
           )
+          if test -f \
+            verification/release-candidate/release-preflight-manifest.json; then
+            signer_args+=(
+              --preflight-manifest \
+              verification/release-candidate/release-preflight-manifest.json
+            )
+          fi
           if test -f "existing-release-receipt/$RELEASE_VERSION.json"; then
             signer_args+=(
               --existing "existing-release-receipt/$RELEASE_VERSION.json"
@@ -492,12 +630,12 @@ jobs:
             "verification/release-preimage/$RELEASE_VERSION.unsigned.witness.json" \
             "release-receipt/$RELEASE_VERSION.witness.json"
           if test -f \
-            verification/release-candidate/action-receipt-v0.2-verification-kit.zip; then
+            "$signing_candidate/action-receipt-v0.2-verification-kit.zip"; then
             cp \
-              verification/release-candidate/action-receipt-v0.2-verification-kit.zip \
+              "$signing_candidate/action-receipt-v0.2-verification-kit.zip" \
               release-receipt/
             cp \
-              verification/release-candidate/action-receipt-v0.2-verification-kit.zip.sha256 \
+              "$signing_candidate/action-receipt-v0.2-verification-kit.zip.sha256" \
               release-receipt/
           fi
           if test -f verification/preimage-recovery.json; then

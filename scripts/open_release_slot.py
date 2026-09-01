@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Repository-local compatibility wrapper for opening a v0.2 release slot.
+"""Repository-local compatibility wrapper for opening a v0.3 release slot.
 
 The default-branch release workflow uses ``trusted_release_signer.py``. This
 wrapper remains for maintainers running the same slot contract manually and
@@ -20,7 +20,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from release_slot import build_slot, verify_slot  # noqa: E402
-from trusted_release_signer import release_issuer  # noqa: E402
+from trusted_release_signer import preflight_binding, release_issuer  # noqa: E402
 
 from bulla.identity import LocalEd25519Signer  # noqa: E402
 
@@ -37,6 +37,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--version", required=True)
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--preflight-manifest", type=Path, required=True)
     ap.add_argument(
         "--context",
         type=Path,
@@ -71,10 +72,18 @@ def main() -> int:
     ).stdout
     import hashlib
 
+    source_tree_sha256 = "sha256:" + hashlib.sha256(tree_payload).hexdigest()
+    binding = preflight_binding(
+        args.preflight_manifest,
+        version=args.version,
+        source_commit=commit,
+        source_tree_sha256=source_tree_sha256,
+    )
     slot = build_slot(
         version=args.version,
         source_commit=commit,
-        source_tree_sha256="sha256:" + hashlib.sha256(tree_payload).hexdigest(),
+        source_tree_sha256=source_tree_sha256,
+        **binding,
         signer=signer,
         issuer_record=issuer_record,
     )

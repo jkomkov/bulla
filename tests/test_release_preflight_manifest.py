@@ -24,7 +24,9 @@ EPOCH = 1_788_236_263
 RUN_ID = 31_415_926
 
 
-def _preflight_tree(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
+def _preflight_tree(
+    tmp_path: Path,
+) -> tuple[Path, Path, Path, Path, Path, Path, Path]:
     artifacts = tmp_path / "artifacts"
     build_a = tmp_path / "build-a"
     build_b = tmp_path / "build-b"
@@ -43,15 +45,30 @@ def _preflight_tree(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
     )
     for name in MANIFEST.SUMMARY_NAMES:
         (artifacts / name).write_text(f"details\n{name}: passed\n", encoding="utf-8")
-    return artifacts, build_a, build_b, artifacts / MANIFEST.MANIFEST_NAME
+    sources = [tmp_path / name for name in ("reference", "source-a", "source-b")]
+    for source in sources:
+        source.mkdir()
+        (source / "source.txt").write_bytes(b"exact source\n")
+    return (
+        artifacts,
+        build_a,
+        build_b,
+        *sources,
+        artifacts / MANIFEST.MANIFEST_NAME,
+    )
 
 
 def _write(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
-    artifacts, build_a, build_b, manifest = _preflight_tree(tmp_path)
+    artifacts, build_a, build_b, reference, source_a, source_b, manifest = (
+        _preflight_tree(tmp_path)
+    )
     MANIFEST.write_manifest(
         artifacts=artifacts,
         build_a=build_a,
         build_b=build_b,
+        reference_source=reference,
+        source_a=source_a,
+        source_b=source_b,
         out=manifest,
         version=VERSION,
         source_commit=COMMIT,
@@ -106,14 +123,52 @@ def test_manifest_rejects_changed_artifact_or_unfrozen_member(tmp_path: Path) ->
         _verify(artifacts, manifest)
 
 
+def test_manifest_rejects_post_slot_installed_summary_mutation(tmp_path: Path) -> None:
+    artifacts, _, _, manifest = _write(tmp_path)
+    (artifacts / "installed-summary.txt").write_text(
+        "forged after the signed slot\n", encoding="utf-8"
+    )
+    with pytest.raises(MANIFEST.ManifestError, match="artifact bytes differ"):
+        _verify(artifacts, manifest)
+
+
 def test_manifest_rejects_nonreproducible_second_build(tmp_path: Path) -> None:
-    artifacts, build_a, build_b, manifest = _preflight_tree(tmp_path)
+    artifacts, build_a, build_b, reference, source_a, source_b, manifest = (
+        _preflight_tree(tmp_path)
+    )
     (build_b / f"bulla-{VERSION}-py3-none-any.whl").write_bytes(b"different")
     with pytest.raises(MANIFEST.ManifestError, match="not byte-identical"):
         MANIFEST.write_manifest(
             artifacts=artifacts,
             build_a=build_a,
             build_b=build_b,
+            reference_source=reference,
+            source_a=source_a,
+            source_b=source_b,
+            out=manifest,
+            version=VERSION,
+            source_commit=COMMIT,
+            source_tree_sha256=TREE,
+            source_date_epoch=EPOCH,
+            run_id=RUN_ID,
+        )
+
+
+def test_manifest_rejects_build_source_mutated_after_initial_check(
+    tmp_path: Path,
+) -> None:
+    artifacts, build_a, build_b, reference, source_a, source_b, manifest = (
+        _preflight_tree(tmp_path)
+    )
+    (source_a / "source.txt").write_bytes(b"mutated after pre-build check\n")
+    with pytest.raises(MANIFEST.ManifestError, match="build source differs"):
+        MANIFEST.write_manifest(
+            artifacts=artifacts,
+            build_a=build_a,
+            build_b=build_b,
+            reference_source=reference,
+            source_a=source_a,
+            source_b=source_b,
             out=manifest,
             version=VERSION,
             source_commit=COMMIT,

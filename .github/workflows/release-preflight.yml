@@ -119,6 +119,7 @@ jobs:
           tests/test_golden_f13.py
           tests/test_release_045_contract.py
           tests/test_release_preflight_manifest.py
+          tests/test_release_source_materialization.py
           tests/test_verification_kit.py
           tests/test_version_single_source.py
           tests/test_wrap.py
@@ -139,18 +140,22 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           ref: ${{ inputs.source_commit }}
+          path: reference-checkout
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.11"
       - name: Reconfirm exact main identity and derive deterministic source values
         run: |
           test "$GITHUB_SHA" = "$SOURCE_COMMIT"
-          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
-          git fetch --force origin main
-          test "$(git rev-parse refs/remotes/origin/main)" = "$SOURCE_COMMIT"
-          tree="$(git rev-parse "$SOURCE_COMMIT^{tree}")"
-          git cat-file tree "$tree" > "$RUNNER_TEMP/source-tree.bin"
-          echo "SOURCE_DATE_EPOCH=$(git show -s --format=%ct "$SOURCE_COMMIT")" \
+          test "$(git -C reference-checkout rev-parse HEAD)" = "$SOURCE_COMMIT"
+          git -C reference-checkout fetch --force origin main
+          test "$(git -C reference-checkout rev-parse refs/remotes/origin/main)" \
+            = "$SOURCE_COMMIT"
+          test -z "$(git -C reference-checkout status --porcelain=v1 --untracked-files=all)"
+          tree="$(git -C reference-checkout rev-parse "$SOURCE_COMMIT^{tree}")"
+          git -C reference-checkout cat-file tree "$tree" \
+            > "$RUNNER_TEMP/source-tree.bin"
+          echo "SOURCE_DATE_EPOCH=$(git -C reference-checkout show -s --format=%ct "$SOURCE_COMMIT")" \
             >> "$GITHUB_ENV"
           python - <<'PY' >> "$GITHUB_ENV"
           import hashlib
@@ -163,22 +168,46 @@ jobs:
       - name: Run the complete standalone release suite
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e ".[identity,ots]" pytest pytest-timeout
-          python scripts/verify_distribution_policy.py --print-standalone-tests \
-            > "$RUNNER_TEMP/standalone-tests.txt"
-          mapfile -t standalone_tests < "$RUNNER_TEMP/standalone-tests.txt"
-          test "${#standalone_tests[@]}" -gt 0
-          python -m pytest "${standalone_tests[@]}" -q --timeout=600 \
-            | tee "$RUNNER_TEMP/pytest-summary.txt"
+          python -m pip install -e "reference-checkout[identity,ots]" pytest pytest-timeout
+          (
+            cd reference-checkout
+            python scripts/verify_distribution_policy.py --print-standalone-tests \
+              > "$RUNNER_TEMP/standalone-tests.txt"
+            mapfile -t standalone_tests < "$RUNNER_TEMP/standalone-tests.txt"
+            test "${#standalone_tests[@]}" -gt 0
+            python -m pytest "${standalone_tests[@]}" -q --timeout=600 \
+              | tee "$RUNNER_TEMP/pytest-summary.txt"
+          )
       - name: Verify tests did not alter the exact source
         run: |
-          dirty="$(git status --porcelain=v1 --untracked-files=all)"
+          dirty="$(git -C reference-checkout status --porcelain=v1 --untracked-files=all)"
           if [ -n "$dirty" ]; then
             printf '%s\n' "$dirty"
             echo "::error::Tests changed exact preflight source."
             exit 1
           fi
-      - name: Build the candidate twice from the same deterministic source
+      - name: Create three fresh exact-commit source materializations
+        run: |
+          for label in reference a b; do
+            git -C reference-checkout archive \
+              --format=tar \
+              --output="$RUNNER_TEMP/source-$label.tar" \
+              "$SOURCE_COMMIT"
+          done
+          cmp --silent "$RUNNER_TEMP/source-reference.tar" "$RUNNER_TEMP/source-a.tar"
+          cmp --silent "$RUNNER_TEMP/source-reference.tar" "$RUNNER_TEMP/source-b.tar"
+          for label in reference a b; do
+            mkdir "$RUNNER_TEMP/source-$label"
+            tar -xf "$RUNNER_TEMP/source-$label.tar" \
+              -C "$RUNNER_TEMP/source-$label"
+          done
+          python -I reference-checkout/scripts/verify_release_source_materialization.py \
+            --reference "$RUNNER_TEMP/source-reference" \
+            --candidate "$RUNNER_TEMP/source-a"
+          python -I reference-checkout/scripts/verify_release_source_materialization.py \
+            --reference "$RUNNER_TEMP/source-reference" \
+            --candidate "$RUNNER_TEMP/source-b"
+      - name: Build twice from independent immutable source materializations
         run: |
           python -m pip install "build==1.4.2"
           build_a="$RUNNER_TEMP/build-a"
@@ -186,18 +215,26 @@ jobs:
           mkdir "$build_a" "$build_b"
           test -z "$(find "$build_a" -mindepth 1 -print -quit)"
           test -z "$(find "$build_b" -mindepth 1 -print -quit)"
-          python -m build --outdir "$build_a"
-          python -m build --outdir "$build_b"
+          (cd "$RUNNER_TEMP/source-a" && python -m build --outdir "$build_a")
+          python -I reference-checkout/scripts/verify_release_source_materialization.py \
+            --reference "$RUNNER_TEMP/source-reference" \
+            --candidate "$RUNNER_TEMP/source-a"
+          (cd "$RUNNER_TEMP/source-b" && python -m build --outdir "$build_b")
+          python -I reference-checkout/scripts/verify_release_source_materialization.py \
+            --reference "$RUNNER_TEMP/source-reference" \
+            --candidate "$RUNNER_TEMP/source-b"
           cmp --silent \
             "$build_a/bulla-$RELEASE_VERSION-py3-none-any.whl" \
             "$build_b/bulla-$RELEASE_VERSION-py3-none-any.whl"
           cmp --silent \
             "$build_a/bulla-$RELEASE_VERSION.tar.gz" \
             "$build_b/bulla-$RELEASE_VERSION.tar.gz"
-          python scripts/verify_distribution_policy.py --dist "$build_a"
-          python scripts/verify_distribution_policy.py --dist "$build_b"
-          python scripts/verify_release_archive_parity.py --root . --dist "$build_a"
-          python scripts/verify_release_archive_parity.py --root . --dist "$build_b"
+          python reference-checkout/scripts/verify_distribution_policy.py --dist "$build_a"
+          python reference-checkout/scripts/verify_distribution_policy.py --dist "$build_b"
+          python reference-checkout/scripts/verify_release_archive_parity.py \
+            --root "$RUNNER_TEMP/source-reference" --dist "$build_a"
+          python reference-checkout/scripts/verify_release_archive_parity.py \
+            --root "$RUNNER_TEMP/source-reference" --dist "$build_b"
           mkdir "$RUNNER_TEMP/release-preflight"
           cp "$build_a"/* "$RUNNER_TEMP/release-preflight/"
       - name: Verify the isolated installed wheel and retained kit
@@ -247,31 +284,32 @@ jobs:
             --out "$RUNNER_TEMP/installed-kit.zip"
           cmp --silent \
             "$RUNNER_TEMP/installed-kit.zip" \
-            src/bulla/data/action-receipt-v0.2-verification-kit.zip
-          cp src/bulla/data/action-receipt-v0.2-verification-kit.zip \
+            reference-checkout/src/bulla/data/action-receipt-v0.2-verification-kit.zip
+          cp reference-checkout/src/bulla/data/action-receipt-v0.2-verification-kit.zip \
             "$RUNNER_TEMP/release-preflight/"
-          cp src/bulla/data/action-receipt-v0.2-verification-kit.zip.sha256 \
+          cp reference-checkout/src/bulla/data/action-receipt-v0.2-verification-kit.zip.sha256 \
             "$RUNNER_TEMP/release-preflight/"
           (
             cd "$RUNNER_TEMP"
             BULLA_CAPTURE_TEST_INSTALLED=1 \
             "$RUNNER_TEMP/bulla-wheel/bin/python" -I -m pytest -q \
-              "$GITHUB_WORKSPACE/tests/test_action_receipt.py" \
-              "$GITHUB_WORKSPACE/tests/test_action_receipt_v04.py" \
-              "$GITHUB_WORKSPACE/tests/test_capture_mcp.py" \
-              "$GITHUB_WORKSPACE/tests/test_distribution_policy.py" \
-              "$GITHUB_WORKSPACE/tests/test_event_coverage.py" \
-              "$GITHUB_WORKSPACE/tests/test_golden_f13.py" \
-              "$GITHUB_WORKSPACE/tests/test_release_045_contract.py" \
-              "$GITHUB_WORKSPACE/tests/test_release_preflight_manifest.py" \
-              "$GITHUB_WORKSPACE/tests/test_verification_kit.py" \
-              "$GITHUB_WORKSPACE/tests/test_version_single_source.py" \
-              "$GITHUB_WORKSPACE/tests/test_wrap.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_action_receipt.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_action_receipt_v04.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_capture_mcp.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_distribution_policy.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_event_coverage.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_golden_f13.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_release_045_contract.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_release_preflight_manifest.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_release_source_materialization.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_verification_kit.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_version_single_source.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_wrap.py" \
               --timeout=120 \
               | tee "$RUNNER_TEMP/installed-summary.txt"
             BULLA_CAPTURE_TEST_INSTALLED=1 \
             "$RUNNER_TEMP/bulla-wheel/bin/python" -I -m pytest -q \
-              "$GITHUB_WORKSPACE/tests/test_capture_mcp.py::test_session_root_survives_two_unchanged_server_lifecycles" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_capture_mcp.py::test_session_root_survives_two_unchanged_server_lifecycles" \
               --timeout=120 \
               | tee "$RUNNER_TEMP/lifecycle-summary.txt"
           )
@@ -283,17 +321,20 @@ jobs:
             "$RUNNER_TEMP/release-preflight/installed-summary.txt"
           cp "$RUNNER_TEMP/lifecycle-summary.txt" \
             "$RUNNER_TEMP/release-preflight/lifecycle-summary.txt"
-          python -I scripts/release_preflight_manifest.py write \
+          python -I reference-checkout/scripts/release_preflight_manifest.py write \
             --artifacts "$RUNNER_TEMP/release-preflight" \
             --build-a "$RUNNER_TEMP/build-a" \
             --build-b "$RUNNER_TEMP/build-b" \
+            --reference-source "$RUNNER_TEMP/source-reference" \
+            --source-a "$RUNNER_TEMP/source-a" \
+            --source-b "$RUNNER_TEMP/source-b" \
             --out "$RUNNER_TEMP/release-preflight/release-preflight-manifest.json" \
             --version "$RELEASE_VERSION" \
             --source-commit "$SOURCE_COMMIT" \
             --source-tree-sha256 "$SOURCE_TREE_SHA256" \
             --source-date-epoch "$SOURCE_DATE_EPOCH" \
             --run-id "$GITHUB_RUN_ID"
-          python -I scripts/release_preflight_manifest.py verify \
+          python -I reference-checkout/scripts/release_preflight_manifest.py verify \
             --artifacts "$RUNNER_TEMP/release-preflight" \
             --manifest "$RUNNER_TEMP/release-preflight/release-preflight-manifest.json" \
             --version "$RELEASE_VERSION" \

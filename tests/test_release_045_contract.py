@@ -136,9 +136,9 @@ def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
     assert "packages-dir: packages" in workflow
     assert workflow.count("id-token: write") == 1
     assert workflow.count("persist-credentials: false") >= 4
-    assert "git status --porcelain=v1 --untracked-files=all" in preflight
+    assert "git -C reference-checkout status --porcelain=v1 --untracked-files=all" in preflight
     assert 'tee "$RUNNER_TEMP/pytest-summary.txt"' in preflight
-    assert "tail -1 release-candidate/pytest-summary.txt" in workflow
+    assert "tail -1 release-signing-candidate/pytest-summary.txt" in workflow
     assert "tee pytest-summary.txt" not in workflow
     assert "BULLA_RELEASE_KEY" not in workflow
     assert "RELEASE_ADMIN_READ_TOKEN" not in workflow
@@ -160,7 +160,20 @@ def test_release_workflow_is_publish_then_verify_then_receipt() -> None:
     assert 'git rev-list -n 1 "$RELEASE_REF"' in workflow
     assert "release_preflight_manifest.py verify" in workflow
     assert "Recheck frozen distribution hashes without candidate execution" in workflow
+    assert "--source-tree-sha256 \"$source_tree_sha256\"" in workflow
+    assert "release-candidate/release-preflight-manifest.json" in workflow
+    assert "mkdir release-signing-candidate" in workflow
+    assert "release-signing-candidate/" in workflow
     assert "release_preflight_manifest.py verify" in prepare
+    assert "--preflight-manifest" in prepare
+    assert "preflight_run_id" in (ROOT / "scripts/trusted_release_signer.py").read_text(
+        encoding="utf-8"
+    )
+    assert preflight.count("git -C reference-checkout archive") == 1
+    assert preflight.count("verify_release_source_materialization.py") == 4
+    assert '--reference "$RUNNER_TEMP/source-reference"' in preflight
+    assert '(cd "$RUNNER_TEMP/source-a" && python -m build' in preflight
+    assert '(cd "$RUNNER_TEMP/source-b" && python -m build' in preflight
     assert prepare.index("release_preflight_manifest.py verify") < prepare.index(
         "trusted_release_signer.py open-slot"
     )
@@ -188,7 +201,7 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert "verify_pypi_release.py" in workflow
     assert "release-finalization-requirements.txt" in workflow
     assert "trusted_release_signer.py sign-receipt" in workflow
-    assert "verification/release-candidate/action-receipt-v0.2-verification-kit.zip" in workflow
+    assert '"$signing_candidate/action-receipt-v0.2-verification-kit.zip"' in workflow
     assert "environment: release-signing" in workflow
     assert "--expected-commit \"$SOURCE_COMMIT\"" in workflow
     assert "release-preimage/$RELEASE_VERSION.unsigned.json" in workflow
@@ -214,6 +227,30 @@ def test_release_finalizer_recovers_without_republishing() -> None:
     assert "TRUSTED_SIGNER_SHA256:" in sign_job
     assert "refs/heads/main" in workflow
     assert "python -I scripts/trusted_release_signer.py sign-receipt" in workflow
+    assert "--preflight-manifest" in workflow
+    assert "verification/release-candidate/release-preflight-manifest.json" in workflow
+    assert "scripts/release_preflight_manifest.py verify" in verify_job
+    assert "--artifacts finalization/release-candidate" in verify_job
+    assert verify_job.index("trusted_release_signer.py verify-slot") < verify_job.index(
+        "release_preflight_manifest.py verify"
+    ) < verify_job.index("python -m pip install --no-deps")
+    assert '--dist "$signing_candidate"' in workflow
+    assert "finalization/release-signing-candidate" in workflow
+    assert 'signing_candidate="finalization/release-candidate"' in workflow
+    assert 'signing_candidate="verification/release-candidate"' in workflow
+    pre_key_reverify = workflow.index(
+        "Reverify frozen evidence immediately before key exposure"
+    )
+    signing_step = workflow.index(
+        "Sign the closed receipt preimage without importing candidate code"
+    )
+    assert pre_key_reverify < signing_step
+    assert "BULLA_RELEASE_KEY" not in workflow[pre_key_reverify:signing_step]
+    assert "release_preflight_manifest.py verify" in sign_job
+    assert "--artifacts verification/release-candidate" in sign_job
+    assert sign_job.index("release_preflight_manifest.py verify") < sign_job.index(
+        "trusted_release_signer.py sign-receipt"
+    )
     assert 'git rev-list -n 1 "v$RELEASE_VERSION"' in workflow
     assert "immutable-releases" in workflow
     assert 'gh release verify "v$RELEASE_VERSION"' in workflow

@@ -15,8 +15,8 @@
     },
     "sdist": {
       "algorithm": "sha256-sorted-posix-lines-v1",
-      "count": 1363,
-      "sha256": "e5bc617c3d1b5a45add90ffe1c8ae3b6fd92dcea1d3923d0e39d8a496caee6eb"
+      "count": 1365,
+      "sha256": "0fe76fc0153295004bb8263b0173e8fb70014e43b8b6f97abd970103170e0ef4"
     }
   },
   "generated_archive_bytes": {

@@ -35,7 +35,7 @@ jobs:
       RELEASE_VERSION: ${{ inputs.version }}
       SOURCE_COMMIT: ${{ inputs.source_commit }}
       PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
-      TRUSTED_SIGNER_SHA256: 5477082c209a641c99d58594a262dee23d76d4c4ccbb0803e19a7907d0e7357c
+      TRUSTED_SIGNER_SHA256: 4c695f73fb015f82566524b37483b1990be5af07e33038f6232ac63feef40fa6
       TRUSTED_WORKFLOW_REF: ${{ github.ref }}
       TRUSTED_REPOSITORY: ${{ github.repository }}
     steps:
@@ -231,6 +231,8 @@ jobs:
             --version "$RELEASE_VERSION" \
             --source-commit "$SOURCE_COMMIT" \
             --source-tree-sha256 "$SOURCE_TREE_SHA256" \
+            --preflight-manifest \
+              "$RUNNER_TEMP/release-preflight/release-preflight-manifest.json" \
             --context releases/release-trust-context.json \
             --out "release-slot/$RELEASE_VERSION.slot.json"
       - name: Publish the immutable slot, tag the commit, then open the package draft

@@ -8,16 +8,24 @@ stopped the 0.49.1 candidate before PyPI publication.
 
 - Adds a read-only exact-`main` preflight that runs the six-platform Python
   compatibility matrix, the complete standalone suite, two byte-identical
-  reproducible builds, archive parity, isolated installed-wheel checks, and two
-  unchanged capture-server lifecycles before any release slot, tag, or draft is
-  created.
+  reproducible builds from independent fresh exact-commit materializations,
+  archive parity against an immutable third materialization, isolated
+  installed-wheel checks, and two unchanged capture-server lifecycles before
+  any release slot, tag, or draft is created. Each build source is inventoried
+  before and after the build.
 - Freezes the exact version, source commit, source-tree digest, build epoch,
   compatibility matrix, both build records, test summaries, artifact sizes, and
   SHA-256 digests into one strict preflight manifest.
 - Requires the signed preparation workflow to authenticate the successful exact
   preflight run and verify its complete frozen artifact before minting release
-  identity. Publication re-verifies and stages those exact bytes; it never
-  rebuilds the candidate after the slot and tag exist.
+  identity. The signed v0.3 slot commits the selected preflight run, manifest,
+  wheel, sdist, and exact source tree, so another same-commit preflight cannot be
+  substituted. Publication re-verifies and stages those exact bytes; it never
+  rebuilds the candidate after the slot and tag exist. Finalization keeps the
+  historical five-member signer input separate from the complete preflight
+  evidence. Before receipt signing, finalization re-verifies all eight evidence
+  members and proves that the five-member signer directory's wheel and sdist
+  equal the slot's signed preflight commitments.
 - Corrects the Windows claim-release scheduling regression to pause the shared
   `_release_acquired_windows_root_claim` boundary, so native HANDLE release and
   the platform-neutral fallback exercise the same loser-waits-for-release rule.

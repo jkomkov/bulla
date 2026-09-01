@@ -33,30 +33,44 @@ or result correctness.
    release-signing, tag-creation, draft-creation, or PyPI authority.
 3. Before any identity is minted, preflight must pass the supported Linux,
    macOS, and Windows/Python compatibility matrix, the complete standalone test
-   inventory, two reproducible byte-identical builds, both archive gates, the
+   inventory, two reproducible byte-identical builds from independent fresh
+   exact-commit materializations, both archive gates against a third immutable
+   original materialization, before/after source-inventory checks, the
    isolated installed-wheel suite, installed Doorstep commands and CLI checks, exact verification-kit
    reconstruction, and two unchanged server lifecycles against one session root.
 4. Preflight freezes one strict manifest binding the repository, workflow, run
    ID, version, source commit, source-tree digest, deterministic build epoch,
    exact compatibility matrix, both build records, test summaries, artifact
-   inventory, sizes, and SHA-256 digests. The retained artifact contains exactly
+   source-materialization inventory, artifact inventory, sizes, and SHA-256
+   digests. The retained artifact contains exactly
    the reviewed wheel, sdist, verification kit and detached digest, three test
    summaries, and this manifest.
 5. Only after the exact preflight succeeds may `prepare-release.yml` run. It
    authenticates the preflight workflow/run/commit and verifies the complete
    downloaded artifact against the frozen manifest before the signing key is
-   exposed or a slot, tag, or draft is created.
+   exposed or a slot, tag, or draft is created. Its signed v0.3 release slot
+   immutably commits the preflight run ID plus the manifest, wheel, and sdist
+   digests and the independently derived exact source-tree digest.
 6. The preparation workflow opens the signed public slot, creates the immutable
    package tag and draft, and dispatches `publish.yml` with both exact run IDs.
    Publication authenticates both runs, downloads the named preflight artifact,
    re-verifies its identity, hashes, archive inventory, and runtime parity, and
-   stages it unchanged. It does not rebuild the wheel or sdist.
+   stages it unchanged. Slot verification recomputes the expected source tree
+   and rejects a different preflight even when both runs share one commit. It
+   does not rebuild the wheel or sdist.
 7. The sole OIDC-authorized job independently rechecks the frozen version,
    commit, run ID, distribution sizes, and SHA-256 digests, copies only the wheel
    and sdist into a fresh two-file directory, and submits those exact bytes to
    PyPI. PyPI publication consumes the version.
 8. Post-publication verification compares PyPI's accepted bytes and provenance
-   commit with the exact preflight artifact before receipt finalization.
+   commit with the exact preflight artifact before receipt finalization. The
+   complete eight-member preflight evidence remains separate from the
+   historical five-member signer candidate (wheel, sdist, kit, detached kit
+   digest, and pytest summary); the manifest is supplied as its own signed-slot
+   verification input. Finalization runs the strict eight-member manifest gate
+   again and the minimal signer independently cross-checks its five-member
+   wheel and sdist against the slot's signed preflight commitments before it
+   signs the receipt.
 
 The preflight artifact is evidence, not release identity. Uploading it to the
 workflow run does not authorize or imply publication. A failed or expired

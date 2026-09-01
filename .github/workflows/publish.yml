@@ -174,10 +174,14 @@ jobs:
             --source-tree-sha256 "$SOURCE_TREE_SHA256" \
             --source-date-epoch "$SOURCE_DATE_EPOCH" \
             --run-id "$PREFLIGHT_RUN_ID"
-          python scripts/verify_distribution_policy.py --dist release-candidate
+          mkdir "$RUNNER_TEMP/distributions"
+          cp release-candidate/*.whl release-candidate/*.tar.gz \
+            "$RUNNER_TEMP/distributions/"
+          python scripts/verify_distribution_policy.py \
+            --dist "$RUNNER_TEMP/distributions"
           python scripts/verify_release_archive_parity.py \
             --root . \
-            --dist release-candidate
+            --dist "$RUNNER_TEMP/distributions"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: bulla-release-candidate-${{ github.sha }}
@@ -190,7 +194,11 @@ jobs:
     needs: stage-candidate
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: read
+    env:
+      RELEASE_VERSION: ${{ inputs.version }}
+      SOURCE_COMMIT: ${{ inputs.source_commit }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -204,6 +212,10 @@ jobs:
         run: |
           python -m pip install --require-hashes \
             -r .github/release-signing-requirements.txt
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: bulla-release-candidate-${{ github.sha }}
+          path: release-candidate
       - name: Retrieve the public immutable slot created after preflight
         env:
           GH_TOKEN: ${{ github.token }}
@@ -220,9 +232,23 @@ jobs:
             fi
           done
           test -f "release-slot/$version.slot.json"
+          tree="$(git rev-parse "$SOURCE_COMMIT^{tree}")"
+          git cat-file tree "$tree" > "$RUNNER_TEMP/source-tree.bin"
+          source_tree_sha256="$(python - <<'PY'
+          import hashlib
+          import os
+          from pathlib import Path
+
+          payload = (Path(os.environ["RUNNER_TEMP"]) / "source-tree.bin").read_bytes()
+          print(f"sha256:{hashlib.sha256(payload).hexdigest()}")
+          PY
+          )"
           python -I scripts/trusted_release_signer.py verify-slot \
             --version "$version" \
-            --source-commit "$GITHUB_SHA" \
+            --source-commit "$SOURCE_COMMIT" \
+            --source-tree-sha256 "$source_tree_sha256" \
+            --preflight-manifest \
+              release-candidate/release-preflight-manifest.json \
             --slot "release-slot/$version.slot.json" \
             --context releases/release-trust-context.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -345,18 +371,28 @@ jobs:
           path: release-slot
       - name: Install the exact accepted wheel without signing authority
         run: |
+          mkdir release-signing-candidate
+          cp \
+            release-candidate/*.whl \
+            release-candidate/*.tar.gz \
+            release-candidate/action-receipt-v0.2-verification-kit.zip \
+            release-candidate/action-receipt-v0.2-verification-kit.zip.sha256 \
+            release-candidate/pytest-summary.txt \
+            release-signing-candidate/
+          test "$(find release-signing-candidate -maxdepth 1 -type f | wc -l | tr -d ' ')" \
+            = "5"
           python -m pip install --require-hashes \
             -r .github/release-finalization-requirements.txt
-          python -m pip install --no-deps release-candidate/*.whl
+          python -m pip install --no-deps release-signing-candidate/*.whl
       - name: Mint and verify the unsigned finalization preimage
         env:
           RELEASE_REF: v${{ inputs.version }}
         run: |
           version="${RELEASE_REF#v}"
-          test_result="$(tail -1 release-candidate/pytest-summary.txt)"
+          test_result="$(tail -1 release-signing-candidate/pytest-summary.txt)"
           mkdir release-preimage
           python scripts/mint_release_receipt.py \
-            --dist release-candidate \
+            --dist release-signing-candidate \
             --out "release-preimage/$version.unsigned.json" \
             --test-result "$test_result" \
             --git-tag "$RELEASE_REF" \
@@ -371,6 +407,7 @@ jobs:
           name: release-finalization-${{ github.sha }}
           path: |
             release-candidate/
+            release-signing-candidate/
             release-slot/
             release-preimage/
           if-no-files-found: error

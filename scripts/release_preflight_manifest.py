@@ -8,6 +8,7 @@ import hashlib
 import json
 from pathlib import Path, PurePosixPath
 import re
+import stat
 from typing import Any
 
 
@@ -34,6 +35,7 @@ FIXED_EVIDENCE_NAMES = (
     "action-receipt-v0.2-verification-kit.zip.sha256",
     *SUMMARY_NAMES,
 )
+SOURCE_INVENTORY_ALGORITHM = "sha256-posix-path-mode-content-v1"
 
 
 class ManifestError(RuntimeError):
@@ -106,6 +108,37 @@ def _last_nonempty_line(path: Path) -> str:
     return nonempty[-1]
 
 
+def _source_inventory(root: Path) -> dict[str, int | str]:
+    if not root.is_dir() or root.is_symlink():
+        raise ManifestError(f"source root is not one directory: {root}")
+    records: list[tuple[str, int, str]] = []
+    for path in sorted(root.rglob("*")):
+        relative = path.relative_to(root).as_posix()
+        metadata = path.lstat()
+        if path.is_symlink():
+            raise ManifestError(f"source contains a symlink: {relative}")
+        if stat.S_ISDIR(metadata.st_mode):
+            continue
+        if not stat.S_ISREG(metadata.st_mode):
+            raise ManifestError(f"source contains a non-regular member: {relative}")
+        records.append(
+            (
+                relative,
+                stat.S_IMODE(metadata.st_mode),
+                hashlib.sha256(path.read_bytes()).hexdigest(),
+            )
+        )
+    payload = "".join(
+        f"{mode:04o} {digest} {relative}\n"
+        for relative, mode, digest in records
+    ).encode("utf-8")
+    return {
+        "algorithm": SOURCE_INVENTORY_ALGORITHM,
+        "files": len(records),
+        "sha256": hashlib.sha256(payload).hexdigest(),
+    }
+
+
 def _strict_json(path: Path) -> dict[str, Any]:
     if not path.is_file() or path.is_symlink() or path.stat().st_size > 64 * 1024:
         raise ManifestError("preflight manifest is not one bounded regular file")
@@ -132,6 +165,9 @@ def write_manifest(
     artifacts: Path,
     build_a: Path,
     build_b: Path,
+    reference_source: Path,
+    source_a: Path,
+    source_b: Path,
     out: Path,
     version: str,
     source_commit: str,
@@ -153,6 +189,17 @@ def write_manifest(
     for name in distributions:
         if artifact_records[name] != build_records["a"][name]:
             raise ManifestError(f"retained artifact differs from reproducible build: {name}")
+    source_records = {
+        "reference": _source_inventory(reference_source),
+        "a": _source_inventory(source_a),
+        "b": _source_inventory(source_b),
+    }
+    if source_records["a"] != source_records["reference"] or source_records[
+        "b"
+    ] != source_records["reference"]:
+        raise ManifestError(
+            "build source differs from the immutable exact-commit materialization"
+        )
 
     summaries = {
         name: {"final_line": _last_nonempty_line(artifacts / name), "path": name}
@@ -167,6 +214,7 @@ def write_manifest(
         "schema": SCHEMA,
         "source_commit": source_commit,
         "source_date_epoch": source_date_epoch,
+        "source_materialization": source_records["reference"],
         "source_tree_sha256": source_tree_sha256,
         "tests": summaries,
         "version": version,
@@ -209,6 +257,7 @@ def verify_manifest(
         "schema",
         "source_commit",
         "source_date_epoch",
+        "source_materialization",
         "source_tree_sha256",
         "tests",
         "version",
@@ -232,6 +281,19 @@ def verify_manifest(
         raise ManifestError("preflight manifest identity differs from the requested release")
     if manifest.get("compatibility_matrix") != COMPATIBILITY_MATRIX:
         raise ManifestError("preflight compatibility matrix differs from the release contract")
+    source_materialization = manifest.get("source_materialization")
+    if (
+        not isinstance(source_materialization, dict)
+        or set(source_materialization) != {"algorithm", "files", "sha256"}
+        or source_materialization.get("algorithm") != SOURCE_INVENTORY_ALGORITHM
+        or isinstance(source_materialization.get("files"), bool)
+        or not isinstance(source_materialization.get("files"), int)
+        or source_materialization["files"] <= 0
+        or not isinstance(source_materialization.get("sha256"), str)
+        or re.fullmatch(r"[0-9a-f]{64}", source_materialization["sha256"])
+        is None
+    ):
+        raise ManifestError("preflight source materialization record is invalid")
 
     distributions = set(_distribution_names(version))
     expected_files = distributions | set(FIXED_EVIDENCE_NAMES)
@@ -272,6 +334,9 @@ def main() -> int:
     write_parser = subparsers.choices["write"]
     write_parser.add_argument("--build-a", type=Path, required=True)
     write_parser.add_argument("--build-b", type=Path, required=True)
+    write_parser.add_argument("--reference-source", type=Path, required=True)
+    write_parser.add_argument("--source-a", type=Path, required=True)
+    write_parser.add_argument("--source-b", type=Path, required=True)
     write_parser.add_argument("--out", type=Path, required=True)
     verify_parser = subparsers.choices["verify"]
     verify_parser.add_argument("--manifest", type=Path, required=True)
@@ -290,6 +355,9 @@ def main() -> int:
                 **common,
                 build_a=args.build_a,
                 build_b=args.build_b,
+                reference_source=args.reference_source,
+                source_a=args.source_a,
+                source_b=args.source_b,
                 out=args.out,
             )
         else:

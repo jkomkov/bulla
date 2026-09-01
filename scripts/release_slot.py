@@ -8,9 +8,11 @@ acts generally: open a signed commitment BEFORE the irreversible step, close it
 with the post-publication receipt, and treat a slot still open past its
 deadline as objective evidence of omission.
 
-A v0.2 slot record is a small canonical JSON document:
+A v0.3 slot record is a small canonical JSON document:
 
   {schema_version, kind, package, version, source_commit, source_tree_sha256,
+   preflight_run_id, preflight_manifest_sha256, preflight_wheel_sha256,
+   preflight_sdist_sha256,
    release_issuer_id, release_issuer_record_hash, trust_context_schema,
    expected_publisher, opened_at, close_deadline, slot_hash, proof}
 
@@ -36,7 +38,8 @@ from bulla.action_receipt import verify_receipt
 from bulla.identity import LocalEd25519Signer, verify_proof_domain
 
 HISTORICAL_SCHEMA_VERSION = "release-slot/0.1"
-SCHEMA_VERSION = "release-slot/0.2"
+PREVIOUS_SCHEMA_VERSION = "release-slot/0.2"
+SCHEMA_VERSION = "release-slot/0.3"
 CURRENT_SCHEMA_VERSION = SCHEMA_VERSION
 KIND = "bulla.release-slot"
 PROOF_PURPOSE = "release-slot"
@@ -62,6 +65,10 @@ def build_slot(
     source_tree_sha256: str,
     signer: LocalEd25519Signer,
     issuer_record: dict,
+    preflight_run_id: int,
+    preflight_manifest_sha256: str,
+    preflight_wheel_sha256: str,
+    preflight_sdist_sha256: str,
     opened_at: str | None = None,
 ) -> dict:
     """Build and sign a pre-publication release slot record."""
@@ -78,6 +85,10 @@ def build_slot(
         "version": version,
         "source_commit": source_commit,
         "source_tree_sha256": source_tree_sha256,
+        "preflight_run_id": preflight_run_id,
+        "preflight_manifest_sha256": preflight_manifest_sha256,
+        "preflight_wheel_sha256": preflight_wheel_sha256,
+        "preflight_sdist_sha256": preflight_sdist_sha256,
         "release_issuer_id": issuer_record["id"],
         "release_issuer_record_hash": issuer_record["record_hash"],
         "trust_context_schema": issuer_record["trust_context_schema"],
@@ -118,11 +129,16 @@ def verify_slot(
             return False, f"missing field {field}"
     schema = slot["schema_version"]
     if (
-        schema not in {HISTORICAL_SCHEMA_VERSION, CURRENT_SCHEMA_VERSION}
+        schema
+        not in {
+            HISTORICAL_SCHEMA_VERSION,
+            PREVIOUS_SCHEMA_VERSION,
+            CURRENT_SCHEMA_VERSION,
+        }
         or slot["kind"] != KIND
     ):
         return False, "unexpected schema_version or kind"
-    if schema == CURRENT_SCHEMA_VERSION:
+    if schema in {PREVIOUS_SCHEMA_VERSION, CURRENT_SCHEMA_VERSION}:
         for field in (
             "source_tree_sha256",
             "release_issuer_id",
@@ -132,7 +148,7 @@ def verify_slot(
             if field not in slot:
                 return False, f"missing field {field}"
         if issuer_record is None:
-            return False, "v0.2 slot requires an external issuer record"
+            return False, "current lineage slot requires an external issuer record"
         if (
             slot["release_issuer_id"] != issuer_record.get("id")
             or slot["release_issuer_record_hash"] != issuer_record.get("record_hash")
@@ -144,6 +160,25 @@ def verify_slot(
             or issuer_record.get("proof_type") != "bulla/ed25519-2026"
         ):
             return False, "slot issuer record differs from the external context"
+    if schema == CURRENT_SCHEMA_VERSION:
+        digest_fields = (
+            "preflight_manifest_sha256",
+            "preflight_wheel_sha256",
+            "preflight_sdist_sha256",
+        )
+        if (
+            isinstance(slot.get("preflight_run_id"), bool)
+            or not isinstance(slot.get("preflight_run_id"), int)
+            or slot["preflight_run_id"] <= 0
+            or any(
+                not isinstance(slot.get(field), str)
+                or len(slot[field]) != 71
+                or not slot[field].startswith("sha256:")
+                or any(character not in "0123456789abcdef" for character in slot[field][7:])
+                for field in digest_fields
+            )
+        ):
+            return False, "v0.3 slot preflight binding is invalid"
     if issuer_record is not None:
         accepted_issuer = issuer_record.get("issuer")
     try:
@@ -154,7 +189,7 @@ def verify_slot(
     if opened.tzinfo is None or deadline.tzinfo is None or deadline <= opened:
         return False, "slot timestamps are not ordered timezone-aware values"
     if (
-        schema == CURRENT_SCHEMA_VERSION
+        schema in {PREVIOUS_SCHEMA_VERSION, CURRENT_SCHEMA_VERSION}
         and deadline - opened != timedelta(hours=DEFAULT_DEADLINE_HOURS)
     ):
         return False, "current release slot deadline is not exactly 24 hours"
