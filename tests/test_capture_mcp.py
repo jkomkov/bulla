@@ -5,10 +5,14 @@ from __future__ import annotations
 import io
 import json
 import os
+import stat
 import subprocess
 import sys
+import threading
+import uuid
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -275,6 +279,149 @@ def test_out_symlink_is_rejected_before_backend_spawn_or_payload_retention(
     assert b"capture output must not be a symlink" in result.stderr
     assert list(redirected.iterdir()) == []
     assert not backend_log.exists()
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows junction boundary")
+def test_windows_junction_parent_is_rejected_before_target_changes(
+    tmp_path: Path,
+):
+    server = _write_server(tmp_path)
+    redirected = tmp_path / "junction-target"
+    redirected.mkdir()
+    sentinel = redirected / "preserve.bin"
+    sentinel.write_bytes(b"unchanged-target-bytes\x00\xff")
+    junction = tmp_path / "capture-parent-junction"
+    created = subprocess.run(
+        ["cmd.exe", "/d", "/c", "mklink", "/J", str(junction), str(redirected)],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        timeout=10,
+    )
+    assert created.returncode == 0, (
+        "windows-latest must support the required local NTFS junction gate: "
+        f"{created.stderr!r}"
+    )
+
+    backend_log = tmp_path / "junction-backend-input.bin"
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "bulla",
+            "capture",
+            "mcp",
+            "--out",
+            str(junction / "capture"),
+            "--retain-payloads",
+            "--",
+            sys.executable,
+            str(server),
+        ],
+        input=_request(secret="must-not-cross-junction-parent"),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        env=_cli_env(backend_log),
+        timeout=20,
+    )
+
+    assert result.returncode == 2
+    assert not backend_log.exists()
+    assert {path.name for path in redirected.iterdir()} == {sentinel.name}
+    assert sentinel.read_bytes() == b"unchanged-target-bytes\x00\xff"
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows atomic directory handles")
+@pytest.mark.parametrize("created_member", ("output", "sessions", "session"))
+def test_windows_new_directory_cannot_be_substituted_before_its_anchor(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    created_member: str,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / f"atomic-{created_member}-root"
+    output = tmp_path / "atomic-one-shot-output"
+    if created_member == "session":
+        module._initialize_capture_root_windows(root)
+        output = module.allocate_capture_session(root)
+    target = {
+        "output": output,
+        "sessions": root / "sessions",
+        "session": output,
+    }[created_member]
+    attacker = tmp_path / f"{created_member}-attacker"
+    attacker.mkdir()
+    sentinel = attacker / "sentinel.bin"
+    sentinel.write_bytes(b"attacker-directory-unchanged\x00\xff")
+    stolen = tmp_path / f"{created_member}-stolen"
+    observed: list[Path] = []
+
+    def attempt_substitution(path: Path) -> None:
+        if path != target:
+            return
+        observed.append(path)
+        with pytest.raises(OSError):
+            path.rename(stolen)
+
+    monkeypatch.setattr(
+        module, "_observe_created_windows_directory", attempt_substitution
+    )
+
+    if created_member == "sessions":
+        module._initialize_capture_root_windows(root)
+    else:
+        session = module.CaptureSession(output, ["backend-must-not-start"])
+        session.finish(0)
+
+    assert observed == [target]
+    assert target.is_dir() and not stolen.exists()
+    assert {path.name for path in attacker.iterdir()} == {sentinel.name}
+    assert sentinel.read_bytes() == b"attacker-directory-unchanged\x00\xff"
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows published-root junction boundary")
+def test_windows_published_root_below_junction_parent_is_not_accepted(
+    tmp_path: Path,
+):
+    import bulla.capture_mcp as module
+
+    redirected_parent = tmp_path / "published-root-target"
+    redirected_parent.mkdir()
+    published_root = redirected_parent / "published"
+    module._initialize_capture_root_windows(published_root)
+    before = {
+        path.relative_to(redirected_parent).as_posix(): (
+            "dir" if path.is_dir() else path.read_bytes()
+        )
+        for path in redirected_parent.rglob("*")
+    }
+    junction = tmp_path / "published-root-junction"
+    created = subprocess.run(
+        [
+            "cmd.exe",
+            "/d",
+            "/c",
+            "mklink",
+            "/J",
+            str(junction),
+            str(redirected_parent),
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        timeout=10,
+    )
+    assert created.returncode == 0, created.stderr
+
+    with pytest.raises(CaptureError, match="parent does not exist"):
+        module._initialize_capture_root_windows(junction / published_root.name)
+
+    after = {
+        path.relative_to(redirected_parent).as_posix(): (
+            "dir" if path.is_dir() else path.read_bytes()
+        )
+        for path in redirected_parent.rglob("*")
+    }
+    assert after == before
 
 
 @pytest.mark.skipif(os.name != "posix", reason="POSIX directory identity boundary")
@@ -706,6 +853,276 @@ def test_concurrent_empty_root_reservations_are_distinct_and_leave_no_orphans(
     assert set(path.name for path in root.iterdir()) == {"root.json", "sessions"}
 
 
+def test_windows_root_initialization_uses_one_exclusive_claim(tmp_path: Path):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "windows-concurrent-root"
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        list(
+            executor.map(
+                lambda _: module._initialize_capture_root_windows(root), range(8)
+            )
+        )
+
+    assert module._validate_capture_root_layout(root) == root / "sessions"
+    assert not module._windows_root_claim_path(root).exists()
+    assert set(path.name for path in tmp_path.iterdir()) == {root.name}
+
+
+def test_windows_loser_waits_for_winner_to_release_completed_root_claim(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "windows-paused-winner-root"
+    release_entered = threading.Event()
+    allow_release = threading.Event()
+    release_lock = threading.Lock()
+    pause_next_release = [True]
+    original_release = module._release_windows_root_claim
+    original_sleep = module.time.sleep
+    loser_waiting = threading.Event()
+
+    def paused_release(claim: Path, token: bytes) -> None:
+        with release_lock:
+            pause = pause_next_release[0]
+            pause_next_release[0] = False
+        if pause:
+            release_entered.set()
+            assert allow_release.wait(timeout=5)
+        original_release(claim, token)
+
+    def observed_sleep(seconds: float) -> None:
+        loser_waiting.set()
+        original_sleep(seconds)
+
+    monkeypatch.setattr(module, "_release_windows_root_claim", paused_release)
+    monkeypatch.setattr(module.time, "sleep", observed_sleep)
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        winner = executor.submit(module._initialize_capture_root_windows, root)
+        assert release_entered.wait(timeout=5)
+        assert module._validate_capture_root_layout(root) == root / "sessions"
+        assert module._windows_root_claim_path(root).exists()
+        loser = executor.submit(module._initialize_capture_root_windows, root)
+        try:
+            assert loser_waiting.wait(timeout=5)
+            assert not loser.done()
+        finally:
+            allow_release.set()
+        winner.result(timeout=5)
+        loser.result(timeout=5)
+
+    assert not module._windows_root_claim_path(root).exists()
+    assert module._validate_capture_root_layout(root) == root / "sessions"
+
+
+def test_windows_stranded_root_claim_times_out_without_stealing(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "windows-stranded-root"
+    claim = module._windows_root_claim_path(root)
+    claim.write_bytes(b"other-initializer\n")
+    clock = [0.0]
+    sleeps: list[float] = []
+
+    def monotonic() -> float:
+        return clock[0]
+
+    def sleep(seconds: float) -> None:
+        sleeps.append(seconds)
+        clock[0] += seconds
+
+    monkeypatch.setattr(module.time, "monotonic", monotonic)
+    monkeypatch.setattr(module.time, "sleep", sleep)
+
+    with pytest.raises(CaptureError, match="unresolved for 5 seconds"):
+        module._initialize_capture_root_windows(root)
+
+    assert sleeps and set(sleeps) == {0.025}
+    assert clock[0] >= 5.0
+    assert claim.read_bytes() == b"other-initializer\n"
+    assert not root.exists()
+
+
+def test_windows_complete_root_with_stranded_claim_still_times_out(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "windows-complete-but-claimed-root"
+    module._initialize_capture_root_unclaimed(root)
+    claim = module._windows_root_claim_path(root)
+    claim.write_bytes(b"stranded-after-publication\n")
+    clock = [0.0]
+
+    def monotonic() -> float:
+        return clock[0]
+
+    def sleep(seconds: float) -> None:
+        assert seconds == 0.025
+        clock[0] += seconds
+
+    monkeypatch.setattr(module.time, "monotonic", monotonic)
+    monkeypatch.setattr(module.time, "sleep", sleep)
+
+    with pytest.raises(CaptureError, match="unresolved for 5 seconds"):
+        module._initialize_capture_root_windows(root)
+
+    assert module._validate_capture_root_layout(root) == root / "sessions"
+    assert claim.read_bytes() == b"stranded-after-publication\n"
+
+
+def test_windows_owned_claim_unlink_failure_never_reports_a_session(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "windows-owned-claim-unlink-failure"
+    claim = module._windows_root_claim_path(root)
+
+    def denied_release(
+        path: Path, token: bytes, native_handle: int | None,
+    ) -> None:
+        assert path == claim and token
+        if native_handle is not None:
+            module._close_windows_handle(native_handle)
+        raise CaptureError("could not remove owned injected claim")
+
+    monkeypatch.setattr(module, "_release_acquired_windows_root_claim", denied_release)
+    monkeypatch.setattr(
+        module, "_initialize_capture_root", module._initialize_capture_root_windows
+    )
+
+    with pytest.raises(CaptureError, match="could not remove owned"):
+        module.allocate_capture_session(root)
+
+    assert claim.is_file()
+    assert module._validate_capture_root_layout(root) == root / "sessions"
+    assert list((root / "sessions").iterdir()) == []
+
+
+def test_windows_release_never_steals_changed_claim(
+    tmp_path: Path,
+):
+    import bulla.capture_mcp as module
+
+    claim = tmp_path / ".changed.init.claim"
+    claim.write_bytes(b"replacement-owner\n")
+
+    with pytest.raises(CaptureError, match="ownership changed"):
+        module._release_windows_root_claim(claim, b"original-owner\n")
+
+    assert claim.read_bytes() == b"replacement-owner\n"
+
+
+def test_windows_release_accepts_later_owner_after_unlink_aba(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+):
+    import bulla.capture_mcp as module
+
+    claim = tmp_path / ".aba.init.claim"
+    owned_token = b"owned-initializer\n"
+    later_token = b"later-initializer\n"
+    claim.write_bytes(owned_token)
+    owned_unlinked = threading.Event()
+    later_acquired = threading.Event()
+    original_unlink = Path.unlink
+
+    def unlink_then_pause(path: Path, *args, **kwargs) -> None:
+        original_unlink(path, *args, **kwargs)
+        if path == claim:
+            owned_unlinked.set()
+            assert later_acquired.wait(timeout=5)
+
+    monkeypatch.setattr(Path, "unlink", unlink_then_pause)
+    with ThreadPoolExecutor(max_workers=1) as executor:
+        released = executor.submit(
+            module._release_windows_root_claim, claim, owned_token
+        )
+        assert owned_unlinked.wait(timeout=5)
+        claim.write_bytes(later_token)
+        later_acquired.set()
+        released.result(timeout=5)
+
+    assert claim.read_bytes() == later_token
+
+
+def test_windows_reparse_metadata_is_never_a_managed_directory() -> None:
+    import bulla.capture_mcp as module
+
+    metadata = SimpleNamespace(
+        st_mode=stat.S_IFDIR,
+        st_file_attributes=getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400),
+    )
+
+    assert module._is_symlink_or_windows_reparse_point(metadata)
+
+
+@pytest.mark.parametrize("member", ("root", "sessions", "session"))
+def test_simulated_windows_reparse_directories_fail_closed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, member: str,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "windows-reparse-root"
+    module._initialize_capture_root_unclaimed(root)
+    sessions = root / "sessions"
+    session = sessions / f"session-{uuid.uuid4()}"
+    session.mkdir()
+    target = {"root": root, "sessions": sessions, "session": session}[member]
+    original_metadata = module._no_follow_metadata
+
+    def simulated_metadata(path: Path):
+        metadata = original_metadata(path)
+        if path == target:
+            return SimpleNamespace(
+                st_mode=metadata.st_mode,
+                st_dev=metadata.st_dev,
+                st_ino=metadata.st_ino,
+                st_file_attributes=getattr(
+                    stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400
+                ),
+            )
+        return metadata
+
+    monkeypatch.setattr(module, "_no_follow_metadata", simulated_metadata)
+
+    if member == "session":
+        with pytest.raises(CaptureDirectoryError, match="unexpected member"):
+            module._capture_session_members(sessions)
+    else:
+        with pytest.raises(CaptureDirectoryError):
+            module._validate_capture_root_layout(root)
+
+
+def test_simulated_windows_reparse_parent_refuses_root_initialization(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+):
+    import bulla.capture_mcp as module
+
+    original_metadata = module._no_follow_metadata
+
+    def simulated_metadata(path: Path):
+        metadata = original_metadata(path)
+        if path == tmp_path:
+            return SimpleNamespace(
+                st_mode=metadata.st_mode,
+                st_dev=metadata.st_dev,
+                st_ino=metadata.st_ino,
+                st_file_attributes=getattr(
+                    stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400
+                ),
+            )
+        return metadata
+
+    monkeypatch.setattr(module, "_no_follow_metadata", simulated_metadata)
+
+    with pytest.raises(CaptureError, match="parent does not exist"):
+        module._initialize_capture_root_windows(tmp_path / "refused-root")
+
+
 def test_stale_initializer_snapshot_revalidates_concurrent_published_session(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ):
@@ -942,7 +1359,9 @@ def test_root_cli_aggregate_and_show_receipts_are_local_and_absolute(tmp_path: P
     assert checked.returncode == 0
     assert b"sessions=1" in checked.stdout and b"complete=1" in checked.stdout
     receipt_lines = [
-        Path(line) for line in checked.stdout.decode().splitlines() if line.startswith("/")
+        path
+        for line in checked.stdout.decode().splitlines()
+        if (path := Path(line)).is_absolute()
     ]
     assert len(receipt_lines) == 1
     assert receipt_lines[0].is_absolute() and receipt_lines[0].is_file()

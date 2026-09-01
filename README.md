@@ -23,7 +23,7 @@ Bulla supports Python 3.10 and later. Receipt creation and file-integrity checks
 run locally and require no hosted Bulla service.
 
 ```bash
-python -m pip install "bulla==0.49.0"
+python -m pip install "bulla==0.49.1"
 bulla demo
 ```
 
@@ -270,7 +270,7 @@ bulla receipt drill RECEIPT.json --format text
 
 ## Published package and source profiles
 
-Bulla 0.49.0 ships ActionReceipt creation and verification, explicit reliance
+Bulla 0.49.1 ships ActionReceipt creation and verification, explicit reliance
 policy, coverage reconciliation, and the local Doorstep MCP capture commands
 described above. The following examples are experimental repository-source
 profiles. They do not add installed commands or stable Python exports.
