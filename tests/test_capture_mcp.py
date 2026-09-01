@@ -297,8 +297,10 @@ def test_windows_junction_parent_is_rejected_before_target_changes(
         stderr=subprocess.PIPE,
         timeout=10,
     )
-    if created.returncode != 0:
-        pytest.skip(f"could not create local NTFS junction: {created.stderr!r}")
+    assert created.returncode == 0, (
+        "windows-latest must support the required local NTFS junction gate: "
+        f"{created.stderr!r}"
+    )
 
     backend_log = tmp_path / "junction-backend-input.bin"
     result = subprocess.run(

@@ -330,10 +330,10 @@ def _native_windows_claim_api():
 
 
 def _release_native_windows_root_claim(handle: int, claim: Path) -> None:
-    ctypes, _, _, _, _, set_information = _native_windows_claim_api()
+    ctypes, wintypes, _, _, _, set_information = _native_windows_claim_api()
 
     class FileDispositionInformation(ctypes.Structure):
-        _fields_ = (("delete_file", ctypes.c_ubyte),)
+        _fields_ = (("delete_file", wintypes.BOOL),)
 
     disposition = FileDispositionInformation(1)
     if not set_information(
@@ -381,7 +381,9 @@ def _acquire_native_windows_root_claim(claim: Path, token: bytes) -> int:
     value = ctypes.cast(handle, ctypes.c_void_p).value
     if value in (None, invalid_handle):
         error = ctypes.get_last_error()
-        if error in (80, 183):  # ERROR_FILE_EXISTS, ERROR_ALREADY_EXISTS
+        if error in (32, 80, 183):
+            # ERROR_SHARING_VIOLATION, ERROR_FILE_EXISTS,
+            # ERROR_ALREADY_EXISTS all mean another live or stranded claim.
             raise FileExistsError(error, f"capture root claim already exists: {claim}")
         raise OSError(error, f"could not create capture root claim: {claim}")
 
