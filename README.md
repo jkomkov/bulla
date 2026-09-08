@@ -10,7 +10,7 @@ Answerable-computing profiles for inference procurement, witnessed history,
 consequence rules, and correction networks live in repository source. They are
 not part of the installed package.
 
-Glyph Standard publishes the ActionReceipt format, Bulla, and the public test
+Bulla Labs publishes the ActionReceipt format, Bulla, and the public test
 suite.
 
 The application creates the receipt where an action is accepted or completed:
@@ -137,7 +137,7 @@ receipt = action.receipt
 
 The receipt can record the action claim, declared authority and limits, supplied
 evidence references, and challenge path. The exact fields are defined by the
-[ActionReceipt standard](https://glyphstandard.com/spec).
+[ActionReceipt standard](https://bullalabs.com/spec).
 
 ## Verify one receipt
 
@@ -145,7 +145,7 @@ Download the constructed payment receipt and check it locally:
 
 ```bash
 curl -fsSLo constructed-payment-authorization-v0.2.json \
-  https://glyphstandard.com/examples/payment-authorization-v0.2.json
+  https://bullalabs.com/examples/payment-authorization-v0.2.json
 bulla receipt verify constructed-payment-authorization-v0.2.json --format json
 ```
 
@@ -399,15 +399,15 @@ dimensions or apply an explicit reliance policy.
 
 ## Documentation
 
-- [Quickstart](https://glyphstandard.com/bulla/quickstart)
-- [Bulla documentation](https://glyphstandard.com/bulla)
-- [ActionReceipt standard](https://glyphstandard.com/spec)
-- [Buyer requirements](https://glyphstandard.com/buyers)
-- [Ecosystem map](https://glyphstandard.com/bulla/ecosystem)
-- [Answerable Computing](https://glyphstandard.com/bulla/answerable-computing)
-- [Status and evidence](https://glyphstandard.com/evidence)
+- [Quickstart](https://bullalabs.com/bulla/quickstart)
+- [Bulla documentation](https://bullalabs.com/bulla)
+- [ActionReceipt standard](https://bullalabs.com/spec)
+- [Buyer requirements](https://bullalabs.com/buyers)
+- [Ecosystem map](https://bullalabs.com/bulla/ecosystem)
+- [Answerable Computing](https://bullalabs.com/answerable-computing)
+- [Status and evidence](https://bullalabs.com/evidence)
 - [Complete capability reference](https://github.com/jkomkov/bulla/blob/main/docs/CAPABILITIES.md)
-- [Source-only experimental research](https://glyphstandard.com/bulla/experimental)
+- [Source-only experimental research](https://bullalabs.com/bulla/experimental)
 - [Changelog](https://github.com/jkomkov/bulla/blob/main/CHANGELOG.md)
 - [Release lineage](https://github.com/jkomkov/bulla/blob/main/docs/RELEASE-LINEAGE.md)
 - [Security policy](https://github.com/jkomkov/bulla/security/policy)
@@ -423,3 +423,20 @@ Bulla is licensed under the
 Report vulnerabilities privately through
 [GitHub Security Advisories](https://github.com/jkomkov/bulla/security/advisories/new)
 or the [security policy](https://github.com/jkomkov/bulla/blob/main/SECURITY.md).
+
+
+## Bulla Labs and the research program
+
+Bulla Labs develops open-source software and standards for
+[Answerable Computing](https://bullalabs.com/answerable-computing).
+Bulla supplies the released record tools; the wider research program studies
+how commitments, evidence, and responsibility survive changes in the software
+and institutions carrying out a transaction.
+
+The [machine-buyer experiment](https://bullalabs.com/research/routed-buyer-continuity)
+records 24 inference requests through OpenRouter and a buyer-process restart.
+Its scheduler, durable controller, and simulator are research code, not features
+of the installed package. The experiment reports signed-JSON parity and does not
+establish provider identity, payment, or independent adoption.
+
+Bulla Labs is operated by Glyph Standard, Inc.
