@@ -83,7 +83,7 @@ def test_first_level_copy_preserves_current_product_boundary() -> None:
     assert "apply its own `ReliancePolicy`" in readme_flat
     assert "reconcile the receipt set against its own event records" in readme_flat
     assert "They are not part of the installed package." in readme_flat
-    assert "Glyph Standard publishes the ActionReceipt format, Bulla" in readme_flat
+    assert "Bulla Labs publishes the ActionReceipt format, Bulla" in readme_flat
     assert "The altered file fails its integrity check" in readme
     assert (
         "The supplied receiver record contains one action with no matching receipt"
@@ -108,3 +108,16 @@ def test_readme_coverage_example_matches_the_public_api() -> None:
     assert 'assert complete["coverage"] == 1.0' in readme
     assert 'assert with_gap["coverage"] == 0.5' in readme
     assert 'assert with_gap["unreceipted_delta"] == ["action-002"]' in readme
+
+
+def test_current_documentation_identity_and_research_boundary() -> None:
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    assert "Bulla Labs" in readme
+    assert "Answerable Computing" in readme
+    assert "Glyph Standard, Inc." in readme
+    assert "https://bullalabs.com/answerable-computing" in readme
+    assert "https://bullalabs.com/research/routed-buyer-continuity" in readme
+    assert "https://glyphstandard.com" not in readme
+    assert "/bulla/answerable-computing" not in readme
+    assert 'bulla==0.49.2' in readme
+    assert "signed-JSON parity" in readme
