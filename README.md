@@ -1,442 +1,164 @@
 # Bulla
 
-**Receipts for Agents.**
+Bulla creates portable ActionReceipts for software purchases, tool calls, and
+other consequential actions. Applications retain the records, verify them
+locally, apply receiver-supplied policies, and reconcile them with their own
+event records.
 
-Bulla creates portable ActionReceipts for consequential agent transactions. A
-receiving system can verify the record locally, apply its own `ReliancePolicy`,
-and reconcile the receipt set against its own event records.
+Use Bulla when an application needs to give another party a transaction record
+it can retain and inspect without continued access to the issuing service.
+The application creates the receipt where it accepts or completes the action;
+the model does not need to generate receipt JSON.
 
-Answerable-computing profiles for inference procurement, witnessed history,
-consequence rules, and correction networks live in repository source. They are
-not part of the installed package.
+## Install and try the local demo
 
-Bulla Labs publishes the ActionReceipt format, Bulla, and the public test
-suite.
-
-The application creates the receipt where an action is accepted or completed:
-an API gateway, tool router, payment handler, or agent runtime. The model does
-not need to know about Bulla or write JSON.
-
-## Install and run one transaction
-
-Bulla supports Python 3.10 and later. Receipt creation and file-integrity checks
-run locally and require no hosted Bulla service.
+Python 3.10 or later is required. Receipt creation and local file checks need
+no hosted Bulla service or account.
 
 ```bash
-python -m pip install "bulla==0.49.2"
+python -m pip install "bulla==0.49.3"
 bulla demo
 ```
 
-## Capture one existing MCP call
+Each run creates a fresh directory and prints its location after `artifacts`.
+The constructed demo records a USD 125 payment request with a declared USD 200
+limit. It keeps the original receipt, changes a copy, and compares the receipts
+with a separately supplied customer record. No funds move.
 
-Wrap an ordinary stdio MCP server without changing that server or the client
-handshake:
+| Demo condition | Recorded result |
+| --- | --- |
+| Original receipt | Integrity check passes |
+| Changed copy | Integrity check fails |
+| Additional customer-record entry | One action has no matching receipt |
 
-```bash
-bulla capture mcp --session-root ./bulla-calls -- SERVER COMMAND...
-bulla capture check ./bulla-calls --show-receipts
+The altered file fails its integrity check because its amount no longer matches
+its stored commitments. This unsigned example is not an authentication test:
+someone could change a record and recompute its hashes. Coverage is relative
+to the supplied customer record; it cannot reveal an action absent from both
+that record and the receipt set.
+
+For a chosen output location, use `bulla demo --out DIR`; `DIR` must not already
+exist. Use `bulla demo --format json` for the machine-readable report. The
+[quickstart](https://bullalabs.com/bulla/quickstart) walks through the saved files
+and the retained standalone checker.
+
+## Capture an existing MCP call
+
+Bulla's `capture` command wraps an existing stdio MCP server. Keep your current
+server command after `--`. The following is a configuration template: replace
+the absolute paths and `SERVER COMMAND...` with your own values, then configure
+your MCP client to launch the wrapped server.
+
+```text
+bulla capture mcp --session-root /absolute/path/to/bulla-calls -- SERVER COMMAND...
+bulla capture check /absolute/path/to/bulla-calls --show-receipts
 bulla receipt verify /absolute/path/to/receipt.json
 ```
 
-The wrapper forwards newline-delimited MCP traffic byte-for-byte. Each complete
-client-originated `tools/call` and matching response leaves an ActionReceipt
-v0.4 containing minimal call metadata and commitments to the exact forwarded
-request and response frames. Payload bytes are not retained unless
-`--retain-payloads` is explicitly selected.
+The wrapper forwards newline-delimited traffic byte-for-byte without changing
+the client handshake. A completed client-originated `tools/call` and matching
+response produce a local receipt. The session root supports successive server
+lifecycles without changing the wrapper configuration.
 
-An unsigned receipt reaches the digest-verification rung. `--key FILE`
-authenticates only the local observer's statement; it does not authenticate the
-MCP server, prove that a tool executed, or establish that its result is correct.
-The capture directory is implementation-local and is checked with
-`bulla capture check`, not treated as a portable protocol object.
+**Privacy default: commitments only.** Request and response payloads are not
+retained unless you choose `--retain-payloads`. That option saves exact frames
+and can retain prompts, credentials, tool arguments, and results. Review the
+directory's access controls and retention needs before enabling it.
 
-The fixed demo creates a receipt for one constructed USD 125 payment, checks the
-saved file, rejects an altered copy, and compares the receipt set with a
-separately supplied receiver record containing one additional action.
+An optional `--key FILE` signature authenticates only the local observer's
+statement, not the MCP server, tool execution, or result correctness. The
+capture directory is implementation-local, not a portable protocol object.
+See the [MCP capture guide](https://bullalabs.com/bulla/capture) for client
+configuration, signing requirements, and the full claim boundary.
 
-```text
-FIRST ACTION DEMO · CONSTRUCTED LOCAL SCENARIO
+## Create a receipt in application code
 
-ACTION
-recorded action       payments.charge
-amount                USD 125.00
-declared limit        USD 200.00
-
-ALTERATION CONTROL
-record integrity      FAILED
-original receipt      UNCHANGED
-
-OMISSION CONTROL
-coverage before       1/1
-coverage after        1/2
-unreceipted action    pay_demo_043
-original integrity    VERIFIED
-```
-
-The altered file fails its integrity check. The separate receiver record exposes
-an action with no matching receipt. Neither result establishes that funds moved
-or that the receiver record contains every action.
-
-Use `bulla demo --out DIR` to choose a fresh output directory or `bulla demo
---format json` for the versioned machine report. Bulla refuses to replace an
-existing path.
-
-## Provider logs and receiver records
-
-Provider logs are useful, and Bulla does not replace them. They usually describe
-an activity stream inside the provider's system, use a provider-specific schema,
-and remain under the provider's custody.
-
-An ActionReceipt has a different job: hand the receiving party one portable
-record for one transaction. If a provider exports the relevant event, binds it to the
-buyer's request and accepted terms, authenticates it, and lets the buyer retain
-it, that export can become evidence for an ActionReceipt. The standard format
-means a buyer does not need a different log integration for every provider.
-
-| | Provider log | ActionReceipt |
-|---|---|---|
-| Primary use | Operate and debug the provider | Hand one transaction to the receiving party |
-| Custody | Usually controlled by the provider | Retained by each receiving party |
-| Format | Provider-specific | Open and versioned |
-| Scope | System activity stream | One action or transaction |
-| Verification | Whatever the provider exposes | Local checks defined by the format |
-| Completeness | Not assumed | Not assumed |
-
-Buyers, gateways, and marketplaces can require receipt support before routing
-work or accepting a delivery. A provider that supports the format can qualify
-for those workflows and use the same agreed transaction file for acceptance,
-audit, and disputes. This repository does not claim that receipts improve
-payment speed, insurance pricing, or reputation.
-
-## The receipt is not the decision
-
-An ActionReceipt preserves the request, accepted permissions and limits,
-reported result, and supplied evidence. It does not make the next decision.
-The customer, auditor, marketplace, or downstream agent applies its own policy
-to the retained record.
-
-An eligible consequence is still separate from authority to execute it. A
-receipt does not establish that the reported event occurred or that the
-receiver record contains every relevant event.
-
-## Add Bulla where the application acts
-
-`wrap_action` creates the JSON file around the application call:
+This runnable example records a constructed local response, checks the receipt,
+and compares it with two supplied application events. In an integration,
+replace the constructed response with the bytes your application actually
+receives; Bulla does not perform or judge that work for you.
 
 ```python
-from bulla import wrap_action
+import hashlib
+from bulla import event_coverage, verify_receipt, wrap_action
 
-with wrap_action(
-    "payments.charge",
-    {"event_id": "pay-1", "amount_minor": 12500},
-) as action:
-    action.set_result("sha256:" + "0" * 64)
+with wrap_action("demo.echo", {"event_id": "action-001"}) as action:
+    response = b"hello"
+    action.set_result("sha256:" + hashlib.sha256(response).hexdigest())
 
 receipt = action.receipt
-```
-
-The receipt can record the action claim, declared authority and limits, supplied
-evidence references, and challenge path. The exact fields are defined by the
-[ActionReceipt standard](https://bullalabs.com/spec).
-
-## Verify one receipt
-
-Download the constructed payment receipt and check it locally:
-
-```bash
-curl -fsSLo constructed-payment-authorization-v0.2.json \
-  https://bullalabs.com/examples/payment-authorization-v0.2.json
-bulla receipt verify constructed-payment-authorization-v0.2.json --format json
-```
-
-The receipt records a USD 125.00 charge, declares a USD 200.00 limit, and carries
-an executable rule for checking the limit. The dimensional report includes:
-
-```text
-integrity             VERIFIED
-authenticity          UNVERIFIED
-authority             UNAUTHENTICATED
-declared_bounds       CONFORMS
-grounding             SELF_ASSERTED
-recourse              NAMED
-reachability          UNVERIFIED
-reliance_decision     NOT_COMPUTED
-```
-
-These are separate results, not one global safety or truth verdict. The same
-receipt is available at `spec/vectors/payment-authorization.json`; its expected
-result is pinned in `spec/vectors/expected.json` and recomputed in CI.
-
-## Check receipt coverage
-
-`event_coverage` compares valid receipts with a receiver record supplied outside
-the receipt set. For an exact saved-record match, add `record_sha256` using
-`observed_record_sha256`; the receipt must carry the same digest in its result or
-evidence references. Without that field, coverage is action-ID correlation.
-
-```python
-from bulla.action_receipt import verify_receipt
-from bulla.coverage import event_coverage
-from bulla.wrap import receipt_for
-
-receipt = receipt_for("network.egress", {"event_id": "action-001"})
 assert verify_receipt(receipt).ok
 
-complete = event_coverage([{"id": "action-001"}], [receipt])
-assert complete["coverage"] == 1.0
-assert complete["unreceipted_delta"] == []
-
-with_gap = event_coverage(
-    [{"id": "action-001"}, {"id": "action-002"}],
-    [receipt],
+coverage = event_coverage(
+    [{"id": "action-001"}, {"id": "action-002"}], [receipt]
 )
-assert with_gap["coverage"] == 0.5
-assert with_gap["unreceipted_delta"] == ["action-002"]
+assert coverage["coverage"] == 0.5
+assert coverage["unreceipted_delta"] == ["action-002"]
 ```
 
-Receipt integrity is unchanged in the second comparison. The supplied receiver
-record contains one action with no matching receipt. Bulla does not establish
-that the record itself is complete.
+The receipt is available to serialize and retain; the application decides
+where it is delivered. This comparison correlates action identifiers. For an
+exact saved-record binding, supply `record_sha256` using
+`observed_record_sha256` as described in the
+[Python SDK](https://bullalabs.com/bulla/sdk).
 
-## Apply a receiver policy
+## Understand the checks
 
-`ReliancePolicy` turns a complete verification view into `RELY`, `REFUSE`, or
-`ESCALATE`. Bulla publishes strict and pragmatic policies, plus an
-evidence-strict policy that requires both a third-party-anchored or
-execution-verified label and the receiver's acceptance of the exact evidence
-digest/class pair through separately supplied grounding context.
+Receipt verification reports separate dimensions. Integrity checks the supplied
+record's structure and commitments. With the required cryptographic support,
+signature verification checks a signature under a key; it does not establish
+that the key is an authority your application should accept. Referenced
+evidence is not automatically fetched or treated as true.
 
-```python
-from bulla import (
-    EVIDENCE_STRICT_RELIANCE_POLICY,
-    decide,
-    receipt_for,
-    verify_receipt,
-)
+A receiver supplies its own `ReliancePolicy` to compute `RELY`, `REFUSE`, or
+`ESCALATE`. Those results do not execute a payment, grant access, or create legal
+authority. The evidence-strict policy requires separately supplied acceptance
+of the exact evidence digest and grounding class, not merely a label carried
+inside the receipt. See [receiver policies](https://bullalabs.com/bulla/concepts#reliance).
 
-receipt = receipt_for("network.egress", {"event_id": "action-001"})
-verification = verify_receipt(receipt)
-decision = decide(verification, EVIDENCE_STRICT_RELIANCE_POLICY)
-assert decision.outcome == "refuse"
-assert {item["dimension"] for item in decision.unmet} >= {
-    "verified_to", "effective_grounding"
-}
-```
+Reconciliation finds supplied customer events without matching receipts. It
+does not establish that the customer's record is complete. None of these
+checks alone proves that the underlying action occurred or that its result
+was correct. Verification and the decision to rely remain separate.
 
-The application chooses the policy and decides what downstream action follows.
-Receipt-carried grounding labels do not satisfy the evidence-strict policy by
-themselves. After validating an anchor or recomputing evidence, a receiver may
-pass its resulting `verified_evidence_grounding` mapping to `verify_receipt`.
-That external context is a receiver input, not a fact the packet may supply.
-When the receiver records the result as a `bulla.rely` receipt, Bulla binds the
-exact context hash into the signed subject; replay verification requires the
-same context as a separate input. A serialized verification view cannot promote
-its own grounding status.
-Even then, a grounding class does not establish occurrence, worldly truth,
-organizational independence, custody, settlement, or downstream effect.
+## Why not signed JSON?
 
-## Keep the verification kit
+Signed JSON can carry the same facts. In our scheduling experiment, matched
+signed records produced the same decisions as ActionReceipts. Bulla supplies
+a versioned record format, local verification tools, receiver-policy
+evaluation, and receipt reconciliation. The intended advantage is a shared
+interface rather than a custom convention for each integration. Reduced
+integration effort and interoperability between independently operated systems
+remain unmeasured. Read the [comparison methods](https://bullalabs.com/research/routed-buyer-continuity#methods)
+and [ecosystem guide](https://bullalabs.com/bulla/ecosystem).
 
-The package carries the v0.2 specification, constructed examples, expected
-dimensional reports, and a zero-dependency checker as one immutable archive:
+## Formats, documentation, and maintenance
 
-```bash
-bulla receipt kit --out action-receipt-v0.2-verification-kit.zip
-```
+MCP capture is included in Bulla 0.49.3. It emits ActionReceipt v0.4, an
+experimental draft format; v0.2 remains the normative default for the general
+receipt tools. v0.3 remains a released, non-normative draft. Package versions
+and receipt-format versions are separate.
 
-Expected archive digest:
-
-```text
-sha256:8f2cdd16bcbd1a1121f49545b6a6512872b188221ca30ec054dfd6b2fb2142ab
-```
-
-After extracting the archive, run `python3 verify.py` to check the kit or run
-its standalone checker against a saved v0.2 receipt:
-
-```bash
-python3 verify.py receipt RECEIPT.json --format text
-```
-
-The checker imports no Bulla code and makes no network request. The manifest
-checks the archive contents. Authenticate the archive itself with the detached
-digest or signed release receipt.
-
-`bulla receipt drill` runs both the installed Bulla checker and the retained
-standalone checker while network access is denied:
-
-```bash
-bulla receipt drill RECEIPT.json --format text
-```
-
-## Published package and source profiles
-
-Bulla 0.49.2 ships ActionReceipt creation and verification, explicit reliance
-policy, coverage reconciliation, and the local Doorstep MCP capture commands
-described above. The following examples are experimental repository-source
-profiles. They do not add installed commands or stable Python exports.
-
-## Experimental: evaluate one receiving policy
-
-The source-only [Acceptance Contract
-alpha](spec/acceptance-contract/PROFILE.md) demonstrates an agent-to-agent
-deployment handoff. A deploy agent reports that staging is ready; the receiving
-release policy also requires a rollback-test record for the exact build and
-contract. Missing evidence produces a conditional request, `PASS` permits
-eligibility, and `FAIL` refuses it. Even the eligible result leaves
-authorization unissued and execution unattempted.
-
-```bash
-PYTHONPATH=src python3 examples/acceptance-contract/run_demo.py \
-  --story --out /tmp/bulla-acceptance
-python3 -I spec/acceptance-contract/check.py \
-  /tmp/bulla-acceptance/missing \
-  --context /tmp/bulla-acceptance/context.json \
-  --format story
-```
-
-This profile is inspectable in source and excluded from the installed package.
-
-## Experimental: trace a correction through declared reliance
-
-The source-only [Reliance Map profile](spec/reliance-map/PROFILE.md) starts
-from an accepted declared graph. When an authenticated correction notice
-targets one source digest, the verifier identifies the exact descendants that
-require rechecking. Complete branches with no declared path are reported
-separately; incomplete lineage remains unresolved.
-
-The constructed corpus contains 10,000 declared decisions: 2,500 require
-rechecking, 5,000 have no declared path under the accepted graph, and 2,500
-remain unresolved because their lineage is incomplete. Python and standalone
-Node produce the same report.
-
-```bash
-PYTHONPATH=src python3 spec/reliance-map/check.py \
-  spec/reliance-map/generated/graph.json \
-  --ledger spec/reliance-map/generated/correction-ledger.json \
-  --context spec/reliance-map/generated/context.json
-
-node spec/reliance-map/check.mjs \
-  spec/reliance-map/generated/graph.json \
-  --ledger spec/reliance-map/generated/correction-ledger.json \
-  --context spec/reliance-map/generated/context.json
-```
-
-The map does not capture dependencies automatically, establish that a
-correction is true, reverse an action, or authorize a consequence. The profile
-and its Handoff Admission parsing dependency are excluded from the installed
-package.
-
-## Experimental: bind recourse to witness equivocation
-
-The source-only [Witness Covenant profile](spec/witness-covenant/PROFILE.md)
-binds a dedicated test-ledger allocation to one objective fault: two authentic,
-same-size checkpoints for the same log and epoch carry different roots. The
-verifier keeps checkpoint authenticity, equivocation, challenge state, capital,
-eligibility, authorization, and an attempted ledger event separate.
-
-A bond changes recourse only. It does not make a receipt true, make the witness
-independent, establish custody or collection, or upgrade a provider claim.
-
-```bash
-PYTHONPATH=src python3 spec/witness-covenant/check.py \
-  spec/witness-covenant/vectors/fork-closed \
-  --context spec/witness-covenant/contexts/fork-closed.json
-
-node spec/witness-covenant/check.mjs \
-  spec/witness-covenant/vectors/fork-closed \
-  --context spec/witness-covenant/contexts/fork-closed.json
-```
-
-## Experimental: verify an answerability network
-
-The source-only [Answerability Network
-profile](spec/answerability-network/PROFILE.md) composes a constructed inference
-procurement, ActionReceipt, witnessed checkpoint, covenant, and 10,000-decision
-declared reliance graph. When the verifier receives two authentic incompatible
-checkpoint views, it identifies 2,500 declared descendants for recheck, leaves
-5,000 complete unrelated decisions unaffected under the accepted graph, and
-keeps 2,500 incomplete branches unresolved.
-
-Only the witness covenant's bounded remedy can become eligible. Provider claims
-and unrelated branches do not inherit the witness fault.
-
-```bash
-PYTHONPATH=src python3 spec/answerability-network/check.py \
-  spec/answerability-network/vectors/fork-closed \
-  --context spec/answerability-network/contexts/fork-closed.json
-
-node spec/answerability-network/check.mjs \
-  spec/answerability-network/vectors/fork-closed \
-  --context spec/answerability-network/contexts/fork-closed.json
-```
-
-## Where Bulla fits
-
-- **Payments:** record the request, authorization, amount limits, supplied
-  evidence, and dispute path.
-- **Permissions and writes:** bind an operation to its stated principal and
-  policy.
-- **Gateways and provider handoffs:** retain the request and terms that crossed
-  an organizational boundary.
-
-ActionReceipt v0.2 remains the normative default. ActionReceipt v0.4 is an
-opt-in experimental draft. Source-only research profiles remain inspectable on
-GitHub but are excluded from the installed package unless the distribution
-policy explicitly releases them.
-
-## Limits
-
-- File integrity does not establish that the reported action occurred or that
-  every recorded field is true.
-- A signature authenticates an accepted key; it does not create authority.
-- Coverage is relative to the supplied receiver record.
-- Bulla does not establish that the supplied receiver record is complete.
-- Unsigned receipts remain unauthenticated.
-- Reliance remains `NOT_COMPUTED` unless a reliance policy is supplied.
-
-Multidimensional reports reject Boolean coercion. Callers inspect the named
-dimensions or apply an explicit reliance policy.
-
-## Documentation
-
-- [Quickstart](https://bullalabs.com/bulla/quickstart)
-- [Bulla documentation](https://bullalabs.com/bulla)
-- [ActionReceipt standard](https://bullalabs.com/spec)
-- [Buyer requirements](https://bullalabs.com/buyers)
-- [Ecosystem map](https://bullalabs.com/bulla/ecosystem)
-- [Answerable Computing](https://bullalabs.com/answerable-computing)
-- [Status and evidence](https://bullalabs.com/evidence)
-- [Complete capability reference](https://github.com/jkomkov/bulla/blob/main/docs/CAPABILITIES.md)
-- [Source-only experimental research](https://bullalabs.com/bulla/experimental)
+- [ActionReceipt specification](https://bullalabs.com/spec)
+- [CLI reference](https://bullalabs.com/bulla/cli) and [capability reference](https://github.com/jkomkov/bulla/blob/main/docs/CAPABILITIES.md)
+- [Buyer requirements](https://bullalabs.com/buyers) and [status](https://bullalabs.com/status)
 - [Changelog](https://github.com/jkomkov/bulla/blob/main/CHANGELOG.md)
-- [Release lineage](https://github.com/jkomkov/bulla/blob/main/docs/RELEASE-LINEAGE.md)
-- [Security policy](https://github.com/jkomkov/bulla/security/policy)
 
-## License and security
-
-Bulla is the developer toolkit. ActionReceipt is the open format implemented by
-Bulla. Glyph Standard, Inc. maintains the specification; Res Agentica contains
-the broader research program.
-
-Bulla is licensed under the
-[Apache License 2.0](https://github.com/jkomkov/bulla/blob/main/LICENSE).
-Report vulnerabilities privately through
-[GitHub Security Advisories](https://github.com/jkomkov/bulla/security/advisories/new)
-or the [security policy](https://github.com/jkomkov/bulla/blob/main/SECURITY.md).
-
-
-## Bulla Labs and the research program
-
-Bulla Labs develops open-source software and standards for
-[Answerable Computing](https://bullalabs.com/answerable-computing).
-Bulla supplies the released record tools; the wider research program studies
-how commitments, evidence, and responsibility survive changes in the software
-and institutions carrying out a transaction.
-
-The [machine-buyer experiment](https://bullalabs.com/research/routed-buyer-continuity)
-records 24 inference requests through OpenRouter and a buyer-process restart.
-Its scheduler, durable controller, and simulator are research code, not features
-of the installed package. The experiment reports signed-JSON parity and does not
-establish provider identity, payment, or independent adoption.
-
+John Komkov is the maintainer of record. Use
+[GitHub issues](https://github.com/jkomkov/bulla/issues) for product questions
+and implementation feedback. Report security vulnerabilities privately through
+[GitHub Security Advisories](https://github.com/jkomkov/bulla/security/advisories/new),
+following the [security policy](https://github.com/jkomkov/bulla/blob/main/SECURITY.md).
+Bulla is [Apache-2.0 licensed](https://github.com/jkomkov/bulla/blob/main/LICENSE).
 Bulla Labs is operated by Glyph Standard, Inc.
+
+## The broader program
+
+Bulla Labs develops software and standards for
+[Answerable Computing](https://bullalabs.com/answerable-computing).
+The [machine-buyer experiment](https://bullalabs.com/research/routed-buyer-continuity)
+studies retained evidence and process continuity, including signed-JSON parity.
+Its scheduler, durable controller, and simulator are research code, not package
+features. Research on witnessing, adjudication, and financial backing remains
+separate from the released tools; the [research index](https://bullalabs.com/research)
+links to the source profiles and their implementation status.

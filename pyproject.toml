@@ -92,12 +92,13 @@ all = ["bulla[ots,identity,scitt,discover,langgraph,crewai]"]
 bulla = "bulla.cli:main"
 
 [project.urls]
-Homepage = "https://glyphstandard.com/bulla"
-Documentation = "https://glyphstandard.com/bulla/quickstart"
-Specification = "https://glyphstandard.com/spec"
-Status = "https://glyphstandard.com/status"
+Homepage = "https://bullalabs.com/bulla"
+Documentation = "https://bullalabs.com/bulla/quickstart"
+Specification = "https://bullalabs.com/spec"
+Status = "https://bullalabs.com/status"
 Research = "https://www.resagentica.com/research"
-Publisher = "https://glyphstandard.com/about"
+Publisher = "https://bullalabs.com/about"
+Security = "https://github.com/jkomkov/bulla/security/policy"
 Source = "https://github.com/jkomkov/bulla"
 Issues = "https://github.com/jkomkov/bulla/issues"
 Changelog = "https://github.com/jkomkov/bulla/blob/main/CHANGELOG.md"

@@ -68,56 +68,42 @@ def test_readme_answerability_fixture_matches_real_cli(tmp_path: Path) -> None:
 
 
 def test_first_level_copy_preserves_current_product_boundary() -> None:
+    import bulla
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    readme_flat = " ".join(readme.split())
-    metadata = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
-    combined = readme + "\n" + metadata
-    assert "SEAM is the underlying theory" not in combined
-    assert "coherence fee as a safety" not in combined.lower()
-    assert "coherence fee as an execution" not in combined.lower()
-    assert "authorless action" not in combined.lower()
-    assert "independently validated" not in combined.lower()
-    assert "**Receipts for Agents.**" in readme
-    assert "Bulla creates portable ActionReceipts" in readme
-    assert "receiving system can verify the record locally" in readme_flat
-    assert "apply its own `ReliancePolicy`" in readme_flat
-    assert "reconcile the receipt set against its own event records" in readme_flat
-    assert "They are not part of the installed package." in readme_flat
-    assert "Bulla Labs publishes the ActionReceipt format, Bulla" in readme_flat
-    assert "The altered file fails its integrity check" in readme
-    assert (
-        "The supplied receiver record contains one action with no matching receipt"
-        in readme_flat
-    )
-    assert "Bulla 0.49.2 ships ActionReceipt creation and verification" in readme_flat
-    assert "local Doorstep MCP capture commands described above" in readme_flat
-    assert "They do not add installed commands or stable Python exports." in readme_flat
-    assert "Legacy composition diagnostics" not in readme
-    assert "Research frontier" not in readme
-    assert "A bulla was the clay envelope" not in readme
-    assert (
-        'description = "Portable ActionReceipts and receiver-side verification for '
-        'consequential agent transactions"'
-    ) in metadata
-    assert 'Publisher = "https://glyphstandard.com/about"' in metadata
-
-
-def test_readme_coverage_example_matches_the_public_api() -> None:
-    readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert 'receipt_for("network.egress", {"event_id": "action-001"})' in readme
-    assert 'assert complete["coverage"] == 1.0' in readme
-    assert 'assert with_gap["coverage"] == 0.5' in readme
-    assert 'assert with_gap["unreceipted_delta"] == ["action-002"]' in readme
+    flat = " ".join(readme.split())
+    assert 800 <= len(readme.split()) <= 1100
+    for phrase in (
+        "Bulla creates portable ActionReceipts",
+        "apply receiver-supplied policies",
+        "No funds move.",
+        "This unsigned example is not an authentication test",
+        "Coverage is relative to the supplied customer record",
+        "Privacy default: commitments only.",
+        "not the MCP server, tool execution, or result correctness",
+        "Reduced integration effort and interoperability between independently operated systems remain unmeasured",
+        "v0.2 remains the normative default",
+        "research code, not package features",
+    ):
+        assert phrase in flat
+    assert f'bulla=={bulla.__version__}' in readme
+    assert f"MCP capture is included in Bulla {bulla.__version__}" in flat
+    assert readme.index("| Original receipt |") < readme.index("## Capture")
+    assert readme.count("```python") == 1
+    assert "PYTHONPATH=" not in readme
+    assert "/bulla/inspect" not in readme
+    for claim in ("Stripe for", "tamper-proof", "different log integration for every provider"):
+        assert claim not in readme
 
 
 def test_current_documentation_identity_and_research_boundary() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert "Bulla Labs" in readme
-    assert "Answerable Computing" in readme
-    assert "Glyph Standard, Inc." in readme
-    assert "https://bullalabs.com/answerable-computing" in readme
-    assert "https://bullalabs.com/research/routed-buyer-continuity" in readme
-    assert "https://glyphstandard.com" not in readme
-    assert "/bulla/answerable-computing" not in readme
-    assert 'bulla==0.49.2' in readme
-    assert "signed-JSON parity" in readme
+    metadata = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    for value in ("Bulla Labs", "Answerable Computing", "Glyph Standard, Inc.",
+                  "John Komkov", "signed-JSON parity",
+                  "https://bullalabs.com/answerable-computing",
+                  "https://bullalabs.com/research/routed-buyer-continuity"):
+        assert value in readme
+    assert "https://glyphstandard.com" not in readme + metadata
+    assert "/bulla/answerable-computing" not in readme + metadata
+    assert 'Publisher = "https://bullalabs.com/about"' in metadata
+    assert 'Security = "https://github.com/jkomkov/bulla/security/policy"' in metadata

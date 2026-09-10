@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package": "bulla",
-  "release": "0.49.2",
+  "release": "0.49.3",
   "normative_action_receipt": "0.2",
   "released_experimental_action_receipts": [
     "0.3",
@@ -11,16 +11,16 @@
     "wheel": {
       "algorithm": "sha256-sorted-posix-lines-v1",
       "count": 195,
-      "sha256": "72406296b0395d42b4875fbef80aba5a0485174ca1630870726b8b56631f9cce"
+      "sha256": "021d73b87cb41a84c23daf6c577b10cd49e02b3bd773d7e55dffd2bc87d760a9"
     },
     "sdist": {
       "algorithm": "sha256-sorted-posix-lines-v1",
-      "count": 1365,
-      "sha256": "0fe76fc0153295004bb8263b0173e8fb70014e43b8b6f97abd970103170e0ef4"
+      "count": 1368,
+      "sha256": "c78ee77c4de2c21f8e9904357a5d12820ac306b2c5ae3227163bfef60bd7e494"
     }
   },
   "generated_archive_bytes": {
-    "metadata_sha256": "164c9924c34311dc64e24d1257fc4eb7782c05d0d1b9916f5fdb22a0067b804b"
+    "metadata_sha256": "933a0b2e27e47f3bcaf8aa8b4abe63576e55a58c54d996ef3744d0bc05f4e40c"
   },
   "required_root_exports": [
     "EVIDENCE_STRICT_RELIANCE_POLICY",
@@ -83,7 +83,10 @@
     "src/bulla/data/action-receipt-v0.2-verification-kit.zip.sha256",
     "src/bulla/wrap.py",
     "tests/test_capture_mcp.py",
-    "tests/test_release_preflight_manifest.py"
+    "tests/test_release_preflight_manifest.py",
+    "docs/RELEASE-0.49.3.md",
+    "tests/test_package_entry.py",
+    "releases/package-entry-0.49.3-allowed-differences.json"
   ],
   "source_only_modules": [
     "bulla.experimental.action_boundary",
