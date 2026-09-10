@@ -36,7 +36,7 @@ def _workflow_job(workflow: str, name: str) -> str:
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.49.2"
+    assert bulla.__version__ == "0.49.3"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
     assert "## 0.49.2 — 2026-08-31" in changelog
     assert "## 0.49.1 — 2026-08-31 (not published)" in changelog
@@ -84,7 +84,8 @@ def test_publication_contract_binds_two_clocks_and_final_main_commit() -> None:
     lineage = (ROOT / "docs/RELEASE-LINEAGE.md").read_text(encoding="utf-8")
     assert "| 0.49.0 | not published |" in lineage
     assert "| 0.49.1 | not published |" in lineage
-    assert "| 0.49.2 | candidate; not published |" in lineage
+    assert "| 0.49.2 | published 2026-09-01 |" in lineage
+    assert "| 0.49.3 | candidate; not published |" in lineage
 
 
 def test_failed_release_authorization_is_sealed_and_consumed() -> None:

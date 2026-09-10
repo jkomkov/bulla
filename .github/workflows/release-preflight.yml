@@ -117,6 +117,9 @@ jobs:
           tests/test_event_coverage.py
           tests/test_first_action_demo.py
           tests/test_golden_f13.py
+          tests/test_package_entry.py
+          tests/test_public_front_door.py
+          tests/test_readme_examples.py
           tests/test_release_045_contract.py
           tests/test_release_preflight_manifest.py
           tests/test_release_source_materialization.py
@@ -303,6 +306,9 @@ jobs:
               "$GITHUB_WORKSPACE/reference-checkout/tests/test_distribution_policy.py" \
               "$GITHUB_WORKSPACE/reference-checkout/tests/test_event_coverage.py" \
               "$GITHUB_WORKSPACE/reference-checkout/tests/test_golden_f13.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_package_entry.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_public_front_door.py" \
+              "$GITHUB_WORKSPACE/reference-checkout/tests/test_readme_examples.py" \
               "$GITHUB_WORKSPACE/reference-checkout/tests/test_release_045_contract.py" \
               "$GITHUB_WORKSPACE/reference-checkout/tests/test_release_preflight_manifest.py" \
               "$GITHUB_WORKSPACE/reference-checkout/tests/test_release_source_materialization.py" \

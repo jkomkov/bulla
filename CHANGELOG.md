@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.49.3 — 2026-09-10
+
+Documentation and package-metadata update. The README now follows installation,
+the constructed local demo, MCP capture, and one runnable application example.
+It distinguishes format maturity, receiver decisions, and unmeasured shared-
+interface benefits, and points to Bulla Labs' current documentation and contact
+routes.
+
+There are no functional changes to capture, verification, receiver policies,
+reconciliation, or ActionReceipt formats. The package version declaration is
+updated; newly created receipts can carry different producer provenance and
+hashes. Existing receipt bytes and the retained v0.2 verification kit remain
+unchanged. This release does not include the browser inspector or promote any
+research mechanism into an installed feature.
+
 ## 0.49.2 — 2026-08-31
 
 **Evidence before identity.** This patch release preserves the Doorstep runtime
