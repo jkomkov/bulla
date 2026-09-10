@@ -869,6 +869,136 @@ def test_windows_root_initialization_uses_one_exclusive_claim(tmp_path: Path):
     assert set(path.name for path in tmp_path.iterdir()) == {root.name}
 
 
+def test_native_windows_access_denied_is_not_claim_ownership(monkeypatch):
+    import ctypes
+    import bulla.capture_mcp as module
+
+    native = SimpleNamespace(
+        c_void_p=ctypes.c_void_p, cast=ctypes.cast, get_last_error=lambda: 5,
+    )
+    monkeypatch.setattr(module, "_native_windows_claim_api", lambda: (
+        native, None, lambda *args: ctypes.c_void_p(-1).value, None, None, None,
+    ))
+    with pytest.raises(module._WindowsRootClaimDenied) as failure:
+        module._acquire_native_windows_root_claim(Path("unused-claim"), b"token\n")
+    assert failure.value.errno == 5
+
+
+@pytest.mark.parametrize("layout", ("absent", "valid-claimed", "malformed", "unreadable-claim"))
+def test_windows_denied_claim_never_creates_repairs_or_steals(
+    tmp_path, monkeypatch, layout,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "denied-root"
+    claim = module._windows_root_claim_path(root)
+    if layout in ("valid-claimed", "unreadable-claim"):
+        module._initialize_capture_root_unclaimed(root)
+        claim.write_bytes(b"other-owner\n")
+    elif layout == "malformed":
+        root.mkdir()
+        (root / "unexpected").write_bytes(b"preserve")
+    before = {p.relative_to(tmp_path).as_posix(): p.read_bytes()
+              for p in tmp_path.rglob("*") if p.is_file()}
+    if layout == "unreadable-claim":
+        # The native presence check treats denied/unknown attributes as present.
+        monkeypatch.setattr(module, "_windows_root_claim_present", lambda _: True)
+    calls = []
+
+    def denied(path, token):
+        calls.append(path)
+        raise module._WindowsRootClaimDenied(5, "constructed native denial")
+
+    clock = [0.0]
+    monkeypatch.setattr(module, "_acquire_windows_root_claim", denied)
+    monkeypatch.setattr(module.time, "monotonic", lambda: clock[0])
+    monkeypatch.setattr(module.time, "sleep", lambda seconds: clock.__setitem__(0, clock[0] + seconds))
+    with pytest.raises(CaptureError, match="access was denied.*5 seconds"):
+        module._initialize_capture_root_windows(root)
+    assert calls == [claim], "denial must not trigger another ownership attempt"
+    assert 5 <= clock[0] < 5.1
+    assert before == {p.relative_to(tmp_path).as_posix(): p.read_bytes()
+                      for p in tmp_path.rglob("*") if p.is_file()}
+    if layout == "absent":
+        assert not root.exists() and not claim.exists()
+
+
+def test_windows_denied_claim_accepts_only_valid_publication_after_claim_removal(
+    tmp_path, monkeypatch,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "pending-publication"
+    module._initialize_capture_root_unclaimed(root)
+    claim = module._windows_root_claim_path(root)
+    claim.write_bytes(b"constructed-owner\n")
+    calls = []
+
+    def denied(path, token):
+        calls.append(path)
+        raise module._WindowsRootClaimDenied(5, "constructed delete-pending denial")
+
+    def owner_finishes(seconds):
+        assert seconds == module._WINDOWS_ROOT_CLAIM_POLL_SECONDS
+        assert claim.read_bytes() == b"constructed-owner\n"
+        claim.unlink()  # Simulated owner, never the denied initializer.
+
+    monkeypatch.setattr(module, "_acquire_windows_root_claim", denied)
+    monkeypatch.setattr(module.time, "sleep", owner_finishes)
+    module._initialize_capture_root_windows(root)
+    assert calls == [claim]
+    assert module._validate_capture_root_layout(root) == root / "sessions"
+    assert list((root / "sessions").iterdir()) == []
+
+
+@pytest.mark.skipif(os.name != "nt", reason="native Windows delete-pending handle")
+def test_native_windows_delete_pending_claim_waits_for_exact_owner_close(
+    tmp_path, monkeypatch,
+):
+    import bulla.capture_mcp as module
+
+    root = tmp_path / "native-delete-pending-root"
+    original_api = module._native_windows_claim_api
+    pending = threading.Event()
+    denied = threading.Event()
+    allow_close = threading.Event()
+
+    def observed_api():
+        ctypes, wintypes, create_file, write_file, flush_file, set_info = original_api()
+
+        def observed_create(*args):
+            handle = create_file(*args)
+            error = ctypes.get_last_error()
+            if ctypes.cast(handle, ctypes.c_void_p).value == ctypes.c_void_p(-1).value and error == 5:
+                denied.set()
+            ctypes.set_last_error(error)
+            return handle
+
+        def held_disposition(*args):
+            ok = set_info(*args)
+            if ok:
+                pending.set()
+                assert allow_close.wait(timeout=10)
+            return ok
+
+        return ctypes, wintypes, observed_create, write_file, flush_file, held_disposition
+
+    monkeypatch.setattr(module, "_native_windows_claim_api", observed_api)
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        winner = executor.submit(module._initialize_capture_root_windows, root)
+        try:
+            assert pending.wait(timeout=10)
+            loser = executor.submit(module._initialize_capture_root_windows, root)
+            assert denied.wait(timeout=3), "test must exercise actual Windows error 5"
+            assert not loser.done(), "delete-pending is not an unclaimed publication"
+        finally:
+            allow_close.set()
+        winner.result(timeout=10)
+        loser.result(timeout=10)
+    assert module._validate_capture_root_layout(root) == root / "sessions"
+    assert not module._windows_root_claim_present(module._windows_root_claim_path(root))
+
+
 def test_windows_loser_waits_for_winner_to_release_completed_root_claim(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ):

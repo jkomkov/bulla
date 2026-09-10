@@ -2,14 +2,21 @@
 
 ## 0.49.3 — 2026-09-10
 
-Documentation and package-metadata update. The README now follows installation,
+Documentation, package metadata, and a bounded Windows capture fix. The README now follows installation,
 the constructed local demo, MCP capture, and one runnable application example.
 It distinguishes format maturity, receiver decisions, and unmeasured shared-
 interface benefits, and points to Bulla Labs' current documentation and contact
 routes.
 
-There are no functional changes to capture, verification, receiver policies,
-reconciliation, or ActionReceipt formats. The package version declaration is
+Windows capture-root initialization now handles native claim access denial by
+waiting only for a valid, unclaimed root to become available within the existing
+five-second deadline. A competing initializer can encounter this denial while
+the owner's claim is delete-pending. Denial never grants ownership: the waiting
+process does not acquire another claim, remove a claim, or repair the root.
+Persistent denied access, stranded claims, and malformed roots still fail closed.
+
+Verification, receiver policies, reconciliation, and ActionReceipt formats are
+unchanged. The package version declaration is
 updated; newly created receipts can carry different producer provenance and
 hashes. Existing receipt bytes and the retained v0.2 verification kit remain
 unchanged. This release does not include the browser inspector or promote any
