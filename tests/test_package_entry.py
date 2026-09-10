@@ -41,7 +41,7 @@ def _protected_source_bytes(root: Path, scopes: list[str], exclusions: list[str]
     # arbitrary evidence/archive bytes ourselves or ignore new source files.
     subprocess.run(["git", "diff", "--quiet", "HEAD", "--", *scopes], cwd=root, check=True)
     archived = subprocess.run(
-        ["git", "archive", "--format=tar", "HEAD", *scopes],
+        ["git", "-c", "core.autocrlf=false", "-c", "core.eol=lf", "archive", "--format=tar", "HEAD", *scopes],
         cwd=root, capture_output=True, check=True,
     ).stdout
     canonical = {}
