@@ -22,6 +22,8 @@
     "tests/test_public_front_door.py",
     "tests/test_release_045_contract.py",
     "tests/test_package_entry.py",
+    "tests/test_distribution_policy.py",
+    "tests/test_acceptance_contract.py",
     "releases/package-entry-0.49.3-allowed-differences.json"
   ],
   "allowed_generated_distribution_changes": [
