@@ -1,4 +1,4 @@
-"""The package-entry patch changes presentation, not released receipt behavior."""
+"""Bound the package-entry release and its authorized Windows claim repair."""
 
 from __future__ import annotations
 
@@ -20,6 +20,9 @@ def test_package_entry_checks_run_in_compatibility_and_installed_preflight() -> 
     workflow = (ROOT / ".github/workflows/release-preflight.yml").read_text()
     for name in ("test_package_entry.py", "test_public_front_door.py", "test_readme_examples.py"):
         assert workflow.count("tests/" + name) == 2
+    pr_workflow = (ROOT / ".github/workflows/bulla.yml").read_text()
+    assert "windows-capture:" in pr_workflow
+    assert "tests/test_capture_mcp.py" in pr_workflow
 
 
 def _protected_source_bytes(root: Path, scopes: list[str], exclusions: list[str]) -> dict[str, bytes]:
@@ -59,7 +62,15 @@ def test_protected_package_sources_match_published_0492() -> None:
     manifest = json.loads((ROOT / "releases/package-entry-0.49.3-allowed-differences.json").read_text(encoding="utf-8"))
     sources = _protected_source_bytes(ROOT, manifest["protected_scopes"], manifest["baseline_scope_exclusions"])
     version = sources.pop("src/bulla/__init__.py")
-    rows = [(name, hashlib.sha256(raw).hexdigest()) for name, raw in sources.items()]
+    patches = manifest["authorized_runtime_patches"]
+    assert set(patches) == {"src/bulla/capture_mcp.py"}
+    rows = []
+    for name, raw in sources.items():
+        digest = hashlib.sha256(raw).hexdigest()
+        if name in patches:
+            assert digest == patches[name]["after_sha256"]
+            digest = patches[name]["before_sha256"]
+        rows.append((name, digest))
     material = "".join(f"{digest}  {path}\n" for path, digest in sorted(rows)).encode()
     assert len(rows) == manifest["protected_source_members"]
     assert "sha256:" + hashlib.sha256(material).hexdigest() == manifest["protected_source_root"]

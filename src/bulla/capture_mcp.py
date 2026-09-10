@@ -65,6 +65,10 @@ class CaptureDirectoryError(ValueError):
     """The local capture directory is unreadable or structurally unusable."""
 
 
+class _WindowsRootClaimDenied(OSError):
+    """Native claim creation was denied; no ownership was acquired."""
+
+
 def _sha256(data: bytes) -> str:
     return "sha256:" + hashlib.sha256(data).hexdigest()
 
@@ -394,6 +398,10 @@ def _acquire_native_windows_root_claim(claim: Path, token: bytes) -> int:
             # ERROR_SHARING_VIOLATION, ERROR_FILE_EXISTS,
             # ERROR_ALREADY_EXISTS all mean another live or stranded claim.
             raise FileExistsError(error, f"capture root claim already exists: {claim}")
+        if error == 5:  # ERROR_ACCESS_DENIED, including a delete-pending name
+            raise _WindowsRootClaimDenied(
+                error, f"access denied creating capture root claim: {claim}"
+            )
         raise OSError(error, f"could not create capture root claim: {claim}")
 
     written = wintypes.DWORD()
@@ -952,6 +960,22 @@ def _initialize_capture_root_windows_anchored(
             return
         try:
             native_handle = _acquire_windows_root_claim(claim, token)
+        except _WindowsRootClaimDenied as exc:
+            # Access denied does not prove contention or confer ownership. A
+            # winner may be between marking its claim delete-pending and
+            # closing it. Do not acquire, remove, or repair anything here:
+            # only accept an independently revalidated, unclaimed root. A
+            # permission failure or stranded claim remains a bounded failure.
+            while True:
+                if _windows_root_is_published(root, claim, parent_anchor):
+                    return
+                if time.monotonic() >= deadline:
+                    raise CaptureError(
+                        "capture root claim access was denied and no unclaimed "
+                        "valid root became available within "
+                        f"{_WINDOWS_ROOT_CLAIM_WAIT_SECONDS:g} seconds"
+                    ) from exc
+                time.sleep(_WINDOWS_ROOT_CLAIM_POLL_SECONDS)
         except FileExistsError:
             if time.monotonic() >= deadline:
                 raise CaptureError(
