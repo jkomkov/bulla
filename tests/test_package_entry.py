@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 from pathlib import Path
 import subprocess
 import sys
+import tarfile
+
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,25 +22,81 @@ def test_package_entry_checks_run_in_compatibility_and_installed_preflight() -> 
         assert workflow.count("tests/" + name) == 2
 
 
-def test_protected_package_sources_match_published_0492() -> None:
-    manifest = json.loads((ROOT / "releases/package-entry-0.49.3-allowed-differences.json").read_text())
-    # The sdist deliberately excludes source-only research. This commitment
-    # covers the unchanged shipped sources and specifications in either tree.
-    exclusions = manifest["baseline_scope_exclusions"]
-    rows = []
-    for scope in manifest["protected_scopes"]:
-        for path in (ROOT / scope).rglob("*"):
-            relative = path.relative_to(ROOT).as_posix()
+def _protected_source_bytes(root: Path, scopes: list[str], exclusions: list[str]) -> dict[str, bytes]:
+    working = {}
+    for scope in scopes:
+        for path in (root / scope).rglob("*"):
+            relative = path.relative_to(root).as_posix()
             if "__pycache__" in path.parts or any(relative.startswith(p) for p in exclusions):
                 continue
             assert not path.is_symlink(), relative
-            if not path.is_file() or relative == "src/bulla/__init__.py":
+            if path.is_file():
+                working[relative] = path.read_bytes()
+    if not (root / ".git").exists():
+        # Release archives have no checkout conversion: compare exact bytes.
+        return working
+    # Windows Git can materialize text as CRLF. Check that tracked work is
+    # unchanged under Git's checkout rules, then hash the canonical source
+    # bytes used by the existing git-archive release build. Never normalize
+    # arbitrary evidence/archive bytes ourselves or ignore new source files.
+    subprocess.run(["git", "diff", "--quiet", "HEAD", "--", *scopes], cwd=root, check=True)
+    archived = subprocess.run(
+        ["git", "archive", "--format=tar", "HEAD", *scopes],
+        cwd=root, capture_output=True, check=True,
+    ).stdout
+    canonical = {}
+    with tarfile.open(fileobj=io.BytesIO(archived), mode="r:") as archive:
+        for member in archive:
+            if member.isdir() or any(member.name.startswith(p) for p in exclusions):
                 continue
-            rows.append((relative, hashlib.sha256(path.read_bytes()).hexdigest()))
+            assert member.isfile(), member.name
+            canonical[member.name] = archive.extractfile(member).read()
+    assert set(canonical) == set(working), "protected source inventory differs from HEAD"
+    return canonical
+
+
+def test_protected_package_sources_match_published_0492() -> None:
+    manifest = json.loads((ROOT / "releases/package-entry-0.49.3-allowed-differences.json").read_text(encoding="utf-8"))
+    sources = _protected_source_bytes(ROOT, manifest["protected_scopes"], manifest["baseline_scope_exclusions"])
+    version = sources.pop("src/bulla/__init__.py")
+    rows = [(name, hashlib.sha256(raw).hexdigest()) for name, raw in sources.items()]
     material = "".join(f"{digest}  {path}\n" for path, digest in sorted(rows)).encode()
     assert len(rows) == manifest["protected_source_members"]
     assert "sha256:" + hashlib.sha256(material).hexdigest() == manifest["protected_source_root"]
-    assert hashlib.sha256((ROOT / "src/bulla/__init__.py").read_bytes()).hexdigest() == manifest["version_file_after"]
+    assert hashlib.sha256(version).hexdigest() == manifest["version_file_after"]
+
+
+def test_source_guard_allows_git_checkout_conversion_but_not_edits(tmp_path: Path) -> None:
+    root = tmp_path / "repository"
+    (root / "src").mkdir(parents=True)
+    file = root / "src/example.py"
+    raw = b"value = 1\n"
+    file.write_bytes(raw)
+    subprocess.run(["git", "init", "--quiet", str(root)], check=True)
+    subprocess.run(["git", "config", "core.autocrlf", "true"], cwd=root, check=True)
+    subprocess.run(["git", "add", "src/example.py"], cwd=root, check=True)
+    subprocess.run([
+        "git", "-c", "user.name=Constructed test", "-c", "user.email=test@example.invalid",
+        "-c", "commit.gpgsign=false", "-c", f"core.hooksPath={root / 'no-hooks'}",
+        "commit", "--quiet", "-m", "Constructed source",
+    ], cwd=root, check=True)
+    file.unlink()  # Only the constructed fixture; force a fresh Git checkout.
+    subprocess.run(["git", "checkout-index", "--", "src/example.py"], cwd=root, check=True)
+    assert file.read_bytes() == b"value = 1\r\n"
+    assert _protected_source_bytes(root, ["src"], []) == {"src/example.py": raw}
+    file.write_bytes(b"value = 2\r\n")
+    with pytest.raises(subprocess.CalledProcessError):
+        _protected_source_bytes(root, ["src"], [])
+    file.write_bytes(b"value = 1\r\n")
+    (root / "src/untracked.py").write_bytes(b"unexpected = True\n")
+    with pytest.raises(AssertionError, match="inventory"):
+        _protected_source_bytes(root, ["src"], [])
+
+
+def test_materialized_source_bytes_are_not_line_ending_normalized(tmp_path: Path) -> None:
+    (tmp_path / "src").mkdir()
+    (tmp_path / "src/example.py").write_bytes(b"value = 1\r\n")
+    assert _protected_source_bytes(tmp_path, ["src"], []) == {"src/example.py": b"value = 1\r\n"}
 
 
 def test_readme_demo_without_output_path_is_repeat_safe(tmp_path: Path) -> None:
