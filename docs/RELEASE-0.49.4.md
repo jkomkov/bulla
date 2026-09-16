@@ -26,3 +26,8 @@ stops this plan; it does not authorize a different release or reuse of a slot.
 The branding inventory separates current copy from retained historical evidence,
 compatibility identifiers, and internal infrastructure. Existing old-domain
 redirects remain operational. No public API or wire identifier is renamed.
+
+The original NOTICE is also an input to the frozen v0.2 verification kit. It
+retains the historical format name "Glyph" byte-for-byte; changing the kit's
+notice would change its established identity. Current introductions use
+ActionReceipt. This exception does not retain the former legal-operator name.

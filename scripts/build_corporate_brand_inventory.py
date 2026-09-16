@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "70e603401d9876501064b3ed7e4d17838cb0adf7"
 OUTPUT = ROOT / "docs/corporate-rebrand-inventory.json"
 CURRENT = {
-    "README.md", "GOVERNANCE.md", "NOTICE", "docs/CAPABILITIES.md",
+    "README.md", "GOVERNANCE.md", "docs/CAPABILITIES.md",
     "docs/sa-ra.svg", "docs/sa-ra-favicon.svg",
     ".github/ISSUE_TEMPLATE/external_reliance_candidate.yml",
     ".github/ISSUE_TEMPLATE/independent_witness_candidate.yml",
