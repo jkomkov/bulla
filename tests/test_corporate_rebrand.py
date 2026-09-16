@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import subprocess
 
-from test_package_entry import _protected_source_bytes
+from .test_package_entry import _protected_source_bytes
 
 ROOT = Path(__file__).resolve().parents[1]
 
