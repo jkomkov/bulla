@@ -21,11 +21,16 @@ def test_rebrand_preserves_published_runtime_and_formats():
     assert len(sources) == manifest["protected_source_members"]
     assert "sha256:" + hashlib.sha256(material).hexdigest() == manifest["protected_source_root"]
     if (ROOT / ".git").exists():
-        names = subprocess.check_output(["git", "diff", "--name-only", manifest["baseline_source"], "HEAD"], cwd=ROOT, text=True).splitlines()
-        assert set(names) <= set(manifest["allowed_changed_paths"])
-        # Protect even source-only material excluded from installed archives.
-        changes = subprocess.check_output(["git", "diff", "--name-only", manifest["baseline_source"], "HEAD", "--", "src", "spec"], cwd=ROOT, text=True).splitlines()
-        assert changes == ["src/bulla/__init__.py"]
+        # This self-contained root also protects source-only material and works
+        # in a depth-one CI checkout: no baseline Git object is required.
+        all_sources = _protected_source_bytes(ROOT, manifest["protected_scopes"], [])
+        all_sources.pop("src/bulla/__init__.py")
+        all_material = "".join(f"{hashlib.sha256(raw).hexdigest()}  {name}\n" for name, raw in sorted(all_sources.items())).encode()
+        assert len(all_sources) == manifest["repository_source_members"]
+        assert "sha256:" + hashlib.sha256(all_material).hexdigest() == manifest["repository_source_root"]
+        if subprocess.run(["git", "cat-file", "-e", manifest["baseline_source"]], cwd=ROOT, capture_output=True).returncode == 0:
+            names = subprocess.check_output(["git", "diff", "--name-only", manifest["baseline_source"], "HEAD"], cwd=ROOT, text=True).splitlines()
+            assert set(names) <= set(manifest["allowed_changed_paths"])
 
 
 def test_current_brand_and_historical_identity_are_separate():

@@ -39,7 +39,6 @@
     "src/bulla/experimental/witness_covenant.py"
   ],
   "allowed_changed_paths": [
-    "scripts/build_corporate_brand_inventory.py",
     ".github/ISSUE_TEMPLATE/external_reliance_candidate.yml",
     ".github/ISSUE_TEMPLATE/independent_witness_candidate.yml",
     ".github/workflows/release-preflight.yml",
@@ -55,7 +54,9 @@
     "docs/sa-ra-favicon.svg",
     "docs/sa-ra.svg",
     "releases/corporate-rebrand-0.49.4-allowed-differences.json",
+    "scripts/build_corporate_brand_inventory.py",
     "src/bulla/__init__.py",
+    "tests/test_acceptance_contract.py",
     "tests/test_corporate_rebrand.py",
     "tests/test_distribution_policy.py",
     "tests/test_package_entry.py",
@@ -69,5 +70,7 @@
     "Closed distribution inventories and release tests"
   ],
   "runtime_changes": false,
-  "receipt_formats_unchanged": true
+  "receipt_formats_unchanged": true,
+  "repository_source_members": 768,
+  "repository_source_root": "sha256:139e81e7551abfa10c2f055c31369f0561bb21a119c55e993a19cd80d618ce8f"
 }
