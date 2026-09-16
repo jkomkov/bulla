@@ -16,7 +16,7 @@ limitations under the License.
 
 ---
 
-"Glyph" is the open ActionReceipt format and verification contract. "bulla"
+ActionReceipt is the open record format and verification contract. "bulla"
 (this repository) is its Apache-2.0 Python reference implementation.
 
 Convention packs under src/bulla/packs/ carry metadata authored for this

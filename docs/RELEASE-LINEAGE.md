@@ -13,6 +13,14 @@ slot but not PyPI remain recorded and are not reused.
 | 0.49.2 | published 2026-09-01 | Evidence-before-identity release. PyPI provenance binds public source `848417f39eecfefd70b6ed8d06e2c2969fe8de55`; immutable distributions and the signed release receipt preserve the publication evidence. |
 | 0.49.3 | candidate; not published | Documentation, package metadata, and bounded Windows capture-root access-denied recovery. Publication is established only by the accepted PyPI artifacts and signed final release evidence, not this preparation row. |
 
+The 0.49.3 preparation row above is historical. Its publication is established by
+[PyPI 0.49.3](https://pypi.org/project/bulla/0.49.3/) and the
+[immutable release evidence](https://github.com/jkomkov/bulla/releases/tag/v0.49.3).
+
+| New candidate | Publication | Scope |
+| --- | --- | --- |
+| 0.49.4 | candidate; not published | Corporate branding and documentation only; no functional runtime change. Publication requires accepted PyPI artifacts and signed final evidence. |
+
 The 0.45.1 release body cannot be rewritten after immutable publication. Future
 release finalization generates and verifies the complete release body before
 the draft becomes public.

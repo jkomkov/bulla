@@ -64,5 +64,5 @@ from the stable package root.
 - Production collateral, settlement custody, witness plurality, stake,
   slashing, and a witness market are not available.
 
-See [What Exists Today](https://glyphstandard.com/status) for the generated
+See [What Exists Today](https://bullalabs.com/status) for the generated
 status record and external-participant counts.

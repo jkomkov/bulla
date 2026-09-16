@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package": "bulla",
-  "release": "0.49.3",
+  "release": "0.49.4",
   "normative_action_receipt": "0.2",
   "released_experimental_action_receipts": [
     "0.3",

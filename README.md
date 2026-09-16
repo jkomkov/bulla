@@ -16,7 +16,7 @@ Python 3.10 or later is required. Receipt creation and local file checks need
 no hosted Bulla service or account.
 
 ```bash
-python -m pip install "bulla==0.49.3"
+python -m pip install "bulla==0.49.4"
 bulla demo
 ```
 
@@ -134,7 +134,7 @@ and [ecosystem guide](https://bullalabs.com/bulla/ecosystem).
 
 ## Formats, documentation, and maintenance
 
-MCP capture is included in Bulla 0.49.3. It emits ActionReceipt v0.4, an
+MCP capture is included in Bulla 0.49.4. It emits ActionReceipt v0.4, an
 experimental draft format; v0.2 remains the normative default for the general
 receipt tools. v0.3 remains a released, non-normative draft. Package versions
 and receipt-format versions are separate.
@@ -150,7 +150,7 @@ and implementation feedback. Report security vulnerabilities privately through
 [GitHub Security Advisories](https://github.com/jkomkov/bulla/security/advisories/new),
 following the [security policy](https://github.com/jkomkov/bulla/blob/main/SECURITY.md).
 Bulla is [Apache-2.0 licensed](https://github.com/jkomkov/bulla/blob/main/LICENSE).
-Bulla Labs is operated by Glyph Standard, Inc.
+Bulla Labs is operated by Bulla Labs, Inc.
 
 ## The broader program
 
