@@ -36,7 +36,7 @@ def _workflow_job(workflow: str, name: str) -> str:
 
 
 def test_release_version_and_status_language_are_synchronized() -> None:
-    assert bulla.__version__ == "0.49.3"
+    assert bulla.__version__ == "0.49.4"
     changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
     assert "## 0.49.2 — 2026-08-31" in changelog
     assert "## 0.49.1 — 2026-08-31 (not published)" in changelog

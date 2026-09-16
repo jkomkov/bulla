@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package": "bulla",
-  "release": "0.49.3",
+  "release": "0.49.4",
   "normative_action_receipt": "0.2",
   "released_experimental_action_receipts": [
     "0.3",
@@ -11,16 +11,16 @@
     "wheel": {
       "algorithm": "sha256-sorted-posix-lines-v1",
       "count": 195,
-      "sha256": "021d73b87cb41a84c23daf6c577b10cd49e02b3bd773d7e55dffd2bc87d760a9"
+      "sha256": "42c38e3fa95a3df9ce16e25b3797e76265bbdd14d136d007138f9af3a665b6e1"
     },
     "sdist": {
       "algorithm": "sha256-sorted-posix-lines-v1",
-      "count": 1368,
-      "sha256": "c78ee77c4de2c21f8e9904357a5d12820ac306b2c5ae3227163bfef60bd7e494"
+      "count": 1373,
+      "sha256": "723ecaf362b75ab7f06b4654ad7c38b51ad65e2a7dbcc8e256e301cef585cbec"
     }
   },
   "generated_archive_bytes": {
-    "metadata_sha256": "933a0b2e27e47f3bcaf8aa8b4abe63576e55a58c54d996ef3744d0bc05f4e40c"
+    "metadata_sha256": "b8e33844f2e1a48792383dc05bb69d6f5782607320a6d8caaf994db0b9d77956"
   },
   "required_root_exports": [
     "EVIDENCE_STRICT_RELIANCE_POLICY",

@@ -74,7 +74,10 @@ def test_protected_package_sources_match_published_0492() -> None:
     material = "".join(f"{digest}  {path}\n" for path, digest in sorted(rows)).encode()
     assert len(rows) == manifest["protected_source_members"]
     assert "sha256:" + hashlib.sha256(material).hexdigest() == manifest["protected_source_root"]
-    assert hashlib.sha256(version).hexdigest() == manifest["version_file_after"]
+    # Preserve the historical 0.49.3 guard; the only later source change is the
+    # separately guarded producer-version declaration, not a rewritten baseline.
+    historical_version = version.replace(b'__version__ = "0.49.4"', b'__version__ = "0.49.3"')
+    assert hashlib.sha256(historical_version).hexdigest() == manifest["version_file_after"]
 
 
 def test_source_guard_allows_git_checkout_conversion_but_not_edits(tmp_path: Path) -> None:

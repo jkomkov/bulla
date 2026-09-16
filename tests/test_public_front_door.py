@@ -98,7 +98,7 @@ def test_first_level_copy_preserves_current_product_boundary() -> None:
 def test_current_documentation_identity_and_research_boundary() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     metadata = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
-    for value in ("Bulla Labs", "Answerable Computing", "Glyph Standard, Inc.",
+    for value in ("Bulla Labs", "Answerable Computing", "Bulla Labs, Inc.",
                   "John Komkov", "signed-JSON parity",
                   "https://bullalabs.com/answerable-computing",
                   "https://bullalabs.com/research/routed-buyer-continuity"):

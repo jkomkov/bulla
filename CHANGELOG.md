@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.49.4 — 2026-09-16
+
+Corporate branding, documentation, and descriptive metadata only. Current
+organization copy uses Bulla Labs and identifies its legal operator as Bulla
+Labs, Inc. Current documentation links use bullalabs.com. Historical records,
+protocol identifiers, copyright notices, licenses, and maintainer roles remain
+unchanged. No runtime behavior, dependency, or receipt-format change is included.
+The producer-version declaration changes to 0.49.4; newly generated receipt
+provenance and hashes can therefore differ.
+
 ## 0.49.3 — 2026-09-10
 
 Documentation, package metadata, and a bounded Windows capture fix. The README now follows installation,

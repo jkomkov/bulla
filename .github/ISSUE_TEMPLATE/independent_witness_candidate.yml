@@ -40,5 +40,5 @@ body:
           required: true
         - label: I understand that signatures do not prove organizational independence and that a passing candidate is not automatically counted.
           required: true
-        - label: I generated and control the submitted witness key; Glyph did not supply or operate it.
+        - label: I generated and control the submitted witness key; Bulla Labs did not supply or operate it.
           required: true

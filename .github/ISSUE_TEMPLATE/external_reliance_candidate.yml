@@ -1,5 +1,5 @@
 name: External reliance candidate
-description: Submit one public receiver-policy and boundary packet for Glyph Standard's D evidence ledger.
+description: Submit one public receiver-policy and boundary packet for Bulla Labs' D evidence ledger.
 title: "[External reliance candidate] "
 labels:
   - external-reliance-candidate
@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        This is a public evidence intake. Submit only records and relationship disclosures that may remain public permanently. A candidate is `NOT_COUNTED` until Glyph Standard's dedicated intake authority signs a qualification event and ledger head and the resulting pull request merges.
+        This is a public evidence intake. Submit only records and relationship disclosures that may remain public permanently. A candidate is `NOT_COUNTED` until Bulla Labs' dedicated intake authority signs a qualification event and ledger head and the resulting pull request merges.
   - type: input
     id: package_url
     attributes:
@@ -42,7 +42,7 @@ body:
     id: disclosure
     attributes:
       label: Control and relationship disclosure
-      description: Identify provider/receiver control domains and any relationship with Glyph Standard.
+      description: Identify provider/receiver control domains and any relationship with Bulla Labs.
     validations:
       required: true
   - type: checkboxes

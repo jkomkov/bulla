@@ -1,6 +1,6 @@
 # Governance
 
-Bulla is the Apache-2.0 reference implementation of **Glyph**, the open ActionReceipt
+Bulla is the Apache-2.0 reference implementation of the open **ActionReceipt**
 format and verification contract. This document says who decides what, and how that is
 intended to open up as the project grows. It is deliberately small; it will grow with
 the community, not ahead of it.
@@ -40,7 +40,7 @@ The intended progression, tied to real signals rather than dates:
    merge rights, adopt a two-reviewer rule for the load-bearing surfaces above, and
    split `CODEOWNERS` accordingly.
 3. **On real adoption / a second independent implementation of the spec** — move the
-   *standard* (Glyph: `spec/` + the independent verifier) to neutral, multi-party
+   *standard* (ActionReceipt: `spec/` + the independent verifier) to neutral, multi-party
    governance (a working group or a foundation), so no single party is the gatekeeper
    of the substrate. The Apache-2.0 license is chosen precisely to make that possible.
 
